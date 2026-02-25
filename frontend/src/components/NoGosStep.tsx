@@ -6,7 +6,7 @@ import { QuestionBubble } from "./QuestionBubble";
 import { motion, AnimatePresence } from "framer-motion";
 
 export function NoGosStep() {
-	const { profile, noGoSubIndex } = useAppState();
+	const { noGoSubIndex } = useAppState();
 	const dispatch = useAppDispatch();
 	const cards = content.noGos.cards;
 	const current = cards[noGoSubIndex];

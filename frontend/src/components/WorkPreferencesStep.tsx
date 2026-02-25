@@ -6,7 +6,7 @@ import { QuestionBubble } from "./QuestionBubble";
 import { motion, AnimatePresence } from "framer-motion";
 
 export function WorkPreferencesStep() {
-	const { profile, workPrefSubIndex } = useAppState();
+	const { workPrefSubIndex } = useAppState();
 	const dispatch = useAppDispatch();
 	const pairs = content.workPreferences.pairs;
 	const current = pairs[workPrefSubIndex];

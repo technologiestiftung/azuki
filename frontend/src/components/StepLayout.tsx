@@ -1,7 +1,7 @@
 import { type ReactNode } from "react";
 import { ProgressBar } from "./ProgressBar";
 import { QuestionBubble } from "./QuestionBubble";
-import { useAppState, useAppDispatch } from "../context/AppContext";
+import { useAppDispatch } from "../context/AppContext";
 import { content } from "../content/de";
 import { type Step } from "../types";
 
