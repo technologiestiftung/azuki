@@ -1,0 +1,46 @@
+import { useEffect, useRef } from "react";
+import { motion } from "framer-motion";
+import { content } from "../content/de";
+import { useAppState, useAppDispatch } from "../context/AppContext";
+import { Step } from "../types";
+import { matchProfile } from "../api/client";
+
+export function LoadingScreen() {
+	const { profile } = useAppState();
+	const dispatch = useAppDispatch();
+	const called = useRef(false);
+
+	useEffect(() => {
+		if (called.current) return;
+		called.current = true;
+
+		const doMatch = async () => {
+			try {
+				const result = await matchProfile(profile);
+				dispatch({ type: "SET_MATCH_RESULTS", results: result });
+			} catch (err) {
+				console.error("Match API error:", err);
+			}
+		};
+
+		const minDelay = new Promise<void>((r) => setTimeout(r, 2500));
+
+		Promise.all([doMatch(), minDelay]).then(() => {
+			dispatch({ type: "GO_TO_STEP", step: Step.Results });
+		});
+	}, [profile, dispatch]);
+
+	return (
+		<div className="flex flex-col items-center justify-center min-h-[100dvh] px-8">
+			<motion.div
+				animate={{ rotate: 360 }}
+				transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+				className="w-16 h-16 rounded-full border-4 border-gray-200 mb-8"
+				style={{ borderTopColor: "var(--theme-primary-filled)" }}
+			/>
+			<h2 className="text-h3 font-semibold text-center">
+				{content.loading.title}
+			</h2>
+		</div>
+	);
+}

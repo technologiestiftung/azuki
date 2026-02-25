@@ -25,3 +25,11 @@ dist-ssr
 **/test-results/
 /blob-report/
 /playwright/.cache/
+
+frontend/node_modules/
+backend/.env
+frontend/dist/
+.env
+backend/node_modules/
+backend/dist/
+materialien/

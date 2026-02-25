@@ -6,7 +6,7 @@
 
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
-# {template-vite-react}
+# Azuki
 
 ## TODO (after you generated the repo)
 

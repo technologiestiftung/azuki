@@ -1,0 +1,33 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+	:root {
+		--theme-background: #fafdff;
+		--theme-primary-filled: #38bdf8;
+		--theme-primary: rgba(3, 171, 246, 0.79);
+		--theme-primary-pressed: rgba(0, 169, 249, 0.51);
+		--theme-on-primary: #010c13;
+		--theme-text: #010c13;
+		--theme-subtle: rgba(9, 166, 248, 0.28);
+		--theme-subtle-pressed: rgba(17, 155, 247, 0.13);
+
+		--btn-fill-primary: rgba(2, 9, 25, 0.94);
+		--btn-fill-secondary: rgba(19, 37, 73, 0.11);
+		--btn-fill-disabled: rgba(7, 43, 98, 0.11);
+		--btn-on-disabled: #9ca3af;
+		--card-fill: rgba(15, 35, 75, 0.05);
+	}
+
+	html {
+		font-family: "Asap", system-ui, sans-serif;
+		-webkit-font-smoothing: antialiased;
+		-moz-osx-font-smoothing: grayscale;
+	}
+
+	body {
+		background-color: var(--theme-background);
+		color: var(--theme-text);
+	}
+}
