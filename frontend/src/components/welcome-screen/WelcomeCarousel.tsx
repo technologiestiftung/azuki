@@ -75,18 +75,18 @@ export function WelcomeCarousel() {
 						</div>
 					);
 				})}
-            </div>
-            <div
-                key={currentSlide}
-                className="flex-1 flex flex-col items-center justify-center text-center animate-slideIn"
-            >
-                <img
-                    src={slideImages[currentSlide]}
-                    alt=""
-                    className="w-56 h-56 object-contain mb-10"
-                />
-                <h1 className="text-h2 font-bold">{slides[currentSlide].title}</h1>
-            </div>
+			</div>
+			<div
+				key={currentSlide}
+				className="flex-1 flex flex-col items-center justify-center text-center animate-slideIn"
+			>
+				<img
+					src={slideImages[currentSlide]}
+					alt=""
+					className="w-56 h-56 object-contain mb-10"
+				/>
+				<h1 className="text-h2 font-bold">{slides[currentSlide].title}</h1>
+			</div>
 
 			<div className="px-4 pb-8">
 				<PrimaryButton onClick={handleCta} className="w-full">
