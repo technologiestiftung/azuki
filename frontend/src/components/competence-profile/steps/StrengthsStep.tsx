@@ -3,7 +3,6 @@ import { useAppStore } from "../../../store/useAppStore";
 import { Step } from "../../../common";
 import { ProgressBar } from "../progress-bar/ProgressBar";
 import { QuestionBubble } from "../question-bubble/QuestionBubble";
-import { motion, AnimatePresence } from "framer-motion";
 import { PrimaryButton } from "../../primitives/buttons/PrimaryButton";
 import { SecondaryButton } from "../../primitives/buttons/SecondaryButton";
 import { BackButton } from "../../back-button/BackButton";
@@ -63,14 +62,9 @@ export function StrengthsStep() {
 			</div>
 
 			<div className="flex-1 flex flex-col items-center justify-center px-4 pt-6">
-				<AnimatePresence mode="wait">
-					<motion.div
-						key={current.id}
-						initial={{ opacity: 0, x: 40 }}
-						animate={{ opacity: 1, x: 0 }}
-						exit={{ opacity: 0, x: -40 }}
-						transition={{ duration: 0.25 }}
-						className="w-full bg-gray-50 rounded-3xl p-6 flex flex-col items-center"
+				<div
+					key={current.id}
+					className="w-full bg-gray-50 rounded-3xl p-6 flex flex-col items-center animate-slideIn"
 					>
 						<img
 							src={current.illustration}
@@ -81,8 +75,7 @@ export function StrengthsStep() {
 						<p className="text-body text-gray-500 text-center">
 							{current.description}
 						</p>
-					</motion.div>
-				</AnimatePresence>
+				</div>
 
 				<div className="w-full mt-6">
 					<div className="flex justify-between text-caption text-gray-500 mb-3">

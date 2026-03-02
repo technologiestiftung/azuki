@@ -56,6 +56,20 @@ export default {
 			borderRadius: {
 				"4xl": "32px",
 			},
+			keyframes: {
+				fadeIn: {
+					from: { opacity: '0' },
+					to: { opacity: '1' },
+				},
+				slideIn: {
+					from: { opacity: '0', transform: 'translateX(40px)' },
+					to: { opacity: '1', transform: 'translateX(0)' },
+				},
+			},
+			animation: {
+				fadeIn: 'fadeIn 0.2s ease-in-out',
+				slideIn: 'slideIn 0.25s ease-out',
+			},
 		},
 	},
 	plugins: [],

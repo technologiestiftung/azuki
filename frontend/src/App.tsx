@@ -1,4 +1,3 @@
-import { AnimatePresence, motion } from "framer-motion";
 import { useAppStore } from "./store/useAppStore";
 import { Step } from "./common";
 import { LoginScreen } from "./components/login-screen/LoginScreen";
@@ -58,17 +57,12 @@ function App() {
 
 	return (
 		<div className="max-w-[430px] mx-auto min-h-[100dvh] bg-white relative overflow-hidden">
-			<AnimatePresence mode="wait">
-				<motion.div
-					key={currentStep}
-					initial={{ opacity: 0 }}
-					animate={{ opacity: 1 }}
-					exit={{ opacity: 0 }}
-					transition={{ duration: 0.2 }}
-				>
-					<StepRenderer />
-				</motion.div>
-			</AnimatePresence>
+			<div
+				key={currentStep}
+				className="animate-fadeIn"
+			>
+				<StepRenderer />
+			</div>
 		</div>
 	);
 }

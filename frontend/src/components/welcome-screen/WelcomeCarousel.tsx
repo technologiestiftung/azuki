@@ -1,5 +1,4 @@
 import { useState, useEffect, useCallback } from "react";
-import { motion, AnimatePresence } from "framer-motion";
 import { content } from "../../content/de";
 import { useAppStore } from "../../store/useAppStore";
 import { Step } from "../../common";
@@ -53,23 +52,17 @@ export function WelcomeCarousel() {
 			</div>
 
 			<div className="flex-1 flex flex-col items-center justify-center px-8">
-				<AnimatePresence mode="wait">
-					<motion.div
-						key={currentSlide}
-						initial={{ opacity: 0, x: 40 }}
-						animate={{ opacity: 1, x: 0 }}
-						exit={{ opacity: 0, x: -40 }}
-						transition={{ duration: 0.3 }}
-						className="flex flex-col items-center text-center"
-					>
-						<img
-							src={slideImages[currentSlide]}
-							alt=""
-							className="w-56 h-56 object-contain mb-10"
-						/>
-						<h1 className="text-h2 font-bold">{slides[currentSlide].title}</h1>
-					</motion.div>
-				</AnimatePresence>
+				<div
+					key={currentSlide}
+					className="flex flex-col items-center text-center animate-slideIn"
+				>
+					<img
+						src={slideImages[currentSlide]}
+						alt=""
+						className="w-56 h-56 object-contain mb-10"
+					/>
+					<h1 className="text-h2 font-bold">{slides[currentSlide].title}</h1>
+				</div>
 			</div>
 
 			<div className="px-4 pb-8">

@@ -3,7 +3,6 @@ import { useAppStore } from "../../../store/useAppStore";
 import { Step, type WorkPreferenceChoice } from "../../../common";
 import { ProgressBar } from "../progress-bar/ProgressBar";
 import { QuestionBubble } from "../question-bubble/QuestionBubble";
-import { motion, AnimatePresence } from "framer-motion";
 import { SecondaryButton } from "../../primitives/buttons/SecondaryButton";
 import { BackButton } from "../../back-button/BackButton";
 
@@ -59,34 +58,28 @@ export function WorkPreferencesStep() {
 			</div>
 
 			<div className="flex-1 flex flex-col justify-center px-4 pt-6 gap-3">
-				<AnimatePresence mode="wait">
-					<motion.div
-						key={current.id}
-						initial={{ opacity: 0, x: 40 }}
-						animate={{ opacity: 1, x: 0 }}
-						exit={{ opacity: 0, x: -40 }}
-						transition={{ duration: 0.25 }}
-						className="space-y-3"
+				<div
+					key={current.id}
+					className="space-y-3 animate-slideIn"
+				>
+					<button
+						onClick={() => handleChoice("a")}
+						className="w-full py-10 px-6 rounded-3xl text-h4 font-semibold text-center bg-sky-400/30 text-sky-1000 transition-transform active:scale-[0.98] focus-visible:outline focus-visible:outline-2 focus-visible:outline-sky-500"
 					>
-						<button
-							onClick={() => handleChoice("a")}
-							className="w-full py-10 px-6 rounded-3xl text-h4 font-semibold text-center bg-sky-400/30 text-sky-1000 transition-transform active:scale-[0.98] focus-visible:outline focus-visible:outline-2 focus-visible:outline-sky-500"
-						>
-							{current.a}
-						</button>
+						{current.a}
+					</button>
 
-						<p className="text-center text-body text-gray-400">
-							{content["workPreferences.orLabel"]}
-						</p>
+					<p className="text-center text-body text-gray-400">
+						{content["workPreferences.orLabel"]}
+					</p>
 
-						<button
-							onClick={() => handleChoice("b")}
-							className="w-full py-10 px-6 rounded-3xl text-h4 font-semibold text-center bg-sky-1000 text-white transition-transform active:scale-[0.98] focus-visible:outline focus-visible:outline-2 focus-visible:outline-sky-500"
-						>
-							{current.b}
-						</button>
-					</motion.div>
-				</AnimatePresence>
+					<button
+						onClick={() => handleChoice("b")}
+						className="w-full py-10 px-6 rounded-3xl text-h4 font-semibold text-center bg-sky-1000 text-white transition-transform active:scale-[0.98] focus-visible:outline focus-visible:outline-2 focus-visible:outline-sky-500"
+					>
+						{current.b}
+					</button>
+				</div>
 			</div>
 
 			<div className="flex flex-col justify-center px-4 pb-8 pt-4 space-y-2">
