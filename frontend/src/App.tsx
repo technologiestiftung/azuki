@@ -1,23 +1,23 @@
 import { AnimatePresence, motion } from "framer-motion";
-import { useAppState } from "./context/AppContext";
-import { Step } from "./types";
-import { LoginScreen } from "./components/LoginScreen";
-import { WelcomeCarousel } from "./components/WelcomeCarousel";
-import { StartScreen } from "./components/StartScreen";
-import { InSchoolStep } from "./components/InSchoolStep";
-import { SchoolDegreeStep } from "./components/SchoolDegreeStep";
-import { SchoolSubjectsStep } from "./components/SchoolSubjectsStep";
-import { InterestsStep } from "./components/InterestsStep";
-import { StrengthsStep } from "./components/StrengthsStep";
-import { SecretTalentStep } from "./components/SecretTalentStep";
-import { PracticalExperienceStep } from "./components/PracticalExperienceStep";
-import { WorkPreferencesStep } from "./components/WorkPreferencesStep";
-import { NoGosStep } from "./components/NoGosStep";
-import { LoadingScreen } from "./components/LoadingScreen";
-import { ResultsScreen } from "./components/ResultsScreen";
+import { useAppStore } from "./store/useAppStore";
+import { Step } from "./common";
+import { LoginScreen } from "./components/login-screen/LoginScreen";
+import { WelcomeCarousel } from "./components/welcome-screen/WelcomeCarousel";
+import { StartScreen } from "./components/competence-profile/start/StartScreen";
+import { InSchoolStep } from "./components/competence-profile/steps/InSchoolStep";
+import { SchoolDegreeStep } from "./components/competence-profile/steps/SchoolDegreeStep";
+import { SchoolSubjectsStep } from "./components/competence-profile/steps/SchoolSubjectsStep";
+import { InterestsStep } from "./components/competence-profile/steps/InterestsStep";
+import { StrengthsStep } from "./components/competence-profile/steps/StrengthsStep";
+import { SecretTalentStep } from "./components/competence-profile/steps/SecretTalentStep";
+import { PracticalExperienceStep } from "./components/competence-profile/steps/PracticalExperienceStep";
+import { WorkPreferencesStep } from "./components/competence-profile/steps/WorkPreferencesStep";
+import { NoGosStep } from "./components/competence-profile/steps/NoGosStep";
+import { LoadingScreen } from "./components/loading-screen/LoadingScreen";
+import { ResultsScreen } from "./components/result-screen/ResultsScreen";
 
 function StepRenderer() {
-	const { currentStep } = useAppState();
+	const currentStep = useAppStore((state) => state.currentStep);
 
 	switch (currentStep) {
 		case Step.Login:
@@ -28,7 +28,7 @@ function StepRenderer() {
 			return <StartScreen />;
 		case Step.InSchool:
 			return <InSchoolStep />;
-		case Step.SchoolDegree:
+		case Step.SchoolDegreeStep:
 			return <SchoolDegreeStep />;
 		case Step.SchoolSubjects:
 			return <SchoolSubjectsStep />;
@@ -54,7 +54,7 @@ function StepRenderer() {
 }
 
 function App() {
-	const { currentStep } = useAppState();
+	const currentStep = useAppStore((state) => state.currentStep);
 
 	return (
 		<div className="max-w-[430px] mx-auto min-h-[100dvh] bg-white relative overflow-hidden">
