@@ -65,16 +65,16 @@ export function StrengthsStep() {
 				<div
 					key={current.id}
 					className="w-full bg-gray-50 rounded-3xl p-6 flex flex-col items-center animate-slideIn"
-					>
-						<img
-							src={current.illustration}
-							alt=""
-							className="w-32 h-32 object-contain mb-4"
-						/>
-						<h3 className="text-h4 font-semibold mb-1">{current.title}</h3>
-						<p className="text-body text-gray-500 text-center">
-							{current.description}
-						</p>
+				>
+					<img
+						src={current.illustration}
+						alt=""
+						className="w-32 h-32 object-contain mb-4"
+					/>
+					<h3 className="text-h4 font-semibold mb-1">{current.title}</h3>
+					<p className="text-body text-gray-500 text-center">
+						{current.description}
+					</p>
 				</div>
 
 				<div className="w-full mt-6">

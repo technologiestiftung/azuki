@@ -58,10 +58,7 @@ export function WorkPreferencesStep() {
 			</div>
 
 			<div className="flex-1 flex flex-col justify-center px-4 pt-6 gap-3">
-				<div
-					key={current.id}
-					className="space-y-3 animate-slideIn"
-				>
+				<div key={current.id} className="space-y-3 animate-slideIn">
 					<button
 						onClick={() => handleChoice("a")}
 						className="w-full py-10 px-6 rounded-3xl text-h4 font-semibold text-center bg-sky-400/30 text-sky-1000 transition-transform active:scale-[0.98] focus-visible:outline focus-visible:outline-2 focus-visible:outline-sky-500"

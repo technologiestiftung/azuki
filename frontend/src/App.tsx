@@ -57,10 +57,7 @@ function App() {
 
 	return (
 		<div className="max-w-[430px] mx-auto min-h-[100dvh] bg-white relative overflow-hidden">
-			<div
-				key={currentStep}
-				className="animate-fadeIn"
-			>
+			<div key={currentStep} className="animate-fadeIn">
 				<StepRenderer />
 			</div>
 		</div>
