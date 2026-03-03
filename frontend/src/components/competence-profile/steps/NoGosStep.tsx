@@ -3,7 +3,7 @@ import { useAppStore } from "../../../store/useAppStore";
 import { Step, type NoGoAnswer } from "../../../common";
 import { ProgressBar } from "../progress-bar/ProgressBar";
 import { QuestionBubble } from "../question-bubble/QuestionBubble";
-import { motion, AnimatePresence } from "framer-motion";
+// Removed framer-motion
 import { BackButton } from "../../back-button/BackButton";
 
 export function NoGosStep() {
@@ -50,28 +50,22 @@ export function NoGosStep() {
 			</div>
 
 			<div className="flex-1 flex flex-col items-center justify-center px-4 pt-6">
-				<AnimatePresence mode="wait">
-					<motion.div
-						key={current.id}
-						initial={{ opacity: 0, scale: 0.95 }}
-						animate={{ opacity: 1, scale: 1 }}
-						exit={{ opacity: 0, scale: 0.95 }}
-						transition={{ duration: 0.25 }}
-						className="w-full bg-gray-50 rounded-3xl p-8 flex flex-col items-center"
-					>
-						<img
-							src={current.illustration}
-							alt=""
-							className="w-40 h-40 object-contain mb-4"
-						/>
-						<h3 className="text-h4 font-semibold text-center mb-2">
-							{current.title}
-						</h3>
-						<p className="text-body text-gray-500 text-center">
-							{current.description}
-						</p>
-					</motion.div>
-				</AnimatePresence>
+				<div
+					key={current.id}
+					className="w-full bg-gray-50 rounded-3xl p-8 flex flex-col items-center transition-all duration-200 ease-in-out opacity-100 scale-100"
+				>
+					<img
+						src={current.illustration}
+						alt=""
+						className="w-40 h-40 object-contain mb-4"
+					/>
+					<h3 className="text-h4 font-semibold text-center mb-2">
+						{current.title}
+					</h3>
+					<p className="text-body text-gray-500 text-center">
+						{current.description}
+					</p>
+				</div>
 			</div>
 
 			<div className="flex gap-3 px-4 pb-8 pt-6">
