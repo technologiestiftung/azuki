@@ -41,7 +41,9 @@ export function ResultsScreen() {
 										#{index + 1}
 									</span>
 								</div>
-								<h3 className="text-lg leading-6 font-bold mb-2">{beruf.name}</h3>
+								<h3 className="text-lg leading-6 font-bold mb-2">
+									{beruf.name}
+								</h3>
 								<p className="text-sm text-gray-600 mb-3">
 									{beruf.begruendung}
 								</p>

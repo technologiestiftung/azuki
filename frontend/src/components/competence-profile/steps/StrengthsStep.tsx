@@ -71,7 +71,9 @@ export function StrengthsStep() {
 						alt=""
 						className="w-32 h-32 object-contain mb-4"
 					/>
-					<h3 className="text-xl leading-6 font-semibold mb-1">{current.title}</h3>
+					<h3 className="text-xl leading-6 font-semibold mb-1">
+						{current.title}
+					</h3>
 					<p className="text-base text-gray-500 text-center">
 						{current.description}
 					</p>
