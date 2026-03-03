@@ -43,7 +43,7 @@ export function NoGosStep() {
 
 			<div className="px-4 pt-8">
 				<QuestionBubble>
-					<h2 className="text-h3 font-bold text-white">
+					<h2 className="text-2xl font-bold text-white">
 						{content["noGos.question"]}
 					</h2>
 				</QuestionBubble>
@@ -59,10 +59,10 @@ export function NoGosStep() {
 						alt=""
 						className="w-40 h-40 object-contain mb-4"
 					/>
-					<h3 className="text-h4 font-semibold text-center mb-2">
+					<h3 className="text-xl leading-6 font-semibold text-center mb-2">
 						{current.title}
 					</h3>
-					<p className="text-body text-gray-500 text-center">
+					<p className="text-base text-gray-500 text-center">
 						{current.description}
 					</p>
 				</div>
@@ -70,14 +70,14 @@ export function NoGosStep() {
 
 			<div className="flex gap-3 px-4 pb-8 pt-6">
 				<button
-					className="py-4 rounded-2xl text-subhead font-semibold text-orange-1000 flex items-center justify-center gap-2 transition-transform active:scale-[0.97] flex-1 bg-orange-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-sky-500"
+					className="py-4 rounded-2xl text-lg leading-6 font-semibold text-orange-1000 flex items-center justify-center gap-2 transition-transform active:scale-[0.97] flex-1 bg-orange-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-sky-500"
 					onClick={() => handleAnswer("geht_nicht")}
 				>
 					<img src="/icons/close-black.svg" alt="" className="w-6 h-6" />
 					{content["noGos.rejectLabel"]}
 				</button>
 				<button
-					className="py-4 rounded-2xl text-subhead font-semibold text-orange-1000 flex items-center justify-center gap-2 transition-transform active:scale-[0.97] flex-1 bg-sky-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-sky-500"
+					className="py-4 rounded-2xl text-lg leading-6 font-semibold text-orange-1000 flex items-center justify-center gap-2 transition-transform active:scale-[0.97] flex-1 bg-sky-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-sky-500"
 					onClick={() => handleAnswer("ist_okay")}
 				>
 					{content["noGos.acceptLabel"]}

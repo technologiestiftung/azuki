@@ -23,8 +23,8 @@ export function StartScreen() {
 			</div>
 
 			<div className="px-4 pb-4">
-				<h1 className="text-h2 font-bold mb-3">{content["start.title"]}</h1>
-				<p className="text-body text-gray-600 mb-8">
+				<h1 className="text-3xl font-bold mb-3">{content["start.title"]}</h1>
+				<p className="text-base text-gray-600 mb-8">
 					{content["start.description"]}
 				</p>
 			</div>

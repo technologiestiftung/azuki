@@ -55,7 +55,7 @@ export function StrengthsStep() {
 
 			<div className="px-4 pt-8">
 				<QuestionBubble>
-					<h2 className="text-h3 font-bold text-white">
+					<h2 className="text-2xl font-bold text-white">
 						{content["strengths.question"]}
 					</h2>
 				</QuestionBubble>
@@ -71,14 +71,14 @@ export function StrengthsStep() {
 						alt=""
 						className="w-32 h-32 object-contain mb-4"
 					/>
-					<h3 className="text-h4 font-semibold mb-1">{current.title}</h3>
-					<p className="text-body text-gray-500 text-center">
+					<h3 className="text-xl leading-6 font-semibold mb-1">{current.title}</h3>
+					<p className="text-base text-gray-500 text-center">
 						{current.description}
 					</p>
 				</div>
 
 				<div className="w-full mt-6">
-					<div className="flex justify-between text-caption text-gray-500 mb-3">
+					<div className="flex justify-between text-sm text-gray-500 mb-3">
 						<span>{content["strengths.sliderMin"]}</span>
 						<span>{content["strengths.sliderMax"]}</span>
 					</div>

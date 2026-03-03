@@ -36,8 +36,8 @@ export const LoginScreen = () => {
 				alt=""
 				className="w-32 h-32 object-contain mb-8"
 			/>
-			<h1 className="text-h2 font-bold text-center mb-2">Azuki</h1>
-			<p className="text-body text-gray-500 text-center mb-8">
+			<h1 className="text-3xl font-bold text-center mb-2">Azuki</h1>
+			<p className="text-base text-gray-500 text-center mb-8">
 				Bitte gib das Passwort ein, um fortzufahren.
 			</p>
 
@@ -51,13 +51,13 @@ export const LoginScreen = () => {
 						setError(false);
 					}}
 					placeholder="Passwort"
-					className={`w-full px-4 py-3 rounded-2xl border-2 text-body outline-none transition-colors focus:outline-none focus-visible:border-sky-300 ${
+					className={`w-full px-4 py-3 rounded-2xl border-2 text-base outline-none transition-colors focus:outline-none focus-visible:border-sky-300 ${
 						error ? "border-red-500" : "border-gray-200"
 					}`}
 					autoFocus
 				/>
 				{error && (
-					<p className="text-caption text-red-500 text-center">
+					<p className="text-sm text-red-500 text-center">
 						Falsches Passwort. Bitte versuche es erneut.
 					</p>
 				)}

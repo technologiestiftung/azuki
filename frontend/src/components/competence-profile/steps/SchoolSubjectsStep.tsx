@@ -19,7 +19,7 @@ export function SchoolSubjectsStep() {
 			<div className="space-y-6">
 				{content["schoolSubjects.categories"].map((category) => (
 					<div key={category.name}>
-						<h3 className="text-caption font-semibold text-gray-500 mb-2">
+						<h3 className="text-sm font-semibold text-gray-500 mb-2">
 							{category.name}
 						</h3>
 						<div className="space-y-2">
@@ -31,7 +31,7 @@ export function SchoolSubjectsStep() {
 									<button
 										key={subject.value}
 										onClick={() => toggleSubject(subject.value)}
-										className={`w-full flex items-center justify-between px-5 py-4 rounded-2xl border-2 transition-colors text-body focus-visible:outline focus-visible:outline-2 focus-visible:outline-sky-500 ${
+										className={`w-full flex items-center justify-between px-5 py-4 rounded-2xl border-2 transition-colors text-base focus-visible:outline focus-visible:outline-2 focus-visible:outline-sky-500 ${
 											selected
 												? "border-sky-300 bg-sky-400/28"
 												: "border-gray-200 bg-transparent"

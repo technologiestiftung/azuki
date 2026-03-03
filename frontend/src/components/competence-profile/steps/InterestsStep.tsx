@@ -30,13 +30,13 @@ export function InterestsStep() {
 			<div className="space-y-6">
 				{profile.customInteressen.length > 0 && (
 					<div>
-						<h3 className="text-caption font-semibold mb-2 text-sky-300">
+						<h3 className="text-sm font-semibold mb-2 text-sky-300">
 							{content["interests.addedByYouLabel"]}
 						</h3>
 						<div className="flex flex-wrap gap-2">
 							{profile.customInteressen.map((interest) => (
 								<button
-									className={`flex items-center gap-2 px-4 py-2 rounded-full border-2 text-body transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-sky-500	${
+									className={`flex items-center gap-2 px-4 py-2 rounded-full border-2 text-base transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-sky-500	${
 										profile.interessen.includes(interest)
 											? "border-sky-300 bg-sky-400/30"
 											: "border-gray-200 bg-transparent"
@@ -53,7 +53,7 @@ export function InterestsStep() {
 
 				{content["interests.categories"].map((category) => (
 					<div key={category.name}>
-						<h3 className="text-caption font-semibold text-gray-500 mb-2">
+						<h3 className="text-sm font-semibold text-gray-500 mb-2">
 							{category.name}
 						</h3>
 						<div className="flex flex-wrap gap-2">
@@ -63,7 +63,7 @@ export function InterestsStep() {
 									<button
 										key={item.label}
 										onClick={() => toggleInterest(item.label)}
-										className={`flex items-center gap-2 px-4 py-2 rounded-2xl border-2 text-body transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-sky-500 ${
+										className={`flex items-center gap-2 px-4 py-2 rounded-2xl border-2 text-base transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-sky-500 ${
 											selected
 												? "border-sky-300 bg-sky-400/28"
 												: "border-gray-200 bg-transparent"
@@ -87,7 +87,7 @@ export function InterestsStep() {
 					onChange={(e) => setCustomInput(e.target.value)}
 					onKeyDown={(e) => e.key === "Enter" && handleAddCustom()}
 					placeholder={content["interests.addPlaceholder"]}
-					className="flex-1 text-body bg-white focus:outline-none rounded-2xl px-4 py-2"
+					className="flex-1 text-base bg-white focus:outline-none rounded-2xl px-4 py-2"
 				/>
 				<button
 					onClick={handleAddCustom}

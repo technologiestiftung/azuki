@@ -19,7 +19,7 @@ export function InSchoolStep() {
 			<div className="space-y-3">
 				{content["inSchool.options"].map((option) => (
 					<button
-						className={`text-left px-5 py-4 w-full rounded-2xl border-2 transition-colors text-body focus-visible:outline focus-visible:outline-2 focus-visible:outline-sky-500 ${
+						className={`text-left px-5 py-4 w-full rounded-2xl border-2 transition-colors text-base focus-visible:outline focus-visible:outline-2 focus-visible:outline-sky-500 ${
 							selected === option.value
 								? "border-sky-300 bg-sky-400/28"
 								: "border-gray-200 bg-transparent"

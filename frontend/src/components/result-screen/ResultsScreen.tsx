@@ -13,8 +13,8 @@ export function ResultsScreen() {
 	return (
 		<div className="flex flex-col min-h-[100dvh]">
 			<div className="px-4 pt-6 pb-4">
-				<h1 className="text-h2 font-bold">{content["results.title"]}</h1>
-				<p className="text-body text-gray-500 mt-2">
+				<h1 className="text-3xl font-bold">{content["results.title"]}</h1>
+				<p className="text-base text-gray-500 mt-2">
 					{berufe.length > 0
 						? `Wir haben ${berufe.length} Ausbildungen gefunden, die zu dir passen.`
 						: "Basierend auf deinem Profil haben wir passende Ausbildungen für dich gefunden."}
@@ -37,16 +37,16 @@ export function ResultsScreen() {
 							)}
 							<div className="p-4">
 								<div className="flex items-center gap-2 mb-1">
-									<span className="text-caption font-semibold text-gray-400">
+									<span className="text-sm font-semibold text-gray-400">
 										#{index + 1}
 									</span>
 								</div>
-								<h3 className="text-subhead font-bold mb-2">{beruf.name}</h3>
-								<p className="text-caption text-gray-600 mb-3">
+								<h3 className="text-lg leading-6 font-bold mb-2">{beruf.name}</h3>
+								<p className="text-sm text-gray-600 mb-3">
 									{beruf.begruendung}
 								</p>
 								{beruf.aufgabenKompakt && (
-									<p className="text-detail text-gray-500 line-clamp-3">
+									<p className="text-xs text-gray-500 line-clamp-3">
 										{beruf.aufgabenKompakt}
 									</p>
 								)}
@@ -55,11 +55,11 @@ export function ResultsScreen() {
 					))
 				) : (
 					<div className="bg-gray-50 rounded-3xl p-6">
-						<p className="text-body text-gray-600 mb-4">
+						<p className="text-base text-gray-600 mb-4">
 							Dein Profil wurde erstellt. Starte den Backend-Server, um deine
 							Top-Ausbildungsberufe zu sehen.
 						</p>
-						<div className="space-y-2 text-caption text-gray-500">
+						<div className="space-y-2 text-sm text-gray-500">
 							<p>
 								<strong>Schulabschluss:</strong> {profile.schulabschluss || "–"}
 							</p>

@@ -31,7 +31,7 @@ export function PracticalExperienceStep() {
 					value={value}
 					onChange={(e) => setValue(e.target.value)}
 					placeholder={content["practicalExperience.placeholder"]}
-					className="w-full h-40 bg-transparent text-body resize-none focus:outline-none placeholder:text-gray-300 placeholder:italic"
+					className="w-full h-40 bg-transparent text-base resize-none focus:outline-none placeholder:text-gray-300 placeholder:italic"
 				/>
 			</div>
 		</StepLayout>

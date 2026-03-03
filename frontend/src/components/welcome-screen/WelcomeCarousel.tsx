@@ -85,7 +85,7 @@ export function WelcomeCarousel() {
 					alt=""
 					className="w-56 h-56 object-contain mb-10"
 				/>
-				<h1 className="text-h2 font-bold">{slides[currentSlide].title}</h1>
+				<h1 className="text-3xl font-bold">{slides[currentSlide].title}</h1>
 			</div>
 
 			<div className="px-4 pb-8">

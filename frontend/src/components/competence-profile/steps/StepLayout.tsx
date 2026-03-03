@@ -44,9 +44,9 @@ export function StepLayout({
 
 			<div className="px-4 pt-8">
 				<QuestionBubble>
-					<h2 className="text-h3 font-bold text-white">{question}</h2>
+					<h2 className="text-2xl font-bold text-white">{question}</h2>
 					{subtitle && (
-						<p className="text-body text-white/80 mt-1">{subtitle}</p>
+						<p className="text-base text-white/80 mt-1">{subtitle}</p>
 					)}
 				</QuestionBubble>
 			</div>
