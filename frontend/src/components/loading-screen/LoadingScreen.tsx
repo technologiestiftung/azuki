@@ -34,9 +34,7 @@ export function LoadingScreen() {
 
 	return (
 		<div className="flex flex-col items-center justify-center min-h-[100dvh] px-8">
-			<div
-				className="w-16 h-16 rounded-full border-4 border-gray-200 border-t-sky-300 mb-8 animate-spin"
-			/>
+			<div className="w-16 h-16 rounded-full border-4 border-gray-200 border-t-sky-300 mb-8 animate-spin" />
 			<h2 className="text-h3 font-semibold text-center">
 				{content["loading.title"]}
 			</h2>
