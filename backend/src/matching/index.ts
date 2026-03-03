@@ -1,19 +1,19 @@
-import type { Beruf, UserProfile } from "../types.js";
-import { scoreBeruf } from "./score.js";
+import type { Occupation, UserProfile } from "@azuki/shared";
+import { scoreOccupation } from "./score.js";
 
-export interface ScoredBeruf {
-	beruf: Beruf;
+export interface ScoredOccupation {
+	occupation: Occupation;
 	score: number;
 }
 
-export function grobFilter(
-	berufe: Beruf[],
+export function preFilter(
+	occupations: Occupation[],
 	profile: UserProfile,
 	topN: number = 30,
-): ScoredBeruf[] {
-	const scored: ScoredBeruf[] = berufe.map((beruf) => ({
-		beruf,
-		score: scoreBeruf(beruf, profile),
+): ScoredOccupation[] {
+	const scored: ScoredOccupation[] = occupations.map((occupation) => ({
+		occupation,
+		score: scoreOccupation(occupation, profile),
 	}));
 
 	scored.sort((a, b) => b.score - a.score);

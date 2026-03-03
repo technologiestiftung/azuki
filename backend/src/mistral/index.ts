@@ -1,6 +1,6 @@
 import { Mistral } from "@mistralai/mistralai";
-import type { UserProfile, MatchResult } from "../types.js";
-import type { ScoredBeruf } from "../matching/index.js";
+import type { UserProfile, MatchResult } from "@azuki/shared";
+import type { ScoredOccupation } from "../matching/index.js";
 
 const MISTRAL_API_KEY = process.env.MISTRAL_API_KEY;
 
@@ -22,33 +22,36 @@ Antworte AUSSCHLIESSLICH im folgenden JSON-Format, ohne Markdown-Codeblöcke:
 ]`;
 }
 
-function buildUserPrompt(scored: ScoredBeruf[], profile: UserProfile): string {
+function buildUserPrompt(
+	scored: ScoredOccupation[],
+	profile: UserProfile,
+): string {
 	const parts: string[] = [];
-	if (profile.schulabschluss) {
-		parts.push(`Schulabschluss: ${profile.schulabschluss}`);
+	if (profile.educationLevel) {
+		parts.push(`Schulabschluss: ${profile.educationLevel}`);
 	}
-	if (profile.lieblingsfaecher.length > 0) {
-		parts.push(`Lieblingsfächer: ${profile.lieblingsfaecher.join(", ")}`);
+	if (profile.favoriteSubjects.length > 0) {
+		parts.push(`Lieblingsfächer: ${profile.favoriteSubjects.join(", ")}`);
 	}
-	if (profile.interessen.length > 0) {
-		parts.push(`Interessen/Hobbys: ${profile.interessen.join(", ")}`);
+	if (profile.interests.length > 0) {
+		parts.push(`Interessen/Hobbys: ${profile.interests.join(", ")}`);
 	}
 
-	const staerkenEntries = Object.entries(profile.staerken)
+	const strengthEntries = Object.entries(profile.strengths)
 		.filter(([, v]) => v >= 0.5)
 		.map(([k, v]) => `${k} (${v >= 1 ? "stark" : "etwas"})`);
-	if (staerkenEntries.length > 0) {
-		parts.push(`Stärken: ${staerkenEntries.join(", ")}`);
+	if (strengthEntries.length > 0) {
+		parts.push(`Stärken: ${strengthEntries.join(", ")}`);
 	}
 
-	const prefA = Object.entries(profile.arbeitsbedingungen)
+	const prefA = Object.entries(profile.workPreferences)
 		.filter(([, v]) => v === "a")
 		.map(([k]) => k);
 	if (prefA.length > 0) {
 		parts.push(`Arbeitsvorlieben (Option A): ${prefA.join(", ")}`);
 	}
 
-	const prefB = Object.entries(profile.arbeitsbedingungen)
+	const prefB = Object.entries(profile.workPreferences)
 		.filter(([, v]) => v === "b")
 		.map(([k]) => k);
 	if (prefB.length > 0) {
@@ -56,41 +59,41 @@ function buildUserPrompt(scored: ScoredBeruf[], profile: UserProfile): string {
 	}
 
 	const noGos = Object.entries(profile.noGos)
-		.filter(([, v]) => v === "geht_nicht")
+		.filter(([, v]) => v === "rejected")
 		.map(([k]) => k);
 	if (noGos.length > 0) {
 		parts.push(`No-Gos: ${noGos.join(", ")}`);
 	}
 
-	if (profile.geheimesTalent) {
-		parts.push(`Geheimes Talent: ${profile.geheimesTalent}`);
+	if (profile.secretTalent) {
+		parts.push(`Geheimes Talent: ${profile.secretTalent}`);
 	}
-	if (profile.praktischeErfahrungen) {
-		parts.push(`Praktische Erfahrungen: ${profile.praktischeErfahrungen}`);
+	if (profile.practicalExperience) {
+		parts.push(`Praktische Erfahrungen: ${profile.practicalExperience}`);
 	}
 
 	const profileText = parts.join("\n");
 
-	const berufTexts = scored.map((s, i) => {
-		const b = s.beruf;
-		const desc = b.steckbriefKurz || b.aufgabenKompakt || b.name;
+	const occupationTexts = scored.map((s, i) => {
+		const o = s.occupation;
+		const desc = o.descriptionShort || o.taskSummary || o.name;
 		const truncated = desc.length > 400 ? desc.slice(0, 400) + "..." : desc;
-		return `${i + 1}. [ID: ${b.id}] ${b.name}\n   ${truncated}`;
+		return `${i + 1}. [ID: ${o.id}] ${o.name}\n   ${truncated}`;
 	});
 
 	return `PROFIL DES JUGENDLICHEN:
 ${profileText}
 
 AUSBILDUNGSBERUFE (wähle die 5-8 besten aus):
-${berufTexts.join("\n\n")}`;
+${occupationTexts.join("\n\n")}`;
 }
 
 export async function mistralRank(
-	scored: ScoredBeruf[],
+	scored: ScoredOccupation[],
 	profile: UserProfile,
 ): Promise<MatchResult> {
 	if (!MISTRAL_API_KEY) {
-		console.warn("MISTRAL_API_KEY not set — returning grob-filter results");
+		console.warn("MISTRAL_API_KEY not set — returning pre-filter results");
 		return fallbackResult(scored);
 	}
 
@@ -122,35 +125,35 @@ export async function mistralRank(
 		return fallbackResult(scored);
 	}
 
-	const berufMap = new Map(scored.map((s) => [s.beruf.id, s]));
+	const occupationMap = new Map(scored.map((s) => [s.occupation.id, s]));
 	const result: MatchResult = {
-		berufe: rankings
-			.filter((r) => berufMap.has(r.id))
+		occupations: rankings
+			.filter((r) => occupationMap.has(r.id))
 			.map((r) => {
-				const s = berufMap.get(r.id)!;
+				const s = occupationMap.get(r.id)!;
 				return {
-					id: s.beruf.id,
-					name: s.beruf.name,
+					id: s.occupation.id,
+					name: s.occupation.name,
 					score: s.score,
-					bilder: s.beruf.bilder.slice(0, 3),
-					aufgabenKompakt: s.beruf.aufgabenKompakt || "",
-					begruendung: r.begruendung,
+					images: s.occupation.images.slice(0, 3),
+					taskSummary: s.occupation.taskSummary || "",
+					reasoning: r.begruendung,
 				};
 			}),
 	};
 
-	if (result.berufe.length < 5) {
-		const usedIds = new Set(result.berufe.map((b) => b.id));
+	if (result.occupations.length < 5) {
+		const usedIds = new Set(result.occupations.map((o) => o.id));
 		for (const s of scored) {
-			if (result.berufe.length >= 8) break;
-			if (usedIds.has(s.beruf.id)) continue;
-			result.berufe.push({
-				id: s.beruf.id,
-				name: s.beruf.name,
+			if (result.occupations.length >= 8) break;
+			if (usedIds.has(s.occupation.id)) continue;
+			result.occupations.push({
+				id: s.occupation.id,
+				name: s.occupation.name,
 				score: s.score,
-				bilder: s.beruf.bilder.slice(0, 3),
-				aufgabenKompakt: s.beruf.aufgabenKompakt || "",
-				begruendung: "Dieser Beruf passt zu deinem Profil.",
+				images: s.occupation.images.slice(0, 3),
+				taskSummary: s.occupation.taskSummary || "",
+				reasoning: "Dieser Beruf passt zu deinem Profil.",
 			});
 		}
 	}
@@ -158,15 +161,15 @@ export async function mistralRank(
 	return result;
 }
 
-function fallbackResult(scored: ScoredBeruf[]): MatchResult {
+function fallbackResult(scored: ScoredOccupation[]): MatchResult {
 	return {
-		berufe: scored.slice(0, 8).map((s) => ({
-			id: s.beruf.id,
-			name: s.beruf.name,
+		occupations: scored.slice(0, 8).map((s) => ({
+			id: s.occupation.id,
+			name: s.occupation.name,
 			score: s.score,
-			bilder: s.beruf.bilder.slice(0, 3),
-			aufgabenKompakt: s.beruf.aufgabenKompakt || "",
-			begruendung: "Dieser Beruf passt zu deinem Profil.",
+			images: s.occupation.images.slice(0, 3),
+			taskSummary: s.occupation.taskSummary || "",
+			reasoning: "Dieser Beruf passt zu deinem Profil.",
 		})),
 	};
 }

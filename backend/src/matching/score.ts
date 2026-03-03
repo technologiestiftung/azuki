@@ -1,37 +1,40 @@
-import type { Beruf, UserProfile } from "../types.js";
+import type { Occupation, UserProfile } from "@azuki/shared";
 
-const NO_GO_MAP: Record<string, (b: Beruf) => boolean> = {
-	noise: (b) => b.bedingungen.laerm,
-	dirt: (b) => b.bedingungen.schmutz,
-	"heavy-work": (b) => b.bedingungen.schweresHeben,
-	computer: (b) => b.bedingungen.bildschirm,
-	"shift-work": (b) => b.bedingungen.schichtarbeit,
-	animals: (b) => b.bedingungen.draussen,
-	danger: (b) => b.bedingungen.hoehe,
+type OccupationPredicate = (occupation: Occupation) => boolean;
+type WorkPreferenceOptionChecks = {
+	a: OccupationPredicate;
+	b: OccupationPredicate;
 };
 
-const WORK_PREF_MAP: Record<
-	string,
-	{ a: (b: Beruf) => boolean; b: (b: Beruf) => boolean }
-> = {
+const NO_GO_MAP: Record<string, OccupationPredicate> = {
+	noise: (o) => o.conditions.noise,
+	dirt: (o) => o.conditions.dirt,
+	"heavy-work": (o) => o.conditions.heavyLifting,
+	computer: (o) => o.conditions.screenWork,
+	"shift-work": (o) => o.conditions.shiftWork,
+	animals: (o) => o.conditions.outdoor,
+	danger: (o) => o.conditions.heights,
+};
+
+const WORK_PREF_MAP: Record<string, WorkPreferenceOptionChecks> = {
 	location: {
-		a: (b) => b.bedingungen.buero || b.bedingungen.werkstatt,
-		b: (b) => b.bedingungen.draussen || b.bedingungen.baustelle,
+		a: (o) => o.conditions.office || o.conditions.workshop,
+		b: (o) => o.conditions.outdoor || o.conditions.constructionSite,
 	},
 	"hands-vs-mind": {
-		a: (b) => b.bedingungen.handarbeit,
-		b: (b) => b.bedingungen.bildschirm || b.bedingungen.buero,
+		a: (o) => o.conditions.manualLabor,
+		b: (o) => o.conditions.screenWork || o.conditions.office,
 	},
 	variety: {
 		a: () => false,
 		b: () => false,
 	},
 	people: {
-		a: (b) => !b.bedingungen.kundenkontakt,
-		b: (b) => b.bedingungen.kundenkontakt,
+		a: (o) => !o.conditions.customerContact,
+		b: (o) => o.conditions.customerContact,
 	},
 	pace: {
-		a: (b) => b.bedingungen.buero,
+		a: (o) => o.conditions.office,
 		b: () => false,
 	},
 	structure: {
@@ -39,12 +42,12 @@ const WORK_PREF_MAP: Record<
 		b: () => false,
 	},
 	purpose: {
-		a: (b) => b.interessen.includes("sozial-beratend"),
+		a: (o) => o.interests.includes("sozial-beratend"),
 		b: () => false,
 	},
 	environment: {
-		a: (b) => b.bedingungen.buero || b.bedingungen.werkstatt,
-		b: (b) => b.bedingungen.draussen,
+		a: (o) => o.conditions.office || o.conditions.workshop,
+		b: (o) => o.conditions.outdoor,
 	},
 };
 
@@ -71,92 +74,108 @@ const HOBBY_TO_INTEREST: Record<string, string[]> = {
 	"Kinder betreuen": ["sozial-beratend"],
 };
 
-export function scoreBeruf(beruf: Beruf, profile: UserProfile): number {
+export function scoreOccupation(
+	occupation: Occupation,
+	profile: UserProfile,
+): number {
 	let score = 0;
 
-	score += scoreSchulabschluss(beruf, profile);
-	score += scoreNoGos(beruf, profile);
-	score += scoreWorkPreferences(beruf, profile);
-	score += scoreFaecher(beruf, profile);
-	score += scoreInteressen(beruf, profile);
+	score += scoreEducation(occupation, profile);
+	score += scoreNoGos(occupation, profile);
+	score += scoreWorkPreferences(occupation, profile);
+	score += scoreSubjects(occupation, profile);
+	score += scoreInterests(occupation, profile);
 
 	return score;
 }
 
-function scoreSchulabschluss(beruf: Beruf, profile: UserProfile): number {
-	if (!beruf.schulabschluss || !profile.schulabschluss) return 0;
+function scoreEducation(
+	occupation: Occupation,
+	profile: UserProfile,
+): number {
+	if (!occupation.degreeStats || !profile.educationLevel) return 0;
 
-	const sa = beruf.schulabschluss;
+	const stats = occupation.degreeStats;
 
-	switch (profile.schulabschluss) {
-		case "hauptschule":
-		case "erweitert_hauptschule":
-			if (sa.hauptschule + sa.ohne < 10) return -10;
+	switch (profile.educationLevel) {
+		case "secondary":
+		case "extended_secondary":
+			if (stats.secondary + stats.noQualification < 10) return -10;
 			break;
-		case "realschule":
-			if (sa.mittel + sa.hauptschule + sa.ohne < 10) return -5;
+		case "intermediate":
+			if (stats.intermediate + stats.secondary + stats.noQualification < 10)
+				return -5;
 			break;
-		case "ohne_abschluss":
-			if (sa.ohne < 10) return -15;
+		case "none":
+			if (stats.noQualification < 10) return -15;
 			break;
-		case "abitur":
+		case "university_entrance":
 			break;
 	}
 
 	return 0;
 }
 
-function scoreNoGos(beruf: Beruf, profile: UserProfile): number {
+function scoreNoGos(occupation: Occupation, profile: UserProfile): number {
 	let penalty = 0;
 	for (const [id, answer] of Object.entries(profile.noGos)) {
-		if (answer !== "geht_nicht") continue;
+		if (answer !== "rejected") continue;
 		const check = NO_GO_MAP[id];
-		if (check && check(beruf)) {
+		if (check && check(occupation)) {
 			penalty -= 5;
 		}
 	}
 	return penalty;
 }
 
-function scoreWorkPreferences(beruf: Beruf, profile: UserProfile): number {
+function scoreWorkPreferences(
+	occupation: Occupation,
+	profile: UserProfile,
+): number {
 	let score = 0;
-	for (const [id, choice] of Object.entries(profile.arbeitsbedingungen)) {
+	for (const [id, choice] of Object.entries(profile.workPreferences)) {
 		if (!choice) continue;
 		const mapping = WORK_PREF_MAP[id];
 		if (!mapping) continue;
 
-		const checkFn = choice === "a" ? mapping.a : mapping.b;
-		if (checkFn(beruf)) score += 2;
+		const selectedOptionCheck = choice === "a" ? mapping.a : mapping.b;
+		if (selectedOptionCheck(occupation)) score += 2;
 	}
 	return score;
 }
 
-function scoreFaecher(beruf: Beruf, profile: UserProfile): number {
+function scoreSubjects(
+	occupation: Occupation,
+	profile: UserProfile,
+): number {
 	let score = 0;
-	for (const fach of profile.lieblingsfaecher) {
-		if (beruf.schulfaecher.includes(fach)) {
+	for (const subject of profile.favoriteSubjects) {
+		if (occupation.subjects.includes(subject)) {
 			score += 1;
 		}
 	}
 	return score;
 }
 
-function scoreInteressen(beruf: Beruf, profile: UserProfile): number {
+function scoreInterests(
+	occupation: Occupation,
+	profile: UserProfile,
+): number {
 	let score = 0;
 
 	const userCategories = new Set<string>();
-	for (const interest of profile.interessen) {
-		const cats = HOBBY_TO_INTEREST[interest];
-		if (cats) {
-			for (const c of cats) userCategories.add(c);
+	for (const interest of profile.interests) {
+		const mappedCategories = HOBBY_TO_INTEREST[interest];
+		if (mappedCategories) {
+			for (const category of mappedCategories) userCategories.add(category);
 		}
 	}
 
 	for (const cat of userCategories) {
-		const idx = beruf.interessen.indexOf(cat);
-		if (idx === 0) score += 3;
-		else if (idx === 1) score += 2;
-		else if (idx >= 2) score += 1;
+		const interestIndex = occupation.interests.indexOf(cat);
+		if (interestIndex === 0) score += 3;
+		else if (interestIndex === 1) score += 2;
+		else if (interestIndex >= 2) score += 1;
 	}
 
 	return score;
