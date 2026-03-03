@@ -1,4 +1,6 @@
-import type { UserProfile, MatchResult } from "../types";
+import type { UserProfile, MatchResult } from "../common";
+
+type HeadersInit = Record<string, string>;
 
 const API_BASE = import.meta.env.VITE_API_URL || "/api";
 
@@ -10,13 +12,13 @@ export function setAppPassword(password: string) {
 
 function headers(): HeadersInit {
 	const h: HeadersInit = { "Content-Type": "application/json" };
-	if (appPassword) h["x-app-password"] = appPassword;
+	if (appPassword) {
+		h["x-app-password"] = appPassword;
+	}
 	return h;
 }
 
-export async function matchProfile(
-	profile: UserProfile,
-): Promise<MatchResult> {
+export async function matchProfile(profile: UserProfile): Promise<MatchResult> {
 	const res = await fetch(`${API_BASE}/match`, {
 		method: "POST",
 		headers: headers(),

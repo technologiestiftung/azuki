@@ -15,9 +15,9 @@
 		"preview": "vite preview"
 	},
 	"dependencies": {
-		"framer-motion": "12.34.3",
 		"react": "18.3.1",
-		"react-dom": "18.3.1"
+		"react-dom": "18.3.1",
+		"zustand": "5.0.11"
 	},
 	"devDependencies": {
 		"@axe-core/playwright": "4.10.0",
