@@ -9,6 +9,7 @@ export type {
 	UserProfile,
 	MatchedOccupation,
 	MatchResult,
+	SubjectDefinition,
 } from "@azuki/shared";
 
 import type { WorkPreferenceChoice } from "@azuki/shared";

@@ -8,6 +8,10 @@ export function InSchoolStep() {
 	const nextStep = useAppStore((state) => state.nextStep);
 	const [selected, setSelected] = useState<string | null>(null);
 
+	const inSchoolOptions: { value: string; label: string }[] = [
+		{ value: "yes", label: content["inSchool.option.yes.label"] },
+		{ value: "no", label: content["inSchool.option.no.label"] },
+	];
 	return (
 		<StepLayout
 			question={content["inSchool.question"]}
@@ -17,7 +21,7 @@ export function InSchoolStep() {
 			showSkip={false}
 		>
 			<div className="flex flex-col gap-3">
-				{content["inSchool.options"].map((option) => (
+				{inSchoolOptions.map((option) => (
 					<button
 						className={`text-left p-3 w-full rounded-xl border-2 text-gray-700 text-lg font-normal focus-visible:outline focus-visible:outline-2 focus-visible:outline-sky-500 ${
 							selected === option.value

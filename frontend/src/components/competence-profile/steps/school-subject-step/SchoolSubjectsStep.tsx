@@ -1,7 +1,8 @@
-import { content } from "../../../content/de";
-import { useAppStore } from "../../../store/useAppStore";
-import { Step } from "../../../common";
-import { StepLayout } from "./StepLayout";
+import { content } from "../../../../content/de";
+import { useAppStore } from "../../../../store/useAppStore";
+import { Step } from "../../../../common";
+import { StepLayout } from "../StepLayout";
+import { categories } from "./school-subjects";
 
 export function SchoolSubjectsStep() {
 	const profile = useAppStore((state) => state.profile);
@@ -19,7 +20,7 @@ export function SchoolSubjectsStep() {
 			skipLabel={content["schoolSubjects.skipButton.label"]}
 		>
 			<div className="flex flex-col gap-8">
-				{content["schoolSubjects.categories"].map((category) => (
+				{categories.map((category) => (
 					<div key={category.name}>
 						<h3 className="text-lg font-semibold text-gray-500 mb-2 px-3.5">
 							{category.name}
