@@ -20,16 +20,12 @@ export const content = {
 
 	// School Degree
 	"schoolDegree.question": "Welchen Schulabschluss hast du?",
-	"schoolDegree.options": [
-		{ value: "secondary", label: "Hauptschulabschluss" },
-		{
-			value: "extended_secondary",
-			label: "Erweiterter Hauptschulabschluss",
-		},
-		{ value: "intermediate", label: "Realschulabschluss" },
-		{ value: "none", label: "Ohne Abschluss" },
-		{ value: "university_entrance", label: "Abitur" },
-	],
+	"schoolDegree.option.secondary.label": "Hauptschulabschluss",
+	"schoolDegree.option.extendedSecondary.label":
+		"Erweiterter Hauptschulabschluss",
+	"schoolDegree.option.intermediate.label": "Realschulabschluss",
+	"schoolDegree.option.none.label": "Ohne Abschluss",
+	"schoolDegree.option.universityEntrance.label": "Abitur",
 	"schoolDegree.skipButton.label": "Ich weiß es nicht",
 
 	// School Subjects
@@ -50,7 +46,6 @@ export const content = {
 	"schoolSubjects.society.economics.label": "Wirtschaft",
 	"schoolSubjects.society.ethics.label": "Ethik",
 	"schoolSubjects.society.religion.label": "Religion",
-	"schoolSubjects.economy.label": "Wirtschaft",
 	// Creativity & Practice
 	"schoolSubjects.creativity.label": "Praxis & Kreativität",
 	"schoolSubjects.creativity.craftsAndTechnology.label": "Werken/Technik",
