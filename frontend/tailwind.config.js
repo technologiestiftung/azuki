@@ -58,17 +58,22 @@ export default {
 			},
 			keyframes: {
 				fadeIn: {
-					from: { opacity: '0' },
-					to: { opacity: '1' },
+					from: { opacity: "0" },
+					to: { opacity: "1" },
 				},
 				slideIn: {
-					from: { opacity: '0', transform: 'translateX(40px)' },
-					to: { opacity: '1', transform: 'translateX(0)' },
+					from: { opacity: "0", transform: "translateX(40px)" },
+					to: { opacity: "1", transform: "translateX(0)" },
+				},
+				progressFill: {
+					from: { width: "0%" },
+					to: { width: "100%" },
 				},
 			},
 			animation: {
-				fadeIn: 'fadeIn 0.2s ease-in-out',
-				slideIn: 'slideIn 0.25s ease-out',
+				fadeIn: "fadeIn 0.2s ease-in-out",
+				slideIn: "slideIn 0.25s ease-out",
+				progressFill: "progressFill 4s linear forwards",
 			},
 		},
 	},
