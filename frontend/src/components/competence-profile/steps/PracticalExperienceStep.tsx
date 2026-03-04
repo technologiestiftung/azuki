@@ -10,7 +10,7 @@ export function PracticalExperienceStep() {
 		(state) => state.setPracticalExperience,
 	);
 	const nextStep = useAppStore((state) => state.nextStep);
-	const [value, setValue] = useState(profile.praktischeErfahrungen);
+	const [value, setValue] = useState(profile.practicalExperience);
 
 	function handleNext() {
 		setPracticalExperience(value);

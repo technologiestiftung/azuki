@@ -1,4 +1,4 @@
-import type { UserProfile, MatchResult } from "../common";
+import type { UserProfile, MatchResult } from "@azuki/shared";
 
 type HeadersInit = Record<string, string>;
 

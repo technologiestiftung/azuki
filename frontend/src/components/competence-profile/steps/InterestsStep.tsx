@@ -13,7 +13,7 @@ export function InterestsStep() {
 
 	function handleAddCustom() {
 		const trimmed = customInput.trim();
-		if (trimmed && !profile.interessen.includes(trimmed)) {
+		if (trimmed && !profile.interests.includes(trimmed)) {
 			addCustomInterest(trimmed);
 			setCustomInput("");
 		}
@@ -25,19 +25,19 @@ export function InterestsStep() {
 			currentStep={Step.Interests}
 			onNext={nextStep}
 			onSkip={nextStep}
-			nextDisabled={profile.interessen.length === 0}
+			nextDisabled={profile.interests.length === 0}
 		>
 			<div className="space-y-6">
-				{profile.customInteressen.length > 0 && (
+				{profile.customInterests.length > 0 && (
 					<div>
 						<h3 className="text-sm font-semibold mb-2 text-sky-300">
 							{content["interests.addedByYouLabel"]}
 						</h3>
 						<div className="flex flex-wrap gap-2">
-							{profile.customInteressen.map((interest) => (
+							{profile.customInterests.map((interest) => (
 								<button
 									className={`flex items-center gap-2 px-4 py-2 rounded-full border-2 text-base transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-sky-500	${
-										profile.interessen.includes(interest)
+										profile.interests.includes(interest)
 											? "border-sky-300 bg-sky-400/30"
 											: "border-gray-200 bg-transparent"
 									} `}
@@ -58,7 +58,7 @@ export function InterestsStep() {
 						</h3>
 						<div className="flex flex-wrap gap-2">
 							{category.items.map((item) => {
-								const selected = profile.interessen.includes(item.label);
+								const selected = profile.interests.includes(item.label);
 								return (
 									<button
 										key={item.label}

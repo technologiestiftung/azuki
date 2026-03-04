@@ -2,7 +2,7 @@ import { create } from "zustand";
 import {
 	Step,
 	type UserProfile,
-	type SchoolDegree,
+	type EducationLevel,
 	type WorkPreferenceChoice,
 	type NoGoAnswer,
 	type MatchResult,
@@ -26,14 +26,14 @@ const STEP_ORDER = [
 ];
 
 const initialProfile: UserProfile = {
-	schulabschluss: null,
-	lieblingsfaecher: [],
-	interessen: [],
-	customInteressen: [],
-	staerken: {},
-	geheimesTalent: "",
-	praktischeErfahrungen: "",
-	arbeitsbedingungen: {},
+	educationLevel: null,
+	favoriteSubjects: [],
+	interests: [],
+	customInterests: [],
+	strengths: {},
+	secretTalent: "",
+	practicalExperience: "",
+	workPreferences: {},
 	noGos: {},
 };
 
@@ -50,7 +50,7 @@ interface AppActions {
 	goToStep: (step: Step) => void;
 	nextStep: () => void;
 	prevStep: () => void;
-	setSchoolDegree: (value: SchoolDegree) => void;
+	setEducationLevel: (value: EducationLevel) => void;
 	toggleSubject: (subject: string) => void;
 	toggleInterest: (interest: string) => void;
 	addCustomInterest: (interest: string) => void;
@@ -93,28 +93,28 @@ export const useAppStore = create<AppState & AppActions>((set, get) => ({
 		}
 	},
 
-	setSchoolDegree: (value) =>
+	setEducationLevel: (value) =>
 		set((state) => ({
-			profile: { ...state.profile, schulabschluss: value },
+			profile: { ...state.profile, educationLevel: value },
 		})),
 
 	toggleSubject: (subject) =>
 		set((state) => {
-			const subjects = state.profile.lieblingsfaecher.includes(subject)
-				? state.profile.lieblingsfaecher.filter((s) => s !== subject)
-				: [...state.profile.lieblingsfaecher, subject];
+			const subjects = state.profile.favoriteSubjects.includes(subject)
+				? state.profile.favoriteSubjects.filter((s) => s !== subject)
+				: [...state.profile.favoriteSubjects, subject];
 			return {
-				profile: { ...state.profile, lieblingsfaecher: subjects },
+				profile: { ...state.profile, favoriteSubjects: subjects },
 			};
 		}),
 
 	toggleInterest: (interest) =>
 		set((state) => {
-			const interests = state.profile.interessen.includes(interest)
-				? state.profile.interessen.filter((i) => i !== interest)
-				: [...state.profile.interessen, interest];
+			const interests = state.profile.interests.includes(interest)
+				? state.profile.interests.filter((i) => i !== interest)
+				: [...state.profile.interests, interest];
 			return {
-				profile: { ...state.profile, interessen: interests },
+				profile: { ...state.profile, interests },
 			};
 		}),
 
@@ -122,8 +122,8 @@ export const useAppStore = create<AppState & AppActions>((set, get) => ({
 		set((state) => ({
 			profile: {
 				...state.profile,
-				customInteressen: [...state.profile.customInteressen, interest],
-				interessen: [...state.profile.interessen, interest],
+				customInterests: [...state.profile.customInterests, interest],
+				interests: [...state.profile.interests, interest],
 			},
 		})),
 
@@ -131,26 +131,26 @@ export const useAppStore = create<AppState & AppActions>((set, get) => ({
 		set((state) => ({
 			profile: {
 				...state.profile,
-				staerken: { ...state.profile.staerken, [id]: value },
+				strengths: { ...state.profile.strengths, [id]: value },
 			},
 		})),
 
 	setSecretTalent: (value) =>
 		set((state) => ({
-			profile: { ...state.profile, geheimesTalent: value },
+			profile: { ...state.profile, secretTalent: value },
 		})),
 
 	setPracticalExperience: (value) =>
 		set((state) => ({
-			profile: { ...state.profile, praktischeErfahrungen: value },
+			profile: { ...state.profile, practicalExperience: value },
 		})),
 
 	setWorkPreference: (id, choice) =>
 		set((state) => ({
 			profile: {
 				...state.profile,
-				arbeitsbedingungen: {
-					...state.profile.arbeitsbedingungen,
+				workPreferences: {
+					...state.profile.workPreferences,
 					[id]: choice,
 				},
 			},

@@ -8,7 +8,7 @@ export function SecretTalentStep() {
 	const profile = useAppStore((state) => state.profile);
 	const setSecretTalent = useAppStore((state) => state.setSecretTalent);
 	const nextStep = useAppStore((state) => state.nextStep);
-	const [value, setValue] = useState(profile.geheimesTalent);
+	const [value, setValue] = useState(profile.secretTalent);
 
 	function handleNext() {
 		setSecretTalent(value);
