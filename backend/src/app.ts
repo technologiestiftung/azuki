@@ -4,7 +4,7 @@ import { UserProfileSchema } from "./schemas/user-profile.js";
 import { readFileSync, existsSync } from "node:fs";
 import { resolve, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
-import type { Occupation, UserProfile, MatchResult } from "@azuki/shared";
+import type { Occupation, MatchResult } from "@azuki/shared";
 import { preFilter } from "./matching/index.js";
 import { mistralRank } from "./mistral/index.js";
 
@@ -57,7 +57,7 @@ app.post("/api/match", async (c) => {
 	if (!parsedProfile.success) {
 		return c.json({ error: "Invalid request body" }, 400);
 	}
-	const profile = parsedProfile.data as UserProfile;
+	const profile = parsedProfile.data;
 
 	const top40 = preFilter(occupations, profile, 40);
 

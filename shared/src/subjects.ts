@@ -19,7 +19,3 @@ export const SUBJECTS: SubjectDefinition[] = [
 	{ id: "ethics", dataLabel: "Ethik" },
 	{ id: "religion", dataLabel: "Religion" },
 ];
-
-export const SUBJECT_BY_DATA_LABEL = new Map(
-	SUBJECTS.map((s) => [s.dataLabel, s]),
-);

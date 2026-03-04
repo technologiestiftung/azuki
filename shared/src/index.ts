@@ -13,6 +13,5 @@ export type {
 
 export {
 	SUBJECTS,
-	SUBJECT_BY_DATA_LABEL,
 	type SubjectDefinition,
 } from "./subjects";

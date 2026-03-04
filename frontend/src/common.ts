@@ -11,6 +11,8 @@ export type {
 	MatchResult,
 } from "@azuki/shared";
 
+import type { WorkPreferenceChoice } from "@azuki/shared";
+
 export interface StrengthRating {
 	id: string;
 	value: number;
@@ -18,7 +20,7 @@ export interface StrengthRating {
 
 export interface WorkPreference {
 	id: string;
-	choice: import("@azuki/shared").WorkPreferenceChoice | null;
+	choice: WorkPreferenceChoice | null;
 }
 
 export enum Step {

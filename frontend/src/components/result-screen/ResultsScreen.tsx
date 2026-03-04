@@ -63,8 +63,7 @@ export function ResultsScreen() {
 						</p>
 						<div className="space-y-2 text-sm text-gray-500">
 							<p>
-								<strong>Schulabschluss:</strong>{" "}
-								{profile.educationLevel || "–"}
+								<strong>Schulabschluss:</strong> {profile.educationLevel || "–"}
 							</p>
 							<p>
 								<strong>Lieblingsfächer:</strong>{" "}

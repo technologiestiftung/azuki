@@ -1,3 +1,23 @@
+/**
+ * Occupation–profile scoring engine.
+ *
+ * Each occupation is scored against a user profile across five dimensions:
+ *
+ *   1. Education — penalizes occupations where the user's degree level
+ *      is underrepresented among current practitioners.
+ *   2. No-gos — penalizes occupations whose working conditions match
+ *      conditions the user has explicitly rejected (noise, dirt, etc.).
+ *   3. Work preferences — rewards occupations matching the user's
+ *      preferred work style (indoor/outdoor, hands-on/desk, pace, etc.).
+ *   4. Subjects — rewards occupations linked to the user's favorite
+ *      school subjects.
+ *   5. Interests — maps hobbies to BERUFENET interest categories and
+ *      rewards matches, weighted by the category's rank in the occupation.
+ *
+ * The combined score is used to pre-rank occupations before the LLM
+ * re-ranking step in mistral/.
+ */
+
 import type { Occupation, UserProfile } from "@azuki/shared";
 
 type OccupationPredicate = (occupation: Occupation) => boolean;
