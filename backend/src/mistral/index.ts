@@ -1,8 +1,12 @@
 import { Mistral } from "@mistralai/mistralai";
-import type { UserProfile, MatchResult } from "../types.js";
-import type { ScoredBeruf } from "../matching/index.js";
+import type { UserProfile, MatchResult } from "@azuki/shared";
+import type { ScoredOccupation } from "../matching/index.js";
 
 const MISTRAL_API_KEY = process.env.MISTRAL_API_KEY;
+const MAX_DESCRIPTION_LENGTH = 400;
+const MIN_RESULTS = 5;
+const MAX_RESULTS = 8;
+const DEFAULT_REASONING = "Dieser Beruf passt zu deinem Profil.";
 
 function buildSystemPrompt(): string {
 	return `Du bist ein freundlicher Berufsberater für Jugendliche in Deutschland. 
@@ -11,7 +15,7 @@ Du hilfst jungen Menschen, passende Ausbildungsberufe zu finden.
 Deine Aufgabe:
 - Du bekommst ein Profil eines Jugendlichen (Interessen, Stärken, Wünsche, Schulabschluss).
 - Du bekommst eine Liste von Ausbildungsberufen mit Beschreibungen.
-- Wähle die 5 bis 8 Berufe aus, die am besten zum Profil passen.
+- Wähle die ${MIN_RESULTS} bis ${MAX_RESULTS} Berufe aus, die am besten zum Profil passen.
 - Schreibe für jeden gewählten Beruf eine kurze, motivierende Begründung (1-2 Sätze) in einfacher, jugendlicher Sprache.
 - Berücksichtige besonders die eigenen Worte des Jugendlichen — sie drücken aus, was die strukturierten Fragen nicht erfassen konnten.
 
@@ -22,75 +26,112 @@ Antworte AUSSCHLIESSLICH im folgenden JSON-Format, ohne Markdown-Codeblöcke:
 ]`;
 }
 
-function buildUserPrompt(scored: ScoredBeruf[], profile: UserProfile): string {
+/**
+ * Serializes the user profile into labeled German-language lines
+ * for the Mistral prompt. Only non-empty fields are included.
+ */
+function formatProfileSections(profile: UserProfile): string {
 	const parts: string[] = [];
-	if (profile.schulabschluss) {
-		parts.push(`Schulabschluss: ${profile.schulabschluss}`);
+
+	// Basic profile fields
+	if (profile.educationLevel) {
+		parts.push(`Schulabschluss: ${profile.educationLevel}`);
 	}
-	if (profile.lieblingsfaecher.length > 0) {
-		parts.push(`Lieblingsfächer: ${profile.lieblingsfaecher.join(", ")}`);
+	if (profile.favoriteSubjects.length > 0) {
+		parts.push(`Lieblingsfächer: ${profile.favoriteSubjects.join(", ")}`);
 	}
-	if (profile.interessen.length > 0) {
-		parts.push(`Interessen/Hobbys: ${profile.interessen.join(", ")}`);
+	if (profile.interests.length > 0) {
+		parts.push(`Interessen/Hobbys: ${profile.interests.join(", ")}`);
 	}
 
-	const staerkenEntries = Object.entries(profile.staerken)
-		.filter(([, v]) => v >= 0.5)
-		.map(([k, v]) => `${k} (${v >= 1 ? "stark" : "etwas"})`);
-	if (staerkenEntries.length > 0) {
-		parts.push(`Stärken: ${staerkenEntries.join(", ")}`);
+	// Derived fields: strengths above threshold, grouped work preferences, rejected no-gos
+	const strengthEntries = Object.entries(profile.strengths)
+		.filter(([, value]) => value >= 0.5)
+		.map(([key, value]) => `${key} (${value >= 1 ? "stark" : "etwas"})`);
+	if (strengthEntries.length > 0) {
+		parts.push(`Stärken: ${strengthEntries.join(", ")}`);
 	}
 
-	const prefA = Object.entries(profile.arbeitsbedingungen)
-		.filter(([, v]) => v === "a")
-		.map(([k]) => k);
-	if (prefA.length > 0) {
-		parts.push(`Arbeitsvorlieben (Option A): ${prefA.join(", ")}`);
+	const preferencesA = Object.entries(profile.workPreferences)
+		.filter(([, value]) => value === "a")
+		.map(([key]) => key);
+	if (preferencesA.length > 0) {
+		parts.push(`Arbeitsvorlieben (Option A): ${preferencesA.join(", ")}`);
 	}
 
-	const prefB = Object.entries(profile.arbeitsbedingungen)
-		.filter(([, v]) => v === "b")
-		.map(([k]) => k);
-	if (prefB.length > 0) {
-		parts.push(`Arbeitsvorlieben (Option B): ${prefB.join(", ")}`);
+	const preferencesB = Object.entries(profile.workPreferences)
+		.filter(([, value]) => value === "b")
+		.map(([key]) => key);
+	if (preferencesB.length > 0) {
+		parts.push(`Arbeitsvorlieben (Option B): ${preferencesB.join(", ")}`);
 	}
 
 	const noGos = Object.entries(profile.noGos)
-		.filter(([, v]) => v === "geht_nicht")
-		.map(([k]) => k);
+		.filter(([, value]) => value === "rejected")
+		.map(([key]) => key);
 	if (noGos.length > 0) {
 		parts.push(`No-Gos: ${noGos.join(", ")}`);
 	}
 
-	if (profile.geheimesTalent) {
-		parts.push(`Geheimes Talent: ${profile.geheimesTalent}`);
+	// Free-text fields from the user
+	if (profile.secretTalent) {
+		parts.push(`Geheimes Talent: ${profile.secretTalent}`);
 	}
-	if (profile.praktischeErfahrungen) {
-		parts.push(`Praktische Erfahrungen: ${profile.praktischeErfahrungen}`);
+	if (profile.practicalExperience) {
+		parts.push(`Praktische Erfahrungen: ${profile.practicalExperience}`);
 	}
 
-	const profileText = parts.join("\n");
+	return parts.join("\n");
+}
 
-	const berufTexts = scored.map((s, i) => {
-		const b = s.beruf;
-		const desc = b.steckbriefKurz || b.aufgabenKompakt || b.name;
-		const truncated = desc.length > 400 ? desc.slice(0, 400) + "..." : desc;
-		return `${i + 1}. [ID: ${b.id}] ${b.name}\n   ${truncated}`;
-	});
+function formatOccupationList(scored: ScoredOccupation[]): string {
+	return scored
+		.map((item, index) => {
+			const occupation = item.occupation;
+			const description =
+				occupation.descriptionShort ||
+				occupation.taskSummary ||
+				occupation.name;
+			const truncated =
+				description.length > MAX_DESCRIPTION_LENGTH
+					? description.slice(0, MAX_DESCRIPTION_LENGTH) + "..."
+					: description;
+			return `${index + 1}. [ID: ${occupation.id}] ${occupation.name}\n   ${truncated}`;
+		})
+		.join("\n\n");
+}
 
+function buildUserPrompt(
+	scored: ScoredOccupation[],
+	profile: UserProfile,
+): string {
 	return `PROFIL DES JUGENDLICHEN:
-${profileText}
+${formatProfileSections(profile)}
 
-AUSBILDUNGSBERUFE (wähle die 5-8 besten aus):
-${berufTexts.join("\n\n")}`;
+AUSBILDUNGSBERUFE (wähle die ${MIN_RESULTS}-${MAX_RESULTS} besten aus):
+${formatOccupationList(scored)}`;
+}
+
+function toOccupationResult(
+	item: ScoredOccupation,
+	reasoning: string,
+): MatchResult["occupations"][number] {
+	return {
+		id: item.occupation.id,
+		name: item.occupation.name,
+		score: item.score,
+		images: item.occupation.images.slice(0, 3),
+		taskSummary: item.occupation.taskSummary || "",
+		reasoning,
+	};
 }
 
 export async function mistralRank(
-	scored: ScoredBeruf[],
+	scored: ScoredOccupation[],
 	profile: UserProfile,
 ): Promise<MatchResult> {
 	if (!MISTRAL_API_KEY) {
-		console.warn("MISTRAL_API_KEY not set — returning grob-filter results");
+		console.warn("MISTRAL_API_KEY not set — returning pre-filter results");
 		return fallbackResult(scored);
 	}
 
@@ -122,51 +163,39 @@ export async function mistralRank(
 		return fallbackResult(scored);
 	}
 
-	const berufMap = new Map(scored.map((s) => [s.beruf.id, s]));
+	const occupationMap = new Map(
+		scored.map((item) => [item.occupation.id, item]),
+	);
+
 	const result: MatchResult = {
-		berufe: rankings
-			.filter((r) => berufMap.has(r.id))
-			.map((r) => {
-				const s = berufMap.get(r.id)!;
-				return {
-					id: s.beruf.id,
-					name: s.beruf.name,
-					score: s.score,
-					bilder: s.beruf.bilder.slice(0, 3),
-					aufgabenKompakt: s.beruf.aufgabenKompakt || "",
-					begruendung: r.begruendung,
-				};
+		occupations: rankings
+			.filter((ranking) => occupationMap.has(ranking.id))
+			.map((ranking) => {
+				const item = occupationMap.get(ranking.id)!;
+				return toOccupationResult(item, ranking.begruendung);
 			}),
 	};
 
-	if (result.berufe.length < 5) {
-		const usedIds = new Set(result.berufe.map((b) => b.id));
-		for (const s of scored) {
-			if (result.berufe.length >= 8) break;
-			if (usedIds.has(s.beruf.id)) continue;
-			result.berufe.push({
-				id: s.beruf.id,
-				name: s.beruf.name,
-				score: s.score,
-				bilder: s.beruf.bilder.slice(0, 3),
-				aufgabenKompakt: s.beruf.aufgabenKompakt || "",
-				begruendung: "Dieser Beruf passt zu deinem Profil.",
-			});
+	if (result.occupations.length < MIN_RESULTS) {
+		const usedIds = new Set(
+			result.occupations.map((occupation) => occupation.id),
+		);
+		for (const item of scored) {
+			if (result.occupations.length >= MAX_RESULTS) break;
+			if (usedIds.has(item.occupation.id)) continue;
+			result.occupations.push(
+				toOccupationResult(item, DEFAULT_REASONING),
+			);
 		}
 	}
 
 	return result;
 }
 
-function fallbackResult(scored: ScoredBeruf[]): MatchResult {
+function fallbackResult(scored: ScoredOccupation[]): MatchResult {
 	return {
-		berufe: scored.slice(0, 8).map((s) => ({
-			id: s.beruf.id,
-			name: s.beruf.name,
-			score: s.score,
-			bilder: s.beruf.bilder.slice(0, 3),
-			aufgabenKompakt: s.beruf.aufgabenKompakt || "",
-			begruendung: "Dieser Beruf passt zu deinem Profil.",
-		})),
+		occupations: scored
+			.slice(0, MAX_RESULTS)
+			.map((item) => toOccupationResult(item, DEFAULT_REASONING)),
 	};
 }

@@ -9,10 +9,7 @@
 		"outDir": "dist",
 		"rootDir": "src",
 		"resolveJsonModule": true,
-		"declaration": true,
-		"paths": {
-			"shared": ["../frontend/src/types/index.ts"]
-		}
+		"declaration": true
 	},
 	"include": ["src/**/*.ts"]
 }

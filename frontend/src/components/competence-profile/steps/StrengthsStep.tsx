@@ -18,7 +18,7 @@ export function StrengthsStep() {
 	const prevStep = useAppStore((state) => state.prevStep);
 	const cards = content["strengths.cards"];
 	const current = cards[strengthSubIndex];
-	const currentValue = profile.staerken[current.id] ?? 0.5;
+	const currentValue = profile.strengths[current.id] ?? 0.5;
 
 	function handleSliderChange(value: number) {
 		setStrength(current.id, value);

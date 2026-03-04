@@ -22,14 +22,14 @@ export const content = {
 	// School Degree
 	"schoolDegree.question": "Welchen Schulabschluss hast du?",
 	"schoolDegree.options": [
-		{ value: "hauptschule", label: "Hauptschulabschluss" },
+		{ value: "secondary", label: "Hauptschulabschluss" },
 		{
-			value: "erweitert_hauptschule",
+			value: "extended_secondary",
 			label: "Erweiterter Hauptschulabschluss",
 		},
-		{ value: "realschule", label: "Realschulabschluss" },
-		{ value: "ohne_abschluss", label: "Ohne Abschluss" },
-		{ value: "abitur", label: "Abitur" },
+		{ value: "intermediate", label: "Realschulabschluss" },
+		{ value: "none", label: "Ohne Abschluss" },
+		{ value: "university_entrance", label: "Abitur" },
 	],
 	"schoolDegree.unknownLabel": "Ich weiß es nicht",
 
@@ -39,37 +39,37 @@ export const content = {
 		{
 			name: "Sprachen",
 			subjects: [
-				{ label: "Deutsch", value: "deutsch" },
-				{ label: "Englisch", value: "englisch" },
-				{ label: "Französisch", value: "franzoesisch" },
-				{ label: "Spanisch", value: "spanisch" },
+				{ label: "Deutsch", value: "german" },
+				{ label: "Englisch", value: "english" },
+				{ label: "Französisch", value: "french" },
+				{ label: "Spanisch", value: "spanish" },
 			],
 		},
 		{
 			name: "Naturwissenschaften",
 			subjects: [
-				{ label: "Mathe", value: "mathe" },
-				{ label: "Physik", value: "physik" },
-				{ label: "Chemie", value: "chemie" },
-				{ label: "Biologie", value: "biologie" },
+				{ label: "Mathe", value: "math" },
+				{ label: "Physik", value: "physics" },
+				{ label: "Chemie", value: "chemistry" },
+				{ label: "Biologie", value: "biology" },
 			],
 		},
 		{
 			name: "Gesellschaft & Wirtschaft",
 			subjects: [
-				{ label: "Wirtschaft", value: "wirtschaft" },
-				{ label: "Ethik", value: "ethik" },
+				{ label: "Wirtschaft", value: "economics" },
+				{ label: "Ethik", value: "ethics" },
 				{ label: "Religion", value: "religion" },
 			],
 		},
 		{
 			name: "Praxis & Kreativität",
 			subjects: [
-				{ label: "Werken/Technik", value: "werken_technik" },
-				{ label: "Informatik", value: "informatik" },
-				{ label: "Kunst", value: "kunst" },
-				{ label: "Musik", value: "musik" },
-				{ label: "Sport", value: "sport" },
+				{ label: "Werken/Technik", value: "crafts_technology" },
+				{ label: "Informatik", value: "computer_science" },
+				{ label: "Kunst", value: "art" },
+				{ label: "Musik", value: "music" },
+				{ label: "Sport", value: "sports" },
 			],
 		},
 	],

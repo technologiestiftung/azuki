@@ -1,6 +1,7 @@
 import { content } from "../../../content/de";
 import { useAppStore } from "../../../store/useAppStore";
-import { Step, type NoGoAnswer } from "../../../common";
+import { Step } from "../../../common";
+import type { NoGoAnswer } from "@azuki/shared";
 import { ProgressBar } from "../progress-bar/ProgressBar";
 import { QuestionBubble } from "../question-bubble/QuestionBubble";
 // Removed framer-motion
@@ -71,14 +72,14 @@ export function NoGosStep() {
 			<div className="flex gap-3 px-4 pb-8 pt-6">
 				<button
 					className="py-4 rounded-2xl text-lg leading-6 font-semibold text-orange-1000 flex items-center justify-center gap-2 transition-transform active:scale-[0.97] flex-1 bg-orange-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-sky-500"
-					onClick={() => handleAnswer("geht_nicht")}
+					onClick={() => handleAnswer("rejected")}
 				>
 					<img src="/icons/close-black.svg" alt="" className="w-6 h-6" />
 					{content["noGos.rejectLabel"]}
 				</button>
 				<button
 					className="py-4 rounded-2xl text-lg leading-6 font-semibold text-orange-1000 flex items-center justify-center gap-2 transition-transform active:scale-[0.97] flex-1 bg-sky-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-sky-500"
-					onClick={() => handleAnswer("ist_okay")}
+					onClick={() => handleAnswer("accepted")}
 				>
 					{content["noGos.acceptLabel"]}
 					<img src="/icons/check-black.svg" alt="" className="w-6 h-6" />

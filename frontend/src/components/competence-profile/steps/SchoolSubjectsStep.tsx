@@ -14,7 +14,7 @@ export function SchoolSubjectsStep() {
 			currentStep={Step.SchoolSubjects}
 			onNext={nextStep}
 			onSkip={nextStep}
-			nextDisabled={profile.lieblingsfaecher.length === 0}
+			nextDisabled={profile.favoriteSubjects.length === 0}
 		>
 			<div className="space-y-6">
 				{content["schoolSubjects.categories"].map((category) => (
@@ -24,7 +24,7 @@ export function SchoolSubjectsStep() {
 						</h3>
 						<div className="space-y-2">
 							{category.subjects.map((subject) => {
-								const selected = profile.lieblingsfaecher.includes(
+								const selected = profile.favoriteSubjects.includes(
 									subject.value,
 								);
 								return (
