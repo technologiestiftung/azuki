@@ -36,6 +36,7 @@ export const content = {
 
 	// School Subjects
 	"schoolSubjects.question": "Welche Schulfächer machen dir Spaß?",
+	"schoolSubjects.skipButton.label": "Überspringen",
 	"schoolSubjects.categories": [
 		{
 			name: "Sprachen",

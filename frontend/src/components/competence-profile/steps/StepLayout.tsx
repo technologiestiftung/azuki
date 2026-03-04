@@ -18,6 +18,7 @@ interface StepLayoutProps {
 	showSkip?: boolean;
 	showNext?: boolean;
 	currentStep: Step;
+	skipLabel?: string;
 }
 
 export function StepLayout({
@@ -30,6 +31,7 @@ export function StepLayout({
 	showSkip = true,
 	showNext = true,
 	currentStep,
+	skipLabel,
 }: StepLayoutProps) {
 	const prevStep = useAppStore((state) => state.prevStep);
 
@@ -51,10 +53,14 @@ export function StepLayout({
 					</QuestionBubble>
 				</div>
 
-				<div className="flex-1 overflow-y-auto min-h-0 pb-5">{children}</div>
+				<div className="flex-1 overflow-y-auto min-h-0 pt-0.5 px-0.5">
+					{children}
+				</div>
 			</div>
 
-			<div className="fixed bottom-0 left-0 w-full bg-white border-t-2 border-gray-200 flex flex-col p-4 gap-y-2">
+			<div
+				className={`fixed bottom-0 left-0 w-full bg-white border-t-2 border-gray-200 flex flex-col px-4 gap-y-2 ${showSkip ? "pt-4 pb-2" : "py-4"}`}
+			>
 				{showNext && (
 					<PrimaryButton
 						onClick={onNext}
@@ -66,7 +72,7 @@ export function StepLayout({
 				)}
 				{showSkip && onSkip && (
 					<SecondaryButton onClick={onSkip}>
-						{content["navigation.skip"]}
+						{skipLabel || content["navigation.skip"]}
 					</SecondaryButton>
 				)}
 			</div>
