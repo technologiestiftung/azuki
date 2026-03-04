@@ -9,8 +9,8 @@ export function StartScreen() {
 	const nextStep = useAppStore((state) => state.nextStep);
 
 	return (
-		<div className="flex flex-col min-h-[100dvh]">
-			<div className="px-4 pt-2 pb-1">
+		<div className="flex flex-col h-[100dvh] p-4 overflow-y-auto min-h-0">
+			<div className="pb-1">
 				<BackButton onClick={() => goToStep(Step.Welcome)} />
 			</div>
 

@@ -34,26 +34,27 @@ export function StepLayout({
 	const prevStep = useAppStore((state) => state.prevStep);
 
 	return (
-		<div className="flex flex-col min-h-[100dvh]">
-			<div className="flex items-center gap-3 px-4 pt-2 pb-1">
+		<div className="flex flex-col h-[100dvh] p-4 pb-32">
+			<div className="flex items-center gap-3 pb-1 shrink-0">
 				<BackButton onClick={prevStep} />
 				<div className="flex-1">
 					<ProgressBar currentStep={currentStep} />
 				</div>
 			</div>
+			<div className="flex flex-1 flex-col gap-8 min-h-0">
+				<div className="shrink-0">
+					<QuestionBubble>
+						<h2 className="text-3xl font-bold text-sky-1000">{question}</h2>
+						{subtitle && (
+							<p className="text-base text-white/80 mt-1">{subtitle}</p>
+						)}
+					</QuestionBubble>
+				</div>
 
-			<div className="px-4 pt-8">
-				<QuestionBubble>
-					<h2 className="text-2xl font-bold text-white">{question}</h2>
-					{subtitle && (
-						<p className="text-base text-white/80 mt-1">{subtitle}</p>
-					)}
-				</QuestionBubble>
+				<div className="flex-1 overflow-y-auto min-h-0 pb-5">{children}</div>
 			</div>
 
-			<div className="flex-1 px-4 pt-6 pb-4 overflow-y-auto">{children}</div>
-
-			<div className="flex flex-col px-4 pb-6 pt-2 space-y-2 justify-center">
+			<div className="fixed bottom-0 left-0 w-full bg-white border-t-2 border-gray-200 flex flex-col p-4 gap-y-2">
 				{showNext && (
 					<PrimaryButton
 						onClick={onNext}

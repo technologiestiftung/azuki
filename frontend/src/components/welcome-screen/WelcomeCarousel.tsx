@@ -31,7 +31,7 @@ export function WelcomeCarousel() {
 	}
 
 	return (
-		<div className="flex flex-col min-h-[100dvh] p-4">
+		<div className="flex flex-col h-[100dvh] p-4 min-h-0 overflow-y-auto">
 			<div className="flex gap-[6px] pb-1">
 				{slides.map((slide, index) => {
 					const isCurrent = index === currentSlide;

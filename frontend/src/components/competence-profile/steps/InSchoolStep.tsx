@@ -16,12 +16,12 @@ export function InSchoolStep() {
 			nextDisabled={!selected}
 			showSkip={false}
 		>
-			<div className="space-y-3">
+			<div className="flex flex-col gap-3">
 				{content["inSchool.options"].map((option) => (
 					<button
-						className={`text-left px-5 py-4 w-full rounded-2xl border-2 transition-colors text-base focus-visible:outline focus-visible:outline-2 focus-visible:outline-sky-500 ${
+						className={`text-left p-3 w-full rounded-xl border-2 text-gray-700 text-lg font-normal focus-visible:outline focus-visible:outline-2 focus-visible:outline-sky-500 ${
 							selected === option.value
-								? "border-sky-300 bg-sky-400/28"
+								? "border-sky-300 bg-sky-50"
 								: "border-gray-200 bg-transparent"
 						}`}
 						key={option.value}

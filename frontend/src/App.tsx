@@ -56,8 +56,8 @@ function App() {
 	const currentStep = useAppStore((state) => state.currentStep);
 
 	return (
-		<div className="max-w-[430px] mx-auto min-h-[100dvh] bg-white relative overflow-hidden">
-			<div key={currentStep} className="animate-fadeIn">
+		<div className="max-w-[430px] mx-auto h-[100dvh] bg-white relative overflow-hidden">
+			<div key={currentStep} className="animate-fadeIn h-full">
 				<StepRenderer />
 			</div>
 		</div>

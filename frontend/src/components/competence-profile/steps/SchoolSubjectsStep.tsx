@@ -31,7 +31,7 @@ export function SchoolSubjectsStep() {
 									<button
 										key={subject.value}
 										onClick={() => toggleSubject(subject.value)}
-										className={`w-full flex items-center justify-between px-5 py-4 rounded-2xl border-2 transition-colors text-base focus-visible:outline focus-visible:outline-2 focus-visible:outline-sky-500 ${
+										className={`w-full flex items-center justify-between p-3 rounded-xl border-2 transition-colors text-base focus-visible:outline focus-visible:outline-2 focus-visible:outline-sky-500 ${
 											selected
 												? "border-sky-300 bg-sky-400/28"
 												: "border-gray-200 bg-transparent"
