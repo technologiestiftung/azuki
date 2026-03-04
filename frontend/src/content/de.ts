@@ -10,7 +10,7 @@ export const content = {
 	// Start
 	"start.title": "Zeig uns was dich besonders macht!",
 	"start.description":
-		"Wir stellen dir ein paar Fragen. Danach zeigen wir dir Ausbildungen, die gut zu dir passen.",
+		"Wir stellen dir ein paar Fragen. In nur wenigen Minuten erhältst du dein eigenes Stärkenprofil und siehst Ausbildungen, die gut zu dir passen.",
 	"start.cta": "Los geht's!",
 
 	// In School
