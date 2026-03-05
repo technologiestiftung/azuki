@@ -112,51 +112,50 @@ export function WelcomeCarousel() {
 
 	return (
 		<div className="flex flex-col min-h-[100dvh] p-4">
-			<div className="flex gap-[6px] pb-1">
-				{slides.map((slide, index) => {
-					const isCurrent = index === currentSlide;
-					const isCompleted = index < currentSlide;
-					return (
-						<button
-							key={slide.title}
-							type="button"
-							onClick={() => {
-								setCurrentSlide(index);
-							}}
-							aria-label={`${content["welcome.slide.ariaLabelPrefix"]} ${index + 1}`}
-							className="h-2 flex-1 rounded-full bg-gray-200 overflow-hidden focus-visible:outline-1 focus-visible:outline-sky-500"
-						>
-							{isCurrent ? (
-								<div
-									key={currentSlide}
-									className="h-full bg-sky-300 animate-progressFill"
-									style={{
-										animationPlayState: isPaused ? "paused" : "running",
-									}}
-									onAnimationEnd={advanceSlide}
-								/>
-							) : (
-								<div
-									className={`h-full bg-sky-300 ${isCompleted ? "w-full" : "w-0"}`}
-								/>
-							)}
-						</button>
-					);
-				})}
-			</div>
-
 			<div
 				role="region"
 				aria-roledescription="carousel"
 				aria-label={`Slide ${currentSlide + 1} of ${slides.length}`}
 				tabIndex={0}
-				className="flex-1 flex justify-center touch-none select-none focus-visible:outline-1 focus-visible:outline-sky-500 rounded-lg"
+				className="flex-1 flex flex-col touch-none select-none focus-visible:outline-1 focus-visible:outline-sky-500 rounded-lg"
 				onPointerDown={handlePointerDown}
 				onPointerUp={handlePointerUp}
 				onPointerCancel={handlePointerCancel}
 				onKeyDown={handleKeyDown}
 			>
-				<div key={currentSlide} className="flex justify-center animate-slideIn">
+				<div className="flex gap-[6px] pb-1">
+					{slides.map((slide, index) => {
+						const isCurrent = index === currentSlide;
+						const isCompleted = index < currentSlide;
+						return (
+							<div
+								key={slide.title}
+								aria-label={`${content["welcome.slide.ariaLabelPrefix"]} ${index + 1}`}
+								className="h-2 flex-1 rounded-full bg-gray-200 overflow-hidden"
+							>
+								{isCurrent ? (
+									<div
+										key={currentSlide}
+										className="h-full bg-sky-300 animate-progressFill"
+										style={{
+											animationPlayState: isPaused ? "paused" : "running",
+										}}
+										onAnimationEnd={advanceSlide}
+									/>
+								) : (
+									<div
+										className={`h-full bg-sky-300 ${isCompleted ? "w-full" : "w-0"}`}
+									/>
+								)}
+							</div>
+						);
+					})}
+				</div>
+
+				<div
+					key={currentSlide}
+					className="flex-1 flex justify-center animate-slideIn"
+				>
 					<img
 						src={slideImages[currentSlide]}
 						alt=""
