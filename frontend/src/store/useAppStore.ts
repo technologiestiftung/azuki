@@ -66,7 +66,6 @@ interface AppActions {
 }
 
 export const useAppStore = create<AppState & AppActions>((set, get) => ({
-	// Initial state
 	currentStep: Step.Login,
 	profile: initialProfile,
 	matchResults: null,
@@ -74,22 +73,21 @@ export const useAppStore = create<AppState & AppActions>((set, get) => ({
 	noGoSubIndex: 0,
 	workPrefSubIndex: 0,
 
-	// Actions
 	goToStep: (step) => set({ currentStep: step }),
 
 	nextStep: () => {
 		const currentStep = get().currentStep;
-		const idx = STEP_ORDER.indexOf(currentStep);
-		if (idx < STEP_ORDER.length - 1) {
-			set({ currentStep: STEP_ORDER[idx + 1] });
+		const currentStepIndex = STEP_ORDER.indexOf(currentStep);
+		if (currentStepIndex < STEP_ORDER.length - 1) {
+			set({ currentStep: STEP_ORDER[currentStepIndex + 1] });
 		}
 	},
 
 	prevStep: () => {
 		const currentStep = get().currentStep;
-		const idx = STEP_ORDER.indexOf(currentStep);
-		if (idx > 0) {
-			set({ currentStep: STEP_ORDER[idx - 1] });
+		const currentStepIndex = STEP_ORDER.indexOf(currentStep);
+		if (currentStepIndex > 0) {
+			set({ currentStep: STEP_ORDER[currentStepIndex - 1] });
 		}
 	},
 
