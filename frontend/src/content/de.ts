@@ -5,12 +5,13 @@ export const content = {
 	"welcome.slide.3.title": "Entdecke welche Ausbildungen zu dir passen",
 	"welcome.slide.4.title": "Finde freie Plätze in deiner Nähe",
 	"welcome.slide.ariaLabelPrefix": "Gehe zu Folie",
+	"welcome.carousel.ariaLabel": "Folie {current} von {total}",
 	"welcome.cta": "Ausbildung finden",
 
 	// Start
 	"start.title": "Zeig uns was dich besonders macht!",
 	"start.description":
-		"Wir stellen dir ein paar Fragen. Danach zeigen wir dir Ausbildungen, die gut zu dir passen.",
+		"Wir stellen dir ein paar Fragen. In nur wenigen Minuten erhältst du dein eigenes Stärkenprofil und siehst Ausbildungen, die gut zu dir passen.",
 	"start.cta": "Los geht's!",
 
 	// In School

@@ -14,26 +14,18 @@ export function StartScreen() {
 				<BackButton onClick={() => goToStep(Step.Welcome)} />
 			</div>
 
-			<div className="flex-1 flex flex-col items-center justify-center px-8">
-				<img
-					src="/illustrations/star.svg"
-					alt=""
-					className="w-64 h-64 object-contain mb-8"
-				/>
+			<div className="flex-1 flex flex-col items-center justify-center">
+				<img src="/illustrations/star.svg" alt="" className="w-full" />
 			</div>
 
-			<div className="px-4 pb-4">
-				<h1 className="text-3xl font-bold mb-3">{content["start.title"]}</h1>
-				<p className="text-base text-gray-600 mb-8">
-					{content["start.description"]}
-				</p>
+			<div className="flex flex-col gap-4 py-6">
+				<h1 className="text-4xl font-bold">{content["start.title"]}</h1>
+				<p className="text-lg font-normal">{content["start.description"]}</p>
 			</div>
 
-			<div className="px-4 pb-8">
-				<PrimaryButton onClick={nextStep} className="w-full">
-					{content["start.cta"]}
-				</PrimaryButton>
-			</div>
+			<PrimaryButton onClick={nextStep} className="w-full mt-8">
+				{content["start.cta"]}
+			</PrimaryButton>
 		</div>
 	);
 }
