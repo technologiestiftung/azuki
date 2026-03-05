@@ -19,12 +19,8 @@ export function StartScreen() {
 			</div>
 
 			<div className="flex flex-col gap-4 py-6">
-				<h1 className="text-4xl font-bold text-center">
-					{content["start.title"]}
-				</h1>
-				<p className="text-lg font-normal text-center">
-					{content["start.description"]}
-				</p>
+				<h1 className="text-4xl font-bold">{content["start.title"]}</h1>
+				<p className="text-lg font-normal">{content["start.description"]}</p>
 			</div>
 
 			<PrimaryButton onClick={nextStep} className="w-full mt-8">
