@@ -5,6 +5,7 @@ export const content = {
 	"welcome.slide.3.title": "Entdecke welche Ausbildungen zu dir passen",
 	"welcome.slide.4.title": "Finde freie Plätze in deiner Nähe",
 	"welcome.slide.ariaLabelPrefix": "Gehe zu Folie",
+	"welcome.carousel.ariaLabel": "Folie {current} von {total}",
 	"welcome.cta": "Ausbildung finden",
 
 	// Start

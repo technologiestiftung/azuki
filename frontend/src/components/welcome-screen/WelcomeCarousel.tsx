@@ -115,7 +115,9 @@ export function WelcomeCarousel() {
 			<div
 				role="region"
 				aria-roledescription="carousel"
-				aria-label={`Slide ${currentSlide + 1} of ${slides.length}`}
+				aria-label={content["welcome.carousel.ariaLabel"]
+					.replace("{current}", String(currentSlide + 1))
+					.replace("{total}", String(slides.length))}
 				tabIndex={0}
 				className="flex-1 flex flex-col touch-none select-none focus-visible:outline-1 focus-visible:outline-sky-500 rounded-lg"
 				onPointerDown={handlePointerDown}
