@@ -61,6 +61,9 @@ const DELAY_MS = 150;
 const INFOFELD_IDS = {
 	bedingungen: "b16-3",
 	interessen: "b20-1",
+	arbeitsSozialverhalten: "b20-4",
+	verdienstEinkommen: "b50-0",
+	digitalisierung: "b40-02",
 	schulabschluss: "a31-12",
 	schulfaecher: "a20-31",
 	aufgabenKompakt: "b11-0",
@@ -89,7 +92,8 @@ function decodeHtmlEntities(html: string): string {
 		.replace(/&szlig;/g, "ß")
 		.replace(/&ndash;/g, "–")
 		.replace(/&mdash;/g, "—")
-		.replace(/&nbsp;/g, " ");
+		.replace(/&nbsp;/g, " ")
+		.replace(/&euro;/g, "€");
 }
 
 function stripHtml(html: string): string {
@@ -132,7 +136,30 @@ function extractConditions(infofelder: Infofeld[]): WorkConditions {
 		customerContact: /Kundenkontakt/i.test(text),
 		teamwork: /Gruppen-, Teamarbeit/i.test(text),
 		standingWalking: /Gehen und Stehen/i.test(text),
+		irregularHours:
+			/unregelmäßige Arbeitszeiten|Wochenend- und Feiertagsarbeit|Nachtarbeit/i.test(
+				text,
+			),
+		// Extended condition flags used by newer preference/no-go scoring rules.
+		changingTasks: /häufig wechselnde Aufgaben/i.test(text),
+		regulatedWork: /Beachtung vielfältiger Vorschriften/i.test(text),
+		animalWork: /Umgang mit Tieren|Körperkontakt mit Tieren|Tierställen/i.test(
+			text,
+		),
+		accidentRisk: /Unfallgefahr|Infektionsgefahr|Absturzgefährdung/i.test(text),
 	};
+}
+
+function parseEuroToNumber(value: string): number {
+	return parseFloat(value.replace(/\./g, "").replace(",", "."));
+}
+
+function median(values: number[]): number {
+	if (values.length === 0) return 0;
+	const sorted = [...values].sort((a, b) => a - b);
+	const mid = Math.floor(sorted.length / 2);
+	if (sorted.length % 2 === 0) return (sorted[mid - 1] + sorted[mid]) / 2;
+	return sorted[mid];
 }
 
 function extractInterests(infofelder: Infofeld[]): string[] {
@@ -157,6 +184,76 @@ function extractInterests(infofelder: Infofeld[]): string[] {
 		}
 	}
 	return result;
+}
+
+function extractStrengthTags(infofelder: Infofeld[]): string[] {
+	const field = infofelder.find(
+		(f) => f.id === INFOFELD_IDS.arbeitsSozialverhalten,
+	);
+	if (!field?.content) return [];
+
+	const decoded = decodeHtmlEntities(field.content);
+	// b20-4 encodes tags in name="..." attributes in the HTML payload.
+	const matches = decoded.matchAll(/name="([^"]+)"/g);
+	const result: string[] = [];
+
+	for (const m of matches) {
+		const tag = m[1];
+		// Drop section headline and keep each tag only once.
+		if (tag === "Merkmale des Arbeits- und Sozialverhaltens") continue;
+		if (!result.includes(tag)) {
+			result.push(tag);
+		}
+	}
+
+	return result;
+}
+
+function extractSalarySignal(infofelder: Infofeld[]): {
+	salaryMonthlyMedian: number | null;
+	salaryKnown: boolean;
+} {
+	const field = infofelder.find((f) => f.id === INFOFELD_IDS.verdienstEinkommen);
+	if (!field?.content) {
+		return { salaryMonthlyMedian: null, salaryKnown: false };
+	}
+
+	const decoded = decodeHtmlEntities(field.content);
+	const plain = stripHtml(decoded);
+	const euros = [...plain.matchAll(/(\d{1,3}(?:\.\d{3})*(?:,\d+)?)\s*(?:€|euro)/gi)];
+	const monthlyMatches: number[] = [];
+	const allMatches: number[] = [];
+
+	for (const match of euros) {
+		const raw = match[1];
+		const num = parseEuroToNumber(raw);
+		if (Number.isNaN(num) || num <= 100) continue;
+
+		allMatches.push(num);
+
+		const idx = match.index ?? 0;
+		const start = Math.max(0, idx - 50);
+		const end = Math.min(plain.length, idx + 50);
+		const context = plain.slice(start, end).toLowerCase();
+		if (/monat/i.test(context)) {
+			monthlyMatches.push(num);
+		}
+	}
+
+	const values = monthlyMatches.length > 0 ? monthlyMatches : allMatches;
+	if (values.length === 0) {
+		return { salaryMonthlyMedian: null, salaryKnown: false };
+	}
+
+	return {
+		salaryMonthlyMedian: median(values),
+		salaryKnown: true,
+	};
+}
+
+function extractDigitalizationSignal(infofelder: Infofeld[]): boolean {
+	const field = infofelder.find((f) => f.id === INFOFELD_IDS.digitalisierung);
+	return Boolean(field?.content && stripHtml(field.content).length > 0);
 }
 
 function extractDegreeStats(
@@ -212,7 +309,17 @@ function extractSubjects(infofelder: Infofeld[]): string[] {
 	if (!field?.content) return [];
 
 	const text = stripHtml(field.content);
-	return SUBJECTS.filter((s) => text.includes(s.dataLabel)).map((s) => s.id);
+	const result = SUBJECTS.filter((s) => text.includes(s.dataLabel)).map(
+		(s) => s.id,
+	);
+
+	// "Fremdsprachen" is a source bucket; map it to selectable language subjects.
+	if (/Fremdsprachen/i.test(text)) {
+		if (!result.includes("french")) result.push("french");
+		if (!result.includes("spanish")) result.push("spanish");
+	}
+
+	return result;
 }
 
 function findInfofeld(infofelder: Infofeld[], id: string): string {
@@ -261,6 +368,7 @@ function processOccupationDetail(data: ApiBerufItem[]): Occupation | null {
 
 	const ausbildungInfofelder = ausbildung.infofelder || [];
 	const taetigkeitInfofelder = taetigkeit.infofelder || [];
+	const mergedInfofelder = [...taetigkeitInfofelder, ...ausbildungInfofelder];
 
 	const allImages = [
 		...extractImages(ausbildung),
@@ -279,6 +387,7 @@ function processOccupationDetail(data: ApiBerufItem[]): Occupation | null {
 	const descriptionLong = ausbildung.steckbrief?.lang
 		? stripHtml(ausbildung.steckbrief.lang)
 		: null;
+	const salarySignal = extractSalarySignal(mergedInfofelder);
 
 	return {
 		id: ausbildung.id,
@@ -291,7 +400,11 @@ function processOccupationDetail(data: ApiBerufItem[]): Occupation | null {
 		degreeStats: extractDegreeStats(ausbildungInfofelder),
 		subjects: extractSubjects(ausbildungInfofelder),
 		interests: extractInterests(taetigkeitInfofelder),
+		strengthTags: extractStrengthTags(taetigkeitInfofelder),
 		conditions: extractConditions(taetigkeitInfofelder),
+		salaryMonthlyMedian: salarySignal.salaryMonthlyMedian,
+		salaryKnown: salarySignal.salaryKnown,
+		digitalizationSignal: extractDigitalizationSignal(mergedInfofelder),
 		workLocations: findInfofeld(
 			taetigkeitInfofelder,
 			INFOFELD_IDS.arbeitsorte,

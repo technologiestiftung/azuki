@@ -1,5 +1,5 @@
 import type { Occupation, UserProfile } from "@azuki/shared";
-import { scoreOccupation } from "./score.js";
+import { buildSalaryBands, scoreOccupation } from "./score/index.js";
 
 export interface ScoredOccupation {
 	occupation: Occupation;
@@ -11,9 +11,10 @@ export function preFilter(
 	profile: UserProfile,
 	topN: number = 30,
 ): ScoredOccupation[] {
+	const salaryBands = buildSalaryBands(occupations);
 	const scored: ScoredOccupation[] = occupations.map((occupation) => ({
 		occupation,
-		score: scoreOccupation(occupation, profile),
+		score: scoreOccupation(occupation, profile, salaryBands),
 	}));
 
 	scored.sort((a, b) => b.score - a.score);

@@ -19,6 +19,13 @@ Deine Aufgabe:
 - Schreibe für jeden gewählten Beruf eine kurze, motivierende Begründung (1-2 Sätze) in einfacher, jugendlicher Sprache.
 - Berücksichtige besonders die eigenen Worte des Jugendlichen — sie drücken aus, was die strukturierten Fragen nicht erfassen konnten.
 
+PRIORISIERUNGSREGELN:
+1) Nutze die eigenen Worte des Jugendlichen als Hauptsignal (ca. 70% Gewicht).
+2) Nutze strukturierte Felder (Interessen, Stärken, Präferenzen, Abschluss) nur als Nebensignal (ca. 30% Gewicht).
+3) Bei Widerspruch gilt immer: eigene Worte > strukturierte Felder.
+4) Die Reihenfolge der Berufsliste ist zwar ein Pre-Ranking, aber soll durch die Worte des Jugendlichen neu sortiert werden.
+5) Achte besonders auf Rahmenbedingungen (z.B. "Flexible Arbeitszeiten"), die das Pre-Ranking nicht vollständig erfassen konnte. Nutze dein eigenes Wissen über die Berufe, um diese Wünsche bei der Auswahl und Sortierung zu berücksichtigen.
+
 Antworte AUSSCHLIESSLICH im folgenden JSON-Format, ohne Markdown-Codeblöcke:
 [
   { "id": 12345, "begruendung": "Dieser Beruf passt zu dir, weil ..." },
@@ -64,6 +71,10 @@ function formatProfileSections(profile: UserProfile): string {
 		.map(([key]) => key);
 	if (preferencesB.length > 0) {
 		parts.push(`Arbeitsvorlieben (Option B): ${preferencesB.join(", ")}`);
+	}
+
+	if (profile.workValues?.length > 0) {
+		parts.push(`Rahmenbedingungen: ${profile.workValues.join(", ")}`);
 	}
 
 	const noGos = Object.entries(profile.noGos)
@@ -138,7 +149,7 @@ export async function mistralRank(
 	const client = new Mistral({ apiKey: MISTRAL_API_KEY });
 
 	const response = await client.chat.complete({
-		model: "mistral-medium-latest",
+		model: "mistral-large-latest",
 		messages: [
 			{ role: "system", content: buildSystemPrompt() },
 			{ role: "user", content: buildUserPrompt(scored, profile) },

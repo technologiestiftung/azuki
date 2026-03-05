@@ -16,6 +16,11 @@ export interface WorkConditions {
 	customerContact: boolean;
 	teamwork: boolean;
 	standingWalking: boolean;
+	irregularHours: boolean;
+	changingTasks: boolean;
+	regulatedWork: boolean;
+	animalWork: boolean;
+	accidentRisk: boolean;
 }
 
 // --- Degree Statistics ---
@@ -47,7 +52,11 @@ export interface Occupation {
 	degreeStats: DegreeDistribution | null;
 	subjects: string[];
 	interests: string[];
+	strengthTags: string[];
 	conditions: WorkConditions;
+	salaryMonthlyMedian: number | null;
+	salaryKnown: boolean;
+	digitalizationSignal: boolean;
 	workLocations: string;
 	competenciesText: string;
 }
@@ -75,6 +84,7 @@ export interface UserProfile {
 	favoriteSubjects: string[];
 	interests: string[];
 	customInterests: string[];
+	workValues: string[];
 	strengths: Record<string, number>;
 	secretTalent: string;
 	practicalExperience: string;
