@@ -33,6 +33,7 @@ export function SchoolSubjectsStep() {
 								return (
 									<button
 										key={subject.value}
+										aria-pressed={selected}
 										onClick={() => toggleSubject(subject.value)}
 										className={`w-full flex items-center justify-between p-3 rounded-xl border-2 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-sky-500 ${
 											selected

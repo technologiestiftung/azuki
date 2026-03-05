@@ -59,7 +59,7 @@ export function StepLayout({
 			</div>
 
 			<div
-				className={`fixed bottom-0 left-0 w-full bg-white border-t-2 border-gray-200 flex flex-col px-4 gap-y-2 ${showSkip ? "pt-4 pb-2" : "py-4"}`}
+				className={`fixed bottom-0 left-1/2 -translate-x-1/2 w-full bg-white border-t-2 border-gray-200 flex flex-col px-4 gap-y-2 max-w-[430px] ${showSkip ? "pt-4 pb-2" : "py-4"}`}
 			>
 				{showNext && (
 					<PrimaryButton
