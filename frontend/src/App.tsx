@@ -5,7 +5,7 @@ import { WelcomeCarousel } from "./components/welcome-screen/WelcomeCarousel";
 import { StartScreen } from "./components/competence-profile/start/StartScreen";
 import { InSchoolStep } from "./components/competence-profile/steps/InSchoolStep";
 import { SchoolDegreeStep } from "./components/competence-profile/steps/SchoolDegreeStep";
-import { SchoolSubjectsStep } from "./components/competence-profile/steps/SchoolSubjectsStep";
+import { SchoolSubjectsStep } from "./components/competence-profile/steps/school-subject-step/SchoolSubjectsStep";
 import { InterestsStep } from "./components/competence-profile/steps/InterestsStep";
 import { StrengthsStep } from "./components/competence-profile/steps/StrengthsStep";
 import { SecretTalentStep } from "./components/competence-profile/steps/SecretTalentStep";
@@ -56,8 +56,8 @@ function App() {
 	const currentStep = useAppStore((state) => state.currentStep);
 
 	return (
-		<div className="max-w-[430px] mx-auto min-h-[100dvh] bg-white relative overflow-hidden">
-			<div key={currentStep} className="animate-fadeIn">
+		<div className="max-w-[430px] mx-auto h-[100dvh] bg-white relative overflow-hidden">
+			<div key={currentStep} className="animate-fadeIn h-full">
 				<StepRenderer />
 			</div>
 		</div>

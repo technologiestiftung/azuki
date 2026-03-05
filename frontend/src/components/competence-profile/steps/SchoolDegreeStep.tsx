@@ -3,6 +3,23 @@ import { useAppStore } from "../../../store/useAppStore";
 import { Step, type EducationLevel } from "../../../common";
 import { StepLayout } from "./StepLayout";
 
+const degreeOptions: { value: EducationLevel; label: string }[] = [
+	{ value: "secondary", label: content["schoolDegree.option.secondary.label"] },
+	{
+		value: "extended_secondary",
+		label: content["schoolDegree.option.extendedSecondary.label"],
+	},
+	{
+		value: "intermediate",
+		label: content["schoolDegree.option.intermediate.label"],
+	},
+	{
+		value: "university_entrance",
+		label: content["schoolDegree.option.universityEntrance.label"],
+	},
+	{ value: "none", label: content["schoolDegree.option.none.label"] },
+];
+
 export function SchoolDegreeStep() {
 	const profile = useAppStore((state) => state.profile);
 	const setEducationLevel = useAppStore((state) => state.setEducationLevel);
@@ -20,13 +37,14 @@ export function SchoolDegreeStep() {
 			onSkip={nextStep}
 			nextDisabled={!profile.educationLevel}
 			showSkip={true}
+			skipLabel={content["schoolDegree.skipButton.label"]}
 		>
-			<div className="space-y-3">
-				{content["schoolDegree.options"].map((option) => (
+			<div className="flex flex-col gap-3">
+				{degreeOptions.map((option) => (
 					<button
-						className={`text-left px-5 py-4 w-full rounded-2xl border-2 transition-colors text-base focus-visible:outline focus-visible:outline-2 focus-visible:outline-sky-500 ${
+						className={`text-left p-3 w-full rounded-xl border-2 text-gray-700 text-lg font-normal focus-visible:outline focus-visible:outline-2 focus-visible:outline-sky-500 ${
 							profile.educationLevel === option.value
-								? "border-sky-300 bg-sky-400/28"
+								? "border-sky-300 bg-sky-50"
 								: "border-gray-200 bg-transparent"
 						}`}
 						key={option.value}
