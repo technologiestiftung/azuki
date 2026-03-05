@@ -6,14 +6,23 @@ interface QuestionBubbleProps {
 
 export function QuestionBubble({ children }: QuestionBubbleProps) {
 	return (
-		<div className="relative">
-			<div className="absolute -top-10 left-1">
-				<img
-					src="/illustrations/question-bubble-star.svg"
-					alt="Question Bubble"
-				/>
+		<div className="w-full pt-[38px]">
+			<div className="relative w-full">
+				<div className="relative w-full">
+					<div className="absolute -top-[38px] left-0">
+						<img
+							src="/illustrations/question-bubble-star.svg"
+							alt="Question Bubble"
+						/>
+					</div>
+					<img
+						src="/illustrations/question-bubble-outline.svg"
+						alt="Question Bubble"
+						className="absolute inset-0 h-full w-full"
+					/>
+					<div className="relative flex items-center p-3">{children}</div>
+				</div>
 			</div>
-			<div className="bg-sky-300 rounded-3xl px-5 py-5 mt-2">{children}</div>
 		</div>
 	);
 }
