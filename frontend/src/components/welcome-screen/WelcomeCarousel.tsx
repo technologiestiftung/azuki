@@ -30,7 +30,13 @@ export function WelcomeCarousel() {
 	];
 
 	function goToNextSlide() {
-		setCurrentSlide((prev) => Math.min(prev + 1, slides.length - 1));
+		setCurrentSlide((prev) => {
+			if (prev >= slides.length - 1) {
+				goToStep(Step.Start);
+				return prev;
+			}
+			return prev + 1;
+		});
 	}
 
 	function goToPrevSlide() {
