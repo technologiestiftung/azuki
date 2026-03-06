@@ -14,6 +14,7 @@ interface StepLayoutProps {
 	children: ReactNode;
 	onNext?: () => void;
 	onSkip?: () => void;
+	onBack?: () => void;
 	nextDisabled?: boolean;
 	showSkip?: boolean;
 	showNext?: boolean;
@@ -27,6 +28,7 @@ export function StepLayout({
 	children,
 	onNext,
 	onSkip,
+	onBack,
 	nextDisabled = false,
 	showSkip = true,
 	showNext = true,
@@ -38,7 +40,7 @@ export function StepLayout({
 	return (
 		<div className="flex flex-col h-[100dvh] p-4 pb-32">
 			<div className="flex items-center gap-3 pb-1 shrink-0">
-				<BackButton onClick={prevStep} />
+				<BackButton onClick={onBack ?? prevStep} />
 				<div className="flex-1">
 					<ProgressBar currentStep={currentStep} />
 				</div>
