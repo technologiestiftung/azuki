@@ -4,7 +4,7 @@ import { useAppStore } from "../../../../store/useAppStore";
 import { Step } from "../../../../common";
 import { StepLayout } from "../StepLayout";
 import { interests } from "./interests";
-import { TextInput } from "../../../primitives/text-inputs/textInput";
+import { TextInput } from "../../../primitives/text-inputs/TextInput";
 import { Pill } from "../../../primitives/buttons/Pill";
 
 export function InterestsStep() {
