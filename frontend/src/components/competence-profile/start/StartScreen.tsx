@@ -9,13 +9,19 @@ export function StartScreen() {
 	const nextStep = useAppStore((state) => state.nextStep);
 
 	return (
-		<div className="flex flex-col h-[100dvh] pt-4 overflow-y-auto min-h-0">
+		<div className="flex flex-col h-[100dvh] pt-4 overflow-hidden min-h-0">
 			<div className="pb-1 px-4">
 				<BackButton onClick={() => goToStep(Step.Welcome)} />
 			</div>
 
-			<div className="flex-1 flex flex-col items-center justify-center px-4">
-				<img src="/illustrations/star.svg" alt="" className="w-full" />
+			<div className="flex-1 flex flex-col items-center justify-center px-4 min-h-0">
+				<div className="flex-1 flex items-center justify-center w-full min-h-0">
+					<img
+						src="/illustrations/star.svg"
+						alt=""
+						className="max-h-full max-w-full object-contain"
+					/>
+				</div>
 			</div>
 
 			<div className="flex flex-col gap-4 py-6 mb-4 px-4">
