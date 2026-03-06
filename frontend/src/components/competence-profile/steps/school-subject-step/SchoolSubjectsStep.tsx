@@ -16,7 +16,7 @@ export function SchoolSubjectsStep() {
 			onNext={nextStep}
 			onSkip={nextStep}
 			nextDisabled={profile.favoriteSubjects.length === 0}
-			showSkip={true}
+			hasSkipButton={true}
 			skipLabel={content["schoolSubjects.skipButton.label"]}
 		>
 			<div className="flex flex-col gap-8">

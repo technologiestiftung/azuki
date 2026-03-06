@@ -18,7 +18,7 @@ export function InSchoolStep() {
 			currentStep={Step.InSchool}
 			onNext={nextStep}
 			nextDisabled={!selected}
-			showSkip={false}
+			hasSkipButton={false}
 		>
 			<div className="flex flex-col gap-3">
 				{inSchoolOptions.map((option) => (
