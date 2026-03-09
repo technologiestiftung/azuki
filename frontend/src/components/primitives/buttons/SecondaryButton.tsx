@@ -14,7 +14,7 @@ export const SecondaryButton: React.FC<SecondaryButtonProps> = ({
 }) => {
 	return (
 		<button
-			className={`py-3 text-base text-gray-500 font-medium hover:text-gray-700 transition-colors rounded-2xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-sky-500 ${className}`}
+			className={`py-2 px-5 text-base text-gray-900 font-medium hover:text-gray-700 transition-colors rounded-2xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-sky-500 ${className}`}
 			disabled={disabled}
 			onClick={onClick}
 			type={type}

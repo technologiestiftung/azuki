@@ -5,75 +5,55 @@ export const content = {
 	"welcome.slide.3.title": "Entdecke welche Ausbildungen zu dir passen",
 	"welcome.slide.4.title": "Finde freie Plätze in deiner Nähe",
 	"welcome.slide.ariaLabelPrefix": "Gehe zu Folie",
+	"welcome.carousel.ariaLabel": "Folie {current} von {total}",
 	"welcome.cta": "Ausbildung finden",
 
 	// Start
 	"start.title": "Zeig uns was dich besonders macht!",
 	"start.description":
-		"Wir stellen dir ein paar Fragen. Danach zeigen wir dir Ausbildungen, die gut zu dir passen.",
+		"Wir stellen dir ein paar Fragen. In nur wenigen Minuten erhältst du dein eigenes Stärkenprofil und siehst Ausbildungen, die gut zu dir passen.",
 	"start.cta": "Los geht's!",
 
 	// In School
 	"inSchool.question": "Gehst du zur Schule?",
-	"inSchool.options": [
-		{ value: "yes", label: "Ja" },
-		{ value: "no", label: "Nein" },
-	],
+	"inSchool.option.yes.label": "Ja",
+	"inSchool.option.no.label": "Nein",
 
 	// School Degree
 	"schoolDegree.question": "Welchen Schulabschluss hast du?",
-	"schoolDegree.options": [
-		{ value: "secondary", label: "Hauptschulabschluss" },
-		{
-			value: "extended_secondary",
-			label: "Erweiterter Hauptschulabschluss",
-		},
-		{ value: "intermediate", label: "Realschulabschluss" },
-		{ value: "none", label: "Ohne Abschluss" },
-		{ value: "university_entrance", label: "Abitur" },
-	],
-	"schoolDegree.unknownLabel": "Ich weiß es nicht",
+	"schoolDegree.option.secondary.label": "Hauptschulabschluss",
+	"schoolDegree.option.extendedSecondary.label":
+		"Erweiterter Hauptschulabschluss",
+	"schoolDegree.option.intermediate.label": "Realschulabschluss",
+	"schoolDegree.option.none.label": "Ohne Abschluss",
+	"schoolDegree.option.universityEntrance.label": "Abitur",
+	"schoolDegree.skipButton.label": "Ich weiß es nicht",
 
 	// School Subjects
 	"schoolSubjects.question": "Welche Schulfächer machen dir Spaß?",
-	"schoolSubjects.categories": [
-		{
-			name: "Sprachen",
-			subjects: [
-				{ label: "Deutsch", value: "german" },
-				{ label: "Englisch", value: "english" },
-				{ label: "Französisch", value: "french" },
-				{ label: "Spanisch", value: "spanish" },
-			],
-		},
-		{
-			name: "Naturwissenschaften",
-			subjects: [
-				{ label: "Mathe", value: "math" },
-				{ label: "Physik", value: "physics" },
-				{ label: "Chemie", value: "chemistry" },
-				{ label: "Biologie", value: "biology" },
-			],
-		},
-		{
-			name: "Gesellschaft & Wirtschaft",
-			subjects: [
-				{ label: "Wirtschaft", value: "economics" },
-				{ label: "Ethik", value: "ethics" },
-				{ label: "Religion", value: "religion" },
-			],
-		},
-		{
-			name: "Praxis & Kreativität",
-			subjects: [
-				{ label: "Werken/Technik", value: "crafts_technology" },
-				{ label: "Informatik", value: "computer_science" },
-				{ label: "Kunst", value: "art" },
-				{ label: "Musik", value: "music" },
-				{ label: "Sport", value: "sports" },
-			],
-		},
-	],
+	"schoolSubjects.skipButton.label": "Überspringen",
+	//Languages
+	"schoolSubjects.languages.label": "Sprachen",
+	"schoolSubjects.languages.german.label": "Deutsch",
+	"schoolSubjects.languages.english.label": "Englisch",
+	//Sciences
+	"schoolSubjects.sciences.label": "Naturwissenschaften",
+	"schoolSubjects.sciences.math.label": "Mathe",
+	"schoolSubjects.sciences.physics.label": "Physik",
+	"schoolSubjects.sciences.chemistry.label": "Chemie",
+	"schoolSubjects.sciences.biology.label": "Biologie",
+	// Society & Economy
+	"schoolSubjects.society.label": "Gesellschaft & Wirtschaft",
+	"schoolSubjects.society.economics.label": "Wirtschaft",
+	"schoolSubjects.society.ethics.label": "Ethik",
+	"schoolSubjects.society.religion.label": "Religion",
+	// Creativity & Practice
+	"schoolSubjects.creativity.label": "Praxis & Kreativität",
+	"schoolSubjects.creativity.craftsAndTechnology.label": "Werken/Technik",
+	"schoolSubjects.creativity.computerScience.label": "Informatik",
+	"schoolSubjects.creativity.art.label": "Kunst",
+	"schoolSubjects.creativity.music.label": "Musik",
+	"schoolSubjects.creativity.sports.label": "Sport",
 
 	// Interests
 	"interests.question": "Was machst du gerne?",
