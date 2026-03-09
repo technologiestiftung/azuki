@@ -11,3 +11,8 @@ export type {
 	MatchResult,
 } from "./types";
 
+export {
+	SUBJECTS,
+	type SubjectDefinition,
+} from "./subjects";
+
