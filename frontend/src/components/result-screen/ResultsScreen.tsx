@@ -11,7 +11,7 @@ export function ResultsScreen() {
 	const occupations = matchResults?.occupations ?? [];
 
 	return (
-		<div className="flex flex-col min-h-[100dvh]">
+		<div className="flex flex-col h-full">
 			<div className="px-4 pt-6 pb-4">
 				<h1 className="text-3xl font-bold">{content["results.title"]}</h1>
 				<p className="text-base text-gray-500 mt-2">
