@@ -30,6 +30,7 @@ const initialProfile: UserProfile = {
 	favoriteSubjects: [],
 	interests: [],
 	customInterests: [],
+	workValues: [],
 	strengths: {},
 	secretTalent: "",
 	practicalExperience: "",

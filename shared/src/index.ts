@@ -15,3 +15,4 @@ export {
 	SUBJECTS,
 	type SubjectDefinition,
 } from "./subjects";
+
