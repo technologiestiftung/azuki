@@ -36,24 +36,31 @@ export const content = {
 	"schoolSubjects.languages.label": "Sprachen",
 	"schoolSubjects.languages.german.label": "Deutsch",
 	"schoolSubjects.languages.english.label": "Englisch",
-	//Sciences
-	"schoolSubjects.sciences.label": "Naturwissenschaften",
-	"schoolSubjects.sciences.math.label": "Mathe",
-	"schoolSubjects.sciences.physics.label": "Physik",
-	"schoolSubjects.sciences.chemistry.label": "Chemie",
-	"schoolSubjects.sciences.biology.label": "Biologie",
+	"schoolSubjects.languages.other.label": "Andere Fremdsprachen",
+	//MINT
+	"schoolSubjects.mint.label": "MINT",
+	"schoolSubjects.mint.math.label": "Mathe",
+	"schoolSubjects.mint.physics.label": "Physik",
+	"schoolSubjects.mint.biology.label": "Biologie",
+	"schoolSubjects.mint.chemistry.label": "Chemie",
+	"schoolSubjects.mint.computerScience.label": "Informatik",
 	// Society & Economy
-	"schoolSubjects.society.label": "Gesellschaft & Wirtschaft",
-	"schoolSubjects.society.economics.label": "Wirtschaft",
-	"schoolSubjects.society.ethics.label": "Ethik",
-	"schoolSubjects.society.religion.label": "Religion",
-	// Creativity & Practice
-	"schoolSubjects.creativity.label": "Praxis & Kreativität",
-	"schoolSubjects.creativity.craftsAndTechnology.label": "Werken/Technik",
-	"schoolSubjects.creativity.computerScience.label": "Informatik",
-	"schoolSubjects.creativity.art.label": "Kunst",
+	"schoolSubjects.society.label": "Gesellschaft und Wirtschaft",
+	"schoolSubjects.society.wat.label": "Wirtschaft-Arbeit-Technik (WAT)",
+	"schoolSubjects.society.homeEconomics.label": "Hauswirtschaftslehre",
+	"schoolSubjects.society.ethicsReligion.label": "Ethik & Religion",
+	"schoolSubjects.society.pedagogy.label": "Pädagogik",
+	"schoolSubjects.society.history.label": "Geschichte",
+	"schoolSubjects.society.politics.label": "Politik",
+	"schoolSubjects.society.geography.label": "Geographie",
+	// Creativity
+	"schoolSubjects.creativity.label": "Kreatives",
 	"schoolSubjects.creativity.music.label": "Musik",
-	"schoolSubjects.creativity.sports.label": "Sport",
+	"schoolSubjects.creativity.art.label": "Kunst",
+	"schoolSubjects.creativity.performingArts.label": "Darstellendes Spiel",
+	// Sport
+	"schoolSubjects.sports.label": "Sport",
+	"schoolSubjects.sports.sports.label": "Sport",
 
 	// Interests
 	"interests.question": "Was machst du gerne?",

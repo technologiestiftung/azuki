@@ -16,26 +16,34 @@ export const categories: {
 				label: content["schoolSubjects.languages.english.label"],
 				value: "english",
 			},
+			{
+				label: content["schoolSubjects.languages.other.label"],
+				value: "other_languages",
+			},
 		],
 	},
 	{
-		name: content["schoolSubjects.sciences.label"],
+		name: content["schoolSubjects.mint.label"],
 		subjects: [
 			{
-				label: content["schoolSubjects.sciences.math.label"],
+				label: content["schoolSubjects.mint.math.label"],
 				value: "math",
 			},
 			{
-				label: content["schoolSubjects.sciences.physics.label"],
+				label: content["schoolSubjects.mint.physics.label"],
 				value: "physics",
 			},
 			{
-				label: content["schoolSubjects.sciences.chemistry.label"],
+				label: content["schoolSubjects.mint.biology.label"],
+				value: "biology",
+			},
+			{
+				label: content["schoolSubjects.mint.chemistry.label"],
 				value: "chemistry",
 			},
 			{
-				label: content["schoolSubjects.sciences.biology.label"],
-				value: "biology",
+				label: content["schoolSubjects.mint.computerScience.label"],
+				value: "computer_science",
 			},
 		],
 	},
@@ -43,16 +51,32 @@ export const categories: {
 		name: content["schoolSubjects.society.label"],
 		subjects: [
 			{
-				label: content["schoolSubjects.society.economics.label"],
-				value: "economics",
+				label: content["schoolSubjects.society.wat.label"],
+				value: "wat",
 			},
 			{
-				label: content["schoolSubjects.society.ethics.label"],
-				value: "ethics",
+				label: content["schoolSubjects.society.homeEconomics.label"],
+				value: "home_economics",
 			},
 			{
-				label: content["schoolSubjects.society.religion.label"],
-				value: "religion",
+				label: content["schoolSubjects.society.ethicsReligion.label"],
+				value: "ethics_religion",
+			},
+			{
+				label: content["schoolSubjects.society.pedagogy.label"],
+				value: "pedagogy",
+			},
+			{
+				label: content["schoolSubjects.society.history.label"],
+				value: "history",
+			},
+			{
+				label: content["schoolSubjects.society.politics.label"],
+				value: "politics",
+			},
+			{
+				label: content["schoolSubjects.society.geography.label"],
+				value: "geography",
 			},
 		],
 	},
@@ -60,23 +84,24 @@ export const categories: {
 		name: content["schoolSubjects.creativity.label"],
 		subjects: [
 			{
-				label: content["schoolSubjects.creativity.craftsAndTechnology.label"],
-				value: "crafts_technology",
-			},
-			{
-				label: content["schoolSubjects.creativity.computerScience.label"],
-				value: "computer_science",
+				label: content["schoolSubjects.creativity.music.label"],
+				value: "music",
 			},
 			{
 				label: content["schoolSubjects.creativity.art.label"],
 				value: "art",
 			},
 			{
-				label: content["schoolSubjects.creativity.music.label"],
-				value: "music",
+				label: content["schoolSubjects.creativity.performingArts.label"],
+				value: "performing_arts",
 			},
+		],
+	},
+	{
+		name: content["schoolSubjects.sports.label"],
+		subjects: [
 			{
-				label: content["schoolSubjects.creativity.sports.label"],
+				label: content["schoolSubjects.sports.sports.label"],
 				value: "sports",
 			},
 		],
