@@ -37,6 +37,7 @@ export const WORK_PREF_MAP: Record<string, WorkPreferenceOptionChecks> = {
 	},
 	pace: {
 		a: (o) => o.conditions.office,
+		// No BERUFENET signal for "Arbeit unter Zeitdruck".
 		b: () => false,
 	},
 	structure: {
@@ -45,6 +46,7 @@ export const WORK_PREF_MAP: Record<string, WorkPreferenceOptionChecks> = {
 	},
 	purpose: {
 		a: (o) => o.interests.includes("sozial-beratend"),
+		// No BERUFENET signal for "Aufgaben erledigen".
 		b: () => false,
 	},
 	environment: {
@@ -81,6 +83,7 @@ export const STRENGTH_TO_TAGS: Record<string, string[]> = {
 	teamwork: ["Befähigung zu Gruppenarbeit / Teamfähigkeit"],
 	"logical-thinking": ["Umsicht", "Sorgfalt"],
 	creativity: ["Kreativität"],
+	// No b20-4 tags; scored via conditions fallback in dimensions.ts.
 	craftsmanship: [],
 	communication: ["Kommunikationsfähigkeit", "Kontaktbereitschaft"],
 	concentration: ["Sorgfalt"],
@@ -100,6 +103,7 @@ export const WORK_VALUE_CHECKS: Record<string, WorkValuePredicate> = {
 	autonomy_responsibility: (o) =>
 		o.strengthTags.includes("Selbstständige Arbeitsweise") ||
 		o.strengthTags.includes("Verantwortungsbewusstsein und -bereitschaft"),
+	// No BERUFENET signal for flexibility; delegated to LLM re-ranking.
 	flexible_hours: () => false,
 	stability: (o) =>
 		o.conditions.regulatedWork &&
