@@ -7,6 +7,8 @@ export const SUBJECTS: SubjectDefinition[] = [
 	{ id: "math", dataLabel: "Mathematik" },
 	{ id: "german", dataLabel: "Deutsch" },
 	{ id: "english", dataLabel: "Englisch" },
+	{ id: "french", dataLabel: "Französisch" },
+	{ id: "spanish", dataLabel: "Spanisch" },
 	{ id: "physics", dataLabel: "Physik" },
 	{ id: "chemistry", dataLabel: "Chemie" },
 	{ id: "biology", dataLabel: "Biologie" },

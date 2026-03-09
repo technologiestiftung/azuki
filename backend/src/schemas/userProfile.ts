@@ -18,6 +18,7 @@ export const UserProfileSchema = z.object({
 	favoriteSubjects: z.array(z.string()),
 	interests: z.array(z.string()),
 	customInterests: z.array(z.string()),
+	workValues: z.array(z.string()),
 	strengths: z.record(z.string(), z.number()),
 	secretTalent: z.string(),
 	practicalExperience: z.string(),
