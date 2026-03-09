@@ -66,12 +66,24 @@ export default {
 					to: { opacity: "1", transform: "translateX(0)" },
 				},
 				slideOutLeft: {
-					from: { opacity: "1", transform: "translateX(0)" },
-					to: { opacity: "0", transform: "translateX(-100%)" },
+					from: {
+						opacity: "1",
+						transform: "translateX(0) rotate(0deg) translateY(0)",
+					},
+					to: {
+						opacity: "0",
+						transform: "translateX(-100vw) rotate(-20deg) translateY(-40px)",
+					},
 				},
 				slideOutRight: {
-					from: { opacity: "1", transform: "translateX(0)" },
-					to: { opacity: "0", transform: "translateX(100%)" },
+					from: {
+						opacity: "1",
+						transform: "translateX(0) rotate(0deg) translateY(0)",
+					},
+					to: {
+						opacity: "0",
+						transform: "translateX(100vw) rotate(20deg) translateY(-40px)",
+					},
 				},
 				slideInLeft: {
 					from: { opacity: "0", transform: "translateX(-40px)" },

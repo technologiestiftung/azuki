@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import React, { useState, useRef } from "react";
 import { content } from "../../../../content/de";
 import { useAppStore } from "../../../../store/useAppStore";
 import { Step } from "../../../../common";
@@ -18,6 +18,10 @@ export function StrengthsStep() {
 	const [displayIndex, setDisplayIndex] = useState(
 		useAppStore.getState().strengthSubIndex,
 	);
+
+	const pointerStartX = useRef<number | null>(null);
+	const [dragX, setDragX] = useState(0);
+	const [isDragging, setIsDragging] = useState(false);
 	const [animClass, setAnimClass] = useState("animate-slideInRight");
 	const isAnimating = useRef(false);
 
@@ -82,6 +86,52 @@ export function StrengthsStep() {
 		nextStep();
 	}
 
+	// Tinder-like swipe handlers
+	function handlePointerDown(e: React.PointerEvent<HTMLDivElement>) {
+		pointerStartX.current = e.clientX;
+		setIsDragging(true);
+	}
+
+	function handlePointerMove(e: React.PointerEvent<HTMLDivElement>) {
+		if (!isDragging || pointerStartX.current === null) {
+			return;
+		}
+		const deltaX = e.clientX - pointerStartX.current;
+		setDragX(deltaX);
+	}
+
+	function handlePointerUp(e: React.PointerEvent<HTMLDivElement>) {
+		if (!isDragging || pointerStartX.current === null) {
+			return;
+		}
+		const deltaX = e.clientX - pointerStartX.current;
+		setIsDragging(false);
+
+		const threshold = 80;
+		if (deltaX < -threshold) {
+			setDragX(-window.innerWidth); // animate out left
+			setTimeout(() => {
+				setDragX(0);
+				handleNext();
+			}, 200);
+		} else if (deltaX > threshold) {
+			setDragX(window.innerWidth); // animate out right
+			setTimeout(() => {
+				setDragX(0);
+				handleBack();
+			}, 200);
+		} else {
+			setDragX(0); // snap back
+		}
+		pointerStartX.current = null;
+	}
+
+	function handlePointerLeave() {
+		setIsDragging(false);
+		setDragX(0);
+		pointerStartX.current = null;
+	}
+
 	return (
 		<StepLayout
 			question={content["strengths.question"]}
@@ -105,6 +155,18 @@ export function StrengthsStep() {
 					<div
 						key={current.id}
 						className={`relative w-full bg-gray-200 rounded-3xl p-6 flex flex-col items-center ${animClass}`}
+						onPointerDown={handlePointerDown}
+						onPointerMove={handlePointerMove}
+						onPointerUp={handlePointerUp}
+						onPointerLeave={handlePointerLeave}
+						style={{
+							touchAction: "pan-y",
+							cursor: isDragging ? "grabbing" : "grab",
+							transform: `translateX(${dragX}px) rotate(${dragX / 20}deg)`,
+							transition: isDragging
+								? "none"
+								: "transform 0.2s cubic-bezier(.22,.68,0,1.71)",
+						}}
 					>
 						<img
 							src={current.illustration}
