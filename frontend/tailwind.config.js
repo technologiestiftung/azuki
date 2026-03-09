@@ -86,12 +86,24 @@ export default {
 					},
 				},
 				slideInLeft: {
-					from: { opacity: "0", transform: "translateX(-40px)" },
-					to: { opacity: "1", transform: "translateX(0)" },
+					from: {
+						opacity: "0",
+						transform: "translateX(-100vw) rotate(-20deg) translateY(-40px)",
+					},
+					to: {
+						opacity: "1",
+						transform: "translateX(0) rotate(0deg) translateY(0)",
+					},
 				},
 				slideInRight: {
-					from: { opacity: "0", transform: "translateX(40px)" },
-					to: { opacity: "1", transform: "translateX(0)" },
+					from: {
+						opacity: "0",
+						transform: "translateX(100vw) rotate(20deg) translateY(-40px)",
+					},
+					to: {
+						opacity: "1",
+						transform: "translateX(0) rotate(0deg) translateY(0)",
+					},
 				},
 				progressFill: {
 					from: { width: "0%" },
@@ -103,8 +115,8 @@ export default {
 				slideIn: "slideIn 0.25s ease-out",
 				slideOutLeft: "slideOutLeft 0.3s ease-in forwards",
 				slideOutRight: "slideOutRight 0.3s ease-in forwards",
-				slideInLeft: "slideInLeft 0.25s ease-out",
-				slideInRight: "slideInRight 0.25s ease-out",
+				slideInLeft: "slideInLeft 0.3s ease-out forwards",
+				slideInRight: "slideInRight 0.3s ease-out forwards",
 				progressFill: "progressFill 4s linear forwards",
 			},
 		},
