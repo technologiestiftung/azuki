@@ -22,9 +22,16 @@ function snapToNearestAnchor(value: number): number {
 interface StrengthsSliderProps {
 	value: number;
 	onChange: (value: number) => void;
+	minLabel?: string;
+	maxLabel?: string;
 }
 
-export function StrengthsSlider({ value, onChange }: StrengthsSliderProps) {
+export function StrengthsSlider({
+	value,
+	onChange,
+	minLabel,
+	maxLabel,
+}: StrengthsSliderProps) {
 	const trackRef = useRef<HTMLDivElement>(null);
 	const isDragging = useRef(false);
 
@@ -58,55 +65,61 @@ export function StrengthsSlider({ value, onChange }: StrengthsSliderProps) {
 	}
 
 	return (
-		<div
-			ref={trackRef}
-			className="relative h-12 rounded-xl bg-gray-100 cursor-pointer touch-none select-none"
-			onPointerDown={onPointerDown}
-			onPointerMove={onPointerMove}
-			onPointerUp={onPointerUp}
-			onPointerCancel={onPointerUp}
-			role="slider"
-			aria-valuemin={0}
-			aria-valuemax={100}
-			aria-valuenow={Math.round(value * 100)}
-			tabIndex={0}
-		>
-			{/* Filled track */}
+		<div className="w-full mb-1">
+			<div className="flex justify-between text-base font-medium text-gray-600 mb-2">
+				<span>{minLabel}</span>
+				<span>{maxLabel}</span>
+			</div>
 			<div
-				className="absolute inset-y-0 left-0 bg-sky-300 rounded-xl transition-[width] duration-75"
-				style={{
-					width: `calc(20px + ${value} * (100% - 40px) + 24px - 4px)`,
-				}}
-			/>
-			{/* Thumb */}
-			<div
-				className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-12 h-12 p-2 border-4 border-sky-300 bg-white rounded-lg shadow-sm transition-[left] duration-75 z-10"
-				style={{
-					left: `calc(24px + ${value} * (100% - 48px))`,
-				}}
-			/>
-			{/* Anchor dots */}
-			{ANCHOR_STOPS.map((stop) => {
-				let dotColor = "bg-gray-400";
-				if (stop < value) {
-					dotColor = "bg-sky-600";
-				} else if (stop === value) {
-					dotColor = "bg-transparent";
-				}
-				return (
-					<div
-						key={stop}
-						className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2"
-						style={{
-							left: `calc(20px + ${stop} * (100% - 40px))`,
-						}}
-					>
-						<span
-							className={`block w-1.5 h-1.5 rounded-full transition-colors ${dotColor}`}
-						/>
-					</div>
-				);
-			})}
+				ref={trackRef}
+				className="relative h-12 rounded-xl bg-gray-100 cursor-pointer touch-none select-none"
+				onPointerDown={onPointerDown}
+				onPointerMove={onPointerMove}
+				onPointerUp={onPointerUp}
+				onPointerCancel={onPointerUp}
+				role="slider"
+				aria-valuemin={0}
+				aria-valuemax={100}
+				aria-valuenow={Math.round(value * 100)}
+				tabIndex={0}
+			>
+				{/* Filled track */}
+				<div
+					className="absolute inset-y-0 left-0 bg-sky-300 rounded-xl transition-[width] duration-75"
+					style={{
+						width: `calc(20px + ${value} * (100% - 40px) + 24px - 4px)`,
+					}}
+				/>
+				{/* Thumb */}
+				<div
+					className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-12 h-12 p-2 border-4 border-sky-300 bg-white rounded-lg shadow-sm transition-[left] duration-75 z-10"
+					style={{
+						left: `calc(24px + ${value} * (100% - 48px))`,
+					}}
+				/>
+				{/* Anchor dots */}
+				{ANCHOR_STOPS.map((stop) => {
+					let dotColor = "bg-gray-400";
+					if (stop < value) {
+						dotColor = "bg-sky-600";
+					} else if (stop === value) {
+						dotColor = "bg-transparent";
+					}
+					return (
+						<div
+							key={stop}
+							className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2"
+							style={{
+								left: `calc(20px + ${stop} * (100% - 40px))`,
+							}}
+						>
+							<span
+								className={`block w-1.5 h-1.5 rounded-full transition-colors ${dotColor}`}
+							/>
+						</div>
+					);
+				})}
+			</div>
 		</div>
 	);
 }

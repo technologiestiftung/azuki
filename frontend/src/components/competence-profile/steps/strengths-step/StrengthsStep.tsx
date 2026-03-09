@@ -67,6 +67,14 @@ export function StrengthsStep() {
 			onSkip={() => stackRef.current?.goNext("right")}
 			onBack={() => stackRef.current?.goBack("left")}
 			skipLabel={content["strengths.skipButton.label"]}
+			bottomContent={
+				<StrengthsSlider
+					value={currentValue}
+					onChange={handleSliderChange}
+					minLabel={content["strengths.sliderMin"]}
+					maxLabel={content["strengths.sliderMax"]}
+				/>
+			}
 		>
 			<div className="flex flex-col justify-center items-center h-full flex-1">
 				<SwipeCardStack
@@ -81,13 +89,6 @@ export function StrengthsStep() {
 					onIndexChange={handleIndexChange}
 					renderCard={(index: number) => <StrengthCard index={index} />}
 				/>
-				<div className="w-full mt-4">
-					<div className="flex justify-between text-base font-medium text-gray-600 mb-2">
-						<span>{content["strengths.sliderMin"]}</span>
-						<span>{content["strengths.sliderMax"]}</span>
-					</div>
-					<StrengthsSlider value={currentValue} onChange={handleSliderChange} />
-				</div>
 			</div>
 		</StepLayout>
 	);
