@@ -6,6 +6,8 @@ const EducationLevelSchema = z.enum([
 	"intermediate",
 	"none",
 	"university_entrance",
+	"vocational_diploma",
+	"foreign_degree",
 	"unknown",
 ]);
 
@@ -14,6 +16,7 @@ const NoGoAnswerSchema = z.enum(["rejected", "accepted"]);
 const WorkPreferenceChoiceSchema = z.enum(["a", "b"]);
 
 export const UserProfileSchema = z.object({
+	inSchool: z.boolean().nullable(),
 	educationLevel: EducationLevelSchema.nullable(),
 	favoriteSubjects: z.array(z.string()),
 	interests: z.array(z.string()),

@@ -33,6 +33,9 @@ export function scoreEducation(
       break;
     // Abitur is never penalized — compatible with any occupation
     case "university_entrance":
+    case "vocational_diploma":
+    case "foreign_degree":
+    case "unknown":
       break;
   }
   return 0;
