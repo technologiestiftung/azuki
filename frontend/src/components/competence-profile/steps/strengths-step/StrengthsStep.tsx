@@ -63,9 +63,9 @@ export function StrengthsStep() {
 		<StepLayout
 			question={content["strengths.question"]}
 			currentStep={Step.Strengths}
-			onNext={() => stackRef.current?.goNext("right")}
-			onSkip={() => stackRef.current?.goNext("right")}
-			onBack={() => stackRef.current?.goBack("left")}
+			onNext={() => stackRef.current?.goNext()}
+			onSkip={() => stackRef.current?.goNext()}
+			onBack={() => stackRef.current?.goBack()}
 			skipLabel={content["strengths.skipButton.label"]}
 			bottomContent={
 				<StrengthsSlider
@@ -76,7 +76,7 @@ export function StrengthsStep() {
 				/>
 			}
 		>
-			<div className="flex flex-col justify-center items-center h-full flex-1">
+			<div className="flex flex-col justify-center items-center h-[85%] flex-1">
 				<SwipeCardStack
 					ref={stackRef}
 					count={strengths.length}

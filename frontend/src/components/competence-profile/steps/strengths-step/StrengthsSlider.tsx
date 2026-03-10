@@ -1,4 +1,9 @@
-import { useRef, useCallback, type PointerEvent } from "react";
+import {
+	useRef,
+	useCallback,
+	type KeyboardEvent,
+	type PointerEvent,
+} from "react";
 
 const ANCHOR_STOPS = [0, 0.25, 0.5, 0.75, 1];
 const SNAP_THRESHOLD = 0.04;
@@ -17,6 +22,10 @@ function snapToNearestAnchor(value: number): number {
 	return ANCHOR_STOPS.reduce((prev, curr) =>
 		Math.abs(curr - value) < Math.abs(prev - value) ? curr : prev,
 	);
+}
+
+function clamp(value: number): number {
+	return Math.max(0, Math.min(1, value));
 }
 
 interface StrengthsSliderProps {
@@ -64,6 +73,55 @@ export function StrengthsSlider({
 		onChange(snapToNearestAnchor(value));
 	}
 
+	function onKeyDown(e: KeyboardEvent<HTMLDivElement>) {
+		const currentIndex = ANCHOR_STOPS.findIndex((stop) => stop === value);
+
+		if (e.key === "ArrowRight" || e.key === "ArrowUp") {
+			e.preventDefault();
+			if (currentIndex >= 0) {
+				const nextIndex = Math.min(ANCHOR_STOPS.length - 1, currentIndex + 1);
+				onChange(ANCHOR_STOPS[nextIndex]);
+				return;
+			}
+			onChange(clamp(value + 0.05));
+			return;
+		}
+
+		if (e.key === "ArrowLeft" || e.key === "ArrowDown") {
+			e.preventDefault();
+			if (currentIndex >= 0) {
+				const prevIndex = Math.max(0, currentIndex - 1);
+				onChange(ANCHOR_STOPS[prevIndex]);
+				return;
+			}
+			onChange(clamp(value - 0.05));
+			return;
+		}
+
+		if (e.key === "PageUp") {
+			e.preventDefault();
+			onChange(clamp(value + 0.25));
+			return;
+		}
+
+		if (e.key === "PageDown") {
+			e.preventDefault();
+			onChange(clamp(value - 0.25));
+			return;
+		}
+
+		if (e.key === "Home") {
+			e.preventDefault();
+			onChange(0);
+			return;
+		}
+
+		if (e.key === "End") {
+			e.preventDefault();
+			onChange(1);
+		}
+	}
+
 	return (
 		<div className="w-full mb-1">
 			<div className="flex justify-between text-base font-medium text-gray-600 mb-2">
@@ -77,10 +135,12 @@ export function StrengthsSlider({
 				onPointerMove={onPointerMove}
 				onPointerUp={onPointerUp}
 				onPointerCancel={onPointerUp}
+				onKeyDown={onKeyDown}
 				role="slider"
 				aria-valuemin={0}
 				aria-valuemax={100}
 				aria-valuenow={Math.round(value * 100)}
+				aria-valuetext={`${Math.round(value * 100)}%`}
 				tabIndex={0}
 			>
 				{/* Filled track */}

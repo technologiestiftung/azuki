@@ -116,46 +116,34 @@ export const content = {
 	"strengths.cards.teamwork.title": "Teamarbeit",
 	"strengths.cards.teamwork.description":
 		"Ich arbeite mit anderen zusammen und spreche Aufgaben ab.",
-	"strengths.cards.teamwork.illustration": "/illustrations/teamwork.svg",
 	// Logical Thinking
 	"strengths.cards.logical-thinking.title": "Logisches Denken",
 	"strengths.cards.logical-thinking.description":
 		"Wenn etwas nicht funktioniert, gehe ich Schritt für Schritt vor.",
-	"strengths.cards.logical-thinking.illustration":
-		"/illustrations/logical-thinking.svg",
 	// Creativity
 	"strengths.cards.creativity.title": "Kreativität",
 	"strengths.cards.creativity.description":
 		"Ich finde eigene Ideen oder neue Lösungen.",
-	"strengths.cards.creativity.illustration": "/illustrations/craftsmanship.svg",
 	// Communication
 	"strengths.cards.communication.title": "Kommunikation",
 	"strengths.cards.communication.description":
 		"Wenn ich etwas erkläre, verstehen andere mich. Ich höre anderen zu.",
-	"strengths.cards.communication.illustration":
-		"/illustrations/communication.svg",
 	// Craftsmanship
 	"strengths.cards.craftsmanship.title": "Handwerklich geschickt",
 	"strengths.cards.craftsmanship.description":
 		"Ich arbeite gern mit den Händen, zum Beispiel beim Bauen oder Reparieren.",
-	"strengths.cards.craftsmanship.illustration":
-		"/illustrations/craftsmanship.svg",
 	// Concentration
 	"strengths.cards.concentration.title": "Konzentration",
 	"strengths.cards.concentration.description":
 		"Ich bleibe bei einer Aufgabe, auch wenn es Ablenkung gibt.",
-	"strengths.cards.concentration.illustration":
-		"/illustrations/concentration.svg",
 	// Precision
 	"strengths.cards.precision.title": "Genaues Arbeiten",
 	"strengths.cards.precision.description":
 		"Ich arbeite sorgfältig und achte auf Details.",
-	"strengths.cards.precision.illustration": "/illustrations/precise-work.svg",
 	// Perseverance
 	"strengths.cards.perseverance.title": "Durchhalten",
 	"strengths.cards.perseverance.description":
 		"Ich mache weiter, auch wenn eine Aufgabe anstrengend ist.",
-	"strengths.cards.perseverance.illustration": "/illustrations/endurance.svg",
 
 	// Secret Talent
 	"secretTalent.question":

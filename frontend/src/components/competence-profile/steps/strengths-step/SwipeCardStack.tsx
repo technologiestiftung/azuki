@@ -14,8 +14,8 @@ const SLIDE_IN_MS = 300;
 export type SwipeDirection = "left" | "right";
 
 export interface SwipeCardStackHandle {
-	goNext: (direction: SwipeDirection) => void;
-	goBack: (direction: SwipeDirection) => void;
+	goNext: () => void;
+	goBack: () => void;
 }
 
 interface SwipeCardStackProps {
@@ -134,14 +134,12 @@ export const SwipeCardStack = forwardRef<
 					setDisplayIndex(targetIndex);
 					onAdvance(targetIndex);
 					onIndexChange?.(targetIndex);
-				} else if (direction === "left") {
-					onExhausted();
 				} else {
-					onBefore();
+					onExhausted();
 				}
 			}, FLY_OUT_MS);
 		},
-		[dragY, onAdvance, onExhausted, onBefore, onIndexChange],
+		[dragY, onAdvance, onExhausted, onIndexChange],
 	);
 
 	const slideIn = useCallback(
