@@ -112,4 +112,5 @@ export const WORK_VALUE_CHECKS: Record<string, WorkValuePredicate> = {
 	modern_technology: (o) => o.conditions.machinery || o.digitalizationSignal,
 	movement: (o) =>
 		o.conditions.standingWalking || o.conditions.manualLabor || o.conditions.outdoor,
+	//TODO: add conditions for short_distance, career, benefits, remote
 };

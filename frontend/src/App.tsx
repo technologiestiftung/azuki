@@ -14,6 +14,7 @@ import { WorkPreferencesStep } from "./components/competence-profile/steps/WorkP
 import { NoGosStep } from "./components/competence-profile/steps/NoGosStep";
 import { LoadingScreen } from "./components/loading-screen/LoadingScreen";
 import { ResultsScreen } from "./components/result-screen/ResultsScreen";
+import { WorkValuesStep } from "./components/competence-profile/steps/WorkValuesStep";
 
 function StepRenderer() {
 	const currentStep = useAppStore((state) => state.currentStep);
@@ -33,6 +34,8 @@ function StepRenderer() {
 			return <SchoolSubjectsStep />;
 		case Step.Interests:
 			return <InterestsStep />;
+		case Step.WorkValues:
+			return <WorkValuesStep />;
 		case Step.Strengths:
 			return <StrengthsStep />;
 		case Step.SecretTalent:

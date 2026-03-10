@@ -206,6 +206,22 @@ export const content = {
 	"practicalExperience.cancelLabel": "Abbrechen",
 	"practicalExperience.saveLabel": "Speichern",
 
+	//Work Values
+	"workValues.question": "Was ist dir in deinem Beruf wichtig?",
+	"workValues.skipButton.label": "Überspringen",
+	"workValues.option.goodSalary": "Gutes Gehalt",
+	"workValues.option.peopleWork": "Mit Menschen arbeiten",
+	"workValues.option.teamWork": "Teamarbeit",
+	"workValues.option.autonomyResponsibility":
+		"Selbstständigkeit und Verantwortung",
+	"workValues.option.flexibleHours": "Flexible Arbeitszeiten",
+	"workValues.option.stability": "Sicherheit und Stabilität",
+	"workValues.option.modernTechnology": "Arbeiten mit modernen Technologien",
+	"workValues.option.shortDistance": "Kurzer Arbeitsweg",
+	"workValues.option.career": "Karriere",
+	"workValues.option.benefits": "Benefits (Arbeitgeberleistungen)",
+	"workValues.option.remote": "Remote möglich",
+
 	// Work Preferences
 	"workPreferences.question": "Wie möchtest du in Zukunft arbeiten?",
 	"workPreferences.pairs": [

@@ -17,6 +17,7 @@ const STEP_ORDER = [
 	Step.SchoolSubjects,
 	Step.Interests,
 	Step.Strengths,
+	Step.WorkValues,
 	Step.SecretTalent,
 	Step.PracticalExperience,
 	Step.WorkPreferences,
@@ -53,6 +54,7 @@ interface AppActions {
 	prevStep: () => void;
 	setEducationLevel: (value: EducationLevel) => void;
 	toggleSubject: (subject: string) => void;
+	toggleWorkValue: (value: string) => void;
 	toggleInterest: (interest: string) => void;
 	addCustomInterest: (interest: string) => void;
 	setStrength: (id: string, value: number) => void;
@@ -100,17 +102,32 @@ export const useAppStore = create<AppState & AppActions>((set, get) => ({
 	toggleSubject: (subject) =>
 		set((state) => {
 			const subjects = state.profile.favoriteSubjects.includes(subject)
-				? state.profile.favoriteSubjects.filter((s) => s !== subject)
+				? state.profile.favoriteSubjects.filter(
+						(favoriteSubject: string) => favoriteSubject !== subject,
+					)
 				: [...state.profile.favoriteSubjects, subject];
 			return {
 				profile: { ...state.profile, favoriteSubjects: subjects },
+			};
+		}),
+	toggleWorkValue: (value) =>
+		set((state) => {
+			const workValues = state.profile.workValues.includes(value)
+				? state.profile.workValues.filter(
+						(workValue: string) => workValue !== value,
+					)
+				: [...state.profile.workValues, value];
+			return {
+				profile: { ...state.profile, workValues },
 			};
 		}),
 
 	toggleInterest: (interest) =>
 		set((state) => {
 			const interests = state.profile.interests.includes(interest)
-				? state.profile.interests.filter((i) => i !== interest)
+				? state.profile.interests.filter(
+						(interestValue: string) => interestValue !== interest,
+					)
 				: [...state.profile.interests, interest];
 			return {
 				profile: { ...state.profile, interests },

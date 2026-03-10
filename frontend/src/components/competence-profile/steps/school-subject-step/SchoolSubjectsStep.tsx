@@ -3,6 +3,7 @@ import { useAppStore } from "../../../../store/useAppStore";
 import { Step } from "../../../../common";
 import { StepLayout } from "../StepLayout";
 import { categories } from "./school-subjects";
+import { SelectableRowButton } from "../../../primitives/buttons/SelectableRowButton";
 
 export function SchoolSubjectsStep() {
 	const profile = useAppStore((state) => state.profile);
@@ -31,36 +32,12 @@ export function SchoolSubjectsStep() {
 									subject.value,
 								);
 								return (
-									<button
+									<SelectableRowButton
 										key={subject.value}
-										aria-pressed={selected}
+										label={subject.label}
+										selected={selected}
 										onClick={() => toggleSubject(subject.value)}
-										className={`w-full flex items-center justify-between p-3 rounded-xl border-2 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-sky-500 ${
-											selected
-												? "border-sky-300 bg-sky-50"
-												: "border-gray-200 bg-transparent"
-										}`}
-									>
-										<span className="text-lg font-medium text-gray-700">
-											{subject.label}
-										</span>
-										<div
-											className={`w-6 h-6 rounded-[5px] border-2 flex items-center justify-center transition-colors ${
-												selected
-													? "border-sky-300 bg-sky-300"
-													: "border-gray-300 bg-transparent"
-											}`}
-										>
-											{selected && (
-												<img
-													src="/icons/check-white.svg"
-													alt=""
-													width={18}
-													height={18}
-												/>
-											)}
-										</div>
-									</button>
+									/>
 								);
 							})}
 						</div>
