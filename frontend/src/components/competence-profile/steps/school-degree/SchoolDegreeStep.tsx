@@ -26,7 +26,7 @@ export function SchoolDegreeStep() {
 			onNext={nextStep}
 			onSkip={nextStep}
 			nextDisabled={!profile.educationLevel}
-			showSkip={false}
+			hasSkipButton={true}
 			skipLabel={content["schoolDegree.skipButton.label"]}
 		>
 			<div className="flex flex-col gap-3">
