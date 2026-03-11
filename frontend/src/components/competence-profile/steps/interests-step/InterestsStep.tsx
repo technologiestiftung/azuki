@@ -1,0 +1,87 @@
+import { useState } from "react";
+import { content } from "../../../../content/de";
+import { useAppStore } from "../../../../store/useAppStore";
+import { Step } from "../../../../common";
+import { StepLayout } from "../StepLayout";
+import { interests } from "./interests";
+import { TextInput } from "../../../primitives/text-inputs/TextInput";
+import { Pill } from "../../../primitives/buttons/Pill";
+
+export function InterestsStep() {
+	const profile = useAppStore((state) => state.profile);
+	const toggleInterest = useAppStore((state) => state.toggleInterest);
+	const addCustomInterest = useAppStore((state) => state.addCustomInterest);
+	const nextStep = useAppStore((state) => state.nextStep);
+	const [customInput, setCustomInput] = useState("");
+
+	function handleAddCustom() {
+		const trimmed = customInput.trim();
+		if (trimmed && !profile.interests.includes(trimmed)) {
+			addCustomInterest(trimmed);
+			setCustomInput("");
+		}
+	}
+
+	const CustomInterestInput = (
+		<TextInput
+			name="customInterest"
+			value={customInput}
+			onChange={(e) => setCustomInput(e.target.value)}
+			onSubmit={handleAddCustom}
+			submitDisabled={!customInput.trim()}
+			placeholder={content["interests.addPlaceholder"]}
+			containerClassName="mb-1"
+		/>
+	);
+
+	return (
+		<StepLayout
+			question={content["interests.question"]}
+			currentStep={Step.Interests}
+			onNext={nextStep}
+			nextDisabled={profile.interests.length === 0}
+			bottomContent={CustomInterestInput}
+		>
+			<div className="flex flex-col gap-8">
+				{profile.customInterests.length > 0 && (
+					<div>
+						<h3 className="text-lg font-semibold text-gray-500 mb-2 px-3.5">
+							{content["interests.addedByYouLabel"]}
+						</h3>
+						<div className="flex flex-wrap gap-2.5 rounded-2xl bg-gray-100 p-3">
+							{profile.customInterests.map((interest: string) => (
+								<Pill
+									key={interest}
+									label={interest}
+									selected={profile.interests.includes(interest)}
+									onClick={() => toggleInterest(interest)}
+									ariaLabel={`${interest} ${content["interests.skipButton.pill.label.postfix"]}`}
+								/>
+							))}
+						</div>
+					</div>
+				)}
+
+				{interests.map((category) => (
+					<div key={category.name}>
+						<h3 className="text-lg font-semibold text-gray-500 mb-2 px-3.5">
+							{category.name}
+						</h3>
+						<div className="flex flex-wrap gap-2.5 rounded-2xl bg-gray-100 p-3">
+							{category.interests.map((item) => (
+								<Pill
+									key={item.label}
+									label={item.label}
+									icon={item.icon}
+									selected={profile.interests.includes(item.label)}
+									onClick={() => toggleInterest(item.label)}
+									ariaLabel={`${item.label} ${content["interests.skipButton.pill.label.postfix"]}`}
+								/>
+							))}
+						</div>
+					</div>
+				))}
+			</div>
+		</StepLayout>
+	);
+}

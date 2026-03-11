@@ -15,10 +15,10 @@ interface StepLayoutProps {
 	onNext?: () => void;
 	onSkip?: () => void;
 	nextDisabled?: boolean;
-	showSkip?: boolean;
-	showNext?: boolean;
+	hasSkipButton?: boolean;
 	currentStep: Step;
 	skipLabel?: string;
+	bottomContent?: ReactNode;
 }
 
 export function StepLayout({
@@ -28,10 +28,10 @@ export function StepLayout({
 	onNext,
 	onSkip,
 	nextDisabled = false,
-	showSkip = true,
-	showNext = true,
+	hasSkipButton = true,
 	currentStep,
 	skipLabel,
+	bottomContent,
 }: StepLayoutProps) {
 	const prevStep = useAppStore((state) => state.prevStep);
 
@@ -59,18 +59,19 @@ export function StepLayout({
 			</div>
 
 			<div
-				className={`fixed bottom-0 left-1/2 -translate-x-1/2 w-full bg-white border-t-2 border-gray-200 flex flex-col px-4 gap-y-2 max-w-[430px] ${showSkip ? "pt-4 pb-2" : "py-4"}`}
+				className={`fixed bottom-0 left-1/2 -translate-x-1/2 w-full bg-white border-t-2 border-gray-200 flex flex-col px-4 gap-y-2 max-w-[430px] ${hasSkipButton ? "pt-4 pb-2" : "py-4"}`}
 			>
-				{showNext && (
-					<PrimaryButton
-						onClick={onNext}
-						disabled={nextDisabled}
-						className="w-full"
-					>
-						{content["navigation.next"]}
-					</PrimaryButton>
-				)}
-				{showSkip && onSkip && (
+				{bottomContent}
+
+				<PrimaryButton
+					onClick={onNext}
+					disabled={nextDisabled}
+					className="w-full"
+				>
+					{content["navigation.next"]}
+				</PrimaryButton>
+
+				{hasSkipButton && onSkip && (
 					<SecondaryButton onClick={onSkip}>
 						{skipLabel || content["navigation.skip"]}
 					</SecondaryButton>
