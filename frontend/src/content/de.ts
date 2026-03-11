@@ -135,61 +135,41 @@ export const content = {
 
 	// Strengths
 	"strengths.question": "Was kannst du gut?",
-	"strengths.cards": [
-		{
-			id: "teamwork",
-			title: "Teamarbeit",
-			description: "Ich arbeite mit anderen zusammen und spreche Aufgaben ab.",
-			illustration: "/illustrations/teamwork.svg",
-		},
-		{
-			id: "logical-thinking",
-			title: "Logisches Denken",
-			description:
-				"Wenn etwas nicht funktioniert, gehe ich Schritt für Schritt vor.",
-			illustration: "/illustrations/logical-thinking.svg",
-		},
-		{
-			id: "creativity",
-			title: "Kreativität",
-			description: "Ich finde eigene Ideen oder neue Lösungen.",
-			illustration: "/illustrations/craftsmanship.svg",
-		},
-		{
-			id: "communication",
-			title: "Kommunikation",
-			description:
-				"Wenn ich etwas erkläre, verstehen andere mich. Ich höre anderen zu.",
-			illustration: "/illustrations/communication.svg",
-		},
-		{
-			id: "craftsmanship",
-			title: "Handwerklich geschickt",
-			description:
-				"Ich arbeite gern mit den Händen, zum Beispiel beim Bauen oder Reparieren.",
-			illustration: "/illustrations/craftsmanship.svg",
-		},
-		{
-			id: "concentration",
-			title: "Konzentration",
-			description: "Ich bleibe bei einer Aufgabe, auch wenn es Ablenkung gibt.",
-			illustration: "/illustrations/concentration.svg",
-		},
-		{
-			id: "precision",
-			title: "Genaues Arbeiten",
-			description: "Ich arbeite sorgfältig und achte auf Details.",
-			illustration: "/illustrations/precise-work.svg",
-		},
-		{
-			id: "perseverance",
-			title: "Durchhalten",
-			description: "Ich mache weiter, auch wenn eine Aufgabe anstrengend ist.",
-			illustration: "/illustrations/endurance.svg",
-		},
-	],
 	"strengths.sliderMin": "Gar nicht",
 	"strengths.sliderMax": "100%",
+	"strengths.skipButton.label": "Überspringen",
+	// Teamwork
+	"strengths.cards.teamwork.title": "Teamarbeit",
+	"strengths.cards.teamwork.description":
+		"Ich arbeite mit anderen zusammen und spreche Aufgaben ab.",
+	// Logical Thinking
+	"strengths.cards.logical-thinking.title": "Logisches Denken",
+	"strengths.cards.logical-thinking.description":
+		"Wenn etwas nicht funktioniert, gehe ich Schritt für Schritt vor.",
+	// Creativity
+	"strengths.cards.creativity.title": "Kreativität",
+	"strengths.cards.creativity.description":
+		"Ich finde eigene Ideen oder neue Lösungen.",
+	// Communication
+	"strengths.cards.communication.title": "Kommunikation",
+	"strengths.cards.communication.description":
+		"Wenn ich etwas erkläre, verstehen andere mich. Ich höre anderen zu.",
+	// Craftsmanship
+	"strengths.cards.craftsmanship.title": "Handwerklich geschickt",
+	"strengths.cards.craftsmanship.description":
+		"Ich arbeite gern mit den Händen, zum Beispiel beim Bauen oder Reparieren.",
+	// Concentration
+	"strengths.cards.concentration.title": "Konzentration",
+	"strengths.cards.concentration.description":
+		"Ich bleibe bei einer Aufgabe, auch wenn es Ablenkung gibt.",
+	// Precision
+	"strengths.cards.precision.title": "Genaues Arbeiten",
+	"strengths.cards.precision.description":
+		"Ich arbeite sorgfältig und achte auf Details.",
+	// Perseverance
+	"strengths.cards.perseverance.title": "Durchhalten",
+	"strengths.cards.perseverance.description":
+		"Ich mache weiter, auch wenn eine Aufgabe anstrengend ist.",
 
 	// Secret Talent
 	"secretTalent.question":

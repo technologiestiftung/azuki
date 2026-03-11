@@ -65,6 +65,46 @@ export default {
 					from: { opacity: "0", transform: "translateX(40px)" },
 					to: { opacity: "1", transform: "translateX(0)" },
 				},
+				slideOutLeft: {
+					from: {
+						opacity: "1",
+						transform: "translateX(0) rotate(0deg) translateY(0)",
+					},
+					to: {
+						opacity: "0",
+						transform: "translateX(-100vw) rotate(-20deg) translateY(-40px)",
+					},
+				},
+				slideOutRight: {
+					from: {
+						opacity: "1",
+						transform: "translateX(0) rotate(0deg) translateY(0)",
+					},
+					to: {
+						opacity: "0",
+						transform: "translateX(100vw) rotate(20deg) translateY(-40px)",
+					},
+				},
+				slideInLeft: {
+					from: {
+						opacity: "0",
+						transform: "translateX(-100vw) rotate(-20deg) translateY(-40px)",
+					},
+					to: {
+						opacity: "1",
+						transform: "translateX(0) rotate(0deg) translateY(0)",
+					},
+				},
+				slideInRight: {
+					from: {
+						opacity: "0",
+						transform: "translateX(100vw) rotate(20deg) translateY(-40px)",
+					},
+					to: {
+						opacity: "1",
+						transform: "translateX(0) rotate(0deg) translateY(0)",
+					},
+				},
 				progressFill: {
 					from: { width: "0%" },
 					to: { width: "100%" },
@@ -73,6 +113,10 @@ export default {
 			animation: {
 				fadeIn: "fadeIn 0.2s ease-in-out",
 				slideIn: "slideIn 0.25s ease-out",
+				slideOutLeft: "slideOutLeft 0.3s ease-in forwards",
+				slideOutRight: "slideOutRight 0.3s ease-in forwards",
+				slideInLeft: "slideInLeft 0.3s ease-out forwards",
+				slideInRight: "slideInRight 0.3s ease-out forwards",
 				progressFill: "progressFill 4s linear forwards",
 			},
 		},
