@@ -38,7 +38,7 @@ export function WorkValuesStep() {
 	return (
 		<StepLayout
 			question={content["workValues.question"]}
-			currentStep={Step.WorkPreferences}
+			currentStep={Step.WorkValues}
 			onNext={nextStep}
 			onSkip={nextStep}
 			nextDisabled={profile.workValues.length === 0}
