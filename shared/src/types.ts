@@ -52,6 +52,7 @@ export interface Occupation {
 	degreeStats: DegreeDistribution | null;
 	subjects: string[];
 	interests: string[];
+	interestKeywords: string[];
 	strengthTags: string[];
 	conditions: WorkConditions;
 	salaryMonthlyMedian: number | null;

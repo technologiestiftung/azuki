@@ -3,6 +3,7 @@ import type { UserProfile, MatchResult } from "@azuki/shared";
 import type { ScoredOccupation } from "../matching/index.js";
 import {
   EDUCATION_LABELS,
+  INTEREST_LABELS,
   SUBJECT_LABELS,
   STRENGTH_LABELS,
   WORK_PREF_LABELS,
@@ -132,7 +133,9 @@ function formatProfileSections(profile: UserProfile): string {
     );
   }
   if (profile.interests.length > 0) {
-    parts.push(`Interessen/Hobbys: ${profile.interests.join(", ")}`);
+    parts.push(
+      `Interessen/Hobbys: ${profile.interests.map((s) => label(s, INTEREST_LABELS)).join(", ")}`,
+    );
   }
 
   const strengthEntries = Object.entries(profile.strengths)

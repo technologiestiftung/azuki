@@ -138,8 +138,8 @@ export const content = {
 	"interests.people.read.icon": "📚",
 	"interests.people.babysitting.label": "Babysitten",
 	"interests.people.babysitting.icon": "🧸",
-	"interests.people.organizing.label": "Haustiere pflegen",
-	"interests.people.organizing.icon": "🐕",
+	"interests.people.petCare.label": "Haustiere pflegen",
+	"interests.people.petCare.icon": "🐕",
 	"interests.people.planning.label": "Party planen",
 	"interests.people.planning.icon": "🎉",
 

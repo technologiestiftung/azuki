@@ -1,4 +1,6 @@
 
+import { INTERESTS } from "@azuki/shared";
+
 export const EDUCATION_LABELS: Record<string, string> = {
 	secondary: "Hauptschulabschluss",
 	extended_secondary: "Erweiterter Hauptschulabschluss",
@@ -74,3 +76,7 @@ export const WORK_VALUE_LABELS: Record<string, string> = {
 	benefits: "Benefits (Arbeitgeberleistungen)",
 	remote: "Remote möglich",
 };
+
+export const INTEREST_LABELS: Record<string, string> = Object.fromEntries(
+	INTERESTS.map((interest) => [interest.id, interest.dataLabel]),
+);

@@ -16,3 +16,8 @@ export {
 	type SubjectDefinition,
 } from "./subjects";
 
+export {
+	INTERESTS,
+	type InterestDefinition,
+} from "./interests";
+

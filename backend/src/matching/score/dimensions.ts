@@ -1,12 +1,14 @@
 import type { Occupation, UserProfile } from "@azuki/shared";
+import { INTERESTS } from "@azuki/shared";
 import type { SalaryBands } from "./salaryScoreBands.js";
 import {
-  HOBBY_TO_INTEREST,
   NO_GO_MAP,
   STRENGTH_TO_TAGS,
   WORK_PREF_MAP,
   WORK_VALUE_CHECKS,
 } from "./config.js";
+
+const INTEREST_BY_ID = new Map(INTERESTS.map((interest) => [interest.id, interest]));
 
 export function scoreEducation(
   occupation: Occupation,
@@ -81,26 +83,56 @@ export function scoreSubjects(
   return score;
 }
 
+/**
+ * Scores how well an occupation matches the user's selected interests.
+ * Uses a two-tier system (category + keyword) and returns a non-negative score.
+ *
+ * @example Input shapes
+ *   profile.interests     = ["gaming", "photography"]   // user-selected interest IDs
+ *   occupation.interests  = ["theoretisch-abstrakt", "kreativ-gestaltend", ...]  // BERUFENET tags, order = relevance
+ *   occupation.interestKeywords = ["software", "system", "fotografieren", "kamera", ...]
+ */
 export function scoreInterests(
   occupation: Occupation,
   profile: UserProfile,
 ): number {
   let score = 0;
 
+  // Flatten the user's selected interest IDs into BERUFENET categories and match keywords.
+  // e.g. profile.interests ["gaming","photography"] → userCategories {"theoretisch-abstrakt","kreativ-gestaltend"}, userKeywords {"computer","software","fotografieren","kamera",...}
   const userCategories = new Set<string>();
-  for (const interest of profile.interests) {
-    const mappedCategories = HOBBY_TO_INTEREST[interest];
-    if (mappedCategories) {
-      for (const category of mappedCategories) userCategories.add(category);
+  const userKeywords = new Set<string>();
+  for (const interestId of profile.interests) {
+    const interestDefinition = INTEREST_BY_ID.get(interestId);
+    if (!interestDefinition) continue;
+
+    for (const category of interestDefinition.berufenetTags) {
+      userCategories.add(category);
+    }
+    for (const keyword of interestDefinition.matchKeywords) {
+      userKeywords.add(keyword.toLowerCase());
     }
   }
 
+  // Tier 1: broad BERUFENET category matching. Earlier position in occupation.interests = stronger signal (index 0 → 3 pts, 1 → 2 pts, 2+ → 1 pt).
+  // e.g. occupation.interests = ["theoretisch-abstrakt", "kreativ-gestaltend", "praktisch-konkret"] → matching "theoretisch-abstrakt" at index 0 gives +3.
   for (const cat of userCategories) {
     const interestIndex = occupation.interests.indexOf(cat);
     if (interestIndex === 0) score += 3;
     else if (interestIndex === 1) score += 2;
     else if (interestIndex >= 2) score += 1;
   }
+
+  // Tier 2: granular keyword overlap; contribution capped at 3 so it doesn't outweigh category match.
+  // e.g. userKeywords ∩ occupation.interestKeywords = {"software","kamera"} → 2 hits → +2 (or +3 if ≥3 overlaps).
+  let keywordHits = 0;
+  const occupationKeywords = new Set(
+    (occupation.interestKeywords).map((keyword) => keyword.toLowerCase()),
+  );
+  for (const keyword of userKeywords) {
+    if (occupationKeywords.has(keyword)) keywordHits++;
+  }
+  score += Math.min(keywordHits, 3);
 
   return score;
 }

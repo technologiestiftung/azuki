@@ -173,9 +173,9 @@ export const interests: {
 				value: "babysitting",
 			},
 			{
-				label: content["interests.people.organizing.label"],
-				icon: content["interests.people.organizing.icon"],
-				value: "organizing",
+				label: content["interests.people.petCare.label"],
+				icon: content["interests.people.petCare.icon"],
+				value: "petCare",
 			},
 			{
 				label: content["interests.people.planning.label"],

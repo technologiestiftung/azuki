@@ -55,29 +55,6 @@ export const WORK_PREF_MAP: Record<string, WorkPreferenceOptionChecks> = {
 	},
 };
 
-export const HOBBY_TO_INTEREST: Record<string, string[]> = {
-	Gaming: ["theoretisch-abstrakt"],
-	Computer: ["theoretisch-abstrakt"],
-	Fotografieren: ["kreativ-gestaltend"],
-	Videos: ["kreativ-gestaltend"],
-	Zeichnen: ["kreativ-gestaltend"],
-	Musik: ["kreativ-gestaltend"],
-	Basteln: ["kreativ-gestaltend", "praktisch-konkret"],
-	Schreiben: ["kreativ-gestaltend"],
-	Bauen: ["praktisch-konkret"],
-	Reparieren: ["praktisch-konkret"],
-	Kochen: ["praktisch-konkret"],
-	"Gärtnern": ["praktisch-konkret"],
-	Tiere: ["praktisch-konkret"],
-	Wandern: ["praktisch-konkret"],
-	Natur: ["praktisch-konkret"],
-	Sport: ["praktisch-konkret"],
-	"Anderen helfen": ["sozial-beratend"],
-	Organisieren: ["organisatorisch-pruefend"],
-	Verkaufen: ["sozial-beratend"],
-	"Kinder betreuen": ["sozial-beratend"],
-};
-
 export const STRENGTH_TO_TAGS: Record<string, string[]> = {
 	// Translates frontend strength ids to BERUFENET tags from b20-4.
 	teamwork: ["Befähigung zu Gruppenarbeit / Teamfähigkeit"],
