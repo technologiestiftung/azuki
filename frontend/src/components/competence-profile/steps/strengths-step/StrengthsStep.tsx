@@ -5,9 +5,12 @@ import { Step } from "../../../../common";
 import { StepLayout } from "../StepLayout";
 import { StrengthsSlider } from "./StrengthsSlider";
 import { strengths } from "./strengths";
-import { SwipeCardStack } from "./SwipeCardStack";
-import type { SwipeCardStackHandle, SwipeDirection } from "./SwipeCardStack";
-import { StrengthCard } from "./StrengthCard";
+import { SwipeCardStack } from "../../../primitives/swipe-card-stack/SwipeCardStack";
+import type {
+	SwipeCardStackHandle,
+	SwipeDirection,
+} from "../../../primitives/swipe-card-stack/SwipeCardStack";
+import { SwipeCard } from "../../../primitives/swipe-card-stack/SwipeCard";
 
 export function StrengthsStep() {
 	const profile = useAppStore((state) => state.profile);
@@ -78,7 +81,9 @@ export function StrengthsStep() {
 					onBefore={prevStep}
 					onBack={getDirectionForIndex}
 					onIndexChange={handleIndexChange}
-					renderCard={(index: number) => <StrengthCard index={index} />}
+					renderCard={(index: number) => (
+						<SwipeCard index={index} cards={strengths} />
+					)}
 				/>
 			</div>
 		</StepLayout>

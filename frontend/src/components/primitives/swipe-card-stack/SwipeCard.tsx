@@ -1,17 +1,24 @@
 import { memo } from "react";
-import { strengths } from "./strengths";
 
-interface StrengthCardProps {
+interface SwipeCardProps {
+	cards: {
+		illustration: string;
+		title: string;
+		description: string;
+	}[];
 	index: number;
 }
 
-export const StrengthCard = memo(function StrengthCard({
+export const SwipeCard = memo(function SwipeCard({
 	index,
-}: StrengthCardProps) {
-	const card = strengths[index];
+	cards,
+}: SwipeCardProps) {
+	const card = cards[index];
+
 	if (!card) {
 		return null;
 	}
+
 	return (
 		<div className="flex flex-col gap-2 justify-between items-center">
 			<img
