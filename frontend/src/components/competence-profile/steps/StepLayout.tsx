@@ -38,7 +38,7 @@ export function StepLayout({
 	const prevStep = useAppStore((state) => state.prevStep);
 
 	return (
-		<div className="flex flex-col h-[100dvh] p-4 pb-32">
+		<div className="flex flex-col h-[100dvh] p-4">
 			<div className="flex items-center gap-3 pb-1 shrink-0">
 				<BackButton onClick={onBack ?? prevStep} />
 				<div className="flex-1">
@@ -55,7 +55,7 @@ export function StepLayout({
 					</QuestionBubble>
 				</div>
 
-				<div className="flex-1 overflow-y-auto min-h-0 pt-0.5 px-0.5">
+				<div className="flex-1 overflow-y-auto min-h-0 pt-0.5 px-0.5 pb-32">
 					{children}
 				</div>
 			</div>
