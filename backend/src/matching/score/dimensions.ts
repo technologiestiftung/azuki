@@ -27,12 +27,11 @@ export function scoreEducation(
       if (stats.intermediate + stats.secondary + stats.noQualification < 10)
         return -5;
       break;
-    case "none":
-      // Penalize if < 10% of workers have no formal qualification
-      if (stats.noQualification < 10) return -15;
-      break;
-    // Abitur is never penalized — compatible with any occupation
+    // No penalty
     case "university_entrance":
+    case "vocational_diploma":
+    case "foreign_degree":
+    case "unknown":
       break;
   }
   return 0;

@@ -67,8 +67,9 @@ export type EducationLevel =
 	| "secondary"
 	| "extended_secondary"
 	| "intermediate"
-	| "none"
 	| "university_entrance"
+	| "vocational_diploma"
+	| "foreign_degree"
 	| "unknown";
 
 // --- User Choices ---
@@ -80,6 +81,7 @@ export type WorkPreferenceChoice = "a" | "b";
 // --- User Profile (POST /api/match body) ---
 
 export interface UserProfile {
+	inSchool: boolean | null;
 	educationLevel: EducationLevel | null;
 	favoriteSubjects: string[];
 	interests: string[];

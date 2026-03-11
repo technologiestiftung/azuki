@@ -3,9 +3,10 @@ export const EDUCATION_LABELS: Record<string, string> = {
 	secondary: "Hauptschulabschluss",
 	extended_secondary: "Erweiterter Hauptschulabschluss",
 	intermediate: "Realschulabschluss",
-	none: "Ohne Abschluss",
 	university_entrance: "Abitur",
-	unknown: "Unbekannt",
+	unknown: "unbekannt",
+	vocational_diploma: "Fachabitur",
+	foreign_degree: "Abschluss aus dem Ausland",
 };
 
 export const SUBJECT_LABELS: Record<string, string> = {

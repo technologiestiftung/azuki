@@ -27,6 +27,7 @@ const STEP_ORDER = [
 ];
 
 const initialProfile: UserProfile = {
+	inSchool: null,
 	educationLevel: null,
 	favoriteSubjects: [],
 	interests: [],
@@ -52,6 +53,7 @@ interface AppActions {
 	goToStep: (step: Step) => void;
 	nextStep: () => void;
 	prevStep: () => void;
+	setInSchool: (value: boolean) => void;
 	setEducationLevel: (value: EducationLevel) => void;
 	toggleSubject: (subject: string) => void;
 	toggleWorkValue: (value: string) => void;
@@ -93,6 +95,11 @@ export const useAppStore = create<AppState & AppActions>((set, get) => ({
 			set({ currentStep: STEP_ORDER[currentStepIndex - 1] });
 		}
 	},
+
+	setInSchool: (value) =>
+		set((state) => ({
+			profile: { ...state.profile, inSchool: value },
+		})),
 
 	setEducationLevel: (value) =>
 		set((state) => ({

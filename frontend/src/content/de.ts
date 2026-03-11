@@ -21,12 +21,15 @@ export const content = {
 
 	// School Degree
 	"schoolDegree.question": "Welchen Schulabschluss hast du?",
-	"schoolDegree.option.secondary.label": "Hauptschulabschluss",
+	"schoolDegree.question.inSchool": "Welchen Schulabschluss wirst du haben?",
+	"schoolDegree.option.secondary.label": "Hauptschulabschluss (BBR)",
 	"schoolDegree.option.extendedSecondary.label":
-		"Erweiterter Hauptschulabschluss",
-	"schoolDegree.option.intermediate.label": "Realschulabschluss",
-	"schoolDegree.option.none.label": "Ohne Abschluss",
+		"Erweiterter Hauptschulabschluss (eBBR)",
+	"schoolDegree.option.intermediate.label": "Realschulabschluss (MSA)",
 	"schoolDegree.option.universityEntrance.label": "Abitur",
+	"schoolDegree.option.vocationalDiploma.label": "Fachabitur",
+	"schoolDegree.option.foreign.label": "Abschluss aus dem Ausland",
+	"schoolDegree.option.unknown.label": "Ich weiß es nicht",
 	"schoolDegree.skipButton.label": "Ich weiß es nicht",
 
 	// School Subjects

@@ -4,7 +4,7 @@ import { LoginScreen } from "./components/login-screen/LoginScreen";
 import { WelcomeCarousel } from "./components/welcome-screen/WelcomeCarousel";
 import { StartScreen } from "./components/competence-profile/start/StartScreen";
 import { InSchoolStep } from "./components/competence-profile/steps/InSchoolStep";
-import { SchoolDegreeStep } from "./components/competence-profile/steps/SchoolDegreeStep";
+import { SchoolDegreeStep } from "./components/competence-profile/steps/school-degree/SchoolDegreeStep";
 import { SchoolSubjectsStep } from "./components/competence-profile/steps/school-subject-step/SchoolSubjectsStep";
 import { StrengthsStep } from "./components/competence-profile/steps/strengths-step/StrengthsStep";
 import { InterestsStep } from "./components/competence-profile/steps/interests-step/InterestsStep";
