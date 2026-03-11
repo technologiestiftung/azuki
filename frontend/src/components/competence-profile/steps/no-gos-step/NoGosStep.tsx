@@ -15,33 +15,37 @@ import { SwipeCard } from "../../../primitives/swipe-card-stack/SwipeCard";
 export function NoGosStep() {
 	const stackRef = useRef<SwipeCardStackHandle>(null);
 	const initialIndex = useAppStore.getState().noGoSubIndex;
-
-	const noGoSubIndex = useAppStore((state) => state.noGoSubIndex);
 	const setNoGo = useAppStore((state) => state.setNoGo);
 	const nextStep = useAppStore((state) => state.nextStep);
 	const prevStep = useAppStore((state) => state.prevStep);
 	const profile = useAppStore((state) => state.profile);
 	const setNoGoSubIndex = useAppStore((state) => state.setNoGoSubIndex);
-	const goToStep = useAppStore((state) => state.goToStep);
 
-	const current = noGos[noGoSubIndex] ?? noGos[0];
-
-	function handleAnswer(answer: NoGoAnswer) {
-		setNoGo(current.id, answer);
-		if (noGoSubIndex < noGos.length - 1) {
-			setNoGoSubIndex(noGoSubIndex + 1);
-		} else {
-			goToStep(Step.Loading);
-		}
-	}
-
-	const handleBack = useCallback(
-		(targetIndex: number): SwipeDirection => {
-			const card = noGos[targetIndex];
-			const value = profile.noGos[card?.id] ?? "accepted";
+	const getDirectionForIndex = useCallback(
+		(index: number): SwipeDirection => {
+			const card = noGos[index];
+			const value: NoGoAnswer = profile.noGos[card?.id] ?? "accepted";
 			return value === "accepted" ? "right" : "left";
 		},
 		[profile.noGos],
+	);
+	const handleIndexChange = useCallback(
+		(index: number) => {
+			setNoGoSubIndex(index);
+		},
+		[setNoGoSubIndex],
+	);
+
+	const handleSwipe = useCallback(
+		(direction: SwipeDirection, index: number) => {
+			const card = noGos[index];
+			if (card) {
+				const answer: NoGoAnswer =
+					direction === "right" ? "accepted" : "rejected";
+				setNoGo(card.id, answer);
+			}
+		},
+		[setNoGo],
 	);
 
 	const actionButtons = () => {
@@ -49,7 +53,7 @@ export function NoGosStep() {
 			<div className="flex gap-3">
 				<button
 					className="py-2 px-5 min-h-14 rounded-2xl text-lg leading-6 font-medium text-orange-1000 flex items-center justify-center gap-2 flex-1 bg-orange-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-sky-500"
-					onClick={() => handleAnswer("rejected")}
+					onClick={() => stackRef.current?.swipeLeft()}
 					aria-label={content["noGos.ariaLabel.reject"]}
 				>
 					{content["noGos.rejectLabel"]}
@@ -57,7 +61,7 @@ export function NoGosStep() {
 				</button>
 				<button
 					className="py-2 px-5 min-h-14 rounded-2xl text-lg leading-6 font-medium text-orange-1000 flex items-center justify-center gap-2 flex-1 bg-sky-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-sky-500"
-					onClick={() => handleAnswer("accepted")}
+					onClick={() => stackRef.current?.swipeRight()}
 					aria-label={content["noGos.ariaLabel.accept"]}
 				>
 					{content["noGos.acceptLabel"]}
@@ -71,25 +75,28 @@ export function NoGosStep() {
 		<StepLayout
 			question={content["noGos.question"]}
 			currentStep={Step.NoGos}
-			onNext={() => handleAnswer("accepted")}
+			onNext={() => stackRef.current?.goNext()}
+			onSkip={() => stackRef.current?.goNext()}
+			onBack={() => stackRef.current?.goBack()}
 			nextDisabled={false}
 			hasSkipButton={false}
 			hasNextButton={false}
 			bottomContent={actionButtons()}
 		>
-			<div className="flex flex-col justify-center items-center h-[85%] flex-1">
+			<div className="flex flex-col justify-center items-center h-full flex-1">
 				<SwipeCardStack
 					ref={stackRef}
 					count={noGos.length}
 					initialIndex={initialIndex}
-					onCommit={handleCommit}
+					onCommit={getDirectionForIndex}
 					onAdvance={handleIndexChange}
 					onExhausted={nextStep}
 					onBefore={prevStep}
-					onBack={handleBack}
+					onBack={getDirectionForIndex}
 					onIndexChange={handleIndexChange}
+					onSwipe={handleSwipe}
 					renderCard={(index: number) => (
-						<SwipeCard index={index} cards={noGos} />
+						<SwipeCard index={index} cards={noGos} minHeight={257} />
 					)}
 				/>
 			</div>

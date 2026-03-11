@@ -232,9 +232,9 @@ export const content = {
 	"noGos.computer.title": "Den ganzen Tag am Computer",
 	"noGos.computer.description": "viel sitzen und am Bildschirm arbeiten",
 	//shift-work
-	"noGos.shift-work.title": "Schicht- oder Nachtarbeit",
+	"noGos.shift-work.title": "Schichtarbeit",
 	"noGos.shift-work.description":
-		"wechselnde Arbeitszeiten, auch sehr früh oder spät",
+		"zu unterschiedlichen Zeiten arbeiten (z.B. morgens, abends, nachts)",
 	//animals
 	"noGos.animals.title": "Arbeit mit Tieren",
 	"noGos.animals.description": "z. B. im Stall, Tierheim oder Tierarzt",

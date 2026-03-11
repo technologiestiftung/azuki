@@ -16,6 +16,8 @@ export type SwipeDirection = "left" | "right";
 export interface SwipeCardStackHandle {
 	goNext: () => void;
 	goBack: () => void;
+	swipeLeft: () => void;
+	swipeRight: () => void;
 }
 
 interface SwipeCardStackProps {
@@ -27,6 +29,7 @@ interface SwipeCardStackProps {
 	onBefore: () => void;
 	onBack: (newIndex: number) => SwipeDirection;
 	onIndexChange?: (index: number) => void;
+	onSwipe?: (direction: SwipeDirection, index: number) => void;
 	renderCard: (index: number) => React.ReactNode;
 	renderBackCard?: (index: number) => React.ReactNode;
 	className?: string;
@@ -45,6 +48,7 @@ export const SwipeCardStack = forwardRef<
 		onBefore,
 		onBack,
 		onIndexChange,
+		onSwipe,
 		renderCard,
 		renderBackCard,
 		className = "",
@@ -125,6 +129,8 @@ export const SwipeCardStack = forwardRef<
 			setCardTransition("transform 0.4s ease-out");
 			setFlyOffset({ x: exitX, y: dragY });
 
+			onSwipe?.(direction, displayIndex);
+
 			timeoutRef.current = window.setTimeout(() => {
 				setFlyOffset(null);
 				setCardTransition("");
@@ -139,7 +145,7 @@ export const SwipeCardStack = forwardRef<
 				}
 			}, FLY_OUT_MS);
 		},
-		[dragY, onAdvance, onExhausted, onIndexChange],
+		[dragY, onAdvance, onExhausted, onIndexChange, onSwipe, displayIndex],
 	);
 
 	const slideIn = useCallback(
@@ -179,7 +185,26 @@ export const SwipeCardStack = forwardRef<
 		slideIn(direction, targetIndex);
 	}, [slideIn, displayIndex, onBefore, onBack]);
 
-	useImperativeHandle(ref, () => ({ goNext, goBack }), [goNext, goBack]);
+	const swipeLeft = useCallback(() => {
+		if (isAnimating.current) {
+			return;
+		}
+		flyOut("left", hasNext ? displayIndex + 1 : null);
+	}, [flyOut, hasNext, displayIndex]);
+
+	const swipeRight = useCallback(() => {
+		if (isAnimating.current) {
+			return;
+		}
+		flyOut("right", hasNext ? displayIndex + 1 : null);
+	}, [flyOut, hasNext, displayIndex]);
+
+	useImperativeHandle(ref, () => ({ goNext, goBack, swipeLeft, swipeRight }), [
+		goNext,
+		goBack,
+		swipeLeft,
+		swipeRight,
+	]);
 
 	const handlePointerDown = useCallback(
 		(e: React.PointerEvent<HTMLDivElement>) => {
@@ -249,7 +274,7 @@ export const SwipeCardStack = forwardRef<
 	const backCardContent = renderBackCard ?? renderCard;
 
 	return (
-		<div className={["relative w-full min-h-[246px]", className].join(" ")}>
+		<div className={["relative w-full", className].join(" ")}>
 			{/* Ghost card */}
 			{hasNext && (
 				<div
@@ -279,7 +304,7 @@ export const SwipeCardStack = forwardRef<
 			{/* Top card */}
 			<div
 				className={[
-					"absolute inset-0 w-full bg-gray-200 rounded-3xl pt-5 pb-6 px-6 flex flex-col items-center",
+					"relative w-full bg-gray-200 rounded-3xl pt-5 pb-6 px-6 flex flex-col items-center",
 					slideInClass,
 				].join(" ")}
 				style={{

@@ -7,11 +7,13 @@ interface SwipeCardProps {
 		description: string;
 	}[];
 	index: number;
+	minHeight?: number;
 }
 
 export const SwipeCard = memo(function SwipeCard({
 	index,
 	cards,
+	minHeight = 246,
 }: SwipeCardProps) {
 	const card = cards[index];
 
@@ -20,7 +22,7 @@ export const SwipeCard = memo(function SwipeCard({
 	}
 
 	return (
-		<div className="flex flex-col gap-2 justify-between items-center">
+		<div className="flex flex-col gap-2 items-center" style={{ minHeight }}>
 			<img
 				src={card.illustration}
 				alt=""
