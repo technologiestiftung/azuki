@@ -19,18 +19,9 @@ export function StrengthsStep() {
 	const stackRef = useRef<SwipeCardStackHandle>(null);
 	const initialIndex = useAppStore.getState().strengthSubIndex;
 
-	const handleCommit = useCallback(
+	const getDirectionForIndex = useCallback(
 		(index: number): SwipeDirection => {
 			const card = strengths[index];
-			const value = profile.strengths[card?.id] ?? 0.5;
-			return value < 0.5 ? "left" : "right";
-		},
-		[profile.strengths],
-	);
-
-	const handleBack = useCallback(
-		(targetIndex: number): SwipeDirection => {
-			const card = strengths[targetIndex];
 			const value = profile.strengths[card?.id] ?? 0.5;
 			return value >= 0.5 ? "right" : "left";
 		},
@@ -81,11 +72,11 @@ export function StrengthsStep() {
 					ref={stackRef}
 					count={strengths.length}
 					initialIndex={initialIndex}
-					onCommit={handleCommit}
+					onCommit={getDirectionForIndex}
 					onAdvance={handleIndexChange}
 					onExhausted={nextStep}
 					onBefore={prevStep}
-					onBack={handleBack}
+					onBack={getDirectionForIndex}
 					onIndexChange={handleIndexChange}
 					renderCard={(index: number) => <StrengthCard index={index} />}
 				/>
