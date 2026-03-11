@@ -11,24 +11,28 @@ import type {
 	SwipeDirection,
 } from "../../../primitives/swipe-card-stack/SwipeCardStack";
 import { SwipeCard } from "../../../primitives/swipe-card-stack/SwipeCard";
+import { NoGoActionButtons } from "./NoGoActionButtons";
 
 export function NoGosStep() {
 	const stackRef = useRef<SwipeCardStackHandle>(null);
-	const initialIndex = useAppStore.getState().noGoSubIndex;
+	const initialIndexValue = useAppStore((state) => state.noGoSubIndex);
+	const initialIndex = useRef(initialIndexValue).current;
+
 	const setNoGo = useAppStore((state) => state.setNoGo);
 	const nextStep = useAppStore((state) => state.nextStep);
 	const prevStep = useAppStore((state) => state.prevStep);
-	const profile = useAppStore((state) => state.profile);
+	const noGosValues = useAppStore((state) => state.profile.noGos);
 	const setNoGoSubIndex = useAppStore((state) => state.setNoGoSubIndex);
 
 	const getDirectionForIndex = useCallback(
 		(index: number): SwipeDirection => {
 			const card = noGos[index];
-			const value: NoGoAnswer = profile.noGos[card?.id] ?? "accepted";
+			const value: NoGoAnswer = noGosValues[card?.id] ?? "accepted";
 			return value === "accepted" ? "right" : "left";
 		},
-		[profile.noGos],
+		[noGosValues],
 	);
+
 	const handleIndexChange = useCallback(
 		(index: number) => {
 			setNoGoSubIndex(index);
@@ -48,29 +52,6 @@ export function NoGosStep() {
 		[setNoGo],
 	);
 
-	const actionButtons = () => {
-		return (
-			<div className="flex gap-3">
-				<button
-					className="py-2 px-5 min-h-14 rounded-2xl text-lg leading-6 font-medium text-orange-1000 flex items-center justify-center gap-2 flex-1 bg-orange-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-sky-500"
-					onClick={() => stackRef.current?.swipeLeft()}
-					aria-label={content["noGos.ariaLabel.reject"]}
-				>
-					{content["noGos.rejectLabel"]}
-					<img src="/icons/close-black.svg" alt="" className="w-6 h-6" />
-				</button>
-				<button
-					className="py-2 px-5 min-h-14 rounded-2xl text-lg leading-6 font-medium text-orange-1000 flex items-center justify-center gap-2 flex-1 bg-sky-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-sky-500"
-					onClick={() => stackRef.current?.swipeRight()}
-					aria-label={content["noGos.ariaLabel.accept"]}
-				>
-					{content["noGos.acceptLabel"]}
-					<img src="/icons/check-black.svg" alt="" className="w-6 h-6" />
-				</button>
-			</div>
-		);
-	};
-
 	return (
 		<StepLayout
 			question={content["noGos.question"]}
@@ -81,7 +62,12 @@ export function NoGosStep() {
 			nextDisabled={false}
 			hasSkipButton={false}
 			hasNextButton={false}
-			bottomContent={actionButtons()}
+			bottomContent={
+				<NoGoActionButtons
+					onClickAccept={() => stackRef.current?.swipeRight()}
+					onClickReject={() => stackRef.current?.swipeLeft()}
+				/>
+			}
 		>
 			<div className="flex flex-col justify-center items-center h-full flex-1">
 				<SwipeCardStack
@@ -89,7 +75,6 @@ export function NoGosStep() {
 					count={noGos.length}
 					initialIndex={initialIndex}
 					onCommit={getDirectionForIndex}
-					onAdvance={handleIndexChange}
 					onExhausted={nextStep}
 					onBefore={prevStep}
 					onBack={getDirectionForIndex}

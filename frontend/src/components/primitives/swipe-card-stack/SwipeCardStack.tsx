@@ -24,7 +24,6 @@ interface SwipeCardStackProps {
 	count: number;
 	initialIndex?: number;
 	onCommit: (index: number) => SwipeDirection;
-	onAdvance: (newIndex: number) => void;
 	onExhausted: () => void;
 	onBefore: () => void;
 	onBack: (newIndex: number) => SwipeDirection;
@@ -43,7 +42,6 @@ export const SwipeCardStack = forwardRef<
 		count,
 		initialIndex = 0,
 		onCommit,
-		onAdvance,
 		onExhausted,
 		onBefore,
 		onBack,
@@ -138,14 +136,13 @@ export const SwipeCardStack = forwardRef<
 
 				if (targetIndex !== null) {
 					setDisplayIndex(targetIndex);
-					onAdvance(targetIndex);
 					onIndexChange?.(targetIndex);
 				} else {
 					onExhausted();
 				}
 			}, FLY_OUT_MS);
 		},
-		[dragY, onAdvance, onExhausted, onIndexChange, onSwipe, displayIndex],
+		[dragY, onExhausted, onIndexChange, onSwipe, displayIndex],
 	);
 
 	const slideIn = useCallback(
