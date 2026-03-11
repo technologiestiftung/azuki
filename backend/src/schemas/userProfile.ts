@@ -4,7 +4,6 @@ const EducationLevelSchema = z.enum([
 	"secondary",
 	"extended_secondary",
 	"intermediate",
-	"none",
 	"university_entrance",
 	"vocational_diploma",
 	"foreign_degree",
