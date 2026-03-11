@@ -2,6 +2,7 @@ import { useAppStore } from "../../store/useAppStore";
 import { Step } from "../../common";
 import { content } from "../../content/de";
 import { PrimaryButton } from "../primitives/buttons/PrimaryButton";
+import { Occupation } from "@azuki/shared";
 
 export function ResultsScreen() {
 	const matchResults = useAppStore((state) => state.matchResults);
@@ -9,6 +10,11 @@ export function ResultsScreen() {
 	const goToStep = useAppStore((state) => state.goToStep);
 
 	const occupations = matchResults?.occupations ?? [];
+
+	const handleNewStart = () => {
+		useAppStore.getState().resetProfile();
+		goToStep(Step.Welcome);
+	};
 
 	return (
 		<div className="flex flex-col h-full">
@@ -23,7 +29,7 @@ export function ResultsScreen() {
 
 			<div className="flex-1 px-4 pb-4 space-y-4 overflow-y-auto">
 				{occupations.length > 0 ? (
-					occupations.map((occupation, index) => (
+					occupations.map((occupation: Occupation, index: number) => (
 						<div
 							key={occupation.id}
 							className="bg-gray-50 rounded-3xl overflow-hidden"
@@ -85,10 +91,7 @@ export function ResultsScreen() {
 			</div>
 
 			<div className="px-4 pb-8">
-				<PrimaryButton
-					onClick={() => goToStep(Step.Welcome)}
-					className="w-full"
-				>
+				<PrimaryButton onClick={handleNewStart} className="w-full">
 					{content["results.restartCta"]}
 				</PrimaryButton>
 			</div>
