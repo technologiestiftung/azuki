@@ -2,7 +2,7 @@ import React, { useState, useRef } from "react";
 import { content } from "../../content/de";
 import { useAppStore } from "../../store/useAppStore";
 import { Step } from "../../common";
-import { PrimaryButton } from "../primitives/buttons/PrimaryButton";
+import { PrimaryThemedButton } from "../primitives/buttons/PrimaryThemedButton";
 
 const slideImages = [
 	"/illustrations/binoculars.svg",
@@ -171,9 +171,9 @@ export function WelcomeCarousel() {
 					{slides[currentSlide].title}
 				</h1>
 
-				<PrimaryButton onClick={handleGetStarted} className="w-full">
+				<PrimaryThemedButton onClick={handleGetStarted} className="w-full">
 					{content["welcome.cta"]}
-				</PrimaryButton>
+				</PrimaryThemedButton>
 			</div>
 		</div>
 	);

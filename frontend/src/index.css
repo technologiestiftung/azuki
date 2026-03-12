@@ -12,3 +12,9 @@
 		@apply text-sky-1000;
 	}
 }
+
+@layer utilities {
+	.text-base.font-medium {
+		font-weight: 520;
+	}
+}

@@ -5,7 +5,7 @@ import { useAppStore } from "../../../store/useAppStore";
 import { content } from "../../../content/de";
 import { type Step } from "../../../common";
 import { PrimaryButton } from "../../primitives/buttons/PrimaryButton";
-import { SecondaryButton } from "../../primitives/buttons/SecondaryButton";
+import { GhostButton } from "../../primitives/buttons/GhostButton";
 import { BackButton } from "../../back-button/BackButton";
 
 interface StepLayoutProps {
@@ -47,23 +47,25 @@ export function StepLayout({
 					<ProgressBar currentStep={currentStep} />
 				</div>
 			</div>
-			<div className="flex flex-1 flex-col gap-8 min-h-0">
+			<div className="flex flex-1 flex-col min-h-0">
 				<div className="shrink-0">
 					<QuestionBubble>
-						<h2 className="text-3xl font-bold text-sky-1000">{question}</h2>
-						{subtitle && (
-							<p className="text-base text-white/80 mt-1">{subtitle}</p>
-						)}
+						<div className="flex flex-col gap-2">
+							<h2 className="text-3xl font-bold text-sky-1000">{question}</h2>
+							{subtitle && (
+								<p className="text-base text-sky-700 mt-1">{subtitle}</p>
+							)}
+						</div>
 					</QuestionBubble>
 				</div>
 
-				<div className="flex-1 overflow-y-auto min-h-0 pt-0.5 px-0.5 pb-32">
+				<div className="flex-1 overflow-y-auto min-h-0 pt-8 px-0.5 pb-32">
 					{children}
 				</div>
 			</div>
 
 			<div
-				className={`fixed bottom-0 left-1/2 -translate-x-1/2 w-full bg-white border-t-2 border-gray-200 flex flex-col px-4 gap-y-2 max-w-[430px] ${hasSkipButton ? "pt-4 pb-2" : "py-4"}`}
+				className={`fixed bottom-0 left-1/2 -translate-x-1/2 w-full bg-sky-white border-t-2 border-gray-200 flex flex-col px-4 gap-y-2 max-w-[430px] ${hasSkipButton ? "pt-4 pb-2" : "py-4"}`}
 			>
 				{bottomContent}
 				{hasNextButton && (
@@ -77,9 +79,9 @@ export function StepLayout({
 				)}
 
 				{hasSkipButton && onSkip && (
-					<SecondaryButton onClick={onSkip}>
+					<GhostButton onClick={onSkip}>
 						{skipLabel || content["navigation.skip"]}
-					</SecondaryButton>
+					</GhostButton>
 				)}
 			</div>
 		</div>

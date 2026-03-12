@@ -3,7 +3,7 @@ import { useAppStore } from "../../../store/useAppStore";
 import { Step, type WorkPreferenceChoice } from "../../../common";
 import { ProgressBar } from "../progress-bar/ProgressBar";
 import { QuestionBubble } from "../question-bubble/QuestionBubble";
-import { SecondaryButton } from "../../primitives/buttons/SecondaryButton";
+import { GhostButton } from "../../primitives/buttons/GhostButton";
 import { BackButton } from "../../back-button/BackButton";
 
 export function WorkPreferencesStep() {
@@ -80,9 +80,9 @@ export function WorkPreferencesStep() {
 			</div>
 
 			<div className="flex flex-col justify-center px-4 pb-8 pt-4 space-y-2">
-				<SecondaryButton onClick={handleSkip} className="w-full">
+				<GhostButton onClick={handleSkip} className="w-full">
 					{content["navigation.skip"]}
-				</SecondaryButton>
+				</GhostButton>
 			</div>
 		</div>
 	);
