@@ -207,7 +207,9 @@ const INTEREST_KEYWORD_STOP_WORDS = new Set([
   "durch",
 ]);
 
-/** Splits text into lowercase tokens (≥4 chars), drops stop words. e.g. "Planen von Abläufen" → ["planen", "abläufen"]. */
+const INTEREST_KEYWORD_ALLOW_LIST = new Set(["rad", "weg"]);
+
+/** Splits text into lowercase tokens (≥4 chars or explicitly allowed short words), drops stop words. e.g. "Planen von Abläufen" → ["planen", "abläufen"]. */
 function tokenizeInterestText(text: string): string[] {
   return text
     .toLowerCase()
@@ -216,7 +218,8 @@ function tokenizeInterestText(text: string): string[] {
     .map((token) => token.trim())
     .filter(
       (token) =>
-        token.length >= 4 && !INTEREST_KEYWORD_STOP_WORDS.has(token),
+        (token.length >= 4 || INTEREST_KEYWORD_ALLOW_LIST.has(token)) &&
+        !INTEREST_KEYWORD_STOP_WORDS.has(token),
     );
 }
 
