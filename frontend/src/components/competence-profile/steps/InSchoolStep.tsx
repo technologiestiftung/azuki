@@ -23,9 +23,9 @@ export function InSchoolStep() {
 			<div className="flex flex-col gap-3">
 				{inSchoolOptions.map((option) => (
 					<button
-						className={`text-left p-3 w-full rounded-xl border-2 text-gray-700 text-lg font-normal focus-visible:outline focus-visible:outline-2 focus-visible:outline-sky-500 ${
+						className={`min-h-[52px] text-left p-3 w-full rounded-xl border-2 text-gray-700 text-lg font-medium focus-visible:outline focus-visible:outline-2 focus-visible:outline-sky-500 ${
 							profile.inSchool === option.value
-								? "border-sky-300 bg-sky-50"
+								? "border-sky-300 bg-sky-50 text-sky-700"
 								: "border-gray-200 bg-transparent"
 						}`}
 						key={option.value.toString()}

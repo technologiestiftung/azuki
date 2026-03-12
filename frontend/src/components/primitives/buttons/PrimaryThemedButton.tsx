@@ -1,9 +1,9 @@
 import React from "react";
 import { type ButtonProps } from "./buttonTypes";
 
-export type PrimaryButtonProps = ButtonProps;
+export type PrimaryThemedButtonProps = ButtonProps;
 
-export const PrimaryButton: React.FC<PrimaryButtonProps> = ({
+export const PrimaryThemedButton: React.FC<PrimaryThemedButtonProps> = ({
 	onClick,
 	disabled = false,
 	type = "button",
@@ -18,7 +18,7 @@ export const PrimaryButton: React.FC<PrimaryButtonProps> = ({
 				focus-visible:outline focus-visible:outline-2 focus-visible:outline-sky-500 ${
 					disabled
 						? "bg-gray-200 text-gray-400"
-						: "bg-gray-900 text-white hover:bg-gray-700 hover:text-gray-50"
+						: "bg-sky-300 text-sky-1000 hover:bg-sky-200"
 				} ${className}`}
 			disabled={disabled}
 			onClick={onClick}

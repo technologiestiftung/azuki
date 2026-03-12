@@ -1,7 +1,7 @@
 import { content } from "../../../content/de";
 import { useAppStore } from "../../../store/useAppStore";
 import { Step } from "../../../common";
-import { PrimaryButton } from "../../primitives/buttons/PrimaryButton";
+import { PrimaryThemedButton } from "../../primitives/buttons/PrimaryThemedButton";
 import { BackButton } from "../../back-button/BackButton";
 
 export function StartScreen() {
@@ -29,10 +29,10 @@ export function StartScreen() {
 				<p className="text-lg font-normal">{content["start.description"]}</p>
 			</div>
 
-			<div className="w-full bg-white border-t-2 border-gray-200 flex flex-col p-4 gap-y-2 max-w-[430px]">
-				<PrimaryButton onClick={nextStep} className="w-full">
+			<div className="w-full bg-sky-white border-t-2 border-gray-200 flex flex-col p-4 gap-y-2 max-w-[430px]">
+				<PrimaryThemedButton onClick={nextStep} className="w-full">
 					{content["start.cta"]}
-				</PrimaryButton>
+				</PrimaryThemedButton>
 			</div>
 		</div>
 	);
