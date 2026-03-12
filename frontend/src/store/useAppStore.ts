@@ -68,6 +68,7 @@ interface AppActions {
 	setStrengthSubIndex: (index: number) => void;
 	setNoGoSubIndex: (index: number) => void;
 	setWorkPrefSubIndex: (index: number) => void;
+	resetProfile: () => void;
 }
 
 export const useAppStore = create<AppState & AppActions>((set, get) => ({
@@ -194,4 +195,12 @@ export const useAppStore = create<AppState & AppActions>((set, get) => ({
 	setNoGoSubIndex: (index) => set({ noGoSubIndex: index }),
 
 	setWorkPrefSubIndex: (index) => set({ workPrefSubIndex: index }),
+	resetProfile: () =>
+		set({
+			profile: initialProfile,
+			matchResults: null,
+			strengthSubIndex: 0,
+			noGoSubIndex: 0,
+			workPrefSubIndex: 0,
+		}),
 }));
