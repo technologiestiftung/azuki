@@ -1,45 +1,48 @@
-import { useCallback, useRef, useState } from "react";
+import { useCallback, useRef } from "react";
 import { content } from "../../../../content/de";
 import { useAppStore } from "../../../../store/useAppStore";
 import { Step } from "../../../../common";
 import { StepLayout } from "../StepLayout";
 import { StrengthsSlider } from "./StrengthsSlider";
 import { strengths } from "./strengths";
-import { SwipeCardStack } from "./SwipeCardStack";
-import type { SwipeCardStackHandle, SwipeDirection } from "./SwipeCardStack";
-import { StrengthCard } from "./StrengthCard";
+import { SwipeCardStack } from "../../../primitives/swipe-card-stack/SwipeCardStack";
+import type {
+	SwipeCardStackHandle,
+	SwipeDirection,
+} from "../../../primitives/swipe-card-stack/SwipeCardStack";
+import { SwipeCard } from "../../../primitives/swipe-card-stack/SwipeCard";
 
 export function StrengthsStep() {
-	const profile = useAppStore((state) => state.profile);
+	const strengthValues = useAppStore((state) => state.profile.strengths);
 	const setStrength = useAppStore((state) => state.setStrength);
 	const setStrengthSubIndex = useAppStore((state) => state.setStrengthSubIndex);
 	const nextStep = useAppStore((state) => state.nextStep);
 	const prevStep = useAppStore((state) => state.prevStep);
 
 	const stackRef = useRef<SwipeCardStackHandle>(null);
-	const initialIndex = useAppStore.getState().strengthSubIndex;
+	const initialIndexValue = useAppStore((state) => state.strengthSubIndex);
+	const initialIndex = useRef(initialIndexValue).current;
+
+	const currentIndex = useAppStore((state) => state.strengthSubIndex);
 
 	const getDirectionForIndex = useCallback(
 		(index: number): SwipeDirection => {
 			const card = strengths[index];
-			const value = profile.strengths[card?.id] ?? 0.5;
+			const value = strengthValues[card?.id] ?? 0.5;
 			return value >= 0.5 ? "right" : "left";
 		},
-		[profile.strengths],
+		[strengthValues],
 	);
-
-	const [currentIndex, setCurrentIndex] = useState(initialIndex);
 
 	const handleIndexChange = useCallback(
 		(index: number) => {
-			setCurrentIndex(index);
 			setStrengthSubIndex(index);
 		},
 		[setStrengthSubIndex],
 	);
 
 	const currentCard = strengths[currentIndex];
-	const currentValue = profile.strengths[currentCard?.id] ?? 0.5;
+	const currentValue = strengthValues[currentCard?.id] ?? 0.5;
 
 	const handleSliderChange = useCallback(
 		(value: number) => {
@@ -73,12 +76,13 @@ export function StrengthsStep() {
 					count={strengths.length}
 					initialIndex={initialIndex}
 					onCommit={getDirectionForIndex}
-					onAdvance={handleIndexChange}
 					onExhausted={nextStep}
 					onBefore={prevStep}
 					onBack={getDirectionForIndex}
 					onIndexChange={handleIndexChange}
-					renderCard={(index: number) => <StrengthCard index={index} />}
+					renderCard={(index: number) => (
+						<SwipeCard index={index} cards={strengths} minHeight={202} />
+					)}
 				/>
 			</div>
 		</StepLayout>

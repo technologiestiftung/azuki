@@ -22,25 +22,23 @@ export function InterestsStep() {
 		}
 	}
 
-	const CustomInterestInput = (
-		<TextInput
-			name="customInterest"
-			value={customInput}
-			onChange={(e) => setCustomInput(e.target.value)}
-			onSubmit={handleAddCustom}
-			submitDisabled={!customInput.trim()}
-			placeholder={content["interests.addPlaceholder"]}
-			containerClassName="mb-1"
-		/>
-	);
-
 	return (
 		<StepLayout
 			question={content["interests.question"]}
 			currentStep={Step.Interests}
 			onNext={nextStep}
 			nextDisabled={profile.interests.length === 0}
-			bottomContent={CustomInterestInput}
+			bottomContent={
+				<TextInput
+					name="customInterest"
+					value={customInput}
+					onChange={(e) => setCustomInput(e.target.value)}
+					onSubmit={handleAddCustom}
+					submitDisabled={!customInput.trim()}
+					placeholder={content["interests.addPlaceholder"]}
+					containerClassName="mb-1"
+				/>
+			}
 		>
 			<div className="flex flex-col gap-8">
 				{profile.customInterests.length > 0 && (

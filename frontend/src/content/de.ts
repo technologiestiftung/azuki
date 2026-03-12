@@ -240,52 +240,33 @@ export const content = {
 
 	// No-Gos
 	"noGos.question": "Was geht für dich überhaupt nicht?",
-	"noGos.cards": [
-		{
-			id: "noise",
-			title: "Arbeit mit Lärm",
-			description: "z. B. Baustelle, Maschinen oder laute Werkstatt",
-			illustration: "/illustrations/noise.svg",
-		},
-		{
-			id: "dirt",
-			title: "Schmutz bei der Arbeit",
-			description: "z. B. Müll, Öl, Staub oder starke Gerüche",
-			illustration: "/illustrations/dirty-work.svg",
-		},
-		{
-			id: "heavy-work",
-			title: "Schwere körperliche Arbeit",
-			description: "z. B. schwer heben, lange stehen, viel tragen",
-			illustration: "/illustrations/heavy-work.svg",
-		},
-		{
-			id: "computer",
-			title: "Den ganzen Tag am Computer",
-			description: "viel sitzen und am Bildschirm arbeiten",
-			illustration: "/illustrations/computer.svg",
-		},
-		{
-			id: "shift-work",
-			title: "Schicht- oder Nachtarbeit",
-			description: "wechselnde Arbeitszeiten, auch sehr früh oder spät",
-			illustration: "/illustrations/shift-work.svg",
-		},
-		{
-			id: "animals",
-			title: "Arbeit mit Tieren",
-			description: "z. B. im Stall, Tierheim oder Tierarzt",
-			illustration: "/illustrations/animals.svg",
-		},
-		{
-			id: "danger",
-			title: "Gefährliche Arbeit",
-			description: "z. B. mit Chemikalien, Strom oder großer Höhe",
-			illustration: "/illustrations/danger.svg",
-		},
-	],
 	"noGos.rejectLabel": "Geht nicht",
+	"noGos.ariaLabel.reject": "Als geht nicht markieren",
 	"noGos.acceptLabel": "Ist okay",
+	"noGos.ariaLabel.accept": "Als ist okay markieren",
+	//noise
+	"noGos.noise.title": "Arbeit mit Lärm",
+	"noGos.noise.description": "z. B. Baustelle, Maschinen oder laute Werkstatt",
+	//dirt
+	"noGos.dirt.title": "Schmutz bei der Arbeit",
+	"noGos.dirt.description": "z. B. Müll, Öl, Staub oder starke Gerüche",
+	//heavy-work
+	"noGos.heavy-work.title": "Schwere körperliche Arbeit",
+	"noGos.heavy-work.description":
+		"z. B. schwer heben, lange stehen, viel tragen",
+	//computer
+	"noGos.computer.title": "Den ganzen Tag am Computer",
+	"noGos.computer.description": "viel sitzen und am Bildschirm arbeiten",
+	//shift-work
+	"noGos.shift-work.title": "Schichtarbeit",
+	"noGos.shift-work.description":
+		"zu unterschiedlichen Zeiten arbeiten (z.B. morgens, abends, nachts)",
+	//animals
+	"noGos.animals.title": "Arbeit mit Tieren",
+	"noGos.animals.description": "z. B. im Stall, Tierheim oder Tierarzt",
+	//danger
+	"noGos.danger.title": "Gefährliche Arbeit",
+	"noGos.danger.description": "z. B. mit Chemikalien, Strom oder großer Höhe",
 
 	// Navigation
 	"navigation.next": "Weiter",
