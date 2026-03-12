@@ -2,7 +2,7 @@ import { useAppStore } from "../../store/useAppStore";
 import { Step } from "../../common";
 import { content } from "../../content/de";
 import { PrimaryButton } from "../primitives/buttons/PrimaryButton";
-import { Occupation } from "@azuki/shared";
+import { type MatchedOccupation } from "@azuki/shared";
 
 export function ResultsScreen() {
 	const matchResults = useAppStore((state) => state.matchResults);
@@ -29,7 +29,7 @@ export function ResultsScreen() {
 
 			<div className="flex-1 px-4 pb-4 space-y-4 overflow-y-auto">
 				{occupations.length > 0 ? (
-					occupations.map((occupation: Occupation, index: number) => (
+					occupations.map((occupation: MatchedOccupation, index: number) => (
 						<div
 							key={occupation.id}
 							className="bg-gray-50 rounded-3xl overflow-hidden"
@@ -82,7 +82,7 @@ export function ResultsScreen() {
 							<p>
 								<strong>Stärken:</strong>{" "}
 								{Object.entries(profile.strengths)
-									.map(([k, v]) => `${k}: ${Math.round(v * 100)}%`)
+									.map(([k, v]) => `${k}: ${Math.round((v as number) * 100)}%`)
 									.join(", ") || "–"}
 							</p>
 						</div>
