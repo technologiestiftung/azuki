@@ -23,6 +23,10 @@ export const schoolDegrees: { value: EducationLevel; label: string }[] = [
 		label: content["schoolDegree.option.universityEntrance.label"],
 	},
 	{
+		value: "none",
+		label: content["schoolDegree.option.none.label"],
+	},
+	{
 		value: "foreign_degree",
 		label: content["schoolDegree.option.foreign.label"],
 	},

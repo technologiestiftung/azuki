@@ -28,6 +28,7 @@ export const content = {
 	"schoolDegree.option.intermediate.label": "Realschulabschluss (MSA)",
 	"schoolDegree.option.universityEntrance.label": "Abitur",
 	"schoolDegree.option.vocationalDiploma.label": "Fachabitur",
+	"schoolDegree.option.none.label": "Ohne Abschluss",
 	"schoolDegree.option.foreign.label": "Abschluss aus dem Ausland",
 	"schoolDegree.option.unknown.label": "Ich weiß es nicht",
 	"schoolDegree.skipButton.label": "Ich weiß es nicht",

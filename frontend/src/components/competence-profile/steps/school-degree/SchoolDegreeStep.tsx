@@ -11,6 +11,13 @@ export function SchoolDegreeStep() {
 
 	const inSchool = profile.inSchool;
 
+	const filteredDegrees = schoolDegrees.filter((degree) => {
+		if (inSchool) {
+			return degree.value !== "none" && degree.value !== "foreign_degree";
+		}
+		return true;
+	});
+
 	function handleSelect(value: string) {
 		setEducationLevel(value as EducationLevel);
 	}
@@ -30,7 +37,7 @@ export function SchoolDegreeStep() {
 			skipLabel={content["schoolDegree.skipButton.label"]}
 		>
 			<div className="flex flex-col gap-3">
-				{schoolDegrees.map((degree) => (
+				{filteredDegrees.map((degree) => (
 					<button
 						className={`text-left p-3 w-full rounded-xl border-2 text-gray-700 text-lg font-normal focus-visible:outline focus-visible:outline-2 focus-visible:outline-sky-500 ${
 							profile.educationLevel === degree.value
