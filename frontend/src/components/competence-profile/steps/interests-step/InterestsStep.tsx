@@ -73,8 +73,8 @@ export function InterestsStep() {
 									key={item.label}
 									label={item.label}
 									icon={item.icon}
-									selected={profile.interests.includes(item.label)}
-									onClick={() => toggleInterest(item.label)}
+									selected={profile.interests.includes(item.value)}
+									onClick={() => toggleInterest(item.value)}
 									ariaLabel={`${item.label} ${content["interests.skipButton.pill.label.postfix"]}`}
 								/>
 							))}

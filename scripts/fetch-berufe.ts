@@ -161,28 +161,104 @@ function median(values: number[]): number {
   return sorted[mid];
 }
 
-function extractInterests(infofelder: Infofeld[]): string[] {
+const INTEREST_CATEGORY_MAP: Record<string, string> = {
+  "praktisch-konkreten Tätigkeiten": "praktisch-konkret",
+  "theoretisch-abstrakten Tätigkeiten": "theoretisch-abstrakt",
+  "kreativ-gestaltenden Tätigkeiten": "kreativ-gestaltend",
+  "sozial-beratenden Tätigkeiten": "sozial-beratend",
+  "organisatorisch-prüfenden Tätigkeiten": "organisatorisch-pruefend",
+  "verwaltend-organisatorischen Tätigkeiten": "verwaltend-organisatorisch",
+  "kaufmännisch-organisatorischen Tätigkeiten": "kaufmännisch-organisatorisch",
+};
+
+const INTEREST_KEYWORD_STOP_WORDS = new Set([
+  "der",
+  "die",
+  "das",
+  "den",
+  "dem",
+  "des",
+  "ein",
+  "eine",
+  "einer",
+  "eines",
+  "einem",
+  "einen",
+  "und",
+  "oder",
+  "mit",
+  "ohne",
+  "für",
+  "von",
+  "auf",
+  "im",
+  "in",
+  "am",
+  "an",
+  "aus",
+  "bei",
+  "zu",
+  "zur",
+  "zum",
+  "auch",
+  "sowie",
+  "wie",
+  "als",
+  "durch",
+]);
+
+const INTEREST_KEYWORD_ALLOW_LIST = new Set(["rad", "weg"]);
+
+/** Splits text into lowercase tokens (≥4 chars or explicitly allowed short words), drops stop words. e.g. "Planen von Abläufen" → ["planen", "abläufen"]. */
+function tokenizeInterestText(text: string): string[] {
+  return text
+    .toLowerCase()
+    .replace(/[^\p{L}\p{N}\s-]+/gu, " ")
+    .split(/[\s-]+/)
+    .map((token) => token.trim())
+    .filter(
+      (token) =>
+        (token.length >= 4 || INTEREST_KEYWORD_ALLOW_LIST.has(token)) &&
+        !INTEREST_KEYWORD_STOP_WORDS.has(token),
+    );
+}
+
+/**
+ * Extracts interests and interestKeywords from the BERUFENET "Interessen" infofeld (b20-1).
+ * Two sources: (1) category names in name="Interesse an ..." → interests[], (2) "z.B. ..." list text → tokenized interestKeywords[].
+ *
+ * @example Input
+ *   infofelder = [{ id: "b20-1", content: '... name="Interesse an theoretisch-abstrakten Tätigkeiten" ... z.B. Software entwickeln</p> ...' }]
+ * @example Output
+ *   { interests: ["theoretisch-abstrakt"], interestKeywords: ["software", "entwickeln", ...] }
+ */
+function extractInterestData(infofelder: Infofeld[]): {
+  interests: string[];
+  interestKeywords: string[];
+} {
   const field = infofelder.find((f) => f.id === INFOFELD_IDS.interessen);
-  if (!field?.content) return [];
+  if (!field?.content) return { interests: [], interestKeywords: [] };
 
   const decoded = decodeHtmlEntities(field.content);
-  const matches = decoded.matchAll(/name="Interesse an ([^"]+)"/g);
-  const map: Record<string, string> = {
-    "praktisch-konkreten Tätigkeiten": "praktisch-konkret",
-    "theoretisch-abstrakten Tätigkeiten": "theoretisch-abstrakt",
-    "kreativ-gestaltenden Tätigkeiten": "kreativ-gestaltend",
-    "sozial-beratenden Tätigkeiten": "sozial-beratend",
-    "organisatorisch-prüfenden Tätigkeiten": "organisatorisch-pruefend",
-  };
-
-  const result: string[] = [];
-  for (const m of matches) {
-    const mapped = map[m[1]];
-    if (mapped && !result.includes(mapped)) {
-      result.push(mapped);
+  // Match BERUFENET category labels; map to normalized tags. e.g. "Interesse an kreativ-gestaltenden Tätigkeiten" → "kreativ-gestaltend".
+  const categoryMatches = decoded.matchAll(/name="Interesse an ([^"]+)"/g);
+  const interests: string[] = [];
+  for (const m of categoryMatches) {
+    const mapped = INTEREST_CATEGORY_MAP[m[1]];
+    if (mapped && !interests.includes(mapped)) {
+      interests.push(mapped);
     }
   }
-  return result;
+
+  // b20-1 lists concrete examples as "z.B. ...</p>". Extract phrase, tokenize, dedupe. e.g. "z.B. Software entwickeln</p>" → ["software", "entwickeln"].
+  const examplePhrases = Array.from(decoded.matchAll(/z\.B\.\s*([^<]+)<\/p>/g))
+    .map((m) => m[1].replace(/\s+/g, " ").trim())
+    .filter(Boolean);
+  const interestKeywords = [
+    ...new Set(examplePhrases.flatMap((phrase) => tokenizeInterestText(phrase))),
+  ];
+
+  return { interests, interestKeywords };
 }
 
 function extractStrengthTags(infofelder: Infofeld[]): string[] {
@@ -387,6 +463,7 @@ function processOccupationDetail(data: ApiBerufItem[]): Occupation | null {
     ? stripHtml(ausbildung.steckbrief.lang)
     : null;
   const salarySignal = extractSalarySignal(mergedInfofelder);
+  const interestData = extractInterestData(taetigkeitInfofelder);
 
   return {
     id: ausbildung.id,
@@ -398,7 +475,8 @@ function processOccupationDetail(data: ApiBerufItem[]): Occupation | null {
     images,
     degreeStats: extractDegreeStats(ausbildungInfofelder),
     subjects: extractSubjects(ausbildungInfofelder),
-    interests: extractInterests(taetigkeitInfofelder),
+    interests: interestData.interests,
+    interestKeywords: interestData.interestKeywords,
     strengthTags: extractStrengthTags(taetigkeitInfofelder),
     conditions: extractConditions(taetigkeitInfofelder),
     salaryMonthlyMedian: salarySignal.salaryMonthlyMedian,
