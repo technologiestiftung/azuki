@@ -15,12 +15,12 @@ export function QuestionBubble({ question, subtitle }: QuestionBubbleProps) {
 							className="w-full h-full"
 						/>
 						<div
-							className="absolute -top-[41px] left-1 shrink-0"
+							className="absolute -top-[37px] left-1.5 shrink-0"
 							aria-hidden="true"
 						>
 							<div className="relative">
 								<img
-									src="/illustrations/question-bubble-star.svg"
+									src="/illustrations/question-bubble-star-cropped.svg"
 									alt=""
 									className="relative z-0 max-w-none shrink-0"
 								/>
