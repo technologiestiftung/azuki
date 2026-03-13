@@ -20,7 +20,9 @@ export function SelectableRowButton({
 				selected ? "border-sky-300 bg-sky-50" : "border-gray-200 bg-transparent"
 			}`}
 		>
-			<span className="text-lg font-medium text-gray-700">{label}</span>
+			<span className="text-left text-lg font-medium text-gray-700">
+				{label}
+			</span>
 			<div
 				className={`w-6 h-6 rounded-[5px] border-2 flex items-center justify-center transition-colors ${
 					selected

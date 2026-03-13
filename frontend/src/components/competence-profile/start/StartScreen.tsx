@@ -29,7 +29,7 @@ export function StartScreen() {
 				<p className="text-lg font-normal">{content["start.description"]}</p>
 			</div>
 
-			<div className="w-full bg-sky-white border-t-2 border-gray-200 flex flex-col p-4 gap-y-2 max-w-[430px]">
+			<div className="w-full flex flex-col p-4 gap-y-2 max-w-[430px]">
 				<PrimaryThemedButton onClick={nextStep} className="w-full">
 					{content["start.cta"]}
 				</PrimaryThemedButton>

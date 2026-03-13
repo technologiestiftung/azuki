@@ -35,6 +35,8 @@ export const content = {
 	// School Subjects
 	"schoolSubjects.question": "Welche Schulfächer machen dir Spaß?",
 	"schoolSubjects.skipButton.label": "Überspringen",
+	"schoolSubjects.input.addPlaceholder": "Etwas anderes hinzufügen",
+	"schoolSubjects.input.customSubject.label": "Von dir hinzugefügt",
 	//Languages
 	"schoolSubjects.languages.label": "Sprachen",
 	"schoolSubjects.languages.german.label": "Deutsch",
