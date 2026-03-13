@@ -97,9 +97,18 @@ export const useAppStore = create<AppState & AppActions>((set, get) => ({
 	},
 
 	setInSchool: (value) =>
-		set((state) => ({
-			profile: { ...state.profile, inSchool: value },
-		})),
+		set((state) => {
+			// If the user changes their school status, reset the education level
+			// to prevent invalid states (e.g. having "none" selected while being in school)
+			const resetEducationLevel = state.profile.inSchool !== value;
+			return {
+				profile: {
+					...state.profile,
+					inSchool: value,
+					...(resetEducationLevel ? { educationLevel: null } : {}),
+				},
+			};
+		}),
 
 	setEducationLevel: (value) =>
 		set((state) => ({
