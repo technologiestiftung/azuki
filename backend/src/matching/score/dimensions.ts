@@ -29,6 +29,10 @@ export function scoreEducation(
       if (stats.intermediate + stats.secondary + stats.noQualification < 10)
         return -5;
       break;
+    case "none":
+      // Penalize if < 10% of workers have no formal qualification
+      if (stats.noQualification < 10) return -15;
+      break;
     // No penalty
     case "university_entrance":
     case "vocational_diploma":
