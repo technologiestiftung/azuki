@@ -36,7 +36,7 @@ export const TextInput = ({
 				<button
 					onClick={onSubmit}
 					disabled={submitDisabled}
-					className={`w-10 h-10 flex items-center justify-center transition-colors rounded-xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-sky-500 ${
+					className={`w-10 h-10 flex items-center justify-center transition-colors rounded-xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-sky-500 shrink-0 ${
 						!submitDisabled ? "bg-sky-300" : "bg-gray-300"
 					}`}
 				>

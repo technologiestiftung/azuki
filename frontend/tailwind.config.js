@@ -67,6 +67,7 @@ export default {
 					1000: "#010c13",
 					white: "#fafdff",
 				},
+				"card-fill": "#EEF2F6",
 			},
 			borderRadius: {
 				"4xl": "32px",
@@ -76,9 +77,21 @@ export default {
 					from: { opacity: "0" },
 					to: { opacity: "1" },
 				},
-				slideIn: {
-					from: { opacity: "0", transform: "translateX(40px)" },
-					to: { opacity: "1", transform: "translateX(0)" },
+				slideInNext: {
+					from: { transform: "translateX(100%)" },
+					to: { transform: "translateX(0)" },
+				},
+				slideOutPrev: {
+					from: { transform: "translateX(0)" },
+					to: { transform: "translateX(-100%)" },
+				},
+				slideInPrev: {
+					from: { transform: "translateX(-100%)" },
+					to: { transform: "translateX(0)" },
+				},
+				slideOutNext: {
+					from: { transform: "translateX(0)" },
+					to: { transform: "translateX(100%)" },
 				},
 				slideOutLeft: {
 					from: {
@@ -127,7 +140,10 @@ export default {
 			},
 			animation: {
 				fadeIn: "fadeIn 0.2s ease-in-out",
-				slideIn: "slideIn 0.25s ease-out",
+				slideInNext: "slideInNext 0.3s ease-in-out",
+				slideOutPrev: "slideOutPrev 0.3s ease-in-out forwards",
+				slideInPrev: "slideInPrev 0.3s ease-in-out",
+				slideOutNext: "slideOutNext 0.3s ease-in-out forwards",
 				slideOutLeft: "slideOutLeft 0.3s ease-in forwards",
 				slideOutRight: "slideOutRight 0.3s ease-in forwards",
 				slideInLeft: "slideInLeft 0.3s ease-out forwards",

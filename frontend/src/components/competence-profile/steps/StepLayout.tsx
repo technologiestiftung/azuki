@@ -49,14 +49,7 @@ export function StepLayout({
 			</div>
 			<div className="flex flex-1 flex-col min-h-0">
 				<div className="shrink-0">
-					<QuestionBubble>
-						<div className="flex flex-col gap-2">
-							<h2 className="text-3xl font-bold text-sky-1000">{question}</h2>
-							{subtitle && (
-								<p className="text-base text-sky-700 mt-1">{subtitle}</p>
-							)}
-						</div>
-					</QuestionBubble>
+					<QuestionBubble question={question} subtitle={subtitle} />
 				</div>
 
 				<div className="flex-1 overflow-y-auto min-h-0 pt-8 px-0.5 pb-32">

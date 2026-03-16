@@ -11,47 +11,44 @@ const slideImages = [
 	"/illustrations/map.svg",
 ];
 
+const SLIDE_COUNT = slideImages.length;
+
 const SWIPE_THRESHOLD = 50;
 const TAP_MAX_DURATION = 300;
+const KEYBOARD_PAUSE_DURATION = 300;
 
 export function WelcomeCarousel() {
 	const [currentSlide, setCurrentSlide] = useState(0);
+	const [previousSlide, setPreviousSlide] = useState<number | null>(null);
+	const [slideDirection, setSlideDirection] = useState<"next" | "prev" | null>(
+		null,
+	);
 	const [isPaused, setIsPaused] = useState(false);
 	const goToStep = useAppStore((state) => state.goToStep);
 
 	const pointerStartX = useRef<number | null>(null);
 	const pointerDownTime = useRef(0);
+	const keyboardPauseTimeout = useRef<ReturnType<typeof setTimeout> | null>(
+		null,
+	);
 
-	const slides = [
-		{ title: content["welcome.slide.1.title"] },
-		{ title: content["welcome.slide.2.title"] },
-		{ title: content["welcome.slide.3.title"] },
-		{ title: content["welcome.slide.4.title"] },
-	];
-
-	function goToNextSlide() {
+	function navigate(direction: "next" | "prev") {
 		setCurrentSlide((prev) => {
-			if (prev >= slides.length - 1) {
+			if (direction === "next" && prev >= SLIDE_COUNT - 1) {
 				goToStep(Step.Start);
 				return prev;
 			}
-			return prev + 1;
+			if (direction === "prev" && prev === 0) {
+				return prev;
+			}
+			setPreviousSlide(prev);
+			setSlideDirection(direction);
+			return direction === "next" ? prev + 1 : prev - 1;
 		});
-	}
-
-	function goToPrevSlide() {
-		setCurrentSlide((prev) => Math.max(prev - 1, 0));
 	}
 
 	function advanceSlide() {
-		setCurrentSlide((prev) => {
-			//go to start step after the last slide
-			if (prev >= slides.length - 1) {
-				goToStep(Step.Start);
-				return prev;
-			}
-			return prev + 1;
-		});
+		navigate("next");
 	}
 
 	function handleGetStarted() {
@@ -75,24 +72,18 @@ export function WelcomeCarousel() {
 		const pressDuration = Date.now() - pointerDownTime.current;
 		pointerStartX.current = null;
 
-		const navigate = diff > 0 ? goToNextSlide : goToPrevSlide;
-
-		// Swipe detected
 		if (Math.abs(diff) > SWIPE_THRESHOLD) {
-			navigate();
+			navigate(diff > 0 ? "next" : "prev");
 			return;
 		}
 
-		// Long press without swipe → just resume, no navigation
 		if (pressDuration >= TAP_MAX_DURATION) {
 			return;
 		}
 
-		// Short tap: left half → back, right half → forward
 		const rect = e.currentTarget.getBoundingClientRect();
 		const tapX = e.clientX - rect.left;
-		const tapNavigate = tapX < rect.width / 2 ? goToPrevSlide : goToNextSlide;
-		tapNavigate();
+		navigate(tapX < rect.width / 2 ? "prev" : "next");
 	}
 
 	function handlePointerCancel() {
@@ -103,42 +94,58 @@ export function WelcomeCarousel() {
 	function handleKeyDown(e: React.KeyboardEvent<HTMLDivElement>) {
 		if (e.key === "ArrowRight" || e.key === "ArrowDown") {
 			e.preventDefault();
-			goToNextSlide();
+			setIsPaused(true);
+			navigate("next");
+			if (keyboardPauseTimeout.current) {
+				clearTimeout(keyboardPauseTimeout.current);
+			}
+			keyboardPauseTimeout.current = setTimeout(
+				() => setIsPaused(false),
+				KEYBOARD_PAUSE_DURATION,
+			);
 		} else if (e.key === "ArrowLeft" || e.key === "ArrowUp") {
 			e.preventDefault();
-			goToPrevSlide();
+			setIsPaused(true);
+			navigate("prev");
+			if (keyboardPauseTimeout.current) {
+				clearTimeout(keyboardPauseTimeout.current);
+			}
+			keyboardPauseTimeout.current = setTimeout(
+				() => setIsPaused(false),
+				KEYBOARD_PAUSE_DURATION,
+			);
 		}
 	}
 
 	return (
-		<div className="flex flex-col h-[100dvh] p-4 min-h-0 overflow-y-auto">
+		<div className="flex flex-col h-[100dvh] p-4 overflow-hidden">
 			<div
 				role="region"
 				aria-roledescription="carousel"
 				aria-label={content["welcome.carousel.ariaLabel"]
 					.replace("{current}", String(currentSlide + 1))
-					.replace("{total}", String(slides.length))}
+					.replace("{total}", String(SLIDE_COUNT))}
 				tabIndex={0}
-				className="flex-1 flex flex-col touch-none select-none focus-visible:outline-1 focus-visible:outline-sky-500 rounded-lg"
+				className="flex-1 min-h-0 flex flex-col touch-none select-none focus-visible:outline-1 focus-visible:outline-sky-500 rounded-[7px]"
 				onPointerDown={handlePointerDown}
 				onPointerUp={handlePointerUp}
 				onPointerCancel={handlePointerCancel}
 				onKeyDown={handleKeyDown}
 			>
-				<div className="flex gap-[6px] pb-1">
-					{slides.map((slide, index) => {
+				<div className="flex gap-[6px] pb-1 shrink-0">
+					{Array.from({ length: SLIDE_COUNT }, (_, index) => {
 						const isCurrent = index === currentSlide;
 						const isCompleted = index < currentSlide;
 						return (
 							<div
-								key={slide.title}
+								key={index}
 								aria-label={`${content["welcome.slide.ariaLabelPrefix"]} ${index + 1}`}
 								className="h-2 flex-1 rounded-full bg-gray-200 overflow-hidden"
 							>
 								{isCurrent ? (
 									<div
 										key={currentSlide}
-										className="h-full bg-sky-300 animate-progressFill"
+										className="h-full bg-sky-300 animate-progressFill rounded-[7px]"
 										style={{
 											animationPlayState: isPaused ? "paused" : "running",
 										}}
@@ -154,27 +161,57 @@ export function WelcomeCarousel() {
 					})}
 				</div>
 
-				<div
-					key={currentSlide}
-					className="flex-1 flex justify-center animate-slideIn"
-				>
-					<img
-						src={slideImages[currentSlide]}
-						alt=""
-						className="w-full mb-10 pointer-events-none"
-						draggable={false}
-					/>
+				<div className="flex-1 min-h-0 relative overflow-hidden">
+					{Array.from({ length: SLIDE_COUNT }, (_, index) => {
+						if (index !== currentSlide && index !== previousSlide) {
+							return null;
+						}
+
+						let animationClass = "";
+						if (slideDirection === "next") {
+							animationClass =
+								index === currentSlide
+									? "animate-slideInNext"
+									: "animate-slideOutPrev";
+						} else if (slideDirection === "prev") {
+							animationClass =
+								index === currentSlide
+									? "animate-slideInPrev"
+									: "animate-slideOutNext";
+						}
+
+						return (
+							<div
+								key={index}
+								className={`absolute inset-0 flex flex-col ${animationClass}`}
+								style={{ zIndex: index === currentSlide ? 10 : 0 }}
+							>
+								<div className="flex-1 min-h-0 flex justify-center items-center">
+									<img
+										src={slideImages[index]}
+										alt=""
+										className="max-h-full w-auto max-w-full object-contain pointer-events-none"
+										draggable={false}
+									/>
+								</div>
+								<div className="shrink-0 flex flex-col justify-end">
+									<h1 className="text-4xl font-bold py-6 text-center h-52">
+										{
+											content[
+												`welcome.slide.${index + 1}.title` as keyof typeof content
+											] as string
+										}
+									</h1>
+								</div>
+							</div>
+						);
+					})}
 				</div>
 			</div>
-			<div className="flex flex-col">
-				<h1 className="text-4xl font-bold py-6 text-center h-52">
-					{slides[currentSlide].title}
-				</h1>
 
-				<PrimaryThemedButton onClick={handleGetStarted} className="w-full">
-					{content["welcome.cta"]}
-				</PrimaryThemedButton>
-			</div>
+			<PrimaryThemedButton onClick={handleGetStarted} className="w-full">
+				{content["welcome.cta"]}
+			</PrimaryThemedButton>
 		</div>
 	);
 }
