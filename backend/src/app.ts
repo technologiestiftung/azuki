@@ -1,23 +1,12 @@
 import { Hono, type Context } from "hono";
 import { cors } from "hono/cors";
 import { UserProfileSchema } from "./schemas/userProfile.js";
-import { readFileSync, existsSync } from "node:fs";
-import { resolve, dirname } from "node:path";
-import { fileURLToPath } from "node:url";
 import type { Occupation, MatchResult } from "@azuki/shared";
 import { preFilter } from "./matching/index.js";
 import { mistralRank } from "./mistral/index.js";
+import occupationsData from "./data/berufe.json";
 
-const __dirname = dirname(fileURLToPath(import.meta.url));
-const dataPath = resolve(__dirname, "../data/berufe.json");
-
-let occupations: Occupation[] = [];
-if (existsSync(dataPath)) {
-	occupations = JSON.parse(readFileSync(dataPath, "utf-8"));
-	console.log(`Loaded ${occupations.length} occupations from cache.`);
-} else {
-	console.warn(`No berufe.json found at ${dataPath}. Run fetch-berufe first.`);
-}
+const occupations: Occupation[] = occupationsData as Occupation[];
 
 const app = new Hono();
 
