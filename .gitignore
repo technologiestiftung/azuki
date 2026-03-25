@@ -33,3 +33,4 @@ frontend/dist/
 backend/node_modules/
 backend/dist/
 materialien/
+.worktrees/
