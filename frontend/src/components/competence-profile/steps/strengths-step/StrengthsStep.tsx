@@ -53,13 +53,21 @@ export function StrengthsStep() {
 		[currentCard, setStrength],
 	);
 
+	const handleSkip = useCallback(() => {
+		if (currentCard) {
+			setStrength(currentCard.id, 0.5);
+		}
+		stackRef.current?.goNext();
+	}, [currentCard, setStrength]);
+
 	return (
 		<StepLayout
 			question={content["strengths.question"]}
 			currentStep={Step.Strengths}
 			onNext={() => stackRef.current?.goNext()}
-			onSkip={() => stackRef.current?.goNext()}
+			onSkip={handleSkip}
 			onBack={() => stackRef.current?.goBack()}
+			hasSkipButton={true}
 			skipLabel={content["strengths.skipButton.label"]}
 			bottomContent={
 				<StrengthsSlider

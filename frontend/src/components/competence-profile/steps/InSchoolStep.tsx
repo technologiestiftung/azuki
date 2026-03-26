@@ -17,7 +17,7 @@ export function InSchoolStep() {
 			question={content["inSchool.question"]}
 			currentStep={Step.InSchool}
 			onNext={nextStep}
-			nextDisabled={profile.inSchool === null}
+			isNextDisabled={profile.inSchool === null}
 			hasSkipButton={false}
 		>
 			<div className="flex flex-col gap-3">

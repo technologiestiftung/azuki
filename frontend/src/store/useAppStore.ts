@@ -63,7 +63,7 @@ interface AppActions {
 	setSecretTalent: (value: string) => void;
 	setPracticalExperience: (value: string) => void;
 	setWorkPreference: (id: string, choice: WorkPreferenceChoice) => void;
-	setNoGo: (id: string, answer: NoGoAnswer) => void;
+	setNoGo: (id: string, answer: NoGoAnswer | null) => void;
 	setMatchResults: (results: MatchResult) => void;
 	setStrengthSubIndex: (index: number) => void;
 	setNoGoSubIndex: (index: number) => void;
@@ -189,7 +189,7 @@ export const useAppStore = create<AppState & AppActions>((set, get) => ({
 			},
 		})),
 
-	setNoGo: (id, answer) =>
+	setNoGo: (id, answer: NoGoAnswer | null) =>
 		set((state) => ({
 			profile: {
 				...state.profile,
