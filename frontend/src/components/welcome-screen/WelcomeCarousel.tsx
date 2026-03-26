@@ -118,7 +118,7 @@ export function WelcomeCarousel() {
 	}
 
 	return (
-		<div className="flex flex-col h-[100dvh] p-4 overflow-hidden">
+		<div className="flex flex-col h-[100dvh] py-4 overflow-hidden">
 			<div
 				role="region"
 				aria-roledescription="carousel"
@@ -194,7 +194,7 @@ export function WelcomeCarousel() {
 										draggable={false}
 									/>
 								</div>
-								<div className="shrink-0 flex flex-col justify-end">
+								<div className="shrink-0 flex flex-col justify-end px-4">
 									<h1 className="text-4xl font-bold py-6 text-center h-52">
 										{
 											content[
@@ -208,10 +208,11 @@ export function WelcomeCarousel() {
 					})}
 				</div>
 			</div>
-
-			<PrimaryThemedButton onClick={handleGetStarted} className="w-full">
-				{content["welcome.cta"]}
-			</PrimaryThemedButton>
+			<div className="px-4">
+				<PrimaryThemedButton onClick={handleGetStarted} className="w-full">
+					{content["welcome.cta"]}
+				</PrimaryThemedButton>
+			</div>
 		</div>
 	);
 }
