@@ -152,7 +152,7 @@ export function StrengthsSlider({
 				/>
 				{/* Thumb */}
 				<div
-					className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-12 h-12 p-2 border-4 border-sky-300 bg-sky-white rounded-lg shadow-sm transition-[left] duration-75 z-10"
+					className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-12 h-12 p-2 border-4 border-sky-300 bg-sky-white rounded-xl transition-[left] duration-75 z-10"
 					style={{
 						left: `calc(24px + ${value} * (100% - 48px))`,
 					}}

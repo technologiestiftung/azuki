@@ -339,7 +339,7 @@ export const SwipeCardStack = forwardRef<
 
 				{/* Top card */}
 				<div
-					className={`relative w-full rounded-3xl pt-5 pb-6 px-6 flex flex-col items-center ${topCardBg} ${topCardAnimationClassNames(animationPhase, animationDirection)}`}
+					className={`relative w-full rounded-3xl pt-5 pb-6 px-6 flex flex-col items-center shadow-[0_6px_16px_0_rgba(17,24,39,0.10)] ${topCardBg} ${topCardAnimationClassNames(animationPhase, animationDirection)}`}
 					style={{
 						zIndex: 2,
 						touchAction: "none",
