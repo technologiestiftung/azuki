@@ -1,0 +1,42 @@
+import { execSync } from "node:child_process";
+import { cpSync, mkdirSync, writeFileSync } from "node:fs";
+
+// 1. Build frontend
+execSync("npm run build --workspace=frontend", { stdio: "inherit" });
+
+// 2. Create Build Output API v3 structure
+mkdirSync(".vercel/output/static", { recursive: true });
+mkdirSync(".vercel/output/functions/api/[...route].func", { recursive: true });
+
+// 3. Copy static files
+cpSync("frontend/dist/", ".vercel/output/static/", { recursive: true });
+
+// 4. Bundle serverless function with esbuild (self-contained, no @vercel/nft needed)
+execSync(
+	`npx esbuild api/_handler.ts --bundle --platform=node --format=esm --outfile=".vercel/output/functions/api/[...route].func/index.mjs"`,
+	{ stdio: "inherit" },
+);
+
+// 5. Function runtime config
+writeFileSync(
+	".vercel/output/functions/api/[...route].func/.vc-config.json",
+	JSON.stringify({
+		runtime: "nodejs22.x",
+		handler: "index.mjs",
+		launcherType: "Nodejs",
+		maxDuration: 60,
+	}),
+);
+
+// 6. Routing config: check filesystem (static + functions) first, then SPA fallback
+writeFileSync(
+	".vercel/output/config.json",
+	JSON.stringify({
+		version: 3,
+		routes: [
+			{ handle: "filesystem" },
+			{ src: "/api/(.*)", dest: "/api/[...route]" },
+			{ src: "/(.*)", dest: "/index.html" },
+		],
+	}),
+);

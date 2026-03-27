@@ -526,7 +526,7 @@ async function main() {
   );
 
   const __dirname = dirname(fileURLToPath(import.meta.url));
-  const outDir = resolve(__dirname, "../backend/data");
+  const outDir = resolve(__dirname, "../backend/src/data");
   mkdirSync(outDir, { recursive: true });
   const outPath = resolve(outDir, "berufe.json");
   writeFileSync(outPath, JSON.stringify(occupations, null, 2), "utf-8");
