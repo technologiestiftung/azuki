@@ -17,8 +17,9 @@ export function InSchoolStep() {
 			question={content["inSchool.question"]}
 			currentStep={Step.InSchool}
 			onNext={nextStep}
-			isNextDisabled={profile.inSchool === null}
+			onSkip={nextStep}
 			hasSkipButton={false}
+			isSkipConfirmDialogOpen={profile.inSchool === null}
 		>
 			<div className="flex flex-col gap-3">
 				{inSchoolOptions.map((option) => (
