@@ -58,13 +58,15 @@ export const WORK_PREF_MAP: Record<string, WorkPreferenceOptionChecks> = {
 export const STRENGTH_TO_TAGS: Record<string, string[]> = {
 	// Translates frontend strength ids to BERUFENET tags from b20-4.
 	teamwork: ["Befähigung zu Gruppenarbeit / Teamfähigkeit"],
-	"logical-thinking": ["Umsicht", "Sorgfalt"],
+	"logical-thinking": ["Umsicht"],
 	creativity: ["Kreativität"],
 	// No b20-4 tags; scored via conditions fallback in dimensions.ts.
 	craftsmanship: [],
 	communication: ["Kommunikationsfähigkeit", "Kontaktbereitschaft"],
-	concentration: ["Sorgfalt"],
-	precision: ["Sorgfalt"],
+	// Scored via conditions fallback (precisionWork) in dimensions.ts.
+	precision: [],
+	// Scored via skillTags fallback (b20-2) in dimensions.ts.
+	concentration: [],
 	perseverance: [
 		"Durchhaltevermögen/Zielstrebigkeit",
 		"Leistungs- und Einsatzbereitschaft",

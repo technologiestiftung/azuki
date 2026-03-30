@@ -162,6 +162,23 @@ export function scoreStrengths(
       continue;
     }
 
+    if (strengthId === "precision") {
+      if (occupation.conditions.precisionWork) {
+        score += 2;
+      }
+      continue;
+    }
+
+    if (strengthId === "concentration") {
+      const concentrationTags = ["Konzentration", "Daueraufmerksamkeit"];
+      if (
+        concentrationTags.some((tag) => occupation.skillTags.includes(tag))
+      ) {
+        score += 2;
+      }
+      continue;
+    }
+
     const tags = STRENGTH_TO_TAGS[strengthId];
     if (!tags?.length) continue;
 
