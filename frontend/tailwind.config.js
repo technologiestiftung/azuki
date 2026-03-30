@@ -95,31 +95,25 @@ export default {
 				},
 				slideOutLeft: {
 					from: {
-						opacity: "1",
 						transform: "translateX(0) rotate(0deg) translateY(0)",
 					},
 					to: {
-						opacity: "0",
 						transform: "translateX(-100vw) rotate(-20deg) translateY(-40px)",
 					},
 				},
 				slideOutRight: {
 					from: {
-						opacity: "1",
 						transform: "translateX(0) rotate(0deg) translateY(0)",
 					},
 					to: {
-						opacity: "0",
 						transform: "translateX(100vw) rotate(20deg) translateY(-40px)",
 					},
 				},
 				slideOutUp: {
 					from: {
-						opacity: "1",
 						transform: "translateY(0) scale(1)",
 					},
 					to: {
-						opacity: "0",
 						transform: "translateY(-100vh) scale(0.3)",
 					},
 				},

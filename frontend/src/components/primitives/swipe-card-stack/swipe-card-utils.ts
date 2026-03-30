@@ -3,7 +3,7 @@ export type SwipeDirection = "left" | "right" | "up";
 export type AnimationPhase = "idle" | "slide-in" | "slide-out";
 
 export const SWIPE_THRESHOLD = 80;
-export const FLY_OUT_MS = 400;
+export const FLY_OUT_MS = 600;
 export const SLIDE_IN_MS = 400;
 export const EXIT_OFFSET_X = 1000;
 export const EXIT_OFFSET_Y = -800;

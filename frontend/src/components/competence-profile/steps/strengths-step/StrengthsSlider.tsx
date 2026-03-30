@@ -124,10 +124,6 @@ export function StrengthsSlider({
 
 	return (
 		<div className="w-full mb-1">
-			<div className="flex justify-between text-base font-medium text-gray-600 mb-2">
-				<span>{minLabel}</span>
-				<span>{maxLabel}</span>
-			</div>
 			<div
 				ref={trackRef}
 				className="relative h-12 rounded-xl bg-gray-100 cursor-pointer touch-none select-none"
@@ -179,6 +175,10 @@ export function StrengthsSlider({
 						</div>
 					);
 				})}
+			</div>
+			<div className="flex justify-between text-base font-medium text-gray-600 py-2">
+				<span>{minLabel}</span>
+				<span>{maxLabel}</span>
 			</div>
 		</div>
 	);

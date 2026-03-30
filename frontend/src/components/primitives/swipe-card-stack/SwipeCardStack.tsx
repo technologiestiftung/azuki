@@ -86,12 +86,11 @@ export const SwipeCardStack = forwardRef<
 	const isFlying = flyOffset !== null;
 	const isSliding = animationPhase === "slide-in";
 	const isSlidingOut = animationPhase === "slide-out";
-	const isSlidingUp = flyDirection === "up" && isFlying;
 	const hasNext = displayIndex < count - 1;
 	const nextIndex = hasNext ? displayIndex + 1 : null;
 	const activeOffset = flyOffset ?? { x: dragX, y: dragY };
 
-	const { backScale, backOpacity, backTranslateY, topOpacity, topTransform } =
+	const { backScale, backOpacity, backTranslateY, topTransform } =
 		getCardVisualState(activeOffset, isFlying, flyDirection);
 
 	useEffect(() => {
@@ -301,20 +300,19 @@ export const SwipeCardStack = forwardRef<
 	const backCardContent = renderBackCard ?? renderCard;
 	const isAnimatingCard = isSliding || isSlidingOut;
 	const cursorStyle = getCursorStyle(isDraggingEnabled, isDragging);
-	const topCardBg =
-		isSliding || isSlidingOut || isSlidingUp || isDragging
-			? "bg-sky-300"
-			: "bg-gray-200";
 
 	return (
-		<div className="flex flex-col justify-center items-center h-fit py-3 px-6">
+		<div className="flex flex-col w-full justify-center items-center h-fit py-3">
 			<div className={`relative w-full ${className}`}>
 				{/* Ghost card */}
 				{hasNext && (
 					<div
 						aria-hidden="true"
-						className="absolute inset-0 -bottom-8 w-full bg-gray-500 rounded-3xl pointer-events-none"
-						style={{ zIndex: 0, transform: "scale(0.85)", opacity: 0.4 }}
+						className={`absolute inset-0 -bottom-8 w-full bg-gray-300 rounded-3xl pointer-events-none transition-opacity duration-200 ease-in ${isSlidingOut || isDragging ? "opacity-50" : "opacity-100"}`}
+						style={{
+							zIndex: 0,
+							transform: "scale(0.85)",
+						}}
 					/>
 				)}
 
@@ -328,7 +326,7 @@ export const SwipeCardStack = forwardRef<
 							transform: `scale(${backScale}) translateY(${backTranslateY}px)`,
 							opacity: backOpacity,
 							transition: isFlying
-								? "transform 0.3s ease 0.1s, opacity 0.3s ease 0.1s"
+								? "transform 0.6s ease 0.1s, opacity 0.3s ease 0.1s"
 								: "none",
 							willChange: "transform, opacity",
 						}}
@@ -339,7 +337,9 @@ export const SwipeCardStack = forwardRef<
 
 				{/* Top card */}
 				<div
-					className={`relative w-full rounded-3xl pt-5 pb-6 px-6 flex flex-col items-center shadow-[0_6px_16px_0_rgba(17,24,39,0.10)] ${topCardBg} ${topCardAnimationClassNames(animationPhase, animationDirection)}`}
+					className={`relative w-full rounded-3xl pt-5 pb-6 px-6 flex flex-col items-center shadow-[0_6px_16px_0_rgba(17,24,39,0.10)] 
+						${(isSlidingOut || isDragging) && flyDirection !== "up" ? "bg-sky-300" : "bg-gray-200"} 
+						${topCardAnimationClassNames(animationPhase, animationDirection)}`}
 					style={{
 						zIndex: 2,
 						touchAction: "none",
@@ -347,8 +347,6 @@ export const SwipeCardStack = forwardRef<
 						userSelect: "none",
 						transform: isAnimatingCard ? undefined : topTransform,
 						transition: isAnimatingCard ? undefined : cardTransition,
-						opacity: isAnimatingCard ? undefined : topOpacity,
-						willChange: "transform, opacity",
 						pointerEvents: isAnimatingCard ? "none" : undefined,
 					}}
 					onPointerDown={handlePointerDown}
