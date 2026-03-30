@@ -1,29 +1,28 @@
 import { useState } from "react";
 import { content } from "../../../content/de";
 import { useAppStore } from "../../../store/useAppStore";
-import { Step } from "../../../common";
 import { StepLayout } from "./StepLayout";
+import { useFlowNavigation } from "../../../routing/useFlowNavigation";
 
 export function PracticalExperienceStep() {
 	const profile = useAppStore((state) => state.profile);
 	const setPracticalExperience = useAppStore(
 		(state) => state.setPracticalExperience,
 	);
-	const nextStep = useAppStore((state) => state.nextStep);
+	const { goNext } = useFlowNavigation();
 	const [value, setValue] = useState(profile.practicalExperience);
 
 	function handleNext() {
 		setPracticalExperience(value);
-		nextStep();
+		goNext();
 	}
 
 	return (
 		<StepLayout
 			question={content["practicalExperience.question"]}
 			subtitle={content["practicalExperience.subtitle"]}
-			currentStep={Step.PracticalExperience}
 			onNext={handleNext}
-			onSkip={nextStep}
+			onSkip={goNext}
 			nextDisabled={false}
 		>
 			<div className="rounded-3xl p-5 min-h-48 bg-gray-50 border-2 border-gray-200">

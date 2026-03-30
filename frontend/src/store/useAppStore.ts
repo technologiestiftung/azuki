@@ -1,30 +1,11 @@
 import { create } from "zustand";
 import {
-	Step,
 	type UserProfile,
 	type EducationLevel,
 	type WorkPreferenceChoice,
 	type NoGoAnswer,
 	type MatchResult,
 } from "../common";
-
-const STEP_ORDER = [
-	Step.Login,
-	Step.Welcome,
-	Step.Start,
-	Step.InSchool,
-	Step.SchoolDegreeStep,
-	Step.SchoolSubjects,
-	Step.Interests,
-	Step.Strengths,
-	Step.WorkValues,
-	Step.SecretTalent,
-	Step.PracticalExperience,
-	Step.WorkPreferences,
-	Step.NoGos,
-	Step.Loading,
-	Step.Results,
-];
 
 const initialProfile: UserProfile = {
 	inSchool: null,
@@ -41,18 +22,11 @@ const initialProfile: UserProfile = {
 };
 
 interface AppState {
-	currentStep: Step;
 	profile: UserProfile;
 	matchResults: MatchResult | null;
-	strengthSubIndex: number;
-	noGoSubIndex: number;
-	workPrefSubIndex: number;
 }
 
 interface AppActions {
-	goToStep: (step: Step) => void;
-	nextStep: () => void;
-	prevStep: () => void;
 	setInSchool: (value: boolean) => void;
 	setEducationLevel: (value: EducationLevel) => void;
 	toggleSubject: (subject: string) => void;
@@ -65,37 +39,12 @@ interface AppActions {
 	setWorkPreference: (id: string, choice: WorkPreferenceChoice) => void;
 	setNoGo: (id: string, answer: NoGoAnswer) => void;
 	setMatchResults: (results: MatchResult) => void;
-	setStrengthSubIndex: (index: number) => void;
-	setNoGoSubIndex: (index: number) => void;
-	setWorkPrefSubIndex: (index: number) => void;
 	resetProfile: () => void;
 }
 
-export const useAppStore = create<AppState & AppActions>((set, get) => ({
-	currentStep: Step.Login,
+export const useAppStore = create<AppState & AppActions>((set) => ({
 	profile: initialProfile,
 	matchResults: null,
-	strengthSubIndex: 0,
-	noGoSubIndex: 0,
-	workPrefSubIndex: 0,
-
-	goToStep: (step) => set({ currentStep: step }),
-
-	nextStep: () => {
-		const currentStep = get().currentStep;
-		const currentStepIndex = STEP_ORDER.indexOf(currentStep);
-		if (currentStepIndex < STEP_ORDER.length - 1) {
-			set({ currentStep: STEP_ORDER[currentStepIndex + 1] });
-		}
-	},
-
-	prevStep: () => {
-		const currentStep = get().currentStep;
-		const currentStepIndex = STEP_ORDER.indexOf(currentStep);
-		if (currentStepIndex > 0) {
-			set({ currentStep: STEP_ORDER[currentStepIndex - 1] });
-		}
-	},
 
 	setInSchool: (value) =>
 		set((state) => {
@@ -199,17 +148,9 @@ export const useAppStore = create<AppState & AppActions>((set, get) => ({
 
 	setMatchResults: (results) => set({ matchResults: results }),
 
-	setStrengthSubIndex: (index) => set({ strengthSubIndex: index }),
-
-	setNoGoSubIndex: (index) => set({ noGoSubIndex: index }),
-
-	setWorkPrefSubIndex: (index) => set({ workPrefSubIndex: index }),
 	resetProfile: () =>
 		set({
 			profile: initialProfile,
 			matchResults: null,
-			strengthSubIndex: 0,
-			noGoSubIndex: 0,
-			workPrefSubIndex: 0,
 		}),
 }));

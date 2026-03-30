@@ -1,13 +1,13 @@
 import { useEffect, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import { content } from "../../content/de";
 import { useAppStore } from "../../store/useAppStore";
-import { Step } from "../../common";
 import { matchProfile } from "../../api/client";
 
 export function LoadingScreen() {
 	const profile = useAppStore((state) => state.profile);
 	const setMatchResults = useAppStore((state) => state.setMatchResults);
-	const goToStep = useAppStore((state) => state.goToStep);
+	const navigate = useNavigate();
 	const called = useRef(false);
 
 	useEffect(() => {
@@ -28,9 +28,9 @@ export function LoadingScreen() {
 		const minDelay = new Promise<void>((r) => setTimeout(r, 2500));
 
 		Promise.all([doMatch(), minDelay]).then(() => {
-			goToStep(Step.Results);
+			navigate("/results/list");
 		});
-	}, [profile, setMatchResults, goToStep]);
+	}, [profile, setMatchResults, navigate]);
 
 	return (
 		<div className="flex flex-col items-center justify-center min-h-[100dvh] px-8">

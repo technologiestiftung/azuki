@@ -1,7 +1,7 @@
-import { useRef, useCallback } from "react";
+import { useRef, useCallback, useLayoutEffect } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import { content } from "../../../../content/de";
 import { useAppStore } from "../../../../store/useAppStore";
-import { Step } from "../../../../common";
 import type { NoGoAnswer } from "@azuki/shared";
 import { StepLayout } from "../StepLayout";
 import { noGos } from "./no-gos";
@@ -12,17 +12,28 @@ import type {
 } from "../../../primitives/swipe-card-stack/SwipeCardStack";
 import { SwipeCard } from "../../../primitives/swipe-card-stack/SwipeCard";
 import { NoGoActionButtons } from "./NoGoActionButtons";
+import { useFlowNavigation } from "../../../../routing/useFlowNavigation";
+import { parseHashCardIndex } from "../../../../routing/routes";
 
 export function NoGosStep() {
+	const { pathname, hash } = useLocation();
+	const navigate = useNavigate();
+	const { goNext, goPrevious } = useFlowNavigation();
+
 	const stackRef = useRef<SwipeCardStackHandle>(null);
-	const initialIndexValue = useAppStore((state) => state.noGoSubIndex);
-	const initialIndex = useRef(initialIndexValue).current;
+	const cardIndex = Math.min(
+		parseHashCardIndex(hash),
+		Math.max(0, noGos.length - 1),
+	);
+
+	useLayoutEffect(() => {
+		if (pathname === "/nogos" && !hash) {
+			navigate({ pathname: "/nogos", hash: "#0" }, { replace: true });
+		}
+	}, [pathname, hash, navigate]);
 
 	const setNoGo = useAppStore((state) => state.setNoGo);
-	const nextStep = useAppStore((state) => state.nextStep);
-	const prevStep = useAppStore((state) => state.prevStep);
 	const noGosValues = useAppStore((state) => state.profile.noGos);
-	const setNoGoSubIndex = useAppStore((state) => state.setNoGoSubIndex);
 
 	const getDirectionForIndex = useCallback(
 		(index: number): SwipeDirection => {
@@ -35,9 +46,9 @@ export function NoGosStep() {
 
 	const handleIndexChange = useCallback(
 		(index: number) => {
-			setNoGoSubIndex(index);
+			navigate({ pathname: "/nogos", hash: `#${index}` }, { replace: true });
 		},
-		[setNoGoSubIndex],
+		[navigate],
 	);
 
 	const handleSwipe = useCallback(
@@ -55,7 +66,6 @@ export function NoGosStep() {
 	return (
 		<StepLayout
 			question={content["noGos.question"]}
-			currentStep={Step.NoGos}
 			onNext={() => stackRef.current?.goNext()}
 			onSkip={() => stackRef.current?.goNext()}
 			onBack={() => stackRef.current?.goBack()}
@@ -73,10 +83,10 @@ export function NoGosStep() {
 				<SwipeCardStack
 					ref={stackRef}
 					count={noGos.length}
-					initialIndex={initialIndex}
+					initialIndex={cardIndex}
 					onCommit={getDirectionForIndex}
-					onExhausted={nextStep}
-					onBefore={prevStep}
+					onExhausted={goNext}
+					onBefore={goPrevious}
 					onBack={getDirectionForIndex}
 					onIndexChange={handleIndexChange}
 					onSwipe={handleSwipe}

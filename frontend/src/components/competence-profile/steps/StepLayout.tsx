@@ -1,12 +1,12 @@
 import { type ReactNode } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import { ProgressBar } from "../progress-bar/ProgressBar";
 import { QuestionBubble } from "../question-bubble/QuestionBubble";
-import { useAppStore } from "../../../store/useAppStore";
 import { content } from "../../../content/de";
-import { type Step } from "../../../common";
 import { PrimaryButton } from "../../primitives/buttons/PrimaryButton";
 import { GhostButton } from "../../primitives/buttons/GhostButton";
 import { BackButton } from "../../back-button/BackButton";
+import { pathnameToStep, getPreviousPath } from "../../../routing/routes";
 
 interface StepLayoutProps {
 	question: string;
@@ -18,7 +18,6 @@ interface StepLayoutProps {
 	nextDisabled?: boolean;
 	hasSkipButton?: boolean;
 	hasNextButton?: boolean;
-	currentStep: Step;
 	skipLabel?: string;
 	bottomContent?: ReactNode;
 }
@@ -33,18 +32,22 @@ export function StepLayout({
 	nextDisabled = false,
 	hasSkipButton = true,
 	hasNextButton = true,
-	currentStep,
 	skipLabel,
 	bottomContent,
 }: StepLayoutProps) {
-	const prevStep = useAppStore((state) => state.prevStep);
+	const { pathname, hash } = useLocation();
+	const navigate = useNavigate();
+	const progressStep = pathnameToStep(pathname);
+
+	const handleBack =
+		onBack ?? (() => navigate(getPreviousPath(pathname, hash)));
 
 	return (
 		<div className="flex flex-col h-[100dvh] p-4">
 			<div className="flex items-center gap-3 pb-1 shrink-0">
-				<BackButton onClick={onBack ?? prevStep} />
+				<BackButton onClick={handleBack} />
 				<div className="flex-1">
-					<ProgressBar currentStep={currentStep} />
+					<ProgressBar currentStep={progressStep} />
 				</div>
 			</div>
 			<div className="flex flex-1 flex-col min-h-0">

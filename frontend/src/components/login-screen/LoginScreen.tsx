@@ -1,11 +1,10 @@
 import React, { useState } from "react";
-import { useAppStore } from "../../store/useAppStore";
-import { Step } from "../../common";
+import { useNavigate } from "react-router-dom";
 import { unlock } from "../../api/client";
 import { PrimaryButton } from "../primitives/buttons/PrimaryButton";
 
 export const LoginScreen = () => {
-	const goToStep = useAppStore((state) => state.goToStep);
+	const navigate = useNavigate();
 	const [password, setPassword] = useState("");
 	const [error, setError] = useState(false);
 	const [loading, setLoading] = useState(false);
@@ -23,7 +22,7 @@ export const LoginScreen = () => {
 		setLoading(false);
 
 		if (ok) {
-			goToStep(Step.Welcome);
+			navigate("/welcome");
 		} else {
 			setError(true);
 		}

@@ -1,3 +1,5 @@
+import { workPreferencePairs } from "./work-preference-pairs";
+
 export const content = {
 	// Welcome
 	"welcome.slide.1.title": "Du suchst eine Ausbildung, die gut zu dir passt?",
@@ -217,28 +219,7 @@ export const content = {
 
 	// Work Preferences
 	"workPreferences.question": "Wie möchtest du in Zukunft arbeiten?",
-	"workPreferences.pairs": [
-		{ id: "location", a: "Immer am gleichen Ort", b: "Oft unterwegs" },
-		{
-			id: "hands-vs-mind",
-			a: "Mit den Händen arbeiten",
-			b: "Mit dem Kopf arbeiten",
-		},
-		{
-			id: "variety",
-			a: "Immer die gleichen Aufgaben",
-			b: "Immer andere Aufgaben",
-		},
-		{
-			id: "people",
-			a: "Wenig Kontakt mit Menschen",
-			b: "Viel Kontakt mit Menschen",
-		},
-		{ id: "pace", a: "Ruhige Arbeit", b: "Arbeit unter Zeitdruck" },
-		{ id: "structure", a: "Feste Regeln", b: "Viel Freiheit" },
-		{ id: "purpose", a: "Anderen helfen", b: "Aufgaben erledigen" },
-		{ id: "environment", a: "Drinnen", b: "Draußen" },
-	],
+	"workPreferences.pairs": workPreferencePairs,
 	"workPreferences.orLabel": "oder",
 
 	// No-Gos

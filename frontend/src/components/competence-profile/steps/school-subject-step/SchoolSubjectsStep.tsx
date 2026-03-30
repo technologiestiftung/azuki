@@ -1,21 +1,20 @@
 import { content } from "../../../../content/de";
 import { useAppStore } from "../../../../store/useAppStore";
-import { Step } from "../../../../common";
 import { StepLayout } from "../StepLayout";
+import { useFlowNavigation } from "../../../../routing/useFlowNavigation";
 import { categories } from "./school-subjects";
 import { SelectableRowButton } from "../../../primitives/buttons/SelectableRowButton";
 
 export function SchoolSubjectsStep() {
 	const profile = useAppStore((state) => state.profile);
 	const toggleSubject = useAppStore((state) => state.toggleSubject);
-	const nextStep = useAppStore((state) => state.nextStep);
+	const { goNext } = useFlowNavigation();
 
 	return (
 		<StepLayout
 			question={content["schoolSubjects.question"]}
-			currentStep={Step.SchoolSubjects}
-			onNext={nextStep}
-			onSkip={nextStep}
+			onNext={goNext}
+			onSkip={goNext}
 			nextDisabled={profile.favoriteSubjects.length === 0}
 			hasSkipButton={true}
 			skipLabel={content["schoolSubjects.skipButton.label"]}
