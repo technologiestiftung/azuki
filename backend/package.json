@@ -7,7 +7,9 @@
 		"dev": "tsx watch --env-file=.env src/index.ts",
 		"build": "tsc",
 		"start": "tsx src/index.ts",
-		"fetch-berufe": "tsx ../scripts/fetch-berufe.ts"
+		"fetch-berufe": "tsx ../scripts/fetch-berufe.ts",
+		"test": "vitest run",
+		"test:watch": "vitest"
 	},
 	"dependencies": {
 		"@azuki/shared": "*",
@@ -19,6 +21,7 @@
 	"devDependencies": {
 		"@types/node": "22.19.11",
 		"tsx": "4.21.0",
-		"typescript": "5.9.3"
+		"typescript": "5.9.3",
+		"vitest": "4.1.2"
 	}
 }
