@@ -146,6 +146,9 @@ function extractConditions(infofelder: Infofeld[]): WorkConditions {
       text,
     ),
     accidentRisk: /Unfallgefahr|Infektionsgefahr|Absturzgefährdung/i.test(text),
+		precisionWork: /Präzisions.+Feinarbeit/i.test(text),
+		frequentAbsence: /häufige Abwesenheit vom Wohnort/i.test(text),
+		changingWorkplaces: /wechselnde Arbeitsorte/i.test(text),
   };
 }
 
@@ -282,6 +285,25 @@ function extractStrengthTags(infofelder: Infofeld[]): string[] {
   }
 
   return result;
+}
+
+function extractSkillTags(infofelder: Infofeld[]): string[] {
+	const field = infofelder.find((f) => f.id === "b20-2");
+	if (!field?.content) return [];
+
+	const decoded = decodeHtmlEntities(field.content);
+	const matches = decoded.matchAll(/name="([^"]+)"/g);
+	const result: string[] = [];
+
+	for (const m of matches) {
+		const tag = m[1];
+		if (tag === "Fähigkeiten" || tag === "Ausprägungsgrad") continue;
+		if (!result.includes(tag)) {
+			result.push(tag);
+		}
+	}
+
+	return result;
 }
 
 function extractSalarySignal(infofelder: Infofeld[]): {
@@ -478,6 +500,7 @@ function processOccupationDetail(data: ApiBerufItem[]): Occupation | null {
     interests: interestData.interests,
     interestKeywords: interestData.interestKeywords,
     strengthTags: extractStrengthTags(taetigkeitInfofelder),
+    skillTags: extractSkillTags(taetigkeitInfofelder),
     conditions: extractConditions(taetigkeitInfofelder),
     salaryMonthlyMedian: salarySignal.salaryMonthlyMedian,
     salaryKnown: salarySignal.salaryKnown,
