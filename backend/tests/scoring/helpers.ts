@@ -24,7 +24,9 @@ export function makeConditions(
 		regulatedWork: false,
 		animalWork: false,
 		accidentRisk: false,
-		// precisionWork, frequentAbsence, changingWorkplaces — added in Task 2
+		precisionWork: false,
+		frequentAbsence: false,
+		changingWorkplaces: false,
 		...overrides,
 	};
 }
@@ -47,7 +49,7 @@ export function makeOccupation(
 		interests: [],
 		interestKeywords: [],
 		strengthTags: [],
-		// skillTags — added in Task 2
+		skillTags: [],
 		salaryMonthlyMedian: null,
 		salaryKnown: false,
 		digitalizationSignal: false,
