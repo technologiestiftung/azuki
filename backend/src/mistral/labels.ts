@@ -70,7 +70,6 @@ export const WORK_VALUE_LABELS: Record<string, string> = {
 	flexible_hours: "Flexible Arbeitszeiten",
 	stability: "Sicherheit und Stabilität",
 	modern_technology: "Arbeiten mit modernen Technologien",
-	movement: "Viel Bewegung",
 	short_distance: "Kurzer Arbeitsweg",
 	career: "Karriere",
 	benefits: "Benefits (Arbeitgeberleistungen)",

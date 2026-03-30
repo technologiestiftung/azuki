@@ -89,7 +89,5 @@ export const WORK_VALUE_CHECKS: Record<string, WorkValuePredicate> = {
 		!o.conditions.accidentRisk &&
 		!o.conditions.irregularHours,
 	modern_technology: (o) => o.conditions.machinery || o.digitalizationSignal,
-	movement: (o) =>
-		o.conditions.standingWalking || o.conditions.manualLabor || o.conditions.outdoor,
-	//TODO: add conditions for short_distance, career, benefits, remote
+	remote: (o) => /homeoffice/i.test(o.workLocations),
 };

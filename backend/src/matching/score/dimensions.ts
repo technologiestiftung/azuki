@@ -210,6 +210,16 @@ export function scoreWorkValues(
       continue;
     }
 
+    if (valueId === "short_distance") {
+      if (
+        occupation.conditions.frequentAbsence ||
+        occupation.conditions.changingWorkplaces
+      ) {
+        score -= 2;
+      }
+      continue;
+    }
+
     const check = WORK_VALUE_CHECKS[valueId];
     if (check && check(occupation)) {
       score += 2;
