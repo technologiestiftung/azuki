@@ -122,6 +122,14 @@ function label(id: string, map: Record<string, string>): string {
 function formatProfileSections(profile: UserProfile): string {
   const parts: string[] = [];
 
+  if (profile.inSchool !== null) {
+    parts.push(
+      profile.inSchool
+        ? "Ist aktuell noch in der Schule"
+        : "Hat die Schule bereits abgeschlossen",
+    );
+  }
+
   if (profile.educationLevel) {
     parts.push(
       `Schulabschluss: ${label(profile.educationLevel, EDUCATION_LABELS)}`,
@@ -135,6 +143,11 @@ function formatProfileSections(profile: UserProfile): string {
   if (profile.interests.length > 0) {
     parts.push(
       `Interessen/Hobbys: ${profile.interests.map((s) => label(s, INTEREST_LABELS)).join(", ")}`,
+    );
+  }
+  if (profile.customInterests.length > 0) {
+    parts.push(
+      `Weitere Interessen (eigene Angaben): ${profile.customInterests.join(", ")}`,
     );
   }
 
