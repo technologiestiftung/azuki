@@ -211,11 +211,19 @@ function formatOccupationList(scored: ScoredOccupation[]): string {
         occupation.descriptionShort ||
         occupation.taskSummary ||
         occupation.name;
-      const truncated =
+      const truncatedDesc =
         description.length > MAX_DESCRIPTION_LENGTH
           ? description.slice(0, MAX_DESCRIPTION_LENGTH) + "..."
           : description;
-      return `${index + 1}. [ID: ${occupation.id}] ${occupation.name}\n   ${truncated}`;
+      let entry = `${index + 1}. [ID: ${occupation.id}] ${occupation.name}\n   ${truncatedDesc}`;
+      if (occupation.competenciesText) {
+        const truncatedComp =
+          occupation.competenciesText.length > MAX_DESCRIPTION_LENGTH
+            ? occupation.competenciesText.slice(0, MAX_DESCRIPTION_LENGTH) + "..."
+            : occupation.competenciesText;
+        entry += `\n   Kompetenzen: ${truncatedComp}`;
+      }
+      return entry;
     })
     .join("\n\n");
 }

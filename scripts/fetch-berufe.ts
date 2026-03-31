@@ -147,9 +147,9 @@ function extractConditions(infofelder: Infofeld[]): WorkConditions {
       text,
     ),
     accidentRisk: /Unfallgefahr|Infektionsgefahr|Absturzgefährdung/i.test(text),
-		precisionWork: /Präzisions.+Feinarbeit/i.test(text),
-		frequentAbsence: /häufige Abwesenheit vom Wohnort/i.test(text),
-		changingWorkplaces: /wechselnde Arbeitsorte/i.test(text),
+    precisionWork: /Präzisions.+Feinarbeit/i.test(text),
+    frequentAbsence: /häufige Abwesenheit vom Wohnort/i.test(text),
+    changingWorkplaces: /wechselnde Arbeitsorte/i.test(text),
   };
 }
 
@@ -259,7 +259,9 @@ function extractInterestData(infofelder: Infofeld[]): {
     .map((m) => m[1].replace(/\s+/g, " ").trim())
     .filter(Boolean);
   const interestKeywords = [
-    ...new Set(examplePhrases.flatMap((phrase) => tokenizeInterestText(phrase))),
+    ...new Set(
+      examplePhrases.flatMap((phrase) => tokenizeInterestText(phrase)),
+    ),
   ];
 
   return { interests, interestKeywords };
@@ -289,15 +291,25 @@ function extractNameTags(
   return result;
 }
 
-const STRENGTH_TAG_HEADERS = new Set(["Merkmale des Arbeits- und Sozialverhaltens"]);
+const STRENGTH_TAG_HEADERS = new Set([
+  "Merkmale des Arbeits- und Sozialverhaltens",
+]);
 const SKILL_TAG_HEADERS = new Set(["Fähigkeiten", "Ausprägungsgrad"]);
 
 function extractStrengthTags(infofelder: Infofeld[]): string[] {
-  return extractNameTags(infofelder, INFOFELD_IDS.arbeitsSozialverhalten, STRENGTH_TAG_HEADERS);
+  return extractNameTags(
+    infofelder,
+    INFOFELD_IDS.arbeitsSozialverhalten,
+    STRENGTH_TAG_HEADERS,
+  );
 }
 
 function extractSkillTags(infofelder: Infofeld[]): string[] {
-  return extractNameTags(infofelder, INFOFELD_IDS.faehigkeiten, SKILL_TAG_HEADERS);
+  return extractNameTags(
+    infofelder,
+    INFOFELD_IDS.faehigkeiten,
+    SKILL_TAG_HEADERS,
+  );
 }
 
 function extractSalarySignal(infofelder: Infofeld[]): {
