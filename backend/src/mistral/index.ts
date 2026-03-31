@@ -161,6 +161,13 @@ function formatProfileSections(profile: UserProfile): string {
     parts.push(`Stärken: ${strengthEntries.join(", ")}`);
   }
 
+  const weaknessEntries = Object.entries(profile.strengths)
+    .filter(([, value]) => value > 0 && value < 0.5)
+    .map(([key]) => label(key, STRENGTH_LABELS));
+  if (weaknessEntries.length > 0) {
+    parts.push(`Eher nicht so gut in: ${weaknessEntries.join(", ")}`);
+  }
+
   const prefLabels = Object.entries(profile.workPreferences)
     .filter(([, value]) => value !== null)
     .map(([key, value]) => {
