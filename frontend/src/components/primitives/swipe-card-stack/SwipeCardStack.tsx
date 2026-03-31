@@ -33,6 +33,7 @@ interface SwipeCardStackProps {
 	count: number;
 	initialIndex?: number;
 	isDraggingEnabled?: boolean;
+	isSwipeUpGestureEnabled?: boolean;
 	onCommit: (index: number) => SwipeDirection;
 	onExhausted: () => void;
 	onBefore: () => void;
@@ -52,6 +53,7 @@ export const SwipeCardStack = forwardRef<
 		count,
 		initialIndex = 0,
 		isDraggingEnabled = true,
+		isSwipeUpGestureEnabled = true,
 		onCommit,
 		onExhausted,
 		onBefore,
@@ -277,7 +279,7 @@ export const SwipeCardStack = forwardRef<
 			setIsDragging(false);
 
 			const direction = detectSwipeDirection(dx, dy);
-			if (direction) {
+			if (direction && (direction !== "up" || isSwipeUpGestureEnabled)) {
 				flyOut(direction, nextIndex);
 			} else {
 				setCardTransition("transform 0.3s ease");
@@ -285,7 +287,7 @@ export const SwipeCardStack = forwardRef<
 				setDragY(0);
 			}
 		},
-		[isDragging, flyOut, nextIndex],
+		[isDragging, flyOut, nextIndex, isSwipeUpGestureEnabled],
 	);
 
 	const handlePointerCancel = useCallback(() => {
