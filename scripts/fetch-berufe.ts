@@ -408,6 +408,7 @@ function extractSubjects(infofelder: Infofeld[]): string[] {
   if (/Fremdsprachen/i.test(text)) {
     if (!result.includes("french")) result.push("french");
     if (!result.includes("spanish")) result.push("spanish");
+    if (!result.includes("other_languages")) result.push("other_languages");
   }
 
   return result;
