@@ -32,8 +32,7 @@ export function SchoolDegreeStep() {
 			currentStep={Step.SchoolDegreeStep}
 			onNext={nextStep}
 			onSkip={nextStep}
-			nextDisabled={!profile.educationLevel}
-			hasSkipButton={false}
+			isSkipConfirmDialogOpen={!profile.educationLevel}
 		>
 			<div className="flex flex-col gap-3">
 				{filteredDegrees.map((degree) => (

@@ -21,7 +21,6 @@ export function SecretTalentStep() {
 			currentStep={Step.SecretTalent}
 			onNext={handleNext}
 			onSkip={nextStep}
-			nextDisabled={false}
 		>
 			<div className="rounded-3xl p-5 min-h-48 bg-gray-50 border-2 border-gray-200">
 				<textarea

@@ -16,9 +16,8 @@ export function SchoolSubjectsStep() {
 			currentStep={Step.SchoolSubjects}
 			onNext={nextStep}
 			onSkip={nextStep}
-			nextDisabled={profile.favoriteSubjects.length === 0}
-			hasSkipButton={true}
 			skipLabel={content["schoolSubjects.skipButton.label"]}
+			isSkipConfirmDialogOpen={profile.favoriteSubjects.length === 0}
 		>
 			<div className="flex flex-col gap-8">
 				{categories.map((category) => (

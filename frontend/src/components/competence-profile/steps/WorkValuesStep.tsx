@@ -41,9 +41,8 @@ export function WorkValuesStep() {
 			currentStep={Step.WorkValues}
 			onNext={nextStep}
 			onSkip={nextStep}
-			nextDisabled={profile.workValues.length === 0}
-			hasSkipButton={true}
 			skipLabel={content["workValues.skipButton.label"]}
+			isSkipConfirmDialogOpen={profile.workValues.length === 0}
 		>
 			<div className="flex flex-col gap-3">
 				{workValues.map((value) => {

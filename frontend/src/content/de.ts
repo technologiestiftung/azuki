@@ -247,6 +247,7 @@ export const content = {
 	"noGos.ariaLabel.reject": "Als geht nicht markieren",
 	"noGos.acceptLabel": "Ist okay",
 	"noGos.ariaLabel.accept": "Als ist okay markieren",
+	"noGos.skipButton.label": "Überspringen",
 	//noise
 	"noGos.noise.title": "Arbeit mit Lärm",
 	"noGos.noise.description": "z. B. Baustelle, Maschinen oder laute Werkstatt",
@@ -283,4 +284,11 @@ export const content = {
 	"results.title": "Deine Ergebnisse",
 	"results.moreInfo": "Mehr erfahren",
 	"results.restartCta": "Nochmal starten",
+
+	// Skip confirm dialog
+	"skipConfirmDialog.title": "Du hast noch nichts ausgewählt",
+	"skipConfirmDialog.description":
+		"Wenn du mehr auswählst, können wir dir passendere Berufe vorschlagen.",
+	"skipConfirmDialog.confirm": "Auswahl treffen",
+	"skipConfirmDialog.cancel": "Überspringen",
 };
