@@ -40,7 +40,6 @@ export function WorkValuesStep() {
 			question={content["workValues.question"]}
 			onNext={goNext}
 			onSkip={goNext}
-			hasSkipButton={true}
 			skipLabel={content["workValues.skipButton.label"]}
 			isSkipConfirmDialogOpen={profile.workValues.length === 0}
 		>

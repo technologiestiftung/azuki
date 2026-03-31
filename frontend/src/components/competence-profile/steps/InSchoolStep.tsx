@@ -16,6 +16,7 @@ export function InSchoolStep() {
 		<StepLayout
 			question={content["inSchool.question"]}
 			onNext={goNext}
+			onSkip={goNext}
 			hasSkipButton={false}
 			isSkipConfirmDialogOpen={profile.inSchool === null}
 		>

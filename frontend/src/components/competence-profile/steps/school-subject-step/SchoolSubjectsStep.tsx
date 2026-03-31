@@ -15,7 +15,7 @@ export function SchoolSubjectsStep() {
 			question={content["schoolSubjects.question"]}
 			onNext={goNext}
 			onSkip={goNext}
-			hasSkipButton={true}
+			hasSkipButton={false}
 			skipLabel={content["schoolSubjects.skipButton.label"]}
 			isSkipConfirmDialogOpen={profile.favoriteSubjects.length === 0}
 		>

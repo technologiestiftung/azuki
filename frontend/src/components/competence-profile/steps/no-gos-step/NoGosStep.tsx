@@ -66,15 +66,13 @@ export function NoGosStep() {
 		[setNoGo],
 	);
 
-	const currentIndex = useAppStore((state) => state.noGoSubIndex);
-
 	const handleSkip = useCallback(() => {
-		const card = noGos[currentIndex];
+		const card = noGos[cardIndex];
 		if (card) {
 			setNoGo(card.id, null);
 		}
-		stackRef.current?.goNext();
-	}, [currentIndex, setNoGo]);
+		stackRef.current?.swipeUp();
+	}, [cardIndex, setNoGo]);
 
 	return (
 		<StepLayout
