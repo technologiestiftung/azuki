@@ -95,11 +95,6 @@ export const categories: {
 				label: content["schoolSubjects.creativity.performingArts.label"],
 				value: "performing_arts",
 			},
-		],
-	},
-	{
-		name: content["schoolSubjects.sports.label"],
-		subjects: [
 			{
 				label: content["schoolSubjects.sports.sports.label"],
 				value: "sports",
