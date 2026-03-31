@@ -2,6 +2,7 @@ import type { Occupation, UserProfile } from "@azuki/shared";
 import { INTERESTS } from "@azuki/shared";
 import type { SalaryBands } from "./salaryScoreBands.js";
 import {
+  CONCENTRATION_SKILL_TAGS,
   NO_GO_MAP,
   STRENGTH_TO_TAGS,
   WORK_PREF_MAP,
@@ -170,9 +171,8 @@ export function scoreStrengths(
     }
 
     if (strengthId === "concentration") {
-      const concentrationTags = ["Konzentration", "Daueraufmerksamkeit"];
       if (
-        concentrationTags.some((tag) => occupation.skillTags.includes(tag))
+        CONCENTRATION_SKILL_TAGS.some((tag) => occupation.skillTags.includes(tag))
       ) {
         score += 2;
       }

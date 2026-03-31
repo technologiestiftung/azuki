@@ -73,6 +73,14 @@ export const STRENGTH_TO_TAGS: Record<string, string[]> = {
 	],
 };
 
+/** BERUFENET b20-2 skill tags that indicate concentration ability. */
+export const CONCENTRATION_SKILL_TAGS: readonly string[] = [
+	"Konzentration",
+	"Daueraufmerksamkeit",
+] as const;
+
+const HOMEOFFICE_RE = /homeoffice/i;
+
 export const WORK_VALUE_CHECKS: Record<string, WorkValuePredicate> = {
 	people_work: (o) =>
 		o.conditions.customerContact || o.interests.includes("sozial-beratend"),
@@ -89,5 +97,5 @@ export const WORK_VALUE_CHECKS: Record<string, WorkValuePredicate> = {
 		!o.conditions.accidentRisk &&
 		!o.conditions.irregularHours,
 	modern_technology: (o) => o.conditions.machinery || o.digitalizationSignal,
-	remote: (o) => /homeoffice/i.test(o.workLocations),
+	remote: (o) => HOMEOFFICE_RE.test(o.workLocations),
 };

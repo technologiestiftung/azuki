@@ -68,6 +68,7 @@ const INFOFELD_IDS = {
   aufgabenKompakt: "b11-0",
   arbeitsorte: "b12-02",
   kompetenzenText: "b20-32",
+  faehigkeiten: "b20-2",
 } as const;
 
 // --- Helpers ---
@@ -264,21 +265,22 @@ function extractInterestData(infofelder: Infofeld[]): {
   return { interests, interestKeywords };
 }
 
-function extractStrengthTags(infofelder: Infofeld[]): string[] {
-  const field = infofelder.find(
-    (f) => f.id === INFOFELD_IDS.arbeitsSozialverhalten,
-  );
+/** Extracts deduplicated name="..." tags from an HTML infofeld, skipping listed headers. */
+function extractNameTags(
+  infofelder: Infofeld[],
+  fieldId: string,
+  skipTags: Set<string>,
+): string[] {
+  const field = infofelder.find((f) => f.id === fieldId);
   if (!field?.content) return [];
 
   const decoded = decodeHtmlEntities(field.content);
-  // b20-4 encodes tags in name="..." attributes in the HTML payload.
   const matches = decoded.matchAll(/name="([^"]+)"/g);
   const result: string[] = [];
 
   for (const m of matches) {
     const tag = m[1];
-    // Drop section headline and keep each tag only once.
-    if (tag === "Merkmale des Arbeits- und Sozialverhaltens") continue;
+    if (skipTags.has(tag)) continue;
     if (!result.includes(tag)) {
       result.push(tag);
     }
@@ -287,23 +289,15 @@ function extractStrengthTags(infofelder: Infofeld[]): string[] {
   return result;
 }
 
+const STRENGTH_TAG_HEADERS = new Set(["Merkmale des Arbeits- und Sozialverhaltens"]);
+const SKILL_TAG_HEADERS = new Set(["Fähigkeiten", "Ausprägungsgrad"]);
+
+function extractStrengthTags(infofelder: Infofeld[]): string[] {
+  return extractNameTags(infofelder, INFOFELD_IDS.arbeitsSozialverhalten, STRENGTH_TAG_HEADERS);
+}
+
 function extractSkillTags(infofelder: Infofeld[]): string[] {
-	const field = infofelder.find((f) => f.id === "b20-2");
-	if (!field?.content) return [];
-
-	const decoded = decodeHtmlEntities(field.content);
-	const matches = decoded.matchAll(/name="([^"]+)"/g);
-	const result: string[] = [];
-
-	for (const m of matches) {
-		const tag = m[1];
-		if (tag === "Fähigkeiten" || tag === "Ausprägungsgrad") continue;
-		if (!result.includes(tag)) {
-			result.push(tag);
-		}
-	}
-
-	return result;
+  return extractNameTags(infofelder, INFOFELD_IDS.faehigkeiten, SKILL_TAG_HEADERS);
 }
 
 function extractSalarySignal(infofelder: Infofeld[]): {
