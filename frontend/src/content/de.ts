@@ -148,7 +148,7 @@ export const content = {
 
 	// Strengths
 	"strengths.question": "Was kannst du gut?",
-	"strengths.sliderMin": "Gar nicht",
+	"strengths.sliderMin": "0%",
 	"strengths.sliderMax": "100%",
 	"strengths.skipButton.label": "Überspringen",
 	// Teamwork

@@ -86,6 +86,7 @@ export function NoGosStep() {
 					ref={stackRef}
 					count={noGos.length}
 					initialIndex={initialIndex}
+					isSwipeUpGestureEnabled={false}
 					onCommit={getDirectionForIndex}
 					onExhausted={nextStep}
 					onBefore={prevStep}
