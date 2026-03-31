@@ -135,3 +135,107 @@ describe("scoreStrengths — unchanged strengths still work", () => {
 		expect(scoreStrengths(occ, profile)).toBe(0);
 	});
 });
+
+describe("scoreStrengths — creativity b20-2 fallback", () => {
+	const profile = makeProfile({ strengths: { creativity: 0.8 } });
+
+	test("awards +2 for Ästhetik skillTag", () => {
+		const occ = makeOccupation({
+			skillTags: ["Sinn und Gespür für Ästhetik"],
+		});
+		expect(scoreStrengths(occ, profile)).toBe(2);
+	});
+
+	test("awards +2 for Zeichnerische Befähigung skillTag", () => {
+		const occ = makeOccupation({
+			skillTags: ["Zeichnerische Befähigung"],
+		});
+		expect(scoreStrengths(occ, profile)).toBe(2);
+	});
+
+	test("still awards +2 for b20-4 Kreativität tag", () => {
+		const occ = makeOccupation({ strengthTags: ["Kreativität"] });
+		expect(scoreStrengths(occ, profile)).toBe(2);
+	});
+
+	test("awards only +2 even when both b20-4 and b20-2 match", () => {
+		const occ = makeOccupation({
+			strengthTags: ["Kreativität"],
+			skillTags: ["Sinn und Gespür für Ästhetik"],
+		});
+		expect(scoreStrengths(occ, profile)).toBe(2);
+	});
+});
+
+describe("scoreStrengths — precision b20-2 fallback", () => {
+	const profile = makeProfile({ strengths: { precision: 0.7 } });
+
+	test("awards +2 for Beobachtungsgenauigkeit skillTag", () => {
+		const occ = makeOccupation({
+			skillTags: ["Beobachtungsgenauigkeit"],
+		});
+		expect(scoreStrengths(occ, profile)).toBe(2);
+	});
+
+	test("still awards +2 for precisionWork condition", () => {
+		const occ = makeOccupation({ conditions: { precisionWork: true } });
+		expect(scoreStrengths(occ, profile)).toBe(2);
+	});
+});
+
+describe("scoreStrengths — craftsmanship b20-2 fallback", () => {
+	const profile = makeProfile({ strengths: { craftsmanship: 0.8 } });
+
+	test("awards +2 for Fingergeschick skillTag", () => {
+		const occ = makeOccupation({
+			skillTags: ["Fingergeschick"],
+		});
+		expect(scoreStrengths(occ, profile)).toBe(2);
+	});
+
+	test("still awards +2 for manualLabor condition", () => {
+		const occ = makeOccupation({ conditions: { manualLabor: true } });
+		expect(scoreStrengths(occ, profile)).toBe(2);
+	});
+});
+
+describe("scoreStrengths — logical-thinking b20-2 fallback", () => {
+	const profile = makeProfile({ strengths: { "logical-thinking": 0.8 } });
+
+	test("awards +2 for Numerisches Denken skillTag", () => {
+		const occ = makeOccupation({
+			skillTags: ["Numerisches (rechnerisches) Denken"],
+		});
+		expect(scoreStrengths(occ, profile)).toBe(2);
+	});
+
+	test("still awards +2 for Umsicht strengthTag", () => {
+		const occ = makeOccupation({ strengthTags: ["Umsicht"] });
+		expect(scoreStrengths(occ, profile)).toBe(2);
+	});
+});
+
+describe("scoreStrengths — communication b20-2 fallback", () => {
+	const profile = makeProfile({ strengths: { communication: 0.8 } });
+
+	test("awards +2 for Mündliches Ausdrucksvermögen skillTag", () => {
+		const occ = makeOccupation({
+			skillTags: ["Mündliches Ausdrucksvermögen"],
+		});
+		expect(scoreStrengths(occ, profile)).toBe(2);
+	});
+
+	test("awards +2 for Schriftliches Ausdrucksvermögen skillTag", () => {
+		const occ = makeOccupation({
+			skillTags: ["Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"],
+		});
+		expect(scoreStrengths(occ, profile)).toBe(2);
+	});
+
+	test("still awards +2 for Kommunikationsfähigkeit strengthTag", () => {
+		const occ = makeOccupation({
+			strengthTags: ["Kommunikationsfähigkeit"],
+		});
+		expect(scoreStrengths(occ, profile)).toBe(2);
+	});
+});

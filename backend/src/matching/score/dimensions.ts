@@ -2,8 +2,13 @@ import type { Occupation, UserProfile } from "@azuki/shared";
 import { INTERESTS } from "@azuki/shared";
 import type { SalaryBands } from "./salaryScoreBands.js";
 import {
+  COMMUNICATION_SKILL_TAGS,
   CONCENTRATION_SKILL_TAGS,
+  CRAFTSMANSHIP_SKILL_TAGS,
+  CREATIVITY_SKILL_TAGS,
+  LOGICAL_THINKING_SKILL_TAGS,
   NO_GO_MAP,
+  PRECISION_SKILL_TAGS,
   STRENGTH_TO_TAGS,
   WORK_PREF_MAP,
   WORK_VALUE_CHECKS,
@@ -149,14 +154,13 @@ export function scoreStrengths(
   let score = 0;
 
   for (const [strengthId, value] of Object.entries(profile.strengths)) {
-    // Only count strengths the user rated in the upper half.
     if (value < 0.5) continue;
 
     if (strengthId === "craftsmanship") {
-      // Craftsmanship is inferred from practical/manual work conditions.
       if (
         occupation.conditions.manualLabor ||
-        occupation.conditions.machinery
+        occupation.conditions.machinery ||
+        CRAFTSMANSHIP_SKILL_TAGS.some((tag) => occupation.skillTags.includes(tag))
       ) {
         score += 2;
       }
@@ -164,7 +168,10 @@ export function scoreStrengths(
     }
 
     if (strengthId === "precision") {
-      if (occupation.conditions.precisionWork) {
+      if (
+        occupation.conditions.precisionWork ||
+        PRECISION_SKILL_TAGS.some((tag) => occupation.skillTags.includes(tag))
+      ) {
         score += 2;
       }
       continue;
@@ -173,6 +180,39 @@ export function scoreStrengths(
     if (strengthId === "concentration") {
       if (
         CONCENTRATION_SKILL_TAGS.some((tag) => occupation.skillTags.includes(tag))
+      ) {
+        score += 2;
+      }
+      continue;
+    }
+
+    if (strengthId === "creativity") {
+      const tags = STRENGTH_TO_TAGS[strengthId];
+      if (
+        tags?.some((tag) => occupation.strengthTags.includes(tag)) ||
+        CREATIVITY_SKILL_TAGS.some((tag) => occupation.skillTags.includes(tag))
+      ) {
+        score += 2;
+      }
+      continue;
+    }
+
+    if (strengthId === "logical-thinking") {
+      const tags = STRENGTH_TO_TAGS[strengthId];
+      if (
+        tags?.some((tag) => occupation.strengthTags.includes(tag)) ||
+        LOGICAL_THINKING_SKILL_TAGS.some((tag) => occupation.skillTags.includes(tag))
+      ) {
+        score += 2;
+      }
+      continue;
+    }
+
+    if (strengthId === "communication") {
+      const tags = STRENGTH_TO_TAGS[strengthId];
+      if (
+        tags?.some((tag) => occupation.strengthTags.includes(tag)) ||
+        COMMUNICATION_SKILL_TAGS.some((tag) => occupation.skillTags.includes(tag))
       ) {
         score += 2;
       }

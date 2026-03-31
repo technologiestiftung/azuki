@@ -79,6 +79,33 @@ export const CONCENTRATION_SKILL_TAGS: readonly string[] = [
 	"Daueraufmerksamkeit",
 ] as const;
 
+/** BERUFENET b20-2 skill tags that indicate creativity. */
+export const CREATIVITY_SKILL_TAGS: readonly string[] = [
+	"Sinn und Gespür für Ästhetik",
+	"Zeichnerische Befähigung",
+] as const;
+
+/** BERUFENET b20-2 skill tags that indicate precision. */
+export const PRECISION_SKILL_TAGS: readonly string[] = [
+	"Beobachtungsgenauigkeit",
+] as const;
+
+/** BERUFENET b20-2 skill tags that indicate craftsmanship. */
+export const CRAFTSMANSHIP_SKILL_TAGS: readonly string[] = [
+	"Fingergeschick",
+] as const;
+
+/** BERUFENET b20-2 skill tags that indicate logical thinking. */
+export const LOGICAL_THINKING_SKILL_TAGS: readonly string[] = [
+	"Numerisches (rechnerisches) Denken",
+] as const;
+
+/** BERUFENET b20-2 skill tags that indicate communication ability. */
+export const COMMUNICATION_SKILL_TAGS: readonly string[] = [
+	"Mündliches Ausdrucksvermögen",
+	"Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit",
+] as const;
+
 const HOMEOFFICE_RE = /homeoffice/i;
 
 export const WORK_VALUE_CHECKS: Record<string, WorkValuePredicate> = {
