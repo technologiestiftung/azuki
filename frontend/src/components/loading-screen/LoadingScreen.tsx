@@ -6,11 +6,16 @@ import { matchProfile } from "../../api/client";
 
 export function LoadingScreen() {
 	const profile = useAppStore((state) => state.profile);
+	const matchResults = useAppStore((state) => state.matchResults);
 	const setMatchResults = useAppStore((state) => state.setMatchResults);
 	const navigate = useNavigate();
 	const called = useRef(false);
 
 	useEffect(() => {
+		if (matchResults) {
+			navigate("/results/list", { replace: true });
+			return;
+		}
 		if (called.current) {
 			return;
 		}
@@ -30,7 +35,7 @@ export function LoadingScreen() {
 		Promise.all([doMatch(), minDelay]).then(() => {
 			navigate("/results/list");
 		});
-	}, [profile, setMatchResults, navigate]);
+	}, [profile, matchResults, setMatchResults, navigate]);
 
 	return (
 		<div className="flex flex-col items-center justify-center min-h-[100dvh] px-8">

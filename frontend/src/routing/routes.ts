@@ -85,7 +85,7 @@ export function getNextPath(pathname: string, hash: string): To {
 
 export function getPreviousPath(pathname: string, hash: string): To {
 	if (pathname.startsWith("/results")) {
-		return "/loading";
+		return { pathname: "/nogos", hash: `#${Math.max(0, noGos.length - 1)}` };
 	}
 
 	const index = orderedStepIndexByPath.get(pathname);
