@@ -60,12 +60,11 @@ export const content = {
 	"schoolSubjects.society.politics.label": "Politik",
 	"schoolSubjects.society.geography.label": "Geographie",
 	// Creativity
-	"schoolSubjects.creativity.label": "Kreatives",
+	"schoolSubjects.creativity.label": "Kreatives und Bewegung",
 	"schoolSubjects.creativity.music.label": "Musik",
 	"schoolSubjects.creativity.art.label": "Kunst",
-	"schoolSubjects.creativity.performingArts.label": "Darstellendes Spiel",
+	"schoolSubjects.creativity.performingArts.label": "Theater",
 	// Sport
-	"schoolSubjects.sports.label": "Sport",
 	"schoolSubjects.sports.sports.label": "Sport",
 
 	// Interests
