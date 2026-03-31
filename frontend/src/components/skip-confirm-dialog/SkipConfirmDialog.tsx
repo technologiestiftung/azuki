@@ -19,12 +19,28 @@ export function hideSkipConfirmDialog() {
 }
 
 interface SkipConfirmDialogProps {
-	onCancel?: () => void;
+	onSkip?: () => void;
+	onStay?: () => void;
 }
 
 export const SkipConfirmDialog: React.FC<SkipConfirmDialogProps> = ({
-	onCancel,
+	onSkip,
+	onStay,
 }) => {
+	const handleStay = () => {
+		hideSkipConfirmDialog();
+		if (onStay) {
+			onStay();
+		}
+	};
+
+	const handleSkip = () => {
+		hideSkipConfirmDialog();
+		if (onSkip) {
+			onSkip();
+		}
+	};
+
 	return (
 		<DefaultDialog id={skipConfirmDialogId}>
 			<div className="flex flex-col gap-2 px-2 pb-6 text-gray-900">
@@ -34,10 +50,10 @@ export const SkipConfirmDialog: React.FC<SkipConfirmDialogProps> = ({
 				<p className="text-lg">{content["skipConfirmDialog.description"]}</p>
 			</div>
 			<div className="flex flex-col gap-2 pt-2">
-				<PrimaryThemedButton onClick={hideSkipConfirmDialog}>
+				<PrimaryThemedButton onClick={handleStay}>
 					{content["skipConfirmDialog.confirm"]}
 				</PrimaryThemedButton>
-				<SecondaryButton onClick={onCancel}>
+				<SecondaryButton onClick={handleSkip}>
 					{content["skipConfirmDialog.cancel"]}
 				</SecondaryButton>
 			</div>

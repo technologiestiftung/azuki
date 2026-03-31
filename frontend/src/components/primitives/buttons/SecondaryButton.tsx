@@ -16,8 +16,8 @@ export const SecondaryButton: React.FC<SecondaryButtonProps> = ({
 		<button
 			className={`h-12 w-full py-2 px-5 text-base font-medium transition-colors rounded-2xl bg-gray-300
 				focus-visible:outline focus-visible:outline-2 focus-visible:outline-sky-500
-				hover:bg-gray-200 hover:text-gray-800
-				${disabled ? "text-gray-400" : "text-gray-900 hover:text-gray-800"}
+				md:hover:bg-gray-200 md:hover:text-gray-800
+				${disabled ? "text-gray-400" : "text-gray-900 md:hover:text-gray-800"}
 				${className}`}
 			disabled={disabled}
 			onClick={onClick}

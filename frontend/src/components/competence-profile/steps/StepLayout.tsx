@@ -82,7 +82,7 @@ export function StepLayout({
 						{skipLabel || content["navigation.skip"]}
 					</GhostButton>
 				)}
-				{isSkipConfirmDialogOpen && <SkipConfirmDialog onCancel={onSkip} />}
+				{isSkipConfirmDialogOpen && <SkipConfirmDialog onSkip={onSkip} />}
 			</div>
 		</div>
 	);
