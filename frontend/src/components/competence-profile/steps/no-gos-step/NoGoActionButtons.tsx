@@ -13,7 +13,7 @@ export const NoGoActionButtons = ({
 		<div className="flex gap-3">
 			<PrimaryOrangeButton
 				onClick={onClickReject}
-				aria-label={content["noGos.ariaLabel.reject"]}
+				ariaLabel={content["noGos.ariaLabel.reject"]}
 				className="flex gap-2 justify-center items-center flex-1"
 			>
 				<img src="/icons/close-black.svg" alt="" className="w-6 h-6" />
@@ -21,7 +21,7 @@ export const NoGoActionButtons = ({
 			</PrimaryOrangeButton>
 			<PrimaryThemedButton
 				onClick={onClickAccept}
-				aria-label={content["noGos.ariaLabel.accept"]}
+				ariaLabel={content["noGos.ariaLabel.accept"]}
 				className="flex gap-2 justify-center items-center flex-1"
 			>
 				<img src="/icons/check-black.svg" alt="" className="w-6 h-6" />
