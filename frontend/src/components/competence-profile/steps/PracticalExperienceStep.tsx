@@ -23,7 +23,7 @@ export function PracticalExperienceStep() {
 			subtitle={content["practicalExperience.subtitle"]}
 			onNext={handleNext}
 			onSkip={goNext}
-			nextDisabled={false}
+			isNextDisabled={false}
 		>
 			<div className="rounded-3xl p-5 min-h-48 bg-gray-50 border-2 border-gray-200">
 				<textarea

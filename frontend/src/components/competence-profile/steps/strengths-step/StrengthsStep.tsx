@@ -38,7 +38,12 @@ export function StrengthsStep() {
 		(index: number): SwipeDirection => {
 			const card = strengths[index];
 			const value = strengthValues[card?.id] ?? 0.5;
-			return value >= 0.5 ? "right" : "left";
+
+			if (value === 0.5) {
+				return "up";
+			}
+
+			return value > 0.5 ? "right" : "left";
 		},
 		[strengthValues],
 	);
@@ -65,23 +70,23 @@ export function StrengthsStep() {
 		[currentCard, setStrength],
 	);
 
+	const handleSkip = useCallback(() => {
+		if (currentCard) {
+			setStrength(currentCard.id, 0.5);
+		}
+		stackRef.current?.goNext();
+	}, [currentCard, setStrength]);
+
 	return (
 		<StepLayout
 			question={content["strengths.question"]}
 			onNext={() => stackRef.current?.goNext()}
-			onSkip={() => stackRef.current?.goNext()}
+			onSkip={handleSkip}
 			onBack={() => stackRef.current?.goBack()}
+			hasSkipButton={true}
 			skipLabel={content["strengths.skipButton.label"]}
-			bottomContent={
-				<StrengthsSlider
-					value={currentValue}
-					onChange={handleSliderChange}
-					minLabel={content["strengths.sliderMin"]}
-					maxLabel={content["strengths.sliderMax"]}
-				/>
-			}
 		>
-			<div className="flex flex-col justify-center items-center h-[85%] flex-1">
+			<div className="flex flex-col justify-center items-center h-[85%] flex-1 gap-y-5 py-5">
 				<SwipeCardStack
 					ref={stackRef}
 					count={strengths.length}
@@ -94,6 +99,13 @@ export function StrengthsStep() {
 					renderCard={(index: number) => (
 						<SwipeCard index={index} cards={strengths} minHeight={202} />
 					)}
+					isDraggingEnabled={false}
+				/>
+				<StrengthsSlider
+					value={currentValue}
+					onChange={handleSliderChange}
+					minLabel={content["strengths.sliderMin"]}
+					maxLabel={content["strengths.sliderMax"]}
 				/>
 			</div>
 		</StepLayout>

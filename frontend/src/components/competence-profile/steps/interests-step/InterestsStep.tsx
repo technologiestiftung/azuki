@@ -26,7 +26,7 @@ export function InterestsStep() {
 		<StepLayout
 			question={content["interests.question"]}
 			onNext={goNext}
-			nextDisabled={profile.interests.length === 0}
+			isSkipConfirmDialogOpen={profile.interests.length === 0}
 			bottomContent={
 				<TextInput
 					name="customInterest"

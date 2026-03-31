@@ -7,6 +7,10 @@ import { PrimaryButton } from "../../primitives/buttons/PrimaryButton";
 import { GhostButton } from "../../primitives/buttons/GhostButton";
 import { BackButton } from "../../back-button/BackButton";
 import { pathnameToStep, getPreviousPath } from "../../../routing/routes";
+import {
+	SkipConfirmDialog,
+	showSkipConfirmDialog,
+} from "../../skip-confirm-dialog/SkipConfirmDialog";
 
 interface StepLayoutProps {
 	question: string;
@@ -15,11 +19,12 @@ interface StepLayoutProps {
 	onNext?: () => void;
 	onSkip?: () => void;
 	onBack?: () => void;
-	nextDisabled?: boolean;
+	isNextDisabled?: boolean;
 	hasSkipButton?: boolean;
 	hasNextButton?: boolean;
 	skipLabel?: string;
 	bottomContent?: ReactNode;
+	isSkipConfirmDialogOpen?: boolean;
 }
 
 export function StepLayout({
@@ -29,11 +34,12 @@ export function StepLayout({
 	onNext,
 	onSkip,
 	onBack,
-	nextDisabled = false,
-	hasSkipButton = true,
+	isNextDisabled = false,
+	hasSkipButton = false,
 	hasNextButton = true,
 	skipLabel,
 	bottomContent,
+	isSkipConfirmDialogOpen,
 }: StepLayoutProps) {
 	const { pathname, hash } = useLocation();
 	const navigate = useNavigate();
@@ -61,24 +67,25 @@ export function StepLayout({
 			</div>
 
 			<div
-				className={`fixed bottom-0 left-1/2 -translate-x-1/2 w-full bg-sky-white border-t-2 border-gray-200 flex flex-col px-4 gap-y-2 max-w-[430px] ${hasSkipButton ? "pt-4 pb-2" : "py-4"}`}
+				className={`fixed bottom-0 left-1/2 -translate-x-1/2 w-full bg-sky-white border-t-2 border-gray-200 flex flex-col px-4 gap-y-1 max-w-[430px] ${hasSkipButton ? "pt-4 pb-2" : "py-4"}`}
 			>
 				{bottomContent}
 				{hasNextButton && (
 					<PrimaryButton
-						onClick={onNext}
-						disabled={nextDisabled}
+						onClick={isSkipConfirmDialogOpen ? showSkipConfirmDialog : onNext}
+						disabled={isNextDisabled}
 						className="w-full"
 					>
 						{content["navigation.next"]}
 					</PrimaryButton>
 				)}
 
-				{hasSkipButton && onSkip && (
+				{hasSkipButton && (
 					<GhostButton onClick={onSkip}>
 						{skipLabel || content["navigation.skip"]}
 					</GhostButton>
 				)}
+				{isSkipConfirmDialogOpen && <SkipConfirmDialog onSkip={onSkip} />}
 			</div>
 		</div>
 	);

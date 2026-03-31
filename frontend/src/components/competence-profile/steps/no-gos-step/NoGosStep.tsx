@@ -32,7 +32,10 @@ export function NoGosStep() {
 		}
 	}, [pathname, hash, navigate]);
 
-	const setNoGo = useAppStore((state) => state.setNoGo);
+	const setNoGo = useAppStore(
+		(state) => state.setNoGo as (id: string, answer: NoGoAnswer | null) => void,
+	);
+
 	const noGosValues = useAppStore((state) => state.profile.noGos);
 
 	const getDirectionForIndex = useCallback(
@@ -63,15 +66,25 @@ export function NoGosStep() {
 		[setNoGo],
 	);
 
+	const currentIndex = useAppStore((state) => state.noGoSubIndex);
+
+	const handleSkip = useCallback(() => {
+		const card = noGos[currentIndex];
+		if (card) {
+			setNoGo(card.id, null);
+		}
+		stackRef.current?.goNext();
+	}, [currentIndex, setNoGo]);
+
 	return (
 		<StepLayout
 			question={content["noGos.question"]}
 			onNext={() => stackRef.current?.goNext()}
-			onSkip={() => stackRef.current?.goNext()}
+			onSkip={handleSkip}
 			onBack={() => stackRef.current?.goBack()}
-			nextDisabled={false}
-			hasSkipButton={false}
+			hasSkipButton={true}
 			hasNextButton={false}
+			skipLabel={content["noGos.skipButton.label"]}
 			bottomContent={
 				<NoGoActionButtons
 					onClickAccept={() => stackRef.current?.swipeRight()}
@@ -84,6 +97,7 @@ export function NoGosStep() {
 					ref={stackRef}
 					count={noGos.length}
 					initialIndex={cardIndex}
+					isSwipeUpGestureEnabled={false}
 					onCommit={getDirectionForIndex}
 					onExhausted={goNext}
 					onBefore={goPrevious}

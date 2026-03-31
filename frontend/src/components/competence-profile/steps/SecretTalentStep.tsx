@@ -20,7 +20,6 @@ export function SecretTalentStep() {
 			question={content["secretTalent.question"]}
 			onNext={handleNext}
 			onSkip={goNext}
-			nextDisabled={false}
 		>
 			<div className="rounded-3xl p-5 min-h-48 bg-gray-50 border-2 border-gray-200">
 				<textarea
