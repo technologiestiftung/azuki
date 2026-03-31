@@ -9,6 +9,7 @@ export const EDUCATION_LABELS: Record<string, string> = {
 	unknown: "unbekannt",
 	vocational_diploma: "Fachabitur",
 	foreign_degree: "Abschluss aus dem Ausland",
+	none: "Ohne Abschluss",
 };
 
 export const SUBJECT_LABELS: Record<string, string> = {
@@ -28,6 +29,15 @@ export const SUBJECT_LABELS: Record<string, string> = {
 	music: "Musik",
 	ethics: "Ethik",
 	religion: "Religion",
+	wat: "Wirtschaft-Arbeit-Technik (WAT)",
+	home_economics: "Hauswirtschaftslehre",
+	pedagogy: "Pädagogik",
+	history: "Geschichte",
+	politics: "Politik",
+	geography: "Geographie",
+	ethics_religion: "Ethik & Religion",
+	performing_arts: "Darstellendes Spiel",
+	other_languages: "Andere Fremdsprachen",
 };
 
 export const STRENGTH_LABELS: Record<string, string> = {
