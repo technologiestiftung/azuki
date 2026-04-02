@@ -2,6 +2,7 @@ import { useAppStore } from "../../store/useAppStore";
 import { Step } from "../../common";
 import { content } from "../../content/de";
 import { PrimaryButton } from "../primitives/buttons/PrimaryButton";
+import { SecondaryButton } from "../primitives/buttons/SecondaryButton";
 import { type MatchedOccupation } from "@azuki/shared";
 
 export function ResultsScreen() {
@@ -90,10 +91,15 @@ export function ResultsScreen() {
 				)}
 			</div>
 
-			<div className="px-4 pb-8">
-				<PrimaryButton onClick={handleNewStart} className="w-full">
+			<div className="px-4 pb-8 space-y-3">
+				{occupations.length > 0 && (
+					<PrimaryButton onClick={() => goToStep(Step.FreiePlaetze)} className="w-full">
+						{content["results.freiePlaetzeCta"]}
+					</PrimaryButton>
+				)}
+				<SecondaryButton onClick={handleNewStart} className="w-full">
 					{content["results.restartCta"]}
-				</PrimaryButton>
+				</SecondaryButton>
 			</div>
 		</div>
 	);

@@ -9,6 +9,9 @@ export type {
 	UserProfile,
 	MatchedOccupation,
 	MatchResult,
+	AusbildungsplatzPreview,
+	AusbildungsplatzResult,
+	AusbildungsplaetzeResponse,
 } from "./types";
 
 export {

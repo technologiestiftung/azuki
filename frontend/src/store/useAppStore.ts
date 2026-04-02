@@ -6,6 +6,7 @@ import {
 	type WorkPreferenceChoice,
 	type NoGoAnswer,
 	type MatchResult,
+	type AusbildungsplaetzeResponse,
 } from "../common";
 
 const STEP_ORDER = [
@@ -24,6 +25,7 @@ const STEP_ORDER = [
 	Step.NoGos,
 	Step.Loading,
 	Step.Results,
+	Step.FreiePlaetze,
 ];
 
 const initialProfile: UserProfile = {
@@ -47,6 +49,7 @@ interface AppState {
 	strengthSubIndex: number;
 	noGoSubIndex: number;
 	workPrefSubIndex: number;
+	ausbildungsplaetze: AusbildungsplaetzeResponse | null;
 }
 
 interface AppActions {
@@ -68,6 +71,7 @@ interface AppActions {
 	setStrengthSubIndex: (index: number) => void;
 	setNoGoSubIndex: (index: number) => void;
 	setWorkPrefSubIndex: (index: number) => void;
+	setAusbildungsplaetze: (results: AusbildungsplaetzeResponse) => void;
 	resetProfile: () => void;
 }
 
@@ -78,6 +82,7 @@ export const useAppStore = create<AppState & AppActions>((set, get) => ({
 	strengthSubIndex: 0,
 	noGoSubIndex: 0,
 	workPrefSubIndex: 0,
+	ausbildungsplaetze: null,
 
 	goToStep: (step) => set({ currentStep: step }),
 
@@ -204,10 +209,14 @@ export const useAppStore = create<AppState & AppActions>((set, get) => ({
 	setNoGoSubIndex: (index) => set({ noGoSubIndex: index }),
 
 	setWorkPrefSubIndex: (index) => set({ workPrefSubIndex: index }),
+
+	setAusbildungsplaetze: (results) => set({ ausbildungsplaetze: results }),
+
 	resetProfile: () =>
 		set({
 			profile: initialProfile,
 			matchResults: null,
+			ausbildungsplaetze: null,
 			strengthSubIndex: 0,
 			noGoSubIndex: 0,
 			workPrefSubIndex: 0,

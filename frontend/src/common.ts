@@ -10,6 +10,7 @@ export type {
 	MatchedOccupation,
 	MatchResult,
 	SubjectDefinition,
+	AusbildungsplaetzeResponse,
 } from "@azuki/shared";
 
 import type { WorkPreferenceChoice } from "@azuki/shared";
@@ -40,6 +41,7 @@ export enum Step {
 	NoGos = 12,
 	Loading = 13,
 	Results = 14,
+	FreiePlaetze = 15,
 }
 
 export const QUESTIONNAIRE_STEPS = [

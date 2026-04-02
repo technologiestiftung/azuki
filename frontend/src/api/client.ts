@@ -1,4 +1,4 @@
-import type { UserProfile, MatchResult } from "@azuki/shared";
+import type { UserProfile, MatchResult, AusbildungsplaetzeResponse } from "@azuki/shared";
 
 type HeadersInit = Record<string, string>;
 
@@ -42,4 +42,22 @@ export async function unlock(password: string): Promise<boolean> {
 		return true;
 	}
 	return false;
+}
+
+export async function fetchAusbildungsplaetze(
+	plz: string,
+	berufe: string[],
+	umkreis?: number,
+): Promise<AusbildungsplaetzeResponse> {
+	const res = await fetch(`${API_BASE}/ausbildungsplaetze`, {
+		method: "POST",
+		headers: headers(),
+		body: JSON.stringify({ plz, berufe, umkreis }),
+	});
+
+	if (!res.ok) {
+		throw new Error(`Ausbildungsplaetze fetch failed: ${res.status}`);
+	}
+
+	return res.json();
 }

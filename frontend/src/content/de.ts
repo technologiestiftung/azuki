@@ -283,6 +283,7 @@ export const content = {
 	"results.title": "Deine Ergebnisse",
 	"results.moreInfo": "Mehr erfahren",
 	"results.restartCta": "Nochmal starten",
+	"results.freiePlaetzeCta": "Freie Plätze anzeigen",
 
 	// Skip confirm dialog
 	"skipConfirmDialog.title": "Du hast noch nichts ausgewählt",
@@ -290,4 +291,17 @@ export const content = {
 		"Wenn du mehr auswählst, können wir dir passendere Berufe vorschlagen.",
 	"skipConfirmDialog.confirm": "Auswahl treffen",
 	"skipConfirmDialog.cancel": "Überspringen",
+
+	// Freie Plätze
+	"freiePlaetze.title": "Freie Ausbildungsplätze",
+	"freiePlaetze.subtitle": "Finde freie Ausbildungsplätze in deiner Nähe.",
+	"freiePlaetze.plzLabel": "Deine Postleitzahl",
+	"freiePlaetze.plzPlaceholder": "z. B. 10115",
+	"freiePlaetze.radiusLabel": "Umkreis",
+	"freiePlaetze.searchCta": "Suchen",
+	"freiePlaetze.loadingTitle": "Wir suchen freie Plätze für dich...",
+	"freiePlaetze.noResults": "Keine freien Plätze in deiner Nähe gefunden",
+	"freiePlaetze.resultCount": "Plätze",
+	"freiePlaetze.showAll": "Alle Plätze auf Arbeitsagentur.de anzeigen",
+	"freiePlaetze.backCta": "Zurück zu den Ergebnissen",
 };

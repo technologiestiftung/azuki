@@ -15,6 +15,7 @@ import { NoGosStep } from "./components/competence-profile/steps/no-gos-step/NoG
 import { LoadingScreen } from "./components/loading-screen/LoadingScreen";
 import { ResultsScreen } from "./components/result-screen/ResultsScreen";
 import { WorkValuesStep } from "./components/competence-profile/steps/WorkValuesStep";
+import { FreiePlaetzePage } from "./components/freie-plaetze/FreiePlaetzePage";
 
 function StepRenderer() {
 	const currentStep = useAppStore((state) => state.currentStep);
@@ -50,6 +51,8 @@ function StepRenderer() {
 			return <LoadingScreen />;
 		case Step.Results:
 			return <ResultsScreen />;
+		case Step.FreiePlaetze:
+			return <FreiePlaetzePage />;
 		default:
 			return null;
 	}

@@ -110,3 +110,21 @@ export interface MatchedOccupation {
 export interface MatchResult {
 	occupations: MatchedOccupation[];
 }
+
+// --- Ausbildungsplatz Search (POST /api/ausbildungsplaetze response) ---
+
+export interface AusbildungsplatzPreview {
+	employer: string;
+	city: string;
+}
+
+export interface AusbildungsplatzResult {
+	beruf: string;
+	totalCount: number;
+	previews: AusbildungsplatzPreview[];
+	searchUrl: string;
+}
+
+export interface AusbildungsplaetzeResponse {
+	results: AusbildungsplatzResult[];
+}
