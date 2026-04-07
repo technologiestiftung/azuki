@@ -36,7 +36,7 @@ export function LoadingScreen() {
 		Promise.all([doMatch(), minDelay]).then(() => {
 			navigate("/results/list");
 		});
-	}, [profile, matchResults, setMatchResults, navigate]);
+	}, [profile, matchResults, setMatchResults, selectedModel, navigate]);
 
 	return (
 		<div className="flex flex-col items-center justify-center min-h-[100dvh] px-8">
