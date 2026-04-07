@@ -14,6 +14,7 @@ import { NoGosStep } from "./components/competence-profile/steps/no-gos-step/NoG
 import { LoadingScreen } from "./components/loading-screen/LoadingScreen";
 import { ResultsPage } from "./components/results-page/ResultsPage";
 import { WorkValuesStep } from "./components/competence-profile/steps/WorkValuesStep";
+import { ROUTE_PATHS } from "./routing/routes";
 
 function App() {
 	const location = useLocation();
@@ -22,22 +23,22 @@ function App() {
 		<div className="max-w-[430px] mx-auto h-[100dvh] bg-sky-white relative overflow-hidden">
 			<div key={location.pathname} className="animate-fadeIn h-full">
 				<Routes>
-					<Route path="/" element={<LoginScreen />} />
-					<Route path="/welcome" element={<WelcomeCarousel />} />
-					<Route path="/start" element={<StartScreen />} />
-					<Route path="/education/inschool" element={<InSchoolStep />} />
-					<Route path="/education/degree" element={<SchoolDegreeStep />} />
-					<Route path="/education/subjects" element={<SchoolSubjectsStep />} />
-					<Route path="/interests" element={<InterestsStep />} />
-					<Route path="/strengths" element={<StrengthsStep />} />
-					<Route path="/secret-talent" element={<SecretTalentStep />} />
-					<Route path="/conditions" element={<WorkValuesStep />} />
-					<Route path="/experience" element={<PracticalExperienceStep />} />
-					<Route path="/expectations" element={<WorkPreferencesStep />} />
-					<Route path="/nogos" element={<NoGosStep />} />
-					<Route path="/loading" element={<LoadingScreen />} />
-					<Route path="/results/list" element={<ResultsPage />} />
-					<Route path="*" element={<Navigate to="/welcome" replace />} />
+					<Route path={ROUTE_PATHS.login} element={<LoginScreen />} />
+					<Route path={ROUTE_PATHS.welcome} element={<WelcomeCarousel />} />
+					<Route path={ROUTE_PATHS.start} element={<StartScreen />} />
+					<Route path={ROUTE_PATHS.educationInSchool} element={<InSchoolStep />} />
+					<Route path={ROUTE_PATHS.educationDegree} element={<SchoolDegreeStep />} />
+					<Route path={ROUTE_PATHS.educationSubjects} element={<SchoolSubjectsStep />} />
+					<Route path={ROUTE_PATHS.interests} element={<InterestsStep />} />
+					<Route path={ROUTE_PATHS.strengths} element={<StrengthsStep />} />
+					<Route path={ROUTE_PATHS.secretTalent} element={<SecretTalentStep />} />
+					<Route path={ROUTE_PATHS.conditions} element={<WorkValuesStep />} />
+					<Route path={ROUTE_PATHS.experience} element={<PracticalExperienceStep />} />
+					<Route path={ROUTE_PATHS.expectations} element={<WorkPreferencesStep />} />
+					<Route path={ROUTE_PATHS.nogos} element={<NoGosStep />} />
+					<Route path={ROUTE_PATHS.loading} element={<LoadingScreen />} />
+					<Route path={ROUTE_PATHS.resultsList} element={<ResultsPage />} />
+					<Route path="*" element={<Navigate to={ROUTE_PATHS.welcome} replace />} />
 				</Routes>
 			</div>
 		</div>

@@ -4,6 +4,26 @@ import { workPreferencePairs } from "../content/work-preference-pairs";
 import { noGos } from "../components/competence-profile/steps/no-gos-step/no-gos";
 import { strengths } from "../components/competence-profile/steps/strengths-step/strengths";
 
+export const ROUTE_PATHS = {
+	login: "/",
+	welcome: "/welcome",
+	start: "/start",
+	educationInSchool: "/education/inschool",
+	educationDegree: "/education/degree",
+	educationSubjects: "/education/subjects",
+	interests: "/interests",
+	strengths: "/strengths",
+	conditions: "/conditions",
+	secretTalent: "/secret-talent",
+	experience: "/experience",
+	expectations: "/expectations",
+	nogos: "/nogos",
+	loading: "/loading",
+	resultsList: "/results/list",
+} as const;
+
+export const RESULTS_PATH_PREFIX = "/results" as const;
+
 interface FlowNode {
 	path: string;
 	step?: Step;
@@ -15,25 +35,29 @@ interface FlowNode {
  * Multi-card steps declare `cardCount` — the hash (#0, #1, …) tracks progress within them.
  */
 const ORDERED_NAVIGATION_STEPS: FlowNode[] = [
-	{ path: "/", step: Step.Login },
-	{ path: "/welcome", step: Step.Welcome },
-	{ path: "/start", step: Step.Start },
-	{ path: "/education/inschool", step: Step.InSchool },
-	{ path: "/education/degree", step: Step.SchoolDegreeStep },
-	{ path: "/education/subjects", step: Step.SchoolSubjects },
-	{ path: "/interests", step: Step.Interests },
-	{ path: "/strengths", step: Step.Strengths, cardCount: strengths.length },
-	{ path: "/conditions", step: Step.WorkValues },
-	{ path: "/secret-talent", step: Step.SecretTalent },
-	{ path: "/experience", step: Step.PracticalExperience },
+	{ path: ROUTE_PATHS.login, step: Step.Login },
+	{ path: ROUTE_PATHS.welcome, step: Step.Welcome },
+	{ path: ROUTE_PATHS.start, step: Step.Start },
+	{ path: ROUTE_PATHS.educationInSchool, step: Step.InSchool },
+	{ path: ROUTE_PATHS.educationDegree, step: Step.SchoolDegreeStep },
+	{ path: ROUTE_PATHS.educationSubjects, step: Step.SchoolSubjects },
+	{ path: ROUTE_PATHS.interests, step: Step.Interests },
 	{
-		path: "/expectations",
+		path: ROUTE_PATHS.strengths,
+		step: Step.Strengths,
+		cardCount: strengths.length,
+	},
+	{ path: ROUTE_PATHS.conditions, step: Step.WorkValues },
+	{ path: ROUTE_PATHS.secretTalent, step: Step.SecretTalent },
+	{ path: ROUTE_PATHS.experience, step: Step.PracticalExperience },
+	{
+		path: ROUTE_PATHS.expectations,
 		step: Step.WorkPreferences,
 		cardCount: workPreferencePairs.length,
 	},
-	{ path: "/nogos", step: Step.NoGos, cardCount: noGos.length },
-	{ path: "/loading", step: Step.Loading },
-	{ path: "/results/list", step: Step.Results },
+	{ path: ROUTE_PATHS.nogos, step: Step.NoGos, cardCount: noGos.length },
+	{ path: ROUTE_PATHS.loading, step: Step.Loading },
+	{ path: ROUTE_PATHS.resultsList, step: Step.Results },
 ];
 
 const orderedStepIndexByPath = new Map(
@@ -52,7 +76,7 @@ export function parseHashCardIndex(hash: string): number {
 }
 
 export function pathnameToStep(pathname: string): Step | undefined {
-	if (pathname.startsWith("/results")) {
+	if (pathname.startsWith(RESULTS_PATH_PREFIX)) {
 		return Step.Results;
 	}
 	const index = orderedStepIndexByPath.get(pathname);
@@ -84,13 +108,16 @@ export function getNextPath(pathname: string, hash: string): To {
 }
 
 export function getPreviousPath(pathname: string, hash: string): To {
-	if (pathname.startsWith("/results")) {
-		return { pathname: "/nogos", hash: `#${Math.max(0, noGos.length - 1)}` };
+	if (pathname.startsWith(RESULTS_PATH_PREFIX)) {
+		return {
+			pathname: ROUTE_PATHS.nogos,
+			hash: `#${Math.max(0, noGos.length - 1)}`,
+		};
 	}
 
 	const index = orderedStepIndexByPath.get(pathname);
 	if (index === undefined || index === 0) {
-		return "/";
+		return ROUTE_PATHS.login;
 	}
 
 	const current = ORDERED_NAVIGATION_STEPS[index];
