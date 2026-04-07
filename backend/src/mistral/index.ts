@@ -20,18 +20,18 @@ function buildSystemPrompt(): string {
   return `AUFGABE
 Du bekommst:
 - ein Profil eines Jugendlichen
-- eine vorgefilterte Liste der 30 passendsten Ausbildungsberufe
+- eine vorgefilterte Liste der 40 passendsten Ausbildungsberufe
 - zu jedem Beruf strukturierte Daten und kurze Beschreibungstexte
 
 Dein Job ist nicht, neue Berufe zu suchen.
-Dein Job ist, die 30 vorgefilterten Berufe neu zu bewerten, neu zu sortieren und die ${MIN_RESULTS} bis ${MAX_RESULTS} Berufe auszuwählen, die am besten zum Jugendlichen passen.
+Dein Job ist, die 40 vorgefilterten Berufe neu zu bewerten, neu zu sortieren und die ${MIN_RESULTS} bis ${MAX_RESULTS} Berufe auszuwählen, die am besten zum Jugendlichen passen.
 
 KONTEXT ZUM MATCHING
-Die Liste mit 30 Berufen wurde bereits durch einen deterministischen Matching-Algorithmus berechnet.
+Die Liste mit 40 Berufen wurde bereits durch einen deterministischen Matching-Algorithmus berechnet.
 Dabei wurden strukturierte Kriterien wie Schulabschluss, No-Gos, Arbeitsvorlieben, Lieblingsfächer, Interessen, Stärken und Rahmenbedingungen berücksichtigt.
 
 Nutze dieses Pre-Filtering als starke Grundlage.
-Nutze das LLM-Re-Ranking, um innerhalb dieser 30 Berufe feiner zu unterscheiden.
+Nutze das LLM-Re-Ranking, um innerhalb dieser 40 Berufe feiner zu unterscheiden.
 
 PRIORISIERUNG
 Gewichte die Signale ungefähr so:
@@ -58,14 +58,14 @@ Wenn freie Aussagen und strukturierte Angaben sich widersprechen, gelten freie A
 Ausnahme: harte Ausschlusskriterien dürfen nicht ignoriert werden.
 
 HARTE REGELN
-- Wähle nur Berufe aus der gegebenen Top-30-Liste.
+- Wähle nur Berufe aus der gegebenen Top-40-Liste.
 - Erfinde keine neuen Berufe.
-- Empfiehl keine Berufe, die klar gegen wichtige No-Gos sprechen, wenn es in der Top-30 passendere Alternativen gibt.
+- Empfiehl keine Berufe, die klar gegen wichtige No-Gos sprechen, wenn es in der Top-40 passendere Alternativen gibt.
 - Nutze den Schulabschluss als Realitätscheck, aber nicht als einziges Entscheidungskriterium.
 - Nutze nur Informationen aus dem Profil, den gelieferten Berufsdaten und allgemein plausible Merkmale eines Berufs.
 - Erfinde keine Wünsche, Erfahrungen, Stärken oder Lebensumstände, die nicht im Profil stehen.
 - Wenn mehrere Berufe ähnlich gut passen, bevorzuge den Beruf, der die eigenen Worte des Jugendlichen besser trifft.
-- Wenn du für einen Beruf keine klare individuelle Begründung geben kannst, wähle lieber einen anderen Beruf aus der Top-30-Liste.
+- Wenn du für einen Beruf keine klare individuelle Begründung geben kannst, wähle lieber einen anderen Beruf aus der Top-40-Liste.
 
 WORAUF DU BESONDERS ACHTEN SOLLST
 Berücksichtige besonders Signale, die im Pre-Filter nur teilweise oder gar nicht erfasst werden, zum Beispiel:
@@ -122,6 +122,14 @@ function label(id: string, map: Record<string, string>): string {
 function formatProfileSections(profile: UserProfile): string {
   const parts: string[] = [];
 
+  if (profile.inSchool !== null) {
+    parts.push(
+      profile.inSchool
+        ? "Ist aktuell noch in der Schule"
+        : "Hat die Schule bereits abgeschlossen",
+    );
+  }
+
   if (profile.educationLevel) {
     parts.push(
       `Schulabschluss: ${label(profile.educationLevel, EDUCATION_LABELS)}`,
@@ -137,6 +145,11 @@ function formatProfileSections(profile: UserProfile): string {
       `Interessen/Hobbys: ${profile.interests.map((s) => label(s, INTEREST_LABELS)).join(", ")}`,
     );
   }
+  if (profile.customInterests.length > 0) {
+    parts.push(
+      `Weitere Interessen (eigene Angaben): ${profile.customInterests.join(", ")}`,
+    );
+  }
 
   const strengthEntries = Object.entries(profile.strengths)
     .filter(([, value]) => value >= 0.5)
@@ -146,6 +159,13 @@ function formatProfileSections(profile: UserProfile): string {
     );
   if (strengthEntries.length > 0) {
     parts.push(`Stärken: ${strengthEntries.join(", ")}`);
+  }
+
+  const weaknessEntries = Object.entries(profile.strengths)
+    .filter(([, value]) => value > 0 && value < 0.5)
+    .map(([key]) => label(key, STRENGTH_LABELS));
+  if (weaknessEntries.length > 0) {
+    parts.push(`Eher nicht so gut in: ${weaknessEntries.join(", ")}`);
   }
 
   const prefLabels = Object.entries(profile.workPreferences)
@@ -191,11 +211,19 @@ function formatOccupationList(scored: ScoredOccupation[]): string {
         occupation.descriptionShort ||
         occupation.taskSummary ||
         occupation.name;
-      const truncated =
+      const truncatedDesc =
         description.length > MAX_DESCRIPTION_LENGTH
           ? description.slice(0, MAX_DESCRIPTION_LENGTH) + "..."
           : description;
-      return `${index + 1}. [ID: ${occupation.id}] ${occupation.name}\n   ${truncated}`;
+      let entry = `${index + 1}. [ID: ${occupation.id}] ${occupation.name}\n   ${truncatedDesc}`;
+      if (occupation.competenciesText) {
+        const truncatedComp =
+          occupation.competenciesText.length > MAX_DESCRIPTION_LENGTH
+            ? occupation.competenciesText.slice(0, MAX_DESCRIPTION_LENGTH) + "..."
+            : occupation.competenciesText;
+        entry += `\n   Kompetenzen: ${truncatedComp}`;
+      }
+      return entry;
     })
     .join("\n\n");
 }

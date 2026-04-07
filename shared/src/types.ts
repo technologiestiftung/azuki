@@ -21,6 +21,9 @@ export interface WorkConditions {
 	regulatedWork: boolean;
 	animalWork: boolean;
 	accidentRisk: boolean;
+	precisionWork: boolean;
+	frequentAbsence: boolean;
+	changingWorkplaces: boolean;
 }
 
 // --- Degree Statistics ---
@@ -54,6 +57,7 @@ export interface Occupation {
 	interests: string[];
 	interestKeywords: string[];
 	strengthTags: string[];
+	skillTags: string[];
 	conditions: WorkConditions;
 	salaryMonthlyMedian: number | null;
 	salaryKnown: boolean;

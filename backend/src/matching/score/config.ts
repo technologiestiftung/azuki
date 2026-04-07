@@ -58,18 +58,55 @@ export const WORK_PREF_MAP: Record<string, WorkPreferenceOptionChecks> = {
 export const STRENGTH_TO_TAGS: Record<string, string[]> = {
 	// Translates frontend strength ids to BERUFENET tags from b20-4.
 	teamwork: ["Befähigung zu Gruppenarbeit / Teamfähigkeit"],
-	"logical-thinking": ["Umsicht", "Sorgfalt"],
+	"logical-thinking": ["Umsicht"],
 	creativity: ["Kreativität"],
 	// No b20-4 tags; scored via conditions fallback in dimensions.ts.
 	craftsmanship: [],
 	communication: ["Kommunikationsfähigkeit", "Kontaktbereitschaft"],
-	concentration: ["Sorgfalt"],
-	precision: ["Sorgfalt"],
+	// Scored via conditions fallback (precisionWork) in dimensions.ts.
+	precision: [],
+	// Scored via skillTags fallback (b20-2) in dimensions.ts.
+	concentration: [],
 	perseverance: [
 		"Durchhaltevermögen/Zielstrebigkeit",
 		"Leistungs- und Einsatzbereitschaft",
 	],
 };
+
+/** BERUFENET b20-2 skill tags that indicate concentration ability. */
+export const CONCENTRATION_SKILL_TAGS: readonly string[] = [
+	"Konzentration",
+	"Daueraufmerksamkeit",
+] as const;
+
+/** BERUFENET b20-2 skill tags that indicate creativity. */
+export const CREATIVITY_SKILL_TAGS: readonly string[] = [
+	"Sinn und Gespür für Ästhetik",
+	"Zeichnerische Befähigung",
+] as const;
+
+/** BERUFENET b20-2 skill tags that indicate precision. */
+export const PRECISION_SKILL_TAGS: readonly string[] = [
+	"Beobachtungsgenauigkeit",
+] as const;
+
+/** BERUFENET b20-2 skill tags that indicate craftsmanship. */
+export const CRAFTSMANSHIP_SKILL_TAGS: readonly string[] = [
+	"Fingergeschick",
+] as const;
+
+/** BERUFENET b20-2 skill tags that indicate logical thinking. */
+export const LOGICAL_THINKING_SKILL_TAGS: readonly string[] = [
+	"Numerisches (rechnerisches) Denken",
+] as const;
+
+/** BERUFENET b20-2 skill tags that indicate communication ability. */
+export const COMMUNICATION_SKILL_TAGS: readonly string[] = [
+	"Mündliches Ausdrucksvermögen",
+	"Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit",
+] as const;
+
+const HOMEOFFICE_RE = /homeoffice/i;
 
 export const WORK_VALUE_CHECKS: Record<string, WorkValuePredicate> = {
 	people_work: (o) =>
@@ -87,7 +124,5 @@ export const WORK_VALUE_CHECKS: Record<string, WorkValuePredicate> = {
 		!o.conditions.accidentRisk &&
 		!o.conditions.irregularHours,
 	modern_technology: (o) => o.conditions.machinery || o.digitalizationSignal,
-	movement: (o) =>
-		o.conditions.standingWalking || o.conditions.manualLabor || o.conditions.outdoor,
-	//TODO: add conditions for short_distance, career, benefits, remote
+	remote: (o) => HOMEOFFICE_RE.test(o.workLocations),
 };
