@@ -67,6 +67,7 @@ export function makeProfile(
 		inSchool: null,
 		educationLevel: null,
 		favoriteSubjects: [],
+		customSubjects: [],
 		interests: [],
 		customInterests: [],
 		workValues: [],
