@@ -18,11 +18,14 @@ function headers(): HeadersInit {
 	return h;
 }
 
-export async function matchProfile(profile: UserProfile): Promise<MatchResult> {
+export async function matchProfile(
+	profile: UserProfile,
+	model?: string,
+): Promise<MatchResult> {
 	const res = await fetch(`${API_BASE}/match`, {
 		method: "POST",
 		headers: headers(),
-		body: JSON.stringify(profile),
+		body: JSON.stringify({ profile, model }),
 	});
 
 	if (!res.ok) {

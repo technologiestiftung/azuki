@@ -44,6 +44,7 @@ function normalizeProfile(
 interface AppState {
 	profile: UserProfile;
 	matchResults: MatchResult | null;
+	selectedModel: string | null;
 }
 
 interface AppActions {
@@ -60,6 +61,7 @@ interface AppActions {
 	setWorkPreference: (id: string, choice: WorkPreferenceChoice) => void;
 	setNoGo: (id: string, answer: NoGoAnswer | null) => void;
 	setMatchResults: (results: MatchResult) => void;
+	setSelectedModel: (model: string | null) => void;
 	resetProfile: () => void;
 }
 
@@ -68,6 +70,7 @@ export const useAppStore = create<AppState & AppActions>()(
 		(set) => ({
 			profile: initialProfile,
 			matchResults: null,
+			selectedModel: null,
 
 			setInSchool: (value) =>
 				set((state) => {
@@ -194,6 +197,8 @@ export const useAppStore = create<AppState & AppActions>()(
 				})),
 
 			setMatchResults: (results) => set({ matchResults: results }),
+
+			setSelectedModel: (model) => set({ selectedModel: model }),
 
 			resetProfile: () =>
 				set({
