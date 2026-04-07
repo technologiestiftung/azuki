@@ -26,19 +26,40 @@ function App() {
 					<Route path={ROUTE_PATHS.login} element={<LoginScreen />} />
 					<Route path={ROUTE_PATHS.welcome} element={<WelcomeCarousel />} />
 					<Route path={ROUTE_PATHS.start} element={<StartScreen />} />
-					<Route path={ROUTE_PATHS.educationInSchool} element={<InSchoolStep />} />
-					<Route path={ROUTE_PATHS.educationDegree} element={<SchoolDegreeStep />} />
-					<Route path={ROUTE_PATHS.educationSubjects} element={<SchoolSubjectsStep />} />
+					<Route
+						path={ROUTE_PATHS.educationInSchool}
+						element={<InSchoolStep />}
+					/>
+					<Route
+						path={ROUTE_PATHS.educationDegree}
+						element={<SchoolDegreeStep />}
+					/>
+					<Route
+						path={ROUTE_PATHS.educationSubjects}
+						element={<SchoolSubjectsStep />}
+					/>
 					<Route path={ROUTE_PATHS.interests} element={<InterestsStep />} />
 					<Route path={ROUTE_PATHS.strengths} element={<StrengthsStep />} />
-					<Route path={ROUTE_PATHS.secretTalent} element={<SecretTalentStep />} />
+					<Route
+						path={ROUTE_PATHS.secretTalent}
+						element={<SecretTalentStep />}
+					/>
 					<Route path={ROUTE_PATHS.conditions} element={<WorkValuesStep />} />
-					<Route path={ROUTE_PATHS.experience} element={<PracticalExperienceStep />} />
-					<Route path={ROUTE_PATHS.expectations} element={<WorkPreferencesStep />} />
+					<Route
+						path={ROUTE_PATHS.experience}
+						element={<PracticalExperienceStep />}
+					/>
+					<Route
+						path={ROUTE_PATHS.expectations}
+						element={<WorkPreferencesStep />}
+					/>
 					<Route path={ROUTE_PATHS.nogos} element={<NoGosStep />} />
 					<Route path={ROUTE_PATHS.loading} element={<LoadingScreen />} />
 					<Route path={ROUTE_PATHS.resultsList} element={<ResultsPage />} />
-					<Route path="*" element={<Navigate to={ROUTE_PATHS.welcome} replace />} />
+					<Route
+						path="*"
+						element={<Navigate to={ROUTE_PATHS.welcome} replace />}
+					/>
 				</Routes>
 			</div>
 		</div>
