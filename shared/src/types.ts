@@ -113,4 +113,17 @@ export interface MatchedOccupation {
 
 export interface MatchResult {
 	occupations: MatchedOccupation[];
+	generation?: GenerationInfo;
+}
+
+export interface GenerationInfo {
+	model: string;
+	cost: number;
+	tokensInput: number;
+	tokensOutput: number;
+}
+
+export interface MatchRequest {
+	profile: UserProfile;
+	model?: string;
 }

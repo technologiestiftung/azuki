@@ -9,7 +9,11 @@ export type {
 	UserProfile,
 	MatchedOccupation,
 	MatchResult,
+	GenerationInfo,
+	MatchRequest,
 } from "./types";
+
+export { AI_MODELS, AI_MODEL_IDS, type AiModel } from "./models";
 
 export {
 	SUBJECTS,
