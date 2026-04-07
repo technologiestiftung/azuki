@@ -1,4 +1,4 @@
-import { useLayoutEffect } from "react";
+import { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { content } from "../../../content/de";
 import { useAppStore } from "../../../store/useAppStore";
@@ -19,7 +19,7 @@ export function WorkPreferencesStep() {
 	);
 	const current = pairs[pairIndex];
 
-	useLayoutEffect(() => {
+	useEffect(() => {
 		if (pathname === "/expectations" && !hash) {
 			navigate({ pathname: "/expectations", hash: "#0" }, { replace: true });
 		}

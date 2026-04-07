@@ -1,4 +1,4 @@
-import { useRef, useCallback, useLayoutEffect } from "react";
+import { useRef, useCallback, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { content } from "../../../../content/de";
 import { useAppStore } from "../../../../store/useAppStore";
@@ -26,7 +26,7 @@ export function NoGosStep() {
 		Math.max(0, noGos.length - 1),
 	);
 
-	useLayoutEffect(() => {
+	useEffect(() => {
 		if (pathname === "/nogos" && !hash) {
 			navigate({ pathname: "/nogos", hash: "#0" }, { replace: true });
 		}

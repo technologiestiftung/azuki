@@ -1,4 +1,4 @@
-import { useCallback, useRef, useLayoutEffect } from "react";
+import { useCallback, useRef, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { content } from "../../../../content/de";
 import { useAppStore } from "../../../../store/useAppStore";
@@ -28,7 +28,7 @@ export function StrengthsStep() {
 		Math.max(0, strengths.length - 1),
 	);
 
-	useLayoutEffect(() => {
+	useEffect(() => {
 		if (pathname === "/strengths" && !hash) {
 			navigate({ pathname: "/strengths", hash: "#0" }, { replace: true });
 		}
