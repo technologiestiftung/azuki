@@ -8,6 +8,7 @@ export function LoadingScreen() {
 	const profile = useAppStore((state) => state.profile);
 	const matchResults = useAppStore((state) => state.matchResults);
 	const setMatchResults = useAppStore((state) => state.setMatchResults);
+	const selectedModel = useAppStore((state) => state.selectedModel);
 	const navigate = useNavigate();
 	const called = useRef(false);
 
@@ -23,7 +24,7 @@ export function LoadingScreen() {
 
 		const doMatch = async () => {
 			try {
-				const result = await matchProfile(profile);
+				const result = await matchProfile(profile, selectedModel ?? undefined);
 				setMatchResults(result);
 			} catch (err) {
 				console.error("Match API error:", err);
