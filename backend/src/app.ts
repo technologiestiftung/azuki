@@ -1,9 +1,10 @@
 import { Hono, type Context } from "hono";
 import { cors } from "hono/cors";
-import { UserProfileSchema } from "./schemas/userProfile.js";
+import { MatchRequestSchema } from "./schemas/userProfile.js";
 import type { Occupation, MatchResult } from "@azuki/shared";
+import { AI_MODEL_IDS } from "@azuki/shared";
 import { preFilter } from "./matching/index.js";
-import { mistralRank } from "./mistral/index.js";
+import { aiRank } from "./ai/index.js";
 import occupationsData from "./data/berufe.json";
 
 const occupations: Occupation[] = occupationsData as Occupation[];
@@ -42,19 +43,23 @@ app.post("/api/match", async (c) => {
 		return c.json({ error: "Invalid request body" }, 400);
 	}
 
-	const parsedProfile = UserProfileSchema.safeParse(body);
-	if (!parsedProfile.success) {
+	const parsedRequest = MatchRequestSchema.safeParse(body);
+	if (!parsedRequest.success) {
 		return c.json({ error: "Invalid request body" }, 400);
 	}
-	const profile = parsedProfile.data;
+	const { profile, model } = parsedRequest.data;
+
+	if (model !== undefined && !AI_MODEL_IDS.has(model)) {
+		return c.json({ error: "Invalid model" }, 400);
+	}
 
 	const top40 = preFilter(occupations, profile, 40);
 
 	try {
-		const result = await mistralRank(top40, profile);
+		const result = await aiRank(top40, profile, model);
 		return c.json(result);
 	} catch (err) {
-		console.error("Mistral error, falling back to pre-filter:", err);
+		console.error("AI ranking error, falling back to pre-filter:", err);
 		const fallback: MatchResult = {
 			occupations: top40.slice(0, 8).map((scored) => ({
 				id: scored.occupation.id,
