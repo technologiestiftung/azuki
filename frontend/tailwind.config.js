@@ -68,6 +68,9 @@ export default {
 					white: "#fafdff",
 				},
 				"card-fill": "#EEF2F6",
+				red: {
+					700: "#B91C1C",
+				},
 			},
 			borderRadius: {
 				"4xl": "32px",
