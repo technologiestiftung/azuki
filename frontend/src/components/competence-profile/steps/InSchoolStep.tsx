@@ -19,6 +19,7 @@ export function InSchoolStep() {
 			onSkip={goNext}
 			hasSkipButton={false}
 			isSkipConfirmDialogOpen={profile.inSchool === null}
+			subtitle={content["common.singleSelect.subline"]}
 		>
 			<div className="flex flex-col gap-3">
 				{inSchoolOptions.map((option) => (

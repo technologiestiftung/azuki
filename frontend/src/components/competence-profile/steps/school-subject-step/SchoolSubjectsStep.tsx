@@ -18,6 +18,7 @@ export function SchoolSubjectsStep() {
 			hasSkipButton={false}
 			skipLabel={content["schoolSubjects.skipButton.label"]}
 			isSkipConfirmDialogOpen={profile.favoriteSubjects.length === 0}
+			subtitle={content["common.multiSelect.subline"]}
 		>
 			<div className="flex flex-col gap-8">
 				{categories.map((category) => (

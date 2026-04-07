@@ -1,6 +1,9 @@
 import { workPreferencePairs } from "./work-preference-pairs";
 
 export const content = {
+	// Common
+	"common.multiSelect.subline": "Wähle alle aus, die zutreffen.",
+	"common.singleSelect.subline": "Wähle eine Option aus.",
 	// Welcome
 	"welcome.slide.1.title": "Du suchst eine Ausbildung, die gut zu dir passt?",
 	"welcome.slide.2.title": "Lerne deine Stärken kennen!",
