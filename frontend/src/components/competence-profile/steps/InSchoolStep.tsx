@@ -1,12 +1,12 @@
 import { content } from "../../../content/de";
 import { useAppStore } from "../../../store/useAppStore";
-import { Step } from "../../../common";
 import { StepLayout } from "./StepLayout";
+import { useFlowNavigation } from "../../../routing/useFlowNavigation";
 
 export function InSchoolStep() {
 	const profile = useAppStore((state) => state.profile);
 	const setInSchool = useAppStore((state) => state.setInSchool);
-	const nextStep = useAppStore((state) => state.nextStep);
+	const { goNext } = useFlowNavigation();
 
 	const inSchoolOptions: { value: boolean; label: string }[] = [
 		{ value: true, label: content["inSchool.option.yes.label"] },
@@ -15,9 +15,8 @@ export function InSchoolStep() {
 	return (
 		<StepLayout
 			question={content["inSchool.question"]}
-			currentStep={Step.InSchool}
-			onNext={nextStep}
-			onSkip={nextStep}
+			onNext={goNext}
+			onSkip={goNext}
 			hasSkipButton={false}
 			isSkipConfirmDialogOpen={profile.inSchool === null}
 		>

@@ -1,13 +1,14 @@
 import { content } from "../../../../content/de";
 import { useAppStore } from "../../../../store/useAppStore";
-import { Step, type EducationLevel } from "../../../../common";
+import { type EducationLevel } from "../../../../common";
 import { StepLayout } from "../StepLayout";
 import { schoolDegrees } from "./school-degrees";
+import { useFlowNavigation } from "../../../../routing/useFlowNavigation";
 
 export function SchoolDegreeStep() {
 	const profile = useAppStore((state) => state.profile);
 	const setEducationLevel = useAppStore((state) => state.setEducationLevel);
-	const nextStep = useAppStore((state) => state.nextStep);
+	const { goNext } = useFlowNavigation();
 
 	const inSchool = profile.inSchool;
 
@@ -29,9 +30,9 @@ export function SchoolDegreeStep() {
 					? content["schoolDegree.question.inSchool"]
 					: content["schoolDegree.question"]
 			}
-			currentStep={Step.SchoolDegreeStep}
-			onNext={nextStep}
-			onSkip={nextStep}
+			onNext={goNext}
+			onSkip={goNext}
+			hasSkipButton={false}
 			isSkipConfirmDialogOpen={!profile.educationLevel}
 		>
 			<div className="flex flex-col gap-3">

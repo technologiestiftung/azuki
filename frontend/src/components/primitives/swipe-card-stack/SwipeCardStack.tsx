@@ -68,6 +68,10 @@ export const SwipeCardStack = forwardRef<
 ) {
 	const [displayIndex, setDisplayIndex] = useState(initialIndex);
 	const [isDragging, setIsDragging] = useState(false);
+
+	useEffect(() => {
+		setDisplayIndex(initialIndex);
+	}, [initialIndex]);
 	const [dragX, setDragX] = useState(0);
 	const [dragY, setDragY] = useState(0);
 	const [cardTransition, setCardTransition] = useState("");

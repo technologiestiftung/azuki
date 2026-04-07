@@ -1,8 +1,8 @@
 import { content } from "../../../content/de";
 import { StepLayout } from "./StepLayout";
-import { Step } from "../../../common";
 import { SelectableRowButton } from "../../primitives/buttons/SelectableRowButton";
 import { useAppStore } from "../../../store/useAppStore";
+import { useFlowNavigation } from "../../../routing/useFlowNavigation";
 
 const workValues: { value: string; label: string }[] = [
 	{ value: "good_salary", label: content["workValues.option.goodSalary"] },
@@ -31,16 +31,15 @@ const workValues: { value: string; label: string }[] = [
 ];
 
 export function WorkValuesStep() {
-	const nextStep = useAppStore((state) => state.nextStep);
+	const { goNext } = useFlowNavigation();
 	const profile = useAppStore((state) => state.profile);
 	const toggleWorkValue = useAppStore((state) => state.toggleWorkValue);
 
 	return (
 		<StepLayout
 			question={content["workValues.question"]}
-			currentStep={Step.WorkValues}
-			onNext={nextStep}
-			onSkip={nextStep}
+			onNext={goNext}
+			onSkip={goNext}
 			skipLabel={content["workValues.skipButton.label"]}
 			isSkipConfirmDialogOpen={profile.workValues.length === 0}
 		>

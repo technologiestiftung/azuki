@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { content } from "../../../../content/de";
 import { useAppStore } from "../../../../store/useAppStore";
-import { Step } from "../../../../common";
 import { StepLayout } from "../StepLayout";
+import { useFlowNavigation } from "../../../../routing/useFlowNavigation";
 import { interests } from "./interests";
 import { TextInput } from "../../../primitives/text-inputs/TextInput";
 import { Pill } from "../../../primitives/buttons/Pill";
@@ -11,7 +11,7 @@ export function InterestsStep() {
 	const profile = useAppStore((state) => state.profile);
 	const toggleInterest = useAppStore((state) => state.toggleInterest);
 	const addCustomInterest = useAppStore((state) => state.addCustomInterest);
-	const nextStep = useAppStore((state) => state.nextStep);
+	const { goNext } = useFlowNavigation();
 	const [customInput, setCustomInput] = useState("");
 
 	function handleAddCustom() {
@@ -25,9 +25,8 @@ export function InterestsStep() {
 	return (
 		<StepLayout
 			question={content["interests.question"]}
-			currentStep={Step.Interests}
-			onNext={nextStep}
-			onSkip={nextStep}
+			onNext={goNext}
+			onSkip={goNext}
 			isSkipConfirmDialogOpen={profile.interests.length === 0}
 			bottomContent={
 				<TextInput
