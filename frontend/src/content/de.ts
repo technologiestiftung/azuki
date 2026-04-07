@@ -62,7 +62,7 @@ export const content = {
 	"schoolSubjects.languages.other.label": "Andere Fremdsprachen",
 	"schoolSubjects.languages.other.icon": "🌍",
 	//MINT
-	"schoolSubjects.mint.label": "MINT",
+	"schoolSubjects.mint.label": "Mathe, Natur und Technik",
 	"schoolSubjects.mint.math.label": "Mathe",
 	"schoolSubjects.mint.math.icon": "➗",
 	"schoolSubjects.mint.physics.label": "Physik",
