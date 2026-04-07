@@ -1,7 +1,6 @@
 import React, { useState, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import { content } from "../../content/de";
-import { useAppStore } from "../../store/useAppStore";
-import { Step } from "../../common";
 import { PrimaryThemedButton } from "../primitives/buttons/PrimaryThemedButton";
 
 const slideImages = [
@@ -24,7 +23,7 @@ export function WelcomeCarousel() {
 		null,
 	);
 	const [isPaused, setIsPaused] = useState(false);
-	const goToStep = useAppStore((state) => state.goToStep);
+	const navigateTo = useNavigate();
 
 	const pointerStartX = useRef<number | null>(null);
 	const pointerDownTime = useRef(0);
@@ -32,27 +31,25 @@ export function WelcomeCarousel() {
 		null,
 	);
 
-	function navigate(direction: "next" | "prev") {
-		setCurrentSlide((prev) => {
-			if (direction === "next" && prev >= SLIDE_COUNT - 1) {
-				goToStep(Step.Start);
-				return prev;
-			}
-			if (direction === "prev" && prev === 0) {
-				return prev;
-			}
-			setPreviousSlide(prev);
-			setSlideDirection(direction);
-			return direction === "next" ? prev + 1 : prev - 1;
-		});
+	function moveSlide(direction: "next" | "prev") {
+		if (direction === "next" && currentSlide >= SLIDE_COUNT - 1) {
+			navigateTo("/start");
+			return;
+		}
+		if (direction === "prev" && currentSlide === 0) {
+			return;
+		}
+		setPreviousSlide(currentSlide);
+		setSlideDirection(direction);
+		setCurrentSlide((prev) => (direction === "next" ? prev + 1 : prev - 1));
 	}
 
 	function advanceSlide() {
-		navigate("next");
+		moveSlide("next");
 	}
 
 	function handleGetStarted() {
-		goToStep(Step.Start);
+		navigateTo("/start");
 	}
 
 	function handlePointerDown(e: React.PointerEvent<HTMLDivElement>) {
@@ -73,7 +70,7 @@ export function WelcomeCarousel() {
 		pointerStartX.current = null;
 
 		if (Math.abs(diff) > SWIPE_THRESHOLD) {
-			navigate(diff > 0 ? "next" : "prev");
+			moveSlide(diff > 0 ? "next" : "prev");
 			return;
 		}
 
@@ -83,7 +80,7 @@ export function WelcomeCarousel() {
 
 		const rect = e.currentTarget.getBoundingClientRect();
 		const tapX = e.clientX - rect.left;
-		navigate(tapX < rect.width / 2 ? "prev" : "next");
+		moveSlide(tapX < rect.width / 2 ? "prev" : "next");
 	}
 
 	function handlePointerCancel() {
@@ -95,7 +92,7 @@ export function WelcomeCarousel() {
 		if (e.key === "ArrowRight" || e.key === "ArrowDown") {
 			e.preventDefault();
 			setIsPaused(true);
-			navigate("next");
+			moveSlide("next");
 			if (keyboardPauseTimeout.current) {
 				clearTimeout(keyboardPauseTimeout.current);
 			}
@@ -106,7 +103,7 @@ export function WelcomeCarousel() {
 		} else if (e.key === "ArrowLeft" || e.key === "ArrowUp") {
 			e.preventDefault();
 			setIsPaused(true);
-			navigate("prev");
+			moveSlide("prev");
 			if (keyboardPauseTimeout.current) {
 				clearTimeout(keyboardPauseTimeout.current);
 			}
@@ -132,7 +129,7 @@ export function WelcomeCarousel() {
 				onPointerCancel={handlePointerCancel}
 				onKeyDown={handleKeyDown}
 			>
-				<div className="flex gap-[6px] pb-1 shrink-0">
+				<div className="flex gap-[6px] pb-1 shrink-0 px-4">
 					{Array.from({ length: SLIDE_COUNT }, (_, index) => {
 						const isCurrent = index === currentSlide;
 						const isCompleted = index < currentSlide;

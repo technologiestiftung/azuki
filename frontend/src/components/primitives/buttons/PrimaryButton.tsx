@@ -18,7 +18,7 @@ export const PrimaryButton: React.FC<PrimaryButtonProps> = ({
 				focus-visible:outline focus-visible:outline-2 focus-visible:outline-sky-500 ${
 					disabled
 						? "bg-gray-200 text-gray-400"
-						: "bg-gray-900 text-white hover:bg-gray-700 hover:text-gray-50"
+						: "bg-gray-900 text-white md:hover:bg-gray-700 md:hover:text-gray-50"
 				} ${className}`}
 			disabled={disabled}
 			onClick={onClick}

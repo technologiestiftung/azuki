@@ -5,11 +5,12 @@ import {
 } from "../../../common";
 
 interface ProgressBarProps {
-	currentStep: Step;
+	currentStep: Step | undefined;
 }
 
 export function ProgressBar({ currentStep }: ProgressBarProps) {
-	const stepIndex = QUESTIONNAIRE_STEPS.indexOf(currentStep);
+	const stepIndex =
+		currentStep !== undefined ? QUESTIONNAIRE_STEPS.indexOf(currentStep) : -1;
 	const progress =
 		stepIndex >= 0 ? (stepIndex + 1) / TOTAL_QUESTIONNAIRE_STEPS : 0;
 

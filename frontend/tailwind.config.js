@@ -7,19 +7,19 @@ export default {
 		},
 		extend: {
 			fontSize: {
-				xs: ["0.75rem", { lineHeight: "20px" }],
-				sm: ["0.875rem", { lineHeight: "22px" }],
-				base: ["1rem", { lineHeight: "22px" }],
-				lg: ["1.125rem", { lineHeight: "28px" }],
-				xl: ["1.25rem", { lineHeight: "28px" }],
-				"2xl": ["1.5rem", { lineHeight: "32px" }],
-				"3xl": ["1.875rem", { lineHeight: "36px" }],
-				"4xl": ["2.25rem", { lineHeight: "48px" }],
-				"5xl": ["3rem", { lineHeight: "48px" }],
-				"6xl": ["3.75rem", { lineHeight: "60px" }],
-				"7xl": ["4.5rem", { lineHeight: "72px" }],
-				"8xl": ["6rem", { lineHeight: "96px" }],
-				"9xl": ["8rem", { lineHeight: "128px" }],
+				xs: ["0.75rem", { lineHeight: "1rem" }],
+				sm: ["0.875rem", { lineHeight: "1.25rem" }],
+				base: ["1rem", { lineHeight: "1.5rem" }],
+				lg: ["1.125rem", { lineHeight: "1.75rem" }],
+				xl: ["1.25rem", { lineHeight: "1.75rem" }],
+				"2xl": ["1.5rem", { lineHeight: "2rem" }],
+				"3xl": ["1.875rem", { lineHeight: "2.25rem" }],
+				"4xl": ["2.25rem", { lineHeight: "2.5rem" }],
+				"5xl": ["3rem", { lineHeight: "3rem" }],
+				"6xl": ["3.75rem", { lineHeight: "3.75rem" }],
+				"7xl": ["4.5rem", { lineHeight: "4.5rem" }],
+				"8xl": ["6rem", { lineHeight: "6rem" }],
+				"9xl": ["8rem", { lineHeight: "8rem" }],
 			},
 			colors: {
 				white: "#ffffff",
@@ -95,22 +95,26 @@ export default {
 				},
 				slideOutLeft: {
 					from: {
-						opacity: "1",
 						transform: "translateX(0) rotate(0deg) translateY(0)",
 					},
 					to: {
-						opacity: "0",
 						transform: "translateX(-100vw) rotate(-20deg) translateY(-40px)",
 					},
 				},
 				slideOutRight: {
 					from: {
-						opacity: "1",
 						transform: "translateX(0) rotate(0deg) translateY(0)",
 					},
 					to: {
-						opacity: "0",
 						transform: "translateX(100vw) rotate(20deg) translateY(-40px)",
+					},
+				},
+				slideOutUp: {
+					from: {
+						transform: "translateY(0) scale(1)",
+					},
+					to: {
+						transform: "translateY(-100vh) scale(0.3)",
 					},
 				},
 				slideInLeft: {
@@ -133,6 +137,16 @@ export default {
 						transform: "translateX(0) rotate(0deg) translateY(0)",
 					},
 				},
+				slideInTop: {
+					from: {
+						opacity: "0",
+						transform: "translateY(-100vh) scale(0.3)",
+					},
+					to: {
+						opacity: "1",
+						transform: "translateY(0) scale(1)",
+					},
+				},
 				progressFill: {
 					from: { width: "0%" },
 					to: { width: "100%" },
@@ -146,8 +160,10 @@ export default {
 				slideOutNext: "slideOutNext 0.3s ease-in-out forwards",
 				slideOutLeft: "slideOutLeft 0.3s ease-in forwards",
 				slideOutRight: "slideOutRight 0.3s ease-in forwards",
+				slideOutUp: "slideOutUp 0.4s linear forwards",
 				slideInLeft: "slideInLeft 0.3s ease-out forwards",
 				slideInRight: "slideInRight 0.3s ease-out forwards",
+				slideInTop: "slideInTop 0.4s ease-out forwards",
 				progressFill: "progressFill 4s linear forwards",
 			},
 		},

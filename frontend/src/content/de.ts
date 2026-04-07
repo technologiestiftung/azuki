@@ -1,3 +1,5 @@
+import { workPreferencePairs } from "./work-preference-pairs";
+
 export const content = {
 	// Welcome
 	"welcome.slide.1.title": "Du suchst eine Ausbildung, die gut zu dir passt?",
@@ -60,12 +62,11 @@ export const content = {
 	"schoolSubjects.society.politics.label": "Politik",
 	"schoolSubjects.society.geography.label": "Geographie",
 	// Creativity
-	"schoolSubjects.creativity.label": "Kreatives",
+	"schoolSubjects.creativity.label": "Kreatives und Bewegung",
 	"schoolSubjects.creativity.music.label": "Musik",
 	"schoolSubjects.creativity.art.label": "Kunst",
-	"schoolSubjects.creativity.performingArts.label": "Darstellendes Spiel",
+	"schoolSubjects.creativity.performingArts.label": "Theater",
 	// Sport
-	"schoolSubjects.sports.label": "Sport",
 	"schoolSubjects.sports.sports.label": "Sport",
 
 	// Interests
@@ -148,7 +149,7 @@ export const content = {
 
 	// Strengths
 	"strengths.question": "Was kannst du gut?",
-	"strengths.sliderMin": "Gar nicht",
+	"strengths.sliderMin": "0%",
 	"strengths.sliderMax": "100%",
 	"strengths.skipButton.label": "Überspringen",
 	// Teamwork
@@ -217,28 +218,7 @@ export const content = {
 
 	// Work Preferences
 	"workPreferences.question": "Wie möchtest du in Zukunft arbeiten?",
-	"workPreferences.pairs": [
-		{ id: "location", a: "Immer am gleichen Ort", b: "Oft unterwegs" },
-		{
-			id: "hands-vs-mind",
-			a: "Mit den Händen arbeiten",
-			b: "Mit dem Kopf arbeiten",
-		},
-		{
-			id: "variety",
-			a: "Immer die gleichen Aufgaben",
-			b: "Immer andere Aufgaben",
-		},
-		{
-			id: "people",
-			a: "Wenig Kontakt mit Menschen",
-			b: "Viel Kontakt mit Menschen",
-		},
-		{ id: "pace", a: "Ruhige Arbeit", b: "Arbeit unter Zeitdruck" },
-		{ id: "structure", a: "Feste Regeln", b: "Viel Freiheit" },
-		{ id: "purpose", a: "Anderen helfen", b: "Aufgaben erledigen" },
-		{ id: "environment", a: "Drinnen", b: "Draußen" },
-	],
+	"workPreferences.pairs": workPreferencePairs,
 	"workPreferences.orLabel": "oder",
 
 	// No-Gos
@@ -247,6 +227,7 @@ export const content = {
 	"noGos.ariaLabel.reject": "Als geht nicht markieren",
 	"noGos.acceptLabel": "Ist okay",
 	"noGos.ariaLabel.accept": "Als ist okay markieren",
+	"noGos.skipButton.label": "Überspringen",
 	//noise
 	"noGos.noise.title": "Arbeit mit Lärm",
 	"noGos.noise.description": "z. B. Baustelle, Maschinen oder laute Werkstatt",
@@ -283,4 +264,11 @@ export const content = {
 	"results.title": "Deine Ergebnisse",
 	"results.moreInfo": "Mehr erfahren",
 	"results.restartCta": "Nochmal starten",
+
+	// Skip confirm dialog
+	"skipConfirmDialog.title": "Du hast noch nichts ausgewählt",
+	"skipConfirmDialog.description":
+		"Wenn du mehr auswählst, können wir dir passendere Berufe vorschlagen.",
+	"skipConfirmDialog.confirm": "Auswahl treffen",
+	"skipConfirmDialog.cancel": "Überspringen",
 };

@@ -7,22 +7,33 @@ import React, {
 	forwardRef,
 } from "react";
 
-const SWIPE_THRESHOLD = 80;
-const FLY_OUT_MS = 400;
-const SLIDE_IN_MS = 300;
+import {
+	detectSwipeDirection,
+	FLY_OUT_MS,
+	EXIT_OFFSET_X,
+	EXIT_OFFSET_Y,
+	getCardVisualState,
+	getCursorStyle,
+	SLIDE_IN_MS,
+	topCardAnimationClassNames,
+} from "./swipe-card-utils";
+import type { AnimationPhase, SwipeDirection } from "./swipe-card-utils";
 
-export type SwipeDirection = "left" | "right";
+export type { SwipeDirection };
 
 export interface SwipeCardStackHandle {
 	goNext: () => void;
 	goBack: () => void;
 	swipeLeft: () => void;
 	swipeRight: () => void;
+	swipeUp: () => void;
 }
 
 interface SwipeCardStackProps {
 	count: number;
 	initialIndex?: number;
+	isDraggingEnabled?: boolean;
+	isSwipeUpGestureEnabled?: boolean;
 	onCommit: (index: number) => SwipeDirection;
 	onExhausted: () => void;
 	onBefore: () => void;
@@ -41,6 +52,8 @@ export const SwipeCardStack = forwardRef<
 	{
 		count,
 		initialIndex = 0,
+		isDraggingEnabled = true,
+		isSwipeUpGestureEnabled = true,
 		onCommit,
 		onExhausted,
 		onBefore,
@@ -50,61 +63,67 @@ export const SwipeCardStack = forwardRef<
 		renderCard,
 		renderBackCard,
 		className = "",
-	}: SwipeCardStackProps,
+	},
 	ref,
 ) {
 	const [displayIndex, setDisplayIndex] = useState(initialIndex);
 	const [isDragging, setIsDragging] = useState(false);
+
+	useEffect(() => {
+		setDisplayIndex(initialIndex);
+	}, [initialIndex]);
 	const [dragX, setDragX] = useState(0);
 	const [dragY, setDragY] = useState(0);
 	const [cardTransition, setCardTransition] = useState("");
 	const [flyOffset, setFlyOffset] = useState<{ x: number; y: number } | null>(
 		null,
 	);
-	const [slideInClass, setSlideInClass] = useState("");
+	const [animationPhase, setAnimationPhase] = useState<AnimationPhase>("idle");
+	const [animationDirection, setAnimationDirection] =
+		useState<SwipeDirection | null>(null);
+	const [flyDirection, setFlyDirection] = useState<SwipeDirection | null>(null);
 
 	const pointerStartX = useRef<number | null>(null);
 	const pointerStartY = useRef<number | null>(null);
 	const isAnimating = useRef(false);
 	const timeoutRef = useRef<number | null>(null);
-	const pendingSlideInRef = useRef("");
+	const pendingSlideInDirectionRef = useRef<SwipeDirection | null>(null);
 
 	const isFlying = flyOffset !== null;
-	const isSliding = slideInClass !== "";
+	const isSliding = animationPhase === "slide-in";
+	const isSlidingOut = animationPhase === "slide-out";
 	const hasNext = displayIndex < count - 1;
+	const nextIndex = hasNext ? displayIndex + 1 : null;
 	const activeOffset = flyOffset ?? { x: dragX, y: dragY };
 
-	const absX = Math.abs(activeOffset.x);
-	const progress = isFlying ? 1 : Math.min(absX / SWIPE_THRESHOLD, 1);
-	const backScale = 0.85 + 0.15 * progress;
-	const backOpacity = progress;
-	const backTranslateY = -43 * (1 - progress);
-
-	const rotate = activeOffset.x / 20;
-	const topTransform = `translate(${activeOffset.x}px, ${activeOffset.y}px) rotate(${rotate}deg)`;
+	const { backScale, backOpacity, backTranslateY, topTransform } =
+		getCardVisualState(activeOffset, isFlying, flyDirection);
 
 	useEffect(() => {
 		setIsDragging(false);
 		setDragX(0);
 		setDragY(0);
 		setFlyOffset(null);
+		setFlyDirection(null);
 		setCardTransition("");
+		setAnimationPhase("idle");
+		setAnimationDirection(null);
 		pointerStartX.current = null;
 		pointerStartY.current = null;
 		if (timeoutRef.current) {
 			window.clearTimeout(timeoutRef.current);
 		}
 
-		if (pendingSlideInRef.current !== "") {
-			const animClass = pendingSlideInRef.current;
-			pendingSlideInRef.current = "";
-			setSlideInClass(animClass);
+		if (pendingSlideInDirectionRef.current !== null) {
+			const pendingDirection = pendingSlideInDirectionRef.current;
+			pendingSlideInDirectionRef.current = null;
+			setAnimationDirection(pendingDirection);
+			setAnimationPhase("slide-in");
 			timeoutRef.current = window.setTimeout(() => {
-				setSlideInClass("");
+				setAnimationPhase("idle");
+				setAnimationDirection(null);
 				isAnimating.current = false;
 			}, SLIDE_IN_MS);
-		} else {
-			setSlideInClass("");
 		}
 	}, [displayIndex]);
 
@@ -123,15 +142,24 @@ export const SwipeCardStack = forwardRef<
 			}
 			isAnimating.current = true;
 
-			const exitX = direction === "right" ? 1000 : -1000;
-			setCardTransition("transform 0.4s ease-out");
-			setFlyOffset({ x: exitX, y: dragY });
+			if (direction === "up") {
+				setFlyDirection("up");
+				setFlyOffset({ x: dragX, y: EXIT_OFFSET_Y });
+			} else {
+				const exitX = direction === "right" ? EXIT_OFFSET_X : -EXIT_OFFSET_X;
+				setFlyOffset({ x: exitX, y: dragY });
+			}
 
+			setAnimationDirection(direction);
+			setAnimationPhase("slide-out");
 			onSwipe?.(direction, displayIndex);
 
 			timeoutRef.current = window.setTimeout(() => {
 				setFlyOffset(null);
+				setFlyDirection(null);
 				setCardTransition("");
+				setAnimationPhase("idle");
+				setAnimationDirection(null);
 				isAnimating.current = false;
 
 				if (targetIndex !== null) {
@@ -142,7 +170,7 @@ export const SwipeCardStack = forwardRef<
 				}
 			}, FLY_OUT_MS);
 		},
-		[dragY, onExhausted, onIndexChange, onSwipe, displayIndex],
+		[dragX, dragY, onExhausted, onIndexChange, onSwipe, displayIndex],
 	);
 
 	const slideIn = useCallback(
@@ -152,8 +180,7 @@ export const SwipeCardStack = forwardRef<
 			}
 			isAnimating.current = true;
 
-			pendingSlideInRef.current =
-				direction === "left" ? "animate-slideInLeft" : "animate-slideInRight";
+			pendingSlideInDirectionRef.current = direction;
 
 			setDisplayIndex(targetIndex);
 			onIndexChange?.(targetIndex);
@@ -166,8 +193,8 @@ export const SwipeCardStack = forwardRef<
 			return;
 		}
 		const direction = onCommit(displayIndex);
-		flyOut(direction, hasNext ? displayIndex + 1 : null);
-	}, [flyOut, hasNext, displayIndex, onCommit]);
+		flyOut(direction, nextIndex);
+	}, [flyOut, nextIndex, displayIndex, onCommit]);
 
 	const goBack = useCallback(() => {
 		if (isAnimating.current) {
@@ -186,26 +213,32 @@ export const SwipeCardStack = forwardRef<
 		if (isAnimating.current) {
 			return;
 		}
-		flyOut("left", hasNext ? displayIndex + 1 : null);
-	}, [flyOut, hasNext, displayIndex]);
+		flyOut("left", nextIndex);
+	}, [flyOut, nextIndex]);
 
 	const swipeRight = useCallback(() => {
 		if (isAnimating.current) {
 			return;
 		}
-		flyOut("right", hasNext ? displayIndex + 1 : null);
-	}, [flyOut, hasNext, displayIndex]);
+		flyOut("right", nextIndex);
+	}, [flyOut, nextIndex]);
 
-	useImperativeHandle(ref, () => ({ goNext, goBack, swipeLeft, swipeRight }), [
-		goNext,
-		goBack,
-		swipeLeft,
-		swipeRight,
-	]);
+	const swipeUp = useCallback(() => {
+		if (isAnimating.current) {
+			return;
+		}
+		flyOut("up", nextIndex);
+	}, [flyOut, nextIndex]);
+
+	useImperativeHandle(
+		ref,
+		() => ({ goNext, goBack, swipeLeft, swipeRight, swipeUp }),
+		[goNext, goBack, swipeLeft, swipeRight, swipeUp],
+	);
 
 	const handlePointerDown = useCallback(
 		(e: React.PointerEvent<HTMLDivElement>) => {
-			if (isAnimating.current) {
+			if (isAnimating.current || !isDraggingEnabled) {
 				return;
 			}
 			(e.target as HTMLElement).setPointerCapture(e.pointerId);
@@ -216,7 +249,7 @@ export const SwipeCardStack = forwardRef<
 			setDragX(0);
 			setDragY(0);
 		},
-		[],
+		[isDraggingEnabled],
 	);
 
 	const handlePointerMove = useCallback(
@@ -236,27 +269,29 @@ export const SwipeCardStack = forwardRef<
 
 	const handlePointerUp = useCallback(
 		(e: React.PointerEvent<HTMLDivElement>) => {
-			if (!isDragging || pointerStartX.current === null) {
+			if (
+				!isDragging ||
+				pointerStartX.current === null ||
+				pointerStartY.current === null
+			) {
 				return;
 			}
 			const dx = e.clientX - pointerStartX.current;
+			const dy = e.clientY - pointerStartY.current;
 			pointerStartX.current = null;
 			pointerStartY.current = null;
 			setIsDragging(false);
 
-			const nextIndex = hasNext ? displayIndex + 1 : null;
-
-			if (dx > SWIPE_THRESHOLD) {
-				flyOut("right", nextIndex);
-			} else if (dx < -SWIPE_THRESHOLD) {
-				flyOut("left", nextIndex);
+			const direction = detectSwipeDirection(dx, dy);
+			if (direction && (direction !== "up" || isSwipeUpGestureEnabled)) {
+				flyOut(direction, nextIndex);
 			} else {
 				setCardTransition("transform 0.3s ease");
 				setDragX(0);
 				setDragY(0);
 			}
 		},
-		[isDragging, flyOut, displayIndex, hasNext],
+		[isDragging, flyOut, nextIndex, isSwipeUpGestureEnabled],
 	);
 
 	const handlePointerCancel = useCallback(() => {
@@ -269,57 +304,64 @@ export const SwipeCardStack = forwardRef<
 	}, []);
 
 	const backCardContent = renderBackCard ?? renderCard;
+	const isAnimatingCard = isSliding || isSlidingOut;
+	const cursorStyle = getCursorStyle(isDraggingEnabled, isDragging);
 
 	return (
-		<div className={["relative w-full", className].join(" ")}>
-			{/* Ghost card */}
-			{hasNext && (
-				<div
-					aria-hidden="true"
-					className="absolute inset-0 -top-10 w-full bg-gray-500 rounded-3xl pointer-events-none"
-					style={{ zIndex: 0, transform: "scale(0.85)", opacity: 0.4 }}
-				/>
-			)}
+		<div className="flex flex-col w-full justify-center items-center h-fit py-3">
+			<div className={`relative w-full ${className}`}>
+				{/* Ghost card */}
+				{hasNext && (
+					<div
+						aria-hidden="true"
+						className={`absolute inset-0 -bottom-8 w-full bg-gray-300 rounded-3xl pointer-events-none transition-opacity duration-200 ease-in ${isSlidingOut || isDragging ? "opacity-50" : "opacity-100"}`}
+						style={{
+							zIndex: 0,
+							transform: "scale(0.85)",
+						}}
+					/>
+				)}
 
-			{/* Back card */}
-			{hasNext && (
+				{/* Back card */}
+				{hasNext && (
+					<div
+						aria-hidden="true"
+						className="absolute inset-0 w-full bg-gray-200 rounded-3xl pt-5 pb-6 px-6 flex flex-col items-center pointer-events-none"
+						style={{
+							zIndex: 1,
+							transform: `scale(${backScale}) translateY(${backTranslateY}px)`,
+							opacity: backOpacity,
+							transition: isFlying
+								? "transform 0.6s ease 0.1s, opacity 0.3s ease 0.1s"
+								: "none",
+							willChange: "transform, opacity",
+						}}
+					>
+						{backCardContent(displayIndex + 1)}
+					</div>
+				)}
+
+				{/* Top card */}
 				<div
-					aria-hidden="true"
-					className="absolute inset-0 w-full bg-gray-200 rounded-3xl pt-5 pb-6 px-6 flex flex-col items-center pointer-events-none"
+					className={`relative w-full rounded-3xl pt-5 pb-6 px-6 flex flex-col items-center shadow-[0_6px_16px_0_rgba(17,24,39,0.10)] 
+						${(isSlidingOut || isDragging) && flyDirection !== "up" ? "bg-sky-300" : "bg-gray-200"} 
+						${topCardAnimationClassNames(animationPhase, animationDirection)}`}
 					style={{
-						zIndex: 1,
-						transform: `scale(${backScale}) translateY(${backTranslateY}px)`,
-						opacity: backOpacity,
-						transition: "none",
-						willChange: "transform, opacity",
+						zIndex: 2,
+						touchAction: "none",
+						cursor: cursorStyle,
+						userSelect: "none",
+						transform: isAnimatingCard ? undefined : topTransform,
+						transition: isAnimatingCard ? undefined : cardTransition,
+						pointerEvents: isAnimatingCard ? "none" : undefined,
 					}}
+					onPointerDown={handlePointerDown}
+					onPointerMove={handlePointerMove}
+					onPointerUp={handlePointerUp}
+					onPointerCancel={handlePointerCancel}
 				>
-					{backCardContent(displayIndex + 1)}
+					{renderCard(displayIndex)}
 				</div>
-			)}
-
-			{/* Top card */}
-			<div
-				className={[
-					"relative w-full bg-gray-200 rounded-3xl pt-5 pb-6 px-6 flex flex-col items-center",
-					slideInClass,
-				].join(" ")}
-				style={{
-					zIndex: 2,
-					touchAction: "pan-y",
-					cursor: isDragging ? "grabbing" : "grab",
-					userSelect: "none",
-					transform: isSliding ? undefined : topTransform,
-					transition: isSliding ? undefined : cardTransition,
-					willChange: "transform",
-					pointerEvents: isSliding ? "none" : undefined,
-				}}
-				onPointerDown={handlePointerDown}
-				onPointerMove={handlePointerMove}
-				onPointerUp={handlePointerUp}
-				onPointerCancel={handlePointerCancel}
-			>
-				{renderCard(displayIndex)}
 			</div>
 		</div>
 	);
