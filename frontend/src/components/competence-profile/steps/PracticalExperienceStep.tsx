@@ -24,6 +24,9 @@ export function PracticalExperienceStep() {
 			onNext={handleNext}
 			onSkip={goNext}
 			isNextDisabled={false}
+			isSkipConfirmDialogOpen={!value?.trim()}
+			skipConfirmTitleKey="skipConfirmDialog.textInput.title"
+			skipConfirmDescriptionKey="skipConfirmDialog.textInput.description"
 		>
 			<div className="rounded-3xl p-5 min-h-48 bg-gray-50 border-2 border-gray-200">
 				<textarea

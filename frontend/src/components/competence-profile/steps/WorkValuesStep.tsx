@@ -42,6 +42,8 @@ export function WorkValuesStep() {
 			onSkip={goNext}
 			skipLabel={content["workValues.skipButton.label"]}
 			isSkipConfirmDialogOpen={profile.workValues.length === 0}
+			skipConfirmTitleKey="skipConfirmDialog.multipleChoice.title"
+			skipConfirmDescriptionKey="skipConfirmDialog.multipleChoice.description"
 			subtitle={content["common.multiSelect.subline"]}
 		>
 			<div className="flex flex-col gap-3">

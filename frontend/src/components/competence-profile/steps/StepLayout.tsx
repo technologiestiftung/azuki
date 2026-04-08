@@ -8,6 +8,8 @@ import { GhostButton } from "../../primitives/buttons/GhostButton";
 import { BackButton } from "../../back-button/BackButton";
 import { pathnameToStep, getPreviousPath } from "../../../routing/routes";
 import {
+	type SkipConfirmDescriptionContentKey,
+	type SkipConfirmTitleContentKey,
 	SkipConfirmDialog,
 	showSkipConfirmDialog,
 } from "../../skip-confirm-dialog/SkipConfirmDialog";
@@ -25,6 +27,8 @@ interface StepLayoutProps {
 	skipLabel?: string;
 	bottomContent?: ReactNode;
 	isSkipConfirmDialogOpen?: boolean;
+	skipConfirmTitleKey?: SkipConfirmTitleContentKey;
+	skipConfirmDescriptionKey?: SkipConfirmDescriptionContentKey;
 }
 
 export function StepLayout({
@@ -40,6 +44,8 @@ export function StepLayout({
 	skipLabel,
 	bottomContent,
 	isSkipConfirmDialogOpen,
+	skipConfirmTitleKey,
+	skipConfirmDescriptionKey,
 }: StepLayoutProps) {
 	const { pathname, hash } = useLocation();
 	const navigate = useNavigate();
@@ -85,7 +91,13 @@ export function StepLayout({
 						{skipLabel || content["navigation.skip"]}
 					</GhostButton>
 				)}
-				{isSkipConfirmDialogOpen && <SkipConfirmDialog onSkip={onSkip} />}
+				{isSkipConfirmDialogOpen && (
+					<SkipConfirmDialog
+						onSkip={onSkip}
+						titleKey={skipConfirmTitleKey}
+						descriptionKey={skipConfirmDescriptionKey}
+					/>
+				)}
 			</div>
 		</div>
 	);
