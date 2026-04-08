@@ -4,7 +4,11 @@ import { useAppStore } from "../../store/useAppStore";
 import { matchProfile } from "../../api/client";
 import { content } from "../../content/de";
 import { PrimaryButton } from "../primitives/buttons/PrimaryButton";
-import { type MatchedOccupation, AI_MODELS, DEFAULT_MODEL_ID } from "@azuki/shared";
+import {
+	type MatchedOccupation,
+	AI_MODELS,
+	DEFAULT_MODEL_ID,
+} from "@azuki/shared";
 
 export function ResultsPage() {
 	const navigate = useNavigate();
@@ -71,16 +75,28 @@ export function ResultsPage() {
 				{generation && (
 					<div className="flex flex-wrap gap-x-4 gap-y-1 text-gray-500">
 						<span>
-							Used: <span className="text-gray-700 font-medium">{generation.model}</span>
+							Used:{" "}
+							<span className="text-gray-700 font-medium">
+								{generation.model}
+							</span>
 						</span>
 						<span>
-							Cost: <span className="text-green-600 font-medium">${generation.cost.toFixed(4)}</span>
+							Cost:{" "}
+							<span className="text-green-600 font-medium">
+								${generation.cost.toFixed(4)}
+							</span>
 						</span>
 						<span>
-							In: <span className="text-gray-700">{generation.tokensInput.toLocaleString()}</span>
+							In:{" "}
+							<span className="text-gray-700">
+								{generation.tokensInput.toLocaleString()}
+							</span>
 						</span>
 						<span>
-							Out: <span className="text-gray-700">{generation.tokensOutput.toLocaleString()}</span>
+							Out:{" "}
+							<span className="text-gray-700">
+								{generation.tokensOutput.toLocaleString()}
+							</span>
 						</span>
 					</div>
 				)}
