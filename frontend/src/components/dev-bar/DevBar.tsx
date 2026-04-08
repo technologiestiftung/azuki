@@ -13,9 +13,7 @@ export function DevBar() {
 
 			<select
 				value={selectedModel ?? ""}
-				onChange={(e) =>
-					setSelectedModel(e.target.value || null)
-				}
+				onChange={(e) => setSelectedModel(e.target.value || null)}
 				className="bg-gray-800 text-white text-xs rounded px-2 py-1 border border-gray-600"
 			>
 				<option value="">Server Default</option>
@@ -32,13 +30,22 @@ export function DevBar() {
 						Model: <span className="text-white">{generation.model}</span>
 					</span>
 					<span>
-						Cost: <span className="text-green-400">${generation.cost.toFixed(4)}</span>
+						Cost:{" "}
+						<span className="text-green-400">
+							${generation.cost.toFixed(4)}
+						</span>
 					</span>
 					<span>
-						In: <span className="text-white">{generation.tokensInput.toLocaleString()}</span>
+						In:{" "}
+						<span className="text-white">
+							{generation.tokensInput.toLocaleString()}
+						</span>
 					</span>
 					<span>
-						Out: <span className="text-white">{generation.tokensOutput.toLocaleString()}</span>
+						Out:{" "}
+						<span className="text-white">
+							{generation.tokensOutput.toLocaleString()}
+						</span>
 					</span>
 				</div>
 			)}
