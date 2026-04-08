@@ -232,15 +232,15 @@ export const content = {
 	"noGos.ariaLabel.accept": "Als ist okay markieren",
 	"noGos.skipButton.label": "Überspringen",
 	//noise
-	"noGos.noise.title": "Arbeit mit Lärm",
-	"noGos.noise.description": "z. B. Baustelle, Maschinen oder laute Werkstatt",
+	"noGos.noise.title": "Lärm",
+	"noGos.noise.description": "z.B. Baustelle, Maschinen oder laute Werkstatt",
 	//dirt
-	"noGos.dirt.title": "Schmutz bei der Arbeit",
-	"noGos.dirt.description": "z. B. Müll, Öl, Staub oder starke Gerüche",
+	"noGos.dirt.title": "Schmutz",
+	"noGos.dirt.description": "z.B. Müll, Öl, Staub, starke Gerüche",
 	//heavy-work
 	"noGos.heavy-work.title": "Schwere körperliche Arbeit",
 	"noGos.heavy-work.description":
-		"z. B. schwer heben, lange stehen, viel tragen",
+		"z.B. schwer heben, lange stehen, viel tragen",
 	//computer
 	"noGos.computer.title": "Den ganzen Tag am Computer",
 	"noGos.computer.description": "viel sitzen und am Bildschirm arbeiten",
@@ -250,10 +250,11 @@ export const content = {
 		"zu unterschiedlichen Zeiten arbeiten (z.B. morgens, abends, nachts)",
 	//animals
 	"noGos.animals.title": "Arbeit mit Tieren",
-	"noGos.animals.description": "z. B. im Stall, Tierheim oder Tierarzt",
+	"noGos.animals.description": "z.B. im Stall, Tierheim oder Tierarzt",
 	//danger
-	"noGos.danger.title": "Gefährliche Arbeit",
-	"noGos.danger.description": "z. B. mit Chemikalien, Strom oder großer Höhe",
+	"noGos.danger.title": "Erhöhte Gefahr",
+	"noGos.danger.description":
+		"z.B. Arbeit mit Chemikalien, Starkstrom, in großer Höhe",
 
 	// Navigation
 	"navigation.next": "Weiter",
