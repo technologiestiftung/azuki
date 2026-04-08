@@ -1,6 +1,6 @@
 import OpenAI from "openai";
 import type { UserProfile, MatchResult, GenerationInfo } from "@azuki/shared";
-import { AI_MODELS, AI_MODEL_IDS } from "@azuki/shared";
+import { AI_MODEL_IDS, DEFAULT_MODEL_ID } from "@azuki/shared";
 import type { ScoredOccupation } from "../matching/index.js";
 import {
   EDUCATION_LABELS,
@@ -13,7 +13,7 @@ import {
 } from "./labels.js";
 
 const OPENROUTER_API_KEY = process.env.OPENROUTER_API_KEY;
-const DEFAULT_MODEL = process.env.AI_MODEL || AI_MODELS[0].id;
+const DEFAULT_MODEL = DEFAULT_MODEL_ID;
 const MAX_DESCRIPTION_LENGTH = 400;
 const MIN_RESULTS = 5;
 const MAX_RESULTS = 8;
