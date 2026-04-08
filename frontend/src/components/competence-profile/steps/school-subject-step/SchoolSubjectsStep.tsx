@@ -44,9 +44,6 @@ export function SchoolSubjectsStep() {
 							))}
 							<PrimaryThemedButton
 								className="text-lg mt-2"
-								ariaLabel={
-									content["schoolSubjects.addCustomSubjectButton.ariaLabel"]
-								}
 								onClick={showInputDialog}
 							>
 								<div className="flex items-center gap-2 justify-center">
@@ -96,6 +93,9 @@ export function SchoolSubjectsStep() {
 				)}
 			</div>
 			<InputDialog
+				dialogAriaLabel={
+					content["schoolSubjects.inputDialog.input.addPlaceholder"]
+				}
 				inputPlaceholder={
 					content["schoolSubjects.inputDialog.input.addPlaceholder"]
 				}

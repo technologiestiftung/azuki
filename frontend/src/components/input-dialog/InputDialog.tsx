@@ -5,6 +5,7 @@ import { SecondaryButton } from "../primitives/buttons/SecondaryButton";
 import { content } from "../../content/de";
 
 const inputDialogId = "input-dialog";
+const inputDialogErrorId = "input-dialog-error";
 
 export function showInputDialog() {
 	(
@@ -17,11 +18,13 @@ export function hideInputDialog() {
 }
 
 interface InputDialogProps {
+	dialogAriaLabel: string;
 	inputPlaceholder: string;
 	onSubmit: (value: string) => void;
 }
 
 export const InputDialog = ({
+	dialogAriaLabel,
 	inputPlaceholder,
 	onSubmit,
 }: InputDialogProps) => {
@@ -48,6 +51,7 @@ export const InputDialog = ({
 	return (
 		<DefaultDialog
 			id={inputDialogId}
+			aria-label={dialogAriaLabel}
 			afterClose={() => {
 				setValue("");
 				setError(false);
@@ -57,11 +61,13 @@ export const InputDialog = ({
 			<div className="flex flex-col gap-10 p-4 rounded-4xl bg-gray-100">
 				<div className="flex flex-col gap-2">
 					<div
-						className={`h-[60px] flex items-center gap-2 px-4 py-2.5 rounded-2xl border-2 border-gray-500 focus-within:outline focus-within:outline-2 focus-within:outline-offset-1 focus-within:outline-sky-300 focus-within:border-gray-800 bg-white group transition-colors ${error && "border-red-700 focus-within:outline-red-700"}`}
+						className={`h-[60px] flex items-center gap-2 px-4 py-2.5 rounded-2xl border-2 focus-within:outline focus-within:outline-2 focus-within:outline-offset-1 focus-within:outline-sky-300 focus-within:border-gray-800 bg-white group transition-colors ${error ? "border-red-700 focus-within:outline-red-700" : "border-gray-500"}`}
 					>
 						<input
 							type="text"
 							placeholder={inputPlaceholder}
+							aria-invalid={error}
+							aria-describedby={error ? inputDialogErrorId : undefined}
 							value={value}
 							onChange={(e) => {
 								setValue(e.target.value);
@@ -87,7 +93,11 @@ export const InputDialog = ({
 						)}
 					</div>
 					{error && (
-						<div className="flex gap-1 text-red-700 text-lg font-medium">
+						<div
+							id={inputDialogErrorId}
+							role="alert"
+							className="flex gap-1 text-red-700 text-lg font-medium"
+						>
 							<img src="/icons/error.svg" alt="" className="w-6 h-6" />
 							{content["common.inputDialog.errorMessage"]}
 						</div>
