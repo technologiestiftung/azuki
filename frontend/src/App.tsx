@@ -1,6 +1,4 @@
 import { Routes, Route, Navigate, useLocation } from "react-router-dom";
-import { DevBar } from "./components/dev-bar/DevBar";
-import { useDevMode } from "./hooks/useDevMode";
 import { LoginScreen } from "./components/login-screen/LoginScreen";
 import { WelcomeCarousel } from "./components/welcome-screen/WelcomeCarousel";
 import { StartScreen } from "./components/competence-profile/start/StartScreen";
@@ -20,8 +18,6 @@ import { ROUTE_PATHS } from "./routing/routes";
 
 function App() {
 	const location = useLocation();
-	const devMode = useDevMode();
-
 	return (
 		<div className="max-w-[430px] mx-auto h-[100dvh] bg-sky-white relative overflow-hidden">
 			<div key={location.pathname} className="animate-fadeIn h-full">
@@ -65,7 +61,6 @@ function App() {
 					/>
 				</Routes>
 			</div>
-		{devMode && <DevBar />}
 		</div>
 	);
 }

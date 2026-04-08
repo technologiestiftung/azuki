@@ -13,7 +13,7 @@ export type {
 	MatchRequest,
 } from "./types";
 
-export { AI_MODELS, AI_MODEL_IDS, type AiModel } from "./models";
+export { AI_MODELS, AI_MODEL_IDS, DEFAULT_MODEL_ID, type AiModel } from "./models";
 
 export {
 	SUBJECTS,
