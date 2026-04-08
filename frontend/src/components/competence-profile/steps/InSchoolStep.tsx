@@ -19,6 +19,8 @@ export function InSchoolStep() {
 			onSkip={goNext}
 			hasSkipButton={false}
 			isSkipConfirmDialogOpen={profile.inSchool === null}
+			skipConfirmTitleKey="skipConfirmDialog.singleChoice.title"
+			skipConfirmDescriptionKey="skipConfirmDialog.singleChoice.description"
 			subtitle={content["common.singleSelect.subline"]}
 		>
 			<div className="flex flex-col gap-3">

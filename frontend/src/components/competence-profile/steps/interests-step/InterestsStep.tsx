@@ -28,6 +28,8 @@ export function InterestsStep() {
 			onNext={goNext}
 			onSkip={goNext}
 			isSkipConfirmDialogOpen={profile.interests.length === 0}
+			skipConfirmTitleKey="skipConfirmDialog.multipleChoice.title"
+			skipConfirmDescriptionKey="skipConfirmDialog.multipleChoice.description"
 			bottomContent={
 				<TextInput
 					name="customInterest"

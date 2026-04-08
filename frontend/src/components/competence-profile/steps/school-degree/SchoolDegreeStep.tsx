@@ -34,6 +34,8 @@ export function SchoolDegreeStep() {
 			onSkip={goNext}
 			hasSkipButton={false}
 			isSkipConfirmDialogOpen={!profile.educationLevel}
+			skipConfirmTitleKey="skipConfirmDialog.singleChoice.title"
+			skipConfirmDescriptionKey="skipConfirmDialog.singleChoice.description"
 			subtitle={content["common.singleSelect.subline"]}
 		>
 			<div className="flex flex-col gap-3">

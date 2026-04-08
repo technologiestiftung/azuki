@@ -269,9 +269,21 @@ export const content = {
 	"results.restartCta": "Nochmal starten",
 
 	// Skip confirm dialog
-	"skipConfirmDialog.title": "Du hast noch nichts ausgewählt",
-	"skipConfirmDialog.description":
+	"skipConfirmDialog.default.title": "Du hast noch nichts ausgewählt",
+	"skipConfirmDialog.default.description":
 		"Wenn du mehr auswählst, können wir dir passendere Berufe vorschlagen.",
 	"skipConfirmDialog.confirm": "Auswahl treffen",
 	"skipConfirmDialog.cancel": "Überspringen",
+	"skipConfirmDialog.singleChoice.title": "Bitte wähle eine Option",
+	"skipConfirmDialog.singleChoice.description":
+		"Wenn du etwas auswählst, können wir dir passendere Berufe vorschlagen.",
+	"skipConfirmDialog.multipleChoice.title": "Wähle eine oder mehrere Optionen",
+	"skipConfirmDialog.multipleChoice.description":
+		"Mehr Auswahl ermöglicht passendere Berufsvorschläge.",
+	"skipConfirmDialog.skipAll.title": "Du hast alle Fragen übersprungen",
+	"skipConfirmDialog.skipAll.description":
+		"Beantworte möglichst viele Fragen, um passendere Berufsvorschläge zu erhalten.",
+	"skipConfirmDialog.textInput.title": "Gib eine Antwort ein",
+	"skipConfirmDialog.textInput.description":
+		"Ergänze hier, was noch wichtig ist um passendere Berufsvorschläge zu erhalten.",
 };

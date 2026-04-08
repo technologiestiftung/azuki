@@ -18,14 +18,32 @@ export function hideSkipConfirmDialog() {
 	).close();
 }
 
+export type SkipConfirmTitleContentKey =
+	| "skipConfirmDialog.default.title"
+	| "skipConfirmDialog.singleChoice.title"
+	| "skipConfirmDialog.multipleChoice.title"
+	| "skipConfirmDialog.skipAll.title"
+	| "skipConfirmDialog.textInput.title";
+
+export type SkipConfirmDescriptionContentKey =
+	| "skipConfirmDialog.default.description"
+	| "skipConfirmDialog.singleChoice.description"
+	| "skipConfirmDialog.multipleChoice.description"
+	| "skipConfirmDialog.skipAll.description"
+	| "skipConfirmDialog.textInput.description";
+
 interface SkipConfirmDialogProps {
 	onSkip?: () => void;
 	onStay?: () => void;
+	titleKey?: SkipConfirmTitleContentKey;
+	descriptionKey?: SkipConfirmDescriptionContentKey;
 }
 
 export const SkipConfirmDialog: React.FC<SkipConfirmDialogProps> = ({
 	onSkip,
 	onStay,
+	titleKey = "skipConfirmDialog.default.title",
+	descriptionKey = "skipConfirmDialog.default.description",
 }) => {
 	const handleStay = () => {
 		hideSkipConfirmDialog();
@@ -45,9 +63,9 @@ export const SkipConfirmDialog: React.FC<SkipConfirmDialogProps> = ({
 		<DefaultDialog id={skipConfirmDialogId}>
 			<div className="flex flex-col gap-2 px-2 pb-6 text-gray-900">
 				<h2 className="text-lg font-semibold pb-1">
-					{content["skipConfirmDialog.title"]}
+					{content[titleKey]}
 				</h2>
-				<p className="text-lg">{content["skipConfirmDialog.description"]}</p>
+				<p className="text-lg">{content[descriptionKey]}</p>
 			</div>
 			<div className="flex flex-col gap-2 pt-2">
 				<PrimaryThemedButton onClick={handleStay}>
