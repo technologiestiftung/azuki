@@ -1,3 +1,4 @@
+import { useRef } from "react";
 import { content } from "../../../../content/de";
 import { useAppStore } from "../../../../store/useAppStore";
 import { StepLayout } from "../StepLayout";
@@ -15,6 +16,19 @@ export function SchoolSubjectsStep() {
 	const toggleSubject = useAppStore((state) => state.toggleSubject);
 	const addCustomSubject = useAppStore((state) => state.addCustomSubject);
 	const { goNext } = useFlowNavigation();
+	const customSubjectsSectionRef = useRef<HTMLDivElement>(null);
+
+	const handleAddCustomSubject = (value: string) => {
+		addCustomSubject(value);
+		requestAnimationFrame(() => {
+			requestAnimationFrame(() => {
+				customSubjectsSectionRef.current?.scrollIntoView({
+					behavior: "smooth",
+					block: "start",
+				});
+			});
+		});
+	};
 
 	return (
 		<StepLayout
@@ -28,7 +42,7 @@ export function SchoolSubjectsStep() {
 		>
 			<div className="flex flex-col gap-8">
 				{profile.customSubjects && profile.customSubjects.length > 0 && (
-					<div>
+					<div ref={customSubjectsSectionRef} className="scroll-mt-4">
 						<h3 className="text-lg font-semibold text-gray-500 mb-2 px-3.5">
 							{content["schoolSubjects.customSubject.label"]}
 						</h3>
@@ -99,7 +113,7 @@ export function SchoolSubjectsStep() {
 				inputPlaceholder={
 					content["schoolSubjects.inputDialog.input.addPlaceholder"]
 				}
-				onSubmit={(value: string) => addCustomSubject(value)}
+				onSubmit={handleAddCustomSubject}
 			/>
 		</StepLayout>
 	);
