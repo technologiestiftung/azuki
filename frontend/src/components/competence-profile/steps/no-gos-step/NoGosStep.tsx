@@ -57,22 +57,35 @@ export function NoGosStep() {
 	const handleSwipe = useCallback(
 		(direction: SwipeDirection, index: number) => {
 			const card = noGos[index];
-			if (card) {
-				const answer: NoGoAnswer =
-					direction === "right" ? "accepted" : "rejected";
-				setNoGo(card.id, answer);
+			if (!card) {
+				return;
 			}
+			if (direction === "up") {
+				setNoGo(card.id, null);
+				return;
+			}
+			const answer: NoGoAnswer =
+				direction === "right" ? "accepted" : "rejected";
+			setNoGo(card.id, answer);
 		},
 		[setNoGo],
 	);
 
 	const handleSkip = useCallback(() => {
-		const card = noGos[cardIndex];
-		if (card) {
-			setNoGo(card.id, null);
-		}
 		stackRef.current?.swipeUp();
-	}, [cardIndex, setNoGo]);
+	}, []);
+
+	const hasAnyExplicitNoGoAnswer = noGos.some((card) => {
+		const value = noGosValues[card.id];
+		return value === "accepted" || value === "rejected";
+	});
+	const isOnLastNoGoCard = cardIndex >= noGos.length - 1;
+	const isSkipConfirmDialogOpen =
+		isOnLastNoGoCard && !hasAnyExplicitNoGoAnswer;
+
+	const skipConfirmOnStay = useCallback(() => {
+		navigate({ pathname, hash: "#0" }, { replace: true });
+	}, [navigate, pathname]);
 
 	return (
 		<StepLayout
@@ -83,6 +96,10 @@ export function NoGosStep() {
 			hasSkipButton={true}
 			hasNextButton={false}
 			skipLabel={content["noGos.skipButton.label"]}
+			isSkipConfirmDialogOpen={isSkipConfirmDialogOpen}
+			skipConfirmTitleKey="skipConfirmDialog.skipAll.title"
+			skipConfirmDescriptionKey="skipConfirmDialog.skipAll.description"
+			skipConfirmOnStay={skipConfirmOnStay}
 			bottomContent={
 				<NoGoActionButtons
 					onClickAccept={() => stackRef.current?.swipeRight()}

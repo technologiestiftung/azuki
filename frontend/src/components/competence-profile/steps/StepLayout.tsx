@@ -29,6 +29,7 @@ interface StepLayoutProps {
 	isSkipConfirmDialogOpen?: boolean;
 	skipConfirmTitleKey?: SkipConfirmTitleContentKey;
 	skipConfirmDescriptionKey?: SkipConfirmDescriptionContentKey;
+	skipConfirmOnStay?: () => void;
 }
 
 export function StepLayout({
@@ -46,6 +47,7 @@ export function StepLayout({
 	isSkipConfirmDialogOpen,
 	skipConfirmTitleKey,
 	skipConfirmDescriptionKey,
+	skipConfirmOnStay,
 }: StepLayoutProps) {
 	const { pathname, hash } = useLocation();
 	const navigate = useNavigate();
@@ -87,13 +89,16 @@ export function StepLayout({
 				)}
 
 				{hasSkipButton && (
-					<GhostButton onClick={onSkip}>
+					<GhostButton
+						onClick={isSkipConfirmDialogOpen ? showSkipConfirmDialog : onSkip}
+					>
 						{skipLabel || content["navigation.skip"]}
 					</GhostButton>
 				)}
 				{isSkipConfirmDialogOpen && (
 					<SkipConfirmDialog
 						onSkip={onSkip}
+						onStay={skipConfirmOnStay}
 						titleKey={skipConfirmTitleKey}
 						descriptionKey={skipConfirmDescriptionKey}
 					/>

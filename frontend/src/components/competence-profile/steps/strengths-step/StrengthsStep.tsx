@@ -61,6 +61,14 @@ export function StrengthsStep() {
 	const currentCard = strengths[cardIndex];
 	const currentValue = strengthValues[currentCard?.id] ?? 0.5;
 
+	const hasAnyExplicitStrengthRating = strengths.some(
+		(strength) => strength.id in strengthValues,
+	);
+	const isOnLastStrengthCard = cardIndex >= strengths.length - 1;
+
+	const isSkipConfirmDialogOpen =
+		isOnLastStrengthCard && !hasAnyExplicitStrengthRating;
+
 	const handleSliderChange = useCallback(
 		(value: number) => {
 			if (currentCard) {
@@ -71,11 +79,12 @@ export function StrengthsStep() {
 	);
 
 	const handleSkip = useCallback(() => {
-		if (currentCard) {
-			setStrength(currentCard.id, 0.5);
-		}
 		stackRef.current?.goNext();
-	}, [currentCard, setStrength]);
+	}, []);
+
+	const skipConfirmOnStay = useCallback(() => {
+		navigate({ pathname, hash: "#0" }, { replace: true });
+	}, [navigate, pathname]);
 
 	return (
 		<StepLayout
@@ -85,6 +94,10 @@ export function StrengthsStep() {
 			onBack={() => stackRef.current?.goBack()}
 			hasSkipButton={true}
 			skipLabel={content["strengths.skipButton.label"]}
+			isSkipConfirmDialogOpen={isSkipConfirmDialogOpen}
+			skipConfirmTitleKey="skipConfirmDialog.skipAll.title"
+			skipConfirmDescriptionKey="skipConfirmDialog.skipAll.description"
+			skipConfirmOnStay={skipConfirmOnStay}
 		>
 			<div className="flex flex-col justify-center items-center h-[85%] flex-1 gap-y-5 py-5">
 				<SwipeCardStack

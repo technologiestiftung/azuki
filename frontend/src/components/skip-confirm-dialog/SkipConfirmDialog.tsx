@@ -67,7 +67,10 @@ export const SkipConfirmDialog: React.FC<SkipConfirmDialogProps> = ({
 			</div>
 			<div className="flex flex-col gap-2 pt-2">
 				<PrimaryThemedButton onClick={handleStay}>
-					{content["skipConfirmDialog.confirm"]}
+					{titleKey === "skipConfirmDialog.skipAll.title" ||
+					titleKey === "skipConfirmDialog.textInput.title"
+						? content["skipConfirmDialog.confirm.answer"]
+						: content["skipConfirmDialog.confirm.selection"]}
 				</PrimaryThemedButton>
 				<SecondaryButton onClick={handleSkip}>
 					{content["skipConfirmDialog.cancel"]}
