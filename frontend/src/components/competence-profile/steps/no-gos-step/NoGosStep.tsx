@@ -80,8 +80,7 @@ export function NoGosStep() {
 		return value === "accepted" || value === "rejected";
 	});
 	const isOnLastNoGoCard = cardIndex >= noGos.length - 1;
-	const isSkipConfirmDialogOpen =
-		isOnLastNoGoCard && !hasAnyExplicitNoGoAnswer;
+	const isSkipConfirmDialogOpen = isOnLastNoGoCard && !hasAnyExplicitNoGoAnswer;
 
 	const skipConfirmOnStay = useCallback(() => {
 		navigate({ pathname, hash: "#0" }, { replace: true });

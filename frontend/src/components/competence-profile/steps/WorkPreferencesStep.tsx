@@ -25,8 +25,7 @@ export function WorkPreferencesStep() {
 		return choice === "a" || choice === "b";
 	});
 	const isOnLastPair = pairIndex >= pairs.length - 1;
-	const isSkipConfirmDialogOpen =
-		isOnLastPair && !hasAnyExplicitWorkPreference;
+	const isSkipConfirmDialogOpen = isOnLastPair && !hasAnyExplicitWorkPreference;
 
 	useEffect(() => {
 		if (pathname === "/expectations" && !hash) {
