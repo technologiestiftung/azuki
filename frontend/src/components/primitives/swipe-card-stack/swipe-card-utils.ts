@@ -54,6 +54,12 @@ const DEFAULT_ACCENT: TopCardHorizontalAccentBg = {
 
 const IDLE_BG = "bg-gray-200";
 
+/** Horizontal drag past this (px) tints even when vertical movement is larger. */
+const TINT_OVERRIDE_HORIZONTAL_DRAG_PX = 18;
+
+/** Minimum horizontal movement (px) before tint when horizontal already dominates vertical. */
+const TINT_DOMINANT_HORIZONTAL_DRAG_PX = 6;
+
 /** Matches `detectSwipeDirection` "up" so vertical skip drags stay neutral. */
 function isDominantUpDrag(dragX: number, dragY: number): boolean {
 	const absDx = Math.abs(dragX);
@@ -74,7 +80,7 @@ export interface TopCardAccentBgInput {
  * Returns the Tailwind bg class for the top card.
  *
  * - Idle / up-swipe → `bg-gray-200`
- * - Horizontal swipe or drag → `accent.left` or `accent.right`
+ * - Horizontal drag past a small threshold → `accent.left` or `accent.right`
  */
 export function getTopCardAccentBg(input: TopCardAccentBgInput): string {
 	const { isDragging, dragX, dragY, flyDirection, animationDirection } = input;
@@ -89,7 +95,17 @@ export function getTopCardAccentBg(input: TopCardAccentBgInput): string {
 
 	let dragSide: SwipeDirection | null = null;
 	if (isDragging) {
-		dragSide = dragX >= 0 ? "right" : "left";
+		const horizontalIntent =
+			Math.abs(dragX) > TINT_OVERRIDE_HORIZONTAL_DRAG_PX ||
+			(Math.abs(dragX) >= TINT_DOMINANT_HORIZONTAL_DRAG_PX &&
+				Math.abs(dragX) >= Math.abs(dragY));
+		if (horizontalIntent) {
+			if (dragX > 0) {
+				dragSide = "right";
+			} else if (dragX < 0) {
+				dragSide = "left";
+			}
+		}
 	}
 	const side = flyDirection ?? animationDirection ?? dragSide;
 
