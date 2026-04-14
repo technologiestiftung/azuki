@@ -16,6 +16,11 @@ import {
 	getCursorStyle,
 	getTopCardAccentBg,
 	SLIDE_IN_MS,
+	SWIPE_SNAP_BACK_MS,
+	SWIPE_SNAP_BACK_POINTER_CANCEL_MS,
+	swipeFlyOutTopTransformTransition,
+	swipeSnapBackStackLayerTransition,
+	swipeSnapBackTopTransition,
 	topCardAnimationClassNames,
 } from "./swipe-card-utils";
 import type {
@@ -89,6 +94,11 @@ export const SwipeCardStack = forwardRef<
 	const [animationDirection, setAnimationDirection] =
 		useState<SwipeDirection | null>(null);
 	const [flyDirection, setFlyDirection] = useState<SwipeDirection | null>(null);
+	const [flyStartOffset, setFlyStartOffset] = useState<{
+		x: number;
+		y: number;
+	} | null>(null);
+	const [backCardTransition, setBackCardTransition] = useState("none");
 
 	const pointerStartX = useRef<number | null>(null);
 	const pointerStartY = useRef<number | null>(null);
@@ -104,7 +114,11 @@ export const SwipeCardStack = forwardRef<
 	const activeOffset = flyOffset ?? { x: dragX, y: dragY };
 
 	const { backScale, backOpacity, backTranslateY, topTransform } =
-		getCardVisualState(activeOffset, isFlying, flyDirection);
+		getCardVisualState(activeOffset, {
+			isFlying,
+			flyDirection,
+			flyStart: flyStartOffset,
+		});
 
 	useEffect(() => {
 		setIsDragging(false);
@@ -112,7 +126,9 @@ export const SwipeCardStack = forwardRef<
 		setDragY(0);
 		setFlyOffset(null);
 		setFlyDirection(null);
+		setFlyStartOffset(null);
 		setCardTransition("");
+		setBackCardTransition("none");
 		setAnimationPhase("idle");
 		setAnimationDirection(null);
 		pointerStartX.current = null;
@@ -149,22 +165,39 @@ export const SwipeCardStack = forwardRef<
 			}
 			isAnimating.current = true;
 
-			if (direction === "up") {
-				setFlyDirection("up");
-				setFlyOffset({ x: dragX, y: EXIT_OFFSET_Y });
-			} else {
-				const exitX = direction === "right" ? EXIT_OFFSET_X : -EXIT_OFFSET_X;
-				setFlyOffset({ x: exitX, y: dragY });
-			}
-
+			const startX = dragX;
+			const startY = dragY;
+			setFlyStartOffset({ x: startX, y: startY });
+			setFlyDirection(direction);
+			setFlyOffset({ x: startX, y: startY });
 			setAnimationDirection(direction);
 			setAnimationPhase("slide-out");
+			setCardTransition(swipeFlyOutTopTransformTransition());
+			setBackCardTransition(
+				`transform ${FLY_OUT_MS}ms ease 100ms, opacity 300ms ease 100ms`,
+			);
 			onSwipe?.(direction, displayIndex);
+
+			requestAnimationFrame(() => {
+				requestAnimationFrame(() => {
+					if (direction === "up") {
+						setFlyOffset({ x: startX, y: EXIT_OFFSET_Y });
+					} else {
+						const exitX =
+							direction === "right" ? EXIT_OFFSET_X : -EXIT_OFFSET_X;
+						setFlyOffset({ x: exitX, y: startY });
+					}
+				});
+			});
 
 			timeoutRef.current = window.setTimeout(() => {
 				setFlyOffset(null);
 				setFlyDirection(null);
+				setFlyStartOffset(null);
+				setDragX(0);
+				setDragY(0);
 				setCardTransition("");
+				setBackCardTransition("none");
 				setAnimationPhase("idle");
 				setAnimationDirection(null);
 				isAnimating.current = false;
@@ -253,6 +286,7 @@ export const SwipeCardStack = forwardRef<
 			pointerStartY.current = e.clientY;
 			setIsDragging(true);
 			setCardTransition("");
+			setBackCardTransition("none");
 			setDragX(0);
 			setDragY(0);
 		},
@@ -293,7 +327,10 @@ export const SwipeCardStack = forwardRef<
 			if (direction && (direction !== "up" || isSwipeUpGestureEnabled)) {
 				flyOut(direction, nextIndex);
 			} else {
-				setCardTransition("transform 0.3s ease");
+				setCardTransition(swipeSnapBackTopTransition(SWIPE_SNAP_BACK_MS));
+				setBackCardTransition(
+					swipeSnapBackStackLayerTransition(SWIPE_SNAP_BACK_MS),
+				);
 				setDragX(0);
 				setDragY(0);
 			}
@@ -305,13 +342,18 @@ export const SwipeCardStack = forwardRef<
 		pointerStartX.current = null;
 		pointerStartY.current = null;
 		setIsDragging(false);
-		setCardTransition("transform 0.5s ease");
+		setCardTransition(
+			swipeSnapBackTopTransition(SWIPE_SNAP_BACK_POINTER_CANCEL_MS),
+		);
+		setBackCardTransition(
+			swipeSnapBackStackLayerTransition(SWIPE_SNAP_BACK_POINTER_CANCEL_MS),
+		);
 		setDragX(0);
 		setDragY(0);
 	}, []);
 
 	const backCardContent = renderBackCard ?? renderCard;
-	const isAnimatingCard = isSliding || isSlidingOut;
+	const useKeyframeTopTransform = isSliding;
 	const cursorStyle = getCursorStyle(isDraggingEnabled, isDragging);
 	const accentBg = getTopCardAccentBg({
 		isDragging,
@@ -329,7 +371,7 @@ export const SwipeCardStack = forwardRef<
 				{hasNext && (
 					<div
 						aria-hidden="true"
-						className={`absolute inset-0 -bottom-8 w-full bg-gray-300 rounded-3xl pointer-events-none transition-opacity duration-200 ease-in ${isSlidingOut || isDragging ? "opacity-50" : "opacity-100"}`}
+						className={`absolute inset-0 -bottom-[37px] w-full bg-gray-300 rounded-3xl pointer-events-none transition-opacity duration-200 ease-in ${isSlidingOut || isDragging ? "opacity-50" : "opacity-100"}`}
 						style={{
 							zIndex: 0,
 							transform: "scale(0.85)",
@@ -346,9 +388,7 @@ export const SwipeCardStack = forwardRef<
 							zIndex: 1,
 							transform: `scale(${backScale}) translateY(${backTranslateY}px)`,
 							opacity: backOpacity,
-							transition: isFlying
-								? "transform 0.6s ease 0.1s, opacity 0.3s ease 0.1s"
-								: "none",
+							transition: backCardTransition,
 							willChange: "transform, opacity",
 						}}
 					>
@@ -364,9 +404,9 @@ export const SwipeCardStack = forwardRef<
 						touchAction: "none",
 						cursor: cursorStyle,
 						userSelect: "none",
-						transform: isAnimatingCard ? undefined : topTransform,
-						transition: isAnimatingCard ? undefined : cardTransition,
-						pointerEvents: isAnimatingCard ? "none" : undefined,
+						transform: useKeyframeTopTransform ? undefined : topTransform,
+						transition: useKeyframeTopTransform ? undefined : cardTransition,
+						pointerEvents: isSliding || isSlidingOut ? "none" : undefined,
 					}}
 					onPointerDown={handlePointerDown}
 					onPointerMove={handlePointerMove}
