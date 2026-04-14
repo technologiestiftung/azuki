@@ -194,6 +194,28 @@ export function getCursorStyle(
 	return isDragging ? "grabbing" : "grab";
 }
 
+export interface DragDirectionAndProgress {
+	direction: "left" | "right" | null;
+	progress: number;
+}
+
+export function getDragDirectionAndProgress(
+	isDragging: boolean,
+	dragX: number,
+	flyDirection: SwipeDirection | null,
+): DragDirectionAndProgress {
+	if (isDragging && dragX !== 0) {
+		return {
+			direction: dragX > 0 ? "right" : "left",
+			progress: Math.min(Math.abs(dragX) / SWIPE_THRESHOLD, 1),
+		};
+	}
+	if (flyDirection === "left" || flyDirection === "right") {
+		return { direction: flyDirection, progress: 1 };
+	}
+	return { direction: null, progress: 0 };
+}
+
 export function detectSwipeDirection(
 	directionX: number,
 	directionY: number,

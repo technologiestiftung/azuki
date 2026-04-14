@@ -13,6 +13,7 @@ import {
 	EXIT_OFFSET_X,
 	EXIT_OFFSET_Y,
 	GHOST_CARD_SHIFT_Y,
+	getDragDirectionAndProgress,
 	getCardVisualState,
 	getCursorStyle,
 	getTopCardAccentBg,
@@ -51,8 +52,16 @@ interface SwipeCardStackProps {
 	onBack: (newIndex: number) => SwipeDirection;
 	onIndexChange?: (index: number) => void;
 	onSwipe?: (direction: SwipeDirection, index: number) => void;
-	renderCard: (index: number) => React.ReactNode;
-	renderBackCard?: (index: number) => React.ReactNode;
+	renderCard: (
+		index: number,
+		dragDirection: "left" | "right" | null,
+		dragProgress: number,
+	) => React.ReactNode;
+	renderBackCard?: (
+		index: number,
+		dragDirection: "left" | "right" | null,
+		dragProgress: number,
+	) => React.ReactNode;
 	className?: string;
 	horizontalAccentBg?: TopCardHorizontalAccentBg;
 }
@@ -118,13 +127,18 @@ export const SwipeCardStack = forwardRef<
 	const nextIndex = hasNext ? displayIndex + 1 : null;
 	const activeOffset = flyOffset ?? { x: dragX, y: dragY };
 
-	const { backScale, backOpacity, backTranslateY, ghostTranslateY, topTransform } =
-		getCardVisualState(activeOffset, {
-			isFlying,
-			isActive: isDragging || isFlying,
-			flyDirection,
-			flyStart: flyStartOffset,
-		});
+	const {
+		backScale,
+		backOpacity,
+		backTranslateY,
+		ghostTranslateY,
+		topTransform,
+	} = getCardVisualState(activeOffset, {
+		isFlying,
+		isActive: isDragging || isFlying,
+		flyDirection,
+		flyStart: flyStartOffset,
+	});
 
 	useEffect(() => {
 		setIsDragging(false);
@@ -269,26 +283,25 @@ export const SwipeCardStack = forwardRef<
 		slideIn(direction, targetIndex);
 	}, [slideIn, displayIndex, onBefore, onBack]);
 
-	const swipeLeft = useCallback(() => {
-		if (isAnimating.current) {
-			return;
-		}
-		flyOut("left", nextIndex);
-	}, [flyOut, nextIndex]);
+	const swipeInDirection = useCallback(
+		(dir: SwipeDirection) => {
+			if (isAnimating.current) {
+				return;
+			}
+			flyOut(dir, nextIndex);
+		},
+		[flyOut, nextIndex],
+	);
 
-	const swipeRight = useCallback(() => {
-		if (isAnimating.current) {
-			return;
-		}
-		flyOut("right", nextIndex);
-	}, [flyOut, nextIndex]);
-
-	const swipeUp = useCallback(() => {
-		if (isAnimating.current) {
-			return;
-		}
-		flyOut("up", nextIndex);
-	}, [flyOut, nextIndex]);
+	const swipeLeft = useCallback(
+		() => swipeInDirection("left"),
+		[swipeInDirection],
+	);
+	const swipeRight = useCallback(
+		() => swipeInDirection("right"),
+		[swipeInDirection],
+	);
+	const swipeUp = useCallback(() => swipeInDirection("up"), [swipeInDirection]);
 
 	useImperativeHandle(
 		ref,
@@ -384,21 +397,24 @@ export const SwipeCardStack = forwardRef<
 		accent: horizontalAccentBg,
 	});
 
+	const { direction: currentDragDirection, progress: dragProgress } =
+		getDragDirectionAndProgress(isDragging, dragX, flyDirection);
+
 	return (
 		<div className="flex flex-col w-full justify-center items-center h-fit py-3">
 			<div className={`relative w-full ${className}`}>
-			{/* Ghost card */}
-			{hasNext && (
-				<div
-					aria-hidden="true"
-					className="absolute inset-0 -bottom-[37px] w-full bg-gray-300 rounded-3xl pointer-events-none"
-					style={{
-						zIndex: 0,
-						transform: `scale(0.85) translateY(${ghostYOverride ?? ghostTranslateY}px)`,
-						transition: ghostTransitionOverride ?? backCardTransition,
-					}}
-				/>
-			)}
+				{/* Ghost card */}
+				{hasNext && (
+					<div
+						aria-hidden="true"
+						className="absolute inset-0 -bottom-[37px] w-full bg-gray-300 rounded-3xl pointer-events-none"
+						style={{
+							zIndex: 0,
+							transform: `scale(0.85) translateY(${ghostYOverride ?? ghostTranslateY}px)`,
+							transition: ghostTransitionOverride ?? backCardTransition,
+						}}
+					/>
+				)}
 
 				{/* Back card */}
 				{hasNext && (
@@ -413,7 +429,7 @@ export const SwipeCardStack = forwardRef<
 							willChange: "transform, opacity",
 						}}
 					>
-						{backCardContent(displayIndex + 1)}
+						{backCardContent(displayIndex + 1, null, 0)}
 					</div>
 				)}
 
@@ -434,7 +450,7 @@ export const SwipeCardStack = forwardRef<
 					onPointerUp={handlePointerUp}
 					onPointerCancel={handlePointerCancel}
 				>
-					{renderCard(displayIndex)}
+					{renderCard(displayIndex, currentDragDirection, dragProgress)}
 				</div>
 			</div>
 		</div>

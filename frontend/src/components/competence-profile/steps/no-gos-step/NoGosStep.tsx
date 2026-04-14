@@ -97,8 +97,8 @@ export function NoGosStep() {
 					initialIndex={cardIndex}
 					isSwipeUpGestureEnabled={false}
 					horizontalAccentBg={{
-						left: "bg-orange-500",
-						right: "bg-sky-300",
+						left: "bg-gray-200",
+						right: "bg-gray-200",
 					}}
 					onCommit={getDirectionForIndex}
 					onExhausted={goNext}
@@ -106,8 +106,19 @@ export function NoGosStep() {
 					onBack={getDirectionForIndex}
 					onIndexChange={handleIndexChange}
 					onSwipe={handleSwipe}
-					renderCard={(index: number) => (
-						<SwipeCard index={index} cards={noGos} minHeight={257} />
+					renderCard={(
+						index: number,
+						dragDirection: "left" | "right" | null,
+						dragProgress: number,
+					) => (
+						<SwipeCard
+							index={index}
+							cards={noGos}
+							minHeight={257}
+							dragDirection={dragDirection}
+							dragProgress={dragProgress}
+							swipeOverlay={{ leftBg: "bg-orange-500", rightBg: "bg-sky-300" }}
+						/>
 					)}
 				/>
 			</div>
