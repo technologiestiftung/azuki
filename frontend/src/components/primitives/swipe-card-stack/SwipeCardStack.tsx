@@ -12,6 +12,7 @@ import {
 	FLY_OUT_MS,
 	EXIT_OFFSET_X,
 	EXIT_OFFSET_Y,
+	GHOST_CARD_SHIFT_Y,
 	getCardVisualState,
 	getCursorStyle,
 	getTopCardAccentBg,
@@ -99,6 +100,10 @@ export const SwipeCardStack = forwardRef<
 		y: number;
 	} | null>(null);
 	const [backCardTransition, setBackCardTransition] = useState("none");
+	const [ghostYOverride, setGhostYOverride] = useState<number | null>(null);
+	const [ghostTransitionOverride, setGhostTransitionOverride] = useState<
+		string | null
+	>(null);
 
 	const pointerStartX = useRef<number | null>(null);
 	const pointerStartY = useRef<number | null>(null);
@@ -113,9 +118,10 @@ export const SwipeCardStack = forwardRef<
 	const nextIndex = hasNext ? displayIndex + 1 : null;
 	const activeOffset = flyOffset ?? { x: dragX, y: dragY };
 
-	const { backScale, backOpacity, backTranslateY, topTransform } =
+	const { backScale, backOpacity, backTranslateY, ghostTranslateY, topTransform } =
 		getCardVisualState(activeOffset, {
 			isFlying,
+			isActive: isDragging || isFlying,
 			flyDirection,
 			flyStart: flyStartOffset,
 		});
@@ -129,6 +135,8 @@ export const SwipeCardStack = forwardRef<
 		setFlyStartOffset(null);
 		setCardTransition("");
 		setBackCardTransition("none");
+		setGhostYOverride(null);
+		setGhostTransitionOverride(null);
 		setAnimationPhase("idle");
 		setAnimationDirection(null);
 		pointerStartX.current = null;
@@ -167,6 +175,8 @@ export const SwipeCardStack = forwardRef<
 
 			const startX = dragX;
 			const startY = dragY;
+			const isButtonTriggered = startX === 0 && startY === 0;
+
 			setFlyStartOffset({ x: startX, y: startY });
 			setFlyDirection(direction);
 			setFlyOffset({ x: startX, y: startY });
@@ -176,9 +186,17 @@ export const SwipeCardStack = forwardRef<
 			setBackCardTransition(
 				`transform ${FLY_OUT_MS}ms ease 100ms, opacity 300ms ease 100ms`,
 			);
+			if (isButtonTriggered) {
+				setGhostYOverride(GHOST_CARD_SHIFT_Y);
+				setGhostTransitionOverride("none");
+			}
 			onSwipe?.(direction, displayIndex);
 
 			requestAnimationFrame(() => {
+				if (isButtonTriggered) {
+					setGhostYOverride(null);
+					setGhostTransitionOverride(null);
+				}
 				requestAnimationFrame(() => {
 					if (direction === "up") {
 						setFlyOffset({ x: startX, y: EXIT_OFFSET_Y });
@@ -198,6 +216,8 @@ export const SwipeCardStack = forwardRef<
 				setDragY(0);
 				setCardTransition("");
 				setBackCardTransition("none");
+				setGhostYOverride(null);
+				setGhostTransitionOverride(null);
 				setAnimationPhase("idle");
 				setAnimationDirection(null);
 				isAnimating.current = false;
@@ -367,17 +387,18 @@ export const SwipeCardStack = forwardRef<
 	return (
 		<div className="flex flex-col w-full justify-center items-center h-fit py-3">
 			<div className={`relative w-full ${className}`}>
-				{/* Ghost card */}
-				{hasNext && (
-					<div
-						aria-hidden="true"
-						className={`absolute inset-0 -bottom-[37px] w-full bg-gray-300 rounded-3xl pointer-events-none transition-opacity duration-200 ease-in ${isSlidingOut || isDragging ? "opacity-50" : "opacity-100"}`}
-						style={{
-							zIndex: 0,
-							transform: "scale(0.85)",
-						}}
-					/>
-				)}
+			{/* Ghost card */}
+			{hasNext && (
+				<div
+					aria-hidden="true"
+					className="absolute inset-0 -bottom-[37px] w-full bg-gray-300 rounded-3xl pointer-events-none"
+					style={{
+						zIndex: 0,
+						transform: `scale(0.85) translateY(${ghostYOverride ?? ghostTranslateY}px)`,
+						transition: ghostTransitionOverride ?? backCardTransition,
+					}}
+				/>
+			)}
 
 				{/* Back card */}
 				{hasNext && (

@@ -14,6 +14,8 @@ export const SLIDE_IN_MS = 400;
 export const EXIT_OFFSET_X = 1000;
 export const EXIT_OFFSET_Y = -800;
 
+export const GHOST_CARD_SHIFT_Y = -8;
+
 const SLIDE_IN_ANIMATION: Record<SwipeDirection, string> = {
 	left: "animate-slideInLeft",
 	right: "animate-slideInRight",
@@ -24,6 +26,7 @@ export interface CardVisualState {
 	backScale: number;
 	backOpacity: number;
 	backTranslateY: number;
+	ghostTranslateY: number;
 	topTransform: string;
 }
 
@@ -138,6 +141,7 @@ function flyUpProgress(startY: number, currentY: number): number {
 
 export interface GetCardVisualStateFly {
 	isFlying: boolean;
+	isActive: boolean;
 	flyDirection: SwipeDirection | null;
 	flyStart: { x: number; y: number } | null;
 }
@@ -155,6 +159,9 @@ export function getCardVisualState(
 	const backScale = 0.85 + 0.15 * progress;
 	const backOpacity = progress;
 	const backTranslateY = 35 * (1 - progress);
+	const ghostTranslateY = fly.isActive
+		? GHOST_CARD_SHIFT_Y * (1 - progress)
+		: 0;
 
 	const isFlyingUp = flyDirection === "up" && isFlying;
 	const rotate = isFlyingUp ? 0 : activeOffset.x / 20;
@@ -171,6 +178,7 @@ export function getCardVisualState(
 		backScale,
 		backOpacity,
 		backTranslateY,
+		ghostTranslateY,
 		topTransform,
 	};
 }
