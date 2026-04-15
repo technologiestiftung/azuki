@@ -37,6 +37,9 @@ export const content = {
 	"schoolDegree.option.foreign.label": "Abschluss aus dem Ausland",
 	"schoolDegree.option.unknown.label": "Ich weiß es nicht",
 	"schoolDegree.skipButton.label": "Ich weiß es nicht",
+	"schoolDegree.link.foreign.label": "Hilfe bei der Anerkennung",
+	"schoolDegree.link.foreign.href":
+		"https://www.berlin.de/sen/bjf/anerkennung/",
 
 	// School Subjects
 	"schoolSubjects.question": "Welche Schulfächer machen dir Spaß?",
