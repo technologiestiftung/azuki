@@ -10,10 +10,6 @@ interface SwipeCardProps {
 	minHeight?: number;
 	dragDirection?: "left" | "right" | "up" | null;
 	dragProgress?: number;
-	swipeOverlay?: {
-		leftBg: string;
-		rightBg: string;
-	};
 }
 
 export const SwipeCard = memo(function SwipeCard({
@@ -22,7 +18,6 @@ export const SwipeCard = memo(function SwipeCard({
 	minHeight = 246,
 	dragDirection = null,
 	dragProgress = 0,
-	swipeOverlay,
 }: SwipeCardProps) {
 	const card = cards[index];
 
@@ -49,12 +44,6 @@ export const SwipeCard = memo(function SwipeCard({
 					{card.description}
 				</p>
 			</div>
-			{dragDirection && dragDirection !== "up" && swipeOverlay && (
-				<div
-					className={`absolute -top-5 -bottom-6 -left-6 -right-6 rounded-3xl pointer-events-none ${dragDirection === "left" ? swipeOverlay.leftBg : swipeOverlay.rightBg}`}
-					style={{ opacity: dragProgress * 0.85 }}
-				/>
-			)}
 			{dragDirection && dragDirection !== "up" && (
 				<div
 					className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 h-[120px] w-[120px] rounded-full bg-orange-0 flex items-center justify-center pointer-events-none"

@@ -400,6 +400,10 @@ export const SwipeCardStack = forwardRef<
 	const { direction: currentDragDirection, progress: dragProgress } =
 		getDragDirectionAndProgress(isDragging, dragX, flyDirection);
 
+	const topCardContentOpacity = currentDragDirection
+		? 1 - dragProgress * 0.15
+		: 1;
+
 	return (
 		<div className="flex flex-col w-full justify-center items-center h-fit py-3">
 			<div className={`relative w-full ${className}`}>
@@ -441,6 +445,7 @@ export const SwipeCardStack = forwardRef<
 						touchAction: "none",
 						cursor: cursorStyle,
 						userSelect: "none",
+						opacity: topCardContentOpacity,
 						transform: useKeyframeTopTransform ? undefined : topTransform,
 						transition: useKeyframeTopTransform ? undefined : cardTransition,
 						pointerEvents: isSliding || isSlidingOut ? "none" : undefined,

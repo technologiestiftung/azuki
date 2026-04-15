@@ -97,8 +97,8 @@ export function NoGosStep() {
 					initialIndex={cardIndex}
 					isSwipeUpGestureEnabled={false}
 					horizontalAccentBg={{
-						left: "bg-gray-200",
-						right: "bg-gray-200",
+						left: "bg-orange-500",
+						right: "bg-sky-300",
 					}}
 					onCommit={getDirectionForIndex}
 					onExhausted={goNext}
@@ -117,7 +117,6 @@ export function NoGosStep() {
 							minHeight={257}
 							dragDirection={dragDirection}
 							dragProgress={dragProgress}
-							swipeOverlay={{ leftBg: "bg-orange-500", rightBg: "bg-sky-300" }}
 						/>
 					)}
 				/>
