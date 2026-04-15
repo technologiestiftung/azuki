@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useCallback, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { content } from "../../../content/de";
 import { useAppStore } from "../../../store/useAppStore";
@@ -11,6 +11,7 @@ export function WorkPreferencesStep() {
 	const { pathname, hash } = useLocation();
 	const navigate = useNavigate();
 	const setWorkPreference = useAppStore((state) => state.setWorkPreference);
+	const workPreferences = useAppStore((state) => state.profile.workPreferences);
 	const { goNext } = useFlowNavigation();
 	const pairs = content["workPreferences.pairs"];
 	const pairIndex = Math.min(
@@ -18,6 +19,13 @@ export function WorkPreferencesStep() {
 		Math.max(0, pairs.length - 1),
 	);
 	const current = pairs[pairIndex];
+
+	const hasAnyExplicitWorkPreference = pairs.some((pair) => {
+		const choice = workPreferences[pair.id];
+		return choice === "a" || choice === "b";
+	});
+	const isOnLastPair = pairIndex >= pairs.length - 1;
+	const isSkipConfirmDialogOpen = isOnLastPair && !hasAnyExplicitWorkPreference;
 
 	useEffect(() => {
 		if (pathname === "/expectations" && !hash) {
@@ -34,6 +42,10 @@ export function WorkPreferencesStep() {
 		goNext();
 	}
 
+	const skipConfirmOnStay = useCallback(() => {
+		navigate({ pathname, hash: "#0" }, { replace: true });
+	}, [navigate, pathname]);
+
 	return (
 		<StepLayout
 			question={content["workPreferences.question"]}
@@ -41,6 +53,10 @@ export function WorkPreferencesStep() {
 			onSkip={handleSkip}
 			hasSkipButton={true}
 			hasNextButton={false}
+			skipConfirmTitleKey="skipConfirmDialog.skipAll.title"
+			skipConfirmDescriptionKey="skipConfirmDialog.skipAll.description"
+			isSkipConfirmDialogOpen={isSkipConfirmDialogOpen}
+			skipConfirmOnStay={skipConfirmOnStay}
 		>
 			<div className="flex flex-col justify-center px-4 pt-6 gap-3 h-full overflow-y-hidden">
 				<div key={current.id} className="space-y-3 animate-slideIn">

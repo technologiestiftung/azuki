@@ -276,7 +276,9 @@ export const content = {
 	"skipConfirmDialog.default.title": "Du hast noch nichts ausgewählt",
 	"skipConfirmDialog.default.description":
 		"Wenn du mehr auswählst, können wir dir passendere Berufe vorschlagen.",
-	"skipConfirmDialog.confirm": "Auswahl treffen",
+	"skipConfirmDialog.confirm.selection": "Auswählen",
+	"skipConfirmDialog.confirm.answerMultiple": "Fragen beantworten",
+	"skipConfirmDialog.confirm.answerSingle": "Frage beantworten",
 	"skipConfirmDialog.cancel": "Überspringen",
 	"skipConfirmDialog.singleChoice.title": "Bitte wähle eine Option",
 	"skipConfirmDialog.singleChoice.description":
