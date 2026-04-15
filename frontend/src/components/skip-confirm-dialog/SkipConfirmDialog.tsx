@@ -59,6 +59,13 @@ export const SkipConfirmDialog: React.FC<SkipConfirmDialogProps> = ({
 		}
 	};
 
+	let stayButtonLabel = content["skipConfirmDialog.confirm.selection"];
+	if (titleKey === "skipConfirmDialog.skipAll.title") {
+		stayButtonLabel = content["skipConfirmDialog.confirm.answerMultiple"];
+	} else if (titleKey === "skipConfirmDialog.textInput.title") {
+		stayButtonLabel = content["skipConfirmDialog.confirm.answerSingle"];
+	}
+
 	return (
 		<DefaultDialog id={skipConfirmDialogId} className="md:max-w-[430px]">
 			<div className="flex flex-col gap-2 px-2 pb-6 text-gray-900">
@@ -67,10 +74,7 @@ export const SkipConfirmDialog: React.FC<SkipConfirmDialogProps> = ({
 			</div>
 			<div className="flex flex-col gap-2 pt-2">
 				<PrimaryThemedButton onClick={handleStay}>
-					{titleKey === "skipConfirmDialog.skipAll.title" ||
-					titleKey === "skipConfirmDialog.textInput.title"
-						? content["skipConfirmDialog.confirm.answer"]
-						: content["skipConfirmDialog.confirm.selection"]}
+					{stayButtonLabel}
 				</PrimaryThemedButton>
 				<SecondaryButton onClick={handleSkip}>
 					{content["skipConfirmDialog.cancel"]}
