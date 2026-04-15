@@ -112,6 +112,10 @@ export function NoGosStep() {
 					count={noGos.length}
 					initialIndex={cardIndex}
 					isSwipeUpGestureEnabled={false}
+					horizontalAccentBg={{
+						left: "bg-orange-500",
+						right: "bg-sky-300",
+					}}
 					onCommit={getDirectionForIndex}
 					onExhausted={goNext}
 					onBefore={goPrevious}

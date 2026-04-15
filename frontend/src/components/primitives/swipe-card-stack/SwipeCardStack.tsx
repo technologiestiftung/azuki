@@ -14,10 +14,15 @@ import {
 	EXIT_OFFSET_Y,
 	getCardVisualState,
 	getCursorStyle,
+	getTopCardAccentBg,
 	SLIDE_IN_MS,
 	topCardAnimationClassNames,
 } from "./swipe-card-utils";
-import type { AnimationPhase, SwipeDirection } from "./swipe-card-utils";
+import type {
+	AnimationPhase,
+	SwipeDirection,
+	TopCardHorizontalAccentBg,
+} from "./swipe-card-utils";
 
 export type { SwipeDirection };
 
@@ -43,6 +48,7 @@ interface SwipeCardStackProps {
 	renderCard: (index: number) => React.ReactNode;
 	renderBackCard?: (index: number) => React.ReactNode;
 	className?: string;
+	horizontalAccentBg?: TopCardHorizontalAccentBg;
 }
 
 export const SwipeCardStack = forwardRef<
@@ -63,6 +69,7 @@ export const SwipeCardStack = forwardRef<
 		renderCard,
 		renderBackCard,
 		className = "",
+		horizontalAccentBg,
 	},
 	ref,
 ) {
@@ -306,6 +313,14 @@ export const SwipeCardStack = forwardRef<
 	const backCardContent = renderBackCard ?? renderCard;
 	const isAnimatingCard = isSliding || isSlidingOut;
 	const cursorStyle = getCursorStyle(isDraggingEnabled, isDragging);
+	const accentBg = getTopCardAccentBg({
+		isDragging,
+		dragX,
+		dragY,
+		flyDirection,
+		animationDirection,
+		accent: horizontalAccentBg,
+	});
 
 	return (
 		<div className="flex flex-col w-full justify-center items-center h-fit py-3">
@@ -343,9 +358,7 @@ export const SwipeCardStack = forwardRef<
 
 				{/* Top card */}
 				<div
-					className={`relative w-full rounded-3xl pt-5 pb-6 px-6 flex flex-col items-center shadow-[0_6px_16px_0_rgba(17,24,39,0.10)] 
-						${(isSlidingOut || isDragging) && flyDirection !== "up" ? "bg-sky-300" : "bg-gray-200"} 
-						${topCardAnimationClassNames(animationPhase, animationDirection)}`}
+					className={`relative w-full rounded-3xl pt-5 pb-6 px-6 flex flex-col items-center ${hasNext ? "shadow-[0_6px_16px_0_rgba(17,24,39,0.10)]" : ""} ${accentBg} ${topCardAnimationClassNames(animationPhase, animationDirection)}`}
 					style={{
 						zIndex: 2,
 						touchAction: "none",
