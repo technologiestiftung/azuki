@@ -4,7 +4,7 @@ import { type EducationLevel } from "../../../../common";
 import { StepLayout } from "../StepLayout";
 import { schoolDegrees } from "./school-degrees";
 import { useFlowNavigation } from "../../../../routing/useFlowNavigation";
-import { Link } from "../../../primitives/links/link";
+import { Link } from "../../../primitives/links/Link";
 
 export function SchoolDegreeStep() {
 	const profile = useAppStore((state) => state.profile);
