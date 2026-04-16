@@ -8,12 +8,16 @@ interface SwipeCardProps {
 	}[];
 	index: number;
 	minHeight?: number;
+	dragDirection?: "left" | "right" | "up" | null;
+	dragProgress?: number;
 }
 
 export const SwipeCard = memo(function SwipeCard({
 	index,
 	cards,
 	minHeight = 246,
+	dragDirection = null,
+	dragProgress = 0,
 }: SwipeCardProps) {
 	const card = cards[index];
 
@@ -22,7 +26,10 @@ export const SwipeCard = memo(function SwipeCard({
 	}
 
 	return (
-		<div className="flex flex-col gap-2 items-center" style={{ minHeight }}>
+		<div
+			className="relative flex flex-col gap-2 items-center"
+			style={{ minHeight }}
+		>
 			<img
 				src={card.illustration}
 				alt=""
@@ -37,6 +44,18 @@ export const SwipeCard = memo(function SwipeCard({
 					{card.description}
 				</p>
 			</div>
+			{dragDirection && dragDirection !== "up" && (
+				<div
+					className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 h-[120px] w-[120px] rounded-full bg-orange-0 flex items-center justify-center pointer-events-none"
+					style={{ opacity: dragProgress }}
+				>
+					{dragDirection === "left" ? (
+						<img src="/icons/close-black.svg" alt="" className="w-20 h-20" />
+					) : (
+						<img src="/icons/check-black.svg" alt="" className="w-20 h-20" />
+					)}
+				</div>
+			)}
 		</div>
 	);
 });

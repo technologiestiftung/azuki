@@ -122,8 +122,18 @@ export function NoGosStep() {
 					onBack={getDirectionForIndex}
 					onIndexChange={handleIndexChange}
 					onSwipe={handleSwipe}
-					renderCard={(index: number) => (
-						<SwipeCard index={index} cards={noGos} minHeight={257} />
+					renderCard={(
+						index: number,
+						dragDirection: "left" | "right" | null,
+						dragProgress: number,
+					) => (
+						<SwipeCard
+							index={index}
+							cards={noGos}
+							minHeight={257}
+							dragDirection={dragDirection}
+							dragProgress={dragProgress}
+						/>
 					)}
 				/>
 			</div>

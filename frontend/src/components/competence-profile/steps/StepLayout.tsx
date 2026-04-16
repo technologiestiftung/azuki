@@ -57,25 +57,25 @@ export function StepLayout({
 		onBack ?? (() => navigate(getPreviousPath(pathname, hash)));
 
 	return (
-		<div className="flex flex-col h-[100dvh] p-4">
-			<div className="flex items-center gap-3 pb-1 shrink-0">
+		<div className="flex flex-col h-[100dvh] py-4">
+			<div className="flex items-center gap-3 pb-1 shrink-0 px-4">
 				<BackButton onClick={handleBack} />
 				<div className="flex-1">
 					<ProgressBar currentStep={progressStep} />
 				</div>
 			</div>
 			<div className="flex flex-1 flex-col min-h-0">
-				<div className="shrink-0">
+				<div className="shrink-0 px-4">
 					<QuestionBubble question={question} subtitle={subtitle} />
 				</div>
 
-				<div className="flex-1 overflow-y-auto min-h-0 pt-8 px-0.5 pb-32">
+				<div className="flex-1 overflow-y-auto min-h-0 pt-8 px-4 pb-32">
 					{children}
 				</div>
 			</div>
 
 			<div
-				className={`fixed bottom-0 left-1/2 -translate-x-1/2 w-full bg-sky-white border-t-2 border-gray-200 flex flex-col px-4 gap-y-1 max-w-[430px] ${hasSkipButton ? "pt-4 pb-2" : "py-4"}`}
+				className={`fixed bottom-0 left-1/2 z-30 -translate-x-1/2 w-full bg-sky-white border-t-2 border-gray-200 flex flex-col px-4 gap-y-1 max-w-[430px] ${hasSkipButton ? "pt-4 pb-2" : "py-4"}`}
 			>
 				{bottomContent}
 				{hasNextButton && (
