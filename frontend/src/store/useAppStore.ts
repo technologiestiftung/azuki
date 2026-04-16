@@ -12,6 +12,7 @@ const initialProfile: UserProfile = {
 	inSchool: null,
 	educationLevel: null,
 	favoriteSubjects: [],
+	customSubjects: [],
 	interests: [],
 	customInterests: [],
 	workValues: [],
@@ -21,6 +22,24 @@ const initialProfile: UserProfile = {
 	workPreferences: {},
 	noGos: {},
 };
+
+/** Normalizes the profile by merging the initial profile with the provided profile. */
+function normalizeProfile(
+	profile: Partial<UserProfile> | undefined,
+): UserProfile {
+	const merged = { ...initialProfile, ...profile };
+	return {
+		...merged,
+		favoriteSubjects: merged.favoriteSubjects ?? [],
+		customSubjects: merged.customSubjects ?? [],
+		interests: merged.interests ?? [],
+		customInterests: merged.customInterests ?? [],
+		workValues: merged.workValues ?? [],
+		strengths: merged.strengths ?? {},
+		workPreferences: merged.workPreferences ?? {},
+		noGos: merged.noGos ?? {},
+	};
+}
 
 interface AppState {
 	profile: UserProfile;
@@ -34,6 +53,7 @@ interface AppActions {
 	toggleWorkValue: (value: string) => void;
 	toggleInterest: (interest: string) => void;
 	addCustomInterest: (interest: string) => void;
+	addCustomSubject: (subject: string) => void;
 	setStrength: (id: string, value: number) => void;
 	setSecretTalent: (value: string) => void;
 	setPracticalExperience: (value: string) => void;
@@ -117,6 +137,19 @@ export const useAppStore = create<AppState & AppActions>()(
 					},
 					matchResults: null,
 				})),
+			addCustomSubject: (subject) =>
+				set((state) => {
+					const customSubjects = state.profile.customSubjects ?? [];
+					const favoriteSubjects = state.profile.favoriteSubjects ?? [];
+					return {
+						profile: {
+							...state.profile,
+							customSubjects: [...customSubjects, subject],
+							favoriteSubjects: [...favoriteSubjects, subject],
+						},
+						matchResults: null,
+					};
+				}),
 
 			setStrength: (id, value) =>
 				set((state) => ({
@@ -175,6 +208,14 @@ export const useAppStore = create<AppState & AppActions>()(
 				profile: state.profile,
 				matchResults: state.matchResults,
 			}),
+			merge: (persistedState, currentState) => {
+				const persisted = persistedState as Partial<AppState> | undefined;
+				return {
+					...currentState,
+					...(persisted ?? {}),
+					profile: normalizeProfile(persisted?.profile),
+				};
+			},
 		},
 	),
 );

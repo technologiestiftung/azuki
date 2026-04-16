@@ -1,14 +1,34 @@
+import { useRef } from "react";
 import { content } from "../../../../content/de";
 import { useAppStore } from "../../../../store/useAppStore";
 import { StepLayout } from "../StepLayout";
 import { useFlowNavigation } from "../../../../routing/useFlowNavigation";
 import { categories } from "./school-subjects";
-import { SelectableRowButton } from "../../../primitives/buttons/SelectableRowButton";
+import { Pill } from "../../../primitives/buttons/Pill";
+import { PrimaryThemedButton } from "../../../primitives/buttons/PrimaryThemedButton";
+import {
+	showInputDialog,
+	InputDialog,
+} from "../../../input-dialog/InputDialog";
 
 export function SchoolSubjectsStep() {
 	const profile = useAppStore((state) => state.profile);
 	const toggleSubject = useAppStore((state) => state.toggleSubject);
+	const addCustomSubject = useAppStore((state) => state.addCustomSubject);
 	const { goNext } = useFlowNavigation();
+	const customSubjectsSectionRef = useRef<HTMLDivElement>(null);
+
+	const handleAddCustomSubject = (value: string) => {
+		addCustomSubject(value);
+		requestAnimationFrame(() => {
+			requestAnimationFrame(() => {
+				customSubjectsSectionRef.current?.scrollIntoView({
+					behavior: "smooth",
+					block: "start",
+				});
+			});
+		});
+	};
 
 	return (
 		<StepLayout
@@ -23,29 +43,80 @@ export function SchoolSubjectsStep() {
 			subtitle={content["common.multiSelect.subline"]}
 		>
 			<div className="flex flex-col gap-8">
+				{profile.customSubjects && profile.customSubjects.length > 0 && (
+					<div ref={customSubjectsSectionRef} className="scroll-mt-4">
+						<h3 className="text-lg font-semibold text-gray-500 mb-2 px-3.5">
+							{content["schoolSubjects.customSubject.label"]}
+						</h3>
+						<div className="flex flex-wrap gap-x-2 gap-y-2.5 rounded-2xl bg-card-fill p-3">
+							{profile.customSubjects.map((customSubject: string) => (
+								<Pill
+									key={customSubject}
+									label={customSubject}
+									selected={profile.favoriteSubjects.includes(customSubject)}
+									onClick={() => toggleSubject(customSubject)}
+									ariaLabel={`${customSubject} ${content["schoolSubjects.pill.label.postfix"]}`}
+								/>
+							))}
+							<PrimaryThemedButton
+								className="text-lg mt-2"
+								onClick={showInputDialog}
+							>
+								<div className="flex items-center gap-2 justify-center">
+									<img src="/icons/plus-black.svg" alt="" className="w-6 h-6" />
+									{content["schoolSubjects.addCustomSubjectButton.addMore"]}
+								</div>
+							</PrimaryThemedButton>
+						</div>
+					</div>
+				)}
 				{categories.map((category) => (
 					<div key={category.name}>
-						<h3 className="text-lg font-semibold text-gray-500 mb-2 px-3.5">
-							{category.name}
-						</h3>
-						<div className="flex flex-col gap-3">
-							{category.subjects.map((subject) => {
-								const selected = profile.favoriteSubjects.includes(
-									subject.value,
-								);
-								return (
-									<SelectableRowButton
-										key={subject.value}
-										label={subject.label}
-										selected={selected}
-										onClick={() => toggleSubject(subject.value)}
-									/>
-								);
-							})}
+						<div className="flex flex-col gap-2">
+							<div key={category.name}>
+								<h3 className="text-lg font-semibold text-gray-500 mb-2 px-3.5">
+									{category.name}
+								</h3>
+								<div className="flex flex-wrap gap-x-2 gap-y-2.5 rounded-2xl bg-card-fill p-3">
+									{category.subjects.map((item) => (
+										<Pill
+											key={item.label}
+											label={item.label}
+											icon={item.icon}
+											selected={profile.favoriteSubjects.includes(item.value)}
+											onClick={() => toggleSubject(item.value)}
+											ariaLabel={`${item.label} ${content["schoolSubjects.pill.label.postfix"]}`}
+										/>
+									))}
+								</div>
+							</div>
 						</div>
 					</div>
 				))}
+				{profile.customSubjects && profile.customSubjects.length === 0 && (
+					<PrimaryThemedButton
+						className="text-lg"
+						ariaLabel={
+							content["schoolSubjects.addCustomSubjectButton.ariaLabel"]
+						}
+						onClick={showInputDialog}
+					>
+						<div className="flex items-center gap-2 justify-center">
+							<img src="/icons/plus-black.svg" alt="" className="w-6 h-6" />
+							{content["schoolSubjects.addCustomSubjectButton.label"]}
+						</div>
+					</PrimaryThemedButton>
+				)}
 			</div>
+			<InputDialog
+				dialogAriaLabel={
+					content["schoolSubjects.inputDialog.input.addPlaceholder"]
+				}
+				inputPlaceholder={
+					content["schoolSubjects.inputDialog.input.addPlaceholder"]
+				}
+				onSubmit={handleAddCustomSubject}
+			/>
 		</StepLayout>
 	);
 }

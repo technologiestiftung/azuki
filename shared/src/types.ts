@@ -90,6 +90,7 @@ export interface UserProfile {
 	inSchool: boolean | null;
 	educationLevel: EducationLevel | null;
 	favoriteSubjects: string[];
+	customSubjects: string[];
 	interests: string[];
 	customInterests: string[];
 	workValues: string[];

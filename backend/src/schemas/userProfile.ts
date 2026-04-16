@@ -19,6 +19,7 @@ export const UserProfileSchema = z.object({
 	inSchool: z.boolean().nullable(),
 	educationLevel: EducationLevelSchema.nullable(),
 	favoriteSubjects: z.array(z.string()),
+	customSubjects: z.array(z.string()).default([]),
 	interests: z.array(z.string()),
 	customInterests: z.array(z.string()),
 	workValues: z.array(z.string()),

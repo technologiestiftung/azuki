@@ -6,6 +6,8 @@ interface DefaultDialogProps {
 	id?: string;
 	afterClose?: () => void;
 	isOpen?: boolean;
+	"aria-label"?: string;
+	"aria-labelledby"?: string;
 }
 
 export const DefaultDialog: React.FC<DefaultDialogProps> = ({
@@ -13,6 +15,8 @@ export const DefaultDialog: React.FC<DefaultDialogProps> = ({
 	className,
 	id,
 	afterClose,
+	"aria-label": ariaLabel,
+	"aria-labelledby": ariaLabelledBy,
 }) => {
 	const dialogRef = useRef<HTMLDialogElement | null>(null);
 
@@ -51,6 +55,8 @@ export const DefaultDialog: React.FC<DefaultDialogProps> = ({
 		<dialog
 			ref={dialogRef}
 			id={id}
+			aria-label={ariaLabel}
+			aria-labelledby={ariaLabelledBy}
 			onClose={closeDialog}
 			className={`${className} backdrop:bg-sky-1000/80 backdrop:backdrop-blur-[2px] bg-gray-100 opacity-100 z-40 rounded-4xl p-4`}
 		>
