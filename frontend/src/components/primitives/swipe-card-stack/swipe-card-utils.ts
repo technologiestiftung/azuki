@@ -3,6 +3,25 @@ export type SwipeDirection = "left" | "right" | "up";
 export type AnimationPhase = "idle" | "slide-in" | "slide-out";
 
 export const SWIPE_THRESHOLD = 80;
+
+export const DEFAULT_STACK_GHOST_LAYER_SCALE = 0.85;
+
+const GRAVITY_OUT_GAIN = 1.16;
+const GRAVITY_IN_GAIN = 0.84;
+
+/**
+ * Maps raw horizontal pointer delta so drags started on the left half feel easier
+ * to pull left (and symmetrically for the right half).
+ */
+export function applyHorizontalDragGravity(
+	rawDx: number,
+	startedLeftHalf: boolean,
+): number {
+	if (startedLeftHalf) {
+		return rawDx <= 0 ? rawDx * GRAVITY_OUT_GAIN : rawDx * GRAVITY_IN_GAIN;
+	}
+	return rawDx >= 0 ? rawDx * GRAVITY_OUT_GAIN : rawDx * GRAVITY_IN_GAIN;
+}
 export const FLY_OUT_MS = 600;
 
 /** Below-threshold release: top card eases back to the stack origin */
@@ -14,19 +33,38 @@ export const SLIDE_IN_MS = 400;
 export const EXIT_OFFSET_X = 1000;
 export const EXIT_OFFSET_Y = -800;
 
-export const GHOST_CARD_SHIFT_Y = -8;
-
 const SLIDE_IN_ANIMATION: Record<SwipeDirection, string> = {
 	left: "animate-slideInLeft",
 	right: "animate-slideInRight",
 	up: "animate-slideInTop",
 };
 
+/** Tailwind `gray-300` / `gray-200` — back card surface lerps between these as it scales up. */
+const BACK_CARD_SURFACE_FROM = [0xd1, 0xd5, 0xdb] as const;
+const BACK_CARD_SURFACE_TO = [0xe5, 0xe7, 0xeb] as const;
+
+export function mixBackCardSurfaceColor(progress: number): string {
+	const t = Math.min(1, Math.max(0, progress));
+	const r = Math.round(
+		BACK_CARD_SURFACE_FROM[0] +
+			(BACK_CARD_SURFACE_TO[0] - BACK_CARD_SURFACE_FROM[0]) * t,
+	);
+	const g = Math.round(
+		BACK_CARD_SURFACE_FROM[1] +
+			(BACK_CARD_SURFACE_TO[1] - BACK_CARD_SURFACE_FROM[1]) * t,
+	);
+	const b = Math.round(
+		BACK_CARD_SURFACE_FROM[2] +
+			(BACK_CARD_SURFACE_TO[2] - BACK_CARD_SURFACE_FROM[2]) * t,
+	);
+	return `rgb(${r} ${g} ${b})`;
+}
+
 export interface CardVisualState {
 	backScale: number;
-	backOpacity: number;
 	backTranslateY: number;
-	ghostTranslateY: number;
+	backCardBackgroundColor: string;
+	ghostOpacity: number;
 	topTransform: string;
 }
 
@@ -119,11 +157,11 @@ export function swipeSnapBackTopTransition(durationMs: number): string {
 
 /**
  * Back stack card during snap-back: same `transform` timing as the top card,
- * plus `opacity`, built from the same millisecond value (no string parsing).
+ * plus `background-color`, using the same millisecond value (no string parsing).
  */
 export function swipeSnapBackStackLayerTransition(durationMs: number): string {
 	const top = swipeSnapBackTopTransition(durationMs);
-	return `${top}, opacity ${durationMs}ms ease`;
+	return `${top}, background-color ${durationMs}ms ease`;
 }
 
 export function swipeFlyOutTopTransformTransition(): string {
@@ -149,6 +187,7 @@ export interface GetCardVisualStateFly {
 export function getCardVisualState(
 	activeOffset: { x: number; y: number },
 	fly: GetCardVisualStateFly,
+	ghostLayerScale: number = DEFAULT_STACK_GHOST_LAYER_SCALE,
 ): CardVisualState {
 	const { isFlying, flyDirection, flyStart } = fly;
 	const absX = Math.abs(activeOffset.x);
@@ -156,12 +195,9 @@ export function getCardVisualState(
 	const progress = isFlying
 		? 1
 		: Math.min(Math.max(absX, absUpY) / SWIPE_THRESHOLD, 1);
-	const backScale = 0.85 + 0.15 * progress;
-	const backOpacity = progress;
-	const backTranslateY = 35 * (1 - progress);
-	const ghostTranslateY = fly.isActive
-		? GHOST_CARD_SHIFT_Y * (1 - progress)
-		: 0;
+	const backScale = ghostLayerScale + (1 - ghostLayerScale) * progress;
+	const backTranslateY = 41 * (1 - progress);
+	const ghostOpacity = fly.isActive ? progress : 1;
 
 	const isFlyingUp = flyDirection === "up" && isFlying;
 	const rotate = isFlyingUp ? 0 : activeOffset.x / 20;
@@ -176,9 +212,9 @@ export function getCardVisualState(
 
 	return {
 		backScale,
-		backOpacity,
 		backTranslateY,
-		ghostTranslateY,
+		backCardBackgroundColor: mixBackCardSurfaceColor(progress),
+		ghostOpacity,
 		topTransform,
 	};
 }
@@ -231,6 +267,38 @@ export function detectSwipeDirection(
 	}
 	if (directionX < -SWIPE_THRESHOLD) {
 		return "left";
+	}
+	return null;
+}
+
+/** Release detection when the card only commits left/right drags (no vertical swipe). */
+export function detectHorizontalSwipeOnly(
+	directionX: number,
+): SwipeDirection | null {
+	if (directionX > SWIPE_THRESHOLD) {
+		return "right";
+	}
+	if (directionX < -SWIPE_THRESHOLD) {
+		return "left";
+	}
+	return null;
+}
+
+/** Horizontal release takes priority; optional upward skip when enabled. */
+export function resolvePointerReleaseSwipeDirection(
+	directionX: number,
+	directionY: number,
+	isSwipeUpGestureEnabled: boolean,
+): SwipeDirection | null {
+	const lateral = detectHorizontalSwipeOnly(directionX);
+	if (lateral !== null) {
+		return lateral;
+	}
+	if (
+		isSwipeUpGestureEnabled &&
+		detectSwipeDirection(directionX, directionY) === "up"
+	) {
+		return "up";
 	}
 	return null;
 }

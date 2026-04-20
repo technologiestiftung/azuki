@@ -69,7 +69,9 @@ export function StepLayout({
 					<QuestionBubble question={question} subtitle={subtitle} />
 				</div>
 
-				<div className="flex-1 overflow-y-auto min-h-0 pt-8 px-4 pb-32">
+				<div
+					className={`flex-1 overflow-y-auto min-h-0 pt-8 px-4 ${hasSkipButton ? "pb-28" : "pb-20"} ${bottomContent ? "pb-36" : "pb-20"}`}
+				>
 					{children}
 				</div>
 			</div>

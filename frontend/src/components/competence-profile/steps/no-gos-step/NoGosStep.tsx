@@ -14,6 +14,14 @@ import { SwipeCard } from "../../../primitives/swipe-card-stack/SwipeCard";
 import { NoGoActionButtons } from "./NoGoActionButtons";
 import { useFlowNavigation } from "../../../../routing/useFlowNavigation";
 import { parseHashCardIndex } from "../../../../routing/routes";
+import type { TopCardHorizontalAccentBg } from "../../../primitives/swipe-card-stack/swipe-card-utils";
+
+export const STACK_GHOST_LAYER_SCALE = 85 / 100;
+
+const NO_GO_CARD_SWIPE_TINT: TopCardHorizontalAccentBg = {
+	left: "bg-orange-500",
+	right: "bg-sky-300",
+};
 
 export function NoGosStep() {
 	const { pathname, hash } = useLocation();
@@ -112,10 +120,8 @@ export function NoGosStep() {
 					count={noGos.length}
 					initialIndex={cardIndex}
 					isSwipeUpGestureEnabled={false}
-					horizontalAccentBg={{
-						left: "bg-orange-500",
-						right: "bg-sky-300",
-					}}
+					stackGhostLayerScale={STACK_GHOST_LAYER_SCALE}
+					horizontalAccentBg={NO_GO_CARD_SWIPE_TINT}
 					onCommit={getDirectionForIndex}
 					onExhausted={goNext}
 					onBefore={goPrevious}
@@ -133,6 +139,7 @@ export function NoGosStep() {
 							minHeight={257}
 							dragDirection={dragDirection}
 							dragProgress={dragProgress}
+							dragColorWash={NO_GO_CARD_SWIPE_TINT}
 						/>
 					)}
 				/>

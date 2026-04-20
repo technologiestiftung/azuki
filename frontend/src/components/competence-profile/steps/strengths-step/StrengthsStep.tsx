@@ -14,6 +14,8 @@ import type {
 import { SwipeCard } from "../../../primitives/swipe-card-stack/SwipeCard";
 import { parseHashCardIndex } from "../../../../routing/routes";
 
+export const STACK_GHOST_LAYER_SCALE = 82 / 100;
+
 export function StrengthsStep() {
 	const { pathname, hash } = useLocation();
 	const navigate = useNavigate();
@@ -99,18 +101,19 @@ export function StrengthsStep() {
 			skipConfirmDescriptionKey="skipConfirmDialog.skipAll.description"
 			skipConfirmOnStay={skipConfirmOnStay}
 		>
-			<div className="flex flex-col justify-center items-center h-[85%] flex-1 gap-y-5 py-5">
+			<div className="flex flex-col justify-center items-center h-full flex-1 gap-y-5">
 				<SwipeCardStack
 					ref={stackRef}
 					count={strengths.length}
 					initialIndex={cardIndex}
+					stackGhostLayerScale={STACK_GHOST_LAYER_SCALE}
 					onCommit={getDirectionForIndex}
 					onExhausted={goNext}
 					onBefore={goPrevious}
 					onBack={getDirectionForIndex}
 					onIndexChange={handleIndexChange}
 					renderCard={(index: number) => (
-						<SwipeCard index={index} cards={strengths} minHeight={202} />
+						<SwipeCard index={index} cards={strengths} minHeight={187} />
 					)}
 					isDraggingEnabled={false}
 				/>

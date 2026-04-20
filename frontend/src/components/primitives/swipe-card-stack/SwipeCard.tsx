@@ -1,5 +1,9 @@
 import { memo } from "react";
 
+import type { TopCardHorizontalAccentBg } from "./swipe-card-utils";
+
+const DRAG_COLOR_WASH_MAX_OPACITY = 0.85;
+
 interface SwipeCardProps {
 	cards: {
 		illustration: string;
@@ -10,14 +14,16 @@ interface SwipeCardProps {
 	minHeight?: number;
 	dragDirection?: "left" | "right" | "up" | null;
 	dragProgress?: number;
+	dragColorWash?: TopCardHorizontalAccentBg;
 }
 
 export const SwipeCard = memo(function SwipeCard({
 	index,
 	cards,
-	minHeight = 246,
+	minHeight = 0,
 	dragDirection = null,
 	dragProgress = 0,
+	dragColorWash,
 }: SwipeCardProps) {
 	const card = cards[index];
 
@@ -25,34 +31,52 @@ export const SwipeCard = memo(function SwipeCard({
 		return null;
 	}
 
+	const showColorWash =
+		dragColorWash !== undefined &&
+		dragDirection !== null &&
+		dragDirection !== "up";
+
 	return (
 		<div
-			className="relative flex flex-col gap-2 items-center"
+			className="relative flex w-full min-w-0 flex-col items-center justify-center gap-2 self-stretch"
 			style={{ minHeight }}
 		>
-			<img
-				src={card.illustration}
-				alt=""
-				className="w-[278px]"
-				draggable={false}
-			/>
-			<div className="text-center">
-				<h3 className="text-gray-700 text-xl leading-6 font-semibold">
-					{card.title}
-				</h3>
-				<p className="text-base text-gray-700 text-center">
-					{card.description}
-				</p>
+			<div className="relative z-0 flex w-full flex-col items-center gap-3">
+				<img
+					src={card.illustration}
+					alt=""
+					className="w-[278px]"
+					draggable={false}
+				/>
+				<div className="text-center">
+					<h3 className="text-xl font-semibold leading-6 text-gray-700">
+						{card.title}
+					</h3>
+					<p className="text-center text-base text-gray-700">
+						{card.description}
+					</p>
+				</div>
 			</div>
+			{showColorWash && dragColorWash && (
+				<div
+					aria-hidden
+					className={`pointer-events-none absolute inset-0 z-[1] rounded-3xl ${
+						dragDirection === "right" ? dragColorWash.right : dragColorWash.left
+					}`}
+					style={{
+						opacity: dragProgress * DRAG_COLOR_WASH_MAX_OPACITY,
+					}}
+				/>
+			)}
 			{dragDirection && dragDirection !== "up" && (
 				<div
-					className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 h-[120px] w-[120px] rounded-full bg-orange-0 flex items-center justify-center pointer-events-none"
+					className="pointer-events-none absolute left-1/2 top-1/2 z-10 flex h-[120px] w-[120px] -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-orange-0"
 					style={{ opacity: dragProgress }}
 				>
 					{dragDirection === "left" ? (
-						<img src="/icons/close-black.svg" alt="" className="w-20 h-20" />
+						<img src="/icons/close-black.svg" alt="" className="h-20 w-20" />
 					) : (
-						<img src="/icons/check-black.svg" alt="" className="w-20 h-20" />
+						<img src="/icons/check-black.svg" alt="" className="h-20 w-20" />
 					)}
 				</div>
 			)}
