@@ -113,7 +113,7 @@ export function StrengthsStep() {
 					onBack={getDirectionForIndex}
 					onIndexChange={handleIndexChange}
 					renderCard={(index: number) => (
-						<SwipeCard index={index} cards={strengths} minHeight={187} />
+						<SwipeCard index={index} cards={strengths} minHeight={202} />
 					)}
 					isDraggingEnabled={false}
 				/>
