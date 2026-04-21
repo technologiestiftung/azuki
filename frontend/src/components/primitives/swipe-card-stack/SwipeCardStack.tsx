@@ -65,7 +65,6 @@ interface SwipeCardStackProps {
 	) => React.ReactNode;
 	className?: string;
 	horizontalAccentBg?: TopCardHorizontalAccentBg;
-	/** Ghost + back-card resting scale (e.g. 0.85 = 85%). Defaults to `DEFAULT_STACK_GHOST_LAYER_SCALE` from swipe-card-utils. */
 	stackGhostLayerScale?: number;
 }
 
@@ -426,8 +425,10 @@ export const SwipeCardStack = forwardRef<
 		dragProgress,
 	});
 	return (
-		<div className="flex flex-col w-full justify-center items-center h-fit pb-3">
-			<div className={`relative w-full h-full flex-1 ${className}`}>
+		<div className="flex min-h-0 w-full flex-1 flex-col pb-3">
+			<div
+				className={`relative flex min-h-0 w-full flex-1 flex-col ${className}`}
+			>
 				{/* Ghost card */}
 				{hasNext && (
 					<div
@@ -446,7 +447,7 @@ export const SwipeCardStack = forwardRef<
 				{hasNext && (
 					<div
 						aria-hidden="true"
-						className="absolute inset-0 w-full rounded-3xl pt-5 pb-6 px-6 flex flex-col items-center pointer-events-none"
+						className="pointer-events-none absolute inset-0 flex min-h-0 w-full flex-col items-stretch rounded-3xl"
 						style={{
 							zIndex: 1,
 							backgroundColor: backCardBackgroundColor,
@@ -455,13 +456,15 @@ export const SwipeCardStack = forwardRef<
 							willChange: "transform, background-color",
 						}}
 					>
-						{backCardContent(displayIndex + 1, null, 0)}
+						<div className="flex min-h-0 min-w-0 flex-1 flex-col">
+							{backCardContent(displayIndex + 1, null, 0)}
+						</div>
 					</div>
 				)}
 
 				{/* Top card */}
 				<div
-					className={`relative w-full rounded-3xl pt-5 pb-6 px-6 flex flex-col items-center ${hasNext ? "shadow-[0_6px_16px_0_rgba(17,24,39,0.10)]" : ""} ${accentBg} ${topCardAnimationClassNames(animationPhase, animationDirection)}`}
+					className={`relative flex min-h-0 w-full flex-1 flex-col items-center rounded-3xl ${hasNext ? "shadow-[0_6px_16px_0_rgba(17,24,39,0.10)]" : ""} ${accentBg} ${topCardAnimationClassNames(animationPhase, animationDirection)}`}
 					style={{
 						zIndex: 2,
 						touchAction: "none",
@@ -477,7 +480,7 @@ export const SwipeCardStack = forwardRef<
 					onPointerUp={handlePointerUp}
 					onPointerCancel={handlePointerCancel}
 				>
-					<div className="relative flex w-full min-w-0 flex-col items-stretch">
+					<div className="relative flex h-full min-h-0 w-full min-w-0 flex-1 flex-col items-stretch">
 						{renderCard(displayIndex, currentDragDirection, dragProgress)}
 					</div>
 				</div>

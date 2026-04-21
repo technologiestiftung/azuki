@@ -11,7 +11,6 @@ interface SwipeCardProps {
 		description: string;
 	}[];
 	index: number;
-	minHeight?: number;
 	dragDirection?: "left" | "right" | "up" | null;
 	dragProgress?: number;
 	dragColorWash?: TopCardHorizontalAccentBg;
@@ -20,7 +19,6 @@ interface SwipeCardProps {
 export const SwipeCard = memo(function SwipeCard({
 	index,
 	cards,
-	minHeight = 0,
 	dragDirection = null,
 	dragProgress = 0,
 	dragColorWash,
@@ -37,22 +35,21 @@ export const SwipeCard = memo(function SwipeCard({
 		dragDirection !== "up";
 
 	return (
-		<div
-			className="relative flex w-full min-w-0 flex-col items-center justify-center gap-2 self-stretc h-full"
-			style={{ minHeight }}
-		>
-			<div className="relative z-0 flex w-full h-full flex-col items-center gap-3">
-				<img
-					src={card.illustration}
-					alt=""
-					className="w-full"
-					draggable={false}
-				/>
-				<div className="text-center">
+		<div className="relative flex h-full min-h-0 w-full min-w-0 flex-col items-stretch gap-2 self-stretch px-6 pt-5 pb-6">
+			<div className="relative z-0 flex min-h-0 w-full flex-1 flex-col items-center gap-3">
+				<div className="flex min-h-0 w-full flex-1 items-center justify-center">
+					<img
+						src={card.illustration}
+						alt=""
+						className="max-h-full w-full max-w-full object-contain"
+						draggable={false}
+					/>
+				</div>
+				<div className="shrink-0 text-center">
 					<h3 className="text-xl font-semibold leading-6 text-gray-700">
 						{card.title}
 					</h3>
-					<p className="text-center text-base text-gray-700">
+					<p className="text-center text-base text-gray-700 max-w-60">
 						{card.description}
 					</p>
 				</div>

@@ -16,7 +16,7 @@ import { useFlowNavigation } from "../../../../routing/useFlowNavigation";
 import { parseHashCardIndex } from "../../../../routing/routes";
 import type { TopCardHorizontalAccentBg } from "../../../primitives/swipe-card-stack/swipe-card-utils";
 
-export const STACK_GHOST_LAYER_SCALE = 85 / 100;
+export const STACK_GHOST_LAYER_SCALE = 86 / 100;
 
 const NO_GO_CARD_SWIPE_TINT: TopCardHorizontalAccentBg = {
 	left: "bg-orange-500",
@@ -114,7 +114,7 @@ export function NoGosStep() {
 				/>
 			}
 		>
-			<div className="flex flex-col justify-center items-center h-full flex-1">
+			<div className="flex min-h-0 flex-1 flex-col h-full pb-5">
 				<SwipeCardStack
 					ref={stackRef}
 					count={noGos.length}
@@ -136,7 +136,6 @@ export function NoGosStep() {
 						<SwipeCard
 							index={index}
 							cards={noGos}
-							minHeight={257}
 							dragDirection={dragDirection}
 							dragProgress={dragProgress}
 							dragColorWash={NO_GO_CARD_SWIPE_TINT}
