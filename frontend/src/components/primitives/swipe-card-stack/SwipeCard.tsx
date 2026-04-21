@@ -38,14 +38,14 @@ export const SwipeCard = memo(function SwipeCard({
 
 	return (
 		<div
-			className="relative flex w-full min-w-0 flex-col items-center justify-center gap-2 self-stretch"
+			className="relative flex w-full min-w-0 flex-col items-center justify-center gap-2 self-stretc h-full"
 			style={{ minHeight }}
 		>
-			<div className="relative z-0 flex w-full flex-col items-center gap-3">
+			<div className="relative z-0 flex w-full h-full flex-col items-center gap-3">
 				<img
 					src={card.illustration}
 					alt=""
-					className="w-[278px]"
+					className="w-full"
 					draggable={false}
 				/>
 				<div className="text-center">

@@ -101,7 +101,7 @@ export function StrengthsStep() {
 			skipConfirmDescriptionKey="skipConfirmDialog.skipAll.description"
 			skipConfirmOnStay={skipConfirmOnStay}
 		>
-			<div className="flex flex-col justify-center items-center h-full flex-1 gap-y-5">
+			<div className="flex flex-col justify-center items-center h-full flex-1 gap-5">
 				<SwipeCardStack
 					ref={stackRef}
 					count={strengths.length}

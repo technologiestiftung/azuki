@@ -426,8 +426,8 @@ export const SwipeCardStack = forwardRef<
 		dragProgress,
 	});
 	return (
-		<div className="flex flex-col w-full justify-center items-center h-fit py-3">
-			<div className={`relative w-full ${className}`}>
+		<div className="flex flex-col w-full justify-center items-center h-fit pb-3">
+			<div className={`relative w-full h-full flex-1 ${className}`}>
 				{/* Ghost card */}
 				{hasNext && (
 					<div
