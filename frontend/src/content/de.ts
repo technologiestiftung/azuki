@@ -105,7 +105,7 @@ export const content = {
 	"schoolSubjects.sports.sports.icon": "⚽️",
 
 	// Interests
-	"interests.question": "Was machst du gerne?",
+	"interests.question": "Was magst du gerne?",
 	"interests.addedByYouLabel": "Von dir hinzugefügt",
 	"interests.addPlaceholder": "Etwas anderes hinzufügen",
 	"interests.skipButton.pill.label.postfix": "als Interesse auswählen",
