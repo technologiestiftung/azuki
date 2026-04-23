@@ -26,7 +26,6 @@ const workValues: { value: string; label: string }[] = [
 		label: content["workValues.option.shortDistance"],
 	},
 	{ value: "career", label: content["workValues.option.career"] },
-	{ value: "benefits", label: content["workValues.option.benefits"] },
 	{ value: "remote", label: content["workValues.option.remote"] },
 ];
 

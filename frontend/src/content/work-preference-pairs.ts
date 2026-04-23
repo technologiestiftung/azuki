@@ -1,22 +1,21 @@
 export const workPreferencePairs = [
-	{ id: "location", a: "Immer am gleichen Ort", b: "Oft unterwegs" },
+	{ id: "environment", a: "Drinnen", b: "Draußen" },
+	{ id: "location", a: "Fester Arbeitsort", b: "Viel unterwegs" },
 	{
 		id: "hands-vs-mind",
-		a: "Mit den Händen arbeiten",
-		b: "Mit dem Kopf arbeiten",
+		a: "Handwerklich umsetzen",
+		b: "Nachdenken und planen",
 	},
 	{
 		id: "variety",
-		a: "Immer die gleichen Aufgaben",
-		b: "Immer andere Aufgaben",
+		a: "Feste Abläufe",
+		b: "Jeden Tag was Neues",
 	},
 	{
 		id: "people",
-		a: "Wenig Kontakt mit Menschen",
+		a: "Meist alleine arbeiten",
 		b: "Viel Kontakt mit Menschen",
 	},
-	{ id: "pace", a: "Ruhige Arbeit", b: "Arbeit unter Zeitdruck" },
-	{ id: "structure", a: "Feste Regeln", b: "Viel Freiheit" },
-	{ id: "purpose", a: "Anderen helfen", b: "Aufgaben erledigen" },
-	{ id: "environment", a: "Drinnen", b: "Draußen" },
+	{ id: "pace", a: "Entspanntes Tempo", b: "Immer viel zu tun" },
+	{ id: "structure", a: "Aufgaben erledigen", b: "Neue Ideen entwickeln" },
 ] as const;
