@@ -17,7 +17,7 @@ export function Pill({ label, icon, selected, onClick, ariaLabel }: PillProps) {
 			}`}
 		>
 			{icon && <span className="shrink-0">{icon}</span>}
-			<span className="max-w-[310px] truncate">{label}</span>
+			<span className="w-full truncate">{label}</span>
 		</button>
 	);
 }
