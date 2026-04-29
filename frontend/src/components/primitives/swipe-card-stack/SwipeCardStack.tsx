@@ -8,13 +8,14 @@ import React, {
 } from "react";
 
 import {
-	detectSwipeDirection,
+	applyHorizontalDragGravity,
+	resolvePointerReleaseSwipeDirection,
 	FLY_OUT_MS,
 	EXIT_OFFSET_X,
 	EXIT_OFFSET_Y,
-	GHOST_CARD_SHIFT_Y,
 	getDragDirectionAndProgress,
 	getCardVisualState,
+	DEFAULT_STACK_GHOST_LAYER_SCALE,
 	getCursorStyle,
 	getTopCardAccentBg,
 	SLIDE_IN_MS,
@@ -64,6 +65,20 @@ interface SwipeCardStackProps {
 	) => React.ReactNode;
 	className?: string;
 	horizontalAccentBg?: TopCardHorizontalAccentBg;
+	stackGhostLayerScale?: number;
+}
+
+function getTopCardContentOpacity(input: {
+	horizontalAccentBg: TopCardHorizontalAccentBg | undefined;
+	isDragging: boolean;
+	dragDirection: "left" | "right" | null;
+	dragProgress: number;
+}): number {
+	const { horizontalAccentBg, isDragging, dragDirection, dragProgress } = input;
+	if (horizontalAccentBg === undefined && isDragging && dragDirection) {
+		return 1 - dragProgress * 0.15;
+	}
+	return 1;
 }
 
 export const SwipeCardStack = forwardRef<
@@ -85,6 +100,7 @@ export const SwipeCardStack = forwardRef<
 		renderBackCard,
 		className = "",
 		horizontalAccentBg,
+		stackGhostLayerScale = DEFAULT_STACK_GHOST_LAYER_SCALE,
 	},
 	ref,
 ) {
@@ -109,13 +125,10 @@ export const SwipeCardStack = forwardRef<
 		y: number;
 	} | null>(null);
 	const [backCardTransition, setBackCardTransition] = useState("none");
-	const [ghostYOverride, setGhostYOverride] = useState<number | null>(null);
-	const [ghostTransitionOverride, setGhostTransitionOverride] = useState<
-		string | null
-	>(null);
 
 	const pointerStartX = useRef<number | null>(null);
 	const pointerStartY = useRef<number | null>(null);
+	const dragStartedLeftHalfRef = useRef(true);
 	const isAnimating = useRef(false);
 	const timeoutRef = useRef<number | null>(null);
 	const pendingSlideInDirectionRef = useRef<SwipeDirection | null>(null);
@@ -125,20 +138,24 @@ export const SwipeCardStack = forwardRef<
 	const isSlidingOut = animationPhase === "slide-out";
 	const hasNext = displayIndex < count - 1;
 	const nextIndex = hasNext ? displayIndex + 1 : null;
-	const activeOffset = flyOffset ?? { x: dragX, y: dragY };
+	const activeOffset = flyOffset ?? { x: dragX, y: 0 };
 
 	const {
 		backScale,
-		backOpacity,
 		backTranslateY,
-		ghostTranslateY,
+		backCardBackgroundColor,
+		ghostOpacity,
 		topTransform,
-	} = getCardVisualState(activeOffset, {
-		isFlying,
-		isActive: isDragging || isFlying,
-		flyDirection,
-		flyStart: flyStartOffset,
-	});
+	} = getCardVisualState(
+		activeOffset,
+		{
+			isFlying,
+			isActive: isDragging || isFlying,
+			flyDirection,
+			flyStart: flyStartOffset,
+		},
+		stackGhostLayerScale,
+	);
 
 	useEffect(() => {
 		setIsDragging(false);
@@ -149,8 +166,6 @@ export const SwipeCardStack = forwardRef<
 		setFlyStartOffset(null);
 		setCardTransition("");
 		setBackCardTransition("none");
-		setGhostYOverride(null);
-		setGhostTransitionOverride(null);
 		setAnimationPhase("idle");
 		setAnimationDirection(null);
 		pointerStartX.current = null;
@@ -189,7 +204,6 @@ export const SwipeCardStack = forwardRef<
 
 			const startX = dragX;
 			const startY = dragY;
-			const isButtonTriggered = startX === 0 && startY === 0;
 
 			setFlyStartOffset({ x: startX, y: startY });
 			setFlyDirection(direction);
@@ -198,19 +212,12 @@ export const SwipeCardStack = forwardRef<
 			setAnimationPhase("slide-out");
 			setCardTransition(swipeFlyOutTopTransformTransition());
 			setBackCardTransition(
-				`transform ${FLY_OUT_MS}ms ease 100ms, opacity 300ms ease 100ms`,
+				`transform ${FLY_OUT_MS}ms ease 100ms, background-color ${FLY_OUT_MS}ms ease 100ms`,
 			);
-			if (isButtonTriggered) {
-				setGhostYOverride(GHOST_CARD_SHIFT_Y);
-				setGhostTransitionOverride("none");
-			}
+
 			onSwipe?.(direction, displayIndex);
 
 			requestAnimationFrame(() => {
-				if (isButtonTriggered) {
-					setGhostYOverride(null);
-					setGhostTransitionOverride(null);
-				}
 				requestAnimationFrame(() => {
 					if (direction === "up") {
 						setFlyOffset({ x: startX, y: EXIT_OFFSET_Y });
@@ -230,8 +237,6 @@ export const SwipeCardStack = forwardRef<
 				setDragY(0);
 				setCardTransition("");
 				setBackCardTransition("none");
-				setGhostYOverride(null);
-				setGhostTransitionOverride(null);
 				setAnimationPhase("idle");
 				setAnimationDirection(null);
 				isAnimating.current = false;
@@ -315,6 +320,10 @@ export const SwipeCardStack = forwardRef<
 				return;
 			}
 			(e.target as HTMLElement).setPointerCapture(e.pointerId);
+			const rect = e.currentTarget.getBoundingClientRect();
+			const localX = e.clientX - rect.left;
+			dragStartedLeftHalfRef.current =
+				rect.width > 0 ? localX < rect.width / 2 : true;
 			pointerStartX.current = e.clientX;
 			pointerStartY.current = e.clientY;
 			setIsDragging(true);
@@ -335,8 +344,11 @@ export const SwipeCardStack = forwardRef<
 			) {
 				return;
 			}
-			setDragX(e.clientX - pointerStartX.current);
-			setDragY(e.clientY - pointerStartY.current);
+			const rawDx = e.clientX - pointerStartX.current;
+			setDragX(
+				applyHorizontalDragGravity(rawDx, dragStartedLeftHalfRef.current),
+			);
+			setDragY(0);
 		},
 		[isDragging],
 	);
@@ -356,14 +368,19 @@ export const SwipeCardStack = forwardRef<
 			pointerStartY.current = null;
 			setIsDragging(false);
 
-			const direction = detectSwipeDirection(dx, dy);
-			if (direction && (direction !== "up" || isSwipeUpGestureEnabled)) {
+			const direction = resolvePointerReleaseSwipeDirection(
+				dx,
+				dy,
+				isSwipeUpGestureEnabled,
+			);
+			if (direction) {
 				flyOut(direction, nextIndex);
 			} else {
 				setCardTransition(swipeSnapBackTopTransition(SWIPE_SNAP_BACK_MS));
 				setBackCardTransition(
 					swipeSnapBackStackLayerTransition(SWIPE_SNAP_BACK_MS),
 				);
+
 				setDragX(0);
 				setDragY(0);
 			}
@@ -381,6 +398,7 @@ export const SwipeCardStack = forwardRef<
 		setBackCardTransition(
 			swipeSnapBackStackLayerTransition(SWIPE_SNAP_BACK_POINTER_CANCEL_MS),
 		);
+
 		setDragX(0);
 		setDragY(0);
 	}, []);
@@ -400,13 +418,17 @@ export const SwipeCardStack = forwardRef<
 	const { direction: currentDragDirection, progress: dragProgress } =
 		getDragDirectionAndProgress(isDragging, dragX, flyDirection);
 
-	const topCardContentOpacity = currentDragDirection
-		? 1 - dragProgress * 0.15
-		: 1;
-
+	const topCardContentOpacity = getTopCardContentOpacity({
+		horizontalAccentBg,
+		isDragging,
+		dragDirection: currentDragDirection,
+		dragProgress,
+	});
 	return (
-		<div className="flex flex-col w-full justify-center items-center h-fit py-3">
-			<div className={`relative w-full ${className}`}>
+		<div className="flex min-h-0 w-full flex-1 flex-col pb-3">
+			<div
+				className={`relative flex min-h-0 w-full flex-1 flex-col ${className}`}
+			>
 				{/* Ghost card */}
 				{hasNext && (
 					<div
@@ -414,8 +436,9 @@ export const SwipeCardStack = forwardRef<
 						className="absolute inset-0 -bottom-[37px] w-full bg-gray-300 rounded-3xl pointer-events-none"
 						style={{
 							zIndex: 0,
-							transform: `scale(0.85) translateY(${ghostYOverride ?? ghostTranslateY}px)`,
-							transition: ghostTransitionOverride ?? backCardTransition,
+							transform: `scale(${stackGhostLayerScale})`,
+							opacity: ghostOpacity,
+							willChange: "opacity",
 						}}
 					/>
 				)}
@@ -424,22 +447,24 @@ export const SwipeCardStack = forwardRef<
 				{hasNext && (
 					<div
 						aria-hidden="true"
-						className="absolute inset-0 w-full bg-gray-200 rounded-3xl pt-5 pb-6 px-6 flex flex-col items-center pointer-events-none"
+						className="pointer-events-none absolute inset-0 flex min-h-0 w-full flex-col items-stretch rounded-3xl"
 						style={{
 							zIndex: 1,
+							backgroundColor: backCardBackgroundColor,
 							transform: `scale(${backScale}) translateY(${backTranslateY}px)`,
-							opacity: backOpacity,
 							transition: backCardTransition,
-							willChange: "transform, opacity",
+							willChange: "transform, background-color",
 						}}
 					>
-						{backCardContent(displayIndex + 1, null, 0)}
+						<div className="flex min-h-0 min-w-0 flex-1 flex-col">
+							{backCardContent(displayIndex + 1, null, 0)}
+						</div>
 					</div>
 				)}
 
 				{/* Top card */}
 				<div
-					className={`relative w-full rounded-3xl pt-5 pb-6 px-6 flex flex-col items-center ${hasNext ? "shadow-[0_6px_16px_0_rgba(17,24,39,0.10)]" : ""} ${accentBg} ${topCardAnimationClassNames(animationPhase, animationDirection)}`}
+					className={`relative flex min-h-0 w-full flex-1 flex-col items-center rounded-3xl ${hasNext ? "shadow-[0_6px_16px_0_rgba(17,24,39,0.10)]" : ""} ${accentBg} ${topCardAnimationClassNames(animationPhase, animationDirection)}`}
 					style={{
 						zIndex: 2,
 						touchAction: "none",
@@ -455,7 +480,9 @@ export const SwipeCardStack = forwardRef<
 					onPointerUp={handlePointerUp}
 					onPointerCancel={handlePointerCancel}
 				>
-					{renderCard(displayIndex, currentDragDirection, dragProgress)}
+					<div className="relative flex h-full min-h-0 w-full min-w-0 flex-1 flex-col items-stretch">
+						{renderCard(displayIndex, currentDragDirection, dragProgress)}
+					</div>
 				</div>
 			</div>
 		</div>

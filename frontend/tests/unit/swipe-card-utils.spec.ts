@@ -2,12 +2,17 @@ import { expect, test, describe } from "vitest";
 
 import {
 	SWIPE_THRESHOLD,
+	DEFAULT_STACK_GHOST_LAYER_SCALE,
 	FLY_OUT_MS,
+	applyHorizontalDragGravity,
+	detectHorizontalSwipeOnly,
 	detectSwipeDirection,
 	getCardVisualState,
 	getCursorStyle,
 	getDragDirectionAndProgress,
 	getTopCardAccentBg,
+	mixBackCardSurfaceColor,
+	resolvePointerReleaseSwipeDirection,
 	swipeFlyOutTopTransformTransition,
 	swipeSnapBackStackLayerTransition,
 	swipeSnapBackTopTransition,
@@ -139,9 +144,9 @@ describe("swipeSnapBackTopTransition", () => {
 });
 
 describe("swipeSnapBackStackLayerTransition", () => {
-	test("combines top transform transition with opacity", () => {
+	test("combines top transform transition with background-color", () => {
 		expect(swipeSnapBackStackLayerTransition(300)).toBe(
-			"transform 300ms ease, opacity 300ms ease",
+			"transform 300ms ease, background-color 300ms ease",
 		);
 	});
 });
@@ -151,6 +156,13 @@ describe("swipeFlyOutTopTransformTransition", () => {
 		expect(swipeFlyOutTopTransformTransition()).toBe(
 			`transform ${FLY_OUT_MS}ms ease-in`,
 		);
+	});
+});
+
+describe("mixBackCardSurfaceColor", () => {
+	test("interpolates from gray-300 at 0 to gray-200 at 1", () => {
+		expect(mixBackCardSurfaceColor(0)).toBe("rgb(209 213 219)");
+		expect(mixBackCardSurfaceColor(1)).toBe("rgb(229 231 235)");
 	});
 });
 
@@ -167,9 +179,9 @@ describe("getCardVisualState", () => {
 		);
 
 		expect(state.backScale).toBe(1);
-		expect(state.backOpacity).toBe(1);
 		expect(state.backTranslateY).toBe(0);
-		expect(Math.abs(state.ghostTranslateY)).toBe(0);
+		expect(state.backCardBackgroundColor).toBe(mixBackCardSurfaceColor(1));
+		expect(state.ghostOpacity).toBe(1);
 		expect(state.topTransform).toContain("rotate(");
 		expect(state.topTransform).toContain("scale(1)");
 	});
@@ -186,7 +198,32 @@ describe("getCardVisualState", () => {
 		);
 
 		expect(state.backScale).toBe(1);
-		expect(state.backOpacity).toBe(1);
+		expect(state.ghostOpacity).toBe(1);
+	});
+
+	test("ghost is hidden at gesture start and fades with progress when active", () => {
+		const hidden = getCardVisualState(
+			{ x: 0, y: 0 },
+			{
+				isFlying: false,
+				isActive: true,
+				flyDirection: null,
+				flyStart: null,
+			},
+		);
+		expect(hidden.ghostOpacity).toBe(0);
+		expect(hidden.backScale).toBe(DEFAULT_STACK_GHOST_LAYER_SCALE);
+
+		const mid = getCardVisualState(
+			{ x: SWIPE_THRESHOLD / 2, y: 0 },
+			{
+				isFlying: false,
+				isActive: true,
+				flyDirection: null,
+				flyStart: null,
+			},
+		);
+		expect(mid.ghostOpacity).toBeCloseTo(0.5);
 	});
 
 	test("up fly applies scale from flyUp progress when flyStart is set", () => {
@@ -204,7 +241,7 @@ describe("getCardVisualState", () => {
 		expect(state.topTransform).toContain("rotate(0deg)");
 	});
 
-	test("inactive fly clears ghost offset", () => {
+	test("when stack layer is inactive, ghost stays fully visible", () => {
 		const state = getCardVisualState(
 			{ x: 40, y: 0 },
 			{
@@ -215,7 +252,7 @@ describe("getCardVisualState", () => {
 			},
 		);
 
-		expect(state.ghostTranslateY).toBe(0);
+		expect(state.ghostOpacity).toBe(1);
 	});
 });
 
@@ -278,5 +315,42 @@ describe("detectSwipeDirection", () => {
 	test("returns null below thresholds", () => {
 		expect(detectSwipeDirection(40, -40)).toBe(null);
 		expect(detectSwipeDirection(0, 0)).toBe(null);
+	});
+});
+
+describe("applyHorizontalDragGravity", () => {
+	test("left-half start amplifies leftward drag and dampens rightward", () => {
+		expect(applyHorizontalDragGravity(-100, true)).toBeCloseTo(-116);
+		expect(applyHorizontalDragGravity(100, true)).toBeCloseTo(84);
+	});
+
+	test("right-half start amplifies rightward drag and dampens leftward", () => {
+		expect(applyHorizontalDragGravity(100, false)).toBeCloseTo(116);
+		expect(applyHorizontalDragGravity(-100, false)).toBeCloseTo(-84);
+	});
+});
+
+describe("detectHorizontalSwipeOnly", () => {
+	test("detects horizontal past threshold", () => {
+		expect(detectHorizontalSwipeOnly(SWIPE_THRESHOLD + 1)).toBe("right");
+		expect(detectHorizontalSwipeOnly(-SWIPE_THRESHOLD - 1)).toBe("left");
+	});
+
+	test("returns null below threshold regardless of vertical", () => {
+		expect(detectHorizontalSwipeOnly(40)).toBe(null);
+		expect(detectHorizontalSwipeOnly(10)).toBe(null);
+	});
+});
+
+describe("resolvePointerReleaseSwipeDirection", () => {
+	test("prefers lateral over vertical when both qualify", () => {
+		expect(
+			resolvePointerReleaseSwipeDirection(SWIPE_THRESHOLD + 5, -200, true),
+		).toBe("right");
+	});
+
+	test("allows up only when enabled and lateral is below threshold", () => {
+		expect(resolvePointerReleaseSwipeDirection(10, -90, true)).toBe("up");
+		expect(resolvePointerReleaseSwipeDirection(10, -90, false)).toBe(null);
 	});
 });

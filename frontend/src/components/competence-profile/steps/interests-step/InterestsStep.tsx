@@ -43,7 +43,7 @@ export function InterestsStep() {
 			}
 			subtitle={content["common.multiSelect.subline"]}
 		>
-			<div className="flex flex-col gap-8 pb-4">
+			<div className="flex flex-col gap-8 pb-16">
 				{profile.customInterests.length > 0 && (
 					<div>
 						<h3 className="text-lg font-semibold text-gray-500 mb-2 px-3.5">
