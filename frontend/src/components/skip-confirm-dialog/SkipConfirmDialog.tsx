@@ -67,7 +67,7 @@ export const SkipConfirmDialog: React.FC<SkipConfirmDialogProps> = ({
 	}
 
 	return (
-		<DefaultDialog id={skipConfirmDialogId} className="md:max-w-[430px]">
+		<DefaultDialog id={skipConfirmDialogId} className="max-w-[398px]">
 			<div className="flex flex-col gap-2 px-2 pb-6 text-gray-900">
 				<h2 className="text-lg font-semibold pb-1">{content[titleKey]}</h2>
 				<p className="text-lg">{content[descriptionKey]}</p>
