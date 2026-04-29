@@ -73,34 +73,40 @@ function SwipeCardOverlays({
 
 	return (
 		<>
-			{showColorWash && dragColorWash && slideInHorizontalColorFade && horizontalDrag && (
-				<div
-					aria-hidden
-					className={`pointer-events-none absolute inset-0 z-[1] ${slideInTintClass}`}
-				>
+			{showColorWash &&
+				dragColorWash &&
+				slideInHorizontalColorFade &&
+				horizontalDrag && (
 					<div
-						className={`absolute inset-0 rounded-3xl opacity-[0.85] ${accentClassForHorizontalDrag(
+						aria-hidden
+						className={`pointer-events-none absolute inset-0 z-[1] ${slideInTintClass}`}
+					>
+						<div
+							className={`absolute inset-0 rounded-3xl opacity-[0.85] ${accentClassForHorizontalDrag(
+								horizontalDrag,
+								dragColorWash,
+							)}`}
+						/>
+						<div className="pointer-events-none absolute left-1/2 top-1/2 z-10 flex h-[120px] w-[120px] -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-orange-0">
+							<HorizontalDragGlyph direction={horizontalDrag} />
+						</div>
+					</div>
+				)}
+			{showColorWash &&
+				dragColorWash &&
+				!slideInHorizontalColorFade &&
+				horizontalDrag && (
+					<div
+						aria-hidden
+						className={`pointer-events-none absolute inset-0 z-[1] rounded-3xl ${accentClassForHorizontalDrag(
 							horizontalDrag,
 							dragColorWash,
 						)}`}
+						style={{
+							opacity: dragProgress * DRAG_COLOR_WASH_MAX_OPACITY,
+						}}
 					/>
-					<div className="pointer-events-none absolute left-1/2 top-1/2 z-10 flex h-[120px] w-[120px] -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-orange-0">
-						<HorizontalDragGlyph direction={horizontalDrag} />
-					</div>
-				</div>
-			)}
-			{showColorWash && dragColorWash && !slideInHorizontalColorFade && horizontalDrag && (
-				<div
-					aria-hidden
-					className={`pointer-events-none absolute inset-0 z-[1] rounded-3xl ${accentClassForHorizontalDrag(
-						horizontalDrag,
-						dragColorWash,
-					)}`}
-					style={{
-						opacity: dragProgress * DRAG_COLOR_WASH_MAX_OPACITY,
-					}}
-				/>
-			)}
+				)}
 			{horizontalDrag && !slideInHorizontalColorFade && (
 				<div
 					className="pointer-events-none absolute left-1/2 top-1/2 z-10 flex h-[120px] w-[120px] -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-orange-0"
