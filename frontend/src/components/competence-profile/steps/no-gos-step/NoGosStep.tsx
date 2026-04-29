@@ -46,11 +46,22 @@ export function NoGosStep() {
 
 	const noGosValues = useAppStore((state) => state.profile.noGos);
 
+	/**
+	 * Fly-out (Next) and slide-in (Back) use the same mapping: skipped (`null`) → up;
+	 * never answered (`undefined`) → default accepted → right; accepted/rejected → lateral.
+	 */
 	const getDirectionForIndex = useCallback(
 		(index: number): SwipeDirection => {
 			const card = noGos[index];
-			const value: NoGoAnswer = noGosValues[card?.id] ?? "accepted";
-			return value === "accepted" ? "right" : "left";
+			if (!card) {
+				return "right";
+			}
+			const value = noGosValues[card.id];
+			if (value === null) {
+				return "up";
+			}
+			const resolved: NoGoAnswer = value ?? "accepted";
+			return resolved === "accepted" ? "right" : "left";
 		},
 		[noGosValues],
 	);
@@ -128,17 +139,19 @@ export function NoGosStep() {
 					onBack={getDirectionForIndex}
 					onIndexChange={handleIndexChange}
 					onSwipe={handleSwipe}
-					renderCard={(
-						index: number,
-						dragDirection: "left" | "right" | null,
-						dragProgress: number,
-					) => (
+					renderCard={({
+						index,
+						dragDirection,
+						dragProgress,
+						slideInHorizontalColorFade = false,
+					}) => (
 						<SwipeCard
 							index={index}
 							cards={noGos}
 							dragDirection={dragDirection}
 							dragProgress={dragProgress}
 							dragColorWash={NO_GO_CARD_SWIPE_TINT}
+							slideInHorizontalColorFade={slideInHorizontalColorFade}
 						/>
 					)}
 				/>

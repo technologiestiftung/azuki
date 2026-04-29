@@ -112,7 +112,7 @@ export function StrengthsStep() {
 					onBefore={goPrevious}
 					onBack={getDirectionForIndex}
 					onIndexChange={handleIndexChange}
-					renderCard={(index: number) => (
+					renderCard={({ index }) => (
 						<SwipeCard index={index} cards={strengths} />
 					)}
 					isDraggingEnabled={false}
