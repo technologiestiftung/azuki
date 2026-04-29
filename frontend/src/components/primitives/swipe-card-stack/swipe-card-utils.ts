@@ -249,12 +249,17 @@ export interface DragTintContext {
 	animationDirection: SwipeDirection | null;
 }
 
+export interface GetDragDirectionAndProgressInput {
+	isDragging: boolean;
+	dragX: number;
+	flyDirection: SwipeDirection | null;
+	tintContext?: DragTintContext;
+}
+
 export function getDragDirectionAndProgress(
-	isDragging: boolean,
-	dragX: number,
-	flyDirection: SwipeDirection | null,
-	tintContext?: DragTintContext,
+	input: GetDragDirectionAndProgressInput,
 ): DragDirectionAndProgress {
+	const { isDragging, dragX, flyDirection, tintContext } = input;
 	if (isDragging && dragX !== 0) {
 		return {
 			direction: dragX > 0 ? "right" : "left",

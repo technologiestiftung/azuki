@@ -293,17 +293,33 @@ describe("getCursorStyle", () => {
 describe("getDragDirectionAndProgress", () => {
 	test("derives direction and capped progress from drag", () => {
 		expect(
-			getDragDirectionAndProgress(true, SWIPE_THRESHOLD * 2, null),
+			getDragDirectionAndProgress({
+				isDragging: true,
+				dragX: SWIPE_THRESHOLD * 2,
+				flyDirection: null,
+			}),
 		).toEqual({ direction: "right", progress: 1 });
 
-		expect(getDragDirectionAndProgress(true, -40, null)).toEqual({
+		expect(
+			getDragDirectionAndProgress({
+				isDragging: true,
+				dragX: -40,
+				flyDirection: null,
+			}),
+		).toEqual({
 			direction: "left",
 			progress: 40 / SWIPE_THRESHOLD,
 		});
 	});
 
 	test("uses fly direction at full progress when not dragging", () => {
-		expect(getDragDirectionAndProgress(false, 0, "left")).toEqual({
+		expect(
+			getDragDirectionAndProgress({
+				isDragging: false,
+				dragX: 0,
+				flyDirection: "left",
+			}),
+		).toEqual({
 			direction: "left",
 			progress: 1,
 		});
@@ -311,22 +327,39 @@ describe("getDragDirectionAndProgress", () => {
 
 	test("slide-in horizontal uses animation direction at full progress", () => {
 		expect(
-			getDragDirectionAndProgress(false, 0, null, {
-				animationPhase: "slide-in",
-				animationDirection: "right",
+			getDragDirectionAndProgress({
+				isDragging: false,
+				dragX: 0,
+				flyDirection: null,
+				tintContext: {
+					animationPhase: "slide-in",
+					animationDirection: "right",
+				},
 			}),
 		).toEqual({ direction: "right", progress: 1 });
 	});
 
 	test("ignores up for horizontal direction", () => {
-		expect(getDragDirectionAndProgress(false, 0, "up")).toEqual({
+		expect(
+			getDragDirectionAndProgress({
+				isDragging: false,
+				dragX: 0,
+				flyDirection: "up",
+			}),
+		).toEqual({
 			direction: null,
 			progress: 0,
 		});
 	});
 
 	test("no direction when not dragging and no lateral fly", () => {
-		expect(getDragDirectionAndProgress(false, 0, null)).toEqual({
+		expect(
+			getDragDirectionAndProgress({
+				isDragging: false,
+				dragX: 0,
+				flyDirection: null,
+			}),
+		).toEqual({
 			direction: null,
 			progress: 0,
 		});

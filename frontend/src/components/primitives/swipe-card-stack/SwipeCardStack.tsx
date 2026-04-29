@@ -457,9 +457,14 @@ export const SwipeCardStack = forwardRef<
 	});
 
 	const { direction: currentDragDirection, progress: dragProgress } =
-		getDragDirectionAndProgress(isDragging, dragX, flyDirection, {
-			animationPhase,
-			animationDirection,
+		getDragDirectionAndProgress({
+			isDragging,
+			dragX,
+			flyDirection,
+			tintContext: {
+				animationPhase,
+				animationDirection,
+			},
 		});
 
 	const slideInHorizontalColorFade = slideInHorizontalColorFadeActive(
