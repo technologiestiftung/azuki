@@ -44,11 +44,6 @@ export const WORK_PREF_MAP: Record<string, WorkPreferenceOptionChecks> = {
 		a: (o) => o.conditions.regulatedWork,
 		b: (o) => !o.conditions.regulatedWork,
 	},
-	purpose: {
-		a: (o) => o.interests.includes("sozial-beratend"),
-		// No BERUFENET signal for "Aufgaben erledigen".
-		b: () => false,
-	},
 	environment: {
 		a: (o) => o.conditions.office || o.conditions.workshop,
 		b: (o) => o.conditions.outdoor,

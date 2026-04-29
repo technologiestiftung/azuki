@@ -248,7 +248,6 @@ export const content = {
 	"workValues.option.modernTechnology": "Arbeiten mit modernen Technologien",
 	"workValues.option.shortDistance": "Kurzer Arbeitsweg",
 	"workValues.option.career": "Karriere",
-	"workValues.option.benefits": "Benefits (Arbeitgeberleistungen)",
 	"workValues.option.remote": "Remote möglich",
 
 	// Work Preferences
