@@ -49,7 +49,7 @@ export function InterestsStep() {
 						<h3 className="text-lg font-semibold text-gray-500 mb-2 px-3.5">
 							{content["interests.addedByYouLabel"]}
 						</h3>
-						<div className="flex flex-wrap gap-x-2 gap-y-2.5 rounded-2xl bg-card-fill p-3">
+						<div className="flex min-w-0 flex-wrap gap-x-2 gap-y-2.5 rounded-2xl bg-card-fill p-3">
 							{profile.customInterests.map((interest: string) => (
 								<Pill
 									key={interest}
@@ -68,7 +68,7 @@ export function InterestsStep() {
 						<h3 className="text-lg font-semibold text-gray-500 mb-2 px-3.5">
 							{category.name}
 						</h3>
-						<div className="flex flex-wrap gap-x-2 gap-y-2.5 rounded-2xl bg-card-fill p-3">
+						<div className="flex min-w-0 flex-wrap gap-x-2 gap-y-2.5 rounded-2xl bg-card-fill p-3">
 							{category.interests.map((item) => (
 								<Pill
 									key={item.label}
