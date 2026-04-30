@@ -1,6 +1,6 @@
 import {
 	POPULARITY_INDEX,
-	type PersonaRubric,
+	type Persona,
 	type PrefilterEntry,
 } from "@azuki/shared";
 
@@ -33,14 +33,14 @@ function getNameById(id: number): string {
 
 export function rubricReachability(
 	prefilter: PrefilterEntry[],
-	rubric: PersonaRubric,
+	persona: Persona,
 ): RubricReachability {
 	const rankById = new Map(prefilter.map((e, i) => [e.id, i + 1]));
 	const nameInPrefilter = new Map(prefilter.map((e) => [e.id, e.name]));
 
 	const tierSReached: ReachableEntry[] = [];
 	const tierSMissed: MissedEntry[] = [];
-	for (const id of rubric.tierS) {
+	for (const id of persona.tierS) {
 		const rank = rankById.get(id);
 		if (rank !== undefined) {
 			tierSReached.push({
@@ -54,7 +54,7 @@ export function rubricReachability(
 	}
 
 	const tierCInPrefilter: ReachableEntry[] = [];
-	for (const id of rubric.tierC) {
+	for (const id of persona.tierC) {
 		const rank = rankById.get(id);
 		if (rank !== undefined) {
 			tierCInPrefilter.push({
@@ -66,7 +66,7 @@ export function rubricReachability(
 	}
 
 	return {
-		tierSTotal: rubric.tierS.length,
+		tierSTotal: persona.tierS.length,
 		tierSReached,
 		tierSMissed,
 		tierCInPrefilter,

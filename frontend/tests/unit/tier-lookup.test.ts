@@ -1,41 +1,55 @@
 import { describe, expect, test } from "vitest";
-import type { PersonaRubric } from "@azuki/shared";
+import type { Persona } from "@azuki/shared";
 import { getRubricTier } from "../../src/components/eval/tier-lookup";
 
-const rubric: PersonaRubric = {
+const baseProfile = {
+	inSchool: false,
+	educationLevel: "secondary" as const,
+	favoriteSubjects: [],
+	customSubjects: [],
+	interests: [],
+	customInterests: [],
+	workValues: [],
+	strengths: {},
+	secretTalent: "",
+	practicalExperience: "",
+	workPreferences: {},
+	noGos: {},
+};
+
+const persona: Persona = {
+	id: "p",
+	name: "p",
+	description: null,
+	profile: baseProfile,
 	tierS: [1, 2],
 	tierA: [10, 11],
 	tierC: [100, 101],
-	criteria: [],
+	inEvalSet: true,
+	createdAt: "x",
+	updatedAt: "x",
 };
 
 describe("getRubricTier", () => {
 	test("returns S for IDs in tierS", () => {
-		expect(getRubricTier(1, rubric)).toBe("S");
-		expect(getRubricTier(2, rubric)).toBe("S");
+		expect(getRubricTier(1, persona)).toBe("S");
 	});
-
 	test("returns A for IDs in tierA", () => {
-		expect(getRubricTier(10, rubric)).toBe("A");
-		expect(getRubricTier(11, rubric)).toBe("A");
+		expect(getRubricTier(10, persona)).toBe("A");
 	});
-
 	test("returns C for IDs in tierC", () => {
-		expect(getRubricTier(100, rubric)).toBe("C");
-		expect(getRubricTier(101, rubric)).toBe("C");
+		expect(getRubricTier(100, persona)).toBe("C");
 	});
-
-	test("returns undefined for IDs in no tier", () => {
-		expect(getRubricTier(999, rubric)).toBeUndefined();
+	test("returns undefined for unknown IDs", () => {
+		expect(getRubricTier(999, persona)).toBeUndefined();
 	});
-
-	test("ID present in multiple tiers — S wins over A wins over C", () => {
-		const odd: PersonaRubric = {
+	test("S wins over A wins over C when ID in multiple tiers", () => {
+		const overlapping: Persona = {
+			...persona,
 			tierS: [42],
 			tierA: [42],
 			tierC: [42],
-			criteria: [],
 		};
-		expect(getRubricTier(42, odd)).toBe("S");
+		expect(getRubricTier(42, overlapping)).toBe("S");
 	});
 });

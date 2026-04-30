@@ -1,4 +1,9 @@
-import type { UserProfile, MatchResult, EvalSnapshot } from "@azuki/shared";
+import type {
+	UserProfile,
+	MatchResult,
+	EvalSnapshot,
+	Persona,
+} from "@azuki/shared";
 
 type HeadersInit = Record<string, string>;
 
@@ -65,14 +70,77 @@ export async function getDefaultPrompt(): Promise<string> {
 export async function runEvalRequest(
 	systemPrompt: string,
 	model: string,
+	personaIds: string[],
 ): Promise<EvalSnapshot> {
 	const res = await fetch(`${API_BASE}/eval/run`, {
 		method: "POST",
 		headers: headers(),
-		body: JSON.stringify({ systemPrompt, model }),
+		body: JSON.stringify({ systemPrompt, model, personaIds }),
 	});
 	if (!res.ok) {
 		throw new Error(`runEval failed: ${res.status}`);
 	}
 	return res.json();
+}
+
+export interface PersonaInput {
+	name: string;
+	description: string | null;
+	profile: UserProfile;
+	tierS: number[];
+	tierA: number[];
+	tierC: number[];
+}
+
+export async function listPersonas(): Promise<Persona[]> {
+	const res = await fetch(`${API_BASE}/personas`, { headers: headers() });
+	if (!res.ok) {
+		throw new Error(`listPersonas failed: ${res.status}`);
+	}
+	return res.json();
+}
+
+export async function getPersona(id: string): Promise<Persona> {
+	const res = await fetch(`${API_BASE}/personas/${id}`, { headers: headers() });
+	if (!res.ok) {
+		throw new Error(`getPersona failed: ${res.status}`);
+	}
+	return res.json();
+}
+
+export async function createPersona(input: PersonaInput): Promise<Persona> {
+	const res = await fetch(`${API_BASE}/personas`, {
+		method: "POST",
+		headers: headers(),
+		body: JSON.stringify(input),
+	});
+	if (!res.ok) {
+		throw new Error(`createPersona failed: ${res.status}`);
+	}
+	return res.json();
+}
+
+export async function updatePersona(
+	id: string,
+	input: PersonaInput,
+): Promise<Persona> {
+	const res = await fetch(`${API_BASE}/personas/${id}`, {
+		method: "PUT",
+		headers: headers(),
+		body: JSON.stringify(input),
+	});
+	if (!res.ok) {
+		throw new Error(`updatePersona failed: ${res.status}`);
+	}
+	return res.json();
+}
+
+export async function deletePersona(id: string): Promise<void> {
+	const res = await fetch(`${API_BASE}/personas/${id}`, {
+		method: "DELETE",
+		headers: headers(),
+	});
+	if (!res.ok) {
+		throw new Error(`deletePersona failed: ${res.status}`);
+	}
 }

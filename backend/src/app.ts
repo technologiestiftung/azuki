@@ -8,6 +8,13 @@ import { aiRank, buildSystemPrompt } from "./ai/index.js";
 import occupationsData from "./data/berufe.json";
 import { runEval } from "../eval/run.js";
 import { z } from "zod";
+import { getSupabase } from "./supabase.js";
+import { slugify } from "./personas/slugify.js";
+import {
+	CreatePersonaSchema,
+	UpdatePersonaSchema,
+} from "./personas/schemas.js";
+import { rowToPersona, type PersonaInsertRow } from "./personas/mappers.js";
 
 const occupations: Occupation[] = occupationsData as Occupation[];
 
@@ -18,6 +25,7 @@ app.use("/*", cors());
 const EvalRunRequestSchema = z.object({
 	systemPrompt: z.string().min(1),
 	model: z.string().min(1),
+	personaIds: z.array(z.string().min(1)).min(1),
 });
 
 app.get("/api/health", (c) =>
@@ -29,6 +37,22 @@ function isAuthorized(c: Context): boolean {
 	if (!appPassword) return true;
 	const providedPassword = c.req.header("x-app-password");
 	return Boolean(providedPassword && providedPassword === appPassword);
+}
+
+async function generateUniqueSlug(name: string): Promise<string> {
+	const base = slugify(name) || "persona";
+	const reserved = new Set(["nico", "elina", "karim"]);
+	const supabase = getSupabase();
+	const { data: existing } = await supabase
+		.from("personas")
+		.select("id")
+		.eq("id", base)
+		.maybeSingle();
+	if (!existing && !reserved.has(base)) {
+		return base;
+	}
+	const stamp = new Date().toISOString().slice(0, 16).replace(/[-:T]/g, "");
+	return `${base}-${stamp.slice(0, 12)}`;
 }
 
 app.post("/api/unlock", (c) => {
@@ -111,18 +135,196 @@ app.post("/api/eval/run", async (c) => {
 	if (!parsed.success) {
 		return c.json({ error: "Invalid request body" }, 400);
 	}
-	const { systemPrompt, model } = parsed.data;
+	const { systemPrompt, model, personaIds } = parsed.data;
 
 	if (!AI_MODEL_IDS.has(model)) {
 		return c.json({ error: "Invalid model" }, 400);
+	}
+
+	let personas;
+	try {
+		const supabase = getSupabase();
+		const { data, error } = await supabase
+			.from("personas")
+			.select("*")
+			.in("id", personaIds);
+		if (error) {
+			return c.json({ error: error.message }, 502);
+		}
+		personas = (data ?? []).map(rowToPersona);
+	} catch (err) {
+		const msg = err instanceof Error ? err.message : String(err);
+		return c.json({ error: msg }, 502);
+	}
+
+	const foundIds = new Set(personas.map((p) => p.id));
+	const missing = personaIds.filter((id) => !foundIds.has(id));
+	if (missing.length > 0) {
+		return c.json({ error: "Persona(s) not found", missing }, 400);
 	}
 
 	const snapshot = await runEval({
 		systemPrompt,
 		model,
 		occupations,
+		personas,
 	});
 	return c.json(snapshot);
+});
+
+app.get("/api/personas", async (c) => {
+	if (!isAuthorized(c)) {
+		return c.json({ error: "Unauthorized" }, 401);
+	}
+	try {
+		const supabase = getSupabase();
+		const { data, error } = await supabase
+			.from("personas")
+			.select("*")
+			.order("created_at", { ascending: true });
+		if (error) {
+			return c.json({ error: error.message }, 502);
+		}
+		return c.json((data ?? []).map(rowToPersona));
+	} catch (err) {
+		const msg = err instanceof Error ? err.message : String(err);
+		return c.json({ error: msg }, 502);
+	}
+});
+
+app.get("/api/personas/:id", async (c) => {
+	if (!isAuthorized(c)) {
+		return c.json({ error: "Unauthorized" }, 401);
+	}
+	const id = c.req.param("id");
+	try {
+		const supabase = getSupabase();
+		const { data, error } = await supabase
+			.from("personas")
+			.select("*")
+			.eq("id", id)
+			.maybeSingle();
+		if (error) {
+			return c.json({ error: error.message }, 502);
+		}
+		if (!data) {
+			return c.json({ error: "Persona not found" }, 404);
+		}
+		return c.json(rowToPersona(data));
+	} catch (err) {
+		const msg = err instanceof Error ? err.message : String(err);
+		return c.json({ error: msg }, 502);
+	}
+});
+
+app.post("/api/personas", async (c) => {
+	if (!isAuthorized(c)) {
+		return c.json({ error: "Unauthorized" }, 401);
+	}
+	let body: unknown;
+	try {
+		body = await c.req.json();
+	} catch {
+		return c.json({ error: "Invalid request body" }, 400);
+	}
+	const parsed = CreatePersonaSchema.safeParse(body);
+	if (!parsed.success) {
+		return c.json({ error: "Invalid request body", issues: parsed.error.issues }, 400);
+	}
+	const input = parsed.data;
+	const id = await generateUniqueSlug(input.name);
+	const row: PersonaInsertRow = {
+		id,
+		name: input.name,
+		description: input.description ?? null,
+		profile: input.profile,
+		tier_s: input.tierS,
+		tier_a: input.tierA,
+		tier_c: input.tierC,
+	};
+	try {
+		const supabase = getSupabase();
+		const { data, error } = await supabase
+			.from("personas")
+			.insert(row)
+			.select("*")
+			.single();
+		if (error) {
+			return c.json({ error: error.message }, 502);
+		}
+		return c.json(rowToPersona(data));
+	} catch (err) {
+		const msg = err instanceof Error ? err.message : String(err);
+		return c.json({ error: msg }, 502);
+	}
+});
+
+app.put("/api/personas/:id", async (c) => {
+	if (!isAuthorized(c)) {
+		return c.json({ error: "Unauthorized" }, 401);
+	}
+	const id = c.req.param("id");
+	let body: unknown;
+	try {
+		body = await c.req.json();
+	} catch {
+		return c.json({ error: "Invalid request body" }, 400);
+	}
+	const parsed = UpdatePersonaSchema.safeParse(body);
+	if (!parsed.success) {
+		return c.json({ error: "Invalid request body", issues: parsed.error.issues }, 400);
+	}
+	const input = parsed.data;
+	try {
+		const supabase = getSupabase();
+		const { data, error } = await supabase
+			.from("personas")
+			.update({
+				name: input.name,
+				description: input.description ?? null,
+				profile: input.profile,
+				tier_s: input.tierS,
+				tier_a: input.tierA,
+				tier_c: input.tierC,
+			})
+			.eq("id", id)
+			.select("*")
+			.maybeSingle();
+		if (error) {
+			return c.json({ error: error.message }, 502);
+		}
+		if (!data) {
+			return c.json({ error: "Persona not found" }, 404);
+		}
+		return c.json(rowToPersona(data));
+	} catch (err) {
+		const msg = err instanceof Error ? err.message : String(err);
+		return c.json({ error: msg }, 502);
+	}
+});
+
+app.delete("/api/personas/:id", async (c) => {
+	if (!isAuthorized(c)) {
+		return c.json({ error: "Unauthorized" }, 401);
+	}
+	const id = c.req.param("id");
+	try {
+		const supabase = getSupabase();
+		const { error, count } = await supabase
+			.from("personas")
+			.delete({ count: "exact" })
+			.eq("id", id);
+		if (error) {
+			return c.json({ error: error.message }, 502);
+		}
+		if (count === 0) {
+			return c.json({ error: "Persona not found" }, 404);
+		}
+		return c.json({ ok: true });
+	} catch (err) {
+		const msg = err instanceof Error ? err.message : String(err);
+		return c.json({ error: msg }, 502);
+	}
 });
 
 export default app;

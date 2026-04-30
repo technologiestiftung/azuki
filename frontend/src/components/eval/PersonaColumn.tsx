@@ -1,11 +1,5 @@
 import { useState } from "react";
-import type {
-	PersonaId,
-	PersonaResult,
-	ScoreReport,
-	UserProfile,
-} from "@azuki/shared";
-import { PERSONAS, RUBRICS } from "@azuki/shared";
+import type { Persona, PersonaResult, ScoreReport } from "@azuki/shared";
 import type { RubricReachability } from "./reachability";
 import { JobCard } from "./JobCard";
 import { ScoreBanner } from "./ScoreBanner";
@@ -13,7 +7,7 @@ import { ReachabilityPanel } from "./ReachabilityPanel";
 import { getRubricTier, type RubricTier } from "./tier-lookup";
 
 interface Props {
-	personaId: PersonaId;
+	persona: Persona;
 	current: PersonaResult | undefined;
 	report: ScoreReport | undefined;
 	reachability: RubricReachability | undefined;
@@ -32,13 +26,8 @@ const PREFILTER_TIER_BADGE: Record<RubricTier, string> = {
 	C: "bg-red-100 text-red-800",
 };
 
-function PersonaHeader({
-	id,
-	profile,
-}: {
-	id: PersonaId;
-	profile: UserProfile;
-}) {
+function PersonaHeader({ persona }: { persona: Persona }) {
+	const profile = persona.profile;
 	const summary = [
 		profile.educationLevel ?? "—",
 		profile.inSchool ? "in Schule" : "nicht in Schule",
@@ -47,7 +36,7 @@ function PersonaHeader({
 	].join(" · ");
 	return (
 		<div className="border-b border-gray-200 pb-2 mb-2">
-			<div className="font-semibold capitalize">{id}</div>
+			<div className="font-semibold">{persona.name}</div>
 			<div className="text-xs text-gray-600">{summary}</div>
 			<div
 				className="text-xs text-gray-500 mt-1 truncate"
@@ -61,21 +50,19 @@ function PersonaHeader({
 }
 
 export function PersonaColumn({
-	personaId,
+	persona,
 	current,
 	report,
 	reachability,
 	onRetry,
 }: Props) {
 	const [showPrefilter, setShowPrefilter] = useState(false);
-	const profile = PERSONAS[personaId];
-	const rubric = RUBRICS[personaId];
 	const isSuccess = current && !("error" in current);
 
 	return (
 		<div className="flex-1 min-w-0 border border-gray-200 rounded p-3">
 			<ScoreBanner report={report} />
-			<PersonaHeader id={personaId} profile={profile} />
+			<PersonaHeader persona={persona} />
 
 			{!current && <div className="text-sm text-gray-500">No run yet.</div>}
 
@@ -100,7 +87,7 @@ export function PersonaColumn({
 								key={entry.id}
 								entry={entry}
 								rank={i + 1}
-								tier={getRubricTier(entry.id, rubric)}
+								tier={getRubricTier(entry.id, persona)}
 							/>
 						))}
 					</div>
@@ -120,7 +107,7 @@ export function PersonaColumn({
 					{showPrefilter && (
 						<div className="mt-2 space-y-1 text-xs">
 							{current.prefilter.map((entry, i) => {
-								const tier = getRubricTier(entry.id, rubric);
+								const tier = getRubricTier(entry.id, persona);
 								const borderClass = tier
 									? PREFILTER_TIER_BORDER[tier]
 									: "border-gray-200";

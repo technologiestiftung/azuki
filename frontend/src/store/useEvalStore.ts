@@ -1,8 +1,10 @@
 import { create } from "zustand";
-import type { EvalSnapshot } from "@azuki/shared";
+import type { EvalSnapshot, Persona } from "@azuki/shared";
 import { DEFAULT_MODEL_ID } from "@azuki/shared";
+import { listPersonas } from "../api/client";
 
 const PROMPT_DRAFT_KEY = "eval.promptDraft";
+const SELECTED_PERSONA_IDS_KEY = "eval.selectedPersonaIds";
 
 interface EvalState {
 	prompt: string;
@@ -10,12 +12,17 @@ interface EvalState {
 	currentRun: EvalSnapshot | null;
 	isRunning: boolean;
 	error: string | null;
+	personas: Persona[] | null;
+	selectedPersonaIds: Set<string>;
 
 	setPrompt: (prompt: string) => void;
 	setModel: (model: string) => void;
 	setRunning: (running: boolean) => void;
 	setError: (error: string | null) => void;
 	pushNewRun: (snapshot: EvalSnapshot) => void;
+	fetchPersonas: () => Promise<void>;
+	setSelectedPersonaIds: (ids: Set<string>) => void;
+	togglePersonaSelection: (id: string) => void;
 }
 
 const initialPrompt =
@@ -23,12 +30,39 @@ const initialPrompt =
 		? (localStorage.getItem(PROMPT_DRAFT_KEY) ?? "")
 		: "";
 
-export const useEvalStore = create<EvalState>((set) => ({
+const initialSelectedIds = (() => {
+	if (typeof window === "undefined") {
+		return new Set<string>();
+	}
+	const raw = localStorage.getItem(SELECTED_PERSONA_IDS_KEY);
+	if (!raw) {
+		return new Set<string>();
+	}
+	try {
+		const parsed = JSON.parse(raw);
+		return new Set<string>(Array.isArray(parsed) ? parsed : []);
+	} catch {
+		return new Set<string>();
+	}
+})();
+
+function persistSelected(ids: Set<string>): void {
+	if (typeof window !== "undefined") {
+		localStorage.setItem(
+			SELECTED_PERSONA_IDS_KEY,
+			JSON.stringify(Array.from(ids)),
+		);
+	}
+}
+
+export const useEvalStore = create<EvalState>((set, get) => ({
 	prompt: initialPrompt,
 	model: DEFAULT_MODEL_ID,
 	currentRun: null,
 	isRunning: false,
 	error: null,
+	personas: null,
+	selectedPersonaIds: initialSelectedIds,
 
 	setPrompt: (prompt) => {
 		if (typeof window !== "undefined") {
@@ -40,4 +74,32 @@ export const useEvalStore = create<EvalState>((set) => ({
 	setRunning: (running) => set({ isRunning: running }),
 	setError: (error) => set({ error }),
 	pushNewRun: (snapshot) => set({ currentRun: snapshot }),
+
+	fetchPersonas: async () => {
+		const personas = await listPersonas();
+		const current = get().selectedPersonaIds;
+		let next = current;
+		if (current.size === 0) {
+			next = new Set(personas.map((p) => p.id));
+			persistSelected(next);
+		}
+		set({ personas, selectedPersonaIds: next });
+	},
+
+	setSelectedPersonaIds: (ids) => {
+		persistSelected(ids);
+		set({ selectedPersonaIds: ids });
+	},
+
+	togglePersonaSelection: (id) => {
+		const current = get().selectedPersonaIds;
+		const next = new Set(current);
+		if (next.has(id)) {
+			next.delete(id);
+		} else {
+			next.add(id);
+		}
+		persistSelected(next);
+		set({ selectedPersonaIds: next });
+	},
 }));

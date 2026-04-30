@@ -21,6 +21,8 @@ export const ROUTE_PATHS = {
 	loading: "/loading",
 	resultsList: "/results/list",
 	eval: "/eval",
+	personas: "/personas",
+	personaDetail: "/personas/:id",
 } as const;
 
 export const RESULTS_PATH_PREFIX = "/results" as const;

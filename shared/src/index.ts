@@ -26,20 +26,11 @@ export {
 } from "./interests";
 
 export type {
-	PersonaId,
 	PrefilterEntry,
 	FinalEntry,
 	PersonaResult,
 	EvalSnapshot,
 } from "./eval-types";
-
-export {
-	PERSONAS,
-	PERSONA_IDS,
-	nico,
-	elina,
-	karim,
-} from "./eval-fixtures";
 
 export {
 	POPULARITY_INDEX,
@@ -51,11 +42,9 @@ export {
 } from "./popularity";
 
 export {
-	RUBRICS,
 	type Verdict,
-	type CriterionResult,
-	type Criterion,
-	type PersonaRubric,
 	type ScoreReport,
-} from "./eval-rubrics";
+} from "./eval-rubrics/types";
+
+export type { Persona } from "./persona";
 

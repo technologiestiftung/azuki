@@ -43,9 +43,6 @@ export function RunScoreBanner({ score }: Props) {
 			<span className="text-base font-semibold">{style.label}</span>
 			<span className="text-base">·</span>
 			<span className="text-base font-semibold">{score.percent}%</span>
-			<span className="text-sm text-gray-600">
-				({score.passedCount} / {score.totalCount} criteria passed)
-			</span>
 		</div>
 	);
 }

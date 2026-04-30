@@ -1,18 +1,18 @@
-import type { PersonaRubric } from "@azuki/shared";
+import type { Persona } from "@azuki/shared";
 
 export type RubricTier = "S" | "A" | "C";
 
 export function getRubricTier(
 	occupationId: number,
-	rubric: PersonaRubric,
+	persona: Persona,
 ): RubricTier | undefined {
-	if (rubric.tierS.includes(occupationId)) {
+	if (persona.tierS.includes(occupationId)) {
 		return "S";
 	}
-	if (rubric.tierA.includes(occupationId)) {
+	if (persona.tierA.includes(occupationId)) {
 		return "A";
 	}
-	if (rubric.tierC.includes(occupationId)) {
+	if (persona.tierC.includes(occupationId)) {
 		return "C";
 	}
 	return undefined;
