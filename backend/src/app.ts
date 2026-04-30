@@ -4,14 +4,21 @@ import { MatchRequestSchema } from "./schemas/userProfile.js";
 import type { Occupation, MatchResult } from "@azuki/shared";
 import { AI_MODEL_IDS } from "@azuki/shared";
 import { preFilter } from "./matching/index.js";
-import { aiRank } from "./ai/index.js";
+import { aiRank, buildSystemPrompt } from "./ai/index.js";
 import occupationsData from "./data/berufe.json";
+import { runEval } from "../eval/run.js";
+import { z } from "zod";
 
 const occupations: Occupation[] = occupationsData as Occupation[];
 
 const app = new Hono();
 
 app.use("/*", cors());
+
+const EvalRunRequestSchema = z.object({
+	systemPrompt: z.string().min(1),
+	model: z.string().min(1),
+});
 
 app.get("/api/health", (c) =>
 	c.json({ ok: true, occupationCount: occupations.length }),
@@ -56,7 +63,7 @@ app.post("/api/match", async (c) => {
 	const top40 = preFilter(occupations, profile, 40);
 
 	try {
-		const result = await aiRank(top40, profile, model);
+		const result = await aiRank(top40, profile, { model });
 		return c.json(result);
 	} catch (err) {
 		console.error("AI ranking error, falling back to pre-filter:", err);
@@ -79,6 +86,43 @@ app.get("/api/occupations/:id", (c) => {
 	const occupation = occupations.find((o) => o.id === id);
 	if (!occupation) return c.json({ error: "Occupation not found" }, 404);
 	return c.json(occupation);
+});
+
+app.get("/api/eval/default-prompt", (c) => {
+	if (!isAuthorized(c)) {
+		return c.json({ error: "Unauthorized" }, 401);
+	}
+	return c.json({ prompt: buildSystemPrompt() });
+});
+
+app.post("/api/eval/run", async (c) => {
+	if (!isAuthorized(c)) {
+		return c.json({ error: "Unauthorized" }, 401);
+	}
+
+	let body: unknown;
+	try {
+		body = await c.req.json();
+	} catch {
+		return c.json({ error: "Invalid request body" }, 400);
+	}
+
+	const parsed = EvalRunRequestSchema.safeParse(body);
+	if (!parsed.success) {
+		return c.json({ error: "Invalid request body" }, 400);
+	}
+	const { systemPrompt, model } = parsed.data;
+
+	if (!AI_MODEL_IDS.has(model)) {
+		return c.json({ error: "Invalid model" }, 400);
+	}
+
+	const snapshot = await runEval({
+		systemPrompt,
+		model,
+		occupations,
+	});
+	return c.json(snapshot);
 });
 
 export default app;

@@ -14,12 +14,19 @@ import { NoGosStep } from "./components/competence-profile/steps/no-gos-step/NoG
 import { LoadingScreen } from "./components/loading-screen/LoadingScreen";
 import { ResultsPage } from "./components/results-page/ResultsPage";
 import { WorkValuesStep } from "./components/competence-profile/steps/WorkValuesStep";
+import { EvalPage } from "./components/eval/EvalPage";
 import { ROUTE_PATHS } from "./routing/routes";
 
 function App() {
 	const location = useLocation();
 	return (
-		<div className="max-w-[430px] mx-auto h-[100dvh] bg-sky-white relative overflow-hidden">
+		<div
+			className={
+				location.pathname === ROUTE_PATHS.eval
+					? "w-full min-h-[100dvh] bg-white relative"
+					: "max-w-[430px] mx-auto h-[100dvh] bg-sky-white relative overflow-hidden"
+			}
+		>
 			<div key={location.pathname} className="animate-fadeIn h-full">
 				<Routes>
 					<Route path={ROUTE_PATHS.login} element={<LoginScreen />} />
@@ -55,6 +62,7 @@ function App() {
 					<Route path={ROUTE_PATHS.nogos} element={<NoGosStep />} />
 					<Route path={ROUTE_PATHS.loading} element={<LoadingScreen />} />
 					<Route path={ROUTE_PATHS.resultsList} element={<ResultsPage />} />
+					<Route path={ROUTE_PATHS.eval} element={<EvalPage />} />
 					<Route
 						path="*"
 						element={<Navigate to={ROUTE_PATHS.welcome} replace />}

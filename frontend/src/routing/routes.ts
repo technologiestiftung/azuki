@@ -20,6 +20,7 @@ export const ROUTE_PATHS = {
 	nogos: "/nogos",
 	loading: "/loading",
 	resultsList: "/results/list",
+	eval: "/eval",
 } as const;
 
 export const RESULTS_PATH_PREFIX = "/results" as const;

@@ -25,3 +25,37 @@ export {
 	type InterestDefinition,
 } from "./interests";
 
+export type {
+	PersonaId,
+	PrefilterEntry,
+	FinalEntry,
+	PersonaResult,
+	EvalSnapshot,
+} from "./eval-types";
+
+export {
+	PERSONAS,
+	PERSONA_IDS,
+	nico,
+	elina,
+	karim,
+} from "./eval-fixtures";
+
+export {
+	POPULARITY_INDEX,
+	getPopularityTier,
+	type PopularityTier,
+	type OccupationCategory,
+	type DazubiMatchType,
+	type PopularityRecord,
+} from "./popularity";
+
+export {
+	RUBRICS,
+	type Verdict,
+	type CriterionResult,
+	type Criterion,
+	type PersonaRubric,
+	type ScoreReport,
+} from "./eval-rubrics";
+

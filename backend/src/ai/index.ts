@@ -24,7 +24,7 @@ const client = new OpenAI({
   apiKey: OPENROUTER_API_KEY,
 });
 
-function buildSystemPrompt(): string {
+export function buildSystemPrompt(): string {
   return `AUFGABE
 Du bekommst:
 - ein Profil eines Jugendlichen
@@ -284,22 +284,29 @@ async function fetchGenerationCost(
   }
 }
 
+export interface AiRankOptions {
+  model?: string;
+  systemPrompt?: string;
+}
+
 export async function aiRank(
   scored: ScoredOccupation[],
   profile: UserProfile,
-  model?: string,
+  options: AiRankOptions = {},
 ): Promise<MatchResult> {
   if (!OPENROUTER_API_KEY) {
     console.warn("OPENROUTER_API_KEY not set — returning pre-filter results");
     return fallbackResult(scored);
   }
 
+  const { model, systemPrompt } = options;
   const selectedModel = model && AI_MODEL_IDS.has(model) ? model : DEFAULT_MODEL;
+  const prompt = systemPrompt ?? buildSystemPrompt();
 
   const response = await client.chat.completions.create({
     model: selectedModel,
     messages: [
-      { role: "system", content: buildSystemPrompt() },
+      { role: "system", content: prompt },
       { role: "user", content: buildUserPrompt(scored, profile) },
     ],
     temperature: 0.3,

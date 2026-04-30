@@ -1,0 +1,1113 @@
+{
+  "timestamp": "2026-04-29T14:28:03.182Z",
+  "prompt": "AUFGABE\nDu bekommst:\n- ein Profil eines Jugendlichen\n- eine vorgefilterte Liste der 40 passendsten Ausbildungsberufe\n- zu jedem Beruf strukturierte Daten und kurze Beschreibungstexte\n\nDein Job ist nicht, neue Berufe zu suchen.\nDein Job ist, die 40 vorgefilterten Berufe neu zu bewerten, neu zu sortieren und die ${MIN_RESULTS} bis ${MAX_RESULTS} Berufe auszuwählen, die am besten zum Jugendlichen passen.\n\nKONTEXT ZUM MATCHING\nDie Liste mit 40 Berufen wurde bereits durch einen deterministischen Matching-Algorithmus berechnet.\nDabei wurden strukturierte Kriterien wie Schulabschluss, No-Gos, Arbeitsvorlieben, Lieblingsfächer, Interessen, Stärken und Rahmenbedingungen berücksichtigt.\n\nNutze dieses Pre-Filtering als starke Grundlage.\nNutze das LLM-Re-Ranking, um innerhalb dieser 40 Berufe feiner zu unterscheiden.\n\nPRIORISIERUNG\nGewichte die Signale ungefähr so:\n- freie Texte / eigene Worte des Jugendlichen: 70 %\n- strukturierte Profilfelder: 30 %\n\nFreie Texte sind besonders wichtig, zum Beispiel:\n- eigene Beschreibungen\n- geheimes Talent\n- praktische Erfahrungen\n- individuelle Wünsche\n- persönliche Rahmenbedingungen\n\nStrukturierte Felder sind ergänzend wichtig, zum Beispiel:\n- Schulabschluss\n- Lieblingsfächer\n- Interessen\n- Stärken\n- Arbeitsvorlieben\n- No-Gos\n- Rahmenbedingungen\n\nWenn freie Aussagen und strukturierte Angaben sich widersprechen, gelten freie Aussagen stärker.\nAusnahme: harte Ausschlusskriterien dürfen nicht ignoriert werden.\n\nHARTE REGELN\n- Wähle nur Berufe aus der gegebenen Top-40-Liste.\n- Erfinde keine neuen Berufe.\n- Empfiehl keine Berufe, die klar gegen wichtige No-Gos sprechen, wenn es in der Top-40 passendere Alternativen gibt.\n- Nutze den Schulabschluss als Realitätscheck, aber nicht als einziges Entscheidungskriterium.\n- Nutze nur Informationen aus dem Profil, den gelieferten Berufsdaten und allgemein plausible Merkmale eines Berufs.\n- Erfinde keine Wünsche, Erfahrungen, Stärken oder Lebensumstände, die nicht im Profil stehen.\n- Wenn mehrere Berufe ähnlich gut passen, bevorzuge den Beruf, der die eigenen Worte des Jugendlichen besser trifft.\n- Wenn du für einen Beruf keine klare individuelle Begründung geben kannst, wähle lieber einen anderen Beruf aus der Top-40-Liste.\n\nWORAUF DU BESONDERS ACHTEN SOLLST\nBerücksichtige besonders Signale, die im Pre-Filter nur teilweise oder gar nicht erfasst werden, zum Beispiel:\n- freie Texte\n- individuelle Formulierungen\n- praktische Erfahrungen aus Alltag, Schule, Familie, Verein, Praktikum oder Job\n- versteckte Stärken\n- persönliche Wünsche an Arbeit und Umfeld\n- Rahmenbedingungen, die nicht sauber strukturiert abgebildet sind\n\nAchte außerdem darauf, ob ein Beruf vor allem passt wegen:\n- Interesse\n- Stärke\n- Erfahrung\n- Arbeitsweise\n- Rahmenbedingungen\n\nSPRACHE FÜR DIE BEGRÜNDUNGEN\n- einfache Sprache\n- kurze Sätze\n- motivierend und respektvoll\n- jugendnah, aber nicht künstlich\n- keine Fachsprache\n- keine Übertreibungen\n- keine leeren Floskeln\n- keine negative oder defizitorientierte Sprache\n\nQUALITÄT DER BEGRÜNDUNGEN\nJede Begründung muss:\n- konkret auf den Jugendlichen bezogen sein\n- mindestens ein echtes Signal aus dem Profil aufgreifen\n- kurz erklären, warum der Beruf gut passen könnte\n- möglichst die eigenen Worte des Jugendlichen aufgreifen\n- nicht generisch klingen\n\nAUSGABE\nAntworte ausschließlich als JSON-Array, ohne Markdown, ohne zusätzliche Erklärung.\n\nFormat:\n[\n  { \"id\": 12345, \"begruendung\": \"Dieser Beruf könnte gut zu dir passen, weil ...\" },\n  { \"id\": 67890, \"begruendung\": \"Das passt gut zu dir, wenn du gern ...\" }\n]",
+  "model": "google/gemini-3-flash-preview",
+  "results": {
+    "nico": {
+      "prefilter": [
+        {
+          "id": 7355,
+          "name": "Fluglotse/Fluglotsin",
+          "score": 19
+        },
+        {
+          "id": 14557,
+          "name": "Designer/in (Ausbildung) - angewandte Formgebung, Schmuck und Gerät",
+          "score": 18
+        },
+        {
+          "id": 9387,
+          "name": "Fachlehrer/in - musisch-technische Fächer",
+          "score": 18
+        },
+        {
+          "id": 2713,
+          "name": "Präparationstechnische/r Assistent/in",
+          "score": 18
+        },
+        {
+          "id": 2874,
+          "name": "Technische/r Assistent/in - medizinische Gerätetechnik",
+          "score": 18
+        },
+        {
+          "id": 7020,
+          "name": "Assistent/in - Medientechnik",
+          "score": 17
+        },
+        {
+          "id": 5924,
+          "name": "Bekleidungstechnische/r Assistent/in",
+          "score": 17
+        },
+        {
+          "id": 15623,
+          "name": "Elektroniker/in - Betriebstechnik",
+          "score": 17
+        },
+        {
+          "id": 134719,
+          "name": "Elektroniker/in - Maschinen und Antriebstechnik (BBiG)",
+          "score": 17
+        },
+        {
+          "id": 134718,
+          "name": "Elektroniker/in - Maschinen und Antriebstechnik (HwO)",
+          "score": 17
+        },
+        {
+          "id": 142203,
+          "name": "Gold- und Silberschmied/in - Silberschmieden",
+          "score": 17
+        },
+        {
+          "id": 59113,
+          "name": "Journalist/in (Ausbildung)",
+          "score": 17
+        },
+        {
+          "id": 5879,
+          "name": "Lebensmitteltechnische/r Assistent/in",
+          "score": 17
+        },
+        {
+          "id": 6327,
+          "name": "Agrarwirtschaftlich-technische/r Assistent/in",
+          "score": 16
+        },
+        {
+          "id": 34754,
+          "name": "Artist/in",
+          "score": 16
+        },
+        {
+          "id": 7848,
+          "name": "Assistent/in - Informatik (Softwaretechnik)",
+          "score": 16
+        },
+        {
+          "id": 7743,
+          "name": "Assistent/in - Informatik (technische Informatik)",
+          "score": 16
+        },
+        {
+          "id": 7798,
+          "name": "Assistent/in - Informatik (Wirtschaftsinformatik)",
+          "score": 16
+        },
+        {
+          "id": 6315,
+          "name": "Biologisch-technische/r Assistent/in",
+          "score": 16
+        },
+        {
+          "id": 2774,
+          "name": "Elektroanlagenmonteur/in",
+          "score": 16
+        },
+        {
+          "id": 15621,
+          "name": "Elektroniker/in - Gebäude- und Infrastruktursysteme",
+          "score": 16
+        },
+        {
+          "id": 134715,
+          "name": "Elektroniker/in - Gebäudesystemintegration",
+          "score": 16
+        },
+        {
+          "id": 5502,
+          "name": "Elektrotechnische/r Assistent/in",
+          "score": 16
+        },
+        {
+          "id": 15540,
+          "name": "Fahrzeuglackierer/in",
+          "score": 16
+        },
+        {
+          "id": 1946,
+          "name": "Feinpolierer/in",
+          "score": 16
+        },
+        {
+          "id": 9898,
+          "name": "Gemeindehelfer/in/Gemeindediakon/in",
+          "score": 16
+        },
+        {
+          "id": 6515,
+          "name": "Gestaltungstechnische/r Assistent/in",
+          "score": 16
+        },
+        {
+          "id": 34948,
+          "name": "Industriekeramiker/in Dekorationstechnik",
+          "score": 16
+        },
+        {
+          "id": 34938,
+          "name": "Industriekeramiker/in Modelltechnik",
+          "score": 16
+        },
+        {
+          "id": 14517,
+          "name": "Kaufmännische/r Assistent/in/Wirtschaftsassistent/in - Betriebsinformatik",
+          "score": 16
+        },
+        {
+          "id": 77694,
+          "name": "Pferdewirt/in - Pferderennen",
+          "score": 16
+        },
+        {
+          "id": 90014,
+          "name": "Textilgestalter/in im Handwerk - Filzen",
+          "score": 16
+        },
+        {
+          "id": 6045,
+          "name": "Umweltschutztechnische/r Assistent/in",
+          "score": 16
+        },
+        {
+          "id": 13952,
+          "name": "Amtliche/r Fachassistent/in (Fleischkontrolleur/in)",
+          "score": 15
+        },
+        {
+          "id": 7850,
+          "name": "Assistent/in - Informatik (Medieninformatik)",
+          "score": 15
+        },
+        {
+          "id": 137338,
+          "name": "Berufsspezialist/in Technische/r Kaufmann/-frau (doppelt qualifizierende Ausbildung)",
+          "score": 15
+        },
+        {
+          "id": 136199,
+          "name": "Eisenbahner/in - Zugverkehrssteuerung",
+          "score": 15
+        },
+        {
+          "id": 15636,
+          "name": "Elektroniker/in - Energie- und Gebäudetechnik",
+          "score": 15
+        },
+        {
+          "id": 27448,
+          "name": "Fachkraft - Lagerlogistik",
+          "score": 15
+        },
+        {
+          "id": 14376,
+          "name": "Fachkraft - Wasserwirtschaft",
+          "score": 15
+        }
+      ],
+      "final": [
+        {
+          "id": 7020,
+          "name": "Assistent/in - Medientechnik",
+          "score": 17,
+          "reasoning": "Da du dich in deiner Freizeit viel mit Videos beschäftigst, passt dieser Beruf super. Du kannst dein Interesse für Bildschnitt und Videobearbeitung nutzen, arbeitest meist drinnen am Computer und hast ein entspannteres Arbeitstempo als in der Kfz-Werkstatt.",
+          "images": [
+            {
+              "url": "https://rest.arbeitsagentur.de/infosysbub/berufepool-rest/ct/v1/bilder/dkz_7011_01.jpg",
+              "caption": "Schreibtischarbeiten im Büro",
+              "imageGroup": "Arbeitsort"
+            },
+            {
+              "url": "https://rest.arbeitsagentur.de/infosysbub/berufepool-rest/ct/v1/bilder/dkz_7011_02.jpg",
+              "caption": "Vorbereiten der Teamsitzung im Besprechungszimmer",
+              "imageGroup": "Arbeitsort"
+            },
+            {
+              "url": "https://rest.arbeitsagentur.de/infosysbub/berufepool-rest/ct/v1/bilder/dkz_7011_03.jpg",
+              "caption": "Bei der Planung von Medienkonzepten",
+              "imageGroup": "Beruf"
+            }
+          ],
+          "taskSummary": "Assistenten und Assistentinnen für Medientechnik konzipieren Medienprodukte aller Art, z.B. Printprodukte, Videospots, Animationen, Computerspiele oder Internetangebote, und realisieren diese nach Kundenwunsch. Dabei erstellen und bearbeiten sie Medienelemente, verarbeiten Audio-, Video- und Bildmaterial und bereiten es für die Verwendung in unterschiedlichen Medien auf. Auch mit Layout, deutsch: Bildschirmgestaltung Informationstechnik (IT): Grafische Gestaltung von Benutzeroberflächen auf dem Bildschirm, v.a. in Zusammenhang mit Browseranwendungen \" name=\"Screendesign\">Screen-Design und Gestaltung unterschiedlichster Medien (Druckwerke, elektronische Medien usw.), z.B. durch Schrift, Bilder, Linien oder Flächen \" name=\"Typografie\">Typografie kennen sie sich aus. Sie entwerfen Gestaltungskonzepte, erstellen Webseiten und programmieren Webanwendungen unter Einbindung von Datenbanken. Ebenso bedienen und warten sie medientechnische Anlagen wie computerunterstützte Schnittsysteme oder Druckanlagen, organisieren Produktionsabläufe und wirken in der technischen Dokumentation mit. Auch Aufgaben im Eventaufbau oder im Marketing können sie übernehmen."
+        },
+        {
+          "id": 2874,
+          "name": "Technische/r Assistent/in - medizinische Gerätetechnik",
+          "score": 18,
+          "reasoning": "Hier ist dein Talent für Werkzeug und Technik gefragt, aber ohne die schwere körperliche Belastung vom Kfz-Bereich. Du kümmerst dich um die Wartung und Reparatur von medizinischen Geräten, was dir die gewünschte Sicherheit und Stabilität bietet.",
+          "images": [
+            {
+              "url": "https://rest.arbeitsagentur.de/infosysbub/berufepool-rest/ct/v1/bilder/dkz_2871_11.jpg",
+              "caption": "Beim Kunden im Krankenhaus ein medizinisches Gerät installieren",
+              "imageGroup": "Arbeitsort"
+            },
+            {
+              "url": "https://rest.arbeitsagentur.de/infosysbub/berufepool-rest/ct/v1/bilder/dkz_2871_12.jpg",
+              "caption": "In der Werkstatt eine defekte Infusionspumpe reparieren",
+              "imageGroup": "Arbeitsort"
+            },
+            {
+              "url": "https://rest.arbeitsagentur.de/infosysbub/berufepool-rest/ct/v1/bilder/dkz_2871_13.jpg",
+              "caption": "Prüfgerät zur Kontrolle der elektrischen Sicherheit von Geräten",
+              "imageGroup": "Arbeitsgegenstand"
+            }
+          ],
+          "taskSummary": "Technische Assistenten und Assistentinnen für medizinische Gerätetechnik beraten medizinisches Personal im Hinblick auf die medizintechnische Ausstattung, informieren über die technischen und betriebswirtschaftlichen Daten sowie die Einsatzmöglichkeiten medizinischer Geräte und weisen die Anwender/innen in den sachgemäßen Betrieb ein. Sie warten die medizintechnischen Geräte, halten sie instand, führen sicherheitstechnische Kontrollen durch, überprüfen defekte Geräte und reparieren diese. Auch an der Geräteherstellung und -entwicklung, im technischen Kundendienst und im Vertrieb wirken sie mit."
+        },
+        {
+          "id": 134719,
+          "name": "Elektroniker/in - Maschinen und Antriebstechnik (BBiG)",
+          "score": 17,
+          "reasoning": "Dieser Beruf nutzt dein handwerkliches Geschick und dein technisches Verständnis für Maschinen. Da es in der Industrie oft geregeltere Abläufe und modernere Arbeitsplätze gibt, ist der Ton meist angenehmer als in einer kleinen Werkstatt, was dir wichtig ist.",
+          "images": [
+            {
+              "url": "https://rest.arbeitsagentur.de/infosysbub/berufepool-rest/ct/v1/bilder/dkz_134717_01.jpg",
+              "caption": "Die Wicklung in einen Stator einlegen",
+              "imageGroup": "Beruf"
+            },
+            {
+              "url": "https://rest.arbeitsagentur.de/infosysbub/berufepool-rest/ct/v1/bilder/dkz_134717_05.jpg",
+              "caption": "Ein zyklengesteuertes Programm schreiben",
+              "imageGroup": "Tätigkeit"
+            },
+            {
+              "url": "https://rest.arbeitsagentur.de/infosysbub/berufepool-rest/ct/v1/bilder/dkz_134717_09.jpg",
+              "caption": "In der Produktion eine Fräsmaschine bedienen",
+              "imageGroup": "Arbeitsort"
+            }
+          ],
+          "taskSummary": "Elektroniker/innen für Maschinen und Antriebstechnik nach dem Berufsbildungsgesetz übernehmen, vorwiegend in Betrieben der Elektroindustrie, Aufgaben bei der Herstellung elektrischer Maschinen. Sie fertigen an Fertigung: Span abhebende (sog. spanende) Bearbeitung; Werkstück führt kreisförmige Schnittbewegungen aus, dabei ist das Drehwerkzeug fest am Werkzeugträger eingespannt \" name=\"Drehen\">Dreh- oder Fräsmaschinen die mechanischen Bauteile wie Wellen, Lager und Gehäuse an und montieren sie mit elektrischen Baugruppen, Lehre von Gebrauch und Strömungsverhalten von Flüssigkeiten, um Kraft und Energie zu übertragen Maschinenbau, Verfahrenstechnik: Befassen mit Systemen (sog. hydraulische Systeme), die durch Druckflüssigkeit große Kräfte übertragen, z.B. zum Antrieb und zur Steuerung von Arbeitsmaschinen \" name=\"Hydraulik\">hydraulischen oder Lehre von der technischen Anwendung von Druckluft; sog. pneumatische Systeme nutzen Druckluft, um Kraft zu übertragen, z.B. in Antriebssystemen oder Produktionsanlagen \" name=\"Pneumatik\">pneumatischen Komponenten und elektronischen Steuereinheiten zu Motoren oder Antriebssystemen. Die fertigen Systeme installieren sie ggf. vor Ort und vernetzen sie. Oder sie sind für die Wartung und Instandsetzung von Antrieben und Systemen der Energieerzeugung im eigenen oder in Kundenbetrieben zuständig. Dann nehmen sie z.B. regelmäßige Inspektionen vor, gehen Störungsursachen mit Diagnosegeräten auf den Grund, demontieren Bauteile, setzen sie instand und nehmen die Systeme wieder in Betrieb."
+        },
+        {
+          "id": 6515,
+          "name": "Gestaltungstechnische/r Assistent/in",
+          "score": 16,
+          "reasoning": "Wenn du gerne kreativ bist und dich für Videos interessierst, kannst du hier professionell mit Bildbearbeitung und Design arbeiten. Es ist eine saubere Arbeit drinnen, bei der du oft konzentriert für dich alleine an Projekten tüftelst.",
+          "images": [
+            {
+              "url": "https://rest.arbeitsagentur.de/infosysbub/berufepool-rest/ct/v1/bilder/dkz_6512_11.jpg",
+              "caption": "Farbfächer für Kunstdruckpapier",
+              "imageGroup": "Arbeitsgegenstand"
+            },
+            {
+              "url": "https://rest.arbeitsagentur.de/infosysbub/berufepool-rest/ct/v1/bilder/dkz_6512_12.jpg",
+              "caption": "Im Besprechungsraum mit Kunden die Gestaltung einer Broschüre abstimmen",
+              "imageGroup": "Arbeitsort"
+            },
+            {
+              "url": "https://rest.arbeitsagentur.de/infosysbub/berufepool-rest/ct/v1/bilder/dkz_6512_13.jpg",
+              "caption": "Im Büro Preisauskünfte von Domainanbietern einholen",
+              "imageGroup": "Arbeitsort"
+            }
+          ],
+          "taskSummary": "Gestaltungstechnische Assistenten und Assistentinnen wirken an der Konzeption von Druckerzeugnissen, Online-Medien oder Bildschirmseiten mit. In den Bereichen Grafik/Design und Medien/Kommunikation setzen sie Kundenangaben bzw. -wünsche in multimediale Produkte wie Internet- oder Social-Media-Auftritte um. Hierfür übernehmen sie Text-, Grafik- und Videodaten, bearbeiten und kombinieren sie unter grafischen Aspekten. Auch erstellen sie Druckvorlagen für Prospekte, Broschüren oder Plakate. Im Bereich deutsch: Bildschirmgestaltung Informationstechnik (IT): Grafische Gestaltung von Benutzeroberflächen auf dem Bildschirm, v.a. in Zusammenhang mit Browseranwendungen \" name=\"Screendesign\">Screen-Design arbeiten sie die Benutzeroberflächen von Online- und Offline-Medien mit aus. Dabei verwenden sie Stilelemente wie Farbe, Formen und Schriften sowie Fotos, Animationen, Musik oder Videos. Der Bereich Webdesign umfasst vor allem die Entwicklung und Realisierung von Webseiten."
+        },
+        {
+          "id": 5502,
+          "name": "Elektrotechnische/r Assistent/in",
+          "score": 16,
+          "reasoning": "Da du gerne 'schraubst' und ein Händchen für Technik hast, passt die Elektrotechnik gut. Du arbeitest hier viel mit feiner Elektronik und Schaltplänen, was körperlich deutlich leichter ist als der Kfz-Alltag, den du erlebt hast.",
+          "images": [
+            {
+              "url": "https://rest.arbeitsagentur.de/infosysbub/berufepool-rest/ct/v1/bilder/dkz_5496_01.jpg",
+              "caption": "Messergebnisse im Büro protokollieren",
+              "imageGroup": "Arbeitsort"
+            },
+            {
+              "url": "https://rest.arbeitsagentur.de/infosysbub/berufepool-rest/ct/v1/bilder/dkz_5496_02.jpg",
+              "caption": "Warten der elektrotechnischen Anlage im Hauptanschlussraum",
+              "imageGroup": "Arbeitsort"
+            },
+            {
+              "url": "https://rest.arbeitsagentur.de/infosysbub/berufepool-rest/ct/v1/bilder/dkz_5496_03.jpg",
+              "caption": "Mit der Kollegin Testberichte im Besprechungsraum sichten",
+              "imageGroup": "Arbeitsort"
+            }
+          ],
+          "taskSummary": "Elektrotechnische Assistenten und Assistentinnen erarbeiten Lösungen für elektrotechnische und elektronische Problemstellungen. Sie wirken an der Entwicklung von Studien und Prototypen mit - etwa für Informationstechnik (IT): Zentraleinheit eines Mikrocomputers mit Rechen- und Steuerwerk; Ein- und Ausgabeeinrichtungen sowie Speicherwerk können den Mikroprozessor zum Mikrocomputer ergänzen \" name=\"Mikroprozessor\">mikroprozessorgesteuerte Geräte, arbeiten Details aus, fertigen Montageskizzen an, entwerfen Schaltbilder und berechnen Leistungsmerkmale der Bauteile. Um die Aggregate zu testen, bauen sie Versuchsanordnungen auf und führen Versuche und Messungen durch. Auch an der Inbetriebnahme der fertigen Geräte, an Kundendienst und Kundenberatung können sie beteiligt sein. Beispielsweise entstören sie Geräte, passen Systeme an oder arbeiten an Angeboten für technische Anlagen mit. Sie programmieren, bedienen und warten elektrotechnische und elektronische Anlagen und überwachen deren technische Leistungsfähigkeit, indem sie z.B. Ereignisprotokolle führen und diese auswerten."
+        },
+        {
+          "id": 14557,
+          "name": "Designer/in (Ausbildung) - angewandte Formgebung, Schmuck und Gerät",
+          "score": 18,
+          "reasoning": "In diesem Beruf ist dein starkes handwerkliches Geschick gefragt, um Schmuck und Gerät zu gestalten. Es ist eine sehr feine, ruhige Arbeit, bei der du meist alleine an deinem Werkstück sitzt und dich nicht körperlich verausgaben musst.",
+          "images": [
+            {
+              "url": "https://rest.arbeitsagentur.de/infosysbub/berufepool-rest/ct/v1/bilder/dkz_14556_01.jpg",
+              "caption": "In der Werkstatt ein Einzelstück anfertigen",
+              "imageGroup": "Arbeitsort"
+            },
+            {
+              "url": "https://rest.arbeitsagentur.de/infosysbub/berufepool-rest/ct/v1/bilder/dkz_14556_02.jpg",
+              "caption": "Im Büro die Skizze für ein Schmuckstück erstellen",
+              "imageGroup": "Arbeitsort"
+            },
+            {
+              "url": "https://rest.arbeitsagentur.de/infosysbub/berufepool-rest/ct/v1/bilder/dkz_14556_03.jpg",
+              "caption": "Im Verkaufsraum eine Kundenbestellung dokumentieren",
+              "imageGroup": "Arbeitsort"
+            }
+          ],
+          "taskSummary": "Designer/innen für angewandte Formgebung, Schmuck/Gerät entwerfen z.B. Ringe, Halsketten, Broschen, Ohrschmuck, Armbänder, Kannen, Zinnteller und künstlerisch-handwerkliche Objekte aus Materialien wie Silber, Gold, Platin und Edelsteinen. Sie gestalten Skizzen und Zeichnungen nach eigenen Entwürfen oder Kundenwünschen. Neben Einzelstücken entwerfen und fertigen sie auch Musterkollektionen für die Serienproduktion. Dabei schmieden sie Gold und Silber, Edelmetallbearbeitung: Herausarbeiten von Figuren und Verzierungen aus Gold- und Silberoberflächen u.a. mit Stichel, Meißel und Feile \" name=\"Ziselieren\">ziselieren Edelmetalle, schleifen und fassen Edelsteine und auch: Emaille Ein Überzug, der auf Metall aufgeschmolzen wird, korrosions- sowie temperaturbeständig und oft farbig ist und als Schutz- oder Zierfläche dient \" name=\"Email\">emaillieren Schmuck- und Gebrauchsgegenstände. Beispielsweise biegen sie zierliche Verschlüsse mit kleinen Zangen und löten winzige Ösen. Mit kritischem Blick überprüfen sie selbst kleinste Details und bessern jede Unebenheit auf der Oberfläche aus. Designer/innen für angewandte Formgebung, Schmuck/Gerät arbeiten ggf. auch Objekte um, führen Reparaturen aus und verzieren Gegenstände durch Gravuren."
+        },
+        {
+          "id": 15621,
+          "name": "Elektroniker/in - Gebäude- und Infrastruktursysteme",
+          "score": 16,
+          "reasoning": "Hier geht es um die Technik in großen Gebäuden. Da du Wert auf Sicherheit und ein gutes Gehalt legst, bietet dir diese industrielle Ausbildung eine stabile Zukunft, während du trotzdem praktisch mit Werkzeug arbeiten kannst.",
+          "images": [
+            {
+              "url": "https://rest.arbeitsagentur.de/infosysbub/berufepool-rest/ct/v1/bilder/dkz_15622_09.jpg",
+              "caption": "Die Steuerung einer thermischen Solaranlage in Betrieb nehmen",
+              "imageGroup": "Beruf"
+            },
+            {
+              "url": "https://rest.arbeitsagentur.de/infosysbub/berufepool-rest/ct/v1/bilder/dkz_15622_12.jpg",
+              "caption": "Neuinstallationen in einem Zählerschrank protokollieren",
+              "imageGroup": "Tätigkeit"
+            },
+            {
+              "url": "https://rest.arbeitsagentur.de/infosysbub/berufepool-rest/ct/v1/bilder/dkz_15622_13.jpg",
+              "caption": "Zur Fehlersuche die elektrische Spannung an Bauteilen messen",
+              "imageGroup": "Tätigkeit"
+            }
+          ],
+          "taskSummary": "Elektroniker/innen für Gebäude- und Infrastruktursysteme planen z.B. Lüftungs-, Heizungs-, Elektrizitäts- und Sicherungssysteme in Wohn- und Industrieanlagen, Schulen, Krankenhäusern und anderen Gebäuden, installieren diese und stellen deren reibungsloses Funktionieren sicher. Sie integrieren und konfigurieren gebäudetechnische Anlagen und Leiteinrichtungen, übergeben die Systeme und weisen Nutzer in die Bedienung ein. Außerdem überwachen sie die Anlagen mit Hilfe von Leitsystemen, überprüfen die Einrichtungen und die Einhaltung von Sicherheitsvorschriften, erstellen Fehlerdiagnosen und setzen die technischen Einrichtungen selbst instand oder veranlassen deren Reparatur. Dabei beraten sie Auftraggeber, kalkulieren Kosten, vergeben Aufträge und nehmen Leistungen Dritter ab."
+        }
+      ]
+    },
+    "elina": {
+      "prefilter": [
+        {
+          "id": 8564,
+          "name": "Assistent/in - Innenarchitektur",
+          "score": 28
+        },
+        {
+          "id": 137579,
+          "name": "Gestalter/in - immersive Medien",
+          "score": 28
+        },
+        {
+          "id": 13968,
+          "name": "Designer/in (Ausbildung) - Kommunikationsdesign",
+          "score": 27
+        },
+        {
+          "id": 7855,
+          "name": "Fachberater/in - Integrierte Systeme (doppelt qualifizierende Ausbildung)",
+          "score": 27
+        },
+        {
+          "id": 13778,
+          "name": "Heilerziehungspflegeassistent/in",
+          "score": 27
+        },
+        {
+          "id": 9127,
+          "name": "Heilerziehungspfleger/in",
+          "score": 27
+        },
+        {
+          "id": 2927,
+          "name": "IT-System-Elektroniker/in",
+          "score": 27
+        },
+        {
+          "id": 14217,
+          "name": "Designer/in (Ausbildung) - Grafik",
+          "score": 26
+        },
+        {
+          "id": 76789,
+          "name": "Fotograf/in",
+          "score": 26
+        },
+        {
+          "id": 129408,
+          "name": "Hörakustiker/in",
+          "score": 26
+        },
+        {
+          "id": 27398,
+          "name": "Maßschneider/in",
+          "score": 26
+        },
+        {
+          "id": 137684,
+          "name": "Mediengestalter/in Digital und Print - Designkonzeption",
+          "score": 26
+        },
+        {
+          "id": 14647,
+          "name": "Redakteur/in",
+          "score": 26
+        },
+        {
+          "id": 7850,
+          "name": "Assistent/in - Informatik (Medieninformatik)",
+          "score": 25
+        },
+        {
+          "id": 7020,
+          "name": "Assistent/in - Medientechnik",
+          "score": 25
+        },
+        {
+          "id": 9599,
+          "name": "Atem-, Sprech- und Stimmlehrer/in",
+          "score": 25
+        },
+        {
+          "id": 2634,
+          "name": "Augenoptiker/in",
+          "score": 25
+        },
+        {
+          "id": 14326,
+          "name": "Designer/in (Ausbildung) - Foto",
+          "score": 25
+        },
+        {
+          "id": 8459,
+          "name": "Designer/in (Ausbildung) - Medien",
+          "score": 25
+        },
+        {
+          "id": 7847,
+          "name": "Fachinformatiker/in - Systemintegration",
+          "score": 25
+        },
+        {
+          "id": 27542,
+          "name": "Gestalter/in - visuelles Marketing",
+          "score": 25
+        },
+        {
+          "id": 8533,
+          "name": "Mediengestalter/in - Bild und Ton",
+          "score": 25
+        },
+        {
+          "id": 137682,
+          "name": "Mediengestalter/in Digital und Print - Digitalmedien",
+          "score": 25
+        },
+        {
+          "id": 137683,
+          "name": "Mediengestalter/in Digital und Print - Printmedien",
+          "score": 25
+        },
+        {
+          "id": 3497,
+          "name": "Orthopädieschuhmacher/in",
+          "score": 25
+        },
+        {
+          "id": 8477,
+          "name": "Produktgestalter/in - Textil",
+          "score": 25
+        },
+        {
+          "id": 8491,
+          "name": "Schilder- und Lichtreklamehersteller/in",
+          "score": 25
+        },
+        {
+          "id": 58343,
+          "name": "Sportfachmann/-frau",
+          "score": 25
+        },
+        {
+          "id": 34754,
+          "name": "Artist/in",
+          "score": 24
+        },
+        {
+          "id": 15424,
+          "name": "Assistent/in - Produktdesign",
+          "score": 24
+        },
+        {
+          "id": 30226,
+          "name": "Dramaturg/in (Ausbildung)",
+          "score": 24
+        },
+        {
+          "id": 35019,
+          "name": "Fachberater/in - Softwaretechniken (doppelt qualifizierende Ausbildung)",
+          "score": 24
+        },
+        {
+          "id": 129457,
+          "name": "Fachkraft - Veranstaltungstechnik",
+          "score": 24
+        },
+        {
+          "id": 9387,
+          "name": "Fachlehrer/in - musisch-technische Fächer",
+          "score": 24
+        },
+        {
+          "id": 9524,
+          "name": "Gymnastiklehrer/in",
+          "score": 24
+        },
+        {
+          "id": 7965,
+          "name": "Industriekaufmann/-frau",
+          "score": 24
+        },
+        {
+          "id": 134721,
+          "name": "Informationselektroniker/in",
+          "score": 24
+        },
+        {
+          "id": 133596,
+          "name": "Kaufmann/-frau - Groß- und Außenhandelsmanagement (Außenhandel)",
+          "score": 24
+        },
+        {
+          "id": 133597,
+          "name": "Kaufmann/-frau - Groß- und Außenhandelsmanagement (Großhandel)",
+          "score": 24
+        },
+        {
+          "id": 33235,
+          "name": "Kaufmann/-frau - Tourismus und Freizeit",
+          "score": 24
+        }
+      ],
+      "final": [
+        {
+          "id": 9127,
+          "name": "Heilerziehungspfleger/in",
+          "score": 27,
+          "reasoning": "In diesem Beruf kannst du dein Talent für 'Einfache Sprache' direkt nutzen, um Menschen mit Behinderungen den Alltag zu erleichtern. Da du bereits Verantwortung für deine Geschwister übernimmst und gern anderen hilfst, passt die soziale Arbeit perfekt zu dir.",
+          "images": [
+            {
+              "url": "https://rest.arbeitsagentur.de/infosysbub/berufepool-rest/ct/v1/bilder/dkz_9118_08.jpg",
+              "caption": "Das Sommerfest einer Wohngemeinschaft planen",
+              "imageGroup": "Tätigkeit"
+            },
+            {
+              "url": "https://rest.arbeitsagentur.de/infosysbub/berufepool-rest/ct/v1/bilder/dkz_9118_13.jpg",
+              "caption": "Das Waschprogramm an der Maschine einstellen",
+              "imageGroup": "Tätigkeit"
+            },
+            {
+              "url": "https://rest.arbeitsagentur.de/infosysbub/berufepool-rest/ct/v1/bilder/dkz_9118_15.jpg",
+              "caption": "Beim Anziehen der Straßenschuhe unterstützen",
+              "imageGroup": "Tätigkeit"
+            }
+          ],
+          "taskSummary": "Heilerziehungspfleger/innen begleiten und unterstützen Menschen mit geistigen, körperlichen oder seelischen Behinderungen aller Altersstufen, um deren Eigenständigkeit zu stärken und sie zu einer möglichst selbstständigen Lebensführung im Alltag zu befähigen. Dabei berücksichtigen sie Art und Grad der jeweiligen Behinderung. Sie unterstützen die zu Betreuenden bei der Verrichtung alltäglicher Tätigkeiten wie Einkauf oder Nahrungszubereitung und motivieren sie zu Freizeitbeschäftigungen wie Malen, Musizieren oder Schwimmen. Ebenso fördern sie das soziale Verhalten sowie die persönliche Entwicklung der ihnen anvertrauten Personen und stehen diesen bei ihrer schulischen oder beruflichen Eingliederung zur Seite. Darüber hinaus helfen Heilerziehungspfleger/innen bettlägerigen oder kranken Menschen bei der Körperpflege, bei der Nahrungsaufnahme sowie beim An- und Auskleiden (Grundpflege). Sie erledigen zudem organisatorische und verwaltungstechnische Arbeiten. Beispielsweise planen und gestalten sie das Freizeitprogramm oder wirken bei der Erstellung von Förderplänen mit."
+        },
+        {
+          "id": 13968,
+          "name": "Designer/in (Ausbildung) - Kommunikationsdesign",
+          "score": 27,
+          "reasoning": "Deine Stärken in Kunst und Zeichnen sowie deine Kreativität sind hier genau richtig. Du kannst neue Ideen entwickeln und komplexe Inhalte visuell so aufbereiten, dass sie jeder versteht – ähnlich wie du es heute schon mit schwierigen Texten machst.",
+          "images": [
+            {
+              "url": "https://rest.arbeitsagentur.de/infosysbub/berufepool-rest/ct/v1/bilder/dkz_14675_08.jpg",
+              "caption": "Im Besprechungsraum dem Auftraggeber ein Werbekonzept präsentieren",
+              "imageGroup": "Arbeitsort"
+            },
+            {
+              "url": "https://rest.arbeitsagentur.de/infosysbub/berufepool-rest/ct/v1/bilder/dkz_14675_12.jpg",
+              "caption": "Im Kollegenkreis das passende Bild zu einem Thema auswählen",
+              "imageGroup": "Tätigkeit"
+            },
+            {
+              "url": "https://rest.arbeitsagentur.de/infosysbub/berufepool-rest/ct/v1/bilder/dkz_14675_14.jpg",
+              "caption": "Fachliteratur für Design",
+              "imageGroup": "Arbeitsgegenstand"
+            }
+          ],
+          "taskSummary": "Kommunikationsdesigner/innen planen und gestalten die Werbung für Industrieprodukte und Dienstleistungen. Sie entwerfen z.B. Prospekte, Anzeigen, Plakate oder Internetauftritte. Sowohl per Hand als auch computerunterstützt fertigen sie auf der Grundlage des Kundenwunsches mehrere Entwürfe an, wählen Gestaltungsmittel und Materialien aus und kalkulieren die Kosten für ihr Angebot. Ihre Entwürfe besprechen sie mit den Kunden und setzen sie entsprechend abgeändert in reproduktionsfähige Formen um. Anschließend kontrollieren sie die Produktion, die ggf. auch extern stattfindet. Um ihre Kunden kompetent beraten zu können, beobachten sie laufend die aktuelle Trendentwicklung."
+        },
+        {
+          "id": 14647,
+          "name": "Redakteur/in",
+          "score": 26,
+          "reasoning": "Da du seit Jahren Behördenbriefe übersetzt, bringst du die wichtigste Fähigkeit für die Redaktion schon mit: schwierige Infos verständlich machen. Dein Interesse am Lesen und deine Kommunikationsstärke helfen dir dabei, jeden Tag neue Themen zu planen.",
+          "images": [
+            {
+              "url": "https://rest.arbeitsagentur.de/infosysbub/berufepool-rest/ct/v1/bilder/dkz_8288_11.jpg",
+              "caption": "Im Besprechungsraum eine neue Artikelserie vorstellen",
+              "imageGroup": "Arbeitsort"
+            },
+            {
+              "url": "https://rest.arbeitsagentur.de/infosysbub/berufepool-rest/ct/v1/bilder/dkz_8288_12.jpg",
+              "caption": "Einen Beitrag für die Lokalnachrichten verfassen",
+              "imageGroup": "Tätigkeit"
+            },
+            {
+              "url": "https://rest.arbeitsagentur.de/infosysbub/berufepool-rest/ct/v1/bilder/dkz_8288_14.jpg",
+              "caption": "Eine Video-Datei für einen Podcast bereitstellen",
+              "imageGroup": "Tätigkeit"
+            }
+          ],
+          "taskSummary": "Redakteure und Redakteurinnen sammeln und prüfen zielgruppenspezifische Informationen und bringen diese in mediengerechte Form - in Text, Bild oder Ton. Im Bereich Onlineredaktion bearbeiten sie z.B. Texte mithilfe von Software zur Verwaltung von Inhalten, z.B. Websites; auch ohne Programmierkenntnisse nutzbar \" name=\"Content-Management-System (CMS)\">Content-Management-Systemen (CMS) oder erstellen Dateien für Podcasts. Redakteure und Redakteurinnen recherchieren Aktuelles und Hintergründe zu Themen und Ereignissen, indem sie beispielsweise Agenturmeldungen sichten, Pressekonferenzen besuchen oder Recherchen auf einschlägigen Internetportalen und in Social-Media-Kanälen durchführen. Dabei spezialisieren sie sich meist auf bestimmte Ressorts wie Politik, Wirtschaft, Lokales, Sport oder Kultur. Sie bearbeiten auch vorhandene Meldungen und Beiträge, machen diese z.B. für die jeweilige Zielgruppe verständlich und passen sie in ein Layout bzw. Sendekonzept ein. Im Verlag können ihre Arbeitsbereiche sowohl Printmedien wie Bücher, Zeitungen und Zeitschriften als auch digitale Medien sein. Hier prüfen Redakteure und Redakteurinnen auch Texte anderer Autoren in Bezug auf inhaltliche Richtigkeit, formalen Aufbau und stilistische Wortwahl. Sie planen zukünftige Ausgaben und Themen oder schreiben Klappentexte für Bücher."
+        },
+        {
+          "id": 9599,
+          "name": "Atem-, Sprech- und Stimmlehrer/in",
+          "score": 25,
+          "reasoning": "Dieser Beruf verbindet deine Liebe zur Sprache (Lieblingsfach Deutsch) mit dem Wunsch, eng mit Menschen zu arbeiten. Du hilfst anderen dabei, sich besser auszudrücken, und übernimmst dabei viel Verantwortung in einem ruhigen Arbeitsumfeld ohne Lärm.",
+          "images": [
+            {
+              "url": "https://rest.arbeitsagentur.de/infosysbub/berufepool-rest/ct/v1/bilder/dkz_9580_11.jpg",
+              "caption": "Die Therapie von Sprechstörungen kindgerecht gestalten",
+              "imageGroup": "Tätigkeit"
+            },
+            {
+              "url": "https://rest.arbeitsagentur.de/infosysbub/berufepool-rest/ct/v1/bilder/dkz_9580_12.jpg",
+              "caption": "Im Gruppenraum mit einem Chor ein Stimmtraining durchführen",
+              "imageGroup": "Arbeitsort"
+            },
+            {
+              "url": "https://rest.arbeitsagentur.de/infosysbub/berufepool-rest/ct/v1/bilder/dkz_9580_13.jpg",
+              "caption": "In einer Kindergruppe Strohhalme für Atemübungen nutzen",
+              "imageGroup": "Tätigkeit"
+            }
+          ],
+          "taskSummary": "Atem-, Sprech- und Stimmlehrer/innen sind im medizinisch-therapeutischen, präventiven oder Lehre und Wissenschaft von der Erziehung \" name=\"Pädagogik\">pädagogischen Bereich tätig. Sie behandeln Patienten mit Störungen der Atemwege, des Stimmorgans, der Sprechwerkzeuge oder der Sprachentwicklung. Sie erheben Befunde, beraten Patienten und deren Angehörige über Behandlungsmöglichkeiten und unterstützende Übungen, planen therapeutische Maßnahmen, setzen diese um und werten sie aus. Je nach Art der Störung führen sie, in der Regel auf Basis ärztlicher Verordnungen, Stimm-, Sprech-, Sprach- und Schluckbehandlungen durch. Präventiv wirken sie in der betrieblichen und individuellen Gesundheitsförderung, indem sie z.B. Menschen mit berufsbedingt stark beanspruchter Stimme schulen, Fördermaßnahmen bei Kindern, Menschen mit Behinderungen und in der auch: Altersheilkunde Medizinisches Fachgebiet, das sich mit Krankheiten älterer Menschen beschäftigt \" name=\"Geriatrie\">Geriatrie durchführen oder Schwangere in Atemtechniken unterweisen. Darüber hinaus sind sie in der Erwachsenenbildung tätig und lehren ihre Kursteilnehmer, Atmung und Stimme zu optimieren, bewusst einzusetzen und die richtigen Atem- und Stimmtechniken zu entwickeln."
+        },
+        {
+          "id": 137684,
+          "name": "Mediengestalter/in Digital und Print - Designkonzeption",
+          "score": 26,
+          "reasoning": "Hier kannst du basteln, zeichnen und planen. Als Mediengestalter entwickelst du Designkonzepte und nutzt deine Genauigkeit, um Informationen für andere ansprechend und klar zu gestalten – genau das, was dir Spaß macht.",
+          "images": [],
+          "taskSummary": "Mediengestalter/innen Digital und Print der Fachrichtung Designkonzeption gestalten das Erscheinungsbild von Print- oder Digitalmedienprodukten wie Anzeigen, Katalogen, Plakaten, Videos oder Werbebannern. Zunächst analysieren sie die Wünsche der Kunden an das Produkt, ihre Kommunikationsziele sowie die jeweilige Zielgruppe und informieren darüber, wie die jeweilige Aufgabenstellung gestalterisch und technisch umgesetzt werden kann. Sie entwickeln Gestaltungsideen und -varianten für die jeweiligen Medien, visualisieren sie und präsentieren sie ihren Kunden. Entsprechend dem Kundenfeedback aus der Präsentation passen sie Designkonzepte an, optimieren sie und stimmen sie mit den Kunden ab. Dann bereiten sie die Konzeptionen bzw. Prototypen für die medienspezifische Weiterverarbeitung vor."
+        },
+        {
+          "id": 129408,
+          "name": "Hörakustiker/in",
+          "score": 26,
+          "reasoning": "Wenn du einen sicheren Job mit viel Kundenkontakt suchst, ist Hörakustik ideal. Du arbeitest konzentriert und genau an technischem Gerät, hilfst aber gleichzeitig Menschen direkt dabei, wieder besser am Leben teilzunehmen.",
+          "images": [
+            {
+              "url": "https://rest.arbeitsagentur.de/infosysbub/berufepool-rest/ct/v1/bilder/dkz_129407_01.jpg",
+              "caption": "Eine Kundin über unterschiedliche Hörgerät-Modelle beraten",
+              "imageGroup": "Tätigkeit"
+            },
+            {
+              "url": "https://rest.arbeitsagentur.de/infosysbub/berufepool-rest/ct/v1/bilder/dkz_129407_02.jpg",
+              "caption": "Den Gehörgang einer Patientin mittels Otoskopie beurteilen",
+              "imageGroup": "Tätigkeit"
+            },
+            {
+              "url": "https://rest.arbeitsagentur.de/infosysbub/berufepool-rest/ct/v1/bilder/dkz_129407_03.jpg",
+              "caption": "Gehörgang und Ohrmuschel zur Ohrabformung mit Silikon füllen",
+              "imageGroup": "Beruf"
+            }
+          ],
+          "taskSummary": "Hörakustiker/innen beraten Kunden hinsichtlich unterschiedlicher Arten von Hörsystemen bzw. Gehörschutz. Dabei gehen sie auf die individuellen Bedürfnisse ihrer Kunden ein. Sei es, dass eine Altershörschwäche vorliegt oder erhöhte Geräuschbelastung im Beruf gegeben ist. Um ein Hörgerät optimal anpassen zu können, führen sie Tests zur Hörleistung durch, z.B. untersuchen sie, wie gut Kunden hohe und tiefe Töne oder Sprache wahrnehmen können. Auch stellen sie Aus dem Rohling gefertigtes Maßohrstück eines Hörgerätes \" name=\"Otoplastik\">Otoplastiken für Hörgeräte oder als Gehörschutz her. Dafür nehmen sie Abdrücke vom Gehörgang, passen die Ohrstücke individuell am Kunden an, bauen die Maßohrstücke in die Hörsysteme ein und nehmen die akustischen Feineinstellungen vor. Sie weisen die Kunden in die Bedienung von Hörsystemen ein und führen Service- bzw. Instandhaltungsmaßnahmen durch. Zudem übernehmen sie kaufmännische und verwaltende Arbeiten, erledigen z.B. die Korrespondenz, kalkulieren Angebote und erstellen Abrechnungen für Krankenkassen oder Kunden."
+        },
+        {
+          "id": 8564,
+          "name": "Assistent/in - Innenarchitektur",
+          "score": 28,
+          "reasoning": "Da du gerne bastelst und zeichnest, könnte die Innenarchitektur-Assistenz gut passen. Du planst Räume am Computer oder Papier und kannst deine kreativen Ideen in die Tat umsetzen, ohne dass es auf der Baustelle laut oder schmutzig für dich wird.",
+          "images": [
+            {
+              "url": "https://rest.arbeitsagentur.de/infosysbub/berufepool-rest/ct/v1/bilder/dkz_8562_11.jpg",
+              "caption": "Modell zur Veranschaulichung eines geplanten Umbaus",
+              "imageGroup": "Arbeitsgegenstand"
+            },
+            {
+              "url": "https://rest.arbeitsagentur.de/infosysbub/berufepool-rest/ct/v1/bilder/dkz_8562_12.jpg",
+              "caption": "Vorschriften und Normen beim Planen eines Büroumbaus nachschlagen",
+              "imageGroup": "Tätigkeit"
+            },
+            {
+              "url": "https://rest.arbeitsagentur.de/infosysbub/berufepool-rest/ct/v1/bilder/dkz_8562_13.jpg",
+              "caption": "Ein Raum- und Lichtkonzept realitätsnah visualisieren",
+              "imageGroup": "Tätigkeit"
+            }
+          ],
+          "taskSummary": "Assistenten und Assistentinnen für Innenarchitektur übernehmen die technische Realisierung der Gestaltungskonzepte von Innenarchitekten und -architektinnen bzw. Designern und Designerinnen. Mit speziellen Technologie für Planung, Entwurf, Konstruktion o.ä.; Erstellung technischer Zeichnungen und Modelle verschiedener Erzeugnisse in 2D oder 3D, z. B. im Bauwesen, im Maschinenbau, in der Elektrotechnik \" name=\"Computer Aided Design (CAD)\">CAD-Programmen setzen sie Entwürfe in detaillierte Pläne um. Sie arbeiten ihren Vorgesetzten bei Ausschreibungen und der Vergabe von Bauleistungen zu, koordinieren die Ausführung der Arbeiten und dokumentieren die Gesamtergebnisse. Ebenso beraten Assistenten und Assistentinnen für Innenarchitektur Kunden über Einrichtungsmöglichkeiten. Sie achten darauf, dass die Bedürfnisse der Menschen, die in den Räumen wohnen oder arbeiten, bereits in die Planung mit einfließen. Dabei gilt es, z.B. Materialien und Farben, Beleuchtung und Bodenbeläge sorgfältig auszuwählen oder Bildschirmarbeitsplätze sinnvoll anzuordnen."
+        }
+      ]
+    },
+    "karim": {
+      "prefilter": [
+        {
+          "id": 27427,
+          "name": "Aufbereitungsmechaniker/in - Braunkohle",
+          "score": 22
+        },
+        {
+          "id": 76769,
+          "name": "Werkfeuerwehrmann/-frau",
+          "score": 22
+        },
+        {
+          "id": 124409,
+          "name": "Zweiradmechatroniker/in - Fahrradtechnik",
+          "score": 22
+        },
+        {
+          "id": 124029,
+          "name": "Süßwarentechnologe/-technologin",
+          "score": 21
+        },
+        {
+          "id": 29047,
+          "name": "Anlagenmechaniker/in",
+          "score": 20
+        },
+        {
+          "id": 15577,
+          "name": "Bestattungsfachkraft (Ausbildung)",
+          "score": 20
+        },
+        {
+          "id": 13747,
+          "name": "Betonfertigteilbauer/in",
+          "score": 20
+        },
+        {
+          "id": 1143,
+          "name": "Chemikant/in",
+          "score": 20
+        },
+        {
+          "id": 8899,
+          "name": "Diätassistent/in",
+          "score": 20
+        },
+        {
+          "id": 2187,
+          "name": "Fluggerätmechaniker/in - Fertigungstechnik",
+          "score": 20
+        },
+        {
+          "id": 137639,
+          "name": "Karosserie- und Fahrzeugbaumechaniker/in - Caravan- und Reisemobiltechnik",
+          "score": 20
+        },
+        {
+          "id": 15166,
+          "name": "Karosserie- und Fahrzeugbaumechaniker/in - Karosserieinstandhaltungstechnik",
+          "score": 20
+        },
+        {
+          "id": 29049,
+          "name": "Konstruktionsmechaniker/in",
+          "score": 20
+        },
+        {
+          "id": 14799,
+          "name": "Kraftfahrzeugmechatroniker/in - Personenkraftwagentechnik",
+          "score": 20
+        },
+        {
+          "id": 2665,
+          "name": "Metallblasinstrumentenmacher/in",
+          "score": 20
+        },
+        {
+          "id": 2874,
+          "name": "Technische/r Assistent/in - medizinische Gerätetechnik",
+          "score": 20
+        },
+        {
+          "id": 946,
+          "name": "Verfahrensmechaniker/in - Steine- und Erdenindustrie - Baustoffe",
+          "score": 20
+        },
+        {
+          "id": 126855,
+          "name": "Werksteinhersteller/in",
+          "score": 20
+        },
+        {
+          "id": 820,
+          "name": "Aufbereitungsmechaniker/in - Feuerfeste/keramische Rohstoffe",
+          "score": 19
+        },
+        {
+          "id": 821,
+          "name": "Aufbereitungsmechaniker/in - Naturstein",
+          "score": 19
+        },
+        {
+          "id": 822,
+          "name": "Aufbereitungsmechaniker/in - Sand und Kies",
+          "score": 19
+        },
+        {
+          "id": 819,
+          "name": "Aufbereitungsmechaniker/in - Steinkohle",
+          "score": 19
+        },
+        {
+          "id": 90474,
+          "name": "Bootsbauer/in - Neu-, Aus- und Umbau",
+          "score": 19
+        },
+        {
+          "id": 90469,
+          "name": "Bootsbauer/in - Technik",
+          "score": 19
+        },
+        {
+          "id": 2610,
+          "name": "Edelsteinfasser/in",
+          "score": 19
+        },
+        {
+          "id": 131163,
+          "name": "Edelsteinschleifer/in - Edelsteingravieren",
+          "score": 19
+        },
+        {
+          "id": 131165,
+          "name": "Edelsteinschleifer/in - Edelsteinschleifen",
+          "score": 19
+        },
+        {
+          "id": 131167,
+          "name": "Edelsteinschleifer/in - Schmuckdiamantschleifen",
+          "score": 19
+        },
+        {
+          "id": 33362,
+          "name": "Fachkraft - Kurier-, Express- und Postdienstleistungen",
+          "score": 19
+        },
+        {
+          "id": 3898,
+          "name": "Fachkraft - Lebensmitteltechnik",
+          "score": 19
+        },
+        {
+          "id": 2398,
+          "name": "Fluggerätmechaniker/in - Instandhaltungstechnik",
+          "score": 19
+        },
+        {
+          "id": 2403,
+          "name": "Fluggerätmechaniker/in - Triebwerkstechnik",
+          "score": 19
+        },
+        {
+          "id": 7355,
+          "name": "Fluglotse/Fluglotsin",
+          "score": 19
+        },
+        {
+          "id": 126847,
+          "name": "Gießereimechaniker/in",
+          "score": 19
+        },
+        {
+          "id": 4364,
+          "name": "Glaser/in - Verglasung und Glasbau",
+          "score": 19
+        },
+        {
+          "id": 7288,
+          "name": "Hafenschiffer/in",
+          "score": 19
+        },
+        {
+          "id": 13778,
+          "name": "Heilerziehungspflegeassistent/in",
+          "score": 19
+        },
+        {
+          "id": 124530,
+          "name": "Karosserie- und Fahrzeugbaumechaniker/in - Karosserie- und Fahrzeugbautechnik",
+          "score": 19
+        },
+        {
+          "id": 126857,
+          "name": "Kerzenhersteller/in und Wachsbildner/in",
+          "score": 19
+        },
+        {
+          "id": 122564,
+          "name": "Kraftfahrzeugmechatroniker/in - Karosserietechnik",
+          "score": 19
+        }
+      ],
+      "final": [
+        {
+          "id": 33362,
+          "name": "Fachkraft - Kurier-, Express- und Postdienstleistungen",
+          "score": 19,
+          "reasoning": "Das ist dein Top-Match, da du direkt in der Logistik arbeiten willst. Du hast im Profil geschrieben, dass du gut Sachen tragen und organisieren kannst. In diesem Beruf bist du viel in Bewegung, hast Kontakt zu Menschen und kannst deine Zuverlässigkeit beim Zustellen von Paketen beweisen.",
+          "images": [
+            {
+              "url": "https://rest.arbeitsagentur.de/infosysbub/berufepool-rest/ct/v1/bilder/dkz_33363_15.jpg",
+              "caption": "Im Zustelldienst im Freien das Fahrzeug mit Ware beladen",
+              "imageGroup": "Arbeitsort"
+            },
+            {
+              "url": "https://rest.arbeitsagentur.de/infosysbub/berufepool-rest/ct/v1/bilder/dkz_33363_19.jpg",
+              "caption": "Den Barcode eines Pakets zur Sendungsverfolgung einscannen",
+              "imageGroup": "Tätigkeit"
+            },
+            {
+              "url": "https://rest.arbeitsagentur.de/infosysbub/berufepool-rest/ct/v1/bilder/dkz_33363_23.jpg",
+              "caption": "Ein elektrisches Zustellfahrzeug für die Liefertour aufladen",
+              "imageGroup": "Tätigkeit"
+            }
+          ],
+          "taskSummary": "Fachkräfte für Kurier-, Express- und Postdienstleistungen stellen Briefe, Päckchen oder Pakete zu. Dazu leeren sie beispielsweise Briefkästen, sortieren Sendungen, bereiten diese für den weiteren Versandweg vor und planen die Zustellfolge. Sie beraten Kunden und nehmen von ihnen Sendungen entgegen. Außerdem nehmen sie Zahlungen in Empfang, rechnen ab und dokumentieren Sendungen."
+        },
+        {
+          "id": 7288,
+          "name": "Hafenschiffer/in",
+          "score": 19,
+          "reasoning": "Dieser Beruf passt super, weil du gerne draußen bist und körperlich anpackst. Das Beladen und Entladen von Schiffen im Hafen kommt deinem Talent, 'Sachen zu tragen', sehr entgegen. Außerdem arbeitest du hier im Team, was dir laut Profil besonders wichtig ist.",
+          "images": [
+            {
+              "url": "https://rest.arbeitsagentur.de/infosysbub/berufepool-rest/ct/v1/bilder/dkz_7287_11.jpg",
+              "caption": "Hafenfähre",
+              "imageGroup": "Arbeitsgegenstand"
+            },
+            {
+              "url": "https://rest.arbeitsagentur.de/infosysbub/berufepool-rest/ct/v1/bilder/dkz_7287_12.jpg",
+              "caption": "Auf dem Schiff Rettungseinrichtungen instandhalten",
+              "imageGroup": "Arbeitsort"
+            },
+            {
+              "url": "https://rest.arbeitsagentur.de/infosysbub/berufepool-rest/ct/v1/bilder/dkz_7287_13.jpg",
+              "caption": "Im Hafen ein Rundfahrtschiff am Liegeplatz festmachen",
+              "imageGroup": "Arbeitsort"
+            }
+          ],
+          "taskSummary": "Hafenschiffer/innen führen Wasserfahrzeuge in See- und Binnenhäfen. Mit ihren Booten Hochseefischerei: Nachziehen des Fischernetzes (Schleppnetz) Schifffahrt: Stark motorisiertes Spezialschiff, das Schleppkähne und andere motorlose, schwer manövrierbare Schwimmkörper zieht oder schiebt; Schleppzug beschreibt mehrere von einem Schlepper gezogene Schleppkähne \" name=\"Schleppen\">schleppen sie Flaches, breites Schiff ohne eigenen Antrieb; dient dem Gütertransport innerhalb von Häfen \" name=\"Schute\">Schuten , Schifffahrt: Gedecktes oder ungedecktes Fahrzeug ohne eigene Antriebsvorrichtung, v.a. zum Gütertransport in der Binnenschifffahrt eingesetzt \" name=\"Leichter\">Leichter und andere schwimmende Geräte. Sie stellen die Schleppverbände zusammen und überwachen den Schleppvorgang. Auch beim Laden und Schifffahrt: Entladen eines Wasserfahrzeuges mittels des sog. Löschgeschirrs \" name=\"Löschen\">Löschen wirken sie mit. Anhand der Begleitpapiere prüfen sie Trockengüter und Container. Mithilfe von Gabelstaplern, (Brücken-)Kränen und anderen Hilfsmittel zum Heben von großen Lasten, z.B. Krane, Gabelstapler u.ä. \" name=\"Hebezeuge\">Hebezeugen transportieren sie Ladungen von Bord auf Güterwaggons, Lkws oder in Zwischenlager. Reinigungs- und Wartungsarbeiten an Bord gehören ebenfalls zu ihren Aufgaben. Hierbei entsorgen sie Abfallstoffe, pflegen das Tauwerk, halten die Motoren und andere technische Einrichtungen instand und entrosten den Bootskörper. Im Fähr- und Touristikverkehr kassieren sie das Fahrgeld und erteilen Auskünfte. Außerdem sorgen sie dafür, dass Vorkehrungen für die Sicherheit der Passagiere getroffen werden und z.B. ausreichend Schwimmwesten an Bord sind."
+        },
+        {
+          "id": 124029,
+          "name": "Süßwarentechnologe/-technologin",
+          "score": 21,
+          "reasoning": "Hier arbeitest du zwar drinnen, aber es ist immer viel zu tun. Da du im Lager oder Markt genau weißt, wo alles ist, hilft dir dieser Ordnungssinn auch bei der Warenannahme und Kontrolle von Rohstoffen in der Lebensmittelproduktion.",
+          "images": [
+            {
+              "url": "https://rest.arbeitsagentur.de/infosysbub/berufepool-rest/ct/v1/bilder/dkz_124028_01.jpg",
+              "caption": "Display einer Fertigungsanlage für Schokoladehohlfiguren",
+              "imageGroup": "Arbeitsgegenstand"
+            },
+            {
+              "url": "https://rest.arbeitsagentur.de/infosysbub/berufepool-rest/ct/v1/bilder/dkz_124028_02.jpg",
+              "caption": "Die Einfüllmenge der flüssigen Schokolade regulieren",
+              "imageGroup": "Beruf"
+            },
+            {
+              "url": "https://rest.arbeitsagentur.de/infosysbub/berufepool-rest/ct/v1/bilder/dkz_124028_03.jpg",
+              "caption": "Eine Anlage zur Schokoladenherstellung in Gang setzen",
+              "imageGroup": "Tätigkeit"
+            }
+          ],
+          "taskSummary": "Süßwarentechnologen und -technologinnen beschicken, steuern und überwachen Maschinen und Anlagen. Die automatisierte Produktion umfasst alle Arbeitsschritte von der Rohstoffaufbereitung bis zur Verpackung der Ware. Zutaten wie Zucker, Kakaobohnen oder Nüsse werden maschinell gewogen, dosiert und ggf. gereinigt und zerkleinert. Den Rohstoffen geben die Fachkräfte verschiedene Zusatzstoffe bei. Automaten und Maschinen werden von den Fachkräften beschickt und überwacht. Bei der Rohstoffanlieferung und während der Herstellung nehmen sie Proben für das Labor, überzeugen sich aber auch durch Augenschein, Geruchs- und vor allem Geschmackstests davon, dass die Produktionsprozesse einwandfrei ablaufen. Außerdem reinigen und warten sie die Maschinen und Anlagen."
+        },
+        {
+          "id": 13747,
+          "name": "Betonfertigteilbauer/in",
+          "score": 20,
+          "reasoning": "Da du gerne 'baust' und handwerklich umsetzt, ist die Arbeit mit Beton ideal. Du bist körperlich aktiv, arbeitest im Team und siehst am Ende des Tages, was du geschafft hast. Deine Stärke im Durchhalten ist auf dem Bau besonders viel wert.",
+          "images": [
+            {
+              "url": "https://rest.arbeitsagentur.de/infosysbub/berufepool-rest/ct/v1/bilder/dkz_13748_11.jpg",
+              "caption": "Eingebrachten Beton mit einem Motorrüttler verdichten",
+              "imageGroup": "Beruf"
+            },
+            {
+              "url": "https://rest.arbeitsagentur.de/infosysbub/berufepool-rest/ct/v1/bilder/dkz_13748_12.jpg",
+              "caption": "Laser-Entfernungsmesser, Meterstab, Bauteilzeichnung",
+              "imageGroup": "Arbeitsgegenstand"
+            },
+            {
+              "url": "https://rest.arbeitsagentur.de/infosysbub/berufepool-rest/ct/v1/bilder/dkz_13748_14.jpg",
+              "caption": "Im Werkstattlabor die Druckfestigkeit eines Bauteils prüfen",
+              "imageGroup": "Arbeitsort"
+            }
+          ],
+          "taskSummary": "Betonfertigteilbauer/innen fertigen Beton- und Stahlbetonfertigteile wie Rohre, Wände, Platten und Treppenstufen. Dazu stellen sie Formen und Gussform, die eine Betonmasse hält, bis sie erhärtet \" name=\"Schalung\">Schalungen aus Holz, Kunststoff oder Metall sowie Betonmischungen aus Sand, Kies, Zement, Wasser und Betonzusätzen her. Den Beton füllen sie in die vorbereiteten Schalungen und härten ihn. Gegebenenfalls bauen sie auch Verbindungsteile und zusätzliche Wärmedämmstoffe ein. Stellen sie Stahl- und Textilbeton her, verstärken sie den Beton durch Bewehrungen aus Stahl oder technischen Textilien. Die Oberfläche der Betonbauteile gestalten und bearbeiten sie durch Schleifen oder Strahlen und versiegeln sie gegen Feuchtigkeit. Bei der Instandsetzung von Betonfertigteilen prüfen Betonfertigteilbauer/innen die Schäden und bessern diese aus."
+        },
+        {
+          "id": 124409,
+          "name": "Zweiradmechatroniker/in - Fahrradtechnik",
+          "score": 22,
+          "reasoning": "Da Mathe und Sport deine Lieblingsfächer sind, passt die technische Arbeit an Fahrrädern gut. Du kannst handwerklich arbeiten, hast Kontakt zu Kunden und bist nicht den ganzen Tag am Computer, was ein wichtiges No-Go für dich ist.",
+          "images": [
+            {
+              "url": "https://rest.arbeitsagentur.de/infosysbub/berufepool-rest/ct/v1/bilder/dkz_124407_01.jpg",
+              "caption": "Eine Muffe für den Fahrradrahmenbau an der Werkbank ablängen",
+              "imageGroup": "Tätigkeit"
+            },
+            {
+              "url": "https://rest.arbeitsagentur.de/infosysbub/berufepool-rest/ct/v1/bilder/dkz_124407_02.jpg",
+              "caption": "Ein Vorderrad zentrieren",
+              "imageGroup": "Tätigkeit"
+            },
+            {
+              "url": "https://rest.arbeitsagentur.de/infosysbub/berufepool-rest/ct/v1/bilder/dkz_124407_04.jpg",
+              "caption": "Ein erneuertes Bremssystem kontrollieren",
+              "imageGroup": "Tätigkeit"
+            }
+          ],
+          "taskSummary": "Zweiradmechatroniker/innen der Fachrichtung Fahrradtechnik warten und reparieren Fahrräder wie Mountainbikes, Rennräder, City- und Tourenräder sowie deren Bauteile und Komponenten. Die Fahrzeuge sind entweder nicht motorisiert oder mit einem Elektro- bzw. Hybridantrieb ausgestattet. Zweiradmechatroniker/innen der Fachrichtung Fahrradtechnik führen Montagearbeiten aus, passen Fahrzeuge an Kundenwünsche an oder rüsten sie um. Bei der Herstellung von Bauteilen oder auch kompletten Fahrzeugen wenden sie manuelle und maschinelle Metallbearbeitungstechniken an. Sie beraten Kunden und verkaufen Fahrzeuge, Zubehör und Dienstleistungen, neben Fahrrädern auch Mehrrad- und Spezialfahrzeuge."
+        },
+        {
+          "id": 76769,
+          "name": "Werkfeuerwehrmann/-frau",
+          "score": 22,
+          "reasoning": "Dieser Beruf passt zu deinem Wunsch nach Sicherheit und Stabilität. Du bist sportlich fit, arbeitest extrem eng im Team und hilfst Menschen. Da du gerne anpackst und zuverlässig bist, ist die Werkfeuerwehr eine spannende Alternative zum reinen Handwerk.",
+          "images": [
+            {
+              "url": "https://rest.arbeitsagentur.de/infosysbub/berufepool-rest/ct/v1/bilder/dkz_76768_13.jpg",
+              "caption": "Absturzsicherung",
+              "imageGroup": "Arbeitsgegenstand"
+            },
+            {
+              "url": "https://rest.arbeitsagentur.de/infosysbub/berufepool-rest/ct/v1/bilder/dkz_76768_09.jpg",
+              "caption": "Gewöhnungsübungen in der Atemschutzübungsanlage durchführen",
+              "imageGroup": "Tätigkeit"
+            },
+            {
+              "url": "https://rest.arbeitsagentur.de/infosysbub/berufepool-rest/ct/v1/bilder/dkz_76768_12.jpg",
+              "caption": "Ein Gasleck mit einem Mehrgasmessgerät suchen",
+              "imageGroup": "Tätigkeit"
+            }
+          ],
+          "taskSummary": "Werkfeuerwehrleute sind für den vorbeugenden Brand- und Gefahrenschutz, aber auch für Lösch- und Rettungseinsätze zuständig. Sie stimmen die Schutzmaßnahmen individuell auf die Besonderheiten des Betriebes ab und sorgen dafür, dass Einsatzfahrzeuge und Feuerwehrgeräte stets betriebsbereit sind. Ziel ist es, Brände, Explosionen oder Unfälle zu verhindern. Im Ernstfall führen sie Maßnahmen zur Brandbekämpfung durch. Ist ein Notruf eingegangen, besetzen sie innerhalb kürzester Zeit die Einsatzfahrzeuge und eilen zur Schadensstelle, um den Brand zu löschen. Sie sichern die Gefahrenstelle ab, führen Bergungsarbeiten durch und übernehmen die medizinische Notfallversorgung. Ihre Aufgabe ist es, die Sicherheit der Mitarbeiter/innen zu gewährleisten, aber auch die Schäden an betrieblichen Anlagen möglichst gering zu halten. Außerdem leisten Werkfeuerwehrleute technische Hilfe und führen ggf. ABC-Einsätze durch, d.h. Einsätze zur Abwehr von radioaktiven, biologischen und chemischen Gefahren."
+        },
+        {
+          "id": 29049,
+          "name": "Konstruktionsmechaniker/in",
+          "score": 20,
+          "reasoning": "Beim Bau von großen Metallkonstruktionen kannst du dein handwerkliches Geschick nutzen. Es ist eine stabile Ausbildung in der Industrie mit gutem Gehalt, die genau zu deinem Wunsch nach 'handwerklich umsetzen' und 'festem Arbeitsort' passt.",
+          "images": [
+            {
+              "url": "https://rest.arbeitsagentur.de/infosysbub/berufepool-rest/ct/v1/bilder/dkz_29050_06.jpg",
+              "caption": "In der Werkhalle einen Fallstromverdampfer montieren",
+              "imageGroup": "Arbeitsort"
+            },
+            {
+              "url": "https://rest.arbeitsagentur.de/infosysbub/berufepool-rest/ct/v1/bilder/dkz_29050_08.jpg",
+              "caption": "Im Schneideraum Stahlbleche mit CNC-Brennschneider trennen",
+              "imageGroup": "Arbeitsort"
+            },
+            {
+              "url": "https://rest.arbeitsagentur.de/infosysbub/berufepool-rest/ct/v1/bilder/dkz_29050_09.jpg",
+              "caption": "Mit der Walzmaschine ein Blech biegen",
+              "imageGroup": "Tätigkeit"
+            }
+          ],
+          "taskSummary": "Konstruktionsmechaniker/innen fertigen z.B. Aufzüge, Werk- oder Flughafenabfertigungshallen, Schiffsrümpfe und -aufbauten oder Fußgängerbrücken. Mit Brennschneidern, Lasern oder mithilfe von deutsch: Computergestützte numerische Maschinensteuerung Dabei wird die Werkzeugmaschine über einen (Mikro-)Computer gesteuert, der direkt in deren Steuerungsteil integriert ist \" name=\"Computerized Numerical Control (CNC)\">CNC-Maschinen längen sie Stahlträger ab und schneiden Profile sowie Bleche millimetergenau zu. Sie biegen oder Metallverarbeitung: Biegen von Blechen über gerade Kanten, um verschiedenartige, winklige Profile herzustellen; sowohl manuell als auch maschinell möglich \" name=\"Abkanten\">kanten Bleche, bringen Bohrungen an, fügen die Bauteile zusammen, richten sie aus und verbinden sie durch Verschweißen, Verschrauben oder Nieten. Gegebenenfalls bauen sie Antriebe und Steuerungseinrichtungen ein und bringen Verkleidungen an. Kleinere Objekte wie Fahrzeugaufbauten montieren sie in der Werkhalle, größere Konstruktionen, beispielsweise Hallen oder Brücken, vor Ort. Auch die Wartung und Instandsetzung von Metallbaukonstruktionen oder von Werkzeugen und Produktionsmaschinen gehört zu ihrem Aufgabengebiet."
+        }
+      ]
+    }
+  }
+}
