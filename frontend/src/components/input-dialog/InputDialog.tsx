@@ -61,7 +61,7 @@ export const InputDialog = ({
 			<div className="flex flex-col gap-10 p-4 rounded-4xl bg-gray-100">
 				<div className="flex flex-col gap-2">
 					<div
-						className={`h-[60px] flex items-center gap-2 px-4 py-2.5 rounded-2xl border-2 focus-within:outline focus-within:outline-2 focus-within:outline-offset-1 focus-within:outline-sky-300 focus-within:border-gray-800 bg-white group transition-colors ${error ? "border-red-700 focus-within:outline-red-700" : "border-gray-500"}`}
+						className={`h-[60px] flex items-center gap-2 px-4 py-2.5 rounded-2xl border-2 focus-within:outline focus-within:outline-2 focus-within:outline-offset-1 focus-within:outline-sky-300 focus-within:border-gray-700 bg-white group transition-colors ${error ? "border-red-700 focus-within:outline-red-700" : "border-gray-500"}`}
 					>
 						<input
 							type="text"
