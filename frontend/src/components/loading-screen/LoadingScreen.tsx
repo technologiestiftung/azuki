@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import { content } from "../../content/de";
+import { content } from "../../content";
 import { useAppStore } from "../../store/useAppStore";
 import { matchProfile } from "../../api/client";
 

@@ -1,4 +1,4 @@
-import { content } from "../../../../content/de";
+import { content } from "../../../../content";
 import { useAppStore } from "../../../../store/useAppStore";
 import { type EducationLevel } from "../../../../common";
 import { StepLayout } from "../StepLayout";

@@ -1,4 +1,4 @@
-import { content } from "../../../content/de";
+import { content } from "../../../content";
 import { StepLayout } from "./StepLayout";
 import { SelectableRowButton } from "../../primitives/buttons/SelectableRowButton";
 import { useAppStore } from "../../../store/useAppStore";

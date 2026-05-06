@@ -2,7 +2,7 @@ import { type ReactNode } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { ProgressBar } from "../progress-bar/ProgressBar";
 import { QuestionBubble } from "../question-bubble/QuestionBubble";
-import { content } from "../../../content/de";
+import { content } from "../../../content";
 import { PrimaryButton } from "../../primitives/buttons/PrimaryButton";
 import { GhostButton } from "../../primitives/buttons/GhostButton";
 import { BackButton } from "../../back-button/BackButton";

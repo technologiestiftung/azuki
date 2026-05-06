@@ -1,6 +1,6 @@
 import { useCallback, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { content } from "../../../content/de";
+import { content } from "../../../content";
 import { useAppStore } from "../../../store/useAppStore";
 import { type WorkPreferenceChoice } from "../../../common";
 import { StepLayout } from "./StepLayout";

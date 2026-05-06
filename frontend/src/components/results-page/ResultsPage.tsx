@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useAppStore } from "../../store/useAppStore";
-import { content } from "../../content/de";
+import { content } from "../../content";
 import { PrimaryButton } from "../primitives/buttons/PrimaryButton";
 import { type MatchedOccupation } from "@azuki/shared";
 
