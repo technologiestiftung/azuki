@@ -15,6 +15,7 @@ import {
 	EXIT_OFFSET_Y,
 	getDragDirectionAndProgress,
 	getCardVisualState,
+	computeGhostStackScale,
 	DEFAULT_STACK_GHOST_LAYER_SCALE,
 	getCursorStyle,
 	getTopCardAccentBg,
@@ -122,6 +123,97 @@ function slideInHorizontalColorFadeActive(
 	);
 }
 
+function useSlideInGhostProgress(
+	animationPhase: AnimationPhase,
+	displayIndex: number,
+): number {
+	const [slideInGhostProgress, setSlideInGhostProgress] = useState(0);
+
+	useEffect(() => {
+		let cancelled = false;
+		let raf = 0;
+
+		if (animationPhase !== "slide-in") {
+			setSlideInGhostProgress(0);
+		} else {
+			const start = performance.now();
+			const tick = () => {
+				if (cancelled) {
+					return;
+				}
+				const t = Math.min(1, (performance.now() - start) / SLIDE_IN_MS);
+				setSlideInGhostProgress(t);
+				if (t < 1) {
+					raf = requestAnimationFrame(tick);
+				}
+			};
+			raf = requestAnimationFrame(tick);
+		}
+
+		return () => {
+			cancelled = true;
+			cancelAnimationFrame(raf);
+		};
+	}, [animationPhase, displayIndex]);
+
+	return slideInGhostProgress;
+}
+
+function useFlyOutGhostProgress(
+	animationPhase: AnimationPhase,
+	displayIndex: number,
+): number {
+	const [flyOutGhostProgress, setFlyOutGhostProgress] = useState(0);
+
+	useEffect(() => {
+		let cancelled = false;
+		let raf = 0;
+
+		if (animationPhase !== "slide-out") {
+			setFlyOutGhostProgress(0);
+		} else {
+			const start = performance.now();
+			const tick = () => {
+				if (cancelled) {
+					return;
+				}
+				const t = Math.min(1, (performance.now() - start) / FLY_OUT_MS);
+				setFlyOutGhostProgress(t);
+				if (t < 1) {
+					raf = requestAnimationFrame(tick);
+				}
+			};
+			raf = requestAnimationFrame(tick);
+		}
+
+		return () => {
+			cancelled = true;
+			cancelAnimationFrame(raf);
+		};
+	}, [animationPhase, displayIndex]);
+
+	return flyOutGhostProgress;
+}
+
+function ghostInteractionProgress(input: {
+	animationPhase: AnimationPhase;
+	slideInGhostProgress: number;
+	flyOutGhostProgress: number;
+	isDragging: boolean;
+	interactionProgress: number;
+}): number {
+	if (input.animationPhase === "slide-in") {
+		return input.slideInGhostProgress;
+	}
+	if (input.animationPhase === "slide-out") {
+		return input.flyOutGhostProgress;
+	}
+	if (input.isDragging) {
+		return input.interactionProgress;
+	}
+	return 0;
+}
+
 export const SwipeCardStack = forwardRef<
 	SwipeCardStackHandle,
 	SwipeCardStackProps
@@ -186,6 +278,7 @@ export const SwipeCardStack = forwardRef<
 		backTranslateY,
 		backCardBackgroundColor,
 		ghostOpacity,
+		interactionProgress,
 		topTransform,
 	} = getCardVisualState(
 		activeOffset,
@@ -196,6 +289,27 @@ export const SwipeCardStack = forwardRef<
 			flyStart: flyStartOffset,
 		},
 		stackGhostLayerScale,
+	);
+
+	const slideInGhostProgress = useSlideInGhostProgress(
+		animationPhase,
+		displayIndex,
+	);
+
+	const flyOutGhostProgress = useFlyOutGhostProgress(
+		animationPhase,
+		displayIndex,
+	);
+
+	const ghostScale = computeGhostStackScale(
+		stackGhostLayerScale,
+		ghostInteractionProgress({
+			animationPhase,
+			slideInGhostProgress,
+			flyOutGhostProgress,
+			isDragging,
+			interactionProgress,
+		}),
 	);
 
 	useEffect(() => {
@@ -493,9 +607,9 @@ export const SwipeCardStack = forwardRef<
 						className="absolute inset-0 -bottom-[37px] w-full bg-gray-300 rounded-3xl pointer-events-none"
 						style={{
 							zIndex: 0,
-							transform: `scale(${stackGhostLayerScale})`,
+							transform: `scale(${ghostScale})`,
 							opacity: ghostOpacity,
-							willChange: "opacity",
+							willChange: "opacity, transform",
 						}}
 					/>
 				)}
