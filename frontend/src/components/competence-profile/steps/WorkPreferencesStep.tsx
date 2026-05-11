@@ -78,6 +78,12 @@ export function WorkPreferencesStep() {
 		goNext();
 	}
 
+	function handleSkip() {
+		setSelectedChoice(null);
+		setWorkPreference(current.id, null);
+		goNext();
+	}
+
 	const skipConfirmOnStay = useCallback(() => {
 		navigate({ pathname, hash: "#0" }, { replace: true });
 	}, [navigate, pathname]);
@@ -86,7 +92,7 @@ export function WorkPreferencesStep() {
 		<StepLayout
 			question={content["workPreferences.question"]}
 			onNext={handleNext}
-			onSkip={handleNext}
+			onSkip={handleSkip}
 			hasSkipButton={true}
 			hasNextButton={true}
 			skipConfirmTitleKey="skipConfirmDialog.skipAll.title"
@@ -113,16 +119,12 @@ export function WorkPreferencesStep() {
 				<div className="flex gap-3 pb-4" key={current.id}>
 					<SelectableCardButton
 						label={current.a}
-						selected={
-							selectedChoice === "a" || workPreferences[current.id] === "a"
-						}
+						selected={workPreferences[current.id] === "a"}
 						onClick={() => handleChoice("a")}
 					/>
 					<SelectableCardButton
 						label={current.b}
-						selected={
-							selectedChoice === "b" || workPreferences[current.id] === "b"
-						}
+						selected={workPreferences[current.id] === "b"}
 						onClick={() => handleChoice("b")}
 					/>
 				</div>
