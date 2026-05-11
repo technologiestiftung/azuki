@@ -8,6 +8,7 @@ import {
 	detectHorizontalSwipeOnly,
 	detectSwipeDirection,
 	getCardVisualState,
+	computeGhostStackScale,
 	getCursorStyle,
 	getDragDirectionAndProgress,
 	getTopCardAccentBg,
@@ -188,6 +189,15 @@ describe("mixBackCardSurfaceColor", () => {
 	});
 });
 
+describe("computeGhostStackScale", () => {
+	test("matches base scale at rest and at full progress; dips near mid progress", () => {
+		const g = DEFAULT_STACK_GHOST_LAYER_SCALE;
+		expect(computeGhostStackScale(g, 0)).toBeCloseTo(g);
+		expect(computeGhostStackScale(g, 1)).toBeCloseTo(g);
+		expect(computeGhostStackScale(g, 0.5)).toBeLessThan(g);
+	});
+});
+
 describe("getCardVisualState", () => {
 	test("computes back stack and ghost from drag progress", () => {
 		const state = getCardVisualState(
@@ -204,6 +214,7 @@ describe("getCardVisualState", () => {
 		expect(state.backTranslateY).toBe(0);
 		expect(state.backCardBackgroundColor).toBe(mixBackCardSurfaceColor(1));
 		expect(state.ghostOpacity).toBe(1);
+		expect(state.interactionProgress).toBe(1);
 		expect(state.topTransform).toContain("rotate(");
 		expect(state.topTransform).toContain("scale(1)");
 	});
@@ -221,6 +232,7 @@ describe("getCardVisualState", () => {
 
 		expect(state.backScale).toBe(1);
 		expect(state.ghostOpacity).toBe(1);
+		expect(state.interactionProgress).toBe(1);
 	});
 
 	test("ghost is hidden at gesture start and fades with progress when active", () => {
@@ -235,6 +247,7 @@ describe("getCardVisualState", () => {
 		);
 		expect(hidden.ghostOpacity).toBe(0);
 		expect(hidden.backScale).toBe(DEFAULT_STACK_GHOST_LAYER_SCALE);
+		expect(hidden.interactionProgress).toBe(0);
 
 		const mid = getCardVisualState(
 			{ x: SWIPE_THRESHOLD / 2, y: 0 },
@@ -246,6 +259,7 @@ describe("getCardVisualState", () => {
 			},
 		);
 		expect(mid.ghostOpacity).toBeCloseTo(0.5);
+		expect(mid.interactionProgress).toBeCloseTo(0.5);
 	});
 
 	test("up fly applies scale from flyUp progress when flyStart is set", () => {
@@ -275,6 +289,7 @@ describe("getCardVisualState", () => {
 		);
 
 		expect(state.ghostOpacity).toBe(1);
+		expect(state.interactionProgress).toBeCloseTo(40 / SWIPE_THRESHOLD);
 	});
 });
 

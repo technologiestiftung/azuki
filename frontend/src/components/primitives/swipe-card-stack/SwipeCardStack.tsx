@@ -15,6 +15,7 @@ import {
 	EXIT_OFFSET_Y,
 	getDragDirectionAndProgress,
 	getCardVisualState,
+	computeGhostStackScale,
 	DEFAULT_STACK_GHOST_LAYER_SCALE,
 	getCursorStyle,
 	getTopCardAccentBg,
@@ -173,6 +174,7 @@ export const SwipeCardStack = forwardRef<
 	const isAnimating = useRef(false);
 	const timeoutRef = useRef<number | null>(null);
 	const pendingSlideInDirectionRef = useRef<SwipeDirection | null>(null);
+	const flyOutTriggeredByDragRef = useRef(false);
 
 	const isFlying = flyOffset !== null;
 	const isSliding = animationPhase === "slide-in";
@@ -186,6 +188,7 @@ export const SwipeCardStack = forwardRef<
 		backTranslateY,
 		backCardBackgroundColor,
 		ghostOpacity,
+		interactionProgress,
 		topTransform,
 	} = getCardVisualState(
 		activeOffset,
@@ -196,6 +199,42 @@ export const SwipeCardStack = forwardRef<
 			flyStart: flyStartOffset,
 		},
 		stackGhostLayerScale,
+	);
+
+	const [flyOutGhostProgress, setFlyOutGhostProgress] = useState(0);
+
+	useEffect(() => {
+		if (animationPhase !== "slide-out" || flyOutTriggeredByDragRef.current) {
+			setFlyOutGhostProgress(0);
+			return undefined;
+		}
+		let cancelled = false;
+		let raf = 0;
+		const start = performance.now();
+		const tick = () => {
+			if (cancelled) {
+				return;
+			}
+			const elapsed = Math.min(1, (performance.now() - start) / FLY_OUT_MS);
+			setFlyOutGhostProgress(elapsed);
+			if (elapsed < 1) {
+				raf = requestAnimationFrame(tick);
+			}
+		};
+		raf = requestAnimationFrame(tick);
+		return () => {
+			cancelled = true;
+			cancelAnimationFrame(raf);
+		};
+	}, [animationPhase, displayIndex]);
+
+	const ghostDipProgress = isDragging
+		? interactionProgress
+		: flyOutGhostProgress;
+
+	const ghostScale = computeGhostStackScale(
+		stackGhostLayerScale,
+		ghostDipProgress,
 	);
 
 	useEffect(() => {
@@ -281,6 +320,7 @@ export const SwipeCardStack = forwardRef<
 				setAnimationPhase("idle");
 				setAnimationDirection(null);
 				isAnimating.current = false;
+				flyOutTriggeredByDragRef.current = false;
 
 				if (targetIndex !== null) {
 					setDisplayIndex(targetIndex);
@@ -415,6 +455,7 @@ export const SwipeCardStack = forwardRef<
 				isSwipeUpGestureEnabled,
 			);
 			if (direction) {
+				flyOutTriggeredByDragRef.current = true;
 				flyOut(direction, nextIndex);
 			} else {
 				setCardTransition(swipeSnapBackTopTransition(SWIPE_SNAP_BACK_MS));
@@ -493,9 +534,9 @@ export const SwipeCardStack = forwardRef<
 						className="absolute inset-0 -bottom-[37px] w-full bg-gray-300 rounded-3xl pointer-events-none"
 						style={{
 							zIndex: 0,
-							transform: `scale(${stackGhostLayerScale})`,
+							transform: `scale(${ghostScale})`,
 							opacity: ghostOpacity,
-							willChange: "opacity",
+							willChange: "opacity, transform",
 						}}
 					/>
 				)}
