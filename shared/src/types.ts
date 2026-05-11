@@ -123,8 +123,3 @@ export interface GenerationInfo {
 	tokensInput: number;
 	tokensOutput: number;
 }
-
-export interface MatchRequest {
-	profile: UserProfile;
-	model?: string;
-}

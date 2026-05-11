@@ -8,7 +8,6 @@ export function LoadingScreen() {
 	const profile = useAppStore((state) => state.profile);
 	const matchResults = useAppStore((state) => state.matchResults);
 	const setMatchResults = useAppStore((state) => state.setMatchResults);
-	const selectedModel = useAppStore((state) => state.selectedModel);
 	const navigate = useNavigate();
 	const called = useRef(false);
 
@@ -24,7 +23,7 @@ export function LoadingScreen() {
 
 		const doMatch = async () => {
 			try {
-				const result = await matchProfile(profile, selectedModel ?? undefined);
+				const result = await matchProfile(profile);
 				setMatchResults(result);
 			} catch (err) {
 				console.error("Match API error:", err);
@@ -36,7 +35,7 @@ export function LoadingScreen() {
 		Promise.all([doMatch(), minDelay]).then(() => {
 			navigate("/results/list");
 		});
-	}, [profile, matchResults, setMatchResults, selectedModel, navigate]);
+	}, [profile, matchResults, setMatchResults, navigate]);
 
 	return (
 		<div className="flex flex-col items-center justify-center min-h-[100dvh] px-8">

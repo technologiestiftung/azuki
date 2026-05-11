@@ -1,6 +1,6 @@
 import { Hono, type Context } from "hono";
 import { cors } from "hono/cors";
-import { MatchRequestSchema } from "./schemas/userProfile.js";
+import { UserProfileSchema } from "./schemas/userProfile.js";
 import type { Occupation, MatchResult } from "@azuki/shared";
 import { AI_MODEL_IDS } from "@azuki/shared";
 import { preFilter } from "./matching/index.js";
@@ -74,20 +74,16 @@ app.post("/api/match", async (c) => {
 		return c.json({ error: "Invalid request body" }, 400);
 	}
 
-	const parsedRequest = MatchRequestSchema.safeParse(body);
-	if (!parsedRequest.success) {
+	const parsedProfile = UserProfileSchema.safeParse(body);
+	if (!parsedProfile.success) {
 		return c.json({ error: "Invalid request body" }, 400);
 	}
-	const { profile, model } = parsedRequest.data;
-
-	if (model !== undefined && !AI_MODEL_IDS.has(model)) {
-		return c.json({ error: "Invalid model" }, 400);
-	}
+	const profile = parsedProfile.data;
 
 	const top40 = preFilter(occupations, profile, 40);
 
 	try {
-		const result = await aiRank(top40, profile, { model });
+		const result = await aiRank(top40, profile);
 		return c.json(result);
 	} catch (err) {
 		console.error("AI ranking error, falling back to pre-filter:", err);

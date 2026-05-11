@@ -29,8 +29,3 @@ export const UserProfileSchema = z.object({
 	workPreferences: z.record(z.string(), WorkPreferenceChoiceSchema.nullable()),
 	noGos: z.record(z.string(), NoGoAnswerSchema.nullable()),
 });
-
-export const MatchRequestSchema = z.object({
-	profile: UserProfileSchema,
-	model: z.string().optional(),
-});
