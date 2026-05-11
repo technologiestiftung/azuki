@@ -33,9 +33,11 @@ export function WorkPreferencesStep() {
 	const baseIllustration = "/illustrations/work-preferences/star.svg";
 	const [selectedChoice, setSelectedChoice] =
 		useState<WorkPreferenceChoice | null>(null);
-	const selectedIllustrationPath = selectedChoice
-		? (OVERLAY_ILLUSTRATIONS[current.id]?.[selectedChoice] ?? baseIllustration)
-		: baseIllustration;
+	const activeChoice = selectedChoice ?? workPreferences[current.id] ?? null;
+	const selectedIllustrationPath =
+		activeChoice && (activeChoice === "a" || activeChoice === "b")
+			? (OVERLAY_ILLUSTRATIONS[current.id]?.[activeChoice] ?? baseIllustration)
+			: baseIllustration;
 
 	const hasAnyExplicitWorkPreference = pairs.some((pair) => {
 		const choice = workPreferences[pair.id];
@@ -78,7 +80,11 @@ export function WorkPreferencesStep() {
 		>
 			<div className="flex flex-1 flex-col gap-3 h-full">
 				<div className="relative flex flex-1 h-[217px] items-center justify-center">
-					<img src={baseIllustration} alt="" className="object-contain" />
+					<img
+						src={baseIllustration}
+						alt=""
+						className="object-contain h-full"
+					/>
 					{selectedIllustrationPath && (
 						<img
 							key={selectedIllustrationPath}
