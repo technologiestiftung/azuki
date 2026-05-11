@@ -1,5 +1,5 @@
 import { describe, expect, test } from "vitest";
-import { formatProfileSections } from "../../src/mistral/index.js";
+import { formatProfileSections } from "../../src/ai/index.js";
 import { makeProfile } from "../scoring/helpers.js";
 
 describe("formatProfileSections — custom interest dedup", () => {

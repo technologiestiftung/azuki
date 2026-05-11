@@ -19,10 +19,19 @@ const MIN_RESULTS = 5;
 const MAX_RESULTS = 8;
 const DEFAULT_REASONING = "Dieser Beruf passt zu deinem Profil.";
 
-const client = new OpenAI({
-  baseURL: "https://openrouter.ai/api/v1",
-  apiKey: OPENROUTER_API_KEY,
-});
+// Lazy client construction. Constructing OpenAI at module load throws when
+// OPENROUTER_API_KEY is missing, which broke pure-function tests that just
+// want to import formatProfileSections from this file, and made Vercel cold
+// starts fragile. Defer until the first aiRank() call.
+let _client: OpenAI | null = null;
+function getClient(): OpenAI {
+  if (_client) return _client;
+  _client = new OpenAI({
+    baseURL: "https://openrouter.ai/api/v1",
+    apiKey: OPENROUTER_API_KEY,
+  });
+  return _client;
+}
 
 export function buildSystemPrompt(): string {
   return `AUFGABE
@@ -326,7 +335,7 @@ export async function aiRank(
   const selectedModel = model && AI_MODEL_IDS.has(model) ? model : DEFAULT_MODEL;
   const prompt = systemPrompt ?? buildSystemPrompt();
 
-  const response = await client.chat.completions.create({
+  const response = await getClient().chat.completions.create({
     model: selectedModel,
     messages: [
       { role: "system", content: prompt },
