@@ -50,7 +50,7 @@ function App() {
 						element={<PracticalExperienceStep />}
 					/>
 					<Route
-						path={ROUTE_PATHS.expectations}
+						path={ROUTE_PATHS.preferences}
 						element={<WorkPreferencesStep />}
 					/>
 					<Route path={ROUTE_PATHS.nogos} element={<NoGosStep />} />

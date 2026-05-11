@@ -45,8 +45,8 @@ export function WorkPreferencesStep() {
 	const isSkipConfirmDialogOpen = isOnLastPair && !hasAnyExplicitWorkPreference;
 
 	useEffect(() => {
-		if (pathname === "/expectations" && !hash) {
-			navigate({ pathname: "/expectations", hash: "#0" }, { replace: true });
+		if (pathname === "/preferences" && !hash) {
+			navigate({ pathname: "/preferences", hash: "#0" }, { replace: true });
 		}
 	}, [pathname, hash, navigate]);
 

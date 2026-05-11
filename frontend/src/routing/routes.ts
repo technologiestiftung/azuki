@@ -16,7 +16,7 @@ export const ROUTE_PATHS = {
 	conditions: "/conditions",
 	secretTalent: "/secret-talent",
 	experience: "/experience",
-	expectations: "/expectations",
+	preferences: "/preferences",
 	nogos: "/nogos",
 	loading: "/loading",
 	resultsList: "/results/list",
@@ -51,7 +51,7 @@ const ORDERED_NAVIGATION_STEPS: FlowNode[] = [
 	{ path: ROUTE_PATHS.secretTalent, step: Step.SecretTalent },
 	{ path: ROUTE_PATHS.experience, step: Step.PracticalExperience },
 	{
-		path: ROUTE_PATHS.expectations,
+		path: ROUTE_PATHS.preferences,
 		step: Step.WorkPreferences,
 		cardCount: workPreferencePairs.length,
 	},
