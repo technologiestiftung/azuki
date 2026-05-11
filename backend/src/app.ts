@@ -18,9 +18,41 @@ import { rowToPersona, type PersonaInsertRow } from "./personas/mappers.js";
 
 const occupations: Occupation[] = occupationsData as Occupation[];
 
+const IS_PRODUCTION = process.env.NODE_ENV === "production";
+const APP_PASSWORD = process.env.APP_PASSWORD;
+
+if (IS_PRODUCTION && !APP_PASSWORD) {
+	throw new Error(
+		"APP_PASSWORD must be set in production. Refusing to start with an unauthenticated admin surface.",
+	);
+}
+if (!APP_PASSWORD) {
+	console.warn(
+		"[security] APP_PASSWORD is not set — admin routes are unauthenticated. Set it for any non-local environment.",
+	);
+}
+
+const ALLOWED_ORIGINS = (process.env.ALLOWED_ORIGINS ?? "http://localhost:5173")
+	.split(",")
+	.map((o) => o.trim())
+	.filter(Boolean);
+
+if (IS_PRODUCTION && !process.env.ALLOWED_ORIGINS) {
+	throw new Error(
+		"ALLOWED_ORIGINS must be set in production (comma-separated list of frontend origins).",
+	);
+}
+
 const app = new Hono();
 
-app.use("/*", cors());
+app.use(
+	"/*",
+	cors({
+		origin: (origin) => (ALLOWED_ORIGINS.includes(origin) ? origin : null),
+		allowHeaders: ["Content-Type", "x-app-password"],
+		allowMethods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+	}),
+);
 
 const EvalRunRequestSchema = z.object({
 	systemPrompt: z.string().min(1),
@@ -33,10 +65,12 @@ app.get("/api/health", (c) =>
 );
 
 function isAuthorized(c: Context): boolean {
-	const appPassword = process.env.APP_PASSWORD;
-	if (!appPassword) return true;
-	const providedPassword = c.req.header("x-app-password");
-	return Boolean(providedPassword && providedPassword === appPassword);
+	if (!APP_PASSWORD) {
+		// Reachable only in non-production (prod startup throws above).
+		return !IS_PRODUCTION;
+	}
+	const provided = c.req.header("x-app-password");
+	return provided === APP_PASSWORD;
 }
 
 async function generateUniqueSlug(name: string): Promise<string> {

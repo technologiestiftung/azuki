@@ -3,10 +3,11 @@ export interface AiModel {
   label: string;
 }
 
-export const DEFAULT_MODEL_ID = "google/gemini-3-flash-preview";
+export const DEFAULT_MODEL_ID = "mistralai/mistral-large-2512";
 
 export const AI_MODELS: AiModel[] = [
-  { id: "google/gemini-3-flash-preview", label: "Gemini 3 Flash (default)" },
+  { id: "mistralai/mistral-large-2512", label: "Mistral Large 2512 (default)" },
+  { id: "google/gemini-3-flash-preview", label: "Gemini 3 Flash" },
   { id: "google/gemini-3.1-pro-preview-20260219", label: "Gemini 3.1 Pro" },
   { id: "openai/gpt-5.4-mini", label: "GPT-5.4 Mini" },
   { id: "openai/gpt-5.4", label: "GPT-5.4" },
