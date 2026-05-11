@@ -1,4 +1,4 @@
-import { useCallback, useEffect } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { content } from "../../../content/de";
 import { useAppStore } from "../../../store/useAppStore";
@@ -6,6 +6,16 @@ import { type WorkPreferenceChoice } from "../../../common";
 import { StepLayout } from "./StepLayout";
 import { useFlowNavigation } from "../../../routing/useFlowNavigation";
 import { parseHashCardIndex } from "../../../routing/routes";
+import { SelectableCardButton } from "../../primitives/buttons/SelectableCardButton";
+
+const OVERLAY_ILLUSTRATIONS: Partial<
+	Record<string, Record<"a" | "b", string>>
+> = {
+	environment: {
+		a: "/illustrations/work-preferences/inside.svg",
+		b: "/illustrations/work-preferences/outside.svg",
+	},
+};
 
 export function WorkPreferencesStep() {
 	const { pathname, hash } = useLocation();
@@ -19,6 +29,13 @@ export function WorkPreferencesStep() {
 		Math.max(0, pairs.length - 1),
 	);
 	const current = pairs[pairIndex];
+
+	const baseIllustration = "/illustrations/work-preferences/star.svg";
+	const [selectedChoice, setSelectedChoice] =
+		useState<WorkPreferenceChoice | null>(null);
+	const selectedIllustrationPath = selectedChoice
+		? (OVERLAY_ILLUSTRATIONS[current.id]?.[selectedChoice] ?? baseIllustration)
+		: baseIllustration;
 
 	const hasAnyExplicitWorkPreference = pairs.some((pair) => {
 		const choice = workPreferences[pair.id];
@@ -34,11 +51,12 @@ export function WorkPreferencesStep() {
 	}, [pathname, hash, navigate]);
 
 	function handleChoice(choice: WorkPreferenceChoice) {
+		setSelectedChoice(choice);
 		setWorkPreference(current.id, choice);
-		goNext();
 	}
 
-	function handleSkip() {
+	function handleNext() {
+		setSelectedChoice(null);
 		goNext();
 	}
 
@@ -49,36 +67,42 @@ export function WorkPreferencesStep() {
 	return (
 		<StepLayout
 			question={content["workPreferences.question"]}
-			onNext={goNext}
-			onSkip={handleSkip}
+			onNext={handleNext}
+			onSkip={handleNext}
 			hasSkipButton={true}
-			hasNextButton={false}
+			hasNextButton={true}
 			skipConfirmTitleKey="skipConfirmDialog.skipAll.title"
 			skipConfirmDescriptionKey="skipConfirmDialog.skipAll.description"
 			isSkipConfirmDialogOpen={isSkipConfirmDialogOpen}
 			skipConfirmOnStay={skipConfirmOnStay}
 		>
-			<div className="flex flex-col justify-center px-4 pt-6 gap-3 h-full overflow-y-hidden">
-				<div key={current.id} className="space-y-3 animate-slideIn">
-					<button
-						type="button"
+			<div className="flex flex-1 flex-col gap-3 h-full">
+				<div className="relative flex flex-1 h-[217px] items-center justify-center">
+					<img src={baseIllustration} alt="" className="object-contain" />
+					{selectedIllustrationPath && (
+						<img
+							key={selectedIllustrationPath}
+							src={selectedIllustrationPath}
+							alt=""
+							className="absolute inset-0 w-full h-full object-contain animate-fadeIn"
+						/>
+					)}
+				</div>
+				<div className="flex gap-3 pb-4" key={current.id}>
+					<SelectableCardButton
+						label={current.a}
+						selected={
+							selectedChoice === "a" || workPreferences[current.id] === "a"
+						}
 						onClick={() => handleChoice("a")}
-						className="w-full py-10 px-6 rounded-3xl text-xl leading-6 font-semibold text-center bg-sky-200 text-sky-1000 transition-transform active:scale-[0.98] focus-visible:outline focus-visible:outline-2 focus-visible:outline-sky-500"
-					>
-						{current.a}
-					</button>
-
-					<p className="text-center text-base text-gray-800">
-						{content["workPreferences.orLabel"]}
-					</p>
-
-					<button
-						type="button"
+					/>
+					<SelectableCardButton
+						label={current.b}
+						selected={
+							selectedChoice === "b" || workPreferences[current.id] === "b"
+						}
 						onClick={() => handleChoice("b")}
-						className="w-full py-10 px-6 rounded-3xl text-xl leading-6 font-semibold text-center bg-sky-800 text-sky-white transition-transform active:scale-[0.98] focus-visible:outline focus-visible:outline-2 focus-visible:outline-sky-500"
-					>
-						{current.b}
-					</button>
+					/>
 				</div>
 			</div>
 		</StepLayout>

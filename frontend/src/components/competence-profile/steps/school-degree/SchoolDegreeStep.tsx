@@ -5,6 +5,7 @@ import { StepLayout } from "../StepLayout";
 import { schoolDegrees } from "./school-degrees";
 import { useFlowNavigation } from "../../../../routing/useFlowNavigation";
 import { Link } from "../../../primitives/links/Link";
+import { SelectableCardButton } from "../../../primitives/buttons/SelectableCardButton";
 
 export function SchoolDegreeStep() {
 	const profile = useAppStore((state) => state.profile);
@@ -41,16 +42,12 @@ export function SchoolDegreeStep() {
 		>
 			<div className="flex flex-col gap-3">
 				{filteredDegrees.map((degree) => (
-					<button
-						className={`flex flex-col gap-2 min-h-[52px] text-left p-3 w-full rounded-xl border-2 text-gray-700 text-lg font-medium focus-visible:outline focus-visible:outline-2 focus-visible:outline-sky-500 ${
-							profile.educationLevel === degree.value
-								? "border-sky-300 bg-sky-50 text-sky-700"
-								: "border-gray-200 bg-transparent"
-						}`}
+					<SelectableCardButton
 						key={degree.value}
+						label={degree.label}
+						selected={profile.educationLevel === degree.value}
 						onClick={() => handleSelect(degree.value)}
 					>
-						{degree.label}
 						{profile.educationLevel === "foreign_degree" &&
 							degree.value === "foreign_degree" && (
 								<Link
@@ -62,7 +59,7 @@ export function SchoolDegreeStep() {
 									showIcon={true}
 								/>
 							)}
-					</button>
+					</SelectableCardButton>
 				))}
 			</div>
 		</StepLayout>

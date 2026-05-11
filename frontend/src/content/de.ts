@@ -251,9 +251,8 @@ export const content = {
 	"workValues.option.remote": "Remote möglich",
 
 	// Work Preferences
-	"workPreferences.question": "Wie möchtest du in Zukunft arbeiten?",
+	"workPreferences.question": "Wie möchtest du lieber arbeiten?",
 	"workPreferences.pairs": workPreferencePairs,
-	"workPreferences.orLabel": "oder",
 
 	// No-Gos
 	"noGos.question": "Was geht für dich überhaupt nicht?",
