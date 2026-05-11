@@ -18,6 +18,11 @@ import { rowToPersona, type PersonaInsertRow } from "./personas/mappers.js";
 
 const occupations: Occupation[] = occupationsData as Occupation[];
 
+// Real defense for the admin surface is APP_PASSWORD, not CORS:
+// auth is via the `x-app-password` request header (never auto-sent by
+// browsers), so a strict CORS allowlist provides little uplift in this
+// model. If/when this migrates to cookie-based auth, revisit and lock
+// CORS down by origin.
 const IS_PRODUCTION = process.env.NODE_ENV === "production";
 const APP_PASSWORD = process.env.APP_PASSWORD;
 
@@ -32,23 +37,12 @@ if (!APP_PASSWORD) {
 	);
 }
 
-const ALLOWED_ORIGINS = (process.env.ALLOWED_ORIGINS ?? "http://localhost:5173")
-	.split(",")
-	.map((o) => o.trim())
-	.filter(Boolean);
-
-if (IS_PRODUCTION && !process.env.ALLOWED_ORIGINS) {
-	throw new Error(
-		"ALLOWED_ORIGINS must be set in production (comma-separated list of frontend origins).",
-	);
-}
-
 const app = new Hono();
 
 app.use(
 	"/*",
 	cors({
-		origin: (origin) => (ALLOWED_ORIGINS.includes(origin) ? origin : null),
+		origin: "*",
 		allowHeaders: ["Content-Type", "x-app-password"],
 		allowMethods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
 	}),
