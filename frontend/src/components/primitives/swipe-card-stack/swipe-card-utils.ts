@@ -6,6 +6,9 @@ export const SWIPE_THRESHOLD = 80;
 
 export const DEFAULT_STACK_GHOST_LAYER_SCALE = 0.85;
 
+/** ghost card scale: shrinks slightly mid-gesture, returns to base scale at full progress */
+const GHOST_STACK_DIP = 0.01;
+
 const GRAVITY_OUT_GAIN = 1.16;
 const GRAVITY_IN_GAIN = 0.84;
 
@@ -29,7 +32,7 @@ export const SWIPE_SNAP_BACK_MS = 300;
 
 /** Pointer cancel: same motion with a slightly longer ease */
 export const SWIPE_SNAP_BACK_POINTER_CANCEL_MS = 500;
-export const SLIDE_IN_MS = 400;
+export const SLIDE_IN_MS = 800;
 export const EXIT_OFFSET_X = 1000;
 export const EXIT_OFFSET_Y = -800;
 
@@ -65,7 +68,17 @@ export interface CardVisualState {
 	backTranslateY: number;
 	backCardBackgroundColor: string;
 	ghostOpacity: number;
+	/** 0–1 from drag / fly; use with `computeGhostStackScale` for the rearmost ghost layer. */
+	interactionProgress: number;
 	topTransform: string;
+}
+
+export function computeGhostStackScale(
+	ghostLayerScale: number,
+	interactionProgress: number,
+): number {
+	const p = Math.min(1, Math.max(0, interactionProgress));
+	return ghostLayerScale * (1 - GHOST_STACK_DIP * Math.sin(Math.PI * p));
 }
 
 export function topCardAnimationClassNames(
@@ -117,10 +130,19 @@ export interface TopCardAccentBgInput {
  *
  * - Idle / up-swipe → `bg-gray-200`
  * - Horizontal drag past a small threshold → `accent.left` or `accent.right`
+ *
+ * When `accent` is passed explicitly (asymmetric left/right stacks), the base stays
+ * `bg-gray-200` so progressive tint can live only in the card overlay — avoids an
+ * instant jump to full saturation while dragging.
  */
 export function getTopCardAccentBg(input: TopCardAccentBgInput): string {
 	const { isDragging, dragX, dragY, flyDirection, animationDirection } = input;
 	const accent = input.accent ?? DEFAULT_ACCENT;
+	const useOverlayOnlyTint = input.accent !== undefined;
+
+	if (useOverlayOnlyTint) {
+		return IDLE_BG;
+	}
 
 	if (flyDirection === "up" || animationDirection === "up") {
 		return IDLE_BG;
@@ -198,6 +220,7 @@ export function getCardVisualState(
 	const backScale = ghostLayerScale + (1 - ghostLayerScale) * progress;
 	const backTranslateY = 41 * (1 - progress);
 	const ghostOpacity = fly.isActive ? progress : 1;
+	const interactionProgress = progress;
 
 	const isFlyingUp = flyDirection === "up" && isFlying;
 	const rotate = isFlyingUp ? 0 : activeOffset.x / 20;
@@ -215,6 +238,7 @@ export function getCardVisualState(
 		backTranslateY,
 		backCardBackgroundColor: mixBackCardSurfaceColor(progress),
 		ghostOpacity,
+		interactionProgress,
 		topTransform,
 	};
 }
@@ -235,11 +259,22 @@ export interface DragDirectionAndProgress {
 	progress: number;
 }
 
+export interface DragTintContext {
+	animationPhase: AnimationPhase;
+	animationDirection: SwipeDirection | null;
+}
+
+export interface GetDragDirectionAndProgressInput {
+	isDragging: boolean;
+	dragX: number;
+	flyDirection: SwipeDirection | null;
+	tintContext?: DragTintContext;
+}
+
 export function getDragDirectionAndProgress(
-	isDragging: boolean,
-	dragX: number,
-	flyDirection: SwipeDirection | null,
+	input: GetDragDirectionAndProgressInput,
 ): DragDirectionAndProgress {
+	const { isDragging, dragX, flyDirection, tintContext } = input;
 	if (isDragging && dragX !== 0) {
 		return {
 			direction: dragX > 0 ? "right" : "left",
@@ -248,6 +283,17 @@ export function getDragDirectionAndProgress(
 	}
 	if (flyDirection === "left" || flyDirection === "right") {
 		return { direction: flyDirection, progress: 1 };
+	}
+	if (
+		tintContext &&
+		tintContext.animationPhase === "slide-in" &&
+		(tintContext.animationDirection === "left" ||
+			tintContext.animationDirection === "right")
+	) {
+		return {
+			direction: tintContext.animationDirection,
+			progress: 1,
+		};
 	}
 	return { direction: null, progress: 0 };
 }

@@ -15,6 +15,7 @@ import {
 	EXIT_OFFSET_Y,
 	getDragDirectionAndProgress,
 	getCardVisualState,
+	computeGhostStackScale,
 	DEFAULT_STACK_GHOST_LAYER_SCALE,
 	getCursorStyle,
 	getTopCardAccentBg,
@@ -33,6 +34,13 @@ import type {
 } from "./swipe-card-utils";
 
 export type { SwipeDirection };
+
+export interface SwipeCardRenderArgs {
+	index: number;
+	dragDirection: "left" | "right" | null;
+	dragProgress: number;
+	slideInHorizontalColorFade?: boolean;
+}
 
 export interface SwipeCardStackHandle {
 	goNext: () => void;
@@ -53,16 +61,8 @@ interface SwipeCardStackProps {
 	onBack: (newIndex: number) => SwipeDirection;
 	onIndexChange?: (index: number) => void;
 	onSwipe?: (direction: SwipeDirection, index: number) => void;
-	renderCard: (
-		index: number,
-		dragDirection: "left" | "right" | null,
-		dragProgress: number,
-	) => React.ReactNode;
-	renderBackCard?: (
-		index: number,
-		dragDirection: "left" | "right" | null,
-		dragProgress: number,
-	) => React.ReactNode;
+	renderCard: (args: SwipeCardRenderArgs) => React.ReactNode;
+	renderBackCard?: (args: SwipeCardRenderArgs) => React.ReactNode;
 	className?: string;
 	horizontalAccentBg?: TopCardHorizontalAccentBg;
 	stackGhostLayerScale?: number;
@@ -79,6 +79,48 @@ function getTopCardContentOpacity(input: {
 		return 1 - dragProgress * 0.15;
 	}
 	return 1;
+}
+
+function backCardLayerStyle(input: {
+	slideInRecede: boolean;
+	stackGhostLayerScale: number;
+	backCardBackgroundColor: string;
+	backScale: number;
+	backTranslateY: number;
+	backCardTransition: string;
+}): React.CSSProperties {
+	const {
+		slideInRecede,
+		stackGhostLayerScale,
+		backCardBackgroundColor,
+		backScale,
+		backTranslateY,
+		backCardTransition,
+	} = input;
+	if (slideInRecede) {
+		return {
+			["--stack-ghost-scale" as string]: String(stackGhostLayerScale),
+			willChange: "transform, background-color",
+		};
+	}
+	return {
+		backgroundColor: backCardBackgroundColor,
+		transform: `scale(${backScale}) translateY(${backTranslateY}px)`,
+		transition: backCardTransition,
+		willChange: "transform, background-color",
+	};
+}
+
+function slideInHorizontalColorFadeActive(
+	horizontalAccentBg: TopCardHorizontalAccentBg | undefined,
+	isSliding: boolean,
+	animationDirection: SwipeDirection | null,
+): boolean {
+	return (
+		horizontalAccentBg !== undefined &&
+		isSliding &&
+		(animationDirection === "left" || animationDirection === "right")
+	);
 }
 
 export const SwipeCardStack = forwardRef<
@@ -132,6 +174,7 @@ export const SwipeCardStack = forwardRef<
 	const isAnimating = useRef(false);
 	const timeoutRef = useRef<number | null>(null);
 	const pendingSlideInDirectionRef = useRef<SwipeDirection | null>(null);
+	const flyOutTriggeredByDragRef = useRef(false);
 
 	const isFlying = flyOffset !== null;
 	const isSliding = animationPhase === "slide-in";
@@ -145,6 +188,7 @@ export const SwipeCardStack = forwardRef<
 		backTranslateY,
 		backCardBackgroundColor,
 		ghostOpacity,
+		interactionProgress,
 		topTransform,
 	} = getCardVisualState(
 		activeOffset,
@@ -155,6 +199,42 @@ export const SwipeCardStack = forwardRef<
 			flyStart: flyStartOffset,
 		},
 		stackGhostLayerScale,
+	);
+
+	const [flyOutGhostProgress, setFlyOutGhostProgress] = useState(0);
+
+	useEffect(() => {
+		if (animationPhase !== "slide-out" || flyOutTriggeredByDragRef.current) {
+			setFlyOutGhostProgress(0);
+			return undefined;
+		}
+		let cancelled = false;
+		let raf = 0;
+		const start = performance.now();
+		const tick = () => {
+			if (cancelled) {
+				return;
+			}
+			const elapsed = Math.min(1, (performance.now() - start) / FLY_OUT_MS);
+			setFlyOutGhostProgress(elapsed);
+			if (elapsed < 1) {
+				raf = requestAnimationFrame(tick);
+			}
+		};
+		raf = requestAnimationFrame(tick);
+		return () => {
+			cancelled = true;
+			cancelAnimationFrame(raf);
+		};
+	}, [animationPhase, displayIndex]);
+
+	const ghostDipProgress = isDragging
+		? interactionProgress
+		: flyOutGhostProgress;
+
+	const ghostScale = computeGhostStackScale(
+		stackGhostLayerScale,
+		ghostDipProgress,
 	);
 
 	useEffect(() => {
@@ -240,6 +320,7 @@ export const SwipeCardStack = forwardRef<
 				setAnimationPhase("idle");
 				setAnimationDirection(null);
 				isAnimating.current = false;
+				flyOutTriggeredByDragRef.current = false;
 
 				if (targetIndex !== null) {
 					setDisplayIndex(targetIndex);
@@ -374,6 +455,7 @@ export const SwipeCardStack = forwardRef<
 				isSwipeUpGestureEnabled,
 			);
 			if (direction) {
+				flyOutTriggeredByDragRef.current = true;
 				flyOut(direction, nextIndex);
 			} else {
 				setCardTransition(swipeSnapBackTopTransition(SWIPE_SNAP_BACK_MS));
@@ -416,7 +498,23 @@ export const SwipeCardStack = forwardRef<
 	});
 
 	const { direction: currentDragDirection, progress: dragProgress } =
-		getDragDirectionAndProgress(isDragging, dragX, flyDirection);
+		getDragDirectionAndProgress({
+			isDragging,
+			dragX,
+			flyDirection,
+			tintContext: {
+				animationPhase,
+				animationDirection,
+			},
+		});
+
+	const slideInHorizontalColorFade = slideInHorizontalColorFadeActive(
+		horizontalAccentBg,
+		isSliding,
+		animationDirection,
+	);
+
+	const backCardSlideInRecede = isSliding && hasNext;
 
 	const topCardContentOpacity = getTopCardContentOpacity({
 		horizontalAccentBg,
@@ -436,9 +534,9 @@ export const SwipeCardStack = forwardRef<
 						className="absolute inset-0 -bottom-[37px] w-full bg-gray-300 rounded-3xl pointer-events-none"
 						style={{
 							zIndex: 0,
-							transform: `scale(${stackGhostLayerScale})`,
+							transform: `scale(${ghostScale})`,
 							opacity: ghostOpacity,
-							willChange: "opacity",
+							willChange: "opacity, transform",
 						}}
 					/>
 				)}
@@ -447,17 +545,28 @@ export const SwipeCardStack = forwardRef<
 				{hasNext && (
 					<div
 						aria-hidden="true"
-						className="pointer-events-none absolute inset-0 flex min-h-0 w-full flex-col items-stretch rounded-3xl"
+						className={`pointer-events-none absolute inset-0 flex min-h-0 w-full flex-col items-stretch rounded-3xl ${
+							backCardSlideInRecede ? "animate-backCardSlideInRecede" : ""
+						}`}
 						style={{
 							zIndex: 1,
-							backgroundColor: backCardBackgroundColor,
-							transform: `scale(${backScale}) translateY(${backTranslateY}px)`,
-							transition: backCardTransition,
-							willChange: "transform, background-color",
+							...backCardLayerStyle({
+								slideInRecede: backCardSlideInRecede,
+								stackGhostLayerScale,
+								backCardBackgroundColor,
+								backScale,
+								backTranslateY,
+								backCardTransition,
+							}),
 						}}
 					>
 						<div className="flex min-h-0 min-w-0 flex-1 flex-col">
-							{backCardContent(displayIndex + 1, null, 0)}
+							{backCardContent({
+								index: displayIndex + 1,
+								dragDirection: null,
+								dragProgress: 0,
+								slideInHorizontalColorFade: false,
+							})}
 						</div>
 					</div>
 				)}
@@ -481,7 +590,12 @@ export const SwipeCardStack = forwardRef<
 					onPointerCancel={handlePointerCancel}
 				>
 					<div className="relative flex h-full min-h-0 w-full min-w-0 flex-1 flex-col items-stretch">
-						{renderCard(displayIndex, currentDragDirection, dragProgress)}
+						{renderCard({
+							index: displayIndex,
+							dragDirection: currentDragDirection,
+							dragProgress,
+							slideInHorizontalColorFade,
+						})}
 					</div>
 				</div>
 			</div>

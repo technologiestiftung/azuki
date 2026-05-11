@@ -8,6 +8,7 @@ import {
 	detectHorizontalSwipeOnly,
 	detectSwipeDirection,
 	getCardVisualState,
+	computeGhostStackScale,
 	getCursorStyle,
 	getDragDirectionAndProgress,
 	getTopCardAccentBg,
@@ -76,7 +77,7 @@ describe("getTopCardAccentBg", () => {
 		).toBe("bg-gray-200");
 	});
 
-	test("returns accent side for horizontal intent while dragging", () => {
+	test("keeps neutral base when accent is explicit (tint is overlay-only)", () => {
 		expect(
 			getTopCardAccentBg({
 				isDragging: true,
@@ -86,7 +87,7 @@ describe("getTopCardAccentBg", () => {
 				animationDirection: null,
 				accent: customAccent,
 			}),
-		).toBe("bg-blue-500");
+		).toBe("bg-gray-200");
 
 		expect(
 			getTopCardAccentBg({
@@ -97,10 +98,32 @@ describe("getTopCardAccentBg", () => {
 				animationDirection: null,
 				accent: customAccent,
 			}),
-		).toBe("bg-red-500");
+		).toBe("bg-gray-200");
 	});
 
-	test("uses flyDirection or animationDirection when not overridden by up", () => {
+	test("uses flyDirection or animationDirection when accent uses defaults only", () => {
+		expect(
+			getTopCardAccentBg({
+				isDragging: false,
+				dragX: 0,
+				dragY: 0,
+				flyDirection: "right",
+				animationDirection: null,
+			}),
+		).toBe("bg-sky-300");
+
+		expect(
+			getTopCardAccentBg({
+				isDragging: false,
+				dragX: 0,
+				dragY: 0,
+				flyDirection: null,
+				animationDirection: "left",
+			}),
+		).toBe("bg-sky-300");
+	});
+
+	test("keeps neutral base for explicit accent during fly / slide animation", () => {
 		expect(
 			getTopCardAccentBg({
 				isDragging: false,
@@ -110,7 +133,7 @@ describe("getTopCardAccentBg", () => {
 				animationDirection: null,
 				accent: customAccent,
 			}),
-		).toBe("bg-blue-500");
+		).toBe("bg-gray-200");
 
 		expect(
 			getTopCardAccentBg({
@@ -121,7 +144,7 @@ describe("getTopCardAccentBg", () => {
 				animationDirection: "left",
 				accent: customAccent,
 			}),
-		).toBe("bg-red-500");
+		).toBe("bg-gray-200");
 	});
 
 	test("returns idle when no side is determined", () => {
@@ -166,6 +189,15 @@ describe("mixBackCardSurfaceColor", () => {
 	});
 });
 
+describe("computeGhostStackScale", () => {
+	test("matches base scale at rest and at full progress; dips near mid progress", () => {
+		const g = DEFAULT_STACK_GHOST_LAYER_SCALE;
+		expect(computeGhostStackScale(g, 0)).toBeCloseTo(g);
+		expect(computeGhostStackScale(g, 1)).toBeCloseTo(g);
+		expect(computeGhostStackScale(g, 0.5)).toBeLessThan(g);
+	});
+});
+
 describe("getCardVisualState", () => {
 	test("computes back stack and ghost from drag progress", () => {
 		const state = getCardVisualState(
@@ -182,6 +214,7 @@ describe("getCardVisualState", () => {
 		expect(state.backTranslateY).toBe(0);
 		expect(state.backCardBackgroundColor).toBe(mixBackCardSurfaceColor(1));
 		expect(state.ghostOpacity).toBe(1);
+		expect(state.interactionProgress).toBe(1);
 		expect(state.topTransform).toContain("rotate(");
 		expect(state.topTransform).toContain("scale(1)");
 	});
@@ -199,6 +232,7 @@ describe("getCardVisualState", () => {
 
 		expect(state.backScale).toBe(1);
 		expect(state.ghostOpacity).toBe(1);
+		expect(state.interactionProgress).toBe(1);
 	});
 
 	test("ghost is hidden at gesture start and fades with progress when active", () => {
@@ -213,6 +247,7 @@ describe("getCardVisualState", () => {
 		);
 		expect(hidden.ghostOpacity).toBe(0);
 		expect(hidden.backScale).toBe(DEFAULT_STACK_GHOST_LAYER_SCALE);
+		expect(hidden.interactionProgress).toBe(0);
 
 		const mid = getCardVisualState(
 			{ x: SWIPE_THRESHOLD / 2, y: 0 },
@@ -224,6 +259,7 @@ describe("getCardVisualState", () => {
 			},
 		);
 		expect(mid.ghostOpacity).toBeCloseTo(0.5);
+		expect(mid.interactionProgress).toBeCloseTo(0.5);
 	});
 
 	test("up fly applies scale from flyUp progress when flyStart is set", () => {
@@ -253,6 +289,7 @@ describe("getCardVisualState", () => {
 		);
 
 		expect(state.ghostOpacity).toBe(1);
+		expect(state.interactionProgress).toBeCloseTo(40 / SWIPE_THRESHOLD);
 	});
 });
 
@@ -271,31 +308,73 @@ describe("getCursorStyle", () => {
 describe("getDragDirectionAndProgress", () => {
 	test("derives direction and capped progress from drag", () => {
 		expect(
-			getDragDirectionAndProgress(true, SWIPE_THRESHOLD * 2, null),
+			getDragDirectionAndProgress({
+				isDragging: true,
+				dragX: SWIPE_THRESHOLD * 2,
+				flyDirection: null,
+			}),
 		).toEqual({ direction: "right", progress: 1 });
 
-		expect(getDragDirectionAndProgress(true, -40, null)).toEqual({
+		expect(
+			getDragDirectionAndProgress({
+				isDragging: true,
+				dragX: -40,
+				flyDirection: null,
+			}),
+		).toEqual({
 			direction: "left",
 			progress: 40 / SWIPE_THRESHOLD,
 		});
 	});
 
 	test("uses fly direction at full progress when not dragging", () => {
-		expect(getDragDirectionAndProgress(false, 0, "left")).toEqual({
+		expect(
+			getDragDirectionAndProgress({
+				isDragging: false,
+				dragX: 0,
+				flyDirection: "left",
+			}),
+		).toEqual({
 			direction: "left",
 			progress: 1,
 		});
 	});
 
+	test("slide-in horizontal uses animation direction at full progress", () => {
+		expect(
+			getDragDirectionAndProgress({
+				isDragging: false,
+				dragX: 0,
+				flyDirection: null,
+				tintContext: {
+					animationPhase: "slide-in",
+					animationDirection: "right",
+				},
+			}),
+		).toEqual({ direction: "right", progress: 1 });
+	});
+
 	test("ignores up for horizontal direction", () => {
-		expect(getDragDirectionAndProgress(false, 0, "up")).toEqual({
+		expect(
+			getDragDirectionAndProgress({
+				isDragging: false,
+				dragX: 0,
+				flyDirection: "up",
+			}),
+		).toEqual({
 			direction: null,
 			progress: 0,
 		});
 	});
 
 	test("no direction when not dragging and no lateral fly", () => {
-		expect(getDragDirectionAndProgress(false, 0, null)).toEqual({
+		expect(
+			getDragDirectionAndProgress({
+				isDragging: false,
+				dragX: 0,
+				flyDirection: null,
+			}),
+		).toEqual({
 			direction: null,
 			progress: 0,
 		});

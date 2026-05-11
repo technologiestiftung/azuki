@@ -127,7 +127,7 @@ function label(id: string, map: Record<string, string>): string {
  * Serializes the user profile into labeled German-language lines
  * for the AI prompt. Only non-empty fields are included.
  */
-function formatProfileSections(profile: UserProfile): string {
+export function formatProfileSections(profile: UserProfile): string {
   const parts: string[] = [];
 
   if (profile.inSchool !== null) {
@@ -143,14 +143,35 @@ function formatProfileSections(profile: UserProfile): string {
       `Schulabschluss: ${label(profile.educationLevel, EDUCATION_LABELS)}`,
     );
   }
-  if (profile.favoriteSubjects.length > 0) {
+  // Custom subjects are mirrored into `profile.favoriteSubjects` by the store
+  // (see addCustomSubject in frontend/src/store/useAppStore.ts). Filter them
+  // out of the structured "Lieblingsfächer" line so they only appear once,
+  // under the "eigene Angaben" line below.
+  const customSubjectSet = new Set(profile.customSubjects);
+  const predefinedSubjects = profile.favoriteSubjects.filter(
+    (id) => !customSubjectSet.has(id),
+  );
+  if (predefinedSubjects.length > 0) {
     parts.push(
-      `Lieblingsfächer: ${profile.favoriteSubjects.map((s) => label(s, SUBJECT_LABELS)).join(", ")}`,
+      `Lieblingsfächer: ${predefinedSubjects.map((s) => label(s, SUBJECT_LABELS)).join(", ")}`,
     );
   }
-  if (profile.interests.length > 0) {
+  if (profile.customSubjects.length > 0) {
     parts.push(
-      `Interessen/Hobbys: ${profile.interests.map((s) => label(s, INTEREST_LABELS)).join(", ")}`,
+      `Weitere Schulfächer (eigene Angaben): ${profile.customSubjects.join(", ")}`,
+    );
+  }
+  // Custom interests are mirrored into `profile.interests` by the store
+  // (see addCustomInterest in frontend/src/store/useAppStore.ts). Filter them
+  // out of the structured "Interessen/Hobbys" line so they only appear once,
+  // under the "eigene Angaben" line below.
+  const customInterestSet = new Set(profile.customInterests);
+  const predefinedInterests = profile.interests.filter(
+    (id) => !customInterestSet.has(id),
+  );
+  if (predefinedInterests.length > 0) {
+    parts.push(
+      `Interessen/Hobbys: ${predefinedInterests.map((s) => label(s, INTEREST_LABELS)).join(", ")}`,
     );
   }
   if (profile.customInterests.length > 0) {
@@ -202,10 +223,12 @@ function formatProfileSections(profile: UserProfile): string {
   }
 
   if (profile.secretTalent) {
-    parts.push(`Geheimes Talent: ${profile.secretTalent}`);
+    parts.push(`Geheimes Talent (eigene Angaben): ${profile.secretTalent}`);
   }
   if (profile.practicalExperience) {
-    parts.push(`Praktische Erfahrungen: ${profile.practicalExperience}`);
+    parts.push(
+      `Praktische Erfahrungen (eigene Angaben): ${profile.practicalExperience}`,
+    );
   }
 
   return parts.join("\n");
