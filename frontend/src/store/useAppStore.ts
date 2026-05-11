@@ -15,7 +15,7 @@ const initialProfile: UserProfile = {
 	customSubjects: [],
 	interests: [],
 	customInterests: [],
-	workValues: [],
+	workExpectations: [],
 	strengths: {},
 	secretTalent: "",
 	practicalExperience: "",
@@ -34,7 +34,7 @@ function normalizeProfile(
 		customSubjects: merged.customSubjects ?? [],
 		interests: merged.interests ?? [],
 		customInterests: merged.customInterests ?? [],
-		workValues: merged.workValues ?? [],
+		workExpectations: merged.workExpectations ?? [],
 		strengths: merged.strengths ?? {},
 		workPreferences: merged.workPreferences ?? {},
 		noGos: merged.noGos ?? {},
@@ -50,7 +50,7 @@ interface AppActions {
 	setInSchool: (value: boolean) => void;
 	setEducationLevel: (value: EducationLevel) => void;
 	toggleSubject: (subject: string) => void;
-	toggleWorkValue: (value: string) => void;
+	toggleWorkExpectation: (value: string) => void;
 	toggleInterest: (interest: string) => void;
 	addCustomInterest: (interest: string) => void;
 	addCustomSubject: (subject: string) => void;
@@ -102,15 +102,17 @@ export const useAppStore = create<AppState & AppActions>()(
 						matchResults: null,
 					};
 				}),
-			toggleWorkValue: (value) =>
+			toggleWorkExpectation: (value) =>
 				set((state) => {
-					const workValues = state.profile.workValues.includes(value)
-						? state.profile.workValues.filter(
-								(workValue: string) => workValue !== value,
+					const workExpectations = state.profile.workExpectations.includes(
+						value,
+					)
+						? state.profile.workExpectations.filter(
+								(workExpectation: string) => workExpectation !== value,
 							)
-						: [...state.profile.workValues, value];
+						: [...state.profile.workExpectations, value];
 					return {
-						profile: { ...state.profile, workValues },
+						profile: { ...state.profile, workExpectations },
 						matchResults: null,
 					};
 				}),

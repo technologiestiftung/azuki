@@ -2,13 +2,13 @@ import { Mistral } from "@mistralai/mistralai";
 import type { UserProfile, MatchResult } from "@azuki/shared";
 import type { ScoredOccupation } from "../matching/index.js";
 import {
-  EDUCATION_LABELS,
-  INTEREST_LABELS,
-  SUBJECT_LABELS,
-  STRENGTH_LABELS,
-  WORK_PREF_LABELS,
-  NO_GO_LABELS,
-  WORK_VALUE_LABELS,
+	EDUCATION_LABELS,
+	INTEREST_LABELS,
+	SUBJECT_LABELS,
+	STRENGTH_LABELS,
+	WORK_PREF_LABELS,
+	NO_GO_LABELS,
+	WORK_EXPECTATION_LABELS,
 } from "./labels.js";
 const MISTRAL_API_KEY = process.env.MISTRAL_API_KEY;
 const MAX_DESCRIPTION_LENGTH = 400;
@@ -17,7 +17,7 @@ const MAX_RESULTS = 8;
 const DEFAULT_REASONING = "Dieser Beruf passt zu deinem Profil.";
 
 function buildSystemPrompt(): string {
-  return `AUFGABE
+	return `AUFGABE
 Du bekommst:
 - ein Profil eines Jugendlichen
 - eine vorgefilterte Liste der 40 passendsten Ausbildungsberufe
@@ -112,7 +112,7 @@ Format:
 }
 
 function label(id: string, map: Record<string, string>): string {
-  return map[id] ?? id;
+	return map[id] ?? id;
 }
 
 /**
@@ -120,142 +120,143 @@ function label(id: string, map: Record<string, string>): string {
  * for the Mistral prompt. Only non-empty fields are included.
  */
 export function formatProfileSections(profile: UserProfile): string {
-  const parts: string[] = [];
+	const parts: string[] = [];
 
-  if (profile.inSchool !== null) {
-    parts.push(
-      profile.inSchool
-        ? "Ist aktuell noch in der Schule"
-        : "Hat die Schule bereits abgeschlossen",
-    );
-  }
+	if (profile.inSchool !== null) {
+		parts.push(
+			profile.inSchool
+				? "Ist aktuell noch in der Schule"
+				: "Hat die Schule bereits abgeschlossen",
+		);
+	}
 
-  if (profile.educationLevel) {
-    parts.push(
-      `Schulabschluss: ${label(profile.educationLevel, EDUCATION_LABELS)}`,
-    );
-  }
-  // Custom subjects are mirrored into `profile.favoriteSubjects` by the store
-  // (see addCustomSubject in frontend/src/store/useAppStore.ts). Filter them
-  // out of the structured "Lieblingsfächer" line so they only appear once,
-  // under the "eigene Angaben" line below.
-  const customSubjectSet = new Set(profile.customSubjects);
-  const predefinedSubjects = profile.favoriteSubjects.filter(
-    (id) => !customSubjectSet.has(id),
-  );
-  if (predefinedSubjects.length > 0) {
-    parts.push(
-      `Lieblingsfächer: ${predefinedSubjects.map((s) => label(s, SUBJECT_LABELS)).join(", ")}`,
-    );
-  }
-  if (profile.customSubjects.length > 0) {
-    parts.push(
-      `Weitere Schulfächer (eigene Angaben): ${profile.customSubjects.join(", ")}`,
-    );
-  }
-  // Custom interests are mirrored into `profile.interests` by the store
-  // (see addCustomInterest in frontend/src/store/useAppStore.ts). Filter them
-  // out of the structured "Interessen/Hobbys" line so they only appear once,
-  // under the "eigene Angaben" line below.
-  const customInterestSet = new Set(profile.customInterests);
-  const predefinedInterests = profile.interests.filter(
-    (id) => !customInterestSet.has(id),
-  );
-  if (predefinedInterests.length > 0) {
-    parts.push(
-      `Interessen/Hobbys: ${predefinedInterests.map((s) => label(s, INTEREST_LABELS)).join(", ")}`,
-    );
-  }
-  if (profile.customInterests.length > 0) {
-    parts.push(
-      `Weitere Interessen (eigene Angaben): ${profile.customInterests.join(", ")}`,
-    );
-  }
+	if (profile.educationLevel) {
+		parts.push(
+			`Schulabschluss: ${label(profile.educationLevel, EDUCATION_LABELS)}`,
+		);
+	}
+	// Custom subjects are mirrored into `profile.favoriteSubjects` by the store
+	// (see addCustomSubject in frontend/src/store/useAppStore.ts). Filter them
+	// out of the structured "Lieblingsfächer" line so they only appear once,
+	// under the "eigene Angaben" line below.
+	const customSubjectSet = new Set(profile.customSubjects);
+	const predefinedSubjects = profile.favoriteSubjects.filter(
+		(id) => !customSubjectSet.has(id),
+	);
+	if (predefinedSubjects.length > 0) {
+		parts.push(
+			`Lieblingsfächer: ${predefinedSubjects.map((s) => label(s, SUBJECT_LABELS)).join(", ")}`,
+		);
+	}
+	if (profile.customSubjects.length > 0) {
+		parts.push(
+			`Weitere Schulfächer (eigene Angaben): ${profile.customSubjects.join(", ")}`,
+		);
+	}
+	// Custom interests are mirrored into `profile.interests` by the store
+	// (see addCustomInterest in frontend/src/store/useAppStore.ts). Filter them
+	// out of the structured "Interessen/Hobbys" line so they only appear once,
+	// under the "eigene Angaben" line below.
+	const customInterestSet = new Set(profile.customInterests);
+	const predefinedInterests = profile.interests.filter(
+		(id) => !customInterestSet.has(id),
+	);
+	if (predefinedInterests.length > 0) {
+		parts.push(
+			`Interessen/Hobbys: ${predefinedInterests.map((s) => label(s, INTEREST_LABELS)).join(", ")}`,
+		);
+	}
+	if (profile.customInterests.length > 0) {
+		parts.push(
+			`Weitere Interessen (eigene Angaben): ${profile.customInterests.join(", ")}`,
+		);
+	}
 
-  const strengthEntries = Object.entries(profile.strengths)
-    .filter(([, value]) => value >= 0.5)
-    .map(
-      ([key, value]) =>
-        `${label(key, STRENGTH_LABELS)} (${value >= 1 ? "stark" : "etwas"})`,
-    );
-  if (strengthEntries.length > 0) {
-    parts.push(`Stärken: ${strengthEntries.join(", ")}`);
-  }
+	const strengthEntries = Object.entries(profile.strengths)
+		.filter(([, value]) => value >= 0.5)
+		.map(
+			([key, value]) =>
+				`${label(key, STRENGTH_LABELS)} (${value >= 1 ? "stark" : "etwas"})`,
+		);
+	if (strengthEntries.length > 0) {
+		parts.push(`Stärken: ${strengthEntries.join(", ")}`);
+	}
 
-  const weaknessEntries = Object.entries(profile.strengths)
-    .filter(([, value]) => value > 0 && value < 0.5)
-    .map(([key]) => label(key, STRENGTH_LABELS));
-  if (weaknessEntries.length > 0) {
-    parts.push(`Eher nicht so gut in: ${weaknessEntries.join(", ")}`);
-  }
+	const weaknessEntries = Object.entries(profile.strengths)
+		.filter(([, value]) => value > 0 && value < 0.5)
+		.map(([key]) => label(key, STRENGTH_LABELS));
+	if (weaknessEntries.length > 0) {
+		parts.push(`Eher nicht so gut in: ${weaknessEntries.join(", ")}`);
+	}
 
-  const prefLabels = Object.entries(profile.workPreferences)
-    .filter(([, value]) => value !== null)
-    .map(([key, value]) => {
-      const pair = WORK_PREF_LABELS[key];
-      if (!pair) return null;
-      return value === "a" ? pair.a : pair.b;
-    })
-    .filter(Boolean);
-  if (prefLabels.length > 0) {
-    parts.push(`Arbeitsvorlieben: ${prefLabels.join(", ")}`);
-  }
+	const prefLabels = Object.entries(profile.workPreferences)
+		.filter(([, value]) => value !== null)
+		.map(([key, value]) => {
+			const pair = WORK_PREF_LABELS[key];
+			if (!pair) return null;
+			return value === "a" ? pair.a : pair.b;
+		})
+		.filter(Boolean);
+	if (prefLabels.length > 0) {
+		parts.push(`Arbeitsvorlieben: ${prefLabels.join(", ")}`);
+	}
 
-  if (profile.workValues?.length > 0) {
-    parts.push(
-      `Rahmenbedingungen: ${profile.workValues.map((v) => label(v, WORK_VALUE_LABELS)).join(", ")}`,
-    );
-  }
+	if (profile.workExpectations?.length > 0) {
+		parts.push(
+			`Rahmenbedingungen: ${profile.workExpectations.map((v) => label(v, WORK_EXPECTATION_LABELS)).join(", ")}`,
+		);
+	}
 
-  const noGoLabels = Object.entries(profile.noGos)
-    .filter(([, value]) => value === "rejected")
-    .map(([key]) => label(key, NO_GO_LABELS));
-  if (noGoLabels.length > 0) {
-    parts.push(`No-Gos: ${noGoLabels.join(", ")}`);
-  }
+	const noGoLabels = Object.entries(profile.noGos)
+		.filter(([, value]) => value === "rejected")
+		.map(([key]) => label(key, NO_GO_LABELS));
+	if (noGoLabels.length > 0) {
+		parts.push(`No-Gos: ${noGoLabels.join(", ")}`);
+	}
 
-  if (profile.secretTalent) {
-    parts.push(`Geheimes Talent (eigene Angaben): ${profile.secretTalent}`);
-  }
-  if (profile.practicalExperience) {
-    parts.push(
-      `Praktische Erfahrungen (eigene Angaben): ${profile.practicalExperience}`,
-    );
-  }
+	if (profile.secretTalent) {
+		parts.push(`Geheimes Talent (eigene Angaben): ${profile.secretTalent}`);
+	}
+	if (profile.practicalExperience) {
+		parts.push(
+			`Praktische Erfahrungen (eigene Angaben): ${profile.practicalExperience}`,
+		);
+	}
 
-  return parts.join("\n");
+	return parts.join("\n");
 }
 
 function formatOccupationList(scored: ScoredOccupation[]): string {
-  return scored
-    .map((item, index) => {
-      const occupation = item.occupation;
-      const description =
-        occupation.descriptionShort ||
-        occupation.taskSummary ||
-        occupation.name;
-      const truncatedDesc =
-        description.length > MAX_DESCRIPTION_LENGTH
-          ? description.slice(0, MAX_DESCRIPTION_LENGTH) + "..."
-          : description;
-      let entry = `${index + 1}. [ID: ${occupation.id}] ${occupation.name}\n   ${truncatedDesc}`;
-      if (occupation.competenciesText) {
-        const truncatedComp =
-          occupation.competenciesText.length > MAX_DESCRIPTION_LENGTH
-            ? occupation.competenciesText.slice(0, MAX_DESCRIPTION_LENGTH) + "..."
-            : occupation.competenciesText;
-        entry += `\n   Kompetenzen: ${truncatedComp}`;
-      }
-      return entry;
-    })
-    .join("\n\n");
+	return scored
+		.map((item, index) => {
+			const occupation = item.occupation;
+			const description =
+				occupation.descriptionShort ||
+				occupation.taskSummary ||
+				occupation.name;
+			const truncatedDesc =
+				description.length > MAX_DESCRIPTION_LENGTH
+					? description.slice(0, MAX_DESCRIPTION_LENGTH) + "..."
+					: description;
+			let entry = `${index + 1}. [ID: ${occupation.id}] ${occupation.name}\n   ${truncatedDesc}`;
+			if (occupation.competenciesText) {
+				const truncatedComp =
+					occupation.competenciesText.length > MAX_DESCRIPTION_LENGTH
+						? occupation.competenciesText.slice(0, MAX_DESCRIPTION_LENGTH) +
+							"..."
+						: occupation.competenciesText;
+				entry += `\n   Kompetenzen: ${truncatedComp}`;
+			}
+			return entry;
+		})
+		.join("\n\n");
 }
 
 function buildUserPrompt(
-  scored: ScoredOccupation[],
-  profile: UserProfile,
+	scored: ScoredOccupation[],
+	profile: UserProfile,
 ): string {
-  return `PROFIL DES JUGENDLICHEN:
+	return `PROFIL DES JUGENDLICHEN:
 ${formatProfileSections(profile)}
 
 AUSBILDUNGSBERUFE (wähle die ${MIN_RESULTS}-${MAX_RESULTS} besten aus):
@@ -263,87 +264,87 @@ ${formatOccupationList(scored)}`;
 }
 
 function toOccupationResult(
-  item: ScoredOccupation,
-  reasoning: string,
+	item: ScoredOccupation,
+	reasoning: string,
 ): MatchResult["occupations"][number] {
-  return {
-    id: item.occupation.id,
-    name: item.occupation.name,
-    score: item.score,
-    images: item.occupation.images.slice(0, 3),
-    taskSummary: item.occupation.taskSummary || "",
-    reasoning,
-  };
+	return {
+		id: item.occupation.id,
+		name: item.occupation.name,
+		score: item.score,
+		images: item.occupation.images.slice(0, 3),
+		taskSummary: item.occupation.taskSummary || "",
+		reasoning,
+	};
 }
 
 export async function mistralRank(
-  scored: ScoredOccupation[],
-  profile: UserProfile,
+	scored: ScoredOccupation[],
+	profile: UserProfile,
 ): Promise<MatchResult> {
-  if (!MISTRAL_API_KEY) {
-    console.warn("MISTRAL_API_KEY not set — returning pre-filter results");
-    return fallbackResult(scored);
-  }
+	if (!MISTRAL_API_KEY) {
+		console.warn("MISTRAL_API_KEY not set — returning pre-filter results");
+		return fallbackResult(scored);
+	}
 
-  const client = new Mistral({ apiKey: MISTRAL_API_KEY });
-  const userPrompt = buildUserPrompt(scored, profile);
-  const response = await client.chat.complete({
-    model: "mistral-large-latest",
-    messages: [
-      { role: "system", content: buildSystemPrompt() },
-      { role: "user", content: userPrompt },
-    ],
-    temperature: 0.3,
-    responseFormat: { type: "json_object" },
-  });
+	const client = new Mistral({ apiKey: MISTRAL_API_KEY });
+	const userPrompt = buildUserPrompt(scored, profile);
+	const response = await client.chat.complete({
+		model: "mistral-large-latest",
+		messages: [
+			{ role: "system", content: buildSystemPrompt() },
+			{ role: "user", content: userPrompt },
+		],
+		temperature: 0.3,
+		responseFormat: { type: "json_object" },
+	});
 
-  const content =
-    typeof response.choices?.[0]?.message?.content === "string"
-      ? response.choices[0].message.content
-      : "";
+	const content =
+		typeof response.choices?.[0]?.message?.content === "string"
+			? response.choices[0].message.content
+			: "";
 
-  let rankings: { id: number; begruendung: string }[];
-  try {
-    const parsed = JSON.parse(content);
-    rankings = Array.isArray(parsed)
-      ? parsed
-      : parsed.berufe || parsed.results || [];
-  } catch {
-    console.error("Failed to parse Mistral response:", content);
-    return fallbackResult(scored);
-  }
+	let rankings: { id: number; begruendung: string }[];
+	try {
+		const parsed = JSON.parse(content);
+		rankings = Array.isArray(parsed)
+			? parsed
+			: parsed.berufe || parsed.results || [];
+	} catch {
+		console.error("Failed to parse Mistral response:", content);
+		return fallbackResult(scored);
+	}
 
-  const occupationMap = new Map(
-    scored.map((item) => [item.occupation.id, item]),
-  );
+	const occupationMap = new Map(
+		scored.map((item) => [item.occupation.id, item]),
+	);
 
-  const result: MatchResult = {
-    occupations: rankings
-      .filter((ranking) => occupationMap.has(ranking.id))
-      .map((ranking) => {
-        const item = occupationMap.get(ranking.id)!;
-        return toOccupationResult(item, ranking.begruendung);
-      }),
-  };
+	const result: MatchResult = {
+		occupations: rankings
+			.filter((ranking) => occupationMap.has(ranking.id))
+			.map((ranking) => {
+				const item = occupationMap.get(ranking.id)!;
+				return toOccupationResult(item, ranking.begruendung);
+			}),
+	};
 
-  if (result.occupations.length < MIN_RESULTS) {
-    const usedIds = new Set(
-      result.occupations.map((occupation) => occupation.id),
-    );
-    for (const item of scored) {
-      if (result.occupations.length >= MAX_RESULTS) break;
-      if (usedIds.has(item.occupation.id)) continue;
-      result.occupations.push(toOccupationResult(item, DEFAULT_REASONING));
-    }
-  }
+	if (result.occupations.length < MIN_RESULTS) {
+		const usedIds = new Set(
+			result.occupations.map((occupation) => occupation.id),
+		);
+		for (const item of scored) {
+			if (result.occupations.length >= MAX_RESULTS) break;
+			if (usedIds.has(item.occupation.id)) continue;
+			result.occupations.push(toOccupationResult(item, DEFAULT_REASONING));
+		}
+	}
 
-  return result;
+	return result;
 }
 
 function fallbackResult(scored: ScoredOccupation[]): MatchResult {
-  return {
-    occupations: scored
-      .slice(0, MAX_RESULTS)
-      .map((item) => toOccupationResult(item, DEFAULT_REASONING)),
-  };
+	return {
+		occupations: scored
+			.slice(0, MAX_RESULTS)
+			.map((item) => toOccupationResult(item, DEFAULT_REASONING)),
+	};
 }
