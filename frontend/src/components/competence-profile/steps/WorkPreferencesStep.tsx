@@ -15,7 +15,23 @@ const OVERLAY_ILLUSTRATIONS: Partial<
 		a: "/illustrations/work-preferences/inside.svg",
 		b: "/illustrations/work-preferences/outside.svg",
 	},
-};
+	location: {
+		a: "/illustrations/work-preferences/fixed.svg",
+		b: "/illustrations/work-preferences/mobile.svg",
+	},
+	"hands-vs-mind": {
+		a: "/illustrations/work-preferences/practical.svg",
+		b: "/illustrations/work-preferences/mind.svg",
+	},
+	variety: {
+		a: "/illustrations/work-preferences/routine.svg",
+		b: "/illustrations/work-preferences/variety.svg",
+	},
+	pace: {
+		a: "/illustrations/work-preferences/fast.svg",
+		b: "/illustrations/work-preferences/slow.svg",
+	},
+} as const;
 
 export function WorkPreferencesStep() {
 	const { pathname, hash } = useLocation();
