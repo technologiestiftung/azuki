@@ -9,27 +9,34 @@ import { parseHashCardIndex } from "../../../routing/routes";
 import { SelectableCardButton } from "../../primitives/buttons/SelectableCardButton";
 
 const OVERLAY_ILLUSTRATIONS: Partial<
-	Record<string, Record<"a" | "b", string>>
+	Record<string, Record<"a" | "b", string[]>>
 > = {
 	environment: {
-		a: "/illustrations/work-preferences/inside.svg",
-		b: "/illustrations/work-preferences/outside.svg",
+		a: ["/illustrations/work-preferences/inside.svg"],
+		b: [
+			"/illustrations/work-preferences/outside.svg",
+			"/illustrations/work-preferences/sun.svg",
+		],
 	},
 	location: {
-		a: "/illustrations/work-preferences/fixed.svg",
-		b: "/illustrations/work-preferences/mobile.svg",
+		a: ["/illustrations/work-preferences/fixed.svg"],
+		b: ["/illustrations/work-preferences/mobile.svg"],
 	},
 	"hands-vs-mind": {
-		a: "/illustrations/work-preferences/practical.svg",
-		b: "/illustrations/work-preferences/mind.svg",
+		a: ["/illustrations/work-preferences/practical.svg"],
+		b: ["/illustrations/work-preferences/mind.svg"],
 	},
 	variety: {
-		a: "/illustrations/work-preferences/routine.svg",
-		b: "/illustrations/work-preferences/variety.svg",
+		a: ["/illustrations/work-preferences/routine.svg"],
+		b: ["/illustrations/work-preferences/variety.svg"],
 	},
 	pace: {
-		a: "/illustrations/work-preferences/fast.svg",
-		b: "/illustrations/work-preferences/slow.svg",
+		a: ["/illustrations/work-preferences/fast.svg"],
+		b: ["/illustrations/work-preferences/slow.svg"],
+	},
+	structure: {
+		a: ["/illustrations/work-preferences/task.svg"],
+		b: ["/illustrations/work-preferences/idea.svg"],
 	},
 } as const;
 
@@ -50,10 +57,10 @@ export function WorkPreferencesStep() {
 	const [selectedChoice, setSelectedChoice] =
 		useState<WorkPreferenceChoice | null>(null);
 	const activeChoice = selectedChoice ?? workPreferences[current.id] ?? null;
-	const selectedIllustrationPath =
+	const selectedIllustrations: string[] =
 		activeChoice && (activeChoice === "a" || activeChoice === "b")
-			? (OVERLAY_ILLUSTRATIONS[current.id]?.[activeChoice] ?? baseIllustration)
-			: baseIllustration;
+			? (OVERLAY_ILLUSTRATIONS[current.id]?.[activeChoice] ?? [])
+			: [];
 
 	const hasAnyExplicitWorkPreference = pairs.some((pair) => {
 		const choice = workPreferences[pair.id];
@@ -107,14 +114,14 @@ export function WorkPreferencesStep() {
 						alt=""
 						className="object-contain h-full"
 					/>
-					{selectedIllustrationPath && (
+					{selectedIllustrations.map((src) => (
 						<img
-							key={selectedIllustrationPath}
-							src={selectedIllustrationPath}
+							key={src}
+							src={src}
 							alt=""
 							className="absolute inset-0 w-full h-full object-contain animate-fadeInUp"
 						/>
-					)}
+					))}
 				</div>
 				<div className="flex gap-3 pb-4" key={current.id}>
 					<SelectableCardButton
