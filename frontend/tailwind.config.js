@@ -80,6 +80,10 @@ export default {
 					from: { opacity: "0" },
 					to: { opacity: "1" },
 				},
+				fadeInUp: {
+					from: { opacity: "0", transform: "translateY(0.5rem)" },
+					to: { opacity: "1", transform: "translateY(0)" },
+				},
 				slideInNext: {
 					from: { transform: "translateX(100%)" },
 					to: { transform: "translateX(0)" },
@@ -153,14 +157,17 @@ export default {
 			},
 			animation: {
 				fadeIn: "fadeIn 0.2s ease-in-out",
+				fadeInUp: "fadeInUp 0.2s ease-in-out",
 				slideInNext: "slideInNext 0.3s ease-in-out",
 				slideOutPrev: "slideOutPrev 0.3s ease-in-out forwards",
 				slideInPrev: "slideInPrev 0.3s ease-in-out",
 				slideOutNext: "slideOutNext 0.3s ease-in-out forwards",
 				slideInLeft: "slideInLeft 0.3s ease-out forwards",
 				slideInRight: "slideInRight 0.3s ease-out forwards",
-				slideInLeftTint: "slideInLeftTint 800ms cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards",
-				slideInRightTint: "slideInRightTint 800ms cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards",
+				slideInLeftTint:
+					"slideInLeftTint 800ms cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards",
+				slideInRightTint:
+					"slideInRightTint 800ms cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards",
 				backCardSlideInRecede:
 					"backCardSlideInRecede 800ms cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards",
 				slideInTop: "slideInTop 0.4s ease-out forwards",

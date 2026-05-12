@@ -112,7 +112,7 @@ export function WorkPreferencesStep() {
 							key={selectedIllustrationPath}
 							src={selectedIllustrationPath}
 							alt=""
-							className="absolute inset-0 w-full h-full object-contain animate-fadeIn"
+							className="absolute inset-0 w-full h-full object-contain animate-fadeInUp"
 						/>
 					)}
 				</div>
