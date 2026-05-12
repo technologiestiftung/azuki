@@ -14,13 +14,16 @@ const OVERLAY_ILLUSTRATIONS: Partial<
 	environment: {
 		a: ["/illustrations/work-preferences/inside.svg"],
 		b: [
-			"/illustrations/work-preferences/outside.svg",
 			"/illustrations/work-preferences/sun.svg",
+			"/illustrations/work-preferences/outside.svg",
 		],
 	},
 	location: {
 		a: ["/illustrations/work-preferences/fixed.svg"],
-		b: ["/illustrations/work-preferences/mobile.svg"],
+		b: [
+			"/illustrations/work-preferences/fixed.svg",
+			"/illustrations/work-preferences/mobile.svg",
+		],
 	},
 	"hands-vs-mind": {
 		a: ["/illustrations/work-preferences/practical.svg"],
@@ -38,6 +41,10 @@ const OVERLAY_ILLUSTRATIONS: Partial<
 		a: ["/illustrations/work-preferences/task.svg"],
 		b: ["/illustrations/work-preferences/idea.svg"],
 	},
+	people: {
+		a: ["/illustrations/work-preferences/alone.svg"],
+		b: ["/illustrations/work-preferences/contact.svg"],
+	},
 } as const;
 
 export function WorkPreferencesStep() {
@@ -53,7 +60,10 @@ export function WorkPreferencesStep() {
 	);
 	const current = pairs[pairIndex];
 
-	const baseIllustration = "/illustrations/work-preferences/star.svg";
+	const baseIllustration =
+		current.id === "pace"
+			? "/illustrations/work-preferences/clock.svg"
+			: "/illustrations/work-preferences/star.svg";
 	const [selectedChoice, setSelectedChoice] =
 		useState<WorkPreferenceChoice | null>(null);
 	const activeChoice = selectedChoice ?? workPreferences[current.id] ?? null;
