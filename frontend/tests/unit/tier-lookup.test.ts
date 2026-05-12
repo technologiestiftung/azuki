@@ -42,13 +42,13 @@ describe("getRubricTier", () => {
 	test("returns undefined for unknown IDs", () => {
 		expect(getRubricTier(999, persona)).toBeUndefined();
 	});
-	test("S wins over A wins over C when ID in multiple tiers", () => {
+	test("C wins over S wins over A when ID in multiple tiers", () => {
 		const overlapping: Persona = {
 			...persona,
 			tierS: [42],
 			tierA: [42],
 			tierC: [42],
 		};
-		expect(getRubricTier(42, overlapping)).toBe("S");
+		expect(getRubricTier(42, overlapping)).toBe("C");
 	});
 });

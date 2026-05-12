@@ -46,7 +46,9 @@ function installFakeLocalStorage(): Storage {
 			data.set(k, v);
 		},
 	};
-	(globalThis as unknown as { window: unknown }).window = { localStorage: storage };
+	(globalThis as unknown as { window: unknown }).window = {
+		localStorage: storage,
+	};
 	(globalThis as unknown as { localStorage: Storage }).localStorage = storage;
 	return storage;
 }
@@ -77,7 +79,10 @@ describe("useEvalStore — fetchPersonas", () => {
 	});
 
 	test("preserves existing selectedPersonaIds when non-empty", async () => {
-		globalThis.localStorage.setItem("eval.selectedPersonaIds", JSON.stringify(["a"]));
+		globalThis.localStorage.setItem(
+			"eval.selectedPersonaIds",
+			JSON.stringify(["a"]),
+		);
 		const useEvalStore = await loadFreshStore([
 			makePersona("a"),
 			makePersona("b"),
