@@ -47,3 +47,12 @@ export {
 
 export type { Persona } from "./persona";
 
+export {
+	type Bundesland,
+	BUNDESLAENDER,
+	isBundesland,
+	traineeCountInState,
+	traineeCountAcrossStates,
+	hasAvailabilityData,
+} from "./availability";
+

@@ -14,11 +14,17 @@
 		"test:unit": "npm run test:unit --workspace=frontend",
 		"test:e2e": "npm run test:e2e --workspace=frontend",
 		"test:a11y": "npm run test:a11y --workspace=frontend",
-		"install:all": "npm install && npm install --workspace=backend && npm install --workspace=frontend"
+		"install:all": "npm install && npm install --workspace=backend && npm install --workspace=frontend",
+		"data:fetch-berufe": "npx tsx scripts/fetch-berufe.ts",
+		"data:build-trainee-fixtures": "npx tsx scripts/build-trainee-fixtures.ts",
+		"data:build-availability": "npx tsx scripts/build-availability.ts"
 	},
 	"workspaces": [
 		"shared",
 		"backend",
 		"frontend"
-	]
+	],
+	"devDependencies": {
+		"exceljs": "^4.4.0"
+	}
 }

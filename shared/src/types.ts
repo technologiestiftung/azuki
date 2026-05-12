@@ -64,6 +64,8 @@ export interface Occupation {
 	digitalizationSignal: boolean;
 	workLocations: string;
 	competenciesText: string;
+	/** Klassifikation der Berufe 2010 (KldB 2010) — joint Bundesagentur/Destatis classification, used to join external datasets. */
+	germanOccupationCode: string | null;
 }
 
 // --- Education Level (user's own degree) ---
