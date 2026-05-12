@@ -11,6 +11,12 @@ describe("slugify", () => {
 		expect(slugify("Łódź")).toBe("lodz");
 	});
 
+	test("expands German eszett to ss", () => {
+		expect(slugify("Straße")).toBe("strasse");
+		expect(slugify("Größe")).toBe("grosse");
+		expect(slugify("STRAẞE")).toBe("strasse");
+	});
+
 	test("spaces become dashes", () => {
 		expect(slugify("Maria Tester")).toBe("maria-tester");
 	});

@@ -28,7 +28,6 @@ function makePersona(overrides: Partial<Persona> = {}): Persona {
 		tierS: [],
 		tierA: [],
 		tierC: [],
-		inEvalSet: true,
 		createdAt: "x",
 		updatedAt: "x",
 		...overrides,

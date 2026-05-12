@@ -25,7 +25,6 @@ const persona: Persona = {
 	tierS: [1, 2],
 	tierA: [10, 11],
 	tierC: [100, 101],
-	inEvalSet: true,
 	createdAt: "x",
 	updatedAt: "x",
 };
