@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import type { Persona } from "@azuki/shared";
-import { createPersona, listPersonas } from "../../api/client";
+import { createPersona } from "../../api/client";
+import { useEvalStore } from "../../store/useEvalStore";
 import { EvalAuthGate } from "../eval/EvalAuthGate";
 import { EvalNav } from "../eval/EvalNav";
 
@@ -30,16 +30,18 @@ const EMPTY_PROFILE = {
 
 function PersonasPageInner() {
 	const navigate = useNavigate();
-	const [personas, setPersonas] = useState<Persona[] | null>(null);
+	const personas = useEvalStore((s) => s.personas);
+	const fetchPersonas = useEvalStore((s) => s.fetchPersonas);
+	const addPersona = useEvalStore((s) => s.addPersona);
 	const [error, setError] = useState<string | null>(null);
 
 	useEffect(() => {
-		listPersonas()
-			.then(setPersonas)
-			.catch((err) =>
+		if (personas === null) {
+			fetchPersonas().catch((err) =>
 				setError(err instanceof Error ? err.message : String(err)),
 			);
-	}, []);
+		}
+	}, [personas, fetchPersonas]);
 
 	async function handleCreate() {
 		try {
@@ -51,6 +53,7 @@ function PersonasPageInner() {
 				tierA: [],
 				tierC: [],
 			});
+			addPersona(created);
 			navigate(`/personas/${created.id}`);
 		} catch (err) {
 			setError(err instanceof Error ? err.message : String(err));

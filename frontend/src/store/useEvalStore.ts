@@ -23,6 +23,9 @@ interface EvalState {
 	fetchPersonas: () => Promise<void>;
 	setSelectedPersonaIds: (ids: Set<string>) => void;
 	togglePersonaSelection: (id: string) => void;
+	addPersona: (persona: Persona) => void;
+	replacePersona: (persona: Persona) => void;
+	removePersona: (id: string) => void;
 }
 
 const initialPrompt =
@@ -101,5 +104,42 @@ export const useEvalStore = create<EvalState>((set, get) => ({
 		}
 		persistSelected(next);
 		set({ selectedPersonaIds: next });
+	},
+
+	addPersona: (persona) => {
+		const current = get();
+		const nextPersonas = current.personas
+			? [...current.personas, persona]
+			: [persona];
+		const nextSelected = new Set(current.selectedPersonaIds);
+		nextSelected.add(persona.id);
+		persistSelected(nextSelected);
+		set({ personas: nextPersonas, selectedPersonaIds: nextSelected });
+	},
+
+	replacePersona: (persona) => {
+		const current = get().personas;
+		if (!current) {
+			return;
+		}
+		const idx = current.findIndex((p) => p.id === persona.id);
+		if (idx === -1) {
+			return;
+		}
+		const next = [...current];
+		next[idx] = persona;
+		set({ personas: next });
+	},
+
+	removePersona: (id) => {
+		const current = get();
+		if (!current.personas) {
+			return;
+		}
+		const nextPersonas = current.personas.filter((p) => p.id !== id);
+		const nextSelected = new Set(current.selectedPersonaIds);
+		nextSelected.delete(id);
+		persistSelected(nextSelected);
+		set({ personas: nextPersonas, selectedPersonaIds: nextSelected });
 	},
 }));

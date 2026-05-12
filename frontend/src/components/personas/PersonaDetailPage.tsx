@@ -6,6 +6,7 @@ import {
 	type Persona,
 } from "@azuki/shared";
 import { deletePersona, getPersona, updatePersona } from "../../api/client";
+import { useEvalStore } from "../../store/useEvalStore";
 import { EvalAuthGate } from "../eval/EvalAuthGate";
 import { EvalNav } from "../eval/EvalNav";
 import { OccupationPicker } from "./OccupationPicker";
@@ -39,6 +40,8 @@ const EDUCATION_LEVELS: { value: EducationLevel; label: string }[] = [
 function PersonaDetailPageInner() {
 	const { id } = useParams<{ id: string }>();
 	const navigate = useNavigate();
+	const replacePersona = useEvalStore((s) => s.replacePersona);
+	const removePersona = useEvalStore((s) => s.removePersona);
 	const [persona, setPersona] = useState<Persona | null>(null);
 	const [draft, setDraft] = useState<Persona | null>(null);
 	const [error, setError] = useState<string | null>(null);
@@ -79,6 +82,7 @@ function PersonaDetailPageInner() {
 			});
 			setPersona(updated);
 			setDraft(updated);
+			replacePersona(updated);
 		} catch (err) {
 			setError(err instanceof Error ? err.message : String(err));
 		} finally {
@@ -95,6 +99,7 @@ function PersonaDetailPageInner() {
 		}
 		try {
 			await deletePersona(id);
+			removePersona(id);
 			navigate("/personas");
 		} catch (err) {
 			setError(err instanceof Error ? err.message : String(err));
