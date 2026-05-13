@@ -1,8 +1,9 @@
-import { useCallback, useRef } from "react";
+import { useCallback, useRef, useEffect } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import { content } from "../../../../content/de";
 import { useAppStore } from "../../../../store/useAppStore";
-import { Step } from "../../../../common";
 import { StepLayout } from "../StepLayout";
+import { useFlowNavigation } from "../../../../routing/useFlowNavigation";
 import { StrengthsSlider } from "./StrengthsSlider";
 import { strengths } from "./strengths";
 import { SwipeCardStack } from "../../../primitives/swipe-card-stack/SwipeCardStack";
@@ -11,19 +12,29 @@ import type {
 	SwipeDirection,
 } from "../../../primitives/swipe-card-stack/SwipeCardStack";
 import { SwipeCard } from "../../../primitives/swipe-card-stack/SwipeCard";
+import { parseHashCardIndex } from "../../../../routing/routes";
+
+export const STACK_GHOST_LAYER_SCALE = 84 / 100;
 
 export function StrengthsStep() {
+	const { pathname, hash } = useLocation();
+	const navigate = useNavigate();
+	const { goNext, goPrevious } = useFlowNavigation();
+
 	const strengthValues = useAppStore((state) => state.profile.strengths);
 	const setStrength = useAppStore((state) => state.setStrength);
-	const setStrengthSubIndex = useAppStore((state) => state.setStrengthSubIndex);
-	const nextStep = useAppStore((state) => state.nextStep);
-	const prevStep = useAppStore((state) => state.prevStep);
 
 	const stackRef = useRef<SwipeCardStackHandle>(null);
-	const initialIndexValue = useAppStore((state) => state.strengthSubIndex);
-	const initialIndex = useRef(initialIndexValue).current;
+	const cardIndex = Math.min(
+		parseHashCardIndex(hash),
+		Math.max(0, strengths.length - 1),
+	);
 
-	const currentIndex = useAppStore((state) => state.strengthSubIndex);
+	useEffect(() => {
+		if (pathname === "/strengths" && !hash) {
+			navigate({ pathname: "/strengths", hash: "#0" }, { replace: true });
+		}
+	}, [pathname, hash, navigate]);
 
 	const getDirectionForIndex = useCallback(
 		(index: number): SwipeDirection => {
@@ -41,13 +52,24 @@ export function StrengthsStep() {
 
 	const handleIndexChange = useCallback(
 		(index: number) => {
-			setStrengthSubIndex(index);
+			navigate(
+				{ pathname: "/strengths", hash: `#${index}` },
+				{ replace: true },
+			);
 		},
-		[setStrengthSubIndex],
+		[navigate],
 	);
 
-	const currentCard = strengths[currentIndex];
+	const currentCard = strengths[cardIndex];
 	const currentValue = strengthValues[currentCard?.id] ?? 0.5;
+
+	const hasAnyExplicitStrengthRating = strengths.some(
+		(strength) => strength.id in strengthValues,
+	);
+	const isOnLastStrengthCard = cardIndex >= strengths.length - 1;
+
+	const isSkipConfirmDialogOpen =
+		isOnLastStrengthCard && !hasAnyExplicitStrengthRating;
 
 	const handleSliderChange = useCallback(
 		(value: number) => {
@@ -59,34 +81,39 @@ export function StrengthsStep() {
 	);
 
 	const handleSkip = useCallback(() => {
-		if (currentCard) {
-			setStrength(currentCard.id, 0.5);
-		}
 		stackRef.current?.goNext();
-	}, [currentCard, setStrength]);
+	}, []);
+
+	const skipConfirmOnStay = useCallback(() => {
+		navigate({ pathname, hash: "#0" }, { replace: true });
+	}, [navigate, pathname]);
 
 	return (
 		<StepLayout
 			question={content["strengths.question"]}
-			currentStep={Step.Strengths}
 			onNext={() => stackRef.current?.goNext()}
 			onSkip={handleSkip}
 			onBack={() => stackRef.current?.goBack()}
 			hasSkipButton={true}
 			skipLabel={content["strengths.skipButton.label"]}
+			isSkipConfirmDialogOpen={isSkipConfirmDialogOpen}
+			skipConfirmTitleKey="skipConfirmDialog.skipAll.title"
+			skipConfirmDescriptionKey="skipConfirmDialog.skipAll.description"
+			skipConfirmOnStay={skipConfirmOnStay}
 		>
-			<div className="flex flex-col justify-center items-center h-[85%] flex-1 gap-y-5 py-5">
+			<div className="flex min-h-0 flex-1 flex-col items-center gap-5 h-full pb-5">
 				<SwipeCardStack
 					ref={stackRef}
 					count={strengths.length}
-					initialIndex={initialIndex}
+					initialIndex={cardIndex}
+					stackGhostLayerScale={STACK_GHOST_LAYER_SCALE}
 					onCommit={getDirectionForIndex}
-					onExhausted={nextStep}
-					onBefore={prevStep}
+					onExhausted={goNext}
+					onBefore={goPrevious}
 					onBack={getDirectionForIndex}
 					onIndexChange={handleIndexChange}
-					renderCard={(index: number) => (
-						<SwipeCard index={index} cards={strengths} minHeight={202} />
+					renderCard={({ index }) => (
+						<SwipeCard index={index} cards={strengths} />
 					)}
 					isDraggingEnabled={false}
 				/>

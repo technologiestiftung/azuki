@@ -1,4 +1,15 @@
+import { workPreferencePairs } from "./work-preference-pairs";
+
 export const content = {
+	// Common
+	"common.multiSelect.subline": "Wähle alle aus, die zutreffen.",
+	"common.singleSelect.subline": "Wähle eine Option aus.",
+	"common.inputDialog.submitButtonLabel": "Hinzufügen",
+	"common.inputDialog.submitButtonAriaLabel": "Hinzufügen",
+	"common.inputDialog.cancelButtonLabel": "Abbrechen",
+	"common.inputDialog.cancelButtonAriaLabel": "Abbrechen",
+	"common.inputDialog.clearButtonAriaLabel": "Eingabe löschen",
+	"common.inputDialog.errorMessage": "Bitte gib etwas ein",
 	// Welcome
 	"welcome.slide.1.title": "Du suchst eine Ausbildung, die gut zu dir passt?",
 	"welcome.slide.2.title": "Lerne deine Stärken kennen!",
@@ -32,46 +43,72 @@ export const content = {
 	"schoolDegree.option.foreign.label": "Abschluss aus dem Ausland",
 	"schoolDegree.option.unknown.label": "Ich weiß es nicht",
 	"schoolDegree.skipButton.label": "Ich weiß es nicht",
+	"schoolDegree.link.foreign.label": "Hilfe bei der Anerkennung",
+	"schoolDegree.link.foreign.href":
+		"https://www.berlin.de/sen/bjf/anerkennung/",
 
 	// School Subjects
 	"schoolSubjects.question": "Welche Schulfächer machen dir Spaß?",
 	"schoolSubjects.skipButton.label": "Überspringen",
-	"schoolSubjects.input.addPlaceholder": "Etwas anderes hinzufügen",
-	"schoolSubjects.input.customSubject.label": "Von dir hinzugefügt",
+	"schoolSubjects.pill.label.postfix": "als lieblingsfach auswählen",
+	"schoolSubjects.addCustomSubjectButton.label": "Schulfach hinzufügen",
+	"schoolSubjects.addCustomSubjectButton.ariaLabel": "Schulfach hinzufügen",
+	"schoolSubjects.customSubject.label": "Von dir hinzugefügt",
+	"schoolSubjects.inputDialog.input.addPlaceholder": "Schulfach hinzufügen",
+	"schoolSubjects.addCustomSubjectButton.addMore": "Weitere hinzufügen",
 	//Languages
 	"schoolSubjects.languages.label": "Sprachen",
 	"schoolSubjects.languages.german.label": "Deutsch",
+	"schoolSubjects.languages.german.icon": "🇩🇪",
 	"schoolSubjects.languages.english.label": "Englisch",
+	"schoolSubjects.languages.english.icon": "🇬🇧",
 	"schoolSubjects.languages.other.label": "Andere Fremdsprachen",
+	"schoolSubjects.languages.other.icon": "🌍",
 	//MINT
-	"schoolSubjects.mint.label": "MINT",
+	"schoolSubjects.mint.label": "Mathe, Natur und Technik",
 	"schoolSubjects.mint.math.label": "Mathe",
+	"schoolSubjects.mint.math.icon": "➗",
 	"schoolSubjects.mint.physics.label": "Physik",
+	"schoolSubjects.mint.physics.icon": "⚛️",
 	"schoolSubjects.mint.biology.label": "Biologie",
+	"schoolSubjects.mint.biology.icon": "🔬",
 	"schoolSubjects.mint.chemistry.label": "Chemie",
+	"schoolSubjects.mint.chemistry.icon": "🧪",
 	"schoolSubjects.mint.computerScience.label": "Informatik",
+	"schoolSubjects.mint.computerScience.icon": "💻",
 	// Society & Economy
 	"schoolSubjects.society.label": "Gesellschaft und Wirtschaft",
 	"schoolSubjects.society.wat.label": "Wirtschaft-Arbeit-Technik (WAT)",
+	"schoolSubjects.society.wat.icon": "🛠️",
 	"schoolSubjects.society.homeEconomics.label": "Hauswirtschaftslehre",
+	"schoolSubjects.society.homeEconomics.icon": "🍳",
 	"schoolSubjects.society.ethicsReligion.label": "Ethik & Religion",
+	"schoolSubjects.society.ethicsReligion.icon": "💭",
 	"schoolSubjects.society.pedagogy.label": "Pädagogik",
+	"schoolSubjects.society.pedagogy.icon": "🎓",
 	"schoolSubjects.society.history.label": "Geschichte",
+	"schoolSubjects.society.history.icon": "📜",
 	"schoolSubjects.society.politics.label": "Politik",
+	"schoolSubjects.society.politics.icon": "🗳️",
 	"schoolSubjects.society.geography.label": "Geographie",
+	"schoolSubjects.society.geography.icon": "🗺️",
 	// Creativity
 	"schoolSubjects.creativity.label": "Kreatives und Bewegung",
 	"schoolSubjects.creativity.music.label": "Musik",
+	"schoolSubjects.creativity.music.icon": "🎵",
 	"schoolSubjects.creativity.art.label": "Kunst",
+	"schoolSubjects.creativity.art.icon": "🎨",
 	"schoolSubjects.creativity.performingArts.label": "Theater",
+	"schoolSubjects.creativity.performingArts.icon": "🎭",
 	// Sport
 	"schoolSubjects.sports.sports.label": "Sport",
+	"schoolSubjects.sports.sports.icon": "⚽️",
 
 	// Interests
-	"interests.question": "Was machst du gerne?",
+	"interests.question": "Was magst du gerne?",
 	"interests.addedByYouLabel": "Von dir hinzugefügt",
 	"interests.addPlaceholder": "Etwas anderes hinzufügen",
-	"interests.skipButton.pill.label.postfix": "auswählen als Interesse",
+	"interests.skipButton.pill.label.postfix": "als Interesse auswählen",
 	// Tech & Digital
 	"interests.tech.label": "Technik & Digitales",
 	"interests.tech.gaming.label": "Gaming",
@@ -211,33 +248,11 @@ export const content = {
 	"workValues.option.modernTechnology": "Arbeiten mit modernen Technologien",
 	"workValues.option.shortDistance": "Kurzer Arbeitsweg",
 	"workValues.option.career": "Karriere",
-	"workValues.option.benefits": "Benefits (Arbeitgeberleistungen)",
 	"workValues.option.remote": "Remote möglich",
 
 	// Work Preferences
 	"workPreferences.question": "Wie möchtest du in Zukunft arbeiten?",
-	"workPreferences.pairs": [
-		{ id: "location", a: "Immer am gleichen Ort", b: "Oft unterwegs" },
-		{
-			id: "hands-vs-mind",
-			a: "Mit den Händen arbeiten",
-			b: "Mit dem Kopf arbeiten",
-		},
-		{
-			id: "variety",
-			a: "Immer die gleichen Aufgaben",
-			b: "Immer andere Aufgaben",
-		},
-		{
-			id: "people",
-			a: "Wenig Kontakt mit Menschen",
-			b: "Viel Kontakt mit Menschen",
-		},
-		{ id: "pace", a: "Ruhige Arbeit", b: "Arbeit unter Zeitdruck" },
-		{ id: "structure", a: "Feste Regeln", b: "Viel Freiheit" },
-		{ id: "purpose", a: "Anderen helfen", b: "Aufgaben erledigen" },
-		{ id: "environment", a: "Drinnen", b: "Draußen" },
-	],
+	"workPreferences.pairs": workPreferencePairs,
 	"workPreferences.orLabel": "oder",
 
 	// No-Gos
@@ -248,15 +263,15 @@ export const content = {
 	"noGos.ariaLabel.accept": "Als ist okay markieren",
 	"noGos.skipButton.label": "Überspringen",
 	//noise
-	"noGos.noise.title": "Arbeit mit Lärm",
-	"noGos.noise.description": "z. B. Baustelle, Maschinen oder laute Werkstatt",
+	"noGos.noise.title": "Lärm",
+	"noGos.noise.description": "z.B. Baustelle, Maschinen oder laute Werkstatt",
 	//dirt
-	"noGos.dirt.title": "Schmutz bei der Arbeit",
-	"noGos.dirt.description": "z. B. Müll, Öl, Staub oder starke Gerüche",
+	"noGos.dirt.title": "Schmutz",
+	"noGos.dirt.description": "z.B. Müll, Öl, Staub, starke Gerüche",
 	//heavy-work
 	"noGos.heavy-work.title": "Schwere körperliche Arbeit",
 	"noGos.heavy-work.description":
-		"z. B. schwer heben, lange stehen, viel tragen",
+		"z.B. schwer heben, lange stehen, viel tragen",
 	//computer
 	"noGos.computer.title": "Den ganzen Tag am Computer",
 	"noGos.computer.description": "viel sitzen und am Bildschirm arbeiten",
@@ -266,10 +281,11 @@ export const content = {
 		"zu unterschiedlichen Zeiten arbeiten (z.B. morgens, abends, nachts)",
 	//animals
 	"noGos.animals.title": "Arbeit mit Tieren",
-	"noGos.animals.description": "z. B. im Stall, Tierheim oder Tierarzt",
+	"noGos.animals.description": "z.B. im Stall, Tierheim oder Tierarzt",
 	//danger
-	"noGos.danger.title": "Gefährliche Arbeit",
-	"noGos.danger.description": "z. B. mit Chemikalien, Strom oder großer Höhe",
+	"noGos.danger.title": "Erhöhte Gefahr",
+	"noGos.danger.description":
+		"z.B. Arbeit mit Chemikalien, Starkstrom, in großer Höhe",
 
 	// Navigation
 	"navigation.next": "Weiter",
@@ -286,11 +302,25 @@ export const content = {
 	"results.freiePlaetzeCta": "Freie Plätze anzeigen",
 
 	// Skip confirm dialog
-	"skipConfirmDialog.title": "Du hast noch nichts ausgewählt",
-	"skipConfirmDialog.description":
+	"skipConfirmDialog.default.title": "Du hast noch nichts ausgewählt",
+	"skipConfirmDialog.default.description":
 		"Wenn du mehr auswählst, können wir dir passendere Berufe vorschlagen.",
-	"skipConfirmDialog.confirm": "Auswahl treffen",
+	"skipConfirmDialog.confirm.selection": "Auswählen",
+	"skipConfirmDialog.confirm.answerMultiple": "Fragen beantworten",
+	"skipConfirmDialog.confirm.answerSingle": "Frage beantworten",
 	"skipConfirmDialog.cancel": "Überspringen",
+	"skipConfirmDialog.singleChoice.title": "Bitte wähle eine Option",
+	"skipConfirmDialog.singleChoice.description":
+		"Wenn du etwas auswählst, können wir dir passendere Berufe vorschlagen.",
+	"skipConfirmDialog.multipleChoice.title": "Wähle eine oder mehrere Optionen",
+	"skipConfirmDialog.multipleChoice.description":
+		"Mehr Auswahl ermöglicht passendere Berufsvorschläge.",
+	"skipConfirmDialog.skipAll.title": "Du hast alle Fragen übersprungen",
+	"skipConfirmDialog.skipAll.description":
+		"Beantworte möglichst viele Fragen, um passendere Berufsvorschläge zu erhalten.",
+	"skipConfirmDialog.textInput.title": "Gib eine Antwort ein",
+	"skipConfirmDialog.textInput.description":
+		"Ergänze hier, was noch wichtig ist um passendere Berufsvorschläge zu erhalten.",
 
 	// Freie Plätze
 	"freiePlaetze.title": "Freie Ausbildungsplätze",

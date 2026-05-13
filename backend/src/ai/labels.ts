@@ -1,4 +1,3 @@
-
 import { INTERESTS } from "@azuki/shared";
 
 export const EDUCATION_LABELS: Record<string, string> = {
@@ -9,6 +8,7 @@ export const EDUCATION_LABELS: Record<string, string> = {
 	unknown: "unbekannt",
 	vocational_diploma: "Fachabitur",
 	foreign_degree: "Abschluss aus dem Ausland",
+	none: "Ohne Abschluss",
 };
 
 export const SUBJECT_LABELS: Record<string, string> = {
@@ -28,6 +28,15 @@ export const SUBJECT_LABELS: Record<string, string> = {
 	music: "Musik",
 	ethics: "Ethik",
 	religion: "Religion",
+	wat: "Wirtschaft-Arbeit-Technik (WAT)",
+	home_economics: "Hauswirtschaftslehre",
+	pedagogy: "Pädagogik",
+	history: "Geschichte",
+	politics: "Politik",
+	geography: "Geographie",
+	ethics_religion: "Ethik & Religion",
+	performing_arts: "Darstellendes Spiel",
+	other_languages: "Andere Fremdsprachen",
 };
 
 export const STRENGTH_LABELS: Record<string, string> = {
@@ -42,14 +51,13 @@ export const STRENGTH_LABELS: Record<string, string> = {
 };
 
 export const WORK_PREF_LABELS: Record<string, { a: string; b: string }> = {
-	location: { a: "Immer am gleichen Ort", b: "Oft unterwegs" },
-	"hands-vs-mind": { a: "Mit den Händen arbeiten", b: "Mit dem Kopf arbeiten" },
-	variety: { a: "Immer die gleichen Aufgaben", b: "Immer andere Aufgaben" },
-	people: { a: "Wenig Kontakt mit Menschen", b: "Viel Kontakt mit Menschen" },
-	pace: { a: "Ruhige Arbeit", b: "Arbeit unter Zeitdruck" },
-	structure: { a: "Feste Regeln", b: "Viel Freiheit" },
-	purpose: { a: "Anderen helfen", b: "Aufgaben erledigen" },
 	environment: { a: "Drinnen", b: "Draußen" },
+	location: { a: "Fester Arbeitsort", b: "Viel unterwegs" },
+	"hands-vs-mind": { a: "Handwerklich umsetzen", b: "Nachdenken und planen" },
+	variety: { a: "Feste Abläufe", b: "Jeden Tag was Neues" },
+	people: { a: "Meist alleine arbeiten", b: "Viel Kontakt mit Menschen" },
+	pace: { a: "Entspanntes Tempo", b: "Immer viel zu tun" },
+	structure: { a: "Aufgaben erledigen", b: "Neue Ideen entwickeln" },
 };
 
 export const NO_GO_LABELS: Record<string, string> = {
@@ -70,10 +78,8 @@ export const WORK_VALUE_LABELS: Record<string, string> = {
 	flexible_hours: "Flexible Arbeitszeiten",
 	stability: "Sicherheit und Stabilität",
 	modern_technology: "Arbeiten mit modernen Technologien",
-	movement: "Viel Bewegung",
 	short_distance: "Kurzer Arbeitsweg",
 	career: "Karriere",
-	benefits: "Benefits (Arbeitgeberleistungen)",
 	remote: "Remote möglich",
 };
 

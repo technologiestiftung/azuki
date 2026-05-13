@@ -21,6 +21,9 @@ export interface WorkConditions {
 	regulatedWork: boolean;
 	animalWork: boolean;
 	accidentRisk: boolean;
+	precisionWork: boolean;
+	frequentAbsence: boolean;
+	changingWorkplaces: boolean;
 }
 
 // --- Degree Statistics ---
@@ -54,6 +57,7 @@ export interface Occupation {
 	interests: string[];
 	interestKeywords: string[];
 	strengthTags: string[];
+	skillTags: string[];
 	conditions: WorkConditions;
 	salaryMonthlyMedian: number | null;
 	salaryKnown: boolean;
@@ -86,6 +90,7 @@ export interface UserProfile {
 	inSchool: boolean | null;
 	educationLevel: EducationLevel | null;
 	favoriteSubjects: string[];
+	customSubjects: string[];
 	interests: string[];
 	customInterests: string[];
 	workValues: string[];
@@ -109,6 +114,14 @@ export interface MatchedOccupation {
 
 export interface MatchResult {
 	occupations: MatchedOccupation[];
+	generation?: GenerationInfo;
+}
+
+export interface GenerationInfo {
+	model: string;
+	cost: number;
+	tokensInput: number;
+	tokensOutput: number;
 }
 
 // --- Ausbildungsplatz Search (POST /api/ausbildungsplaetze response) ---

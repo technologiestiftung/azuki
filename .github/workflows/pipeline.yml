@@ -43,11 +43,9 @@ jobs:
       - name: Check Lint 🔎
         run: npm run lint
 
-      # Add the following lines if you need them in your project
-
-#      - name: Run Unit Tests 🧪
-#        run: npm run test:unit
-#
+      - name: Run Unit Tests 🧪
+        run: npm run test:unit
+# Add the following lines if you need them in your project
 #      - name: Install Playwright Browsers 🧭
 #        run: npx playwright install --with-deps
 #

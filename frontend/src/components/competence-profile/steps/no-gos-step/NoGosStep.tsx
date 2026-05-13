@@ -1,7 +1,7 @@
-import { useRef, useCallback } from "react";
+import { useRef, useCallback, useEffect } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import { content } from "../../../../content/de";
 import { useAppStore } from "../../../../store/useAppStore";
-import { Step } from "../../../../common";
 import type { NoGoAnswer } from "@azuki/shared";
 import { StepLayout } from "../StepLayout";
 import { noGos } from "./no-gos";
@@ -12,68 +12,112 @@ import type {
 } from "../../../primitives/swipe-card-stack/SwipeCardStack";
 import { SwipeCard } from "../../../primitives/swipe-card-stack/SwipeCard";
 import { NoGoActionButtons } from "./NoGoActionButtons";
+import { useFlowNavigation } from "../../../../routing/useFlowNavigation";
+import { parseHashCardIndex } from "../../../../routing/routes";
+import type { TopCardHorizontalAccentBg } from "../../../primitives/swipe-card-stack/swipe-card-utils";
+
+export const STACK_GHOST_LAYER_SCALE = 86 / 100;
+
+const NO_GO_CARD_SWIPE_TINT: TopCardHorizontalAccentBg = {
+	left: "bg-orange-500",
+	right: "bg-sky-300",
+};
 
 export function NoGosStep() {
+	const { pathname, hash } = useLocation();
+	const navigate = useNavigate();
+	const { goNext, goPrevious } = useFlowNavigation();
+
 	const stackRef = useRef<SwipeCardStackHandle>(null);
-	const initialIndexValue = useAppStore((state) => state.noGoSubIndex);
-	const initialIndex = useRef(initialIndexValue).current;
+	const cardIndex = Math.min(
+		parseHashCardIndex(hash),
+		Math.max(0, noGos.length - 1),
+	);
+
+	useEffect(() => {
+		if (pathname === "/nogos" && !hash) {
+			navigate({ pathname: "/nogos", hash: "#0" }, { replace: true });
+		}
+	}, [pathname, hash, navigate]);
 
 	const setNoGo = useAppStore(
 		(state) => state.setNoGo as (id: string, answer: NoGoAnswer | null) => void,
 	);
-	const nextStep = useAppStore((state) => state.nextStep);
-	const prevStep = useAppStore((state) => state.prevStep);
-	const noGosValues = useAppStore((state) => state.profile.noGos);
-	const setNoGoSubIndex = useAppStore((state) => state.setNoGoSubIndex);
 
+	const noGosValues = useAppStore((state) => state.profile.noGos);
+
+	/**
+	 * Fly-out (Next) and slide-in (Back) use the same mapping: skipped (`null`) → up;
+	 * never answered (`undefined`) → default accepted → right; accepted/rejected → lateral.
+	 */
 	const getDirectionForIndex = useCallback(
 		(index: number): SwipeDirection => {
 			const card = noGos[index];
-			const value: NoGoAnswer = noGosValues[card?.id] ?? "accepted";
-			return value === "accepted" ? "right" : "left";
+			if (!card) {
+				return "right";
+			}
+			const value = noGosValues[card.id];
+			if (value === null) {
+				return "up";
+			}
+			const resolved: NoGoAnswer = value ?? "accepted";
+			return resolved === "accepted" ? "right" : "left";
 		},
 		[noGosValues],
 	);
 
 	const handleIndexChange = useCallback(
 		(index: number) => {
-			setNoGoSubIndex(index);
+			navigate({ pathname: "/nogos", hash: `#${index}` }, { replace: true });
 		},
-		[setNoGoSubIndex],
+		[navigate],
 	);
 
 	const handleSwipe = useCallback(
 		(direction: SwipeDirection, index: number) => {
 			const card = noGos[index];
-			if (card) {
-				const answer: NoGoAnswer =
-					direction === "right" ? "accepted" : "rejected";
-				setNoGo(card.id, answer);
+			if (!card) {
+				return;
 			}
+			if (direction === "up") {
+				setNoGo(card.id, null);
+				return;
+			}
+			const answer: NoGoAnswer =
+				direction === "right" ? "accepted" : "rejected";
+			setNoGo(card.id, answer);
 		},
 		[setNoGo],
 	);
 
-	const currentIndex = useAppStore((state) => state.noGoSubIndex);
-
 	const handleSkip = useCallback(() => {
-		const card = noGos[currentIndex];
-		if (card) {
-			setNoGo(card.id, null);
-		}
-		stackRef.current?.goNext();
-	}, [currentIndex, setNoGo]);
+		stackRef.current?.swipeUp();
+	}, []);
+
+	const hasAnyExplicitNoGoAnswer = noGos.some((card) => {
+		const value = noGosValues[card.id];
+		return value === "accepted" || value === "rejected";
+	});
+	const isOnLastNoGoCard = cardIndex >= noGos.length - 1;
+	const isSkipConfirmDialogOpen = isOnLastNoGoCard && !hasAnyExplicitNoGoAnswer;
+
+	const skipConfirmOnStay = useCallback(() => {
+		navigate({ pathname, hash: "#0" }, { replace: true });
+	}, [navigate, pathname]);
 
 	return (
 		<StepLayout
 			question={content["noGos.question"]}
-			currentStep={Step.NoGos}
 			onNext={() => stackRef.current?.goNext()}
 			onSkip={handleSkip}
 			onBack={() => stackRef.current?.goBack()}
 			hasSkipButton={true}
 			hasNextButton={false}
 			skipLabel={content["noGos.skipButton.label"]}
+			isSkipConfirmDialogOpen={isSkipConfirmDialogOpen}
+			skipConfirmTitleKey="skipConfirmDialog.skipAll.title"
+			skipConfirmDescriptionKey="skipConfirmDialog.skipAll.description"
+			skipConfirmOnStay={skipConfirmOnStay}
 			bottomContent={
 				<NoGoActionButtons
 					onClickAccept={() => stackRef.current?.swipeRight()}
@@ -81,20 +125,34 @@ export function NoGosStep() {
 				/>
 			}
 		>
-			<div className="flex flex-col justify-center items-center h-full flex-1">
+			<div className="flex min-h-0 flex-1 flex-col h-full pb-5">
 				<SwipeCardStack
 					ref={stackRef}
 					count={noGos.length}
-					initialIndex={initialIndex}
+					initialIndex={cardIndex}
 					isSwipeUpGestureEnabled={false}
+					stackGhostLayerScale={STACK_GHOST_LAYER_SCALE}
+					horizontalAccentBg={NO_GO_CARD_SWIPE_TINT}
 					onCommit={getDirectionForIndex}
-					onExhausted={nextStep}
-					onBefore={prevStep}
+					onExhausted={goNext}
+					onBefore={goPrevious}
 					onBack={getDirectionForIndex}
 					onIndexChange={handleIndexChange}
 					onSwipe={handleSwipe}
-					renderCard={(index: number) => (
-						<SwipeCard index={index} cards={noGos} minHeight={257} />
+					renderCard={({
+						index,
+						dragDirection,
+						dragProgress,
+						slideInHorizontalColorFade = false,
+					}) => (
+						<SwipeCard
+							index={index}
+							cards={noGos}
+							dragDirection={dragDirection}
+							dragProgress={dragProgress}
+							dragColorWash={NO_GO_CARD_SWIPE_TINT}
+							slideInHorizontalColorFade={slideInHorizontalColorFade}
+						/>
 					)}
 				/>
 			</div>

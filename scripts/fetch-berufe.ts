@@ -68,6 +68,7 @@ const INFOFELD_IDS = {
   aufgabenKompakt: "b11-0",
   arbeitsorte: "b12-02",
   kompetenzenText: "b20-32",
+  faehigkeiten: "b20-2",
 } as const;
 
 // --- Helpers ---
@@ -146,6 +147,9 @@ function extractConditions(infofelder: Infofeld[]): WorkConditions {
       text,
     ),
     accidentRisk: /Unfallgefahr|Infektionsgefahr|Absturzgefährdung/i.test(text),
+    precisionWork: /Präzisions.+Feinarbeit/i.test(text),
+    frequentAbsence: /häufige Abwesenheit vom Wohnort/i.test(text),
+    changingWorkplaces: /wechselnde Arbeitsorte/i.test(text),
   };
 }
 
@@ -255,33 +259,57 @@ function extractInterestData(infofelder: Infofeld[]): {
     .map((m) => m[1].replace(/\s+/g, " ").trim())
     .filter(Boolean);
   const interestKeywords = [
-    ...new Set(examplePhrases.flatMap((phrase) => tokenizeInterestText(phrase))),
+    ...new Set(
+      examplePhrases.flatMap((phrase) => tokenizeInterestText(phrase)),
+    ),
   ];
 
   return { interests, interestKeywords };
 }
 
-function extractStrengthTags(infofelder: Infofeld[]): string[] {
-  const field = infofelder.find(
-    (f) => f.id === INFOFELD_IDS.arbeitsSozialverhalten,
-  );
+/** Extracts deduplicated name="..." tags from an HTML infofeld, skipping listed headers. */
+function extractNameTags(
+  infofelder: Infofeld[],
+  fieldId: string,
+  skipTags: Set<string>,
+): string[] {
+  const field = infofelder.find((f) => f.id === fieldId);
   if (!field?.content) return [];
 
   const decoded = decodeHtmlEntities(field.content);
-  // b20-4 encodes tags in name="..." attributes in the HTML payload.
   const matches = decoded.matchAll(/name="([^"]+)"/g);
   const result: string[] = [];
 
   for (const m of matches) {
     const tag = m[1];
-    // Drop section headline and keep each tag only once.
-    if (tag === "Merkmale des Arbeits- und Sozialverhaltens") continue;
+    if (skipTags.has(tag)) continue;
     if (!result.includes(tag)) {
       result.push(tag);
     }
   }
 
   return result;
+}
+
+const STRENGTH_TAG_HEADERS = new Set([
+  "Merkmale des Arbeits- und Sozialverhaltens",
+]);
+const SKILL_TAG_HEADERS = new Set(["Fähigkeiten", "Ausprägungsgrad"]);
+
+function extractStrengthTags(infofelder: Infofeld[]): string[] {
+  return extractNameTags(
+    infofelder,
+    INFOFELD_IDS.arbeitsSozialverhalten,
+    STRENGTH_TAG_HEADERS,
+  );
+}
+
+function extractSkillTags(infofelder: Infofeld[]): string[] {
+  return extractNameTags(
+    infofelder,
+    INFOFELD_IDS.faehigkeiten,
+    SKILL_TAG_HEADERS,
+  );
 }
 
 function extractSalarySignal(infofelder: Infofeld[]): {
@@ -392,6 +420,7 @@ function extractSubjects(infofelder: Infofeld[]): string[] {
   if (/Fremdsprachen/i.test(text)) {
     if (!result.includes("french")) result.push("french");
     if (!result.includes("spanish")) result.push("spanish");
+    if (!result.includes("other_languages")) result.push("other_languages");
   }
 
   return result;
@@ -478,6 +507,7 @@ function processOccupationDetail(data: ApiBerufItem[]): Occupation | null {
     interests: interestData.interests,
     interestKeywords: interestData.interestKeywords,
     strengthTags: extractStrengthTags(taetigkeitInfofelder),
+    skillTags: extractSkillTags(taetigkeitInfofelder),
     conditions: extractConditions(taetigkeitInfofelder),
     salaryMonthlyMedian: salarySignal.salaryMonthlyMedian,
     salaryKnown: salarySignal.salaryKnown,

@@ -1,13 +1,15 @@
 import { content } from "../../../../content/de";
 import { useAppStore } from "../../../../store/useAppStore";
-import { Step, type EducationLevel } from "../../../../common";
+import { type EducationLevel } from "../../../../common";
 import { StepLayout } from "../StepLayout";
 import { schoolDegrees } from "./school-degrees";
+import { useFlowNavigation } from "../../../../routing/useFlowNavigation";
+import { Link } from "../../../primitives/links/Link";
 
 export function SchoolDegreeStep() {
 	const profile = useAppStore((state) => state.profile);
 	const setEducationLevel = useAppStore((state) => state.setEducationLevel);
-	const nextStep = useAppStore((state) => state.nextStep);
+	const { goNext } = useFlowNavigation();
 
 	const inSchool = profile.inSchool;
 
@@ -29,15 +31,18 @@ export function SchoolDegreeStep() {
 					? content["schoolDegree.question.inSchool"]
 					: content["schoolDegree.question"]
 			}
-			currentStep={Step.SchoolDegreeStep}
-			onNext={nextStep}
-			onSkip={nextStep}
+			onNext={goNext}
+			onSkip={goNext}
+			hasSkipButton={false}
 			isSkipConfirmDialogOpen={!profile.educationLevel}
+			skipConfirmTitleKey="skipConfirmDialog.singleChoice.title"
+			skipConfirmDescriptionKey="skipConfirmDialog.singleChoice.description"
+			subtitle={content["common.singleSelect.subline"]}
 		>
 			<div className="flex flex-col gap-3">
 				{filteredDegrees.map((degree) => (
 					<button
-						className={`h-[52px] text-left p-3 w-full rounded-xl border-2 text-gray-700 text-lg font-medium focus-visible:outline focus-visible:outline-2 focus-visible:outline-sky-500 ${
+						className={`flex flex-col gap-2 min-h-[52px] text-left p-3 w-full rounded-xl border-2 text-gray-700 text-lg font-medium focus-visible:outline focus-visible:outline-2 focus-visible:outline-sky-500 ${
 							profile.educationLevel === degree.value
 								? "border-sky-300 bg-sky-50 text-sky-700"
 								: "border-gray-200 bg-transparent"
@@ -46,6 +51,17 @@ export function SchoolDegreeStep() {
 						onClick={() => handleSelect(degree.value)}
 					>
 						{degree.label}
+						{profile.educationLevel === "foreign_degree" &&
+							degree.value === "foreign_degree" && (
+								<Link
+									href={content["schoolDegree.link.foreign.href"]}
+									label={content["schoolDegree.link.foreign.label"]}
+									target="_blank"
+									rel="noopener noreferrer"
+									variant="primary"
+									showIcon={true}
+								/>
+							)}
 					</button>
 				))}
 			</div>

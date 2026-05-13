@@ -1,10 +1,11 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useAppStore } from "../../store/useAppStore";
-import { Step } from "../../common";
 import { content } from "../../content/de";
 import { PrimaryButton } from "../primitives/buttons/PrimaryButton";
 import { SecondaryButton } from "../primitives/buttons/SecondaryButton";
 import { fetchAusbildungsplaetze } from "../../api/client";
+import { ROUTE_PATHS } from "../../routing/routes";
 import type { AusbildungsplatzResult } from "@azuki/shared";
 
 const RADIUS_OPTIONS = [10, 25, 50, 100] as const;
@@ -115,7 +116,7 @@ export function FreiePlaetzePage() {
 	const matchResults = useAppStore((state) => state.matchResults);
 	const ausbildungsplaetze = useAppStore((state) => state.ausbildungsplaetze);
 	const setAusbildungsplaetze = useAppStore((state) => state.setAusbildungsplaetze);
-	const goToStep = useAppStore((state) => state.goToStep);
+	const navigate = useNavigate();
 
 	const [plz, setPlz] = useState("");
 	const [umkreis, setUmkreis] = useState(25);
@@ -196,7 +197,7 @@ export function FreiePlaetzePage() {
 			</div>
 
 			<div className="px-4 pb-8">
-				<SecondaryButton onClick={() => goToStep(Step.Results)} className="w-full">
+				<SecondaryButton onClick={() => navigate(ROUTE_PATHS.resultsList)} className="w-full">
 					{content["freiePlaetze.backCta"]}
 				</SecondaryButton>
 			</div>

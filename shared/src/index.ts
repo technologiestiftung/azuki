@@ -12,7 +12,10 @@ export type {
 	AusbildungsplatzPreview,
 	AusbildungsplatzResult,
 	AusbildungsplaetzeResponse,
+	GenerationInfo,
 } from "./types";
+
+export { AI_MODELS, AI_MODEL_IDS, DEFAULT_MODEL_ID, type AiModel } from "./models";
 
 export {
 	SUBJECTS,
@@ -23,4 +26,27 @@ export {
 	INTERESTS,
 	type InterestDefinition,
 } from "./interests";
+
+export type {
+	PrefilterEntry,
+	FinalEntry,
+	PersonaResult,
+	EvalSnapshot,
+} from "./eval-types";
+
+export {
+	POPULARITY_INDEX,
+	getPopularityTier,
+	type PopularityTier,
+	type OccupationCategory,
+	type DazubiMatchType,
+	type PopularityRecord,
+} from "./popularity";
+
+export {
+	type Verdict,
+	type ScoreReport,
+} from "./eval-rubrics/types";
+
+export type { Persona } from "./persona";
 

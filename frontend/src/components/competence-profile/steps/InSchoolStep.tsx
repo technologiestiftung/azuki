@@ -1,12 +1,12 @@
 import { content } from "../../../content/de";
 import { useAppStore } from "../../../store/useAppStore";
-import { Step } from "../../../common";
 import { StepLayout } from "./StepLayout";
+import { useFlowNavigation } from "../../../routing/useFlowNavigation";
 
 export function InSchoolStep() {
 	const profile = useAppStore((state) => state.profile);
 	const setInSchool = useAppStore((state) => state.setInSchool);
-	const nextStep = useAppStore((state) => state.nextStep);
+	const { goNext } = useFlowNavigation();
 
 	const inSchoolOptions: { value: boolean; label: string }[] = [
 		{ value: true, label: content["inSchool.option.yes.label"] },
@@ -15,16 +15,18 @@ export function InSchoolStep() {
 	return (
 		<StepLayout
 			question={content["inSchool.question"]}
-			currentStep={Step.InSchool}
-			onNext={nextStep}
-			onSkip={nextStep}
+			onNext={goNext}
+			onSkip={goNext}
 			hasSkipButton={false}
 			isSkipConfirmDialogOpen={profile.inSchool === null}
+			skipConfirmTitleKey="skipConfirmDialog.singleChoice.title"
+			skipConfirmDescriptionKey="skipConfirmDialog.singleChoice.description"
+			subtitle={content["common.singleSelect.subline"]}
 		>
 			<div className="flex flex-col gap-3">
 				{inSchoolOptions.map((option) => (
 					<button
-						className={`h-[52px] text-left p-3 w-full rounded-xl border-2 text-gray-700 text-lg font-medium focus-visible:outline focus-visible:outline-2 focus-visible:outline-sky-500 ${
+						className={`min-h-[52px] text-left p-3 w-full rounded-xl border-2 text-gray-700 text-lg font-medium focus-visible:outline focus-visible:outline-2 focus-visible:outline-sky-500 ${
 							profile.inSchool === option.value
 								? "border-sky-300 bg-sky-50 text-sky-700"
 								: "border-gray-200 bg-transparent"

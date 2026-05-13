@@ -1,20 +1,21 @@
+import { useNavigate } from "react-router-dom";
 import { useAppStore } from "../../store/useAppStore";
-import { Step } from "../../common";
 import { content } from "../../content/de";
 import { PrimaryButton } from "../primitives/buttons/PrimaryButton";
 import { SecondaryButton } from "../primitives/buttons/SecondaryButton";
+import { ROUTE_PATHS } from "../../routing/routes";
 import { type MatchedOccupation } from "@azuki/shared";
 
-export function ResultsScreen() {
+export function ResultsPage() {
+	const navigate = useNavigate();
 	const matchResults = useAppStore((state) => state.matchResults);
 	const profile = useAppStore((state) => state.profile);
-	const goToStep = useAppStore((state) => state.goToStep);
 
 	const occupations = matchResults?.occupations ?? [];
 
 	const handleNewStart = () => {
 		useAppStore.getState().resetProfile();
-		goToStep(Step.Welcome);
+		navigate("/welcome");
 	};
 
 	return (
@@ -93,7 +94,7 @@ export function ResultsScreen() {
 
 			<div className="px-4 pb-8 space-y-3">
 				{occupations.length > 0 && (
-					<PrimaryButton onClick={() => goToStep(Step.FreiePlaetze)} className="w-full">
+					<PrimaryButton onClick={() => navigate(ROUTE_PATHS.freiePlaetze)} className="w-full">
 						{content["results.freiePlaetzeCta"]}
 					</PrimaryButton>
 				)}

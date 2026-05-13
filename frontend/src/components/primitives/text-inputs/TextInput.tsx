@@ -24,7 +24,7 @@ export const TextInput = ({
 
 	return (
 		<div
-			className={`flex items-center gap-2 rounded-2xl border-2 border-gray-600 focus-within:outline focus-within:outline-2 focus-within:outline-offset-1 focus-within:outline-sky-300 focus-within:border-gray-800 pr-2 pl-4 py-2 group transition-colors ${containerClassName}`}
+			className={`flex items-center gap-2 rounded-2xl border-2 border-gray-600 focus-within:outline focus-within:outline-2 focus-within:outline-offset-1 focus-within:outline-sky-300 focus-within:border-gray-800 pr-2 pl-4 py-2 bg-white group transition-colors ${containerClassName}`}
 		>
 			<input
 				type="text"

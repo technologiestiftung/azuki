@@ -1,5 +1,6 @@
-import { Mistral } from "@mistralai/mistralai";
-import type { UserProfile, MatchResult } from "@azuki/shared";
+import OpenAI from "openai";
+import type { UserProfile, MatchResult, GenerationInfo } from "@azuki/shared";
+import { AI_MODEL_IDS, DEFAULT_MODEL_ID } from "@azuki/shared";
 import type { ScoredOccupation } from "../matching/index.js";
 import {
   EDUCATION_LABELS,
@@ -10,28 +11,44 @@ import {
   NO_GO_LABELS,
   WORK_VALUE_LABELS,
 } from "./labels.js";
-const MISTRAL_API_KEY = process.env.MISTRAL_API_KEY;
+
+const OPENROUTER_API_KEY = process.env.OPENROUTER_API_KEY;
+const DEFAULT_MODEL = DEFAULT_MODEL_ID;
 const MAX_DESCRIPTION_LENGTH = 400;
 const MIN_RESULTS = 5;
 const MAX_RESULTS = 8;
 const DEFAULT_REASONING = "Dieser Beruf passt zu deinem Profil.";
 
-function buildSystemPrompt(): string {
+// Lazy client construction. Constructing OpenAI at module load throws when
+// OPENROUTER_API_KEY is missing, which broke pure-function tests that just
+// want to import formatProfileSections from this file, and made Vercel cold
+// starts fragile. Defer until the first aiRank() call.
+let _client: OpenAI | null = null;
+function getClient(): OpenAI {
+  if (_client) return _client;
+  _client = new OpenAI({
+    baseURL: "https://openrouter.ai/api/v1",
+    apiKey: OPENROUTER_API_KEY,
+  });
+  return _client;
+}
+
+export function buildSystemPrompt(): string {
   return `AUFGABE
 Du bekommst:
 - ein Profil eines Jugendlichen
-- eine vorgefilterte Liste der 30 passendsten Ausbildungsberufe
+- eine vorgefilterte Liste der 40 passendsten Ausbildungsberufe
 - zu jedem Beruf strukturierte Daten und kurze Beschreibungstexte
 
 Dein Job ist nicht, neue Berufe zu suchen.
-Dein Job ist, die 30 vorgefilterten Berufe neu zu bewerten, neu zu sortieren und die ${MIN_RESULTS} bis ${MAX_RESULTS} Berufe auszuwählen, die am besten zum Jugendlichen passen.
+Dein Job ist, die 40 vorgefilterten Berufe neu zu bewerten, neu zu sortieren und die ${MIN_RESULTS} bis ${MAX_RESULTS} Berufe auszuwählen, die am besten zum Jugendlichen passen.
 
 KONTEXT ZUM MATCHING
-Die Liste mit 30 Berufen wurde bereits durch einen deterministischen Matching-Algorithmus berechnet.
+Die Liste mit 40 Berufen wurde bereits durch einen deterministischen Matching-Algorithmus berechnet.
 Dabei wurden strukturierte Kriterien wie Schulabschluss, No-Gos, Arbeitsvorlieben, Lieblingsfächer, Interessen, Stärken und Rahmenbedingungen berücksichtigt.
 
 Nutze dieses Pre-Filtering als starke Grundlage.
-Nutze das LLM-Re-Ranking, um innerhalb dieser 30 Berufe feiner zu unterscheiden.
+Nutze das LLM-Re-Ranking, um innerhalb dieser 40 Berufe feiner zu unterscheiden.
 
 PRIORISIERUNG
 Gewichte die Signale ungefähr so:
@@ -58,14 +75,14 @@ Wenn freie Aussagen und strukturierte Angaben sich widersprechen, gelten freie A
 Ausnahme: harte Ausschlusskriterien dürfen nicht ignoriert werden.
 
 HARTE REGELN
-- Wähle nur Berufe aus der gegebenen Top-30-Liste.
+- Wähle nur Berufe aus der gegebenen Top-40-Liste.
 - Erfinde keine neuen Berufe.
-- Empfiehl keine Berufe, die klar gegen wichtige No-Gos sprechen, wenn es in der Top-30 passendere Alternativen gibt.
+- Empfiehl keine Berufe, die klar gegen wichtige No-Gos sprechen, wenn es in der Top-40 passendere Alternativen gibt.
 - Nutze den Schulabschluss als Realitätscheck, aber nicht als einziges Entscheidungskriterium.
 - Nutze nur Informationen aus dem Profil, den gelieferten Berufsdaten und allgemein plausible Merkmale eines Berufs.
 - Erfinde keine Wünsche, Erfahrungen, Stärken oder Lebensumstände, die nicht im Profil stehen.
 - Wenn mehrere Berufe ähnlich gut passen, bevorzuge den Beruf, der die eigenen Worte des Jugendlichen besser trifft.
-- Wenn du für einen Beruf keine klare individuelle Begründung geben kannst, wähle lieber einen anderen Beruf aus der Top-30-Liste.
+- Wenn du für einen Beruf keine klare individuelle Begründung geben kannst, wähle lieber einen anderen Beruf aus der Top-40-Liste.
 
 WORAUF DU BESONDERS ACHTEN SOLLST
 Berücksichtige besonders Signale, die im Pre-Filter nur teilweise oder gar nicht erfasst werden, zum Beispiel:
@@ -117,24 +134,58 @@ function label(id: string, map: Record<string, string>): string {
 
 /**
  * Serializes the user profile into labeled German-language lines
- * for the Mistral prompt. Only non-empty fields are included.
+ * for the AI prompt. Only non-empty fields are included.
  */
-function formatProfileSections(profile: UserProfile): string {
+export function formatProfileSections(profile: UserProfile): string {
   const parts: string[] = [];
+
+  if (profile.inSchool !== null) {
+    parts.push(
+      profile.inSchool
+        ? "Ist aktuell noch in der Schule"
+        : "Hat die Schule bereits abgeschlossen",
+    );
+  }
 
   if (profile.educationLevel) {
     parts.push(
       `Schulabschluss: ${label(profile.educationLevel, EDUCATION_LABELS)}`,
     );
   }
-  if (profile.favoriteSubjects.length > 0) {
+  // Custom subjects are mirrored into `profile.favoriteSubjects` by the store
+  // (see addCustomSubject in frontend/src/store/useAppStore.ts). Filter them
+  // out of the structured "Lieblingsfächer" line so they only appear once,
+  // under the "eigene Angaben" line below.
+  const customSubjectSet = new Set(profile.customSubjects);
+  const predefinedSubjects = profile.favoriteSubjects.filter(
+    (id) => !customSubjectSet.has(id),
+  );
+  if (predefinedSubjects.length > 0) {
     parts.push(
-      `Lieblingsfächer: ${profile.favoriteSubjects.map((s) => label(s, SUBJECT_LABELS)).join(", ")}`,
+      `Lieblingsfächer: ${predefinedSubjects.map((s) => label(s, SUBJECT_LABELS)).join(", ")}`,
     );
   }
-  if (profile.interests.length > 0) {
+  if (profile.customSubjects.length > 0) {
     parts.push(
-      `Interessen/Hobbys: ${profile.interests.map((s) => label(s, INTEREST_LABELS)).join(", ")}`,
+      `Weitere Schulfächer (eigene Angaben): ${profile.customSubjects.join(", ")}`,
+    );
+  }
+  // Custom interests are mirrored into `profile.interests` by the store
+  // (see addCustomInterest in frontend/src/store/useAppStore.ts). Filter them
+  // out of the structured "Interessen/Hobbys" line so they only appear once,
+  // under the "eigene Angaben" line below.
+  const customInterestSet = new Set(profile.customInterests);
+  const predefinedInterests = profile.interests.filter(
+    (id) => !customInterestSet.has(id),
+  );
+  if (predefinedInterests.length > 0) {
+    parts.push(
+      `Interessen/Hobbys: ${predefinedInterests.map((s) => label(s, INTEREST_LABELS)).join(", ")}`,
+    );
+  }
+  if (profile.customInterests.length > 0) {
+    parts.push(
+      `Weitere Interessen (eigene Angaben): ${profile.customInterests.join(", ")}`,
     );
   }
 
@@ -146,6 +197,13 @@ function formatProfileSections(profile: UserProfile): string {
     );
   if (strengthEntries.length > 0) {
     parts.push(`Stärken: ${strengthEntries.join(", ")}`);
+  }
+
+  const weaknessEntries = Object.entries(profile.strengths)
+    .filter(([, value]) => value > 0 && value < 0.5)
+    .map(([key]) => label(key, STRENGTH_LABELS));
+  if (weaknessEntries.length > 0) {
+    parts.push(`Eher nicht so gut in: ${weaknessEntries.join(", ")}`);
   }
 
   const prefLabels = Object.entries(profile.workPreferences)
@@ -174,10 +232,12 @@ function formatProfileSections(profile: UserProfile): string {
   }
 
   if (profile.secretTalent) {
-    parts.push(`Geheimes Talent: ${profile.secretTalent}`);
+    parts.push(`Geheimes Talent (eigene Angaben): ${profile.secretTalent}`);
   }
   if (profile.practicalExperience) {
-    parts.push(`Praktische Erfahrungen: ${profile.practicalExperience}`);
+    parts.push(
+      `Praktische Erfahrungen (eigene Angaben): ${profile.practicalExperience}`,
+    );
   }
 
   return parts.join("\n");
@@ -191,11 +251,19 @@ function formatOccupationList(scored: ScoredOccupation[]): string {
         occupation.descriptionShort ||
         occupation.taskSummary ||
         occupation.name;
-      const truncated =
+      const truncatedDesc =
         description.length > MAX_DESCRIPTION_LENGTH
           ? description.slice(0, MAX_DESCRIPTION_LENGTH) + "..."
           : description;
-      return `${index + 1}. [ID: ${occupation.id}] ${occupation.name}\n   ${truncated}`;
+      let entry = `${index + 1}. [ID: ${occupation.id}] ${occupation.name}\n   ${truncatedDesc}`;
+      if (occupation.competenciesText) {
+        const truncatedComp =
+          occupation.competenciesText.length > MAX_DESCRIPTION_LENGTH
+            ? occupation.competenciesText.slice(0, MAX_DESCRIPTION_LENGTH) + "..."
+            : occupation.competenciesText;
+        entry += `\n   Kompetenzen: ${truncatedComp}`;
+      }
+      return entry;
     })
     .join("\n\n");
 }
@@ -225,30 +293,59 @@ function toOccupationResult(
   };
 }
 
-export async function mistralRank(
+async function fetchGenerationCost(
+  generationId: string,
+): Promise<GenerationInfo | undefined> {
+  try {
+    const res = await fetch(
+      `https://openrouter.ai/api/v1/generation?id=${generationId}`,
+      {
+        headers: { Authorization: `Bearer ${OPENROUTER_API_KEY}` },
+      },
+    );
+    if (!res.ok) return undefined;
+    const data = await res.json();
+    return {
+      model: data.model ?? "",
+      cost: data.total_cost ?? 0,
+      tokensInput: data.tokens_prompt ?? 0,
+      tokensOutput: data.tokens_completion ?? 0,
+    };
+  } catch {
+    return undefined;
+  }
+}
+
+export interface AiRankOptions {
+  model?: string;
+  systemPrompt?: string;
+}
+
+export async function aiRank(
   scored: ScoredOccupation[],
   profile: UserProfile,
+  options: AiRankOptions = {},
 ): Promise<MatchResult> {
-  if (!MISTRAL_API_KEY) {
-    console.warn("MISTRAL_API_KEY not set — returning pre-filter results");
+  if (!OPENROUTER_API_KEY) {
+    console.warn("OPENROUTER_API_KEY not set — returning pre-filter results");
     return fallbackResult(scored);
   }
 
-  const client = new Mistral({ apiKey: MISTRAL_API_KEY });
-  const response = await client.chat.complete({
-    model: "mistral-large-latest",
+  const { model, systemPrompt } = options;
+  const selectedModel = model && AI_MODEL_IDS.has(model) ? model : DEFAULT_MODEL;
+  const prompt = systemPrompt ?? buildSystemPrompt();
+
+  const response = await getClient().chat.completions.create({
+    model: selectedModel,
     messages: [
-      { role: "system", content: buildSystemPrompt() },
+      { role: "system", content: prompt },
       { role: "user", content: buildUserPrompt(scored, profile) },
     ],
     temperature: 0.3,
-    responseFormat: { type: "json_object" },
+    response_format: { type: "json_object" },
   });
 
-  const content =
-    typeof response.choices?.[0]?.message?.content === "string"
-      ? response.choices[0].message.content
-      : "";
+  const content = response.choices?.[0]?.message?.content ?? "";
 
   let rankings: { id: number; begruendung: string }[];
   try {
@@ -257,7 +354,7 @@ export async function mistralRank(
       ? parsed
       : parsed.berufe || parsed.results || [];
   } catch {
-    console.error("Failed to parse Mistral response:", content);
+    console.error("Failed to parse AI response:", content);
     return fallbackResult(scored);
   }
 
@@ -283,6 +380,11 @@ export async function mistralRank(
       if (usedIds.has(item.occupation.id)) continue;
       result.occupations.push(toOccupationResult(item, DEFAULT_REASONING));
     }
+  }
+
+  const generation = await fetchGenerationCost(response.id);
+  if (generation) {
+    result.generation = generation;
   }
 
   return result;

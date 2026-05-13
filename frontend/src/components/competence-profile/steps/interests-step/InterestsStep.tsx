@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { content } from "../../../../content/de";
 import { useAppStore } from "../../../../store/useAppStore";
-import { Step } from "../../../../common";
 import { StepLayout } from "../StepLayout";
+import { useFlowNavigation } from "../../../../routing/useFlowNavigation";
 import { interests } from "./interests";
 import { TextInput } from "../../../primitives/text-inputs/TextInput";
 import { Pill } from "../../../primitives/buttons/Pill";
@@ -11,7 +11,7 @@ export function InterestsStep() {
 	const profile = useAppStore((state) => state.profile);
 	const toggleInterest = useAppStore((state) => state.toggleInterest);
 	const addCustomInterest = useAppStore((state) => state.addCustomInterest);
-	const nextStep = useAppStore((state) => state.nextStep);
+	const { goNext } = useFlowNavigation();
 	const [customInput, setCustomInput] = useState("");
 
 	function handleAddCustom() {
@@ -25,10 +25,11 @@ export function InterestsStep() {
 	return (
 		<StepLayout
 			question={content["interests.question"]}
-			currentStep={Step.Interests}
-			onNext={nextStep}
-			onSkip={nextStep}
+			onNext={goNext}
+			onSkip={goNext}
 			isSkipConfirmDialogOpen={profile.interests.length === 0}
+			skipConfirmTitleKey="skipConfirmDialog.multipleChoice.title"
+			skipConfirmDescriptionKey="skipConfirmDialog.multipleChoice.description"
 			bottomContent={
 				<TextInput
 					name="customInterest"
@@ -40,14 +41,15 @@ export function InterestsStep() {
 					containerClassName="mb-1"
 				/>
 			}
+			subtitle={content["common.multiSelect.subline"]}
 		>
-			<div className="flex flex-col gap-8 pb-4">
+			<div className="flex flex-col gap-8 pb-16">
 				{profile.customInterests.length > 0 && (
 					<div>
 						<h3 className="text-lg font-semibold text-gray-500 mb-2 px-3.5">
 							{content["interests.addedByYouLabel"]}
 						</h3>
-						<div className="flex flex-wrap gap-x-2 gap-y-2.5 rounded-2xl bg-card-fill p-3">
+						<div className="flex min-w-0 flex-wrap gap-x-2 gap-y-2.5 rounded-2xl bg-card-fill p-3">
 							{profile.customInterests.map((interest: string) => (
 								<Pill
 									key={interest}
@@ -66,7 +68,7 @@ export function InterestsStep() {
 						<h3 className="text-lg font-semibold text-gray-500 mb-2 px-3.5">
 							{category.name}
 						</h3>
-						<div className="flex flex-wrap gap-x-2 gap-y-2.5 rounded-2xl bg-card-fill p-3">
+						<div className="flex min-w-0 flex-wrap gap-x-2 gap-y-2.5 rounded-2xl bg-card-fill p-3">
 							{category.interests.map((item) => (
 								<Pill
 									key={item.label}

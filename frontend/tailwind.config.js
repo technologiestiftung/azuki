@@ -68,6 +68,9 @@ export default {
 					white: "#fafdff",
 				},
 				"card-fill": "#EEF2F6",
+				red: {
+					700: "#B91C1C",
+				},
 			},
 			borderRadius: {
 				"4xl": "32px",
@@ -93,30 +96,6 @@ export default {
 					from: { transform: "translateX(0)" },
 					to: { transform: "translateX(100%)" },
 				},
-				slideOutLeft: {
-					from: {
-						transform: "translateX(0) rotate(0deg) translateY(0)",
-					},
-					to: {
-						transform: "translateX(-100vw) rotate(-20deg) translateY(-40px)",
-					},
-				},
-				slideOutRight: {
-					from: {
-						transform: "translateX(0) rotate(0deg) translateY(0)",
-					},
-					to: {
-						transform: "translateX(100vw) rotate(20deg) translateY(-40px)",
-					},
-				},
-				slideOutUp: {
-					from: {
-						transform: "translateY(0) scale(1)",
-					},
-					to: {
-						transform: "translateY(-100vh) scale(0.3)",
-					},
-				},
 				slideInLeft: {
 					from: {
 						opacity: "0",
@@ -127,6 +106,11 @@ export default {
 						transform: "translateX(0) rotate(0deg) translateY(0)",
 					},
 				},
+				/** No-gos back: hold full tint ~45%, then fade (sync duration with SLIDE_IN_MS). */
+				slideInLeftTint: {
+					"0%, 45%": { opacity: "1" },
+					"100%": { opacity: "0" },
+				},
 				slideInRight: {
 					from: {
 						opacity: "0",
@@ -135,6 +119,21 @@ export default {
 					to: {
 						opacity: "1",
 						transform: "translateX(0) rotate(0deg) translateY(0)",
+					},
+				},
+				slideInRightTint: {
+					"0%, 45%": { opacity: "1" },
+					"100%": { opacity: "0" },
+				},
+				/** Back card (former top) shrinks into stack when navigating back; matches mixBackCardSurfaceColor ends. */
+				backCardSlideInRecede: {
+					from: {
+						transform: "scale(1) translateY(0px)",
+						backgroundColor: "rgb(229 231 235)",
+					},
+					to: {
+						transform: "scale(var(--stack-ghost-scale, 0.85)) translateY(41px)",
+						backgroundColor: "rgb(209 213 219)",
 					},
 				},
 				slideInTop: {
@@ -158,11 +157,12 @@ export default {
 				slideOutPrev: "slideOutPrev 0.3s ease-in-out forwards",
 				slideInPrev: "slideInPrev 0.3s ease-in-out",
 				slideOutNext: "slideOutNext 0.3s ease-in-out forwards",
-				slideOutLeft: "slideOutLeft 0.3s ease-in forwards",
-				slideOutRight: "slideOutRight 0.3s ease-in forwards",
-				slideOutUp: "slideOutUp 0.4s linear forwards",
 				slideInLeft: "slideInLeft 0.3s ease-out forwards",
 				slideInRight: "slideInRight 0.3s ease-out forwards",
+				slideInLeftTint: "slideInLeftTint 800ms cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards",
+				slideInRightTint: "slideInRightTint 800ms cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards",
+				backCardSlideInRecede:
+					"backCardSlideInRecede 800ms cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards",
 				slideInTop: "slideInTop 0.4s ease-out forwards",
 				progressFill: "progressFill 4s linear forwards",
 			},
