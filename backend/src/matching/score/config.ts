@@ -36,9 +36,9 @@ export const WORK_PREF_MAP: Record<string, WorkPreferenceOptionChecks> = {
 		b: (o) => o.conditions.customerContact || o.conditions.teamwork,
 	},
 	pace: {
-		a: (o) => o.conditions.office,
 		// No BERUFENET signal for "Arbeit unter Zeitdruck".
-		b: () => false,
+		a: () => false,
+		b: (o) => o.conditions.office,
 	},
 	structure: {
 		a: (o) => o.conditions.regulatedWork,

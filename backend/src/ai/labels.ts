@@ -56,7 +56,7 @@ export const WORK_PREF_LABELS: Record<string, { a: string; b: string }> = {
 	"hands-vs-mind": { a: "Praktisch arbeiten", b: "Nachdenken und planen" },
 	variety: { a: "Feste Abläufe", b: "Jeden Tag was Neues" },
 	people: { a: "Meist alleine arbeiten", b: "Viel Kontakt mit Menschen" },
-	pace: { a: "Entspanntes Tempo", b: "Immer viel zu tun" },
+	pace: { a: "Immer viel zu tun", b: "Entspanntes Tempo" },
 	structure: { a: "Aufgaben erledigen", b: "Neue Ideen entwickeln" },
 };
 

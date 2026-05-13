@@ -57,7 +57,7 @@ interface AppActions {
 	setStrength: (id: string, value: number) => void;
 	setSecretTalent: (value: string) => void;
 	setPracticalExperience: (value: string) => void;
-	setWorkPreference: (id: string, choice: WorkPreferenceChoice) => void;
+	setWorkPreference: (id: string, choice: WorkPreferenceChoice | null) => void;
 	setNoGo: (id: string, answer: NoGoAnswer | null) => void;
 	setMatchResults: (results: MatchResult) => void;
 	resetProfile: () => void;
