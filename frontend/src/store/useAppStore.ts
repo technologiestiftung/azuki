@@ -42,10 +42,18 @@ function normalizeProfile(
 	};
 }
 
+export interface Standort {
+	plz: string;
+	umkreis: number;
+}
+
+const DEFAULT_STANDORT: Standort = { plz: "10115", umkreis: 25 };
+
 interface AppState {
 	profile: UserProfile;
 	matchResults: MatchResult | null;
 	ausbildungsplaetze: AusbildungsplaetzeResponse | null;
+	standort: Standort;
 }
 
 interface AppActions {
@@ -63,6 +71,7 @@ interface AppActions {
 	setNoGo: (id: string, answer: NoGoAnswer | null) => void;
 	setMatchResults: (results: MatchResult) => void;
 	setAusbildungsplaetze: (results: AusbildungsplaetzeResponse | null) => void;
+	setStandort: (standort: Partial<Standort>) => void;
 	resetProfile: () => void;
 }
 
@@ -72,6 +81,7 @@ export const useAppStore = create<AppState & AppActions>()(
 			profile: initialProfile,
 			matchResults: null,
 			ausbildungsplaetze: null,
+			standort: DEFAULT_STANDORT,
 
 			setInSchool: (value) =>
 				set((state) => {
@@ -211,14 +221,23 @@ export const useAppStore = create<AppState & AppActions>()(
 
 			setMatchResults: (results) => set({ matchResults: results }),
 
-			setAusbildungsplaetze: (results) =>
-				set({ ausbildungsplaetze: results }),
+			setAusbildungsplaetze: (results) => set({ ausbildungsplaetze: results }),
+
+			setStandort: (standort) =>
+				set((state) => ({
+					standort: { ...state.standort, ...standort },
+					// Changing standort invalidates per-beruf counts since they
+					// were fetched for the previous location.
+					ausbildungsplaetze: null,
+				})),
 
 			resetProfile: () =>
 				set({
 					profile: initialProfile,
 					matchResults: null,
 					ausbildungsplaetze: null,
+					// standort is user preference, not derived from profile —
+					// keep it across resets.
 				}),
 		}),
 		{
@@ -227,6 +246,7 @@ export const useAppStore = create<AppState & AppActions>()(
 			partialize: (state) => ({
 				profile: state.profile,
 				matchResults: state.matchResults,
+				standort: state.standort,
 			}),
 			merge: (persistedState, currentState) => {
 				const persisted = persistedState as Partial<AppState> | undefined;

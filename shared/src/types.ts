@@ -129,6 +129,8 @@ export interface GenerationInfo {
 export interface AusbildungsplatzPreview {
 	employer: string;
 	city: string;
+	/** ISO date string (YYYY-MM-DD) for the start of the Ausbildung. */
+	eintrittsdatum?: string;
 }
 
 export interface AusbildungsplatzResult {

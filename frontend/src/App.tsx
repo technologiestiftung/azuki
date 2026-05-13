@@ -14,7 +14,6 @@ import { NoGosStep } from "./components/competence-profile/steps/no-gos-step/NoG
 import { LoadingScreen } from "./components/loading-screen/LoadingScreen";
 import { ResultsPage } from "./components/results-page/ResultsPage";
 import { WorkValuesStep } from "./components/competence-profile/steps/WorkValuesStep";
-import { FreiePlaetzePage } from "./components/freie-plaetze/FreiePlaetzePage";
 import { EvalPage } from "./components/eval/EvalPage";
 import { PersonasPage } from "./components/personas/PersonasPage";
 import { PersonaDetailPage } from "./components/personas/PersonaDetailPage";
@@ -66,10 +65,6 @@ function App() {
 					<Route path={ROUTE_PATHS.nogos} element={<NoGosStep />} />
 					<Route path={ROUTE_PATHS.loading} element={<LoadingScreen />} />
 					<Route path={ROUTE_PATHS.resultsList} element={<ResultsPage />} />
-					<Route
-						path={ROUTE_PATHS.freiePlaetze}
-						element={<FreiePlaetzePage />}
-					/>
 					<Route path={ROUTE_PATHS.eval} element={<EvalPage />} />
 					<Route path={ROUTE_PATHS.personas} element={<PersonasPage />} />
 					<Route
