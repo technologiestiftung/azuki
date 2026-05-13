@@ -264,8 +264,8 @@ function ProfileEditorSection({
 				/>
 
 				<WorkValuesEditor
-					workValues={profile.workValues}
-					onChange={(next) => patchProfile({ workValues: next })}
+					workExpectations={profile.workExpectations}
+					onChange={(next) => patchProfile({ workExpectations: next })}
 				/>
 
 				<StrengthsEditor

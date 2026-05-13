@@ -3,40 +3,7 @@ import { StepLayout } from "./StepLayout";
 import { SelectableRowButton } from "../../primitives/buttons/SelectableRowButton";
 import { useAppStore } from "../../../store/useAppStore";
 import { useFlowNavigation } from "../../../routing/useFlowNavigation";
-
-const WorkExpectations: { value: string; label: string }[] = [
-	{
-		value: "good_salary",
-		label: content["workExpectations.option.goodSalary"],
-	},
-	{
-		value: "people_work",
-		label: content["workExpectations.option.peopleWork"],
-	},
-	{
-		value: "teamwork_value",
-		label: content["workExpectations.option.teamWork"],
-	},
-	{
-		value: "autonomy_responsibility",
-		label: content["workExpectations.option.autonomyResponsibility"],
-	},
-	{
-		value: "flexible_hours",
-		label: content["workExpectations.option.flexibleHours"],
-	},
-	{ value: "stability", label: content["workExpectations.option.stability"] },
-	{
-		value: "modern_technology",
-		label: content["workExpectations.option.modernTechnology"],
-	},
-	{
-		value: "short_distance",
-		label: content["workExpectations.option.shortDistance"],
-	},
-	{ value: "career", label: content["workExpectations.option.career"] },
-	{ value: "remote", label: content["workExpectations.option.remote"] },
-];
+import { workExpectationOptions } from "./work-expectation-options";
 
 export function WorkExpectationsStep() {
 	const { goNext } = useFlowNavigation();
@@ -57,7 +24,7 @@ export function WorkExpectationsStep() {
 			subtitle={content["common.multiSelect.subline"]}
 		>
 			<div className="flex flex-col gap-3">
-				{WorkExpectations.map((value) => {
+				{workExpectationOptions.map((value) => {
 					const selected = profile.workExpectations.includes(value.value);
 					return (
 						<SelectableRowButton
