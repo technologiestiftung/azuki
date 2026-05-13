@@ -8,42 +8,47 @@ import { useFlowNavigation } from "../../../routing/useFlowNavigation";
 import { parseHashCardIndex } from "../../../routing/routes";
 import { SelectableCardButton } from "../../primitives/buttons/SelectableCardButton";
 
+const BASE_ILLUSTRATION_Z = 5;
+const DEFAULT_OVERLAY_Z = 10;
+
+type OverlayLayer = { src: string; zIndex?: number };
+
 const OVERLAY_ILLUSTRATIONS: Partial<
-	Record<string, Record<"a" | "b", string[]>>
+	Record<string, Record<"a" | "b", OverlayLayer[]>>
 > = {
 	environment: {
-		a: ["/illustrations/work-preferences/inside.svg"],
+		a: [{ src: "/illustrations/work-preferences/inside.svg" }],
 		b: [
-			"/illustrations/work-preferences/sun.svg",
-			"/illustrations/work-preferences/outside.svg",
+			{ src: "/illustrations/work-preferences/sun.svg", zIndex: 1 },
+			{ src: "/illustrations/work-preferences/outside.svg" },
 		],
 	},
 	location: {
-		a: ["/illustrations/work-preferences/fixed.svg"],
+		a: [{ src: "/illustrations/work-preferences/fixed.svg" }],
 		b: [
-			"/illustrations/work-preferences/fixed.svg",
-			"/illustrations/work-preferences/mobile.svg",
+			{ src: "/illustrations/work-preferences/fixed.svg" },
+			{ src: "/illustrations/work-preferences/mobile.svg" },
 		],
 	},
 	"hands-vs-mind": {
-		a: ["/illustrations/work-preferences/practical.svg"],
-		b: ["/illustrations/work-preferences/mind.svg"],
+		a: [{ src: "/illustrations/work-preferences/practical.svg" }],
+		b: [{ src: "/illustrations/work-preferences/mind.svg" }],
 	},
 	variety: {
-		a: ["/illustrations/work-preferences/routine.svg"],
-		b: ["/illustrations/work-preferences/variety.svg"],
+		a: [{ src: "/illustrations/work-preferences/routine.svg" }],
+		b: [{ src: "/illustrations/work-preferences/variety.svg" }],
 	},
 	pace: {
-		a: ["/illustrations/work-preferences/fast.svg"],
-		b: ["/illustrations/work-preferences/slow.svg"],
+		a: [{ src: "/illustrations/work-preferences/fast.svg", zIndex: 1 }],
+		b: [{ src: "/illustrations/work-preferences/slow.svg", zIndex: 1 }],
 	},
 	structure: {
-		a: ["/illustrations/work-preferences/task.svg"],
-		b: ["/illustrations/work-preferences/idea.svg"],
+		a: [{ src: "/illustrations/work-preferences/task.svg" }],
+		b: [{ src: "/illustrations/work-preferences/idea.svg" }],
 	},
 	people: {
-		a: ["/illustrations/work-preferences/alone.svg"],
-		b: ["/illustrations/work-preferences/contact.svg"],
+		a: [{ src: "/illustrations/work-preferences/alone.svg" }],
+		b: [{ src: "/illustrations/work-preferences/contact.svg" }],
 	},
 } as const;
 
@@ -64,10 +69,13 @@ export function WorkPreferencesStep() {
 		current.id === "pace"
 			? "/illustrations/work-preferences/clock.svg"
 			: "/illustrations/work-preferences/star.svg";
+
 	const [selectedChoice, setSelectedChoice] =
 		useState<WorkPreferenceChoice | null>(null);
+
 	const activeChoice = selectedChoice ?? workPreferences[current.id] ?? null;
-	const selectedIllustrations: string[] =
+
+	const selectedOverlayLayers: OverlayLayer[] =
 		activeChoice && (activeChoice === "a" || activeChoice === "b")
 			? (OVERLAY_ILLUSTRATIONS[current.id]?.[activeChoice] ?? [])
 			: [];
@@ -122,14 +130,16 @@ export function WorkPreferencesStep() {
 					<img
 						src={baseIllustration}
 						alt=""
-						className="object-contain h-full"
+						className="relative object-contain h-full"
+						style={{ zIndex: BASE_ILLUSTRATION_Z }}
 					/>
-					{selectedIllustrations.map((src) => (
+					{selectedOverlayLayers.map(({ src, zIndex }) => (
 						<img
 							key={src}
 							src={src}
 							alt=""
 							className="absolute inset-0 w-full h-full object-contain animate-fadeInUp"
+							style={{ zIndex: zIndex ?? DEFAULT_OVERLAY_Z }}
 						/>
 					))}
 				</div>
