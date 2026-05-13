@@ -41,9 +41,14 @@ function buildSearchUrl(beruf: string, plz: string, umkreis: number): string {
 }
 
 function isAusbildung(job: JobsucheJob): boolean {
-	// Empirically: Ausbildung has `beruf`, Duales Studium has `studiengang`.
-	// Both fields can be missing in malformed entries — those we drop too.
-	return Boolean(job.beruf) && !job.studiengang;
+	// CONTRACT: this predicate only works because the search call above uses
+	// `angebotsart=4` (Ausbildung + Duales Studium scope). Within that scope,
+	// `beruf` is set whenever an Ausbildung component is offered — pure
+	// Ausbildung or hybrid Ausbildung+Studium. Pure Duales Studium has empty
+	// `beruf`. If `angebotsart` is ever changed or dropped, this filter alone
+	// is NOT enough — regular full-time jobs (angebotsart=1) also have
+	// `beruf` set.
+	return Boolean(job.beruf);
 }
 
 export async function searchAusbildungsplaetze(
