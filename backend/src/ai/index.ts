@@ -1,5 +1,6 @@
-import { Mistral } from "@mistralai/mistralai";
-import type { UserProfile, MatchResult } from "@azuki/shared";
+import OpenAI from "openai";
+import type { UserProfile, MatchResult, GenerationInfo } from "@azuki/shared";
+import { AI_MODEL_IDS, DEFAULT_MODEL_ID } from "@azuki/shared";
 import type { ScoredOccupation } from "../matching/index.js";
 import {
   EDUCATION_LABELS,
@@ -10,13 +11,29 @@ import {
   NO_GO_LABELS,
   WORK_VALUE_LABELS,
 } from "./labels.js";
-const MISTRAL_API_KEY = process.env.MISTRAL_API_KEY;
+
+const OPENROUTER_API_KEY = process.env.OPENROUTER_API_KEY;
+const DEFAULT_MODEL = DEFAULT_MODEL_ID;
 const MAX_DESCRIPTION_LENGTH = 400;
 const MIN_RESULTS = 5;
 const MAX_RESULTS = 8;
 const DEFAULT_REASONING = "Dieser Beruf passt zu deinem Profil.";
 
-function buildSystemPrompt(): string {
+// Lazy client construction. Constructing OpenAI at module load throws when
+// OPENROUTER_API_KEY is missing, which broke pure-function tests that just
+// want to import formatProfileSections from this file, and made Vercel cold
+// starts fragile. Defer until the first aiRank() call.
+let _client: OpenAI | null = null;
+function getClient(): OpenAI {
+  if (_client) return _client;
+  _client = new OpenAI({
+    baseURL: "https://openrouter.ai/api/v1",
+    apiKey: OPENROUTER_API_KEY,
+  });
+  return _client;
+}
+
+export function buildSystemPrompt(): string {
   return `AUFGABE
 Du bekommst:
 - ein Profil eines Jugendlichen
@@ -117,7 +134,7 @@ function label(id: string, map: Record<string, string>): string {
 
 /**
  * Serializes the user profile into labeled German-language lines
- * for the Mistral prompt. Only non-empty fields are included.
+ * for the AI prompt. Only non-empty fields are included.
  */
 export function formatProfileSections(profile: UserProfile): string {
   const parts: string[] = [];
@@ -276,31 +293,59 @@ function toOccupationResult(
   };
 }
 
-export async function mistralRank(
+async function fetchGenerationCost(
+  generationId: string,
+): Promise<GenerationInfo | undefined> {
+  try {
+    const res = await fetch(
+      `https://openrouter.ai/api/v1/generation?id=${generationId}`,
+      {
+        headers: { Authorization: `Bearer ${OPENROUTER_API_KEY}` },
+      },
+    );
+    if (!res.ok) return undefined;
+    const data = await res.json();
+    return {
+      model: data.model ?? "",
+      cost: data.total_cost ?? 0,
+      tokensInput: data.tokens_prompt ?? 0,
+      tokensOutput: data.tokens_completion ?? 0,
+    };
+  } catch {
+    return undefined;
+  }
+}
+
+export interface AiRankOptions {
+  model?: string;
+  systemPrompt?: string;
+}
+
+export async function aiRank(
   scored: ScoredOccupation[],
   profile: UserProfile,
+  options: AiRankOptions = {},
 ): Promise<MatchResult> {
-  if (!MISTRAL_API_KEY) {
-    console.warn("MISTRAL_API_KEY not set — returning pre-filter results");
+  if (!OPENROUTER_API_KEY) {
+    console.warn("OPENROUTER_API_KEY not set — returning pre-filter results");
     return fallbackResult(scored);
   }
 
-  const client = new Mistral({ apiKey: MISTRAL_API_KEY });
-  const userPrompt = buildUserPrompt(scored, profile);
-  const response = await client.chat.complete({
-    model: "mistral-large-latest",
+  const { model, systemPrompt } = options;
+  const selectedModel = model && AI_MODEL_IDS.has(model) ? model : DEFAULT_MODEL;
+  const prompt = systemPrompt ?? buildSystemPrompt();
+
+  const response = await getClient().chat.completions.create({
+    model: selectedModel,
     messages: [
-      { role: "system", content: buildSystemPrompt() },
-      { role: "user", content: userPrompt },
+      { role: "system", content: prompt },
+      { role: "user", content: buildUserPrompt(scored, profile) },
     ],
     temperature: 0.3,
-    responseFormat: { type: "json_object" },
+    response_format: { type: "json_object" },
   });
 
-  const content =
-    typeof response.choices?.[0]?.message?.content === "string"
-      ? response.choices[0].message.content
-      : "";
+  const content = response.choices?.[0]?.message?.content ?? "";
 
   let rankings: { id: number; begruendung: string }[];
   try {
@@ -309,7 +354,7 @@ export async function mistralRank(
       ? parsed
       : parsed.berufe || parsed.results || [];
   } catch {
-    console.error("Failed to parse Mistral response:", content);
+    console.error("Failed to parse AI response:", content);
     return fallbackResult(scored);
   }
 
@@ -335,6 +380,11 @@ export async function mistralRank(
       if (usedIds.has(item.occupation.id)) continue;
       result.occupations.push(toOccupationResult(item, DEFAULT_REASONING));
     }
+  }
+
+  const generation = await fetchGenerationCost(response.id);
+  if (generation) {
+    result.generation = generation;
   }
 
   return result;
