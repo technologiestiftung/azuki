@@ -1,5 +1,6 @@
 import OpenAI from "openai";
 import type { UserProfile, MatchResult, GenerationInfo } from "@azuki/shared";
+import { occupationMatchMeta } from "../occupationMeta";
 import { AI_MODEL_IDS, DEFAULT_MODEL_ID } from "@azuki/shared";
 import type { ScoredOccupation } from "../matching/index.js";
 import {
@@ -283,6 +284,7 @@ function toOccupationResult(
   item: ScoredOccupation,
   reasoning: string,
 ): MatchResult["occupations"][number] {
+  const meta = occupationMatchMeta(item.occupation);
   return {
     id: item.occupation.id,
     name: item.occupation.name,
@@ -290,6 +292,7 @@ function toOccupationResult(
     images: item.occupation.images.slice(0, 3),
     taskSummary: item.occupation.taskSummary || "",
     reasoning,
+    ...meta,
   };
 }
 

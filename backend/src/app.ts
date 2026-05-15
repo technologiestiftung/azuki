@@ -2,6 +2,7 @@ import { Hono, type Context } from "hono";
 import { cors } from "hono/cors";
 import { UserProfileSchema } from "./schemas/userProfile.js";
 import type { Occupation, MatchResult } from "@azuki/shared";
+import { occupationMatchMeta } from "./occupationMeta";
 import { AI_MODEL_IDS } from "@azuki/shared";
 import { preFilter } from "./matching/index.js";
 import { aiRank, buildSystemPrompt } from "./ai/index.js";
@@ -108,13 +109,26 @@ app.post("/api/match", async (c) => {
 	}
 	const profile = parsedProfile.data;
 
-	const top40 = preFilter(occupations, profile, 40);
-
+	let top40: ReturnType<typeof preFilter> = [];
 	try {
+		top40 = preFilter(occupations, profile, 40);
 		const result = await aiRank(top40, profile);
 		return c.json(result);
 	} catch (err) {
-		console.error("AI ranking error, falling back to pre-filter:", err);
+		console.error("Match error, falling back to pre-filter:", err);
+		if (top40.length === 0) {
+			try {
+				top40 = preFilter(occupations, profile, 40);
+			} catch (preErr) {
+				console.error("Pre-filter failed during fallback:", preErr);
+				top40 = occupations.slice(0, 40).map((occupation) => ({
+					occupation,
+					score: 0,
+				}));
+			}
+		}
+		const imgs = (o: (typeof occupations)[number]) =>
+			(o.images ?? []).slice(0, 3);
 		const fallback: MatchResult = {
 			occupations: top40.slice(0, 8).map((scored) => ({
 				id: scored.occupation.id,
@@ -123,6 +137,7 @@ app.post("/api/match", async (c) => {
 				images: scored.occupation.images.slice(0, 3),
 				taskSummary: scored.occupation.taskSummary || "",
 				reasoning: "Dieser Beruf passt zu deinem Profil.",
+				...occupationMatchMeta(scored.occupation),
 			})),
 		};
 		return c.json(fallback);
@@ -253,7 +268,10 @@ app.post("/api/personas", async (c) => {
 	}
 	const parsed = CreatePersonaSchema.safeParse(body);
 	if (!parsed.success) {
-		return c.json({ error: "Invalid request body", issues: parsed.error.issues }, 400);
+		return c.json(
+			{ error: "Invalid request body", issues: parsed.error.issues },
+			400,
+		);
 	}
 	const input = parsed.data;
 	const id = await generateUniqueSlug(input.name);
@@ -296,7 +314,10 @@ app.put("/api/personas/:id", async (c) => {
 	}
 	const parsed = UpdatePersonaSchema.safeParse(body);
 	if (!parsed.success) {
-		return c.json({ error: "Invalid request body", issues: parsed.error.issues }, 400);
+		return c.json(
+			{ error: "Invalid request body", issues: parsed.error.issues },
+			400,
+		);
 	}
 	const input = parsed.data;
 	try {

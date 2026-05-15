@@ -10,6 +10,8 @@ export const content = {
 	"common.inputDialog.cancelButtonAriaLabel": "Abbrechen",
 	"common.inputDialog.clearButtonAriaLabel": "Eingabe löschen",
 	"common.inputDialog.errorMessage": "Bitte gib etwas ein",
+	"common.bottomSheet.overlayDismissLabel": "Schließen",
+	"common.bottomSheet.ariaLabel": "Dialog",
 	// Welcome
 	"welcome.slide.1.title": "Du suchst eine Ausbildung, die gut zu dir passt?",
 	"welcome.slide.2.title": "Lerne deine Stärken kennen!",
@@ -297,8 +299,23 @@ export const content = {
 
 	// Results
 	"results.title": "Deine Ergebnisse",
+	"results.bottomCard.title": "Kein passender Ausbildungsberuf dabei?",
+	"results.bottomCard.resetCta": "Fragen wiederholen",
 	"results.moreInfo": "Mehr erfahren",
 	"results.restartCta": "Nochmal starten",
+	"results.favorite.add": "Zu Favoriten hinzufügen",
+	"results.favorite.remove": "Aus Favoriten entfernen",
+	"results.card.score.label": "Passt zu",
+	"results.occupationType.dual": "Dual",
+	"results.occupationType.school": "Schulisch",
+	// Filter Bottom Sheet
+	"results.filter.title": "Filter",
+	"results.filter.showFavorites": "Meine Favoriten anzeigen",
+	"results.filter.occupationTypeSection": "Art des Berufs",
+	"results.filter.reset": "Zurücksetzen",
+	"results.filter.apply": "Anwenden",
+	"results.filter.settingsAria": "Filtereinstellungen",
+	"results.filter.dismissOverlay": "Schließen",
 
 	// Skip confirm dialog
 	"skipConfirmDialog.default.title": "Du hast noch nichts ausgewählt",
