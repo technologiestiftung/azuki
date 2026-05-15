@@ -299,6 +299,10 @@ export const content = {
 
 	// Results
 	"results.title": "Deine Ergebnisse",
+	"results.tab.results": "Ausbildungsberufe",
+	"results.tab.results.ariaLabel": "Zur Ausbildungsberufe-Ansicht",
+	"results.tab.freeSpots": "Freie Plätze",
+	"results.tab.freeSpots.ariaLabel": "Zur Freie Plätze-Ansicht",
 	"results.bottomCard.title": "Kein passender Ausbildungsberuf dabei?",
 	"results.bottomCard.resetCta": "Fragen wiederholen",
 	"results.bottomCard.consultationCta": "Beratung anfragen",
