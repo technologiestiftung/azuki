@@ -18,8 +18,8 @@ export function ResultCard({ occupation }: ResultCardProps) {
 		school: content["results.occupationType.school"],
 	};
 	const occupationTypeBadge = occupation.occupationType
-		? occupationTypeLabels[occupation.occupationType] ??
-			occupation.occupationType
+		? (occupationTypeLabels[occupation.occupationType] ??
+			occupation.occupationType)
 		: "";
 
 	return (
@@ -54,9 +54,7 @@ export function ResultCard({ occupation }: ResultCardProps) {
 					occupation.occupationDuration ||
 					occupation.occupationEarnings) && (
 					<div className="flex items-center gap-2 mb-[9px]">
-						{occupationTypeBadge && (
-							<Badge label={occupationTypeBadge} />
-						)}
+						{occupationTypeBadge && <Badge label={occupationTypeBadge} />}
 						{occupation.occupationDuration && (
 							<Badge label={occupation.occupationDuration} />
 						)}
