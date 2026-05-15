@@ -301,6 +301,8 @@ export const content = {
 	"results.title": "Deine Ergebnisse",
 	"results.bottomCard.title": "Kein passender Ausbildungsberuf dabei?",
 	"results.bottomCard.resetCta": "Fragen wiederholen",
+	"results.bottomCard.consultationCta": "Beratung anfragen",
+	"results.bottomCard.consultationLink": "https://joblinge.de",
 	"results.moreInfo": "Mehr erfahren",
 	"results.restartCta": "Nochmal starten",
 	"results.favorite.add": "Zu Favoriten hinzufügen",
