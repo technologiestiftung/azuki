@@ -131,8 +131,6 @@ app.post("/api/match", async (c) => {
 				}));
 			}
 		}
-		const imgs = (o: (typeof occupations)[number]) =>
-			(o.images ?? []).slice(0, 3);
 		const fallback: MatchResult = {
 			occupations: top40.slice(0, 8).map((scored) => ({
 				id: scored.occupation.id,
