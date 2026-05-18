@@ -24,9 +24,9 @@ describe("formatOccupationDisplayName", () => {
 	});
 
 	it("removes training-type parentheticals", () => {
-		expect(formatOccupationDisplayName("Kosmetiker/in (duale Ausbildung)")).toBe(
-			"Kosmetiker/in",
-		);
+		expect(
+			formatOccupationDisplayName("Kosmetiker/in (duale Ausbildung)"),
+		).toBe("Kosmetiker/in");
 		expect(
 			formatOccupationDisplayName(
 				"Ausbaumanager/in (doppelt qualifizierende Ausbildung)",

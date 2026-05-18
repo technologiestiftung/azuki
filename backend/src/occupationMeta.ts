@@ -83,7 +83,9 @@ export function occupationMatchMeta(occupation: Occupation): {
 	const occupationType = artText ? resolveOccupationTypeKey(artText) : "";
 
 	const rawDuration = durationMatch?.[1]?.trim() ?? "";
-	const occupationDuration = rawDuration ? formatOccupationDuration(rawDuration) : "";
+	const occupationDuration = rawDuration
+		? formatOccupationDuration(rawDuration)
+		: "";
 
 	let occupationEarnings = "";
 	const payMarker = "Was verdient man in der Ausbildung?";
