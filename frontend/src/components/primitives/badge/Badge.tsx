@@ -4,7 +4,7 @@ interface BadgeProps {
 
 export function Badge({ label }: BadgeProps) {
 	return (
-		<div className="bg-fill-secondary text-gray-900 text-xs leading-5 font-medium p-2 rounded-lg">
+		<div className="inline-flex h-[22px] max-w-full shrink-0 items-center justify-center whitespace-nowrap rounded-lg bg-fill-secondary p-2 text-sm font-medium leading-5 text-gray-900">
 			{label}
 		</div>
 	);

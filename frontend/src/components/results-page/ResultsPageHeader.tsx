@@ -1,5 +1,5 @@
 import { useLocation, useNavigate } from "react-router-dom";
-import { BackButton } from "../back-button/BackButton";
+import { GhostIconButton } from "../primitives/buttons/GhostIconButton";
 import { SecondaryIconButton } from "../primitives/buttons/SecondaryIconButton";
 import { content } from "../../content/de";
 import { TabBar } from "../primitives/tab-bar/TabBar";
@@ -35,7 +35,12 @@ export function ResultsPageHeader({
 	return (
 		<>
 			<div className="flex w-full items-center justify-between px-4 py-2">
-				<BackButton onClick={() => navigate("/start")} />
+				<GhostIconButton
+					iconSrc="/icons/arrow-back-black.svg"
+					onClick={() => navigate("/NoGos")}
+					ariaLabel={content["navigation.back"]}
+					title={content["navigation.back"]}
+				/>
 				<h1 className="text-2xl font-semibold text-gray-900 flex-1 text-center">
 					{title}
 				</h1>

@@ -47,3 +47,5 @@ export {
 
 export type { Persona } from "./persona";
 
+export { formatOccupationDisplayName } from "./occupationDisplayName";
+

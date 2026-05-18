@@ -1,9 +1,13 @@
 import { Hono, type Context } from "hono";
 import { cors } from "hono/cors";
 import { UserProfileSchema } from "./schemas/userProfile.js";
-import type { Occupation, MatchResult } from "@azuki/shared";
+import {
+	type Occupation,
+	type MatchResult,
+	formatOccupationDisplayName,
+	AI_MODEL_IDS,
+} from "@azuki/shared";
 import { occupationMatchMeta } from "./occupationMeta";
-import { AI_MODEL_IDS } from "@azuki/shared";
 import { preFilter } from "./matching/index.js";
 import { aiRank, buildSystemPrompt } from "./ai/index.js";
 import occupationsData from "./data/berufe.json";
@@ -132,7 +136,7 @@ app.post("/api/match", async (c) => {
 		const fallback: MatchResult = {
 			occupations: top40.slice(0, 8).map((scored) => ({
 				id: scored.occupation.id,
-				name: scored.occupation.name,
+				name: formatOccupationDisplayName(scored.occupation.name),
 				score: scored.score,
 				images: scored.occupation.images.slice(0, 3),
 				taskSummary: scored.occupation.taskSummary || "",

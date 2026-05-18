@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import { BackButton } from "../back-button/BackButton";
+import { GhostIconButton } from "../primitives/buttons/GhostIconButton";
 import { BottomSheet } from "../primitives/bottom-sheet/BottomSheet";
 import { SecondaryButton } from "../primitives/buttons/SecondaryButton";
 import { content } from "../../content/de";
@@ -114,7 +114,12 @@ export function FilterBottomSheet({
 			}
 		>
 			<div className="flex items-center justify-between gap-2 py-2 px-4">
-				<BackButton onClick={onClose} />
+				<GhostIconButton
+					onClick={onClose}
+					ariaLabel={content["results.filter.close"]}
+					iconSrc="/icons/close-black.svg"
+				/>
+
 				<h2 className="flex-1 text-center text-lg font-semibold text-gray-900">
 					{content["results.filter.title"]}
 				</h2>
@@ -131,10 +136,11 @@ export function FilterBottomSheet({
 					onChange={(next) => setShowFavoritesOnly(next)}
 				/>
 			</div>
-
-			<h3 className="pl-5 pr-4 pt-6 text-2xl font-semibold text-gray-900">
-				{content["results.filter.occupationTypeSection"]}
-			</h3>
+			{occupationTypeChips && occupationTypeChips.length > 0 && (
+				<h3 className="pl-5 pr-4 pt-6 text-2xl font-semibold text-gray-900">
+					{content["results.filter.occupationTypeSection"]}
+				</h3>
+			)}
 
 			<div className="flex min-w-0 flex-wrap gap-x-2 gap-y-3 px-4 pt-4 pb-8">
 				{occupationTypeChips?.map((chip) => {

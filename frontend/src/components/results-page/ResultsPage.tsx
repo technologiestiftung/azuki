@@ -6,7 +6,6 @@ import {
 	FilterBottomSheet,
 	getAppliedFilterCount,
 	type FilterBottomSheetState,
-	type FilterOccupationTypeChip,
 } from "../filter-bottom-sheet/FilterBottomSheet";
 import { ResultCard } from "./ResultCard";
 import { ResultsPageHeader } from "./ResultsPageHeader";
@@ -54,24 +53,6 @@ export function ResultsPage() {
 		[favoriteOccupationIds],
 	);
 
-	const occupationTypeChips = useMemo((): FilterOccupationTypeChip[] => {
-		const typeLabels: Record<string, string> = {
-			dual: content["results.occupationType.dual"],
-			school: content["results.occupationType.school"],
-		};
-		const types = [
-			...new Set(
-				occupations
-					.map((o) => o.occupationType)
-					.filter((type) => type.length > 0),
-			),
-		];
-		return types.map((type) => ({
-			id: type,
-			label: typeLabels[type] ?? type,
-		}));
-	}, [occupations]);
-
 	const visibleOccupations = useMemo(
 		() => applyFilters(occupations, appliedFilters, favoriteIds),
 		[occupations, appliedFilters, favoriteIds],
@@ -105,7 +86,6 @@ export function ResultsPage() {
 				open={filterOpen}
 				onClose={closeFilter}
 				initialFilters={appliedFilters}
-				occupationTypeChips={occupationTypeChips}
 				onApply={handleApplyFilters}
 				onReset={handleResetFilters}
 			/>
@@ -115,7 +95,7 @@ export function ResultsPage() {
 					visibleOccupations.map((occupation: MatchedOccupation) => (
 						<ResultCard key={occupation.id} occupation={occupation} />
 					))}
-				<BottomCard />
+				{visibleOccupations.length > 0 && <BottomCard />}
 			</div>
 		</div>
 	);
