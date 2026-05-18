@@ -18,7 +18,12 @@ describe("EvalSnapshot JSON round-trip", () => {
 							reasoning: "Passt zu deinem Wunsch …",
 						},
 					],
-					generation: { model: "google/gemini-2.5-flash", tokensInput: 100, tokensOutput: 50, cost: 0.0012 },
+					generation: {
+						model: "google/gemini-2.5-flash",
+						tokensInput: 100,
+						tokensOutput: 50,
+						cost: 0.0012,
+					},
 				},
 				elina: {
 					prefilter: [],

@@ -31,8 +31,7 @@ export interface PopularityRecord {
 	popularityTier: PopularityTier;
 }
 
-export const POPULARITY_INDEX: PopularityRecord[] =
-	data as PopularityRecord[];
+export const POPULARITY_INDEX: PopularityRecord[] = data as PopularityRecord[];
 
 let tierMap: Map<number, PopularityTier> | null = null;
 

@@ -86,10 +86,7 @@ describe("runEval", () => {
 			occupations: MINIMAL_OCCUPATIONS as never,
 			personas,
 		});
-		expect(Object.keys(snap.results).sort()).toEqual([
-			"maria-2026",
-			"nico",
-		]);
+		expect(Object.keys(snap.results).sort()).toEqual(["maria-2026", "nico"]);
 	});
 
 	test("per-persona errors are isolated", async () => {
