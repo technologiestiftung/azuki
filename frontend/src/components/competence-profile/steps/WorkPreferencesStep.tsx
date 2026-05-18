@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { content } from "../../../content/de";
 import { useAppStore } from "../../../store/useAppStore";
@@ -70,10 +70,7 @@ export function WorkPreferencesStep() {
 			? "/illustrations/work-preferences/clock.svg"
 			: "/illustrations/work-preferences/star.svg";
 
-	const [selectedChoice, setSelectedChoice] =
-		useState<WorkPreferenceChoice | null>(null);
-
-	const activeChoice = selectedChoice ?? workPreferences[current.id] ?? null;
+	const activeChoice = workPreferences[current.id] ?? null;
 
 	const selectedOverlayLayers: OverlayLayer[] =
 		activeChoice && (activeChoice === "a" || activeChoice === "b")
@@ -94,17 +91,14 @@ export function WorkPreferencesStep() {
 	}, [pathname, hash, navigate]);
 
 	function handleChoice(choice: WorkPreferenceChoice) {
-		setSelectedChoice(choice);
 		setWorkPreference(current.id, choice);
 	}
 
 	function handleNext() {
-		setSelectedChoice(null);
 		goNext();
 	}
 
 	function handleSkip() {
-		setSelectedChoice(null);
 		setWorkPreference(current.id, null);
 		goNext();
 	}
