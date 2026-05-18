@@ -1,6 +1,13 @@
 import OpenAI from "openai";
-import type { UserProfile, MatchResult, GenerationInfo } from "@azuki/shared";
-import { AI_MODEL_IDS, DEFAULT_MODEL_ID } from "@azuki/shared";
+import {
+	type UserProfile,
+	type MatchResult,
+	type GenerationInfo,
+	formatOccupationDisplayName,
+	AI_MODEL_IDS,
+	DEFAULT_MODEL_ID,
+} from "@azuki/shared";
+import { occupationMatchMeta } from "../occupationMeta";
 import type { ScoredOccupation } from "../matching/index.js";
 import {
 	EDUCATION_LABELS,
@@ -287,13 +294,15 @@ function toOccupationResult(
 	item: ScoredOccupation,
 	reasoning: string,
 ): MatchResult["occupations"][number] {
+	const meta = occupationMatchMeta(item.occupation);
 	return {
 		id: item.occupation.id,
-		name: item.occupation.name,
+		name: formatOccupationDisplayName(item.occupation.name),
 		score: item.score,
 		images: item.occupation.images.slice(0, 3),
 		taskSummary: item.occupation.taskSummary || "",
 		reasoning,
+		...meta,
 	};
 }
 

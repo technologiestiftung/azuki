@@ -42,3 +42,5 @@ export {
 export { type Verdict, type ScoreReport } from "./eval-rubrics/types";
 
 export type { Persona } from "./persona";
+
+export { formatOccupationDisplayName } from "./occupationDisplayName";
