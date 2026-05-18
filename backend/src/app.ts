@@ -132,7 +132,9 @@ app.post("/api/match", async (c) => {
 app.get("/api/occupations/:id", (c) => {
 	const id = parseInt(c.req.param("id"), 10);
 	const occupation = occupations.find((o) => o.id === id);
-	if (!occupation) return c.json({ error: "Occupation not found" }, 404);
+	if (!occupation) {
+		return c.json({ error: "Occupation not found" }, 404);
+	}
 	return c.json(occupation);
 });
 
@@ -253,7 +255,10 @@ app.post("/api/personas", async (c) => {
 	}
 	const parsed = CreatePersonaSchema.safeParse(body);
 	if (!parsed.success) {
-		return c.json({ error: "Invalid request body", issues: parsed.error.issues }, 400);
+		return c.json(
+			{ error: "Invalid request body", issues: parsed.error.issues },
+			400,
+		);
 	}
 	const input = parsed.data;
 	const id = await generateUniqueSlug(input.name);
@@ -296,7 +301,10 @@ app.put("/api/personas/:id", async (c) => {
 	}
 	const parsed = UpdatePersonaSchema.safeParse(body);
 	if (!parsed.success) {
-		return c.json({ error: "Invalid request body", issues: parsed.error.issues }, 400);
+		return c.json(
+			{ error: "Invalid request body", issues: parsed.error.issues },
+			400,
+		);
 	}
 	const input = parsed.data;
 	try {
