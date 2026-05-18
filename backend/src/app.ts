@@ -151,7 +151,9 @@ app.post("/api/match", async (c) => {
 app.get("/api/occupations/:id", (c) => {
 	const id = parseInt(c.req.param("id"), 10);
 	const occupation = occupations.find((o) => o.id === id);
-	if (!occupation) return c.json({ error: "Occupation not found" }, 404);
+	if (!occupation) {
+		return c.json({ error: "Occupation not found" }, 404);
+	}
 	return c.json(occupation);
 });
 
