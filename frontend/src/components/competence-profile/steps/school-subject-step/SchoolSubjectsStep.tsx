@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import { content } from "../../../../content/de";
+import { content } from "../../../../content";
 import { useAppStore } from "../../../../store/useAppStore";
 import { StepLayout } from "../StepLayout";
 import { useFlowNavigation } from "../../../../routing/useFlowNavigation";

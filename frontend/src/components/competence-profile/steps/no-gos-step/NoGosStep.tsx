@@ -1,6 +1,6 @@
 import { useRef, useCallback, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { content } from "../../../../content/de";
+import { content } from "../../../../content";
 import { useAppStore } from "../../../../store/useAppStore";
 import type { NoGoAnswer } from "@azuki/shared";
 import { StepLayout } from "../StepLayout";

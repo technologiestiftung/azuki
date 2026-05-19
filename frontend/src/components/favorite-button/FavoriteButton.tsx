@@ -1,5 +1,5 @@
 import type { MouseEvent } from "react";
-import { content } from "../../content/de";
+import { content } from "../../content";
 
 interface FavoriteButtonProps {
 	onClick: () => void;

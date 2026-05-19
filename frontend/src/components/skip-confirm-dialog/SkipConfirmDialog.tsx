@@ -1,5 +1,5 @@
 import React from "react";
-import { content } from "../../content/de";
+import { content } from "../../content";
 import { DefaultDialog } from "../primitives/dialogs/DefaultDialog";
 import { PrimaryThemedButton } from "../primitives/buttons/PrimaryThemedButton";
 import { SecondaryButton } from "../primitives/buttons/SecondaryButton";

@@ -1,4 +1,4 @@
-import { content } from "../../../../content/de";
+import { content } from "../../../../content";
 import type { EducationLevel } from "../../../../common";
 
 export const schoolDegrees: { value: EducationLevel; label: string }[] = [

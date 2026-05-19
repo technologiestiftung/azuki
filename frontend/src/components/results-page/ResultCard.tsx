@@ -5,7 +5,7 @@ import {
 import { Badge } from "../primitives/badge/Badge";
 import { useMatchResultsStore } from "../../store/useMatchResultsStore";
 import { FavoriteButton } from "../favorite-button/FavoriteButton";
-import { content } from "../../content/de";
+import { content } from "../../content";
 
 interface ResultCardProps {
 	occupation: MatchedOccupation;

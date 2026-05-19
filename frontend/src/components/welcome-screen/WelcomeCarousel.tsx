@@ -1,6 +1,6 @@
 import React, { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import { content } from "../../content/de";
+import { content } from "../../content";
 import { PrimaryThemedButton } from "../primitives/buttons/PrimaryThemedButton";
 
 const slideImages = [
