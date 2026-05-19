@@ -15,6 +15,8 @@ import type {
   OccupationImage,
 } from "@azuki/shared";
 import { SUBJECTS } from "@azuki/shared";
+import { hydrateFachpraktiker } from "./hydrate-fachpraktiker.js";
+import { applyConditionOverrides } from "./apply-condition-overrides.js";
 
 // --- API response types (model the external Arbeitsagentur API) ---
 
@@ -116,14 +118,35 @@ async function apiFetch<T>(path: string): Promise<T> {
 
 // --- Extraction functions ---
 
+// Recognised indoor workplace mentions across BERUFENET infofelder. Used
+// for the broad `indoor` flag (see WorkConditions.indoor). Patterns drawn
+// from a scan of the workLocations field across the full dataset.
+const INDOOR_WORKPLACE_RE =
+  /Büroräumen|Werkstätten|Produktionshallen|Verkaufsräumen|Verkaufsständen|Lagerräumen|Lagerhallen|Kühlräumen|Kühlhäusern|Küchen|Backstube|Gasträumen|Praxisräumen|Behandlungsräumen|Klassenzimmern|Krankenhäusern|Pflegeeinrichtungen|Hotels|Restaurants|Friseursalons|Verwaltungsgebäuden|Bildungseinrichtungen|Apotheken|Sporthallen|Sportstätten/i;
+
 function extractConditions(infofelder: Infofeld[]): WorkConditions {
-  const field = infofelder.find((f) => f.id === INFOFELD_IDS.bedingungen);
-  const text = field ? stripHtml(field.content || "") : "";
+  const conditionsField = infofelder.find(
+    (f) => f.id === INFOFELD_IDS.bedingungen,
+  );
+  const text = conditionsField ? stripHtml(conditionsField.content || "") : "";
+
+  // BERUFENET separates "Bedingungen" (b16-3, working conditions text) from
+  // "Arbeitsorte" (b12-02, explicit workplace list). Office/workshop are
+  // mentioned in both but retail/warehouse/kitchen typically only appear
+  // in Arbeitsorte. Check both fields for the broad indoor flag.
+  const workplaceField = infofelder.find(
+    (f) => f.id === INFOFELD_IDS.arbeitsorte,
+  );
+  const workplaceText = workplaceField
+    ? stripHtml(workplaceField.content || "")
+    : "";
 
   return {
     outdoor: /im Freien/i.test(text),
     office: /Büroräumen/i.test(text),
     workshop: /Werkstätten|Produktionshallen/i.test(text),
+    indoor:
+      INDOOR_WORKPLACE_RE.test(text) || INDOOR_WORKPLACE_RE.test(workplaceText),
     constructionSite: /Baustellen/i.test(text),
     screenWork: /Bildschirmarbeit/i.test(text),
     manualLabor: /Handarbeit/i.test(text),
@@ -554,6 +577,27 @@ async function main() {
   console.log(
     `  -> ${occupations.length} occupations processed, ${errors} errors.\n`,
   );
+
+  console.log(
+    "Step 2b: Hydrating Fachpraktiker (§66 BBiG) records from parent Ausbildungen...",
+  );
+  const hyd = hydrateFachpraktiker(occupations);
+  console.log(
+    `  -> ${hyd.hydrated} hydrated, ${hyd.unresolved} unresolved.\n`,
+  );
+  if (hyd.unresolved > 0) {
+    for (const r of hyd.report) {
+      if (r.parentId === null) {
+        console.log(`  [UNRESOLVED] ${r.id}  ${r.name}`);
+      }
+    }
+  }
+
+  console.log(
+    "Step 2c: Applying curated condition overrides for BERUFENET tag mismatches...",
+  );
+  const overrides = applyConditionOverrides(occupations);
+  console.log(`  -> ${overrides.length} condition overrides applied.\n`);
 
   const __dirname = dirname(fileURLToPath(import.meta.url));
   const outDir = resolve(__dirname, "../backend/src/data");

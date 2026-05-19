@@ -4,6 +4,14 @@ export interface WorkConditions {
 	outdoor: boolean;
 	office: boolean;
 	workshop: boolean;
+	/**
+	 * True if BERUFENET lists any indoor workplace — Büroräume, Werkstätten,
+	 * Verkaufsräume, Lagerhallen/-räume, Kühlhäuser, Küchen, Praxisräume,
+	 * Klassenzimmer, Krankenhäuser, etc. Broader than office || workshop;
+	 * used by environment:a (Drinnen) so the indoor preference matches every
+	 * indoor Beruf, not only office/workshop variants.
+	 */
+	indoor: boolean;
 	constructionSite: boolean;
 	screenWork: boolean;
 	manualLabor: boolean;
@@ -64,6 +72,10 @@ export interface Occupation {
 	digitalizationSignal: boolean;
 	workLocations: string;
 	competenciesText: string;
+	// Set on §66 BBiG / §42r HwO Fachpraktiker records by hydrate-fachpraktiker.
+	// Points to the regular Ausbildung whose tags were inherited. Used by
+	// scorePopularity to make §66 popularity track its parent's tier.
+	parentId?: number | null;
 }
 
 // --- Education Level (user's own degree) ---

@@ -2,6 +2,26 @@ import { describe, expect, test } from "vitest";
 import { scoreStrengths } from "../../src/matching/score/dimensions.js";
 import { makeOccupation, makeProfile } from "./helpers.js";
 
+describe("scoreStrengths — empathy", () => {
+	const profile = makeProfile({ strengths: { empathy: 0.8 } });
+
+	test("awards +2 when occupation has 'Einfühlungsvermögen' strengthTag", () => {
+		const occ = makeOccupation({ strengthTags: ["Einfühlungsvermögen"] });
+		expect(scoreStrengths(occ, profile)).toBe(2);
+	});
+
+	test("does NOT award when occupation lacks empathy tags", () => {
+		const occ = makeOccupation({ strengthTags: ["Sorgfalt"] });
+		expect(scoreStrengths(occ, profile)).toBe(0);
+	});
+
+	test("does NOT fire when empathy is below 0.5", () => {
+		const lowProfile = makeProfile({ strengths: { empathy: 0.4 } });
+		const occ = makeOccupation({ strengthTags: ["Einfühlungsvermögen"] });
+		expect(scoreStrengths(occ, lowProfile)).toBe(0);
+	});
+});
+
 describe("scoreStrengths — logical-thinking", () => {
 	const profile = makeProfile({
 		strengths: { "logical-thinking": 0.8 },

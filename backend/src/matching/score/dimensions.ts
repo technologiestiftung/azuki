@@ -1,5 +1,10 @@
-import type { Occupation, UserProfile } from "@azuki/shared";
-import { INTERESTS } from "@azuki/shared";
+import type {
+	EducationLevel,
+	Occupation,
+	PopularityTier,
+	UserProfile,
+} from "@azuki/shared";
+import { INTERESTS, getPopularityTier } from "@azuki/shared";
 import type { SalaryBands } from "./salaryScoreBands.js";
 import {
 	COMMUNICATION_SKILL_TAGS,
@@ -17,6 +22,87 @@ import {
 const INTEREST_BY_ID = new Map(
 	INTERESTS.map((interest) => [interest.id, interest]),
 );
+
+/**
+ * Additive bonus/penalty per popularity tier. Reflects findability in the
+ * German Ausbildungsmarkt: A-anchor roles (≥5,000 starts/yr) get a small
+ * lift; D/E/G roles get penalized because in practice almost nobody can find
+ * an Ausbildungsplatz. F_fachpraktiker stays neutral — the §66 records were
+ * hydrated from their parent Ausbildung and stand on the parent's signals;
+ * a separate popularity bonus would double-count.
+ *
+ * Magnitudes chosen so the A→E spread (+5 to -6 = 11 points) is just enough
+ * to flip the typical 8-12 point gap between a niche-but-profile-matched
+ * Beruf and a popular-but-thin-fit Beruf without making popularity dominate
+ * profile signals. No-go penalties (-5 to -10) and workPref rewards (+2)
+ * remain the larger levers.
+ */
+const POPULARITY_TIER_SCORE: Record<PopularityTier, number> = {
+	A_anchor: 5,
+	B_solid: 2,
+	C_smallReal: 0,
+	D_niche: -3,
+	E_vanishing: -6,
+	F_fachpraktiker: 0,
+	F_doppelqual: 0,
+	G_unknown: -2,
+};
+
+/**
+ * §66 BBiG / §42r HwO Fachpraktiker variants are designed specifically for
+ * learners with limited education or learning support needs. The popularity
+ * tier alone doesn't reflect that: their absolute starts/yr are small, but
+ * they're the *intended* path for these profiles. For design-intent users,
+ * replace the F_fachpraktiker score with `parent's tier score + 1` so each
+ * §66 record sits just above its parent. This realizes the stated principle
+ * "slightly preferred over the regular variant" universally — including
+ * for A_anchor parents where a flat F-tier bonus produced the opposite.
+ *
+ * Parent-aware tracking comes from hydrate-fachpraktiker, which sets
+ * `parentId` on every resolved §66 record. Unresolved §66 records (no
+ * algorithmic or override match) fall back to the flat bonus.
+ */
+const FACHPRAKTIKER_BOOST_EDU_LEVELS = new Set<EducationLevel>([
+	"secondary",
+	"foreign_degree",
+	"none",
+]);
+const FACHPRAKTIKER_DESIGN_INTENT_BONUS = 1;
+const FACHPRAKTIKER_FALLBACK_BOOST = 3;
+
+export function scorePopularity(
+	occupation: Occupation,
+	profile?: UserProfile,
+): number {
+	const tier = getPopularityTier(occupation.id);
+	if (!tier) {
+		// Off-index Berufe (mostly newly added). Treat like G_unknown.
+		return POPULARITY_TIER_SCORE.G_unknown;
+	}
+
+	const isDesignIntent =
+		tier === "F_fachpraktiker" &&
+		profile?.educationLevel !== undefined &&
+		profile?.educationLevel !== null &&
+		FACHPRAKTIKER_BOOST_EDU_LEVELS.has(profile.educationLevel);
+
+	if (!isDesignIntent) {
+		return POPULARITY_TIER_SCORE[tier];
+	}
+
+	// Parent-aware: §66 sits just above its parent's popularity tier.
+	if (occupation.parentId != null) {
+		const parentTier = getPopularityTier(occupation.parentId);
+		const parentScore = parentTier
+			? POPULARITY_TIER_SCORE[parentTier]
+			: POPULARITY_TIER_SCORE.G_unknown;
+		return parentScore + FACHPRAKTIKER_DESIGN_INTENT_BONUS;
+	}
+
+	// Unresolved §66 record (rare): use the flat fallback so it doesn't
+	// sit at the F_fachpraktiker baseline of 0 for its intended audience.
+	return POPULARITY_TIER_SCORE[tier] + FACHPRAKTIKER_FALLBACK_BOOST;
+}
 
 export function scoreEducation(
 	occupation: Occupation,
@@ -60,6 +146,37 @@ export function scoreEducation(
 	return 0;
 }
 
+/**
+ * Heuristic: an occupation whose primary work is social (sozial-beratend at
+ * index 0 or 1) and that doesn't involve industrial machinery is a
+ * people-care environment — Kindergarten, Pflege, retail floor, salon —
+ * rather than a Werkstatt/Produktion environment.
+ *
+ * BERUFENET uses single boolean tags (`Lärm`, `Schweres Heben`) that fire
+ * in both industrial and people-care contexts. When a Joblinge-target user
+ * selects these as no-gos they typically mean industrial Werkstatt noise
+ * or workshop lifting (per the persona rubrics) — not Kindergartenalltag
+ * or transferring patients. Treating them the same way exiles entire care
+ * families (Erzieher, Altenpflegehelfer, GuK-Helfer) from menus where they
+ * genuinely fit the profile and are the intended target audience.
+ *
+ * When this heuristic fires we apply a soft -1 instead of the full -5,
+ * acknowledging the condition without excluding the Beruf from competition.
+ */
+function isPeopleEnvironmentContext(occupation: Occupation): boolean {
+	const dominantSocial = occupation.interests
+		.slice(0, 2)
+		.includes("sozial-beratend");
+	return dominantSocial && !occupation.conditions.machinery;
+}
+
+// No-gos whose BERUFENET tag fires in both industrial and people-care
+// contexts. For these we soften the penalty in people-care contexts.
+const PEOPLE_ENVIRONMENT_SOFT_NO_GOS = new Set(["noise", "heavy-work"]);
+
+const NO_GO_PENALTY = -5;
+const NO_GO_SOFT_PENALTY = -1;
+
 export function scoreNoGos(
 	occupation: Occupation,
 	profile: UserProfile,
@@ -70,9 +187,17 @@ export function scoreNoGos(
 			continue;
 		}
 		const check = NO_GO_MAP[id];
-		if (check && check(occupation)) {
-			penalty -= 5;
+		if (!check || !check(occupation)) {
+			continue;
 		}
+		if (
+			PEOPLE_ENVIRONMENT_SOFT_NO_GOS.has(id) &&
+			isPeopleEnvironmentContext(occupation)
+		) {
+			penalty += NO_GO_SOFT_PENALTY;
+			continue;
+		}
+		penalty += NO_GO_PENALTY;
 	}
 	return penalty;
 }
@@ -297,11 +422,17 @@ export function scoreWorkValues(
 		}
 
 		if (valueId === "short_distance") {
+			// Symmetric: reward fixed-location Berufe and penalize travel-heavy
+			// ones. An asymmetric penalty made the value selection useless on
+			// retail/logistik for users who chose it specifically because they
+			// want to stay close to home.
 			if (
 				occupation.conditions.frequentAbsence ||
 				occupation.conditions.changingWorkplaces
 			) {
 				score -= 2;
+			} else {
+				score += 2;
 			}
 			continue;
 		}

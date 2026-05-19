@@ -7,6 +7,7 @@ export function makeConditions(
 		outdoor: false,
 		office: false,
 		workshop: false,
+		indoor: false,
 		constructionSite: false,
 		screenWork: false,
 		manualLabor: false,

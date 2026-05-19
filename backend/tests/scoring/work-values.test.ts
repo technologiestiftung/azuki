@@ -51,9 +51,9 @@ describe("scoreWorkValues — short_distance", () => {
 		expect(scoreWorkValues(occ, profile)).toBe(-2);
 	});
 
-	test("awards 0 when neither travel signal is present", () => {
+	test("awards +2 when neither travel signal is present", () => {
 		const occ = makeOccupation();
-		expect(scoreWorkValues(occ, profile)).toBe(0);
+		expect(scoreWorkValues(occ, profile)).toBe(2);
 	});
 });
 
@@ -62,6 +62,31 @@ describe("scoreWorkValues — movement removed", () => {
 		const profile = makeProfile({ workValues: ["movement"] });
 		const occ = makeOccupation({
 			conditions: { standingWalking: true, manualLabor: true, outdoor: true },
+		});
+		expect(scoreWorkValues(occ, profile)).toBe(0);
+	});
+});
+
+describe("scoreWorkValues — atmosphere", () => {
+	const profile = makeProfile({ workValues: ["atmosphere"] });
+
+	test("awards +2 when occupation has 'Freundlich-gewinnendes Wesen'", () => {
+		const occ = makeOccupation({
+			strengthTags: ["Freundlich-gewinnendes Wesen"],
+		});
+		expect(scoreWorkValues(occ, profile)).toBe(2);
+	});
+
+	test("awards +2 when occupation has 'Kontaktbereitschaft'", () => {
+		const occ = makeOccupation({
+			strengthTags: ["Kontaktbereitschaft"],
+		});
+		expect(scoreWorkValues(occ, profile)).toBe(2);
+	});
+
+	test("does NOT award when occupation has neither friendliness tag", () => {
+		const occ = makeOccupation({
+			strengthTags: ["Sorgfalt", "Selbstständige Arbeitsweise"],
 		});
 		expect(scoreWorkValues(occ, profile)).toBe(0);
 	});

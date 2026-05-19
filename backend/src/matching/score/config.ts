@@ -20,7 +20,10 @@ export const NO_GO_MAP: Record<string, OccupationPredicate> = {
 
 export const WORK_PREF_MAP: Record<string, WorkPreferenceOptionChecks> = {
 	location: {
-		a: (o) => o.conditions.office || o.conditions.workshop,
+		// "Fester Arbeitsort" — a stable indoor workplace covers retail,
+		// warehouse, kitchen, salon, practice room etc. The older
+		// office||workshop proxy missed all of those.
+		a: (o) => o.conditions.indoor,
 		b: (o) => o.conditions.outdoor || o.conditions.constructionSite,
 	},
 	"hands-vs-mind": {
@@ -45,7 +48,8 @@ export const WORK_PREF_MAP: Record<string, WorkPreferenceOptionChecks> = {
 		b: (o) => !o.conditions.regulatedWork,
 	},
 	environment: {
-		a: (o) => o.conditions.office || o.conditions.workshop,
+		// "Drinnen" — any indoor workplace, not just office/workshop.
+		a: (o) => o.conditions.indoor,
 		b: (o) => o.conditions.outdoor,
 	},
 };
@@ -58,6 +62,9 @@ export const STRENGTH_TO_TAGS: Record<string, string[]> = {
 	// No b20-4 tags; scored via conditions fallback in dimensions.ts.
 	craftsmanship: [],
 	communication: ["Kommunikationsfähigkeit", "Kontaktbereitschaft"],
+	// "Pädagogisches Geschick" lives in b20-2 skillTags, not b20-4, so we
+	// only map the b20-4 tag here. 85/728 coverage — selective.
+	empathy: ["Einfühlungsvermögen"],
 	// Scored via conditions fallback (precisionWork) in dimensions.ts.
 	precision: [],
 	// Scored via skillTags fallback (b20-2) in dimensions.ts.
@@ -120,4 +127,11 @@ export const WORK_VALUE_CHECKS: Record<string, WorkValuePredicate> = {
 		!o.conditions.irregularHours,
 	modern_technology: (o) => o.conditions.machinery || o.digitalizationSignal,
 	remote: (o) => HOMEOFFICE_RE.test(o.workLocations),
+	// "Gute Atmosphäre" — friendly/sociable workplaces. Distinct from
+	// people_work (which counts any customer/social interaction) and from
+	// teamwork_value (which counts structured team setups): atmosphere is
+	// the b20-4 friendliness signal, present on 137 + 172 / 728 Berufe.
+	atmosphere: (o) =>
+		o.strengthTags.includes("Freundlich-gewinnendes Wesen") ||
+		o.strengthTags.includes("Kontaktbereitschaft"),
 };

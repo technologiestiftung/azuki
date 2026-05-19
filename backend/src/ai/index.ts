@@ -42,6 +42,108 @@ function getClient(): OpenAI {
 	return _client;
 }
 
+interface Ranking {
+	id: number;
+	begruendung: string;
+}
+
+/**
+ * Robust extraction of the ranking array from an LLM response. Handles:
+ * - direct JSON array: `[{...}, ...]`
+ * - JSON object with the array under any key (e.g. GPT under `response_format:
+ *   json_object` might wrap as `{ "auswahl": [...] }` or `{ "ranking": [...] }`)
+ * - prose-prefixed responses (Claude tends to write analysis before the array
+ *   even when asked for JSON only)
+ *
+ * Returns null if no usable array of `{id, begruendung}`-shaped entries
+ * can be recovered.
+ */
+export function extractRankings(content: string): Ranking[] | null {
+	if (!content) return null;
+
+	const candidates: unknown[] = [];
+
+	// 1. Try parsing the full content first (fast path for clean JSON).
+	try {
+		candidates.push(JSON.parse(content));
+	} catch {
+		// fall through to extraction
+	}
+
+	// 2. Extract the first balanced top-level array `[...]` from the content.
+	// Handles prose-prefixed responses like "Analyse: ...\n[ {...}, ... ]".
+	const arrayStart = content.indexOf("[");
+	if (arrayStart >= 0) {
+		let depth = 0;
+		let inString = false;
+		let escape = false;
+		for (let i = arrayStart; i < content.length; i++) {
+			const ch = content[i];
+			if (escape) {
+				escape = false;
+				continue;
+			}
+			if (ch === "\\") {
+				escape = true;
+				continue;
+			}
+			if (ch === '"') {
+				inString = !inString;
+				continue;
+			}
+			if (inString) continue;
+			if (ch === "[") depth++;
+			else if (ch === "]") {
+				depth--;
+				if (depth === 0) {
+					try {
+						candidates.push(JSON.parse(content.slice(arrayStart, i + 1)));
+					} catch {
+						// ignore
+					}
+					break;
+				}
+			}
+		}
+	}
+
+	for (const cand of candidates) {
+		const rankings = findRankingArray(cand);
+		if (rankings) return rankings;
+	}
+	return null;
+}
+
+function isRankingShape(value: unknown): value is Ranking {
+	return (
+		typeof value === "object" &&
+		value !== null &&
+		typeof (value as { id?: unknown }).id === "number"
+	);
+}
+
+function findRankingArray(value: unknown): Ranking[] | null {
+	if (Array.isArray(value)) {
+		if (value.length === 0) return null;
+		if (value.every(isRankingShape)) {
+			return value.map((v) => ({
+				id: v.id,
+				begruendung: typeof v.begruendung === "string" ? v.begruendung : "",
+			}));
+		}
+		return null;
+	}
+	if (typeof value === "object" && value !== null) {
+		// Walk values looking for a ranking-shaped array. We don't recurse
+		// deeply — the LLM may wrap once in an object, not nest arbitrarily.
+		for (const v of Object.values(value as Record<string, unknown>)) {
+			const arr = findRankingArray(v);
+			if (arr) return arr;
+		}
+	}
+	return null;
+}
+
 export function buildSystemPrompt(): string {
 	return `AUFGABE
 Du bekommst:
@@ -128,13 +230,16 @@ Jede Begründung muss:
 - nicht generisch klingen
 
 AUSGABE
-Antworte ausschließlich als JSON-Array, ohne Markdown, ohne zusätzliche Erklärung.
+Antworte ausschließlich als JSON-Objekt mit dem Schlüssel "auswahl", dessen Wert ein Array ist. Ohne Markdown, ohne Vorrede, ohne zusätzliche Erklärung.
+"id" ist immer die numerische BERUFENET-ID hinter "[ID: ...]" in der Berufsliste, niemals eine Position oder Reihenfolge.
 
 Format:
-[
-  { "id": 12345, "begruendung": "Dieser Beruf könnte gut zu dir passen, weil ..." },
-  { "id": 67890, "begruendung": "Das passt gut zu dir, wenn du gern ..." }
-]`;
+{
+  "auswahl": [
+    { "id": 12345, "begruendung": "Dieser Beruf könnte gut zu dir passen, weil ..." },
+    { "id": 67890, "begruendung": "Das passt gut zu dir, wenn du gern ..." }
+  ]
+}`;
 }
 
 function label(id: string, map: Record<string, string>): string {
@@ -254,9 +359,9 @@ export function formatProfileSections(profile: UserProfile): string {
 	return parts.join("\n");
 }
 
-function formatOccupationList(scored: ScoredOccupation[]): string {
+export function formatOccupationList(scored: ScoredOccupation[]): string {
 	return scored
-		.map((item, index) => {
+		.map((item) => {
 			const occupation = item.occupation;
 			const description =
 				occupation.descriptionShort ||
@@ -266,7 +371,7 @@ function formatOccupationList(scored: ScoredOccupation[]): string {
 				description.length > MAX_DESCRIPTION_LENGTH
 					? `${description.slice(0, MAX_DESCRIPTION_LENGTH)}...`
 					: description;
-			let entry = `${index + 1}. [ID: ${occupation.id}] ${occupation.name}\n   ${truncatedDesc}`;
+			let entry = `[ID: ${occupation.id}] ${occupation.name}\n   ${truncatedDesc}`;
 			if (occupation.competenciesText) {
 				const truncatedComp =
 					occupation.competenciesText.length > MAX_DESCRIPTION_LENGTH
@@ -279,7 +384,7 @@ function formatOccupationList(scored: ScoredOccupation[]): string {
 		.join("\n\n");
 }
 
-function buildUserPrompt(
+export function buildUserPrompt(
 	scored: ScoredOccupation[],
 	profile: UserProfile,
 ): string {
@@ -363,13 +468,8 @@ export async function aiRank(
 
 	const content = response.choices?.[0]?.message?.content ?? "";
 
-	let rankings: { id: number; begruendung: string }[];
-	try {
-		const parsed = JSON.parse(content);
-		rankings = Array.isArray(parsed)
-			? parsed
-			: parsed.berufe || parsed.results || [];
-	} catch {
+	const rankings = extractRankings(content);
+	if (rankings === null) {
 		console.error("Failed to parse AI response:", content);
 		return fallbackResult(scored);
 	}

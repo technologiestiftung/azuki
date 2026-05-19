@@ -201,11 +201,31 @@ function ProfileEditorSection({
 	draft: Persona;
 	patch: (p: Partial<Persona>) => void;
 }) {
-	function patchProfile(partial: Partial<Persona["profile"]>) {
-		patch({ profile: { ...draft.profile, ...partial } });
-	}
+	// Normalize the profile so editors can safely read every field.
+	// Personas created via the GUI (or older seed versions) may have partial
+	// JSONB profiles where some fields are missing entirely — the editors
+	// call `.includes()` / `.map()` directly on these props and crash if
+	// a field is undefined. Defaulting here covers all editors at once,
+	// and patchProfile spreads the normalized version so the next save
+	// persists the completed shape.
+	const profile: Persona["profile"] = {
+		inSchool: draft.profile.inSchool ?? null,
+		educationLevel: draft.profile.educationLevel ?? null,
+		favoriteSubjects: draft.profile.favoriteSubjects ?? [],
+		customSubjects: draft.profile.customSubjects ?? [],
+		interests: draft.profile.interests ?? [],
+		customInterests: draft.profile.customInterests ?? [],
+		workValues: draft.profile.workValues ?? [],
+		strengths: draft.profile.strengths ?? {},
+		secretTalent: draft.profile.secretTalent ?? "",
+		practicalExperience: draft.profile.practicalExperience ?? "",
+		workPreferences: draft.profile.workPreferences ?? {},
+		noGos: draft.profile.noGos ?? {},
+	};
 
-	const profile = draft.profile;
+	function patchProfile(partial: Partial<Persona["profile"]>) {
+		patch({ profile: { ...profile, ...partial } });
+	}
 
 	return (
 		<section className="mb-6">
