@@ -11,7 +11,7 @@ import {
 	PRECISION_SKILL_TAGS,
 	STRENGTH_TO_TAGS,
 	WORK_PREF_MAP,
-	WORK_VALUE_CHECKS,
+	WORK_EXPECTATIONS_CHECKS,
 } from "./config.js";
 
 const INTEREST_BY_ID = new Map(
@@ -272,15 +272,15 @@ export function scoreStrengths(
 	return score;
 }
 
-export function scoreWorkValues(
+export function scoreWorkExpectations(
 	occupation: Occupation,
 	profile: UserProfile,
 	salaryBands?: SalaryBands | null,
 ): number {
 	let score = 0;
 
-	for (const valueId of profile.workValues ?? []) {
-		if (valueId === "good_salary") {
+	for (const expectationId of profile.workExpectations ?? []) {
+		if (expectationId === "good_salary") {
 			if (!occupation.salaryKnown || occupation.salaryMonthlyMedian === null) {
 				continue;
 			}
@@ -296,7 +296,7 @@ export function scoreWorkValues(
 			continue;
 		}
 
-		if (valueId === "short_distance") {
+		if (expectationId === "short_distance") {
 			if (
 				occupation.conditions.frequentAbsence ||
 				occupation.conditions.changingWorkplaces
@@ -306,7 +306,7 @@ export function scoreWorkValues(
 			continue;
 		}
 
-		const check = WORK_VALUE_CHECKS[valueId];
+		const check = WORK_EXPECTATIONS_CHECKS[expectationId];
 		if (check && check(occupation)) {
 			score += 2;
 		}
