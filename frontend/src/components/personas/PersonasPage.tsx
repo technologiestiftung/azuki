@@ -21,6 +21,7 @@ const EMPTY_PROFILE = {
 	interests: [],
 	customInterests: [],
 	workExpectations: [],
+	customWorkExpectations: [],
 	strengths: {},
 	secretTalent: "",
 	practicalExperience: "",

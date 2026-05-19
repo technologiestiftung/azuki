@@ -19,6 +19,7 @@ function makePersona(overrides: Partial<Persona> = {}): Persona {
 			interests: [],
 			customInterests: [],
 			workExpectations: [],
+			customWorkExpectations: [],
 			strengths: {},
 			secretTalent: "",
 			practicalExperience: "",
