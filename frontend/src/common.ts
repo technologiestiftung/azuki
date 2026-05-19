@@ -10,6 +10,7 @@ export type {
 	MatchedOccupation,
 	MatchResult,
 	SubjectDefinition,
+	AusbildungsplaetzeResponse,
 } from "@azuki/shared";
 
 import type { WorkPreferenceChoice } from "@azuki/shared";

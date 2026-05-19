@@ -126,3 +126,23 @@ export interface GenerationInfo {
 	tokensInput: number;
 	tokensOutput: number;
 }
+
+// --- Ausbildungsplatz Search (POST /api/ausbildungsplaetze response) ---
+
+export interface AusbildungsplatzPreview {
+	employer: string;
+	city: string;
+	/** ISO date string (YYYY-MM-DD) for the start of the Ausbildung. */
+	eintrittsdatum?: string;
+}
+
+export interface AusbildungsplatzResult {
+	beruf: string;
+	totalCount: number;
+	previews: AusbildungsplatzPreview[];
+	searchUrl: string;
+}
+
+export interface AusbildungsplaetzeResponse {
+	results: AusbildungsplatzResult[];
+}

@@ -5,8 +5,16 @@ import {
 	type EducationLevel,
 	type WorkPreferenceChoice,
 	type NoGoAnswer,
+	type AusbildungsplaetzeResponse,
 } from "../common";
 import { useMatchResultsStore } from "./useMatchResultsStore";
+
+export interface Standort {
+	plz: string;
+	umkreis: number;
+}
+
+const DEFAULT_STANDORT: Standort = { plz: "10115", umkreis: 25 };
 
 const initialProfile: UserProfile = {
 	inSchool: null,
@@ -41,12 +49,18 @@ function normalizeProfile(
 	};
 }
 
+// Clears anything derived from the user's profile or matched berufe.
+// `useMatchResultsStore` lives in a separate store; `ausbildungsplaetze` is
+// keyed to the previous match results, so it must be invalidated together.
 function clearMatchResults(): void {
 	useMatchResultsStore.getState().clearMatchResults();
+	useAppStore.setState({ ausbildungsplaetze: null });
 }
 
 interface AppState {
 	profile: UserProfile;
+	ausbildungsplaetze: AusbildungsplaetzeResponse | null;
+	standort: Standort;
 }
 
 interface AppActions {
@@ -62,6 +76,8 @@ interface AppActions {
 	setPracticalExperience: (value: string) => void;
 	setWorkPreference: (id: string, choice: WorkPreferenceChoice | null) => void;
 	setNoGo: (id: string, answer: NoGoAnswer | null) => void;
+	setAusbildungsplaetze: (results: AusbildungsplaetzeResponse | null) => void;
+	setStandort: (standort: Partial<Standort>) => void;
 	resetProfile: () => void;
 }
 
@@ -69,6 +85,8 @@ export const useAppStore = create<AppState & AppActions>()(
 	persist(
 		(set) => ({
 			profile: initialProfile,
+			ausbildungsplaetze: null,
+			standort: DEFAULT_STANDORT,
 
 			setInSchool: (value) =>
 				set((state) => {
@@ -203,8 +221,20 @@ export const useAppStore = create<AppState & AppActions>()(
 				}));
 			},
 
+			setAusbildungsplaetze: (results) => set({ ausbildungsplaetze: results }),
+
+			setStandort: (standort) =>
+				set((state) => ({
+					standort: { ...state.standort, ...standort },
+					// Changing standort invalidates per-beruf counts since they
+					// were fetched for the previous location.
+					ausbildungsplaetze: null,
+				})),
+
 			resetProfile: () => {
 				clearMatchResults();
+				// standort is a user preference, not derived from profile —
+				// keep it across resets.
 				set({ profile: initialProfile });
 			},
 		}),
@@ -213,6 +243,7 @@ export const useAppStore = create<AppState & AppActions>()(
 			storage: createJSONStorage(() => sessionStorage),
 			partialize: (state) => ({
 				profile: state.profile,
+				standort: state.standort,
 			}),
 			merge: (persistedState, currentState) => {
 				const persisted = persistedState as Partial<AppState> | undefined;

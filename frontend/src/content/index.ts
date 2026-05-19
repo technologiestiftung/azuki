@@ -323,6 +323,19 @@ export const content = {
 	"results.filter.apply": "Anwenden",
 	"results.filter.settingsAria": "Filtereinstellungen",
 	"results.filter.dismissOverlay": "Schließen",
+	// Standort + Ausbildungsplätze (Arbeitsagentur API integration)
+	"results.region": "Berlin und Brandenburg",
+	"results.badge.suffix": "Stellen",
+	"results.badge.empty": "Keine offenen Stellen",
+	"results.previewHeading": "Beispiele in deiner Nähe",
+	"results.startDatePrefix": "Start:",
+	"results.showAllLink": "Alle Stellen auf arbeitsagentur.de ansehen",
+	"results.fetchError":
+		"Die Stellen konnten gerade nicht geladen werden. Versuch es später noch einmal.",
+	"standort.label": "Standort:",
+	"standort.plzAriaLabel": "Postleitzahl",
+	"freiePlaetze.noResults":
+		"Noch keine passenden Berufe. Geh zuerst zurück zur Ergebnisliste.",
 
 	// Skip confirm dialog
 	"skipConfirmDialog.default.title": "Du hast noch nichts ausgewählt",

@@ -1,6 +1,7 @@
 import type {
 	UserProfile,
 	MatchResult,
+	AusbildungsplaetzeResponse,
 	EvalSnapshot,
 	Persona,
 } from "@azuki/shared";
@@ -51,6 +52,26 @@ export async function unlock(password: string): Promise<boolean> {
 		return true;
 	}
 	return false;
+}
+
+export async function fetchAusbildungsplaetze(
+	plz: string,
+	berufe: string[],
+	options: { umkreis?: number; signal?: AbortSignal } = {},
+): Promise<AusbildungsplaetzeResponse> {
+	const { umkreis, signal } = options;
+	const res = await fetch(`${API_BASE}/ausbildungsplaetze`, {
+		method: "POST",
+		headers: headers(),
+		body: JSON.stringify({ plz, berufe, umkreis }),
+		signal,
+	});
+
+	if (!res.ok) {
+		throw new Error(`Ausbildungsplaetze fetch failed: ${res.status}`);
+	}
+
+	return res.json();
 }
 
 export async function getDefaultPrompt(): Promise<string> {
