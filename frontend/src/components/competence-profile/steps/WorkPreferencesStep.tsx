@@ -119,8 +119,8 @@ export function WorkPreferencesStep() {
 			isSkipConfirmDialogOpen={isSkipConfirmDialogOpen}
 			skipConfirmOnStay={skipConfirmOnStay}
 		>
-			<div className="flex flex-1 flex-col gap-3 h-full">
-				<div className="relative flex flex-1 h-[217px] items-center justify-center">
+			<div className="flex flex-1 flex-col justify-between gap-3">
+				<div className="relative flex h-[217px] shrink-0 items-center justify-center">
 					<img
 						src={baseIllustration}
 						alt=""
@@ -137,7 +137,7 @@ export function WorkPreferencesStep() {
 						/>
 					))}
 				</div>
-				<div className="flex gap-3 pb-4" key={current.id}>
+				<div className="flex shrink-0 gap-3 pb-4" key={current.id}>
 					<SelectableCardButton
 						label={current.a}
 						selected={workPreferences[current.id] === "a"}
