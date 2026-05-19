@@ -82,6 +82,10 @@ export default {
 					from: { opacity: "0" },
 					to: { opacity: "1" },
 				},
+				fadeInUp: {
+					from: { opacity: "0", transform: "translateY(0.5rem)" },
+					to: { opacity: "1", transform: "translateY(0)" },
+				},
 				fadeOut: {
 					from: { opacity: "1" },
 					to: { opacity: "0" },
@@ -167,6 +171,7 @@ export default {
 			},
 			animation: {
 				fadeIn: "fadeIn 0.2s ease-in-out",
+				fadeInUp: "fadeInUp 0.2s ease-in-out",
 				fadeOut: "fadeOut 0.2s ease-in-out forwards",
 				slideInBottom:
 					"slideInBottom 0.32s cubic-bezier(0.32, 0.72, 0, 1) forwards",

@@ -3,33 +3,35 @@ import { StepLayout } from "./StepLayout";
 import { SelectableRowButton } from "../../primitives/buttons/SelectableRowButton";
 import { useAppStore } from "../../../store/useAppStore";
 import { useFlowNavigation } from "../../../routing/useFlowNavigation";
-import { workValues } from "./work-values";
+import { workExpectationOptions } from "./work-expectation-options";
 
-export function WorkValuesStep() {
+export function WorkExpectationsStep() {
 	const { goNext } = useFlowNavigation();
 	const profile = useAppStore((state) => state.profile);
-	const toggleWorkValue = useAppStore((state) => state.toggleWorkValue);
+	const toggleWorkExpectation = useAppStore(
+		(state) => state.toggleWorkExpectation,
+	);
 
 	return (
 		<StepLayout
-			question={content["workValues.question"]}
+			question={content["workExpectations.question"]}
 			onNext={goNext}
 			onSkip={goNext}
-			skipLabel={content["workValues.skipButton.label"]}
-			isSkipConfirmDialogOpen={profile.workValues.length === 0}
+			skipLabel={content["workExpectations.skipButton.label"]}
+			isSkipConfirmDialogOpen={profile.workExpectations.length === 0}
 			skipConfirmTitleKey="skipConfirmDialog.multipleChoice.title"
 			skipConfirmDescriptionKey="skipConfirmDialog.multipleChoice.description"
 			subtitle={content["common.multiSelect.subline"]}
 		>
 			<div className="flex flex-col gap-3">
-				{workValues.map((value) => {
-					const selected = profile.workValues.includes(value.value);
+				{workExpectationOptions.map((value) => {
+					const selected = profile.workExpectations.includes(value.value);
 					return (
 						<SelectableRowButton
 							key={value.value}
 							label={value.label}
 							selected={selected}
-							onClick={() => toggleWorkValue(value.value)}
+							onClick={() => toggleWorkExpectation(value.value)}
 						/>
 					);
 				})}

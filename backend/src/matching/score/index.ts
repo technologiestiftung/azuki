@@ -31,7 +31,7 @@ import {
 	scoreStrengths,
 	scoreSubjects,
 	scoreWorkPreferences,
-	scoreWorkValues,
+	scoreWorkExpectations,
 } from "./dimensions.js";
 
 export { buildSalaryBands } from "./salaryScoreBands.js";
@@ -50,7 +50,7 @@ export function scoreOccupation(
 	score += scoreSubjects(occupation, profile);
 	score += scoreInterests(occupation, profile);
 	score += scoreStrengths(occupation, profile);
-	score += scoreWorkValues(occupation, profile, salaryBands);
+	score += scoreWorkExpectations(occupation, profile, salaryBands);
 
 	return score;
 }

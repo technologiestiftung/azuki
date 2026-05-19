@@ -16,7 +16,7 @@ import {
 	STRENGTH_LABELS,
 	WORK_PREF_LABELS,
 	NO_GO_LABELS,
-	WORK_VALUE_LABELS,
+	WORK_EXPECTATION_LABELS,
 } from "./labels.js";
 
 const OPENROUTER_API_KEY = process.env.OPENROUTER_API_KEY;
@@ -229,9 +229,9 @@ export function formatProfileSections(profile: UserProfile): string {
 		parts.push(`Arbeitsvorlieben: ${prefLabels.join(", ")}`);
 	}
 
-	if (profile.workValues?.length > 0) {
+	if (profile.workExpectations?.length > 0) {
 		parts.push(
-			`Rahmenbedingungen: ${profile.workValues.map((v) => label(v, WORK_VALUE_LABELS)).join(", ")}`,
+			`Rahmenbedingungen: ${profile.workExpectations.map((v) => label(v, WORK_EXPECTATION_LABELS)).join(", ")}`,
 		);
 	}
 
