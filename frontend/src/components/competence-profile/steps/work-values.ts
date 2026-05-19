@@ -1,4 +1,4 @@
-import { content } from "../../../content/de";
+import { content } from "../../../content";
 
 export const workValues: { value: string; label: string }[] = [
 	{ value: "good_salary", label: content["workValues.option.goodSalary"] },

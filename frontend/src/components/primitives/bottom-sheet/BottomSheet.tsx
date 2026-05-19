@@ -7,7 +7,7 @@ import {
 	type PointerEvent,
 	type ReactNode,
 } from "react";
-import { content } from "../../../content/de";
+import { content } from "../../../content";
 
 const DISMISS_DRAG_PX = 96;
 const DISMISS_VELOCITY = 0.55; // px/ms downward

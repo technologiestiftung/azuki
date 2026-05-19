@@ -1,7 +1,7 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import { GhostIconButton } from "../primitives/buttons/GhostIconButton";
 import { SecondaryIconButton } from "../primitives/buttons/SecondaryIconButton";
-import { content } from "../../content/de";
+import { content } from "../../content";
 import { TabBar } from "../primitives/tab-bar/TabBar";
 interface ResultsPageHeaderProps {
 	title: string;
