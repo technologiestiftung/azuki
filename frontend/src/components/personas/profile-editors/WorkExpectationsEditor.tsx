@@ -5,7 +5,7 @@ interface Props {
 	onChange: (next: string[]) => void;
 }
 
-export function WorkValuesEditor({
+export function WorkExpectationsEditor({
 	workExpectations: selected,
 	onChange,
 }: Props) {
