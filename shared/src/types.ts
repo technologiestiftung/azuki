@@ -110,8 +110,19 @@ export interface MatchedOccupation {
 	images: OccupationImage[];
 	taskSummary: string;
 	reasoning: string;
+	occupationType: string;
+	occupationDuration: string;
+	occupationEarnings: string;
 }
 
 export interface MatchResult {
 	occupations: MatchedOccupation[];
+	generation?: GenerationInfo;
+}
+
+export interface GenerationInfo {
+	model: string;
+	cost: number;
+	tokensInput: number;
+	tokensOutput: number;
 }

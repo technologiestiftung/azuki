@@ -6,6 +6,9 @@ export const SWIPE_THRESHOLD = 80;
 
 export const DEFAULT_STACK_GHOST_LAYER_SCALE = 0.85;
 
+/** ghost card scale: shrinks slightly mid-gesture, returns to base scale at full progress */
+const GHOST_STACK_DIP = 0.01;
+
 const GRAVITY_OUT_GAIN = 1.16;
 const GRAVITY_IN_GAIN = 0.84;
 
@@ -65,7 +68,17 @@ export interface CardVisualState {
 	backTranslateY: number;
 	backCardBackgroundColor: string;
 	ghostOpacity: number;
+	/** 0–1 from drag / fly; use with `computeGhostStackScale` for the rearmost ghost layer. */
+	interactionProgress: number;
 	topTransform: string;
+}
+
+export function computeGhostStackScale(
+	ghostLayerScale: number,
+	interactionProgress: number,
+): number {
+	const p = Math.min(1, Math.max(0, interactionProgress));
+	return ghostLayerScale * (1 - GHOST_STACK_DIP * Math.sin(Math.PI * p));
 }
 
 export function topCardAnimationClassNames(
@@ -207,6 +220,7 @@ export function getCardVisualState(
 	const backScale = ghostLayerScale + (1 - ghostLayerScale) * progress;
 	const backTranslateY = 41 * (1 - progress);
 	const ghostOpacity = fly.isActive ? progress : 1;
+	const interactionProgress = progress;
 
 	const isFlyingUp = flyDirection === "up" && isFlying;
 	const rotate = isFlyingUp ? 0 : activeOffset.x / 20;
@@ -224,6 +238,7 @@ export function getCardVisualState(
 		backTranslateY,
 		backCardBackgroundColor: mixBackCardSurfaceColor(progress),
 		ghostOpacity,
+		interactionProgress,
 		topTransform,
 	};
 }

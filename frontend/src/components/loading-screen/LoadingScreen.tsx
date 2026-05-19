@@ -2,12 +2,15 @@ import { useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { content } from "../../content";
 import { useAppStore } from "../../store/useAppStore";
+import { useMatchResultsStore } from "../../store/useMatchResultsStore";
 import { matchProfile } from "../../api/client";
 
 export function LoadingScreen() {
 	const profile = useAppStore((state) => state.profile);
-	const matchResults = useAppStore((state) => state.matchResults);
-	const setMatchResults = useAppStore((state) => state.setMatchResults);
+	const matchResults = useMatchResultsStore((state) => state.matchResults);
+	const setMatchResults = useMatchResultsStore(
+		(state) => state.setMatchResults,
+	);
 	const navigate = useNavigate();
 	const called = useRef(false);
 

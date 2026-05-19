@@ -7,8 +7,7 @@ describe("scoreWorkValues — remote", () => {
 
 	test("awards +2 when workLocations contains Homeoffice", () => {
 		const occ = makeOccupation({
-			workLocations:
-				"in Büroräumen im Homeoffice bzw. mobil",
+			workLocations: "in Büroräumen im Homeoffice bzw. mobil",
 		});
 		expect(scoreWorkValues(occ, profile)).toBe(2);
 	});
