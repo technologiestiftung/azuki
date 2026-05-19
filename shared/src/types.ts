@@ -94,6 +94,7 @@ export interface UserProfile {
 	interests: string[];
 	customInterests: string[];
 	workExpectations: string[];
+	customWorkExpectations: string[];
 	strengths: Record<string, number>;
 	secretTalent: string;
 	practicalExperience: string;

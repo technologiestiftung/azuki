@@ -1,26 +1,35 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { content } from "../../../../content";
 import { useAppStore } from "../../../../store/useAppStore";
 import { StepLayout } from "../StepLayout";
 import { useFlowNavigation } from "../../../../routing/useFlowNavigation";
 import { interests } from "./interests";
-import { TextInput } from "../../../primitives/text-inputs/TextInput";
 import { Pill } from "../../../primitives/buttons/Pill";
+import { PrimaryThemedButton } from "../../../primitives/buttons/PrimaryThemedButton";
+import { InputBottomSheet } from "../../../input-bottom-sheet/InputBottomSheet";
 
 export function InterestsStep() {
 	const profile = useAppStore((state) => state.profile);
 	const toggleInterest = useAppStore((state) => state.toggleInterest);
 	const addCustomInterest = useAppStore((state) => state.addCustomInterest);
 	const { goNext } = useFlowNavigation();
-	const [customInput, setCustomInput] = useState("");
+	const [inputSheetOpen, setInputSheetOpen] = useState(false);
+	const customInterestsSectionRef = useRef<HTMLDivElement>(null);
 
-	function handleAddCustom() {
-		const trimmed = customInput.trim();
-		if (trimmed && !profile.interests.includes(trimmed)) {
-			addCustomInterest(trimmed);
-			setCustomInput("");
+	const handleAddCustomInterest = (value: string) => {
+		const trimmedValue = value.trim();
+		if (trimmedValue && !profile.interests.includes(trimmedValue)) {
+			addCustomInterest(trimmedValue);
 		}
-	}
+		requestAnimationFrame(() => {
+			requestAnimationFrame(() => {
+				customInterestsSectionRef.current?.scrollIntoView({
+					behavior: "smooth",
+					block: "start",
+				});
+			});
+		});
+	};
 
 	return (
 		<StepLayout
@@ -30,22 +39,11 @@ export function InterestsStep() {
 			isSkipConfirmDialogOpen={profile.interests.length === 0}
 			skipConfirmTitleKey="skipConfirmDialog.multipleChoice.title"
 			skipConfirmDescriptionKey="skipConfirmDialog.multipleChoice.description"
-			bottomContent={
-				<TextInput
-					name="customInterest"
-					value={customInput}
-					onChange={(e) => setCustomInput(e.target.value)}
-					onSubmit={handleAddCustom}
-					submitDisabled={!customInput.trim()}
-					placeholder={content["interests.addPlaceholder"]}
-					containerClassName="mb-1"
-				/>
-			}
 			subtitle={content["common.multiSelect.subline"]}
 		>
-			<div className="flex flex-col gap-8 pb-16">
+			<div className="flex flex-col gap-8">
 				{profile.customInterests.length > 0 && (
-					<div>
+					<div ref={customInterestsSectionRef} className="scroll-mt-4">
 						<h3 className="text-lg font-semibold text-gray-500 mb-2 px-3.5">
 							{content["interests.addedByYouLabel"]}
 						</h3>
@@ -59,6 +57,15 @@ export function InterestsStep() {
 									ariaLabel={`${interest} ${content["interests.skipButton.pill.label.postfix"]}`}
 								/>
 							))}
+							<PrimaryThemedButton
+								className="text-lg mt-2"
+								onClick={() => setInputSheetOpen(true)}
+							>
+								<div className="flex items-center gap-2 justify-center">
+									<img src="/icons/plus-black.svg" alt="" className="w-6 h-6" />
+									{content["interests.addCustomInterestsButton.addMore"]}
+								</div>
+							</PrimaryThemedButton>
 						</div>
 					</div>
 				)}
@@ -82,7 +89,27 @@ export function InterestsStep() {
 						</div>
 					</div>
 				))}
+				{profile.customInterests && profile.customInterests.length === 0 && (
+					<PrimaryThemedButton
+						className="text-lg"
+						ariaLabel={content["interests.addCustomInterestsButton.ariaLabel"]}
+						onClick={() => setInputSheetOpen(true)}
+					>
+						<div className="flex items-center gap-2 justify-center">
+							<img src="/icons/plus-black.svg" alt="" className="w-6 h-6" />
+							{content["interests.addCustomInterestsButton.label"]}
+						</div>
+					</PrimaryThemedButton>
+				)}
 			</div>
+
+			<InputBottomSheet
+				open={inputSheetOpen}
+				onClose={() => setInputSheetOpen(false)}
+				sheetAriaLabel={content["interests.bottomSheet.input.addPlaceholder"]}
+				inputPlaceholder={content["interests.bottomSheet.input.addPlaceholder"]}
+				onSubmit={handleAddCustomInterest}
+			/>
 		</StepLayout>
 	);
 }

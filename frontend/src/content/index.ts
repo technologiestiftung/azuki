@@ -4,12 +4,12 @@ export const content = {
 	// Common
 	"common.multiSelect.subline": "Wähle alle aus, die zutreffen.",
 	"common.singleSelect.subline": "Wähle eine Option aus.",
-	"common.inputDialog.submitButtonLabel": "Hinzufügen",
-	"common.inputDialog.submitButtonAriaLabel": "Hinzufügen",
-	"common.inputDialog.cancelButtonLabel": "Abbrechen",
-	"common.inputDialog.cancelButtonAriaLabel": "Abbrechen",
-	"common.inputDialog.clearButtonAriaLabel": "Eingabe löschen",
-	"common.inputDialog.errorMessage": "Bitte gib etwas ein",
+	"common.bottomSheet.submitButtonLabel": "Hinzufügen",
+	"common.bottomSheet.submitButtonAriaLabel": "Hinzufügen",
+	"common.bottomSheet.cancelButtonLabel": "Abbrechen",
+	"common.bottomSheet.cancelButtonAriaLabel": "Abbrechen",
+	"common.bottomSheet.clearButtonAriaLabel": "Eingabe löschen",
+	"common.bottomSheet.errorMessage": "Bitte gib etwas ein",
 	"common.bottomSheet.overlayDismissLabel": "Schließen",
 	"common.bottomSheet.ariaLabel": "Dialog",
 	// Welcome
@@ -56,7 +56,7 @@ export const content = {
 	"schoolSubjects.addCustomSubjectButton.label": "Schulfach hinzufügen",
 	"schoolSubjects.addCustomSubjectButton.ariaLabel": "Schulfach hinzufügen",
 	"schoolSubjects.customSubject.label": "Von dir hinzugefügt",
-	"schoolSubjects.inputDialog.input.addPlaceholder": "Schulfach hinzufügen",
+	"schoolSubjects.bottomSheet.input.addPlaceholder": "Schulfach hinzufügen",
 	"schoolSubjects.addCustomSubjectButton.addMore": "Weitere hinzufügen",
 	//Languages
 	"schoolSubjects.languages.label": "Sprachen",
@@ -111,6 +111,16 @@ export const content = {
 	"interests.addedByYouLabel": "Von dir hinzugefügt",
 	"interests.addPlaceholder": "Etwas anderes hinzufügen",
 	"interests.skipButton.pill.label.postfix": "als Interesse auswählen",
+	"interests.addCustomInterestsButton.addMore": "Weiteres hinzufügen",
+	"interests.addCustomInterestsButton.label": "Etwas eigenes hinzufügen",
+	"interests.addCustomInterestsButton.ariaLabel": "Etwas eigenes hinzufügen",
+	"interests.bottomSheet.input.addPlaceholder": "Etwas eigenes hinzufügen",
+	"interests.bottomSheet.submitButtonLabel": "Hinzufügen",
+	"interests.bottomSheet.submitButtonAriaLabel": "Hinzufügen",
+	"interests.bottomSheet.cancelButtonLabel": "Abbrechen",
+	"interests.bottomSheet.cancelButtonAriaLabel": "Abbrechen",
+	"interests.bottomSheet.clearButtonAriaLabel": "Eingabe löschen",
+	"interests.bottomSheet.errorMessage": "Bitte gib etwas ein",
 	// Tech & Digital
 	"interests.tech.label": "Technik & Digitales",
 	"interests.tech.gaming.label": "Gaming",
@@ -252,6 +262,21 @@ export const content = {
 	"workExpectations.option.shortDistance": "Kurzer Arbeitsweg",
 	"workExpectations.option.career": "Karriere",
 	"workExpectations.option.remote": "Remote möglich",
+	"workExpectations.customWorkExpectation.label": "Von dir hinzugefügt",
+	"workExpectations.addCustomWorkExpectationButton.addMore":
+		"Weiteres hinzufügen",
+	"workExpectations.addCustomWorkExpectationButton.label":
+		"Etwas eigenes hinzufügen",
+	"workExpectations.addCustomWorkExpectationButton.ariaLabel":
+		"Etwas eigenes hinzufügen",
+	"workExpectations.bottomSheet.input.addPlaceholder":
+		"Etwas eigenes hinzufügen",
+	"workExpectations.bottomSheet.submitButtonLabel": "Hinzufügen",
+	"workExpectations.bottomSheet.submitButtonAriaLabel": "Hinzufügen",
+	"workExpectations.bottomSheet.cancelButtonLabel": "Abbrechen",
+	"workExpectations.bottomSheet.cancelButtonAriaLabel": "Abbrechen",
+	"workExpectations.bottomSheet.clearButtonAriaLabel": "Eingabe löschen",
+	"workExpectations.bottomSheet.errorMessage": "Bitte gib etwas ein",
 
 	// Work Preferences
 	"workPreferences.question": "Wie möchtest du lieber arbeiten?",

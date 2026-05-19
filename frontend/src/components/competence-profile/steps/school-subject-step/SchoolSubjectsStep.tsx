@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { content } from "../../../../content";
 import { useAppStore } from "../../../../store/useAppStore";
 import { StepLayout } from "../StepLayout";
@@ -6,10 +6,7 @@ import { useFlowNavigation } from "../../../../routing/useFlowNavigation";
 import { categories } from "./school-subjects";
 import { Pill } from "../../../primitives/buttons/Pill";
 import { PrimaryThemedButton } from "../../../primitives/buttons/PrimaryThemedButton";
-import {
-	showInputDialog,
-	InputDialog,
-} from "../../../input-dialog/InputDialog";
+import { InputBottomSheet } from "../../../input-bottom-sheet/InputBottomSheet";
 
 export function SchoolSubjectsStep() {
 	const profile = useAppStore((state) => state.profile);
@@ -17,9 +14,13 @@ export function SchoolSubjectsStep() {
 	const addCustomSubject = useAppStore((state) => state.addCustomSubject);
 	const { goNext } = useFlowNavigation();
 	const customSubjectsSectionRef = useRef<HTMLDivElement>(null);
+	const [inputSheetOpen, setInputSheetOpen] = useState(false);
 
 	const handleAddCustomSubject = (value: string) => {
-		addCustomSubject(value);
+		const trimmedValue = value.trim();
+		if (trimmedValue && !profile.favoriteSubjects.includes(trimmedValue)) {
+			addCustomSubject(trimmedValue);
+		}
 		requestAnimationFrame(() => {
 			requestAnimationFrame(() => {
 				customSubjectsSectionRef.current?.scrollIntoView({
@@ -60,7 +61,7 @@ export function SchoolSubjectsStep() {
 							))}
 							<PrimaryThemedButton
 								className="text-lg mt-2"
-								onClick={showInputDialog}
+								onClick={() => setInputSheetOpen(true)}
 							>
 								<div className="flex items-center gap-2 justify-center">
 									<img src="/icons/plus-black.svg" alt="" className="w-6 h-6" />
@@ -99,7 +100,7 @@ export function SchoolSubjectsStep() {
 						ariaLabel={
 							content["schoolSubjects.addCustomSubjectButton.ariaLabel"]
 						}
-						onClick={showInputDialog}
+						onClick={() => setInputSheetOpen(true)}
 					>
 						<div className="flex items-center gap-2 justify-center">
 							<img src="/icons/plus-black.svg" alt="" className="w-6 h-6" />
@@ -108,12 +109,14 @@ export function SchoolSubjectsStep() {
 					</PrimaryThemedButton>
 				)}
 			</div>
-			<InputDialog
-				dialogAriaLabel={
-					content["schoolSubjects.inputDialog.input.addPlaceholder"]
+			<InputBottomSheet
+				open={inputSheetOpen}
+				onClose={() => setInputSheetOpen(false)}
+				sheetAriaLabel={
+					content["schoolSubjects.bottomSheet.input.addPlaceholder"]
 				}
 				inputPlaceholder={
-					content["schoolSubjects.inputDialog.input.addPlaceholder"]
+					content["schoolSubjects.bottomSheet.input.addPlaceholder"]
 				}
 				onSubmit={handleAddCustomSubject}
 			/>

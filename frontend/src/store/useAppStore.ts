@@ -16,6 +16,7 @@ const initialProfile: UserProfile = {
 	interests: [],
 	customInterests: [],
 	workExpectations: [],
+	customWorkExpectations: [],
 	strengths: {},
 	secretTalent: "",
 	practicalExperience: "",
@@ -35,6 +36,7 @@ function normalizeProfile(
 		interests: merged.interests ?? [],
 		customInterests: merged.customInterests ?? [],
 		workExpectations: merged.workExpectations ?? [],
+		customWorkExpectations: merged.customWorkExpectations ?? [],
 		strengths: merged.strengths ?? {},
 		workPreferences: merged.workPreferences ?? {},
 		noGos: merged.noGos ?? {},
@@ -54,9 +56,11 @@ interface AppActions {
 	setEducationLevel: (value: EducationLevel) => void;
 	toggleSubject: (subject: string) => void;
 	toggleWorkExpectation: (value: string) => void;
+	toggleCustomWorkExpectation: (value: string) => void;
 	toggleInterest: (interest: string) => void;
 	addCustomInterest: (interest: string) => void;
 	addCustomSubject: (subject: string) => void;
+	addCustomWorkExpectation: (workExpectation: string) => void;
 	setStrength: (id: string, value: number) => void;
 	setSecretTalent: (value: string) => void;
 	setPracticalExperience: (value: string) => void;
@@ -119,6 +123,21 @@ export const useAppStore = create<AppState & AppActions>()(
 					};
 				}),
 
+			toggleCustomWorkExpectation: (value: string) =>
+				set((state) => {
+					const customWorkExpectations =
+						state.profile.customWorkExpectations.includes(value)
+							? state.profile.customWorkExpectations.filter(
+									(customWorkExpectation: string) =>
+										customWorkExpectation !== value,
+								)
+							: [...state.profile.customWorkExpectations, value];
+					clearMatchResults();
+					return {
+						profile: { ...state.profile, customWorkExpectations },
+					};
+				}),
+
 			toggleInterest: (interest) =>
 				set((state) => {
 					const interests = state.profile.interests.includes(interest)
@@ -142,6 +161,20 @@ export const useAppStore = create<AppState & AppActions>()(
 					},
 				}));
 			},
+
+			addCustomWorkExpectation: (workExpectation) => {
+				clearMatchResults();
+				set((state) => ({
+					profile: {
+						...state.profile,
+						customWorkExpectations: [
+							...state.profile.customWorkExpectations,
+							workExpectation,
+						],
+					},
+				}));
+			},
+
 			addCustomSubject: (subject) =>
 				set((state) => {
 					const customSubjects = state.profile.customSubjects ?? [];
