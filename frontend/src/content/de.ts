@@ -235,7 +235,7 @@ export const content = {
 	"practicalExperience.cancelLabel": "Abbrechen",
 	"practicalExperience.saveLabel": "Speichern",
 
-	//Work Values
+	//Work Expectations
 	"workExpectations.question": "Was ist dir in deinem Beruf wichtig?",
 	"workExpectations.skipButton.label": "Überspringen",
 	"workExpectations.option.goodSalary": "Gutes Gehalt",
