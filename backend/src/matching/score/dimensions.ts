@@ -22,7 +22,9 @@ export function scoreEducation(
 	occupation: Occupation,
 	profile: UserProfile,
 ): number {
-	if (!occupation.degreeStats || !profile.educationLevel) return 0;
+	if (!occupation.degreeStats || !profile.educationLevel) {
+		return 0;
+	}
 
 	const stats = occupation.degreeStats;
 
@@ -30,22 +32,29 @@ export function scoreEducation(
 		case "secondary":
 		case "extended_secondary":
 			// Penalize if < 10% of workers hold a secondary degree or lower
-			if (stats.secondary + stats.noQualification < 10) return -10;
+			if (stats.secondary + stats.noQualification < 10) {
+				return -10;
+			}
 			break;
 		case "intermediate":
 			// Penalize if < 10% of workers hold an intermediate degree or lower
-			if (stats.intermediate + stats.secondary + stats.noQualification < 10)
+			if (stats.intermediate + stats.secondary + stats.noQualification < 10) {
 				return -5;
+			}
 			break;
 		case "none":
 			// Penalize if < 10% of workers have no formal qualification
-			if (stats.noQualification < 10) return -15;
+			if (stats.noQualification < 10) {
+				return -15;
+			}
 			break;
 		// No penalty
 		case "university_entrance":
 		case "vocational_diploma":
 		case "foreign_degree":
 		case "unknown":
+			break;
+		default:
 			break;
 	}
 	return 0;
@@ -57,7 +66,9 @@ export function scoreNoGos(
 ): number {
 	let penalty = 0;
 	for (const [id, answer] of Object.entries(profile.noGos)) {
-		if (answer !== "rejected") continue;
+		if (answer !== "rejected") {
+			continue;
+		}
 		const check = NO_GO_MAP[id];
 		if (check && check(occupation)) {
 			penalty -= 5;
@@ -72,12 +83,18 @@ export function scoreWorkPreferences(
 ): number {
 	let score = 0;
 	for (const [id, choice] of Object.entries(profile.workPreferences)) {
-		if (!choice) continue;
+		if (!choice) {
+			continue;
+		}
 		const mapping = WORK_PREF_MAP[id];
-		if (!mapping) continue;
+		if (!mapping) {
+			continue;
+		}
 
 		const selectedOptionCheck = choice === "a" ? mapping.a : mapping.b;
-		if (selectedOptionCheck(occupation)) score += 2;
+		if (selectedOptionCheck(occupation)) {
+			score += 2;
+		}
 	}
 	return score;
 }
@@ -116,7 +133,9 @@ export function scoreInterests(
 	const userKeywords = new Set<string>();
 	for (const interestId of profile.interests) {
 		const interestDefinition = INTEREST_BY_ID.get(interestId);
-		if (!interestDefinition) continue;
+		if (!interestDefinition) {
+			continue;
+		}
 
 		for (const category of interestDefinition.berufenetTags) {
 			userCategories.add(category);
@@ -130,9 +149,13 @@ export function scoreInterests(
 	// e.g. occupation.interests = ["theoretisch-abstrakt", "kreativ-gestaltend", "praktisch-konkret"] → matching "theoretisch-abstrakt" at index 0 gives +3.
 	for (const cat of userCategories) {
 		const interestIndex = occupation.interests.indexOf(cat);
-		if (interestIndex === 0) score += 3;
-		else if (interestIndex === 1) score += 2;
-		else if (interestIndex >= 2) score += 1;
+		if (interestIndex === 0) {
+			score += 3;
+		} else if (interestIndex === 1) {
+			score += 2;
+		} else if (interestIndex >= 2) {
+			score += 1;
+		}
 	}
 
 	// Tier 2: granular keyword overlap; contribution capped at 3 so it doesn't outweigh category match.
@@ -142,13 +165,18 @@ export function scoreInterests(
 		occupation.interestKeywords.map((keyword) => keyword.toLowerCase()),
 	);
 	for (const keyword of userKeywords) {
-		if (occupationKeywords.has(keyword)) keywordHits++;
+		if (occupationKeywords.has(keyword)) {
+			keywordHits++;
+		}
 	}
 	score += Math.min(keywordHits, 3);
 
 	return score;
 }
 
+// Dispatcher over 7 fixed strength dimensions, each with bespoke checks.
+// Revisit if growing past ~10 dimensions or adding cross-cutting logic.
+// eslint-disable-next-line complexity
 export function scoreStrengths(
 	occupation: Occupation,
 	profile: UserProfile,
@@ -156,7 +184,9 @@ export function scoreStrengths(
 	let score = 0;
 
 	for (const [strengthId, value] of Object.entries(profile.strengths)) {
-		if (value < 0.5) continue;
+		if (value < 0.5) {
+			continue;
+		}
 
 		if (strengthId === "craftsmanship") {
 			if (
@@ -230,7 +260,9 @@ export function scoreStrengths(
 		}
 
 		const tags = STRENGTH_TO_TAGS[strengthId];
-		if (!tags?.length) continue;
+		if (!tags?.length) {
+			continue;
+		}
 
 		if (tags.some((tag) => occupation.strengthTags.includes(tag))) {
 			score += 2;
@@ -249,14 +281,18 @@ export function scoreWorkExpectations(
 
 	for (const expectationId of profile.workExpectations ?? []) {
 		if (expectationId === "good_salary") {
-			if (!occupation.salaryKnown || occupation.salaryMonthlyMedian === null)
+			if (!occupation.salaryKnown || occupation.salaryMonthlyMedian === null) {
 				continue;
-			if (!salaryBands) continue;
+			}
+			if (!salaryBands) {
+				continue;
+			}
 
-			if (occupation.salaryMonthlyMedian >= salaryBands.upperBandMin)
+			if (occupation.salaryMonthlyMedian >= salaryBands.upperBandMin) {
 				score += 3;
-			else if (occupation.salaryMonthlyMedian >= salaryBands.lowerBandMin)
+			} else if (occupation.salaryMonthlyMedian >= salaryBands.lowerBandMin) {
 				score += 1;
+			}
 			continue;
 		}
 

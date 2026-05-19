@@ -8,8 +8,11 @@
 		"build": "tsc",
 		"start": "tsx src/index.ts",
 		"fetch-berufe": "tsx ../scripts/fetch-berufe.ts",
-		"test": "vitest run",
-		"test:watch": "vitest"
+		"test:unit": "vitest run",
+		"test:watch": "vitest",
+		"lint": "ESLINT_USE_FLAT_CONFIG=true eslint \"src/**/*\" \"tests/**/*\"",
+		"prettier": "prettier --write src tests",
+		"prettier:ci": "prettier --check src tests"
 	},
 	"dependencies": {
 		"@azuki/shared": "*",
@@ -20,9 +23,13 @@
 		"zod": "4.3.6"
 	},
 	"devDependencies": {
+		"@technologiestiftung/eslint-config": "0.3.1",
 		"@types/node": "22.19.11",
+		"eslint": "9.11.1",
+		"globals": "15.10.0",
+		"prettier": "3.3.3",
 		"tsx": "4.21.0",
 		"typescript": "5.9.3",
-		"vitest": "4.1.2"
+		"vitest": "2.1.1"
 	}
 }
