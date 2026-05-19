@@ -13,7 +13,7 @@ export const ROUTE_PATHS = {
 	educationSubjects: "/education/subjects",
 	interests: "/interests",
 	strengths: "/strengths",
-	conditions: "/conditions",
+	expectations: "/expectations",
 	secretTalent: "/secret-talent",
 	experience: "/experience",
 	preferences: "/preferences",
@@ -50,7 +50,7 @@ const ORDERED_NAVIGATION_STEPS: FlowNode[] = [
 		step: Step.Strengths,
 		cardCount: strengths.length,
 	},
-	{ path: ROUTE_PATHS.conditions, step: Step.WorkValues },
+	{ path: ROUTE_PATHS.expectations, step: Step.WorkExpectations },
 	{ path: ROUTE_PATHS.secretTalent, step: Step.SecretTalent },
 	{ path: ROUTE_PATHS.experience, step: Step.PracticalExperience },
 	{

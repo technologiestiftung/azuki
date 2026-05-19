@@ -93,7 +93,7 @@ export interface UserProfile {
 	customSubjects: string[];
 	interests: string[];
 	customInterests: string[];
-	workValues: string[];
+	workExpectations: string[];
 	strengths: Record<string, number>;
 	secretTalent: string;
 	practicalExperience: string;

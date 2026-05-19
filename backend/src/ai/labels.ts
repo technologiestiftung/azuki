@@ -70,7 +70,7 @@ export const NO_GO_LABELS: Record<string, string> = {
 	danger: "Gefährliche Arbeit",
 };
 
-export const WORK_VALUE_LABELS: Record<string, string> = {
+export const WORK_EXPECTATION_LABELS: Record<string, string> = {
 	good_salary: "Gutes Gehalt",
 	people_work: "Mit Menschen arbeiten",
 	teamwork_value: "Teamarbeit",

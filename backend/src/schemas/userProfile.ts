@@ -22,7 +22,7 @@ export const UserProfileSchema = z.object({
 	customSubjects: z.array(z.string()).default([]),
 	interests: z.array(z.string()),
 	customInterests: z.array(z.string()),
-	workValues: z.array(z.string()),
+	workExpectations: z.array(z.string()),
 	strengths: z.record(z.string(), z.number()),
 	secretTalent: z.string(),
 	practicalExperience: z.string(),

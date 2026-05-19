@@ -1,11 +1,14 @@
-import { workValues } from "../../competence-profile/steps/work-values";
+import { workExpectationOptions } from "../../competence-profile/steps/work-expectation-options";
 
 interface Props {
-	workValues: string[];
+	workExpectations: string[];
 	onChange: (next: string[]) => void;
 }
 
-export function WorkValuesEditor({ workValues: selected, onChange }: Props) {
+export function WorkExpectationsEditor({
+	workExpectations: selected,
+	onChange,
+}: Props) {
 	function toggle(value: string) {
 		const next = selected.includes(value)
 			? selected.filter((v) => v !== value)
@@ -17,7 +20,7 @@ export function WorkValuesEditor({ workValues: selected, onChange }: Props) {
 		<div className="flex flex-col gap-2">
 			<span className="text-sm text-gray-600">Rahmenbedingungen</span>
 			<div className="flex flex-wrap gap-1">
-				{workValues.map((opt) => {
+				{workExpectationOptions.map((opt) => {
 					const isSelected = selected.includes(opt.value);
 					return (
 						<button
