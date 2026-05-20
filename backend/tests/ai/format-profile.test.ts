@@ -129,6 +129,67 @@ describe("formatProfileSections — custom subject dedup", () => {
 	});
 });
 
+describe("formatProfileSections — custom work expectation dedup", () => {
+	test("does NOT list custom work expectations twice when they are mirrored into workExpectations", () => {
+		const profile = makeProfile({
+			workExpectations: ["flexible hours"],
+			customWorkExpectations: ["flexible hours"],
+		});
+
+		const output = formatProfileSections(profile);
+
+		expect(output).toContain(
+			"Weitere Rahmenbedingungen (eigene Angaben): flexible hours",
+		);
+		expect(output).not.toMatch(/^Rahmenbedingungen:/m);
+	});
+
+	test("emits predefined work expectations under Rahmenbedingungen with their German label", () => {
+		const profile = makeProfile({ workExpectations: ["remote"] });
+
+		const output = formatProfileSections(profile);
+
+		expect(output).toContain("Rahmenbedingungen:");
+		expect(output).not.toContain("Rahmenbedingungen: remote");
+		expect(output).not.toMatch(
+			/^Weitere Rahmenbedingungen \(eigene Angaben\):/m,
+		);
+	});
+
+	test("lists predefined and custom work expectations on separate lines, each only once", () => {
+		const profile = makeProfile({
+			workExpectations: ["remote", "flexible hours"],
+			customWorkExpectations: ["flexible hours"],
+		});
+
+		const output = formatProfileSections(profile);
+
+		const expectationsLine = output
+			.split("\n")
+			.find((line) => line.startsWith("Rahmenbedingungen:"));
+		expect(expectationsLine).toBeDefined();
+		expect(expectationsLine).not.toContain("flexible hours");
+
+		expect(output).toContain(
+			"Weitere Rahmenbedingungen (eigene Angaben): flexible hours",
+		);
+
+		const occurrences = output.split("flexible hours").length - 1;
+		expect(occurrences).toBe(1);
+	});
+
+	test("omits both work expectation lines when neither array has entries", () => {
+		const profile = makeProfile();
+
+		const output = formatProfileSections(profile);
+
+		expect(output).not.toMatch(/^Rahmenbedingungen:/m);
+		expect(output).not.toMatch(
+			/^Weitere Rahmenbedingungen \(eigene Angaben\):/m,
+		);
+	});
+});
+
 describe("formatProfileSections — free-text fields labeled as eigene Angaben", () => {
 	test("Geheimes Talent label includes (eigene Angaben) suffix", () => {
 		const profile = makeProfile({ secretTalent: "kann gut zuhören" });

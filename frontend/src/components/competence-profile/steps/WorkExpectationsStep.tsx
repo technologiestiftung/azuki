@@ -15,9 +15,6 @@ export function WorkExpectationsStep() {
 		(state) => state.toggleWorkExpectation,
 	);
 
-	const toggleCustomWorkExpectation = useAppStore(
-		(state) => state.toggleCustomWorkExpectation,
-	);
 	const addCustomWorkExpectation = useAppStore(
 		(state) => state.addCustomWorkExpectation,
 	);
@@ -26,7 +23,10 @@ export function WorkExpectationsStep() {
 
 	const handleAddCustomWorkExpectation = (value: string) => {
 		const trimmedValue = value.trim();
-		if (trimmedValue && !profile.workExpectations.includes(trimmedValue)) {
+		if (
+			trimmedValue &&
+			!profile.customWorkExpectations.includes(trimmedValue)
+		) {
 			addCustomWorkExpectation(trimmedValue);
 		}
 		requestAnimationFrame(() => {
@@ -63,12 +63,10 @@ export function WorkExpectationsStep() {
 										<SelectableRowButton
 											key={customExpectation}
 											label={customExpectation}
-											selected={profile.customWorkExpectations.includes(
+											selected={profile.workExpectations.includes(
 												customExpectation,
 											)}
-											onClick={() =>
-												toggleCustomWorkExpectation(customExpectation)
-											}
+											onClick={() => toggleWorkExpectation(customExpectation)}
 										/>
 									),
 								)}

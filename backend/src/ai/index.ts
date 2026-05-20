@@ -229,9 +229,18 @@ export function formatProfileSections(profile: UserProfile): string {
 		parts.push(`Arbeitsvorlieben: ${prefLabels.join(", ")}`);
 	}
 
-	if (profile.workExpectations?.length > 0) {
+	const customWorkExpectationSet = new Set(profile.customWorkExpectations);
+	const predefinedWorkExpectations = (profile.workExpectations ?? []).filter(
+		(id) => !customWorkExpectationSet.has(id),
+	);
+	if (predefinedWorkExpectations.length > 0) {
 		parts.push(
-			`Rahmenbedingungen: ${profile.workExpectations.map((v) => label(v, WORK_EXPECTATION_LABELS)).join(", ")}`,
+			`Rahmenbedingungen: ${predefinedWorkExpectations.map((v) => label(v, WORK_EXPECTATION_LABELS)).join(", ")}`,
+		);
+	}
+	if (profile.customWorkExpectations.length > 0) {
+		parts.push(
+			`Weitere Rahmenbedingungen (eigene Angaben): ${profile.customWorkExpectations.join(", ")}`,
 		);
 	}
 

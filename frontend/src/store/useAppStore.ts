@@ -56,7 +56,6 @@ interface AppActions {
 	setEducationLevel: (value: EducationLevel) => void;
 	toggleSubject: (subject: string) => void;
 	toggleWorkExpectation: (value: string) => void;
-	toggleCustomWorkExpectation: (value: string) => void;
 	toggleInterest: (interest: string) => void;
 	addCustomInterest: (interest: string) => void;
 	addCustomSubject: (subject: string) => void;
@@ -123,21 +122,6 @@ export const useAppStore = create<AppState & AppActions>()(
 					};
 				}),
 
-			toggleCustomWorkExpectation: (value: string) =>
-				set((state) => {
-					const customWorkExpectations =
-						state.profile.customWorkExpectations.includes(value)
-							? state.profile.customWorkExpectations.filter(
-									(customWorkExpectation: string) =>
-										customWorkExpectation !== value,
-								)
-							: [...state.profile.customWorkExpectations, value];
-					clearMatchResults();
-					return {
-						profile: { ...state.profile, customWorkExpectations },
-					};
-				}),
-
 			toggleInterest: (interest) =>
 				set((state) => {
 					const interests = state.profile.interests.includes(interest)
@@ -169,6 +153,10 @@ export const useAppStore = create<AppState & AppActions>()(
 						...state.profile,
 						customWorkExpectations: [
 							...state.profile.customWorkExpectations,
+							workExpectation,
+						],
+						workExpectations: [
+							...state.profile.workExpectations,
 							workExpectation,
 						],
 					},
