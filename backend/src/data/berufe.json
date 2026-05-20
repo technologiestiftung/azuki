@@ -145,7 +145,8 @@
       "Verständnis für mündliche Äußerungen",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "28222"
   },
   {
     "id": 15647,
@@ -305,7 +306,8 @@
       "Verständnis für mündliche Äußerungen",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "84553"
   },
   {
     "id": 6327,
@@ -468,7 +470,8 @@
       "Rechenfertigkeiten",
       "Textverständnis"
     ],
-    "accessLevel": "realschule"
+    "accessLevel": "realschule",
+    "germanOccupationCode": "11132"
   },
   {
     "id": 9063,
@@ -630,7 +633,8 @@
       "Mündliches Ausdrucksvermögen",
       "Textverständnis"
     ],
-    "accessLevel": "hauptschule"
+    "accessLevel": "hauptschule",
+    "germanOccupationCode": "82101"
   },
   {
     "id": 13952,
@@ -780,7 +784,8 @@
       "Textverständnis",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "hauptschule"
+    "accessLevel": "hauptschule",
+    "germanOccupationCode": "53332"
   },
   {
     "id": 51027,
@@ -959,7 +964,8 @@
       "Textverständnis",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "fachhochschulreife"
+    "accessLevel": "fachhochschulreife",
+    "germanOccupationCode": "81332"
   },
   {
     "id": 14509,
@@ -1140,7 +1146,8 @@
       "Verständnis für mündliche Äußerungen",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "63132"
   },
   {
     "id": 29047,
@@ -1307,7 +1314,8 @@
       "Mündliches Ausdrucksvermögen",
       "Textverständnis"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "34342"
   },
   {
     "id": 15164,
@@ -1476,7 +1484,8 @@
       "Rechenfertigkeiten",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "34212"
   },
   {
     "id": 34754,
@@ -1649,7 +1658,8 @@
       "Interessierte an beruflicher Erstausbildung",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "hauptschule"
+    "accessLevel": "hauptschule",
+    "germanOccupationCode": "94283"
   },
   {
     "id": 4303,
@@ -1794,7 +1804,8 @@
       "Interessierte an beruflicher Erstausbildung",
       "Rechenfertigkeiten"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "32222"
   },
   {
     "id": 10186,
@@ -1937,7 +1948,8 @@
       "Verständnis für mündliche Äußerungen",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "hauptschule"
+    "accessLevel": "hauptschule",
+    "germanOccupationCode": "83212"
   },
   {
     "id": 14616,
@@ -2098,7 +2110,8 @@
       "Textverständnis",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "realschule"
+    "accessLevel": "realschule",
+    "germanOccupationCode": "73222"
   },
   {
     "id": 27411,
@@ -2262,7 +2275,8 @@
       "Textverständnis",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "82222"
   },
   {
     "id": 9996,
@@ -2458,7 +2472,8 @@
       "Mündliches Ausdrucksvermögen",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "realschule"
+    "accessLevel": "realschule",
+    "germanOccupationCode": "63212"
   },
   {
     "id": 67663,
@@ -2619,7 +2634,8 @@
       "Textverständnis",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "realschule"
+    "accessLevel": "realschule",
+    "germanOccupationCode": "43102"
   },
   {
     "id": 7850,
@@ -2775,7 +2791,8 @@
       "Textverständnis",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "realschule"
+    "accessLevel": "realschule",
+    "germanOccupationCode": "43152"
   },
   {
     "id": 7848,
@@ -2930,7 +2947,8 @@
       "Textverständnis",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "realschule"
+    "accessLevel": "realschule",
+    "germanOccupationCode": "43412"
   },
   {
     "id": 7743,
@@ -3089,7 +3107,8 @@
       "Textverständnis",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "realschule"
+    "accessLevel": "realschule",
+    "germanOccupationCode": "43122"
   },
   {
     "id": 7798,
@@ -3240,7 +3259,8 @@
       "Textverständnis",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "realschule"
+    "accessLevel": "realschule",
+    "germanOccupationCode": "43112"
   },
   {
     "id": 8564,
@@ -3399,7 +3419,8 @@
       "Mündliches Ausdrucksvermögen",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "realschule"
+    "accessLevel": "realschule",
+    "germanOccupationCode": "93212"
   },
   {
     "id": 14532,
@@ -3555,7 +3576,8 @@
       "Textverständnis",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "realschule"
+    "accessLevel": "realschule",
+    "germanOccupationCode": "25103"
   },
   {
     "id": 7020,
@@ -3721,7 +3743,8 @@
       "Verständnis für mündliche Äußerungen",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "realschule"
+    "accessLevel": "realschule",
+    "germanOccupationCode": "92302"
   },
   {
     "id": 15424,
@@ -3872,7 +3895,8 @@
       "Mündliches Ausdrucksvermögen",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "realschule"
+    "accessLevel": "realschule",
+    "germanOccupationCode": "93102"
   },
   {
     "id": 14497,
@@ -4035,7 +4059,8 @@
       "Textverständnis",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "realschule"
+    "accessLevel": "realschule",
+    "germanOccupationCode": "73332"
   },
   {
     "id": 9599,
@@ -4194,7 +4219,8 @@
       "Textverständnis",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "realschule"
+    "accessLevel": "realschule",
+    "germanOccupationCode": "81733"
   },
   {
     "id": 8526,
@@ -4363,7 +4389,8 @@
       "Mündliches Ausdrucksvermögen",
       "Textverständnis"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "94532"
   },
   {
     "id": 59038,
@@ -4495,7 +4522,8 @@
       "Musikalische Befähigung",
       "Sinn und Gespür für Ästhetik"
     ],
-    "accessLevel": "fachhochschulreife"
+    "accessLevel": "fachhochschulreife",
+    "germanOccupationCode": "94183"
   },
   {
     "id": 27427,
@@ -4663,7 +4691,8 @@
       "Interessierte an beruflicher Erstausbildung",
       "Rechenfertigkeiten"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "21212"
   },
   {
     "id": 820,
@@ -4829,7 +4858,8 @@
       "Interessierte an beruflicher Erstausbildung",
       "Rechenfertigkeiten"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "21212"
   },
   {
     "id": 821,
@@ -5000,7 +5030,8 @@
       "Interessierte an beruflicher Erstausbildung",
       "Rechenfertigkeiten"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "21212"
   },
   {
     "id": 822,
@@ -5169,7 +5200,8 @@
       "Interessierte an beruflicher Erstausbildung",
       "Rechenfertigkeiten"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "21212"
   },
   {
     "id": 819,
@@ -5355,7 +5387,8 @@
       "Interessierte an beruflicher Erstausbildung",
       "Rechenfertigkeiten"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "21212"
   },
   {
     "id": 2634,
@@ -5540,7 +5573,8 @@
       "Textverständnis",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "82522"
   },
   {
     "id": 132718,
@@ -5677,7 +5711,8 @@
       "Interessierte an beruflicher Erstausbildung",
       "Rechenfertigkeiten"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "33122"
   },
   {
     "id": 132717,
@@ -5815,7 +5850,8 @@
       "Interessierte an beruflicher Erstausbildung",
       "Rechenfertigkeiten"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "33112"
   },
   {
     "id": 132719,
@@ -5954,7 +5990,8 @@
       "Interessierte an beruflicher Erstausbildung",
       "Rechenfertigkeiten"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "33222"
   },
   {
     "id": 132721,
@@ -6092,7 +6129,8 @@
       "Interessierte an beruflicher Erstausbildung",
       "Rechenfertigkeiten"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "33302"
   },
   {
     "id": 132723,
@@ -6230,7 +6268,8 @@
       "Interessierte an beruflicher Erstausbildung",
       "Rechenfertigkeiten"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "33312"
   },
   {
     "id": 132724,
@@ -6371,7 +6410,8 @@
       "Interessierte an beruflicher Erstausbildung",
       "Rechenfertigkeiten"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "33322"
   },
   {
     "id": 126840,
@@ -6554,7 +6594,8 @@
       "Textverständnis",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "fachhochschulreife"
+    "accessLevel": "fachhochschulreife",
+    "germanOccupationCode": "33293"
   },
   {
     "id": 14050,
@@ -6733,7 +6774,8 @@
       "Textverständnis",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "fachhochschulreife"
+    "accessLevel": "fachhochschulreife",
+    "germanOccupationCode": "61212"
   },
   {
     "id": 126837,
@@ -6885,7 +6927,8 @@
       "Verständnis für mündliche Äußerungen",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "61142"
   },
   {
     "id": 126835,
@@ -7040,7 +7083,8 @@
       "Verständnis für mündliche Äußerungen",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "25132"
   },
   {
     "id": 6622,
@@ -7222,7 +7266,8 @@
       "Textverständnis",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "62272"
   },
   {
     "id": 3626,
@@ -7372,7 +7417,8 @@
       "Rechenfertigkeiten",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "29222"
   },
   {
     "id": 6755,
@@ -7546,7 +7592,8 @@
       "Textverständnis",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "72112"
   },
   {
     "id": 4823,
@@ -7708,7 +7755,8 @@
       "Rechenfertigkeiten",
       "Verständnis für mündliche Äußerungen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "52522"
   },
   {
     "id": 13727,
@@ -7882,7 +7930,8 @@
       "Textverständnis",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "41432"
   },
   {
     "id": 142962,
@@ -7999,7 +8048,8 @@
       "Textverständnis",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "27212"
   },
   {
     "id": 142964,
@@ -8115,7 +8165,8 @@
       "Textverständnis",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "27212"
   },
   {
     "id": 142963,
@@ -8232,7 +8283,8 @@
       "Textverständnis",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "27212"
   },
   {
     "id": 4304,
@@ -8393,7 +8445,8 @@
       "Interessierte an beruflicher Erstausbildung",
       "Rechenfertigkeiten"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "33232"
   },
   {
     "id": 27304,
@@ -8553,7 +8606,8 @@
       "Rechenfertigkeiten",
       "Verständnis für mündliche Äußerungen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "32172"
   },
   {
     "id": 13741,
@@ -8719,7 +8773,8 @@
       "Textverständnis",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "27212"
   },
   {
     "id": 2153,
@@ -8886,7 +8941,8 @@
       "Interessierte an beruflicher Erstausbildung",
       "Rechenfertigkeiten"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "34342"
   },
   {
     "id": 5924,
@@ -9038,7 +9094,8 @@
       "Mündliches Ausdrucksvermögen",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "realschule"
+    "accessLevel": "realschule",
+    "germanOccupationCode": "28222"
   },
   {
     "id": 756,
@@ -9177,7 +9234,8 @@
       "Interessierte an beruflicher Erstausbildung",
       "Rechenfertigkeiten"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "21112"
   },
   {
     "id": 757,
@@ -9320,7 +9378,8 @@
       "Interessierte an beruflicher Erstausbildung",
       "Rechenfertigkeiten"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "21112"
   },
   {
     "id": 8626,
@@ -9483,7 +9542,8 @@
       "Verständnis für mündliche Äußerungen",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": null
+    "accessLevel": null,
+    "germanOccupationCode": "63132"
   },
   {
     "id": 76437,
@@ -9654,7 +9714,8 @@
       "Interessierte an beruflicher Erstausbildung",
       "Rechenfertigkeiten"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "21112"
   },
   {
     "id": 76429,
@@ -9820,7 +9881,8 @@
       "Interessierte an beruflicher Erstausbildung",
       "Rechenfertigkeiten"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "21112"
   },
   {
     "id": 7342,
@@ -10000,7 +10062,8 @@
       "Mündliches Ausdrucksvermögen",
       "Textverständnis"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "52313"
   },
   {
     "id": 7344,
@@ -10160,7 +10223,8 @@
       "Mündliches Ausdrucksvermögen",
       "Textverständnis"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "52383"
   },
   {
     "id": 13794,
@@ -10332,7 +10396,8 @@
       "Verständnis für mündliche Äußerungen",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "52122"
   },
   {
     "id": 137338,
@@ -10501,7 +10566,8 @@
       "Textverständnis",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "realschule"
+    "accessLevel": "realschule",
+    "germanOccupationCode": "71303"
   },
   {
     "id": 15577,
@@ -10667,7 +10733,8 @@
       "Mündliches Ausdrucksvermögen",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "82402"
   },
   {
     "id": 3980,
@@ -10815,7 +10882,8 @@
       "Interessierte an beruflicher Erstausbildung",
       "Rechenfertigkeiten"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "32112"
   },
   {
     "id": 13747,
@@ -10960,7 +11028,8 @@
       "Interessierte an beruflicher Erstausbildung",
       "Rechenfertigkeiten"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "21222"
   },
   {
     "id": 9066,
@@ -11129,7 +11198,8 @@
       "Verständnis für mündliche Äußerungen",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "83141"
   },
   {
     "id": 6025,
@@ -11302,7 +11372,8 @@
       "Textverständnis",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "fachhochschulreife"
+    "accessLevel": "fachhochschulreife",
+    "germanOccupationCode": "71302"
   },
   {
     "id": 9731,
@@ -11477,7 +11548,8 @@
       "Textverständnis",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "fachhochschulreife"
+    "accessLevel": "fachhochschulreife",
+    "germanOccupationCode": "71303"
   },
   {
     "id": 27401,
@@ -11665,7 +11737,8 @@
       "Textverständnis",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "fachhochschulreife"
+    "accessLevel": "fachhochschulreife",
+    "germanOccupationCode": "61213"
   },
   {
     "id": 27261,
@@ -11847,7 +11920,8 @@
       "Textverständnis",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "fachhochschulreife"
+    "accessLevel": "fachhochschulreife",
+    "germanOccupationCode": "61283"
   },
   {
     "id": 8428,
@@ -11961,7 +12035,8 @@
       "Verständnis für mündliche Äußerungen",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "93312"
   },
   {
     "id": 7285,
@@ -12124,7 +12199,8 @@
       "Verständnis für mündliche Äußerungen",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "52422"
   },
   {
     "id": 136115,
@@ -12293,7 +12369,8 @@
       "Verständnis für mündliche Äußerungen",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "52422"
   },
   {
     "id": 6322,
@@ -12453,7 +12530,8 @@
       "Rechenfertigkeiten",
       "Textverständnis"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "41212"
   },
   {
     "id": 2710,
@@ -12617,7 +12695,8 @@
       "Interessierte an beruflicher Erstausbildung",
       "Rechenfertigkeiten"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "27232"
   },
   {
     "id": 6315,
@@ -12777,7 +12856,8 @@
       "Rechenfertigkeiten",
       "Textverständnis"
     ],
-    "accessLevel": "realschule"
+    "accessLevel": "realschule",
+    "germanOccupationCode": "41212"
   },
   {
     "id": 15144,
@@ -12919,7 +12999,8 @@
       "Rechenfertigkeiten",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "33102"
   },
   {
     "id": 4539,
@@ -13057,7 +13138,8 @@
       "Interessierte an beruflicher Erstausbildung",
       "Rechenfertigkeiten"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "22382"
   },
   {
     "id": 2674,
@@ -13202,7 +13284,8 @@
       "Rechenfertigkeiten",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "93612"
   },
   {
     "id": 90474,
@@ -13342,7 +13425,8 @@
       "Rechenfertigkeiten",
       "Verständnis für mündliche Äußerungen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "33322"
   },
   {
     "id": 90469,
@@ -13503,7 +13587,8 @@
       "Rechenfertigkeiten",
       "Textverständnis"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "25242"
   },
   {
     "id": 3789,
@@ -13651,7 +13736,8 @@
       "Rechenfertigkeiten",
       "Verständnis für mündliche Äußerungen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "29112"
   },
   {
     "id": 3813,
@@ -13794,7 +13880,8 @@
       "Rechenfertigkeiten",
       "Verständnis für mündliche Äußerungen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "29132"
   },
   {
     "id": 4201,
@@ -13949,7 +14036,8 @@
       "Interessierte an beruflicher Erstausbildung",
       "Rechenfertigkeiten"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "32242"
   },
   {
     "id": 90590,
@@ -14121,7 +14209,8 @@
       "Verständnis für mündliche Äußerungen",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "23422"
   },
   {
     "id": 13749,
@@ -14294,7 +14383,8 @@
       "Textverständnis",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "62512"
   },
   {
     "id": 2443,
@@ -14450,7 +14540,8 @@
       "Rechenfertigkeiten",
       "Textverständnis"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "24522"
   },
   {
     "id": 8502,
@@ -14601,7 +14692,8 @@
       "Verständnis für mündliche Äußerungen",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "fachhochschulreife"
+    "accessLevel": "fachhochschulreife",
+    "germanOccupationCode": "94612"
   },
   {
     "id": 14080,
@@ -14749,7 +14841,8 @@
       "Verständnis für mündliche Äußerungen",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "fachhochschulreife"
+    "accessLevel": "fachhochschulreife",
+    "germanOccupationCode": "94612"
   },
   {
     "id": 8409,
@@ -14895,7 +14988,8 @@
       "Musikalische Befähigung",
       "Sinn und Gespür für Ästhetik"
     ],
-    "accessLevel": "hauptschule"
+    "accessLevel": "hauptschule",
+    "germanOccupationCode": "94224"
   },
   {
     "id": 130315,
@@ -15028,7 +15122,8 @@
       "Handwerkliches Geschick",
       "Interessierte an beruflicher Erstausbildung"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "22352"
   },
   {
     "id": 14688,
@@ -15186,7 +15281,8 @@
       "Textverständnis",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "92122"
   },
   {
     "id": 13809,
@@ -15346,7 +15442,8 @@
       "Rechenfertigkeiten",
       "Textverständnis"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "41322"
   },
   {
     "id": 1169,
@@ -15502,7 +15599,8 @@
       "Rechenfertigkeiten",
       "Textverständnis"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "41322"
   },
   {
     "id": 1143,
@@ -15668,7 +15766,8 @@
       "Interessierte an beruflicher Erstausbildung",
       "Rechenfertigkeiten"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "41312"
   },
   {
     "id": 5793,
@@ -15821,7 +15920,8 @@
       "Rechenfertigkeiten",
       "Textverständnis"
     ],
-    "accessLevel": "realschule"
+    "accessLevel": "realschule",
+    "germanOccupationCode": "41322"
   },
   {
     "id": 2436,
@@ -15984,7 +16084,8 @@
       "Rechenfertigkeiten",
       "Textverständnis"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "24512"
   },
   {
     "id": 27289,
@@ -16145,7 +16246,8 @@
       "Verständnis für mündliche Äußerungen",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "94313"
   },
   {
     "id": 14345,
@@ -16303,7 +16405,8 @@
       "Verständnis für mündliche Äußerungen",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "94342"
   },
   {
     "id": 129406,
@@ -16449,7 +16552,8 @@
       "Rechenfertigkeiten",
       "Verständnis für mündliche Äußerungen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "32142"
   },
   {
     "id": 14557,
@@ -16602,7 +16706,8 @@
       "Verständnis für mündliche Äußerungen",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "fachhochschulreife"
+    "accessLevel": "fachhochschulreife",
+    "germanOccupationCode": "93522"
   },
   {
     "id": 14326,
@@ -16768,7 +16873,8 @@
       "Verständnis für mündliche Äußerungen",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "fachhochschulreife"
+    "accessLevel": "fachhochschulreife",
+    "germanOccupationCode": "23322"
   },
   {
     "id": 14217,
@@ -16934,7 +17040,8 @@
       "Verständnis für mündliche Äußerungen",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "fachhochschulreife"
+    "accessLevel": "fachhochschulreife",
+    "germanOccupationCode": "23222"
   },
   {
     "id": 13968,
@@ -17103,7 +17210,8 @@
       "Mündliches Ausdrucksvermögen",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "fachhochschulreife"
+    "accessLevel": "fachhochschulreife",
+    "germanOccupationCode": "23222"
   },
   {
     "id": 8459,
@@ -17273,7 +17381,8 @@
       "Verständnis für mündliche Äußerungen",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "fachhochschulreife"
+    "accessLevel": "fachhochschulreife",
+    "germanOccupationCode": "23222"
   },
   {
     "id": 14319,
@@ -17424,7 +17533,8 @@
       "Mündliches Ausdrucksvermögen",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "fachhochschulreife"
+    "accessLevel": "fachhochschulreife",
+    "germanOccupationCode": "28212"
   },
   {
     "id": 13624,
@@ -17579,7 +17689,8 @@
       "Mündliches Ausdrucksvermögen",
       "Textverständnis"
     ],
-    "accessLevel": "hauptschule"
+    "accessLevel": "hauptschule",
+    "germanOccupationCode": "53342"
   },
   {
     "id": 3814,
@@ -17728,7 +17839,8 @@
       "Rechenfertigkeiten",
       "Verständnis für mündliche Äußerungen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "29132"
   },
   {
     "id": 14346,
@@ -17914,7 +18026,8 @@
       "Textverständnis",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "53152"
   },
   {
     "id": 8899,
@@ -18073,7 +18186,8 @@
       "Textverständnis",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "fachhochschulreife"
+    "accessLevel": "fachhochschulreife",
+    "germanOccupationCode": "81762"
   },
   {
     "id": 142441,
@@ -18169,7 +18283,8 @@
       "Textverständnis",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "realschule"
+    "accessLevel": "realschule",
+    "germanOccupationCode": "81342"
   },
   {
     "id": 8303,
@@ -18331,7 +18446,8 @@
       "Mündliches Ausdrucksvermögen",
       "Textverständnis"
     ],
-    "accessLevel": "fachhochschulreife"
+    "accessLevel": "fachhochschulreife",
+    "germanOccupationCode": "71424"
   },
   {
     "id": 30226,
@@ -18504,7 +18620,8 @@
       "Textverständnis",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "94404"
   },
   {
     "id": 1528,
@@ -18656,7 +18773,8 @@
       "Interessierte an beruflicher Erstausbildung",
       "Rechenfertigkeiten"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "93332"
   },
   {
     "id": 1539,
@@ -18806,7 +18924,8 @@
       "Interessierte an beruflicher Erstausbildung",
       "Rechenfertigkeiten"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "93332"
   },
   {
     "id": 59034,
@@ -18950,7 +19069,8 @@
       "Textverständnis",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "92434"
   },
   {
     "id": 6712,
@@ -19110,7 +19230,8 @@
       "Verständnis für mündliche Äußerungen",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "62412"
   },
   {
     "id": 2610,
@@ -19254,7 +19375,8 @@
       "Verständnis für mündliche Äußerungen",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "93522"
   },
   {
     "id": 131163,
@@ -19404,7 +19526,8 @@
       "Verständnis für mündliche Äußerungen",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "93522"
   },
   {
     "id": 131165,
@@ -19556,7 +19679,8 @@
       "Verständnis für mündliche Äußerungen",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "93522"
   },
   {
     "id": 131166,
@@ -19687,7 +19811,8 @@
       "Interessierte an beruflicher Erstausbildung",
       "Rechenfertigkeiten"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "93522"
   },
   {
     "id": 131167,
@@ -19832,7 +19957,8 @@
       "Verständnis für mündliche Äußerungen",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "93522"
   },
   {
     "id": 136201,
@@ -19989,7 +20115,8 @@
       "Verständnis für mündliche Äußerungen",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "52202"
   },
   {
     "id": 136199,
@@ -20148,7 +20275,8 @@
       "Verständnis für mündliche Äußerungen",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "51522"
   },
   {
     "id": 2774,
@@ -20319,7 +20447,8 @@
       "Mündliches Ausdrucksvermögen",
       "Textverständnis"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "26252"
   },
   {
     "id": 134713,
@@ -20486,7 +20615,8 @@
       "Mündliches Ausdrucksvermögen",
       "Textverständnis"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "26122"
   },
   {
     "id": 15630,
@@ -20654,7 +20784,8 @@
       "Mündliches Ausdrucksvermögen",
       "Textverständnis"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "26122"
   },
   {
     "id": 15623,
@@ -20829,7 +20960,8 @@
       "Mündliches Ausdrucksvermögen",
       "Textverständnis"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "26252"
   },
   {
     "id": 15636,
@@ -20998,7 +21130,8 @@
       "Mündliches Ausdrucksvermögen",
       "Textverständnis"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "26212"
   },
   {
     "id": 15621,
@@ -21175,7 +21308,8 @@
       "Textverständnis",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "26212"
   },
   {
     "id": 134715,
@@ -21347,7 +21481,8 @@
       "Mündliches Ausdrucksvermögen",
       "Textverständnis"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "26212"
   },
   {
     "id": 15632,
@@ -21527,7 +21662,8 @@
       "Textverständnis",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "26302"
   },
   {
     "id": 122382,
@@ -21653,7 +21789,8 @@
       "Textverständnis",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "26312"
   },
   {
     "id": 134719,
@@ -21826,7 +21963,8 @@
       "Mündliches Ausdrucksvermögen",
       "Textverständnis"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "26222"
   },
   {
     "id": 134718,
@@ -21999,7 +22137,8 @@
       "Mündliches Ausdrucksvermögen",
       "Textverständnis"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "26222"
   },
   {
     "id": 5502,
@@ -22155,7 +22294,8 @@
       "Textverständnis",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "realschule"
+    "accessLevel": "realschule",
+    "germanOccupationCode": "26302"
   },
   {
     "id": 8369,
@@ -22307,7 +22447,8 @@
       "Verständnis für mündliche Äußerungen",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "hauptschule"
+    "accessLevel": "hauptschule",
+    "germanOccupationCode": "94134"
   },
   {
     "id": 8779,
@@ -22474,7 +22615,8 @@
       "Textverständnis",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "fachhochschulreife"
+    "accessLevel": "fachhochschulreife",
+    "germanOccupationCode": "81723"
   },
   {
     "id": 9162,
@@ -22661,7 +22803,8 @@
       "Textverständnis",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "fachhochschulreife"
+    "accessLevel": "fachhochschulreife",
+    "germanOccupationCode": "83113"
   },
   {
     "id": 9106,
@@ -22841,7 +22984,8 @@
       "Textverständnis",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "realschule"
+    "accessLevel": "realschule",
+    "germanOccupationCode": "83113"
   },
   {
     "id": 4390,
@@ -22985,7 +23129,8 @@
       "Interessierte an beruflicher Erstausbildung",
       "Rechenfertigkeiten"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "33122"
   },
   {
     "id": 13622,
@@ -23163,7 +23308,8 @@
       "Textverständnis",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "fachhochschulreife"
+    "accessLevel": "fachhochschulreife",
+    "germanOccupationCode": "71413"
   },
   {
     "id": 9598,
@@ -23333,7 +23479,8 @@
       "Verständnis für mündliche Äußerungen",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "84483"
   },
   {
     "id": 35201,
@@ -23491,7 +23638,8 @@
       "Rechenfertigkeiten",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "63403"
   },
   {
     "id": 100809,
@@ -23666,7 +23814,8 @@
       "Textverständnis",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "73212"
   },
   {
     "id": 9496,
@@ -23849,7 +23998,8 @@
       "Verständnis für mündliche Äußerungen",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "53142"
   },
   {
     "id": 35268,
@@ -24017,7 +24167,8 @@
       "Textverständnis",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "91342"
   },
   {
     "id": 8348,
@@ -24172,7 +24323,8 @@
       "Textverständnis",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "73312"
   },
   {
     "id": 8329,
@@ -24341,7 +24493,8 @@
       "Textverständnis",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "73322"
   },
   {
     "id": 8349,
@@ -24501,7 +24654,8 @@
       "Textverständnis",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "73312"
   },
   {
     "id": 8347,
@@ -24669,7 +24823,8 @@
       "Textverständnis",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "73332"
   },
   {
     "id": 14388,
@@ -24826,7 +24981,8 @@
       "Textverständnis",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "73342"
   },
   {
     "id": 7855,
@@ -24992,7 +25148,8 @@
       "Textverständnis",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "fachhochschulreife"
+    "accessLevel": "fachhochschulreife",
+    "germanOccupationCode": "43102"
   },
   {
     "id": 35019,
@@ -25149,7 +25306,8 @@
       "Textverständnis",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "fachhochschulreife"
+    "accessLevel": "fachhochschulreife",
+    "germanOccupationCode": "43412"
   },
   {
     "id": 7856,
@@ -25311,7 +25469,8 @@
       "Textverständnis",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "43412"
   },
   {
     "id": 133556,
@@ -25483,7 +25642,8 @@
       "Textverständnis",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "43112"
   },
   {
     "id": 133560,
@@ -25661,7 +25821,8 @@
       "Textverständnis",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "43312"
   },
   {
     "id": 7847,
@@ -25824,7 +25985,8 @@
       "Textverständnis",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "43102"
   },
   {
     "id": 35009,
@@ -25963,7 +26125,8 @@
       "Rechenfertigkeiten",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "11102"
   },
   {
     "id": 50978,
@@ -26125,7 +26288,8 @@
       "Verständnis für mündliche Äußerungen",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "82222"
   },
   {
     "id": 15085,
@@ -26296,7 +26460,8 @@
       "Verständnis für mündliche Äußerungen",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "52132"
   },
   {
     "id": 3820,
@@ -26455,7 +26620,8 @@
       "Rechenfertigkeiten",
       "Verständnis für mündliche Äußerungen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "29142"
   },
   {
     "id": 136126,
@@ -26621,7 +26787,8 @@
       "Verständnis für mündliche Äußerungen",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "63302"
   },
   {
     "id": 34996,
@@ -26790,7 +26957,8 @@
       "Verständnis für mündliche Äußerungen",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "51332"
   },
   {
     "id": 57895,
@@ -26943,7 +27111,8 @@
       "Interessierte an beruflicher Erstausbildung",
       "Rechenfertigkeiten"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "33242"
   },
   {
     "id": 35021,
@@ -27111,7 +27280,8 @@
       "Textverständnis",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "realschule"
+    "accessLevel": "realschule",
+    "germanOccupationCode": "53322"
   },
   {
     "id": 136119,
@@ -27262,7 +27432,8 @@
       "Rechenfertigkeiten",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "29302"
   },
   {
     "id": 33362,
@@ -27416,7 +27587,8 @@
       "Verständnis für mündliche Äußerungen",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "51322"
   },
   {
     "id": 27448,
@@ -27570,7 +27742,8 @@
       "Verständnis für mündliche Äußerungen",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "51312"
   },
   {
     "id": 3898,
@@ -27725,7 +27898,8 @@
       "Interessierte an beruflicher Erstausbildung",
       "Rechenfertigkeiten"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "29202"
   },
   {
     "id": 126792,
@@ -27855,7 +28029,8 @@
       "Rechenfertigkeiten",
       "Verständnis für mündliche Äußerungen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "28312"
   },
   {
     "id": 90009,
@@ -27982,7 +28157,8 @@
       "Rechenfertigkeiten",
       "Verständnis für mündliche Äußerungen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "28322"
   },
   {
     "id": 129419,
@@ -28126,7 +28302,8 @@
       "Textverständnis",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "fachhochschulreife"
+    "accessLevel": "fachhochschulreife",
+    "germanOccupationCode": "81182"
   },
   {
     "id": 122290,
@@ -28264,7 +28441,8 @@
       "Interessierte an beruflicher Erstausbildung",
       "Rechenfertigkeiten"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "24412"
   },
   {
     "id": 122292,
@@ -28404,7 +28582,8 @@
       "Interessierte an beruflicher Erstausbildung",
       "Rechenfertigkeiten"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "25112"
   },
   {
     "id": 122286,
@@ -28553,7 +28732,8 @@
       "Interessierte an beruflicher Erstausbildung",
       "Rechenfertigkeiten"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "24212"
   },
   {
     "id": 122288,
@@ -28712,7 +28892,8 @@
       "Interessierte an beruflicher Erstausbildung",
       "Rechenfertigkeiten"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "24232"
   },
   {
     "id": 34980,
@@ -28857,7 +29038,8 @@
       "Verständnis für mündliche Äußerungen",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "22342"
   },
   {
     "id": 14463,
@@ -29030,7 +29212,8 @@
       "Verständnis für mündliche Äußerungen",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "53112"
   },
   {
     "id": 14374,
@@ -29206,7 +29389,8 @@
       "Textverständnis",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "31132"
   },
   {
     "id": 129457,
@@ -29400,7 +29584,8 @@
       "Verständnis für mündliche Äußerungen",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "94512"
   },
   {
     "id": 14376,
@@ -29583,7 +29768,8 @@
       "Textverständnis",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "31142"
   },
   {
     "id": 27539,
@@ -29738,7 +29924,8 @@
       "Verständnis für mündliche Äußerungen",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "51312"
   },
   {
     "id": 9387,
@@ -29907,7 +30094,8 @@
       "Textverständnis",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "realschule"
+    "accessLevel": "realschule",
+    "germanOccupationCode": "84214"
   },
   {
     "id": 136125,
@@ -30077,7 +30265,8 @@
       "Verständnis für mündliche Äußerungen",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "63302"
   },
   {
     "id": 9997,
@@ -30250,7 +30439,8 @@
       "Verständnis für mündliche Äußerungen",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "63312"
   },
   {
     "id": 3258,
@@ -30392,7 +30582,8 @@
       "Verständnis für mündliche Äußerungen"
     ],
     "parentId": 126796,
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "28222"
   },
   {
     "id": 29092,
@@ -30553,7 +30744,8 @@
       "Textverständnis"
     ],
     "parentId": 29047,
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "34212"
   },
   {
     "id": 3627,
@@ -30697,7 +30889,8 @@
       "Mündliches Ausdrucksvermögen"
     ],
     "parentId": 3626,
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "29222"
   },
   {
     "id": 1302,
@@ -30864,7 +31057,8 @@
       "Mündliches Ausdrucksvermögen"
     ],
     "parentId": 90590,
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "23422"
   },
   {
     "id": 7883,
@@ -31033,7 +31227,8 @@
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
     "parentId": 123266,
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "71402"
   },
   {
     "id": 136258,
@@ -31116,7 +31311,8 @@
       "Interessierte an beruflicher Erstausbildung"
     ],
     "parentId": 130315,
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "22352"
   },
   {
     "id": 132092,
@@ -31206,7 +31402,8 @@
       "Verständnis für mündliche Äußerungen"
     ],
     "parentId": 129406,
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "32142"
   },
   {
     "id": 124466,
@@ -31369,7 +31566,8 @@
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
     "parentId": 35311,
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "92122"
   },
   {
     "id": 2739,
@@ -31539,7 +31737,8 @@
       "Textverständnis"
     ],
     "parentId": 15623,
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "26212"
   },
   {
     "id": 2858,
@@ -31715,7 +31914,8 @@
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
     "parentId": 15632,
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "26312"
   },
   {
     "id": 14969,
@@ -31851,7 +32051,8 @@
       "Verständnis für mündliche Äußerungen"
     ],
     "parentId": 15540,
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "54152"
   },
   {
     "id": 3673,
@@ -31993,7 +32194,8 @@
       "Mündliches Ausdrucksvermögen"
     ],
     "parentId": 13804,
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "29232"
   },
   {
     "id": 134513,
@@ -32156,7 +32358,8 @@
       "Mündliches Ausdrucksvermögen"
     ],
     "parentId": 9910,
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "82312"
   },
   {
     "id": 14867,
@@ -32291,7 +32494,8 @@
       "Verständnis für mündliche Äußerungen"
     ],
     "parentId": 10236,
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "54112"
   },
   {
     "id": 138818,
@@ -32409,7 +32613,8 @@
       "Mündliches Ausdrucksvermögen"
     ],
     "parentId": 133617,
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "83212"
   },
   {
     "id": 3946,
@@ -32541,7 +32746,8 @@
       "Rechenfertigkeiten"
     ],
     "parentId": 132714,
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "32102"
   },
   {
     "id": 4463,
@@ -32696,7 +32902,8 @@
       "Mündliches Ausdrucksvermögen"
     ],
     "parentId": 4460,
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "22302"
   },
   {
     "id": 129285,
@@ -32844,7 +33051,8 @@
       "Textverständnis"
     ],
     "parentId": 29055,
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "25102"
   },
   {
     "id": 34976,
@@ -33009,7 +33217,8 @@
       "Textverständnis"
     ],
     "parentId": 2927,
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "26312"
   },
   {
     "id": 137038,
@@ -33117,7 +33326,8 @@
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
     "parentId": 7856,
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "43102"
   },
   {
     "id": 2180,
@@ -33266,7 +33476,8 @@
       "Mündliches Ausdrucksvermögen"
     ],
     "parentId": 15166,
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "25212"
   },
   {
     "id": 2376,
@@ -33428,7 +33639,8 @@
       "Mündliches Ausdrucksvermögen"
     ],
     "parentId": 14799,
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "25212"
   },
   {
     "id": 136259,
@@ -33589,7 +33801,8 @@
       "Mündliches Ausdrucksvermögen"
     ],
     "parentId": 3654,
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "29222"
   },
   {
     "id": 119628,
@@ -33742,7 +33955,8 @@
       "Textverständnis"
     ],
     "parentId": 29049,
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "24412"
   },
   {
     "id": 10254,
@@ -33892,7 +34106,8 @@
       "Mündliches Ausdrucksvermögen"
     ],
     "parentId": 138725,
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "34332"
   },
   {
     "id": 4708,
@@ -34037,7 +34252,8 @@
       "Mündliches Ausdrucksvermögen"
     ],
     "parentId": 27448,
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "51312"
   },
   {
     "id": 94629,
@@ -34211,7 +34427,8 @@
       "Mündliches Ausdrucksvermögen"
     ],
     "parentId": 124412,
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "25222"
   },
   {
     "id": 487,
@@ -34358,7 +34575,8 @@
       "Rechenfertigkeiten"
     ],
     "parentId": 272,
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "11102"
   },
   {
     "id": 4585,
@@ -34500,7 +34718,8 @@
       "Verständnis für mündliche Äußerungen"
     ],
     "parentId": 134955,
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "33212"
   },
   {
     "id": 130180,
@@ -34655,7 +34874,8 @@
       "Verständnis für mündliche Äußerungen"
     ],
     "parentId": 90572,
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "23412"
   },
   {
     "id": 1495,
@@ -34801,7 +35021,8 @@
       "Verständnis für mündliche Äußerungen"
     ],
     "parentId": 90574,
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "23412"
   },
   {
     "id": 2261,
@@ -34970,7 +35191,8 @@
       "Rechenfertigkeiten"
     ],
     "parentId": 2277,
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "24412"
   },
   {
     "id": 2997,
@@ -35105,7 +35327,8 @@
       "Rechenfertigkeiten"
     ],
     "parentId": 122292,
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "24202"
   },
   {
     "id": 77408,
@@ -35246,7 +35469,8 @@
       "Mündliches Ausdrucksvermögen"
     ],
     "parentId": 34980,
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "22342"
   },
   {
     "id": 134912,
@@ -35431,7 +35655,8 @@
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
     "parentId": 122351,
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "82512"
   },
   {
     "id": 58313,
@@ -35569,7 +35794,8 @@
       "Mündliches Ausdrucksvermögen"
     ],
     "parentId": 77695,
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "11302"
   },
   {
     "id": 129985,
@@ -35733,7 +35959,8 @@
       "Textverständnis"
     ],
     "parentId": 9031,
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "83212"
   },
   {
     "id": 6496,
@@ -35887,7 +36114,8 @@
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
     "parentId": 90588,
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "27212"
   },
   {
     "id": 10212,
@@ -36021,7 +36249,8 @@
       "Mündliches Ausdrucksvermögen"
     ],
     "parentId": 10211,
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "54132"
   },
   {
     "id": 4110,
@@ -36153,7 +36382,8 @@
       "Rechenfertigkeiten"
     ],
     "parentId": 132661,
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "32202"
   },
   {
     "id": 119768,
@@ -36303,7 +36533,8 @@
       "Mündliches Ausdrucksvermögen"
     ],
     "parentId": 533,
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "11522"
   },
   {
     "id": 125540,
@@ -36467,7 +36698,8 @@
       "Mündliches Ausdrucksvermögen"
     ],
     "parentId": 294,
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "11602"
   },
   {
     "id": 1802,
@@ -36613,7 +36845,8 @@
       "Rechenfertigkeiten"
     ],
     "parentId": 29053,
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "24232"
   },
   {
     "id": 2473,
@@ -36775,7 +37008,8 @@
       "Mündliches Ausdrucksvermögen"
     ],
     "parentId": 124409,
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "25252"
   },
   {
     "id": 4012,
@@ -36909,7 +37143,8 @@
       "Rechenfertigkeiten"
     ],
     "parentId": 132721,
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "33302"
   },
   {
     "id": 579,
@@ -37058,7 +37293,8 @@
       "Mündliches Ausdrucksvermögen"
     ],
     "parentId": 588,
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "12102"
   },
   {
     "id": 10088,
@@ -37215,7 +37451,8 @@
       "Mündliches Ausdrucksvermögen"
     ],
     "parentId": 10009,
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "63302"
   },
   {
     "id": 50987,
@@ -37352,7 +37589,8 @@
       "Verständnis für mündliche Äußerungen"
     ],
     "parentId": 10236,
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "34102"
   },
   {
     "id": 138060,
@@ -37468,7 +37706,8 @@
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
     "parentId": 33212,
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "81102"
   },
   {
     "id": 14818,
@@ -37616,7 +37855,8 @@
       "Mündliches Ausdrucksvermögen"
     ],
     "parentId": 50920,
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "62302"
   },
   {
     "id": 6649,
@@ -37768,7 +38008,8 @@
       "Mündliches Ausdrucksvermögen"
     ],
     "parentId": 6628,
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "62102"
   },
   {
     "id": 93274,
@@ -37922,7 +38163,8 @@
       "Mündliches Ausdrucksvermögen"
     ],
     "parentId": 680,
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "12202"
   },
   {
     "id": 3747,
@@ -38090,7 +38332,8 @@
       "Mündliches Ausdrucksvermögen"
     ],
     "parentId": 3726,
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "29302"
   },
   {
     "id": 50920,
@@ -38242,7 +38485,8 @@
       "Verständnis für mündliche Äußerungen",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "62312"
   },
   {
     "id": 50924,
@@ -38394,7 +38638,8 @@
       "Verständnis für mündliche Äußerungen",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "62322"
   },
   {
     "id": 50922,
@@ -38546,7 +38791,8 @@
       "Verständnis für mündliche Äußerungen",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "62312"
   },
   {
     "id": 3009,
@@ -38698,7 +38944,8 @@
       "Textverständnis"
     ],
     "parentId": 15145,
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "24512"
   },
   {
     "id": 136320,
@@ -38859,7 +39106,8 @@
       "Textverständnis",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "fachhochschulreife"
+    "accessLevel": "fachhochschulreife",
+    "germanOccupationCode": "61283"
   },
   {
     "id": 6532,
@@ -39032,7 +39280,8 @@
       "Textverständnis",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "fachhochschulreife"
+    "accessLevel": "fachhochschulreife",
+    "germanOccupationCode": "61203"
   },
   {
     "id": 125588,
@@ -39204,7 +39453,8 @@
       "Textverständnis",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "fachhochschulreife"
+    "accessLevel": "fachhochschulreife",
+    "germanOccupationCode": "62103"
   },
   {
     "id": 27394,
@@ -39363,7 +39613,8 @@
       "Verständnis für mündliche Äußerungen",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "25252"
   },
   {
     "id": 134333,
@@ -39512,7 +39763,8 @@
       "Rechenfertigkeiten",
       "Verständnis für mündliche Äußerungen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "28242"
   },
   {
     "id": 15540,
@@ -39654,7 +39906,8 @@
       "Rechenfertigkeiten",
       "Verständnis für mündliche Äußerungen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "22212"
   },
   {
     "id": 3951,
@@ -39787,7 +40040,8 @@
       "Interessierte an beruflicher Erstausbildung",
       "Rechenfertigkeiten"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "32152"
   },
   {
     "id": 15657,
@@ -39948,7 +40202,8 @@
       "Verständnis für mündliche Äußerungen",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "84583"
   },
   {
     "id": 1123,
@@ -40100,7 +40355,8 @@
       "Rechenfertigkeiten",
       "Verständnis für mündliche Äußerungen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "21362"
   },
   {
     "id": 1946,
@@ -40235,7 +40491,8 @@
       "Interessierte an beruflicher Erstausbildung",
       "Rechenfertigkeiten"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "24222"
   },
   {
     "id": 15145,
@@ -40392,7 +40649,8 @@
       "Rechenfertigkeiten",
       "Textverständnis"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "24512"
   },
   {
     "id": 2488,
@@ -40552,7 +40810,8 @@
       "Rechenfertigkeiten",
       "Textverständnis"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "25112"
   },
   {
     "id": 3961,
@@ -40689,7 +40948,8 @@
       "Interessierte an beruflicher Erstausbildung",
       "Rechenfertigkeiten"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "32132"
   },
   {
     "id": 995,
@@ -40832,7 +41092,8 @@
       "Interessierte an beruflicher Erstausbildung",
       "Rechenfertigkeiten"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "21422"
   },
   {
     "id": 14197,
@@ -40996,7 +41257,8 @@
       "Textverständnis",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "94403"
   },
   {
     "id": 76910,
@@ -41160,7 +41422,8 @@
       "Textverständnis",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "fachhochschulreife"
+    "accessLevel": "fachhochschulreife",
+    "germanOccupationCode": "72122"
   },
   {
     "id": 129348,
@@ -41311,7 +41574,8 @@
       "Rechenfertigkeiten",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "11412"
   },
   {
     "id": 129350,
@@ -41403,7 +41667,8 @@
       "Rechenfertigkeiten",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "11422"
   },
   {
     "id": 15658,
@@ -41560,7 +41825,8 @@
       "Verständnis für mündliche Äußerungen",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "84553"
   },
   {
     "id": 131053,
@@ -41709,7 +41975,8 @@
       "Rechenfertigkeiten",
       "Verständnis für mündliche Äußerungen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "21342"
   },
   {
     "id": 50909,
@@ -41856,7 +42123,8 @@
       "Verständnis für mündliche Äußerungen",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "22352"
   },
   {
     "id": 13804,
@@ -42004,7 +42272,8 @@
       "Rechenfertigkeiten",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "29232"
   },
   {
     "id": 4325,
@@ -42165,7 +42434,8 @@
       "Rechenfertigkeiten",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "33112"
   },
   {
     "id": 680,
@@ -42325,7 +42595,8 @@
       "Verständnis für mündliche Äußerungen",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "12202"
   },
   {
     "id": 10058,
@@ -42491,7 +42762,8 @@
       "Mündliches Ausdrucksvermögen",
       "Textverständnis"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "51401"
   },
   {
     "id": 100790,
@@ -42615,7 +42887,8 @@
       "Mündliches Ausdrucksvermögen",
       "Textverständnis"
     ],
-    "accessLevel": "fachhochschulreife"
+    "accessLevel": "fachhochschulreife",
+    "germanOccupationCode": "51532"
   },
   {
     "id": 14030,
@@ -42786,7 +43059,8 @@
       "Textverständnis",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "51532"
   },
   {
     "id": 123282,
@@ -42965,7 +43239,8 @@
       "Mündliches Ausdrucksvermögen",
       "Textverständnis"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "26332"
   },
   {
     "id": 2187,
@@ -43153,7 +43428,8 @@
       "Rechenfertigkeiten",
       "Textverständnis"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "25232"
   },
   {
     "id": 2398,
@@ -43338,7 +43614,8 @@
       "Rechenfertigkeiten",
       "Textverständnis"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "25232"
   },
   {
     "id": 2403,
@@ -43511,7 +43788,8 @@
       "Rechenfertigkeiten",
       "Textverständnis"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "25232"
   },
   {
     "id": 9572,
@@ -43690,7 +43968,8 @@
       "Verständnis für mündliche Äußerungen",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "84523"
   },
   {
     "id": 7355,
@@ -43876,7 +44155,8 @@
       "Verständnis für mündliche Äußerungen",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "fachhochschulreife"
+    "accessLevel": "fachhochschulreife",
+    "germanOccupationCode": "51533"
   },
   {
     "id": 9405,
@@ -44034,7 +44314,8 @@
       "Textverständnis",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "realschule"
+    "accessLevel": "realschule",
+    "germanOccupationCode": "84134"
   },
   {
     "id": 727,
@@ -44183,7 +44464,8 @@
       "Interessierte an beruflicher Erstausbildung",
       "Rechenfertigkeiten"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "11712"
   },
   {
     "id": 6461,
@@ -44333,7 +44615,8 @@
       "Verständnis für mündliche Äußerungen",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "realschule"
+    "accessLevel": "realschule",
+    "germanOccupationCode": "23312"
   },
   {
     "id": 76789,
@@ -44498,7 +44781,8 @@
       "Verständnis für mündliche Äußerungen",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "23322"
   },
   {
     "id": 58383,
@@ -44669,7 +44953,8 @@
       "Mündliches Ausdrucksvermögen",
       "Textverständnis"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "62242"
   },
   {
     "id": 7989,
@@ -44822,7 +45107,8 @@
       "Textverständnis",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "realschule"
+    "accessLevel": "realschule",
+    "germanOccupationCode": "71412"
   },
   {
     "id": 9910,
@@ -44989,7 +45275,8 @@
       "Verständnis für mündliche Äußerungen",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "82312"
   },
   {
     "id": 14712,
@@ -45152,7 +45439,8 @@
       "Verständnis für mündliche Äußerungen",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": null
+    "accessLevel": null,
+    "germanOccupationCode": "84543"
   },
   {
     "id": 594,
@@ -45311,7 +45599,8 @@
       "Rechenfertigkeiten",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "12122"
   },
   {
     "id": 620,
@@ -45451,7 +45740,8 @@
       "Rechenfertigkeiten",
       "Verständnis für mündliche Äußerungen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "12132"
   },
   {
     "id": 588,
@@ -45605,7 +45895,8 @@
       "Rechenfertigkeiten",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "12142"
   },
   {
     "id": 614,
@@ -45753,7 +46044,8 @@
       "Rechenfertigkeiten",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "12112"
   },
   {
     "id": 615,
@@ -45897,7 +46189,8 @@
       "Rechenfertigkeiten",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "12112"
   },
   {
     "id": 604,
@@ -46043,7 +46336,8 @@
       "Rechenfertigkeiten",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "12122"
   },
   {
     "id": 605,
@@ -46196,7 +46490,8 @@
       "Rechenfertigkeiten",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "12122"
   },
   {
     "id": 14869,
@@ -46356,7 +46651,8 @@
       "Sinn und Gespür für Ästhetik",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "fachhochschulreife"
+    "accessLevel": "fachhochschulreife",
+    "germanOccupationCode": "23223"
   },
   {
     "id": 9999,
@@ -46524,7 +46820,8 @@
       "Verständnis für mündliche Äußerungen",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "realschule"
+    "accessLevel": "realschule",
+    "germanOccupationCode": "63312"
   },
   {
     "id": 10236,
@@ -46664,7 +46961,8 @@
       "Rechenfertigkeiten",
       "Verständnis für mündliche Äußerungen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "54112"
   },
   {
     "id": 2673,
@@ -46814,7 +47112,8 @@
       "Verständnis für mündliche Äußerungen",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "93612"
   },
   {
     "id": 9898,
@@ -46989,7 +47288,8 @@
       "Textverständnis",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "83322"
   },
   {
     "id": 77494,
@@ -47145,7 +47445,8 @@
       "Textverständnis",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "31222"
   },
   {
     "id": 4066,
@@ -47285,7 +47586,8 @@
       "Interessierte an beruflicher Erstausbildung",
       "Rechenfertigkeiten"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "32162"
   },
   {
     "id": 137579,
@@ -47457,7 +47759,8 @@
       "Mündliches Ausdrucksvermögen",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "23212"
   },
   {
     "id": 27542,
@@ -47624,7 +47927,8 @@
       "Verständnis für mündliche Äußerungen",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "93222"
   },
   {
     "id": 6515,
@@ -47779,7 +48083,8 @@
       "Mündliches Ausdrucksvermögen",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "realschule"
+    "accessLevel": "realschule",
+    "germanOccupationCode": "23212"
   },
   {
     "id": 30191,
@@ -47936,7 +48241,8 @@
       "Verständnis für mündliche Äußerungen",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "hauptschule"
+    "accessLevel": "hauptschule",
+    "germanOccupationCode": "81301"
   },
   {
     "id": 126847,
@@ -48080,7 +48386,8 @@
       "Interessierte an beruflicher Erstausbildung",
       "Rechenfertigkeiten"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "24132"
   },
   {
     "id": 4653,
@@ -48228,7 +48535,8 @@
       "Interessierte an beruflicher Erstausbildung",
       "Rechenfertigkeiten"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "93422"
   },
   {
     "id": 1077,
@@ -48365,7 +48673,8 @@
       "Interessierte an beruflicher Erstausbildung",
       "Rechenfertigkeiten"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "21322"
   },
   {
     "id": 1092,
@@ -48507,7 +48816,8 @@
       "Sinn und Gespür für Ästhetik",
       "Interessierte an beruflicher Erstausbildung"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "93432"
   },
   {
     "id": 1091,
@@ -48654,7 +48964,8 @@
       "Interessierte an beruflicher Erstausbildung",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "93432"
   },
   {
     "id": 1095,
@@ -48786,7 +49097,8 @@
       "Sinn und Gespür für Ästhetik",
       "Interessierte an beruflicher Erstausbildung"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "93432"
   },
   {
     "id": 4365,
@@ -48924,7 +49236,8 @@
       "Interessierte an beruflicher Erstausbildung",
       "Rechenfertigkeiten"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "33342"
   },
   {
     "id": 4364,
@@ -49065,7 +49378,8 @@
       "Interessierte an beruflicher Erstausbildung",
       "Rechenfertigkeiten"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "33342"
   },
   {
     "id": 1048,
@@ -49203,7 +49517,8 @@
       "Interessierte an beruflicher Erstausbildung",
       "Rechenfertigkeiten"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "21312"
   },
   {
     "id": 27446,
@@ -49352,7 +49667,8 @@
       "Interessierte an beruflicher Erstausbildung",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "21342"
   },
   {
     "id": 28998,
@@ -49493,7 +49809,8 @@
       "Interessierte an beruflicher Erstausbildung",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "21342"
   },
   {
     "id": 29000,
@@ -49640,7 +49957,8 @@
       "Interessierte an beruflicher Erstausbildung",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "21342"
   },
   {
     "id": 4144,
@@ -49784,7 +50102,8 @@
       "Interessierte an beruflicher Erstausbildung",
       "Rechenfertigkeiten"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "32232"
   },
   {
     "id": 142202,
@@ -49888,7 +50207,8 @@
       "Verständnis für mündliche Äußerungen",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "93522"
   },
   {
     "id": 142203,
@@ -49992,7 +50312,8 @@
       "Verständnis für mündliche Äußerungen",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "93522"
   },
   {
     "id": 15660,
@@ -50151,7 +50472,8 @@
       "Verständnis für mündliche Äußerungen",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "84583"
   },
   {
     "id": 129455,
@@ -50305,7 +50627,8 @@
       "Verständnis für mündliche Äußerungen",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "93532"
   },
   {
     "id": 9524,
@@ -50472,7 +50795,8 @@
       "Verständnis für mündliche Äußerungen",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "realschule"
+    "accessLevel": "realschule",
+    "germanOccupationCode": "84553"
   },
   {
     "id": 7288,
@@ -50629,7 +50953,8 @@
       "Verständnis für mündliche Äußerungen",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "52422"
   },
   {
     "id": 137478,
@@ -50741,7 +51066,8 @@
       "Textverständnis",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "realschule"
+    "accessLevel": "realschule",
+    "germanOccupationCode": "61203"
   },
   {
     "id": 2694,
@@ -50896,7 +51222,8 @@
       "Verständnis für mündliche Äußerungen",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "93682"
   },
   {
     "id": 9077,
@@ -51058,7 +51385,8 @@
       "Textverständnis",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "hauptschule"
+    "accessLevel": "hauptschule",
+    "germanOccupationCode": "83143"
   },
   {
     "id": 133617,
@@ -51231,7 +51559,8 @@
       "Verständnis für mündliche Äußerungen",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "83212"
   },
   {
     "id": 13778,
@@ -51400,7 +51729,8 @@
       "Mündliches Ausdrucksvermögen",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "hauptschule"
+    "accessLevel": "hauptschule",
+    "germanOccupationCode": "83131"
   },
   {
     "id": 9127,
@@ -51569,7 +51899,8 @@
       "Textverständnis",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "fachhochschulreife"
+    "accessLevel": "fachhochschulreife",
+    "germanOccupationCode": "83133"
   },
   {
     "id": 8722,
@@ -51734,7 +52065,8 @@
       "Textverständnis",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "81752"
   },
   {
     "id": 139241,
@@ -51854,7 +52186,8 @@
       "Textverständnis",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "81752"
   },
   {
     "id": 33207,
@@ -52022,7 +52355,8 @@
       "Mündliches Ausdrucksvermögen",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "81222"
   },
   {
     "id": 139139,
@@ -52116,7 +52450,8 @@
       "Interessierte an beruflicher Erstausbildung",
       "Rechenfertigkeiten"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "32172"
   },
   {
     "id": 132714,
@@ -52253,7 +52588,8 @@
       "Interessierte an beruflicher Erstausbildung",
       "Rechenfertigkeiten"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "32112"
   },
   {
     "id": 132716,
@@ -52338,7 +52674,8 @@
       "Interessierte an beruflicher Erstausbildung",
       "Rechenfertigkeiten"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "32132"
   },
   {
     "id": 132715,
@@ -52421,7 +52758,8 @@
       "Interessierte an beruflicher Erstausbildung",
       "Rechenfertigkeiten"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "32122"
   },
   {
     "id": 129408,
@@ -52617,7 +52955,8 @@
       "Textverständnis",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "82532"
   },
   {
     "id": 58341,
@@ -52768,7 +53107,8 @@
       "Interessierte an beruflicher Erstausbildung",
       "Rechenfertigkeiten"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "33242"
   },
   {
     "id": 57887,
@@ -52917,7 +53257,8 @@
       "Interessierte an beruflicher Erstausbildung",
       "Rechenfertigkeiten"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "33242"
   },
   {
     "id": 29057,
@@ -53058,7 +53399,8 @@
       "Interessierte an beruflicher Erstausbildung",
       "Rechenfertigkeiten"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "22302"
   },
   {
     "id": 1534,
@@ -53204,7 +53546,8 @@
       "Interessierte an beruflicher Erstausbildung",
       "Rechenfertigkeiten"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "93312"
   },
   {
     "id": 2687,
@@ -53353,7 +53696,8 @@
       "Verständnis für mündliche Äußerungen",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "93622"
   },
   {
     "id": 126805,
@@ -53492,7 +53836,8 @@
       "Interessierte an beruflicher Erstausbildung",
       "Rechenfertigkeiten"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "22342"
   },
   {
     "id": 126807,
@@ -53634,7 +53979,8 @@
       "Interessierte an beruflicher Erstausbildung",
       "Rechenfertigkeiten"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "22342"
   },
   {
     "id": 126803,
@@ -53776,7 +54122,8 @@
       "Interessierte an beruflicher Erstausbildung",
       "Rechenfertigkeiten"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "22342"
   },
   {
     "id": 1566,
@@ -53928,7 +54275,8 @@
       "Rechenfertigkeiten",
       "Verständnis für mündliche Äußerungen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "93332"
   },
   {
     "id": 10009,
@@ -54093,7 +54441,8 @@
       "Verständnis für mündliche Äußerungen",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "63222"
   },
   {
     "id": 9042,
@@ -54252,7 +54601,8 @@
       "Textverständnis",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "realschule"
+    "accessLevel": "realschule",
+    "germanOccupationCode": "53322"
   },
   {
     "id": 7055,
@@ -54436,7 +54786,8 @@
       "Textverständnis",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "fachhochschulreife"
+    "accessLevel": "fachhochschulreife",
+    "germanOccupationCode": "61312"
   },
   {
     "id": 35275,
@@ -54621,7 +54972,8 @@
       "Textverständnis",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "61312"
   },
   {
     "id": 4279,
@@ -54767,7 +55119,8 @@
       "Interessierte an beruflicher Erstausbildung",
       "Rechenfertigkeiten"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "33312"
   },
   {
     "id": 76430,
@@ -54940,7 +55293,8 @@
       "Mündliches Ausdrucksvermögen",
       "Textverständnis"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "26252"
   },
   {
     "id": 76438,
@@ -55109,7 +55463,8 @@
       "Mündliches Ausdrucksvermögen",
       "Textverständnis"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "26302"
   },
   {
     "id": 3003,
@@ -55255,7 +55610,8 @@
       "Textverständnis"
     ],
     "parentId": 29055,
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "25102"
   },
   {
     "id": 7965,
@@ -55449,7 +55805,8 @@
       "Textverständnis",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "71302"
   },
   {
     "id": 34941,
@@ -55608,7 +55965,8 @@
       "Interessierte an beruflicher Erstausbildung",
       "Rechenfertigkeiten"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "21412"
   },
   {
     "id": 34948,
@@ -55752,7 +56110,8 @@
       "Interessierte an beruflicher Erstausbildung",
       "Rechenfertigkeiten"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "93422"
   },
   {
     "id": 34938,
@@ -55906,7 +56265,8 @@
       "Interessierte an beruflicher Erstausbildung",
       "Rechenfertigkeiten"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "21422"
   },
   {
     "id": 34943,
@@ -56060,7 +56420,8 @@
       "Interessierte an beruflicher Erstausbildung",
       "Rechenfertigkeiten"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "21412"
   },
   {
     "id": 29055,
@@ -56213,7 +56574,8 @@
       "Rechenfertigkeiten",
       "Textverständnis"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "25102"
   },
   {
     "id": 134721,
@@ -56383,7 +56745,8 @@
       "Mündliches Ausdrucksvermögen",
       "Textverständnis"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "26312"
   },
   {
     "id": 15518,
@@ -56553,7 +56916,8 @@
       "Textverständnis",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "72122"
   },
   {
     "id": 4280,
@@ -56698,7 +57062,8 @@
       "Interessierte an beruflicher Erstausbildung",
       "Rechenfertigkeiten"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "33312"
   },
   {
     "id": 2927,
@@ -56867,7 +57232,8 @@
       "Mündliches Ausdrucksvermögen",
       "Textverständnis"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "26312"
   },
   {
     "id": 59113,
@@ -57029,7 +57395,8 @@
       "Textverständnis",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "92414"
   },
   {
     "id": 142040,
@@ -57142,7 +57509,8 @@
       "Verständnis für mündliche Äußerungen",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "realschule"
+    "accessLevel": "realschule",
+    "germanOccupationCode": "84583"
   },
   {
     "id": 7924,
@@ -57302,7 +57670,8 @@
       "Textverständnis",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "73252"
   },
   {
     "id": 8589,
@@ -57444,7 +57813,8 @@
       "Befähigung zum Planen und Organisieren",
       "Sinn und Gespür für Ästhetik"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "94523"
   },
   {
     "id": 4206,
@@ -57586,7 +57956,8 @@
       "Interessierte an beruflicher Erstausbildung",
       "Rechenfertigkeiten"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "32252"
   },
   {
     "id": 139142,
@@ -57677,7 +58048,8 @@
       "Interessierte an beruflicher Erstausbildung",
       "Rechenfertigkeiten"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "32252"
   },
   {
     "id": 137639,
@@ -57833,7 +58205,8 @@
       "Verständnis für mündliche Äußerungen",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "25212"
   },
   {
     "id": 124530,
@@ -57984,7 +58357,8 @@
       "Verständnis für mündliche Äußerungen",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "25212"
   },
   {
     "id": 15166,
@@ -58138,7 +58512,8 @@
       "Verständnis für mündliche Äußerungen",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "25212"
   },
   {
     "id": 14517,
@@ -58293,7 +58668,8 @@
       "Textverständnis",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "realschule"
+    "accessLevel": "realschule",
+    "germanOccupationCode": "43112"
   },
   {
     "id": 7891,
@@ -58464,7 +58840,8 @@
       "Textverständnis",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "realschule"
+    "accessLevel": "realschule",
+    "germanOccupationCode": "71302"
   },
   {
     "id": 7893,
@@ -58617,7 +58994,8 @@
       "Textverständnis",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "realschule"
+    "accessLevel": "realschule",
+    "germanOccupationCode": "71402"
   },
   {
     "id": 137121,
@@ -58741,7 +59119,8 @@
       "Textverständnis",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "realschule"
+    "accessLevel": "realschule",
+    "germanOccupationCode": "43112"
   },
   {
     "id": 7991,
@@ -58901,7 +59280,8 @@
       "Textverständnis",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "realschule"
+    "accessLevel": "realschule",
+    "germanOccupationCode": "71412"
   },
   {
     "id": 7789,
@@ -59065,7 +59445,8 @@
       "Textverständnis",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "realschule"
+    "accessLevel": "realschule",
+    "germanOccupationCode": "43112"
   },
   {
     "id": 7017,
@@ -59223,7 +59604,8 @@
       "Textverständnis",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "realschule"
+    "accessLevel": "realschule",
+    "germanOccupationCode": "92302"
   },
   {
     "id": 7018,
@@ -59392,7 +59774,8 @@
       "Textverständnis",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "92302"
   },
   {
     "id": 123266,
@@ -59567,7 +59950,8 @@
       "Textverständnis",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "71402"
   },
   {
     "id": 35311,
@@ -59739,7 +60123,8 @@
       "Textverständnis",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "92122"
   },
   {
     "id": 133555,
@@ -59908,7 +60293,8 @@
       "Textverständnis",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "43112"
   },
   {
     "id": 130926,
@@ -60075,7 +60461,8 @@
       "Textverständnis",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "61282"
   },
   {
     "id": 6580,
@@ -60233,7 +60620,8 @@
       "Verständnis für mündliche Äußerungen",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "62102"
   },
   {
     "id": 7134,
@@ -60399,7 +60787,8 @@
       "Textverständnis",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "51632"
   },
   {
     "id": 7889,
@@ -60574,7 +60963,8 @@
       "Textverständnis",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "73222"
   },
   {
     "id": 133596,
@@ -60751,7 +61141,8 @@
       "Textverständnis",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "61212"
   },
   {
     "id": 133597,
@@ -60924,7 +61315,8 @@
       "Textverständnis",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "61212"
   },
   {
     "id": 136121,
@@ -61099,7 +61491,8 @@
       "Mündliches Ausdrucksvermögen",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "63212"
   },
   {
     "id": 133558,
@@ -61272,7 +61665,8 @@
       "Textverständnis",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "43232"
   },
   {
     "id": 33364,
@@ -61431,7 +61825,8 @@
       "Textverständnis",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "51662"
   },
   {
     "id": 35279,
@@ -61601,7 +61996,8 @@
       "Textverständnis",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "92112"
   },
   {
     "id": 143179,
@@ -61702,7 +62098,8 @@
     "workLocations": "Kaufleute für Mobilität und Verkehrsservice arbeiten meist in Reisezentren von Bahnhöfen an Schaltern und Servicepoints in Verkehrsmitteln in Büroräumen in Sicherheitszentralen Sie arbeiten ggf. auch im Homeoffice bzw. mobil",
     "competenciesText": "Kernkompetenzen, die man während der Ausbildung erwirbt: Disposition (Personenverkehr) Fahrausweise kontrollieren Fahrausweise verkaufen Kombinierter Verkehr (KV) Kundenberatung, -betreuung Linienbusverkehr Mobilitätsplattformen Öffentlicher Personennahverkehr (ÖPNV) Personenverkehr Projektmanagement Schienenverkehr Schulbusverkehr Überwachungsaufgaben Zugbegleitservice Weitere Kompetenzen, die für die Ausübung dieses Berufs bedeutsam sein können: Ansage (Bahnhof, Flughafen) Auskünfte erteilen Bahntouristik Bustouristik Deeskalationstechniken Einkauf, Beschaffung Fahrplanprogramme Internationaler Reiseverkehr Kundenangebote erstellen Marketing Mobile Terminals Mobilitätsmanagement Regionaler Verkehr, Nahverkehr Reiseorganisation Reiseverkehr Reklamationsbearbeitung Reservierung, Buchung (Reiseverkehr) Schaltertätigkeit Service für Menschen mit Behinderungen Sicherheitstechnik Tourenplanung Weitere relevante Fertigkeiten und Kenntnisse: Kompetenzgruppe \" Bürokommunikation, MS-Office \"",
     "skillTags": [],
-    "accessLevel": null
+    "accessLevel": null,
+    "germanOccupationCode": null
   },
   {
     "id": 29441,
@@ -61862,7 +62259,8 @@
       "Textverständnis",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "51622"
   },
   {
     "id": 33235,
@@ -62036,7 +62434,8 @@
       "Textverständnis",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "63112"
   },
   {
     "id": 7131,
@@ -62211,7 +62610,8 @@
       "Textverständnis",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "51412"
   },
   {
     "id": 136117,
@@ -62386,7 +62786,8 @@
       "Textverständnis",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "72132"
   },
   {
     "id": 76608,
@@ -62533,7 +62934,8 @@
       "Rechenfertigkeiten",
       "Verständnis für mündliche Äußerungen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "93412"
   },
   {
     "id": 126857,
@@ -62682,7 +63084,8 @@
       "Interessierte an beruflicher Erstausbildung",
       "Rechenfertigkeiten"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "93352"
   },
   {
     "id": 9108,
@@ -62863,7 +63266,8 @@
       "Mündliches Ausdrucksvermögen",
       "Textverständnis"
     ],
-    "accessLevel": "realschule"
+    "accessLevel": "realschule",
+    "germanOccupationCode": "83113"
   },
   {
     "id": 2647,
@@ -63028,7 +63432,8 @@
       "Verständnis für mündliche Äußerungen",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "93642"
   },
   {
     "id": 2648,
@@ -63196,7 +63601,8 @@
       "Verständnis für mündliche Äußerungen",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "93642"
   },
   {
     "id": 2168,
@@ -63337,7 +63743,8 @@
       "Rechenfertigkeiten",
       "Verständnis für mündliche Äußerungen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "34202"
   },
   {
     "id": 3726,
@@ -63510,7 +63917,8 @@
       "Rechenfertigkeiten",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "29302"
   },
   {
     "id": 7799,
@@ -63677,7 +64085,8 @@
       "Textverständnis",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "71402"
   },
   {
     "id": 3654,
@@ -63844,7 +64253,8 @@
       "Rechenfertigkeiten",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "29222"
   },
   {
     "id": 29049,
@@ -64003,7 +64413,8 @@
       "Rechenfertigkeiten",
       "Textverständnis"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "24412"
   },
   {
     "id": 14624,
@@ -64170,7 +64581,8 @@
       "Verständnis für mündliche Äußerungen",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "82322"
   },
   {
     "id": 9929,
@@ -64332,7 +64744,8 @@
       "Verständnis für mündliche Äußerungen",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "hauptschule"
+    "accessLevel": "hauptschule",
+    "germanOccupationCode": "82322"
   },
   {
     "id": 122564,
@@ -64489,7 +64902,8 @@
       "Verständnis für mündliche Äußerungen",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "25212"
   },
   {
     "id": 27300,
@@ -64659,7 +65073,8 @@
       "Verständnis für mündliche Äußerungen",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "25252"
   },
   {
     "id": 27298,
@@ -64828,7 +65243,8 @@
       "Verständnis für mündliche Äußerungen",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "25212"
   },
   {
     "id": 14799,
@@ -64994,7 +65410,8 @@
       "Verständnis für mündliche Äußerungen",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "25212"
   },
   {
     "id": 122563,
@@ -65130,7 +65547,8 @@
       "Verständnis für mündliche Äußerungen",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "25212"
   },
   {
     "id": 3611,
@@ -65287,7 +65705,8 @@
       "Verständnis für mündliche Äußerungen",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "28342"
   },
   {
     "id": 15844,
@@ -65453,7 +65872,8 @@
       "Rechenfertigkeiten",
       "Textverständnis"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "63404"
   },
   {
     "id": 13991,
@@ -65604,7 +66024,8 @@
       "Verständnis für mündliche Äußerungen",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "93323"
   },
   {
     "id": 137752,
@@ -65721,7 +66142,8 @@
       "Interessierte an beruflicher Erstausbildung",
       "Rechenfertigkeiten"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "22102"
   },
   {
     "id": 137753,
@@ -65885,7 +66307,8 @@
       "Interessierte an beruflicher Erstausbildung",
       "Rechenfertigkeiten"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "22102"
   },
   {
     "id": 137751,
@@ -65998,7 +66421,8 @@
       "Interessierte an beruflicher Erstausbildung",
       "Rechenfertigkeiten"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "22102"
   },
   {
     "id": 137747,
@@ -66166,7 +66590,8 @@
       "Interessierte an beruflicher Erstausbildung",
       "Rechenfertigkeiten"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "22102"
   },
   {
     "id": 137746,
@@ -66334,7 +66759,8 @@
       "Interessierte an beruflicher Erstausbildung",
       "Rechenfertigkeiten"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "22102"
   },
   {
     "id": 137750,
@@ -66447,7 +66873,8 @@
       "Interessierte an beruflicher Erstausbildung",
       "Rechenfertigkeiten"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "22102"
   },
   {
     "id": 137748,
@@ -66566,7 +66993,8 @@
       "Interessierte an beruflicher Erstausbildung",
       "Rechenfertigkeiten"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "22102"
   },
   {
     "id": 59055,
@@ -66727,7 +67155,8 @@
       "Mündliches Ausdrucksvermögen",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "81743"
   },
   {
     "id": 6415,
@@ -66887,7 +67316,8 @@
       "Rechenfertigkeiten",
       "Textverständnis"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "22222"
   },
   {
     "id": 124412,
@@ -67067,7 +67497,8 @@
       "Verständnis für mündliche Äußerungen",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "25222"
   },
   {
     "id": 272,
@@ -67219,7 +67650,8 @@
       "Interessierte an beruflicher Erstausbildung",
       "Rechenfertigkeiten"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "11102"
   },
   {
     "id": 5879,
@@ -67400,7 +67832,8 @@
       "Rechenfertigkeiten",
       "Textverständnis"
     ],
-    "accessLevel": "realschule"
+    "accessLevel": "realschule",
+    "germanOccupationCode": "29202"
   },
   {
     "id": 15104,
@@ -67550,7 +67983,8 @@
       "Verständnis für mündliche Äußerungen",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "84553"
   },
   {
     "id": 59445,
@@ -67716,7 +68150,8 @@
       "Textverständnis",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "84124"
   },
   {
     "id": 4559,
@@ -67887,7 +68322,8 @@
       "Rechenfertigkeiten",
       "Textverständnis"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "25232"
   },
   {
     "id": 139146,
@@ -67984,7 +68420,8 @@
       "Interessierte an beruflicher Erstausbildung",
       "Rechenfertigkeiten"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "34322"
   },
   {
     "id": 1088,
@@ -68127,7 +68564,8 @@
       "Interessierte an beruflicher Erstausbildung",
       "Rechenfertigkeiten"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "21332"
   },
   {
     "id": 8764,
@@ -68282,7 +68720,8 @@
       "Textverständnis",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "fachhochschulreife"
+    "accessLevel": "fachhochschulreife",
+    "germanOccupationCode": "81733"
   },
   {
     "id": 6928,
@@ -68449,7 +68888,8 @@
       "Textverständnis",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "51642"
   },
   {
     "id": 134955,
@@ -68596,7 +69036,8 @@
       "Rechenfertigkeiten",
       "Verständnis für mündliche Äußerungen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "33212"
   },
   {
     "id": 15532,
@@ -68733,7 +69174,8 @@
       "Interessierte an beruflicher Erstausbildung",
       "Rechenfertigkeiten"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "33212"
   },
   {
     "id": 134954,
@@ -68866,7 +69308,8 @@
       "Interessierte an beruflicher Erstausbildung",
       "Rechenfertigkeiten"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "33212"
   },
   {
     "id": 15530,
@@ -69018,7 +69461,8 @@
       "Verständnis für mündliche Äußerungen",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "33212"
   },
   {
     "id": 15534,
@@ -69189,7 +69633,8 @@
       "Verständnis für mündliche Äußerungen",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "33212"
   },
   {
     "id": 77908,
@@ -69357,7 +69802,8 @@
       "Textverständnis",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "fachhochschulreife"
+    "accessLevel": "fachhochschulreife",
+    "germanOccupationCode": "71403"
   },
   {
     "id": 58991,
@@ -69525,7 +69971,8 @@
       "Textverständnis",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "realschule"
+    "accessLevel": "realschule",
+    "germanOccupationCode": "71403"
   },
   {
     "id": 4664,
@@ -69670,7 +70117,8 @@
       "Interessierte an beruflicher Erstausbildung",
       "Rechenfertigkeiten"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "93422"
   },
   {
     "id": 132652,
@@ -69824,7 +70272,8 @@
       "Interessierte an beruflicher Erstausbildung",
       "Rechenfertigkeiten"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "23122"
   },
   {
     "id": 132657,
@@ -69977,7 +70426,8 @@
       "Interessierte an beruflicher Erstausbildung",
       "Rechenfertigkeiten"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "29202"
   },
   {
     "id": 132653,
@@ -70126,7 +70576,8 @@
       "Interessierte an beruflicher Erstausbildung",
       "Rechenfertigkeiten"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "24202"
   },
   {
     "id": 132655,
@@ -70277,7 +70728,8 @@
       "Interessierte an beruflicher Erstausbildung",
       "Rechenfertigkeiten"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "28102"
   },
   {
     "id": 132656,
@@ -70429,7 +70881,8 @@
       "Interessierte an beruflicher Erstausbildung",
       "Rechenfertigkeiten"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "28142"
   },
   {
     "id": 15200,
@@ -70583,7 +71036,8 @@
       "Verständnis für mündliche Äußerungen",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "82342"
   },
   {
     "id": 8734,
@@ -70736,7 +71190,8 @@
       "Textverständnis",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "hauptschule"
+    "accessLevel": "hauptschule",
+    "germanOccupationCode": "81712"
   },
   {
     "id": 27398,
@@ -70897,7 +71352,8 @@
       "Verständnis für mündliche Äußerungen",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "28222"
   },
   {
     "id": 131156,
@@ -71045,7 +71501,8 @@
       "Verständnis für mündliche Äußerungen",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "28332"
   },
   {
     "id": 131157,
@@ -71192,7 +71649,8 @@
       "Verständnis für mündliche Äußerungen",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "28332"
   },
   {
     "id": 14087,
@@ -71340,7 +71798,8 @@
       "Textverständnis",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "realschule"
+    "accessLevel": "realschule",
+    "germanOccupationCode": "43412"
   },
   {
     "id": 51029,
@@ -71506,7 +71965,8 @@
       "Textverständnis",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "43412"
   },
   {
     "id": 3938,
@@ -71646,7 +72106,8 @@
       "Interessierte an beruflicher Erstausbildung",
       "Rechenfertigkeiten"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "32122"
   },
   {
     "id": 27442,
@@ -71791,7 +72252,8 @@
       "Verständnis für mündliche Äußerungen",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "22112"
   },
   {
     "id": 27444,
@@ -71947,7 +72409,8 @@
       "Verständnis für mündliche Äußerungen",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "22112"
   },
   {
     "id": 2868,
@@ -72121,7 +72584,8 @@
       "Mündliches Ausdrucksvermögen",
       "Textverständnis"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "26112"
   },
   {
     "id": 35283,
@@ -72281,7 +72745,8 @@
       "Mündliches Ausdrucksvermögen",
       "Textverständnis"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "34232"
   },
   {
     "id": 8533,
@@ -72453,7 +72918,8 @@
       "Mündliches Ausdrucksvermögen",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "94532"
   },
   {
     "id": 137684,
@@ -72585,7 +73051,8 @@
       "Mündliches Ausdrucksvermögen",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "23212"
   },
   {
     "id": 137682,
@@ -72712,7 +73179,8 @@
       "Mündliches Ausdrucksvermögen",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "23212"
   },
   {
     "id": 137683,
@@ -72891,7 +73359,8 @@
       "Mündliches Ausdrucksvermögen",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "23212"
   },
   {
     "id": 137685,
@@ -73059,7 +73528,8 @@
       "Mündliches Ausdrucksvermögen",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "23212"
   },
   {
     "id": 35281,
@@ -73232,7 +73702,8 @@
       "Textverständnis",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "92302"
   },
   {
     "id": 90572,
@@ -73391,7 +73862,8 @@
       "Rechenfertigkeiten",
       "Verständnis für mündliche Äußerungen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "23412"
   },
   {
     "id": 90574,
@@ -73541,7 +74013,8 @@
       "Rechenfertigkeiten",
       "Verständnis für mündliche Äußerungen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "23422"
   },
   {
     "id": 90578,
@@ -73693,7 +74166,8 @@
       "Rechenfertigkeiten",
       "Verständnis für mündliche Äußerungen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "23412"
   },
   {
     "id": 8343,
@@ -73848,7 +74322,8 @@
       "Textverständnis",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "realschule"
+    "accessLevel": "realschule",
+    "germanOccupationCode": "73342"
   },
   {
     "id": 33212,
@@ -74019,7 +74494,8 @@
       "Textverständnis",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "81102"
   },
   {
     "id": 9013,
@@ -74173,7 +74649,8 @@
       "Mündliches Ausdrucksvermögen",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "hauptschule"
+    "accessLevel": "hauptschule",
+    "germanOccupationCode": "41222"
   },
   {
     "id": 135579,
@@ -74341,7 +74818,8 @@
       "Mündliches Ausdrucksvermögen",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "fachhochschulreife"
+    "accessLevel": "fachhochschulreife",
+    "germanOccupationCode": "81222"
   },
   {
     "id": 135577,
@@ -74512,7 +74990,8 @@
       "Mündliches Ausdrucksvermögen",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "fachhochschulreife"
+    "accessLevel": "fachhochschulreife",
+    "germanOccupationCode": "81212"
   },
   {
     "id": 135581,
@@ -74687,7 +75166,8 @@
       "Mündliches Ausdrucksvermögen",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "fachhochschulreife"
+    "accessLevel": "fachhochschulreife",
+    "germanOccupationCode": "81232"
   },
   {
     "id": 135583,
@@ -74857,7 +75337,8 @@
       "Textverständnis",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "fachhochschulreife"
+    "accessLevel": "fachhochschulreife",
+    "germanOccupationCode": "81242"
   },
   {
     "id": 1708,
@@ -75031,7 +75512,8 @@
       "Interessierte an beruflicher Erstausbildung",
       "Rechenfertigkeiten"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "24142"
   },
   {
     "id": 1696,
@@ -75182,7 +75664,8 @@
       "Interessierte an beruflicher Erstausbildung",
       "Rechenfertigkeiten"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "24142"
   },
   {
     "id": 1702,
@@ -75328,7 +75811,8 @@
       "Interessierte an beruflicher Erstausbildung",
       "Rechenfertigkeiten"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "24142"
   },
   {
     "id": 2277,
@@ -75502,7 +75986,8 @@
       "Interessierte an beruflicher Erstausbildung",
       "Rechenfertigkeiten"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "24412"
   },
   {
     "id": 2267,
@@ -75667,7 +76152,8 @@
       "Interessierte an beruflicher Erstausbildung",
       "Rechenfertigkeiten"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "24412"
   },
   {
     "id": 2266,
@@ -75827,7 +76313,8 @@
       "Interessierte an beruflicher Erstausbildung",
       "Rechenfertigkeiten"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "25222"
   },
   {
     "id": 129467,
@@ -75973,7 +76460,8 @@
       "Interessierte an beruflicher Erstausbildung",
       "Rechenfertigkeiten"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "93512"
   },
   {
     "id": 129468,
@@ -76119,7 +76607,8 @@
       "Interessierte an beruflicher Erstausbildung",
       "Rechenfertigkeiten"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "93512"
   },
   {
     "id": 1964,
@@ -76270,7 +76759,8 @@
       "Verständnis für mündliche Äußerungen",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "93532"
   },
   {
     "id": 2665,
@@ -76428,7 +76918,8 @@
       "Verständnis für mündliche Äußerungen",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "93632"
   },
   {
     "id": 2757,
@@ -76588,7 +77079,8 @@
       "Mündliches Ausdrucksvermögen",
       "Textverständnis"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "26322"
   },
   {
     "id": 77248,
@@ -76751,7 +77243,8 @@
       "Interessierte an beruflicher Erstausbildung",
       "Rechenfertigkeiten"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "29252"
   },
   {
     "id": 6342,
@@ -76905,7 +77398,8 @@
       "Rechenfertigkeiten",
       "Textverständnis"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "41212"
   },
   {
     "id": 77800,
@@ -77064,7 +77558,8 @@
       "Textverständnis",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "94334"
   },
   {
     "id": 3353,
@@ -77217,7 +77712,8 @@
       "Verständnis für mündliche Äußerungen",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "28222"
   },
   {
     "id": 8377,
@@ -77359,7 +77855,8 @@
       "Musikalische Befähigung",
       "Sinn und Gespür für Ästhetik"
     ],
-    "accessLevel": "hauptschule"
+    "accessLevel": "hauptschule",
+    "germanOccupationCode": "94114"
   },
   {
     "id": 8379,
@@ -77513,7 +78010,8 @@
       "Musikalische Befähigung",
       "Sinn und Gespür für Ästhetik"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "94114"
   },
   {
     "id": 73829,
@@ -77688,7 +78186,8 @@
       "Textverständnis",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "62532"
   },
   {
     "id": 15421,
@@ -77847,7 +78346,8 @@
       "Mündliches Ausdrucksvermögen",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "81743"
   },
   {
     "id": 846,
@@ -77993,7 +78493,8 @@
       "Interessierte an beruflicher Erstausbildung",
       "Rechenfertigkeiten"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "21212"
   },
   {
     "id": 847,
@@ -78133,7 +78634,8 @@
       "Interessierte an beruflicher Erstausbildung",
       "Rechenfertigkeiten"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "21212"
   },
   {
     "id": 15435,
@@ -78282,7 +78784,8 @@
       "Rechenfertigkeiten",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "21232"
   },
   {
     "id": 67629,
@@ -78332,7 +78835,8 @@
     "workLocations": "",
     "competenciesText": "",
     "skillTags": [],
-    "accessLevel": "fachhochschulreife"
+    "accessLevel": "fachhochschulreife",
+    "germanOccupationCode": "51132"
   },
   {
     "id": 7955,
@@ -78501,7 +79005,8 @@
       "Textverständnis",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "73112"
   },
   {
     "id": 122462,
@@ -78693,7 +79198,8 @@
       "Mündliches Ausdrucksvermögen",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "fachhochschulreife"
+    "accessLevel": "fachhochschulreife",
+    "germanOccupationCode": "81342"
   },
   {
     "id": 34975,
@@ -78829,7 +79335,8 @@
       "Interessierte an beruflicher Erstausbildung",
       "Rechenfertigkeiten"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "24302"
   },
   {
     "id": 35285,
@@ -78996,7 +79503,8 @@
       "Rechenfertigkeiten",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "34222"
   },
   {
     "id": 8830,
@@ -79187,7 +79695,8 @@
       "Verständnis für mündliche Äußerungen",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "fachhochschulreife"
+    "accessLevel": "fachhochschulreife",
+    "germanOccupationCode": "81332"
   },
   {
     "id": 132536,
@@ -79357,7 +79866,8 @@
       "Verständnis für mündliche Äußerungen",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "93652"
   },
   {
     "id": 132537,
@@ -79518,7 +80028,8 @@
       "Verständnis für mündliche Äußerungen",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "93652"
   },
   {
     "id": 3497,
@@ -79689,7 +80200,8 @@
       "Verständnis für mündliche Äußerungen",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "28332"
   },
   {
     "id": 122351,
@@ -79880,7 +80392,8 @@
       "Textverständnis",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "82512"
   },
   {
     "id": 8769,
@@ -80037,7 +80550,8 @@
       "Textverständnis",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "fachhochschulreife"
+    "accessLevel": "fachhochschulreife",
+    "germanOccupationCode": "81132"
   },
   {
     "id": 90568,
@@ -80231,7 +80745,8 @@
       "Interessierte an beruflicher Erstausbildung",
       "Rechenfertigkeiten"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "23122"
   },
   {
     "id": 78502,
@@ -80397,7 +80912,8 @@
       "Interessierte an beruflicher Erstausbildung",
       "Rechenfertigkeiten"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "23112"
   },
   {
     "id": 4415,
@@ -80555,7 +81071,8 @@
       "Rechenfertigkeiten",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "33132"
   },
   {
     "id": 7957,
@@ -80742,7 +81259,8 @@
       "Textverständnis",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "73112"
   },
   {
     "id": 3602,
@@ -80871,7 +81389,8 @@
       "Rechenfertigkeiten",
       "Verständnis für mündliche Äußerungen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "28342"
   },
   {
     "id": 58385,
@@ -81055,7 +81574,8 @@
       "Textverständnis",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "71522"
   },
   {
     "id": 77696,
@@ -81202,7 +81722,8 @@
       "Rechenfertigkeiten",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "11322"
   },
   {
     "id": 77695,
@@ -81344,7 +81865,8 @@
       "Rechenfertigkeiten",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "11302"
   },
   {
     "id": 77694,
@@ -81484,7 +82006,8 @@
       "Rechenfertigkeiten",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "11322"
   },
   {
     "id": 77699,
@@ -81627,7 +82150,8 @@
       "Rechenfertigkeiten",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "11312"
   },
   {
     "id": 77697,
@@ -81773,7 +82297,8 @@
       "Rechenfertigkeiten",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "11322"
   },
   {
     "id": 122322,
@@ -81936,7 +82461,8 @@
       "Rechenfertigkeiten",
       "Textverständnis"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "11132"
   },
   {
     "id": 135349,
@@ -82097,7 +82623,8 @@
       "Mündliches Ausdrucksvermögen",
       "Textverständnis"
     ],
-    "accessLevel": "hauptschule"
+    "accessLevel": "hauptschule",
+    "germanOccupationCode": "81301"
   },
   {
     "id": 132173,
@@ -82272,7 +82799,8 @@
       "Textverständnis",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "fachhochschulreife"
+    "accessLevel": "fachhochschulreife",
+    "germanOccupationCode": "81302"
   },
   {
     "id": 1151,
@@ -82435,7 +82963,8 @@
       "Rechenfertigkeiten",
       "Verständnis für mündliche Äußerungen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "41312"
   },
   {
     "id": 6717,
@@ -82599,7 +83128,8 @@
       "Mündliches Ausdrucksvermögen",
       "Textverständnis"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "62412"
   },
   {
     "id": 8910,
@@ -82783,7 +83313,8 @@
       "Mündliches Ausdrucksvermögen",
       "Textverständnis"
     ],
-    "accessLevel": "fachhochschulreife"
+    "accessLevel": "fachhochschulreife",
+    "germanOccupationCode": "81822"
   },
   {
     "id": 8042,
@@ -82925,7 +83456,8 @@
       "Verständnis für mündliche Äußerungen",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "71432"
   },
   {
     "id": 5826,
@@ -83079,7 +83611,8 @@
       "Rechenfertigkeiten",
       "Textverständnis"
     ],
-    "accessLevel": "realschule"
+    "accessLevel": "realschule",
+    "germanOccupationCode": "41412"
   },
   {
     "id": 6351,
@@ -83240,7 +83773,8 @@
       "Rechenfertigkeiten",
       "Textverständnis"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "41412"
   },
   {
     "id": 8750,
@@ -83412,7 +83946,8 @@
       "Textverständnis",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "fachhochschulreife"
+    "accessLevel": "fachhochschulreife",
+    "germanOccupationCode": "81713"
   },
   {
     "id": 137340,
@@ -83576,7 +84111,8 @@
       "Verständnis für mündliche Äußerungen",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "84553"
   },
   {
     "id": 14427,
@@ -83726,7 +84262,8 @@
       "Mündliches Ausdrucksvermögen",
       "Textverständnis"
     ],
-    "accessLevel": "fachhochschulreife"
+    "accessLevel": "fachhochschulreife",
+    "germanOccupationCode": "81772"
   },
   {
     "id": 4442,
@@ -83878,7 +84415,8 @@
       "Verständnis für mündliche Äußerungen",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "28232"
   },
   {
     "id": 4432,
@@ -84024,7 +84562,8 @@
       "Verständnis für mündliche Äußerungen",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "28242"
   },
   {
     "id": 2713,
@@ -84188,7 +84727,8 @@
       "Verständnis für mündliche Äußerungen",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "realschule"
+    "accessLevel": "realschule",
+    "germanOccupationCode": "41222"
   },
   {
     "id": 131057,
@@ -84341,7 +84881,8 @@
       "Interessierte an beruflicher Erstausbildung",
       "Rechenfertigkeiten"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "24522"
   },
   {
     "id": 131058,
@@ -84499,7 +85040,8 @@
       "Interessierte an beruflicher Erstausbildung",
       "Rechenfertigkeiten"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "24522"
   },
   {
     "id": 8477,
@@ -84657,7 +85199,8 @@
       "Verständnis für mündliche Äußerungen",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "28112"
   },
   {
     "id": 34950,
@@ -84822,7 +85365,8 @@
       "Interessierte an beruflicher Erstausbildung",
       "Rechenfertigkeiten"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "41312"
   },
   {
     "id": 33210,
@@ -84977,7 +85521,8 @@
       "Interessierte an beruflicher Erstausbildung",
       "Rechenfertigkeiten"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "28102"
   },
   {
     "id": 67789,
@@ -85133,7 +85678,8 @@
       "Textverständnis",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "27302"
   },
   {
     "id": 51106,
@@ -85292,7 +85838,8 @@
       "Auge-Hand-Koordination",
       "Interessierte an beruflicher Erstausbildung"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "28122"
   },
   {
     "id": 34937,
@@ -85449,7 +85996,8 @@
       "Interessierte an beruflicher Erstausbildung",
       "Rechenfertigkeiten"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "28142"
   },
   {
     "id": 130893,
@@ -85598,7 +86146,8 @@
       "Rechenfertigkeiten",
       "Textverständnis"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "41322"
   },
   {
     "id": 59025,
@@ -85756,7 +86305,8 @@
       "Mündliches Ausdrucksvermögen",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "92203"
   },
   {
     "id": 14512,
@@ -85920,7 +86470,8 @@
       "Mündliches Ausdrucksvermögen",
       "Textverständnis"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "94582"
   },
   {
     "id": 4405,
@@ -86077,7 +86628,8 @@
       "Verständnis für mündliche Äußerungen",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "93232"
   },
   {
     "id": 4425,
@@ -86228,7 +86780,8 @@
       "Mündliches Ausdrucksvermögen"
     ],
     "parentId": 4405,
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "93232"
   },
   {
     "id": 7959,
@@ -86411,7 +86964,8 @@
       "Textverständnis",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "73112"
   },
   {
     "id": 7958,
@@ -86589,7 +87143,8 @@
       "Textverständnis",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "73112"
   },
   {
     "id": 14647,
@@ -86755,7 +87310,8 @@
       "Textverständnis",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "92413"
   },
   {
     "id": 15663,
@@ -86915,7 +87471,8 @@
       "Verständnis für mündliche Äußerungen",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "84583"
   },
   {
     "id": 14404,
@@ -87070,7 +87627,8 @@
       "Verständnis für mündliche Äußerungen",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "hauptschule"
+    "accessLevel": "hauptschule",
+    "germanOccupationCode": "81341"
   },
   {
     "id": 8888,
@@ -87240,7 +87798,8 @@
       "Mündliches Ausdrucksvermögen",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "hauptschule"
+    "accessLevel": "hauptschule",
+    "germanOccupationCode": "81342"
   },
   {
     "id": 713,
@@ -87387,7 +87946,8 @@
       "Interessierte an beruflicher Erstausbildung",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "11732"
   },
   {
     "id": 2243,
@@ -87535,7 +88095,8 @@
       "Interessierte an beruflicher Erstausbildung",
       "Rechenfertigkeiten"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "34322"
   },
   {
     "id": 27530,
@@ -87697,7 +88258,8 @@
       "Rechenfertigkeiten",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "33352"
   },
   {
     "id": 8401,
@@ -87845,7 +88407,8 @@
       "Sinn und Gespür für Ästhetik",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "94124"
   },
   {
     "id": 35029,
@@ -87989,7 +88552,8 @@
       "Verständnis für mündliche Äußerungen",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "28322"
   },
   {
     "id": 35025,
@@ -88133,7 +88697,8 @@
       "Verständnis für mündliche Äußerungen",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "28322"
   },
   {
     "id": 35027,
@@ -88282,7 +88847,8 @@
       "Verständnis für mündliche Äußerungen",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "28322"
   },
   {
     "id": 27396,
@@ -88429,7 +88995,8 @@
       "Mündliches Ausdrucksvermögen",
       "Textverständnis"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "53342"
   },
   {
     "id": 29471,
@@ -88576,7 +89143,8 @@
       "Mündliches Ausdrucksvermögen"
     ],
     "parentId": 131157,
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "28332"
   },
   {
     "id": 8412,
@@ -88725,7 +89293,8 @@
       "Sinn und Gespür für Ästhetik",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "realschule"
+    "accessLevel": "realschule",
+    "germanOccupationCode": "94214"
   },
   {
     "id": 6920,
@@ -88898,7 +89467,8 @@
       "Textverständnis",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "51652"
   },
   {
     "id": 6921,
@@ -89071,7 +89641,8 @@
       "Textverständnis",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "51652"
   },
   {
     "id": 14506,
@@ -89121,7 +89692,8 @@
     "workLocations": "",
     "competenciesText": "",
     "skillTags": [],
-    "accessLevel": "realschule"
+    "accessLevel": "realschule",
+    "germanOccupationCode": "51132"
   },
   {
     "id": 7273,
@@ -89282,7 +89854,8 @@
       "Rechenfertigkeiten",
       "Textverständnis"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "25242"
   },
   {
     "id": 8491,
@@ -89441,7 +90014,8 @@
       "Verständnis für mündliche Äußerungen",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "93542"
   },
   {
     "id": 2574,
@@ -89590,7 +90164,8 @@
       "Mündliches Ausdrucksvermögen"
     ],
     "parentId": 142202,
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "93522"
   },
   {
     "id": 8213,
@@ -89755,7 +90330,8 @@
       "Mündliches Ausdrucksvermögen",
       "Textverständnis"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "42212"
   },
   {
     "id": 35205,
@@ -89906,7 +90482,8 @@
       "Textverständnis",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "71423"
   },
   {
     "id": 3513,
@@ -90040,7 +90617,8 @@
       "Rechenfertigkeiten",
       "Verständnis für mündliche Äußerungen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "28332"
   },
   {
     "id": 15545,
@@ -90175,7 +90753,8 @@
       "Interessierte an beruflicher Erstausbildung",
       "Rechenfertigkeiten"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "24422"
   },
   {
     "id": 2074,
@@ -90310,7 +90889,8 @@
       "Rechenfertigkeiten"
     ],
     "parentId": 15545,
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "24422"
   },
   {
     "id": 9495,
@@ -90471,7 +91051,8 @@
       "Verständnis für mündliche Äußerungen",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "84583"
   },
   {
     "id": 3379,
@@ -90607,7 +91188,8 @@
       "Verständnis für mündliche Äußerungen",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "28232"
   },
   {
     "id": 3045,
@@ -90741,7 +91323,8 @@
       "Verständnis für mündliche Äußerungen",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "28132"
   },
   {
     "id": 35309,
@@ -90912,7 +91495,8 @@
       "Textverständnis",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "92122"
   },
   {
     "id": 33360,
@@ -91084,7 +91668,8 @@
       "Verständnis für mündliche Äußerungen",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "52182"
   },
   {
     "id": 6972,
@@ -91269,7 +91854,8 @@
       "Textverständnis",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "51422"
   },
   {
     "id": 70148,
@@ -91442,7 +92028,8 @@
       "Verständnis für mündliche Äußerungen",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "53112"
   },
   {
     "id": 13874,
@@ -91610,7 +92197,8 @@
       "Verständnis für mündliche Äußerungen",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": null
+    "accessLevel": null,
+    "germanOccupationCode": "84583"
   },
   {
     "id": 15650,
@@ -91780,7 +92368,8 @@
       "Verständnis für mündliche Äußerungen",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": null
+    "accessLevel": null,
+    "germanOccupationCode": "84583"
   },
   {
     "id": 9031,
@@ -91946,7 +92535,8 @@
       "Mündliches Ausdrucksvermögen",
       "Textverständnis"
     ],
-    "accessLevel": "hauptschule"
+    "accessLevel": "hauptschule",
+    "germanOccupationCode": "83142"
   },
   {
     "id": 9170,
@@ -92105,7 +92695,8 @@
       "Verständnis für mündliche Äußerungen",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "hauptschule"
+    "accessLevel": "hauptschule",
+    "germanOccupationCode": "83112"
   },
   {
     "id": 7930,
@@ -92274,7 +92865,8 @@
       "Textverständnis",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "73212"
   },
   {
     "id": 7936,
@@ -92454,7 +93046,8 @@
       "Textverständnis",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "73212"
   },
   {
     "id": 7946,
@@ -92629,7 +93222,8 @@
       "Textverständnis",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "73212"
   },
   {
     "id": 7931,
@@ -92801,7 +93395,8 @@
       "Textverständnis",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "73212"
   },
   {
     "id": 7932,
@@ -92986,7 +93581,8 @@
       "Textverständnis",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "73212"
   },
   {
     "id": 4188,
@@ -93173,7 +93769,8 @@
       "Interessierte an beruflicher Erstausbildung",
       "Rechenfertigkeiten"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "32202"
   },
   {
     "id": 2704,
@@ -93314,7 +93911,8 @@
       "Rechenfertigkeiten",
       "Verständnis für mündliche Äußerungen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "93332"
   },
   {
     "id": 14449,
@@ -93510,7 +94108,8 @@
       "Textverständnis",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "63122"
   },
   {
     "id": 15652,
@@ -93682,7 +94281,8 @@
       "Textverständnis",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "realschule"
+    "accessLevel": "realschule",
+    "germanOccupationCode": "63122"
   },
   {
     "id": 58343,
@@ -93852,7 +94452,8 @@
       "Textverständnis",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "63122"
   },
   {
     "id": 14408,
@@ -94021,7 +94622,8 @@
       "Verständnis für mündliche Äußerungen",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "84583"
   },
   {
     "id": 122285,
@@ -94186,7 +94788,8 @@
       "Interessierte an beruflicher Erstausbildung",
       "Rechenfertigkeiten"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "24212"
   },
   {
     "id": 863,
@@ -94345,7 +94948,8 @@
       "Rechenfertigkeiten",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "93312"
   },
   {
     "id": 862,
@@ -94510,7 +95114,8 @@
       "Rechenfertigkeiten",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "21232"
   },
   {
     "id": 7573,
@@ -94630,7 +95235,8 @@
       "Textverständnis",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "72302"
   },
   {
     "id": 4105,
@@ -94775,7 +95381,8 @@
       "Interessierte an beruflicher Erstausbildung",
       "Rechenfertigkeiten"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "32222"
   },
   {
     "id": 7194,
@@ -94936,7 +95543,8 @@
       "Interessierte an beruflicher Erstausbildung",
       "Rechenfertigkeiten"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "51212"
   },
   {
     "id": 4248,
@@ -95095,7 +95703,8 @@
       "Interessierte an beruflicher Erstausbildung",
       "Rechenfertigkeiten"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "33222"
   },
   {
     "id": 124029,
@@ -95248,7 +95857,8 @@
       "Interessierte an beruflicher Erstausbildung",
       "Rechenfertigkeiten"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "29262"
   },
   {
     "id": 9497,
@@ -95410,7 +96020,8 @@
       "Verständnis für mündliche Äußerungen",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "84583"
   },
   {
     "id": 33346,
@@ -95563,7 +96174,8 @@
       "Verständnis für mündliche Äußerungen",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "84553"
   },
   {
     "id": 6722,
@@ -95712,7 +96324,8 @@
       "Verständnis für mündliche Äußerungen",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "62282"
   },
   {
     "id": 9511,
@@ -95871,7 +96484,8 @@
       "Verständnis für mündliche Äußerungen",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "84533"
   },
   {
     "id": 15664,
@@ -96044,7 +96658,8 @@
       "Verständnis für mündliche Äußerungen",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "84533"
   },
   {
     "id": 14302,
@@ -96200,7 +96815,8 @@
       "Mündliches Ausdrucksvermögen",
       "Textverständnis"
     ],
-    "accessLevel": "realschule"
+    "accessLevel": "realschule",
+    "germanOccupationCode": "26122"
   },
   {
     "id": 5620,
@@ -96351,7 +96967,8 @@
       "Textverständnis",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "realschule"
+    "accessLevel": "realschule",
+    "germanOccupationCode": "31102"
   },
   {
     "id": 2874,
@@ -96503,7 +97120,8 @@
       "Mündliches Ausdrucksvermögen",
       "Textverständnis"
     ],
-    "accessLevel": "realschule"
+    "accessLevel": "realschule",
+    "germanOccupationCode": "82502"
   },
   {
     "id": 6379,
@@ -96646,7 +97264,8 @@
       "Rechenfertigkeiten",
       "Textverständnis"
     ],
-    "accessLevel": "realschule"
+    "accessLevel": "realschule",
+    "germanOccupationCode": "41422"
   },
   {
     "id": 13625,
@@ -96813,7 +97432,8 @@
       "Räumliche Orientierung",
       "Interessierte an beruflicher Erstausbildung"
     ],
-    "accessLevel": "realschule"
+    "accessLevel": "realschule",
+    "germanOccupationCode": "94712"
   },
   {
     "id": 33197,
@@ -96978,7 +97598,8 @@
       "Textverständnis",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "realschule"
+    "accessLevel": "realschule",
+    "germanOccupationCode": "26242"
   },
   {
     "id": 9734,
@@ -97157,7 +97778,8 @@
       "Textverständnis",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "fachhochschulreife"
+    "accessLevel": "fachhochschulreife",
+    "germanOccupationCode": "71303"
   },
   {
     "id": 3388,
@@ -97298,7 +97920,8 @@
       "Verständnis für mündliche Äußerungen",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "28232"
   },
   {
     "id": 76568,
@@ -97454,7 +98077,8 @@
       "Verständnis für mündliche Äußerungen",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "27232"
   },
   {
     "id": 76569,
@@ -97609,7 +98233,8 @@
       "Rechenfertigkeiten",
       "Verständnis für mündliche Äußerungen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "27232"
   },
   {
     "id": 76573,
@@ -97772,7 +98397,8 @@
       "Rechenfertigkeiten",
       "Verständnis für mündliche Äußerungen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "27232"
   },
   {
     "id": 67654,
@@ -97823,7 +98449,8 @@
     "workLocations": "",
     "competenciesText": "",
     "skillTags": [],
-    "accessLevel": "fachhochschulreife"
+    "accessLevel": "fachhochschulreife",
+    "germanOccupationCode": "51132"
   },
   {
     "id": 90571,
@@ -97977,7 +98604,8 @@
       "Textverständnis",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "27212"
   },
   {
     "id": 90588,
@@ -98135,7 +98763,8 @@
       "Textverständnis",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "27212"
   },
   {
     "id": 90585,
@@ -98298,7 +98927,8 @@
       "Textverständnis",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "27212"
   },
   {
     "id": 90575,
@@ -98454,7 +99084,8 @@
       "Textverständnis",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "27212"
   },
   {
     "id": 90591,
@@ -98626,7 +99257,8 @@
       "Textverständnis",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "27212"
   },
   {
     "id": 7391,
@@ -98792,7 +99424,8 @@
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
     "parentId": 35309,
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "71401"
   },
   {
     "id": 9546,
@@ -98948,7 +99581,8 @@
       "Verständnis für mündliche Äußerungen",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "realschule"
+    "accessLevel": "realschule",
+    "germanOccupationCode": "84543"
   },
   {
     "id": 126794,
@@ -99095,7 +99729,8 @@
       "Rechenfertigkeiten",
       "Verständnis für mündliche Äußerungen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "28222"
   },
   {
     "id": 126796,
@@ -99242,7 +99877,8 @@
       "Rechenfertigkeiten",
       "Verständnis für mündliche Äußerungen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "28222"
   },
   {
     "id": 90014,
@@ -99392,7 +100028,8 @@
       "Verständnis für mündliche Äußerungen",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "28122"
   },
   {
     "id": 90019,
@@ -99548,7 +100185,8 @@
       "Verständnis für mündliche Äußerungen",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "28122"
   },
   {
     "id": 90008,
@@ -99716,7 +100354,8 @@
       "Verständnis für mündliche Äußerungen",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "28122"
   },
   {
     "id": 90017,
@@ -99865,7 +100504,8 @@
       "Verständnis für mündliche Äußerungen",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "28112"
   },
   {
     "id": 90013,
@@ -100021,7 +100661,8 @@
       "Verständnis für mündliche Äußerungen",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "28122"
   },
   {
     "id": 90011,
@@ -100173,7 +100814,8 @@
       "Verständnis für mündliche Äußerungen",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "28122"
   },
   {
     "id": 6419,
@@ -100331,7 +100973,8 @@
       "Rechenfertigkeiten",
       "Textverständnis"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "41322"
   },
   {
     "id": 10211,
@@ -100468,7 +101111,8 @@
       "Verständnis für mündliche Äußerungen",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "54132"
   },
   {
     "id": 59042,
@@ -100638,7 +101282,8 @@
       "Mündliches Ausdrucksvermögen",
       "Textverständnis"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "94414"
   },
   {
     "id": 1083,
@@ -100765,7 +101410,8 @@
       "Interessierte an beruflicher Erstausbildung",
       "Rechenfertigkeiten"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "21332"
   },
   {
     "id": 1084,
@@ -100905,7 +101551,8 @@
       "Interessierte an beruflicher Erstausbildung",
       "Rechenfertigkeiten"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "21352"
   },
   {
     "id": 132661,
@@ -101042,7 +101689,8 @@
       "Interessierte an beruflicher Erstausbildung",
       "Rechenfertigkeiten"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "32242"
   },
   {
     "id": 132660,
@@ -101180,7 +101828,8 @@
       "Interessierte an beruflicher Erstausbildung",
       "Rechenfertigkeiten"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "32232"
   },
   {
     "id": 132662,
@@ -101316,7 +101965,8 @@
       "Interessierte an beruflicher Erstausbildung",
       "Rechenfertigkeiten"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "32252"
   },
   {
     "id": 139143,
@@ -101400,7 +102050,8 @@
       "Interessierte an beruflicher Erstausbildung",
       "Rechenfertigkeiten"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "32252"
   },
   {
     "id": 139147,
@@ -101485,7 +102136,8 @@
       "Interessierte an beruflicher Erstausbildung",
       "Rechenfertigkeiten"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "34322"
   },
   {
     "id": 132663,
@@ -101622,7 +102274,8 @@
       "Interessierte an beruflicher Erstausbildung",
       "Rechenfertigkeiten"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "34322"
   },
   {
     "id": 132659,
@@ -101762,7 +102415,8 @@
       "Interessierte an beruflicher Erstausbildung",
       "Rechenfertigkeiten"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "32222"
   },
   {
     "id": 565,
@@ -101926,7 +102580,8 @@
       "Textverständnis",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "81532"
   },
   {
     "id": 33214,
@@ -102108,7 +102763,8 @@
       "Textverständnis",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "81142"
   },
   {
     "id": 531,
@@ -102262,7 +102918,8 @@
       "Interessierte an beruflicher Erstausbildung",
       "Rechenfertigkeiten"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "11582"
   },
   {
     "id": 533,
@@ -102416,7 +103073,8 @@
       "Rechenfertigkeiten",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "11522"
   },
   {
     "id": 532,
@@ -102560,7 +103218,8 @@
       "Rechenfertigkeiten",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "11522"
   },
   {
     "id": 139600,
@@ -102718,7 +103377,8 @@
       "Textverständnis",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "81532"
   },
   {
     "id": 330,
@@ -102858,7 +103518,8 @@
       "Interessierte an beruflicher Erstausbildung",
       "Rechenfertigkeiten"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "11222"
   },
   {
     "id": 367,
@@ -103000,7 +103661,8 @@
       "Interessierte an beruflicher Erstausbildung",
       "Rechenfertigkeiten"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "11232"
   },
   {
     "id": 313,
@@ -103145,7 +103807,8 @@
       "Interessierte an beruflicher Erstausbildung",
       "Rechenfertigkeiten"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "11212"
   },
   {
     "id": 319,
@@ -103286,7 +103949,8 @@
       "Interessierte an beruflicher Erstausbildung",
       "Rechenfertigkeiten"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "11212"
   },
   {
     "id": 361,
@@ -103431,7 +104095,8 @@
       "Interessierte an beruflicher Erstausbildung",
       "Rechenfertigkeiten"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "11212"
   },
   {
     "id": 4460,
@@ -103592,7 +104257,8 @@
       "Verständnis für mündliche Äußerungen",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "22342"
   },
   {
     "id": 93277,
@@ -103776,7 +104442,8 @@
       "Textverständnis",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "63112"
   },
   {
     "id": 13620,
@@ -103950,7 +104617,8 @@
       "Textverständnis",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "realschule"
+    "accessLevel": "realschule",
+    "germanOccupationCode": "63112"
   },
   {
     "id": 4289,
@@ -104091,7 +104759,8 @@
       "Interessierte an beruflicher Erstausbildung",
       "Rechenfertigkeiten"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "33302"
   },
   {
     "id": 136559,
@@ -104260,7 +104929,8 @@
       "Textverständnis",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "fachhochschulreife"
+    "accessLevel": "fachhochschulreife",
+    "germanOccupationCode": "71423"
   },
   {
     "id": 2502,
@@ -104413,7 +105083,8 @@
       "Mündliches Ausdrucksvermögen",
       "Textverständnis"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "24532"
   },
   {
     "id": 6045,
@@ -104568,7 +105239,8 @@
       "Textverständnis",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "realschule"
+    "accessLevel": "realschule",
+    "germanOccupationCode": "42202"
   },
   {
     "id": 138722,
@@ -104729,7 +105401,8 @@
       "Rechenfertigkeiten",
       "Verständnis für mündliche Äußerungen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "34312"
   },
   {
     "id": 138725,
@@ -104832,7 +105505,8 @@
       "Verständnis für mündliche Äußerungen",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "34332"
   },
   {
     "id": 138723,
@@ -104950,7 +105624,8 @@
       "Rechenfertigkeiten",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "34312"
   },
   {
     "id": 138721,
@@ -105071,7 +105746,8 @@
       "Verständnis für mündliche Äußerungen",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "34312"
   },
   {
     "id": 14448,
@@ -105241,7 +105917,8 @@
       "Textverständnis",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "63402"
   },
   {
     "id": 4613,
@@ -105392,7 +106069,8 @@
       "Interessierte an beruflicher Erstausbildung",
       "Rechenfertigkeiten"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "24302"
   },
   {
     "id": 15146,
@@ -105536,7 +106214,8 @@
       "Rechenfertigkeiten",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "21362"
   },
   {
     "id": 14318,
@@ -105688,7 +106367,8 @@
       "Interessierte an beruflicher Erstausbildung",
       "Rechenfertigkeiten"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "21312"
   },
   {
     "id": 27429,
@@ -105857,7 +106537,8 @@
       "Interessierte an beruflicher Erstausbildung",
       "Rechenfertigkeiten"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "21222"
   },
   {
     "id": 946,
@@ -106028,7 +106709,8 @@
       "Interessierte an beruflicher Erstausbildung",
       "Rechenfertigkeiten"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "21222"
   },
   {
     "id": 948,
@@ -106191,7 +106873,8 @@
       "Interessierte an beruflicher Erstausbildung",
       "Rechenfertigkeiten"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "21222"
   },
   {
     "id": 949,
@@ -106348,7 +107031,8 @@
       "Interessierte an beruflicher Erstausbildung",
       "Rechenfertigkeiten"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "21222"
   },
   {
     "id": 947,
@@ -106505,7 +107189,8 @@
       "Interessierte an beruflicher Erstausbildung",
       "Rechenfertigkeiten"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "21222"
   },
   {
     "id": 950,
@@ -106666,7 +107351,8 @@
       "Interessierte an beruflicher Erstausbildung",
       "Rechenfertigkeiten"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "21222"
   },
   {
     "id": 130257,
@@ -106819,7 +107505,8 @@
       "Interessierte an beruflicher Erstausbildung",
       "Rechenfertigkeiten"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "29212"
   },
   {
     "id": 130255,
@@ -106975,7 +107662,8 @@
       "Interessierte an beruflicher Erstausbildung",
       "Rechenfertigkeiten"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "29212"
   },
   {
     "id": 130918,
@@ -107142,7 +107830,8 @@
       "Interessierte an beruflicher Erstausbildung",
       "Rechenfertigkeiten"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "24112"
   },
   {
     "id": 130922,
@@ -107312,7 +108001,8 @@
       "Interessierte an beruflicher Erstausbildung",
       "Rechenfertigkeiten"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "24122"
   },
   {
     "id": 130919,
@@ -107485,7 +108175,8 @@
       "Interessierte an beruflicher Erstausbildung",
       "Rechenfertigkeiten"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "24112"
   },
   {
     "id": 130923,
@@ -107653,7 +108344,8 @@
       "Interessierte an beruflicher Erstausbildung",
       "Rechenfertigkeiten"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "24122"
   },
   {
     "id": 4640,
@@ -107803,7 +108495,8 @@
       "Verständnis für mündliche Äußerungen",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "93342"
   },
   {
     "id": 6628,
@@ -107959,7 +108652,8 @@
       "Verständnis für mündliche Äußerungen",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "62102"
   },
   {
     "id": 7340,
@@ -108112,7 +108806,8 @@
       "Mündliches Ausdrucksvermögen",
       "Textverständnis"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "52314"
   },
   {
     "id": 15524,
@@ -108270,7 +108965,8 @@
       "Mündliches Ausdrucksvermögen",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "53182"
   },
   {
     "id": 77492,
@@ -108427,7 +109123,8 @@
       "Mündliches Ausdrucksvermögen",
       "Textverständnis"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "31212"
   },
   {
     "id": 77495,
@@ -108577,7 +109274,8 @@
       "Mündliches Ausdrucksvermögen",
       "Textverständnis"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "31212"
   },
   {
     "id": 7934,
@@ -108749,7 +109447,8 @@
       "Textverständnis",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "73202"
   },
   {
     "id": 7933,
@@ -108921,7 +109620,8 @@
       "Textverständnis",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "73282"
   },
   {
     "id": 7929,
@@ -109090,7 +109790,8 @@
       "Textverständnis",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "73282"
   },
   {
     "id": 7944,
@@ -109263,7 +109964,8 @@
       "Textverständnis",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "73202"
   },
   {
     "id": 7925,
@@ -109439,7 +110141,8 @@
       "Textverständnis",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "73202"
   },
   {
     "id": 14200,
@@ -109593,7 +110296,8 @@
       "Textverständnis",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "92413"
   },
   {
     "id": 4278,
@@ -109734,7 +110438,8 @@
       "Interessierte an beruflicher Erstausbildung",
       "Rechenfertigkeiten"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "33312"
   },
   {
     "id": 4171,
@@ -109897,7 +110602,8 @@
       "Interessierte an beruflicher Erstausbildung",
       "Rechenfertigkeiten"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "32262"
   },
   {
     "id": 122362,
@@ -110057,7 +110763,8 @@
       "Verständnis für mündliche Äußerungen",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "29122"
   },
   {
     "id": 59029,
@@ -110229,7 +110936,8 @@
       "Textverständnis",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "82223"
   },
   {
     "id": 76769,
@@ -110410,7 +111118,8 @@
       "Verständnis für mündliche Äußerungen",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "53132"
   },
   {
     "id": 8010,
@@ -110557,7 +111266,8 @@
       "Verständnis für mündliche Äußerungen",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "71382"
   },
   {
     "id": 126855,
@@ -110698,7 +111408,8 @@
       "Interessierte an beruflicher Erstausbildung",
       "Rechenfertigkeiten"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "21222"
   },
   {
     "id": 122368,
@@ -110864,7 +111575,8 @@
       "Rechenfertigkeiten",
       "Textverständnis"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "41422"
   },
   {
     "id": 6376,
@@ -111036,7 +111748,8 @@
       "Rechenfertigkeiten",
       "Textverständnis"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "41422"
   },
   {
     "id": 122367,
@@ -111201,7 +111914,8 @@
       "Rechenfertigkeiten",
       "Textverständnis"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "41422"
   },
   {
     "id": 6375,
@@ -111371,7 +112085,8 @@
       "Rechenfertigkeiten",
       "Textverständnis"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "41422"
   },
   {
     "id": 29051,
@@ -111537,7 +112252,8 @@
       "Rechenfertigkeiten",
       "Textverständnis"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "24522"
   },
   {
     "id": 294,
@@ -111705,7 +112421,8 @@
       "Rechenfertigkeiten",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "11602"
   },
   {
     "id": 8317,
@@ -111866,7 +112583,8 @@
       "Textverständnis",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "71423"
   },
   {
     "id": 9603,
@@ -112013,7 +112731,8 @@
       "Verständnis für mündliche Äußerungen",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "84553"
   },
   {
     "id": 14704,
@@ -112191,7 +112910,8 @@
       "Textverständnis",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "81112"
   },
   {
     "id": 2622,
@@ -112355,7 +113075,8 @@
       "Verständnis für mündliche Äußerungen",
       "Textverständnis"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "82542"
   },
   {
     "id": 29053,
@@ -112507,7 +113228,8 @@
       "Interessierte an beruflicher Erstausbildung",
       "Rechenfertigkeiten"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "24232"
   },
   {
     "id": 4010,
@@ -112647,7 +113369,8 @@
       "Interessierte an beruflicher Erstausbildung",
       "Rechenfertigkeiten"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "33322"
   },
   {
     "id": 124509,
@@ -112796,7 +113519,8 @@
       "Verständnis für mündliche Äußerungen",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "93612"
   },
   {
     "id": 124510,
@@ -112944,7 +113668,8 @@
       "Verständnis für mündliche Äußerungen",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "93612"
   },
   {
     "id": 124409,
@@ -113110,7 +113835,8 @@
       "Verständnis für mündliche Äußerungen",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "25252"
   },
   {
     "id": 124410,
@@ -113276,7 +114002,8 @@
       "Verständnis für mündliche Äußerungen",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "25252"
   },
   {
     "id": 9015,
@@ -113425,6 +114152,7 @@
       "Verständnis für mündliche Äußerungen",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "unrestricted",
+    "germanOccupationCode": "81212"
   }
 ]

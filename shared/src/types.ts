@@ -96,6 +96,8 @@ export interface Occupation {
 	// Points to the regular Ausbildung whose tags were inherited. Used by
 	// scorePopularity to make §66 popularity track its parent's tier.
 	parentId?: number | null;
+	/** Klassifikation der Berufe 2010 (KldB 2010) — joint Bundesagentur/Destatis classification, used to join external datasets. */
+	germanOccupationCode: string | null;
 }
 
 // --- Education Level (user's own degree) ---

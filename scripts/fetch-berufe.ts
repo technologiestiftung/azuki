@@ -19,6 +19,7 @@ import { SUBJECTS } from "@azuki/shared";
 import { hydrateFachpraktiker } from "./hydrate-fachpraktiker.js";
 import { applyConditionOverrides } from "./apply-condition-overrides.js";
 import { applyAccessOverrides } from "./apply-access-overrides.js";
+import { normalizeKldb } from "./normalizeKldb.js";
 
 // --- API response types (model the external Arbeitsagentur API) ---
 
@@ -44,6 +45,7 @@ interface ApiBerufItem {
   steckbrief?: ApiSteckbrief;
   infofelder?: Infofeld[];
   bilder?: ApiBild[];
+  kldb2010?: string;
 }
 
 interface BerufeListResponse {
@@ -603,6 +605,7 @@ function processOccupationDetail(data: ApiBerufItem[]): Occupation | null {
     name: ausbildung.kurzBezeichnungNeutral || "Unbekannt",
     descriptionShort,
     descriptionLong,
+    germanOccupationCode: normalizeKldb(ausbildung.kldb2010),
     taskSummary:
       findInfofeld(taetigkeitInfofelder, INFOFELD_IDS.aufgabenKompakt) || null,
     images,
