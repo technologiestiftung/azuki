@@ -295,12 +295,11 @@ insert into personas (
       "dirt": "rejected"
     }
   }'::jsonb,
-  -- tier_s: 8 entries (v3 — promoted Logopäde from Tier A; signature translator-strength match)
+  -- tier_s: 7 entries (v4 — dropped Sozialpädagogische Assistent/Kinderpfleger 9170; not a Berlin pathway, Berlin students go through Erzieher directly with no Kinderpfleger intermediate level)
   ARRAY[
     9031,   -- Sozialassistent/in
     9162,   -- Erzieher/in
     9106,   -- Erzieher/in - Jugend- und Heimerziehung
-    9170,   -- Sozialpädagogische/r Assistent/in / Kinderpfleger/in
     33212,  -- Medizinische/r Fachangestellte/r
     14704,  -- Zahnmedizinische/r Fachangestellte/r (MFA sibling, more Hauptschule-accessible)
     137684, -- Mediengestalter/in Digital und Print - Designkonzeption
@@ -989,10 +988,9 @@ insert into personas (
       "dirt": "rejected"
     }
   }'::jsonb,
-  -- tier_s: 6 entries (v3 — demoted Krankenpflegehelfer → Tier A; hospital heavy-lifting conflicts with Hanna's "heavy-work" no-go)
+  -- tier_s: 5 entries (v4 — dropped Sozialpädagogische Assistent/Kinderpfleger 9170; not a Berlin pathway, not trained in BE+BB)
   ARRAY[
     9063,   -- Altenpflegehelfer/in (A_anchor, direct Altersheim hit)
-    9170,   -- Sozialpädagogische/r Assistent/in / Kinderpfleger/in
     9031,   -- Sozialassistent/in
     137683, -- Mediengestalter/in Digital und Print - Printmedien (most accessible)
     8533,   -- Mediengestalter/in - Bild und Ton (music hook)
