@@ -154,6 +154,27 @@ export default {
 						backgroundColor: "rgb(209 213 219)",
 					},
 				},
+				/** Strengths slider exits before the custom-strength card appears. */
+				strengthsSliderSlideOut: {
+					from: {
+						opacity: "1",
+						transform: "translateY(0)",
+					},
+					to: {
+						opacity: "0",
+						transform: "translateY(100%)",
+					},
+				},
+				/** Custom strength screen grows from stack ghost size to full card height. */
+				customStrengthCardExpand: {
+					from: {
+						transform:
+							"scale(var(--stack-ghost-scale, 0.84)) translateY(41px)",
+					},
+					to: {
+						transform: "scale(1) translateY(0)",
+					},
+				},
 				slideInTop: {
 					from: {
 						opacity: "0",
@@ -189,6 +210,10 @@ export default {
 					"slideInRightTint 800ms cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards",
 				backCardSlideInRecede:
 					"backCardSlideInRecede 800ms cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards",
+				strengthsSliderSlideOut:
+					"strengthsSliderSlideOut 400ms cubic-bezier(0.4, 0, 1, 1) forwards",
+				customStrengthCardExpand:
+					"customStrengthCardExpand 800ms cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards",
 				slideInTop: "slideInTop 0.4s ease-out forwards",
 				progressFill: "progressFill 4s linear forwards",
 			},

@@ -66,7 +66,7 @@ Gewichte die Signale ungefähr so:
 
 Freie Texte sind besonders wichtig, zum Beispiel:
 - eigene Beschreibungen
-- geheimes Talent
+- eigene Stärken
 - praktische Erfahrungen
 - individuelle Wünsche
 - persönliche Rahmenbedingungen
@@ -207,6 +207,11 @@ export function formatProfileSections(profile: UserProfile): string {
 	if (strengthEntries.length > 0) {
 		parts.push(`Stärken: ${strengthEntries.join(", ")}`);
 	}
+	if (profile.selectedCustomStrengths.length > 0) {
+		parts.push(
+			`Weitere Stärken (eigene Angaben): ${profile.selectedCustomStrengths.join(", ")}`,
+		);
+	}
 
 	const weaknessEntries = Object.entries(profile.strengths)
 		.filter(([, value]) => value > 0 && value < 0.5)
@@ -251,9 +256,6 @@ export function formatProfileSections(profile: UserProfile): string {
 		parts.push(`No-Gos: ${noGoLabels.join(", ")}`);
 	}
 
-	if (profile.secretTalent) {
-		parts.push(`Geheimes Talent (eigene Angaben): ${profile.secretTalent}`);
-	}
 	if (profile.practicalExperience) {
 		parts.push(
 			`Praktische Erfahrungen (eigene Angaben): ${profile.practicalExperience}`,

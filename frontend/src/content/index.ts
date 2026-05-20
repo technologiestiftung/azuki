@@ -231,13 +231,16 @@ export const content = {
 	"strengths.cards.perseverance.title": "Durchhalten",
 	"strengths.cards.perseverance.description":
 		"Ich mache weiter, auch wenn eine Aufgabe anstrengend ist.",
-
-	// Secret Talent
-	"secretTalent.question":
-		"Was kannst du richtig gut, von dem andere nichts wissen?",
-	"secretTalent.placeholder": "Deine Eingabe",
-	"secretTalent.cancelLabel": "Abbrechen",
-	"secretTalent.saveLabel": "Speichern",
+	// Custom Strengths
+	"strengths.customStrength.label": "Von dir hinzugefügt",
+	"strengths.addCustomStrengthButton.addMore": "Stärke hinzufügen",
+	"strengths.addCustomStrengthButton.label": "Eigene Stärke hinzufügen",
+	"strengths.addCustomStrengthButton.ariaLabel": "Eigene Stärke hinzufügen",
+	"strengths.bottomSheet.input.addPlaceholder": "Eine Stärke von dir",
+	"strengths.customStrength.title": "Fehlt noch etwas?",
+	"strengths.customStrength.description":
+		"Füge weitere Stärken hinzu, die zu dir passen.",
+	"strengths.customStrength.pill.label.postfix": "als Stärke auswählen",
 
 	// Practical Experience
 	"practicalExperience.question": "Wo hast du schon Erfahrungen gesammelt?",

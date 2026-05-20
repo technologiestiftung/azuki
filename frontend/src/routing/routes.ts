@@ -2,7 +2,7 @@ import type { To } from "react-router-dom";
 import { Step } from "../common";
 import { workPreferencePairs } from "../content/work-preference-pairs";
 import { noGos } from "../components/competence-profile/steps/no-gos-step/no-gos";
-import { strengths } from "../components/competence-profile/steps/strengths-step/strengths";
+import { STRENGTH_STEP_CARD_COUNT } from "../components/competence-profile/steps/strengths-step/strengths";
 
 export const ROUTE_PATHS = {
 	login: "/",
@@ -14,7 +14,6 @@ export const ROUTE_PATHS = {
 	interests: "/interests",
 	strengths: "/strengths",
 	expectations: "/expectations",
-	secretTalent: "/secret-talent",
 	experience: "/experience",
 	preferences: "/preferences",
 	nogos: "/nogos",
@@ -48,10 +47,9 @@ const ORDERED_NAVIGATION_STEPS: FlowNode[] = [
 	{
 		path: ROUTE_PATHS.strengths,
 		step: Step.Strengths,
-		cardCount: strengths.length,
+		cardCount: STRENGTH_STEP_CARD_COUNT,
 	},
 	{ path: ROUTE_PATHS.expectations, step: Step.WorkExpectations },
-	{ path: ROUTE_PATHS.secretTalent, step: Step.SecretTalent },
 	{ path: ROUTE_PATHS.experience, step: Step.PracticalExperience },
 	{
 		path: ROUTE_PATHS.preferences,

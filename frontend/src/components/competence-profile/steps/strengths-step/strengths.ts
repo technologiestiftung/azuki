@@ -49,3 +49,6 @@ export const strengths = [
 		illustration: "/illustrations/endurance.svg",
 	},
 ];
+
+/** Predefined swipe cards plus one custom-strength screen at hash #{strengths.length}. */
+export const STRENGTH_STEP_CARD_COUNT = strengths.length + 1;

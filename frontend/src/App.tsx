@@ -7,7 +7,6 @@ import { SchoolDegreeStep } from "./components/competence-profile/steps/school-d
 import { SchoolSubjectsStep } from "./components/competence-profile/steps/school-subject-step/SchoolSubjectsStep";
 import { InterestsStep } from "./components/competence-profile/steps/interests-step/InterestsStep";
 import { StrengthsStep } from "./components/competence-profile/steps/strengths-step/StrengthsStep";
-import { SecretTalentStep } from "./components/competence-profile/steps/SecretTalentStep";
 import { PracticalExperienceStep } from "./components/competence-profile/steps/PracticalExperienceStep";
 import { WorkPreferencesStep } from "./components/competence-profile/steps/WorkPreferencesStep";
 import { NoGosStep } from "./components/competence-profile/steps/no-gos-step/NoGosStep";
@@ -49,10 +48,6 @@ function App() {
 					/>
 					<Route path={ROUTE_PATHS.interests} element={<InterestsStep />} />
 					<Route path={ROUTE_PATHS.strengths} element={<StrengthsStep />} />
-					<Route
-						path={ROUTE_PATHS.secretTalent}
-						element={<SecretTalentStep />}
-					/>
 					<Route
 						path={ROUTE_PATHS.expectations}
 						element={<WorkExpectationsStep />}

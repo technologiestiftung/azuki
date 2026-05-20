@@ -190,19 +190,47 @@ describe("formatProfileSections — custom work expectation dedup", () => {
 	});
 });
 
-describe("formatProfileSections — free-text fields labeled as eigene Angaben", () => {
-	test("Geheimes Talent label includes (eigene Angaben) suffix", () => {
-		const profile = makeProfile({ secretTalent: "kann gut zuhören" });
+describe("formatProfileSections — custom strengths", () => {
+	test("lists selected custom strengths under Weitere Stärken (eigene Angaben)", () => {
+		const profile = makeProfile({
+			customStrengths: ["kann gut zuhören", "organisiert Umzüge"],
+			selectedCustomStrengths: ["kann gut zuhören", "organisiert Umzüge"],
+		});
 
 		const output = formatProfileSections(profile);
 
 		expect(output).toContain(
-			"Geheimes Talent (eigene Angaben): kann gut zuhören",
+			"Weitere Stärken (eigene Angaben): kann gut zuhören, organisiert Umzüge",
 		);
-		// Bare label without suffix must not appear.
-		expect(output).not.toMatch(/^Geheimes Talent: /m);
 	});
 
+	test("omits deselected custom strengths from the AI line", () => {
+		const profile = makeProfile({
+			customStrengths: ["kann gut zuhören", "organisiert Umzüge"],
+			selectedCustomStrengths: ["kann gut zuhören"],
+		});
+
+		const output = formatProfileSections(profile);
+
+		expect(output).toContain(
+			"Weitere Stärken (eigene Angaben): kann gut zuhören",
+		);
+		expect(output).not.toContain("organisiert Umzüge");
+	});
+
+	test("omits custom strengths line when none are selected", () => {
+		const profile = makeProfile({
+			customStrengths: ["kann gut zuhören"],
+			selectedCustomStrengths: [],
+		});
+
+		const output = formatProfileSections(profile);
+
+		expect(output).not.toMatch(/^Weitere Stärken \(eigene Angaben\):/m);
+	});
+});
+
+describe("formatProfileSections — free-text fields labeled as eigene Angaben", () => {
 	test("Praktische Erfahrungen label includes (eigene Angaben) suffix", () => {
 		const profile = makeProfile({
 			practicalExperience: "Praktikum in der Tischlerei",
@@ -216,12 +244,12 @@ describe("formatProfileSections — free-text fields labeled as eigene Angaben",
 		expect(output).not.toMatch(/^Praktische Erfahrungen: /m);
 	});
 
-	test("free-text field lines are omitted when the values are empty strings", () => {
-		const profile = makeProfile(); // secretTalent and practicalExperience default to ""
+	test("free-text field lines are omitted when the values are empty", () => {
+		const profile = makeProfile(); // practicalExperience defaults to ""
 
 		const output = formatProfileSections(profile);
 
-		expect(output).not.toContain("Geheimes Talent");
 		expect(output).not.toContain("Praktische Erfahrungen");
+		expect(output).not.toContain("Weitere Stärken");
 	});
 });

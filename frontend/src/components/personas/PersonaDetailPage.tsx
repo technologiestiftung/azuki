@@ -15,6 +15,7 @@ import { InterestsEditor } from "./profile-editors/InterestsEditor";
 import { SubjectsEditor } from "./profile-editors/SubjectsEditor";
 import { WorkExpectationsEditor } from "./profile-editors/WorkExpectationsEditor";
 import { StrengthsEditor } from "./profile-editors/StrengthsEditor";
+import { CustomStrengthsEditor } from "./profile-editors/CustomStrengthsEditor";
 import { WorkPreferencesEditor } from "./profile-editors/WorkPreferencesEditor";
 import { NoGosEditor } from "./profile-editors/NoGosEditor";
 
@@ -273,6 +274,16 @@ function ProfileEditorSection({
 					onChange={(next) => patchProfile({ strengths: next })}
 				/>
 
+				<CustomStrengthsEditor
+					customStrengths={profile.customStrengths}
+					onChange={(next) =>
+						patchProfile({
+							customStrengths: next,
+							selectedCustomStrengths: next,
+						})
+					}
+				/>
+
 				<WorkPreferencesEditor
 					workPreferences={profile.workPreferences}
 					onChange={(next) => patchProfile({ workPreferences: next })}
@@ -282,16 +293,6 @@ function ProfileEditorSection({
 					noGos={profile.noGos}
 					onChange={(next) => patchProfile({ noGos: next })}
 				/>
-
-				<label className="flex flex-col gap-1">
-					<span className="text-gray-600">Geheimes Talent (freier Text)</span>
-					<textarea
-						value={profile.secretTalent}
-						onChange={(e) => patchProfile({ secretTalent: e.target.value })}
-						rows={3}
-						className="border border-gray-300 rounded px-2 py-1"
-					/>
-				</label>
 
 				<label className="flex flex-col gap-1">
 					<span className="text-gray-600">

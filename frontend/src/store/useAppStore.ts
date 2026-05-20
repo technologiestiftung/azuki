@@ -6,42 +6,11 @@ import {
 	type WorkPreferenceChoice,
 	type NoGoAnswer,
 } from "../common";
+import {
+	initialUserProfile,
+	normalizeUserProfile,
+} from "../profile/normalizeUserProfile";
 import { useMatchResultsStore } from "./useMatchResultsStore";
-
-const initialProfile: UserProfile = {
-	inSchool: null,
-	educationLevel: null,
-	favoriteSubjects: [],
-	customSubjects: [],
-	interests: [],
-	customInterests: [],
-	workExpectations: [],
-	customWorkExpectations: [],
-	strengths: {},
-	secretTalent: "",
-	practicalExperience: "",
-	workPreferences: {},
-	noGos: {},
-};
-
-/** Normalizes the profile by merging the initial profile with the provided profile. */
-function normalizeProfile(
-	profile: Partial<UserProfile> | undefined,
-): UserProfile {
-	const merged = { ...initialProfile, ...profile };
-	return {
-		...merged,
-		favoriteSubjects: merged.favoriteSubjects ?? [],
-		customSubjects: merged.customSubjects ?? [],
-		interests: merged.interests ?? [],
-		customInterests: merged.customInterests ?? [],
-		workExpectations: merged.workExpectations ?? [],
-		customWorkExpectations: merged.customWorkExpectations ?? [],
-		strengths: merged.strengths ?? {},
-		workPreferences: merged.workPreferences ?? {},
-		noGos: merged.noGos ?? {},
-	};
-}
 
 function clearMatchResults(): void {
 	useMatchResultsStore.getState().clearMatchResults();
@@ -60,8 +29,9 @@ interface AppActions {
 	addCustomInterest: (interest: string) => void;
 	addCustomSubject: (subject: string) => void;
 	addCustomWorkExpectation: (workExpectation: string) => void;
+	addCustomStrength: (strength: string) => void;
+	toggleCustomStrength: (strength: string) => void;
 	setStrength: (id: string, value: number) => void;
-	setSecretTalent: (value: string) => void;
 	setPracticalExperience: (value: string) => void;
 	setWorkPreference: (id: string, choice: WorkPreferenceChoice | null) => void;
 	setNoGo: (id: string, answer: NoGoAnswer | null) => void;
@@ -71,7 +41,7 @@ interface AppActions {
 export const useAppStore = create<AppState & AppActions>()(
 	persist(
 		(set) => ({
-			profile: initialProfile,
+			profile: initialUserProfile,
 
 			setInSchool: (value) =>
 				set((state) => {
@@ -163,6 +133,44 @@ export const useAppStore = create<AppState & AppActions>()(
 				}));
 			},
 
+			addCustomStrength: (strength) => {
+				clearMatchResults();
+				set((state) => {
+					if (state.profile.customStrengths.includes(strength)) {
+						return state;
+					}
+					return {
+						profile: {
+							...state.profile,
+							customStrengths: [...state.profile.customStrengths, strength],
+							selectedCustomStrengths: [
+								...state.profile.selectedCustomStrengths,
+								strength,
+							],
+						},
+					};
+				});
+			},
+
+			toggleCustomStrength: (strength) => {
+				clearMatchResults();
+				set((state) => {
+					const selected = state.profile.selectedCustomStrengths.includes(
+						strength,
+					)
+						? state.profile.selectedCustomStrengths.filter(
+								(value) => value !== strength,
+							)
+						: [...state.profile.selectedCustomStrengths, strength];
+					return {
+						profile: {
+							...state.profile,
+							selectedCustomStrengths: selected,
+						},
+					};
+				});
+			},
+
 			addCustomSubject: (subject) =>
 				set((state) => {
 					const customSubjects = state.profile.customSubjects ?? [];
@@ -184,13 +192,6 @@ export const useAppStore = create<AppState & AppActions>()(
 						...state.profile,
 						strengths: { ...state.profile.strengths, [id]: value },
 					},
-				}));
-			},
-
-			setSecretTalent: (value) => {
-				clearMatchResults();
-				set((state) => ({
-					profile: { ...state.profile, secretTalent: value },
 				}));
 			},
 
@@ -226,7 +227,7 @@ export const useAppStore = create<AppState & AppActions>()(
 
 			resetProfile: () => {
 				clearMatchResults();
-				set({ profile: initialProfile });
+				set({ profile: initialUserProfile });
 			},
 		}),
 		{
@@ -240,7 +241,7 @@ export const useAppStore = create<AppState & AppActions>()(
 				return {
 					...currentState,
 					...(persisted ?? {}),
-					profile: normalizeProfile(persisted?.profile),
+					profile: normalizeUserProfile(persisted?.profile),
 				};
 			},
 		},

@@ -96,7 +96,9 @@ export interface UserProfile {
 	workExpectations: string[];
 	customWorkExpectations: string[];
 	strengths: Record<string, number>;
-	secretTalent: string;
+	customStrengths: string[];
+	/** Subset of `customStrengths` included in matching (mirrors interests selection). */
+	selectedCustomStrengths: string[];
 	practicalExperience: string;
 	workPreferences: Record<string, WorkPreferenceChoice | null>;
 	noGos: Record<string, NoGoAnswer | null>;
