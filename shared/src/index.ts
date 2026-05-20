@@ -1,6 +1,7 @@
 export type {
 	WorkConditions,
 	DegreeDistribution,
+	AccessLevel,
 	OccupationImage,
 	Occupation,
 	EducationLevel,
@@ -33,6 +34,7 @@ export type {
 export {
 	POPULARITY_INDEX,
 	getPopularityTier,
+	getPopularityRecord,
 	type PopularityTier,
 	type OccupationCategory,
 	type DazubiMatchType,

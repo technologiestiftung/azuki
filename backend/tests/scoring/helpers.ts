@@ -46,6 +46,7 @@ export function makeOccupation(
 		taskSummary: null,
 		images: [],
 		degreeStats: null,
+		accessLevel: null,
 		subjects: [],
 		interests: [],
 		interestKeywords: [],

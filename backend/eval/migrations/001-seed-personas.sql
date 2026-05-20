@@ -295,7 +295,7 @@ insert into personas (
       "dirt": "rejected"
     }
   }'::jsonb,
-  -- tier_s: 7 entries (v2 — added ZFA as MFA sibling)
+  -- tier_s: 8 entries (v3 — promoted Logopäde from Tier A; signature translator-strength match)
   ARRAY[
     9031,   -- Sozialassistent/in
     9162,   -- Erzieher/in
@@ -303,14 +303,14 @@ insert into personas (
     9170,   -- Sozialpädagogische/r Assistent/in / Kinderpfleger/in
     33212,  -- Medizinische/r Fachangestellte/r
     14704,  -- Zahnmedizinische/r Fachangestellte/r (MFA sibling, more Hauptschule-accessible)
-    137684  -- Mediengestalter/in Digital und Print - Designkonzeption
+    137684, -- Mediengestalter/in Digital und Print - Designkonzeption
+    8764    -- Logopäde/Logopädin (Ausbildung) (signature translator-strength match, Fachabitur path)
   ]::integer[],
-  -- tier_a: 19 entries (v2 — added Rechtsanwaltsfach, Verkäufer)
+  -- tier_a: 18 entries (v3 — Logopäde promoted to S)
   ARRAY[
     132173, -- Pflegefachmann/-frau (Ausbildung)
     8779,   -- Ergotherapeut/in (Ausbildung)
     9127,   -- Heilerziehungspfleger/in
-    8764,   -- Logopäde/Logopädin (Ausbildung)
     14217,  -- Designer/in (Ausbildung) - Grafik
     129408, -- Hörakustiker/in
     2634,   -- Augenoptiker/in
@@ -720,20 +720,21 @@ insert into personas (
       "dirt": "rejected"
     }
   }'::jsonb,
-  -- tier_s: 5 entries (Joblinge-realistic anchors)
+  -- tier_s: 8 entries (v3 — promoted ZFA/Hotelfach/Kosmetiker-schulische from Tier A for 100% reachability)
   ARRAY[
     9910,   -- Friseur/in (A_anchor, sec+noQ 59% — keystone)
     6628,   -- Verkäufer/in (A_anchor, sec+noQ 57%)
     33212,  -- Medizinische/r Fachangestellte/r (A_anchor, sec+noQ 28%)
     6580,   -- Kaufmann/-frau - Einzelhandel (A_anchor, sec+noQ 33%)
-    134513  -- Fachpraktiker/in für Friseur (§66 BBiG/§42r HwO)
+    134513, -- Fachpraktiker/in für Friseur (§66 BBiG/§42r HwO)
+    14704,  -- Zahnmedizinische/r Fachangestellte/r (MFA sibling, more Hauptschule-accessible)
+    10009,  -- Hotelfachmann/-frau (A_anchor service + planning interest)
+    9929    -- Kosmetiker/in (schulische Ausbildung) (fixture expectedHigh, direct Salon-extension)
   ]::integer[],
-  -- tier_a: 14 entries (v2 — added Kosmetiker schulische, FP Verkauf §66, FP Nahrungsmittelverkauf §66; demoted TFA to Tier C)
+  -- tier_a: 11 entries (v3 — ZFA/Hotelfach/Kosmetiker-schulische promoted to S)
   ARRAY[
-    10009,  -- Hotelfachmann/-frau
     50920,  -- Fachverkäufer/in - Lebensmittelhandwerk (Bäckerei)
     50922,  -- Fachverkäufer/in - Lebensmittelhandwerk (Konditorei)
-    14704,  -- Zahnmedizinische/r Fachangestellte/r
     14624,  -- Kosmetiker/in (duale Ausbildung)
     2634,   -- Augenoptiker/in
     6717,   -- Pharmazeutisch-kaufmännische/r Angestellte/r
@@ -741,11 +742,10 @@ insert into personas (
     680,    -- Florist/in
     9031,   -- Sozialassistent/in
     9063,   -- Altenpflegehelfer/in
-    9929,   -- Kosmetiker/in (schulische Ausbildung) — was in fixture expectedHigh; rubric drift fix
     6649,   -- Fachpraktiker/in im Verkauf (§66)
     14818   -- Fachpraktiker/in im Nahrungsmittelverkauf (§66)
   ]::integer[],
-  -- tier_c
+  -- tier_c: TFA-demoted + profile-conflict (noise/dirt/heavy) + Salon-keyword niche bait
   ARRAY[
     -- TFA demoted (sec+noQ=9%, Abi-cohort-leaning — was Tier A in v1 draft, wrong)
     33214,  -- Tiermedizinische/r Fachangestellte/r
@@ -860,7 +860,7 @@ insert into personas (
       "outdoor-work": "rejected"
     }
   }'::jsonb,
-  -- tier_s: 6 entries (v2 — added E-Commerce 130926; corrected from invalid IDs 37854/130249)
+  -- tier_s: 6 entries (Joblinge-realistic IT/office/Mediengestalter anchors)
   ARRAY[
     130926, -- Kaufmann/-frau - E-Commerce (B_solid, sec+noQ 7% — stretch anchor)
     123266, -- Kaufmann/-frau - Büromanagement (A_anchor, sec+noQ 17%)
@@ -869,11 +869,11 @@ insert into personas (
     137038, -- Fachpraktiker/in für IT Systemintegration (§66 BBiG/§42r HwO)
     137683  -- Mediengestalter/in Digital und Print - Printmedien (sec+noQ 15%, most accessible Mediengestalter)
   ]::integer[],
-  -- tier_a: 12 entries (v2 — added Digitalisierungsmanagement, Industriekaufmann)
+  -- tier_a: 12 entries (Realschule-stretch IT + Mediengestalter siblings + §66 paths)
   ARRAY[
-    137682, -- Mediengestalter/in Digital und Print - Digitalmedien
+    137682, -- Mediengestalter/in Digital und Print - Digitalmedien (direct video-editing hit; sec+noQ 3% — Realschule stretch)
     137684, -- Mediengestalter/in Digital und Print - Designkonzeption
-    34976,  -- Fachpraktiker/in für IT Systemelektronik (§66 BBiG/§42r HwO)
+    34976,  -- Fachpraktiker/in für IT Systemelektronik (§66 BBiG/§42r HwO) (sibling of S 137038 §66 IT-Systemintegration)
     7883,   -- Fachpraktiker/in für Büromanagement (§66 BBiG/§42r HwO)
     7856,   -- Fachinformatiker/in - Anwendungsentwicklung (sec+noQ 4% — stretch)
     7847,   -- Fachinformatiker/in - Systemintegration (sec+noQ 5% — stretch)
@@ -884,7 +884,7 @@ insert into personas (
     133555, -- Kaufmann/-frau - Digitalisierungsmanagement (new bridge anchor)
     7965    -- Industriekaufmann/-frau (mainstream Realschule office anchor)
   ]::integer[],
-  -- tier_c
+  -- tier_c: gaming/anime keyword traps + profile-conflict (heavy/outdoor) + universal niche bait
   ARRAY[
     -- Mathematisch-tech Softwareentwickler: D_niche + 95% uni cohort, no math signal in profile
     51029,  -- Mathematisch-technische/r Softwareentwickler/in
@@ -989,7 +989,7 @@ insert into personas (
       "dirt": "rejected"
     }
   }'::jsonb,
-  -- tier_s: 7 entries (v2 — added Friseur as creative-handwerk anchor)
+  -- tier_s: 7 entries (creative-handwerk + care + Mediengestalter cluster from Realschule-Joblinge fit)
   ARRAY[
     9063,   -- Altenpflegehelfer/in (A_anchor, direct Altersheim hit)
     9170,   -- Sozialpädagogische/r Assistent/in / Kinderpfleger/in
@@ -999,26 +999,35 @@ insert into personas (
     8533,   -- Mediengestalter/in - Bild und Ton (music hook)
     9910    -- Friseur/in (missing creative-handwerk + Hauptschule-floor anchor)
   ]::integer[],
-  -- tier_a: 15 entries (v2 — added Fachverkäufer Bäckerei fixture hit, FP Gesundheitswesen §66)
+  -- tier_a: 15 entries (Mediengestalter siblings + MFA cluster + Realschule care/retail siblings)
   ARRAY[
     137684, -- Mediengestalter/in Digital und Print - Designkonzeption
     137682, -- Mediengestalter/in Digital und Print - Digitalmedien
     6515,   -- Gestaltungstechnische/r Assistent/in
     14217,  -- Designer/in (Ausbildung) - Grafik
-    9127,   -- Heilerziehungspfleger/in
-    9162,   -- Erzieher/in (Fachhochschulreife-path stretch)
-    33212,  -- Medizinische/r Fachangestellte/r
-    132173, -- Pflegefachmann/-frau
-    8779,   -- Ergotherapeut/in (Fachhochschulreife stretch)
-    8764,   -- Logopäde/Logopädin (Fachhochschulreife stretch)
     9106,   -- Erzieher/in - Jugend- und Heimerziehung
     129985, -- Fachpraktiker/in für Service in sozialen Einrichtungen (§66)
+    33212,  -- Medizinische/r Fachangestellte/r (A_anchor structured-care; Realschule fit but no signature signal in profile)
     14704,  -- Zahnmedizinische/r Fachangestellte/r
     50920,  -- Fachverkäufer/in - Lebensmittelhandwerk (Bäckerei) (literal fixture hit)
-    138060  -- Fachpraktiker/in im Gesundheitswesen (§66)
+    138060, -- Fachpraktiker/in im Gesundheitswesen (§66)
+    33214,  -- Tiermedizinische/r Fachangestellte/r (helping + structured, animal-care angle)
+    6717,   -- Pharmazeutisch-kaufmännische/r Angestellte/r (care-adjacent retail)
+    50922,  -- Fachverkäufer/in - Lebensmittelhandwerk (Konditorei) (Bäckerei-sibling)
+    6580,   -- Kaufmann/-frau - Einzelhandel (people-work fallback)
+    9929    -- Kosmetiker/in (schulische Ausbildung) (creative + indoor + customerContact)
   ]::integer[],
-  -- tier_c
+  -- tier_c: practical-FHR-effective + profile-conflict + niche bait
   ARRAY[
+    -- Practical-FHR-effective (BERUFENET a30-0 requires prior Berufsausbildung,
+    -- so functionally FHR-track even though formally Realschule). Demoted
+    -- from Tier A v2 → Tier C v3 because Hanna is Realschule with no Fachabitur
+    -- signal in profile.
+    9127,   -- Heilerziehungspfleger/in
+    9162,   -- Erzieher/in
+    132173, -- Pflegefachmann/-frau
+    8779,   -- Ergotherapeut/in
+    8764,   -- Logopäde/Logopädin
     -- Profile-conflict (heavy/dirty)
     134955, 15532, 134954, 15530, 15534,  -- Maler/Lackierer
     4460,  -- Tischler

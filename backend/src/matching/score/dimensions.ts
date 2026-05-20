@@ -1,4 +1,5 @@
 import type {
+	AccessLevel,
 	EducationLevel,
 	Occupation,
 	PopularityTier,
@@ -52,11 +53,9 @@ const POPULARITY_TIER_SCORE: Record<PopularityTier, number> = {
  * §66 BBiG / §42r HwO Fachpraktiker variants are designed specifically for
  * learners with limited education or learning support needs. The popularity
  * tier alone doesn't reflect that: their absolute starts/yr are small, but
- * they're the *intended* path for these profiles. For design-intent users,
- * replace the F_fachpraktiker score with `parent's tier score + 1` so each
- * §66 record sits just above its parent. This realizes the stated principle
- * "slightly preferred over the regular variant" universally — including
- * for A_anchor parents where a flat F-tier bonus produced the opposite.
+ * they're the *intended* path for these profiles. For design-intent users
+ * (secondary/foreign_degree/none), replace the F_fachpraktiker score with
+ * `parent's tier score + 1` so each §66 record sits just above its parent.
  *
  * Parent-aware tracking comes from hydrate-fachpraktiker, which sets
  * `parentId` on every resolved §66 record. Unresolved §66 records (no
@@ -80,11 +79,12 @@ export function scorePopularity(
 		return POPULARITY_TIER_SCORE.G_unknown;
 	}
 
+	const eduLevel = profile?.educationLevel;
 	const isDesignIntent =
 		tier === "F_fachpraktiker" &&
-		profile?.educationLevel !== undefined &&
-		profile?.educationLevel !== null &&
-		FACHPRAKTIKER_BOOST_EDU_LEVELS.has(profile.educationLevel);
+		eduLevel !== undefined &&
+		eduLevel !== null &&
+		FACHPRAKTIKER_BOOST_EDU_LEVELS.has(eduLevel);
 
 	if (!isDesignIntent) {
 		return POPULARITY_TIER_SCORE[tier];
@@ -104,45 +104,108 @@ export function scorePopularity(
 	return POPULARITY_TIER_SCORE[tier] + FACHPRAKTIKER_FALLBACK_BOOST;
 }
 
+// AccessLevel tier ordering. Higher number = harder to access.
+function accessLevelTier(level: AccessLevel): number {
+	switch (level) {
+		case "unrestricted":
+		case "hauptschule":
+			return 0;
+		case "realschule":
+			return 1;
+		case "fachhochschulreife":
+			return 2;
+	}
+}
+
+// User's education tier mapped to the same scale.
+// `foreign_degree` is intentionally treated as tier 0 — the practical
+// realism for an unverified foreign degree without B2 German is closest
+// to the Hauptschule track.
+function userEducationTier(level: EducationLevel): number | null {
+	switch (level) {
+		case "none":
+		case "secondary":
+		case "extended_secondary":
+		case "foreign_degree":
+			return 0;
+		case "intermediate":
+			return 1;
+		case "vocational_diploma":
+		case "university_entrance":
+			return 2;
+		case "unknown":
+			return null;
+	}
+}
+
+function accessLevelPenalty(
+	level: AccessLevel,
+	userLevel: EducationLevel,
+): number {
+	const userTier = userEducationTier(userLevel);
+	if (userTier === null) return 0;
+	const gap = accessLevelTier(level) - userTier;
+	if (gap <= 0) return 0;
+	if (gap === 1) return -3;
+	return -7; // gap === 2 (FHR required, user at Hauptschule level)
+}
+
 export function scoreEducation(
 	occupation: Occupation,
 	profile: UserProfile,
 ): number {
-	if (!occupation.degreeStats || !profile.educationLevel) {
+	// Joblinge conservative default: when the user hasn't answered the
+	// education question we treat them as Hauptschule-level. The target
+	// audience's realistic floor is `secondary`, so empty-profile users
+	// should see accessible Berufe rather than the same Realschule/FHR
+	// menu as university-track users. Anyone who genuinely wants to
+	// override this picks a level in onboarding.
+	const effectiveLevel: EducationLevel = profile.educationLevel ?? "secondary";
+
+	// Primary signal: workforce composition stats (BERUFENET field a31-12).
+	// When present, this is the strongest education-realism signal.
+	if (occupation.degreeStats) {
+		const stats = occupation.degreeStats;
+		switch (effectiveLevel) {
+			case "secondary":
+			case "extended_secondary":
+				// Penalize if < 10% of workers hold a secondary degree or lower
+				if (stats.secondary + stats.noQualification < 10) {
+					return -10;
+				}
+				break;
+			case "intermediate":
+				// Penalize if < 10% of workers hold an intermediate degree or lower
+				if (
+					stats.intermediate + stats.secondary + stats.noQualification <
+					10
+				) {
+					return -5;
+				}
+				break;
+			case "none":
+				// Penalize if < 10% of workers have no formal qualification
+				if (stats.noQualification < 10) {
+					return -15;
+				}
+				break;
+			case "university_entrance":
+			case "vocational_diploma":
+			case "foreign_degree":
+			case "unknown":
+				break;
+		}
 		return 0;
 	}
 
-	const stats = occupation.degreeStats;
-
-	switch (profile.educationLevel) {
-		case "secondary":
-		case "extended_secondary":
-			// Penalize if < 10% of workers hold a secondary degree or lower
-			if (stats.secondary + stats.noQualification < 10) {
-				return -10;
-			}
-			break;
-		case "intermediate":
-			// Penalize if < 10% of workers hold an intermediate degree or lower
-			if (stats.intermediate + stats.secondary + stats.noQualification < 10) {
-				return -5;
-			}
-			break;
-		case "none":
-			// Penalize if < 10% of workers have no formal qualification
-			if (stats.noQualification < 10) {
-				return -15;
-			}
-			break;
-		// No penalty
-		case "university_entrance":
-		case "vocational_diploma":
-		case "foreign_degree":
-		case "unknown":
-			break;
-		default:
-			break;
+	// Fallback signal: legal access requirements (BERUFENET field a30-0).
+	// Used when degreeStats is null — covers all §66 Fachpraktiker, schulische
+	// Ausbildungen (Erzieher, Sozialassistent, Altenpflegehelfer), most
+	// Assistent/in variants. ~49% of all Berufe.
+	if (occupation.accessLevel) {
+		return accessLevelPenalty(occupation.accessLevel, effectiveLevel);
 	}
+
 	return 0;
 }
 

@@ -76,26 +76,27 @@ describe("scorePopularity — §66 Fachpraktiker (parent-aware)", () => {
 		expect(scorePopularity(fp, profile)).toBe(6);
 	});
 
-	test("no parent-aware lift for intermediate (Realschulabschluss)", () => {
-		const profile = makeProfile({ educationLevel: "intermediate" });
-		expect(scorePopularity(fp, profile)).toBe(0);
-	});
-
-	test("no parent-aware lift for extended_secondary or university_entrance", () => {
-		for (const lvl of ["extended_secondary", "university_entrance"] as const) {
+	test("no parent-aware lift for intermediate, extended_secondary, or university_entrance", () => {
+		// Intermediate (Realschule) users are above the design-intent audience
+		// for §66 BBiG; they get the flat F_fachpraktiker baseline.
+		for (const lvl of [
+			"intermediate",
+			"extended_secondary",
+			"university_entrance",
+		] as const) {
 			const profile = makeProfile({ educationLevel: lvl });
 			expect(scorePopularity(fp, profile)).toBe(0);
 		}
 	});
 
-	test("scales down for §66 with B_solid parent (+2 → §66 +3)", () => {
+	test("scales down for §66 with B_solid parent — secondary user gets +3", () => {
 		// id 2473 = FP Zweiradmechatroniker §66; parent 124409 = Fahrradtechnik (B_solid).
 		const occ = makeOccupation({ id: 2473, parentId: 124409 });
 		const profile = makeProfile({ educationLevel: "secondary" });
 		expect(scorePopularity(occ, profile)).toBe(3);
 	});
 
-	test("falls back to flat +3 when §66 has no parentId (unresolved hydration)", () => {
+	test("falls back to flat +3 when §66 has no parentId (unresolved hydration, design-intent)", () => {
 		const occ = makeOccupation({ id: 4708, parentId: null });
 		const profile = makeProfile({ educationLevel: "foreign_degree" });
 		expect(scorePopularity(occ, profile)).toBe(3);

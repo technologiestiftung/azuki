@@ -8,7 +8,7 @@ import {
 	AI_MODEL_IDS,
 } from "@azuki/shared";
 import { occupationMatchMeta } from "./occupationMeta";
-import { preFilter } from "./matching/index.js";
+import { preFilter, PREFILTER_TOP_K } from "./matching/index.js";
 import { aiRank, buildSystemPrompt } from "./ai/index.js";
 import occupationsData from "./data/berufe.json";
 import { runEval } from "../eval/run.js";
@@ -115,17 +115,17 @@ app.post("/api/match", async (c) => {
 
 	let top40: ReturnType<typeof preFilter> = [];
 	try {
-		top40 = preFilter(occupations, profile, 40);
+		top40 = preFilter(occupations, profile, PREFILTER_TOP_K);
 		const result = await aiRank(top40, profile);
 		return c.json(result);
 	} catch (err) {
 		console.error("Match error, falling back to pre-filter:", err);
 		if (top40.length === 0) {
 			try {
-				top40 = preFilter(occupations, profile, 40);
+				top40 = preFilter(occupations, profile, PREFILTER_TOP_K);
 			} catch (preErr) {
 				console.error("Pre-filter failed during fallback:", preErr);
-				top40 = occupations.slice(0, 40).map((occupation) => ({
+				top40 = occupations.slice(0, PREFILTER_TOP_K).map((occupation) => ({
 					occupation,
 					score: 0,
 				}));

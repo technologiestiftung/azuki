@@ -43,6 +43,23 @@ export interface DegreeDistribution {
 	universityEntrance: number;
 }
 
+// --- Access Level (legal/practical school-degree access requirement) ---
+//
+// Parsed from BERUFENET field a30-0. Used as a fallback for scoreEducation
+// when degreeStats (field a31-12, percentage breakdowns) is null — which is
+// the case for ~49% of Berufe including all §66 Fachpraktiker, schulische
+// Ausbildungen (Erzieher, Sozialassistent, Altenpflegehelfer), and most
+// Assistent/in variants.
+//
+// Ordered from least to most restrictive. `unrestricted` covers Berufe
+// that explicitly say "keine bestimmte Vorbildung vorgeschrieben" (e.g.
+// §66 records, MFA, ZFA in practice).
+export type AccessLevel =
+	| "unrestricted"
+	| "hauptschule"
+	| "realschule"
+	| "fachhochschulreife";
+
 // --- Occupation Image ---
 
 export interface OccupationImage {
@@ -61,6 +78,9 @@ export interface Occupation {
 	taskSummary: string | null;
 	images: OccupationImage[];
 	degreeStats: DegreeDistribution | null;
+	// Parsed from BERUFENET a30-0 (legal Zugangsvoraussetzungen). Used as
+	// fallback for scoreEducation when degreeStats is null.
+	accessLevel: AccessLevel | null;
 	subjects: string[];
 	interests: string[];
 	interestKeywords: string[];
