@@ -52,6 +52,45 @@ const CONDITION_OVERRIDES: Array<{
 		patch: { changingWorkplaces: false },
 		reason: "warehouse zones, not multi-site travel",
 	},
+	{
+		// Human care/therapy/education cohort: BERUFENET's Bedingungen text
+		// for these roles uses "Patientenkontakt", "Klientenkontakt", "Kontakt
+		// zu Kindern" etc., none of which match fetch-berufe's
+		// /Kundenkontakt/i regex. Result: 13+ obviously people-facing Berufe
+		// (Logopäde, Erzieher, Pflegehelfer, Sozialassistent…) carry
+		// customerContact=false, which suppresses them in the "people.b"
+		// work-preference branch and inflates the apparent gap for any
+		// persona who selected people-facing preferences. Surfaced by the
+		// preFilter recall audit at K=60: Elina's Logopäde landed at rank
+		// 224 with pref=4 (vs cutoff 10), almost entirely because of this.
+		ids: [
+			14616, // Assistent/in - Gesundheits- und Sozialwesen
+			8779, // Ergotherapeut/in (Ausbildung)
+			9162, // Erzieher/in
+			9106, // Erzieher/in - Jugend- und Heimerziehung
+			9598, // Eurythmielehrer/in
+			9387, // Fachlehrer/in - musisch-technische Fächer
+			138818, // Fachpraktiker/in für Hauswirtschaft und personenorientierte Serviceleistungen
+			129985, // Fachpraktiker/in für Service in sozialen Einrichtungen (§66 child of 9031)
+			14712, // Fußballtrainer/in
+			30191, // Gesundheits- und Krankenpflegehelfer/in
+			9077, // Haus- und Familienpfleger/in (Ausbildung)
+			13778, // Heilerziehungspflegeassistent/in
+			9127, // Heilerziehungspfleger/in
+			9108, // Kinderdorfmutter/-vater
+			59055, // Kunsttherapeut/in (Ausbildung)
+			59445, // Lehrer/in - Waldorfschulen (Ausbildung)
+			8764, // Logopäde/Logopädin (Ausbildung)
+			15421, // Musiktherapeut/in (Ausbildung)
+			135349, // Pflegeassistent/in
+			132173, // Pflegefachmann/-frau (Ausbildung)
+			9031, // Sozialassistent/in
+			9170, // Sozialpädagogische/r Assistent/in / Kinderpfleger/in
+		],
+		patch: { customerContact: true },
+		reason:
+			"care/therapy/education role; BERUFENET uses Patienten-/Klienten-/Kinder-Kontakt, missed by Kundenkontakt regex",
+	},
 ];
 
 export interface OverrideReport {

@@ -19,23 +19,31 @@ export interface RunEvalOptions {
 	 * the model how to read these signals. Defaults to false.
 	 */
 	withContext?: boolean;
+	/**
+	 * Number of preFilter candidates to forward to the LLM ranker.
+	 * Defaults to PREFILTER_TOP_K. Callers sweeping K must also rebuild
+	 * the systemPrompt with the same K so the prompt text matches the
+	 * candidate-list size the LLM actually sees.
+	 */
+	k?: number;
 }
 
 export async function runEval(opts: RunEvalOptions): Promise<EvalSnapshot> {
 	const { systemPrompt, model, occupations, personas, withContext } = opts;
+	const k = opts.k ?? PREFILTER_TOP_K;
 
 	const personaPromises = personas.map(
 		async (persona): Promise<[string, PersonaResult]> => {
 			try {
-				const top40 = preFilter(occupations, persona.profile, PREFILTER_TOP_K);
+				const topCandidates = preFilter(occupations, persona.profile, k);
 
-				const matchResult = await aiRank(top40, persona.profile, {
+				const matchResult = await aiRank(topCandidates, persona.profile, {
 					systemPrompt,
 					model,
 					withContext,
 				});
 
-				const prefilter = top40.map((entry) => ({
+				const prefilter = topCandidates.map((entry) => ({
 					id: entry.occupation.id,
 					name: entry.occupation.name,
 					score: entry.score,

@@ -509,7 +509,7 @@ insert into personas (
       "computer": "rejected"
     }
   }'::jsonb,
-  -- tier_s: 8 entries (v2 — promoted Einzelhandel + FK KEP)
+  -- tier_s: 7 entries (v3 — demoted Einzelhandel → Tier A; screen-work conflicts with Karim's "computer" no-go)
   ARRAY[
     6628,   -- Verkäufer/in
     27448,  -- Fachkraft - Lagerlogistik
@@ -517,11 +517,11 @@ insert into personas (
     4708,   -- Fachpraktiker/in für Lagerlogistik (§66 BBiG/§42r HwO)
     6649,   -- Fachpraktiker/in im Verkauf (§66 BBiG/§42r HwO)
     3726,   -- Koch/Köchin
-    6580,   -- Kaufmann/-frau - Einzelhandel (largest Ausbildung in DE; he named "Einzelhandel")
     33362   -- Fachkraft - Kurier-, Express- und Postdienstleistungen (highest noQ share; "tragen + organisieren")
   ]::integer[],
-  -- tier_a: 20 entries (v2 — removed Kirchenmalerei → Tier C, added FP Maler/Lackierer §66 + Möbel-Umzug parent)
+  -- tier_a: 21 entries (v3 — Einzelhandel demoted from S due to computer no-go conflict)
   ARRAY[
+    6580,   -- Kaufmann/-frau - Einzelhandel (v3-demoted from S; still a pathway match, but Karim rejected screen work)
     10009,  -- Hotelfachmann/-frau
     50920,  -- Fachverkäufer/in - Lebensmittelhandwerk (Bäckerei)
     50924,  -- Fachverkäufer/in - Lebensmittelhandwerk (Fleischerei)
@@ -989,18 +989,18 @@ insert into personas (
       "dirt": "rejected"
     }
   }'::jsonb,
-  -- tier_s: 7 entries (creative-handwerk + care + Mediengestalter cluster from Realschule-Joblinge fit)
+  -- tier_s: 6 entries (v3 — demoted Krankenpflegehelfer → Tier A; hospital heavy-lifting conflicts with Hanna's "heavy-work" no-go)
   ARRAY[
     9063,   -- Altenpflegehelfer/in (A_anchor, direct Altersheim hit)
     9170,   -- Sozialpädagogische/r Assistent/in / Kinderpfleger/in
     9031,   -- Sozialassistent/in
-    30191,  -- Gesundheits- und Krankenpflegehelfer/in
     137683, -- Mediengestalter/in Digital und Print - Printmedien (most accessible)
     8533,   -- Mediengestalter/in - Bild und Ton (music hook)
     9910    -- Friseur/in (missing creative-handwerk + Hauptschule-floor anchor)
   ]::integer[],
-  -- tier_a: 15 entries (Mediengestalter siblings + MFA cluster + Realschule care/retail siblings)
+  -- tier_a: 16 entries (v3 — Krankenpflegehelfer demoted from S due to heavy-work no-go conflict)
   ARRAY[
+    30191,  -- Gesundheits- und Krankenpflegehelfer/in (v3-demoted from S; care fit is right, but Hanna rejected heavy work and hospital machinery=true disqualifies the soft-no-go path)
     137684, -- Mediengestalter/in Digital und Print - Designkonzeption
     137682, -- Mediengestalter/in Digital und Print - Digitalmedien
     6515,   -- Gestaltungstechnische/r Assistent/in

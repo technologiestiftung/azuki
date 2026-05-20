@@ -84,27 +84,116 @@ export function filterAndDedupeRankings(
  * Returns null if no usable array of `{id, begruendung}`-shaped entries
  * can be recovered.
  */
+/**
+ * Schema-aware fallback extractor. Used when JSON.parse fails because
+ * Opus 4.6 embeds stray ASCII `"` inside `begruendung` values — sometimes
+ * followed by `,` (`Stärke, „…", hilft…`), sometimes by letters
+ * (`ist." Das zeigt`), making JSON-character heuristics ambiguous.
+ *
+ * Strategy: stop relying on JSON.parse. Walk balanced `{...}` chunks at
+ * depth 1 inside an outer `[...]` array. For each chunk, pull `id` with
+ * a number regex and `begruendung` with a greedy regex anchored on the
+ * chunk's closing `}` — that anchor is structural, so stray quotes inside
+ * the value don't matter. Anything between the begruendung's first `"`
+ * and the last `"` before `}` becomes the captured value (with surviving
+ * stray quotes escaped on output so they're valid in JS strings).
+ *
+ * Returns null if no chunks yield an id; callers fall through to other
+ * candidates.
+ */
+function extractRankingsSchemaAware(s: string): Ranking[] | null {
+	// Find the outer auswahl-style array. We accept any top-level array
+	// of objects since the LLM might or might not wrap in {auswahl: [...]}
+	// and might or might not emit ```json fences. We just need the [.
+	const arrayStart = s.indexOf("[");
+	if (arrayStart < 0) return null;
+
+	// Walk to the matching ]. We intentionally do NOT track string
+	// state: stray ASCII `"` inside Opus's begruendung values flips a
+	// naive inString counter to the wrong state and causes us to skip
+	// over real `}` chars. Brace balance alone works for our flat
+	// auswahl schema — begruendung values contain German text, not
+	// literal `{` or `}`.
+	const objects: string[] = [];
+	let depth = 0;
+	let chunkStart = -1;
+	for (let i = arrayStart; i < s.length; i++) {
+		const ch = s[i];
+		if (ch === "{") {
+			if (depth === 0) chunkStart = i;
+			depth++;
+		} else if (ch === "}") {
+			depth--;
+			if (depth === 0 && chunkStart >= 0) {
+				objects.push(s.slice(chunkStart, i + 1));
+				chunkStart = -1;
+			}
+		} else if (ch === "]" && depth === 0) {
+			break;
+		}
+	}
+	if (objects.length === 0) return null;
+
+	const rankings: Ranking[] = [];
+	for (const obj of objects) {
+		const idMatch = obj.match(/"id"\s*:\s*(\d+)/);
+		if (!idMatch) continue;
+		const id = parseInt(idMatch[1], 10);
+		// Greedy `.+` anchored on the chunk's last `"` before `}`.
+		// `[\s\S]` instead of `.` to span any internal newlines.
+		const begMatch = obj.match(/"begruendung"\s*:\s*"([\s\S]+)"\s*\}\s*$/);
+		const begruendung = begMatch ? begMatch[1] : "";
+		rankings.push({ id, begruendung });
+	}
+	return rankings.length > 0 ? rankings : null;
+}
+
 export function extractRankings(content: string): Ranking[] | null {
 	if (!content) return null;
 
+	// Strip ALL C0 control characters (0x00–0x1F) and 0x7F. JSON spec
+	// (RFC 8259 §7) disallows every one of these unescaped inside string
+	// values — including tab (0x09), LF (0x0A), and CR (0x0D). Opus 4.6
+	// observably emits raw tabs and CRs inside `begruendung` values,
+	// which makes JSON.parse fail with "Bad control character in string
+	// literal". The chars are also valid JSON whitespace between tokens,
+	// so removing them never breaks structure; commas/colons/brackets
+	// still delimit. The trade-off: if a control char appeared *inside*
+	// a string value intentionally, we lose it — acceptable for our
+	// matching pipeline.
+	// eslint-disable-next-line no-control-regex
+	const sanitized = content.replace(/[\x00-\x1F\x7F]/g, "");
+
 	const candidates: unknown[] = [];
 
-	// 1. Try parsing the full content first (fast path for clean JSON).
+	// 1. Try parsing the full sanitized content (fast path for clean JSON).
 	try {
-		candidates.push(JSON.parse(content));
+		candidates.push(JSON.parse(sanitized));
 	} catch {
 		// fall through to extraction
 	}
 
-	// 2. Extract the first balanced top-level array `[...]` from the content.
-	// Handles prose-prefixed responses like "Analyse: ...\n[ {...}, ... ]".
-	const arrayStart = content.indexOf("[");
+	// 1b. Strip markdown code fences (Opus 4.6 ignores "ohne Markdown" and
+	// emits ```json ... ```). Try parsing the unwrapped body.
+	const fenceMatch = sanitized.match(/```(?:json)?\s*([\s\S]*?)```/);
+	if (fenceMatch) {
+		try {
+			candidates.push(JSON.parse(fenceMatch[1]));
+		} catch {
+			// fall through
+		}
+	}
+
+	// 2. Extract the first balanced top-level array `[...]` from the
+	// sanitized content. Handles prose-prefixed responses like
+	// "Analyse: ...\n[ {...}, ... ]".
+	const arrayStart = sanitized.indexOf("[");
 	if (arrayStart >= 0) {
 		let depth = 0;
 		let inString = false;
 		let escape = false;
-		for (let i = arrayStart; i < content.length; i++) {
-			const ch = content[i];
+		for (let i = arrayStart; i < sanitized.length; i++) {
+			const ch = sanitized[i];
 			if (escape) {
 				escape = false;
 				continue;
@@ -123,7 +212,7 @@ export function extractRankings(content: string): Ranking[] | null {
 				depth--;
 				if (depth === 0) {
 					try {
-						candidates.push(JSON.parse(content.slice(arrayStart, i + 1)));
+						candidates.push(JSON.parse(sanitized.slice(arrayStart, i + 1)));
 					} catch {
 						// ignore
 					}
@@ -137,7 +226,14 @@ export function extractRankings(content: string): Ranking[] | null {
 		const rankings = findRankingArray(cand);
 		if (rankings) return rankings;
 	}
-	return null;
+
+	// 3. Schema-aware fallback. JSON.parse failed on every candidate —
+	// usually because Opus 4.6 embeds stray ASCII `"` inside begruendung
+	// values. Walk balanced object chunks and extract id+begruendung via
+	// structural anchors (the closing `}`), not character-level quote
+	// matching. This is the last line of defense before falling back to
+	// preFilter results.
+	return extractRankingsSchemaAware(sanitized);
 }
 
 function isRankingShape(value: unknown): value is Ranking {
@@ -178,18 +274,18 @@ function findRankingArray(value: unknown): Ranking[] | null {
 // realism (rule 3), §66 visibility (rule 4), findability (rule 5),
 // ambivalence handling (rule 6). German-language adaptation (rule 7
 // equivalent).
-export function buildSystemPromptV2(): string {
+export function buildSystemPromptV2(topK: number = PREFILTER_TOP_K): string {
 	return `AUFGABE
 Du bekommst:
 - ein Profil eines Jugendlichen
-- eine vorgefilterte Liste der ${PREFILTER_TOP_K} passendsten Ausbildungsberufe
+- eine vorgefilterte Liste der ${topK} passendsten Ausbildungsberufe
 - zu jedem Beruf strukturierte Daten und kurze Beschreibungstexte
 
 Dein Job ist nicht, neue Berufe zu suchen.
-Dein Job ist, die ${PREFILTER_TOP_K} vorgefilterten Berufe neu zu bewerten, neu zu sortieren und die ${MIN_RESULTS} bis ${MAX_RESULTS} Berufe auszuwählen, die am besten zum Jugendlichen passen.
+Dein Job ist, die ${topK} vorgefilterten Berufe neu zu bewerten, neu zu sortieren und die ${MIN_RESULTS} bis ${MAX_RESULTS} Berufe auszuwählen, die am besten zum Jugendlichen passen.
 
 KONTEXT ZUM MATCHING
-Die Top-${PREFILTER_TOP_K} stammt aus einem deterministischen Pre-Filter (Schulabschluss, No-Gos, Arbeitsvorlieben, Lieblingsfächer, Interessen, Stärken, Rahmenbedingungen). Nutze sie als starke Grundlage und unterscheide *innerhalb* dieser Liste — vor allem über die freien Texte und die Realität des deutschen Ausbildungsmarkts.
+Die Top-${topK} stammt aus einem deterministischen Pre-Filter (Schulabschluss, No-Gos, Arbeitsvorlieben, Lieblingsfächer, Interessen, Stärken, Rahmenbedingungen). Nutze sie als starke Grundlage und unterscheide *innerhalb* dieser Liste — vor allem über die freien Texte und die Realität des deutschen Ausbildungsmarkts.
 
 PRIORISIERUNG
 - freie Texte / eigene Worte: 70 %
@@ -197,13 +293,13 @@ PRIORISIERUNG
 Bei Widerspruch gewinnen freie Aussagen. Ausnahme: harte Ausschlüsse (No-Gos, abgebrochene Ausbildung, ausdrückliche Ablehnung) gelten immer.
 
 HARTE REGELN
-1. Nur Berufe aus der Top-${PREFILTER_TOP_K} wählen. Keine neuen erfinden.
+1. Nur Berufe aus der Top-${topK} wählen. Keine neuen erfinden.
 2. ABGEBROCHEN/ABGELEHNT = NO-GO. Wenn der/die Jugendliche eine Ausbildung oder Tätigkeit explizit abgebrochen oder abgelehnt hat („ich habe Kfz abgebrochen", „kein Bürojob"), gilt das als No-Go für genau diesen Beruf UND für eng verwandte (gleiche Werkstatt-/Umgebungsfamilie, gleicher Tätigkeitskern). Ausnahme: eine vereinfachte Variante (z. B. Fachpraktiker §66) ist erlaubt, wenn die Begründung den Abbruch ausdrücklich aufgreift.
 3. REALITÄTSCHECK SCHULABSCHLUSS — nicht nur Mindestabschluss, sondern praktische Zugänglichkeit:
    • Hauptschulabschluss: Berufe mit Titel „Assistent/in" oder „Designer/in" sind in der Praxis fast immer Realschule-gegated — nur wählen, wenn ein freier Text dort explizit hinzeigt.
    • Realschule + offen für Fachabitur: Pflege/Erzieher/Therapieberufe sind anschlussfähig, ruhig im Set lassen.
    • Ausländischer Abschluss + erkennbar einfaches Deutsch (kurze Sätze, A2-Wortwahl im Profil): pflegerische/pädagogische Berufe (Pflege, Erzieher, Sozialassistent) verlangen praktisch B2 — nur wählen, wenn der freie Text klare Sprach-Selbsteinschätzung dagegen liefert.
-4. FACHPRAKTIKER (§66 BBiG) SICHTBAR MACHEN. Wenn das Profil auf eingeschränkten Schulabschluss, abgebrochene Ausbildung oder begrenzte Deutschkenntnisse hindeutet UND die Top-${PREFILTER_TOP_K} Fachpraktiker-Varianten der Wunschrichtung enthält, muss mindestens eine in die Empfehlungen. Diese Berufe sind genau für solche Profile gemacht.
+4. FACHPRAKTIKER (§66 BBiG) SICHTBAR MACHEN. Wenn das Profil auf eingeschränkten Schulabschluss, abgebrochene Ausbildung oder begrenzte Deutschkenntnisse hindeutet UND die Top-${topK} Fachpraktiker-Varianten der Wunschrichtung enthält, muss mindestens eine in die Empfehlungen. Diese Berufe sind genau für solche Profile gemacht.
 5. FINDBARKEIT ZÄHLT. Bevorzuge bekannte Ausbildungen mit deutlicher Marktpräsenz (Verkäufer/in, Fachkraft Lagerlogistik, Kaufmann/-frau Büromanagement, Pflegefachmann/-frau, Maler/in, Koch/Köchin, Mediengestalter/in …). Berufe, die im Alltag praktisch nie genannt werden (Bogenmacher, Pelzveredler, Edelsteinschleifer, exotische Designer-Fachrichtungen, Geigenbauer u. ä.), nur dann empfehlen, wenn der freie Text das Handwerk wörtlich nennt.
 6. VIELFALT BEI AMBIVALENZ. Wenn der/die Jugendliche unentschieden zwischen Richtungen ist („ich weiß nicht ob X oder Y"), spiegele beide Richtungen in der Top-Liste — nicht 8 Varianten einer Richtung.
 7. KEINE BEGRÜNDUNG, KEIN PLATZ. Wenn du für einen Beruf keine konkrete Begründung aus dem Profil ableiten kannst, wähle einen anderen.
@@ -244,8 +340,8 @@ Format:
 // new section makes them anchored to the structured signal rather than
 // vibes-based heuristics. Use together with `buildUserPrompt(..., {
 // withContext: true })`.
-export function buildSystemPromptV3(): string {
-	return `${buildSystemPromptV2()}
+export function buildSystemPromptV3(topK: number = PREFILTER_TOP_K): string {
+	return `${buildSystemPromptV2(topK)}
 
 HINWEIS-ZEILE PRO BERUF
 Zu jedem Beruf findest du in der Liste eine Zeile "Hinweise: ...". Sie fasst zwei strukturierte Signale aus der BERUFENET-Datenbank zusammen, die du als verbindliche Bewertungsbasis nutzen sollst — nicht selbst raten:
@@ -266,22 +362,22 @@ Diese Hinweise überschreiben dein Bauchgefühl zu Findbarkeit und Zugangsrealit
 }
 
 // V1 — original prompt, kept for backward compatibility.
-export function buildSystemPrompt(): string {
+export function buildSystemPrompt(topK: number = PREFILTER_TOP_K): string {
 	return `AUFGABE
 Du bekommst:
 - ein Profil eines Jugendlichen
-- eine vorgefilterte Liste der ${PREFILTER_TOP_K} passendsten Ausbildungsberufe
+- eine vorgefilterte Liste der ${topK} passendsten Ausbildungsberufe
 - zu jedem Beruf strukturierte Daten und kurze Beschreibungstexte
 
 Dein Job ist nicht, neue Berufe zu suchen.
-Dein Job ist, die ${PREFILTER_TOP_K} vorgefilterten Berufe neu zu bewerten, neu zu sortieren und die ${MIN_RESULTS} bis ${MAX_RESULTS} Berufe auszuwählen, die am besten zum Jugendlichen passen.
+Dein Job ist, die ${topK} vorgefilterten Berufe neu zu bewerten, neu zu sortieren und die ${MIN_RESULTS} bis ${MAX_RESULTS} Berufe auszuwählen, die am besten zum Jugendlichen passen.
 
 KONTEXT ZUM MATCHING
-Die Liste mit ${PREFILTER_TOP_K} Berufen wurde bereits durch einen deterministischen Matching-Algorithmus berechnet.
+Die Liste mit ${topK} Berufen wurde bereits durch einen deterministischen Matching-Algorithmus berechnet.
 Dabei wurden strukturierte Kriterien wie Schulabschluss, No-Gos, Arbeitsvorlieben, Lieblingsfächer, Interessen, Stärken und Rahmenbedingungen berücksichtigt.
 
 Nutze dieses Pre-Filtering als starke Grundlage.
-Nutze das LLM-Re-Ranking, um innerhalb dieser ${PREFILTER_TOP_K} Berufe feiner zu unterscheiden.
+Nutze das LLM-Re-Ranking, um innerhalb dieser ${topK} Berufe feiner zu unterscheiden.
 
 PRIORISIERUNG
 Gewichte die Signale ungefähr so:
@@ -308,7 +404,7 @@ Wenn freie Aussagen und strukturierte Angaben sich widersprechen, gelten freie A
 Ausnahme: harte Ausschlusskriterien dürfen nicht ignoriert werden.
 
 HARTE REGELN
-- Wähle nur Berufe aus der gegebenen Top-${PREFILTER_TOP_K}-Liste.
+- Wähle nur Berufe aus der gegebenen Top-${topK}-Liste.
 - Erfinde keine neuen Berufe.
 - Empfiehl keine Berufe, die klar gegen wichtige No-Gos sprechen, wenn es in der Liste passendere Alternativen gibt.
 - Nutze den Schulabschluss als Realitätscheck, aber nicht als einziges Entscheidungskriterium.
@@ -727,6 +823,24 @@ export async function aiRank(
 	const rankings = extractRankings(content);
 	if (rankings === null) {
 		console.error("Failed to parse AI response:", content);
+		// Dump raw bytes (gated by env flag) so we can inspect what the
+		// model actually sent — terminal rendering hides control chars and
+		// makes the failure mode hard to diagnose otherwise.
+		if (process.env.AZUKI_DUMP_BAD_LLM_RESPONSES) {
+			try {
+				const fs = await import("node:fs");
+				const path = await import("node:path");
+				const stamp = new Date().toISOString().replace(/[:.]/g, "-");
+				const file = path.resolve(
+					process.cwd(),
+					`bad-llm-response-${stamp}.bin`,
+				);
+				fs.writeFileSync(file, content);
+				console.error(`  raw response written to ${file}`);
+			} catch (err) {
+				console.error("  could not dump raw response:", err);
+			}
+		}
 		return fallbackResult(scored);
 	}
 

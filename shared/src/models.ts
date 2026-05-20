@@ -13,6 +13,7 @@ export const AI_MODELS: AiModel[] = [
 	{ id: "openai/gpt-5.4-mini", label: "GPT-5.4 Mini" },
 	{ id: "openai/gpt-5.4", label: "GPT-5.4" },
 	{ id: "anthropic/claude-sonnet-4.6", label: "Claude Sonnet 4.6" },
+	{ id: "anthropic/claude-opus-4.6", label: "Claude Opus 4.6" },
 ];
 
 export const AI_MODEL_IDS = new Set(AI_MODELS.map((m) => m.id));

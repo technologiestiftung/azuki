@@ -2063,7 +2063,7 @@
       "heavyLifting": false,
       "heights": false,
       "shiftWork": false,
-      "customerContact": false,
+      "customerContact": true,
       "teamwork": false,
       "standingWalking": false,
       "irregularHours": false,
@@ -4495,7 +4495,7 @@
       "Musikalische Befähigung",
       "Sinn und Gespür für Ästhetik"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "fachhochschulreife"
   },
   {
     "id": 27427,
@@ -14601,7 +14601,7 @@
       "Verständnis für mündliche Äußerungen",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "fachhochschulreife"
   },
   {
     "id": 14080,
@@ -14749,7 +14749,7 @@
       "Verständnis für mündliche Äußerungen",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "fachhochschulreife"
   },
   {
     "id": 8409,
@@ -16602,7 +16602,7 @@
       "Verständnis für mündliche Äußerungen",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "realschule"
+    "accessLevel": "fachhochschulreife"
   },
   {
     "id": 14326,
@@ -16768,7 +16768,7 @@
       "Verständnis für mündliche Äußerungen",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "realschule"
+    "accessLevel": "fachhochschulreife"
   },
   {
     "id": 14217,
@@ -16934,7 +16934,7 @@
       "Verständnis für mündliche Äußerungen",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "realschule"
+    "accessLevel": "fachhochschulreife"
   },
   {
     "id": 13968,
@@ -17103,7 +17103,7 @@
       "Mündliches Ausdrucksvermögen",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "realschule"
+    "accessLevel": "fachhochschulreife"
   },
   {
     "id": 8459,
@@ -17273,7 +17273,7 @@
       "Verständnis für mündliche Äußerungen",
       "Mündliches Ausdrucksvermögen"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "fachhochschulreife"
   },
   {
     "id": 14319,
@@ -17424,7 +17424,7 @@
       "Mündliches Ausdrucksvermögen",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "realschule"
+    "accessLevel": "fachhochschulreife"
   },
   {
     "id": 13624,
@@ -22440,7 +22440,7 @@
       "heavyLifting": false,
       "heights": false,
       "shiftWork": false,
-      "customerContact": false,
+      "customerContact": true,
       "teamwork": false,
       "standingWalking": false,
       "irregularHours": false,
@@ -22628,7 +22628,7 @@
       "heavyLifting": false,
       "heights": false,
       "shiftWork": false,
-      "customerContact": false,
+      "customerContact": true,
       "teamwork": false,
       "standingWalking": false,
       "irregularHours": true,
@@ -22808,7 +22808,7 @@
       "heavyLifting": false,
       "heights": false,
       "shiftWork": false,
-      "customerContact": false,
+      "customerContact": true,
       "teamwork": false,
       "standingWalking": false,
       "irregularHours": true,
@@ -23300,7 +23300,7 @@
       "heavyLifting": false,
       "heights": false,
       "shiftWork": false,
-      "customerContact": false,
+      "customerContact": true,
       "teamwork": false,
       "standingWalking": false,
       "irregularHours": true,
@@ -29871,7 +29871,7 @@
       "heavyLifting": false,
       "heights": false,
       "shiftWork": false,
-      "customerContact": false,
+      "customerContact": true,
       "teamwork": false,
       "standingWalking": false,
       "irregularHours": false,
@@ -32377,7 +32377,7 @@
       "heavyLifting": true,
       "heights": false,
       "shiftWork": false,
-      "customerContact": false,
+      "customerContact": true,
       "teamwork": false,
       "standingWalking": true,
       "irregularHours": true,
@@ -35700,7 +35700,7 @@
       "heavyLifting": true,
       "heights": false,
       "shiftWork": true,
-      "customerContact": false,
+      "customerContact": true,
       "teamwork": false,
       "standingWalking": false,
       "irregularHours": true,
@@ -45121,7 +45121,7 @@
       "heavyLifting": false,
       "heights": false,
       "shiftWork": false,
-      "customerContact": false,
+      "customerContact": true,
       "teamwork": false,
       "standingWalking": true,
       "irregularHours": true,
@@ -46356,7 +46356,7 @@
       "Sinn und Gespür für Ästhetik",
       "Schriftliches Ausdrucksvermögen und Rechtschreibsicherheit"
     ],
-    "accessLevel": "unrestricted"
+    "accessLevel": "fachhochschulreife"
   },
   {
     "id": 9999,
@@ -47907,7 +47907,7 @@
       "heavyLifting": true,
       "heights": false,
       "shiftWork": true,
-      "customerContact": false,
+      "customerContact": true,
       "teamwork": false,
       "standingWalking": true,
       "irregularHours": false,
@@ -51025,7 +51025,7 @@
       "heavyLifting": true,
       "heights": false,
       "shiftWork": false,
-      "customerContact": false,
+      "customerContact": true,
       "teamwork": false,
       "standingWalking": true,
       "irregularHours": true,
@@ -51368,7 +51368,7 @@
       "heavyLifting": true,
       "heights": false,
       "shiftWork": false,
-      "customerContact": false,
+      "customerContact": true,
       "teamwork": false,
       "standingWalking": true,
       "irregularHours": true,
@@ -51536,7 +51536,7 @@
       "heavyLifting": true,
       "heights": false,
       "shiftWork": false,
-      "customerContact": false,
+      "customerContact": true,
       "teamwork": false,
       "standingWalking": true,
       "irregularHours": true,
@@ -62831,7 +62831,7 @@
       "heavyLifting": false,
       "heights": false,
       "shiftWork": false,
-      "customerContact": false,
+      "customerContact": true,
       "teamwork": false,
       "standingWalking": false,
       "irregularHours": true,
@@ -66698,7 +66698,7 @@
       "heavyLifting": false,
       "heights": false,
       "shiftWork": false,
-      "customerContact": false,
+      "customerContact": true,
       "teamwork": false,
       "standingWalking": false,
       "irregularHours": false,
@@ -67688,7 +67688,7 @@
       "heavyLifting": false,
       "heights": false,
       "shiftWork": false,
-      "customerContact": false,
+      "customerContact": true,
       "teamwork": false,
       "standingWalking": false,
       "irregularHours": false,
@@ -68251,7 +68251,7 @@
       "heavyLifting": false,
       "heights": false,
       "shiftWork": false,
-      "customerContact": false,
+      "customerContact": true,
       "teamwork": false,
       "standingWalking": false,
       "irregularHours": false,
@@ -77816,7 +77816,7 @@
       "heavyLifting": false,
       "heights": false,
       "shiftWork": false,
-      "customerContact": false,
+      "customerContact": true,
       "teamwork": false,
       "standingWalking": false,
       "irregularHours": false,
@@ -82067,7 +82067,7 @@
       "heavyLifting": true,
       "heights": false,
       "shiftWork": true,
-      "customerContact": false,
+      "customerContact": true,
       "teamwork": false,
       "standingWalking": true,
       "irregularHours": false,
@@ -82238,7 +82238,7 @@
       "heavyLifting": true,
       "heights": false,
       "shiftWork": true,
-      "customerContact": false,
+      "customerContact": true,
       "teamwork": false,
       "standingWalking": true,
       "irregularHours": false,
@@ -91914,7 +91914,7 @@
       "heavyLifting": true,
       "heights": false,
       "shiftWork": true,
-      "customerContact": false,
+      "customerContact": true,
       "teamwork": false,
       "standingWalking": false,
       "irregularHours": true,
@@ -92074,7 +92074,7 @@
       "heavyLifting": false,
       "heights": false,
       "shiftWork": false,
-      "customerContact": false,
+      "customerContact": true,
       "teamwork": false,
       "standingWalking": false,
       "irregularHours": true,

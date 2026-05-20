@@ -18,6 +18,7 @@ import type {
 import { SUBJECTS } from "@azuki/shared";
 import { hydrateFachpraktiker } from "./hydrate-fachpraktiker.js";
 import { applyConditionOverrides } from "./apply-condition-overrides.js";
+import { applyAccessOverrides } from "./apply-access-overrides.js";
 
 // --- API response types (model the external Arbeitsagentur API) ---
 
@@ -679,6 +680,12 @@ async function main() {
   );
   const overrides = applyConditionOverrides(occupations);
   console.log(`  -> ${overrides.length} condition overrides applied.\n`);
+
+  console.log(
+    "Step 2d: Applying curated access-level overrides for de-facto FHR Berufe...",
+  );
+  const accessOverrides = applyAccessOverrides(occupations);
+  console.log(`  -> ${accessOverrides.length} access-level overrides applied.\n`);
 
   const __dirname = dirname(fileURLToPath(import.meta.url));
   const outDir = resolve(__dirname, "../backend/src/data");
