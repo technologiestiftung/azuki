@@ -39,20 +39,21 @@ export function normalizeUserProfile(
 	const selectedCustomStrengths = hasSelectedKey
 		? (input.selectedCustomStrengths ?? [])
 		: customStrengths;
-	const merged: PersistedProfile = { ...initialUserProfile, ...input };
 
 	return {
-		...merged,
-		favoriteSubjects: merged.favoriteSubjects ?? [],
-		customSubjects: merged.customSubjects ?? [],
-		interests: merged.interests ?? [],
-		customInterests: merged.customInterests ?? [],
-		workExpectations: merged.workExpectations ?? [],
-		customWorkExpectations: merged.customWorkExpectations ?? [],
-		strengths: merged.strengths ?? {},
+		inSchool: input.inSchool ?? null,
+		educationLevel: input.educationLevel ?? null,
+		favoriteSubjects: input.favoriteSubjects ?? [],
+		customSubjects: input.customSubjects ?? [],
+		interests: input.interests ?? [],
+		customInterests: input.customInterests ?? [],
+		workExpectations: input.workExpectations ?? [],
+		customWorkExpectations: input.customWorkExpectations ?? [],
+		strengths: input.strengths ?? {},
 		customStrengths,
 		selectedCustomStrengths,
-		workPreferences: merged.workPreferences ?? {},
-		noGos: merged.noGos ?? {},
+		practicalExperience: input.practicalExperience ?? "",
+		workPreferences: input.workPreferences ?? {},
+		noGos: input.noGos ?? {},
 	};
 }
