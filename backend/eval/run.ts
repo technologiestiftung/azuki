@@ -4,7 +4,7 @@ import type {
 	Persona,
 	Occupation,
 } from "@azuki/shared";
-import { preFilter } from "../src/matching/index.js";
+import { preFilter, PREFILTER_TOP_K } from "../src/matching/index.js";
 import { aiRank } from "../src/ai/index.js";
 
 export interface RunEvalOptions {
@@ -12,19 +12,27 @@ export interface RunEvalOptions {
 	model: string;
 	occupations: Occupation[];
 	personas: Persona[];
+	/**
+	 * When true, the LLM candidate list includes a "Hinweise" line per
+	 * Beruf with the popularity-tier signal and the parsed accessLevel
+	 * phrasing. Used together with the v3 system prompt that instructs
+	 * the model how to read these signals. Defaults to false.
+	 */
+	withContext?: boolean;
 }
 
 export async function runEval(opts: RunEvalOptions): Promise<EvalSnapshot> {
-	const { systemPrompt, model, occupations, personas } = opts;
+	const { systemPrompt, model, occupations, personas, withContext } = opts;
 
 	const personaPromises = personas.map(
 		async (persona): Promise<[string, PersonaResult]> => {
 			try {
-				const top40 = preFilter(occupations, persona.profile, 40);
+				const top40 = preFilter(occupations, persona.profile, PREFILTER_TOP_K);
 
 				const matchResult = await aiRank(top40, persona.profile, {
 					systemPrompt,
 					model,
+					withContext,
 				});
 
 				const prefilter = top40.map((entry) => ({
