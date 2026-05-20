@@ -142,11 +142,13 @@ export function WorkPreferencesStep() {
 						label={current.a}
 						selected={workPreferences[current.id] === "a"}
 						onClick={() => handleChoice("a")}
+						className="items-center text-center"
 					/>
 					<SelectableCardButton
 						label={current.b}
 						selected={workPreferences[current.id] === "b"}
 						onClick={() => handleChoice("b")}
+						className="items-center text-center"
 					/>
 				</div>
 			</div>
