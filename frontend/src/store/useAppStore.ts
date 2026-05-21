@@ -6,10 +6,7 @@ import {
 	type WorkPreferenceChoice,
 	type NoGoAnswer,
 } from "../common";
-import {
-	initialUserProfile,
-	normalizeUserProfile,
-} from "../profile/normalizeUserProfile";
+import { initialUserProfile } from "../profile/initialUserProfile";
 import { useMatchResultsStore } from "./useMatchResultsStore";
 
 function clearMatchResults(): void {
@@ -35,6 +32,8 @@ interface AppActions {
 	setPracticalExperience: (value: string) => void;
 	setWorkPreference: (id: string, choice: WorkPreferenceChoice | null) => void;
 	setNoGo: (id: string, answer: NoGoAnswer | null) => void;
+	addCustomNoGo: (noGo: string) => void;
+	toggleCustomNoGo: (noGo: string) => void;
 	resetProfile: () => void;
 }
 
@@ -225,6 +224,37 @@ export const useAppStore = create<AppState & AppActions>()(
 				}));
 			},
 
+			addCustomNoGo: (noGo) => {
+				clearMatchResults();
+				set((state) => {
+					if (state.profile.customNoGos.includes(noGo)) {
+						return state;
+					}
+					return {
+						profile: {
+							...state.profile,
+							customNoGos: [...state.profile.customNoGos, noGo],
+							noGos: { ...state.profile.noGos, [noGo]: "rejected" },
+						},
+					};
+				});
+			},
+
+			toggleCustomNoGo: (noGo) => {
+				clearMatchResults();
+				set((state) => {
+					const current = state.profile.noGos[noGo];
+					const next: NoGoAnswer =
+						current === "rejected" ? "accepted" : "rejected";
+					return {
+						profile: {
+							...state.profile,
+							noGos: { ...state.profile.noGos, [noGo]: next },
+						},
+					};
+				});
+			},
+
 			resetProfile: () => {
 				clearMatchResults();
 				set({ profile: initialUserProfile });
@@ -241,7 +271,10 @@ export const useAppStore = create<AppState & AppActions>()(
 				return {
 					...currentState,
 					...(persisted ?? {}),
-					profile: normalizeUserProfile(persisted?.profile),
+					profile: {
+						...initialUserProfile,
+						...(persisted?.profile ?? {}),
+					},
 				};
 			},
 		},

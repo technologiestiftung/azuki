@@ -292,6 +292,15 @@ export const content = {
 	"noGos.acceptLabel": "Ist okay",
 	"noGos.ariaLabel.accept": "Als ist okay markieren",
 	"noGos.skipButton.label": "Überspringen",
+	"noGos.customNoGo.label": "Von dir hinzugefügt",
+	"noGos.addCustomNoGoButton.addMore": "No-Go hinzufügen",
+	"noGos.addCustomNoGoButton.label": "Eigenes No-Go hinzufügen",
+	"noGos.addCustomNoGoButton.ariaLabel": "Eigenes No-Go hinzufügen",
+	"noGos.bottomSheet.input.addPlaceholder": "Etwas das für dich nicht geht",
+	"noGos.customNoGo.title": "Fehlt noch etwas?",
+	"noGos.customNoGo.description":
+		"Füge weitere Dinge hinzu, die für dich im Beruf überhaupt nicht gehen.",
+	"noGos.customNoGo.pill.label.postfix": "als No-Go markieren",
 	//noise
 	"noGos.noise.title": "Lärm",
 	"noGos.noise.description": "z.B. Baustelle, Maschinen oder laute Werkstatt",

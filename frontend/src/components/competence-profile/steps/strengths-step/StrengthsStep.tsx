@@ -1,10 +1,4 @@
-import {
-	useCallback,
-	useRef,
-	useEffect,
-	useState,
-	type CSSProperties,
-} from "react";
+import { useCallback, useRef, useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { content } from "../../../../content";
 import { useAppStore } from "../../../../store/useAppStore";
@@ -12,8 +6,8 @@ import { StepLayout } from "../StepLayout";
 import { useFlowNavigation } from "../../../../routing/useFlowNavigation";
 import { StrengthsSlider } from "./StrengthsSlider";
 import { strengths, STRENGTH_STEP_CARD_COUNT } from "./strengths";
-import { PrimaryThemedButton } from "../../../primitives/buttons/PrimaryThemedButton";
 import { InputBottomSheet } from "../../../input-bottom-sheet/InputBottomSheet";
+import { CustomSwipeStepCard } from "../../CustomSwipeStepCard";
 import { SwipeCardStack } from "../../../primitives/swipe-card-stack/SwipeCardStack";
 import type {
 	SwipeCardStackHandle,
@@ -21,7 +15,6 @@ import type {
 } from "../../../primitives/swipe-card-stack/SwipeCardStack";
 import { SwipeCard } from "../../../primitives/swipe-card-stack/SwipeCard";
 import { parseHashCardIndex } from "../../../../routing/routes";
-import { Pill } from "../../../primitives/buttons/Pill";
 
 export const STACK_GHOST_LAYER_SCALE = 84 / 100;
 
@@ -232,88 +225,30 @@ export function StrengthsStep() {
 					</>
 				)}
 				{isCustomStrengthCard && (
-					<div
+					<CustomSwipeStepCard
 						key="custom-strength-card"
-						ref={customStrengthsSectionRef}
-						className="flex h-full min-h-0 w-full flex-1 flex-col origin-top animate-customStrengthCardExpand"
-						style={
-							{
-								"--stack-ghost-scale": String(STACK_GHOST_LAYER_SCALE),
-							} as CSSProperties
+						sectionRef={customStrengthsSectionRef}
+						stackGhostLayerScale={STACK_GHOST_LAYER_SCALE}
+						items={profile.customStrengths}
+						isSelected={(item) =>
+							profile.selectedCustomStrengths.includes(item)
 						}
-					>
-						<div className="flex h-full min-h-0 w-full flex-1 flex-col rounded-3xl bg-gray-200 py-5 px-6  mb-3">
-							{profile.customStrengths.length > 0 ? (
-								<>
-									<h3 className="text-lg font-semibold text-gray-500 mb-2 shrink-0">
-										{content["strengths.customStrength.label"]}
-									</h3>
-									<ul className="flex flex-col gap-2 min-h-0 flex-1 overflow-y-auto">
-										{profile.customStrengths.map((customStrength) => (
-											<Pill
-												key={customStrength}
-												label={customStrength}
-												selected={profile.selectedCustomStrengths.includes(
-													customStrength,
-												)}
-												onClick={() => toggleCustomStrength(customStrength)}
-												ariaLabel={`${customStrength} ${content["strengths.customStrength.pill.label.postfix"]}`}
-												className="text-left w-fit"
-											/>
-										))}
-									</ul>
-									<PrimaryThemedButton
-										className="mt-9 shrink-0"
-										onClick={() => setInputSheetOpen(true)}
-									>
-										<div className="flex items-center gap-2 justify-center">
-											<img
-												src="/icons/plus-black.svg"
-												alt=""
-												className="w-6 h-6"
-											/>
-											{content["strengths.addCustomStrengthButton.addMore"]}
-										</div>
-									</PrimaryThemedButton>
-								</>
-							) : (
-								<div className="flex h-full min-h-0 flex-1 flex-col gap-2 items-center justify-center">
-									<div className="flex min-h-0 w-full flex-1 items-center justify-center p-2">
-										<img
-											src="/illustrations/custom-strength.svg"
-											alt=""
-											className="max-h-full w-full max-w-full object-contain"
-											draggable={false}
-										/>
-									</div>
-									<div className="flex flex-col gap-0.5 items-center justify-center text-center mb-2 shrink-0">
-										<h3 className="text-2xl font-semibold text-gray-700">
-											{content["strengths.customStrength.title"]}
-										</h3>
-										<p className="text-base text-gray-700">
-											{content["strengths.customStrength.description"]}
-										</p>
-									</div>
-									<PrimaryThemedButton
-										className="text-lg shrink-0"
-										ariaLabel={
-											content["strengths.addCustomStrengthButton.ariaLabel"]
-										}
-										onClick={() => setInputSheetOpen(true)}
-									>
-										<div className="flex items-center gap-2 justify-center">
-											<img
-												src="/icons/plus-black.svg"
-												alt=""
-												className="w-6 h-6"
-											/>
-											{content["strengths.addCustomStrengthButton.label"]}
-										</div>
-									</PrimaryThemedButton>
-								</div>
-							)}
-						</div>
-					</div>
+						onToggle={toggleCustomStrength}
+						onAddClick={() => setInputSheetOpen(true)}
+						illustrationSrc="/illustrations/custom-strength.svg"
+						labels={{
+							listLabel: content["strengths.customStrength.label"],
+							pillAriaPostfix:
+								content["strengths.customStrength.pill.label.postfix"],
+							addMore: content["strengths.addCustomStrengthButton.addMore"],
+							addLabel: content["strengths.addCustomStrengthButton.label"],
+							addAriaLabel:
+								content["strengths.addCustomStrengthButton.ariaLabel"],
+							customTitle: content["strengths.customStrength.title"],
+							customDescription:
+								content["strengths.customStrength.description"],
+						}}
+					/>
 				)}
 			</div>
 			<InputBottomSheet

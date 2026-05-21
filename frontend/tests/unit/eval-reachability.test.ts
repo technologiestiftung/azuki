@@ -26,6 +26,7 @@ function makePersona(overrides: Partial<Persona> = {}): Persona {
 			practicalExperience: "",
 			workPreferences: {},
 			noGos: {},
+			customNoGos: [],
 		},
 		tierS: [],
 		tierA: [],

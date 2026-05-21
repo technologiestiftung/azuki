@@ -76,6 +76,7 @@ export function makeProfile(overrides: Partial<UserProfile> = {}): UserProfile {
 		practicalExperience: "",
 		workPreferences: {},
 		noGos: {},
+		customNoGos: [],
 		...overrides,
 	};
 }

@@ -97,11 +97,11 @@ export interface UserProfile {
 	customWorkExpectations: string[];
 	strengths: Record<string, number>;
 	customStrengths: string[];
-	/** Subset of `customStrengths` included in matching (mirrors interests selection). */
 	selectedCustomStrengths: string[];
 	practicalExperience: string;
 	workPreferences: Record<string, WorkPreferenceChoice | null>;
 	noGos: Record<string, NoGoAnswer | null>;
+	customNoGos: string[];
 }
 
 // --- Match Result (POST /api/match response) ---

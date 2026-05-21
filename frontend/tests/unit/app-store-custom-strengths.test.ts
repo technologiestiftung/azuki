@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, test } from "vitest";
 import { useAppStore } from "../../src/store/useAppStore";
-import { initialUserProfile } from "../../src/profile/normalizeUserProfile";
+import { initialUserProfile } from "../../src/profile/initialUserProfile";
 
 describe("useAppStore — custom strengths", () => {
 	beforeEach(() => {

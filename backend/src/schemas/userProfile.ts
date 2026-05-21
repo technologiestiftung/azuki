@@ -30,4 +30,5 @@ export const UserProfileSchema = z.object({
 	practicalExperience: z.string(),
 	workPreferences: z.record(z.string(), WorkPreferenceChoiceSchema.nullable()),
 	noGos: z.record(z.string(), NoGoAnswerSchema.nullable()),
+	customNoGos: z.array(z.string()).default([]),
 });

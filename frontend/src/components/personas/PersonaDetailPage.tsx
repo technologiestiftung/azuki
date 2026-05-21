@@ -18,6 +18,7 @@ import { StrengthsEditor } from "./profile-editors/StrengthsEditor";
 import { CustomStrengthsEditor } from "./profile-editors/CustomStrengthsEditor";
 import { WorkPreferencesEditor } from "./profile-editors/WorkPreferencesEditor";
 import { NoGosEditor } from "./profile-editors/NoGosEditor";
+import { CustomNoGosEditor } from "./profile-editors/CustomNoGosEditor";
 
 export function PersonaDetailPage() {
 	return (
@@ -292,6 +293,12 @@ function ProfileEditorSection({
 				<NoGosEditor
 					noGos={profile.noGos}
 					onChange={(next) => patchProfile({ noGos: next })}
+				/>
+
+				<CustomNoGosEditor
+					customNoGos={profile.customNoGos}
+					noGos={profile.noGos}
+					onChange={(next) => patchProfile(next)}
 				/>
 
 				<label className="flex flex-col gap-1">

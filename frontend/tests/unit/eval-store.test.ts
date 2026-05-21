@@ -16,6 +16,7 @@ const baseProfile = {
 	practicalExperience: "",
 	workPreferences: {},
 	noGos: {},
+	customNoGos: [],
 };
 
 function makePersona(id: string): Persona {

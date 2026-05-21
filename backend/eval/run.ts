@@ -6,7 +6,6 @@ import type {
 } from "@azuki/shared";
 import { preFilter } from "../src/matching/index.js";
 import { aiRank } from "../src/ai/index.js";
-
 export interface RunEvalOptions {
 	systemPrompt: string;
 	model: string;

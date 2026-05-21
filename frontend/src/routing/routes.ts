@@ -1,7 +1,7 @@
 import type { To } from "react-router-dom";
 import { Step } from "../common";
 import { workPreferencePairs } from "../content/work-preference-pairs";
-import { noGos } from "../components/competence-profile/steps/no-gos-step/no-gos";
+import { NO_GO_STEP_CARD_COUNT } from "../components/competence-profile/steps/no-gos-step/no-gos";
 import { STRENGTH_STEP_CARD_COUNT } from "../components/competence-profile/steps/strengths-step/strengths";
 
 export const ROUTE_PATHS = {
@@ -56,7 +56,11 @@ const ORDERED_NAVIGATION_STEPS: FlowNode[] = [
 		step: Step.WorkPreferences,
 		cardCount: workPreferencePairs.length,
 	},
-	{ path: ROUTE_PATHS.nogos, step: Step.NoGos, cardCount: noGos.length },
+	{
+		path: ROUTE_PATHS.nogos,
+		step: Step.NoGos,
+		cardCount: NO_GO_STEP_CARD_COUNT,
+	},
 	{ path: ROUTE_PATHS.loading, step: Step.Loading },
 	{ path: ROUTE_PATHS.resultsList, step: Step.Results },
 ];
@@ -112,7 +116,7 @@ export function getPreviousPath(pathname: string, hash: string): To {
 	if (pathname.startsWith(RESULTS_PATH_PREFIX)) {
 		return {
 			pathname: ROUTE_PATHS.nogos,
-			hash: `#${Math.max(0, noGos.length - 1)}`,
+			hash: `#${Math.max(0, NO_GO_STEP_CARD_COUNT - 1)}`,
 		};
 	}
 

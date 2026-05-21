@@ -28,6 +28,7 @@ const EMPTY_PROFILE = {
 	practicalExperience: "",
 	workPreferences: {},
 	noGos: {},
+	customNoGos: [],
 };
 
 function PersonasPageInner() {
