@@ -102,14 +102,31 @@ describe("scoreEducation — accessLevel fallback (when degreeStats is null)", (
 		).toBe(-3);
 	});
 
-	test("-7 when occupation requires two tiers above user level", () => {
-		// secondary user × fachhochschulreife Beruf: gap 2 → -7
+	test("-12 when occupation requires two tiers above user level", () => {
+		// secondary user × fachhochschulreife Beruf: gap 2 → -12
+		// (raised from -7 in May 2026 — see comment in dimensions.ts
+		// accessLevelPenalty for context: FHR-vs-Hauptschule is a
+		// qualitative step-change, not incremental.)
 		expect(
 			scoreEducation(
 				makeOccupation({ accessLevel: "fachhochschulreife" }),
 				makeProfile({ educationLevel: "secondary" }),
 			),
-		).toBe(-7);
+		).toBe(-12);
+	});
+
+	test("-12 for foreign_degree user × fachhochschulreife Beruf (gap 2)", () => {
+		// The Amira case: foreign_degree treated as tier 0 (same as
+		// secondary), facing FHR-gated Berufe like Erzieher (9162) and
+		// Pflegefachmann (132173). The -12 magnitude was chosen via the
+		// access-penalty sweep to push these Berufe out of the
+		// prefilter top-60 without affecting personas at intermediate level.
+		expect(
+			scoreEducation(
+				makeOccupation({ accessLevel: "fachhochschulreife" }),
+				makeProfile({ educationLevel: "foreign_degree" }),
+			),
+		).toBe(-12);
 	});
 
 	test("foreign_degree treated like secondary (lowest practical tier)", () => {
@@ -157,13 +174,13 @@ describe("scoreEducation — null educationLevel defaults to secondary", () => {
 		).toBe(-3);
 	});
 
-	test("null educationLevel × fachhochschulreife Beruf → -7 (same as secondary)", () => {
+	test("null educationLevel × fachhochschulreife Beruf → -12 (same as secondary)", () => {
 		expect(
 			scoreEducation(
 				makeOccupation({ accessLevel: "fachhochschulreife" }),
 				makeProfile({ educationLevel: null }),
 			),
-		).toBe(-7);
+		).toBe(-12);
 	});
 
 	test("null educationLevel × unrestricted Beruf → 0 (no penalty)", () => {

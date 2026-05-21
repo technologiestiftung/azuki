@@ -147,7 +147,21 @@ function accessLevelPenalty(
 	const gap = accessLevelTier(level) - userTier;
 	if (gap <= 0) return 0;
 	if (gap === 1) return -3;
-	return -7; // gap === 2 (FHR required, user at Hauptschule level)
+	// gap === 2: FHR required, user at Hauptschule level (incl. foreign_degree).
+	// Qualitative step-change rather than incremental — closing this gap requires
+	// either a recognized German Schulabschluss-Aufstockung OR a deutsche
+	// Berufsausbildung-Alternative (Realschule + abgeschlossene Berufsausbildung
+	// counts under the BERUFENET phrasing). Penalty was -7 prior to May 2026;
+	// raised to -12 after the Amira persona eval showed FHR-gated headlines
+	// (Erzieher, Pflegefachmann full Ausbildung) still reaching the LLM
+	// candidate menu (top 20-30) despite the gate — the +30 of multi-dim
+	// direction signal for a care-direction profile easily overrode -7.
+	// Sweep confirmed -12 pushes Erzieher (9162) and Pflegefachmann (132173)
+	// out of Amira's prefilter top-60 with zero collateral on the 7 other
+	// personas (intermediate-level users hit gap=1, unaffected; other
+	// Hauptschule-level personas don't have FHR-gated Berufe in their
+	// direction). See tools/eval-baseline/access-penalty-sweep.ts.
+	return -12;
 }
 
 export function scoreEducation(

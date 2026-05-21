@@ -2,7 +2,7 @@
 -- Seed data for the eval personas.
 -- Run after 000-personas-schema.sql.
 --
--- Active personas (7):
+-- Active personas (10):
 --   nico  — Hauptschule Kfz-dropout (in eval set)
 --   elina — Realschule, 2nd-gen Bulgarian, helping+creative (in eval set)
 --   karim — refugee from Lebanon, foreign_degree, A2 German (in eval set)
@@ -10,6 +10,9 @@
 --   tom   — Realschule, gaming/anime/YouTube hobby (NOT in eval set)
 --   hanna — Realschule, dual creative + care clusters (NOT in eval set)
 --   noah  — vague aspirational low-signal Joblinge teen (NOT in eval set)
+--   amira — Syrian refugee, foreign_degree, B1 German, care direction (NOT in eval set)
+--   lukas — Hauptschule, German native, confident Bau-direction (NOT in eval set)
+--   lara  — Realschule, 2nd-gen Turkish, confident kaufmännisch-direction (NOT in eval set)
 --
 -- All tiers Joblinge-recalibrated. §66 BBiG / §42r HwO Fachpraktiker
 -- variants are treated as first-class supported pathways for the
@@ -1229,6 +1232,625 @@ insert into personas (
         }
       ],
       "label": "Top 8 spans ≥3 direction families (no single-family collapse)"
+    }
+  ]'::jsonb,
+  false
+)
+on conflict (id) do update set
+  name        = excluded.name,
+  description = excluded.description,
+  profile     = excluded.profile,
+  tier_s      = excluded.tier_s,
+  tier_a      = excluded.tier_a,
+  tier_c      = excluded.tier_c,
+  criteria    = excluded.criteria
+  -- in_eval_set deliberately omitted: preserve admin-UI toggles on existing rows
+;
+
+
+-- ============================================================
+-- Persona 8: Amira K.
+-- 22, Syrian refugee in Berlin since late 2022. foreign_degree, B1 German.
+-- Care direction (Damascus Kindergarten + sibling caregiving back home).
+-- The work4u / OFAF cohort shape: recent displacement, mid-language,
+-- family-embedded, care-direction.
+-- tierS: 4  tierA: 14  tierC: persona-specific + universal
+-- criteria: 4
+-- ============================================================
+
+insert into personas (
+  id,
+  name,
+  description,
+  profile,
+  tier_s,
+  tier_a,
+  tier_c,
+  criteria,
+  in_eval_set
+) values (
+  'amira',
+  'Amira K.',
+  '22, Syrian refugee in Berlin since late 2022. No recognized German Schulabschluss, B1 German. Worked unofficially in a Damascus Kindergarten before the family was displaced; helps care for her younger sister at home. Wants to work with children or help people. Lives with family in Neukölln. The work4u / OFAF cohort shape: recent displacement, mid-language, family-embedded, care-direction.',
+  '{
+    "inSchool": false,
+    "educationLevel": "foreign_degree",
+    "favoriteSubjects": ["german"],
+    "customSubjects": [],
+    "interests": ["helping", "babysitting", "planning"],
+    "customInterests": [],
+    "workValues": ["family_stable", "atmosphere", "short_distance"],
+    "strengths": {
+      "empathy": 1,
+      "communication": 0.5,
+      "teamwork": 0.5,
+      "perseverance": 0.5
+    },
+    "secretTalent": "ich bin sehr geduldig mit Kindern. meine kleine Geschwister sagen ich kann gut erklären wenn sie etwas nicht verstehen",
+    "practicalExperience": "in Syrien habe ich in Kindergarten gearbeitet mit kleine Kinder, ich liebe das. hier in Berlin habe ich Integrationskurs gemacht und B1 Sprachkurs. ich passe auf meine Schwester auf wenn meine Mutter arbeitet. ich möchte mit Kindern arbeiten oder helfen Menschen",
+    "workPreferences": {
+      "environment": "a",
+      "hands-vs-mind": "a",
+      "location": "a",
+      "people": "b"
+    },
+    "noGos": {
+      "computer": "rejected"
+    }
+  }'::jsonb,
+  -- tier_s: 4 entries (schulische helping-tier care cluster)
+  ARRAY[
+    9031,   -- Sozialassistent/in (keystone — A_anchor, 2-year, bridge to Erzieher)
+    9063,   -- Altenpflegehelfer/in (A_anchor, 1-year, BB-only availability via asymmetric-keep)
+    30191,  -- Gesundheits- und Krankenpflegehelfer/in (B_solid, 1-year, no heavy-work no-go)
+    135349  -- Pflegeassistent/in (B_solid, 1-year, BE=585 — coverage-audit miss-fix in v2)
+  ]::integer[],
+  -- tier_a: 12 entries (broad — direction-mismatch means several Joblinge-realistic adjacents)
+  ARRAY[
+    138818, -- Fachpraktiker/in für Hauswirtschaft und personenorientierte Serviceleistungen (§66 BBiG) — v2 demoted from S
+    33212,  -- Medizinische/r Fachangestellte/r (A_anchor; screenWork=true held with incidental-clinical-entry carve-out)
+    133617, -- Hauswirtschafter/in (C_smallReal; dual sibling of §66 138818)
+    9106,   -- Erzieher/in - Jugend- und Heimerziehung (C_smallReal, realschule access — one criterion relaxed)
+    9127,   -- Heilerziehungspfleger/in (A_anchor, FHR-gated stretch — added in v2)
+    129985, -- Fachpraktiker/in für Service in sozialen Einrichtungen (§66 BBiG) — added in v2
+    138060, -- Fachpraktiker/in im Gesundheitswesen (§66 BBiG) — §66 sibling of MFA; added in v2.1 after eval surfaced it at rank #7
+    50920,  -- Fachverkäufer/in - Lebensmittelhandwerk (Bäckerei)
+    6628,   -- Verkäufer/in (A_anchor, Joblinge-anchor retail, soft fit)
+    10009,  -- Hotelfachmann/-frau (A_anchor; screenWork=true held with weak carve-out — borderline)
+    136126, -- Fachkraft - Gastronomie (B_solid; conditions-cleanest Gastronomie sibling — added v2.2 after eval surfaced it 3/3 at #7)
+    10236,  -- Gebäudereiniger/in (added in v2)
+    14867,  -- Fachpraktiker/in für Gebäudereiniger (§66 BBiG) — added in v2
+    50987   -- Fachpraktiker/in im Gebäudeservice (§66 BBiG) — added in v2
+  ]::integer[],
+  -- tier_c: ~50 persona-specific + 26 universal niche bait
+  ARRAY[
+    -- Access-floor / FHR gate (no §66 path, no Realschule path documented)
+    132173, -- Pflegefachmann/-frau (Ausbildung)
+    9162,   -- Erzieher/in
+    -- Berlin-not-available (per SCORING-EDGE-CASES §7)
+    9170,   -- Sozialpädagogische/r Assistent/in / Kinderpfleger/in
+    -- Profile-conflict: `computer: rejected` (screenWork=true triggers full -5)
+    123266, -- Kaufmann/-frau - Büromanagement
+    7965,   -- Industriekaufmann/-frau
+    6755,   -- Bankkaufmann/-frau
+    7573,   -- Steuerfachangestellte/r
+    7934,   -- Verwaltungsfachangestellte/r - Bundesverwaltung
+    7933,   -- Verwaltungsfachangestellte/r - HWK und IHK
+    7929,   -- Verwaltungsfachangestellte/r - Kirchenverwaltung
+    7944,   -- Verwaltungsfachangestellte/r - Kommunalverwaltung
+    7925,   -- Verwaltungsfachangestellte/r - Landesverwaltung
+    7924,   -- Justizfachangestellte/r
+    14704,  -- Zahnmedizinische/r Fachangestellte/r (screenWork=true; dental direction not hers)
+    33214,  -- Tiermedizinische/r Fachangestellte/r (screenWork=true; also babysitting→animals bait)
+    130926, -- Kaufmann/-frau - E-Commerce
+    -- Mediengestalter Digital&Print variants only (8533 Bild und Ton has screenWork=false — intentionally NOT in C)
+    137684, -- Mediengestalter/in Digital und Print - Designkonzeption
+    137682, -- Mediengestalter/in Digital und Print - Digitalmedien
+    137683, -- Mediengestalter/in Digital und Print - Printmedien
+    137685, -- Mediengestalter/in Digital und Print - Projektmanagement
+    -- Designer variants
+    14557,  -- Designer/in - angewandte Formgebung
+    14326,  -- Designer/in - Foto
+    14217,  -- Designer/in - Grafik
+    13968,  -- Designer/in - Kommunikationsdesign
+    8459,   -- Designer/in - Medien
+    14319,  -- Designer/in - Mode
+    90571,  -- Technische/r Produktdesigner/in - Maschinen- und Anlagenkonstruktion
+    90588,  -- Technische/r Produktdesigner/in - Produktgestaltung
+    -- IT direction (her computer-rejected no-go)
+    7856,   -- Fachinformatiker/in - Anwendungsentwicklung
+    133556, -- Fachinformatiker/in - Daten- und Prozessanalyse
+    133560, -- Fachinformatiker/in - Digitale Vernetzung
+    7847,   -- Fachinformatiker/in - Systemintegration
+    2927,   -- IT-System-Elektroniker/in
+    -- Other admin / Sozialversicherung
+    7930,   -- Sozialversicherungsfachangestellte/r - allg. KV
+    7936,   -- Sozialversicherungsfachangestellte/r - knappschaftliche SV
+    7946,   -- Sozialversicherungsfachangestellte/r - landwirtschaftliche SV
+    7931,   -- Sozialversicherungsfachangestellte/r - Rentenversicherung
+    7932,   -- Sozialversicherungsfachangestellte/r - Unfallversicherung
+    7958,   -- Rechtsanwaltsfachangestellte/r
+    35279,  -- Kaufmann/-frau - Marketingkommunikation
+    35311,  -- Kaufmann/-frau - Dialogmarketing
+    -- Persona-specific bait: `babysitting` → animal-care misread (sozial-beratend tag overlap)
+    531,    -- Tierpfleger/in - Forschung und Klinik
+    532,    -- Tierpfleger/in - Zoo
+    533,    -- Tierpfleger/in - Tierheim und Tierpension
+    119768, -- Fachpraktiker/in für Tierpflege (§66 BBiG)
+    -- Persona-specific bait: `helping` → Friseur/Salon misread (Mia's direction)
+    9910,   -- Friseur/in
+    134513, -- Fachpraktiker/in für Friseur (§66 BBiG)
+    -- Universal niche bait (string/bowed instruments)
+    2673,   -- Geigenbauer/in
+    124509, -- Zupfinstrumentenmacher/in - Gitarrenbau
+    124510, -- Zupfinstrumentenmacher/in - Harfenbau
+    2674,   -- Bogenmacher/in
+    -- Universal niche bait (wind instruments)
+    2687,   -- Holzblasinstrumentenmacher/in
+    2665,   -- Metallblasinstrumentenmacher/in
+    2694,   -- Handzuginstrumentenmacher/in
+    -- Universal niche bait (keyboard/reed instruments)
+    132536, -- Orgelbauer/in - Orgelbau
+    132537, -- Orgelbauer/in - Pfeifenbau
+    -- Universal niche bait (craft/artisan trades)
+    130315, -- Bürsten- und Pinselmacher/in
+    4539,   -- Böttcher/in
+    1528,   -- Drechsler/in - Drechseln
+    1539,   -- Drechsler/in - Elfenbeinschnitzen
+    4640,   -- Vergolder/in
+    -- Universal niche bait (gemstone/crystal)
+    131163, -- Edelsteinschleifer/in - Edelsteingravieren
+    131165, -- Edelsteinschleifer/in - Edelsteinschleifen
+    131166, -- Edelsteinschleifer/in - Industriediamantschleifen
+    131167, -- Edelsteinschleifer/in - Schmuckdiamantschleifen
+    -- Universal niche bait (glass)
+    1092,   -- Glasbläser/in - Christbaumschmuck
+    1091,   -- Glasbläser/in - Glasgestaltung
+    1095,   -- Glasbläser/in - Kunstaugen
+    1088,   -- Leuchtröhrenglasbläser/in
+    -- Universal niche bait (jewellery/precious metals)
+    142202, -- Gold- und Silberschmied/in - Goldschmieden
+    142203, -- Gold- und Silberschmied/in - Silberschmieden
+    -- Universal niche bait (fur/pelts)
+    3611,   -- Kürschner/in
+    3602    -- Pelzveredler/in
+  ]::integer[],
+  -- criteria: 4
+  '[
+    {"type": "min_tier_s", "count": 2},
+    {"type": "no_tier_c"},
+    {"type": "first_from_s_a_union"},
+    {
+      "type": "at_least_one_in_top_5",
+      "ids": [9031],
+      "label": "Sozialassistent (9031) im Top 5 — Joblinge-accessible bridge zu Erzieher gewählt statt FHR-gated Erzieher"
+    }
+  ]'::jsonb,
+  false
+)
+on conflict (id) do update set
+  name        = excluded.name,
+  description = excluded.description,
+  profile     = excluded.profile,
+  tier_s      = excluded.tier_s,
+  tier_a      = excluded.tier_a,
+  tier_c      = excluded.tier_c,
+  criteria    = excluded.criteria
+  -- in_eval_set deliberately omitted: preserve admin-UI toggles on existing rows
+;
+
+-- ────────────────────────────────────────────────────────────────────────
+-- lukas — Hauptschule, German native, confident Bau-direction
+-- See `tools/eval-rubrics/lukas.md` v1 for full rationale.
+-- HG 3 (Bau/Architektur/Gebäudetechnik) coverage — ~10% of Joblinge TN.
+-- Stepfather is Tiefbau-Polier; 3+ years of Wochenend-Baustellen-Hilfe.
+-- Criterion-first tier assignment + judgment-audit applied: Tier S = 4
+-- (core Bau-Handwerk), §66 entries deliberately omitted (clean German
+-- Hauptschulabschluss, §66 is not his path), Tier C names two trap-shapes
+-- (Schrauben→Kfz, Bauen→tech-drafting).
+-- ────────────────────────────────────────────────────────────────────────
+insert into personas (
+  id,
+  name,
+  description,
+  profile,
+  tier_s,
+  tier_a,
+  tier_c,
+  criteria,
+  in_eval_set
+) values (
+  'lukas',
+  'Lukas P.',
+  '17, Hauptschulabschluss letzten Sommer in Marzahn (Berlin). Stiefvater Tiefbau-Polier; Lukas hilft seit 14 an Wochenenden auf der Baustelle (Pflaster, Mauer, Beton). Letzter Sommer 400€-Job Grünflächenpflege beim Bezirksamt. 2-Wochen Maler-Praktikum in der 9. Klasse — okay aber eintönig. Deutsche Muttersprache, Berliner Umgangssprache. Sucht Ausbildung Sept 2026, will draußen sein, was bauen, kein Büro. HG-3-coverage persona — confident Bau-Handwerk-direction.',
+  '{
+    "inSchool": false,
+    "educationLevel": "secondary",
+    "favoriteSubjects": ["math", "sports"],
+    "customSubjects": ["Werken"],
+    "interests": ["building", "screwing", "outdoors", "gardening"],
+    "customInterests": [],
+    "workValues": ["good_salary", "stability"],
+    "strengths": {
+      "craftsmanship": 1,
+      "perseverance": 1,
+      "concentration": 0.5
+    },
+    "secretTalent": "wenn was kaputt ist mach ich das gleich — Schrank, Schlauch, alles selbst. Mein Stiefvater hat mir Pflastern und Beton mischen beigebracht. Bin gut darin.",
+    "practicalExperience": "Seit ich 14 bin helf ich meinem Stiefvater an Wochenenden auf der Baustelle — Tiefbau, Pflaster, Mauer setzen, Beton mischen. In der 9. Klasse 2 Wochen Praktikum als Maler, fand ich gut, war aber etwas eintönig — Wand streichen ist nicht so spannend wie was richtig bauen. Letzten Sommer 400€-Job Grünflächenpflege beim Bezirksamt, Bäume schneiden und Wege pflastern.",
+    "workPreferences": {
+      "environment": "b",
+      "location": "b",
+      "hands-vs-mind": "a",
+      "variety": "b",
+      "people": "b",
+      "pace": "b"
+    },
+    "noGos": {
+      "computer": "rejected"
+    }
+  }'::jsonb,
+  -- tier_s: 4 entries (core Bau-Handwerk, stepfather-Bau direct hits)
+  ARRAY[
+    15164,  -- Anlagenmechaniker SHK (A_anchor 14k, hands-on installation auf Baustellen)
+    129406, -- Dachdecker (B_solid, outdoor pure Bau, Hauptschule sec+noQ 50%)
+    3938,   -- Maurer (B_solid, "Mauer setzen + Beton mischen" literal stepfather-Bau)
+    4105    -- Straßenbauer (B_solid, "Pflaster legen" literal stepfather-Tiefbau)
+  ]::integer[],
+  -- tier_a: 18 entries (Bau-direction siblings + Ausbau-Handwerk + Bau-adjacent)
+  ARRAY[
+    588,    -- Gärtner Garten- und Landschaftsbau (B_solid, Grünflächenpflege Sommer-Job hit)
+    132715, -- Hochbaufacharbeiter Maurerarbeiten (Maurer 2-yr sibling, sec+noQ 52%)
+    132659, -- Tiefbaufacharbeiter Straßenbauarbeiten (Straßenbau 2-yr sibling, sec+noQ 73%)
+    132662, -- Tiefbaufacharbeiter Kanalbauarbeiten (Tiefbau sibling, sec+noQ 73%)
+    15636,  -- Elektroniker Energie- und Gebäudetechnik (Bauelektriker — adjacent, sec at floor)
+    134955, -- Maler Ausbautechnik (lukewarm "eintönig"-Praktikum, sec+noQ 58%)
+    15530,  -- Maler Gestaltung und Instandhaltung (sibling of 134955)
+    4325,   -- Fliesen-, Platten- und Mosaikleger (Ausbau-Handwerk, sec+noQ 47%)
+    4248,   -- Stuckateur (Ausbau-Handwerk, sec+noQ 54%)
+    4289,   -- Trockenbaumonteur (Ausbau-Handwerk D_niche)
+    4066,   -- Gerüstbauer (Bau-Hilfsgewerk, sec+noQ 64%)
+    4823,   -- Baugeräteführer (Baumaschinen auf Baustellen)
+    2168,   -- Klempner (Bauklempner — Dach/Fassade/Regenrinne)
+    4365,   -- Glaser Fenster- und Glasfassadenbau (Bau-Ausbau)
+    862,    -- Steinmetz Steinmetzarbeiten (Stein-/Mauerwerk overlap)
+    8213,   -- Schornsteinfeger (Bau-adjacent Gebäudetechnik-Service)
+    4206,   -- Kanalbauer (Tiefbau-Spezialist D_niche)
+    124412  -- Land- und Baumaschinenmechatroniker (Baumaschine + craftsmanship-direction)
+  ]::integer[],
+  -- tier_c: ~50 persona-specific + 26 universal niche bait
+  ARRAY[
+    -- Hard `computer: rejected` (screenWork=true → full -5)
+    -- Office / Verwaltung / Kaufmann
+    123266, -- Kaufmann/-frau - Büromanagement
+    7965,   -- Industriekaufmann/-frau
+    6755,   -- Bankkaufmann/-frau
+    7573,   -- Steuerfachangestellte/r
+    7934,   -- Verwaltungsfachangestellte/r - Bundesverwaltung
+    7933,   -- Verwaltungsfachangestellte/r - HWK und IHK
+    7929,   -- Verwaltungsfachangestellte/r - Kirchenverwaltung
+    7944,   -- Verwaltungsfachangestellte/r - Kommunalverwaltung
+    7925,   -- Verwaltungsfachangestellte/r - Landesverwaltung
+    7924,   -- Justizfachangestellte/r
+    130926, -- Kaufmann/-frau - E-Commerce
+    35279,  -- Kaufmann/-frau - Marketingkommunikation
+    35311,  -- Kaufmann/-frau - Dialogmarketing
+    -- Medizinisch-Fachangestellte cluster (screenWork=true)
+    33212,  -- Medizinische/r Fachangestellte/r
+    14704,  -- Zahnmedizinische/r Fachangestellte/r
+    33214,  -- Tiermedizinische/r Fachangestellte/r
+    -- Mediengestalter / Designer / Tech-Produktdesigner (screenWork=true)
+    137682, -- Mediengestalter/in Digital und Print - Digitalmedien
+    137683, -- Mediengestalter/in Digital und Print - Printmedien
+    137684, -- Mediengestalter/in Digital und Print - Designkonzeption
+    137685, -- Mediengestalter/in Digital und Print - Projektmanagement
+    14217,  -- Designer/in - Grafik
+    14326,  -- Designer/in - Foto
+    14557,  -- Designer/in - angewandte Formgebung
+    13968,  -- Designer/in - Kommunikationsdesign
+    8459,   -- Designer/in - Medien
+    14319,  -- Designer/in - Mode
+    90571,  -- Technische/r Produktdesigner/in - Maschinen- und Anlagenkonstruktion
+    90588,  -- Technische/r Produktdesigner/in - Produktgestaltung
+    -- IT (screenWork=true)
+    7856,   -- Fachinformatiker/in - Anwendungsentwicklung
+    133556, -- Fachinformatiker/in - Daten- und Prozessanalyse
+    133560, -- Fachinformatiker/in - Digitale Vernetzung
+    7847,   -- Fachinformatiker/in - Systemintegration
+    2927,   -- IT-System-Elektroniker/in
+    -- Sozialversicherung / Rechtsanwalt (screenWork=true)
+    7930,   -- Sozialversicherungsfachangestellte/r - allg. KV
+    7936,   -- Sozialversicherungsfachangestellte/r - knappschaftliche SV
+    7946,   -- Sozialversicherungsfachangestellte/r - landwirtschaftliche SV
+    7931,   -- Sozialversicherungsfachangestellte/r - Rentenversicherung
+    7932,   -- Sozialversicherungsfachangestellte/r - Unfallversicherung
+    7958,   -- Rechtsanwaltsfachangestellte/r
+    -- Persona-specific bait: "Bauen" keyword → tech-drafting (screenWork=true)
+    13741,  -- Bauzeichner/in
+    90575,  -- Technische/r Systemplaner/in - Stahl- und Metallbautechnik
+    13727,  -- Baustoffprüfer/in
+    -- Persona-specific bait: "Schrauben" keyword → Kfz workshop
+    -- (no workshop signal in free text, environment=b Draußen, location=b)
+    14799,  -- Kraftfahrzeugmechatroniker - PKW
+    122564, -- Kraftfahrzeugmechatroniker - Karosserietechnik
+    27300,  -- Kraftfahrzeugmechatroniker - Motorradtechnik
+    27298,  -- Kraftfahrzeugmechatroniker - Nutzfahrzeugtechnik
+    122563, -- Kraftfahrzeugmechatroniker - System- und Hochvolttechnik
+    124530, -- Karosserie- und Fahrzeugbaumechaniker - Karosseriebautechnik
+    137639, -- Karosserie- und Fahrzeugbaumechaniker - Caravan/Reisemobil
+    15166,  -- Karosserie- und Fahrzeugbaumechaniker - Karosserieinstandhaltung
+    124409, -- Zweiradmechatroniker - Fahrradtechnik
+    124410, -- Zweiradmechatroniker - Motorradtechnik
+    -- Universal niche bait (string/bowed instruments)
+    2673,   -- Geigenbauer/in
+    124509, -- Zupfinstrumentenmacher - Gitarrenbau
+    124510, -- Zupfinstrumentenmacher - Harfenbau
+    2674,   -- Bogenmacher/in
+    -- Universal niche bait (wind instruments)
+    2687,   -- Holzblasinstrumentenmacher/in
+    2665,   -- Metallblasinstrumentenmacher/in
+    2694,   -- Handzuginstrumentenmacher/in
+    -- Universal niche bait (keyboard/reed instruments)
+    132536, -- Orgelbauer - Orgelbau
+    132537, -- Orgelbauer - Pfeifenbau
+    -- Universal niche bait (craft/artisan)
+    130315, -- Bürsten- und Pinselmacher/in
+    4539,   -- Böttcher/in
+    1528,   -- Drechsler - Drechseln
+    1539,   -- Drechsler - Elfenbeinschnitzen
+    4640,   -- Vergolder/in
+    -- Universal niche bait (gemstone)
+    131163, -- Edelsteinschleifer - Edelsteingravieren
+    131165, -- Edelsteinschleifer - Edelsteinschleifen
+    131166, -- Edelsteinschleifer - Industriediamantschleifen
+    131167, -- Edelsteinschleifer - Schmuckdiamantschleifen
+    -- Universal niche bait (glass)
+    1092,   -- Glasbläser - Christbaumschmuck
+    1091,   -- Glasbläser - Glasgestaltung
+    1095,   -- Glasbläser - Kunstaugen
+    1088,   -- Leuchtröhrenglasbläser
+    -- Universal niche bait (jewellery/precious metals)
+    142202, -- Gold- und Silberschmied - Goldschmieden
+    142203, -- Gold- und Silberschmied - Silberschmieden
+    -- Universal niche bait (fur/pelts)
+    3611,   -- Kürschner/in
+    3602    -- Pelzveredler/in
+  ]::integer[],
+  -- criteria: 4
+  '[
+    {"type": "min_tier_s", "count": 2},
+    {"type": "no_tier_c"},
+    {"type": "first_from_s_a_union"},
+    {
+      "type": "at_least_one_in_top_5",
+      "ids": [3938, 4105],
+      "label": "Maurer (3938) oder Straßenbauer (4105) im Top 5 — Stiefvater-Tiefbau-Domäne erkannt"
+    }
+  ]'::jsonb,
+  false
+)
+on conflict (id) do update set
+  name        = excluded.name,
+  description = excluded.description,
+  profile     = excluded.profile,
+  tier_s      = excluded.tier_s,
+  tier_a      = excluded.tier_a,
+  tier_c      = excluded.tier_c,
+  criteria    = excluded.criteria
+  -- in_eval_set deliberately omitted: preserve admin-UI toggles on existing rows
+;
+
+-- ────────────────────────────────────────────────────────────────────────
+-- lara — Realschule, 2nd-gen Turkish, confident kaufmännisch-direction
+-- See `tools/eval-rubrics/lara.md` v1 for full rationale.
+-- HG 6 (Kaufmännische Dienstleistungen/Warenhandel) coverage — currently
+-- only side-covered (Tom-stretch, Elina). Joblinge demographic: Realschule-
+-- Frau cluster, confident Büro-direction.
+-- Criterion-first tier assignment + judgment-audit applied: Tier S = 2
+-- (KBM + VFA-Kommunal — the criterion-cleanest), §66 entries deliberately
+-- omitted (clean Realschule, no Lernbeeinträchtigung signal), Tier C names
+-- three trap-shapes (Mädchen-Realschule→Friseur, Planning→Veranstaltungs-
+-- kauf-Abi, Realschule-creative-stereotype).
+-- ────────────────────────────────────────────────────────────────────────
+insert into personas (
+  id,
+  name,
+  description,
+  profile,
+  tier_s,
+  tier_a,
+  tier_c,
+  criteria,
+  in_eval_set
+) values (
+  'lara',
+  'Lara K.',
+  '17, Realschulabschluss letzten Sommer in Wedding (Berlin). 2nd-gen Türkisch (Eltern Anfang 90er aus Çankırı). Vater Imbiss-Besitzer am Leopoldplatz; Mutter Pflegehilfe. Älteste von 3 Geschwistern — übernimmt zu Hause viel Organisation. Schülerpraktikum 9. Klasse beim Bezirksamt Mitte in der Verwaltung — fand alles top. Hilft seit 2 Jahren ihrem Vater mit Imbiss-Rechnungen — Excel führen, Belege sortieren, Steuerberater-Ordner. Lieblingsfächer: Mathe, Wirtschaft, Deutsch. Sucht Ausbildung Sept 2026, will im Büro arbeiten, kein Schmutz, kein Schweiß. HG-6-coverage persona — confident kaufmännisch-Büro-direction.',
+  '{
+    "inSchool": false,
+    "educationLevel": "intermediate",
+    "favoriteSubjects": ["math", "economics", "german"],
+    "customSubjects": [],
+    "interests": ["planning", "computer"],
+    "customInterests": [],
+    "workValues": ["good_salary", "stability", "career"],
+    "strengths": {
+      "concentration": 1,
+      "precision": 1,
+      "communication": 0.5,
+      "logical-thinking": 0.5
+    },
+    "secretTalent": "ich bin sehr ordentlich. Termine planen, Excel-Tabellen führen, immer wissen wo was ist — das fällt mir leicht. Im Praktikum hat die Chefin gesagt sie würde mich sofort einstellen wenn ich Abschluss habe.",
+    "practicalExperience": "Schülerpraktikum 2 Wochen beim Bezirksamt Mitte — Verwaltung. Akten gemacht, Termine eingetragen, Telefon entgegengenommen, war genau mein Ding. Außerdem helfe ich meinem Vater seit 2 Jahren mit den Rechnungen für den Imbiss — Excel führen, Belege sortieren, Steuerberater-Ordner machen.",
+    "workPreferences": {
+      "environment": "a",
+      "location": "a",
+      "hands-vs-mind": "b",
+      "variety": "a",
+      "people": "b",
+      "pace": "a"
+    },
+    "noGos": {
+      "dirt": "rejected",
+      "heavy-work": "rejected"
+    }
+  }'::jsonb,
+  -- tier_s: 2 entries (criterion-cleanest kaufmännisch Realschule fits)
+  ARRAY[
+    123266, -- Kaufmann/-frau Büromanagement (A_anchor 21k, her named direction)
+    7944    -- Verwaltungsfachangestellte/r Kommunalverwaltung (A_anchor, Realschule-anchored 70%, Bezirksamt-Praktikum literal)
+  ]::integer[],
+  -- tier_a: 15 entries (kaufmännisch siblings + Abi-leaning kaufmännisch core + admin direction)
+  ARRAY[
+    7925,   -- Verwaltungsfachangestellte/r Landesverwaltung (sibling of S 7944)
+    7934,   -- Verwaltungsfachangestellte/r Bundesverwaltung (sibling)
+    7933,   -- Verwaltungsfachangestellte/r HWK und IHK (sibling)
+    7929,   -- Verwaltungsfachangestellte/r Kirchenverwaltung (sibling)
+    7573,   -- Steuerfachangestellte/r (demoted from S — Imbiss-Buchhaltung signal but 60% Abi cohort)
+    7965,   -- Industriekaufmann/-frau (demoted from S — 63% Abi cohort, no Industrie signal)
+    6755,   -- Bankkaufmann/-frau (demoted from S — 61% Abi cohort, no banking signal)
+    7958,   -- Rechtsanwaltsfachangestellte/r (Realschule-anchored 65%, B_solid)
+    7924,   -- Justizfachangestellte/r (admin direction, BE+BB=0 asymmetric-no-data carve-out)
+    7930,   -- Sozialversicherungsfachangestellte/r allg. KV (admin direction)
+    7889,   -- Kaufmann/-frau Gesundheitswesen (kaufmännisch in health-context)
+    136117, -- Kaufmann/-frau Versicherungen und Finanzanlagen (kaufmännisch direction)
+    130926, -- Kaufmann/-frau E-Commerce (newer kaufmännisch, fits her computer interest)
+    35275,  -- Immobilienkaufmann/-frau (kaufmännisch in real-estate)
+    29441   -- Kaufmann/-frau Spedition und Logistikdienstleistung (kaufmännisch with logistics-context, office-side)
+  ]::integer[],
+  -- tier_c: persona-specific bait + hard no-go conflicts + universal niche bait
+  ARRAY[
+    -- A. Hard `dirt: rejected` + `heavy-work: rejected` (each -5)
+    -- Kfz family (Schrauben-cluster)
+    14799,  -- Kraftfahrzeugmechatroniker PKW
+    122564, -- Kfz Karosserietechnik
+    27300,  -- Kfz Motorradtechnik
+    27298,  -- Kfz Nutzfahrzeugtechnik
+    122563, -- Kfz System- und Hochvolttechnik
+    124530, -- Karosserie- und Fahrzeugbaumechaniker - Karosseriebau
+    137639, -- Karosserie- und Fahrzeugbaumechaniker - Caravan
+    15166,  -- Karosserie- und Fahrzeugbaumechaniker - Instandhaltung
+    124409, -- Zweiradmechatroniker - Fahrradtechnik
+    124410, -- Zweiradmechatroniker - Motorradtechnik
+    15540,  -- Fahrzeuglackierer
+    -- Bau-Handwerk cluster (Lukas Tier S/A territory)
+    15164,  -- Anlagenmechaniker SHK
+    129406, -- Dachdecker
+    3938,   -- Maurer
+    4105,   -- Straßenbauer
+    132715, -- Hochbaufach Maurerarbeiten
+    132714, -- Hochbaufach Beton-/Stahlbeton
+    132659, -- Tiefbaufach Straßenbau
+    132662, -- Tiefbaufach Kanalbau
+    132663, -- Tiefbaufach Rohrleitungsbau
+    134955, -- Maler Ausbautechnik
+    15530,  -- Maler Gestaltung
+    15532,  -- Maler Bauten-/Korrosionsschutz
+    134954, -- Maler Energieeffizienz
+    4460,   -- Tischler
+    4325,   -- Fliesen-, Platten- und Mosaikleger
+    4248,   -- Stuckateur
+    4289,   -- Trockenbaumonteur
+    4066,   -- Gerüstbauer
+    4823,   -- Baugeräteführer
+    2168,   -- Klempner
+    4365,   -- Glaser Fenster-/Glasfassadenbau
+    862,    -- Steinmetz Steinmetzarbeiten
+    8213,   -- Schornsteinfeger
+    4206,   -- Kanalbauer
+    15636,  -- Elektroniker Energie-/Gebäudetechnik (Bauelektriker)
+    124412, -- Land-/Baumaschinenmechatroniker
+    3980,   -- Beton-/Stahlbetonbauer
+    -- Industrial-Mech cluster
+    29055,  -- Industriemechaniker
+    29049,  -- Konstruktionsmechaniker
+    2277,   -- Metallbauer Konstruktionstechnik
+    -- Gärtner/Forst/Landwirt (dirt + heavy)
+    588,    -- Gärtner Garten- und Landschaftsbau
+    594,    -- Gärtner Baumschule
+    604,    -- Gärtner Staudengärtnerei
+    605,    -- Gärtner Zierpflanzenbau
+    614,    -- Gärtner Gemüsebau
+    615,    -- Gärtner Obstbau
+    620,    -- Gärtner Friedhofsgärtnerei
+    727,    -- Forstwirt
+    272,    -- Landwirt
+    -- Lager + Möbel-Service + Transport (heavy=true)
+    27539,  -- Fachlagerist (A_anchor, heavy=true)
+    34980,  -- Fachkraft Möbel-/Küchen-/Umzugsservice (heavy)
+    13794,  -- Berufskraftfahrer (heavy)
+    -- Pflege-direction (heavy=true)
+    132173, -- Pflegefachmann
+    30191,  -- Gesundheits- und Krankenpflegehelfer
+    9063,   -- Altenpflegehelfer
+    9031,   -- Sozialassistent
+    -- B. Persona-specific bait — "Mädchen + Realschule → Friseur" (gender stereotype)
+    9910,   -- Friseur (gender-default popularity-pick; no fashion signal)
+    14624,  -- Kosmetiker dual
+    9929,   -- Kosmetiker schulisch
+    134513, -- Fachpraktiker Friseur (§66)
+    -- C. Persona-specific bait — "Planning" → Event de-facto-Abi
+    14448,  -- Veranstaltungskaufmann (sec=2% int=25% = 73% Abi cohort)
+    129457, -- Fachkraft Veranstaltungstechnik (also heavy=true → double-trap)
+    -- D. Persona-specific bait — Realschule-label-but-Abi-clientele creative
+    14217,  -- Designer Grafik (FHR-overridden)
+    14326,  -- Designer Foto
+    14557,  -- Designer angewandte Formgebung
+    13968,  -- Designer Kommunikationsdesign
+    8459,   -- Designer Medien
+    14319,  -- Designer Mode
+    14869,  -- Gamedesigner
+    59038,  -- Audiodesigner Musik
+    8502,   -- Bühnenmaler Malerei
+    14080,  -- Bühnenmaler Plastik
+    90571,  -- Technische Produktdesigner Maschinen-/Anlagenkonstruktion
+    90588,  -- Technische Produktdesigner Produktgestaltung
+    137682, -- Mediengestalter D&P Digitalmedien (67% Abi)
+    137684, -- Mediengestalter D&P Designkonzeption (69% Abi)
+    137685, -- Mediengestalter D&P Projektmanagement (69% Abi)
+    -- E. Universal niche bait
+    -- (instruments)
+    2673,   -- Geigenbauer
+    124509, -- Zupfinstrumentenmacher Gitarrenbau
+    124510, -- Zupfinstrumentenmacher Harfenbau
+    2674,   -- Bogenmacher
+    2687,   -- Holzblasinstrumentenmacher
+    2665,   -- Metallblasinstrumentenmacher
+    2694,   -- Handzuginstrumentenmacher
+    132536, -- Orgelbauer Orgelbau
+    132537, -- Orgelbauer Pfeifenbau
+    -- (crafts)
+    130315, -- Bürsten- und Pinselmacher
+    4539,   -- Böttcher
+    1528,   -- Drechsler Drechseln
+    1539,   -- Drechsler Elfenbeinschnitzen
+    4640,   -- Vergolder
+    -- (gemstone)
+    131163, -- Edelsteinschleifer Edelsteingravieren
+    131165, -- Edelsteinschleifer Edelsteinschleifen
+    131166, -- Edelsteinschleifer Industriediamantschleifen
+    131167, -- Edelsteinschleifer Schmuckdiamantschleifen
+    -- (glass)
+    1092,   -- Glasbläser Christbaumschmuck
+    1091,   -- Glasbläser Glasgestaltung
+    1095,   -- Glasbläser Kunstaugen
+    1088,   -- Leuchtröhrenglasbläser
+    -- (jewellery)
+    142202, -- Gold- und Silberschmied Goldschmieden
+    142203, -- Gold- und Silberschmied Silberschmieden
+    -- (fur)
+    3611,   -- Kürschner
+    3602    -- Pelzveredler
+  ]::integer[],
+  -- criteria: 4
+  '[
+    {"type": "min_tier_s", "count": 1},
+    {"type": "no_tier_c"},
+    {"type": "first_from_s_a_union"},
+    {
+      "type": "at_least_one_in_top_3",
+      "ids": [123266, 7944],
+      "label": "Kaufmann Büromanagement (123266) oder Verwaltungsfachangestellte Kommunalverwaltung (7944) im Top 3 — namentliche Direction (Büro + Bezirksamt-Praktikum) erkannt"
     }
   ]'::jsonb,
   false
