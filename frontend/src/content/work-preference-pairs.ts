@@ -3,7 +3,7 @@ export const workPreferencePairs = [
 	{ id: "location", a: "Fester Arbeitsort", b: "Viel unterwegs" },
 	{
 		id: "hands-vs-mind",
-		a: "Handwerklich umsetzen",
+		a: "Praktisch arbeiten",
 		b: "Nachdenken und planen",
 	},
 	{
@@ -16,6 +16,6 @@ export const workPreferencePairs = [
 		a: "Meist alleine arbeiten",
 		b: "Viel Kontakt mit Menschen",
 	},
-	{ id: "pace", a: "Entspanntes Tempo", b: "Immer viel zu tun" },
+	{ id: "pace", a: "Immer viel zu tun", b: "Entspanntes Tempo" },
 	{ id: "structure", a: "Aufgaben erledigen", b: "Neue Ideen entwickeln" },
 ] as const;

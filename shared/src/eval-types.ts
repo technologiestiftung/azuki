@@ -29,4 +29,3 @@ export interface EvalSnapshot {
 	model: string;
 	results: Record<string, PersonaResult>;
 }
-

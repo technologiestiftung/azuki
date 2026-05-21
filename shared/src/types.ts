@@ -95,7 +95,7 @@ export interface UserProfile {
 	customSubjects: string[];
 	interests: string[];
 	customInterests: string[];
-	workValues: string[];
+	workExpectations: string[];
 	strengths: Record<string, number>;
 	secretTalent: string;
 	practicalExperience: string;
@@ -112,6 +112,9 @@ export interface MatchedOccupation {
 	images: OccupationImage[];
 	taskSummary: string;
 	reasoning: string;
+	occupationType: string;
+	occupationDuration: string;
+	occupationEarnings: string;
 }
 
 export interface MatchResult {

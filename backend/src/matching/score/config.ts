@@ -5,7 +5,7 @@ export type WorkPreferenceOptionChecks = {
 	a: OccupationPredicate;
 	b: OccupationPredicate;
 };
-export type WorkValuePredicate = (occupation: Occupation) => boolean;
+export type WorkExpectationPredicate = (occupation: Occupation) => boolean;
 
 export const NO_GO_MAP: Record<string, OccupationPredicate> = {
 	noise: (o) => o.conditions.noise,
@@ -36,9 +36,9 @@ export const WORK_PREF_MAP: Record<string, WorkPreferenceOptionChecks> = {
 		b: (o) => o.conditions.customerContact || o.conditions.teamwork,
 	},
 	pace: {
-		a: (o) => o.conditions.office,
 		// No BERUFENET signal for "Arbeit unter Zeitdruck".
-		b: () => false,
+		a: () => false,
+		b: (o) => o.conditions.office,
 	},
 	structure: {
 		a: (o) => o.conditions.regulatedWork,
@@ -103,7 +103,10 @@ export const COMMUNICATION_SKILL_TAGS: readonly string[] = [
 
 const HOMEOFFICE_RE = /homeoffice/i;
 
-export const WORK_VALUE_CHECKS: Record<string, WorkValuePredicate> = {
+export const WORK_EXPECTATIONS_CHECKS: Record<
+	string,
+	WorkExpectationPredicate
+> = {
 	people_work: (o) =>
 		o.conditions.customerContact || o.interests.includes("sozial-beratend"),
 	teamwork_value: (o) =>

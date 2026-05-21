@@ -5,8 +5,8 @@ import {
 	type EducationLevel,
 	type WorkPreferenceChoice,
 	type NoGoAnswer,
-	type MatchResult,
 } from "../common";
+import { useMatchResultsStore } from "./useMatchResultsStore";
 
 const initialProfile: UserProfile = {
 	inSchool: null,
@@ -15,7 +15,7 @@ const initialProfile: UserProfile = {
 	customSubjects: [],
 	interests: [],
 	customInterests: [],
-	workValues: [],
+	workExpectations: [],
 	strengths: {},
 	secretTalent: "",
 	practicalExperience: "",
@@ -34,32 +34,34 @@ function normalizeProfile(
 		customSubjects: merged.customSubjects ?? [],
 		interests: merged.interests ?? [],
 		customInterests: merged.customInterests ?? [],
-		workValues: merged.workValues ?? [],
+		workExpectations: merged.workExpectations ?? [],
 		strengths: merged.strengths ?? {},
 		workPreferences: merged.workPreferences ?? {},
 		noGos: merged.noGos ?? {},
 	};
 }
 
+function clearMatchResults(): void {
+	useMatchResultsStore.getState().clearMatchResults();
+}
+
 interface AppState {
 	profile: UserProfile;
-	matchResults: MatchResult | null;
 }
 
 interface AppActions {
 	setInSchool: (value: boolean) => void;
 	setEducationLevel: (value: EducationLevel) => void;
 	toggleSubject: (subject: string) => void;
-	toggleWorkValue: (value: string) => void;
+	toggleWorkExpectation: (value: string) => void;
 	toggleInterest: (interest: string) => void;
 	addCustomInterest: (interest: string) => void;
 	addCustomSubject: (subject: string) => void;
 	setStrength: (id: string, value: number) => void;
 	setSecretTalent: (value: string) => void;
 	setPracticalExperience: (value: string) => void;
-	setWorkPreference: (id: string, choice: WorkPreferenceChoice) => void;
+	setWorkPreference: (id: string, choice: WorkPreferenceChoice | null) => void;
 	setNoGo: (id: string, answer: NoGoAnswer | null) => void;
-	setMatchResults: (results: MatchResult) => void;
 	resetProfile: () => void;
 }
 
@@ -67,28 +69,28 @@ export const useAppStore = create<AppState & AppActions>()(
 	persist(
 		(set) => ({
 			profile: initialProfile,
-			matchResults: null,
 
 			setInSchool: (value) =>
 				set((state) => {
 					// If the user changes their school status, reset the education level
 					// to prevent invalid states (e.g. having "none" selected while being in school)
 					const resetEducationLevel = state.profile.inSchool !== value;
+					clearMatchResults();
 					return {
 						profile: {
 							...state.profile,
 							inSchool: value,
 							...(resetEducationLevel ? { educationLevel: null } : {}),
 						},
-						matchResults: null,
 					};
 				}),
 
-			setEducationLevel: (value) =>
+			setEducationLevel: (value) => {
+				clearMatchResults();
 				set((state) => ({
 					profile: { ...state.profile, educationLevel: value },
-					matchResults: null,
-				})),
+				}));
+			},
 
 			toggleSubject: (subject) =>
 				set((state) => {
@@ -97,21 +99,23 @@ export const useAppStore = create<AppState & AppActions>()(
 								(favoriteSubject: string) => favoriteSubject !== subject,
 							)
 						: [...state.profile.favoriteSubjects, subject];
+					clearMatchResults();
 					return {
 						profile: { ...state.profile, favoriteSubjects: subjects },
-						matchResults: null,
 					};
 				}),
-			toggleWorkValue: (value) =>
+			toggleWorkExpectation: (value) =>
 				set((state) => {
-					const workValues = state.profile.workValues.includes(value)
-						? state.profile.workValues.filter(
-								(workValue: string) => workValue !== value,
+					const workExpectations = state.profile.workExpectations.includes(
+						value,
+					)
+						? state.profile.workExpectations.filter(
+								(workExpectation: string) => workExpectation !== value,
 							)
-						: [...state.profile.workValues, value];
+						: [...state.profile.workExpectations, value];
+					clearMatchResults();
 					return {
-						profile: { ...state.profile, workValues },
-						matchResults: null,
+						profile: { ...state.profile, workExpectations },
 					};
 				}),
 
@@ -122,57 +126,62 @@ export const useAppStore = create<AppState & AppActions>()(
 								(interestValue: string) => interestValue !== interest,
 							)
 						: [...state.profile.interests, interest];
+					clearMatchResults();
 					return {
 						profile: { ...state.profile, interests },
-						matchResults: null,
 					};
 				}),
 
-			addCustomInterest: (interest) =>
+			addCustomInterest: (interest) => {
+				clearMatchResults();
 				set((state) => ({
 					profile: {
 						...state.profile,
 						customInterests: [...state.profile.customInterests, interest],
 						interests: [...state.profile.interests, interest],
 					},
-					matchResults: null,
-				})),
+				}));
+			},
 			addCustomSubject: (subject) =>
 				set((state) => {
 					const customSubjects = state.profile.customSubjects ?? [];
 					const favoriteSubjects = state.profile.favoriteSubjects ?? [];
+					clearMatchResults();
 					return {
 						profile: {
 							...state.profile,
 							customSubjects: [...customSubjects, subject],
 							favoriteSubjects: [...favoriteSubjects, subject],
 						},
-						matchResults: null,
 					};
 				}),
 
-			setStrength: (id, value) =>
+			setStrength: (id, value) => {
+				clearMatchResults();
 				set((state) => ({
 					profile: {
 						...state.profile,
 						strengths: { ...state.profile.strengths, [id]: value },
 					},
-					matchResults: null,
-				})),
+				}));
+			},
 
-			setSecretTalent: (value) =>
+			setSecretTalent: (value) => {
+				clearMatchResults();
 				set((state) => ({
 					profile: { ...state.profile, secretTalent: value },
-					matchResults: null,
-				})),
+				}));
+			},
 
-			setPracticalExperience: (value) =>
+			setPracticalExperience: (value) => {
+				clearMatchResults();
 				set((state) => ({
 					profile: { ...state.profile, practicalExperience: value },
-					matchResults: null,
-				})),
+				}));
+			},
 
-			setWorkPreference: (id, choice) =>
+			setWorkPreference: (id, choice) => {
+				clearMatchResults();
 				set((state) => ({
 					profile: {
 						...state.profile,
@@ -181,32 +190,29 @@ export const useAppStore = create<AppState & AppActions>()(
 							[id]: choice,
 						},
 					},
-					matchResults: null,
-				})),
+				}));
+			},
 
-			setNoGo: (id, answer) =>
+			setNoGo: (id, answer) => {
+				clearMatchResults();
 				set((state) => ({
 					profile: {
 						...state.profile,
 						noGos: { ...state.profile.noGos, [id]: answer },
 					},
-					matchResults: null,
-				})),
+				}));
+			},
 
-			setMatchResults: (results) => set({ matchResults: results }),
-
-			resetProfile: () =>
-				set({
-					profile: initialProfile,
-					matchResults: null,
-				}),
+			resetProfile: () => {
+				clearMatchResults();
+				set({ profile: initialProfile });
+			},
 		}),
 		{
 			name: "azuki-app-store",
 			storage: createJSONStorage(() => sessionStorage),
 			partialize: (state) => ({
 				profile: state.profile,
-				matchResults: state.matchResults,
 			}),
 			merge: (persistedState, currentState) => {
 				const persisted = persistedState as Partial<AppState> | undefined;

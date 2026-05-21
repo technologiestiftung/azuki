@@ -68,6 +68,8 @@ export default {
 					white: "#fafdff",
 				},
 				"card-fill": "#EEF2F6",
+				"fill-secondary": "#1325491C",
+				"fill-primary": "#020919F0",
 				red: {
 					700: "#B91C1C",
 				},
@@ -79,6 +81,22 @@ export default {
 				fadeIn: {
 					from: { opacity: "0" },
 					to: { opacity: "1" },
+				},
+				fadeInUp: {
+					from: { opacity: "0", transform: "translateY(0.5rem)" },
+					to: { opacity: "1", transform: "translateY(0)" },
+				},
+				fadeOut: {
+					from: { opacity: "1" },
+					to: { opacity: "0" },
+				},
+				slideInBottom: {
+					from: { transform: "translateY(100%)" },
+					to: { transform: "translateY(0)" },
+				},
+				slideOutBottom: {
+					from: { transform: "translateY(var(--sheet-drag-y, 0px))" },
+					to: { transform: "translateY(100%)" },
 				},
 				slideInNext: {
 					from: { transform: "translateX(100%)" },
@@ -153,14 +171,22 @@ export default {
 			},
 			animation: {
 				fadeIn: "fadeIn 0.2s ease-in-out",
+				fadeInUp: "fadeInUp 0.2s ease-in-out",
+				fadeOut: "fadeOut 0.2s ease-in-out forwards",
+				slideInBottom:
+					"slideInBottom 0.32s cubic-bezier(0.32, 0.72, 0, 1) forwards",
+				slideOutBottom:
+					"slideOutBottom 0.28s cubic-bezier(0.4, 0, 1, 1) forwards",
 				slideInNext: "slideInNext 0.3s ease-in-out",
 				slideOutPrev: "slideOutPrev 0.3s ease-in-out forwards",
 				slideInPrev: "slideInPrev 0.3s ease-in-out",
 				slideOutNext: "slideOutNext 0.3s ease-in-out forwards",
 				slideInLeft: "slideInLeft 0.3s ease-out forwards",
 				slideInRight: "slideInRight 0.3s ease-out forwards",
-				slideInLeftTint: "slideInLeftTint 800ms cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards",
-				slideInRightTint: "slideInRightTint 800ms cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards",
+				slideInLeftTint:
+					"slideInLeftTint 800ms cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards",
+				slideInRightTint:
+					"slideInRightTint 800ms cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards",
 				backCardSlideInRecede:
 					"backCardSlideInRecede 800ms cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards",
 				slideInTop: "slideInTop 0.4s ease-out forwards",

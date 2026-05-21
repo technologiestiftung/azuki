@@ -12,17 +12,16 @@ export type {
 	GenerationInfo,
 } from "./types";
 
-export { AI_MODELS, AI_MODEL_IDS, DEFAULT_MODEL_ID, type AiModel } from "./models";
-
 export {
-	SUBJECTS,
-	type SubjectDefinition,
-} from "./subjects";
+	AI_MODELS,
+	AI_MODEL_IDS,
+	DEFAULT_MODEL_ID,
+	type AiModel,
+} from "./models";
 
-export {
-	INTERESTS,
-	type InterestDefinition,
-} from "./interests";
+export { SUBJECTS, type SubjectDefinition } from "./subjects";
+
+export { INTERESTS, type InterestDefinition } from "./interests";
 
 export type {
 	PrefilterEntry,
@@ -40,12 +39,11 @@ export {
 	type PopularityRecord,
 } from "./popularity";
 
-export {
-	type Verdict,
-	type ScoreReport,
-} from "./eval-rubrics/types";
+export { type Verdict, type ScoreReport } from "./eval-rubrics/types";
 
 export type { Persona } from "./persona";
+
+export { formatOccupationDisplayName } from "./occupationDisplayName";
 
 export {
 	type Bundesland,
@@ -55,4 +53,3 @@ export {
 	traineeCountAcrossStates,
 	hasAvailabilityData,
 } from "./availability";
-

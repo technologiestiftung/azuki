@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import { DefaultDialog } from "../primitives/dialogs/DefaultDialog";
 import { PrimaryThemedButton } from "../primitives/buttons/PrimaryThemedButton";
 import { SecondaryButton } from "../primitives/buttons/SecondaryButton";
-import { content } from "../../content/de";
+import { content } from "../../content";
+import { TextInput } from "../primitives/text-inputs/TextInput";
 
 const inputDialogId = "input-dialog";
 const inputDialogErrorId = "input-dialog-error";
@@ -48,6 +49,11 @@ export const InputDialog = ({
 		}
 	}
 
+	const handleClearInput = () => {
+		setValue("");
+		setError(false);
+	};
+
 	return (
 		<DefaultDialog
 			id={inputDialogId}
@@ -56,42 +62,26 @@ export const InputDialog = ({
 				setValue("");
 				setError(false);
 			}}
-			className="w-full"
+			className="w-full max-w-[398px]"
 		>
 			<div className="flex flex-col gap-10 p-4 rounded-4xl bg-gray-100">
 				<div className="flex flex-col gap-2">
-					<div
-						className={`h-[60px] flex items-center gap-2 px-4 py-2.5 rounded-2xl border-2 focus-within:outline focus-within:outline-2 focus-within:outline-offset-1 focus-within:outline-sky-300 focus-within:border-gray-700 bg-white group transition-colors ${error ? "border-red-700 focus-within:outline-red-700" : "border-gray-500"}`}
-					>
-						<input
-							type="text"
-							placeholder={inputPlaceholder}
-							aria-invalid={error}
-							aria-describedby={error ? inputDialogErrorId : undefined}
-							value={value}
-							onChange={(e) => {
-								setValue(e.target.value);
-								if (error) {
-									setError(false);
-								}
-							}}
-							onKeyDown={handleKeyDown}
-							className="flex-1 placeholder:text-gray-400 text-sky-900 text-lg font-medium bg-white focus:outline-none"
-						/>
-						{value && (
-							<button
-								type="button"
-								onClick={() => {
-									setValue("");
-									setError(false);
-								}}
-								aria-label={content["common.inputDialog.clearButtonAriaLabel"]}
-								className="bg-gray-300 rounded-full p-2 size-8 focus-visible:outline focus-visible:outline-2 focus-visible:outline-sky-500"
-							>
-								<img src="/icons/close-black.svg" alt="" className="w-4 h-4" />
-							</button>
-						)}
-					</div>
+					<TextInput
+						placeholder={inputPlaceholder}
+						value={value}
+						onChange={(e) => {
+							setValue(e.target.value);
+							if (error) {
+								setError(false);
+							}
+						}}
+						error={error}
+						onKeyDown={handleKeyDown}
+						onSubmit={submit}
+						onClearInput={handleClearInput}
+						submitDisabled={!value.trim()}
+					/>
+
 					{error && (
 						<div
 							id={inputDialogErrorId}

@@ -1,0 +1,9 @@
+# Generated/data files — these are produced by scripts, not authored
+# Workspace-relative because prettier is invoked from the backend workspace
+src/data/berufe.json
+
+# Standard ignores
+node_modules
+dist
+build
+coverage

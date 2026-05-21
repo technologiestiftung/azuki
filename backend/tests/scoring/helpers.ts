@@ -60,9 +60,7 @@ export function makeOccupation(
 	};
 }
 
-export function makeProfile(
-	overrides: Partial<UserProfile> = {},
-): UserProfile {
+export function makeProfile(overrides: Partial<UserProfile> = {}): UserProfile {
 	return {
 		inSchool: null,
 		educationLevel: null,
@@ -70,7 +68,7 @@ export function makeProfile(
 		customSubjects: [],
 		interests: [],
 		customInterests: [],
-		workValues: [],
+		workExpectations: [],
 		strengths: {},
 		secretTalent: "",
 		practicalExperience: "",

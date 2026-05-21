@@ -9,7 +9,7 @@ const baseProfile = {
 	customSubjects: [],
 	interests: [],
 	customInterests: [],
-	workValues: [],
+	workExpectations: [],
 	strengths: {},
 	secretTalent: "",
 	practicalExperience: "",
