@@ -19,10 +19,22 @@ export type Bundesland =
 	| "Thüringen";
 
 export const BUNDESLAENDER: Bundesland[] = [
-	"Baden-Württemberg", "Bayern", "Berlin", "Brandenburg",
-	"Bremen", "Hamburg", "Hessen", "Mecklenburg-Vorpommern",
-	"Niedersachsen", "Nordrhein-Westfalen", "Rheinland-Pfalz", "Saarland",
-	"Sachsen", "Sachsen-Anhalt", "Schleswig-Holstein", "Thüringen",
+	"Baden-Württemberg",
+	"Bayern",
+	"Berlin",
+	"Brandenburg",
+	"Bremen",
+	"Hamburg",
+	"Hessen",
+	"Mecklenburg-Vorpommern",
+	"Niedersachsen",
+	"Nordrhein-Westfalen",
+	"Rheinland-Pfalz",
+	"Saarland",
+	"Sachsen",
+	"Sachsen-Anhalt",
+	"Schleswig-Holstein",
+	"Thüringen",
 ];
 
 export function isBundesland(s: string): s is Bundesland {
@@ -33,7 +45,10 @@ type StateCounts = Partial<Record<Bundesland, number>>;
 const AVAILABILITY = data as Record<string, StateCounts>;
 
 /** Annual trainee count for occupation in a given state, 0 if no record. */
-export function traineeCountInState(occupationId: number, state: Bundesland): number {
+export function traineeCountInState(
+	occupationId: number,
+	state: Bundesland,
+): number {
 	return AVAILABILITY[String(occupationId)]?.[state] ?? 0;
 }
 
