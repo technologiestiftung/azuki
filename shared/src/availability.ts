@@ -58,7 +58,9 @@ export function traineeCountAcrossStates(
 	states: readonly Bundesland[],
 ): number {
 	let total = 0;
-	for (const s of states) total += traineeCountInState(occupationId, s);
+	for (const s of states) {
+		total += traineeCountInState(occupationId, s);
+	}
 	return total;
 }
 

@@ -28,7 +28,9 @@ export function filterByRegionalAvailability(
 	occupations: Occupation[],
 ): Occupation[] {
 	return occupations.filter((o) => {
-		if (!hasAvailabilityData(o.id)) return true;
+		if (!hasAvailabilityData(o.id)) {
+			return true;
+		}
 		return traineeCountAcrossStates(o.id, SERVICE_REGION) >= MIN_TRAINEES;
 	});
 }
