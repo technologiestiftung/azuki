@@ -10,10 +10,15 @@ type HeadersInit = Record<string, string>;
 
 const API_BASE = import.meta.env.VITE_API_URL || "/api";
 
-let appPassword: string | null = null;
+const APP_PASSWORD_STORAGE_KEY = "azuki-app-password";
+
+let appPassword: string | null = sessionStorage.getItem(
+	APP_PASSWORD_STORAGE_KEY,
+);
 
 export function setAppPassword(password: string) {
 	appPassword = password;
+	sessionStorage.setItem(APP_PASSWORD_STORAGE_KEY, password);
 }
 
 export function isAuthenticated(): boolean {

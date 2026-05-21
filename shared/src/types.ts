@@ -106,6 +106,7 @@ export interface UserProfile {
 export interface MatchedOccupation {
 	id: number;
 	name: string;
+	rawName: string;
 	score: number;
 	images: OccupationImage[];
 	taskSummary: string;

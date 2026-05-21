@@ -298,6 +298,7 @@ function toOccupationResult(
 	return {
 		id: item.occupation.id,
 		name: formatOccupationDisplayName(item.occupation.name),
+		rawName: item.occupation.name,
 		score: item.score,
 		images: item.occupation.images.slice(0, 3),
 		taskSummary: item.occupation.taskSummary || "",

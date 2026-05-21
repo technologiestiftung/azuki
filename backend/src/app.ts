@@ -138,6 +138,7 @@ app.post("/api/match", async (c) => {
 			occupations: top40.slice(0, 8).map((scored) => ({
 				id: scored.occupation.id,
 				name: formatOccupationDisplayName(scored.occupation.name),
+				rawName: scored.occupation.name,
 				score: scored.score,
 				images: scored.occupation.images.slice(0, 3),
 				taskSummary: scored.occupation.taskSummary || "",

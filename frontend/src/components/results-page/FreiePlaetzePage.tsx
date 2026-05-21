@@ -113,7 +113,7 @@ export function FreiePlaetzePage() {
 			return () => {};
 		}
 		const controller = new AbortController();
-		const berufe = occupations.map((o) => o.name);
+		const berufe = occupations.map((o) => o.rawName);
 		setFetchError(null);
 		setLoading(true);
 		(async () => {
@@ -172,7 +172,7 @@ export function FreiePlaetzePage() {
 						<BerufCard
 							key={occupation.id}
 							occupation={occupation}
-							stellen={stellenByName.get(occupation.name)}
+							stellen={stellenByName.get(occupation.rawName)}
 							umkreis={standort.umkreis}
 							loading={loading}
 						/>
