@@ -106,8 +106,9 @@ export function InterestsStep() {
 			<InputBottomSheet
 				open={inputSheetOpen}
 				onClose={() => setInputSheetOpen(false)}
-				sheetAriaLabel={content["interests.bottomSheet.input.addPlaceholder"]}
+				sheetAriaLabel={content["interests.bottomSheet.sheetAriaLabel"]}
 				inputPlaceholder={content["interests.bottomSheet.input.addPlaceholder"]}
+				errorMessage={content["interests.bottomSheet.errorMessage"]}
 				onSubmit={handleAddCustomInterest}
 			/>
 		</StepLayout>
