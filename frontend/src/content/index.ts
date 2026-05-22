@@ -57,7 +57,8 @@ export const content = {
 	"schoolSubjects.addCustomSubjectButton.ariaLabel": "Schulfach hinzufügen",
 	"schoolSubjects.customSubject.label": "Von dir hinzugefügt",
 	"schoolSubjects.bottomSheet.sheetAriaLabel": "Bitte gib ein Schulfach ein.",
-	"schoolSubjects.bottomSheet.input.addPlaceholder": "Bitte gib ein Schulfach ein.",
+	"schoolSubjects.bottomSheet.input.addPlaceholder":
+		"Bitte gib ein Schulfach ein.",
 	"schoolSubjects.bottomSheet.errorMessage": "Bitte gib ein Schulfach ein.",
 	"schoolSubjects.addCustomSubjectButton.addMore": "Weitere hinzufügen",
 	//Languages
@@ -116,7 +117,8 @@ export const content = {
 	"interests.addCustomInterestsButton.addMore": "Weitere hinzufügen",
 	"interests.addCustomInterestsButton.label": "Interesse hinzufügen",
 	"interests.addCustomInterestsButton.ariaLabel": "Interesse hinzufügen",
-	"interests.bottomSheet.sheetAriaLabel": "Bitte gib ein, was dich interessiert.",
+	"interests.bottomSheet.sheetAriaLabel":
+		"Bitte gib ein, was dich interessiert.",
 	"interests.bottomSheet.input.addPlaceholder": "Interesse hinzufügen",
 	"interests.bottomSheet.submitButtonLabel": "Hinzufügen",
 	"interests.bottomSheet.submitButtonAriaLabel": "Hinzufügen",
