@@ -281,6 +281,7 @@ export function NoGosStep() {
 				onClose={() => setInputSheetOpen(false)}
 				sheetAriaLabel={content["noGos.bottomSheet.input.addPlaceholder"]}
 				inputPlaceholder={content["noGos.bottomSheet.input.addPlaceholder"]}
+				errorMessage={content["noGos.bottomSheet.errorMessage"]}
 				onSubmit={handleAddCustomNoGo}
 			/>
 		</StepLayout>
