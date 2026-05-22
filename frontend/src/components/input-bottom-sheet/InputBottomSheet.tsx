@@ -12,6 +12,7 @@ export interface InputBottomSheetProps {
 	onClose: () => void;
 	sheetAriaLabel: string;
 	inputPlaceholder: string;
+	errorMessage: string;
 	onSubmit: (value: string) => void;
 }
 
@@ -20,6 +21,7 @@ export function InputBottomSheet({
 	onClose,
 	sheetAriaLabel,
 	inputPlaceholder,
+	errorMessage,
 	onSubmit,
 }: InputBottomSheetProps) {
 	const [value, setValue] = useState("");
@@ -77,7 +79,7 @@ export function InputBottomSheet({
 							className="flex gap-1 text-red-700 text-lg font-medium"
 						>
 							<img src="/icons/error.svg" alt="" className="w-6 h-6" />
-							{content["common.bottomSheet.errorMessage"]}
+							{errorMessage}
 						</div>
 					)}
 				</div>
