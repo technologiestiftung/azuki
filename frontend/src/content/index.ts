@@ -12,6 +12,7 @@ export const content = {
 	"common.bottomSheet.errorMessage": "Bitte gib etwas ein",
 	"common.bottomSheet.overlayDismissLabel": "Schließen",
 	"common.bottomSheet.ariaLabel": "Dialog",
+	"common.bottomSheet.backButtonAriaLabel": "Zurück gehen",
 	// Welcome
 	"welcome.slide.1.title": "Du suchst eine Ausbildung, die gut zu dir passt?",
 	"welcome.slide.2.title": "Lerne deine Stärken kennen!",
@@ -245,10 +246,85 @@ export const content = {
 	// Practical Experience
 	"practicalExperience.question": "Wo hast du schon Erfahrungen gesammelt?",
 	"practicalExperience.subtitle":
-		"Dabei geht es nicht nur um Praktikum und Jobs – auch Aufgaben im Alltag zählen!",
-	"practicalExperience.placeholder": "Deine Eingabe",
-	"practicalExperience.cancelLabel": "Abbrechen",
-	"practicalExperience.saveLabel": "Speichern",
+		"Dabei geht es nicht nur um Praktikum oder Jobs – auch Aufgaben im Alltag zählen!",
+	"practicalExperience.suggestion.label": "Vorschläge",
+	"practicalExperience.suggestion.addedByYouLabel": "Deine Erfahrungen",
+	"practicalExperience.addCustomPracticalExperienceButton.label":
+		"Etwas Eigenes hinzufügen",
+	"practicalExperience.addCustomPracticalExperienceButton.ariaLabel":
+		"Etwas Eigenes hinzufügen",
+	"practicalExperience.bottomSheet.input.addPlaceholder":
+		"Etwas Eigenes hinzufügen",
+	"practicalExperience.bottomSheet.nextButtonLabel": "weiter",
+	"practicalExperience.bottomSheet.nextButtonAriaLabel": "weiter",
+	"practicalExperience.bottomSheet.saveButtonLabel": "Speichern",
+	"practicalExperience.pill.label.postfix":
+		"als praktische Erfahrung auswählen",
+	"practicalExperience.bottomSheet.submitButtonLabel": "Speichern",
+	"practicalExperience.bottomSheet.submitButtonAriaLabel": "Speichern",
+	// Practical Experience Bottom Sheet Questions
+	"practicalExperience.bottomSheet.addInternship.title":
+		"Welches Praktikum hast du gemacht?",
+	"practicalExperience.bottomSheet.addHomeHelp.title":
+		"Wobei hast du Zuhause geholfen?",
+	"practicalExperience.bottomSheet.addNeighborhood.title":
+		"Wobei hast du in der Nachbarschaft geholfen?",
+	"practicalExperience.bottomSheet.addClub.title":
+		"Wobei hast du im Verein geholfen?",
+	"practicalExperience.bottomSheet.addJob.title":
+		"Welchen Job hast du gemacht?",
+	"practicalExperience.bottomSheet.school.title":
+		"Wobei hast du in der Schule geholfen?",
+	"practicalExperience.bottomSheet.addOwn.title":
+		"Wo hast du Erfahrung gesammelt?",
+	"practicalExperience.bottomSheet.rating.ariaLabel":
+		"Wie hat dir das gefallen?",
+	"starRating.groupAriaLabel": "Bewertung auswählen",
+	"starRating.starAriaLabel": "{value} von {max} Sterne",
+	//Placeholders
+	"practicalExperience.bottomSheet.input.homeHelp.placeholder":
+		"z.B. Putzen, Kochen, Waschen",
+	"practicalExperience.bottomSheet.input.school.placeholder":
+		"z.B. Schule, Uni, Berufsschule, Nachhilfe",
+	"practicalExperience.bottomSheet.input.neighborhood.placeholder":
+		"z.B. Nachbarschaft, Stadtbezirk, Gemeinde",
+	"practicalExperience.bottomSheet.input.club.placeholder":
+		"z.B. Verein, Sportverein, Kulturverein",
+	"practicalExperience.bottomSheet.input.internship.placeholder":
+		"z.B. Kita, Werkstatt oder Einzelhandel",
+	"practicalExperience.bottomSheet.input.job.placeholder":
+		"z.B. Job, Freelance, Selbstständig",
+	"practicalExperience.bottomSheet.input.ariaLabel": "Erfahrung hinzufügen",
+	// Rating and Tags
+	"practicalExperience.bottomSheet.rating.title": "Wie hat dir das gefallen?",
+	"practicalExperience.bottomSheet.rating.bad.label": "Was war nicht so gut?",
+	"practicalExperience.bottomSheet.rating.medium.label":
+		"Was hätte besser sein können?",
+	"practicalExperience.bottomSheet.rating.good.label": "Was war gut?",
+	// Tags - bad rating
+	"practicalExperience.bottomSheet.rating.bad.tag.stressful": "Stressig",
+	"practicalExperience.bottomSheet.rating.bad.tag.difficult": "Anstrengend",
+	"practicalExperience.bottomSheet.rating.bad.tag.pressure": "Viel Druck",
+	"practicalExperience.bottomSheet.rating.bad.tag.uninteresting":
+		"Wenig Abwechslung",
+	"practicalExperience.bottomSheet.rating.bad.tag.tasks": "Aufgaben",
+	"practicalExperience.bottomSheet.rating.bad.tag.notMine":
+		"Einfach nicht meins",
+	// Tags - medium rating
+	"practicalExperience.bottomSheet.rating.medium.tag.lessStress":
+		"Weniger Stress",
+	"practicalExperience.bottomSheet.rating.medium.tag.moreVariety":
+		"Mehr Abwechslung",
+	"practicalExperience.bottomSheet.rating.medium.tag.tasks": "Aufgaben",
+	"practicalExperience.bottomSheet.rating.medium.tag.otherLocation":
+		"Anderer Arbeitsort",
+	"practicalExperience.bottomSheet.rating.medium.tag.notMine":
+		"Einfach nicht meins",
+	// Tags - good rating
+	"practicalExperience.bottomSheet.rating.good.tag.tasks": "Aufgaben",
+	"practicalExperience.bottomSheet.rating.good.tag.location": "Arbeitsort",
+	"practicalExperience.bottomSheet.rating.good.tag.variety": "Abwechslung",
+	"practicalExperience.bottomSheet.rating.good.tag.mine": "Genau meins",
 
 	//Work Expectations
 	"workExpectations.question": "Was ist dir in deinem Beruf wichtig?",

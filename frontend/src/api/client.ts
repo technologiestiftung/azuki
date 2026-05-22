@@ -4,7 +4,6 @@ import type {
 	EvalSnapshot,
 	Persona,
 } from "@azuki/shared";
-
 type HeadersInit = Record<string, string>;
 
 const API_BASE = import.meta.env.VITE_API_URL || "/api";

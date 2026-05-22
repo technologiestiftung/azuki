@@ -13,6 +13,9 @@ export interface InputBottomSheetProps {
 	sheetAriaLabel: string;
 	inputPlaceholder: string;
 	onSubmit: (value: string) => void;
+	title?: string;
+	submitButtonLabel?: string;
+	isCancelButtonVisible?: boolean;
 }
 
 export function InputBottomSheet({
@@ -21,6 +24,9 @@ export function InputBottomSheet({
 	sheetAriaLabel,
 	inputPlaceholder,
 	onSubmit,
+	title,
+	submitButtonLabel,
+	isCancelButtonVisible = true,
 }: InputBottomSheetProps) {
 	const [value, setValue] = useState("");
 	const [error, setError] = useState(false);
@@ -54,6 +60,9 @@ export function InputBottomSheet({
 	return (
 		<BottomSheet open={open} onClose={onClose} ariaLabel={sheetAriaLabel}>
 			<div className="flex flex-col items-center gap-3 pt-1 pb-4 px-4 w-full">
+				{title && (
+					<h2 className="text-2xl font-semibold text-gray-900">{title}</h2>
+				)}
 				<div className="flex flex-col gap-2 w-full">
 					<TextInput
 						placeholder={inputPlaceholder}
@@ -83,17 +92,20 @@ export function InputBottomSheet({
 				</div>
 
 				<div className="flex gap-3 w-full">
-					<SecondaryButton
-						onClick={onClose}
-						ariaLabel={content["common.bottomSheet.cancelButtonAriaLabel"]}
-					>
-						{content["common.bottomSheet.cancelButtonLabel"]}
-					</SecondaryButton>
+					{isCancelButtonVisible && (
+						<SecondaryButton
+							onClick={onClose}
+							ariaLabel={content["common.bottomSheet.cancelButtonAriaLabel"]}
+						>
+							{content["common.bottomSheet.cancelButtonLabel"]}
+						</SecondaryButton>
+					)}
 					<PrimaryThemedButton
 						onClick={submit}
 						ariaLabel={content["common.bottomSheet.submitButtonAriaLabel"]}
 					>
-						{content["common.bottomSheet.submitButtonLabel"]}
+						{submitButtonLabel ||
+							content["common.bottomSheet.submitButtonLabel"]}
 					</PrimaryThemedButton>
 				</div>
 			</div>

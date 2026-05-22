@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import {
 	POPULARITY_INDEX,
+	formatPracticalExperiencesForApi,
 	type EducationLevel,
 	type Persona,
 } from "@azuki/shared";
@@ -306,9 +307,28 @@ function ProfileEditorSection({
 						Praktische Erfahrungen (freier Text)
 					</span>
 					<textarea
-						value={profile.practicalExperience}
+						value={formatPracticalExperiencesForApi(
+							profile.practicalExperiences,
+							profile.selectedPracticalExperienceIds,
+						)}
 						onChange={(e) =>
-							patchProfile({ practicalExperience: e.target.value })
+							patchProfile({
+								practicalExperiences: e.target.value
+									? [
+											{
+												id: "eval-draft",
+												description: e.target.value,
+												selectedExperienceId: null,
+												selectedExperienceLabel: null,
+												rating: 0,
+												tags: [],
+											},
+										]
+									: [],
+								selectedPracticalExperienceIds: e.target.value
+									? ["eval-draft"]
+									: [],
+							})
 						}
 						rows={4}
 						className="border border-gray-300 rounded px-2 py-1"

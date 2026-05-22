@@ -7,7 +7,7 @@ import { SchoolDegreeStep } from "./components/competence-profile/steps/school-d
 import { SchoolSubjectsStep } from "./components/competence-profile/steps/school-subject-step/SchoolSubjectsStep";
 import { InterestsStep } from "./components/competence-profile/steps/interests-step/InterestsStep";
 import { StrengthsStep } from "./components/competence-profile/steps/strengths-step/StrengthsStep";
-import { PracticalExperienceStep } from "./components/competence-profile/steps/PracticalExperienceStep";
+import { PracticalExperienceStep } from "./components/competence-profile/steps/practical-experience/PracticalExperienceStep";
 import { WorkPreferencesStep } from "./components/competence-profile/steps/WorkPreferencesStep";
 import { NoGosStep } from "./components/competence-profile/steps/no-gos-step/NoGosStep";
 import { LoadingScreen } from "./components/loading-screen/LoadingScreen";

@@ -4,6 +4,7 @@ import {
 	type MatchResult,
 	type GenerationInfo,
 	formatOccupationDisplayName,
+	formatPracticalExperiencesForApi,
 	AI_MODEL_IDS,
 	DEFAULT_MODEL_ID,
 } from "@azuki/shared";
@@ -273,9 +274,13 @@ export function formatProfileSections(profile: UserProfile): string {
 		);
 	}
 
-	if (profile.practicalExperience) {
+	const practicalExperienceText = formatPracticalExperiencesForApi(
+		profile.practicalExperiences,
+		profile.selectedPracticalExperienceIds,
+	);
+	if (practicalExperienceText) {
 		parts.push(
-			`Praktische Erfahrungen (eigene Angaben): ${profile.practicalExperience}`,
+			`Praktische Erfahrungen (eigene Angaben): ${practicalExperienceText}`,
 		);
 	}
 

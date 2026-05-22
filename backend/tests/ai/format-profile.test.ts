@@ -331,7 +331,17 @@ describe("formatProfileSections — custom no-gos", () => {
 describe("formatProfileSections — free-text fields labeled as eigene Angaben", () => {
 	test("Praktische Erfahrungen label includes (eigene Angaben) suffix", () => {
 		const profile = makeProfile({
-			practicalExperience: "Praktikum in der Tischlerei",
+			practicalExperiences: [
+				{
+					id: "1",
+					description: "Praktikum in der Tischlerei",
+					selectedExperienceId: null,
+					selectedExperienceLabel: null,
+					rating: 0,
+					tags: [],
+				},
+			],
+			selectedPracticalExperienceIds: ["1"],
 		});
 
 		const output = formatProfileSections(profile);
@@ -342,8 +352,39 @@ describe("formatProfileSections — free-text fields labeled as eigene Angaben",
 		expect(output).not.toMatch(/^Praktische Erfahrungen: /m);
 	});
 
+	test("omits deselected practical experiences from the AI line", () => {
+		const profile = makeProfile({
+			practicalExperiences: [
+				{
+					id: "1",
+					description: "Praktikum in der Tischlerei",
+					selectedExperienceId: null,
+					selectedExperienceLabel: null,
+					rating: 0,
+					tags: [],
+				},
+				{
+					id: "2",
+					description: "Job im Supermarkt",
+					selectedExperienceId: null,
+					selectedExperienceLabel: null,
+					rating: 0,
+					tags: [],
+				},
+			],
+			selectedPracticalExperienceIds: ["1"],
+		});
+
+		const output = formatProfileSections(profile);
+
+		expect(output).toContain(
+			"Praktische Erfahrungen (eigene Angaben): Praktikum in der Tischlerei",
+		);
+		expect(output).not.toContain("Job im Supermarkt");
+	});
+
 	test("free-text field lines are omitted when the values are empty", () => {
-		const profile = makeProfile(); // practicalExperience defaults to ""
+		const profile = makeProfile(); // practicalExperiences defaults to []
 
 		const output = formatProfileSections(profile);
 

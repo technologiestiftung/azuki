@@ -15,6 +15,15 @@ const NoGoAnswerSchema = z.enum(["rejected", "accepted"]);
 
 const WorkPreferenceChoiceSchema = z.enum(["a", "b"]);
 
+const PracticalExperienceEntrySchema = z.object({
+	id: z.string(),
+	description: z.string(),
+	selectedExperienceId: z.string().nullable(),
+	selectedExperienceLabel: z.string().nullable(),
+	rating: z.number(),
+	tags: z.array(z.string()),
+});
+
 export const UserProfileSchema = z.object({
 	inSchool: z.boolean().nullable(),
 	educationLevel: EducationLevelSchema.nullable(),
@@ -27,7 +36,8 @@ export const UserProfileSchema = z.object({
 	strengths: z.record(z.string(), z.number()),
 	customStrengths: z.array(z.string()).default([]),
 	selectedCustomStrengths: z.array(z.string()).default([]),
-	practicalExperience: z.string(),
+	practicalExperiences: z.array(PracticalExperienceEntrySchema).default([]),
+	selectedPracticalExperienceIds: z.array(z.string()).default([]),
 	workPreferences: z.record(z.string(), WorkPreferenceChoiceSchema.nullable()),
 	noGos: z.record(z.string(), NoGoAnswerSchema.nullable()),
 	customNoGos: z.array(z.string()).default([]),

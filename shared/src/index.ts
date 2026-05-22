@@ -44,3 +44,9 @@ export { type Verdict, type ScoreReport } from "./eval-rubrics/types";
 export type { Persona } from "./persona";
 
 export { formatOccupationDisplayName } from "./occupationDisplayName";
+
+export type { PracticalExperienceEntry } from "./practicalExperience";
+export {
+	formatPracticalExperiencesForApi,
+	getActivePracticalExperiences,
+} from "./practicalExperience";

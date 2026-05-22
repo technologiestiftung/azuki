@@ -5,6 +5,7 @@ import {
 	type EducationLevel,
 	type WorkPreferenceChoice,
 	type NoGoAnswer,
+	type PracticalExperienceInput,
 } from "../common";
 import { initialUserProfile } from "../profile/initialUserProfile";
 import { useMatchResultsStore } from "./useMatchResultsStore";
@@ -29,7 +30,8 @@ interface AppActions {
 	addCustomStrength: (strength: string) => void;
 	toggleCustomStrength: (strength: string) => void;
 	setStrength: (id: string, value: number) => void;
-	setPracticalExperience: (value: string) => void;
+	addPracticalExperience: (entry: PracticalExperienceInput) => void;
+	togglePracticalExperience: (id: string) => void;
 	setWorkPreference: (id: string, choice: WorkPreferenceChoice | null) => void;
 	setNoGo: (id: string, answer: NoGoAnswer | null) => void;
 	addCustomNoGo: (noGo: string) => void;
@@ -194,11 +196,42 @@ export const useAppStore = create<AppState & AppActions>()(
 				}));
 			},
 
-			setPracticalExperience: (value) => {
+			addPracticalExperience: (entry) => {
 				clearMatchResults();
-				set((state) => ({
-					profile: { ...state.profile, practicalExperience: value },
-				}));
+				set((state) => {
+					const id = crypto.randomUUID();
+					return {
+						profile: {
+							...state.profile,
+							practicalExperiences: [
+								...state.profile.practicalExperiences,
+								{ ...entry, id },
+							],
+							selectedPracticalExperienceIds: [
+								...state.profile.selectedPracticalExperienceIds,
+								id,
+							],
+						},
+					};
+				});
+			},
+
+			togglePracticalExperience: (id) => {
+				clearMatchResults();
+				set((state) => {
+					const selected =
+						state.profile.selectedPracticalExperienceIds.includes(id)
+							? state.profile.selectedPracticalExperienceIds.filter(
+									(entryId) => entryId !== id,
+								)
+							: [...state.profile.selectedPracticalExperienceIds, id];
+					return {
+						profile: {
+							...state.profile,
+							selectedPracticalExperienceIds: selected,
+						},
+					};
+				});
 			},
 
 			setWorkPreference: (id, choice) => {
@@ -274,6 +307,15 @@ export const useAppStore = create<AppState & AppActions>()(
 					profile: {
 						...initialUserProfile,
 						...(persisted?.profile ?? {}),
+						practicalExperiences:
+							persisted?.profile?.practicalExperiences ??
+							initialUserProfile.practicalExperiences,
+						selectedPracticalExperienceIds:
+							persisted?.profile?.selectedPracticalExperienceIds ??
+							persisted?.profile?.practicalExperiences?.map(
+								(entry) => entry.id,
+							) ??
+							initialUserProfile.selectedPracticalExperienceIds,
 					},
 				};
 			},
