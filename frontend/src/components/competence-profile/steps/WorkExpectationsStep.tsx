@@ -123,9 +123,7 @@ export function WorkExpectationsStep() {
 			<InputBottomSheet
 				open={inputSheetOpen}
 				onClose={() => setInputSheetOpen(false)}
-				sheetAriaLabel={
-					content["workExpectations.bottomSheet.sheetAriaLabel"]
-				}
+				sheetAriaLabel={content["workExpectations.bottomSheet.sheetAriaLabel"]}
 				inputPlaceholder={
 					content["workExpectations.bottomSheet.input.addPlaceholder"]
 				}
