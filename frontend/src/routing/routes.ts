@@ -20,6 +20,7 @@ export const ROUTE_PATHS = {
 	nogos: "/nogos",
 	loading: "/loading",
 	resultsList: "/results/list",
+	resultsFreeSpots: "/results/free-spots",
 	eval: "/eval",
 	personas: "/personas",
 	personaDetail: "/personas/:id",

@@ -4,6 +4,7 @@ import { UserProfileSchema } from "./schemas/userProfile.js";
 import {
 	type Occupation,
 	type MatchResult,
+	type AusbildungsplaetzeResponse,
 	formatOccupationDisplayName,
 	AI_MODEL_IDS,
 } from "@azuki/shared";
@@ -11,6 +12,8 @@ import { occupationMatchMeta } from "./occupationMeta";
 import { preFilter } from "./matching/index.js";
 import { aiRank, buildSystemPrompt } from "./ai/index.js";
 import occupationsData from "./data/berufe.json";
+import { AusbildungsplaetzeRequestSchema } from "./schemas/ausbildungsplaetze.js";
+import { searchAusbildungsplaetze } from "./jobsuche/client.js";
 import { runEval } from "../eval/run.js";
 import { z } from "zod";
 import { getSupabase } from "./supabase.js";
@@ -135,6 +138,7 @@ app.post("/api/match", async (c) => {
 			occupations: top40.slice(0, 8).map((scored) => ({
 				id: scored.occupation.id,
 				name: formatOccupationDisplayName(scored.occupation.name),
+				rawName: scored.occupation.name,
 				score: scored.score,
 				images: scored.occupation.images.slice(0, 3),
 				taskSummary: scored.occupation.taskSummary || "",
@@ -144,6 +148,33 @@ app.post("/api/match", async (c) => {
 		};
 		return c.json(fallback);
 	}
+});
+
+app.post("/api/ausbildungsplaetze", async (c) => {
+	if (!isAuthorized(c)) {
+		return c.json({ error: "Unauthorized" }, 401);
+	}
+
+	let body: unknown;
+	try {
+		body = await c.req.json();
+	} catch {
+		return c.json({ error: "Invalid request body" }, 400);
+	}
+
+	const parsed = AusbildungsplaetzeRequestSchema.safeParse(body);
+	if (!parsed.success) {
+		return c.json({ error: "Invalid request body" }, 400);
+	}
+
+	const { plz, berufe, umkreis } = parsed.data;
+
+	const results = await Promise.all(
+		berufe.map((beruf) => searchAusbildungsplaetze(beruf, plz, umkreis)),
+	);
+
+	const response: AusbildungsplaetzeResponse = { results };
+	return c.json(response);
 });
 
 app.get("/api/occupations/:id", (c) => {
