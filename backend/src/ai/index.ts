@@ -57,14 +57,21 @@ export interface Ranking {
  * duplicates (keeping the first occurrence). The LLM occasionally emits
  * the same id twice — without dedup the duplicate Beruf is rendered
  * twice in the final result and double-counted in the eval.
+ *
+ * When `limit` is given, the result is capped to that many rankings
+ * (after filtering and dedup). The LLM is instructed to return at most
+ * MAX_RESULTS, but a non-compliant model could echo the whole candidate
+ * list; the cap enforces the ceiling defensively at the trust boundary.
  */
 export function filterAndDedupeRankings(
 	rankings: Ranking[],
 	validIds: ReadonlySet<number>,
+	limit?: number,
 ): Ranking[] {
 	const seen = new Set<number>();
 	const out: Ranking[] = [];
 	for (const r of rankings) {
+		if (limit !== undefined && out.length >= limit) break;
 		if (!validIds.has(r.id)) continue;
 		if (seen.has(r.id)) continue;
 		seen.add(r.id);
@@ -850,7 +857,7 @@ export async function aiRank(
 
 	const validIds = new Set(occupationMap.keys());
 	const result: MatchResult = {
-		occupations: filterAndDedupeRankings(rankings, validIds).map((ranking) => {
+		occupations: filterAndDedupeRankings(rankings, validIds, MAX_RESULTS).map((ranking) => {
 			// Safe: filterAndDedupeRankings keeps only ids that are in validIds.
 			// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 			const item = occupationMap.get(ranking.id)!;

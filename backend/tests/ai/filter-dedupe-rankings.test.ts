@@ -56,4 +56,40 @@ describe("filterAndDedupeRankings", () => {
 	test("returns empty array on empty input", () => {
 		expect(filterAndDedupeRankings([], new Set([1, 2]))).toEqual([]);
 	});
+
+	test("caps the result to `limit`, keeping the top-N in order", () => {
+		// A non-compliant LLM could echo the whole candidate list; the
+		// frontend renders a top-8, so the result must be capped.
+		const rankings = Array.from({ length: 40 }, (_, i) => ({
+			id: i + 1,
+			begruendung: `b${i + 1}`,
+		}));
+		const validIds = new Set(rankings.map((r) => r.id));
+		const out = filterAndDedupeRankings(rankings, validIds, 8);
+		expect(out).toHaveLength(8);
+		expect(out.map((r) => r.id)).toEqual([1, 2, 3, 4, 5, 6, 7, 8]);
+	});
+
+	test("cap counts valid, unique rankings — duplicates and rogue ids don't consume a slot", () => {
+		const rankings = [
+			{ id: 1, begruendung: "a" },
+			{ id: 999, begruendung: "rogue" },
+			{ id: 1, begruendung: "dup" },
+			{ id: 2, begruendung: "b" },
+			{ id: 3, begruendung: "c" },
+		];
+		const validIds = new Set([1, 2, 3]);
+		expect(
+			filterAndDedupeRankings(rankings, validIds, 2).map((r) => r.id),
+		).toEqual([1, 2]);
+	});
+
+	test("no limit leaves the full deduped list unbounded", () => {
+		const rankings = Array.from({ length: 12 }, (_, i) => ({
+			id: i + 1,
+			begruendung: `b${i + 1}`,
+		}));
+		const validIds = new Set(rankings.map((r) => r.id));
+		expect(filterAndDedupeRankings(rankings, validIds)).toHaveLength(12);
+	});
 });
