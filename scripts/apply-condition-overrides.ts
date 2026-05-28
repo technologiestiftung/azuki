@@ -100,20 +100,30 @@ export interface OverrideReport {
 	reason: string;
 }
 
+export interface ConditionOverrideResult {
+	report: OverrideReport[];
+	/** Curated override ids that no longer resolve to a catalog occupation. */
+	unresolvedIds: number[];
+}
+
 export function applyConditionOverrides(
 	occupations: Occupation[],
-): OverrideReport[] {
+): ConditionOverrideResult {
 	const occMap = new Map(occupations.map((o) => [o.id, o]));
 	const report: OverrideReport[] = [];
+	const unresolvedIds: number[] = [];
 	for (const { ids, patch, reason } of CONDITION_OVERRIDES) {
 		for (const id of ids) {
 			const occ = occMap.get(id);
-			if (!occ) continue;
+			if (!occ) {
+				unresolvedIds.push(id);
+				continue;
+			}
 			Object.assign(occ.conditions, patch);
 			report.push({ id, name: occ.name, patch, reason });
 		}
 	}
-	return report;
+	return { report, unresolvedIds };
 }
 
 // Standalone entry point: read berufe.json, apply overrides, write back.
@@ -123,13 +133,18 @@ if (import.meta.url === `file://${process.argv[1]}`) {
 		"../../backend/src/data/berufe.json",
 	);
 	const occupations: Occupation[] = JSON.parse(readFileSync(dataPath, "utf-8"));
-	const report = applyConditionOverrides(occupations);
+	const { report, unresolvedIds } = applyConditionOverrides(occupations);
 	console.log(`Applied ${report.length} condition overrides.\n`);
 	for (const r of report) {
 		const patchStr = Object.entries(r.patch)
 			.map(([k, v]) => `${k}=${v}`)
 			.join(", ");
 		console.log(`  ${String(r.id).padEnd(7)} ${r.name.slice(0, 50).padEnd(50)} { ${patchStr} }  — ${r.reason}`);
+	}
+	if (unresolvedIds.length > 0) {
+		console.warn(
+			`\nWARNING: ${unresolvedIds.length} override id(s) not found in catalog (stale curated list?): ${unresolvedIds.join(", ")}`,
+		);
 	}
 	writeFileSync(dataPath, JSON.stringify(occupations, null, 2));
 	console.log(`\nWrote ${dataPath}`);

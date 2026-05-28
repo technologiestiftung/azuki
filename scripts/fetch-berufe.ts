@@ -681,14 +681,24 @@ async function main() {
   console.log(
     "Step 2c: Applying curated condition overrides for BERUFENET tag mismatches...",
   );
-  const overrides = applyConditionOverrides(occupations);
-  console.log(`  -> ${overrides.length} condition overrides applied.\n`);
+  const conditionOverrides = applyConditionOverrides(occupations);
+  console.log(`  -> ${conditionOverrides.report.length} condition overrides applied.\n`);
+  if (conditionOverrides.unresolvedIds.length > 0) {
+    console.warn(
+      `  [STALE OVERRIDE] condition override id(s) not in catalog: ${conditionOverrides.unresolvedIds.join(", ")}`,
+    );
+  }
 
   console.log(
     "Step 2d: Applying curated access-level overrides for de-facto FHR Berufe...",
   );
   const accessOverrides = applyAccessOverrides(occupations);
-  console.log(`  -> ${accessOverrides.length} access-level overrides applied.\n`);
+  console.log(`  -> ${accessOverrides.report.length} access-level overrides applied.\n`);
+  if (accessOverrides.unresolvedIds.length > 0) {
+    console.warn(
+      `  [STALE OVERRIDE] access-level override id(s) not in catalog: ${accessOverrides.unresolvedIds.join(", ")}`,
+    );
+  }
 
   const __dirname = dirname(fileURLToPath(import.meta.url));
   const outDir = resolve(__dirname, "../backend/src/data");

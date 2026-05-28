@@ -89,15 +89,25 @@ export interface AccessOverrideReport {
 	reason: string;
 }
 
+export interface AccessOverrideResult {
+	report: AccessOverrideReport[];
+	/** Curated override ids that no longer resolve to a catalog occupation. */
+	unresolvedIds: number[];
+}
+
 export function applyAccessOverrides(
 	occupations: Occupation[],
-): AccessOverrideReport[] {
+): AccessOverrideResult {
 	const occMap = new Map(occupations.map((o) => [o.id, o]));
 	const report: AccessOverrideReport[] = [];
+	const unresolvedIds: number[] = [];
 	for (const { ids, accessLevel, reason } of ACCESS_OVERRIDES) {
 		for (const id of ids) {
 			const occ = occMap.get(id);
-			if (!occ) continue;
+			if (!occ) {
+				unresolvedIds.push(id);
+				continue;
+			}
 			report.push({
 				id,
 				name: occ.name,
@@ -108,7 +118,7 @@ export function applyAccessOverrides(
 			occ.accessLevel = accessLevel;
 		}
 	}
-	return report;
+	return { report, unresolvedIds };
 }
 
 if (import.meta.url === `file://${process.argv[1]}`) {
@@ -117,11 +127,16 @@ if (import.meta.url === `file://${process.argv[1]}`) {
 		"../../backend/src/data/berufe.json",
 	);
 	const occupations: Occupation[] = JSON.parse(readFileSync(dataPath, "utf-8"));
-	const report = applyAccessOverrides(occupations);
+	const { report, unresolvedIds } = applyAccessOverrides(occupations);
 	console.log(`Applied ${report.length} access-level overrides.\n`);
 	for (const r of report) {
 		console.log(
 			`  ${String(r.id).padEnd(7)} ${r.name.slice(0, 60).padEnd(60)} ${(r.before ?? "—")} → ${r.after}`,
+		);
+	}
+	if (unresolvedIds.length > 0) {
+		console.warn(
+			`\nWARNING: ${unresolvedIds.length} override id(s) not found in catalog (stale curated list?): ${unresolvedIds.join(", ")}`,
 		);
 	}
 	writeFileSync(dataPath, JSON.stringify(occupations, null, 2));
