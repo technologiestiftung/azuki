@@ -96,6 +96,21 @@ describe("scorePopularity — §66 Fachpraktiker (parent-aware)", () => {
 		expect(scorePopularity(occ, profile)).toBe(3);
 	});
 
+	test("floors at the F_fachpraktiker baseline for a low-tier parent (no inversion)", () => {
+		const profile = makeProfile({ educationLevel: "secondary" });
+		// D_niche parent (27427 = -3): naive parent+1 would be -2, below baseline.
+		const dParent = makeOccupation({ id: 4708, parentId: 27427 });
+		expect(scorePopularity(dParent, profile)).toBe(0);
+		// E_vanishing parent (33209 = -6): naive parent+1 would be -5.
+		const eParent = makeOccupation({ id: 4708, parentId: 33209 });
+		expect(scorePopularity(eParent, profile)).toBe(0);
+		// Invariant: the intended audience must never score a §66 record below
+		// the flat baseline a general (profile-less) user gets for it.
+		expect(scorePopularity(dParent, profile)).toBeGreaterThanOrEqual(
+			scorePopularity(dParent),
+		);
+	});
+
 	test("falls back to flat +3 when §66 has no parentId (unresolved hydration, design-intent)", () => {
 		const occ = makeOccupation({ id: 4708, parentId: null });
 		const profile = makeProfile({ educationLevel: "foreign_degree" });

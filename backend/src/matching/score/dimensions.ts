@@ -90,13 +90,19 @@ export function scorePopularity(
 		return POPULARITY_TIER_SCORE[tier];
 	}
 
-	// Parent-aware: §66 sits just above its parent's popularity tier.
+	// Parent-aware: §66 sits just above its parent's popularity tier, but
+	// never below the F_fachpraktiker baseline. A vanishing/niche-tier parent
+	// must not make the §66 variant score worse for its intended audience than
+	// the flat baseline a general user receives — that would invert the boost.
 	if (occupation.parentId != null) {
 		const parentTier = getPopularityTier(occupation.parentId);
 		const parentScore = parentTier
 			? POPULARITY_TIER_SCORE[parentTier]
 			: POPULARITY_TIER_SCORE.G_unknown;
-		return parentScore + FACHPRAKTIKER_DESIGN_INTENT_BONUS;
+		return Math.max(
+			POPULARITY_TIER_SCORE.F_fachpraktiker,
+			parentScore + FACHPRAKTIKER_DESIGN_INTENT_BONUS,
+		);
 	}
 
 	// Unresolved §66 record (rare): use the flat fallback so it doesn't
