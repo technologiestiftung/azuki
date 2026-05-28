@@ -628,6 +628,34 @@ function processOccupationDetail(data: ApiBerufItem[]): Occupation | null {
   };
 }
 
+// Max fraction of per-occupation detail fetches allowed to fail before the
+// run is treated as degraded and the berufe.json write is aborted. A broadly
+// failing or rate-limited API trips this instead of silently overwriting the
+// good catalog with a gutted one.
+export const MAX_FETCH_ERROR_RATE = 0.1;
+
+/**
+ * Returns a reason string when a completed fetch looks too degraded to
+ * persist (no ids at all, or the detail-fetch error rate exceeds
+ * `maxErrorRate`), or null when it's healthy. Pure (no I/O) so the write
+ * guard is unit-testable.
+ */
+export function fetchHealthError(
+  idCount: number,
+  occupationCount: number,
+  errorCount: number,
+  maxErrorRate: number = MAX_FETCH_ERROR_RATE,
+): string | null {
+  if (idCount === 0) {
+    return "BERUFENET returned no occupation IDs.";
+  }
+  const rate = errorCount / idCount;
+  if (rate > maxErrorRate) {
+    return `${errorCount}/${idCount} detail fetches failed (${(rate * 100).toFixed(1)}% > ${(maxErrorRate * 100).toFixed(0)}% limit); only ${occupationCount} occupations collected.`;
+  }
+  return null;
+}
+
 async function main() {
   console.log("=== BERUFENET Fetch Script ===\n");
 
@@ -662,6 +690,13 @@ async function main() {
   console.log(
     `  -> ${occupations.length} occupations processed, ${errors} errors.\n`,
   );
+
+  const health = fetchHealthError(ids.length, occupations.length, errors);
+  if (health) {
+    throw new Error(
+      `Aborting before write — refusing to overwrite berufe.json with a degraded fetch: ${health}`,
+    );
+  }
 
   console.log(
     "Step 2b: Hydrating Fachpraktiker (§66 BBiG) records from parent Ausbildungen...",
@@ -718,4 +753,9 @@ async function main() {
   console.log(`  With interests:    ${withInterests}/${occupations.length}`);
 }
 
-main().catch(console.error);
+if (import.meta.url === `file://${process.argv[1]}`) {
+  main().catch((err) => {
+    console.error(err);
+    process.exit(1);
+  });
+}
