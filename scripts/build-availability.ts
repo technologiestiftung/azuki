@@ -6,8 +6,9 @@
  *
  * - DAZUBI rows match by normalized name (popularity-index.json carries
  *   the BERUFENET id ↔ DAZUBI name mapping).
- * - Destatis rows match by KldB 2010 (clean numeric join — set up by
- *   scripts/fetch-berufe.ts).
+ * - Destatis rows match by KldB 2010. Both sides of the join are run
+ *   through normalizeKldb so the equality match shares one contract,
+ *   regardless of how each source wrote its code.
  *
  * Run: npx tsx scripts/build-availability.ts
  */
@@ -17,6 +18,7 @@ import { resolve, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 import { isBundesland, type Bundesland } from "@azuki/shared";
 import { normName } from "./normName.js";
+import { normalizeKldb } from "./normalizeKldb.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(__dirname, "..");
@@ -97,10 +99,10 @@ export function buildAvailability(
 
 	const idsByOccupationCode = new Map<string, number[]>();
 	for (const b of berufe) {
-		if (!b.germanOccupationCode) continue;
-		if (!idsByOccupationCode.has(b.germanOccupationCode))
-			idsByOccupationCode.set(b.germanOccupationCode, []);
-		idsByOccupationCode.get(b.germanOccupationCode)!.push(b.id);
+		const code = normalizeKldb(b.germanOccupationCode);
+		if (!code) continue;
+		if (!idsByOccupationCode.has(code)) idsByOccupationCode.set(code, []);
+		idsByOccupationCode.get(code)!.push(b.id);
 	}
 
 	const availability: Record<number, Partial<Record<Bundesland, number>>> = {};
@@ -141,7 +143,8 @@ export function buildAvailability(
 	let destatisUnmatched = 0;
 	for (const row of destatis) {
 		if (!isBundesland(row.bundesland)) continue;
-		const ids = idsByOccupationCode.get(row.germanOccupationCode);
+		const code = normalizeKldb(row.germanOccupationCode);
+		const ids = code ? idsByOccupationCode.get(code) : undefined;
 		if (!ids?.length) {
 			destatisUnmatched++;
 			continue;

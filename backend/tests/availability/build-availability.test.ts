@@ -115,3 +115,33 @@ describe("buildAvailability — parent-rollup gated on dazubiMatchType=parent", 
 		expect(stats.dazubiRollupMatched).toBe(1);
 	});
 });
+
+describe("buildAvailability — KldB join normalizes both sides", () => {
+	// berufe codes come pre-normalized (via fetch-berufe → normalizeKldb), but
+	// the Destatis fixture historically stored only a trimmed code. The join
+	// must reconcile a "B "-prefixed / internally-spaced Destatis code with the
+	// bare-numeric catalog code rather than silently dropping it to zero.
+	const berufe: Beruf[] = [
+		{ id: 100, name: "Tischler", germanOccupationCode: "521" },
+		{ id: 200, name: "Bäcker", germanOccupationCode: "29302" },
+	];
+	const destatis: DestatisRow[] = [
+		{ germanOccupationCode: "B 521", bundesland: "Berlin", students: 7 },
+		{ germanOccupationCode: " 293 02 ", bundesland: "Berlin", students: 3 },
+	];
+
+	const { availability, stats } = buildAvailability(berufe, [], [], destatis);
+
+	test("B-prefixed Destatis code joins to the bare-numeric catalog code", () => {
+		expect(availability[100]?.Berlin).toBe(7);
+	});
+
+	test("whitespace-laden Destatis code joins after normalization", () => {
+		expect(availability[200]?.Berlin).toBe(3);
+	});
+
+	test("both rows count as matched, none unmatched", () => {
+		expect(stats.destatisMatched).toBe(2);
+		expect(stats.destatisUnmatched).toBe(0);
+	});
+});
