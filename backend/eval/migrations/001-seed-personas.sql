@@ -20,10 +20,8 @@
 --
 -- Re-run-safe AND non-destructive: uses INSERT ... ON CONFLICT (id)
 -- DO UPDATE for each persona. Re-running this file:
---   * updates the 7 personas listed here (name, description, profile,
---     tier arrays, criteria) to match this file's contents
---   * preserves `in_eval_set` if it was toggled in the admin UI
---     (column is deliberately NOT updated on conflict)
+--   * updates the 10 personas listed here (name, description, profile,
+--     tier arrays) to match this file's contents
 --   * leaves any GUI-created personas (rows whose id is NOT listed
 --     here) completely untouched
 --
@@ -42,7 +40,6 @@
 -- Persona 1: Nico B.
 -- 18, Hauptschulabschluss, dropped Kfz-Mechatroniker after 4 months.
 -- tierS: 8  tierA: 16  tierC: 93 (67 persona-specific + 26 universal)
--- criteria: 4
 -- ============================================================
 
 insert into personas (
@@ -52,9 +49,7 @@ insert into personas (
   profile,
   tier_s,
   tier_a,
-  tier_c,
-  criteria,
-  in_eval_set
+  tier_c
 ) values (
   'nico',
   'Nico B.',
@@ -224,19 +219,7 @@ insert into personas (
     -- Universal niche bait (fur/pelts)
     3611,   -- Kürschner/in
     3602    -- Pelzveredler/in
-  ]::integer[],
-  -- criteria: 4
-  '[
-    {"type": "min_tier_s", "count": 3},
-    {"type": "no_tier_c"},
-    {"type": "first_from_s_a_union"},
-    {
-      "type": "at_least_one_in_top_5",
-      "ids": [15540, 14969, 27448, 15623, 134719, 134718],
-      "label": "Top 5 acknowledges Schrauben + no-heavy-no-noise direction (Lackierer / FP Fahrzeugpflege / Lagerlogistik / Elektroniker Betriebstechnik / Elektroniker Maschinen-Antriebstechnik)"
-    }
-  ]'::jsonb,
-  true
+  ]::integer[]
 )
 on conflict (id) do update set
   name        = excluded.name,
@@ -244,16 +227,13 @@ on conflict (id) do update set
   profile     = excluded.profile,
   tier_s      = excluded.tier_s,
   tier_a      = excluded.tier_a,
-  tier_c      = excluded.tier_c,
-  criteria    = excluded.criteria
-  -- in_eval_set deliberately omitted: preserve admin-UI toggles on existing rows
+  tier_c      = excluded.tier_c
 ;
 
 -- ============================================================
 -- Persona 2: Elina M.
 -- 17, Realschule (letztes Schuljahr), 2nd-gen Bulgarian.
 -- tierS: 7  tierA: 19  tierC: 77 (51 persona-specific + 26 universal)
--- criteria: 6
 -- ============================================================
 
 insert into personas (
@@ -263,9 +243,7 @@ insert into personas (
   profile,
   tier_s,
   tier_a,
-  tier_c,
-  criteria,
-  in_eval_set
+  tier_c
 ) values (
   'elina',
   'Elina M.',
@@ -419,38 +397,7 @@ insert into personas (
     -- Universal niche bait (fur/pelts)
     3611,   -- Kürschner/in
     3602    -- Pelzveredler/in
-  ]::integer[],
-  -- criteria: 6
-  '[
-    {"type": "min_tier_s", "count": 3},
-    {
-      "type": "subcategory_coverage",
-      "subcategories": [
-        {
-          "name": "helping (schulisch)",
-          "ids": [9031, 9162, 9106, 9170, 33212, 9127, 132173]
-        },
-        {
-          "name": "creative/communication",
-          "ids": [137684, 14217, 129408, 8764]
-        }
-      ],
-      "label": "Top 8 covers helping and creative roles"
-    },
-    {"type": "no_tier_c"},
-    {"type": "first_from_s_a_union"},
-    {
-      "type": "at_least_one_in_top_5",
-      "ids": [9162, 9106, 8779, 8764, 9127],
-      "label": "Acknowledges Fachabitur path (Erzieher / Ergotherapeut / Logopäde / Heilerziehungspfleger)"
-    },
-    {
-      "type": "at_least_one_in_top_5",
-      "ids": [137684, 14217, 129408],
-      "label": "Hits creative/Kunst signal (Mediengestalter / Designer-Grafik / Hörakustiker)"
-    }
-  ]'::jsonb,
-  true
+  ]::integer[]
 )
 on conflict (id) do update set
   name        = excluded.name,
@@ -458,16 +405,13 @@ on conflict (id) do update set
   profile     = excluded.profile,
   tier_s      = excluded.tier_s,
   tier_a      = excluded.tier_a,
-  tier_c      = excluded.tier_c,
-  criteria    = excluded.criteria
-  -- in_eval_set deliberately omitted: preserve admin-UI toggles on existing rows
+  tier_c      = excluded.tier_c
 ;
 
 -- ============================================================
 -- Persona 3: Karim A.
 -- 21, refugee from Lebanon (2015), no German Schulabschluss, A2 German.
 -- tierS: 8  tierA: 19  tierC: 93 (67 persona-specific + 26 universal)
--- criteria: 4
 -- ============================================================
 
 insert into personas (
@@ -477,9 +421,7 @@ insert into personas (
   profile,
   tier_s,
   tier_a,
-  tier_c,
-  criteria,
-  in_eval_set
+  tier_c
 ) values (
   'karim',
   'Karim A.',
@@ -650,27 +592,7 @@ insert into personas (
     -- Universal niche bait (fur/pelts)
     3611,   -- Kürschner/in
     3602    -- Pelzveredler/in
-  ]::integer[],
-  -- criteria: 4
-  -- NOTE: criterion 3 uses at_least_one_in_top_5 instead of first_from_s_a_union
-  -- because the TS rubric calls firstResultFromSet() with a custom 5-item set
-  -- (not the full tierS ∪ tierA), and no first_from_custom_set DSL type exists.
-  -- This is a semantic downgrade: checks top-5 presence rather than #1 position.
-  '[
-    {"type": "min_tier_s", "count": 4},
-    {"type": "no_tier_c"},
-    {
-      "type": "at_least_one_in_top_5",
-      "ids": [6628, 27448, 27539, 4708, 6649],
-      "label": "Top result is Verkäufer / Fachkraft Lagerlogistik / Fachlagerist or Fachpraktiker variant"
-    },
-    {
-      "type": "at_least_one_popularity_tier",
-      "tier": "F_fachpraktiker",
-      "label": "Top 8 includes a Fachpraktiker entry (acknowledges foreign-degree barrier)"
-    }
-  ]'::jsonb,
-  true
+  ]::integer[]
 )
 on conflict (id) do update set
   name        = excluded.name,
@@ -678,9 +600,7 @@ on conflict (id) do update set
   profile     = excluded.profile,
   tier_s      = excluded.tier_s,
   tier_a      = excluded.tier_a,
-  tier_c      = excluded.tier_c,
-  criteria    = excluded.criteria
-  -- in_eval_set deliberately omitted: preserve admin-UI toggles on existing rows
+  tier_c      = excluded.tier_c
 ;
 
 -- ============================================================
@@ -691,7 +611,7 @@ on conflict (id) do update set
 -- ============================================================
 
 insert into personas (
-  id, name, description, profile, tier_s, tier_a, tier_c, criteria, in_eval_set
+  id, name, description, profile, tier_s, tier_a, tier_c
 ) values (
   'mia',
   'Mia W.',
@@ -703,7 +623,7 @@ insert into personas (
     "customSubjects": [],
     "interests": ["fashion", "helping", "planning"],
     "customInterests": [],
-    "workValues": ["people_work", "atmosphere"],
+    "workExpectations": ["people_work", "teamwork_value"],
     "strengths": {
       "creativity": 0.5,
       "communication": 0.5,
@@ -794,23 +714,7 @@ insert into personas (
     1092, 1091, 1095, 1088,
     142202, 142203,
     3611, 3602
-  ]::integer[],
-  '[
-    {"type": "min_tier_s", "count": 2},
-    {"type": "no_tier_c"},
-    {"type": "first_from_s_a_union"},
-    {
-      "type": "at_least_one_in_top_5",
-      "ids": [9910],
-      "label": "Friseur/in appears in top 8 (acknowledges Salon signal)"
-    },
-    {
-      "type": "at_least_one_in_top_5",
-      "ids": [6628, 6580, 10009, 33212],
-      "label": "Top 5 anchors on a Joblinge-realistic baseline (Verkäufer / Einzelhandel / Hotelfach / MFA)"
-    }
-  ]'::jsonb,
-  false
+  ]::integer[]
 )
 on conflict (id) do update set
   name        = excluded.name,
@@ -818,9 +722,7 @@ on conflict (id) do update set
   profile     = excluded.profile,
   tier_s      = excluded.tier_s,
   tier_a      = excluded.tier_a,
-  tier_c      = excluded.tier_c,
-  criteria    = excluded.criteria
-  -- in_eval_set deliberately omitted: preserve admin-UI toggles on existing rows
+  tier_c      = excluded.tier_c
 ;
 
 -- ============================================================
@@ -831,7 +733,7 @@ on conflict (id) do update set
 -- ============================================================
 
 insert into personas (
-  id, name, description, profile, tier_s, tier_a, tier_c, criteria, in_eval_set
+  id, name, description, profile, tier_s, tier_a, tier_c
 ) values (
   'tom',
   'Tom B.',
@@ -843,7 +745,7 @@ insert into personas (
     "customSubjects": [],
     "interests": ["gaming", "computer", "videos"],
     "customInterests": [],
-    "workValues": ["autonomy_responsibility", "atmosphere"],
+    "workExpectations": ["autonomy_responsibility", "teamwork_value"],
     "strengths": {
       "creativity": 0.5,
       "concentration": 1,
@@ -858,8 +760,7 @@ insert into personas (
       "pace": "a"
     },
     "noGos": {
-      "heavy-work": "rejected",
-      "outdoor-work": "rejected"
+      "heavy-work": "rejected"
     }
   }'::jsonb,
   -- tier_s: 6 entries (Joblinge-realistic IT/office/Mediengestalter anchors)
@@ -927,18 +828,7 @@ insert into personas (
     1092, 1091, 1095, 1088,
     142202, 142203,
     3611, 3602
-  ]::integer[],
-  '[
-    {"type": "min_tier_s", "count": 3},
-    {"type": "no_tier_c"},
-    {"type": "first_from_s_a_union"},
-    {
-      "type": "at_least_one_in_top_5",
-      "ids": [130926, 123266, 2927, 8533, 137038, 137683, 137682, 137684, 34976, 7883, 7856, 7847],
-      "label": "Top 5 contains an IT / Mediengestalter / §66 / Office / E-Commerce path"
-    }
-  ]'::jsonb,
-  false
+  ]::integer[]
 )
 on conflict (id) do update set
   name        = excluded.name,
@@ -946,9 +836,7 @@ on conflict (id) do update set
   profile     = excluded.profile,
   tier_s      = excluded.tier_s,
   tier_a      = excluded.tier_a,
-  tier_c      = excluded.tier_c,
-  criteria    = excluded.criteria
-  -- in_eval_set deliberately omitted: preserve admin-UI toggles on existing rows
+  tier_c      = excluded.tier_c
 ;
 
 -- ============================================================
@@ -959,7 +847,7 @@ on conflict (id) do update set
 -- ============================================================
 
 insert into personas (
-  id, name, description, profile, tier_s, tier_a, tier_c, criteria, in_eval_set
+  id, name, description, profile, tier_s, tier_a, tier_c
 ) values (
   'hanna',
   'Hanna L.',
@@ -971,11 +859,10 @@ insert into personas (
     "customSubjects": [],
     "interests": ["drawing", "dancing", "music", "helping"],
     "customInterests": [],
-    "workValues": ["people_work", "atmosphere", "autonomy_responsibility"],
+    "workExpectations": ["people_work", "teamwork_value", "autonomy_responsibility"],
     "strengths": {
       "creativity": 1,
-      "communication": 0.5,
-      "empathy": 1,
+      "communication": 1,
       "teamwork": 0.5
     },
     "secretTalent": "Ich male und zeichne gerne, tanze in einer Gruppe, mache auch Musik. Außerdem helfe ich oft im Altersheim aus, meine Oma sagt ich bin sehr einfühlsam.",
@@ -1064,32 +951,7 @@ insert into personas (
     1092, 1091, 1095, 1088,
     142202, 142203,
     3611, 3602
-  ]::integer[],
-  '[
-    {"type": "min_tier_s", "count": 3},
-    {
-      "type": "subcategory_coverage",
-      "subcategories": [
-        {
-          "name": "care (Joblinge-anchor)",
-          "ids": [9063, 30191, 9031, 9170]
-        },
-        {
-          "name": "creative",
-          "ids": [137683, 8533, 137684, 137682, 6515, 14217, 9910]
-        }
-      ],
-      "label": "Top 8 covers both clusters (creative AND Joblinge-anchored care)"
-    },
-    {"type": "no_tier_c"},
-    {"type": "first_from_s_a_union"},
-    {
-      "type": "at_least_one_in_top_5",
-      "ids": [9063, 30191, 9031, 9170],
-      "label": "Top 5 contains a Joblinge-anchor care role (not only Erzieher/Ergotherapeut stretches)"
-    }
-  ]'::jsonb,
-  false
+  ]::integer[]
 )
 on conflict (id) do update set
   name        = excluded.name,
@@ -1097,9 +959,7 @@ on conflict (id) do update set
   profile     = excluded.profile,
   tier_s      = excluded.tier_s,
   tier_a      = excluded.tier_a,
-  tier_c      = excluded.tier_c,
-  criteria    = excluded.criteria
-  -- in_eval_set deliberately omitted: preserve admin-UI toggles on existing rows
+  tier_c      = excluded.tier_c
 ;
 
 -- ============================================================
@@ -1111,18 +971,19 @@ on conflict (id) do update set
 -- ============================================================
 
 insert into personas (
-  id, name, description, profile, tier_s, tier_a, tier_c, criteria, in_eval_set
+  id, name, description, profile, tier_s, tier_a, tier_c
 ) values (
   'noah',
   'Noah D.',
   '16, education level not stated. Vague aspirational — no concrete career direction. Only signal is personality (friendly, good listener, adaptable) plus "wants a good job that makes me happy and pays decently". The canonical low-signal Joblinge teen: vague, no plan, no clear constraints. Tests whether the pipeline produces hedged broad output (multiple direction families) rather than a confident specific direction.',
   '{
     "inSchool": false,
+    "educationLevel": null,
     "favoriteSubjects": [],
     "customSubjects": [],
     "interests": [],
     "customInterests": [],
-    "workValues": ["good_salary"],
+    "workExpectations": ["good_salary"],
     "strengths": {},
     "secretTalent": "Ich bin freundlich und höre gut zu, kann mich gut anpassen.",
     "practicalExperience": "Will einen guten Job finden, der mich glücklich macht und ordentlich bezahlt. Habe noch keine richtige Erfahrung, bin erst 16.",
@@ -1194,47 +1055,7 @@ insert into personas (
     1092, 1091, 1095, 1088,
     142202, 142203,
     3611, 3602
-  ]::integer[],
-  '[
-    {"type": "min_tier_s", "count": 4},
-    {"type": "no_tier_c"},
-    {"type": "first_from_s_a_union"},
-    {
-      "type": "subcategory_coverage",
-      "subcategories": [
-        {
-          "name": "retail",
-          "ids": [6628, 6580, 50920, 50922, 50924, 6649]
-        },
-        {
-          "name": "gastro / hospitality",
-          "ids": [10009, 136126, 3726, 10088]
-        },
-        {
-          "name": "logistics",
-          "ids": [27448, 27539, 4708]
-        },
-        {
-          "name": "food handwerk",
-          "ids": [3626, 13804, 3747, 14818]
-        },
-        {
-          "name": "helping-light",
-          "ids": [33212, 14704, 9031, 9063]
-        },
-        {
-          "name": "security",
-          "ids": [14463]
-        },
-        {
-          "name": "personal-services",
-          "ids": [9910, 134513]
-        }
-      ],
-      "label": "Top 8 spans ≥3 direction families (no single-family collapse)"
-    }
-  ]'::jsonb,
-  false
+  ]::integer[]
 )
 on conflict (id) do update set
   name        = excluded.name,
@@ -1242,9 +1063,7 @@ on conflict (id) do update set
   profile     = excluded.profile,
   tier_s      = excluded.tier_s,
   tier_a      = excluded.tier_a,
-  tier_c      = excluded.tier_c,
-  criteria    = excluded.criteria
-  -- in_eval_set deliberately omitted: preserve admin-UI toggles on existing rows
+  tier_c      = excluded.tier_c
 ;
 
 
@@ -1255,7 +1074,6 @@ on conflict (id) do update set
 -- The work4u / OFAF cohort shape: recent displacement, mid-language,
 -- family-embedded, care-direction.
 -- tierS: 4  tierA: 14  tierC: persona-specific + universal
--- criteria: 4
 -- ============================================================
 
 insert into personas (
@@ -1265,9 +1083,7 @@ insert into personas (
   profile,
   tier_s,
   tier_a,
-  tier_c,
-  criteria,
-  in_eval_set
+  tier_c
 ) values (
   'amira',
   'Amira K.',
@@ -1279,10 +1095,9 @@ insert into personas (
     "customSubjects": [],
     "interests": ["helping", "babysitting", "planning"],
     "customInterests": [],
-    "workValues": ["family_stable", "atmosphere", "short_distance"],
+    "workExpectations": ["stability", "teamwork_value", "short_distance"],
     "strengths": {
-      "empathy": 1,
-      "communication": 0.5,
+      "communication": 1,
       "teamwork": 0.5,
       "perseverance": 0.5
     },
@@ -1414,19 +1229,7 @@ insert into personas (
     -- Universal niche bait (fur/pelts)
     3611,   -- Kürschner/in
     3602    -- Pelzveredler/in
-  ]::integer[],
-  -- criteria: 4
-  '[
-    {"type": "min_tier_s", "count": 2},
-    {"type": "no_tier_c"},
-    {"type": "first_from_s_a_union"},
-    {
-      "type": "at_least_one_in_top_5",
-      "ids": [9031],
-      "label": "Sozialassistent (9031) im Top 5 — Joblinge-accessible bridge zu Erzieher gewählt statt FHR-gated Erzieher"
-    }
-  ]'::jsonb,
-  false
+  ]::integer[]
 )
 on conflict (id) do update set
   name        = excluded.name,
@@ -1434,9 +1237,7 @@ on conflict (id) do update set
   profile     = excluded.profile,
   tier_s      = excluded.tier_s,
   tier_a      = excluded.tier_a,
-  tier_c      = excluded.tier_c,
-  criteria    = excluded.criteria
-  -- in_eval_set deliberately omitted: preserve admin-UI toggles on existing rows
+  tier_c      = excluded.tier_c
 ;
 
 -- ────────────────────────────────────────────────────────────────────────
@@ -1456,9 +1257,7 @@ insert into personas (
   profile,
   tier_s,
   tier_a,
-  tier_c,
-  criteria,
-  in_eval_set
+  tier_c
 ) values (
   'lukas',
   'Lukas P.',
@@ -1470,7 +1269,7 @@ insert into personas (
     "customSubjects": ["Werken"],
     "interests": ["building", "screwing", "outdoors", "gardening"],
     "customInterests": [],
-    "workValues": ["good_salary", "stability"],
+    "workExpectations": ["good_salary", "stability"],
     "strengths": {
       "craftsmanship": 1,
       "perseverance": 1,
@@ -1615,19 +1414,7 @@ insert into personas (
     -- Universal niche bait (fur/pelts)
     3611,   -- Kürschner/in
     3602    -- Pelzveredler/in
-  ]::integer[],
-  -- criteria: 4
-  '[
-    {"type": "min_tier_s", "count": 2},
-    {"type": "no_tier_c"},
-    {"type": "first_from_s_a_union"},
-    {
-      "type": "at_least_one_in_top_5",
-      "ids": [3938, 4105],
-      "label": "Maurer (3938) oder Straßenbauer (4105) im Top 5 — Stiefvater-Tiefbau-Domäne erkannt"
-    }
-  ]'::jsonb,
-  false
+  ]::integer[]
 )
 on conflict (id) do update set
   name        = excluded.name,
@@ -1635,9 +1422,7 @@ on conflict (id) do update set
   profile     = excluded.profile,
   tier_s      = excluded.tier_s,
   tier_a      = excluded.tier_a,
-  tier_c      = excluded.tier_c,
-  criteria    = excluded.criteria
-  -- in_eval_set deliberately omitted: preserve admin-UI toggles on existing rows
+  tier_c      = excluded.tier_c
 ;
 
 -- ────────────────────────────────────────────────────────────────────────
@@ -1659,9 +1444,7 @@ insert into personas (
   profile,
   tier_s,
   tier_a,
-  tier_c,
-  criteria,
-  in_eval_set
+  tier_c
 ) values (
   'lara',
   'Lara K.',
@@ -1669,11 +1452,11 @@ insert into personas (
   '{
     "inSchool": false,
     "educationLevel": "intermediate",
-    "favoriteSubjects": ["math", "economics", "german"],
+    "favoriteSubjects": ["math", "wat", "german"],
     "customSubjects": [],
     "interests": ["planning", "computer"],
     "customInterests": [],
-    "workValues": ["good_salary", "stability", "career"],
+    "workExpectations": ["good_salary", "stability", "career"],
     "strengths": {
       "concentration": 1,
       "precision": 1,
@@ -1841,19 +1624,7 @@ insert into personas (
     -- (fur)
     3611,   -- Kürschner
     3602    -- Pelzveredler
-  ]::integer[],
-  -- criteria: 4
-  '[
-    {"type": "min_tier_s", "count": 1},
-    {"type": "no_tier_c"},
-    {"type": "first_from_s_a_union"},
-    {
-      "type": "at_least_one_in_top_3",
-      "ids": [123266, 7944],
-      "label": "Kaufmann Büromanagement (123266) oder Verwaltungsfachangestellte Kommunalverwaltung (7944) im Top 3 — namentliche Direction (Büro + Bezirksamt-Praktikum) erkannt"
-    }
-  ]'::jsonb,
-  false
+  ]::integer[]
 )
 on conflict (id) do update set
   name        = excluded.name,
@@ -1861,7 +1632,5 @@ on conflict (id) do update set
   profile     = excluded.profile,
   tier_s      = excluded.tier_s,
   tier_a      = excluded.tier_a,
-  tier_c      = excluded.tier_c,
-  criteria    = excluded.criteria
-  -- in_eval_set deliberately omitted: preserve admin-UI toggles on existing rows
+  tier_c      = excluded.tier_c
 ;
