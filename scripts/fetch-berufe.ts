@@ -9,12 +9,16 @@ import { writeFileSync, mkdirSync } from "node:fs";
 import { resolve, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 import type {
+  AccessLevel,
   Occupation,
   WorkConditions,
   DegreeDistribution,
   OccupationImage,
 } from "@azuki/shared";
 import { SUBJECTS } from "@azuki/shared";
+import { hydrateFachpraktiker } from "./hydrate-fachpraktiker.js";
+import { applyConditionOverrides } from "./apply-condition-overrides.js";
+import { applyAccessOverrides } from "./apply-access-overrides.js";
 import { normalizeKldb } from "./normalizeKldb.js";
 
 // --- API response types (model the external Arbeitsagentur API) ---
@@ -71,6 +75,7 @@ const INFOFELD_IDS = {
   arbeitsorte: "b12-02",
   kompetenzenText: "b20-32",
   faehigkeiten: "b20-2",
+  zugang: "a30-0",
 } as const;
 
 // --- Helpers ---
@@ -118,14 +123,113 @@ async function apiFetch<T>(path: string): Promise<T> {
 
 // --- Extraction functions ---
 
+// Recognised indoor workplace mentions across BERUFENET infofelder. Used
+// for the broad `indoor` flag (see WorkConditions.indoor). Patterns drawn
+// from a scan of the workLocations field across the full dataset.
+const INDOOR_WORKPLACE_RE =
+  /Büroräumen|Werkstätten|Produktionshallen|Verkaufsräumen|Verkaufsständen|Lagerräumen|Lagerhallen|Kühlräumen|Kühlhäusern|Küchen|Backstube|Gasträumen|Praxisräumen|Behandlungsräumen|Klassenzimmern|Krankenhäusern|Pflegeeinrichtungen|Hotels|Restaurants|Friseursalons|Verwaltungsgebäuden|Bildungseinrichtungen|Apotheken|Sporthallen|Sportstätten/i;
+
+// Classifies German Zugangsvoraussetzungen text (BERUFENET field a30-0)
+// into one of four AccessLevel buckets. Used as a fallback for
+// scoreEducation when the workforce-composition signal (degreeStats /
+// a31-12) is missing — which is the case for ~49% of Berufe, including
+// all §66 Fachpraktiker, schulische Ausbildungen (Erzieher,
+// Sozialassistent, Altenpflegehelfer), and most Assistent/in variants.
+//
+// Strategy: find the FIRST-mentioned school level. BERUFENET text lists
+// the primary/expected education path first; lower-tier paths with extra
+// prerequisites ("Hauptschulabschluss in Verbindung mit einer
+// zweijährigen Berufsausbildung") appear later as alternatives. Taking
+// the first-mention captures the practical floor for a typical applicant.
+//
+// "Keine bestimmte Vorbildung" trumps everything — that's the legal
+// statement that nothing is required, even when other levels are also
+// mentioned as "in der Regel" preferences.
+const ACCESS_LEVEL_PATTERNS: Array<{ level: AccessLevel; re: RegExp }> = [
+  {
+    level: "hauptschule",
+    re: /(hauptschul|berufsbildungsreife|\bberufsreife\b|ohne schulabschluss|erster (allgemein)?bildender? schulabschluss|erster schulabschluss|vollzeitschulpflicht)/i,
+  },
+  {
+    level: "realschule",
+    re: /(realschul|mittlere reife|mittlerer schulabschluss|mittlerer bildungsabschluss|sekundarabschluss i\b|qualifizierter sekundarabschluss|fachoberschulreife|erweiterte berufsbildungsreife)/i,
+  },
+  {
+    level: "fachhochschulreife",
+    re: /(fachhochschulreife|\bhochschulreife\b|\babitur\b|gymnasiale oberstufe)/i,
+  },
+];
+
+// Detects explicit entry prerequisites beyond the school degree in a30-0.
+// Berufe like Erzieher and several care/therapy variants legally accept a
+// Realschulabschluss but require an additional vocational background or
+// Praktikum at the entry point. The practical access level for a typical
+// 16-year-old is closer to Fachhochschulreife. We upgrade `realschule`
+// classifications to `fachhochschulreife` when these phrases appear.
+function hasAdditionalEntryPrerequisite(text: string): boolean {
+  return (
+    /und nachweis einer beruflich/i.test(text) ||
+    /in verbindung mit einer.{0,80}(berufsausbildung|t[äa]tigkeit|praktikum)/i.test(
+      text,
+    ) ||
+    /mindestens (?:2|zwei)[- ]?j[äa]hrig/i.test(text) ||
+    /und abschluss einer beruflich/i.test(text) ||
+    /einschl[äa]gige berufliche vorbildung/i.test(text) ||
+    /entweder eine abgeschlossene/i.test(text) ||
+    /mehrj[äa]hrige.{0,30}einschl[äa]gige.{0,30}berufst[äa]tigkeit/i.test(text)
+  );
+}
+
+function extractAccessLevel(infofelder: Infofeld[]): AccessLevel | null {
+  const field = infofelder.find((f) => f.id === INFOFELD_IDS.zugang);
+  if (!field?.content) return null;
+  const text = stripHtml(field.content);
+  if (!text) return null;
+
+  if (/keine bestimmte vorbildung|keine schulische vorbildung/i.test(text)) {
+    return "unrestricted";
+  }
+
+  let earliest: { level: AccessLevel; idx: number } | null = null;
+  for (const { level, re } of ACCESS_LEVEL_PATTERNS) {
+    const m = text.match(re);
+    if (m && m.index !== undefined) {
+      if (earliest === null || m.index < earliest.idx) {
+        earliest = { level, idx: m.index };
+      }
+    }
+  }
+
+  const level = earliest?.level ?? null;
+  if (level === "realschule" && hasAdditionalEntryPrerequisite(text)) {
+    return "fachhochschulreife";
+  }
+  return level;
+}
+
 function extractConditions(infofelder: Infofeld[]): WorkConditions {
-  const field = infofelder.find((f) => f.id === INFOFELD_IDS.bedingungen);
-  const text = field ? stripHtml(field.content || "") : "";
+  const conditionsField = infofelder.find(
+    (f) => f.id === INFOFELD_IDS.bedingungen,
+  );
+  const text = conditionsField ? stripHtml(conditionsField.content || "") : "";
+
+  // BERUFENET separates "Bedingungen" (b16-3, working conditions text) from
+  // "Arbeitsorte" (b12-02, explicit workplace list). Office/workshop are
+  // mentioned in both but retail/warehouse/kitchen typically only appear
+  // in Arbeitsorte. Check both fields for the broad indoor flag.
+  const workplaceField = infofelder.find(
+    (f) => f.id === INFOFELD_IDS.arbeitsorte,
+  );
+  const workplaceText = workplaceField
+    ? stripHtml(workplaceField.content || "")
+    : "";
 
   return {
     outdoor: /im Freien/i.test(text),
     office: /Büroräumen/i.test(text),
     workshop: /Werkstätten|Produktionshallen/i.test(text),
+    indoor:
+      INDOOR_WORKPLACE_RE.test(text) || INDOOR_WORKPLACE_RE.test(workplaceText),
     constructionSite: /Baustellen/i.test(text),
     screenWork: /Bildschirmarbeit/i.test(text),
     manualLabor: /Handarbeit/i.test(text),
@@ -506,6 +610,7 @@ function processOccupationDetail(data: ApiBerufItem[]): Occupation | null {
       findInfofeld(taetigkeitInfofelder, INFOFELD_IDS.aufgabenKompakt) || null,
     images,
     degreeStats: extractDegreeStats(ausbildungInfofelder),
+    accessLevel: extractAccessLevel(mergedInfofelder),
     subjects: extractSubjects(ausbildungInfofelder),
     interests: interestData.interests,
     interestKeywords: interestData.interestKeywords,
@@ -521,6 +626,34 @@ function processOccupationDetail(data: ApiBerufItem[]): Occupation | null {
       INFOFELD_IDS.kompetenzenText,
     ),
   };
+}
+
+// Max fraction of per-occupation detail fetches allowed to fail before the
+// run is treated as degraded and the berufe.json write is aborted. A broadly
+// failing or rate-limited API trips this instead of silently overwriting the
+// good catalog with a gutted one.
+export const MAX_FETCH_ERROR_RATE = 0.1;
+
+/**
+ * Returns a reason string when a completed fetch looks too degraded to
+ * persist (no ids at all, or the detail-fetch error rate exceeds
+ * `maxErrorRate`), or null when it's healthy. Pure (no I/O) so the write
+ * guard is unit-testable.
+ */
+export function fetchHealthError(
+  idCount: number,
+  occupationCount: number,
+  errorCount: number,
+  maxErrorRate: number = MAX_FETCH_ERROR_RATE,
+): string | null {
+  if (idCount === 0) {
+    return "BERUFENET returned no occupation IDs.";
+  }
+  const rate = errorCount / idCount;
+  if (rate > maxErrorRate) {
+    return `${errorCount}/${idCount} detail fetches failed (${(rate * 100).toFixed(1)}% > ${(maxErrorRate * 100).toFixed(0)}% limit); only ${occupationCount} occupations collected.`;
+  }
+  return null;
 }
 
 async function main() {
@@ -558,6 +691,50 @@ async function main() {
     `  -> ${occupations.length} occupations processed, ${errors} errors.\n`,
   );
 
+  const health = fetchHealthError(ids.length, occupations.length, errors);
+  if (health) {
+    throw new Error(
+      `Aborting before write — refusing to overwrite berufe.json with a degraded fetch: ${health}`,
+    );
+  }
+
+  console.log(
+    "Step 2b: Hydrating Fachpraktiker (§66 BBiG) records from parent Ausbildungen...",
+  );
+  const hyd = hydrateFachpraktiker(occupations);
+  console.log(
+    `  -> ${hyd.hydrated} hydrated, ${hyd.unresolved} unresolved.\n`,
+  );
+  if (hyd.unresolved > 0) {
+    for (const r of hyd.report) {
+      if (r.parentId === null) {
+        console.log(`  [UNRESOLVED] ${r.id}  ${r.name}`);
+      }
+    }
+  }
+
+  console.log(
+    "Step 2c: Applying curated condition overrides for BERUFENET tag mismatches...",
+  );
+  const conditionOverrides = applyConditionOverrides(occupations);
+  console.log(`  -> ${conditionOverrides.report.length} condition overrides applied.\n`);
+  if (conditionOverrides.unresolvedIds.length > 0) {
+    console.warn(
+      `  [STALE OVERRIDE] condition override id(s) not in catalog: ${conditionOverrides.unresolvedIds.join(", ")}`,
+    );
+  }
+
+  console.log(
+    "Step 2d: Applying curated access-level overrides for de-facto FHR Berufe...",
+  );
+  const accessOverrides = applyAccessOverrides(occupations);
+  console.log(`  -> ${accessOverrides.report.length} access-level overrides applied.\n`);
+  if (accessOverrides.unresolvedIds.length > 0) {
+    console.warn(
+      `  [STALE OVERRIDE] access-level override id(s) not in catalog: ${accessOverrides.unresolvedIds.join(", ")}`,
+    );
+  }
+
   const __dirname = dirname(fileURLToPath(import.meta.url));
   const outDir = resolve(__dirname, "../backend/src/data");
   mkdirSync(outDir, { recursive: true });
@@ -576,4 +753,9 @@ async function main() {
   console.log(`  With interests:    ${withInterests}/${occupations.length}`);
 }
 
-main().catch(console.error);
+if (import.meta.url === `file://${process.argv[1]}`) {
+  main().catch((err) => {
+    console.error(err);
+    process.exit(1);
+  });
+}

@@ -8,7 +8,7 @@
  * result after cleaning suggests the upstream API shape has changed — we
  * still return the value but emit a warning so the next maintainer notices.
  */
-export function normalizeKldb(raw: string | undefined): string | null {
+export function normalizeKldb(raw: string | null | undefined): string | null {
 	if (!raw) return null;
 	const cleaned = raw.replace(/^B\s+/, "").replace(/\s+/g, "").trim();
 	if (!cleaned) return null;

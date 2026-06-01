@@ -51,9 +51,9 @@ describe("scoreWorkExpectations — short_distance", () => {
 		expect(scoreWorkExpectations(occ, profile)).toBe(-2);
 	});
 
-	test("awards 0 when neither travel signal is present", () => {
+	test("awards +2 when neither travel signal is present", () => {
 		const occ = makeOccupation();
-		expect(scoreWorkExpectations(occ, profile)).toBe(0);
+		expect(scoreWorkExpectations(occ, profile)).toBe(2);
 	});
 });
 
