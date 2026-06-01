@@ -20,7 +20,7 @@ const EMPTY_PROFILE = {
 	customSubjects: [],
 	interests: [],
 	customInterests: [],
-	workValues: [],
+	workExpectations: [],
 	strengths: {},
 	secretTalent: "",
 	practicalExperience: "",

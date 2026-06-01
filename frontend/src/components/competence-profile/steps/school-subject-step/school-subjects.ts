@@ -1,4 +1,4 @@
-import { content } from "../../../../content/de";
+import { content } from "../../../../content";
 import type { SubjectDefinition } from "../../../../common";
 
 export const categories: {

@@ -2,7 +2,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { GhostIconButton } from "../primitives/buttons/GhostIconButton";
 import { BottomSheet } from "../primitives/bottom-sheet/BottomSheet";
 import { SecondaryButton } from "../primitives/buttons/SecondaryButton";
-import { content } from "../../content/de";
+import { content } from "../../content";
 import { ToggleButton } from "../primitives/buttons/ToggleButton";
 import { Pill } from "../primitives/buttons/Pill";
 import { PrimaryThemedButton } from "../primitives/buttons/PrimaryThemedButton";

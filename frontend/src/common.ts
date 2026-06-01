@@ -10,6 +10,7 @@ export type {
 	MatchedOccupation,
 	MatchResult,
 	SubjectDefinition,
+	AusbildungsplaetzeResponse,
 } from "@azuki/shared";
 
 import type { WorkPreferenceChoice } from "@azuki/shared";
@@ -33,7 +34,7 @@ export enum Step {
 	SchoolSubjects = 5,
 	Interests = 6,
 	Strengths = 7,
-	WorkValues = 8,
+	WorkExpectations = 8,
 	SecretTalent = 9,
 	PracticalExperience = 10,
 	WorkPreferences = 11,
@@ -48,7 +49,7 @@ export const QUESTIONNAIRE_STEPS = [
 	Step.SchoolSubjects,
 	Step.Interests,
 	Step.Strengths,
-	Step.WorkValues,
+	Step.WorkExpectations,
 	Step.SecretTalent,
 	Step.PracticalExperience,
 	Step.WorkPreferences,

@@ -1,4 +1,4 @@
-import { content } from "../../../../content/de";
+import { content } from "../../../../content";
 import { PrimaryOrangeButton } from "../../../primitives/buttons/PrimaryOrangeButton";
 import { PrimaryThemedButton } from "../../../primitives/buttons/PrimaryThemedButton";
 

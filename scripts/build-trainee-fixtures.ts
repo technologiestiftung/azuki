@@ -21,6 +21,7 @@ import { writeFileSync, mkdirSync } from "node:fs";
 import { resolve, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 import { isBundesland } from "@azuki/shared";
+import { normalizeKldb } from "./normalizeKldb.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(__dirname, "..");
@@ -171,6 +172,9 @@ async function readDestatis(): Promise<DestatisRow[]> {
 			const nameRaw = cellString(row.getCell(colName).value);
 			if (kldbRaw === "Insgesamt" || nameRaw === "Insgesamt") return;
 
+			const germanOccupationCode = normalizeKldb(kldbRaw);
+			if (!germanOccupationCode) return;
+
 			const count = cellCount(row.getCell(colCount).value);
 			if (count <= 0) return;
 
@@ -181,7 +185,7 @@ async function readDestatis(): Promise<DestatisRow[]> {
 			}
 
 			rows.push({
-				germanOccupationCode: kldbRaw.trim(),
+				germanOccupationCode,
 				bundesland,
 				students: count,
 			});

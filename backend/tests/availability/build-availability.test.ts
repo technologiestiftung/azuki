@@ -36,7 +36,12 @@ describe("buildAvailability — synthetic round-trip", () => {
 		{ germanOccupationCode: "999", bundesland: "Berlin", students: 1 },
 	];
 
-	const { availability, stats } = buildAvailability(berufe, pop, dazubi, destatis);
+	const { availability, stats } = buildAvailability(
+		berufe,
+		pop,
+		dazubi,
+		destatis,
+	);
 
 	test("DAZUBI rows joined by normalized name into per-state counts", () => {
 		expect(availability[300]?.Berlin).toBe(12);

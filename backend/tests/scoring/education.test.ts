@@ -139,7 +139,12 @@ describe("scoreEducation — accessLevel fallback (when degreeStats is null)", (
 	});
 
 	test("university_entrance has no penalty on any accessLevel", () => {
-		for (const level of ["unrestricted", "hauptschule", "realschule", "fachhochschulreife"] as const) {
+		for (const level of [
+			"unrestricted",
+			"hauptschule",
+			"realschule",
+			"fachhochschulreife",
+		] as const) {
 			expect(
 				scoreEducation(
 					makeOccupation({ accessLevel: level }),

@@ -13,7 +13,8 @@ import { WorkPreferencesStep } from "./components/competence-profile/steps/WorkP
 import { NoGosStep } from "./components/competence-profile/steps/no-gos-step/NoGosStep";
 import { LoadingScreen } from "./components/loading-screen/LoadingScreen";
 import { ResultsPage } from "./components/results-page/ResultsPage";
-import { WorkValuesStep } from "./components/competence-profile/steps/WorkValuesStep";
+import { FreiePlaetzePage } from "./components/results-page/FreiePlaetzePage";
+import { WorkExpectationsStep } from "./components/competence-profile/steps/WorkExpectationsStep";
 import { EvalPage } from "./components/eval/EvalPage";
 import { PersonasPage } from "./components/personas/PersonasPage";
 import { PersonaDetailPage } from "./components/personas/PersonaDetailPage";
@@ -53,18 +54,25 @@ function App() {
 						path={ROUTE_PATHS.secretTalent}
 						element={<SecretTalentStep />}
 					/>
-					<Route path={ROUTE_PATHS.conditions} element={<WorkValuesStep />} />
+					<Route
+						path={ROUTE_PATHS.expectations}
+						element={<WorkExpectationsStep />}
+					/>
 					<Route
 						path={ROUTE_PATHS.experience}
 						element={<PracticalExperienceStep />}
 					/>
 					<Route
-						path={ROUTE_PATHS.expectations}
+						path={ROUTE_PATHS.preferences}
 						element={<WorkPreferencesStep />}
 					/>
 					<Route path={ROUTE_PATHS.nogos} element={<NoGosStep />} />
 					<Route path={ROUTE_PATHS.loading} element={<LoadingScreen />} />
 					<Route path={ROUTE_PATHS.resultsList} element={<ResultsPage />} />
+					<Route
+						path={ROUTE_PATHS.resultsFreeSpots}
+						element={<FreiePlaetzePage />}
+					/>
 					<Route path={ROUTE_PATHS.eval} element={<EvalPage />} />
 					<Route path={ROUTE_PATHS.personas} element={<PersonasPage />} />
 					<Route

@@ -17,7 +17,7 @@ import {
 	PRECISION_SKILL_TAGS,
 	STRENGTH_TO_TAGS,
 	WORK_PREF_MAP,
-	WORK_VALUE_CHECKS,
+	WORK_EXPECTATIONS_CHECKS,
 } from "./config.js";
 
 const INTEREST_BY_ID = new Map(
@@ -94,7 +94,7 @@ export function scorePopularity(
 	// never below the F_fachpraktiker baseline. A vanishing/niche-tier parent
 	// must not make the §66 variant score worse for its intended audience than
 	// the flat baseline a general user receives — that would invert the boost.
-	if (occupation.parentId != null) {
+	if (typeof occupation.parentId === "number") {
 		const parentTier = getPopularityTier(occupation.parentId);
 		const parentScore = parentTier
 			? POPULARITY_TIER_SCORE[parentTier]
@@ -120,6 +120,8 @@ function accessLevelTier(level: AccessLevel): number {
 			return 1;
 		case "fachhochschulreife":
 			return 2;
+		default:
+			throw new Error(`Unhandled access level: ${level as string}`);
 	}
 }
 
@@ -141,6 +143,8 @@ function userEducationTier(level: EducationLevel): number | null {
 			return 2;
 		case "unknown":
 			return null;
+		default:
+			throw new Error(`Unhandled education level: ${level as string}`);
 	}
 }
 
@@ -149,10 +153,16 @@ function accessLevelPenalty(
 	userLevel: EducationLevel,
 ): number {
 	const userTier = userEducationTier(userLevel);
-	if (userTier === null) return 0;
+	if (userTier === null) {
+		return 0;
+	}
 	const gap = accessLevelTier(level) - userTier;
-	if (gap <= 0) return 0;
-	if (gap === 1) return -3;
+	if (gap <= 0) {
+		return 0;
+	}
+	if (gap === 1) {
+		return -3;
+	}
 	// gap === 2: FHR required, user at Hauptschule level (incl. foreign_degree).
 	// Qualitative step-change rather than incremental — closing this gap requires
 	// either a recognized German Schulabschluss-Aufstockung OR a deutsche
@@ -196,10 +206,7 @@ export function scoreEducation(
 				break;
 			case "intermediate":
 				// Penalize if < 10% of workers hold an intermediate degree or lower
-				if (
-					stats.intermediate + stats.secondary + stats.noQualification <
-					10
-				) {
+				if (stats.intermediate + stats.secondary + stats.noQualification < 10) {
 					return -5;
 				}
 				break;
@@ -213,6 +220,8 @@ export function scoreEducation(
 			case "vocational_diploma":
 			case "foreign_degree":
 			case "unknown":
+				break;
+			default:
 				break;
 		}
 		return 0;
@@ -480,15 +489,15 @@ export function scoreStrengths(
 	return score;
 }
 
-export function scoreWorkValues(
+export function scoreWorkExpectations(
 	occupation: Occupation,
 	profile: UserProfile,
 	salaryBands?: SalaryBands | null,
 ): number {
 	let score = 0;
 
-	for (const valueId of profile.workValues ?? []) {
-		if (valueId === "good_salary") {
+	for (const expectationId of profile.workExpectations ?? []) {
+		if (expectationId === "good_salary") {
 			if (!occupation.salaryKnown || occupation.salaryMonthlyMedian === null) {
 				continue;
 			}
@@ -504,7 +513,7 @@ export function scoreWorkValues(
 			continue;
 		}
 
-		if (valueId === "short_distance") {
+		if (expectationId === "short_distance") {
 			// Symmetric: reward fixed-location Berufe and penalize travel-heavy
 			// ones. An asymmetric penalty made the value selection useless on
 			// retail/logistik for users who chose it specifically because they
@@ -520,7 +529,7 @@ export function scoreWorkValues(
 			continue;
 		}
 
-		const check = WORK_VALUE_CHECKS[valueId];
+		const check = WORK_EXPECTATIONS_CHECKS[expectationId];
 		if (check && check(occupation)) {
 			score += 2;
 		}

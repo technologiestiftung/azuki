@@ -53,10 +53,10 @@ export const STRENGTH_LABELS: Record<string, string> = {
 export const WORK_PREF_LABELS: Record<string, { a: string; b: string }> = {
 	environment: { a: "Drinnen", b: "Draußen" },
 	location: { a: "Fester Arbeitsort", b: "Viel unterwegs" },
-	"hands-vs-mind": { a: "Handwerklich umsetzen", b: "Nachdenken und planen" },
+	"hands-vs-mind": { a: "Praktisch arbeiten", b: "Nachdenken und planen" },
 	variety: { a: "Feste Abläufe", b: "Jeden Tag was Neues" },
 	people: { a: "Meist alleine arbeiten", b: "Viel Kontakt mit Menschen" },
-	pace: { a: "Entspanntes Tempo", b: "Immer viel zu tun" },
+	pace: { a: "Immer viel zu tun", b: "Entspanntes Tempo" },
 	structure: { a: "Aufgaben erledigen", b: "Neue Ideen entwickeln" },
 };
 
@@ -70,7 +70,7 @@ export const NO_GO_LABELS: Record<string, string> = {
 	danger: "Gefährliche Arbeit",
 };
 
-export const WORK_VALUE_LABELS: Record<string, string> = {
+export const WORK_EXPECTATION_LABELS: Record<string, string> = {
 	good_salary: "Gutes Gehalt",
 	people_work: "Mit Menschen arbeiten",
 	teamwork_value: "Teamarbeit",

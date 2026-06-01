@@ -13,7 +13,7 @@ import { OccupationPicker } from "./OccupationPicker";
 import { ScoringExplainer } from "./ScoringExplainer";
 import { InterestsEditor } from "./profile-editors/InterestsEditor";
 import { SubjectsEditor } from "./profile-editors/SubjectsEditor";
-import { WorkValuesEditor } from "./profile-editors/WorkValuesEditor";
+import { WorkExpectationsEditor } from "./profile-editors/WorkExpectationsEditor";
 import { StrengthsEditor } from "./profile-editors/StrengthsEditor";
 import { WorkPreferencesEditor } from "./profile-editors/WorkPreferencesEditor";
 import { NoGosEditor } from "./profile-editors/NoGosEditor";
@@ -215,7 +215,7 @@ function ProfileEditorSection({
 		customSubjects: draft.profile.customSubjects ?? [],
 		interests: draft.profile.interests ?? [],
 		customInterests: draft.profile.customInterests ?? [],
-		workValues: draft.profile.workValues ?? [],
+		workExpectations: draft.profile.workExpectations ?? [],
 		strengths: draft.profile.strengths ?? {},
 		secretTalent: draft.profile.secretTalent ?? "",
 		practicalExperience: draft.profile.practicalExperience ?? "",
@@ -283,9 +283,9 @@ function ProfileEditorSection({
 					}
 				/>
 
-				<WorkValuesEditor
-					workValues={profile.workValues}
-					onChange={(next) => patchProfile({ workValues: next })}
+				<WorkExpectationsEditor
+					workExpectations={profile.workExpectations}
+					onChange={(next) => patchProfile({ workExpectations: next })}
 				/>
 
 				<StrengthsEditor

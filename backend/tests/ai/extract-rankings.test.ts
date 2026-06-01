@@ -12,9 +12,7 @@ describe("extractRankings — happy path", () => {
 
 	test("recovers array under known keys (berufe)", () => {
 		const content = `{"berufe": [{"id": 1, "begruendung": "a"}]}`;
-		expect(extractRankings(content)).toEqual([
-			{ id: 1, begruendung: "a" },
-		]);
+		expect(extractRankings(content)).toEqual([{ id: 1, begruendung: "a" }]);
 	});
 
 	test("recovers array under an unknown key (results, auswahl, ranking, etc.)", () => {
@@ -40,7 +38,10 @@ Beste Matches:
   { "id": 136199, "begruendung": "Sicherheit und Stabilität" }
 ]`;
 		expect(extractRankings(content)).toEqual([
-			{ id: 15540, begruendung: "Du sagst selbst, dass du gut mit Autos umgehen kannst" },
+			{
+				id: 15540,
+				begruendung: "Du sagst selbst, dass du gut mit Autos umgehen kannst",
+			},
 			{ id: 136199, begruendung: "Sicherheit und Stabilität" },
 		]);
 	});
@@ -80,11 +81,8 @@ describe("extractRankings — markdown-fenced responses (Opus 4.6)", () => {
 	});
 
 	test("strips bare ``` ... ``` fences (no language tag)", () => {
-		const content =
-			"```\n" + '[{"id": 1, "begruendung": "a"}]' + "\n```";
-		expect(extractRankings(content)).toEqual([
-			{ id: 1, begruendung: "a" },
-		]);
+		const content = "```\n" + '[{"id": 1, "begruendung": "a"}]' + "\n```";
+		expect(extractRankings(content)).toEqual([{ id: 1, begruendung: "a" }]);
 	});
 
 	test("recovers from raw carriage returns inside string values", () => {
@@ -113,8 +111,8 @@ describe("extractRankings — markdown-fenced responses (Opus 4.6)", () => {
 		const result = extractRankings(content);
 		expect(result).not.toBeNull();
 		expect(result).toHaveLength(1);
-		expect(result![0].id).toBe(6628);
-		expect(result![0].begruendung).toContain("Das zeigt");
+		expect(result?.[0].id).toBe(6628);
+		expect(result?.[0].begruendung).toContain("Das zeigt");
 	});
 
 	test("recovers when stray ASCII quote is followed by comma (stray + ,)", () => {
@@ -129,8 +127,8 @@ describe("extractRankings — markdown-fenced responses (Opus 4.6)", () => {
 		const result = extractRankings(content);
 		expect(result).not.toBeNull();
 		expect(result).toHaveLength(1);
-		expect(result![0].id).toBe(137684);
-		expect(result![0].begruendung).toContain("hilft dir dabei");
+		expect(result?.[0].id).toBe(137684);
+		expect(result?.[0].begruendung).toContain("hilft dir dabei");
 	});
 
 	test("recovers from raw tabs inside string values", () => {

@@ -127,7 +127,7 @@ export interface UserProfile {
 	customSubjects: string[];
 	interests: string[];
 	customInterests: string[];
-	workValues: string[];
+	workExpectations: string[];
 	strengths: Record<string, number>;
 	secretTalent: string;
 	practicalExperience: string;
@@ -140,6 +140,7 @@ export interface UserProfile {
 export interface MatchedOccupation {
 	id: number;
 	name: string;
+	rawName: string;
 	score: number;
 	images: OccupationImage[];
 	taskSummary: string;
@@ -159,4 +160,24 @@ export interface GenerationInfo {
 	cost: number;
 	tokensInput: number;
 	tokensOutput: number;
+}
+
+// --- Ausbildungsplatz Search (POST /api/ausbildungsplaetze response) ---
+
+export interface AusbildungsplatzPreview {
+	employer: string;
+	city: string;
+	/** ISO date string (YYYY-MM-DD) for the start of the Ausbildung. */
+	eintrittsdatum?: string;
+}
+
+export interface AusbildungsplatzResult {
+	beruf: string;
+	totalCount: number;
+	previews: AusbildungsplatzPreview[];
+	searchUrl: string;
+}
+
+export interface AusbildungsplaetzeResponse {
+	results: AusbildungsplatzResult[];
 }

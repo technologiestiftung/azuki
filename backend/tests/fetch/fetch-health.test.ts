@@ -25,6 +25,8 @@ describe("fetchHealthError", () => {
 	});
 
 	test("respects a custom maxErrorRate", () => {
-		expect(fetchHealthError(100, 95, 5, 0.01)).toMatch(/detail fetches failed/i);
+		expect(fetchHealthError(100, 95, 5, 0.01)).toMatch(
+			/detail fetches failed/i,
+		);
 	});
 });

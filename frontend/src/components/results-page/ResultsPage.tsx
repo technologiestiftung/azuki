@@ -1,6 +1,6 @@
 import { useCallback, useMemo, useState } from "react";
 import { useMatchResultsStore } from "../../store/useMatchResultsStore";
-import { content } from "../../content/de";
+import { content } from "../../content";
 import { type MatchedOccupation } from "@azuki/shared";
 import {
 	FilterBottomSheet,

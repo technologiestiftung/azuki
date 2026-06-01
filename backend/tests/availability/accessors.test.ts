@@ -19,7 +19,9 @@ describe("availability accessors — missing data", () => {
 	});
 
 	test("traineeCountAcrossStates returns 0 for unknown id", () => {
-		expect(traineeCountAcrossStates(MISSING_ID, ["Berlin", "Brandenburg"])).toBe(0);
+		expect(
+			traineeCountAcrossStates(MISSING_ID, ["Berlin", "Brandenburg"]),
+		).toBe(0);
 	});
 
 	test("traineeCountAcrossStates with empty state list returns 0", () => {
@@ -37,7 +39,9 @@ describe("availability accessors — fixture shape", () => {
 
 	test("every count is a non-negative integer", () => {
 		for (const [, counts] of Object.entries(availability)) {
-			for (const [state, n] of Object.entries(counts as Record<string, number>)) {
+			for (const [state, n] of Object.entries(
+				counts as Record<string, number>,
+			)) {
 				expect(Number.isInteger(n)).toBe(true);
 				expect(n).toBeGreaterThanOrEqual(0);
 				expect(typeof state).toBe("string");

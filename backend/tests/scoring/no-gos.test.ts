@@ -57,7 +57,11 @@ describe("scoreNoGos — soft noise penalty for people-environment Berufe", () =
 		// — not where the work happens, so noise is still industrial.
 		const occ = makeOccupation({
 			conditions: { noise: true, machinery: false },
-			interests: ["praktisch-konkret", "verwaltend-organisatorisch", "sozial-beratend"],
+			interests: [
+				"praktisch-konkret",
+				"verwaltend-organisatorisch",
+				"sozial-beratend",
+			],
 		});
 		expect(scoreNoGos(occ, profile)).toBe(-5);
 	});

@@ -237,25 +237,25 @@ export const content = {
 	"practicalExperience.cancelLabel": "Abbrechen",
 	"practicalExperience.saveLabel": "Speichern",
 
-	//Work Values
-	"workValues.question": "Was ist dir in deinem Beruf wichtig?",
-	"workValues.skipButton.label": "Überspringen",
-	"workValues.option.goodSalary": "Gutes Gehalt",
-	"workValues.option.peopleWork": "Mit Menschen arbeiten",
-	"workValues.option.teamWork": "Teamarbeit",
-	"workValues.option.autonomyResponsibility":
+	//Work Expectations
+	"workExpectations.question": "Was ist dir in deinem Beruf wichtig?",
+	"workExpectations.skipButton.label": "Überspringen",
+	"workExpectations.option.goodSalary": "Gutes Gehalt",
+	"workExpectations.option.peopleWork": "Mit Menschen arbeiten",
+	"workExpectations.option.teamWork": "Teamarbeit",
+	"workExpectations.option.autonomyResponsibility":
 		"Selbstständigkeit und Verantwortung",
-	"workValues.option.flexibleHours": "Flexible Arbeitszeiten",
-	"workValues.option.stability": "Sicherheit und Stabilität",
-	"workValues.option.modernTechnology": "Arbeiten mit modernen Technologien",
-	"workValues.option.shortDistance": "Kurzer Arbeitsweg",
-	"workValues.option.career": "Karriere",
-	"workValues.option.remote": "Remote möglich",
+	"workExpectations.option.flexibleHours": "Flexible Arbeitszeiten",
+	"workExpectations.option.stability": "Sicherheit und Stabilität",
+	"workExpectations.option.modernTechnology":
+		"Arbeiten mit modernen Technologien",
+	"workExpectations.option.shortDistance": "Kurzer Arbeitsweg",
+	"workExpectations.option.career": "Karriere",
+	"workExpectations.option.remote": "Remote möglich",
 
 	// Work Preferences
-	"workPreferences.question": "Wie möchtest du in Zukunft arbeiten?",
+	"workPreferences.question": "Wie möchtest du lieber arbeiten?",
 	"workPreferences.pairs": workPreferencePairs,
-	"workPreferences.orLabel": "oder",
 
 	// No-Gos
 	"noGos.question": "Was geht für dich überhaupt nicht?",
@@ -323,6 +323,19 @@ export const content = {
 	"results.filter.apply": "Anwenden",
 	"results.filter.settingsAria": "Filtereinstellungen",
 	"results.filter.dismissOverlay": "Schließen",
+	// Standort + Ausbildungsplätze (Arbeitsagentur API integration)
+	"results.region": "Berlin und Brandenburg",
+	"results.badge.suffix": "Stellen",
+	"results.badge.empty": "Keine offenen Stellen",
+	"results.previewHeading": "Beispiele in deiner Nähe",
+	"results.startDatePrefix": "Start:",
+	"results.showAllLink": "Alle Stellen auf arbeitsagentur.de ansehen",
+	"results.fetchError":
+		"Die Stellen konnten gerade nicht geladen werden. Versuch es später noch einmal.",
+	"standort.label": "Standort:",
+	"standort.plzAriaLabel": "Postleitzahl",
+	"freiePlaetze.noResults":
+		"Noch keine passenden Berufe. Geh zuerst zurück zur Ergebnisliste.",
 
 	// Skip confirm dialog
 	"skipConfirmDialog.default.title": "Du hast noch nichts ausgewählt",

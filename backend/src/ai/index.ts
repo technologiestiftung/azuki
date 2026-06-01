@@ -21,7 +21,7 @@ import {
 	STRENGTH_LABELS,
 	WORK_PREF_LABELS,
 	NO_GO_LABELS,
-	WORK_VALUE_LABELS,
+	WORK_EXPECTATION_LABELS,
 } from "./labels.js";
 
 const OPENROUTER_API_KEY = process.env.OPENROUTER_API_KEY;
@@ -71,9 +71,15 @@ export function filterAndDedupeRankings(
 	const seen = new Set<number>();
 	const out: Ranking[] = [];
 	for (const r of rankings) {
-		if (limit !== undefined && out.length >= limit) break;
-		if (!validIds.has(r.id)) continue;
-		if (seen.has(r.id)) continue;
+		if (limit !== undefined && out.length >= limit) {
+			break;
+		}
+		if (!validIds.has(r.id)) {
+			continue;
+		}
+		if (seen.has(r.id)) {
+			continue;
+		}
 		seen.add(r.id);
 		out.push(r);
 	}
@@ -113,7 +119,9 @@ function extractRankingsSchemaAware(s: string): Ranking[] | null {
 	// of objects since the LLM might or might not wrap in {auswahl: [...]}
 	// and might or might not emit ```json fences. We just need the [.
 	const arrayStart = s.indexOf("[");
-	if (arrayStart < 0) return null;
+	if (arrayStart < 0) {
+		return null;
+	}
 
 	// Walk to the matching ]. We intentionally do NOT track string
 	// state: stray ASCII `"` inside Opus's begruendung values flips a
@@ -127,7 +135,9 @@ function extractRankingsSchemaAware(s: string): Ranking[] | null {
 	for (let i = arrayStart; i < s.length; i++) {
 		const ch = s[i];
 		if (ch === "{") {
-			if (depth === 0) chunkStart = i;
+			if (depth === 0) {
+				chunkStart = i;
+			}
 			depth++;
 		} else if (ch === "}") {
 			depth--;
@@ -139,12 +149,16 @@ function extractRankingsSchemaAware(s: string): Ranking[] | null {
 			break;
 		}
 	}
-	if (objects.length === 0) return null;
+	if (objects.length === 0) {
+		return null;
+	}
 
 	const rankings: Ranking[] = [];
 	for (const obj of objects) {
 		const idMatch = obj.match(/"id"\s*:\s*(\d+)/);
-		if (!idMatch) continue;
+		if (!idMatch) {
+			continue;
+		}
 		const id = parseInt(idMatch[1], 10);
 		// Greedy `.+` anchored on the chunk's last `"` before `}`.
 		// `[\s\S]` instead of `.` to span any internal newlines.
@@ -156,7 +170,9 @@ function extractRankingsSchemaAware(s: string): Ranking[] | null {
 }
 
 export function extractRankings(content: string): Ranking[] | null {
-	if (!content) return null;
+	if (!content) {
+		return null;
+	}
 
 	// Strip ALL C0 control characters (0x00–0x1F) and 0x7F. JSON spec
 	// (RFC 8259 §7) disallows every one of these unescaped inside string
@@ -213,25 +229,31 @@ export function extractRankings(content: string): Ranking[] | null {
 				inString = !inString;
 				continue;
 			}
-			if (inString) continue;
-			if (ch === "[") depth++;
-			else if (ch === "]") {
+			if (inString) {
+				continue;
+			}
+			if (ch === "[") {
+				depth++;
+			} else if (ch === "]") {
 				depth--;
-				if (depth === 0) {
-					try {
-						candidates.push(JSON.parse(sanitized.slice(arrayStart, i + 1)));
-					} catch {
-						// ignore
-					}
-					break;
+				if (depth !== 0) {
+					continue;
 				}
+				try {
+					candidates.push(JSON.parse(sanitized.slice(arrayStart, i + 1)));
+				} catch {
+					// ignore
+				}
+				break;
 			}
 		}
 	}
 
 	for (const cand of candidates) {
 		const rankings = findRankingArray(cand);
-		if (rankings) return rankings;
+		if (rankings) {
+			return rankings;
+		}
 	}
 
 	// 3. Schema-aware fallback. JSON.parse failed on every candidate —
@@ -253,7 +275,9 @@ function isRankingShape(value: unknown): value is Ranking {
 
 function findRankingArray(value: unknown): Ranking[] | null {
 	if (Array.isArray(value)) {
-		if (value.length === 0) return null;
+		if (value.length === 0) {
+			return null;
+		}
 		if (value.every(isRankingShape)) {
 			return value.map((v) => ({
 				id: v.id,
@@ -267,7 +291,9 @@ function findRankingArray(value: unknown): Ranking[] | null {
 		// deeply — the LLM may wrap once in an object, not nest arbitrarily.
 		for (const v of Object.values(value as Record<string, unknown>)) {
 			const arr = findRankingArray(v);
-			if (arr) return arr;
+			if (arr) {
+				return arr;
+			}
 		}
 	}
 	return null;
@@ -559,9 +585,9 @@ export function formatProfileSections(profile: UserProfile): string {
 		parts.push(`Arbeitsvorlieben: ${prefLabels.join(", ")}`);
 	}
 
-	if (profile.workValues?.length > 0) {
+	if (profile.workExpectations?.length > 0) {
 		parts.push(
-			`Rahmenbedingungen: ${profile.workValues.map((v) => label(v, WORK_VALUE_LABELS)).join(", ")}`,
+			`Rahmenbedingungen: ${profile.workExpectations.map((v) => label(v, WORK_EXPECTATION_LABELS)).join(", ")}`,
 		);
 	}
 
@@ -591,11 +617,16 @@ export function formatProfileSections(profile: UserProfile): string {
 // is available (mostly §66 records and a few G_unknown).
 function approximateYearlyStarts(occupationId: number): number | null {
 	const rec = getPopularityRecord(occupationId);
-	if (!rec) return null;
-	if (rec.dazubiContracts != null && rec.dazubiContracts > 0) {
+	if (!rec) {
+		return null;
+	}
+	if (typeof rec.dazubiContracts === "number" && rec.dazubiContracts > 0) {
 		return rec.dazubiContracts;
 	}
-	if (rec.schulischeStudents != null && rec.schulischeStudents > 0) {
+	if (
+		typeof rec.schulischeStudents === "number" &&
+		rec.schulischeStudents > 0
+	) {
 		return rec.schulischeStudents;
 	}
 	return null;
@@ -605,10 +636,15 @@ function approximateYearlyStarts(occupationId: number): number | null {
 // (period as Tausenderpunkt). 19710 → "~20.000", 5800 → "~5.800", 880 → "~880".
 function roundStarts(n: number): string {
 	let rounded: number;
-	if (n >= 10000) rounded = Math.round(n / 1000) * 1000;
-	else if (n >= 1000) rounded = Math.round(n / 100) * 100;
-	else if (n >= 100) rounded = Math.round(n / 10) * 10;
-	else rounded = n;
+	if (n >= 10000) {
+		rounded = Math.round(n / 1000) * 1000;
+	} else if (n >= 1000) {
+		rounded = Math.round(n / 100) * 100;
+	} else if (n >= 100) {
+		rounded = Math.round(n / 10) * 10;
+	} else {
+		rounded = n;
+	}
 	return `~${rounded.toLocaleString("de-DE")}`;
 }
 
@@ -626,7 +662,8 @@ function popularityPhrase(
 	starts: number | null,
 	parentName: string | null,
 ): string {
-	const startsSuffix = starts !== null ? ` (${roundStarts(starts)} Plätze/Jahr)` : "";
+	const startsSuffix =
+		starts !== null ? ` (${roundStarts(starts)} Plätze/Jahr)` : "";
 	switch (tier) {
 		case "A_anchor":
 			return `Sehr beliebte Ausbildung${startsSuffix}, im Alltag gut findbar`;
@@ -647,6 +684,8 @@ function popularityPhrase(
 			return `Doppelqualifizierungs-Pfad (Ausbildung + zusätzlicher Abschluss)`;
 		case "G_unknown":
 			return `Wenig Daten zur Marktgröße verfügbar`;
+		default:
+			throw new Error(`Unhandled popularity tier: ${tier as string}`);
 	}
 }
 
@@ -655,7 +694,9 @@ function popularityPhrase(
 // Berufsausbildung" (which is the practical-FHR case — Erzieher, HEP, etc.)
 // from "Fachhochschulreife genuinely required" by adding a "i.d.R. ... mit
 // vorheriger beruflicher Vorbildung" hedge for the upgraded class.
-function accessLevelPhrase(level: AccessLevel | null | undefined): string | null {
+function accessLevelPhrase(
+	level: AccessLevel | null | undefined,
+): string | null {
 	switch (level) {
 		case "unrestricted":
 			return "Zugang ohne formalen Schulabschluss möglich";
@@ -683,15 +724,15 @@ export function formatOccupationContext(occupation: Occupation): string | null {
 	// scoring layer knows about. Falls back to the generic phrasing if
 	// unresolved (rare).
 	const parentName =
-		tier === "F_fachpraktiker" && occupation.parentId != null
+		tier === "F_fachpraktiker" && typeof occupation.parentId === "number"
 			? (getPopularityRecord(occupation.parentId)?.name ?? null)
 			: null;
 	const popularity = tier ? popularityPhrase(tier, starts, parentName) : null;
 
-	const parts = [popularity, access].filter(
-		(s): s is string => s !== null,
-	);
-	if (parts.length === 0) return null;
+	const parts = [popularity, access].filter((s): s is string => s !== null);
+	if (parts.length === 0) {
+		return null;
+	}
 	return parts.join(" | ");
 }
 
@@ -753,6 +794,7 @@ function toOccupationResult(
 	return {
 		id: item.occupation.id,
 		name: formatOccupationDisplayName(item.occupation.name),
+		rawName: item.occupation.name,
 		score: item.score,
 		images: item.occupation.images.slice(0, 3),
 		taskSummary: item.occupation.taskSummary || "",
@@ -857,12 +899,14 @@ export async function aiRank(
 
 	const validIds = new Set(occupationMap.keys());
 	const result: MatchResult = {
-		occupations: filterAndDedupeRankings(rankings, validIds, MAX_RESULTS).map((ranking) => {
-			// Safe: filterAndDedupeRankings keeps only ids that are in validIds.
-			// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-			const item = occupationMap.get(ranking.id)!;
-			return toOccupationResult(item, ranking.begruendung);
-		}),
+		occupations: filterAndDedupeRankings(rankings, validIds, MAX_RESULTS).map(
+			(ranking) => {
+				// Safe: filterAndDedupeRankings keeps only ids that are in validIds.
+				// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+				const item = occupationMap.get(ranking.id)!;
+				return toOccupationResult(item, ranking.begruendung);
+			},
+		),
 	};
 
 	if (result.occupations.length < MIN_RESULTS) {

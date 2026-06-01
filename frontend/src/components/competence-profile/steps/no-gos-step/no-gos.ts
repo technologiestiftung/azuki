@@ -1,4 +1,4 @@
-import { content } from "../../../../content/de";
+import { content } from "../../../../content";
 export const noGos = [
 	{
 		id: "noise",

@@ -26,7 +26,10 @@ describe("normName — frozen verbatim behavior", () => {
 		// joining particles dropped
 		["Fachkraft für Lagerlogistik", "fachkraftlagerlogistik"],
 		["Mitarbeiter im Vertrieb", "mitarbeitervertrieb"],
-		["Anlagenmechaniker für Sanitär- und Heiztechnik", "anlagenmechanikersanitärheiztechnik"],
+		[
+			"Anlagenmechaniker für Sanitär- und Heiztechnik",
+			"anlagenmechanikersanitärheiztechnik",
+		],
 	];
 
 	for (const [input, expected] of cases) {

@@ -5,7 +5,7 @@ export type WorkPreferenceOptionChecks = {
 	a: OccupationPredicate;
 	b: OccupationPredicate;
 };
-export type WorkValuePredicate = (occupation: Occupation) => boolean;
+export type WorkExpectationPredicate = (occupation: Occupation) => boolean;
 
 export const NO_GO_MAP: Record<string, OccupationPredicate> = {
 	noise: (o) => o.conditions.noise,
@@ -39,9 +39,9 @@ export const WORK_PREF_MAP: Record<string, WorkPreferenceOptionChecks> = {
 		b: (o) => o.conditions.customerContact || o.conditions.teamwork,
 	},
 	pace: {
-		a: (o) => o.conditions.office,
 		// No BERUFENET signal for "Arbeit unter Zeitdruck".
-		b: () => false,
+		a: () => false,
+		b: (o) => o.conditions.office,
 	},
 	structure: {
 		a: (o) => o.conditions.regulatedWork,
@@ -110,7 +110,10 @@ export const COMMUNICATION_SKILL_TAGS: readonly string[] = [
 
 const HOMEOFFICE_RE = /homeoffice/i;
 
-export const WORK_VALUE_CHECKS: Record<string, WorkValuePredicate> = {
+export const WORK_EXPECTATIONS_CHECKS: Record<
+	string,
+	WorkExpectationPredicate
+> = {
 	people_work: (o) =>
 		o.conditions.customerContact || o.interests.includes("sozial-beratend"),
 	teamwork_value: (o) =>
@@ -127,11 +130,4 @@ export const WORK_VALUE_CHECKS: Record<string, WorkValuePredicate> = {
 		!o.conditions.irregularHours,
 	modern_technology: (o) => o.conditions.machinery || o.digitalizationSignal,
 	remote: (o) => HOMEOFFICE_RE.test(o.workLocations),
-	// "Gute Atmosphäre" — friendly/sociable workplaces. Distinct from
-	// people_work (which counts any customer/social interaction) and from
-	// teamwork_value (which counts structured team setups): atmosphere is
-	// the b20-4 friendliness signal, present on 137 + 172 / 728 Berufe.
-	atmosphere: (o) =>
-		o.strengthTags.includes("Freundlich-gewinnendes Wesen") ||
-		o.strengthTags.includes("Kontaktbereitschaft"),
 };

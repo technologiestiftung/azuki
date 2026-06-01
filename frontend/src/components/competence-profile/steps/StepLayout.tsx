@@ -2,7 +2,7 @@ import { type ReactNode } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { ProgressBar } from "../progress-bar/ProgressBar";
 import { QuestionBubble } from "../question-bubble/QuestionBubble";
-import { content } from "../../../content/de";
+import { content } from "../../../content";
 import { PrimaryButton } from "../../primitives/buttons/PrimaryButton";
 import { GhostButton } from "../../primitives/buttons/GhostButton";
 import { BackButton } from "../../back-button/BackButton";
@@ -70,7 +70,7 @@ export function StepLayout({
 				</div>
 
 				<div
-					className={`flex-1 min-h-0 overflow-x-clip overflow-y-auto overscroll-y-contain overscroll-x-none touch-pan-y pt-8 px-4 ${hasSkipButton ? "pb-[110px]" : "pb-20"}`}
+					className={`flex flex-1 flex-col min-h-0 overflow-x-clip overflow-y-auto overscroll-y-contain overscroll-x-none touch-pan-y pt-8 px-4 ${hasSkipButton ? "pb-[110px]" : "pb-20"}`}
 				>
 					{children}
 				</div>

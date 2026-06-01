@@ -66,7 +66,7 @@ insert into personas (
     "customSubjects": [],
     "interests": ["videos", "screwing", "gym"],
     "customInterests": [],
-    "workValues": ["good_salary", "stability"],
+    "workExpectations": ["good_salary", "stability"],
     "strengths": {
       "craftsmanship": 1,
       "perseverance": 0.5,
@@ -277,7 +277,7 @@ insert into personas (
     "customSubjects": [],
     "interests": ["drawing", "reading", "crafting", "helping"],
     "customInterests": [],
-    "workValues": ["people_work", "autonomy_responsibility", "stability"],
+    "workExpectations": ["people_work", "autonomy_responsibility", "stability"],
     "strengths": {
       "creativity": 1,
       "communication": 1,
@@ -491,7 +491,7 @@ insert into personas (
     "customSubjects": [],
     "interests": ["team", "gym", "outdoors", "building"],
     "customInterests": [],
-    "workValues": ["good_salary", "stability", "short_distance"],
+    "workExpectations": ["good_salary", "stability", "short_distance"],
     "strengths": {
       "teamwork": 1,
       "perseverance": 1,

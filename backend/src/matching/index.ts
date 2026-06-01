@@ -1,8 +1,5 @@
 import type { Bundesland, Occupation, UserProfile } from "@azuki/shared";
-import {
-	hasAvailabilityData,
-	traineeCountAcrossStates,
-} from "@azuki/shared";
+import { hasAvailabilityData, traineeCountAcrossStates } from "@azuki/shared";
 import { buildSalaryBands, scoreOccupation } from "./score/index.js";
 
 // Number of Berufe preFilter forwards to the LLM ranker. Set after a
@@ -45,7 +42,9 @@ export function filterByRegionalAvailability(
 	occupations: Occupation[],
 ): Occupation[] {
 	return occupations.filter((o) => {
-		if (!hasAvailabilityData(o.id)) return true;
+		if (!hasAvailabilityData(o.id)) {
+			return true;
+		}
 		return traineeCountAcrossStates(o.id, SERVICE_REGION) >= MIN_TRAINEES;
 	});
 }
