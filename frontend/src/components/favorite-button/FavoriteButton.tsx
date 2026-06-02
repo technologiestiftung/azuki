@@ -15,7 +15,7 @@ export function FavoriteButton({ onClick, isFavorite }: FavoriteButtonProps) {
 	return (
 		<button
 			type="button"
-			className="absolute flex items-center justify-center z-10 w-10 h-10 -top-3 right-1"
+			className="absolute flex items-center justify-center z-10 w-10 h-10 -top-[9px] right-1"
 			onClick={handleClick}
 			aria-pressed={isFavorite}
 			aria-label={
@@ -27,12 +27,12 @@ export function FavoriteButton({ onClick, isFavorite }: FavoriteButtonProps) {
 			<img
 				src="/icons/favorite.svg"
 				alt=""
-				className={isFavorite ? "hidden" : "block w-6 h-6"}
+				className={isFavorite ? "hidden" : "block w-7 h-7"}
 			/>
 			<img
 				src="/icons/favorite-filled.svg"
 				alt=""
-				className={isFavorite ? "block w-6 h-6" : "hidden"}
+				className={isFavorite ? "block  w-7 h-7" : "hidden"}
 			/>
 		</button>
 	);

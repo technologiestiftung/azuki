@@ -1,0 +1,6067 @@
+[
+  {
+    "germanOccupationCode": "23212",
+    "bundesland": "Baden-Württemberg",
+    "students": 59
+  },
+  {
+    "germanOccupationCode": "23222",
+    "bundesland": "Baden-Württemberg",
+    "students": 49
+  },
+  {
+    "germanOccupationCode": "23222",
+    "bundesland": "Baden-Württemberg",
+    "students": 729
+  },
+  {
+    "germanOccupationCode": "23222",
+    "bundesland": "Baden-Württemberg",
+    "students": 14
+  },
+  {
+    "germanOccupationCode": "23223",
+    "bundesland": "Baden-Württemberg",
+    "students": 12
+  },
+  {
+    "germanOccupationCode": "23312",
+    "bundesland": "Baden-Württemberg",
+    "students": 169
+  },
+  {
+    "germanOccupationCode": "23322",
+    "bundesland": "Baden-Württemberg",
+    "students": 8
+  },
+  {
+    "germanOccupationCode": "26302",
+    "bundesland": "Baden-Württemberg",
+    "students": 65
+  },
+  {
+    "germanOccupationCode": "27212",
+    "bundesland": "Baden-Württemberg",
+    "students": 4
+  },
+  {
+    "germanOccupationCode": "28212",
+    "bundesland": "Baden-Württemberg",
+    "students": 365
+  },
+  {
+    "germanOccupationCode": "41212",
+    "bundesland": "Baden-Württemberg",
+    "students": 241
+  },
+  {
+    "germanOccupationCode": "41322",
+    "bundesland": "Baden-Württemberg",
+    "students": 243
+  },
+  {
+    "germanOccupationCode": "41412",
+    "bundesland": "Baden-Württemberg",
+    "students": 19
+  },
+  {
+    "germanOccupationCode": "43102",
+    "bundesland": "Baden-Württemberg",
+    "students": 37
+  },
+  {
+    "germanOccupationCode": "43152",
+    "bundesland": "Baden-Württemberg",
+    "students": 31
+  },
+  {
+    "germanOccupationCode": "63122",
+    "bundesland": "Baden-Württemberg",
+    "students": 92
+  },
+  {
+    "germanOccupationCode": "71413",
+    "bundesland": "Baden-Württemberg",
+    "students": 10
+  },
+  {
+    "germanOccupationCode": "73332",
+    "bundesland": "Baden-Württemberg",
+    "students": 671
+  },
+  {
+    "germanOccupationCode": "73342",
+    "bundesland": "Baden-Württemberg",
+    "students": 8
+  },
+  {
+    "germanOccupationCode": "81301",
+    "bundesland": "Baden-Württemberg",
+    "students": 30
+  },
+  {
+    "germanOccupationCode": "81302",
+    "bundesland": "Baden-Württemberg",
+    "students": 3764
+  },
+  {
+    "germanOccupationCode": "81822",
+    "bundesland": "Baden-Württemberg",
+    "students": 718
+  },
+  {
+    "germanOccupationCode": "82101",
+    "bundesland": "Baden-Württemberg",
+    "students": 3004
+  },
+  {
+    "germanOccupationCode": "83112",
+    "bundesland": "Baden-Württemberg",
+    "students": 2528
+  },
+  {
+    "germanOccupationCode": "83113",
+    "bundesland": "Baden-Württemberg",
+    "students": 4789
+  },
+  {
+    "germanOccupationCode": "83141",
+    "bundesland": "Baden-Württemberg",
+    "students": 149
+  },
+  {
+    "germanOccupationCode": "83322",
+    "bundesland": "Baden-Württemberg",
+    "students": 18
+  },
+  {
+    "germanOccupationCode": "84412",
+    "bundesland": "Baden-Württemberg",
+    "students": 12
+  },
+  {
+    "germanOccupationCode": "84533",
+    "bundesland": "Baden-Württemberg",
+    "students": 15
+  },
+  {
+    "germanOccupationCode": "84553",
+    "bundesland": "Baden-Württemberg",
+    "students": 229
+  },
+  {
+    "germanOccupationCode": "84553",
+    "bundesland": "Baden-Württemberg",
+    "students": 13
+  },
+  {
+    "germanOccupationCode": "93102",
+    "bundesland": "Baden-Württemberg",
+    "students": 253
+  },
+  {
+    "germanOccupationCode": "93312",
+    "bundesland": "Baden-Württemberg",
+    "students": 11
+  },
+  {
+    "germanOccupationCode": "93522",
+    "bundesland": "Baden-Württemberg",
+    "students": 43
+  },
+  {
+    "germanOccupationCode": "94214",
+    "bundesland": "Baden-Württemberg",
+    "students": 38
+  },
+  {
+    "germanOccupationCode": "94224",
+    "bundesland": "Baden-Württemberg",
+    "students": 18
+  },
+  {
+    "germanOccupationCode": "94283",
+    "bundesland": "Baden-Württemberg",
+    "students": 6
+  },
+  {
+    "germanOccupationCode": "94532",
+    "bundesland": "Baden-Württemberg",
+    "students": 10
+  },
+  {
+    "germanOccupationCode": "99999",
+    "bundesland": "Baden-Württemberg",
+    "students": 23
+  },
+  {
+    "germanOccupationCode": "23222",
+    "bundesland": "Bayern",
+    "students": 76
+  },
+  {
+    "germanOccupationCode": "23223",
+    "bundesland": "Bayern",
+    "students": 23
+  },
+  {
+    "germanOccupationCode": "28212",
+    "bundesland": "Bayern",
+    "students": 26
+  },
+  {
+    "germanOccupationCode": "28222",
+    "bundesland": "Bayern",
+    "students": 7
+  },
+  {
+    "germanOccupationCode": "41212",
+    "bundesland": "Bayern",
+    "students": 68
+  },
+  {
+    "germanOccupationCode": "41322",
+    "bundesland": "Bayern",
+    "students": 42
+  },
+  {
+    "germanOccupationCode": "43102",
+    "bundesland": "Bayern",
+    "students": 21
+  },
+  {
+    "germanOccupationCode": "43112",
+    "bundesland": "Bayern",
+    "students": 117
+  },
+  {
+    "germanOccupationCode": "43122",
+    "bundesland": "Bayern",
+    "students": 212
+  },
+  {
+    "germanOccupationCode": "63212",
+    "bundesland": "Bayern",
+    "students": 136
+  },
+  {
+    "germanOccupationCode": "71403",
+    "bundesland": "Bayern",
+    "students": 5
+  },
+  {
+    "germanOccupationCode": "71413",
+    "bundesland": "Bayern",
+    "students": 486
+  },
+  {
+    "germanOccupationCode": "81752",
+    "bundesland": "Bayern",
+    "students": 11
+  },
+  {
+    "germanOccupationCode": "82222",
+    "bundesland": "Bayern",
+    "students": 80
+  },
+  {
+    "germanOccupationCode": "82322",
+    "bundesland": "Bayern",
+    "students": 213
+  },
+  {
+    "germanOccupationCode": "83112",
+    "bundesland": "Bayern",
+    "students": 3722
+  },
+  {
+    "germanOccupationCode": "83142",
+    "bundesland": "Bayern",
+    "students": 836
+  },
+  {
+    "germanOccupationCode": "83212",
+    "bundesland": "Bayern",
+    "students": 905
+  },
+  {
+    "germanOccupationCode": "84483",
+    "bundesland": "Bayern",
+    "students": 2
+  },
+  {
+    "germanOccupationCode": "84553",
+    "bundesland": "Bayern",
+    "students": 51
+  },
+  {
+    "germanOccupationCode": "93102",
+    "bundesland": "Bayern",
+    "students": 45
+  },
+  {
+    "germanOccupationCode": "93212",
+    "bundesland": "Bayern",
+    "students": 6
+  },
+  {
+    "germanOccupationCode": "93323",
+    "bundesland": "Bayern",
+    "students": 9
+  },
+  {
+    "germanOccupationCode": "94114",
+    "bundesland": "Bayern",
+    "students": 3
+  },
+  {
+    "germanOccupationCode": "94134",
+    "bundesland": "Bayern",
+    "students": 253
+  },
+  {
+    "germanOccupationCode": "94214",
+    "bundesland": "Bayern",
+    "students": 90
+  },
+  {
+    "germanOccupationCode": "94224",
+    "bundesland": "Bayern",
+    "students": 12
+  },
+  {
+    "germanOccupationCode": "99999",
+    "bundesland": "Bayern",
+    "students": 11
+  },
+  {
+    "germanOccupationCode": "23212",
+    "bundesland": "Berlin",
+    "students": 137
+  },
+  {
+    "germanOccupationCode": "23222",
+    "bundesland": "Berlin",
+    "students": 116
+  },
+  {
+    "germanOccupationCode": "23312",
+    "bundesland": "Berlin",
+    "students": 187
+  },
+  {
+    "germanOccupationCode": "23322",
+    "bundesland": "Berlin",
+    "students": 25
+  },
+  {
+    "germanOccupationCode": "26302",
+    "bundesland": "Berlin",
+    "students": 38
+  },
+  {
+    "germanOccupationCode": "26312",
+    "bundesland": "Berlin",
+    "students": 37
+  },
+  {
+    "germanOccupationCode": "28212",
+    "bundesland": "Berlin",
+    "students": 73
+  },
+  {
+    "germanOccupationCode": "28222",
+    "bundesland": "Berlin",
+    "students": 30
+  },
+  {
+    "germanOccupationCode": "29202",
+    "bundesland": "Berlin",
+    "students": 8
+  },
+  {
+    "germanOccupationCode": "31152",
+    "bundesland": "Berlin",
+    "students": 13
+  },
+  {
+    "germanOccupationCode": "41212",
+    "bundesland": "Berlin",
+    "students": 90
+  },
+  {
+    "germanOccupationCode": "41322",
+    "bundesland": "Berlin",
+    "students": 64
+  },
+  {
+    "germanOccupationCode": "41412",
+    "bundesland": "Berlin",
+    "students": 26
+  },
+  {
+    "germanOccupationCode": "41422",
+    "bundesland": "Berlin",
+    "students": 4
+  },
+  {
+    "germanOccupationCode": "42202",
+    "bundesland": "Berlin",
+    "students": 8
+  },
+  {
+    "germanOccupationCode": "43102",
+    "bundesland": "Berlin",
+    "students": 106
+  },
+  {
+    "germanOccupationCode": "43102",
+    "bundesland": "Berlin",
+    "students": 27
+  },
+  {
+    "germanOccupationCode": "43112",
+    "bundesland": "Berlin",
+    "students": 10
+  },
+  {
+    "germanOccupationCode": "43122",
+    "bundesland": "Berlin",
+    "students": 67
+  },
+  {
+    "germanOccupationCode": "71302",
+    "bundesland": "Berlin",
+    "students": 102
+  },
+  {
+    "germanOccupationCode": "71402",
+    "bundesland": "Berlin",
+    "students": 8
+  },
+  {
+    "germanOccupationCode": "71412",
+    "bundesland": "Berlin",
+    "students": 102
+  },
+  {
+    "germanOccupationCode": "82322",
+    "bundesland": "Berlin",
+    "students": 123
+  },
+  {
+    "germanOccupationCode": "82502",
+    "bundesland": "Berlin",
+    "students": 32
+  },
+  {
+    "germanOccupationCode": "83142",
+    "bundesland": "Berlin",
+    "students": 2418
+  },
+  {
+    "germanOccupationCode": "83212",
+    "bundesland": "Berlin",
+    "students": 19
+  },
+  {
+    "germanOccupationCode": "92302",
+    "bundesland": "Berlin",
+    "students": 10
+  },
+  {
+    "germanOccupationCode": "94224",
+    "bundesland": "Berlin",
+    "students": 10
+  },
+  {
+    "germanOccupationCode": "94283",
+    "bundesland": "Berlin",
+    "students": 2
+  },
+  {
+    "germanOccupationCode": "99999",
+    "bundesland": "Berlin",
+    "students": 48
+  },
+  {
+    "germanOccupationCode": "23212",
+    "bundesland": "Brandenburg",
+    "students": 146
+  },
+  {
+    "germanOccupationCode": "41212",
+    "bundesland": "Brandenburg",
+    "students": 17
+  },
+  {
+    "germanOccupationCode": "63122",
+    "bundesland": "Brandenburg",
+    "students": 93
+  },
+  {
+    "germanOccupationCode": "71402",
+    "bundesland": "Brandenburg",
+    "students": 9
+  },
+  {
+    "germanOccupationCode": "83142",
+    "bundesland": "Brandenburg",
+    "students": 1227
+  },
+  {
+    "germanOccupationCode": "23212",
+    "bundesland": "Bremen",
+    "students": 43
+  },
+  {
+    "germanOccupationCode": "23222",
+    "bundesland": "Bremen",
+    "students": 47
+  },
+  {
+    "germanOccupationCode": "41212",
+    "bundesland": "Bremen",
+    "students": 17
+  },
+  {
+    "germanOccupationCode": "41322",
+    "bundesland": "Bremen",
+    "students": 15
+  },
+  {
+    "germanOccupationCode": "43112",
+    "bundesland": "Bremen",
+    "students": 75
+  },
+  {
+    "germanOccupationCode": "43122",
+    "bundesland": "Bremen",
+    "students": 44
+  },
+  {
+    "germanOccupationCode": "43412",
+    "bundesland": "Bremen",
+    "students": 27
+  },
+  {
+    "germanOccupationCode": "71412",
+    "bundesland": "Bremen",
+    "students": 37
+  },
+  {
+    "germanOccupationCode": "81301",
+    "bundesland": "Bremen",
+    "students": 27
+  },
+  {
+    "germanOccupationCode": "81822",
+    "bundesland": "Bremen",
+    "students": 30
+  },
+  {
+    "germanOccupationCode": "83112",
+    "bundesland": "Bremen",
+    "students": 414
+  },
+  {
+    "germanOccupationCode": "83131",
+    "bundesland": "Bremen",
+    "students": 10
+  },
+  {
+    "germanOccupationCode": "83142",
+    "bundesland": "Bremen",
+    "students": 29
+  },
+  {
+    "germanOccupationCode": "83143",
+    "bundesland": "Bremen",
+    "students": 35
+  },
+  {
+    "germanOccupationCode": "23212",
+    "bundesland": "Hamburg",
+    "students": 110
+  },
+  {
+    "germanOccupationCode": "41212",
+    "bundesland": "Hamburg",
+    "students": 62
+  },
+  {
+    "germanOccupationCode": "41322",
+    "bundesland": "Hamburg",
+    "students": 46
+  },
+  {
+    "germanOccupationCode": "63112",
+    "bundesland": "Hamburg",
+    "students": 23
+  },
+  {
+    "germanOccupationCode": "71412",
+    "bundesland": "Hamburg",
+    "students": 62
+  },
+  {
+    "germanOccupationCode": "81822",
+    "bundesland": "Hamburg",
+    "students": 203
+  },
+  {
+    "germanOccupationCode": "83112",
+    "bundesland": "Hamburg",
+    "students": 930
+  },
+  {
+    "germanOccupationCode": "84553",
+    "bundesland": "Hamburg",
+    "students": 42
+  },
+  {
+    "germanOccupationCode": "92302",
+    "bundesland": "Hamburg",
+    "students": 52
+  },
+  {
+    "germanOccupationCode": "41212",
+    "bundesland": "Hessen",
+    "students": 91
+  },
+  {
+    "germanOccupationCode": "41322",
+    "bundesland": "Hessen",
+    "students": 73
+  },
+  {
+    "germanOccupationCode": "42202",
+    "bundesland": "Hessen",
+    "students": 21
+  },
+  {
+    "germanOccupationCode": "43112",
+    "bundesland": "Hessen",
+    "students": 242
+  },
+  {
+    "germanOccupationCode": "43112",
+    "bundesland": "Hessen",
+    "students": 602
+  },
+  {
+    "germanOccupationCode": "43122",
+    "bundesland": "Hessen",
+    "students": 215
+  },
+  {
+    "germanOccupationCode": "71412",
+    "bundesland": "Hessen",
+    "students": 229
+  },
+  {
+    "germanOccupationCode": "83142",
+    "bundesland": "Hessen",
+    "students": 1915
+  },
+  {
+    "germanOccupationCode": "92302",
+    "bundesland": "Hessen",
+    "students": 184
+  },
+  {
+    "germanOccupationCode": "23212",
+    "bundesland": "Mecklenburg-Vorpommern",
+    "students": 162
+  },
+  {
+    "germanOccupationCode": "28212",
+    "bundesland": "Mecklenburg-Vorpommern",
+    "students": 43
+  },
+  {
+    "germanOccupationCode": "43122",
+    "bundesland": "Mecklenburg-Vorpommern",
+    "students": 8
+  },
+  {
+    "germanOccupationCode": "73342",
+    "bundesland": "Mecklenburg-Vorpommern",
+    "students": 7
+  },
+  {
+    "germanOccupationCode": "81132",
+    "bundesland": "Mecklenburg-Vorpommern",
+    "students": 11
+  },
+  {
+    "germanOccupationCode": "81212",
+    "bundesland": "Mecklenburg-Vorpommern",
+    "students": 40
+  },
+  {
+    "germanOccupationCode": "81232",
+    "bundesland": "Mecklenburg-Vorpommern",
+    "students": 52
+  },
+  {
+    "germanOccupationCode": "81302",
+    "bundesland": "Mecklenburg-Vorpommern",
+    "students": 1214
+  },
+  {
+    "germanOccupationCode": "81332",
+    "bundesland": "Mecklenburg-Vorpommern",
+    "students": 40
+  },
+  {
+    "germanOccupationCode": "81332",
+    "bundesland": "Mecklenburg-Vorpommern",
+    "students": 77
+  },
+  {
+    "germanOccupationCode": "81342",
+    "bundesland": "Mecklenburg-Vorpommern",
+    "students": 106
+  },
+  {
+    "germanOccupationCode": "81712",
+    "bundesland": "Mecklenburg-Vorpommern",
+    "students": 13
+  },
+  {
+    "germanOccupationCode": "81713",
+    "bundesland": "Mecklenburg-Vorpommern",
+    "students": 232
+  },
+  {
+    "germanOccupationCode": "81723",
+    "bundesland": "Mecklenburg-Vorpommern",
+    "students": 148
+  },
+  {
+    "germanOccupationCode": "81733",
+    "bundesland": "Mecklenburg-Vorpommern",
+    "students": 29
+  },
+  {
+    "germanOccupationCode": "81762",
+    "bundesland": "Mecklenburg-Vorpommern",
+    "students": 19
+  },
+  {
+    "germanOccupationCode": "81772",
+    "bundesland": "Mecklenburg-Vorpommern",
+    "students": 16
+  },
+  {
+    "germanOccupationCode": "81822",
+    "bundesland": "Mecklenburg-Vorpommern",
+    "students": 45
+  },
+  {
+    "germanOccupationCode": "82101",
+    "bundesland": "Mecklenburg-Vorpommern",
+    "students": 407
+  },
+  {
+    "germanOccupationCode": "83112",
+    "bundesland": "Mecklenburg-Vorpommern",
+    "students": 108
+  },
+  {
+    "germanOccupationCode": "83113",
+    "bundesland": "Mecklenburg-Vorpommern",
+    "students": 441
+  },
+  {
+    "germanOccupationCode": "83142",
+    "bundesland": "Mecklenburg-Vorpommern",
+    "students": 584
+  },
+  {
+    "germanOccupationCode": "11132",
+    "bundesland": "Niedersachsen",
+    "students": 16
+  },
+  {
+    "germanOccupationCode": "23212",
+    "bundesland": "Niedersachsen",
+    "students": 210
+  },
+  {
+    "germanOccupationCode": "26302",
+    "bundesland": "Niedersachsen",
+    "students": 7
+  },
+  {
+    "germanOccupationCode": "28212",
+    "bundesland": "Niedersachsen",
+    "students": 25
+  },
+  {
+    "germanOccupationCode": "41212",
+    "bundesland": "Niedersachsen",
+    "students": 154
+  },
+  {
+    "germanOccupationCode": "41322",
+    "bundesland": "Niedersachsen",
+    "students": 89
+  },
+  {
+    "germanOccupationCode": "42202",
+    "bundesland": "Niedersachsen",
+    "students": 17
+  },
+  {
+    "germanOccupationCode": "43102",
+    "bundesland": "Niedersachsen",
+    "students": 345
+  },
+  {
+    "germanOccupationCode": "43112",
+    "bundesland": "Niedersachsen",
+    "students": 141
+  },
+  {
+    "germanOccupationCode": "51132",
+    "bundesland": "Niedersachsen",
+    "students": 4
+  },
+  {
+    "germanOccupationCode": "71412",
+    "bundesland": "Niedersachsen",
+    "students": 152
+  },
+  {
+    "germanOccupationCode": "81301",
+    "bundesland": "Niedersachsen",
+    "students": 1691
+  },
+  {
+    "germanOccupationCode": "81302",
+    "bundesland": "Niedersachsen",
+    "students": 964
+  },
+  {
+    "germanOccupationCode": "81713",
+    "bundesland": "Niedersachsen",
+    "students": 71
+  },
+  {
+    "germanOccupationCode": "81723",
+    "bundesland": "Niedersachsen",
+    "students": 722
+  },
+  {
+    "germanOccupationCode": "81723",
+    "bundesland": "Niedersachsen",
+    "students": 11
+  },
+  {
+    "germanOccupationCode": "81733",
+    "bundesland": "Niedersachsen",
+    "students": 43
+  },
+  {
+    "germanOccupationCode": "81822",
+    "bundesland": "Niedersachsen",
+    "students": 641
+  },
+  {
+    "germanOccupationCode": "82322",
+    "bundesland": "Niedersachsen",
+    "students": 526
+  },
+  {
+    "germanOccupationCode": "83112",
+    "bundesland": "Niedersachsen",
+    "students": 3579
+  },
+  {
+    "germanOccupationCode": "83142",
+    "bundesland": "Niedersachsen",
+    "students": 21
+  },
+  {
+    "germanOccupationCode": "23212",
+    "bundesland": "Nordrhein-Westfalen",
+    "students": 1545
+  },
+  {
+    "germanOccupationCode": "25103",
+    "bundesland": "Nordrhein-Westfalen",
+    "students": 200
+  },
+  {
+    "germanOccupationCode": "26242",
+    "bundesland": "Nordrhein-Westfalen",
+    "students": 25
+  },
+  {
+    "germanOccupationCode": "26302",
+    "bundesland": "Nordrhein-Westfalen",
+    "students": 190
+  },
+  {
+    "germanOccupationCode": "28222",
+    "bundesland": "Nordrhein-Westfalen",
+    "students": 195
+  },
+  {
+    "germanOccupationCode": "29202",
+    "bundesland": "Nordrhein-Westfalen",
+    "students": 35
+  },
+  {
+    "germanOccupationCode": "31102",
+    "bundesland": "Nordrhein-Westfalen",
+    "students": 205
+  },
+  {
+    "germanOccupationCode": "41212",
+    "bundesland": "Nordrhein-Westfalen",
+    "students": 205
+  },
+  {
+    "germanOccupationCode": "41222",
+    "bundesland": "Nordrhein-Westfalen",
+    "students": 25
+  },
+  {
+    "germanOccupationCode": "41322",
+    "bundesland": "Nordrhein-Westfalen",
+    "students": 330
+  },
+  {
+    "germanOccupationCode": "41412",
+    "bundesland": "Nordrhein-Westfalen",
+    "students": 25
+  },
+  {
+    "germanOccupationCode": "41422",
+    "bundesland": "Nordrhein-Westfalen",
+    "students": 20
+  },
+  {
+    "germanOccupationCode": "42202",
+    "bundesland": "Nordrhein-Westfalen",
+    "students": 30
+  },
+  {
+    "germanOccupationCode": "43102",
+    "bundesland": "Nordrhein-Westfalen",
+    "students": 1685
+  },
+  {
+    "germanOccupationCode": "43112",
+    "bundesland": "Nordrhein-Westfalen",
+    "students": 5
+  },
+  {
+    "germanOccupationCode": "43112",
+    "bundesland": "Nordrhein-Westfalen",
+    "students": 50
+  },
+  {
+    "germanOccupationCode": "43112",
+    "bundesland": "Nordrhein-Westfalen",
+    "students": 325
+  },
+  {
+    "germanOccupationCode": "43152",
+    "bundesland": "Nordrhein-Westfalen",
+    "students": 85
+  },
+  {
+    "germanOccupationCode": "43412",
+    "bundesland": "Nordrhein-Westfalen",
+    "students": 75
+  },
+  {
+    "germanOccupationCode": "71302",
+    "bundesland": "Nordrhein-Westfalen",
+    "students": 505
+  },
+  {
+    "germanOccupationCode": "71412",
+    "bundesland": "Nordrhein-Westfalen",
+    "students": 240
+  },
+  {
+    "germanOccupationCode": "82322",
+    "bundesland": "Nordrhein-Westfalen",
+    "students": 420
+  },
+  {
+    "germanOccupationCode": "83112",
+    "bundesland": "Nordrhein-Westfalen",
+    "students": 5620
+  },
+  {
+    "germanOccupationCode": "83131",
+    "bundesland": "Nordrhein-Westfalen",
+    "students": 440
+  },
+  {
+    "germanOccupationCode": "83142",
+    "bundesland": "Nordrhein-Westfalen",
+    "students": 2585
+  },
+  {
+    "germanOccupationCode": "83212",
+    "bundesland": "Nordrhein-Westfalen",
+    "students": 305
+  },
+  {
+    "germanOccupationCode": "84553",
+    "bundesland": "Nordrhein-Westfalen",
+    "students": 300
+  },
+  {
+    "germanOccupationCode": "99999",
+    "bundesland": "Nordrhein-Westfalen",
+    "students": 690
+  },
+  {
+    "germanOccupationCode": "23212",
+    "bundesland": "Rheinland-Pfalz",
+    "students": 267
+  },
+  {
+    "germanOccupationCode": "26112",
+    "bundesland": "Rheinland-Pfalz",
+    "students": 135
+  },
+  {
+    "germanOccupationCode": "28222",
+    "bundesland": "Rheinland-Pfalz",
+    "students": 11
+  },
+  {
+    "germanOccupationCode": "41212",
+    "bundesland": "Rheinland-Pfalz",
+    "students": 109
+  },
+  {
+    "germanOccupationCode": "43102",
+    "bundesland": "Rheinland-Pfalz",
+    "students": 468
+  },
+  {
+    "germanOccupationCode": "53212",
+    "bundesland": "Rheinland-Pfalz",
+    "students": 61
+  },
+  {
+    "germanOccupationCode": "63312",
+    "bundesland": "Rheinland-Pfalz",
+    "students": 55
+  },
+  {
+    "germanOccupationCode": "71302",
+    "bundesland": "Rheinland-Pfalz",
+    "students": 1813
+  },
+  {
+    "germanOccupationCode": "81302",
+    "bundesland": "Rheinland-Pfalz",
+    "students": 1574
+  },
+  {
+    "germanOccupationCode": "83142",
+    "bundesland": "Rheinland-Pfalz",
+    "students": 1692
+  },
+  {
+    "germanOccupationCode": "83212",
+    "bundesland": "Rheinland-Pfalz",
+    "students": 58
+  },
+  {
+    "germanOccupationCode": "83112",
+    "bundesland": "Saarland",
+    "students": 269
+  },
+  {
+    "germanOccupationCode": "83131",
+    "bundesland": "Saarland",
+    "students": 40
+  },
+  {
+    "germanOccupationCode": "83143",
+    "bundesland": "Saarland",
+    "students": 55
+  },
+  {
+    "germanOccupationCode": "23222",
+    "bundesland": "Sachsen",
+    "students": 54
+  },
+  {
+    "germanOccupationCode": "23222",
+    "bundesland": "Sachsen",
+    "students": 10
+  },
+  {
+    "germanOccupationCode": "23223",
+    "bundesland": "Sachsen",
+    "students": 17
+  },
+  {
+    "germanOccupationCode": "28212",
+    "bundesland": "Sachsen",
+    "students": 25
+  },
+  {
+    "germanOccupationCode": "81212",
+    "bundesland": "Sachsen",
+    "students": 64
+  },
+  {
+    "germanOccupationCode": "81222",
+    "bundesland": "Sachsen",
+    "students": 13
+  },
+  {
+    "germanOccupationCode": "81232",
+    "bundesland": "Sachsen",
+    "students": 76
+  },
+  {
+    "germanOccupationCode": "81301",
+    "bundesland": "Sachsen",
+    "students": 1392
+  },
+  {
+    "germanOccupationCode": "81302",
+    "bundesland": "Sachsen",
+    "students": 3433
+  },
+  {
+    "germanOccupationCode": "81332",
+    "bundesland": "Sachsen",
+    "students": 73
+  },
+  {
+    "germanOccupationCode": "81332",
+    "bundesland": "Sachsen",
+    "students": 143
+  },
+  {
+    "germanOccupationCode": "81342",
+    "bundesland": "Sachsen",
+    "students": 298
+  },
+  {
+    "germanOccupationCode": "81712",
+    "bundesland": "Sachsen",
+    "students": 70
+  },
+  {
+    "germanOccupationCode": "81713",
+    "bundesland": "Sachsen",
+    "students": 900
+  },
+  {
+    "germanOccupationCode": "81723",
+    "bundesland": "Sachsen",
+    "students": 743
+  },
+  {
+    "germanOccupationCode": "81733",
+    "bundesland": "Sachsen",
+    "students": 199
+  },
+  {
+    "germanOccupationCode": "81762",
+    "bundesland": "Sachsen",
+    "students": 33
+  },
+  {
+    "germanOccupationCode": "81772",
+    "bundesland": "Sachsen",
+    "students": 66
+  },
+  {
+    "germanOccupationCode": "81822",
+    "bundesland": "Sachsen",
+    "students": 266
+  },
+  {
+    "germanOccupationCode": "83142",
+    "bundesland": "Sachsen",
+    "students": 1977
+  },
+  {
+    "germanOccupationCode": "94214",
+    "bundesland": "Sachsen",
+    "students": 7
+  },
+  {
+    "germanOccupationCode": "94224",
+    "bundesland": "Sachsen",
+    "students": 5
+  },
+  {
+    "germanOccupationCode": "23212",
+    "bundesland": "Sachsen-Anhalt",
+    "students": 111
+  },
+  {
+    "germanOccupationCode": "41212",
+    "bundesland": "Sachsen-Anhalt",
+    "students": 24
+  },
+  {
+    "germanOccupationCode": "43102",
+    "bundesland": "Sachsen-Anhalt",
+    "students": 30
+  },
+  {
+    "germanOccupationCode": "43112",
+    "bundesland": "Sachsen-Anhalt",
+    "students": 45
+  },
+  {
+    "germanOccupationCode": "81212",
+    "bundesland": "Sachsen-Anhalt",
+    "students": 9
+  },
+  {
+    "germanOccupationCode": "81301",
+    "bundesland": "Sachsen-Anhalt",
+    "students": 840
+  },
+  {
+    "germanOccupationCode": "81712",
+    "bundesland": "Sachsen-Anhalt",
+    "students": 15
+  },
+  {
+    "germanOccupationCode": "81713",
+    "bundesland": "Sachsen-Anhalt",
+    "students": 204
+  },
+  {
+    "germanOccupationCode": "81723",
+    "bundesland": "Sachsen-Anhalt",
+    "students": 174
+  },
+  {
+    "germanOccupationCode": "81733",
+    "bundesland": "Sachsen-Anhalt",
+    "students": 24
+  },
+  {
+    "germanOccupationCode": "81762",
+    "bundesland": "Sachsen-Anhalt",
+    "students": 15
+  },
+  {
+    "germanOccupationCode": "81822",
+    "bundesland": "Sachsen-Anhalt",
+    "students": 102
+  },
+  {
+    "germanOccupationCode": "83112",
+    "bundesland": "Sachsen-Anhalt",
+    "students": 729
+  },
+  {
+    "germanOccupationCode": "83142",
+    "bundesland": "Sachsen-Anhalt",
+    "students": 831
+  },
+  {
+    "germanOccupationCode": "83143",
+    "bundesland": "Sachsen-Anhalt",
+    "students": 54
+  },
+  {
+    "germanOccupationCode": "99999",
+    "bundesland": "Schleswig-Holstein",
+    "students": 4364
+  },
+  {
+    "germanOccupationCode": "23212",
+    "bundesland": "Thüringen",
+    "students": 63
+  },
+  {
+    "germanOccupationCode": "41212",
+    "bundesland": "Thüringen",
+    "students": 15
+  },
+  {
+    "germanOccupationCode": "41322",
+    "bundesland": "Thüringen",
+    "students": 11
+  },
+  {
+    "germanOccupationCode": "43122",
+    "bundesland": "Thüringen",
+    "students": 56
+  },
+  {
+    "germanOccupationCode": "53322",
+    "bundesland": "Thüringen",
+    "students": 12
+  },
+  {
+    "germanOccupationCode": "71302",
+    "bundesland": "Thüringen",
+    "students": 16
+  },
+  {
+    "germanOccupationCode": "81132",
+    "bundesland": "Thüringen",
+    "students": 8
+  },
+  {
+    "germanOccupationCode": "81212",
+    "bundesland": "Thüringen",
+    "students": 37
+  },
+  {
+    "germanOccupationCode": "81222",
+    "bundesland": "Thüringen",
+    "students": 13
+  },
+  {
+    "germanOccupationCode": "81232",
+    "bundesland": "Thüringen",
+    "students": 73
+  },
+  {
+    "germanOccupationCode": "81301",
+    "bundesland": "Thüringen",
+    "students": 241
+  },
+  {
+    "germanOccupationCode": "81302",
+    "bundesland": "Thüringen",
+    "students": 1576
+  },
+  {
+    "germanOccupationCode": "81332",
+    "bundesland": "Thüringen",
+    "students": 15
+  },
+  {
+    "germanOccupationCode": "81332",
+    "bundesland": "Thüringen",
+    "students": 95
+  },
+  {
+    "germanOccupationCode": "81342",
+    "bundesland": "Thüringen",
+    "students": 107
+  },
+  {
+    "germanOccupationCode": "81712",
+    "bundesland": "Thüringen",
+    "students": 19
+  },
+  {
+    "germanOccupationCode": "81713",
+    "bundesland": "Thüringen",
+    "students": 252
+  },
+  {
+    "germanOccupationCode": "81723",
+    "bundesland": "Thüringen",
+    "students": 183
+  },
+  {
+    "germanOccupationCode": "81733",
+    "bundesland": "Thüringen",
+    "students": 35
+  },
+  {
+    "germanOccupationCode": "81772",
+    "bundesland": "Thüringen",
+    "students": 32
+  },
+  {
+    "germanOccupationCode": "81822",
+    "bundesland": "Thüringen",
+    "students": 95
+  },
+  {
+    "germanOccupationCode": "82101",
+    "bundesland": "Thüringen",
+    "students": 575
+  },
+  {
+    "germanOccupationCode": "83112",
+    "bundesland": "Thüringen",
+    "students": 806
+  },
+  {
+    "germanOccupationCode": "83142",
+    "bundesland": "Thüringen",
+    "students": 774
+  },
+  {
+    "germanOccupationCode": "11132",
+    "bundesland": "Deutschland",
+    "students": 16
+  },
+  {
+    "germanOccupationCode": "23212",
+    "bundesland": "Deutschland",
+    "students": 59
+  },
+  {
+    "germanOccupationCode": "23212",
+    "bundesland": "Deutschland",
+    "students": 2794
+  },
+  {
+    "germanOccupationCode": "23222",
+    "bundesland": "Deutschland",
+    "students": 49
+  },
+  {
+    "germanOccupationCode": "23222",
+    "bundesland": "Deutschland",
+    "students": 946
+  },
+  {
+    "germanOccupationCode": "23222",
+    "bundesland": "Deutschland",
+    "students": 86
+  },
+  {
+    "germanOccupationCode": "23222",
+    "bundesland": "Deutschland",
+    "students": 14
+  },
+  {
+    "germanOccupationCode": "23223",
+    "bundesland": "Deutschland",
+    "students": 52
+  },
+  {
+    "germanOccupationCode": "23312",
+    "bundesland": "Deutschland",
+    "students": 356
+  },
+  {
+    "germanOccupationCode": "23322",
+    "bundesland": "Deutschland",
+    "students": 33
+  },
+  {
+    "germanOccupationCode": "25103",
+    "bundesland": "Deutschland",
+    "students": 200
+  },
+  {
+    "germanOccupationCode": "26112",
+    "bundesland": "Deutschland",
+    "students": 135
+  },
+  {
+    "germanOccupationCode": "26242",
+    "bundesland": "Deutschland",
+    "students": 25
+  },
+  {
+    "germanOccupationCode": "26302",
+    "bundesland": "Deutschland",
+    "students": 300
+  },
+  {
+    "germanOccupationCode": "26312",
+    "bundesland": "Deutschland",
+    "students": 37
+  },
+  {
+    "germanOccupationCode": "27212",
+    "bundesland": "Deutschland",
+    "students": 4
+  },
+  {
+    "germanOccupationCode": "28212",
+    "bundesland": "Deutschland",
+    "students": 557
+  },
+  {
+    "germanOccupationCode": "28222",
+    "bundesland": "Deutschland",
+    "students": 243
+  },
+  {
+    "germanOccupationCode": "29202",
+    "bundesland": "Deutschland",
+    "students": 43
+  },
+  {
+    "germanOccupationCode": "31102",
+    "bundesland": "Deutschland",
+    "students": 205
+  },
+  {
+    "germanOccupationCode": "31152",
+    "bundesland": "Deutschland",
+    "students": 13
+  },
+  {
+    "germanOccupationCode": "41212",
+    "bundesland": "Deutschland",
+    "students": 1093
+  },
+  {
+    "germanOccupationCode": "41222",
+    "bundesland": "Deutschland",
+    "students": 25
+  },
+  {
+    "germanOccupationCode": "41322",
+    "bundesland": "Deutschland",
+    "students": 913
+  },
+  {
+    "germanOccupationCode": "41412",
+    "bundesland": "Deutschland",
+    "students": 70
+  },
+  {
+    "germanOccupationCode": "41422",
+    "bundesland": "Deutschland",
+    "students": 24
+  },
+  {
+    "germanOccupationCode": "42202",
+    "bundesland": "Deutschland",
+    "students": 76
+  },
+  {
+    "germanOccupationCode": "43102",
+    "bundesland": "Deutschland",
+    "students": 2655
+  },
+  {
+    "germanOccupationCode": "43102",
+    "bundesland": "Deutschland",
+    "students": 37
+  },
+  {
+    "germanOccupationCode": "43102",
+    "bundesland": "Deutschland",
+    "students": 27
+  },
+  {
+    "germanOccupationCode": "43112",
+    "bundesland": "Deutschland",
+    "students": 247
+  },
+  {
+    "germanOccupationCode": "43112",
+    "bundesland": "Deutschland",
+    "students": 50
+  },
+  {
+    "germanOccupationCode": "43112",
+    "bundesland": "Deutschland",
+    "students": 117
+  },
+  {
+    "germanOccupationCode": "43112",
+    "bundesland": "Deutschland",
+    "students": 1198
+  },
+  {
+    "germanOccupationCode": "43122",
+    "bundesland": "Deutschland",
+    "students": 602
+  },
+  {
+    "germanOccupationCode": "43152",
+    "bundesland": "Deutschland",
+    "students": 116
+  },
+  {
+    "germanOccupationCode": "43412",
+    "bundesland": "Deutschland",
+    "students": 75
+  },
+  {
+    "germanOccupationCode": "43412",
+    "bundesland": "Deutschland",
+    "students": 27
+  },
+  {
+    "germanOccupationCode": "51132",
+    "bundesland": "Deutschland",
+    "students": 4
+  },
+  {
+    "germanOccupationCode": "53212",
+    "bundesland": "Deutschland",
+    "students": 61
+  },
+  {
+    "germanOccupationCode": "53322",
+    "bundesland": "Deutschland",
+    "students": 12
+  },
+  {
+    "germanOccupationCode": "63112",
+    "bundesland": "Deutschland",
+    "students": 23
+  },
+  {
+    "germanOccupationCode": "63122",
+    "bundesland": "Deutschland",
+    "students": 185
+  },
+  {
+    "germanOccupationCode": "63212",
+    "bundesland": "Deutschland",
+    "students": 136
+  },
+  {
+    "germanOccupationCode": "63312",
+    "bundesland": "Deutschland",
+    "students": 55
+  },
+  {
+    "germanOccupationCode": "71302",
+    "bundesland": "Deutschland",
+    "students": 2436
+  },
+  {
+    "germanOccupationCode": "71402",
+    "bundesland": "Deutschland",
+    "students": 17
+  },
+  {
+    "germanOccupationCode": "71403",
+    "bundesland": "Deutschland",
+    "students": 5
+  },
+  {
+    "germanOccupationCode": "71412",
+    "bundesland": "Deutschland",
+    "students": 822
+  },
+  {
+    "germanOccupationCode": "71413",
+    "bundesland": "Deutschland",
+    "students": 496
+  },
+  {
+    "germanOccupationCode": "73332",
+    "bundesland": "Deutschland",
+    "students": 671
+  },
+  {
+    "germanOccupationCode": "73342",
+    "bundesland": "Deutschland",
+    "students": 15
+  },
+  {
+    "germanOccupationCode": "81132",
+    "bundesland": "Deutschland",
+    "students": 19
+  },
+  {
+    "germanOccupationCode": "81212",
+    "bundesland": "Deutschland",
+    "students": 150
+  },
+  {
+    "germanOccupationCode": "81222",
+    "bundesland": "Deutschland",
+    "students": 26
+  },
+  {
+    "germanOccupationCode": "81232",
+    "bundesland": "Deutschland",
+    "students": 201
+  },
+  {
+    "germanOccupationCode": "81301",
+    "bundesland": "Deutschland",
+    "students": 1633
+  },
+  {
+    "germanOccupationCode": "81301",
+    "bundesland": "Deutschland",
+    "students": 2588
+  },
+  {
+    "germanOccupationCode": "81302",
+    "bundesland": "Deutschland",
+    "students": 12525
+  },
+  {
+    "germanOccupationCode": "81332",
+    "bundesland": "Deutschland",
+    "students": 128
+  },
+  {
+    "germanOccupationCode": "81332",
+    "bundesland": "Deutschland",
+    "students": 315
+  },
+  {
+    "germanOccupationCode": "81342",
+    "bundesland": "Deutschland",
+    "students": 511
+  },
+  {
+    "germanOccupationCode": "81712",
+    "bundesland": "Deutschland",
+    "students": 117
+  },
+  {
+    "germanOccupationCode": "81713",
+    "bundesland": "Deutschland",
+    "students": 1659
+  },
+  {
+    "germanOccupationCode": "81723",
+    "bundesland": "Deutschland",
+    "students": 1970
+  },
+  {
+    "germanOccupationCode": "81723",
+    "bundesland": "Deutschland",
+    "students": 11
+  },
+  {
+    "germanOccupationCode": "81733",
+    "bundesland": "Deutschland",
+    "students": 43
+  },
+  {
+    "germanOccupationCode": "81733",
+    "bundesland": "Deutschland",
+    "students": 287
+  },
+  {
+    "germanOccupationCode": "81752",
+    "bundesland": "Deutschland",
+    "students": 11
+  },
+  {
+    "germanOccupationCode": "81762",
+    "bundesland": "Deutschland",
+    "students": 67
+  },
+  {
+    "germanOccupationCode": "81772",
+    "bundesland": "Deutschland",
+    "students": 114
+  },
+  {
+    "germanOccupationCode": "81822",
+    "bundesland": "Deutschland",
+    "students": 2100
+  },
+  {
+    "germanOccupationCode": "82101",
+    "bundesland": "Deutschland",
+    "students": 3986
+  },
+  {
+    "germanOccupationCode": "82222",
+    "bundesland": "Deutschland",
+    "students": 80
+  },
+  {
+    "germanOccupationCode": "82322",
+    "bundesland": "Deutschland",
+    "students": 1282
+  },
+  {
+    "germanOccupationCode": "82502",
+    "bundesland": "Deutschland",
+    "students": 32
+  },
+  {
+    "germanOccupationCode": "83112",
+    "bundesland": "Deutschland",
+    "students": 18705
+  },
+  {
+    "germanOccupationCode": "83113",
+    "bundesland": "Deutschland",
+    "students": 5230
+  },
+  {
+    "germanOccupationCode": "83131",
+    "bundesland": "Deutschland",
+    "students": 490
+  },
+  {
+    "germanOccupationCode": "83141",
+    "bundesland": "Deutschland",
+    "students": 149
+  },
+  {
+    "germanOccupationCode": "83142",
+    "bundesland": "Deutschland",
+    "students": 14889
+  },
+  {
+    "germanOccupationCode": "83143",
+    "bundesland": "Deutschland",
+    "students": 144
+  },
+  {
+    "germanOccupationCode": "83212",
+    "bundesland": "Deutschland",
+    "students": 1287
+  },
+  {
+    "germanOccupationCode": "83322",
+    "bundesland": "Deutschland",
+    "students": 18
+  },
+  {
+    "germanOccupationCode": "84412",
+    "bundesland": "Deutschland",
+    "students": 12
+  },
+  {
+    "germanOccupationCode": "84483",
+    "bundesland": "Deutschland",
+    "students": 2
+  },
+  {
+    "germanOccupationCode": "84533",
+    "bundesland": "Deutschland",
+    "students": 15
+  },
+  {
+    "germanOccupationCode": "84553",
+    "bundesland": "Deutschland",
+    "students": 622
+  },
+  {
+    "germanOccupationCode": "84553",
+    "bundesland": "Deutschland",
+    "students": 13
+  },
+  {
+    "germanOccupationCode": "92302",
+    "bundesland": "Deutschland",
+    "students": 246
+  },
+  {
+    "germanOccupationCode": "93102",
+    "bundesland": "Deutschland",
+    "students": 298
+  },
+  {
+    "germanOccupationCode": "93212",
+    "bundesland": "Deutschland",
+    "students": 6
+  },
+  {
+    "germanOccupationCode": "93312",
+    "bundesland": "Deutschland",
+    "students": 11
+  },
+  {
+    "germanOccupationCode": "93323",
+    "bundesland": "Deutschland",
+    "students": 9
+  },
+  {
+    "germanOccupationCode": "93522",
+    "bundesland": "Deutschland",
+    "students": 43
+  },
+  {
+    "germanOccupationCode": "94114",
+    "bundesland": "Deutschland",
+    "students": 3
+  },
+  {
+    "germanOccupationCode": "94134",
+    "bundesland": "Deutschland",
+    "students": 253
+  },
+  {
+    "germanOccupationCode": "94214",
+    "bundesland": "Deutschland",
+    "students": 135
+  },
+  {
+    "germanOccupationCode": "94224",
+    "bundesland": "Deutschland",
+    "students": 45
+  },
+  {
+    "germanOccupationCode": "94283",
+    "bundesland": "Deutschland",
+    "students": 8
+  },
+  {
+    "germanOccupationCode": "94532",
+    "bundesland": "Deutschland",
+    "students": 10
+  },
+  {
+    "germanOccupationCode": "99999",
+    "bundesland": "Deutschland",
+    "students": 5136
+  },
+  {
+    "germanOccupationCode": "11113",
+    "bundesland": "Baden-Württemberg",
+    "students": 17
+  },
+  {
+    "germanOccupationCode": "11193",
+    "bundesland": "Baden-Württemberg",
+    "students": 229
+  },
+  {
+    "germanOccupationCode": "11603",
+    "bundesland": "Baden-Württemberg",
+    "students": 17
+  },
+  {
+    "germanOccupationCode": "11693",
+    "bundesland": "Baden-Württemberg",
+    "students": 32
+  },
+  {
+    "germanOccupationCode": "12143",
+    "bundesland": "Baden-Württemberg",
+    "students": 23
+  },
+  {
+    "germanOccupationCode": "12193",
+    "bundesland": "Baden-Württemberg",
+    "students": 182
+  },
+  {
+    "germanOccupationCode": "21293",
+    "bundesland": "Baden-Württemberg",
+    "students": 5
+  },
+  {
+    "germanOccupationCode": "21293",
+    "bundesland": "Baden-Württemberg",
+    "students": 5
+  },
+  {
+    "germanOccupationCode": "22193",
+    "bundesland": "Baden-Württemberg",
+    "students": 8
+  },
+  {
+    "germanOccupationCode": "22203",
+    "bundesland": "Baden-Württemberg",
+    "students": 16
+  },
+  {
+    "germanOccupationCode": "22203",
+    "bundesland": "Baden-Württemberg",
+    "students": 11
+  },
+  {
+    "germanOccupationCode": "22293",
+    "bundesland": "Baden-Württemberg",
+    "students": 16
+  },
+  {
+    "germanOccupationCode": "22303",
+    "bundesland": "Baden-Württemberg",
+    "students": 40
+  },
+  {
+    "germanOccupationCode": "22393",
+    "bundesland": "Baden-Württemberg",
+    "students": 27
+  },
+  {
+    "germanOccupationCode": "22393",
+    "bundesland": "Baden-Württemberg",
+    "students": 166
+  },
+  {
+    "germanOccupationCode": "23193",
+    "bundesland": "Baden-Württemberg",
+    "students": 12
+  },
+  {
+    "germanOccupationCode": "23193",
+    "bundesland": "Baden-Württemberg",
+    "students": 43
+  },
+  {
+    "germanOccupationCode": "23213",
+    "bundesland": "Baden-Württemberg",
+    "students": 16
+  },
+  {
+    "germanOccupationCode": "23293",
+    "bundesland": "Baden-Württemberg",
+    "students": 36
+  },
+  {
+    "germanOccupationCode": "23413",
+    "bundesland": "Baden-Württemberg",
+    "students": 11
+  },
+  {
+    "germanOccupationCode": "24193",
+    "bundesland": "Baden-Württemberg",
+    "students": 21
+  },
+  {
+    "germanOccupationCode": "24233",
+    "bundesland": "Baden-Württemberg",
+    "students": 19
+  },
+  {
+    "germanOccupationCode": "24293",
+    "bundesland": "Baden-Württemberg",
+    "students": 81
+  },
+  {
+    "germanOccupationCode": "24303",
+    "bundesland": "Baden-Württemberg",
+    "students": 9
+  },
+  {
+    "germanOccupationCode": "24413",
+    "bundesland": "Baden-Württemberg",
+    "students": 7
+  },
+  {
+    "germanOccupationCode": "24493",
+    "bundesland": "Baden-Württemberg",
+    "students": 51
+  },
+  {
+    "germanOccupationCode": "24513",
+    "bundesland": "Baden-Württemberg",
+    "students": 44
+  },
+  {
+    "germanOccupationCode": "24593",
+    "bundesland": "Baden-Württemberg",
+    "students": 18
+  },
+  {
+    "germanOccupationCode": "24593",
+    "bundesland": "Baden-Württemberg",
+    "students": 93
+  },
+  {
+    "germanOccupationCode": "25103",
+    "bundesland": "Baden-Württemberg",
+    "students": 1072
+  },
+  {
+    "germanOccupationCode": "25213",
+    "bundesland": "Baden-Württemberg",
+    "students": 53
+  },
+  {
+    "germanOccupationCode": "25293",
+    "bundesland": "Baden-Württemberg",
+    "students": 350
+  },
+  {
+    "germanOccupationCode": "25293",
+    "bundesland": "Baden-Württemberg",
+    "students": 58
+  },
+  {
+    "germanOccupationCode": "25293",
+    "bundesland": "Baden-Württemberg",
+    "students": 30
+  },
+  {
+    "germanOccupationCode": "26113",
+    "bundesland": "Baden-Württemberg",
+    "students": 392
+  },
+  {
+    "germanOccupationCode": "26303",
+    "bundesland": "Baden-Württemberg",
+    "students": 398
+  },
+  {
+    "germanOccupationCode": "26313",
+    "bundesland": "Baden-Württemberg",
+    "students": 40
+  },
+  {
+    "germanOccupationCode": "26393",
+    "bundesland": "Baden-Württemberg",
+    "students": 128
+  },
+  {
+    "germanOccupationCode": "28103",
+    "bundesland": "Baden-Württemberg",
+    "students": 10
+  },
+  {
+    "germanOccupationCode": "28213",
+    "bundesland": "Baden-Württemberg",
+    "students": 12
+  },
+  {
+    "germanOccupationCode": "28293",
+    "bundesland": "Baden-Württemberg",
+    "students": 33
+  },
+  {
+    "germanOccupationCode": "29193",
+    "bundesland": "Baden-Württemberg",
+    "students": 12
+  },
+  {
+    "germanOccupationCode": "29193",
+    "bundesland": "Baden-Württemberg",
+    "students": 24
+  },
+  {
+    "germanOccupationCode": "29293",
+    "bundesland": "Baden-Württemberg",
+    "students": 65
+  },
+  {
+    "germanOccupationCode": "29293",
+    "bundesland": "Baden-Württemberg",
+    "students": 40
+  },
+  {
+    "germanOccupationCode": "29293",
+    "bundesland": "Baden-Württemberg",
+    "students": 18
+  },
+  {
+    "germanOccupationCode": "31103",
+    "bundesland": "Baden-Württemberg",
+    "students": 214
+  },
+  {
+    "germanOccupationCode": "32193",
+    "bundesland": "Baden-Württemberg",
+    "students": 72
+  },
+  {
+    "germanOccupationCode": "33193",
+    "bundesland": "Baden-Württemberg",
+    "students": 15
+  },
+  {
+    "germanOccupationCode": "33293",
+    "bundesland": "Baden-Württemberg",
+    "students": 105
+  },
+  {
+    "germanOccupationCode": "33293",
+    "bundesland": "Baden-Württemberg",
+    "students": 25
+  },
+  {
+    "germanOccupationCode": "33393",
+    "bundesland": "Baden-Württemberg",
+    "students": 14
+  },
+  {
+    "germanOccupationCode": "33393",
+    "bundesland": "Baden-Württemberg",
+    "students": 16
+  },
+  {
+    "germanOccupationCode": "33393",
+    "bundesland": "Baden-Württemberg",
+    "students": 119
+  },
+  {
+    "germanOccupationCode": "34103",
+    "bundesland": "Baden-Württemberg",
+    "students": 21
+  },
+  {
+    "germanOccupationCode": "34213",
+    "bundesland": "Baden-Württemberg",
+    "students": 31
+  },
+  {
+    "germanOccupationCode": "34213",
+    "bundesland": "Baden-Württemberg",
+    "students": 6
+  },
+  {
+    "germanOccupationCode": "34293",
+    "bundesland": "Baden-Württemberg",
+    "students": 131
+  },
+  {
+    "germanOccupationCode": "34293",
+    "bundesland": "Baden-Württemberg",
+    "students": 10
+  },
+  {
+    "germanOccupationCode": "34393",
+    "bundesland": "Baden-Württemberg",
+    "students": 25
+  },
+  {
+    "germanOccupationCode": "41293",
+    "bundesland": "Baden-Württemberg",
+    "students": 14
+  },
+  {
+    "germanOccupationCode": "41313",
+    "bundesland": "Baden-Württemberg",
+    "students": 45
+  },
+  {
+    "germanOccupationCode": "42293",
+    "bundesland": "Baden-Württemberg",
+    "students": 32
+  },
+  {
+    "germanOccupationCode": "42313",
+    "bundesland": "Baden-Württemberg",
+    "students": 12
+  },
+  {
+    "germanOccupationCode": "43113",
+    "bundesland": "Baden-Württemberg",
+    "students": 12
+  },
+  {
+    "germanOccupationCode": "53193",
+    "bundesland": "Baden-Württemberg",
+    "students": 17
+  },
+  {
+    "germanOccupationCode": "54193",
+    "bundesland": "Baden-Württemberg",
+    "students": 15
+  },
+  {
+    "germanOccupationCode": "63213",
+    "bundesland": "Baden-Württemberg",
+    "students": 54
+  },
+  {
+    "germanOccupationCode": "63394",
+    "bundesland": "Baden-Württemberg",
+    "students": 10
+  },
+  {
+    "germanOccupationCode": "71303",
+    "bundesland": "Baden-Württemberg",
+    "students": 112
+  },
+  {
+    "germanOccupationCode": "73223",
+    "bundesland": "Baden-Württemberg",
+    "students": 500
+  },
+  {
+    "germanOccupationCode": "81394",
+    "bundesland": "Baden-Württemberg",
+    "students": 195
+  },
+  {
+    "germanOccupationCode": "81723",
+    "bundesland": "Baden-Württemberg",
+    "students": 49
+  },
+  {
+    "germanOccupationCode": "82393",
+    "bundesland": "Baden-Württemberg",
+    "students": 30
+  },
+  {
+    "germanOccupationCode": "82503",
+    "bundesland": "Baden-Württemberg",
+    "students": 15
+  },
+  {
+    "germanOccupationCode": "82593",
+    "bundesland": "Baden-Württemberg",
+    "students": 93
+  },
+  {
+    "germanOccupationCode": "82593",
+    "bundesland": "Baden-Württemberg",
+    "students": 24
+  },
+  {
+    "germanOccupationCode": "82593",
+    "bundesland": "Baden-Württemberg",
+    "students": 42
+  },
+  {
+    "germanOccupationCode": "83113",
+    "bundesland": "Baden-Württemberg",
+    "students": 794
+  },
+  {
+    "germanOccupationCode": "83131",
+    "bundesland": "Baden-Württemberg",
+    "students": 264
+  },
+  {
+    "germanOccupationCode": "83133",
+    "bundesland": "Baden-Württemberg",
+    "students": 209
+  },
+  {
+    "germanOccupationCode": "83133",
+    "bundesland": "Baden-Württemberg",
+    "students": 912
+  },
+  {
+    "germanOccupationCode": "83134",
+    "bundesland": "Baden-Württemberg",
+    "students": 94
+  },
+  {
+    "germanOccupationCode": "83143",
+    "bundesland": "Baden-Württemberg",
+    "students": 15
+  },
+  {
+    "germanOccupationCode": "83213",
+    "bundesland": "Baden-Württemberg",
+    "students": 10
+  },
+  {
+    "germanOccupationCode": "83293",
+    "bundesland": "Baden-Württemberg",
+    "students": 8
+  },
+  {
+    "germanOccupationCode": "83293",
+    "bundesland": "Baden-Württemberg",
+    "students": 10
+  },
+  {
+    "germanOccupationCode": "83384",
+    "bundesland": "Baden-Württemberg",
+    "students": 6
+  },
+  {
+    "germanOccupationCode": "84533",
+    "bundesland": "Baden-Württemberg",
+    "students": 11
+  },
+  {
+    "germanOccupationCode": "93213",
+    "bundesland": "Baden-Württemberg",
+    "students": 7
+  },
+  {
+    "germanOccupationCode": "93213",
+    "bundesland": "Baden-Württemberg",
+    "students": 16
+  },
+  {
+    "germanOccupationCode": "93293",
+    "bundesland": "Baden-Württemberg",
+    "students": 40
+  },
+  {
+    "germanOccupationCode": "93593",
+    "bundesland": "Baden-Württemberg",
+    "students": 18
+  },
+  {
+    "germanOccupationCode": "93593",
+    "bundesland": "Baden-Württemberg",
+    "students": 9
+  },
+  {
+    "germanOccupationCode": "93693",
+    "bundesland": "Baden-Württemberg",
+    "students": 10
+  },
+  {
+    "germanOccupationCode": "93693",
+    "bundesland": "Baden-Württemberg",
+    "students": 19
+  },
+  {
+    "germanOccupationCode": "99999",
+    "bundesland": "Baden-Württemberg",
+    "students": 13
+  },
+  {
+    "germanOccupationCode": "11113",
+    "bundesland": "Bayern",
+    "students": 121
+  },
+  {
+    "germanOccupationCode": "11193",
+    "bundesland": "Bayern",
+    "students": 56
+  },
+  {
+    "germanOccupationCode": "11193",
+    "bundesland": "Bayern",
+    "students": 397
+  },
+  {
+    "germanOccupationCode": "11603",
+    "bundesland": "Bayern",
+    "students": 9
+  },
+  {
+    "germanOccupationCode": "11713",
+    "bundesland": "Bayern",
+    "students": 28
+  },
+  {
+    "germanOccupationCode": "12103",
+    "bundesland": "Bayern",
+    "students": 12
+  },
+  {
+    "germanOccupationCode": "12143",
+    "bundesland": "Bayern",
+    "students": 27
+  },
+  {
+    "germanOccupationCode": "12193",
+    "bundesland": "Bayern",
+    "students": 91
+  },
+  {
+    "germanOccupationCode": "12203",
+    "bundesland": "Bayern",
+    "students": 22
+  },
+  {
+    "germanOccupationCode": "21233",
+    "bundesland": "Bayern",
+    "students": 16
+  },
+  {
+    "germanOccupationCode": "21293",
+    "bundesland": "Bayern",
+    "students": 12
+  },
+  {
+    "germanOccupationCode": "21313",
+    "bundesland": "Bayern",
+    "students": 5
+  },
+  {
+    "germanOccupationCode": "22103",
+    "bundesland": "Bayern",
+    "students": 54
+  },
+  {
+    "germanOccupationCode": "22203",
+    "bundesland": "Bayern",
+    "students": 18
+  },
+  {
+    "germanOccupationCode": "22303",
+    "bundesland": "Bayern",
+    "students": 65
+  },
+  {
+    "germanOccupationCode": "22393",
+    "bundesland": "Bayern",
+    "students": 155
+  },
+  {
+    "germanOccupationCode": "23113",
+    "bundesland": "Bayern",
+    "students": 9
+  },
+  {
+    "germanOccupationCode": "23393",
+    "bundesland": "Bayern",
+    "students": 15
+  },
+  {
+    "germanOccupationCode": "23413",
+    "bundesland": "Bayern",
+    "students": 10
+  },
+  {
+    "germanOccupationCode": "23493",
+    "bundesland": "Bayern",
+    "students": 7
+  },
+  {
+    "germanOccupationCode": "24413",
+    "bundesland": "Bayern",
+    "students": 19
+  },
+  {
+    "germanOccupationCode": "24493",
+    "bundesland": "Bayern",
+    "students": 24
+  },
+  {
+    "germanOccupationCode": "24593",
+    "bundesland": "Bayern",
+    "students": 23
+  },
+  {
+    "germanOccupationCode": "25103",
+    "bundesland": "Bayern",
+    "students": 1002
+  },
+  {
+    "germanOccupationCode": "25293",
+    "bundesland": "Bayern",
+    "students": 16
+  },
+  {
+    "germanOccupationCode": "26113",
+    "bundesland": "Bayern",
+    "students": 219
+  },
+  {
+    "germanOccupationCode": "26303",
+    "bundesland": "Bayern",
+    "students": 585
+  },
+  {
+    "germanOccupationCode": "26333",
+    "bundesland": "Bayern",
+    "students": 160
+  },
+  {
+    "germanOccupationCode": "26393",
+    "bundesland": "Bayern",
+    "students": 130
+  },
+  {
+    "germanOccupationCode": "26393",
+    "bundesland": "Bayern",
+    "students": 20
+  },
+  {
+    "germanOccupationCode": "28103",
+    "bundesland": "Bayern",
+    "students": 11
+  },
+  {
+    "germanOccupationCode": "28213",
+    "bundesland": "Bayern",
+    "students": 16
+  },
+  {
+    "germanOccupationCode": "28223",
+    "bundesland": "Bayern",
+    "students": 6
+  },
+  {
+    "germanOccupationCode": "28293",
+    "bundesland": "Bayern",
+    "students": 27
+  },
+  {
+    "germanOccupationCode": "29193",
+    "bundesland": "Bayern",
+    "students": 44
+  },
+  {
+    "germanOccupationCode": "29203",
+    "bundesland": "Bayern",
+    "students": 29
+  },
+  {
+    "germanOccupationCode": "29233",
+    "bundesland": "Bayern",
+    "students": 5
+  },
+  {
+    "germanOccupationCode": "29253",
+    "bundesland": "Bayern",
+    "students": 26
+  },
+  {
+    "germanOccupationCode": "29253",
+    "bundesland": "Bayern",
+    "students": 36
+  },
+  {
+    "germanOccupationCode": "29293",
+    "bundesland": "Bayern",
+    "students": 24
+  },
+  {
+    "germanOccupationCode": "31103",
+    "bundesland": "Bayern",
+    "students": 425
+  },
+  {
+    "germanOccupationCode": "32193",
+    "bundesland": "Bayern",
+    "students": 53
+  },
+  {
+    "germanOccupationCode": "32293",
+    "bundesland": "Bayern",
+    "students": 27
+  },
+  {
+    "germanOccupationCode": "33293",
+    "bundesland": "Bayern",
+    "students": 81
+  },
+  {
+    "germanOccupationCode": "33393",
+    "bundesland": "Bayern",
+    "students": 56
+  },
+  {
+    "germanOccupationCode": "34213",
+    "bundesland": "Bayern",
+    "students": 77
+  },
+  {
+    "germanOccupationCode": "34293",
+    "bundesland": "Bayern",
+    "students": 127
+  },
+  {
+    "germanOccupationCode": "41213",
+    "bundesland": "Bayern",
+    "students": 23
+  },
+  {
+    "germanOccupationCode": "41313",
+    "bundesland": "Bayern",
+    "students": 37
+  },
+  {
+    "germanOccupationCode": "41423",
+    "bundesland": "Bayern",
+    "students": 9
+  },
+  {
+    "germanOccupationCode": "42313",
+    "bundesland": "Bayern",
+    "students": 67
+  },
+  {
+    "germanOccupationCode": "43103",
+    "bundesland": "Bayern",
+    "students": 102
+  },
+  {
+    "germanOccupationCode": "43113",
+    "bundesland": "Bayern",
+    "students": 73
+  },
+  {
+    "germanOccupationCode": "63213",
+    "bundesland": "Bayern",
+    "students": 31
+  },
+  {
+    "germanOccupationCode": "82393",
+    "bundesland": "Bayern",
+    "students": 44
+  },
+  {
+    "germanOccupationCode": "82593",
+    "bundesland": "Bayern",
+    "students": 14
+  },
+  {
+    "germanOccupationCode": "82593",
+    "bundesland": "Bayern",
+    "students": 23
+  },
+  {
+    "germanOccupationCode": "83113",
+    "bundesland": "Bayern",
+    "students": 93
+  },
+  {
+    "germanOccupationCode": "83131",
+    "bundesland": "Bayern",
+    "students": 539
+  },
+  {
+    "germanOccupationCode": "83133",
+    "bundesland": "Bayern",
+    "students": 1144
+  },
+  {
+    "germanOccupationCode": "83143",
+    "bundesland": "Bayern",
+    "students": 29
+  },
+  {
+    "germanOccupationCode": "83213",
+    "bundesland": "Bayern",
+    "students": 469
+  },
+  {
+    "germanOccupationCode": "83213",
+    "bundesland": "Bayern",
+    "students": 22
+  },
+  {
+    "germanOccupationCode": "84214",
+    "bundesland": "Bayern",
+    "students": 10
+  },
+  {
+    "germanOccupationCode": "93103",
+    "bundesland": "Bayern",
+    "students": 36
+  },
+  {
+    "germanOccupationCode": "93393",
+    "bundesland": "Bayern",
+    "students": 14
+  },
+  {
+    "germanOccupationCode": "93493",
+    "bundesland": "Bayern",
+    "students": 11
+  },
+  {
+    "germanOccupationCode": "93593",
+    "bundesland": "Bayern",
+    "students": 16
+  },
+  {
+    "germanOccupationCode": "99999",
+    "bundesland": "Bayern",
+    "students": 68
+  },
+  {
+    "germanOccupationCode": "12143",
+    "bundesland": "Berlin",
+    "students": 5
+  },
+  {
+    "germanOccupationCode": "12193",
+    "bundesland": "Berlin",
+    "students": 35
+  },
+  {
+    "germanOccupationCode": "22203",
+    "bundesland": "Berlin",
+    "students": 20
+  },
+  {
+    "germanOccupationCode": "23413",
+    "bundesland": "Berlin",
+    "students": 20
+  },
+  {
+    "germanOccupationCode": "25103",
+    "bundesland": "Berlin",
+    "students": 57
+  },
+  {
+    "germanOccupationCode": "26303",
+    "bundesland": "Berlin",
+    "students": 56
+  },
+  {
+    "germanOccupationCode": "29203",
+    "bundesland": "Berlin",
+    "students": 5
+  },
+  {
+    "germanOccupationCode": "29223",
+    "bundesland": "Berlin",
+    "students": 8
+  },
+  {
+    "germanOccupationCode": "32103",
+    "bundesland": "Berlin",
+    "students": 14
+  },
+  {
+    "germanOccupationCode": "41213",
+    "bundesland": "Berlin",
+    "students": 2
+  },
+  {
+    "germanOccupationCode": "41323",
+    "bundesland": "Berlin",
+    "students": 6
+  },
+  {
+    "germanOccupationCode": "63213",
+    "bundesland": "Berlin",
+    "students": 22
+  },
+  {
+    "germanOccupationCode": "71413",
+    "bundesland": "Berlin",
+    "students": 87
+  },
+  {
+    "germanOccupationCode": "72113",
+    "bundesland": "Berlin",
+    "students": 31
+  },
+  {
+    "germanOccupationCode": "82503",
+    "bundesland": "Berlin",
+    "students": 17
+  },
+  {
+    "germanOccupationCode": "83113",
+    "bundesland": "Berlin",
+    "students": 2955
+  },
+  {
+    "germanOccupationCode": "83133",
+    "bundesland": "Berlin",
+    "students": 91
+  },
+  {
+    "germanOccupationCode": "83134",
+    "bundesland": "Berlin",
+    "students": 12
+  },
+  {
+    "germanOccupationCode": "83213",
+    "bundesland": "Berlin",
+    "students": 2
+  },
+  {
+    "germanOccupationCode": "11113",
+    "bundesland": "Brandenburg",
+    "students": 14
+  },
+  {
+    "germanOccupationCode": "25103",
+    "bundesland": "Brandenburg",
+    "students": 3
+  },
+  {
+    "germanOccupationCode": "26303",
+    "bundesland": "Brandenburg",
+    "students": 4
+  },
+  {
+    "germanOccupationCode": "31103",
+    "bundesland": "Brandenburg",
+    "students": 9
+  },
+  {
+    "germanOccupationCode": "83113",
+    "bundesland": "Brandenburg",
+    "students": 1414
+  },
+  {
+    "germanOccupationCode": "83133",
+    "bundesland": "Brandenburg",
+    "students": 209
+  },
+  {
+    "germanOccupationCode": "83134",
+    "bundesland": "Brandenburg",
+    "students": 34
+  },
+  {
+    "germanOccupationCode": "25103",
+    "bundesland": "Bremen",
+    "students": 9
+  },
+  {
+    "germanOccupationCode": "26303",
+    "bundesland": "Bremen",
+    "students": 11
+  },
+  {
+    "germanOccupationCode": "29203",
+    "bundesland": "Bremen",
+    "students": 16
+  },
+  {
+    "germanOccupationCode": "41313",
+    "bundesland": "Bremen",
+    "students": 6
+  },
+  {
+    "germanOccupationCode": "71303",
+    "bundesland": "Bremen",
+    "students": 46
+  },
+  {
+    "germanOccupationCode": "83113",
+    "bundesland": "Bremen",
+    "students": 463
+  },
+  {
+    "germanOccupationCode": "83133",
+    "bundesland": "Bremen",
+    "students": 71
+  },
+  {
+    "germanOccupationCode": "22203",
+    "bundesland": "Hamburg",
+    "students": 33
+  },
+  {
+    "germanOccupationCode": "22303",
+    "bundesland": "Hamburg",
+    "students": 28
+  },
+  {
+    "germanOccupationCode": "25103",
+    "bundesland": "Hamburg",
+    "students": 43
+  },
+  {
+    "germanOccupationCode": "25213",
+    "bundesland": "Hamburg",
+    "students": 14
+  },
+  {
+    "germanOccupationCode": "26113",
+    "bundesland": "Hamburg",
+    "students": 53
+  },
+  {
+    "germanOccupationCode": "26233",
+    "bundesland": "Hamburg",
+    "students": 22
+  },
+  {
+    "germanOccupationCode": "26303",
+    "bundesland": "Hamburg",
+    "students": 36
+  },
+  {
+    "germanOccupationCode": "31103",
+    "bundesland": "Hamburg",
+    "students": 68
+  },
+  {
+    "germanOccupationCode": "41313",
+    "bundesland": "Hamburg",
+    "students": 23
+  },
+  {
+    "germanOccupationCode": "42203",
+    "bundesland": "Hamburg",
+    "students": 14
+  },
+  {
+    "germanOccupationCode": "63213",
+    "bundesland": "Hamburg",
+    "students": 30
+  },
+  {
+    "germanOccupationCode": "83113",
+    "bundesland": "Hamburg",
+    "students": 778
+  },
+  {
+    "germanOccupationCode": "83133",
+    "bundesland": "Hamburg",
+    "students": 104
+  },
+  {
+    "germanOccupationCode": "94613",
+    "bundesland": "Hamburg",
+    "students": 23
+  },
+  {
+    "germanOccupationCode": "11113",
+    "bundesland": "Hessen",
+    "students": 22
+  },
+  {
+    "germanOccupationCode": "11193",
+    "bundesland": "Hessen",
+    "students": 54
+  },
+  {
+    "germanOccupationCode": "21313",
+    "bundesland": "Hessen",
+    "students": 3
+  },
+  {
+    "germanOccupationCode": "22103",
+    "bundesland": "Hessen",
+    "students": 7
+  },
+  {
+    "germanOccupationCode": "22203",
+    "bundesland": "Hessen",
+    "students": 11
+  },
+  {
+    "germanOccupationCode": "25103",
+    "bundesland": "Hessen",
+    "students": 407
+  },
+  {
+    "germanOccupationCode": "26123",
+    "bundesland": "Hessen",
+    "students": 119
+  },
+  {
+    "germanOccupationCode": "26303",
+    "bundesland": "Hessen",
+    "students": 160
+  },
+  {
+    "germanOccupationCode": "28223",
+    "bundesland": "Hessen",
+    "students": 24
+  },
+  {
+    "germanOccupationCode": "29203",
+    "bundesland": "Hessen",
+    "students": 6
+  },
+  {
+    "germanOccupationCode": "31103",
+    "bundesland": "Hessen",
+    "students": 80
+  },
+  {
+    "germanOccupationCode": "34213",
+    "bundesland": "Hessen",
+    "students": 15
+  },
+  {
+    "germanOccupationCode": "41213",
+    "bundesland": "Hessen",
+    "students": 15
+  },
+  {
+    "germanOccupationCode": "41313",
+    "bundesland": "Hessen",
+    "students": 34
+  },
+  {
+    "germanOccupationCode": "43103",
+    "bundesland": "Hessen",
+    "students": 16
+  },
+  {
+    "germanOccupationCode": "61203",
+    "bundesland": "Hessen",
+    "students": 263
+  },
+  {
+    "germanOccupationCode": "63213",
+    "bundesland": "Hessen",
+    "students": 29
+  },
+  {
+    "germanOccupationCode": "71303",
+    "bundesland": "Hessen",
+    "students": 44
+  },
+  {
+    "germanOccupationCode": "83113",
+    "bundesland": "Hessen",
+    "students": 2345
+  },
+  {
+    "germanOccupationCode": "83133",
+    "bundesland": "Hessen",
+    "students": 245
+  },
+  {
+    "germanOccupationCode": "83134",
+    "bundesland": "Hessen",
+    "students": 34
+  },
+  {
+    "germanOccupationCode": "93103",
+    "bundesland": "Hessen",
+    "students": 6
+  },
+  {
+    "germanOccupationCode": "11193",
+    "bundesland": "Mecklenburg-Vorpommern",
+    "students": 18
+  },
+  {
+    "germanOccupationCode": "11193",
+    "bundesland": "Mecklenburg-Vorpommern",
+    "students": 14
+  },
+  {
+    "germanOccupationCode": "25103",
+    "bundesland": "Mecklenburg-Vorpommern",
+    "students": 7
+  },
+  {
+    "germanOccupationCode": "26123",
+    "bundesland": "Mecklenburg-Vorpommern",
+    "students": 9
+  },
+  {
+    "germanOccupationCode": "51133",
+    "bundesland": "Mecklenburg-Vorpommern",
+    "students": 3
+  },
+  {
+    "germanOccupationCode": "51133",
+    "bundesland": "Mecklenburg-Vorpommern",
+    "students": 3
+  },
+  {
+    "germanOccupationCode": "52413",
+    "bundesland": "Mecklenburg-Vorpommern",
+    "students": 9
+  },
+  {
+    "germanOccupationCode": "52413",
+    "bundesland": "Mecklenburg-Vorpommern",
+    "students": 2
+  },
+  {
+    "germanOccupationCode": "72123",
+    "bundesland": "Mecklenburg-Vorpommern",
+    "students": 18
+  },
+  {
+    "germanOccupationCode": "83113",
+    "bundesland": "Mecklenburg-Vorpommern",
+    "students": 435
+  },
+  {
+    "germanOccupationCode": "83133",
+    "bundesland": "Mecklenburg-Vorpommern",
+    "students": 124
+  },
+  {
+    "germanOccupationCode": "11193",
+    "bundesland": "Niedersachsen",
+    "students": 521
+  },
+  {
+    "germanOccupationCode": "21233",
+    "bundesland": "Niedersachsen",
+    "students": 7
+  },
+  {
+    "germanOccupationCode": "22303",
+    "bundesland": "Niedersachsen",
+    "students": 53
+  },
+  {
+    "germanOccupationCode": "24413",
+    "bundesland": "Niedersachsen",
+    "students": 22
+  },
+  {
+    "germanOccupationCode": "25103",
+    "bundesland": "Niedersachsen",
+    "students": 390
+  },
+  {
+    "germanOccupationCode": "25183",
+    "bundesland": "Niedersachsen",
+    "students": 11
+  },
+  {
+    "germanOccupationCode": "25213",
+    "bundesland": "Niedersachsen",
+    "students": 29
+  },
+  {
+    "germanOccupationCode": "26113",
+    "bundesland": "Niedersachsen",
+    "students": 49
+  },
+  {
+    "germanOccupationCode": "26303",
+    "bundesland": "Niedersachsen",
+    "students": 330
+  },
+  {
+    "germanOccupationCode": "31103",
+    "bundesland": "Niedersachsen",
+    "students": 83
+  },
+  {
+    "germanOccupationCode": "34213",
+    "bundesland": "Niedersachsen",
+    "students": 11
+  },
+  {
+    "germanOccupationCode": "42203",
+    "bundesland": "Niedersachsen",
+    "students": 8
+  },
+  {
+    "germanOccupationCode": "51133",
+    "bundesland": "Niedersachsen",
+    "students": 2
+  },
+  {
+    "germanOccupationCode": "51133",
+    "bundesland": "Niedersachsen",
+    "students": 11
+  },
+  {
+    "germanOccupationCode": "52413",
+    "bundesland": "Niedersachsen",
+    "students": 5
+  },
+  {
+    "germanOccupationCode": "52413",
+    "bundesland": "Niedersachsen",
+    "students": 10
+  },
+  {
+    "germanOccupationCode": "52413",
+    "bundesland": "Niedersachsen",
+    "students": 25
+  },
+  {
+    "germanOccupationCode": "63213",
+    "bundesland": "Niedersachsen",
+    "students": 17
+  },
+  {
+    "germanOccupationCode": "71303",
+    "bundesland": "Niedersachsen",
+    "students": 155
+  },
+  {
+    "germanOccupationCode": "83113",
+    "bundesland": "Niedersachsen",
+    "students": 3012
+  },
+  {
+    "germanOccupationCode": "83133",
+    "bundesland": "Niedersachsen",
+    "students": 744
+  },
+  {
+    "germanOccupationCode": "83134",
+    "bundesland": "Niedersachsen",
+    "students": 99
+  },
+  {
+    "germanOccupationCode": "83213",
+    "bundesland": "Niedersachsen",
+    "students": 29
+  },
+  {
+    "germanOccupationCode": "93393",
+    "bundesland": "Niedersachsen",
+    "students": 7
+  },
+  {
+    "germanOccupationCode": "11193",
+    "bundesland": "Nordrhein-Westfalen",
+    "students": 235
+  },
+  {
+    "germanOccupationCode": "12193",
+    "bundesland": "Nordrhein-Westfalen",
+    "students": 185
+  },
+  {
+    "germanOccupationCode": "21323",
+    "bundesland": "Nordrhein-Westfalen",
+    "students": 55
+  },
+  {
+    "germanOccupationCode": "22103",
+    "bundesland": "Nordrhein-Westfalen",
+    "students": 15
+  },
+  {
+    "germanOccupationCode": "22303",
+    "bundesland": "Nordrhein-Westfalen",
+    "students": 90
+  },
+  {
+    "germanOccupationCode": "23213",
+    "bundesland": "Nordrhein-Westfalen",
+    "students": 35
+  },
+  {
+    "germanOccupationCode": "23413",
+    "bundesland": "Nordrhein-Westfalen",
+    "students": 10
+  },
+  {
+    "germanOccupationCode": "24303",
+    "bundesland": "Nordrhein-Westfalen",
+    "students": 25
+  },
+  {
+    "germanOccupationCode": "24413",
+    "bundesland": "Nordrhein-Westfalen",
+    "students": 15
+  },
+  {
+    "germanOccupationCode": "25103",
+    "bundesland": "Nordrhein-Westfalen",
+    "students": 1550
+  },
+  {
+    "germanOccupationCode": "25213",
+    "bundesland": "Nordrhein-Westfalen",
+    "students": 10
+  },
+  {
+    "germanOccupationCode": "25213",
+    "bundesland": "Nordrhein-Westfalen",
+    "students": 30
+  },
+  {
+    "germanOccupationCode": "26113",
+    "bundesland": "Nordrhein-Westfalen",
+    "students": 60
+  },
+  {
+    "germanOccupationCode": "26123",
+    "bundesland": "Nordrhein-Westfalen",
+    "students": 45
+  },
+  {
+    "germanOccupationCode": "26303",
+    "bundesland": "Nordrhein-Westfalen",
+    "students": 850
+  },
+  {
+    "germanOccupationCode": "29203",
+    "bundesland": "Nordrhein-Westfalen",
+    "students": 30
+  },
+  {
+    "germanOccupationCode": "31213",
+    "bundesland": "Nordrhein-Westfalen",
+    "students": 25
+  },
+  {
+    "germanOccupationCode": "32103",
+    "bundesland": "Nordrhein-Westfalen",
+    "students": 185
+  },
+  {
+    "germanOccupationCode": "32203",
+    "bundesland": "Nordrhein-Westfalen",
+    "students": 70
+  },
+  {
+    "germanOccupationCode": "33303",
+    "bundesland": "Nordrhein-Westfalen",
+    "students": 20
+  },
+  {
+    "germanOccupationCode": "34103",
+    "bundesland": "Nordrhein-Westfalen",
+    "students": 20
+  },
+  {
+    "germanOccupationCode": "34213",
+    "bundesland": "Nordrhein-Westfalen",
+    "students": 165
+  },
+  {
+    "germanOccupationCode": "34233",
+    "bundesland": "Nordrhein-Westfalen",
+    "students": 15
+  },
+  {
+    "germanOccupationCode": "41313",
+    "bundesland": "Nordrhein-Westfalen",
+    "students": 70
+  },
+  {
+    "germanOccupationCode": "41323",
+    "bundesland": "Nordrhein-Westfalen",
+    "students": 155
+  },
+  {
+    "germanOccupationCode": "41423",
+    "bundesland": "Nordrhein-Westfalen",
+    "students": 25
+  },
+  {
+    "germanOccupationCode": "42313",
+    "bundesland": "Nordrhein-Westfalen",
+    "students": 55
+  },
+  {
+    "germanOccupationCode": "43123",
+    "bundesland": "Nordrhein-Westfalen",
+    "students": 50
+  },
+  {
+    "germanOccupationCode": "51623",
+    "bundesland": "Nordrhein-Westfalen",
+    "students": 220
+  },
+  {
+    "germanOccupationCode": "61203",
+    "bundesland": "Nordrhein-Westfalen",
+    "students": 75
+  },
+  {
+    "germanOccupationCode": "61213",
+    "bundesland": "Nordrhein-Westfalen",
+    "students": 280
+  },
+  {
+    "germanOccupationCode": "61283",
+    "bundesland": "Nordrhein-Westfalen",
+    "students": 70
+  },
+  {
+    "germanOccupationCode": "61313",
+    "bundesland": "Nordrhein-Westfalen",
+    "students": 45
+  },
+  {
+    "germanOccupationCode": "63113",
+    "bundesland": "Nordrhein-Westfalen",
+    "students": 30
+  },
+  {
+    "germanOccupationCode": "63294",
+    "bundesland": "Nordrhein-Westfalen",
+    "students": 35
+  },
+  {
+    "germanOccupationCode": "71303",
+    "bundesland": "Nordrhein-Westfalen",
+    "students": 155
+  },
+  {
+    "germanOccupationCode": "71303",
+    "bundesland": "Nordrhein-Westfalen",
+    "students": 20
+  },
+  {
+    "germanOccupationCode": "71383",
+    "bundesland": "Nordrhein-Westfalen",
+    "students": 50
+  },
+  {
+    "germanOccupationCode": "71513",
+    "bundesland": "Nordrhein-Westfalen",
+    "students": 350
+  },
+  {
+    "germanOccupationCode": "72123",
+    "bundesland": "Nordrhein-Westfalen",
+    "students": 110
+  },
+  {
+    "germanOccupationCode": "72213",
+    "bundesland": "Nordrhein-Westfalen",
+    "students": 295
+  },
+  {
+    "germanOccupationCode": "72303",
+    "bundesland": "Nordrhein-Westfalen",
+    "students": 45
+  },
+  {
+    "germanOccupationCode": "73223",
+    "bundesland": "Nordrhein-Westfalen",
+    "students": 50
+  },
+  {
+    "germanOccupationCode": "81723",
+    "bundesland": "Nordrhein-Westfalen",
+    "students": 70
+  },
+  {
+    "germanOccupationCode": "81723",
+    "bundesland": "Nordrhein-Westfalen",
+    "students": 15
+  },
+  {
+    "germanOccupationCode": "82503",
+    "bundesland": "Nordrhein-Westfalen",
+    "students": 15
+  },
+  {
+    "germanOccupationCode": "83113",
+    "bundesland": "Nordrhein-Westfalen",
+    "students": 7000
+  },
+  {
+    "germanOccupationCode": "83133",
+    "bundesland": "Nordrhein-Westfalen",
+    "students": 1230
+  },
+  {
+    "germanOccupationCode": "83133",
+    "bundesland": "Nordrhein-Westfalen",
+    "students": 135
+  },
+  {
+    "germanOccupationCode": "83134",
+    "bundesland": "Nordrhein-Westfalen",
+    "students": 195
+  },
+  {
+    "germanOccupationCode": "83193",
+    "bundesland": "Nordrhein-Westfalen",
+    "students": 115
+  },
+  {
+    "germanOccupationCode": "83293",
+    "bundesland": "Nordrhein-Westfalen",
+    "students": 10
+  },
+  {
+    "germanOccupationCode": "83293",
+    "bundesland": "Nordrhein-Westfalen",
+    "students": 30
+  },
+  {
+    "germanOccupationCode": "92113",
+    "bundesland": "Nordrhein-Westfalen",
+    "students": 680
+  },
+  {
+    "germanOccupationCode": "11193",
+    "bundesland": "Rheinland-Pfalz",
+    "students": 73
+  },
+  {
+    "germanOccupationCode": "11693",
+    "bundesland": "Rheinland-Pfalz",
+    "students": 48
+  },
+  {
+    "germanOccupationCode": "12193",
+    "bundesland": "Rheinland-Pfalz",
+    "students": 18
+  },
+  {
+    "germanOccupationCode": "21293",
+    "bundesland": "Rheinland-Pfalz",
+    "students": 9
+  },
+  {
+    "germanOccupationCode": "21413",
+    "bundesland": "Rheinland-Pfalz",
+    "students": 7
+  },
+  {
+    "germanOccupationCode": "22343",
+    "bundesland": "Rheinland-Pfalz",
+    "students": 23
+  },
+  {
+    "germanOccupationCode": "22393",
+    "bundesland": "Rheinland-Pfalz",
+    "students": 16
+  },
+  {
+    "germanOccupationCode": "24493",
+    "bundesland": "Rheinland-Pfalz",
+    "students": 13
+  },
+  {
+    "germanOccupationCode": "24593",
+    "bundesland": "Rheinland-Pfalz",
+    "students": 9
+  },
+  {
+    "germanOccupationCode": "25103",
+    "bundesland": "Rheinland-Pfalz",
+    "students": 114
+  },
+  {
+    "germanOccupationCode": "25103",
+    "bundesland": "Rheinland-Pfalz",
+    "students": 17
+  },
+  {
+    "germanOccupationCode": "25103",
+    "bundesland": "Rheinland-Pfalz",
+    "students": 256
+  },
+  {
+    "germanOccupationCode": "25213",
+    "bundesland": "Rheinland-Pfalz",
+    "students": 11
+  },
+  {
+    "germanOccupationCode": "25213",
+    "bundesland": "Rheinland-Pfalz",
+    "students": 15
+  },
+  {
+    "germanOccupationCode": "25293",
+    "bundesland": "Rheinland-Pfalz",
+    "students": 12
+  },
+  {
+    "germanOccupationCode": "25293",
+    "bundesland": "Rheinland-Pfalz",
+    "students": 28
+  },
+  {
+    "germanOccupationCode": "26113",
+    "bundesland": "Rheinland-Pfalz",
+    "students": 3
+  },
+  {
+    "germanOccupationCode": "26233",
+    "bundesland": "Rheinland-Pfalz",
+    "students": 73
+  },
+  {
+    "germanOccupationCode": "26313",
+    "bundesland": "Rheinland-Pfalz",
+    "students": 29
+  },
+  {
+    "germanOccupationCode": "26393",
+    "bundesland": "Rheinland-Pfalz",
+    "students": 48
+  },
+  {
+    "germanOccupationCode": "32103",
+    "bundesland": "Rheinland-Pfalz",
+    "students": 63
+  },
+  {
+    "germanOccupationCode": "32193",
+    "bundesland": "Rheinland-Pfalz",
+    "students": 24
+  },
+  {
+    "germanOccupationCode": "32203",
+    "bundesland": "Rheinland-Pfalz",
+    "students": 19
+  },
+  {
+    "germanOccupationCode": "33293",
+    "bundesland": "Rheinland-Pfalz",
+    "students": 17
+  },
+  {
+    "germanOccupationCode": "33393",
+    "bundesland": "Rheinland-Pfalz",
+    "students": 23
+  },
+  {
+    "germanOccupationCode": "34213",
+    "bundesland": "Rheinland-Pfalz",
+    "students": 34
+  },
+  {
+    "germanOccupationCode": "41323",
+    "bundesland": "Rheinland-Pfalz",
+    "students": 28
+  },
+  {
+    "germanOccupationCode": "43113",
+    "bundesland": "Rheinland-Pfalz",
+    "students": 8
+  },
+  {
+    "germanOccupationCode": "51623",
+    "bundesland": "Rheinland-Pfalz",
+    "students": 13
+  },
+  {
+    "germanOccupationCode": "63113",
+    "bundesland": "Rheinland-Pfalz",
+    "students": 15
+  },
+  {
+    "germanOccupationCode": "63213",
+    "bundesland": "Rheinland-Pfalz",
+    "students": 4
+  },
+  {
+    "germanOccupationCode": "63403",
+    "bundesland": "Rheinland-Pfalz",
+    "students": 21
+  },
+  {
+    "germanOccupationCode": "71303",
+    "bundesland": "Rheinland-Pfalz",
+    "students": 11
+  },
+  {
+    "germanOccupationCode": "71403",
+    "bundesland": "Rheinland-Pfalz",
+    "students": 87
+  },
+  {
+    "germanOccupationCode": "72303",
+    "bundesland": "Rheinland-Pfalz",
+    "students": 22
+  },
+  {
+    "germanOccupationCode": "73223",
+    "bundesland": "Rheinland-Pfalz",
+    "students": 74
+  },
+  {
+    "germanOccupationCode": "82101",
+    "bundesland": "Rheinland-Pfalz",
+    "students": 1124
+  },
+  {
+    "germanOccupationCode": "82393",
+    "bundesland": "Rheinland-Pfalz",
+    "students": 16
+  },
+  {
+    "germanOccupationCode": "83113",
+    "bundesland": "Rheinland-Pfalz",
+    "students": 1977
+  },
+  {
+    "germanOccupationCode": "83133",
+    "bundesland": "Rheinland-Pfalz",
+    "students": 218
+  },
+  {
+    "germanOccupationCode": "83293",
+    "bundesland": "Rheinland-Pfalz",
+    "students": 3
+  },
+  {
+    "germanOccupationCode": "93413",
+    "bundesland": "Rheinland-Pfalz",
+    "students": 4
+  },
+  {
+    "germanOccupationCode": "99999",
+    "bundesland": "Rheinland-Pfalz",
+    "students": 20
+  },
+  {
+    "germanOccupationCode": "22393",
+    "bundesland": "Saarland",
+    "students": 10
+  },
+  {
+    "germanOccupationCode": "24593",
+    "bundesland": "Saarland",
+    "students": 5
+  },
+  {
+    "germanOccupationCode": "25103",
+    "bundesland": "Saarland",
+    "students": 104
+  },
+  {
+    "germanOccupationCode": "25293",
+    "bundesland": "Saarland",
+    "students": 32
+  },
+  {
+    "germanOccupationCode": "26113",
+    "bundesland": "Saarland",
+    "students": 37
+  },
+  {
+    "germanOccupationCode": "26303",
+    "bundesland": "Saarland",
+    "students": 71
+  },
+  {
+    "germanOccupationCode": "26393",
+    "bundesland": "Saarland",
+    "students": 24
+  },
+  {
+    "germanOccupationCode": "31103",
+    "bundesland": "Saarland",
+    "students": 8
+  },
+  {
+    "germanOccupationCode": "33293",
+    "bundesland": "Saarland",
+    "students": 8
+  },
+  {
+    "germanOccupationCode": "34293",
+    "bundesland": "Saarland",
+    "students": 23
+  },
+  {
+    "germanOccupationCode": "41423",
+    "bundesland": "Saarland",
+    "students": 11
+  },
+  {
+    "germanOccupationCode": "63394",
+    "bundesland": "Saarland",
+    "students": 10
+  },
+  {
+    "germanOccupationCode": "71303",
+    "bundesland": "Saarland",
+    "students": 15
+  },
+  {
+    "germanOccupationCode": "82393",
+    "bundesland": "Saarland",
+    "students": 28
+  },
+  {
+    "germanOccupationCode": "83113",
+    "bundesland": "Saarland",
+    "students": 346
+  },
+  {
+    "germanOccupationCode": "83293",
+    "bundesland": "Saarland",
+    "students": 5
+  },
+  {
+    "germanOccupationCode": "11113",
+    "bundesland": "Sachsen",
+    "students": 22
+  },
+  {
+    "germanOccupationCode": "11193",
+    "bundesland": "Sachsen",
+    "students": 17
+  },
+  {
+    "germanOccupationCode": "12193",
+    "bundesland": "Sachsen",
+    "students": 36
+  },
+  {
+    "germanOccupationCode": "21113",
+    "bundesland": "Sachsen",
+    "students": 4
+  },
+  {
+    "germanOccupationCode": "21113",
+    "bundesland": "Sachsen",
+    "students": 3
+  },
+  {
+    "germanOccupationCode": "25103",
+    "bundesland": "Sachsen",
+    "students": 155
+  },
+  {
+    "germanOccupationCode": "25213",
+    "bundesland": "Sachsen",
+    "students": 15
+  },
+  {
+    "germanOccupationCode": "26113",
+    "bundesland": "Sachsen",
+    "students": 19
+  },
+  {
+    "germanOccupationCode": "26233",
+    "bundesland": "Sachsen",
+    "students": 158
+  },
+  {
+    "germanOccupationCode": "31153",
+    "bundesland": "Sachsen",
+    "students": 2
+  },
+  {
+    "germanOccupationCode": "32103",
+    "bundesland": "Sachsen",
+    "students": 17
+  },
+  {
+    "germanOccupationCode": "32203",
+    "bundesland": "Sachsen",
+    "students": 2
+  },
+  {
+    "germanOccupationCode": "42113",
+    "bundesland": "Sachsen",
+    "students": 3
+  },
+  {
+    "germanOccupationCode": "43313",
+    "bundesland": "Sachsen",
+    "students": 6
+  },
+  {
+    "germanOccupationCode": "63213",
+    "bundesland": "Sachsen",
+    "students": 5
+  },
+  {
+    "germanOccupationCode": "83113",
+    "bundesland": "Sachsen",
+    "students": 2381
+  },
+  {
+    "germanOccupationCode": "83133",
+    "bundesland": "Sachsen",
+    "students": 338
+  },
+  {
+    "germanOccupationCode": "83293",
+    "bundesland": "Sachsen",
+    "students": 15
+  },
+  {
+    "germanOccupationCode": "11193",
+    "bundesland": "Sachsen-Anhalt",
+    "students": 45
+  },
+  {
+    "germanOccupationCode": "25103",
+    "bundesland": "Sachsen-Anhalt",
+    "students": 12
+  },
+  {
+    "germanOccupationCode": "26233",
+    "bundesland": "Sachsen-Anhalt",
+    "students": 9
+  },
+  {
+    "germanOccupationCode": "31103",
+    "bundesland": "Sachsen-Anhalt",
+    "students": 21
+  },
+  {
+    "germanOccupationCode": "41313",
+    "bundesland": "Sachsen-Anhalt",
+    "students": 6
+  },
+  {
+    "germanOccupationCode": "71303",
+    "bundesland": "Sachsen-Anhalt",
+    "students": 21
+  },
+  {
+    "germanOccupationCode": "83113",
+    "bundesland": "Sachsen-Anhalt",
+    "students": 1164
+  },
+  {
+    "germanOccupationCode": "83133",
+    "bundesland": "Sachsen-Anhalt",
+    "students": 120
+  },
+  {
+    "germanOccupationCode": "83134",
+    "bundesland": "Sachsen-Anhalt",
+    "students": 60
+  },
+  {
+    "germanOccupationCode": "99999",
+    "bundesland": "Schleswig-Holstein",
+    "students": 2047
+  },
+  {
+    "germanOccupationCode": "22103",
+    "bundesland": "Thüringen",
+    "students": 2
+  },
+  {
+    "germanOccupationCode": "23113",
+    "bundesland": "Thüringen",
+    "students": 11
+  },
+  {
+    "germanOccupationCode": "25103",
+    "bundesland": "Thüringen",
+    "students": 45
+  },
+  {
+    "germanOccupationCode": "25103",
+    "bundesland": "Thüringen",
+    "students": 24
+  },
+  {
+    "germanOccupationCode": "26113",
+    "bundesland": "Thüringen",
+    "students": 17
+  },
+  {
+    "germanOccupationCode": "26123",
+    "bundesland": "Thüringen",
+    "students": 19
+  },
+  {
+    "germanOccupationCode": "31153",
+    "bundesland": "Thüringen",
+    "students": 11
+  },
+  {
+    "germanOccupationCode": "32203",
+    "bundesland": "Thüringen",
+    "students": 8
+  },
+  {
+    "germanOccupationCode": "51503",
+    "bundesland": "Thüringen",
+    "students": 52
+  },
+  {
+    "germanOccupationCode": "51523",
+    "bundesland": "Thüringen",
+    "students": 15
+  },
+  {
+    "germanOccupationCode": "71303",
+    "bundesland": "Thüringen",
+    "students": 15
+  },
+  {
+    "germanOccupationCode": "83113",
+    "bundesland": "Thüringen",
+    "students": 844
+  },
+  {
+    "germanOccupationCode": "83133",
+    "bundesland": "Thüringen",
+    "students": 175
+  },
+  {
+    "germanOccupationCode": "83134",
+    "bundesland": "Thüringen",
+    "students": 37
+  },
+  {
+    "germanOccupationCode": "92113",
+    "bundesland": "Thüringen",
+    "students": 13
+  },
+  {
+    "germanOccupationCode": "99999",
+    "bundesland": "Thüringen",
+    "students": 25
+  },
+  {
+    "germanOccupationCode": "11113",
+    "bundesland": "Deutschland",
+    "students": 196
+  },
+  {
+    "germanOccupationCode": "11193",
+    "bundesland": "Deutschland",
+    "students": 354
+  },
+  {
+    "germanOccupationCode": "11193",
+    "bundesland": "Deutschland",
+    "students": 521
+  },
+  {
+    "germanOccupationCode": "11193",
+    "bundesland": "Deutschland",
+    "students": 784
+  },
+  {
+    "germanOccupationCode": "11603",
+    "bundesland": "Deutschland",
+    "students": 26
+  },
+  {
+    "germanOccupationCode": "11693",
+    "bundesland": "Deutschland",
+    "students": 80
+  },
+  {
+    "germanOccupationCode": "11713",
+    "bundesland": "Deutschland",
+    "students": 28
+  },
+  {
+    "germanOccupationCode": "12103",
+    "bundesland": "Deutschland",
+    "students": 12
+  },
+  {
+    "germanOccupationCode": "12143",
+    "bundesland": "Deutschland",
+    "students": 55
+  },
+  {
+    "germanOccupationCode": "12193",
+    "bundesland": "Deutschland",
+    "students": 182
+  },
+  {
+    "germanOccupationCode": "12193",
+    "bundesland": "Deutschland",
+    "students": 365
+  },
+  {
+    "germanOccupationCode": "12203",
+    "bundesland": "Deutschland",
+    "students": 22
+  },
+  {
+    "germanOccupationCode": "21113",
+    "bundesland": "Deutschland",
+    "students": 4
+  },
+  {
+    "germanOccupationCode": "21113",
+    "bundesland": "Deutschland",
+    "students": 3
+  },
+  {
+    "germanOccupationCode": "21233",
+    "bundesland": "Deutschland",
+    "students": 23
+  },
+  {
+    "germanOccupationCode": "21293",
+    "bundesland": "Deutschland",
+    "students": 26
+  },
+  {
+    "germanOccupationCode": "21293",
+    "bundesland": "Deutschland",
+    "students": 5
+  },
+  {
+    "germanOccupationCode": "21313",
+    "bundesland": "Deutschland",
+    "students": 8
+  },
+  {
+    "germanOccupationCode": "21323",
+    "bundesland": "Deutschland",
+    "students": 55
+  },
+  {
+    "germanOccupationCode": "21413",
+    "bundesland": "Deutschland",
+    "students": 7
+  },
+  {
+    "germanOccupationCode": "22103",
+    "bundesland": "Deutschland",
+    "students": 76
+  },
+  {
+    "germanOccupationCode": "22103",
+    "bundesland": "Deutschland",
+    "students": 2
+  },
+  {
+    "germanOccupationCode": "22193",
+    "bundesland": "Deutschland",
+    "students": 8
+  },
+  {
+    "germanOccupationCode": "22203",
+    "bundesland": "Deutschland",
+    "students": 11
+  },
+  {
+    "germanOccupationCode": "22203",
+    "bundesland": "Deutschland",
+    "students": 16
+  },
+  {
+    "germanOccupationCode": "22203",
+    "bundesland": "Deutschland",
+    "students": 33
+  },
+  {
+    "germanOccupationCode": "22203",
+    "bundesland": "Deutschland",
+    "students": 49
+  },
+  {
+    "germanOccupationCode": "22293",
+    "bundesland": "Deutschland",
+    "students": 16
+  },
+  {
+    "germanOccupationCode": "22303",
+    "bundesland": "Deutschland",
+    "students": 28
+  },
+  {
+    "germanOccupationCode": "22303",
+    "bundesland": "Deutschland",
+    "students": 248
+  },
+  {
+    "germanOccupationCode": "22343",
+    "bundesland": "Deutschland",
+    "students": 23
+  },
+  {
+    "germanOccupationCode": "22393",
+    "bundesland": "Deutschland",
+    "students": 27
+  },
+  {
+    "germanOccupationCode": "22393",
+    "bundesland": "Deutschland",
+    "students": 347
+  },
+  {
+    "germanOccupationCode": "23113",
+    "bundesland": "Deutschland",
+    "students": 20
+  },
+  {
+    "germanOccupationCode": "23193",
+    "bundesland": "Deutschland",
+    "students": 12
+  },
+  {
+    "germanOccupationCode": "23193",
+    "bundesland": "Deutschland",
+    "students": 43
+  },
+  {
+    "germanOccupationCode": "23213",
+    "bundesland": "Deutschland",
+    "students": 51
+  },
+  {
+    "germanOccupationCode": "23293",
+    "bundesland": "Deutschland",
+    "students": 36
+  },
+  {
+    "germanOccupationCode": "23393",
+    "bundesland": "Deutschland",
+    "students": 15
+  },
+  {
+    "germanOccupationCode": "23413",
+    "bundesland": "Deutschland",
+    "students": 51
+  },
+  {
+    "germanOccupationCode": "23493",
+    "bundesland": "Deutschland",
+    "students": 7
+  },
+  {
+    "germanOccupationCode": "24193",
+    "bundesland": "Deutschland",
+    "students": 21
+  },
+  {
+    "germanOccupationCode": "24233",
+    "bundesland": "Deutschland",
+    "students": 19
+  },
+  {
+    "germanOccupationCode": "24293",
+    "bundesland": "Deutschland",
+    "students": 81
+  },
+  {
+    "germanOccupationCode": "24303",
+    "bundesland": "Deutschland",
+    "students": 9
+  },
+  {
+    "germanOccupationCode": "24303",
+    "bundesland": "Deutschland",
+    "students": 25
+  },
+  {
+    "germanOccupationCode": "24413",
+    "bundesland": "Deutschland",
+    "students": 63
+  },
+  {
+    "germanOccupationCode": "24493",
+    "bundesland": "Deutschland",
+    "students": 88
+  },
+  {
+    "germanOccupationCode": "24513",
+    "bundesland": "Deutschland",
+    "students": 44
+  },
+  {
+    "germanOccupationCode": "24593",
+    "bundesland": "Deutschland",
+    "students": 18
+  },
+  {
+    "germanOccupationCode": "24593",
+    "bundesland": "Deutschland",
+    "students": 130
+  },
+  {
+    "germanOccupationCode": "25103",
+    "bundesland": "Deutschland",
+    "students": 114
+  },
+  {
+    "germanOccupationCode": "25103",
+    "bundesland": "Deutschland",
+    "students": 12
+  },
+  {
+    "germanOccupationCode": "25103",
+    "bundesland": "Deutschland",
+    "students": 52
+  },
+  {
+    "germanOccupationCode": "25103",
+    "bundesland": "Deutschland",
+    "students": 17
+  },
+  {
+    "germanOccupationCode": "25103",
+    "bundesland": "Deutschland",
+    "students": 46
+  },
+  {
+    "germanOccupationCode": "25103",
+    "bundesland": "Deutschland",
+    "students": 5026
+  },
+  {
+    "germanOccupationCode": "25183",
+    "bundesland": "Deutschland",
+    "students": 11
+  },
+  {
+    "germanOccupationCode": "25213",
+    "bundesland": "Deutschland",
+    "students": 79
+  },
+  {
+    "germanOccupationCode": "25213",
+    "bundesland": "Deutschland",
+    "students": 98
+  },
+  {
+    "germanOccupationCode": "25293",
+    "bundesland": "Deutschland",
+    "students": 12
+  },
+  {
+    "germanOccupationCode": "25293",
+    "bundesland": "Deutschland",
+    "students": 410
+  },
+  {
+    "germanOccupationCode": "25293",
+    "bundesland": "Deutschland",
+    "students": 74
+  },
+  {
+    "germanOccupationCode": "25293",
+    "bundesland": "Deutschland",
+    "students": 30
+  },
+  {
+    "germanOccupationCode": "26113",
+    "bundesland": "Deutschland",
+    "students": 849
+  },
+  {
+    "germanOccupationCode": "26123",
+    "bundesland": "Deutschland",
+    "students": 192
+  },
+  {
+    "germanOccupationCode": "26233",
+    "bundesland": "Deutschland",
+    "students": 262
+  },
+  {
+    "germanOccupationCode": "26303",
+    "bundesland": "Deutschland",
+    "students": 40
+  },
+  {
+    "germanOccupationCode": "26303",
+    "bundesland": "Deutschland",
+    "students": 2461
+  },
+  {
+    "germanOccupationCode": "26313",
+    "bundesland": "Deutschland",
+    "students": 69
+  },
+  {
+    "germanOccupationCode": "26333",
+    "bundesland": "Deutschland",
+    "students": 160
+  },
+  {
+    "germanOccupationCode": "26393",
+    "bundesland": "Deutschland",
+    "students": 330
+  },
+  {
+    "germanOccupationCode": "26393",
+    "bundesland": "Deutschland",
+    "students": 20
+  },
+  {
+    "germanOccupationCode": "28103",
+    "bundesland": "Deutschland",
+    "students": 21
+  },
+  {
+    "germanOccupationCode": "28213",
+    "bundesland": "Deutschland",
+    "students": 12
+  },
+  {
+    "germanOccupationCode": "28213",
+    "bundesland": "Deutschland",
+    "students": 16
+  },
+  {
+    "germanOccupationCode": "28223",
+    "bundesland": "Deutschland",
+    "students": 30
+  },
+  {
+    "germanOccupationCode": "28293",
+    "bundesland": "Deutschland",
+    "students": 60
+  },
+  {
+    "germanOccupationCode": "29193",
+    "bundesland": "Deutschland",
+    "students": 56
+  },
+  {
+    "germanOccupationCode": "29193",
+    "bundesland": "Deutschland",
+    "students": 24
+  },
+  {
+    "germanOccupationCode": "29203",
+    "bundesland": "Deutschland",
+    "students": 29
+  },
+  {
+    "germanOccupationCode": "29203",
+    "bundesland": "Deutschland",
+    "students": 57
+  },
+  {
+    "germanOccupationCode": "29223",
+    "bundesland": "Deutschland",
+    "students": 8
+  },
+  {
+    "germanOccupationCode": "29233",
+    "bundesland": "Deutschland",
+    "students": 5
+  },
+  {
+    "germanOccupationCode": "29253",
+    "bundesland": "Deutschland",
+    "students": 26
+  },
+  {
+    "germanOccupationCode": "29253",
+    "bundesland": "Deutschland",
+    "students": 36
+  },
+  {
+    "germanOccupationCode": "29293",
+    "bundesland": "Deutschland",
+    "students": 65
+  },
+  {
+    "germanOccupationCode": "29293",
+    "bundesland": "Deutschland",
+    "students": 64
+  },
+  {
+    "germanOccupationCode": "29293",
+    "bundesland": "Deutschland",
+    "students": 18
+  },
+  {
+    "germanOccupationCode": "31103",
+    "bundesland": "Deutschland",
+    "students": 68
+  },
+  {
+    "germanOccupationCode": "31103",
+    "bundesland": "Deutschland",
+    "students": 840
+  },
+  {
+    "germanOccupationCode": "31153",
+    "bundesland": "Deutschland",
+    "students": 13
+  },
+  {
+    "germanOccupationCode": "31213",
+    "bundesland": "Deutschland",
+    "students": 25
+  },
+  {
+    "germanOccupationCode": "32103",
+    "bundesland": "Deutschland",
+    "students": 279
+  },
+  {
+    "germanOccupationCode": "32193",
+    "bundesland": "Deutschland",
+    "students": 149
+  },
+  {
+    "germanOccupationCode": "32203",
+    "bundesland": "Deutschland",
+    "students": 99
+  },
+  {
+    "germanOccupationCode": "32293",
+    "bundesland": "Deutschland",
+    "students": 27
+  },
+  {
+    "germanOccupationCode": "33193",
+    "bundesland": "Deutschland",
+    "students": 15
+  },
+  {
+    "germanOccupationCode": "33293",
+    "bundesland": "Deutschland",
+    "students": 211
+  },
+  {
+    "germanOccupationCode": "33293",
+    "bundesland": "Deutschland",
+    "students": 25
+  },
+  {
+    "germanOccupationCode": "33303",
+    "bundesland": "Deutschland",
+    "students": 20
+  },
+  {
+    "germanOccupationCode": "33393",
+    "bundesland": "Deutschland",
+    "students": 14
+  },
+  {
+    "germanOccupationCode": "33393",
+    "bundesland": "Deutschland",
+    "students": 16
+  },
+  {
+    "germanOccupationCode": "33393",
+    "bundesland": "Deutschland",
+    "students": 198
+  },
+  {
+    "germanOccupationCode": "34103",
+    "bundesland": "Deutschland",
+    "students": 41
+  },
+  {
+    "germanOccupationCode": "34213",
+    "bundesland": "Deutschland",
+    "students": 333
+  },
+  {
+    "germanOccupationCode": "34213",
+    "bundesland": "Deutschland",
+    "students": 6
+  },
+  {
+    "germanOccupationCode": "34233",
+    "bundesland": "Deutschland",
+    "students": 15
+  },
+  {
+    "germanOccupationCode": "34293",
+    "bundesland": "Deutschland",
+    "students": 281
+  },
+  {
+    "germanOccupationCode": "34293",
+    "bundesland": "Deutschland",
+    "students": 10
+  },
+  {
+    "germanOccupationCode": "34393",
+    "bundesland": "Deutschland",
+    "students": 25
+  },
+  {
+    "germanOccupationCode": "41213",
+    "bundesland": "Deutschland",
+    "students": 40
+  },
+  {
+    "germanOccupationCode": "41293",
+    "bundesland": "Deutschland",
+    "students": 14
+  },
+  {
+    "germanOccupationCode": "41313",
+    "bundesland": "Deutschland",
+    "students": 70
+  },
+  {
+    "germanOccupationCode": "41313",
+    "bundesland": "Deutschland",
+    "students": 23
+  },
+  {
+    "germanOccupationCode": "41313",
+    "bundesland": "Deutschland",
+    "students": 128
+  },
+  {
+    "germanOccupationCode": "41323",
+    "bundesland": "Deutschland",
+    "students": 189
+  },
+  {
+    "germanOccupationCode": "41423",
+    "bundesland": "Deutschland",
+    "students": 45
+  },
+  {
+    "germanOccupationCode": "42113",
+    "bundesland": "Deutschland",
+    "students": 3
+  },
+  {
+    "germanOccupationCode": "42203",
+    "bundesland": "Deutschland",
+    "students": 14
+  },
+  {
+    "germanOccupationCode": "42203",
+    "bundesland": "Deutschland",
+    "students": 8
+  },
+  {
+    "germanOccupationCode": "42293",
+    "bundesland": "Deutschland",
+    "students": 32
+  },
+  {
+    "germanOccupationCode": "42313",
+    "bundesland": "Deutschland",
+    "students": 134
+  },
+  {
+    "germanOccupationCode": "43103",
+    "bundesland": "Deutschland",
+    "students": 118
+  },
+  {
+    "germanOccupationCode": "43113",
+    "bundesland": "Deutschland",
+    "students": 8
+  },
+  {
+    "germanOccupationCode": "43113",
+    "bundesland": "Deutschland",
+    "students": 85
+  },
+  {
+    "germanOccupationCode": "43123",
+    "bundesland": "Deutschland",
+    "students": 50
+  },
+  {
+    "germanOccupationCode": "43313",
+    "bundesland": "Deutschland",
+    "students": 6
+  },
+  {
+    "germanOccupationCode": "51133",
+    "bundesland": "Deutschland",
+    "students": 5
+  },
+  {
+    "germanOccupationCode": "51133",
+    "bundesland": "Deutschland",
+    "students": 14
+  },
+  {
+    "germanOccupationCode": "51503",
+    "bundesland": "Deutschland",
+    "students": 52
+  },
+  {
+    "germanOccupationCode": "51523",
+    "bundesland": "Deutschland",
+    "students": 15
+  },
+  {
+    "germanOccupationCode": "51623",
+    "bundesland": "Deutschland",
+    "students": 233
+  },
+  {
+    "germanOccupationCode": "52413",
+    "bundesland": "Deutschland",
+    "students": 5
+  },
+  {
+    "germanOccupationCode": "52413",
+    "bundesland": "Deutschland",
+    "students": 19
+  },
+  {
+    "germanOccupationCode": "52413",
+    "bundesland": "Deutschland",
+    "students": 27
+  },
+  {
+    "germanOccupationCode": "53193",
+    "bundesland": "Deutschland",
+    "students": 17
+  },
+  {
+    "germanOccupationCode": "54193",
+    "bundesland": "Deutschland",
+    "students": 15
+  },
+  {
+    "germanOccupationCode": "61203",
+    "bundesland": "Deutschland",
+    "students": 338
+  },
+  {
+    "germanOccupationCode": "61213",
+    "bundesland": "Deutschland",
+    "students": 280
+  },
+  {
+    "germanOccupationCode": "61283",
+    "bundesland": "Deutschland",
+    "students": 70
+  },
+  {
+    "germanOccupationCode": "61313",
+    "bundesland": "Deutschland",
+    "students": 45
+  },
+  {
+    "germanOccupationCode": "63113",
+    "bundesland": "Deutschland",
+    "students": 45
+  },
+  {
+    "germanOccupationCode": "63213",
+    "bundesland": "Deutschland",
+    "students": 192
+  },
+  {
+    "germanOccupationCode": "63294",
+    "bundesland": "Deutschland",
+    "students": 35
+  },
+  {
+    "germanOccupationCode": "63394",
+    "bundesland": "Deutschland",
+    "students": 20
+  },
+  {
+    "germanOccupationCode": "63403",
+    "bundesland": "Deutschland",
+    "students": 21
+  },
+  {
+    "germanOccupationCode": "71303",
+    "bundesland": "Deutschland",
+    "students": 15
+  },
+  {
+    "germanOccupationCode": "71303",
+    "bundesland": "Deutschland",
+    "students": 443
+  },
+  {
+    "germanOccupationCode": "71303",
+    "bundesland": "Deutschland",
+    "students": 46
+  },
+  {
+    "germanOccupationCode": "71303",
+    "bundesland": "Deutschland",
+    "students": 90
+  },
+  {
+    "germanOccupationCode": "71383",
+    "bundesland": "Deutschland",
+    "students": 50
+  },
+  {
+    "germanOccupationCode": "71403",
+    "bundesland": "Deutschland",
+    "students": 87
+  },
+  {
+    "germanOccupationCode": "71413",
+    "bundesland": "Deutschland",
+    "students": 87
+  },
+  {
+    "germanOccupationCode": "71513",
+    "bundesland": "Deutschland",
+    "students": 350
+  },
+  {
+    "germanOccupationCode": "72113",
+    "bundesland": "Deutschland",
+    "students": 31
+  },
+  {
+    "germanOccupationCode": "72123",
+    "bundesland": "Deutschland",
+    "students": 128
+  },
+  {
+    "germanOccupationCode": "72213",
+    "bundesland": "Deutschland",
+    "students": 295
+  },
+  {
+    "germanOccupationCode": "72303",
+    "bundesland": "Deutschland",
+    "students": 67
+  },
+  {
+    "germanOccupationCode": "73223",
+    "bundesland": "Deutschland",
+    "students": 50
+  },
+  {
+    "germanOccupationCode": "73223",
+    "bundesland": "Deutschland",
+    "students": 574
+  },
+  {
+    "germanOccupationCode": "81394",
+    "bundesland": "Deutschland",
+    "students": 195
+  },
+  {
+    "germanOccupationCode": "81723",
+    "bundesland": "Deutschland",
+    "students": 49
+  },
+  {
+    "germanOccupationCode": "81723",
+    "bundesland": "Deutschland",
+    "students": 70
+  },
+  {
+    "germanOccupationCode": "81723",
+    "bundesland": "Deutschland",
+    "students": 15
+  },
+  {
+    "germanOccupationCode": "82101",
+    "bundesland": "Deutschland",
+    "students": 1124
+  },
+  {
+    "germanOccupationCode": "82393",
+    "bundesland": "Deutschland",
+    "students": 118
+  },
+  {
+    "germanOccupationCode": "82503",
+    "bundesland": "Deutschland",
+    "students": 47
+  },
+  {
+    "germanOccupationCode": "82593",
+    "bundesland": "Deutschland",
+    "students": 93
+  },
+  {
+    "germanOccupationCode": "82593",
+    "bundesland": "Deutschland",
+    "students": 38
+  },
+  {
+    "germanOccupationCode": "82593",
+    "bundesland": "Deutschland",
+    "students": 65
+  },
+  {
+    "germanOccupationCode": "83113",
+    "bundesland": "Deutschland",
+    "students": 25207
+  },
+  {
+    "germanOccupationCode": "83113",
+    "bundesland": "Deutschland",
+    "students": 794
+  },
+  {
+    "germanOccupationCode": "83131",
+    "bundesland": "Deutschland",
+    "students": 803
+  },
+  {
+    "germanOccupationCode": "83133",
+    "bundesland": "Deutschland",
+    "students": 209
+  },
+  {
+    "germanOccupationCode": "83133",
+    "bundesland": "Deutschland",
+    "students": 5725
+  },
+  {
+    "germanOccupationCode": "83133",
+    "bundesland": "Deutschland",
+    "students": 135
+  },
+  {
+    "germanOccupationCode": "83134",
+    "bundesland": "Deutschland",
+    "students": 565
+  },
+  {
+    "germanOccupationCode": "83143",
+    "bundesland": "Deutschland",
+    "students": 29
+  },
+  {
+    "germanOccupationCode": "83143",
+    "bundesland": "Deutschland",
+    "students": 15
+  },
+  {
+    "germanOccupationCode": "83193",
+    "bundesland": "Deutschland",
+    "students": 115
+  },
+  {
+    "germanOccupationCode": "83213",
+    "bundesland": "Deutschland",
+    "students": 2
+  },
+  {
+    "germanOccupationCode": "83213",
+    "bundesland": "Deutschland",
+    "students": 479
+  },
+  {
+    "germanOccupationCode": "83213",
+    "bundesland": "Deutschland",
+    "students": 51
+  },
+  {
+    "germanOccupationCode": "83293",
+    "bundesland": "Deutschland",
+    "students": 33
+  },
+  {
+    "germanOccupationCode": "83293",
+    "bundesland": "Deutschland",
+    "students": 48
+  },
+  {
+    "germanOccupationCode": "83384",
+    "bundesland": "Deutschland",
+    "students": 6
+  },
+  {
+    "germanOccupationCode": "84214",
+    "bundesland": "Deutschland",
+    "students": 10
+  },
+  {
+    "germanOccupationCode": "84533",
+    "bundesland": "Deutschland",
+    "students": 11
+  },
+  {
+    "germanOccupationCode": "92113",
+    "bundesland": "Deutschland",
+    "students": 693
+  },
+  {
+    "germanOccupationCode": "93103",
+    "bundesland": "Deutschland",
+    "students": 42
+  },
+  {
+    "germanOccupationCode": "93213",
+    "bundesland": "Deutschland",
+    "students": 7
+  },
+  {
+    "germanOccupationCode": "93213",
+    "bundesland": "Deutschland",
+    "students": 16
+  },
+  {
+    "germanOccupationCode": "93293",
+    "bundesland": "Deutschland",
+    "students": 40
+  },
+  {
+    "germanOccupationCode": "93393",
+    "bundesland": "Deutschland",
+    "students": 7
+  },
+  {
+    "germanOccupationCode": "93393",
+    "bundesland": "Deutschland",
+    "students": 14
+  },
+  {
+    "germanOccupationCode": "93413",
+    "bundesland": "Deutschland",
+    "students": 4
+  },
+  {
+    "germanOccupationCode": "93493",
+    "bundesland": "Deutschland",
+    "students": 11
+  },
+  {
+    "germanOccupationCode": "93593",
+    "bundesland": "Deutschland",
+    "students": 34
+  },
+  {
+    "germanOccupationCode": "93593",
+    "bundesland": "Deutschland",
+    "students": 9
+  },
+  {
+    "germanOccupationCode": "93693",
+    "bundesland": "Deutschland",
+    "students": 10
+  },
+  {
+    "germanOccupationCode": "93693",
+    "bundesland": "Deutschland",
+    "students": 19
+  },
+  {
+    "germanOccupationCode": "94613",
+    "bundesland": "Deutschland",
+    "students": 23
+  },
+  {
+    "germanOccupationCode": "99999",
+    "bundesland": "Deutschland",
+    "students": 2173
+  },
+  {
+    "germanOccupationCode": "22343",
+    "bundesland": "Bayern",
+    "students": 14
+  },
+  {
+    "germanOccupationCode": "29103",
+    "bundesland": "Bayern",
+    "students": 24
+  },
+  {
+    "germanOccupationCode": "71303",
+    "bundesland": "Bayern",
+    "students": 76
+  },
+  {
+    "germanOccupationCode": "71423",
+    "bundesland": "Bayern",
+    "students": 96
+  },
+  {
+    "germanOccupationCode": "71424",
+    "bundesland": "Bayern",
+    "students": 93
+  },
+  {
+    "germanOccupationCode": "82503",
+    "bundesland": "Bayern",
+    "students": 21
+  },
+  {
+    "germanOccupationCode": "83113",
+    "bundesland": "Bayern",
+    "students": 4570
+  },
+  {
+    "germanOccupationCode": "83134",
+    "bundesland": "Bayern",
+    "students": 191
+  },
+  {
+    "germanOccupationCode": "83293",
+    "bundesland": "Bayern",
+    "students": 142
+  },
+  {
+    "germanOccupationCode": "84434",
+    "bundesland": "Bayern",
+    "students": 2
+  },
+  {
+    "germanOccupationCode": "93213",
+    "bundesland": "Bayern",
+    "students": 14
+  },
+  {
+    "germanOccupationCode": "94214",
+    "bundesland": "Bayern",
+    "students": 40
+  },
+  {
+    "germanOccupationCode": "94414",
+    "bundesland": "Bayern",
+    "students": 4
+  },
+  {
+    "germanOccupationCode": "81132",
+    "bundesland": "Baden-Württemberg",
+    "students": 8
+  },
+  {
+    "germanOccupationCode": "81212",
+    "bundesland": "Baden-Württemberg",
+    "students": 197
+  },
+  {
+    "germanOccupationCode": "81301",
+    "bundesland": "Baden-Württemberg",
+    "students": 848
+  },
+  {
+    "germanOccupationCode": "81301",
+    "bundesland": "Baden-Württemberg",
+    "students": 18
+  },
+  {
+    "germanOccupationCode": "81302",
+    "bundesland": "Baden-Württemberg",
+    "students": 3171
+  },
+  {
+    "germanOccupationCode": "81332",
+    "bundesland": "Baden-Württemberg",
+    "students": 233
+  },
+  {
+    "germanOccupationCode": "81332",
+    "bundesland": "Baden-Württemberg",
+    "students": 474
+  },
+  {
+    "germanOccupationCode": "81342",
+    "bundesland": "Baden-Württemberg",
+    "students": 735
+  },
+  {
+    "germanOccupationCode": "81712",
+    "bundesland": "Baden-Württemberg",
+    "students": 51
+  },
+  {
+    "germanOccupationCode": "81713",
+    "bundesland": "Baden-Württemberg",
+    "students": 1766
+  },
+  {
+    "germanOccupationCode": "81723",
+    "bundesland": "Baden-Württemberg",
+    "students": 422
+  },
+  {
+    "germanOccupationCode": "81733",
+    "bundesland": "Baden-Württemberg",
+    "students": 275
+  },
+  {
+    "germanOccupationCode": "81762",
+    "bundesland": "Baden-Württemberg",
+    "students": 71
+  },
+  {
+    "germanOccupationCode": "81772",
+    "bundesland": "Baden-Württemberg",
+    "students": 55
+  },
+  {
+    "germanOccupationCode": "99999",
+    "bundesland": "Baden-Württemberg",
+    "students": 222
+  },
+  {
+    "germanOccupationCode": "81132",
+    "bundesland": "Bayern",
+    "students": 7
+  },
+  {
+    "germanOccupationCode": "81212",
+    "bundesland": "Bayern",
+    "students": 197
+  },
+  {
+    "germanOccupationCode": "81232",
+    "bundesland": "Bayern",
+    "students": 175
+  },
+  {
+    "germanOccupationCode": "81301",
+    "bundesland": "Bayern",
+    "students": 1511
+  },
+  {
+    "germanOccupationCode": "81302",
+    "bundesland": "Bayern",
+    "students": 6809
+  },
+  {
+    "germanOccupationCode": "81332",
+    "bundesland": "Bayern",
+    "students": 233
+  },
+  {
+    "germanOccupationCode": "81332",
+    "bundesland": "Bayern",
+    "students": 515
+  },
+  {
+    "germanOccupationCode": "81342",
+    "bundesland": "Bayern",
+    "students": 643
+  },
+  {
+    "germanOccupationCode": "81712",
+    "bundesland": "Bayern",
+    "students": 219
+  },
+  {
+    "germanOccupationCode": "81713",
+    "bundesland": "Bayern",
+    "students": 1667
+  },
+  {
+    "germanOccupationCode": "81723",
+    "bundesland": "Bayern",
+    "students": 763
+  },
+  {
+    "germanOccupationCode": "81733",
+    "bundesland": "Bayern",
+    "students": 212
+  },
+  {
+    "germanOccupationCode": "81762",
+    "bundesland": "Bayern",
+    "students": 96
+  },
+  {
+    "germanOccupationCode": "81772",
+    "bundesland": "Bayern",
+    "students": 61
+  },
+  {
+    "germanOccupationCode": "81822",
+    "bundesland": "Bayern",
+    "students": 516
+  },
+  {
+    "germanOccupationCode": "82101",
+    "bundesland": "Bayern",
+    "students": 2720
+  },
+  {
+    "germanOccupationCode": "41222",
+    "bundesland": "Berlin",
+    "students": 20
+  },
+  {
+    "germanOccupationCode": "81212",
+    "bundesland": "Berlin",
+    "students": 35
+  },
+  {
+    "germanOccupationCode": "81222",
+    "bundesland": "Berlin",
+    "students": 21
+  },
+  {
+    "germanOccupationCode": "81223",
+    "bundesland": "Berlin",
+    "students": 23
+  },
+  {
+    "germanOccupationCode": "81232",
+    "bundesland": "Berlin",
+    "students": 85
+  },
+  {
+    "germanOccupationCode": "81301",
+    "bundesland": "Berlin",
+    "students": 585
+  },
+  {
+    "germanOccupationCode": "81302",
+    "bundesland": "Berlin",
+    "students": 2490
+  },
+  {
+    "germanOccupationCode": "81332",
+    "bundesland": "Berlin",
+    "students": 46
+  },
+  {
+    "germanOccupationCode": "81332",
+    "bundesland": "Berlin",
+    "students": 198
+  },
+  {
+    "germanOccupationCode": "81342",
+    "bundesland": "Berlin",
+    "students": 164
+  },
+  {
+    "germanOccupationCode": "81713",
+    "bundesland": "Berlin",
+    "students": 377
+  },
+  {
+    "germanOccupationCode": "81723",
+    "bundesland": "Berlin",
+    "students": 166
+  },
+  {
+    "germanOccupationCode": "81733",
+    "bundesland": "Berlin",
+    "students": 64
+  },
+  {
+    "germanOccupationCode": "81762",
+    "bundesland": "Berlin",
+    "students": 20
+  },
+  {
+    "germanOccupationCode": "81772",
+    "bundesland": "Berlin",
+    "students": 44
+  },
+  {
+    "germanOccupationCode": "81822",
+    "bundesland": "Berlin",
+    "students": 144
+  },
+  {
+    "germanOccupationCode": "81212",
+    "bundesland": "Brandenburg",
+    "students": 72
+  },
+  {
+    "germanOccupationCode": "81232",
+    "bundesland": "Brandenburg",
+    "students": 53
+  },
+  {
+    "germanOccupationCode": "81301",
+    "bundesland": "Brandenburg",
+    "students": 303
+  },
+  {
+    "germanOccupationCode": "81302",
+    "bundesland": "Brandenburg",
+    "students": 1621
+  },
+  {
+    "germanOccupationCode": "81332",
+    "bundesland": "Brandenburg",
+    "students": 20
+  },
+  {
+    "germanOccupationCode": "81332",
+    "bundesland": "Brandenburg",
+    "students": 49
+  },
+  {
+    "germanOccupationCode": "81342",
+    "bundesland": "Brandenburg",
+    "students": 95
+  },
+  {
+    "germanOccupationCode": "81713",
+    "bundesland": "Brandenburg",
+    "students": 186
+  },
+  {
+    "germanOccupationCode": "81723",
+    "bundesland": "Brandenburg",
+    "students": 72
+  },
+  {
+    "germanOccupationCode": "81733",
+    "bundesland": "Brandenburg",
+    "students": 32
+  },
+  {
+    "germanOccupationCode": "81822",
+    "bundesland": "Brandenburg",
+    "students": 23
+  },
+  {
+    "germanOccupationCode": "82101",
+    "bundesland": "Brandenburg",
+    "students": 209
+  },
+  {
+    "germanOccupationCode": "81212",
+    "bundesland": "Bremen",
+    "students": 19
+  },
+  {
+    "germanOccupationCode": "81232",
+    "bundesland": "Bremen",
+    "students": 21
+  },
+  {
+    "germanOccupationCode": "81301",
+    "bundesland": "Bremen",
+    "students": 33
+  },
+  {
+    "germanOccupationCode": "81301",
+    "bundesland": "Bremen",
+    "students": 87
+  },
+  {
+    "germanOccupationCode": "81302",
+    "bundesland": "Bremen",
+    "students": 484
+  },
+  {
+    "germanOccupationCode": "81332",
+    "bundesland": "Bremen",
+    "students": 15
+  },
+  {
+    "germanOccupationCode": "81332",
+    "bundesland": "Bremen",
+    "students": 19
+  },
+  {
+    "germanOccupationCode": "81342",
+    "bundesland": "Bremen",
+    "students": 64
+  },
+  {
+    "germanOccupationCode": "81713",
+    "bundesland": "Bremen",
+    "students": 55
+  },
+  {
+    "germanOccupationCode": "81723",
+    "bundesland": "Bremen",
+    "students": 20
+  },
+  {
+    "germanOccupationCode": "81733",
+    "bundesland": "Bremen",
+    "students": 20
+  },
+  {
+    "germanOccupationCode": "81132",
+    "bundesland": "Hamburg",
+    "students": 7
+  },
+  {
+    "germanOccupationCode": "81212",
+    "bundesland": "Hamburg",
+    "students": 38
+  },
+  {
+    "germanOccupationCode": "81232",
+    "bundesland": "Hamburg",
+    "students": 32
+  },
+  {
+    "germanOccupationCode": "81302",
+    "bundesland": "Hamburg",
+    "students": 1318
+  },
+  {
+    "germanOccupationCode": "81332",
+    "bundesland": "Hamburg",
+    "students": 76
+  },
+  {
+    "germanOccupationCode": "81332",
+    "bundesland": "Hamburg",
+    "students": 135
+  },
+  {
+    "germanOccupationCode": "81342",
+    "bundesland": "Hamburg",
+    "students": 136
+  },
+  {
+    "germanOccupationCode": "81712",
+    "bundesland": "Hamburg",
+    "students": 31
+  },
+  {
+    "germanOccupationCode": "81713",
+    "bundesland": "Hamburg",
+    "students": 307
+  },
+  {
+    "germanOccupationCode": "81723",
+    "bundesland": "Hamburg",
+    "students": 173
+  },
+  {
+    "germanOccupationCode": "81733",
+    "bundesland": "Hamburg",
+    "students": 59
+  },
+  {
+    "germanOccupationCode": "81762",
+    "bundesland": "Hamburg",
+    "students": 1
+  },
+  {
+    "germanOccupationCode": "73342",
+    "bundesland": "Hessen",
+    "students": 8
+  },
+  {
+    "germanOccupationCode": "81132",
+    "bundesland": "Hessen",
+    "students": 4
+  },
+  {
+    "germanOccupationCode": "81212",
+    "bundesland": "Hessen",
+    "students": 52
+  },
+  {
+    "germanOccupationCode": "81232",
+    "bundesland": "Hessen",
+    "students": 97
+  },
+  {
+    "germanOccupationCode": "81301",
+    "bundesland": "Hessen",
+    "students": 546
+  },
+  {
+    "germanOccupationCode": "81302",
+    "bundesland": "Hessen",
+    "students": 8939
+  },
+  {
+    "germanOccupationCode": "81332",
+    "bundesland": "Hessen",
+    "students": 65
+  },
+  {
+    "germanOccupationCode": "81332",
+    "bundesland": "Hessen",
+    "students": 159
+  },
+  {
+    "germanOccupationCode": "81342",
+    "bundesland": "Hessen",
+    "students": 624
+  },
+  {
+    "germanOccupationCode": "81342",
+    "bundesland": "Hessen",
+    "students": 129
+  },
+  {
+    "germanOccupationCode": "81713",
+    "bundesland": "Hessen",
+    "students": 515
+  },
+  {
+    "germanOccupationCode": "81723",
+    "bundesland": "Hessen",
+    "students": 248
+  },
+  {
+    "germanOccupationCode": "81733",
+    "bundesland": "Hessen",
+    "students": 26
+  },
+  {
+    "germanOccupationCode": "81762",
+    "bundesland": "Hessen",
+    "students": 21
+  },
+  {
+    "germanOccupationCode": "81772",
+    "bundesland": "Hessen",
+    "students": 55
+  },
+  {
+    "germanOccupationCode": "81822",
+    "bundesland": "Hessen",
+    "students": 121
+  },
+  {
+    "germanOccupationCode": "82101",
+    "bundesland": "Hessen",
+    "students": 1368
+  },
+  {
+    "germanOccupationCode": "81132",
+    "bundesland": "Niedersachsen",
+    "students": 9
+  },
+  {
+    "germanOccupationCode": "81212",
+    "bundesland": "Niedersachsen",
+    "students": 123
+  },
+  {
+    "germanOccupationCode": "81222",
+    "bundesland": "Niedersachsen",
+    "students": 15
+  },
+  {
+    "germanOccupationCode": "81232",
+    "bundesland": "Niedersachsen",
+    "students": 135
+  },
+  {
+    "germanOccupationCode": "81302",
+    "bundesland": "Niedersachsen",
+    "students": 4174
+  },
+  {
+    "germanOccupationCode": "81332",
+    "bundesland": "Niedersachsen",
+    "students": 136
+  },
+  {
+    "germanOccupationCode": "81332",
+    "bundesland": "Niedersachsen",
+    "students": 251
+  },
+  {
+    "germanOccupationCode": "81342",
+    "bundesland": "Niedersachsen",
+    "students": 425
+  },
+  {
+    "germanOccupationCode": "81713",
+    "bundesland": "Niedersachsen",
+    "students": 1085
+  },
+  {
+    "germanOccupationCode": "81733",
+    "bundesland": "Niedersachsen",
+    "students": 123
+  },
+  {
+    "germanOccupationCode": "81762",
+    "bundesland": "Niedersachsen",
+    "students": 47
+  },
+  {
+    "germanOccupationCode": "81772",
+    "bundesland": "Niedersachsen",
+    "students": 65
+  },
+  {
+    "germanOccupationCode": "81212",
+    "bundesland": "Nordrhein-Westfalen",
+    "students": 265
+  },
+  {
+    "germanOccupationCode": "81232",
+    "bundesland": "Nordrhein-Westfalen",
+    "students": 260
+  },
+  {
+    "germanOccupationCode": "81301",
+    "bundesland": "Nordrhein-Westfalen",
+    "students": 3560
+  },
+  {
+    "germanOccupationCode": "81332",
+    "bundesland": "Nordrhein-Westfalen",
+    "students": 205
+  },
+  {
+    "germanOccupationCode": "81332",
+    "bundesland": "Nordrhein-Westfalen",
+    "students": 470
+  },
+  {
+    "germanOccupationCode": "81342",
+    "bundesland": "Nordrhein-Westfalen",
+    "students": 635
+  },
+  {
+    "germanOccupationCode": "81712",
+    "bundesland": "Nordrhein-Westfalen",
+    "students": 75
+  },
+  {
+    "germanOccupationCode": "81713",
+    "bundesland": "Nordrhein-Westfalen",
+    "students": 1850
+  },
+  {
+    "germanOccupationCode": "81723",
+    "bundesland": "Nordrhein-Westfalen",
+    "students": 815
+  },
+  {
+    "germanOccupationCode": "81733",
+    "bundesland": "Nordrhein-Westfalen",
+    "students": 290
+  },
+  {
+    "germanOccupationCode": "81762",
+    "bundesland": "Nordrhein-Westfalen",
+    "students": 40
+  },
+  {
+    "germanOccupationCode": "81772",
+    "bundesland": "Nordrhein-Westfalen",
+    "students": 70
+  },
+  {
+    "germanOccupationCode": "81822",
+    "bundesland": "Nordrhein-Westfalen",
+    "students": 805
+  },
+  {
+    "germanOccupationCode": "83143",
+    "bundesland": "Nordrhein-Westfalen",
+    "students": 70
+  },
+  {
+    "germanOccupationCode": "81212",
+    "bundesland": "Rheinland-Pfalz",
+    "students": 52
+  },
+  {
+    "germanOccupationCode": "81232",
+    "bundesland": "Rheinland-Pfalz",
+    "students": 50
+  },
+  {
+    "germanOccupationCode": "81301",
+    "bundesland": "Rheinland-Pfalz",
+    "students": 447
+  },
+  {
+    "germanOccupationCode": "81302",
+    "bundesland": "Rheinland-Pfalz",
+    "students": 867
+  },
+  {
+    "germanOccupationCode": "81332",
+    "bundesland": "Rheinland-Pfalz",
+    "students": 69
+  },
+  {
+    "germanOccupationCode": "81332",
+    "bundesland": "Rheinland-Pfalz",
+    "students": 138
+  },
+  {
+    "germanOccupationCode": "81342",
+    "bundesland": "Rheinland-Pfalz",
+    "students": 179
+  },
+  {
+    "germanOccupationCode": "81712",
+    "bundesland": "Rheinland-Pfalz",
+    "students": 16
+  },
+  {
+    "germanOccupationCode": "81713",
+    "bundesland": "Rheinland-Pfalz",
+    "students": 798
+  },
+  {
+    "germanOccupationCode": "81723",
+    "bundesland": "Rheinland-Pfalz",
+    "students": 320
+  },
+  {
+    "germanOccupationCode": "81733",
+    "bundesland": "Rheinland-Pfalz",
+    "students": 56
+  },
+  {
+    "germanOccupationCode": "81762",
+    "bundesland": "Rheinland-Pfalz",
+    "students": 18
+  },
+  {
+    "germanOccupationCode": "81772",
+    "bundesland": "Rheinland-Pfalz",
+    "students": 11
+  },
+  {
+    "germanOccupationCode": "81822",
+    "bundesland": "Rheinland-Pfalz",
+    "students": 138
+  },
+  {
+    "germanOccupationCode": "81212",
+    "bundesland": "Sachsen-Anhalt",
+    "students": 39
+  },
+  {
+    "germanOccupationCode": "81232",
+    "bundesland": "Sachsen-Anhalt",
+    "students": 57
+  },
+  {
+    "germanOccupationCode": "81301",
+    "bundesland": "Sachsen-Anhalt",
+    "students": 120
+  },
+  {
+    "germanOccupationCode": "81332",
+    "bundesland": "Sachsen-Anhalt",
+    "students": 36
+  },
+  {
+    "germanOccupationCode": "81332",
+    "bundesland": "Sachsen-Anhalt",
+    "students": 102
+  },
+  {
+    "germanOccupationCode": "81342",
+    "bundesland": "Sachsen-Anhalt",
+    "students": 141
+  },
+  {
+    "germanOccupationCode": "81342",
+    "bundesland": "Sachsen-Anhalt",
+    "students": 117
+  },
+  {
+    "germanOccupationCode": "81713",
+    "bundesland": "Sachsen-Anhalt",
+    "students": 21
+  },
+  {
+    "germanOccupationCode": "81772",
+    "bundesland": "Sachsen-Anhalt",
+    "students": 27
+  },
+  {
+    "germanOccupationCode": "81232",
+    "bundesland": "Schleswig-Holstein",
+    "students": 58
+  },
+  {
+    "germanOccupationCode": "81301",
+    "bundesland": "Schleswig-Holstein",
+    "students": 332
+  },
+  {
+    "germanOccupationCode": "81302",
+    "bundesland": "Schleswig-Holstein",
+    "students": 1472
+  },
+  {
+    "germanOccupationCode": "81332",
+    "bundesland": "Schleswig-Holstein",
+    "students": 53
+  },
+  {
+    "germanOccupationCode": "81332",
+    "bundesland": "Schleswig-Holstein",
+    "students": 93
+  },
+  {
+    "germanOccupationCode": "81342",
+    "bundesland": "Schleswig-Holstein",
+    "students": 251
+  },
+  {
+    "germanOccupationCode": "81342",
+    "bundesland": "Schleswig-Holstein",
+    "students": 327
+  },
+  {
+    "germanOccupationCode": "81713",
+    "bundesland": "Schleswig-Holstein",
+    "students": 296
+  },
+  {
+    "germanOccupationCode": "81723",
+    "bundesland": "Schleswig-Holstein",
+    "students": 192
+  },
+  {
+    "germanOccupationCode": "81733",
+    "bundesland": "Schleswig-Holstein",
+    "students": 40
+  },
+  {
+    "germanOccupationCode": "81762",
+    "bundesland": "Schleswig-Holstein",
+    "students": 19
+  },
+  {
+    "germanOccupationCode": "81772",
+    "bundesland": "Schleswig-Holstein",
+    "students": 24
+  },
+  {
+    "germanOccupationCode": "82101",
+    "bundesland": "Schleswig-Holstein",
+    "students": 474
+  },
+  {
+    "germanOccupationCode": "41222",
+    "bundesland": "Deutschland",
+    "students": 20
+  },
+  {
+    "germanOccupationCode": "73342",
+    "bundesland": "Deutschland",
+    "students": 8
+  },
+  {
+    "germanOccupationCode": "81132",
+    "bundesland": "Deutschland",
+    "students": 35
+  },
+  {
+    "germanOccupationCode": "81212",
+    "bundesland": "Deutschland",
+    "students": 892
+  },
+  {
+    "germanOccupationCode": "81212",
+    "bundesland": "Deutschland",
+    "students": 197
+  },
+  {
+    "germanOccupationCode": "81222",
+    "bundesland": "Deutschland",
+    "students": 36
+  },
+  {
+    "germanOccupationCode": "81223",
+    "bundesland": "Deutschland",
+    "students": 23
+  },
+  {
+    "germanOccupationCode": "81232",
+    "bundesland": "Deutschland",
+    "students": 1023
+  },
+  {
+    "germanOccupationCode": "81301",
+    "bundesland": "Deutschland",
+    "students": 4140
+  },
+  {
+    "germanOccupationCode": "81301",
+    "bundesland": "Deutschland",
+    "students": 4250
+  },
+  {
+    "germanOccupationCode": "81302",
+    "bundesland": "Deutschland",
+    "students": 31345
+  },
+  {
+    "germanOccupationCode": "81332",
+    "bundesland": "Deutschland",
+    "students": 1187
+  },
+  {
+    "germanOccupationCode": "81332",
+    "bundesland": "Deutschland",
+    "students": 2603
+  },
+  {
+    "germanOccupationCode": "81342",
+    "bundesland": "Deutschland",
+    "students": 4092
+  },
+  {
+    "germanOccupationCode": "81342",
+    "bundesland": "Deutschland",
+    "students": 573
+  },
+  {
+    "germanOccupationCode": "81712",
+    "bundesland": "Deutschland",
+    "students": 392
+  },
+  {
+    "germanOccupationCode": "81713",
+    "bundesland": "Deutschland",
+    "students": 8923
+  },
+  {
+    "germanOccupationCode": "81723",
+    "bundesland": "Deutschland",
+    "students": 3191
+  },
+  {
+    "germanOccupationCode": "81733",
+    "bundesland": "Deutschland",
+    "students": 1197
+  },
+  {
+    "germanOccupationCode": "81762",
+    "bundesland": "Deutschland",
+    "students": 333
+  },
+  {
+    "germanOccupationCode": "81772",
+    "bundesland": "Deutschland",
+    "students": 412
+  },
+  {
+    "germanOccupationCode": "81822",
+    "bundesland": "Deutschland",
+    "students": 1747
+  },
+  {
+    "germanOccupationCode": "82101",
+    "bundesland": "Deutschland",
+    "students": 4771
+  },
+  {
+    "germanOccupationCode": "83143",
+    "bundesland": "Deutschland",
+    "students": 70
+  },
+  {
+    "germanOccupationCode": "99999",
+    "bundesland": "Deutschland",
+    "students": 222
+  }
+]

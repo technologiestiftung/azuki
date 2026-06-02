@@ -40,7 +40,22 @@ export const INTERESTS: InterestDefinition[] = [
 		id: "videos",
 		dataLabel: "Videos",
 		berufenetTags: ["kreativ-gestaltend"],
-		matchKeywords: ["video", "aufnahme", "schnitt", "medien", "gestaltung"],
+		// BERUFENET emits inflected/atomized tokens (`tonproduktionen`,
+		// `kameras`, `mikrofonen`, `bild`, `bearbeiten`) rather than the
+		// loanword "Video"/"Schnitt"/"Medien". Include the verbatim German
+		// tokens that AV Berufe actually carry.
+		matchKeywords: [
+			"video",
+			"aufnahme",
+			"schnitt",
+			"medien",
+			"gestaltung",
+			"bild",
+			"ton",
+			"kamera",
+			"film",
+			"audio",
+		],
 	},
 	{
 		id: "drawing",

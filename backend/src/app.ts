@@ -4,13 +4,16 @@ import { UserProfileSchema } from "./schemas/userProfile.js";
 import {
 	type Occupation,
 	type MatchResult,
+	type AusbildungsplaetzeResponse,
 	formatOccupationDisplayName,
 	AI_MODEL_IDS,
 } from "@azuki/shared";
 import { occupationMatchMeta } from "./occupationMeta";
-import { preFilter } from "./matching/index.js";
+import { preFilter, PREFILTER_TOP_K } from "./matching/index.js";
 import { aiRank, buildSystemPrompt } from "./ai/index.js";
 import occupationsData from "./data/berufe.json";
+import { AusbildungsplaetzeRequestSchema } from "./schemas/ausbildungsplaetze.js";
+import { searchAusbildungsplaetze } from "./jobsuche/client.js";
 import { runEval } from "../eval/run.js";
 import { z } from "zod";
 import { getSupabase } from "./supabase.js";
@@ -113,28 +116,31 @@ app.post("/api/match", async (c) => {
 	}
 	const profile = parsedProfile.data;
 
-	let top40: ReturnType<typeof preFilter> = [];
+	let topCandidates: ReturnType<typeof preFilter> = [];
 	try {
-		top40 = preFilter(occupations, profile, 40);
-		const result = await aiRank(top40, profile);
+		topCandidates = preFilter(occupations, profile, PREFILTER_TOP_K);
+		const result = await aiRank(topCandidates, profile);
 		return c.json(result);
 	} catch (err) {
 		console.error("Match error, falling back to pre-filter:", err);
-		if (top40.length === 0) {
+		if (topCandidates.length === 0) {
 			try {
-				top40 = preFilter(occupations, profile, 40);
+				topCandidates = preFilter(occupations, profile, PREFILTER_TOP_K);
 			} catch (preErr) {
 				console.error("Pre-filter failed during fallback:", preErr);
-				top40 = occupations.slice(0, 40).map((occupation) => ({
-					occupation,
-					score: 0,
-				}));
+				topCandidates = occupations
+					.slice(0, PREFILTER_TOP_K)
+					.map((occupation) => ({
+						occupation,
+						score: 0,
+					}));
 			}
 		}
 		const fallback: MatchResult = {
-			occupations: top40.slice(0, 8).map((scored) => ({
+			occupations: topCandidates.slice(0, 8).map((scored) => ({
 				id: scored.occupation.id,
 				name: formatOccupationDisplayName(scored.occupation.name),
+				rawName: scored.occupation.name,
 				score: scored.score,
 				images: scored.occupation.images.slice(0, 3),
 				taskSummary: scored.occupation.taskSummary || "",
@@ -144,6 +150,33 @@ app.post("/api/match", async (c) => {
 		};
 		return c.json(fallback);
 	}
+});
+
+app.post("/api/ausbildungsplaetze", async (c) => {
+	if (!isAuthorized(c)) {
+		return c.json({ error: "Unauthorized" }, 401);
+	}
+
+	let body: unknown;
+	try {
+		body = await c.req.json();
+	} catch {
+		return c.json({ error: "Invalid request body" }, 400);
+	}
+
+	const parsed = AusbildungsplaetzeRequestSchema.safeParse(body);
+	if (!parsed.success) {
+		return c.json({ error: "Invalid request body" }, 400);
+	}
+
+	const { plz, berufe, umkreis } = parsed.data;
+
+	const results = await Promise.all(
+		berufe.map((beruf) => searchAusbildungsplaetze(beruf, plz, umkreis)),
+	);
+
+	const response: AusbildungsplaetzeResponse = { results };
+	return c.json(response);
 });
 
 app.get("/api/occupations/:id", (c) => {
