@@ -262,6 +262,8 @@ export const content = {
 		"als praktische Erfahrung auswählen",
 	"practicalExperience.bottomSheet.submitButtonLabel": "Speichern",
 	"practicalExperience.bottomSheet.submitButtonAriaLabel": "Speichern",
+	"practicalExperience.bottomSheet.rating.custom.ariaLabel":
+		"Eigenes Tag hinzufügen",
 	// Practical Experience Bottom Sheet Questions
 	"practicalExperience.bottomSheet.addInternship.title":
 		"Welches Praktikum hast du gemacht?",

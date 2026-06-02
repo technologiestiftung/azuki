@@ -5,6 +5,7 @@ import { StarRating } from "../../../competence-profile/star-rating/StarRating";
 import { GhostIconButton } from "../../../primitives/buttons/GhostIconButton";
 import { Pill } from "../../../primitives/buttons/Pill";
 import { PrimaryThemedButton } from "../../../primitives/buttons/PrimaryThemedButton";
+import { ThemedIconButton } from "../../../primitives/buttons/ThemedIconButton";
 
 export function RatingBottomSheet({
 	open,
@@ -91,11 +92,11 @@ export function RatingBottomSheet({
 		<BottomSheet open={open} onClose={onClose} ariaLabel={ariaLabel}>
 			<div className="flex flex-col items-center pb-4  w-full">
 				<div className="flex w-full px-2">
-					{/* TODO: back button should go to the previous state of the bottom sheet */}
 					<GhostIconButton
+						className="w-12 h-12"
 						onClick={onClose}
 						ariaLabel={content["common.bottomSheet.backButtonAriaLabel"]}
-						iconSrc="/icons/chevron-back.svg"
+						iconSrc="/icons/arrow-back-black.svg"
 					/>
 				</div>
 				<div className="flex flex-col gap-4 w-full px-4">
@@ -124,7 +125,7 @@ export function RatingBottomSheet({
 									content["practicalExperience.bottomSheet.rating.good.label"]}
 							</h2>
 							<div className="min-h-0 flex-1 overflow-y-auto p-3 bg-card-fill rounded-[20px]">
-								<ul className="flex flex-wrap gap-x-2 gap-y-2">
+								<ul className="flex flex-wrap gap-x-2 gap-y-2 items-center">
 									{tags[tagKey].map((item) => (
 										<Pill
 											key={item}
@@ -135,6 +136,17 @@ export function RatingBottomSheet({
 											className="text-left w-fit"
 										/>
 									))}
+									{/* TODO: Open stacked bottom sheet and add custom tag input */}
+									<ThemedIconButton
+										iconSrc="/icons/plus-black.svg"
+										className="w-12 h-12"
+										onClick={() => toggleTag("custom")}
+										ariaLabel={
+											content[
+												"practicalExperience.bottomSheet.rating.custom.ariaLabel"
+											]
+										}
+									/>
 								</ul>
 							</div>
 							<PrimaryThemedButton
