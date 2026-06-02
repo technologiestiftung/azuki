@@ -196,6 +196,32 @@ function BasicInfoSection({
 	);
 }
 
+function normalizePersonaProfile(raw: Persona["profile"]): Persona["profile"] {
+	const customStrengths = raw.customStrengths ?? [];
+	const selectedCustomStrengths =
+		(raw.selectedCustomStrengths?.length ?? 0) > 0
+			? raw.selectedCustomStrengths
+			: customStrengths;
+
+	return {
+		inSchool: raw.inSchool ?? null,
+		educationLevel: raw.educationLevel ?? null,
+		favoriteSubjects: raw.favoriteSubjects ?? [],
+		customSubjects: raw.customSubjects ?? [],
+		interests: raw.interests ?? [],
+		customInterests: raw.customInterests ?? [],
+		workExpectations: raw.workExpectations ?? [],
+		customWorkExpectations: raw.customWorkExpectations ?? [],
+		strengths: raw.strengths ?? {},
+		customStrengths,
+		selectedCustomStrengths,
+		practicalExperience: raw.practicalExperience ?? "",
+		workPreferences: raw.workPreferences ?? {},
+		noGos: raw.noGos ?? {},
+		customNoGos: raw.customNoGos ?? [],
+	};
+}
+
 function ProfileEditorSection({
 	draft,
 	patch,
@@ -203,27 +229,7 @@ function ProfileEditorSection({
 	draft: Persona;
 	patch: (p: Partial<Persona>) => void;
 }) {
-	// Normalize the profile so editors can safely read every field.
-	// Personas created via the GUI (or older seed versions) may have partial
-	// JSONB profiles where some fields are missing entirely — the editors
-	// call `.includes()` / `.map()` directly on these props and crash if
-	// a field is undefined. Defaulting here covers all editors at once,
-	// and patchProfile spreads the normalized version so the next save
-	// persists the completed shape.
-	const profile: Persona["profile"] = {
-		inSchool: draft.profile.inSchool ?? null,
-		educationLevel: draft.profile.educationLevel ?? null,
-		favoriteSubjects: draft.profile.favoriteSubjects ?? [],
-		customSubjects: draft.profile.customSubjects ?? [],
-		interests: draft.profile.interests ?? [],
-		customInterests: draft.profile.customInterests ?? [],
-		workExpectations: draft.profile.workExpectations ?? [],
-		strengths: draft.profile.strengths ?? {},
-		secretTalent: draft.profile.secretTalent ?? "",
-		practicalExperience: draft.profile.practicalExperience ?? "",
-		workPreferences: draft.profile.workPreferences ?? {},
-		noGos: draft.profile.noGos ?? {},
-	};
+	const profile = normalizePersonaProfile(draft.profile);
 
 	function patchProfile(partial: Partial<Persona["profile"]>) {
 		patch({ profile: { ...profile, ...partial } });
