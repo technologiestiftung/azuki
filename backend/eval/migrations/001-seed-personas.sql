@@ -67,7 +67,8 @@ insert into personas (
       "perseverance": 0.5,
       "teamwork": 0.5
     },
-    "secretTalent": "kann gut mit autos und werkzeug umgehen, nicht krass aber ich finds einfach, wo andere nicht weiterkommen",
+    "customStrengths": ["kann gut mit autos und werkzeug umgehen, nicht krass aber ich finds einfach, wo andere nicht weiterkommen"],
+    "selectedCustomStrengths": ["kann gut mit autos und werkzeug umgehen, nicht krass aber ich finds einfach, wo andere nicht weiterkommen"],
     "practicalExperience": "hab 4 monate kfz-mechatroniker gemacht, war zu hart körperlich und der ton in der werkstatt war nichts für mich. hab aufgehört. will was wo man nicht den ganzen tag nur ackert",
     "workPreferences": {
       "environment": "a",
@@ -262,7 +263,8 @@ insert into personas (
       "concentration": 0.5,
       "precision": 0.5
     },
-    "secretTalent": "Ich übersetze seit Jahren Behördenbriefe und Arztgespräche für meine Eltern. Ich bin gut darin, schwierige Texte in einfache Sprache zu bringen.",
+    "customStrengths": ["Ich übersetze seit Jahren Behördenbriefe und Arztgespräche für meine Eltern. Ich bin gut darin, schwierige Texte in einfache Sprache zu bringen."],
+    "selectedCustomStrengths": ["Ich übersetze seit Jahren Behördenbriefe und Arztgespräche für meine Eltern. Ich bin gut darin, schwierige Texte in einfache Sprache zu bringen."],
     "practicalExperience": "Ich habe bisher keine richtige Berufserfahrung. Manchmal helfe ich bei schulischen Projekten aus, und zuhause übernehme ich viel Verantwortung für meine jüngeren Geschwister. Ich weiß noch nicht genau, welchen Weg ich nehmen soll.",
     "workPreferences": {
       "environment": "a",
@@ -440,7 +442,8 @@ insert into personas (
       "craftsmanship": 0.5,
       "concentration": 0.5
     },
-    "secretTalent": "ich kann gut Sachen tragen und organisieren. in Lager oder Markt ich weiß wo alles ist. meine Freunde sagen ich bin sehr zuverlässig",
+    "customStrengths": ["ich kann gut Sachen tragen und organisieren. in Lager oder Markt ich weiß wo alles ist. meine Freunde sagen ich bin sehr zuverlässig"],
+    "selectedCustomStrengths": ["ich kann gut Sachen tragen und organisieren. in Lager oder Markt ich weiß wo alles ist. meine Freunde sagen ich bin sehr zuverlässig"],
     "practicalExperience": "ich haben Integrationskurs gemacht und Sprachkurs. ich habe geholfen bei Umzug von Freunde, viel Kisten tragen und Möbel aufbauen. ich suche Ausbildung in Logistik oder Einzelhandel, ich will arbeiten",
     "workPreferences": {
       "environment": "a",

@@ -43,3 +43,6 @@ export const noGos = [
 		illustration: "/illustrations/danger.svg",
 	},
 ];
+
+/** Predefined swipe cards plus one custom no-go screen at hash #{noGos.length}. */
+export const NO_GO_STEP_CARD_COUNT = noGos.length + 1;

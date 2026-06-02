@@ -129,19 +129,206 @@ describe("formatProfileSections — custom subject dedup", () => {
 	});
 });
 
-describe("formatProfileSections — free-text fields labeled as eigene Angaben", () => {
-	test("Geheimes Talent label includes (eigene Angaben) suffix", () => {
-		const profile = makeProfile({ secretTalent: "kann gut zuhören" });
+describe("formatProfileSections — custom work expectation dedup", () => {
+	test("does NOT list custom work expectations twice when they are mirrored into workExpectations", () => {
+		const profile = makeProfile({
+			workExpectations: ["flexible hours"],
+			customWorkExpectations: ["flexible hours"],
+		});
 
 		const output = formatProfileSections(profile);
 
 		expect(output).toContain(
-			"Geheimes Talent (eigene Angaben): kann gut zuhören",
+			"Weitere Rahmenbedingungen (eigene Angaben): flexible hours",
 		);
-		// Bare label without suffix must not appear.
-		expect(output).not.toMatch(/^Geheimes Talent: /m);
+		expect(output).not.toMatch(/^Rahmenbedingungen:/m);
 	});
 
+	test("emits predefined work expectations under Rahmenbedingungen with their German label", () => {
+		const profile = makeProfile({ workExpectations: ["remote"] });
+
+		const output = formatProfileSections(profile);
+
+		expect(output).toContain("Rahmenbedingungen:");
+		expect(output).not.toContain("Rahmenbedingungen: remote");
+		expect(output).not.toMatch(
+			/^Weitere Rahmenbedingungen \(eigene Angaben\):/m,
+		);
+	});
+
+	test("lists predefined and custom work expectations on separate lines, each only once", () => {
+		const profile = makeProfile({
+			workExpectations: ["remote", "flexible hours"],
+			customWorkExpectations: ["flexible hours"],
+		});
+
+		const output = formatProfileSections(profile);
+
+		const expectationsLine = output
+			.split("\n")
+			.find((line) => line.startsWith("Rahmenbedingungen:"));
+		expect(expectationsLine).toBeDefined();
+		expect(expectationsLine).not.toContain("flexible hours");
+
+		expect(output).toContain(
+			"Weitere Rahmenbedingungen (eigene Angaben): flexible hours",
+		);
+
+		const occurrences = output.split("flexible hours").length - 1;
+		expect(occurrences).toBe(1);
+	});
+
+	test("omits both work expectation lines when neither array has entries", () => {
+		const profile = makeProfile();
+
+		const output = formatProfileSections(profile);
+
+		expect(output).not.toMatch(/^Rahmenbedingungen:/m);
+		expect(output).not.toMatch(
+			/^Weitere Rahmenbedingungen \(eigene Angaben\):/m,
+		);
+	});
+
+	test("omits deselected custom work expectations from the AI line", () => {
+		const profile = makeProfile({
+			workExpectations: [],
+			customWorkExpectations: ["flexible hours", "kurze Pendelzeit"],
+		});
+
+		const output = formatProfileSections(profile);
+
+		expect(output).not.toMatch(
+			/^Weitere Rahmenbedingungen \(eigene Angaben\):/m,
+		);
+		expect(output).not.toContain("flexible hours");
+		expect(output).not.toContain("kurze Pendelzeit");
+	});
+
+	test("lists only custom work expectations still selected in workExpectations", () => {
+		const profile = makeProfile({
+			workExpectations: ["flexible hours"],
+			customWorkExpectations: ["flexible hours", "kurze Pendelzeit"],
+		});
+
+		const output = formatProfileSections(profile);
+
+		expect(output).toContain(
+			"Weitere Rahmenbedingungen (eigene Angaben): flexible hours",
+		);
+		expect(output).not.toContain("kurze Pendelzeit");
+	});
+});
+
+describe("formatProfileSections — custom strengths", () => {
+	test("lists selected custom strengths under Weitere Stärken (eigene Angaben)", () => {
+		const profile = makeProfile({
+			customStrengths: ["kann gut zuhören", "organisiert Umzüge"],
+			selectedCustomStrengths: ["kann gut zuhören", "organisiert Umzüge"],
+		});
+
+		const output = formatProfileSections(profile);
+
+		expect(output).toContain(
+			"Weitere Stärken (eigene Angaben): kann gut zuhören, organisiert Umzüge",
+		);
+	});
+
+	test("omits deselected custom strengths from the AI line", () => {
+		const profile = makeProfile({
+			customStrengths: ["kann gut zuhören", "organisiert Umzüge"],
+			selectedCustomStrengths: ["kann gut zuhören"],
+		});
+
+		const output = formatProfileSections(profile);
+
+		expect(output).toContain(
+			"Weitere Stärken (eigene Angaben): kann gut zuhören",
+		);
+		expect(output).not.toContain("organisiert Umzüge");
+	});
+
+	test("omits custom strengths line when none are selected", () => {
+		const profile = makeProfile({
+			customStrengths: ["kann gut zuhören"],
+			selectedCustomStrengths: [],
+		});
+
+		const output = formatProfileSections(profile);
+
+		expect(output).not.toMatch(/^Weitere Stärken \(eigene Angaben\):/m);
+	});
+
+	test("omits selectedCustomStrengths not present in customStrengths catalog", () => {
+		const profile = makeProfile({
+			customStrengths: ["kann gut zuhören"],
+			selectedCustomStrengths: ["kann gut zuhören", "orphan entry"],
+		});
+
+		const output = formatProfileSections(profile);
+
+		expect(output).toContain(
+			"Weitere Stärken (eigene Angaben): kann gut zuhören",
+		);
+		expect(output).not.toContain("orphan entry");
+	});
+});
+
+describe("formatProfileSections — custom no-gos", () => {
+	test("lists predefined rejected no-gos under No-Gos with German labels", () => {
+		const profile = makeProfile({
+			noGos: { noise: "rejected", dirt: "accepted" },
+		});
+
+		const output = formatProfileSections(profile);
+
+		expect(output).toContain("No-Gos:");
+		expect(output).toContain("Lärm");
+		expect(output).not.toContain("Schmutz");
+	});
+
+	test("lists rejected custom no-gos under Weitere No-Gos (eigene Angaben)", () => {
+		const profile = makeProfile({
+			customNoGos: ["lange Pendeln", "viel Telefonieren"],
+			noGos: {
+				"lange Pendeln": "rejected",
+				"viel Telefonieren": "accepted",
+			},
+		});
+
+		const output = formatProfileSections(profile);
+
+		expect(output).toContain("Weitere No-Gos (eigene Angaben): lange Pendeln");
+		expect(output).not.toContain("viel Telefonieren");
+	});
+
+	test("does NOT list custom no-gos twice when keyed in noGos", () => {
+		const profile = makeProfile({
+			customNoGos: ["lange Pendeln"],
+			noGos: { "lange Pendeln": "rejected" },
+		});
+
+		const output = formatProfileSections(profile);
+
+		expect(output).not.toMatch(/^No-Gos:.*lange Pendeln/m);
+		expect(output).toContain("Weitere No-Gos (eigene Angaben): lange Pendeln");
+		const occurrences = output.split("lange Pendeln").length - 1;
+		expect(occurrences).toBe(1);
+	});
+
+	test("omits both no-go lines when none are rejected", () => {
+		const profile = makeProfile({
+			customNoGos: ["lange Pendeln"],
+			noGos: { noise: "accepted", "lange Pendeln": "accepted" },
+		});
+
+		const output = formatProfileSections(profile);
+
+		expect(output).not.toMatch(/^No-Gos:/m);
+		expect(output).not.toMatch(/^Weitere No-Gos \(eigene Angaben\):/m);
+	});
+});
+
+describe("formatProfileSections — free-text fields labeled as eigene Angaben", () => {
 	test("Praktische Erfahrungen label includes (eigene Angaben) suffix", () => {
 		const profile = makeProfile({
 			practicalExperience: "Praktikum in der Tischlerei",
@@ -155,12 +342,12 @@ describe("formatProfileSections — free-text fields labeled as eigene Angaben",
 		expect(output).not.toMatch(/^Praktische Erfahrungen: /m);
 	});
 
-	test("free-text field lines are omitted when the values are empty strings", () => {
-		const profile = makeProfile(); // secretTalent and practicalExperience default to ""
+	test("free-text field lines are omitted when the values are empty", () => {
+		const profile = makeProfile(); // practicalExperience defaults to ""
 
 		const output = formatProfileSections(profile);
 
-		expect(output).not.toContain("Geheimes Talent");
 		expect(output).not.toContain("Praktische Erfahrungen");
+		expect(output).not.toContain("Weitere Stärken");
 	});
 });

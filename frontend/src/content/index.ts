@@ -4,12 +4,12 @@ export const content = {
 	// Common
 	"common.multiSelect.subline": "Wähle alle aus, die zutreffen.",
 	"common.singleSelect.subline": "Wähle eine Option aus.",
-	"common.inputDialog.submitButtonLabel": "Hinzufügen",
-	"common.inputDialog.submitButtonAriaLabel": "Hinzufügen",
-	"common.inputDialog.cancelButtonLabel": "Abbrechen",
-	"common.inputDialog.cancelButtonAriaLabel": "Abbrechen",
-	"common.inputDialog.clearButtonAriaLabel": "Eingabe löschen",
-	"common.inputDialog.errorMessage": "Bitte gib etwas ein",
+	"common.bottomSheet.submitButtonLabel": "Hinzufügen",
+	"common.bottomSheet.submitButtonAriaLabel": "Hinzufügen",
+	"common.bottomSheet.cancelButtonLabel": "Abbrechen",
+	"common.bottomSheet.cancelButtonAriaLabel": "Abbrechen",
+	"common.bottomSheet.clearButtonAriaLabel": "Eingabe löschen",
+	"common.bottomSheet.errorMessage": "Bitte gib etwas ein",
 	"common.bottomSheet.overlayDismissLabel": "Schließen",
 	"common.bottomSheet.ariaLabel": "Dialog",
 	// Welcome
@@ -56,7 +56,9 @@ export const content = {
 	"schoolSubjects.addCustomSubjectButton.label": "Schulfach hinzufügen",
 	"schoolSubjects.addCustomSubjectButton.ariaLabel": "Schulfach hinzufügen",
 	"schoolSubjects.customSubject.label": "Von dir hinzugefügt",
-	"schoolSubjects.inputDialog.input.addPlaceholder": "Schulfach hinzufügen",
+	"schoolSubjects.bottomSheet.sheetAriaLabel": "Bitte gib ein Schulfach ein.",
+	"schoolSubjects.bottomSheet.input.addPlaceholder": "Schulfach hinzufügen",
+	"schoolSubjects.bottomSheet.errorMessage": "Bitte gib ein Schulfach ein.",
 	"schoolSubjects.addCustomSubjectButton.addMore": "Weitere hinzufügen",
 	//Languages
 	"schoolSubjects.languages.label": "Sprachen",
@@ -111,6 +113,19 @@ export const content = {
 	"interests.addedByYouLabel": "Von dir hinzugefügt",
 	"interests.addPlaceholder": "Etwas anderes hinzufügen",
 	"interests.skipButton.pill.label.postfix": "als Interesse auswählen",
+	"interests.addCustomInterestsButton.addMore": "Weitere hinzufügen",
+	"interests.addCustomInterestsButton.label": "Interesse hinzufügen",
+	"interests.addCustomInterestsButton.ariaLabel": "Interesse hinzufügen",
+	"interests.bottomSheet.sheetAriaLabel":
+		"Bitte gib ein, was dich interessiert.",
+	"interests.bottomSheet.input.addPlaceholder":
+		"Bitte gib ein, was dich interessiert.",
+	"interests.bottomSheet.submitButtonLabel": "Hinzufügen",
+	"interests.bottomSheet.submitButtonAriaLabel": "Hinzufügen",
+	"interests.bottomSheet.cancelButtonLabel": "Abbrechen",
+	"interests.bottomSheet.cancelButtonAriaLabel": "Abbrechen",
+	"interests.bottomSheet.clearButtonAriaLabel": "Eingabe löschen",
+	"interests.bottomSheet.errorMessage": "Bitte gib deine Interesse ein.",
 	// Tech & Digital
 	"interests.tech.label": "Technik & Digitales",
 	"interests.tech.gaming.label": "Gaming",
@@ -221,13 +236,17 @@ export const content = {
 	"strengths.cards.perseverance.title": "Durchhalten",
 	"strengths.cards.perseverance.description":
 		"Ich mache weiter, auch wenn eine Aufgabe anstrengend ist.",
-
-	// Secret Talent
-	"secretTalent.question":
-		"Was kannst du richtig gut, von dem andere nichts wissen?",
-	"secretTalent.placeholder": "Deine Eingabe",
-	"secretTalent.cancelLabel": "Abbrechen",
-	"secretTalent.saveLabel": "Speichern",
+	// Custom Strengths
+	"strengths.customStrength.label": "Von dir hinzugefügt",
+	"strengths.addCustomStrengthButton.addMore": "Weitere hinzufügen",
+	"strengths.addCustomStrengthButton.label": "Stärke hinzufügen",
+	"strengths.addCustomStrengthButton.ariaLabel": "Stärke hinzufügen",
+	"strengths.bottomSheet.input.addPlaceholder": "Stärke von dir hinzufügen",
+	"strengths.bottomSheet.errorMessage": "Bitte gib ein, was du gut kannst.",
+	"strengths.customStrength.title": "Fehlt noch etwas?",
+	"strengths.customStrength.description":
+		"Füge weitere Stärken hinzu, die zu dir passen.",
+	"strengths.customStrength.pill.label.postfix": "als Stärke auswählen",
 
 	// Practical Experience
 	"practicalExperience.question": "Wo hast du schon Erfahrungen gesammelt?",
@@ -252,6 +271,23 @@ export const content = {
 	"workExpectations.option.shortDistance": "Kurzer Arbeitsweg",
 	"workExpectations.option.career": "Karriere",
 	"workExpectations.option.remote": "Remote möglich",
+	"workExpectations.customWorkExpectation.label": "Von dir hinzugefügt",
+	"workExpectations.addCustomWorkExpectationButton.addMore":
+		"Weitere hinzufügen",
+	"workExpectations.addCustomWorkExpectationButton.label": "Wunsch hinzufügen",
+	"workExpectations.addCustomWorkExpectationButton.ariaLabel":
+		"Wunsch hinzufügen",
+	"workExpectations.bottomSheet.sheetAriaLabel":
+		"Bitte gib ein, was dir im Beruf wichtig ist.",
+	"workExpectations.bottomSheet.input.addPlaceholder":
+		"Bitte gib ein, was dir im Beruf wichtig ist.",
+	"workExpectations.bottomSheet.submitButtonLabel": "Hinzufügen",
+	"workExpectations.bottomSheet.submitButtonAriaLabel": "Hinzufügen",
+	"workExpectations.bottomSheet.cancelButtonLabel": "Abbrechen",
+	"workExpectations.bottomSheet.cancelButtonAriaLabel": "Abbrechen",
+	"workExpectations.bottomSheet.clearButtonAriaLabel": "Eingabe löschen",
+	"workExpectations.bottomSheet.errorMessage":
+		"Bitte beschreibe, was dir im Beruf wichtig ist.",
 
 	// Work Preferences
 	"workPreferences.question": "Wie möchtest du lieber arbeiten?",
@@ -264,6 +300,16 @@ export const content = {
 	"noGos.acceptLabel": "Ist okay",
 	"noGos.ariaLabel.accept": "Als ist okay markieren",
 	"noGos.skipButton.label": "Überspringen",
+	"noGos.customNoGo.label": "Von dir hinzugefügt",
+	"noGos.addCustomNoGoButton.addMore": "No Go hinzufügen",
+	"noGos.addCustomNoGoButton.label": "Weitere hinzufügen",
+	"noGos.addCustomNoGoButton.ariaLabel": "No Go hinzufügen",
+	"noGos.bottomSheet.input.addPlaceholder": "Etwas das für dich nicht geht",
+	"noGos.bottomSheet.errorMessage": "Bitte gib ein No Go ein.",
+	"noGos.customNoGo.title": "Fehlt noch etwas?",
+	"noGos.customNoGo.description":
+		"Füge weitere Dinge hinzu, die für dich im Beruf überhaupt nicht gehen.",
+	"noGos.customNoGo.pill.label.postfix": "als No-Go markieren",
 	//noise
 	"noGos.noise.title": "Lärm",
 	"noGos.noise.description": "z.B. Baustelle, Maschinen oder laute Werkstatt",

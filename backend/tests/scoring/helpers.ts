@@ -71,11 +71,14 @@ export function makeProfile(overrides: Partial<UserProfile> = {}): UserProfile {
 		interests: [],
 		customInterests: [],
 		workExpectations: [],
+		customWorkExpectations: [],
 		strengths: {},
-		secretTalent: "",
+		customStrengths: [],
+		selectedCustomStrengths: [],
 		practicalExperience: "",
 		workPreferences: {},
 		noGos: {},
+		customNoGos: [],
 		...overrides,
 	};
 }

@@ -21,7 +21,9 @@ export const TextInput = ({
 }: TextInputProps) => {
 	function handleKeyDown(e: React.KeyboardEvent<HTMLInputElement>) {
 		if (e.key === "Enter" && onSubmit) {
+			e.preventDefault();
 			onSubmit();
+			return;
 		}
 		onKeyDown?.(e);
 	}

@@ -7,6 +7,7 @@ import {
 	type NoGoAnswer,
 	type AusbildungsplaetzeResponse,
 } from "../common";
+import { initialUserProfile } from "../profile/initialUserProfile";
 import { useMatchResultsStore } from "./useMatchResultsStore";
 
 export interface Standort {
@@ -16,26 +17,11 @@ export interface Standort {
 
 const DEFAULT_STANDORT: Standort = { plz: "10115", umkreis: 25 };
 
-const initialProfile: UserProfile = {
-	inSchool: null,
-	educationLevel: null,
-	favoriteSubjects: [],
-	customSubjects: [],
-	interests: [],
-	customInterests: [],
-	workExpectations: [],
-	strengths: {},
-	secretTalent: "",
-	practicalExperience: "",
-	workPreferences: {},
-	noGos: {},
-};
-
 /** Normalizes the profile by merging the initial profile with the provided profile. */
 function normalizeProfile(
 	profile: Partial<UserProfile> | undefined,
 ): UserProfile {
-	const merged = { ...initialProfile, ...profile };
+	const merged = { ...initialUserProfile, ...profile };
 	return {
 		...merged,
 		favoriteSubjects: merged.favoriteSubjects ?? [],
@@ -43,9 +29,13 @@ function normalizeProfile(
 		interests: merged.interests ?? [],
 		customInterests: merged.customInterests ?? [],
 		workExpectations: merged.workExpectations ?? [],
+		customWorkExpectations: merged.customWorkExpectations ?? [],
 		strengths: merged.strengths ?? {},
+		customStrengths: merged.customStrengths ?? [],
+		selectedCustomStrengths: merged.selectedCustomStrengths ?? [],
 		workPreferences: merged.workPreferences ?? {},
 		noGos: merged.noGos ?? {},
+		customNoGos: merged.customNoGos ?? [],
 	};
 }
 
@@ -71,11 +61,15 @@ interface AppActions {
 	toggleInterest: (interest: string) => void;
 	addCustomInterest: (interest: string) => void;
 	addCustomSubject: (subject: string) => void;
+	addCustomWorkExpectation: (workExpectation: string) => void;
+	addCustomStrength: (strength: string) => void;
+	toggleCustomStrength: (strength: string) => void;
 	setStrength: (id: string, value: number) => void;
-	setSecretTalent: (value: string) => void;
 	setPracticalExperience: (value: string) => void;
 	setWorkPreference: (id: string, choice: WorkPreferenceChoice | null) => void;
 	setNoGo: (id: string, answer: NoGoAnswer | null) => void;
+	addCustomNoGo: (noGo: string) => void;
+	toggleCustomNoGo: (noGo: string) => void;
 	setAusbildungsplaetze: (results: AusbildungsplaetzeResponse | null) => void;
 	setStandort: (standort: Partial<Standort>) => void;
 	resetProfile: () => void;
@@ -84,7 +78,7 @@ interface AppActions {
 export const useAppStore = create<AppState & AppActions>()(
 	persist(
 		(set) => ({
-			profile: initialProfile,
+			profile: initialUserProfile,
 			ausbildungsplaetze: null,
 			standort: DEFAULT_STANDORT,
 
@@ -160,6 +154,62 @@ export const useAppStore = create<AppState & AppActions>()(
 					},
 				}));
 			},
+
+			addCustomWorkExpectation: (workExpectation) => {
+				clearMatchResults();
+				set((state) => ({
+					profile: {
+						...state.profile,
+						customWorkExpectations: [
+							...state.profile.customWorkExpectations,
+							workExpectation,
+						],
+						workExpectations: [
+							...state.profile.workExpectations,
+							workExpectation,
+						],
+					},
+				}));
+			},
+
+			addCustomStrength: (strength) => {
+				clearMatchResults();
+				set((state) => {
+					if (state.profile.customStrengths.includes(strength)) {
+						return state;
+					}
+					return {
+						profile: {
+							...state.profile,
+							customStrengths: [...state.profile.customStrengths, strength],
+							selectedCustomStrengths: [
+								...state.profile.selectedCustomStrengths,
+								strength,
+							],
+						},
+					};
+				});
+			},
+
+			toggleCustomStrength: (strength) => {
+				clearMatchResults();
+				set((state) => {
+					const selected = state.profile.selectedCustomStrengths.includes(
+						strength,
+					)
+						? state.profile.selectedCustomStrengths.filter(
+								(value) => value !== strength,
+							)
+						: [...state.profile.selectedCustomStrengths, strength];
+					return {
+						profile: {
+							...state.profile,
+							selectedCustomStrengths: selected,
+						},
+					};
+				});
+			},
+
 			addCustomSubject: (subject) =>
 				set((state) => {
 					const customSubjects = state.profile.customSubjects ?? [];
@@ -181,13 +231,6 @@ export const useAppStore = create<AppState & AppActions>()(
 						...state.profile,
 						strengths: { ...state.profile.strengths, [id]: value },
 					},
-				}));
-			},
-
-			setSecretTalent: (value) => {
-				clearMatchResults();
-				set((state) => ({
-					profile: { ...state.profile, secretTalent: value },
 				}));
 			},
 
@@ -221,6 +264,37 @@ export const useAppStore = create<AppState & AppActions>()(
 				}));
 			},
 
+			addCustomNoGo: (noGo) => {
+				clearMatchResults();
+				set((state) => {
+					if (state.profile.customNoGos.includes(noGo)) {
+						return state;
+					}
+					return {
+						profile: {
+							...state.profile,
+							customNoGos: [...state.profile.customNoGos, noGo],
+							noGos: { ...state.profile.noGos, [noGo]: "rejected" },
+						},
+					};
+				});
+			},
+
+			toggleCustomNoGo: (noGo) => {
+				clearMatchResults();
+				set((state) => {
+					const current = state.profile.noGos[noGo];
+					const next: NoGoAnswer =
+						current === "rejected" ? "accepted" : "rejected";
+					return {
+						profile: {
+							...state.profile,
+							noGos: { ...state.profile.noGos, [noGo]: next },
+						},
+					};
+				});
+			},
+
 			setAusbildungsplaetze: (results) => set({ ausbildungsplaetze: results }),
 
 			setStandort: (standort) =>
@@ -235,7 +309,7 @@ export const useAppStore = create<AppState & AppActions>()(
 				clearMatchResults();
 				// standort is a user preference, not derived from profile —
 				// keep it across resets.
-				set({ profile: initialProfile });
+				set({ profile: initialUserProfile });
 			},
 		}),
 		{

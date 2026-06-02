@@ -15,8 +15,10 @@ import { InterestsEditor } from "./profile-editors/InterestsEditor";
 import { SubjectsEditor } from "./profile-editors/SubjectsEditor";
 import { WorkExpectationsEditor } from "./profile-editors/WorkExpectationsEditor";
 import { StrengthsEditor } from "./profile-editors/StrengthsEditor";
+import { CustomStrengthsEditor } from "./profile-editors/CustomStrengthsEditor";
 import { WorkPreferencesEditor } from "./profile-editors/WorkPreferencesEditor";
 import { NoGosEditor } from "./profile-editors/NoGosEditor";
+import { CustomNoGosEditor } from "./profile-editors/CustomNoGosEditor";
 
 export function PersonaDetailPage() {
 	return (
@@ -194,6 +196,32 @@ function BasicInfoSection({
 	);
 }
 
+function normalizePersonaProfile(raw: Persona["profile"]): Persona["profile"] {
+	const customStrengths = raw.customStrengths ?? [];
+	const selectedCustomStrengths =
+		(raw.selectedCustomStrengths?.length ?? 0) > 0
+			? raw.selectedCustomStrengths
+			: customStrengths;
+
+	return {
+		inSchool: raw.inSchool ?? null,
+		educationLevel: raw.educationLevel ?? null,
+		favoriteSubjects: raw.favoriteSubjects ?? [],
+		customSubjects: raw.customSubjects ?? [],
+		interests: raw.interests ?? [],
+		customInterests: raw.customInterests ?? [],
+		workExpectations: raw.workExpectations ?? [],
+		customWorkExpectations: raw.customWorkExpectations ?? [],
+		strengths: raw.strengths ?? {},
+		customStrengths,
+		selectedCustomStrengths,
+		practicalExperience: raw.practicalExperience ?? "",
+		workPreferences: raw.workPreferences ?? {},
+		noGos: raw.noGos ?? {},
+		customNoGos: raw.customNoGos ?? [],
+	};
+}
+
 function ProfileEditorSection({
 	draft,
 	patch,
@@ -201,27 +229,7 @@ function ProfileEditorSection({
 	draft: Persona;
 	patch: (p: Partial<Persona>) => void;
 }) {
-	// Normalize the profile so editors can safely read every field.
-	// Personas created via the GUI (or older seed versions) may have partial
-	// JSONB profiles where some fields are missing entirely — the editors
-	// call `.includes()` / `.map()` directly on these props and crash if
-	// a field is undefined. Defaulting here covers all editors at once,
-	// and patchProfile spreads the normalized version so the next save
-	// persists the completed shape.
-	const profile: Persona["profile"] = {
-		inSchool: draft.profile.inSchool ?? null,
-		educationLevel: draft.profile.educationLevel ?? null,
-		favoriteSubjects: draft.profile.favoriteSubjects ?? [],
-		customSubjects: draft.profile.customSubjects ?? [],
-		interests: draft.profile.interests ?? [],
-		customInterests: draft.profile.customInterests ?? [],
-		workExpectations: draft.profile.workExpectations ?? [],
-		strengths: draft.profile.strengths ?? {},
-		secretTalent: draft.profile.secretTalent ?? "",
-		practicalExperience: draft.profile.practicalExperience ?? "",
-		workPreferences: draft.profile.workPreferences ?? {},
-		noGos: draft.profile.noGos ?? {},
-	};
+	const profile = normalizePersonaProfile(draft.profile);
 
 	function patchProfile(partial: Partial<Persona["profile"]>) {
 		patch({ profile: { ...profile, ...partial } });
@@ -293,6 +301,16 @@ function ProfileEditorSection({
 					onChange={(next) => patchProfile({ strengths: next })}
 				/>
 
+				<CustomStrengthsEditor
+					customStrengths={profile.customStrengths}
+					onChange={(next) =>
+						patchProfile({
+							customStrengths: next,
+							selectedCustomStrengths: next,
+						})
+					}
+				/>
+
 				<WorkPreferencesEditor
 					workPreferences={profile.workPreferences}
 					onChange={(next) => patchProfile({ workPreferences: next })}
@@ -303,15 +321,11 @@ function ProfileEditorSection({
 					onChange={(next) => patchProfile({ noGos: next })}
 				/>
 
-				<label className="flex flex-col gap-1">
-					<span className="text-gray-600">Geheimes Talent (freier Text)</span>
-					<textarea
-						value={profile.secretTalent}
-						onChange={(e) => patchProfile({ secretTalent: e.target.value })}
-						rows={3}
-						className="border border-gray-300 rounded px-2 py-1"
-					/>
-				</label>
+				<CustomNoGosEditor
+					customNoGos={profile.customNoGos}
+					noGos={profile.noGos}
+					onChange={(next) => patchProfile(next)}
+				/>
 
 				<label className="flex flex-col gap-1">
 					<span className="text-gray-600">
