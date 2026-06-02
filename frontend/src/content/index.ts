@@ -57,8 +57,7 @@ export const content = {
 	"schoolSubjects.addCustomSubjectButton.ariaLabel": "Schulfach hinzufügen",
 	"schoolSubjects.customSubject.label": "Von dir hinzugefügt",
 	"schoolSubjects.bottomSheet.sheetAriaLabel": "Bitte gib ein Schulfach ein.",
-	"schoolSubjects.bottomSheet.input.addPlaceholder":
-		"Bitte gib ein Schulfach ein.",
+	"schoolSubjects.bottomSheet.input.addPlaceholder": "Schulfach hinzufügen",
 	"schoolSubjects.bottomSheet.errorMessage": "Bitte gib ein Schulfach ein.",
 	"schoolSubjects.addCustomSubjectButton.addMore": "Weitere hinzufügen",
 	//Languages
@@ -119,7 +118,8 @@ export const content = {
 	"interests.addCustomInterestsButton.ariaLabel": "Interesse hinzufügen",
 	"interests.bottomSheet.sheetAriaLabel":
 		"Bitte gib ein, was dich interessiert.",
-	"interests.bottomSheet.input.addPlaceholder": "Interesse hinzufügen",
+	"interests.bottomSheet.input.addPlaceholder":
+		"Bitte gib ein, was dich interessiert.",
 	"interests.bottomSheet.submitButtonLabel": "Hinzufügen",
 	"interests.bottomSheet.submitButtonAriaLabel": "Hinzufügen",
 	"interests.bottomSheet.cancelButtonLabel": "Abbrechen",
@@ -279,7 +279,8 @@ export const content = {
 		"Wunsch hinzufügen",
 	"workExpectations.bottomSheet.sheetAriaLabel":
 		"Bitte gib ein, was dir im Beruf wichtig ist.",
-	"workExpectations.bottomSheet.input.addPlaceholder": "Wunsch hinzufügen",
+	"workExpectations.bottomSheet.input.addPlaceholder":
+		"Bitte gib ein, was dir im Beruf wichtig ist.",
 	"workExpectations.bottomSheet.submitButtonLabel": "Hinzufügen",
 	"workExpectations.bottomSheet.submitButtonAriaLabel": "Hinzufügen",
 	"workExpectations.bottomSheet.cancelButtonLabel": "Abbrechen",
@@ -301,7 +302,7 @@ export const content = {
 	"noGos.skipButton.label": "Überspringen",
 	"noGos.customNoGo.label": "Von dir hinzugefügt",
 	"noGos.addCustomNoGoButton.addMore": "No Go hinzufügen",
-	"noGos.addCustomNoGoButton.label": "No Go hinzufügen",
+	"noGos.addCustomNoGoButton.label": "Weitere hinzufügen",
 	"noGos.addCustomNoGoButton.ariaLabel": "No Go hinzufügen",
 	"noGos.bottomSheet.input.addPlaceholder": "Etwas das für dich nicht geht",
 	"noGos.bottomSheet.errorMessage": "Bitte gib ein No Go ein.",
