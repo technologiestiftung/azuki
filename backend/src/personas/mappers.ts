@@ -1,4 +1,5 @@
 import type { Persona, UserProfile } from "@azuki/shared";
+import { UserProfileSchema } from "../schemas/userProfile.js";
 
 interface PersonaRow {
 	id: string;
@@ -17,7 +18,7 @@ export function rowToPersona(row: PersonaRow): Persona {
 		id: row.id,
 		name: row.name,
 		description: row.description,
-		profile: row.profile,
+		profile: UserProfileSchema.parse(row.profile),
 		tierS: row.tier_s,
 		tierA: row.tier_a,
 		tierC: row.tier_c,

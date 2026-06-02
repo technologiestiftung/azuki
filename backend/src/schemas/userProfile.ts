@@ -25,8 +25,10 @@ export const UserProfileSchema = z.object({
 	workExpectations: z.array(z.string()),
 	customWorkExpectations: z.array(z.string()).default([]),
 	strengths: z.record(z.string(), z.number()),
-	secretTalent: z.string(),
+	customStrengths: z.array(z.string()).default([]),
+	selectedCustomStrengths: z.array(z.string()).default([]),
 	practicalExperience: z.string(),
 	workPreferences: z.record(z.string(), WorkPreferenceChoiceSchema.nullable()),
 	noGos: z.record(z.string(), NoGoAnswerSchema.nullable()),
+	customNoGos: z.array(z.string()).default([]),
 });

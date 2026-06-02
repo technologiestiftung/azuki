@@ -12,10 +12,12 @@ const baseProfile = {
 	workExpectations: [],
 	customWorkExpectations: [],
 	strengths: {},
-	secretTalent: "",
+	customStrengths: [],
+	selectedCustomStrengths: [],
 	practicalExperience: "",
 	workPreferences: {},
 	noGos: {},
+	customNoGos: [],
 };
 
 function makePersona(

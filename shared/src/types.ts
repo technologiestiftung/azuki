@@ -96,10 +96,12 @@ export interface UserProfile {
 	workExpectations: string[];
 	customWorkExpectations: string[];
 	strengths: Record<string, number>;
-	secretTalent: string;
+	customStrengths: string[];
+	selectedCustomStrengths: string[];
 	practicalExperience: string;
 	workPreferences: Record<string, WorkPreferenceChoice | null>;
 	noGos: Record<string, NoGoAnswer | null>;
+	customNoGos: string[];
 }
 
 // --- Match Result (POST /api/match response) ---

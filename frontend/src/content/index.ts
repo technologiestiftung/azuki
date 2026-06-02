@@ -236,13 +236,17 @@ export const content = {
 	"strengths.cards.perseverance.title": "Durchhalten",
 	"strengths.cards.perseverance.description":
 		"Ich mache weiter, auch wenn eine Aufgabe anstrengend ist.",
-
-	// Secret Talent
-	"secretTalent.question":
-		"Was kannst du richtig gut, von dem andere nichts wissen?",
-	"secretTalent.placeholder": "Deine Eingabe",
-	"secretTalent.cancelLabel": "Abbrechen",
-	"secretTalent.saveLabel": "Speichern",
+	// Custom Strengths
+	"strengths.customStrength.label": "Von dir hinzugefügt",
+	"strengths.addCustomStrengthButton.addMore": "Weitere hinzufügen",
+	"strengths.addCustomStrengthButton.label": "Stärke hinzufügen",
+	"strengths.addCustomStrengthButton.ariaLabel": "Stärke hinzufügen",
+	"strengths.bottomSheet.input.addPlaceholder": "Stärke von dir hinzufügen",
+	"strengths.bottomSheet.errorMessage": "Bitte gib ein, was du gut kannst.",
+	"strengths.customStrength.title": "Fehlt noch etwas?",
+	"strengths.customStrength.description":
+		"Füge weitere Stärken hinzu, die zu dir passen.",
+	"strengths.customStrength.pill.label.postfix": "als Stärke auswählen",
 
 	// Practical Experience
 	"practicalExperience.question": "Wo hast du schon Erfahrungen gesammelt?",
@@ -295,6 +299,16 @@ export const content = {
 	"noGos.acceptLabel": "Ist okay",
 	"noGos.ariaLabel.accept": "Als ist okay markieren",
 	"noGos.skipButton.label": "Überspringen",
+	"noGos.customNoGo.label": "Von dir hinzugefügt",
+	"noGos.addCustomNoGoButton.addMore": "No Go hinzufügen",
+	"noGos.addCustomNoGoButton.label": "No Go hinzufügen",
+	"noGos.addCustomNoGoButton.ariaLabel": "No Go hinzufügen",
+	"noGos.bottomSheet.input.addPlaceholder": "Etwas das für dich nicht geht",
+	"noGos.bottomSheet.errorMessage": "Bitte gib ein No Go ein.",
+	"noGos.customNoGo.title": "Fehlt noch etwas?",
+	"noGos.customNoGo.description":
+		"Füge weitere Dinge hinzu, die für dich im Beruf überhaupt nicht gehen.",
+	"noGos.customNoGo.pill.label.postfix": "als No-Go markieren",
 	//noise
 	"noGos.noise.title": "Lärm",
 	"noGos.noise.description": "z.B. Baustelle, Maschinen oder laute Werkstatt",

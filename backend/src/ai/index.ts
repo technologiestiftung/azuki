@@ -66,7 +66,7 @@ Gewichte die Signale ungefähr so:
 
 Freie Texte sind besonders wichtig, zum Beispiel:
 - eigene Beschreibungen
-- geheimes Talent
+- eigene Stärken
 - praktische Erfahrungen
 - individuelle Wünsche
 - persönliche Rahmenbedingungen
@@ -207,6 +207,15 @@ export function formatProfileSections(profile: UserProfile): string {
 	if (strengthEntries.length > 0) {
 		parts.push(`Stärken: ${strengthEntries.join(", ")}`);
 	}
+	const customStrengthCatalog = new Set(profile.customStrengths);
+	const activeCustomStrengths = profile.selectedCustomStrengths.filter(
+		(strength) => customStrengthCatalog.has(strength),
+	);
+	if (activeCustomStrengths.length > 0) {
+		parts.push(
+			`Weitere Stärken (eigene Angaben): ${activeCustomStrengths.join(", ")}`,
+		);
+	}
 
 	const weaknessEntries = Object.entries(profile.strengths)
 		.filter(([, value]) => value > 0 && value < 0.5)
@@ -238,22 +247,32 @@ export function formatProfileSections(profile: UserProfile): string {
 			`Rahmenbedingungen: ${predefinedWorkExpectations.map((v) => label(v, WORK_EXPECTATION_LABELS)).join(", ")}`,
 		);
 	}
-	if (profile.customWorkExpectations.length > 0) {
+	const workExpectationSelection = new Set(profile.workExpectations ?? []);
+	const activeCustomWorkExpectations = profile.customWorkExpectations.filter(
+		(expectation) => workExpectationSelection.has(expectation),
+	);
+	if (activeCustomWorkExpectations.length > 0) {
 		parts.push(
-			`Weitere Rahmenbedingungen (eigene Angaben): ${profile.customWorkExpectations.join(", ")}`,
+			`Weitere Rahmenbedingungen (eigene Angaben): ${activeCustomWorkExpectations.join(", ")}`,
 		);
 	}
 
-	const noGoLabels = Object.entries(profile.noGos)
-		.filter(([, value]) => value === "rejected")
+	const customNoGoSet = new Set(profile.customNoGos);
+	const predefinedNoGoLabels = Object.entries(profile.noGos)
+		.filter(([key, value]) => value === "rejected" && !customNoGoSet.has(key))
 		.map(([key]) => label(key, NO_GO_LABELS));
-	if (noGoLabels.length > 0) {
-		parts.push(`No-Gos: ${noGoLabels.join(", ")}`);
+	if (predefinedNoGoLabels.length > 0) {
+		parts.push(`No-Gos: ${predefinedNoGoLabels.join(", ")}`);
+	}
+	const customNoGoLabels = profile.customNoGos.filter(
+		(text) => profile.noGos[text] === "rejected",
+	);
+	if (customNoGoLabels.length > 0) {
+		parts.push(
+			`Weitere No-Gos (eigene Angaben): ${customNoGoLabels.join(", ")}`,
+		);
 	}
 
-	if (profile.secretTalent) {
-		parts.push(`Geheimes Talent (eigene Angaben): ${profile.secretTalent}`);
-	}
 	if (profile.practicalExperience) {
 		parts.push(
 			`Praktische Erfahrungen (eigene Angaben): ${profile.practicalExperience}`,
