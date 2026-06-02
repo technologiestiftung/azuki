@@ -1,5 +1,8 @@
 import { useEffect, useRef, useState } from "react";
-import { BottomSheet } from "../primitives/bottom-sheet/BottomSheet";
+import {
+	BottomSheet,
+	type BottomSheetStackTier,
+} from "../primitives/bottom-sheet/BottomSheet";
 import { PrimaryThemedButton } from "../primitives/buttons/PrimaryThemedButton";
 import { SecondaryButton } from "../primitives/buttons/SecondaryButton";
 import { content } from "../../content";
@@ -16,6 +19,8 @@ export interface InputBottomSheetProps {
 	title?: string;
 	submitButtonLabel?: string;
 	isCancelButtonVisible?: boolean;
+	stackTier?: BottomSheetStackTier;
+	onShellHeightChange?: (height: number) => void;
 }
 
 export function InputBottomSheet({
@@ -27,6 +32,8 @@ export function InputBottomSheet({
 	title,
 	submitButtonLabel,
 	isCancelButtonVisible = true,
+	stackTier = "default",
+	onShellHeightChange,
 }: InputBottomSheetProps) {
 	const [value, setValue] = useState("");
 	const [error, setError] = useState(false);
@@ -58,7 +65,13 @@ export function InputBottomSheet({
 	};
 
 	return (
-		<BottomSheet open={open} onClose={onClose} ariaLabel={sheetAriaLabel}>
+		<BottomSheet
+			open={open}
+			onClose={onClose}
+			ariaLabel={sheetAriaLabel}
+			stackTier={stackTier}
+			onShellHeightChange={onShellHeightChange}
+		>
 			<div className="flex flex-col items-center gap-3 pt-1 pb-4 px-4 w-full">
 				{title && (
 					<h2 className="text-2xl font-semibold text-gray-900">{title}</h2>

@@ -6,6 +6,7 @@ import { GhostIconButton } from "../../../primitives/buttons/GhostIconButton";
 import { Pill } from "../../../primitives/buttons/Pill";
 import { PrimaryThemedButton } from "../../../primitives/buttons/PrimaryThemedButton";
 import { ThemedIconButton } from "../../../primitives/buttons/ThemedIconButton";
+import { InputBottomSheet } from "../../../input-bottom-sheet/InputBottomSheet";
 
 export function RatingBottomSheet({
 	open,
@@ -23,14 +24,26 @@ export function RatingBottomSheet({
 	const [isRated, setIsRated] = useState(false);
 	const [selectedRating, setSelectedRating] = useState(0);
 	const [selectedTags, setSelectedTags] = useState<string[]>([]);
+	const [customTags, setCustomTags] = useState<string[]>([]);
+	const [customTagSheetOpen, setCustomTagSheetOpen] = useState(false);
+	const [stackFrontHeight, setStackFrontHeight] = useState(0);
 
 	useEffect(() => {
 		if (!open) {
 			setIsRated(false);
 			setSelectedRating(0);
 			setSelectedTags([]);
+			setCustomTags([]);
+			setCustomTagSheetOpen(false);
+			setStackFrontHeight(0);
 		}
 	}, [open]);
+
+	useEffect(() => {
+		if (!customTagSheetOpen) {
+			setStackFrontHeight(0);
+		}
+	}, [customTagSheetOpen]);
 
 	const ratingIsBad = selectedRating === 1 || selectedRating === 2;
 	const ratingIsMedium = selectedRating === 3;
@@ -74,6 +87,7 @@ export function RatingBottomSheet({
 		setSelectedRating(value);
 		setIsRated(true);
 		setSelectedTags([]);
+		setCustomTags([]);
 	}
 
 	function toggleTag(tag: string) {
@@ -81,6 +95,12 @@ export function RatingBottomSheet({
 			prev.includes(tag) ? prev.filter((t) => t !== tag) : [...prev, tag],
 		);
 	}
+
+	function handleAddCustomTag(value: string) {
+		setCustomTags((prev) => (prev.includes(value) ? prev : [...prev, value]));
+		setSelectedTags((prev) => (prev.includes(value) ? prev : [...prev, value]));
+	}
+
 	function handleSubmit() {
 		if (selectedRating === 0) {
 			return;
@@ -89,80 +109,117 @@ export function RatingBottomSheet({
 	}
 
 	return (
-		<BottomSheet open={open} onClose={onClose} ariaLabel={ariaLabel}>
-			<div className="flex flex-col items-center pb-4  w-full">
-				<div className="flex w-full px-2">
-					<GhostIconButton
-						className="w-12 h-12"
-						onClick={onClose}
-						ariaLabel={content["common.bottomSheet.backButtonAriaLabel"]}
-						iconSrc="/icons/arrow-back-black.svg"
-					/>
-				</div>
-				<div className="flex flex-col gap-4 w-full px-4">
-					{title && !isRated && (
-						<h2 className="text-left self-start text-2xl font-semibold text-gray-900 pt-1 px-1">
-							{title || content["practicalExperience.bottomSheet.rating.title"]}
-						</h2>
-					)}
-					<div className="flex flex-col gap-2 w-full">
-						<StarRating
-							rating={selectedRating}
-							maxRating={5}
-							onRatingChange={handleRatingChange}
+		<>
+			<BottomSheet
+				open={open}
+				onClose={onClose}
+				ariaLabel={ariaLabel}
+				isStackedBehind={customTagSheetOpen}
+				stackFrontHeight={stackFrontHeight}
+			>
+				<div className="flex flex-col items-center pb-4  w-full">
+					<div className="flex w-full px-2">
+						<GhostIconButton
+							className="w-12 h-12"
+							onClick={onClose}
+							ariaLabel={content["common.bottomSheet.backButtonAriaLabel"]}
+							iconSrc="/icons/arrow-back-black.svg"
 						/>
 					</div>
-					{isRated && (
-						<>
-							<h2 className="text-left self-start text-2xl font-semibold text-gray-900 pt-2 px-1">
-								{ratingIsBad &&
-									content["practicalExperience.bottomSheet.rating.bad.label"]}
-								{ratingIsMedium &&
-									content[
-										"practicalExperience.bottomSheet.rating.medium.label"
-									]}
-								{ratingIsGood &&
-									content["practicalExperience.bottomSheet.rating.good.label"]}
+					<div className="flex flex-col gap-4 w-full px-4">
+						{title && !isRated && (
+							<h2 className="text-left self-start text-2xl font-semibold text-gray-900 pt-1 px-1">
+								{title ||
+									content["practicalExperience.bottomSheet.rating.title"]}
 							</h2>
-							<div className="min-h-0 flex-1 overflow-y-auto p-3 bg-card-fill rounded-[20px]">
-								<ul className="flex flex-wrap gap-x-2 gap-y-2 items-center">
-									{tags[tagKey].map((item) => (
-										<Pill
-											key={item}
-											label={item}
-											selected={selectedTags.includes(item)}
-											onClick={() => toggleTag(item)}
-											ariaLabel={`${item}`}
-											className="text-left w-fit"
+						)}
+						<div className="flex flex-col gap-2 w-full">
+							<StarRating
+								rating={selectedRating}
+								maxRating={5}
+								onRatingChange={handleRatingChange}
+							/>
+						</div>
+						{isRated && (
+							<>
+								<h2 className="text-left self-start text-2xl font-semibold text-gray-900 pt-2 px-1">
+									{ratingIsBad &&
+										content["practicalExperience.bottomSheet.rating.bad.label"]}
+									{ratingIsMedium &&
+										content[
+											"practicalExperience.bottomSheet.rating.medium.label"
+										]}
+									{ratingIsGood &&
+										content[
+											"practicalExperience.bottomSheet.rating.good.label"
+										]}
+								</h2>
+								<div className="max-h-[min(40vh,280px)] overflow-y-auto p-3 bg-card-fill rounded-[20px]">
+									<ul className="flex flex-wrap gap-x-2 gap-y-2 items-center">
+										{tags[tagKey].map((item) => (
+											<Pill
+												key={item}
+												label={item}
+												selected={selectedTags.includes(item)}
+												onClick={() => toggleTag(item)}
+												ariaLabel={`${item}`}
+												className="text-left w-fit"
+											/>
+										))}
+										{customTags.map((item) => (
+											<Pill
+												key={item}
+												label={item}
+												selected={selectedTags.includes(item)}
+												onClick={() => toggleTag(item)}
+												ariaLabel={item}
+												className="text-left w-fit"
+											/>
+										))}
+										<ThemedIconButton
+											iconSrc="/icons/plus-black.svg"
+											className="w-12 h-12"
+											onClick={() => setCustomTagSheetOpen(true)}
+											ariaLabel={
+												content[
+													"practicalExperience.bottomSheet.rating.custom.ariaLabel"
+												]
+											}
 										/>
-									))}
-									{/* TODO: Open stacked bottom sheet and add custom tag input */}
-									<ThemedIconButton
-										iconSrc="/icons/plus-black.svg"
-										className="w-12 h-12"
-										onClick={() => toggleTag("custom")}
-										ariaLabel={
-											content[
-												"practicalExperience.bottomSheet.rating.custom.ariaLabel"
-											]
-										}
-									/>
-								</ul>
-							</div>
-							<PrimaryThemedButton
-								onClick={handleSubmit}
-								ariaLabel={
-									content[
-										"practicalExperience.bottomSheet.submitButtonAriaLabel"
-									]
-								}
-							>
-								{content["practicalExperience.bottomSheet.submitButtonLabel"]}
-							</PrimaryThemedButton>
-						</>
-					)}
+									</ul>
+								</div>
+								<PrimaryThemedButton
+									onClick={handleSubmit}
+									ariaLabel={
+										content[
+											"practicalExperience.bottomSheet.submitButtonAriaLabel"
+										]
+									}
+								>
+									{content["practicalExperience.bottomSheet.submitButtonLabel"]}
+								</PrimaryThemedButton>
+							</>
+						)}
+					</div>
 				</div>
-			</div>
-		</BottomSheet>
+			</BottomSheet>
+			<InputBottomSheet
+				open={customTagSheetOpen}
+				onClose={() => setCustomTagSheetOpen(false)}
+				sheetAriaLabel={
+					content[
+						"practicalExperience.bottomSheet.rating.custom.input.ariaLabel"
+					]
+				}
+				inputPlaceholder={
+					content[
+						"practicalExperience.bottomSheet.rating.custom.input.placeholder"
+					]
+				}
+				onSubmit={handleAddCustomTag}
+				stackTier="elevated"
+				onShellHeightChange={setStackFrontHeight}
+			/>
+		</>
 	);
 }
