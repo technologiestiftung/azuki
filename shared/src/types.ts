@@ -149,6 +149,7 @@ export interface MatchedOccupation {
 	taskSummary: string;
 	reasoning: string;
 	occupationType: string;
+	occupationTag: string;
 	occupationDuration: string;
 	occupationEarnings: string;
 }
