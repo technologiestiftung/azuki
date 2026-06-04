@@ -25,8 +25,7 @@ export const StarRating: React.FC<StarRatingProps> = ({
 		setIsFilled(rating);
 	}, [rating]);
 
-	const focusIndex =
-		isFilled > 0 ? isFilled - 1 : 0;
+	const focusIndex = isFilled > 0 ? isFilled - 1 : 0;
 
 	function selectRating(value: number) {
 		setIsFilled(value);

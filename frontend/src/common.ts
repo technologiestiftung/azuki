@@ -14,19 +14,14 @@ export type {
 	AusbildungsplaetzeResponse,
 } from "@azuki/shared";
 
-export {
-	formatPracticalExperiencesForApi,
-} from "@azuki/shared";
+export { formatPracticalExperiencesForApi } from "@azuki/shared";
 
 import type {
 	PracticalExperienceEntry,
 	WorkPreferenceChoice,
 } from "@azuki/shared";
 
-export type PracticalExperienceInput = Omit<
-	PracticalExperienceEntry,
-	"id"
->;
+export type PracticalExperienceInput = Omit<PracticalExperienceEntry, "id">;
 
 export interface StrengthRating {
 	id: string;
