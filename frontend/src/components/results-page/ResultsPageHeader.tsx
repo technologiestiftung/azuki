@@ -28,7 +28,6 @@ export function ResultsPageHeader({
 			label: content["results.tab.freeSpots"],
 			href: "/results/free-spots",
 			ariaLabel: content["results.tab.freeSpots.ariaLabel"],
-			isDisabled: true,
 		},
 	];
 

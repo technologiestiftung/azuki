@@ -11,6 +11,7 @@ export type {
 	MatchedOccupation,
 	MatchResult,
 	SubjectDefinition,
+	AusbildungsplaetzeResponse,
 } from "@azuki/shared";
 
 export {

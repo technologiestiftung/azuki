@@ -197,6 +197,54 @@ function BasicInfoSection({
 	);
 }
 
+function normalizePersonaProfile(raw: Persona["profile"]): Persona["profile"] {
+	const customStrengths = raw.customStrengths ?? [];
+	const selectedCustomStrengths =
+		(raw.selectedCustomStrengths?.length ?? 0) > 0
+			? raw.selectedCustomStrengths
+			: customStrengths;
+
+	let practicalExperiences = raw.practicalExperiences ?? [];
+	let selectedPracticalExperienceIds =
+		raw.selectedPracticalExperienceIds ?? [];
+	const legacyText = (
+		raw as { practicalExperience?: string }
+	).practicalExperience?.trim();
+	if (practicalExperiences.length === 0 && legacyText) {
+		const id = "legacy";
+		practicalExperiences = [
+			{
+				id,
+				description: legacyText,
+				selectedExperienceId: null,
+				selectedExperienceLabel: null,
+				rating: 0,
+				tags: [],
+			},
+		];
+		selectedPracticalExperienceIds = [id];
+	}
+
+	return {
+		inSchool: raw.inSchool ?? null,
+		educationLevel: raw.educationLevel ?? null,
+		favoriteSubjects: raw.favoriteSubjects ?? [],
+		customSubjects: raw.customSubjects ?? [],
+		interests: raw.interests ?? [],
+		customInterests: raw.customInterests ?? [],
+		workExpectations: raw.workExpectations ?? [],
+		customWorkExpectations: raw.customWorkExpectations ?? [],
+		strengths: raw.strengths ?? {},
+		customStrengths,
+		selectedCustomStrengths,
+		practicalExperiences,
+		selectedPracticalExperienceIds,
+		workPreferences: raw.workPreferences ?? {},
+		noGos: raw.noGos ?? {},
+		customNoGos: raw.customNoGos ?? [],
+	};
+}
+
 function ProfileEditorSection({
 	draft,
 	patch,
@@ -204,11 +252,11 @@ function ProfileEditorSection({
 	draft: Persona;
 	patch: (p: Partial<Persona>) => void;
 }) {
-	function patchProfile(partial: Partial<Persona["profile"]>) {
-		patch({ profile: { ...draft.profile, ...partial } });
-	}
+	const profile = normalizePersonaProfile(draft.profile);
 
-	const profile = draft.profile;
+	function patchProfile(partial: Partial<Persona["profile"]>) {
+		patch({ profile: { ...profile, ...partial } });
+	}
 
 	return (
 		<section className="mb-6">

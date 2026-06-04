@@ -256,6 +256,7 @@ export function StrengthsStep() {
 				onClose={() => setInputSheetOpen(false)}
 				sheetAriaLabel={content["strengths.bottomSheet.input.addPlaceholder"]}
 				inputPlaceholder={content["strengths.bottomSheet.input.addPlaceholder"]}
+				errorMessage={content["strengths.bottomSheet.errorMessage"]}
 				onSubmit={handleAddCustomStrength}
 			/>
 		</StepLayout>

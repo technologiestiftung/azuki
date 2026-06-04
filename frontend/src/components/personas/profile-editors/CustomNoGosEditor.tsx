@@ -25,8 +25,9 @@ export function CustomNoGosEditor({ customNoGos, noGos, onChange }: Props) {
 	}
 
 	function removeCustom(value: string) {
-		const nextNoGos = { ...noGos };
-		delete nextNoGos[value];
+		const nextNoGos = Object.fromEntries(
+			Object.entries(noGos).filter(([key]) => key !== value),
+		);
 		onChange({
 			customNoGos: customNoGos.filter((v) => v !== value),
 			noGos: nextNoGos,

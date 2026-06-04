@@ -123,12 +123,11 @@ export function WorkExpectationsStep() {
 			<InputBottomSheet
 				open={inputSheetOpen}
 				onClose={() => setInputSheetOpen(false)}
-				sheetAriaLabel={
-					content["workExpectations.bottomSheet.input.addPlaceholder"]
-				}
+				sheetAriaLabel={content["workExpectations.bottomSheet.sheetAriaLabel"]}
 				inputPlaceholder={
 					content["workExpectations.bottomSheet.input.addPlaceholder"]
 				}
+				errorMessage={content["workExpectations.bottomSheet.errorMessage"]}
 				onSubmit={handleAddCustomWorkExpectation}
 			/>
 		</StepLayout>

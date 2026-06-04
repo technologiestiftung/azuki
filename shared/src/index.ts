@@ -1,6 +1,7 @@
 export type {
 	WorkConditions,
 	DegreeDistribution,
+	AccessLevel,
 	OccupationImage,
 	Occupation,
 	EducationLevel,
@@ -10,6 +11,9 @@ export type {
 	MatchedOccupation,
 	MatchResult,
 	GenerationInfo,
+	AusbildungsplatzPreview,
+	AusbildungsplatzResult,
+	AusbildungsplaetzeResponse,
 } from "./types";
 
 export {
@@ -33,6 +37,7 @@ export type {
 export {
 	POPULARITY_INDEX,
 	getPopularityTier,
+	getPopularityRecord,
 	type PopularityTier,
 	type OccupationCategory,
 	type DazubiMatchType,
@@ -50,3 +55,11 @@ export {
 	formatPracticalExperiencesForApi,
 	getActivePracticalExperiences,
 } from "./practicalExperience";
+export {
+	type Bundesland,
+	BUNDESLAENDER,
+	isBundesland,
+	traineeCountInState,
+	traineeCountAcrossStates,
+	hasAvailabilityData,
+} from "./availability";

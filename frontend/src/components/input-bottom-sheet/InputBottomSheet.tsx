@@ -21,6 +21,7 @@ export interface InputBottomSheetProps {
 	isCancelButtonVisible?: boolean;
 	stackTier?: BottomSheetStackTier;
 	onShellHeightChange?: (height: number) => void;
+	errorMessage?: string;
 }
 
 export function InputBottomSheet({
@@ -34,6 +35,7 @@ export function InputBottomSheet({
 	isCancelButtonVisible = true,
 	stackTier = "default",
 	onShellHeightChange,
+	errorMessage = content["common.bottomSheet.errorMessage"],
 }: InputBottomSheetProps) {
 	const [value, setValue] = useState("");
 	const [error, setError] = useState(false);
@@ -99,7 +101,7 @@ export function InputBottomSheet({
 							className="flex gap-1 text-red-700 text-lg font-medium"
 						>
 							<img src="/icons/error.svg" alt="" className="w-6 h-6" />
-							{content["common.bottomSheet.errorMessage"]}
+							{errorMessage}
 						</div>
 					)}
 				</div>

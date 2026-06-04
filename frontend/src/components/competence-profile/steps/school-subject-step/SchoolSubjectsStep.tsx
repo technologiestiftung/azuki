@@ -112,12 +112,11 @@ export function SchoolSubjectsStep() {
 			<InputBottomSheet
 				open={inputSheetOpen}
 				onClose={() => setInputSheetOpen(false)}
-				sheetAriaLabel={
-					content["schoolSubjects.bottomSheet.input.addPlaceholder"]
-				}
+				sheetAriaLabel={content["schoolSubjects.bottomSheet.sheetAriaLabel"]}
 				inputPlaceholder={
 					content["schoolSubjects.bottomSheet.input.addPlaceholder"]
 				}
+				errorMessage={content["schoolSubjects.bottomSheet.errorMessage"]}
 				onSubmit={handleAddCustomSubject}
 			/>
 		</StepLayout>

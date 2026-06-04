@@ -31,7 +31,7 @@ export function TabBar({ tabs, activeTab }: TabBarProps) {
 							aria-current={isActive(tab.href) ? "page" : undefined}
 							className={`box-border flex h-11 items-center border-b-2 text-lg ${
 								isActive(tab.href)
-									? "relative z-10 border-gray-900 bg-white font-semibold text-gray-900"
+									? "relative z-10 border-gray-900 bg-sky-white font-semibold text-gray-900"
 									: "border-transparent text-gray-900"
 							}`}
 						>

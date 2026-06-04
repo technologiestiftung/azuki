@@ -57,7 +57,9 @@ export const content = {
 	"schoolSubjects.addCustomSubjectButton.label": "Schulfach hinzufügen",
 	"schoolSubjects.addCustomSubjectButton.ariaLabel": "Schulfach hinzufügen",
 	"schoolSubjects.customSubject.label": "Von dir hinzugefügt",
+	"schoolSubjects.bottomSheet.sheetAriaLabel": "Bitte gib ein Schulfach ein.",
 	"schoolSubjects.bottomSheet.input.addPlaceholder": "Schulfach hinzufügen",
+	"schoolSubjects.bottomSheet.errorMessage": "Bitte gib ein Schulfach ein.",
 	"schoolSubjects.addCustomSubjectButton.addMore": "Weitere hinzufügen",
 	//Languages
 	"schoolSubjects.languages.label": "Sprachen",
@@ -115,6 +117,8 @@ export const content = {
 	"interests.addCustomInterestsButton.addMore": "Weiteres hinzufügen",
 	"interests.addCustomInterestsButton.label": "Etwas eigenes hinzufügen",
 	"interests.addCustomInterestsButton.ariaLabel": "Etwas eigenes hinzufügen",
+	"interests.bottomSheet.sheetAriaLabel":
+		"Bitte gib ein, was dich interessiert.",
 	"interests.bottomSheet.input.addPlaceholder": "Etwas eigenes hinzufügen",
 	"interests.bottomSheet.submitButtonLabel": "Hinzufügen",
 	"interests.bottomSheet.submitButtonAriaLabel": "Hinzufügen",
@@ -238,6 +242,7 @@ export const content = {
 	"strengths.addCustomStrengthButton.label": "Eigene Stärke hinzufügen",
 	"strengths.addCustomStrengthButton.ariaLabel": "Eigene Stärke hinzufügen",
 	"strengths.bottomSheet.input.addPlaceholder": "Eine Stärke von dir",
+	"strengths.bottomSheet.errorMessage": "Bitte gib ein, was du gut kannst.",
 	"strengths.customStrength.title": "Fehlt noch etwas?",
 	"strengths.customStrength.description":
 		"Füge weitere Stärken hinzu, die zu dir passen.",
@@ -356,6 +361,8 @@ export const content = {
 		"Etwas eigenes hinzufügen",
 	"workExpectations.addCustomWorkExpectationButton.ariaLabel":
 		"Etwas eigenes hinzufügen",
+	"workExpectations.bottomSheet.sheetAriaLabel":
+		"Bitte gib ein, was dir im Beruf wichtig ist.",
 	"workExpectations.bottomSheet.input.addPlaceholder":
 		"Etwas eigenes hinzufügen",
 	"workExpectations.bottomSheet.submitButtonLabel": "Hinzufügen",
@@ -381,6 +388,7 @@ export const content = {
 	"noGos.addCustomNoGoButton.label": "Eigenes No-Go hinzufügen",
 	"noGos.addCustomNoGoButton.ariaLabel": "Eigenes No-Go hinzufügen",
 	"noGos.bottomSheet.input.addPlaceholder": "Etwas das für dich nicht geht",
+	"noGos.bottomSheet.errorMessage": "Bitte gib ein No Go ein.",
 	"noGos.customNoGo.title": "Fehlt noch etwas?",
 	"noGos.customNoGo.description":
 		"Füge weitere Dinge hinzu, die für dich im Beruf überhaupt nicht gehen.",
@@ -444,6 +452,19 @@ export const content = {
 	"results.filter.apply": "Anwenden",
 	"results.filter.settingsAria": "Filtereinstellungen",
 	"results.filter.dismissOverlay": "Schließen",
+	// Standort + Ausbildungsplätze (Arbeitsagentur API integration)
+	"results.region": "Berlin und Brandenburg",
+	"results.badge.suffix": "Stellen",
+	"results.badge.empty": "Keine offenen Stellen",
+	"results.previewHeading": "Beispiele in deiner Nähe",
+	"results.startDatePrefix": "Start:",
+	"results.showAllLink": "Alle Stellen auf arbeitsagentur.de ansehen",
+	"results.fetchError":
+		"Die Stellen konnten gerade nicht geladen werden. Versuch es später noch einmal.",
+	"standort.label": "Standort:",
+	"standort.plzAriaLabel": "Postleitzahl",
+	"freiePlaetze.noResults":
+		"Noch keine passenden Berufe. Geh zuerst zurück zur Ergebnisliste.",
 
 	// Skip confirm dialog
 	"skipConfirmDialog.default.title": "Du hast noch nichts ausgewählt",
