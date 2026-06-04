@@ -116,16 +116,14 @@ export const content = {
 	"interests.addCustomInterestsButton.addMore": "Weitere hinzufügen",
 	"interests.addCustomInterestsButton.label": "Interesse hinzufügen",
 	"interests.addCustomInterestsButton.ariaLabel": "Interesse hinzufügen",
-	"interests.bottomSheet.sheetAriaLabel":
-		"Bitte gib ein, was dich interessiert.",
-	"interests.bottomSheet.input.addPlaceholder":
-		"Bitte gib ein, was dich interessiert.",
+	"interests.bottomSheet.sheetAriaLabel": "Interesse hinzufügen",
+	"interests.bottomSheet.input.addPlaceholder": "Interesse hinzufügen",
 	"interests.bottomSheet.submitButtonLabel": "Hinzufügen",
 	"interests.bottomSheet.submitButtonAriaLabel": "Hinzufügen",
 	"interests.bottomSheet.cancelButtonLabel": "Abbrechen",
 	"interests.bottomSheet.cancelButtonAriaLabel": "Abbrechen",
 	"interests.bottomSheet.clearButtonAriaLabel": "Eingabe löschen",
-	"interests.bottomSheet.errorMessage": "Bitte gib deine Interesse ein.",
+	"interests.bottomSheet.errorMessage": "Bitte gib ein, was dich interessiert",
 	// Tech & Digital
 	"interests.tech.label": "Technik & Digitales",
 	"interests.tech.gaming.label": "Gaming",
