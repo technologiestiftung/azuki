@@ -146,7 +146,7 @@ export interface MatchedOccupation {
 	rawName: string;
 	score: number;
 	images: OccupationImage[];
-	taskSummary: string;
+	shortDescription: string;
 	reasoning: string;
 	occupationType: string;
 	occupationDuration: string;

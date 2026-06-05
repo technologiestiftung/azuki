@@ -5,21 +5,23 @@ describe("extractRankings — happy path", () => {
 	test("parses a clean JSON array", () => {
 		const content = `[{"id": 12345, "begruendung": "passt gut"}, {"id": 67890, "begruendung": "auch ok"}]`;
 		expect(extractRankings(content)).toEqual([
-			{ id: 12345, begruendung: "passt gut" },
-			{ id: 67890, begruendung: "auch ok" },
+			{ id: 12345, kurzdefinition: "", begruendung: "passt gut" },
+			{ id: 67890, kurzdefinition: "", begruendung: "auch ok" },
 		]);
 	});
 
 	test("recovers array under known keys (berufe)", () => {
 		const content = `{"berufe": [{"id": 1, "begruendung": "a"}]}`;
-		expect(extractRankings(content)).toEqual([{ id: 1, begruendung: "a" }]);
+		expect(extractRankings(content)).toEqual([
+			{ id: 1, kurzdefinition: "", begruendung: "a" },
+		]);
 	});
 
 	test("recovers array under an unknown key (results, auswahl, ranking, etc.)", () => {
 		const content = `{"auswahl": [{"id": 7, "begruendung": "x"}, {"id": 8, "begruendung": "y"}]}`;
 		expect(extractRankings(content)).toEqual([
-			{ id: 7, begruendung: "x" },
-			{ id: 8, begruendung: "y" },
+			{ id: 7, kurzdefinition: "", begruendung: "x" },
+			{ id: 8, kurzdefinition: "", begruendung: "y" },
 		]);
 	});
 });
@@ -40,24 +42,29 @@ Beste Matches:
 		expect(extractRankings(content)).toEqual([
 			{
 				id: 15540,
+				kurzdefinition: "",
 				begruendung: "Du sagst selbst, dass du gut mit Autos umgehen kannst",
 			},
-			{ id: 136199, begruendung: "Sicherheit und Stabilität" },
+			{
+				id: 136199,
+				kurzdefinition: "",
+				begruendung: "Sicherheit und Stabilität",
+			},
 		]);
 	});
 
 	test("ignores bracket characters inside JSON strings", () => {
 		const content = `Hier: [{"id": 1, "begruendung": "siehe [unten]"}, {"id": 2, "begruendung": "ok"}]`;
 		expect(extractRankings(content)).toEqual([
-			{ id: 1, begruendung: "siehe [unten]" },
-			{ id: 2, begruendung: "ok" },
+			{ id: 1, kurzdefinition: "", begruendung: "siehe [unten]" },
+			{ id: 2, kurzdefinition: "", begruendung: "ok" },
 		]);
 	});
 
 	test("handles escaped quotes inside strings", () => {
 		const content = `[{"id": 1, "begruendung": "er sagte \\"ja\\""}]`;
 		expect(extractRankings(content)).toEqual([
-			{ id: 1, begruendung: 'er sagte "ja"' },
+			{ id: 1, kurzdefinition: "", begruendung: 'er sagte "ja"' },
 		]);
 	});
 });
@@ -75,14 +82,16 @@ describe("extractRankings — markdown-fenced responses (Opus 4.6)", () => {
 			"}\n" +
 			"```";
 		expect(extractRankings(content)).toEqual([
-			{ id: 6628, begruendung: "Verkäufer/in passt." },
-			{ id: 6649, begruendung: "Vereinfachte Variante." },
+			{ id: 6628, kurzdefinition: "", begruendung: "Verkäufer/in passt." },
+			{ id: 6649, kurzdefinition: "", begruendung: "Vereinfachte Variante." },
 		]);
 	});
 
 	test("strips bare ``` ... ``` fences (no language tag)", () => {
 		const content = "```\n" + '[{"id": 1, "begruendung": "a"}]' + "\n```";
-		expect(extractRankings(content)).toEqual([{ id: 1, begruendung: "a" }]);
+		expect(extractRankings(content)).toEqual([
+			{ id: 1, kurzdefinition: "", begruendung: "a" },
+		]);
 	});
 
 	test("recovers from raw carriage returns inside string values", () => {
@@ -95,7 +104,7 @@ describe("extractRankings — markdown-fenced responses (Opus 4.6)", () => {
 			'{ "auswahl": [ { "id": 1, "begruendung": "okay\rstill ok" } ] }\n' +
 			"```";
 		expect(extractRankings(content)).toEqual([
-			{ id: 1, begruendung: "okaystill ok" },
+			{ id: 1, kurzdefinition: "", begruendung: "okaystill ok" },
 		]);
 	});
 
@@ -139,7 +148,7 @@ describe("extractRankings — markdown-fenced responses (Opus 4.6)", () => {
 		const content =
 			'{ "auswahl": [ { "id": 1, "begruendung": "Hat\tab inside" } ] }';
 		expect(extractRankings(content)).toEqual([
-			{ id: 1, begruendung: "Hatab inside" },
+			{ id: 1, kurzdefinition: "", begruendung: "Hatab inside" },
 		]);
 	});
 });
@@ -157,9 +166,31 @@ describe("extractRankings — degenerate cases", () => {
 		expect(extractRankings('["foo", "bar"]')).toBeNull();
 	});
 
+	test("parses kurzdefinition when present", () => {
+		const content = `[{"id": 1, "kurzdefinition": "Organisation von Büroabläufen.", "begruendung": "passt"}]`;
+		expect(extractRankings(content)).toEqual([
+			{
+				id: 1,
+				kurzdefinition: "Organisation von Büroabläufen.",
+				begruendung: "passt",
+			},
+		]);
+	});
+
+	test("parses kurzdefinition when it comes after begruendung", () => {
+		const content = `[{"id": 1, "begruendung": "passt", "kurzdefinition": "Planung und Betrieb von IT-Systemen."}]`;
+		expect(extractRankings(content)).toEqual([
+			{
+				id: 1,
+				kurzdefinition: "Planung und Betrieb von IT-Systemen.",
+				begruendung: "passt",
+			},
+		]);
+	});
+
 	test("ignores missing begruendung field (treats as empty string)", () => {
 		expect(extractRankings('[{"id": 42}]')).toEqual([
-			{ id: 42, begruendung: "" },
+			{ id: 42, kurzdefinition: "", begruendung: "" },
 		]);
 	});
 

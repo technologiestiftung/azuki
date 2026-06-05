@@ -143,7 +143,7 @@ app.post("/api/match", async (c) => {
 				rawName: scored.occupation.name,
 				score: scored.score,
 				images: scored.occupation.images.slice(0, 3),
-				taskSummary: scored.occupation.taskSummary || "",
+				shortDescription: scored.occupation.taskSummary?.trim() ?? "",
 				reasoning: "Dieser Beruf passt zu deinem Profil.",
 				...occupationMatchMeta(scored.occupation),
 			})),

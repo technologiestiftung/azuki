@@ -1,5 +1,10 @@
 import { describe, expect, test, vi, beforeEach } from "vitest";
-import type { EvalSnapshot, Persona, PersonaResult } from "@azuki/shared";
+import type {
+	EvalSnapshot,
+	MatchedOccupation,
+	Persona,
+	PersonaResult,
+} from "@azuki/shared";
 
 vi.mock("../../src/ai/index.js", () => ({
 	aiRank: vi.fn(),
@@ -64,6 +69,24 @@ const MINIMAL_OCCUPATIONS = [
 	},
 ];
 
+function makeMatchedOccupation(
+	overrides: Partial<MatchedOccupation> = {},
+): MatchedOccupation {
+	return {
+		id: 1,
+		name: "Test",
+		rawName: "Test",
+		score: 0.5,
+		images: [],
+		shortDescription: "task",
+		reasoning: "fits",
+		occupationType: "",
+		occupationDuration: "",
+		occupationEarnings: "",
+		...overrides,
+	};
+}
+
 describe("runEval", () => {
 	beforeEach(() => {
 		vi.mocked(aiRank).mockReset();
@@ -71,16 +94,7 @@ describe("runEval", () => {
 
 	test("returns snapshot keyed by persona id strings", async () => {
 		vi.mocked(aiRank).mockResolvedValue({
-			occupations: [
-				{
-					id: 1,
-					name: "Test",
-					score: 0.5,
-					images: [],
-					taskSummary: "task",
-					reasoning: "fits",
-				},
-			],
+			occupations: [makeMatchedOccupation()],
 		});
 		const personas = [makePersona("nico"), makePersona("maria-2026")];
 		const snap: EvalSnapshot = await runEval({
