@@ -33,21 +33,18 @@ const DEFAULT_REASONING = "Dieser Beruf passt zu deinem Profil.";
 
 const KURZDEFINITION_PROMPT = `KURZDEFINITION PRO BERUF (PFLICHTFELD)
 Jeder Eintrag in "auswahl" MUSS "kurzdefinition" enthalten — leer lassen oder weglassen ist nicht erlaubt.
-
-Die Kurzdefinition erscheint auf der Ergebniskarte unter dem Berufstitel. Anforderungen:
-- genau 1 Satz, maximal 15 Wörter
-- fasse die typischen Aufgaben und Tätigkeiten zusammen — was macht man in dem Beruf im Alltag?
-- beginne NICHT mit der Berufsbezeichnung und wiederhole sie nicht (steht schon im Kartentitel)
-- KEINE Ausbildungsinfos (kein Berufstyp, keine Ausbildungsart, -dauer oder Lernorte)
-- formuliere im Nominalstil (z. B. „Planung und Betrieb von …", „Organisation und Verwaltung von …")
-- NICHT die BERUFENET-Aufgabenbeschreibung kopieren oder kürzen
-- sachlich, verständlich, ohne Fachjargon
-
-Gut — Beruf „Kauffrau/mann Büromanagement":
-Organisation und Verwaltung von büro-wirtschaftlichen Abläufen in Unternehmen und Institutionen.
-
-Schlecht — Berufsbezeichnung wiederholt, zu lang, BERUFENET-Kopie:
-"Fachinformatiker/innen der Fachrichtung Systemintegration planen, installieren und betreiben IT-Systeme."`;
+Die Kurzdefinition erscheint auf der Ergebniskarte unter dem Berufstitel. Sie richtet sich an Jugendliche zwischen 15 und 25 Jahren, darunter viele mit eingeschränkten Deutschkenntnissen oder wenig Berufswissen. Schreibe deshalb so, als würdest du einem jungen Menschen kurz erklären, was man in diesem Job den ganzen Tag so macht.
+Anforderungen:
+genau 1 Satz, maximal 15 Wörter
+beschreibe konkrete, alltägliche Tätigkeiten - was passiert wirklich in diesem Job?
+einfache, kurze Wörter - kein Fachjargon, keine Behördensprache
+Nominalstil erlaubt, aber nur mit alltagsnahen Begriffen (z. B. „Autos reparieren und warten" statt „Instandhaltung und Wartung von Kraftfahrzeugen")
+beginne NICHT mit der Berufsbezeichnung und wiederhole sie nicht (steht schon im Kartentitel)
+KEINE Ausbildungsinfos (kein Berufstyp, keine Ausbildungsart, -dauer oder Lernorte)
+NICHT die BERUFENET-Aufgabenbeschreibung kopieren oder kürzen
+Gut — Beruf „Kauffrau/mann Büromanagement": Briefe schreiben, Termine planen und den Büroalltag organisieren.
+Schlecht — zu abstrakt, Behördensprache: Organisation und Verwaltung von bürowirtschaftlichen Abläufen in Unternehmen und Institutionen.
+Schlecht — Berufsbezeichnung wiederholt, zu lang, BERUFENET-Kopie: "Fachinformatiker/innen der Fachrichtung Systemintegration planen, installieren und betreiben IT-Systeme."`;
 
 // Lazy client construction. Constructing OpenAI at module load throws when
 // OPENROUTER_API_KEY is missing, which broke pure-function tests that just
