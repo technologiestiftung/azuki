@@ -360,15 +360,28 @@ export const content = {
 	"results.occupationType.dual": "Duale Ausbildung",
 	"results.occupationType.school": "Schulische Ausbildung",
 	// Filter Bottom Sheet
-	"results.filter.title": "Filter",
-	"results.filter.showFavorites": "Meine Favoriten anzeigen",
-	"results.filter.tagSection": "Berufsgruppen",
+	"results.filter.tags.title": "Berufsgruppen",
+	"results.filter.tags.title.short": "Beruf",
+	"results.filter.tags.filterButton.ariaLabel": "Berufsgruppen filtern",
+	"results.filter.favorites.title": "Meine Favoriten",
+	"results.filter.favorites.filterButton.ariaLabel": "Meine Favoriten filtern",
 	"results.filter.reset": "Zurücksetzen",
 	"results.filter.apply": "Ergebnisse anzeigen",
 	"results.filter.settingsAria": "Filtereinstellungen",
 	"results.filter.dismissOverlay": "Schließen",
 	// Standort + Ausbildungsplätze (Arbeitsagentur API integration)
+	"results.filter.location.title": "Ort",
+	"results.filter.location.filterButton.ariaLabel": "Ort filtern",
 	"results.region": "Berlin und Brandenburg",
+	"results.filter.location.distance.title": "Umkreis",
+	"results.filter.location.currentLocation.button.label": "in meiner Nähe",
+	"results.filter.location.currentLocation.ariaLabel": "in meiner Nähe suchen",
+	"results.filter.location.error.unavailable":
+		"Standortbestimmung wird von diesem Gerät nicht unterstützt.",
+	"results.filter.location.error.permissionDenied":
+		"Standortzugriff wurde verweigert. Bitte erlaube den Zugriff in den Einstellungen.",
+	"results.filter.location.error.geocodeFailed":
+		"Dein Standort konnte nicht ermittelt werden. Bitte versuche es erneut.",
 	"results.badge.suffix": "Stellen",
 	"results.badge.empty": "Keine offenen Stellen",
 	"results.previewHeading": "Beispiele in deiner Nähe",

@@ -10,12 +10,12 @@ import {
 import { initialUserProfile } from "../profile/initialUserProfile";
 import { useMatchResultsStore } from "./useMatchResultsStore";
 
-export interface Standort {
-	plz: string;
-	umkreis: number;
+export interface Location {
+	postcode: string;
+	distance: number;
 }
 
-const DEFAULT_STANDORT: Standort = { plz: "10115", umkreis: 25 };
+export const DEFAULT_LOCATION: Location = { postcode: "10115", distance: 25 };
 
 /** Normalizes the profile by merging the initial profile with the provided profile. */
 function normalizeProfile(
@@ -50,7 +50,7 @@ function clearMatchResults(): void {
 interface AppState {
 	profile: UserProfile;
 	ausbildungsplaetze: AusbildungsplaetzeResponse | null;
-	standort: Standort;
+	location: Location;
 }
 
 interface AppActions {
@@ -71,7 +71,7 @@ interface AppActions {
 	addCustomNoGo: (noGo: string) => void;
 	toggleCustomNoGo: (noGo: string) => void;
 	setAusbildungsplaetze: (results: AusbildungsplaetzeResponse | null) => void;
-	setStandort: (standort: Partial<Standort>) => void;
+	setLocation: (location: Partial<Location>) => void;
 	resetProfile: () => void;
 }
 
@@ -80,7 +80,7 @@ export const useAppStore = create<AppState & AppActions>()(
 		(set) => ({
 			profile: initialUserProfile,
 			ausbildungsplaetze: null,
-			standort: DEFAULT_STANDORT,
+			location: DEFAULT_LOCATION,
 
 			setInSchool: (value) =>
 				set((state) => {
@@ -297,17 +297,17 @@ export const useAppStore = create<AppState & AppActions>()(
 
 			setAusbildungsplaetze: (results) => set({ ausbildungsplaetze: results }),
 
-			setStandort: (standort) =>
+			setLocation: (location) =>
 				set((state) => ({
-					standort: { ...state.standort, ...standort },
-					// Changing standort invalidates per-beruf counts since they
+					location: { ...state.location, ...location },
+					// Changing location invalidates per-beruf counts since they
 					// were fetched for the previous location.
 					ausbildungsplaetze: null,
 				})),
 
 			resetProfile: () => {
 				clearMatchResults();
-				// standort is a user preference, not derived from profile —
+				// location is a user preference, not derived from profile —
 				// keep it across resets.
 				set({ profile: initialUserProfile });
 			},
@@ -317,13 +317,27 @@ export const useAppStore = create<AppState & AppActions>()(
 			storage: createJSONStorage(() => sessionStorage),
 			partialize: (state) => ({
 				profile: state.profile,
-				standort: state.standort,
+				location: state.location,
 			}),
 			merge: (persistedState, currentState) => {
-				const persisted = persistedState as Partial<AppState> | undefined;
+				const persisted = persistedState as
+					| (Partial<AppState> & {
+							standort?: { plz: string; umkreis: number };
+					  })
+					| undefined;
+				const legacyStandort = persisted?.standort;
+				const location =
+					persisted?.location ??
+					(legacyStandort
+						? {
+								postcode: legacyStandort.plz,
+								distance: legacyStandort.umkreis,
+							}
+						: currentState.location);
 				return {
 					...currentState,
 					...(persisted ?? {}),
+					location,
 					profile: normalizeProfile(persisted?.profile),
 				};
 			},

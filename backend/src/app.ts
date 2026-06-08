@@ -169,10 +169,12 @@ app.post("/api/ausbildungsplaetze", async (c) => {
 		return c.json({ error: "Invalid request body" }, 400);
 	}
 
-	const { plz, berufe, umkreis } = parsed.data;
+	const { postcode, occupations: occupationNames, distance } = parsed.data;
 
 	const results = await Promise.all(
-		berufe.map((beruf) => searchAusbildungsplaetze(beruf, plz, umkreis)),
+		occupationNames.map((occupationName) =>
+			searchAusbildungsplaetze(occupationName, postcode, distance),
+		),
 	);
 
 	const response: AusbildungsplaetzeResponse = { results };

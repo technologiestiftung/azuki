@@ -2,11 +2,13 @@ import {
 	getOccupationTagDefinition,
 	OCCUPATION_TAGS,
 	type MatchedOccupation,
+	type OccupationTagId,
 } from "@azuki/shared";
-import type { FilterOccupationTypeTagChip } from "../filter-bottom-sheet/FilterBottomSheet";
+import type { FilterOccupationTypeTagChip } from "../filter-bottom-sheet/OccupationTagsFilterBottomSheet";
 
-/** Supports match results cached before occupationTag was added to the API. */
-export function getOccupationTagId(occupation: MatchedOccupation): string {
+export function getOccupationTagId(
+	occupation: MatchedOccupation,
+): OccupationTagId {
 	return occupation.occupationTag || "sonstige";
 }
 

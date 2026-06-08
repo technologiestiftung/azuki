@@ -31,11 +31,15 @@ interface JobsucheResponse {
 	maxErgebnisse: number;
 }
 
-function buildSearchUrl(beruf: string, plz: string, umkreis: number): string {
+function buildSearchUrl(
+	occupation: string,
+	postcode: string,
+	distance: number,
+): string {
 	const params = new URLSearchParams({
-		was: beruf,
-		wo: plz,
-		umkreis: String(umkreis),
+		was: occupation,
+		wo: postcode,
+		umkreis: String(distance),
 		angebotsart: "4",
 	});
 	return `https://www.arbeitsagentur.de/jobsuche/suche?${params.toString()}`;
@@ -53,15 +57,15 @@ function isAusbildung(job: JobsucheJob): boolean {
 }
 
 function emptyResult(
-	beruf: string,
-	plz: string,
-	umkreis: number,
+	occupation: string,
+	postcode: string,
+	distance: number,
 ): AusbildungsplatzResult {
 	return {
-		beruf,
+		occupation,
 		totalCount: 0,
 		previews: [],
-		searchUrl: buildSearchUrl(beruf, plz, umkreis),
+		searchUrl: buildSearchUrl(occupation, postcode, distance),
 	};
 }
 
@@ -69,14 +73,14 @@ function emptyResult(
 // out via `Promise.all`, so any rejection (network error, JSON parse failure,
 // timeout) would 500 the whole batch even when only one beruf failed.
 export async function searchAusbildungsplaetze(
-	beruf: string,
-	plz: string,
-	umkreis: number = DEFAULT_RADIUS_KM,
+	occupation: string,
+	postcode: string,
+	distance: number = DEFAULT_RADIUS_KM,
 ): Promise<AusbildungsplatzResult> {
 	const params = new URLSearchParams({
-		was: beruf,
-		wo: plz,
-		umkreis: String(umkreis),
+		was: occupation,
+		wo: postcode,
+		umkreis: String(distance),
 		angebotsart: "4",
 		size: String(SAMPLE_SIZE),
 	});
@@ -88,8 +92,8 @@ export async function searchAusbildungsplaetze(
 		});
 
 		if (!res.ok) {
-			console.error(`Jobsuche API error for "${beruf}": ${res.status}`);
-			return emptyResult(beruf, plz, umkreis);
+			console.error(`Jobsuche API error for "${occupation}": ${res.status}`);
+			return emptyResult(occupation, postcode, distance);
 		}
 
 		const data: JobsucheResponse = await res.json();
@@ -115,10 +119,10 @@ export async function searchAusbildungsplaetze(
 			}));
 
 		return {
-			beruf,
+			occupation,
 			totalCount,
 			previews,
-			searchUrl: buildSearchUrl(beruf, plz, umkreis),
+			searchUrl: buildSearchUrl(occupation, postcode, distance),
 		};
 	} catch (err) {
 		let reason: string;
@@ -129,7 +133,7 @@ export async function searchAusbildungsplaetze(
 		} else {
 			reason = String(err);
 		}
-		console.error(`Jobsuche API error for "${beruf}": ${reason}`);
-		return emptyResult(beruf, plz, umkreis);
+		console.error(`Jobsuche API error for "${occupation}": ${reason}`);
+		return emptyResult(occupation, postcode, distance);
 	}
 }

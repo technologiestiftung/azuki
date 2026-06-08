@@ -1,3 +1,5 @@
+import type { OccupationTagId } from "./occupationTags";
+
 // --- Work Conditions ---
 
 export interface WorkConditions {
@@ -149,7 +151,7 @@ export interface MatchedOccupation {
 	taskSummary: string;
 	reasoning: string;
 	occupationType: string;
-	occupationTag: string;
+	occupationTag: OccupationTagId;
 	occupationDuration: string;
 	occupationEarnings: string;
 }
@@ -176,7 +178,7 @@ export interface AusbildungsplatzPreview {
 }
 
 export interface AusbildungsplatzResult {
-	beruf: string;
+	occupation: string;
 	totalCount: number;
 	previews: AusbildungsplatzPreview[];
 	searchUrl: string;

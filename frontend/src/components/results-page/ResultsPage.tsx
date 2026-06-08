@@ -3,40 +3,20 @@ import { useMatchResultsStore } from "../../store/useMatchResultsStore";
 import { content } from "../../content";
 import { type MatchedOccupation } from "@azuki/shared";
 import {
-	FilterBottomSheet,
-	getAppliedFilterCount,
-	type FilterBottomSheetState,
-} from "../filter-bottom-sheet/FilterBottomSheet";
+	OccupationTagsFilterBottomSheet,
+	type OccupationTagsFilterState,
+} from "../filter-bottom-sheet/OccupationTagsFilterBottomSheet";
+import { useFilterSheet } from "../filter-bottom-sheet/useFilterSheet";
 import { ResultCard } from "./ResultCard";
 import { ResultsPageHeader } from "./ResultsPageHeader";
 import { BottomCard } from "./BottomCard";
-import { buildResultTagChips, getOccupationTagId } from "./resultTagChips";
+import { ResultsFilterBar } from "./ResultsFilterBar";
+import { buildResultTagChips } from "./resultTagChips";
+import { applyOccupationFilters } from "./applyOccupationFilters";
 
-const DEFAULT_FILTERS: FilterBottomSheetState = {
-	showFavoritesOnly: false,
+const DEFAULT_TAG_FILTERS: OccupationTagsFilterState = {
 	selectedOccupationTypeTagIds: [],
 };
-
-function applyFilters(
-	occupations: MatchedOccupation[],
-	filters: FilterBottomSheetState,
-	favoriteIds: Set<number>,
-): MatchedOccupation[] {
-	let filtered = occupations;
-
-	if (filters.showFavoritesOnly) {
-		filtered = filtered.filter((occupation) => favoriteIds.has(occupation.id));
-	}
-
-	if (filters.selectedOccupationTypeTagIds.length > 0) {
-		const selected = new Set(filters.selectedOccupationTypeTagIds);
-		filtered = filtered.filter((occupation) =>
-			selected.has(getOccupationTagId(occupation)),
-		);
-	}
-
-	return filtered;
-}
 
 export function ResultsPage() {
 	const matchResults = useMatchResultsStore((state) => state.matchResults);
@@ -44,10 +24,8 @@ export function ResultsPage() {
 		(state) => state.favoriteOccupationIds,
 	);
 	const occupations = matchResults?.occupations ?? [];
-	const [filterOpen, setFilterOpen] = useState(false);
-	const [filterSheetKey, setFilterSheetKey] = useState(0);
-	const [appliedFilters, setAppliedFilters] =
-		useState<FilterBottomSheetState>(DEFAULT_FILTERS);
+	const tagFilter = useFilterSheet(DEFAULT_TAG_FILTERS);
+	const [showFavoritesOnly, setShowFavoritesOnly] = useState(false);
 
 	const favoriteIds = useMemo(
 		() => new Set(favoriteOccupationIds),
@@ -55,13 +33,13 @@ export function ResultsPage() {
 	);
 
 	const visibleOccupations = useMemo(
-		() => applyFilters(occupations, appliedFilters, favoriteIds),
-		[occupations, appliedFilters, favoriteIds],
-	);
-
-	const activeFilterCount = useMemo(
-		() => getAppliedFilterCount(appliedFilters),
-		[appliedFilters],
+		() =>
+			applyOccupationFilters(occupations, {
+				filters: tagFilter.appliedValue,
+				showFavoritesOnly,
+				favoriteIds,
+			}),
+		[occupations, tagFilter.appliedValue, showFavoritesOnly, favoriteIds],
 	);
 
 	const occupationTypeTagChips = useMemo(
@@ -69,39 +47,36 @@ export function ResultsPage() {
 		[occupations],
 	);
 
-	const openFilter = useCallback(() => {
-		setFilterSheetKey((key) => key + 1);
-		setFilterOpen(true);
-	}, []);
-	const closeFilter = useCallback(() => setFilterOpen(false), []);
+	const openTagFilter = tagFilter.open;
+	const closeTagFilter = tagFilter.close;
 
-	const handleApplyFilters = useCallback((filters: FilterBottomSheetState) => {
-		setAppliedFilters(filters);
-	}, []);
-
-	const handleResetFilters = useCallback(() => {
-		setAppliedFilters(DEFAULT_FILTERS);
+	const toggleFavoritesOnly = useCallback(() => {
+		setShowFavoritesOnly((prev) => !prev);
 	}, []);
 
 	return (
 		<div className="flex flex-col h-full">
-			<ResultsPageHeader
-				title={content["results.title"]}
-				hasFilterButton
-				activeFilterCount={activeFilterCount}
-				onFilterClick={openFilter}
+			<ResultsPageHeader title={content["results.title"]} />
+			<ResultsFilterBar
+				hasLocationFilter={false}
+				selectedOccupationTypeTagIds={
+					tagFilter.appliedValue.selectedOccupationTypeTagIds
+				}
+				onOpenTagFilter={openTagFilter}
+				showFavoritesOnly={showFavoritesOnly}
+				onToggleFavoritesOnly={toggleFavoritesOnly}
 			/>
-			<FilterBottomSheet
-				key={filterSheetKey}
-				open={filterOpen}
-				onClose={closeFilter}
-				initialFilters={appliedFilters}
+			<OccupationTagsFilterBottomSheet
+				key={tagFilter.sheetKey}
+				open={tagFilter.isOpen}
+				onClose={closeTagFilter}
+				initialFilters={tagFilter.appliedValue}
 				occupationTypeTagChips={occupationTypeTagChips}
-				onApply={handleApplyFilters}
-				onReset={handleResetFilters}
+				onApply={tagFilter.apply}
+				onReset={tagFilter.reset}
 			/>
 
-			<div className="flex-1 px-4 pb-4 pt-10 space-y-3 overflow-y-auto">
+			<div className="flex-1 px-4 pb-4 space-y-3 overflow-y-auto">
 				{visibleOccupations.length > 0 &&
 					visibleOccupations.map((occupation: MatchedOccupation) => (
 						<ResultCard key={occupation.id} occupation={occupation} />

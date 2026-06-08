@@ -1,11 +1,27 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import type { AusbildungsplatzResult, MatchedOccupation } from "@azuki/shared";
 import { useMatchResultsStore } from "../../store/useMatchResultsStore";
 import { useAppStore } from "../../store/useAppStore";
 import { fetchAusbildungsplaetze } from "../../api/client";
 import { content } from "../../content";
+import {
+	OccupationTagsFilterBottomSheet,
+	type OccupationTagsFilterState,
+} from "../filter-bottom-sheet/OccupationTagsFilterBottomSheet";
+import { useFilterSheet } from "../filter-bottom-sheet/useFilterSheet";
 import { ResultsPageHeader } from "./ResultsPageHeader";
-import { StandortBanner } from "./StandortBanner";
+import { ResultsFilterBar } from "./ResultsFilterBar";
+import { buildResultTagChips } from "./resultTagChips";
+import { applyOccupationFilters } from "./applyOccupationFilters";
+import {
+	LocationFilterBottomSheet,
+	DEFAULT_LOCATION_FILTER,
+	type LocationFilterState,
+} from "../filter-bottom-sheet/LocationFilterBottomSheet";
+
+const DEFAULT_TAG_FILTERS: OccupationTagsFilterState = {
+	selectedOccupationTypeTagIds: [],
+};
 
 function formatStartDate(iso: string | undefined): string | null {
 	if (!iso) {
@@ -23,20 +39,20 @@ function formatStartDate(iso: string | undefined): string | null {
 
 interface BerufCardProps {
 	occupation: MatchedOccupation;
-	stellen: AusbildungsplatzResult | undefined;
-	umkreis: number;
+	vacancies: AusbildungsplatzResult | undefined;
+	distance: number;
 	loading: boolean;
 }
 
 function renderStellenContent(
-	stellen: AusbildungsplatzResult | undefined,
-	umkreis: number,
+	vacancies: AusbildungsplatzResult | undefined,
+	distance: number,
 	loading: boolean,
 ) {
-	if (loading && stellen === undefined) {
+	if (loading && vacancies === undefined) {
 		return <span className="text-sm text-gray-400">…</span>;
 	}
-	if (stellen === undefined || stellen.totalCount === 0) {
+	if (vacancies === undefined || vacancies.totalCount === 0) {
 		return (
 			<span className="text-sm text-gray-500">
 				{content["results.badge.empty"]}
@@ -46,19 +62,22 @@ function renderStellenContent(
 	return (
 		<>
 			<div className="text-sm font-semibold text-sky-700 mb-3">
-				{stellen.totalCount} {content["results.badge.suffix"]} · {umkreis} km
+				{vacancies.totalCount} {content["results.badge.suffix"]} · {distance} km
 			</div>
 
-			{stellen.previews.length > 0 && (
+			{vacancies.previews.length > 0 && (
 				<>
 					<p className="text-xs uppercase tracking-wide text-gray-500 font-semibold mb-2">
 						{content["results.previewHeading"]}
 					</p>
 					<ul className="space-y-2 mb-3">
-						{stellen.previews.map((preview, i) => {
+						{vacancies.previews.map((preview, i) => {
 							const startDate = formatStartDate(preview.eintrittsdatum);
 							return (
-								<li key={i} className="text-sm">
+								<li
+									key={`${preview.employer}-${preview.city}-${i}`}
+									className="text-sm"
+								>
 									<div className="text-gray-900 font-medium">
 										{preview.employer}
 									</div>
@@ -75,7 +94,7 @@ function renderStellenContent(
 			)}
 
 			<a
-				href={stellen.searchUrl}
+				href={vacancies.searchUrl}
 				target="_blank"
 				rel="noopener noreferrer"
 				className="text-sm font-medium text-sky-700 hover:text-sky-800"
@@ -86,42 +105,106 @@ function renderStellenContent(
 	);
 }
 
-function BerufCard({ occupation, stellen, umkreis, loading }: BerufCardProps) {
+function BerufCard({
+	occupation,
+	vacancies,
+	distance,
+	loading,
+}: BerufCardProps) {
 	return (
 		<div className="bg-white rounded-2xl border border-gray-200 p-4">
 			<h3 className="text-lg font-semibold text-gray-900 mb-2">
 				{occupation.name}
 			</h3>
-			{renderStellenContent(stellen, umkreis, loading)}
+			{renderStellenContent(vacancies, distance, loading)}
 		</div>
 	);
 }
 
 export function FreiePlaetzePage() {
 	const matchResults = useMatchResultsStore((state) => state.matchResults);
+	const favoriteOccupationIds = useMatchResultsStore(
+		(state) => state.favoriteOccupationIds,
+	);
 	const ausbildungsplaetze = useAppStore((state) => state.ausbildungsplaetze);
 	const setAusbildungsplaetze = useAppStore(
 		(state) => state.setAusbildungsplaetze,
 	);
-	const standort = useAppStore((state) => state.standort);
+	const location = useAppStore((state) => state.location);
+	const setLocation = useAppStore((state) => state.setLocation);
 	const occupations = matchResults?.occupations ?? [];
+	const tagFilter = useFilterSheet(DEFAULT_TAG_FILTERS);
+	const locationFilter = useFilterSheet(DEFAULT_LOCATION_FILTER, {
+		postcode: location.postcode,
+		distance: location.distance,
+	});
+	const [showFavoritesOnly, setShowFavoritesOnly] = useState(false);
 	const [fetchError, setFetchError] = useState<string | null>(null);
 	const [loading, setLoading] = useState(false);
+
+	const favoriteIds = useMemo(
+		() => new Set(favoriteOccupationIds),
+		[favoriteOccupationIds],
+	);
+
+	const visibleOccupations = useMemo(
+		() =>
+			applyOccupationFilters(occupations, {
+				filters: tagFilter.appliedValue,
+				showFavoritesOnly,
+				favoriteIds,
+			}),
+		[occupations, tagFilter.appliedValue, showFavoritesOnly, favoriteIds],
+	);
+
+	const occupationTypeTagChips = useMemo(
+		() => buildResultTagChips(occupations),
+		[occupations],
+	);
+
+	const openTagFilter = tagFilter.open;
+	const closeTagFilter = tagFilter.close;
+	const openLocationFilter = locationFilter.open;
+	const closeLocationFilter = locationFilter.close;
+
+	const toggleFavoritesOnly = useCallback(() => {
+		setShowFavoritesOnly((prev) => !prev);
+	}, []);
+
+	const applyLocationFilter = useCallback(
+		(filters: LocationFilterState) => {
+			locationFilter.apply(filters);
+			setLocation({ postcode: filters.postcode, distance: filters.distance });
+		},
+		[locationFilter.apply, setLocation],
+	);
+
+	const resetLocationFilter = useCallback(() => {
+		locationFilter.reset();
+		setLocation({
+			postcode: DEFAULT_LOCATION_FILTER.postcode,
+			distance: DEFAULT_LOCATION_FILTER.distance,
+		});
+	}, [locationFilter.reset, setLocation]);
 
 	useEffect(() => {
 		if (occupations.length === 0 || ausbildungsplaetze !== null) {
 			return () => {};
 		}
 		const controller = new AbortController();
-		const berufe = occupations.map((o) => o.rawName);
+		const occupationNames = occupations.map((o) => o.rawName);
 		setFetchError(null);
 		setLoading(true);
 		(async () => {
 			try {
-				const response = await fetchAusbildungsplaetze(standort.plz, berufe, {
-					umkreis: standort.umkreis,
-					signal: controller.signal,
-				});
+				const response = await fetchAusbildungsplaetze(
+					location.postcode,
+					occupationNames,
+					{
+						distance: location.distance,
+						signal: controller.signal,
+					},
+				);
 				if (!controller.signal.aborted) {
 					setAusbildungsplaetze(response);
 				}
@@ -146,39 +229,68 @@ export function FreiePlaetzePage() {
 		ausbildungsplaetze,
 		occupations,
 		setAusbildungsplaetze,
-		standort.plz,
-		standort.umkreis,
+		location.postcode,
+		location.distance,
 	]);
 
-	const stellenByName = new Map(
-		ausbildungsplaetze?.results.map((r) => [r.beruf, r]) ?? [],
+	const vacanciesByName = new Map(
+		ausbildungsplaetze?.results.map((r) => [r.occupation, r]) ?? [],
 	);
 
 	return (
-		<div className="flex flex-col h-full">
-			<ResultsPageHeader title={content["results.title"]} />
-			<StandortBanner />
-			{fetchError && (
-				<p className="px-4 pt-2 text-xs text-red-500">{fetchError}</p>
-			)}
-
-			<div className="flex-1 px-4 pb-4 pt-3 space-y-3 overflow-y-auto">
-				{occupations.length === 0 ? (
-					<p className="text-sm text-gray-500">
-						{content["freiePlaetze.noResults"]}
-					</p>
-				) : (
-					occupations.map((occupation: MatchedOccupation) => (
-						<BerufCard
-							key={occupation.id}
-							occupation={occupation}
-							stellen={stellenByName.get(occupation.rawName)}
-							umkreis={standort.umkreis}
-							loading={loading}
-						/>
-					))
+		<>
+			<div className="flex flex-col h-full">
+				<ResultsPageHeader title={content["results.title"]} />
+				<ResultsFilterBar
+					hasLocationFilter={true}
+					appliedLocationFilter={locationFilter.appliedValue}
+					selectedOccupationTypeTagIds={
+						tagFilter.appliedValue.selectedOccupationTypeTagIds
+					}
+					onOpenTagFilter={openTagFilter}
+					onOpenLocationFilter={openLocationFilter}
+					showFavoritesOnly={showFavoritesOnly}
+					onToggleFavoritesOnly={toggleFavoritesOnly}
+				/>
+				<OccupationTagsFilterBottomSheet
+					key={`tag-${tagFilter.sheetKey}`}
+					open={tagFilter.isOpen}
+					onClose={closeTagFilter}
+					initialFilters={tagFilter.appliedValue}
+					occupationTypeTagChips={occupationTypeTagChips}
+					onApply={tagFilter.apply}
+					onReset={tagFilter.reset}
+				/>
+				<LocationFilterBottomSheet
+					key={`location-${locationFilter.sheetKey}`}
+					open={locationFilter.isOpen}
+					onClose={closeLocationFilter}
+					initialFilters={locationFilter.appliedValue}
+					onApply={applyLocationFilter}
+					onReset={resetLocationFilter}
+				/>
+				{fetchError && (
+					<p className="px-4 text-xs text-red-500">{fetchError}</p>
 				)}
+
+				<div className="flex-1 px-4 pb-4 space-y-3 overflow-y-auto">
+					{visibleOccupations.length === 0 ? (
+						<p className="text-sm text-gray-500">
+							{content["freiePlaetze.noResults"]}
+						</p>
+					) : (
+						visibleOccupations.map((occupation: MatchedOccupation) => (
+							<BerufCard
+								key={occupation.id}
+								occupation={occupation}
+								vacancies={vacanciesByName.get(occupation.rawName)}
+								distance={location.distance}
+								loading={loading}
+							/>
+						))
+					)}
+				</div>
 			</div>
-		</div>
+		</>
 	);
 }
