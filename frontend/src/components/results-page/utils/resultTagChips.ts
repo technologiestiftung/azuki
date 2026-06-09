@@ -4,7 +4,7 @@ import {
 	type MatchedOccupation,
 	type OccupationTagId,
 } from "@azuki/shared";
-import type { FilterOccupationTypeTagChip } from "../filter-bottom-sheet/OccupationTagsFilterBottomSheet";
+import type { FilterOccupationTypeTagChip } from "../../filter-bottom-sheet/OccupationTagsFilterBottomSheet";
 
 export function getOccupationTagId(
 	occupation: MatchedOccupation,

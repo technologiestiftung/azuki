@@ -1,127 +1,30 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
-import type { AusbildungsplatzResult, MatchedOccupation } from "@azuki/shared";
-import { useMatchResultsStore } from "../../store/useMatchResultsStore";
-import { useAppStore } from "../../store/useAppStore";
-import { fetchAusbildungsplaetze } from "../../api/client";
-import { content } from "../../content";
+import type { MatchedOccupation } from "@azuki/shared";
+import { useMatchResultsStore } from "../../../store/useMatchResultsStore";
+import { useAppStore } from "../../../store/useAppStore";
+import { fetchAusbildungsplaetze } from "../../../api/client";
+import { content } from "../../../content";
 import {
 	OccupationTagsFilterBottomSheet,
 	type OccupationTagsFilterState,
-} from "../filter-bottom-sheet/OccupationTagsFilterBottomSheet";
-import { useFilterSheet } from "../filter-bottom-sheet/useFilterSheet";
-import { ResultsPageHeader } from "./ResultsPageHeader";
-import { ResultsFilterBar } from "./ResultsFilterBar";
-import { buildResultTagChips } from "./resultTagChips";
-import { applyOccupationFilters } from "./applyOccupationFilters";
+} from "../../filter-bottom-sheet/OccupationTagsFilterBottomSheet";
+import { useFilterSheet } from "../../filter-bottom-sheet/useFilterSheet";
+import { ResultsPageHeader } from "../ResultsPageHeader";
+import { ResultsFilterBar } from "../ResultsFilterBar";
+import { buildResultTagChips } from "../utils/resultTagChips";
+import { applyOccupationFilters } from "../utils/applyOccupationFilters";
 import {
 	LocationFilterBottomSheet,
 	DEFAULT_LOCATION_FILTER,
 	type LocationFilterState,
-} from "../filter-bottom-sheet/LocationFilterBottomSheet";
+} from "../../filter-bottom-sheet/LocationFilterBottomSheet";
+import { VacancyCard } from "./VacancyCard";
 
 const DEFAULT_TAG_FILTERS: OccupationTagsFilterState = {
 	selectedOccupationTypeTagIds: [],
 };
 
-function formatStartDate(iso: string | undefined): string | null {
-	if (!iso) {
-		return null;
-	}
-	const parsed = new Date(iso);
-	if (Number.isNaN(parsed.getTime())) {
-		return null;
-	}
-	const dd = String(parsed.getDate()).padStart(2, "0");
-	const mm = String(parsed.getMonth() + 1).padStart(2, "0");
-	const yyyy = parsed.getFullYear();
-	return `${dd}.${mm}.${yyyy}`;
-}
-
-interface BerufCardProps {
-	occupation: MatchedOccupation;
-	vacancies: AusbildungsplatzResult | undefined;
-	distance: number;
-	loading: boolean;
-}
-
-function renderStellenContent(
-	vacancies: AusbildungsplatzResult | undefined,
-	distance: number,
-	loading: boolean,
-) {
-	if (loading && vacancies === undefined) {
-		return <span className="text-sm text-gray-400">…</span>;
-	}
-	if (vacancies === undefined || vacancies.totalCount === 0) {
-		return (
-			<span className="text-sm text-gray-500">
-				{content["results.badge.empty"]}
-			</span>
-		);
-	}
-	return (
-		<>
-			<div className="text-sm font-semibold text-sky-700 mb-3">
-				{vacancies.totalCount} {content["results.badge.suffix"]} · {distance} km
-			</div>
-
-			{vacancies.previews.length > 0 && (
-				<>
-					<p className="text-xs uppercase tracking-wide text-gray-500 font-semibold mb-2">
-						{content["results.previewHeading"]}
-					</p>
-					<ul className="space-y-2 mb-3">
-						{vacancies.previews.map((preview, i) => {
-							const startDate = formatStartDate(preview.eintrittsdatum);
-							return (
-								<li
-									key={`${preview.employer}-${preview.city}-${i}`}
-									className="text-sm"
-								>
-									<div className="text-gray-900 font-medium">
-										{preview.employer}
-									</div>
-									<div className="text-gray-500">
-										{preview.city}
-										{startDate &&
-											` · ${content["results.startDatePrefix"]} ${startDate}`}
-									</div>
-								</li>
-							);
-						})}
-					</ul>
-				</>
-			)}
-
-			<a
-				href={vacancies.searchUrl}
-				target="_blank"
-				rel="noopener noreferrer"
-				className="text-sm font-medium text-sky-700 hover:text-sky-800"
-			>
-				{content["results.showAllLink"]} →
-			</a>
-		</>
-	);
-}
-
-function BerufCard({
-	occupation,
-	vacancies,
-	distance,
-	loading,
-}: BerufCardProps) {
-	return (
-		<div className="bg-white rounded-2xl border border-gray-200 p-4">
-			<h3 className="text-lg font-semibold text-gray-900 mb-2">
-				{occupation.name}
-			</h3>
-			{renderStellenContent(vacancies, distance, loading)}
-		</div>
-	);
-}
-
-export function FreiePlaetzePage() {
+export function VacanciesPage() {
 	const matchResults = useMatchResultsStore((state) => state.matchResults);
 	const favoriteOccupationIds = useMatchResultsStore(
 		(state) => state.favoriteOccupationIds,
@@ -269,27 +172,58 @@ export function FreiePlaetzePage() {
 					onApply={applyLocationFilter}
 					onReset={resetLocationFilter}
 				/>
-				{fetchError && (
-					<p className="px-4 text-xs text-red-500">{fetchError}</p>
+
+				{visibleOccupations.length === 0 && (
+					<div className="flex px-4 pb-4 items-center h-full">
+						<div className="flex flex-col items-center justify-center gap-5 px-5">
+							<div className="flex items-center justify-center object-contain p-2">
+								<img
+									src="/illustrations/no-results-star.svg"
+									alt=""
+									className="w-[200px]"
+								/>
+							</div>
+
+							<p className="text-lg font-medium text-gray-1000 text-center">
+								{content["vacancies.noResultsFound"]}
+							</p>
+						</div>
+					</div>
 				)}
 
-				<div className="flex-1 px-4 pb-4 space-y-3 overflow-y-auto">
-					{visibleOccupations.length === 0 ? (
-						<p className="text-sm text-gray-500">
-							{content["freiePlaetze.noResults"]}
-						</p>
-					) : (
-						visibleOccupations.map((occupation: MatchedOccupation) => (
-							<BerufCard
+				{fetchError || vacanciesByName.size === 0 ? (
+					<div className="flex px-4 pb-4 items-center h-full">
+						<div className="flex flex-col items-center justify-center gap-5 px-5">
+							<div className="flex items-center justify-center object-contain p-2">
+								<img
+									src="/illustrations/no-results-star.svg"
+									alt=""
+									className="w-[200px] "
+								/>
+							</div>
+							<div>
+								<h3 className="text-lg font-bold text-gray-1000 mb-1.5 text-center">
+									{content["vacancies.noResults.p1"]}
+								</h3>
+								<p className="text-lg font-medium text-gray-1000 text-center">
+									{content["vacancies.noResults.p2"]}
+								</p>
+							</div>
+						</div>
+					</div>
+				) : (
+					<div className="flex-1 px-4 pb-4 space-y-3 overflow-y-auto">
+						{visibleOccupations.map((occupation: MatchedOccupation) => (
+							<VacancyCard
 								key={occupation.id}
 								occupation={occupation}
 								vacancies={vacanciesByName.get(occupation.rawName)}
 								distance={location.distance}
 								loading={loading}
 							/>
-						))
-					)}
-				</div>
+						))}
+					</div>
+				)}
 			</div>
 		</>
 	);

@@ -11,8 +11,8 @@ import { ResultCard } from "./ResultCard";
 import { ResultsPageHeader } from "./ResultsPageHeader";
 import { BottomCard } from "./BottomCard";
 import { ResultsFilterBar } from "./ResultsFilterBar";
-import { buildResultTagChips } from "./resultTagChips";
-import { applyOccupationFilters } from "./applyOccupationFilters";
+import { buildResultTagChips } from "./utils/resultTagChips";
+import { applyOccupationFilters } from "./utils/applyOccupationFilters";
 
 const DEFAULT_TAG_FILTERS: OccupationTagsFilterState = {
 	selectedOccupationTypeTagIds: [],
@@ -77,11 +77,30 @@ export function ResultsPage() {
 			/>
 
 			<div className="flex-1 px-4 pb-4 space-y-3 overflow-y-auto">
-				{visibleOccupations.length > 0 &&
-					visibleOccupations.map((occupation: MatchedOccupation) => (
-						<ResultCard key={occupation.id} occupation={occupation} />
-					))}
-				{visibleOccupations.length > 0 && <BottomCard />}
+				{visibleOccupations.length > 0 ? (
+					<>
+						{visibleOccupations.map((occupation: MatchedOccupation) => (
+							<ResultCard key={occupation.id} occupation={occupation} />
+						))}
+						<BottomCard />
+					</>
+				) : (
+					<div className="flex px-4 pb-4 items-center h-full">
+						<div className="flex flex-col items-center justify-center gap-5 px-5">
+							<div className="flex items-center justify-center object-contain p-2">
+								<img
+									src="/illustrations/no-results-star.svg"
+									alt=""
+									className="w-[200px]"
+								/>
+							</div>
+
+							<p className="text-lg font-medium text-gray-1000 text-center">
+								{content["results.noResults"]}
+							</p>
+						</div>
+					</div>
+				)}
 			</div>
 		</div>
 	);

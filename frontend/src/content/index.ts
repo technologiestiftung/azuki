@@ -359,6 +359,8 @@ export const content = {
 	"results.card.score.label": "Passt zu",
 	"results.occupationType.dual": "Duale Ausbildung",
 	"results.occupationType.school": "Schulische Ausbildung",
+	"results.noResults":
+		"Wir haben leider keine Ergebnisse zu deiner Auswahl gefunden.",
 	// Filter Bottom Sheet
 	"results.filter.tags.title": "Berufsgruppen",
 	"results.filter.tags.title.short": "Beruf",
@@ -391,8 +393,14 @@ export const content = {
 		"Die Stellen konnten gerade nicht geladen werden. Versuch es später noch einmal.",
 	"standort.label": "Standort:",
 	"standort.plzAriaLabel": "Postleitzahl",
-	"freiePlaetze.noResults":
+	"vacancies.noResults":
 		"Noch keine passenden Berufe. Geh zuerst zurück zur Ergebnisliste.",
+
+	"vacancies.noResults.p1": "Aktuell gibt es keine freien Stellen.",
+	"vacancies.noResults.p2":
+		"Bald kommen Neue - Schau einfach später wieder rein.",
+	"vacancies.noResultsFound":
+		"Wir haben leider keine freien Stellen zu deiner Auswahl gefunden.",
 
 	// Skip confirm dialog
 	"skipConfirmDialog.default.title": "Du hast noch nichts ausgewählt",

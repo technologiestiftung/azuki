@@ -5,7 +5,7 @@ import {
 	hasCustomLocationFilter,
 } from "../filter-bottom-sheet/plzLocality";
 import { FilterChipButton } from "../primitives/buttons/FilterChipButton";
-import { getOccupationTagLabel } from "./resultTagChips";
+import { getOccupationTagLabel } from "./utils/resultTagChips";
 
 export interface ResultsFilterBarProps {
 	hasLocationFilter: boolean;

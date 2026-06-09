@@ -1,5 +1,5 @@
 import type { MatchedOccupation } from "@azuki/shared";
-import type { OccupationTagsFilterState } from "../filter-bottom-sheet/OccupationTagsFilterBottomSheet";
+import type { OccupationTagsFilterState } from "../../filter-bottom-sheet/OccupationTagsFilterBottomSheet";
 import { getOccupationTagId } from "./resultTagChips";
 
 export function applyOccupationFilters(
