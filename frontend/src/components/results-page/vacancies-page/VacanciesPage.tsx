@@ -222,6 +222,30 @@ export function VacanciesPage() {
 								loading={loading}
 							/>
 						))}
+						<div className="flex flex-col gap-5 px-3 py-5 rounded-2xl border border-sky-100 bg-sky-50">
+							<div>
+								<h3 className="text-2xl font-semibold text-sky-1000 text-center mb-[7px]">
+									{content["vacancies.bottomCard.title"]}
+								</h3>
+								<p className="text-lg text-sky-1000 text-center">
+									{content["vacancies.bottomCard.description"]}
+								</p>
+							</div>
+							<div className="flex flex-col">
+								<a
+									href={content["vacancies.bottomCard.consultationLink"]}
+									target="_blank"
+									rel="noopener noreferrer"
+									aria-label={
+										content["vacancies.bottomCard.consultationCta.ariaLabel"]
+									}
+									className="h-12 flex items-center justify-center gap-2 w-full py-2 px-5 rounded-2xl text-base font-medium transition-colors bg-sky-300 text-sky-1000
+									focus-visible:outline focus-visible:outline-2 focus-visible:outline-sky-500 active:bg-sky-200 active:text-sky-900 md:hover:bg-sky-200 md:hover:text-sky-900"
+								>
+									{content["vacancies.bottomCard.consultationCta"]}
+								</a>
+							</div>
+						</div>
 					</div>
 				)}
 			</div>
