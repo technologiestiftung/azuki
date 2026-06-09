@@ -51,6 +51,11 @@ export type { Persona } from "./persona";
 export { formatOccupationDisplayName } from "./occupationDisplayName";
 
 export {
+	SHORT_DESCRIPTION_PROMPT,
+	resolveOccupationShortDescription,
+} from "./shortDescription";
+
+export {
 	type Bundesland,
 	BUNDESLAENDER,
 	isBundesland,

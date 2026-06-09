@@ -8,6 +8,7 @@ import {
 	type GenerationInfo,
 	formatOccupationDisplayName,
 	getPopularityRecord,
+	resolveOccupationShortDescription,
 	AI_MODEL_IDS,
 	DEFAULT_MODEL_ID,
 } from "@azuki/shared";
@@ -31,23 +32,6 @@ const MIN_RESULTS = 5;
 const MAX_RESULTS = 8;
 const DEFAULT_REASONING = "Dieser Beruf passt zu deinem Profil.";
 
-const KURZDEFINITION_PROMPT = `KURZDEFINITION PRO BERUF (PFLICHTFELD)
-Jeder Eintrag in "auswahl" MUSS "kurzdefinition" enthalten — leer lassen oder weglassen ist nicht erlaubt.
-
-Die Kurzdefinition erscheint auf der Ergebniskarte unter dem Berufstitel. Sie richtet sich an Jugendliche zwischen 15 und 25 Jahren, darunter viele mit eingeschränkten Deutschkenntnissen oder wenig Berufswissen. Schreibe deshalb so, als würdest du einem jungen Menschen kurz erklären, was man in diesem Job den ganzen Tag so macht.
-Anforderungen:
-- genau 1 Satz, maximal 15 Wörter
-- beschreibe konkrete, alltägliche Tätigkeiten - was passiert wirklich in diesem Job?
-- einfache, kurze Wörter - kein Fachjargon, keine Behördensprache
-- Nominalstil erlaubt, aber nur mit alltagsnahen Begriffen (z. B. „Autos reparieren und warten" statt „Instandhaltung und Wartung von Kraftfahrzeugen")
-- beginne NICHT mit der Berufsbezeichnung und wiederhole sie nicht (steht schon im Kartentitel)
-- KEINE Ausbildungsinfos (kein Berufstyp, keine Ausbildungsart, -dauer oder Lernorte)
-- NICHT die BERUFENET-Aufgabenbeschreibung kopieren oder kürzen
-Gut — Beruf „Kauffrau/mann Büromanagement": Briefe schreiben, Termine planen und den Büroalltag organisieren.
-
-Schlecht — zu abstrakt, Behördensprache: Organisation und Verwaltung von bürowirtschaftlichen Abläufen in Unternehmen und Institutionen.
-Schlecht — Berufsbezeichnung wiederholt, zu lang, BERUFENET-Kopie: "Fachinformatiker/innen der Fachrichtung Systemintegration planen, installieren und betreiben IT-Systeme."`;
-
 // Lazy client construction. Constructing OpenAI at module load throws when
 // OPENROUTER_API_KEY is missing, which broke pure-function tests that just
 // want to import formatProfileSections from this file, and made Vercel cold
@@ -66,7 +50,6 @@ function getClient(): OpenAI {
 
 export interface Ranking {
 	id: number;
-	kurzdefinition: string;
 	begruendung: string;
 }
 
@@ -180,13 +163,9 @@ function extractRankingsSchemaAware(s: string): Ranking[] | null {
 		const id = parseInt(idMatch[1], 10);
 		// Greedy `.+` anchored on the chunk's last `"` before `}`.
 		// `[\s\S]` instead of `.` to span any internal newlines.
-		const kurzMatch =
-			obj.match(/"kurzdefinition"\s*:\s*"([\s\S]+?)"\s*,\s*"begruendung"/) ||
-			obj.match(/,\s*"kurzdefinition"\s*:\s*"([\s\S]+)"\s*\}\s*$/);
-		const kurzdefinition = kurzMatch ? kurzMatch[1] : "";
 		const begMatch = obj.match(/"begruendung"\s*:\s*"([\s\S]+)"\s*\}\s*$/);
 		const begruendung = begMatch ? begMatch[1] : "";
-		rankings.push({ id, kurzdefinition, begruendung });
+		rankings.push({ id, begruendung });
 	}
 	return rankings.length > 0 ? rankings : null;
 }
@@ -295,40 +274,16 @@ function isRankingShape(value: unknown): value is Ranking {
 	);
 }
 
-function readKurzdefinition(record: {
-	kurzdefinition?: unknown;
-	description?: unknown;
-}): string {
-	if (typeof record.kurzdefinition === "string") {
-		return record.kurzdefinition;
-	}
-	if (typeof record.description === "string") {
-		return record.description;
-	}
-	return "";
-}
-
 function findRankingArray(value: unknown): Ranking[] | null {
 	if (Array.isArray(value)) {
 		if (value.length === 0) {
 			return null;
 		}
 		if (value.every(isRankingShape)) {
-			return value.map((v) => {
-				const record = v as {
-					id: number;
-					kurzdefinition?: unknown;
-					description?: unknown;
-					begruendung?: unknown;
-				};
-				const kurzdefinition = readKurzdefinition(record);
-				return {
-					id: record.id,
-					kurzdefinition,
-					begruendung:
-						typeof record.begruendung === "string" ? record.begruendung : "",
-				};
-			});
+			return value.map((v) => ({
+				id: v.id,
+				begruendung: typeof v.begruendung === "string" ? v.begruendung : "",
+			}));
 		}
 		return null;
 	}
@@ -400,17 +355,15 @@ Jede Begründung muss:
 - kurz erklären, warum der Beruf passen könnte
 - nicht generisch klingen
 
-${KURZDEFINITION_PROMPT}
-
 AUSGABE
 Antworte ausschließlich als JSON-Objekt mit dem Schlüssel "auswahl", dessen Wert ein Array ist. Ohne Markdown, ohne Vorrede, ohne zusätzliche Erklärung.
 "id" ist immer die numerische BERUFENET-ID hinter "[ID: ...]" in der Berufsliste, niemals eine Position oder Reihenfolge.
 
-Format (Schlüssel exakt so schreiben):
+Format:
 {
   "auswahl": [
-    { "id": 12345, "kurzdefinition": "...", "begruendung": "..." },
-    { "id": 67890, "kurzdefinition": "...", "begruendung": "..." }
+    { "id": 12345, "begruendung": "..." },
+    { "id": 67890, "begruendung": "..." }
   ]
 }`;
 }
@@ -528,17 +481,15 @@ Jede Begründung muss:
 - möglichst die eigenen Worte des Jugendlichen aufgreifen
 - nicht generisch klingen
 
-${KURZDEFINITION_PROMPT}
-
 AUSGABE
 Antworte ausschließlich als JSON-Objekt mit dem Schlüssel "auswahl", dessen Wert ein Array ist. Ohne Markdown, ohne Vorrede, ohne zusätzliche Erklärung.
 "id" ist immer die numerische BERUFENET-ID hinter "[ID: ...]" in der Berufsliste, niemals eine Position oder Reihenfolge.
 
-Format (Schlüssel exakt so schreiben):
+Format:
 {
   "auswahl": [
-    { "id": 12345, "kurzdefinition": "...", "begruendung": "Dieser Beruf könnte gut zu dir passen, weil ..." },
-    { "id": 67890, "kurzdefinition": "...", "begruendung": "Das passt gut zu dir, wenn du gern ..." }
+    { "id": 12345, "begruendung": "Dieser Beruf könnte gut zu dir passen, weil ..." },
+    { "id": 67890, "begruendung": "Das passt gut zu dir, wenn du gern ..." }
   ]
 }`;
 }
@@ -864,21 +815,9 @@ AUSBILDUNGSBERUFE (wähle die ${MIN_RESULTS}-${MAX_RESULTS} besten aus):
 ${formatOccupationList(scored, options)}`;
 }
 
-function resolveOccupationDescription(
-	occupation: Occupation,
-	kurzdefinition?: string,
-): string {
-	const fromAi = kurzdefinition?.trim();
-	if (fromAi) {
-		return fromAi;
-	}
-	return occupation.taskSummary?.trim() ?? "";
-}
-
 function toOccupationResult(
 	item: ScoredOccupation,
 	reasoning: string,
-	kurzdefinition?: string,
 ): MatchResult["occupations"][number] {
 	const meta = occupationMatchMeta(item.occupation);
 	return {
@@ -887,10 +826,7 @@ function toOccupationResult(
 		rawName: item.occupation.name,
 		score: item.score,
 		images: item.occupation.images.slice(0, 3),
-		shortDescription: resolveOccupationDescription(
-			item.occupation,
-			kurzdefinition,
-		),
+		shortDescription: resolveOccupationShortDescription(item.occupation),
 		reasoning,
 		...meta,
 	};
@@ -997,11 +933,7 @@ export async function aiRank(
 				// Safe: filterAndDedupeRankings keeps only ids that are in validIds.
 				// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 				const item = occupationMap.get(ranking.id)!;
-				return toOccupationResult(
-					item,
-					ranking.begruendung,
-					ranking.kurzdefinition,
-				);
+				return toOccupationResult(item, ranking.begruendung);
 			},
 		),
 	};
