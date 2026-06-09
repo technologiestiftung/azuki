@@ -18,6 +18,7 @@ import {
 	DEFAULT_LOCATION_FILTER,
 	type LocationFilterState,
 } from "../../filter-bottom-sheet/LocationFilterBottomSheet";
+import { hasCustomLocationFilter } from "../../filter-bottom-sheet/plzLocality";
 import { VacancyCard } from "./VacancyCard";
 
 const DEFAULT_TAG_FILTERS: OccupationTagsFilterState = {
@@ -140,6 +141,16 @@ export function VacanciesPage() {
 		ausbildungsplaetze?.results.map((r) => [r.occupation, r]) ?? [],
 	);
 
+	const locationFilterApplied = hasCustomLocationFilter(
+		locationFilter.appliedValue,
+	);
+	const noVacancyResults = fetchError !== null || vacanciesByName.size === 0;
+	const showSimpleEmpty =
+		visibleOccupations.length === 0 ||
+		(locationFilterApplied && noVacancyResults);
+	const showDetailedEmpty =
+		!locationFilterApplied && noVacancyResults && visibleOccupations.length > 0;
+
 	return (
 		<>
 			<div className="flex flex-col h-full">
@@ -173,7 +184,7 @@ export function VacanciesPage() {
 					onReset={resetLocationFilter}
 				/>
 
-				{visibleOccupations.length === 0 && (
+				{showSimpleEmpty || showDetailedEmpty ? (
 					<div className="flex px-4 pb-4 items-center h-full">
 						<div className="flex flex-col items-center justify-center gap-5 px-5">
 							<div className="flex items-center justify-center object-contain p-2">
@@ -183,32 +194,20 @@ export function VacanciesPage() {
 									className="w-[200px]"
 								/>
 							</div>
-
-							<p className="text-lg font-medium text-gray-1000 text-center">
-								{content["vacancies.noResultsFound"]}
-							</p>
-						</div>
-					</div>
-				)}
-
-				{fetchError || vacanciesByName.size === 0 ? (
-					<div className="flex px-4 pb-4 items-center h-full">
-						<div className="flex flex-col items-center justify-center gap-5 px-5">
-							<div className="flex items-center justify-center object-contain p-2">
-								<img
-									src="/illustrations/no-results-star.svg"
-									alt=""
-									className="w-[200px] "
-								/>
-							</div>
-							<div>
-								<h3 className="text-lg font-bold text-gray-1000 mb-1.5 text-center">
-									{content["vacancies.noResults.p1"]}
-								</h3>
+							{showSimpleEmpty ? (
 								<p className="text-lg font-medium text-gray-1000 text-center">
-									{content["vacancies.noResults.p2"]}
+									{content["vacancies.noResultsFound"]}
 								</p>
-							</div>
+							) : (
+								<div>
+									<h3 className="text-lg font-bold text-gray-1000 mb-1.5 text-center">
+										{content["vacancies.noResults.p1"]}
+									</h3>
+									<p className="text-lg font-medium text-gray-1000 text-center">
+										{content["vacancies.noResults.p2"]}
+									</p>
+								</div>
+							)}
 						</div>
 					</div>
 				) : (
