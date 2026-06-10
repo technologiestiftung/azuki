@@ -22,19 +22,19 @@ export interface OccupationTagDefinition {
 
 /** Display order for filter chips and badges. */
 export const OCCUPATION_TAGS: readonly OccupationTagDefinition[] = [
-	{ id: "bauen-handwerk", label: "Bauen & Handwerk" },
-	{ id: "maschinen-fahrzeuge", label: "Maschinen & Fahrzeuge" },
-	{ id: "elektro-energie", label: "Elektro & Energie" },
-	{ id: "computer-it", label: "Computer & IT" },
-	{ id: "labor-forschung", label: "Labor & Forschung" },
-	{ id: "pflanzen-tiere-umwelt", label: "Pflanzen, Tiere & Umwelt" },
-	{ id: "essen-gastronomie", label: "Essen & Gastronomie" },
+	{ id: "bauen-handwerk", label: "Bauen und Handwerk" },
+	{ id: "maschinen-fahrzeuge", label: "Maschinen und Fahrzeuge" },
+	{ id: "elektro-energie", label: "Elektro und Energie" },
+	{ id: "computer-it", label: "Computer und IT" },
+	{ id: "labor-forschung", label: "Labor und Forschung" },
+	{ id: "pflanzen-tiere-umwelt", label: "Pflanzen, Tiere und Umwelt" },
+	{ id: "essen-gastronomie", label: "Essen und Gastronomie" },
 	{ id: "gesundheit", label: "Gesundheit" },
-	{ id: "soziales-betreuen", label: "Soziales & Betreuen" },
-	{ id: "verkaufen-beraten", label: "Verkaufen & Beraten" },
-	{ id: "buero-verwaltung-logistik", label: "Büro, Verwaltung & Logistik" },
-	{ id: "beauty-fitness", label: "Beauty & Fitness" },
-	{ id: "kreatives-gestaltung", label: "Kreatives & Gestaltung" },
+	{ id: "soziales-betreuen", label: "Soziales und Betreuen" },
+	{ id: "verkaufen-beraten", label: "Verkaufen und Beraten" },
+	{ id: "buero-verwaltung-logistik", label: "Büro, Verwaltung und Logistik" },
+	{ id: "beauty-fitness", label: "Beauty und Fitness" },
+	{ id: "kreatives-gestaltung", label: "Kreatives und Gestaltung" },
 	{ id: "sonstige", label: "Sonstige" },
 ] as const;
 
