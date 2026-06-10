@@ -1,5 +1,8 @@
-import type { AusbildungsplatzResult, MatchedOccupation } from "@azuki/shared";
+import type { AusbildungsplatzPreview } from "@azuki/shared";
+import { formatOccupationDisplayName } from "@azuki/shared";
 import { content } from "../../../content";
+
+const NEW_VACANCY_MAX_DAYS = 3;
 
 function formatStartDate(iso: string | undefined): string | null {
 	if (!iso) {
@@ -15,86 +18,129 @@ function formatStartDate(iso: string | undefined): string | null {
 	return `${dd}.${mm}.${yyyy}`;
 }
 
-export interface VacancyCardProps {
-	occupation: MatchedOccupation;
-	vacancies: AusbildungsplatzResult | undefined;
-	distance: number;
-	loading: boolean;
+function startOfDay(date: Date): Date {
+	return new Date(date.getFullYear(), date.getMonth(), date.getDate());
 }
 
-function renderVacanciesContent(
-	vacancies: AusbildungsplatzResult | undefined,
-	distance: number,
-	loading: boolean,
-) {
-	if (loading && vacancies === undefined) {
-		return <span className="text-sm text-gray-400">…</span>;
+function daysSincePublished(iso: string | undefined): number | null {
+	if (!iso) {
+		return null;
 	}
-	if (vacancies === undefined || vacancies.totalCount === 0) {
-		return (
-			<span className="text-sm text-gray-500">
-				{content["results.badge.empty"]}
-			</span>
-		);
+	const parsed = new Date(iso);
+	if (Number.isNaN(parsed.getTime())) {
+		return null;
 	}
-	return (
-		<>
-			<div className="text-sm font-semibold text-sky-700 mb-3">
-				{vacancies.totalCount} {content["results.badge.suffix"]} · {distance} km
-			</div>
+	const today = startOfDay(new Date());
+	const published = startOfDay(parsed);
+	const diffMs = today.getTime() - published.getTime();
+	return Math.max(0, Math.floor(diffMs / (1000 * 60 * 60 * 24)));
+}
 
-			{vacancies.previews.length > 0 && (
-				<>
-					<p className="text-xs uppercase tracking-wide text-gray-500 font-semibold mb-2">
-						{content["results.previewHeading"]}
-					</p>
-					<ul className="space-y-2 mb-3">
-						{vacancies.previews.map((preview, i) => {
-							const startDate = formatStartDate(preview.eintrittsdatum);
-							return (
-								<li
-									key={`${preview.employer}-${preview.city}-${i}`}
-									className="text-sm"
-								>
-									<div className="text-gray-900 font-medium">
-										{preview.employer}
-									</div>
-									<div className="text-gray-500">
-										{preview.city}
-										{startDate &&
-											` · ${content["results.startDatePrefix"]} ${startDate}`}
-									</div>
-								</li>
-							);
-						})}
-					</ul>
-				</>
-			)}
+function formatPublishedLabel(iso: string | undefined): string | null {
+	const days = daysSincePublished(iso);
+	if (days === null) {
+		return null;
+	}
+	if (days === 0) {
+		return content["vacancies.published.today"];
+	}
+	if (days === 1) {
+		return content["vacancies.published.oneDayAgo"];
+	}
+	return content["vacancies.published.daysAgo"].replace("{days}", String(days));
+}
 
-			<a
-				href={vacancies.searchUrl}
-				target="_blank"
-				rel="noopener noreferrer"
-				className="text-sm font-medium text-sky-700 hover:text-sky-800"
-			>
-				{content["results.showAllLink"]} →
-			</a>
-		</>
-	);
+export interface VacancyCardProps {
+	occupationName: string;
+	preview: AusbildungsplatzPreview;
+	isFavorite: boolean;
+	onToggleFavorite: () => void;
 }
 
 export function VacancyCard({
-	occupation,
-	vacancies,
-	distance,
-	loading,
+	occupationName,
+	preview,
+	isFavorite,
+	onToggleFavorite,
 }: VacancyCardProps) {
+	const startDate = formatStartDate(preview.eintrittsdatum);
+	const publishedLabel = formatPublishedLabel(preview.publishedAt);
+	const daysSince = daysSincePublished(preview.publishedAt);
+	const isNew = daysSince !== null && daysSince <= NEW_VACANCY_MAX_DAYS;
+	const displayName = formatOccupationDisplayName(occupationName);
+
 	return (
-		<div className="bg-white rounded-2xl border border-gray-200 p-4">
-			<h3 className="text-lg font-semibold text-gray-900 mb-2">
-				{occupation.name}
-			</h3>
-			{renderVacanciesContent(vacancies, distance, loading)}
+		<div className="bg-gray-100 rounded-2xl border border-gray-200 overflow-hidden">
+			<div className="flex flex-col gap-5 p-3">
+				<div className="flex justify-between items-start gap-5">
+					<div className="flex flex-col gap-1">
+						<h3 className="text-xl font-semibold text-sky-1000">
+							{displayName}
+						</h3>
+						<p className="text-gray-500">{preview.employer}</p>
+					</div>
+					<button
+						type="button"
+						className="shrink-0 w-7 h-7 flex items-center justify-center"
+						onClick={onToggleFavorite}
+						aria-pressed={isFavorite}
+						aria-label={
+							isFavorite
+								? content["results.favorite.remove"]
+								: content["results.favorite.add"]
+						}
+					>
+						<img
+							src="/icons/favorite.svg"
+							alt=""
+							className={isFavorite ? "hidden" : "block"}
+						/>
+						<img
+							src="/icons/favorite-filled.svg"
+							alt=""
+							className={isFavorite ? "block" : "hidden"}
+						/>
+					</button>
+				</div>
+
+				<div className="flex flex-col gap-[3px]">
+					{startDate && (
+						<div className="flex items-center gap-[5px] text-sky-1000">
+							<img
+								src="/icons/calendar.svg"
+								alt=""
+								className="h-4 w-4 shrink-0"
+							/>
+							<span>
+								{content["vacancies.startDate"]} {startDate}
+							</span>
+						</div>
+					)}
+					<div className="flex items-center gap-[5px] text-gray-900">
+						<img
+							src="/icons/location.svg"
+							alt=""
+							className="h-4 w-4 shrink-0"
+						/>
+						<span>{preview.city}</span>
+					</div>
+				</div>
+			</div>
+
+			{publishedLabel && (
+				<div
+					className={`flex items-center justify-between pl-[14px] pr-3 py-3 border-t border-gray-200 ${
+						isNew ? "bg-sky-100" : "bg-gray-100"
+					}`}
+				>
+					<span className="text-sm text-gray-500">{publishedLabel}</span>
+					{isNew && (
+						<div className="inline-flex h-[22px] max-w-full shrink-0 items-center justify-center whitespace-nowrap rounded-lg bg-fill-primary px-2 text-sm leading-[22px] text-white">
+							{content["vacancies.badge.new"]}
+						</div>
+					)}
+				</div>
+			)}
 		</div>
 	);
 }

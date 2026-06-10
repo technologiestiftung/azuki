@@ -175,6 +175,8 @@ export interface AusbildungsplatzPreview {
 	city: string;
 	/** ISO date string (YYYY-MM-DD) for the start of the Ausbildung. */
 	eintrittsdatum?: string;
+	/** ISO date string (YYYY-MM-DD) when the posting was last published. */
+	publishedAt?: string;
 }
 
 export interface AusbildungsplatzResult {

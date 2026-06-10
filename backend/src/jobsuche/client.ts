@@ -7,7 +7,7 @@ const JOBSUCHE_BASE =
 	"https://rest.arbeitsagentur.de/jobboerse/jobsuche-service/pc/v4/jobs";
 const API_KEY = "jobboerse-jobsuche";
 const DEFAULT_RADIUS_KM = 25;
-const MAX_PREVIEWS = 3;
+const MAX_PREVIEWS = 10;
 // Fetch more than we display so client-side filtering (Duales Studium removal)
 // can drop entries without leaving us short of previews.
 const SAMPLE_SIZE = 10;
@@ -19,6 +19,7 @@ interface JobsucheJob {
 		ort?: string;
 	};
 	eintrittsdatum?: string;
+	aktuelleVeroeffentlichungsdatum?: string;
 	// `beruf` is set on Ausbildung postings, absent on Duales Studium.
 	// `studiengang` is the opposite. We filter on this distinction since
 	// the API has no server-side flag for Ausbildung-only.
@@ -116,6 +117,7 @@ export async function searchAusbildungsplaetze(
 				employer: job.arbeitgeber || "Unbekannter Arbeitgeber",
 				city: job.arbeitsort?.ort || "Unbekannter Ort",
 				eintrittsdatum: job.eintrittsdatum,
+				publishedAt: job.aktuelleVeroeffentlichungsdatum,
 			}));
 
 		return {

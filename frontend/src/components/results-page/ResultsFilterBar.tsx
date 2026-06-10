@@ -10,7 +10,12 @@ import { getOccupationTagLabel } from "./utils/resultTagChips";
 export interface ResultsFilterBarProps {
 	hasLocationFilter: boolean;
 	appliedLocationFilter?: LocationFilterState;
-	selectedOccupationTypeTagIds: string[];
+	selectedOccupationTypeTagIds?: string[];
+	selectedOccupationIds?: number[];
+	resolveOccupationFilterLabel?: (id: number) => string;
+	occupationFilterTitle?: string;
+	occupationFilterTitleShort?: string;
+	occupationFilterAriaLabel?: string;
 	onOpenTagFilter: () => void;
 	onOpenLocationFilter?: () => void;
 	showFavoritesOnly: boolean;
@@ -20,14 +25,38 @@ export interface ResultsFilterBarProps {
 export function ResultsFilterBar({
 	hasLocationFilter,
 	appliedLocationFilter,
-	selectedOccupationTypeTagIds,
+	selectedOccupationTypeTagIds = [],
+	selectedOccupationIds,
+	resolveOccupationFilterLabel,
+	occupationFilterTitle,
+	occupationFilterTitleShort,
+	occupationFilterAriaLabel,
 	onOpenTagFilter,
 	onOpenLocationFilter,
 	showFavoritesOnly,
 	onToggleFavoritesOnly,
 }: ResultsFilterBarProps) {
-	const hasTagFilters = selectedOccupationTypeTagIds.length > 0;
-	const extraTagCount = selectedOccupationTypeTagIds.length - 1;
+	const useOccupationFilter =
+		selectedOccupationIds !== undefined &&
+		resolveOccupationFilterLabel !== undefined;
+	const activeFilterIds = useOccupationFilter
+		? selectedOccupationIds
+		: selectedOccupationTypeTagIds;
+	const hasTagFilters = activeFilterIds.length > 0;
+	const extraTagCount = activeFilterIds.length - 1;
+	const filterTitle =
+		occupationFilterTitle ?? content["results.filter.tags.title"];
+	const filterTitleShort =
+		occupationFilterTitleShort ?? content["results.filter.tags.title.short"];
+	const filterAriaLabel =
+		occupationFilterAriaLabel ??
+		content["results.filter.tags.filterButton.ariaLabel"];
+	let firstFilterLabel: string | null = null;
+	if (hasTagFilters && useOccupationFilter) {
+		firstFilterLabel = resolveOccupationFilterLabel(selectedOccupationIds[0]);
+	} else if (hasTagFilters) {
+		firstFilterLabel = getOccupationTagLabel(selectedOccupationTypeTagIds[0]);
+	}
 	const hasLocationApplied =
 		appliedLocationFilter !== undefined &&
 		hasCustomLocationFilter(appliedLocationFilter);
@@ -58,13 +87,13 @@ export function ResultsFilterBar({
 					variant="dropdown"
 					active={hasTagFilters}
 					onClick={onOpenTagFilter}
-					ariaLabel={content["results.filter.tags.filterButton.ariaLabel"]}
-					title={content["results.filter.tags.title"]}
+					ariaLabel={filterAriaLabel}
+					title={filterTitle}
 				>
 					{hasTagFilters ? (
 						<>
 							<span className="min-w-0 max-w-[120px] flex-1 truncate">
-								{getOccupationTagLabel(selectedOccupationTypeTagIds[0])}
+								{firstFilterLabel}
 							</span>
 							{extraTagCount > 0 && (
 								<span className="shrink-0">+{extraTagCount}</span>
@@ -72,9 +101,7 @@ export function ResultsFilterBar({
 						</>
 					) : (
 						<span className="min-w-0 flex-1 truncate">
-							{hasLocationFilter
-								? content["results.filter.tags.title.short"]
-								: content["results.filter.tags.title"]}
+							{hasLocationFilter ? filterTitleShort : filterTitle}
 						</span>
 					)}
 				</FilterChipButton>
