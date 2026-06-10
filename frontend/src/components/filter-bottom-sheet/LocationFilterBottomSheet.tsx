@@ -138,6 +138,7 @@ export function LocationFilterBottomSheet({
 			title={content["results.filter.location.title"]}
 			ariaLabel={content["results.filter.location.title"]}
 			onReset={handleReset}
+			resetDisabled={!regionSelected}
 			onApply={handleApply}
 		>
 			<div className="flex flex-col min-w-0 gap-2 px-4 pt-4 pb-8">

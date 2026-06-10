@@ -65,6 +65,7 @@ export function OccupationTagsFilterBottomSheet({
 			title={content["results.filter.tags.title"]}
 			ariaLabel={content["results.filter.tags.title"]}
 			onReset={handleReset}
+			resetDisabled={selectedOccupationTypeTagIds.size === 0}
 			onApply={handleApply}
 		>
 			<div className="flex flex-col min-w-0 gap-2 px-4 pt-4 pb-8">

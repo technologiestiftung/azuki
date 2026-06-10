@@ -360,9 +360,9 @@ export const content = {
 	"results.occupationType.dual": "Duale Ausbildung",
 	"results.occupationType.school": "Schulische Ausbildung",
 	"results.noResults":
-		"Wir haben leider keine Ergebnisse zu deiner Auswahl gefunden.",
+		"Wir haben leider keine Ausbildungsberufe zu deiner Auswahl gefunden.",
 	// Filter Bottom Sheet
-	"results.filter.tags.title": "Berufsgruppen",
+	"results.filter.tags.title": "Berufsgruppe",
 	"results.filter.tags.title.short": "Beruf",
 	"results.filter.tags.filterButton.ariaLabel": "Berufsgruppen filtern",
 	"results.filter.favorites.title": "Meine Favoriten",
