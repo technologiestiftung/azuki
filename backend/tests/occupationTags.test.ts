@@ -6,7 +6,20 @@ describe("resolveOccupationTag", () => {
 		expect(resolveOccupationTag("25102")).toBe("maschinen-fahrzeuge");
 		expect(resolveOccupationTag("43102")).toBe("computer-it");
 		expect(resolveOccupationTag("32102")).toBe("bauen-handwerk");
+		expect(resolveOccupationTag("29302")).toBe("essen-gastronomie");
+	});
+
+	it("splits food production from tourism, events and sport in KldB 63", () => {
 		expect(resolveOccupationTag("63302")).toBe("essen-gastronomie");
+		expect(resolveOccupationTag("63402")).toBe(
+			"tourismus-veranstaltungen-sport",
+		);
+		expect(resolveOccupationTag("63102")).toBe(
+			"tourismus-veranstaltungen-sport",
+		);
+		expect(resolveOccupationTag("63202")).toBe(
+			"tourismus-veranstaltungen-sport",
+		);
 	});
 
 	it("splits wellness and beauty from the wider health group", () => {
