@@ -7,6 +7,7 @@ export type OccupationTagId =
 	| "labor-forschung"
 	| "pflanzen-tiere-umwelt"
 	| "essen-gastronomie"
+	| "tourismus-veranstaltungen-sport"
 	| "gesundheit"
 	| "soziales-betreuen"
 	| "verkaufen-beraten"
@@ -29,6 +30,10 @@ export const OCCUPATION_TAGS: readonly OccupationTagDefinition[] = [
 	{ id: "labor-forschung", label: "Labor und Forschung" },
 	{ id: "pflanzen-tiere-umwelt", label: "Pflanzen, Tiere und Umwelt" },
 	{ id: "essen-gastronomie", label: "Essen und Gastronomie" },
+	{
+		id: "tourismus-veranstaltungen-sport",
+		label: "Tourismus, Veranstaltungen und Sport",
+	},
 	{ id: "gesundheit", label: "Gesundheit" },
 	{ id: "soziales-betreuen", label: "Soziales und Betreuen" },
 	{ id: "verkaufen-beraten", label: "Verkaufen und Beraten" },
@@ -71,7 +76,7 @@ const KLDB_2_DIGIT_TO_TAG: Record<string, OccupationTagId> = {
 	"54": "sonstige",
 	"61": "verkaufen-beraten",
 	"62": "verkaufen-beraten",
-	"63": "essen-gastronomie",
+	"63": "tourismus-veranstaltungen-sport",
 	"71": "buero-verwaltung-logistik",
 	"72": "buero-verwaltung-logistik",
 	"73": "buero-verwaltung-logistik",
@@ -96,6 +101,10 @@ const KLDB_3_DIGIT_TO_TAG: Record<string, OccupationTagId> = {
 	"842": "kreatives-gestaltung",
 	"844": "kreatives-gestaltung",
 	"845": "beauty-fitness",
+	"631": "tourismus-veranstaltungen-sport",
+	"632": "tourismus-veranstaltungen-sport",
+	"633": "essen-gastronomie",
+	"634": "tourismus-veranstaltungen-sport",
 };
 
 /**
