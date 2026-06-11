@@ -402,6 +402,13 @@ export const content = {
 	"vacancies.noResultsFound":
 		"Wir haben leider keine freien Stellen zu deiner Auswahl gefunden.",
 
+	"vacancies.bottomCard.title": "Du brauchst Hilfe bei deiner Bewerbung?",
+	"vacancies.bottomCard.description":
+		"Kein Problem, das Joblinge Team ist an deiner Seite. Das kostenlose Beratungsprogramm hilft dir.",
+	"vacancies.bottomCard.consultationLink": "https://joblinge.de",
+	"vacancies.bottomCard.consultationCta": "Zum Beratungsprogramm",
+	"vacancies.bottomCard.consultationCta.ariaLabel": "Zum Beratungsprogramm",
+
 	// Skip confirm dialog
 	"skipConfirmDialog.default.title": "Du hast noch nichts ausgewählt",
 	"skipConfirmDialog.default.description":
