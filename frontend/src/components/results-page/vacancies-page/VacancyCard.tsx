@@ -93,12 +93,12 @@ export function VacancyCard({
 						<img
 							src="/icons/favorite.svg"
 							alt=""
-							className={isFavorite ? "hidden" : "block"}
+							className={isFavorite ? "hidden" : "block w-7 h-7"}
 						/>
 						<img
 							src="/icons/favorite-filled.svg"
 							alt=""
-							className={isFavorite ? "block" : "hidden"}
+							className={isFavorite ? "block w-7 h-7" : "hidden"}
 						/>
 					</button>
 				</div>
@@ -129,11 +129,15 @@ export function VacancyCard({
 
 			{publishedLabel && (
 				<div
-					className={`flex items-center justify-between pl-[14px] pr-3 py-3 border-t border-gray-200 ${
-						isNew ? "bg-sky-100" : "bg-gray-100"
+					className={`flex items-center justify-between pl-[14px] pr-3 py-3 ${
+						isNew ? "bg-sky-100" : "bg-gray-100 border-t border-gray-200"
 					}`}
 				>
-					<span className="text-sm text-gray-500">{publishedLabel}</span>
+					<span
+						className={`text-sm ${isNew ? "text-gray-700" : "text-gray-500"}`}
+					>
+						{publishedLabel}
+					</span>
 					{isNew && (
 						<div className="inline-flex h-[22px] max-w-full shrink-0 items-center justify-center whitespace-nowrap rounded-lg bg-fill-primary px-2 text-sm leading-[22px] text-white">
 							{content["vacancies.badge.new"]}

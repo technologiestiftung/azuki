@@ -111,7 +111,12 @@ export async function searchAusbildungsplaetze(
 				? Math.round((rawTotal * ausbildungenInSample.length) / sample.length)
 				: rawTotal;
 
-		const previews: AusbildungsplatzPreview[] = ausbildungenInSample
+		const previews: AusbildungsplatzPreview[] = [...ausbildungenInSample]
+			.sort(
+				(a, b) =>
+					new Date(b.aktuelleVeroeffentlichungsdatum ?? 0).getTime() -
+					new Date(a.aktuelleVeroeffentlichungsdatum ?? 0).getTime(),
+			)
 			.slice(0, MAX_PREVIEWS)
 			.map((job) => ({
 				employer: job.arbeitgeber || "Unbekannter Arbeitgeber",
