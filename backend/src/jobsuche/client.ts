@@ -13,10 +13,30 @@ const MAX_PREVIEWS = 10;
 const SAMPLE_SIZE = 10;
 const REQUEST_TIMEOUT_MS = 5000;
 
+function normalizeLocationField(
+	value: string | number | undefined,
+): string | undefined {
+	if (value === undefined || value === null) {
+		return undefined;
+	}
+	const text = String(value).trim();
+	if (!text || text === "null") {
+		return undefined;
+	}
+	return text;
+}
+
 interface JobsucheJob {
 	arbeitgeber: string;
 	arbeitsort?: {
+		plz?: string | number;
 		ort?: string;
+		ortsteil?: string;
+		strasse?: string;
+		koordinaten?: {
+			lat?: number;
+			lon?: number;
+		};
 	};
 	eintrittsdatum?: string;
 	aktuelleVeroeffentlichungsdatum?: string;
@@ -118,12 +138,28 @@ export async function searchAusbildungsplaetze(
 					new Date(a.aktuelleVeroeffentlichungsdatum ?? 0).getTime(),
 			)
 			.slice(0, MAX_PREVIEWS)
-			.map((job) => ({
-				employer: job.arbeitgeber || "Unbekannter Arbeitgeber",
-				city: job.arbeitsort?.ort || "Unbekannter Ort",
-				eintrittsdatum: job.eintrittsdatum,
-				publishedAt: job.aktuelleVeroeffentlichungsdatum,
-			}));
+			.map((job) => {
+				const location = job.arbeitsort;
+				const latitude = location?.koordinaten?.lat;
+				const longitude = location?.koordinaten?.lon;
+				return {
+					employer: job.arbeitgeber || "Unbekannter Arbeitgeber",
+					city: normalizeLocationField(location?.ort) || "Unbekannter Ort",
+					postcode: normalizeLocationField(location?.plz),
+					district: normalizeLocationField(location?.ortsteil),
+					street: normalizeLocationField(location?.strasse),
+					latitude:
+						typeof latitude === "number" && Number.isFinite(latitude)
+							? latitude
+							: undefined,
+					longitude:
+						typeof longitude === "number" && Number.isFinite(longitude)
+							? longitude
+							: undefined,
+					eintrittsdatum: job.eintrittsdatum,
+					publishedAt: job.aktuelleVeroeffentlichungsdatum,
+				};
+			});
 
 		return {
 			occupation,

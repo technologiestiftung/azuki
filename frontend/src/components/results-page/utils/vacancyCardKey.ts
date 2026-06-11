@@ -5,5 +5,5 @@ export function buildVacancyCardKey(
 	preview: AusbildungsplatzPreview,
 	index: number,
 ): string {
-	return `${occupationId}-${preview.employer}-${preview.city}-${index}`;
+	return `${occupationId}-${preview.employer}-${preview.postcode ?? preview.city}-${preview.street ?? preview.district ?? ""}-${index}`;
 }

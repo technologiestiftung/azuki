@@ -173,6 +173,11 @@ export interface GenerationInfo {
 export interface AusbildungsplatzPreview {
 	employer: string;
 	city: string;
+	postcode?: string;
+	district?: string;
+	street?: string;
+	latitude?: number;
+	longitude?: number;
 	/** ISO date string (YYYY-MM-DD) for the start of the Ausbildung. */
 	eintrittsdatum?: string;
 	/** ISO date string (YYYY-MM-DD) when the posting was last published. */

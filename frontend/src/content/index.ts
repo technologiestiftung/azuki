@@ -392,6 +392,7 @@ export const content = {
 	"vacancies.filter.occupations.title.short": "Beruf",
 	"vacancies.filter.occupations.filterButton.ariaLabel": "Berufe filtern",
 	"vacancies.startDate": "Beginn ab",
+	"vacancies.location.openMaps": "{location} in Karte öffnen",
 	"vacancies.published.today": "Heute veröffentlicht",
 	"vacancies.published.yesterday": "Gestern veröffentlicht",
 	"vacancies.published.daysAgo": "Vor {days} Tagen veröffentlicht",

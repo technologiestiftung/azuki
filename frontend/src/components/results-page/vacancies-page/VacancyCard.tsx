@@ -1,6 +1,10 @@
 import type { AusbildungsplatzPreview } from "@azuki/shared";
 import { formatOccupationDisplayName } from "@azuki/shared";
 import { content } from "../../../content";
+import {
+	buildVacancyMapsUrl,
+	formatVacancyLocation,
+} from "../utils/formatVacancyLocation";
 
 const NEW_VACANCY_MAX_DAYS = 3;
 
@@ -68,6 +72,8 @@ export function VacancyCard({
 	const daysSince = daysSincePublished(preview.publishedAt);
 	const isNew = daysSince !== null && daysSince <= NEW_VACANCY_MAX_DAYS;
 	const displayName = formatOccupationDisplayName(occupationName);
+	const locationLabel = formatVacancyLocation(preview);
+	const mapsUrl = buildVacancyMapsUrl(preview);
 
 	return (
 		<div className="bg-gray-100 rounded-2xl border border-gray-200 overflow-hidden">
@@ -122,7 +128,22 @@ export function VacancyCard({
 							alt=""
 							className="h-4 w-4 shrink-0"
 						/>
-						<span>{preview.city}</span>
+						{mapsUrl ? (
+							<a
+								href={mapsUrl}
+								target="_blank"
+								rel="noopener noreferrer"
+								className="underline-offset-4 underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-sky-500"
+								aria-label={content["vacancies.location.openMaps"].replace(
+									"{location}",
+									locationLabel,
+								)}
+							>
+								{locationLabel}
+							</a>
+						) : (
+							<span>{locationLabel}</span>
+						)}
 					</div>
 				</div>
 			</div>
