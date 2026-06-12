@@ -1,4 +1,4 @@
-import type { AusbildungsplatzPreview } from "@azuki/shared";
+import type { VacancyPreview } from "@azuki/shared";
 
 const UNKNOWN_LOCATION = "Unbekannter Ort";
 
@@ -6,9 +6,7 @@ function hasValue(value: string | undefined): value is string {
 	return Boolean(value && value !== "null");
 }
 
-export function formatVacancyLocation(
-	preview: AusbildungsplatzPreview,
-): string {
+export function formatVacancyLocation(preview: VacancyPreview): string {
 	const parts: string[] = [];
 
 	if (hasValue(preview.street)) {
@@ -34,7 +32,7 @@ export function formatVacancyLocation(
 	return parts.join(", ") || preview.city || UNKNOWN_LOCATION;
 }
 
-function hasCoordinates(preview: AusbildungsplatzPreview): boolean {
+function hasCoordinates(preview: VacancyPreview): boolean {
 	return (
 		typeof preview.latitude === "number" &&
 		Number.isFinite(preview.latitude) &&
@@ -43,9 +41,7 @@ function hasCoordinates(preview: AusbildungsplatzPreview): boolean {
 	);
 }
 
-export function buildVacancyMapsUrl(
-	preview: AusbildungsplatzPreview,
-): string | null {
+export function buildVacancyMapsUrl(preview: VacancyPreview): string | null {
 	if (hasCoordinates(preview)) {
 		const query = `${preview.latitude},${preview.longitude}`;
 		return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(query)}`;

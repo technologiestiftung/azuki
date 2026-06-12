@@ -1,7 +1,4 @@
-import type {
-	AusbildungsplatzResult,
-	AusbildungsplatzPreview,
-} from "@azuki/shared";
+import type { VacancyResult, VacancyPreview } from "@azuki/shared";
 
 const JOBSUCHE_BASE =
 	"https://rest.arbeitsagentur.de/jobboerse/jobsuche-service/pc/v4/jobs";
@@ -81,7 +78,7 @@ function emptyResult(
 	occupation: string,
 	postcode: string,
 	distance: number,
-): AusbildungsplatzResult {
+): VacancyResult {
 	return {
 		occupation,
 		totalCount: 0,
@@ -93,11 +90,11 @@ function emptyResult(
 // Always resolves with a valid result shape — never rejects. Callers fan this
 // out via `Promise.all`, so any rejection (network error, JSON parse failure,
 // timeout) would 500 the whole batch even when only one beruf failed.
-export async function searchAusbildungsplaetze(
+export async function searchVacancies(
 	occupation: string,
 	postcode: string,
 	distance: number = DEFAULT_RADIUS_KM,
-): Promise<AusbildungsplatzResult> {
+): Promise<VacancyResult> {
 	const params = new URLSearchParams({
 		was: occupation,
 		wo: postcode,
@@ -131,7 +128,7 @@ export async function searchAusbildungsplaetze(
 				? Math.round((rawTotal * ausbildungenInSample.length) / sample.length)
 				: rawTotal;
 
-		const previews: AusbildungsplatzPreview[] = [...ausbildungenInSample]
+		const previews: VacancyPreview[] = [...ausbildungenInSample]
 			.sort(
 				(a, b) =>
 					new Date(b.aktuelleVeroeffentlichungsdatum ?? 0).getTime() -
@@ -156,7 +153,7 @@ export async function searchAusbildungsplaetze(
 						typeof longitude === "number" && Number.isFinite(longitude)
 							? longitude
 							: undefined,
-					eintrittsdatum: job.eintrittsdatum,
+					startDate: job.eintrittsdatum,
 					publishedAt: job.aktuelleVeroeffentlichungsdatum,
 				};
 			});

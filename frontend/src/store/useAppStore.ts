@@ -5,7 +5,7 @@ import {
 	type EducationLevel,
 	type WorkPreferenceChoice,
 	type NoGoAnswer,
-	type AusbildungsplaetzeResponse,
+	type VacanciesResponse,
 } from "../common";
 import { initialUserProfile } from "../profile/initialUserProfile";
 import { useMatchResultsStore } from "./useMatchResultsStore";
@@ -40,20 +40,20 @@ function normalizeProfile(
 }
 
 // Clears anything derived from the user's profile or matched berufe.
-// `useMatchResultsStore` lives in a separate store; `ausbildungsplaetze` is
-// keyed to the previous match results, so it must be invalidated together.
+// `useMatchResultsStore` lives in a separate store; `vacancies` is keyed to
+// the previous match results, so it must be invalidated together.
 function clearMatchResults(): void {
 	useMatchResultsStore.getState().clearMatchResults();
 	useAppStore.setState({
-		ausbildungsplaetze: null,
-		ausbildungsplaetzeFetchError: null,
+		vacancies: null,
+		vacanciesFetchError: null,
 	});
 }
 
 interface AppState {
 	profile: UserProfile;
-	ausbildungsplaetze: AusbildungsplaetzeResponse | null;
-	ausbildungsplaetzeFetchError: string | null;
+	vacancies: VacanciesResponse | null;
+	vacanciesFetchError: string | null;
 	location: Location;
 }
 
@@ -74,8 +74,8 @@ interface AppActions {
 	setNoGo: (id: string, answer: NoGoAnswer | null) => void;
 	addCustomNoGo: (noGo: string) => void;
 	toggleCustomNoGo: (noGo: string) => void;
-	setAusbildungsplaetze: (results: AusbildungsplaetzeResponse | null) => void;
-	setAusbildungsplaetzeFetchError: (error: string | null) => void;
+	setVacancies: (results: VacanciesResponse | null) => void;
+	setVacanciesFetchError: (error: string | null) => void;
 	setLocation: (location: Partial<Location>) => void;
 	resetProfile: () => void;
 }
@@ -84,8 +84,8 @@ export const useAppStore = create<AppState & AppActions>()(
 	persist(
 		(set) => ({
 			profile: initialUserProfile,
-			ausbildungsplaetze: null,
-			ausbildungsplaetzeFetchError: null,
+			vacancies: null,
+			vacanciesFetchError: null,
 			location: DEFAULT_LOCATION,
 
 			setInSchool: (value) =>
@@ -301,22 +301,21 @@ export const useAppStore = create<AppState & AppActions>()(
 				});
 			},
 
-			setAusbildungsplaetze: (results) =>
+			setVacancies: (results) =>
 				set({
-					ausbildungsplaetze: results,
-					ausbildungsplaetzeFetchError: null,
+					vacancies: results,
+					vacanciesFetchError: null,
 				}),
 
-			setAusbildungsplaetzeFetchError: (error) =>
-				set({ ausbildungsplaetzeFetchError: error }),
+			setVacanciesFetchError: (error) => set({ vacanciesFetchError: error }),
 
 			setLocation: (location) =>
 				set((state) => ({
 					location: { ...state.location, ...location },
 					// Changing location invalidates per-beruf counts since they
 					// were fetched for the previous location.
-					ausbildungsplaetze: null,
-					ausbildungsplaetzeFetchError: null,
+					vacancies: null,
+					vacanciesFetchError: null,
 				})),
 
 			resetProfile: () => {

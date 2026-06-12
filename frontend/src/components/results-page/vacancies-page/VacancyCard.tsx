@@ -1,4 +1,4 @@
-import type { AusbildungsplatzPreview } from "@azuki/shared";
+import type { VacancyPreview } from "@azuki/shared";
 import { formatOccupationDisplayName } from "@azuki/shared";
 import { content } from "../../../content";
 import {
@@ -56,7 +56,7 @@ function formatPublishedLabel(iso: string | undefined): string | null {
 
 export interface VacancyCardProps {
 	occupationName: string;
-	preview: AusbildungsplatzPreview;
+	preview: VacancyPreview;
 	isFavorite: boolean;
 	onToggleFavorite: () => void;
 }
@@ -67,7 +67,7 @@ export function VacancyCard({
 	isFavorite,
 	onToggleFavorite,
 }: VacancyCardProps) {
-	const startDate = formatStartDate(preview.eintrittsdatum);
+	const startDate = formatStartDate(preview.startDate);
 	const publishedLabel = formatPublishedLabel(preview.publishedAt);
 	const daysSince = daysSincePublished(preview.publishedAt);
 	const isNew = daysSince !== null && daysSince <= NEW_VACANCY_MAX_DAYS;

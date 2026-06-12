@@ -1,5 +1,5 @@
 import { useCallback, useMemo, useState } from "react";
-import type { AusbildungsplatzPreview, MatchedOccupation } from "@azuki/shared";
+import type { VacancyPreview, MatchedOccupation } from "@azuki/shared";
 import { useMatchResultsStore } from "../../../store/useMatchResultsStore";
 import { useAppStore } from "../../../store/useAppStore";
 import { content } from "../../../content";
@@ -31,7 +31,7 @@ const DEFAULT_OCCUPATION_FILTERS: OccupationsFilterState = {
 interface VacancyListItem {
 	key: string;
 	occupation: MatchedOccupation;
-	preview: AusbildungsplatzPreview;
+	preview: VacancyPreview;
 }
 
 function publishedAtTimestamp(iso: string | undefined): number {
@@ -86,8 +86,8 @@ export function VacanciesPage() {
 	const toggleVacancyFavorite = useMatchResultsStore(
 		(state) => state.toggleVacancyFavorite,
 	);
-	const ausbildungsplaetze = useAppStore((state) => state.ausbildungsplaetze);
-	const fetchError = useAppStore((state) => state.ausbildungsplaetzeFetchError);
+	const vacancies = useAppStore((state) => state.vacancies);
+	const fetchError = useAppStore((state) => state.vacanciesFetchError);
 	const location = useAppStore((state) => state.location);
 	const setLocation = useAppStore((state) => state.setLocation);
 	const occupations = matchResults?.occupations ?? [];
@@ -98,9 +98,7 @@ export function VacanciesPage() {
 	});
 	const [showFavoritesOnly, setShowFavoritesOnly] = useState(false);
 	const loading =
-		occupations.length > 0 &&
-		ausbildungsplaetze === null &&
-		fetchError === null;
+		occupations.length > 0 && vacancies === null && fetchError === null;
 
 	const favoriteVacancyKeySet = useMemo(
 		() => new Set(favoriteVacancyKeys),
@@ -148,22 +146,19 @@ export function VacanciesPage() {
 	const vacanciesByName = useMemo(
 		() =>
 			new Map(
-				ausbildungsplaetze?.results.map((result) => [
-					result.occupation,
-					result,
-				]) ?? [],
+				vacancies?.results.map((result) => [result.occupation, result]) ?? [],
 			),
-		[ausbildungsplaetze],
+		[vacancies],
 	);
 
 	const vacancyCards = useMemo((): VacancyListItem[] => {
 		const cards: VacancyListItem[] = [];
 		for (const occupation of visibleOccupations) {
-			const vacancies = vacanciesByName.get(occupation.rawName);
-			if (!vacancies?.previews.length) {
+			const vacancyResult = vacanciesByName.get(occupation.rawName);
+			if (!vacancyResult?.previews.length) {
 				continue;
 			}
-			for (const [index, preview] of vacancies.previews.entries()) {
+			for (const [index, preview] of vacancyResult.previews.entries()) {
 				const key = buildVacancyCardKey(occupation.id, preview, index);
 				if (showFavoritesOnly && !favoriteVacancyKeySet.has(key)) {
 					continue;
@@ -186,7 +181,7 @@ export function VacanciesPage() {
 	const locationFilterApplied = hasCustomLocationFilter(
 		locationFilter.appliedValue,
 	);
-	const hasLoadedVacancies = ausbildungsplaetze !== null && fetchError === null;
+	const hasLoadedVacancies = vacancies !== null && fetchError === null;
 	const noVacancyResults =
 		fetchError !== null || (hasLoadedVacancies && vacancyCards.length === 0);
 	const { showSimpleEmpty, showDetailedEmpty } = getVacancyEmptyState({

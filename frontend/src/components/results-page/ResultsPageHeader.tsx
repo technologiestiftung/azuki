@@ -5,32 +5,32 @@ import { content } from "../../content";
 import { useAppStore } from "../../store/useAppStore";
 import { useMatchResultsStore } from "../../store/useMatchResultsStore";
 import { TabBar } from "../primitives/tab-bar/TabBar";
-import { useFetchAusbildungsplaetze } from "./useFetchAusbildungsplaetze";
+import { useFetchVacancies } from "./useFetchVacancies";
 
 interface ResultsPageHeaderProps {
 	title: string;
 }
 
 export function ResultsPageHeader({ title }: ResultsPageHeaderProps) {
-	useFetchAusbildungsplaetze();
+	useFetchVacancies();
 	const navigate = useNavigate();
 	const { pathname } = useLocation();
 	const matchResults = useMatchResultsStore((state) => state.matchResults);
-	const ausbildungsplaetze = useAppStore((state) => state.ausbildungsplaetze);
+	const vacancies = useAppStore((state) => state.vacancies);
 
 	const vacanciesCount = useMemo(() => {
-		if (!matchResults || !ausbildungsplaetze) {
+		if (!matchResults || !vacancies) {
 			return undefined;
 		}
 		const vacanciesByName = new Map(
-			ausbildungsplaetze.results.map((result) => [result.occupation, result]),
+			vacancies.results.map((result) => [result.occupation, result]),
 		);
 		return matchResults.occupations.reduce((count, occupation) => {
 			const previews =
 				vacanciesByName.get(occupation.rawName)?.previews.length ?? 0;
 			return count + previews;
 		}, 0);
-	}, [matchResults, ausbildungsplaetze]);
+	}, [matchResults, vacancies]);
 
 	const tabs = [
 		{

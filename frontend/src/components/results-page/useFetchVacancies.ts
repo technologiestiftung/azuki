@@ -1,34 +1,32 @@
 import { useEffect } from "react";
 import { useAppStore } from "../../store/useAppStore";
 import { useMatchResultsStore } from "../../store/useMatchResultsStore";
-import { fetchAusbildungsplaetze } from "../../api/client";
+import { fetchVacancies } from "../../api/client";
 import { content } from "../../content";
 
 /** Prefetch vacancy previews as soon as results are shown (both tabs share the header). */
-export function useFetchAusbildungsplaetze(): void {
+export function useFetchVacancies(): void {
 	const matchResults = useMatchResultsStore((state) => state.matchResults);
-	const ausbildungsplaetze = useAppStore((state) => state.ausbildungsplaetze);
-	const setAusbildungsplaetze = useAppStore(
-		(state) => state.setAusbildungsplaetze,
-	);
-	const setAusbildungsplaetzeFetchError = useAppStore(
-		(state) => state.setAusbildungsplaetzeFetchError,
+	const vacancies = useAppStore((state) => state.vacancies);
+	const setVacancies = useAppStore((state) => state.setVacancies);
+	const setVacanciesFetchError = useAppStore(
+		(state) => state.setVacanciesFetchError,
 	);
 	const location = useAppStore((state) => state.location);
 	const occupations = matchResults?.occupations ?? [];
 
 	useEffect(() => {
-		if (occupations.length === 0 || ausbildungsplaetze !== null) {
+		if (occupations.length === 0 || vacancies !== null) {
 			return () => {};
 		}
 
 		const controller = new AbortController();
 		const occupationNames = occupations.map((occupation) => occupation.rawName);
-		setAusbildungsplaetzeFetchError(null);
+		setVacanciesFetchError(null);
 
 		(async () => {
 			try {
-				const response = await fetchAusbildungsplaetze(
+				const response = await fetchVacancies(
 					location.postcode,
 					occupationNames,
 					{
@@ -37,7 +35,7 @@ export function useFetchAusbildungsplaetze(): void {
 					},
 				);
 				if (!controller.signal.aborted) {
-					setAusbildungsplaetze(response);
+					setVacancies(response);
 				}
 			} catch (err) {
 				if (controller.signal.aborted) {
@@ -46,7 +44,7 @@ export function useFetchAusbildungsplaetze(): void {
 				if (err instanceof DOMException && err.name === "AbortError") {
 					return;
 				}
-				setAusbildungsplaetzeFetchError(content["results.fetchError"]);
+				setVacanciesFetchError(content["results.fetchError"]);
 			}
 		})();
 
@@ -54,10 +52,10 @@ export function useFetchAusbildungsplaetze(): void {
 			controller.abort();
 		};
 	}, [
-		ausbildungsplaetze,
+		vacancies,
 		occupations,
-		setAusbildungsplaetze,
-		setAusbildungsplaetzeFetchError,
+		setVacancies,
+		setVacanciesFetchError,
 		location.postcode,
 		location.distance,
 	]);
