@@ -4,9 +4,11 @@ const JOBSUCHE_BASE =
 	"https://rest.arbeitsagentur.de/jobboerse/jobsuche-service/pc/v4/jobs";
 const API_KEY = "jobboerse-jobsuche";
 const DEFAULT_RADIUS_KM = 25;
-const MAX_PREVIEWS = 10;
-// Fetch more than we display so client-side filtering (Duales Studium removal)
-// can drop entries without leaving us short of previews.
+// limit to 10 weeks to avoid showing vacancies that are too old
+const MAX_PUBLISHED_WEEKS = 10;
+// Convert weeks to ms so we can compare against `Date.now() - published.getTime()`.
+const MS_PER_WEEK = 7 * 24 * 60 * 60 * 1000;
+const MAX_PUBLISHED_AGE_MS = MAX_PUBLISHED_WEEKS * MS_PER_WEEK;
 const SAMPLE_SIZE = 10;
 const REQUEST_TIMEOUT_MS = 5000;
 
@@ -61,6 +63,18 @@ function buildSearchUrl(
 		angebotsart: "4",
 	});
 	return `https://www.arbeitsagentur.de/jobsuche/suche?${params.toString()}`;
+}
+
+function isPublishedWithinMaxAge(publishedAt: string | undefined): boolean {
+	if (!publishedAt) {
+		return false;
+	}
+	const published = new Date(publishedAt);
+	if (Number.isNaN(published.getTime())) {
+		return false;
+	}
+	const ageMs = Date.now() - published.getTime();
+	return ageMs >= 0 && ageMs < MAX_PUBLISHED_AGE_MS;
 }
 
 function isAusbildung(job: JobsucheJob): boolean {
@@ -129,12 +143,14 @@ export async function searchVacancies(
 				: rawTotal;
 
 		const previews: VacancyPreview[] = [...ausbildungenInSample]
+			.filter((job) =>
+				isPublishedWithinMaxAge(job.aktuelleVeroeffentlichungsdatum),
+			)
 			.sort(
 				(a, b) =>
 					new Date(b.aktuelleVeroeffentlichungsdatum ?? 0).getTime() -
 					new Date(a.aktuelleVeroeffentlichungsdatum ?? 0).getTime(),
 			)
-			.slice(0, MAX_PREVIEWS)
 			.map((job) => {
 				const location = job.arbeitsort;
 				const latitude = location?.koordinaten?.lat;
