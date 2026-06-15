@@ -376,7 +376,8 @@ export const content = {
 	"results.filter.location.filterButton.ariaLabel": "Ort filtern",
 	"results.region": "Berlin und Brandenburg",
 	"results.filter.location.distance.title": "Umkreis",
-	"results.filter.location.currentLocation.button.label": "in meiner Nähe",
+	"results.filter.location.currentLocation.button.label":
+		"in meiner Nähe suchen",
 	"results.filter.location.currentLocation.ariaLabel": "in meiner Nähe suchen",
 	"results.filter.location.error.unavailable":
 		"Standortbestimmung wird von diesem Gerät nicht unterstützt.",
