@@ -74,9 +74,9 @@ export function ResultCard({ occupation }: ResultCardProps) {
 					</div>
 				)}
 
-				{occupation.taskSummary && (
+				{occupation.shortDescription && (
 					<p className="text-base text-gray-700 line-clamp-3">
-						{occupation.taskSummary}
+						{occupation.shortDescription}
 					</p>
 				)}
 			</div>

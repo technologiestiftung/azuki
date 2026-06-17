@@ -10,6 +10,7 @@ import {
 } from "@azuki/shared";
 import { occupationMatchMeta } from "./occupationMeta";
 import { preFilter, PREFILTER_TOP_K } from "./matching/index.js";
+import { resolveOccupationShortDescription } from "@azuki/shared";
 import { aiRank, buildSystemPrompt } from "./ai/index.js";
 import occupationsData from "./data/berufe.json";
 import { AusbildungsplaetzeRequestSchema } from "./schemas/ausbildungsplaetze.js";
@@ -143,7 +144,7 @@ app.post("/api/match", async (c) => {
 				rawName: scored.occupation.name,
 				score: scored.score,
 				images: scored.occupation.images.slice(0, 3),
-				taskSummary: scored.occupation.taskSummary || "",
+				shortDescription: resolveOccupationShortDescription(scored.occupation),
 				reasoning: "Dieser Beruf passt zu deinem Profil.",
 				...occupationMatchMeta(scored.occupation),
 			})),

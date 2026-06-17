@@ -5,7 +5,7 @@
  * Usage: npx tsx scripts/fetch-berufe.ts
  */
 
-import { writeFileSync, mkdirSync } from "node:fs";
+import { writeFileSync, mkdirSync, readFileSync, existsSync } from "node:fs";
 import { resolve, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 import type {
@@ -739,6 +739,27 @@ async function main() {
   const outDir = resolve(__dirname, "../backend/src/data");
   mkdirSync(outDir, { recursive: true });
   const outPath = resolve(outDir, "berufe.json");
+
+  if (existsSync(outPath)) {
+    const previous: Occupation[] = JSON.parse(readFileSync(outPath, "utf-8"));
+    const shortById = new Map(
+      previous
+        .filter((occ) => occ.shortDescription?.trim())
+        .map((occ) => [occ.id, occ.shortDescription!.trim()] as const),
+    );
+    let preserved = 0;
+    for (const occ of occupations) {
+      const existing = shortById.get(occ.id);
+      if (existing) {
+        occ.shortDescription = existing;
+        preserved++;
+      }
+    }
+    console.log(
+      `Step 2e: Preserved ${preserved} pre-generated shortDescription(s) from existing catalog.\n`,
+    );
+  }
+
   writeFileSync(outPath, JSON.stringify(occupations, null, 2), "utf-8");
   console.log(`Step 3: Saved to ${outPath}`);
 
