@@ -5,10 +5,22 @@ import {
 	type EducationLevel,
 	type WorkPreferenceChoice,
 	type NoGoAnswer,
-	type AusbildungsplaetzeResponse,
+	type VacanciesResponse,
 } from "../common";
 import { initialUserProfile } from "../profile/initialUserProfile";
+import { shouldPrefillProfile } from "../profile/prefillConfig";
 import { useMatchResultsStore } from "./useMatchResultsStore";
+
+const noopStorage: Storage = {
+	get length() {
+		return 0;
+	},
+	key: () => null,
+	getItem: () => null,
+	setItem: () => {},
+	removeItem: () => {},
+	clear: () => {},
+};
 
 export interface Location {
 	postcode: string;
@@ -41,16 +53,20 @@ function normalizeProfile(
 }
 
 // Clears anything derived from the user's profile or matched berufe.
-// `useMatchResultsStore` lives in a separate store; `ausbildungsplaetze` is
-// keyed to the previous match results, so it must be invalidated together.
+// `useMatchResultsStore` lives in a separate store; `vacancies` is keyed to
+// the previous match results, so it must be invalidated together.
 function clearMatchResults(): void {
 	useMatchResultsStore.getState().clearMatchResults();
-	useAppStore.setState({ ausbildungsplaetze: null });
+	useAppStore.setState({
+		vacancies: null,
+		vacanciesFetchError: null,
+	});
 }
 
 interface AppState {
 	profile: UserProfile;
-	ausbildungsplaetze: AusbildungsplaetzeResponse | null;
+	vacancies: VacanciesResponse | null;
+	vacanciesFetchError: string | null;
 	location: Location;
 }
 
@@ -71,7 +87,8 @@ interface AppActions {
 	setNoGo: (id: string, answer: NoGoAnswer | null) => void;
 	addCustomNoGo: (noGo: string) => void;
 	toggleCustomNoGo: (noGo: string) => void;
-	setAusbildungsplaetze: (results: AusbildungsplaetzeResponse | null) => void;
+	setVacancies: (results: VacanciesResponse | null) => void;
+	setVacanciesFetchError: (error: string | null) => void;
 	setLocation: (location: Partial<Location>) => void;
 	resetProfile: () => void;
 }
@@ -80,7 +97,8 @@ export const useAppStore = create<AppState & AppActions>()(
 	persist(
 		(set) => ({
 			profile: initialUserProfile,
-			ausbildungsplaetze: null,
+			vacancies: null,
+			vacanciesFetchError: null,
 			location: DEFAULT_LOCATION,
 
 			setInSchool: (value) =>
@@ -296,14 +314,21 @@ export const useAppStore = create<AppState & AppActions>()(
 				});
 			},
 
-			setAusbildungsplaetze: (results) => set({ ausbildungsplaetze: results }),
+			setVacancies: (results) =>
+				set({
+					vacancies: results,
+					vacanciesFetchError: null,
+				}),
+
+			setVacanciesFetchError: (error) => set({ vacanciesFetchError: error }),
 
 			setLocation: (location) =>
 				set((state) => ({
 					location: { ...state.location, ...location },
 					// Changing location invalidates per-beruf counts since they
 					// were fetched for the previous location.
-					ausbildungsplaetze: null,
+					vacancies: null,
+					vacanciesFetchError: null,
 				})),
 
 			resetProfile: () => {
@@ -315,7 +340,9 @@ export const useAppStore = create<AppState & AppActions>()(
 		}),
 		{
 			name: "azuki-app-store",
-			storage: createJSONStorage(() => sessionStorage),
+			storage: createJSONStorage(() =>
+				shouldPrefillProfile ? noopStorage : sessionStorage,
+			),
 			partialize: (state) => ({
 				profile: state.profile,
 				location: state.location,

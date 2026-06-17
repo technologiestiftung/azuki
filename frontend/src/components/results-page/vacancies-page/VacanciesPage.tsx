@@ -1,18 +1,21 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
-import type { MatchedOccupation } from "@azuki/shared";
+import type { VacancyPreview, MatchedOccupation } from "@azuki/shared";
 import { useMatchResultsStore } from "../../../store/useMatchResultsStore";
 import { useAppStore } from "../../../store/useAppStore";
-import { fetchAusbildungsplaetze } from "../../../api/client";
 import { content } from "../../../content";
 import {
-	OccupationTagsFilterBottomSheet,
-	type OccupationTagsFilterState,
-} from "../../filter-bottom-sheet/OccupationTagsFilterBottomSheet";
+	OccupationsFilterBottomSheet,
+	type OccupationsFilterState,
+} from "../../filter-bottom-sheet/OccupationsFilterBottomSheet";
 import { useFilterSheet } from "../../filter-bottom-sheet/useFilterSheet";
 import { ResultsPageHeader } from "../ResultsPageHeader";
 import { ResultsFilterBar } from "../ResultsFilterBar";
-import { buildResultTagChips } from "../utils/resultTagChips";
-import { applyOccupationFilters } from "../utils/applyOccupationFilters";
+import {
+	buildOccupationFilterChips,
+	getOccupationFilterLabel,
+} from "../utils/occupationFilterChips";
+import { applyVacancyOccupationFilters } from "../utils/applyVacancyOccupationFilters";
+import { buildVacancyCardKey } from "../utils/vacancyCardKey";
 import {
 	LocationFilterBottomSheet,
 	DEFAULT_LOCATION_FILTER,
@@ -21,54 +24,103 @@ import {
 import { hasCustomLocationFilter } from "../../filter-bottom-sheet/plzLocality";
 import { VacancyCard } from "./VacancyCard";
 
-const DEFAULT_TAG_FILTERS: OccupationTagsFilterState = {
-	selectedOccupationTypeTagIds: [],
+const DEFAULT_OCCUPATION_FILTERS: OccupationsFilterState = {
+	selectedOccupationIds: [],
 };
+
+interface VacancyListItem {
+	key: string;
+	occupation: MatchedOccupation;
+	preview: VacancyPreview;
+}
+
+function publishedAtTimestamp(iso: string | undefined): number {
+	if (!iso) {
+		return 0;
+	}
+	const time = new Date(iso).getTime();
+	return Number.isNaN(time) ? 0 : time;
+}
+
+function compareVacanciesByPublishedAt(
+	a: VacancyListItem,
+	b: VacancyListItem,
+): number {
+	return (
+		publishedAtTimestamp(b.preview.publishedAt) -
+		publishedAtTimestamp(a.preview.publishedAt)
+	);
+}
+
+function getVacancyEmptyState({
+	visibleOccupationCount,
+	locationFilterApplied,
+	showFavoritesOnly,
+	loading,
+	noVacancyResults,
+}: {
+	visibleOccupationCount: number;
+	locationFilterApplied: boolean;
+	showFavoritesOnly: boolean;
+	loading: boolean;
+	noVacancyResults: boolean;
+}) {
+	const showSimpleEmpty =
+		visibleOccupationCount === 0 ||
+		(locationFilterApplied && !loading && noVacancyResults) ||
+		(showFavoritesOnly && !loading && noVacancyResults);
+	const showDetailedEmpty =
+		!locationFilterApplied &&
+		!showFavoritesOnly &&
+		!loading &&
+		noVacancyResults &&
+		visibleOccupationCount > 0;
+	return { showSimpleEmpty, showDetailedEmpty };
+}
 
 export function VacanciesPage() {
 	const matchResults = useMatchResultsStore((state) => state.matchResults);
-	const favoriteOccupationIds = useMatchResultsStore(
-		(state) => state.favoriteOccupationIds,
+	const favoriteVacancyKeys = useMatchResultsStore(
+		(state) => state.favoriteVacancyKeys,
 	);
-	const ausbildungsplaetze = useAppStore((state) => state.ausbildungsplaetze);
-	const setAusbildungsplaetze = useAppStore(
-		(state) => state.setAusbildungsplaetze,
+	const toggleVacancyFavorite = useMatchResultsStore(
+		(state) => state.toggleVacancyFavorite,
 	);
+	const vacancies = useAppStore((state) => state.vacancies);
+	const fetchError = useAppStore((state) => state.vacanciesFetchError);
 	const location = useAppStore((state) => state.location);
 	const setLocation = useAppStore((state) => state.setLocation);
 	const occupations = matchResults?.occupations ?? [];
-	const tagFilter = useFilterSheet(DEFAULT_TAG_FILTERS);
+	const occupationFilter = useFilterSheet(DEFAULT_OCCUPATION_FILTERS);
 	const locationFilter = useFilterSheet(DEFAULT_LOCATION_FILTER, {
 		postcode: location.postcode,
 		distance: location.distance,
 		locality: location.locality ?? null,
 	});
 	const [showFavoritesOnly, setShowFavoritesOnly] = useState(false);
-	const [fetchError, setFetchError] = useState<string | null>(null);
-	const [loading, setLoading] = useState(false);
+	const loading =
+		occupations.length > 0 && vacancies === null && fetchError === null;
 
-	const favoriteIds = useMemo(
-		() => new Set(favoriteOccupationIds),
-		[favoriteOccupationIds],
+	const favoriteVacancyKeySet = useMemo(
+		() => new Set(favoriteVacancyKeys),
+		[favoriteVacancyKeys],
 	);
 
 	const visibleOccupations = useMemo(
 		() =>
-			applyOccupationFilters(occupations, {
-				filters: tagFilter.appliedValue,
-				showFavoritesOnly,
-				favoriteIds,
+			applyVacancyOccupationFilters(occupations, {
+				filters: occupationFilter.appliedValue,
 			}),
-		[occupations, tagFilter.appliedValue, showFavoritesOnly, favoriteIds],
+		[occupations, occupationFilter.appliedValue],
 	);
 
-	const occupationTypeTagChips = useMemo(
-		() => buildResultTagChips(occupations),
+	const occupationFilterChips = useMemo(
+		() => buildOccupationFilterChips(occupations),
 		[occupations],
 	);
 
-	const openTagFilter = tagFilter.open;
-	const closeTagFilter = tagFilter.close;
+	const openOccupationFilter = occupationFilter.open;
+	const closeOccupationFilter = occupationFilter.close;
 	const openLocationFilter = locationFilter.open;
 	const closeLocationFilter = locationFilter.close;
 
@@ -110,65 +162,54 @@ export function VacanciesPage() {
 		locationFilter.apply,
 	]);
 
-	useEffect(() => {
-		if (occupations.length === 0 || ausbildungsplaetze !== null) {
-			return () => {};
-		}
-		const controller = new AbortController();
-		const occupationNames = occupations.map((o) => o.rawName);
-		setFetchError(null);
-		setLoading(true);
-		(async () => {
-			try {
-				const response = await fetchAusbildungsplaetze(
-					location.postcode,
-					occupationNames,
-					{
-						distance: location.distance,
-						signal: controller.signal,
-					},
-				);
-				if (!controller.signal.aborted) {
-					setAusbildungsplaetze(response);
-				}
-			} catch (err) {
-				if (controller.signal.aborted) {
-					return;
-				}
-				if (err instanceof DOMException && err.name === "AbortError") {
-					return;
-				}
-				setFetchError(content["results.fetchError"]);
-			} finally {
-				if (!controller.signal.aborted) {
-					setLoading(false);
-				}
-			}
-		})();
-		return () => {
-			controller.abort();
-		};
-	}, [
-		ausbildungsplaetze,
-		occupations,
-		setAusbildungsplaetze,
-		location.postcode,
-		location.distance,
-	]);
-
-	const vacanciesByName = new Map(
-		ausbildungsplaetze?.results.map((r) => [r.occupation, r]) ?? [],
+	const vacanciesByName = useMemo(
+		() =>
+			new Map(
+				vacancies?.results.map((result) => [result.occupation, result]) ?? [],
+			),
+		[vacancies],
 	);
+
+	const vacancyCards = useMemo((): VacancyListItem[] => {
+		const cards: VacancyListItem[] = [];
+		for (const occupation of visibleOccupations) {
+			const vacancyResult = vacanciesByName.get(occupation.rawName);
+			if (!vacancyResult?.previews.length) {
+				continue;
+			}
+			for (const [index, preview] of vacancyResult.previews.entries()) {
+				const key = buildVacancyCardKey(occupation.id, preview, index);
+				if (showFavoritesOnly && !favoriteVacancyKeySet.has(key)) {
+					continue;
+				}
+				cards.push({
+					key,
+					occupation,
+					preview,
+				});
+			}
+		}
+		return cards.sort(compareVacanciesByPublishedAt);
+	}, [
+		visibleOccupations,
+		vacanciesByName,
+		showFavoritesOnly,
+		favoriteVacancyKeySet,
+	]);
 
 	const locationFilterApplied = hasCustomLocationFilter(
 		locationFilter.appliedValue,
 	);
-	const noVacancyResults = fetchError !== null || vacanciesByName.size === 0;
-	const showSimpleEmpty =
-		visibleOccupations.length === 0 ||
-		(locationFilterApplied && noVacancyResults);
-	const showDetailedEmpty =
-		!locationFilterApplied && noVacancyResults && visibleOccupations.length > 0;
+	const hasLoadedVacancies = vacancies !== null && fetchError === null;
+	const noVacancyResults =
+		fetchError !== null || (hasLoadedVacancies && vacancyCards.length === 0);
+	const { showSimpleEmpty, showDetailedEmpty } = getVacancyEmptyState({
+		visibleOccupationCount: visibleOccupations.length,
+		locationFilterApplied,
+		showFavoritesOnly,
+		loading,
+		noVacancyResults,
+	});
 
 	return (
 		<>
@@ -177,22 +218,32 @@ export function VacanciesPage() {
 				<ResultsFilterBar
 					hasLocationFilter={true}
 					appliedLocationFilter={locationFilter.appliedValue}
-					selectedOccupationTypeTagIds={
-						tagFilter.appliedValue.selectedOccupationTypeTagIds
+					selectedOccupationIds={
+						occupationFilter.appliedValue.selectedOccupationIds
 					}
-					onOpenTagFilter={openTagFilter}
+					resolveOccupationFilterLabel={(id) =>
+						getOccupationFilterLabel(id, occupations)
+					}
+					occupationFilterTitle={content["vacancies.filter.occupations.title"]}
+					occupationFilterTitleShort={
+						content["vacancies.filter.occupations.title.short"]
+					}
+					occupationFilterAriaLabel={
+						content["vacancies.filter.occupations.filterButton.ariaLabel"]
+					}
+					onOpenTagFilter={openOccupationFilter}
 					onOpenLocationFilter={openLocationFilter}
 					showFavoritesOnly={showFavoritesOnly}
 					onToggleFavoritesOnly={toggleFavoritesOnly}
 				/>
-				<OccupationTagsFilterBottomSheet
-					key={`tag-${tagFilter.sheetKey}`}
-					open={tagFilter.isOpen}
-					onClose={closeTagFilter}
-					initialFilters={tagFilter.appliedValue}
-					occupationTypeTagChips={occupationTypeTagChips}
-					onApply={tagFilter.apply}
-					onReset={tagFilter.reset}
+				<OccupationsFilterBottomSheet
+					key={`occupation-${occupationFilter.sheetKey}`}
+					open={occupationFilter.isOpen}
+					onClose={closeOccupationFilter}
+					initialFilters={occupationFilter.appliedValue}
+					occupationChips={occupationFilterChips}
+					onApply={occupationFilter.apply}
+					onReset={occupationFilter.reset}
 				/>
 				<LocationFilterBottomSheet
 					key={`location-${locationFilter.sheetKey}`}
@@ -231,15 +282,19 @@ export function VacanciesPage() {
 					</div>
 				) : (
 					<div className="flex-1 px-4 pb-4 space-y-3 overflow-y-auto">
-						{visibleOccupations.map((occupation: MatchedOccupation) => (
-							<VacancyCard
-								key={occupation.id}
-								occupation={occupation}
-								vacancies={vacanciesByName.get(occupation.rawName)}
-								distance={location.distance}
-								loading={loading}
-							/>
-						))}
+						{loading && vacancyCards.length === 0 ? (
+							<p className="py-8 text-center text-sm text-gray-500">…</p>
+						) : (
+							vacancyCards.map(({ key, occupation, preview }) => (
+								<VacancyCard
+									key={key}
+									occupationName={occupation.name}
+									preview={preview}
+									isFavorite={favoriteVacancyKeySet.has(key)}
+									onToggleFavorite={() => toggleVacancyFavorite(key)}
+								/>
+							))
+						)}
 						<div className="flex flex-col gap-5 px-3 py-5 rounded-2xl border border-sky-100 bg-sky-50">
 							<div>
 								<h3 className="text-2xl font-semibold text-sky-1000 text-center mb-[7px]">

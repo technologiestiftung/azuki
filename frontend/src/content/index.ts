@@ -26,6 +26,7 @@ export const content = {
 	"start.description":
 		"Wir stellen dir ein paar Fragen. In nur wenigen Minuten erhältst du dein eigenes Stärkenprofil und siehst Ausbildungen, die gut zu dir passen.",
 	"start.cta": "Los geht's!",
+	"start.cta.prefill": "Zur Ergebnisseite",
 
 	// In School
 	"inSchool.question": "Gehst du zur Schule?",
@@ -349,8 +350,8 @@ export const content = {
 	"results.title": "Deine Ergebnisse",
 	"results.tab.results": "Ausbildungsberufe",
 	"results.tab.results.ariaLabel": "Zur Ausbildungsberufe-Ansicht",
-	"results.tab.freeSpots": "Freie Plätze",
-	"results.tab.freeSpots.ariaLabel": "Zur Freie Plätze-Ansicht",
+	"results.tab.freeSpots": "Freie Stellen",
+	"results.tab.freeSpots.ariaLabel": "Zur Freie Stellen-Ansicht",
 	"results.bottomCard.title": "Kein passender Ausbildungsberuf dabei?",
 	"results.bottomCard.resetCta": "Fragen wiederholen",
 	"results.bottomCard.consultationCta": "Beratung anfragen",
@@ -393,6 +394,16 @@ export const content = {
 	"results.badge.empty": "Keine offenen Stellen",
 	"results.previewHeading": "Beispiele in deiner Nähe",
 	"results.startDatePrefix": "Start:",
+	"vacancies.filter.occupations.title": "Beruf",
+	"vacancies.filter.occupations.title.short": "Beruf",
+	"vacancies.filter.occupations.filterButton.ariaLabel": "Berufe filtern",
+	"vacancies.startDate": "Beginn ab",
+	"vacancies.location.openMaps": "{location} in Karte öffnen",
+	"vacancies.published.today": "Heute veröffentlicht",
+	"vacancies.published.yesterday": "Gestern veröffentlicht",
+	"vacancies.published.daysAgo": "Vor {days} Tagen veröffentlicht",
+	"vacancies.published.oneDayAgo": "Vor 1 Tag veröffentlicht",
+	"vacancies.badge.new": "Neu",
 	"results.showAllLink": "Alle Stellen auf arbeitsagentur.de ansehen",
 	"results.fetchError":
 		"Die Stellen konnten gerade nicht geladen werden. Versuch es später noch einmal.",
