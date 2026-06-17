@@ -54,7 +54,7 @@ export async function runEval(opts: RunEvalOptions): Promise<EvalSnapshot> {
 					score: occ.score,
 					reasoning: occ.reasoning,
 					images: occ.images,
-					taskSummary: occ.taskSummary,
+					shortDescription: occ.shortDescription,
 				}));
 
 				return [

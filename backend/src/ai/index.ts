@@ -8,6 +8,7 @@ import {
 	type GenerationInfo,
 	formatOccupationDisplayName,
 	getPopularityRecord,
+	resolveOccupationShortDescription,
 	AI_MODEL_IDS,
 	DEFAULT_MODEL_ID,
 } from "@azuki/shared";
@@ -776,8 +777,8 @@ export function formatOccupationList(
 		.map((item) => {
 			const occupation = item.occupation;
 			const description =
-				occupation.descriptionShort ||
 				occupation.taskSummary ||
+				occupation.descriptionShort ||
 				occupation.name;
 			const truncatedDesc =
 				description.length > MAX_DESCRIPTION_LENGTH
@@ -825,7 +826,7 @@ function toOccupationResult(
 		rawName: item.occupation.name,
 		score: item.score,
 		images: item.occupation.images.slice(0, 3),
-		taskSummary: item.occupation.taskSummary || "",
+		shortDescription: resolveOccupationShortDescription(item.occupation),
 		reasoning,
 		...meta,
 	};

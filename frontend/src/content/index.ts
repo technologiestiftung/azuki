@@ -339,7 +339,11 @@ export const content = {
 	"navigation.back": "Zurück",
 
 	// Loading
-	"loading.title": "Wir suchen die besten Ausbildungen für dich...",
+	"loading.success.title": "High five",
+	"loading.success.description": "Du hast alle Fragen beantwortet.",
+	"loading.waiting.title": "Wir suchen nach Ausbildungen, die zu dir passen.",
+	"loading.waiting.description":
+		"Einen Moment - gleich geht's zu deinen Ergebnissen.",
 
 	// Results
 	"results.title": "Deine Ergebnisse",
@@ -362,9 +366,9 @@ export const content = {
 	// Filter Bottom Sheet
 	"results.filter.title": "Filter",
 	"results.filter.showFavorites": "Meine Favoriten anzeigen",
-	"results.filter.occupationTypeSection": "Art des Berufs",
+	"results.filter.tagSection": "Berufsgruppen",
 	"results.filter.reset": "Zurücksetzen",
-	"results.filter.apply": "Anwenden",
+	"results.filter.apply": "Ergebnisse anzeigen",
 	"results.filter.settingsAria": "Filtereinstellungen",
 	"results.filter.dismissOverlay": "Schließen",
 	// Standort + Ausbildungsplätze (Arbeitsagentur API integration)
