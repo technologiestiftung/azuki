@@ -4,7 +4,7 @@ import { UserProfileSchema } from "./schemas/userProfile.js";
 import {
 	type Occupation,
 	type MatchResult,
-	type AusbildungsplaetzeResponse,
+	type VacanciesResponse,
 	formatOccupationDisplayName,
 	AI_MODEL_IDS,
 } from "@azuki/shared";
@@ -13,8 +13,10 @@ import { preFilter, PREFILTER_TOP_K } from "./matching/index.js";
 import { resolveOccupationShortDescription } from "@azuki/shared";
 import { aiRank, buildSystemPrompt } from "./ai/index.js";
 import occupationsData from "./data/berufe.json";
-import { AusbildungsplaetzeRequestSchema } from "./schemas/ausbildungsplaetze.js";
-import { searchAusbildungsplaetze } from "./jobsuche/client.js";
+import { VacanciesRequestSchema } from "./schemas/vacancies.js";
+import { ReverseGeocodeRequestSchema } from "./schemas/reverseGeocode.js";
+import { searchVacancies } from "./jobsuche/client.js";
+import { resolveLocationFromCoordinates } from "./nominatim/client.js";
 import { runEval } from "../eval/run.js";
 import { z } from "zod";
 import { getSupabase } from "./supabase.js";
@@ -153,7 +155,7 @@ app.post("/api/match", async (c) => {
 	}
 });
 
-app.post("/api/ausbildungsplaetze", async (c) => {
+app.post("/api/vacancies", async (c) => {
 	if (!isAuthorized(c)) {
 		return c.json({ error: "Unauthorized" }, 401);
 	}
@@ -165,19 +167,49 @@ app.post("/api/ausbildungsplaetze", async (c) => {
 		return c.json({ error: "Invalid request body" }, 400);
 	}
 
-	const parsed = AusbildungsplaetzeRequestSchema.safeParse(body);
+	const parsed = VacanciesRequestSchema.safeParse(body);
 	if (!parsed.success) {
 		return c.json({ error: "Invalid request body" }, 400);
 	}
 
-	const { plz, berufe, umkreis } = parsed.data;
+	const { postcode, occupations: occupationNames, distance } = parsed.data;
 
 	const results = await Promise.all(
-		berufe.map((beruf) => searchAusbildungsplaetze(beruf, plz, umkreis)),
+		occupationNames.map((occupationName) =>
+			searchVacancies(occupationName, postcode, distance),
+		),
 	);
 
-	const response: AusbildungsplaetzeResponse = { results };
+	const response: VacanciesResponse = { results };
 	return c.json(response);
+});
+
+app.post("/api/reverse-geocode", async (c) => {
+	if (!isAuthorized(c)) {
+		return c.json({ error: "Unauthorized" }, 401);
+	}
+
+	let body: unknown;
+	try {
+		body = await c.req.json();
+	} catch {
+		return c.json({ error: "Invalid request body" }, 400);
+	}
+
+	const parsed = ReverseGeocodeRequestSchema.safeParse(body);
+	if (!parsed.success) {
+		return c.json({ error: "Invalid request body" }, 400);
+	}
+
+	const location = await resolveLocationFromCoordinates(
+		parsed.data.latitude,
+		parsed.data.longitude,
+	);
+	if (!location) {
+		return c.json({ error: "No location found" }, 404);
+	}
+
+	return c.json(location);
 });
 
 app.get("/api/occupations/:id", (c) => {

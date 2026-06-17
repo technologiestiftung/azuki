@@ -5,17 +5,30 @@ import {
 	type EducationLevel,
 	type WorkPreferenceChoice,
 	type NoGoAnswer,
-	type AusbildungsplaetzeResponse,
+	type VacanciesResponse,
 } from "../common";
 import { initialUserProfile } from "../profile/initialUserProfile";
+import { shouldPrefillProfile } from "../profile/prefillConfig";
 import { useMatchResultsStore } from "./useMatchResultsStore";
 
-export interface Standort {
-	plz: string;
-	umkreis: number;
+const noopStorage: Storage = {
+	get length() {
+		return 0;
+	},
+	key: () => null,
+	getItem: () => null,
+	setItem: () => {},
+	removeItem: () => {},
+	clear: () => {},
+};
+
+export interface Location {
+	postcode: string;
+	distance: number;
+	locality?: string | null;
 }
 
-const DEFAULT_STANDORT: Standort = { plz: "10115", umkreis: 25 };
+export const DEFAULT_LOCATION: Location = { postcode: "10115", distance: 25 };
 
 /** Normalizes the profile by merging the initial profile with the provided profile. */
 function normalizeProfile(
@@ -40,17 +53,21 @@ function normalizeProfile(
 }
 
 // Clears anything derived from the user's profile or matched berufe.
-// `useMatchResultsStore` lives in a separate store; `ausbildungsplaetze` is
-// keyed to the previous match results, so it must be invalidated together.
+// `useMatchResultsStore` lives in a separate store; `vacancies` is keyed to
+// the previous match results, so it must be invalidated together.
 function clearMatchResults(): void {
 	useMatchResultsStore.getState().clearMatchResults();
-	useAppStore.setState({ ausbildungsplaetze: null });
+	useAppStore.setState({
+		vacancies: null,
+		vacanciesFetchError: null,
+	});
 }
 
 interface AppState {
 	profile: UserProfile;
-	ausbildungsplaetze: AusbildungsplaetzeResponse | null;
-	standort: Standort;
+	vacancies: VacanciesResponse | null;
+	vacanciesFetchError: string | null;
+	location: Location;
 }
 
 interface AppActions {
@@ -70,8 +87,9 @@ interface AppActions {
 	setNoGo: (id: string, answer: NoGoAnswer | null) => void;
 	addCustomNoGo: (noGo: string) => void;
 	toggleCustomNoGo: (noGo: string) => void;
-	setAusbildungsplaetze: (results: AusbildungsplaetzeResponse | null) => void;
-	setStandort: (standort: Partial<Standort>) => void;
+	setVacancies: (results: VacanciesResponse | null) => void;
+	setVacanciesFetchError: (error: string | null) => void;
+	setLocation: (location: Partial<Location>) => void;
 	resetProfile: () => void;
 }
 
@@ -79,8 +97,9 @@ export const useAppStore = create<AppState & AppActions>()(
 	persist(
 		(set) => ({
 			profile: initialUserProfile,
-			ausbildungsplaetze: null,
-			standort: DEFAULT_STANDORT,
+			vacancies: null,
+			vacanciesFetchError: null,
+			location: DEFAULT_LOCATION,
 
 			setInSchool: (value) =>
 				set((state) => {
@@ -295,35 +314,58 @@ export const useAppStore = create<AppState & AppActions>()(
 				});
 			},
 
-			setAusbildungsplaetze: (results) => set({ ausbildungsplaetze: results }),
+			setVacancies: (results) =>
+				set({
+					vacancies: results,
+					vacanciesFetchError: null,
+				}),
 
-			setStandort: (standort) =>
+			setVacanciesFetchError: (error) => set({ vacanciesFetchError: error }),
+
+			setLocation: (location) =>
 				set((state) => ({
-					standort: { ...state.standort, ...standort },
-					// Changing standort invalidates per-beruf counts since they
+					location: { ...state.location, ...location },
+					// Changing location invalidates per-beruf counts since they
 					// were fetched for the previous location.
-					ausbildungsplaetze: null,
+					vacancies: null,
+					vacanciesFetchError: null,
 				})),
 
 			resetProfile: () => {
 				clearMatchResults();
-				// standort is a user preference, not derived from profile —
+				// location is a user preference, not derived from profile —
 				// keep it across resets.
 				set({ profile: initialUserProfile });
 			},
 		}),
 		{
 			name: "azuki-app-store",
-			storage: createJSONStorage(() => sessionStorage),
+			storage: createJSONStorage(() =>
+				shouldPrefillProfile ? noopStorage : sessionStorage,
+			),
 			partialize: (state) => ({
 				profile: state.profile,
-				standort: state.standort,
+				location: state.location,
 			}),
 			merge: (persistedState, currentState) => {
-				const persisted = persistedState as Partial<AppState> | undefined;
+				const persisted = persistedState as
+					| (Partial<AppState> & {
+							standort?: { plz: string; umkreis: number };
+					  })
+					| undefined;
+				const legacyStandort = persisted?.standort;
+				const location =
+					persisted?.location ??
+					(legacyStandort
+						? {
+								postcode: legacyStandort.plz,
+								distance: legacyStandort.umkreis,
+							}
+						: currentState.location);
 				return {
 					...currentState,
 					...(persisted ?? {}),
+					location,
 					profile: normalizeProfile(persisted?.profile),
 				};
 			},

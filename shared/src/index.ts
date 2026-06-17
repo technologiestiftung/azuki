@@ -11,9 +11,9 @@ export type {
 	MatchedOccupation,
 	MatchResult,
 	GenerationInfo,
-	AusbildungsplatzPreview,
-	AusbildungsplatzResult,
-	AusbildungsplaetzeResponse,
+	VacancyPreview,
+	VacancyResult,
+	VacanciesResponse,
 } from "./types";
 
 export {

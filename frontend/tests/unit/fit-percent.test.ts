@@ -1,5 +1,5 @@
 import { describe, expect, test } from "vitest";
-import { fitPercent } from "../../src/components/results-page/fitPercent";
+import { fitPercent } from "../../src/components/results-page/utils/fitPercent";
 
 describe("fitPercent", () => {
 	test("maps calibration anchor raw scores to expected percentages", () => {

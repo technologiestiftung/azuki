@@ -1,3 +1,5 @@
+import type { OccupationTagId } from "./occupationTags";
+
 // --- Work Conditions ---
 
 export interface WorkConditions {
@@ -150,7 +152,7 @@ export interface MatchedOccupation {
 	shortDescription: string;
 	reasoning: string;
 	occupationType: string;
-	occupationTag: string;
+	occupationTag: OccupationTagId;
 	occupationDuration: string;
 	occupationEarnings: string;
 }
@@ -167,22 +169,29 @@ export interface GenerationInfo {
 	tokensOutput: number;
 }
 
-// --- Ausbildungsplatz Search (POST /api/ausbildungsplaetze response) ---
+// --- Vacancy search (POST /api/vacancies response) ---
 
-export interface AusbildungsplatzPreview {
+export interface VacancyPreview {
 	employer: string;
 	city: string;
-	/** ISO date string (YYYY-MM-DD) for the start of the Ausbildung. */
-	eintrittsdatum?: string;
+	postcode?: string;
+	district?: string;
+	street?: string;
+	latitude?: number;
+	longitude?: number;
+	/** ISO date string (YYYY-MM-DD) for the start of the apprenticeship. */
+	startDate?: string;
+	/** ISO date string (YYYY-MM-DD) when the posting was last published. */
+	publishedAt?: string;
 }
 
-export interface AusbildungsplatzResult {
-	beruf: string;
+export interface VacancyResult {
+	occupation: string;
 	totalCount: number;
-	previews: AusbildungsplatzPreview[];
+	previews: VacancyPreview[];
 	searchUrl: string;
 }
 
-export interface AusbildungsplaetzeResponse {
-	results: AusbildungsplatzResult[];
+export interface VacanciesResponse {
+	results: VacancyResult[];
 }

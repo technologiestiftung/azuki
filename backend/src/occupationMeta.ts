@@ -1,4 +1,8 @@
-import { resolveOccupationTag, type Occupation } from "@azuki/shared";
+import {
+	resolveOccupationTag,
+	type Occupation,
+	type OccupationTagId,
+} from "@azuki/shared";
 
 /** Stable id for filter chips (e.g. `dual`); empty if unknown. */
 export function resolveOccupationTypeKey(artText: string): string {
@@ -70,7 +74,7 @@ export function formatOccupationDuration(raw: string): string {
 
 export function occupationMatchMeta(occupation: Occupation): {
 	occupationType: string;
-	occupationTag: string;
+	occupationTag: OccupationTagId;
 	occupationDuration: string;
 	occupationEarnings: string;
 } {
