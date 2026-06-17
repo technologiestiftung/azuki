@@ -76,6 +76,7 @@ export interface Occupation {
 	descriptionShort: string | null;
 	descriptionLong: string | null;
 	taskSummary: string | null;
+	shortDescription?: string | null;
 	images: OccupationImage[];
 	degreeStats: DegreeDistribution | null;
 	// Parsed from BERUFENET a30-0 (legal Zugangsvoraussetzungen). Used as
@@ -146,7 +147,7 @@ export interface MatchedOccupation {
 	rawName: string;
 	score: number;
 	images: OccupationImage[];
-	taskSummary: string;
+	shortDescription: string;
 	reasoning: string;
 	occupationType: string;
 	occupationTag: string;

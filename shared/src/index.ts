@@ -60,6 +60,11 @@ export {
 } from "./occupationTags";
 
 export {
+	SHORT_DESCRIPTION_PROMPT,
+	resolveOccupationShortDescription,
+} from "./shortDescription";
+
+export {
 	type Bundesland,
 	BUNDESLAENDER,
 	isBundesland,
