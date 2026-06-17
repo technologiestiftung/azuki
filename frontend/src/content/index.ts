@@ -339,7 +339,11 @@ export const content = {
 	"navigation.back": "Zurück",
 
 	// Loading
-	"loading.title": "Wir suchen die besten Ausbildungen für dich...",
+	"loading.success.title": "High five",
+	"loading.success.description": "Du hast alle Fragen beantwortet.",
+	"loading.waiting.title": "Wir suchen nach Ausbildungen, die zu dir passen.",
+	"loading.waiting.description":
+		"Einen Moment - gleich geht's zu deinen Ergebnissen.",
 
 	// Results
 	"results.title": "Deine Ergebnisse",
