@@ -13,7 +13,9 @@ import { preFilter, PREFILTER_TOP_K } from "./matching/index.js";
 import { aiRank, buildSystemPrompt } from "./ai/index.js";
 import occupationsData from "./data/berufe.json";
 import { AusbildungsplaetzeRequestSchema } from "./schemas/ausbildungsplaetze.js";
+import { ReverseGeocodeRequestSchema } from "./schemas/reverseGeocode.js";
 import { searchAusbildungsplaetze } from "./jobsuche/client.js";
+import { resolveLocationFromCoordinates } from "./nominatim/client.js";
 import { runEval } from "../eval/run.js";
 import { z } from "zod";
 import { getSupabase } from "./supabase.js";
@@ -179,6 +181,34 @@ app.post("/api/ausbildungsplaetze", async (c) => {
 
 	const response: AusbildungsplaetzeResponse = { results };
 	return c.json(response);
+});
+
+app.post("/api/reverse-geocode", async (c) => {
+	if (!isAuthorized(c)) {
+		return c.json({ error: "Unauthorized" }, 401);
+	}
+
+	let body: unknown;
+	try {
+		body = await c.req.json();
+	} catch {
+		return c.json({ error: "Invalid request body" }, 400);
+	}
+
+	const parsed = ReverseGeocodeRequestSchema.safeParse(body);
+	if (!parsed.success) {
+		return c.json({ error: "Invalid request body" }, 400);
+	}
+
+	const location = await resolveLocationFromCoordinates(
+		parsed.data.latitude,
+		parsed.data.longitude,
+	);
+	if (!location) {
+		return c.json({ error: "No location found" }, 404);
+	}
+
+	return c.json(location);
 });
 
 app.get("/api/occupations/:id", (c) => {

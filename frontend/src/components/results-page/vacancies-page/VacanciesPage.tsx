@@ -41,6 +41,7 @@ export function VacanciesPage() {
 	const locationFilter = useFilterSheet(DEFAULT_LOCATION_FILTER, {
 		postcode: location.postcode,
 		distance: location.distance,
+		locality: location.locality ?? null,
 	});
 	const [showFavoritesOnly, setShowFavoritesOnly] = useState(false);
 	const [fetchError, setFetchError] = useState<string | null>(null);
@@ -78,7 +79,11 @@ export function VacanciesPage() {
 	const applyLocationFilter = useCallback(
 		(filters: LocationFilterState) => {
 			locationFilter.apply(filters);
-			setLocation({ postcode: filters.postcode, distance: filters.distance });
+			setLocation({
+				postcode: filters.postcode,
+				distance: filters.distance,
+				locality: filters.locality ?? null,
+			});
 		},
 		[locationFilter.apply, setLocation],
 	);
@@ -88,8 +93,22 @@ export function VacanciesPage() {
 		setLocation({
 			postcode: DEFAULT_LOCATION_FILTER.postcode,
 			distance: DEFAULT_LOCATION_FILTER.distance,
+			locality: null,
 		});
 	}, [locationFilter.reset, setLocation]);
+
+	useEffect(() => {
+		locationFilter.apply({
+			postcode: location.postcode,
+			distance: location.distance,
+			locality: location.locality ?? null,
+		});
+	}, [
+		location.postcode,
+		location.distance,
+		location.locality,
+		locationFilter.apply,
+	]);
 
 	useEffect(() => {
 		if (occupations.length === 0 || ausbildungsplaetze !== null) {

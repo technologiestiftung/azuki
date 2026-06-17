@@ -1,4 +1,4 @@
-const PLZ_REGEX = /^\d{5}$/;
+import { DEFAULT_LOCATION } from "../../store/useAppStore";
 
 export function formatPlzWithLocality(
 	plz: string,
@@ -19,7 +19,7 @@ export function getSelectedLocationDisplay({
 	useSpecificLocation: boolean;
 	locality?: string | null;
 }): string {
-	if (useSpecificLocation && PLZ_REGEX.test(postcode)) {
+	if (useSpecificLocation) {
 		return formatPlzWithLocality(postcode, locality);
 	}
 
@@ -33,7 +33,7 @@ export function formatLocationFilterChipLabel({
 	postcode: string;
 	distance: number;
 }): string {
-	return `${postcode} +${distance}`;
+	return `${postcode} +${distance}km`;
 }
 
 export function hasCustomLocationFilter(applied: {
@@ -41,5 +41,9 @@ export function hasCustomLocationFilter(applied: {
 	distance: number;
 	locality?: string | null;
 }): boolean {
-	return Boolean(applied.locality);
+	return (
+		Boolean(applied.locality?.trim()) ||
+		applied.postcode !== DEFAULT_LOCATION.postcode ||
+		applied.distance !== DEFAULT_LOCATION.distance
+	);
 }
