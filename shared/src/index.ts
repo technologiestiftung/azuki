@@ -51,6 +51,15 @@ export type { Persona } from "./persona";
 export { formatOccupationDisplayName } from "./occupationDisplayName";
 
 export {
+	OCCUPATION_TAGS,
+	OCCUPATION_TAG_BY_ID,
+	resolveOccupationTag,
+	getOccupationTagDefinition,
+	type OccupationTagId,
+	type OccupationTagDefinition,
+} from "./occupationTags";
+
+export {
 	SHORT_DESCRIPTION_PROMPT,
 	resolveOccupationShortDescription,
 } from "./shortDescription";

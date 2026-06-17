@@ -48,7 +48,11 @@ export function ResultCard({ occupation }: ResultCardProps) {
 						className="w-full h-40 object-cover"
 					/>
 				) : (
-					<div className="w-full h-40 bg-gray-200" />
+					<img
+						src="/illustrations/occupation-placeholder.svg"
+						alt={displayName}
+						className="w-full h-40 object-cover"
+					/>
 				)}
 			</div>
 

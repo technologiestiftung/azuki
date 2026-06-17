@@ -10,10 +10,11 @@ import {
 import { ResultCard } from "./ResultCard";
 import { ResultsPageHeader } from "./ResultsPageHeader";
 import { BottomCard } from "./BottomCard";
+import { buildResultTagChips, getOccupationTagId } from "./resultTagChips";
 
 const DEFAULT_FILTERS: FilterBottomSheetState = {
 	showFavoritesOnly: false,
-	selectedOccupationTypeIds: [],
+	selectedOccupationTypeTagIds: [],
 };
 
 function applyFilters(
@@ -27,11 +28,10 @@ function applyFilters(
 		filtered = filtered.filter((occupation) => favoriteIds.has(occupation.id));
 	}
 
-	if (filters.selectedOccupationTypeIds.length > 0) {
-		const selected = new Set(filters.selectedOccupationTypeIds);
-		filtered = filtered.filter(
-			(occupation) =>
-				occupation.occupationType && selected.has(occupation.occupationType),
+	if (filters.selectedOccupationTypeTagIds.length > 0) {
+		const selected = new Set(filters.selectedOccupationTypeTagIds);
+		filtered = filtered.filter((occupation) =>
+			selected.has(getOccupationTagId(occupation)),
 		);
 	}
 
@@ -45,6 +45,7 @@ export function ResultsPage() {
 	);
 	const occupations = matchResults?.occupations ?? [];
 	const [filterOpen, setFilterOpen] = useState(false);
+	const [filterSheetKey, setFilterSheetKey] = useState(0);
 	const [appliedFilters, setAppliedFilters] =
 		useState<FilterBottomSheetState>(DEFAULT_FILTERS);
 
@@ -63,7 +64,15 @@ export function ResultsPage() {
 		[appliedFilters],
 	);
 
-	const openFilter = useCallback(() => setFilterOpen(true), []);
+	const occupationTypeTagChips = useMemo(
+		() => buildResultTagChips(occupations),
+		[occupations],
+	);
+
+	const openFilter = useCallback(() => {
+		setFilterSheetKey((key) => key + 1);
+		setFilterOpen(true);
+	}, []);
 	const closeFilter = useCallback(() => setFilterOpen(false), []);
 
 	const handleApplyFilters = useCallback((filters: FilterBottomSheetState) => {
@@ -83,9 +92,11 @@ export function ResultsPage() {
 				onFilterClick={openFilter}
 			/>
 			<FilterBottomSheet
+				key={filterSheetKey}
 				open={filterOpen}
 				onClose={closeFilter}
 				initialFilters={appliedFilters}
+				occupationTypeTagChips={occupationTypeTagChips}
 				onApply={handleApplyFilters}
 				onReset={handleResetFilters}
 			/>
