@@ -45,11 +45,16 @@ export function PracticalExperienceStep() {
 
 	const experienceSuggestions = [
 		{
-			label: "Zuhause helfen",
+			label: "Zu Hause",
 			value: "home-help",
 			heading: content["practicalExperience.bottomSheet.addHomeHelp.title"],
 			inputPlaceholder:
 				content["practicalExperience.bottomSheet.input.homeHelp.placeholder"],
+			examples: [
+				content["practicalExperience.bottomSheet.example.homeHelp.li1"],
+				content["practicalExperience.bottomSheet.example.homeHelp.li2"],
+				content["practicalExperience.bottomSheet.example.homeHelp.li3"],
+			],
 		},
 		{
 			label: "Schule",
@@ -57,15 +62,23 @@ export function PracticalExperienceStep() {
 			heading: content["practicalExperience.bottomSheet.school.title"],
 			inputPlaceholder:
 				content["practicalExperience.bottomSheet.input.school.placeholder"],
+			examples: [
+				content["practicalExperience.bottomSheet.example.school.li1"],
+				content["practicalExperience.bottomSheet.example.school.li2"],
+				content["practicalExperience.bottomSheet.example.school.li3"],
+			],
 		},
 		{
-			label: "Nachbarschaft",
-			value: "neighborhood",
-			heading: content["practicalExperience.bottomSheet.addNeighborhood.title"],
+			label: "Im Freundeskreis",
+			value: "friends",
+			heading: content["practicalExperience.bottomSheet.friends.title"],
 			inputPlaceholder:
-				content[
-					"practicalExperience.bottomSheet.input.neighborhood.placeholder"
-				],
+				content["practicalExperience.bottomSheet.input.friends.placeholder"],
+			examples: [
+				content["practicalExperience.bottomSheet.example.friends.li1"],
+				content["practicalExperience.bottomSheet.example.friends.li2"],
+				content["practicalExperience.bottomSheet.example.friends.li3"],
+			],
 		},
 		{
 			label: "Verein",
@@ -73,6 +86,11 @@ export function PracticalExperienceStep() {
 			heading: content["practicalExperience.bottomSheet.addClub.title"],
 			inputPlaceholder:
 				content["practicalExperience.bottomSheet.input.club.placeholder"],
+			examples: [
+				content["practicalExperience.bottomSheet.example.club.li1"],
+				content["practicalExperience.bottomSheet.example.club.li2"],
+				content["practicalExperience.bottomSheet.example.club.li3"],
+			],
 		},
 		{
 			label: "Praktikum",
@@ -80,6 +98,10 @@ export function PracticalExperienceStep() {
 			heading: content["practicalExperience.bottomSheet.addInternship.title"],
 			inputPlaceholder:
 				content["practicalExperience.bottomSheet.input.internship.placeholder"],
+			examples: [
+				content["practicalExperience.bottomSheet.example.internship.li1"],
+				content["practicalExperience.bottomSheet.example.internship.li2"],
+			],
 		},
 		{
 			label: "Job",
@@ -87,6 +109,10 @@ export function PracticalExperienceStep() {
 			heading: content["practicalExperience.bottomSheet.addJob.title"],
 			inputPlaceholder:
 				content["practicalExperience.bottomSheet.input.job.placeholder"],
+			examples: [
+				content["practicalExperience.bottomSheet.example.job.li1"],
+				content["practicalExperience.bottomSheet.example.job.li2"],
+			],
 		},
 	];
 
@@ -126,9 +152,7 @@ export function PracticalExperienceStep() {
 											ariaLabel={entry.description}
 											className="text-left"
 										>
-											{entry.selectedExperienceLabel
-												? `${entry.selectedExperienceLabel}: ${entry.description}`
-												: entry.description}
+											{entry.description}
 										</Pill>
 									))}
 								</ul>
@@ -190,7 +214,9 @@ export function PracticalExperienceStep() {
 							}
 							inputPlaceholder={
 								selectedSuggestion?.inputPlaceholder ||
-								content["practicalExperience.bottomSheet.input.addPlaceholder"]
+								content[
+									"practicalExperience.bottomSheet.input.addOwn.placeholder"
+								]
 							}
 							onSubmit={(value) => {
 								const suggestion = experienceSuggestions.find(
@@ -211,24 +237,39 @@ export function PracticalExperienceStep() {
 									? selectedSuggestion?.heading
 									: content["practicalExperience.bottomSheet.addOwn.title"]
 							}
+							description={
+								<div>
+									{content["practicalExperience.bottomSheet.example.label"]}{" "}
+									{selectedSuggestion?.examples.map((example) => (
+										<ul className="list-disc list-inside" key={example}>
+											<li key={example}>{example}</li>
+										</ul>
+									))}
+								</div>
+							}
 							isCancelButtonVisible={false}
 						/>
 						<RatingBottomSheet
 							open={ratingSheetOpen}
 							onClose={closeRatingSheet}
+							onBack={() => {
+								setRatingSheetOpen(false);
+								setInputSheetOpen(true);
+							}}
 							ariaLabel={
 								content["practicalExperience.bottomSheet.rating.ariaLabel"]
 							}
 							title={content["practicalExperience.bottomSheet.rating.title"]}
-							onSubmit={(rating, tags) => {
+							onSubmit={(rating) => {
 								addPracticalExperience({
 									description: pendingDescription,
 									selectedExperienceId: pendingSelectedExperienceId,
 									selectedExperienceLabel: pendingSelectedExperienceLabel,
 									rating,
-									tags,
 								});
-								closeRatingSheet();
+								setTimeout(() => {
+									closeRatingSheet();
+								}, 500);
 							}}
 						/>
 					</>

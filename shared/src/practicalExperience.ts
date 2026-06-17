@@ -4,7 +4,6 @@ export interface PracticalExperienceEntry {
 	selectedExperienceId: string | null;
 	selectedExperienceLabel: string | null;
 	rating: number;
-	tags: string[];
 }
 
 export function getActivePracticalExperiences(
@@ -32,9 +31,6 @@ export function formatPracticalExperiencesForApi(
 			const parts = [entry.description];
 			if (entry.rating > 0) {
 				parts.push(`Bewertung: ${entry.rating}/5`);
-			}
-			if (entry.tags.length > 0) {
-				parts.push(`Tags: ${entry.tags.join(", ")}`);
 			}
 			return parts.join(" – ");
 		})

@@ -8,16 +8,9 @@ import {
 	type ReactNode,
 } from "react";
 import { content } from "../../../content";
-import {
-	STACKED_BEHIND_SCALE,
-	useBottomSheetStackMotion,
-	type BottomSheetStackTier,
-} from "./useBottomSheetStackMotion";
 
 const DISMISS_DRAG_PX = 96;
 const DISMISS_VELOCITY = 0.55; // px/ms downward
-
-export type { BottomSheetStackTier };
 
 export interface BottomSheetProps {
 	open: boolean;
@@ -26,103 +19,9 @@ export interface BottomSheetProps {
 	footer?: ReactNode;
 	ariaLabel?: string;
 	overlayDismissLabel?: string;
-	isStackedBehind?: boolean;
-	stackTier?: BottomSheetStackTier;
-	stackFrontHeight?: number;
-	stackedBehindTranslateY?: number;
-	onShellHeightChange?: (height: number) => void;
 }
 
 type DragSample = { t: number; y: number };
-
-const STACK_TRANSITION =
-	"transform 0.32s cubic-bezier(0.32, 0.72, 0, 1), border-radius 0.32s cubic-bezier(0.32, 0.72, 0, 1)";
-const DRAG_SNAP_TRANSITION = "transform 0.22s cubic-bezier(0.32, 0.72, 0, 1)";
-
-function stackedBehindTransform(translateYpx: number): string {
-	return `scale(${STACKED_BEHIND_SCALE}) translateY(${translateYpx}px)`;
-}
-
-function getMotionShellStyle(args: {
-	isClosing: boolean;
-	enterComplete: boolean;
-	isStackedBehind: boolean;
-	isDragging: boolean;
-	sheetDismissFromY: number;
-	stackedBehindTranslateYpx: number;
-}): CSSProperties | undefined {
-	const origin: CSSProperties = { transformOrigin: "bottom center" };
-	const behind = stackedBehindTransform(args.stackedBehindTranslateYpx);
-
-	if (args.isClosing) {
-		return {
-			...origin,
-			["--sheet-drag-y" as string]: `${args.sheetDismissFromY}px`,
-		} as CSSProperties;
-	}
-
-	if (args.isStackedBehind) {
-		return {
-			...origin,
-			transform: behind,
-			transition: STACK_TRANSITION,
-		};
-	}
-
-	if (!args.enterComplete) {
-		return undefined;
-	}
-
-	const transition = args.isDragging ? "none" : DRAG_SNAP_TRANSITION;
-	if (args.isDragging) {
-		return { ...origin, transition };
-	}
-
-	return {
-		...origin,
-		transform: "translateY(0px)",
-		transition,
-	};
-}
-
-function BottomSheetBackdrop({
-	isElevated,
-	isStackedBehind,
-	isClosing,
-	overlayDismissLabel,
-	onClose,
-}: {
-	isElevated: boolean;
-	isStackedBehind: boolean;
-	isClosing: boolean;
-	overlayDismissLabel: string;
-	onClose: () => void;
-}) {
-	if (isElevated) {
-		return (
-			<button
-				type="button"
-				className={`fixed inset-0 z-[55] bg-transparent ${
-					isClosing ? "pointer-events-none" : ""
-				}`}
-				aria-label={overlayDismissLabel}
-				onClick={onClose}
-			/>
-		);
-	}
-
-	return (
-		<button
-			type="button"
-			className={`fixed inset-0 z-40 bg-sky-1000/80 bg-blur-[2px] ${
-				isStackedBehind ? "pointer-events-none" : ""
-			} ${isClosing ? "pointer-events-none animate-fadeOut" : "animate-fadeIn"}`}
-			aria-label={overlayDismissLabel}
-			onClick={onClose}
-			tabIndex={isStackedBehind ? -1 : undefined}
-		/>
-	);
-}
 
 export function BottomSheet({
 	open,
@@ -131,11 +30,6 @@ export function BottomSheet({
 	footer,
 	ariaLabel = content["common.bottomSheet.ariaLabel"],
 	overlayDismissLabel = content["common.bottomSheet.overlayDismissLabel"],
-	isStackedBehind = false,
-	stackTier = "default",
-	stackFrontHeight = 0,
-	stackedBehindTranslateY,
-	onShellHeightChange,
 }: BottomSheetProps) {
 	const [visible, setVisible] = useState(open);
 	const [isClosing, setIsClosing] = useState(false);
@@ -153,12 +47,10 @@ export function BottomSheet({
 	const onCloseRef = useRef(onClose);
 	const openRef = useRef(open);
 	const isClosingRef = useRef(isClosing);
-	const isStackedBehindRef = useRef(isStackedBehind);
 
 	onCloseRef.current = onClose;
 	openRef.current = open;
 	isClosingRef.current = isClosing;
-	isStackedBehindRef.current = isStackedBehind;
 
 	useEffect(() => {
 		if (open) {
@@ -175,36 +67,17 @@ export function BottomSheet({
 		}
 	}, [open, visible]);
 
-	const { stackedBehindTranslateYpx } = useBottomSheetStackMotion({
-		motionShellRef,
-		isStackedBehind,
-		stackTier,
-		visible,
-		enterComplete,
-		stackFrontHeight,
-		stackedBehindTranslateY,
-		onShellHeightChange,
-	});
-
 	useEffect(() => {
 		if (!visible) {
-			return () => {};
-		}
-		const prevBodyOverflow = document.body.style.overflow;
-		document.body.style.overflow = "hidden";
-		return () => {
-			document.body.style.overflow = prevBodyOverflow;
-		};
-	}, [visible]);
-
-	useEffect(() => {
-		if (!visible || isStackedBehind) {
 			return () => {};
 		}
 		const container = dialogRef.current;
 		if (!container) {
 			return () => {};
 		}
+
+		const prevBodyOverflow = document.body.style.overflow;
+		document.body.style.overflow = "hidden";
 
 		const previouslyFocused = document.activeElement as HTMLElement | null;
 		previouslyFocusedElementRef.current =
@@ -231,9 +104,6 @@ export function BottomSheet({
 		}
 
 		const onKeyDown = (e: KeyboardEvent) => {
-			if (isStackedBehindRef.current) {
-				return;
-			}
 			if (e.key === "Escape") {
 				if (!isClosingRef.current) {
 					onCloseRef.current();
@@ -268,9 +138,7 @@ export function BottomSheet({
 		document.addEventListener("keydown", onKeyDown, true);
 		return () => {
 			document.removeEventListener("keydown", onKeyDown, true);
-			if (isStackedBehindRef.current) {
-				return;
-			}
+			document.body.style.overflow = prevBodyOverflow;
 			const toRestore = previouslyFocusedElementRef.current;
 			previouslyFocusedElementRef.current = null;
 			container.removeAttribute("tabindex");
@@ -278,7 +146,7 @@ export function BottomSheet({
 				toRestore.focus();
 			}
 		};
-	}, [visible, isStackedBehind]);
+	}, [visible]);
 
 	const pushDragSample = (clientY: number) => {
 		const t = performance.now();
@@ -321,7 +189,7 @@ export function BottomSheet({
 	};
 
 	const handleGrabPointerDown = (e: PointerEvent<HTMLDivElement>) => {
-		if (!enterComplete || isClosing || isStackedBehind) {
+		if (!enterComplete || isClosing) {
 			return;
 		}
 		if (e.button !== 0) {
@@ -427,53 +295,49 @@ export function BottomSheet({
 		return null;
 	}
 
-	const motionShellStyle = getMotionShellStyle({
-		isClosing,
-		enterComplete,
-		isStackedBehind,
-		isDragging,
-		sheetDismissFromY: sheetDismissFromYRef.current,
-		stackedBehindTranslateYpx,
-	});
+	let motionShellStyle: CSSProperties | undefined = undefined;
+	if (isClosing) {
+		motionShellStyle = {
+			["--sheet-drag-y" as string]: `${sheetDismissFromYRef.current}px`,
+		} as CSSProperties;
+	} else if (enterComplete && !isClosing) {
+		const transition = isDragging
+			? "none"
+			: "transform 0.22s cubic-bezier(0.32, 0.72, 0, 1)";
+		motionShellStyle = isDragging
+			? { transition }
+			: {
+					transform: "translateY(0px)",
+					transition,
+				};
+	}
 
-	const isElevated = stackTier === "elevated";
-	const dialogZ = isElevated ? "z-[60]" : "z-50";
-
-	const baseMotionShellClass = isElevated
-		? "pointer-events-auto flex w-full flex-col overflow-hidden rounded-t-3xl bg-white pb-[env(safe-area-inset-bottom,0px)] shadow-[0_-12px_40px_rgba(17,24,39,0.16)]"
-		: "pointer-events-auto flex min-h-0 max-h-full w-full flex-1 flex-col overflow-hidden rounded-t-3xl bg-white pb-[env(safe-area-inset-bottom,0px)] shadow-[0_-8px_30px_rgba(17,24,39,0.12)]";
-	const stackedBehindShellClass = isStackedBehind
-		? "pointer-events-none bg-gray-300 shadow-[0_15px_75px_0_rgba(1,12,19,0.18)]"
-		: "";
+	const baseMotionShellClass =
+		"pointer-events-auto flex min-h-0 max-h-full w-full flex-1 flex-col overflow-hidden rounded-t-3xl bg-white pb-[env(safe-area-inset-bottom,0px)] shadow-[0_-8px_30px_rgba(17,24,39,0.12)]";
 	let motionAnimClass = "";
 	if (!enterComplete && !isClosing) {
 		motionAnimClass = "animate-slideInBottom";
 	} else if (isClosing) {
 		motionAnimClass = "pointer-events-none animate-slideOutBottom";
 	}
-	const motionShellClass =
-		`${baseMotionShellClass} ${stackedBehindShellClass} ${motionAnimClass}`.trim();
+	const motionShellClass = `${baseMotionShellClass} ${motionAnimClass}`.trim();
 
 	return (
 		<>
-			<BottomSheetBackdrop
-				isElevated={isElevated}
-				isStackedBehind={isStackedBehind}
-				isClosing={isClosing}
-				overlayDismissLabel={overlayDismissLabel}
-				onClose={onClose}
+			<button
+				type="button"
+				className={`fixed inset-0 z-40 bg-sky-1000/80 bg-blur-[2px] ${
+					isClosing ? "pointer-events-none animate-fadeOut" : "animate-fadeIn"
+				}`}
+				aria-label={overlayDismissLabel}
+				onClick={onClose}
 			/>
 			<div
 				ref={dialogRef}
 				role="dialog"
 				aria-modal="true"
 				aria-label={ariaLabel}
-				aria-hidden={isStackedBehind ? true : undefined}
-				className={`pointer-events-none fixed bottom-0 left-0 right-0 ${dialogZ} mx-auto flex max-w-[430px] flex-col overflow-visible ${
-					isElevated
-						? "h-auto max-h-[min(90vh,900px)] shadow-[0_15px_75px_0_rgba(1,12,19,0.18)]"
-						: "max-h-[min(90vh,900px)]"
-				}`}
+				className="pointer-events-none fixed bottom-0 left-0 right-0 z-50 mx-auto flex max-h-[min(90vh,900px)] max-w-[430px] flex-col"
 			>
 				<div
 					ref={motionShellRef}
@@ -494,13 +358,7 @@ export function BottomSheet({
 							aria-hidden
 						/>
 					</div>
-					<div
-						className={
-							isElevated
-								? "overflow-y-auto overscroll-contain"
-								: "min-h-0 flex-1 overflow-y-auto overscroll-contain"
-						}
-					>
+					<div className="min-h-0 flex-1 overflow-y-auto overscroll-contain">
 						{children}
 					</div>
 					{footer ? (

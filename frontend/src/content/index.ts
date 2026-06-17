@@ -249,10 +249,10 @@ export const content = {
 	"strengths.customStrength.pill.label.postfix": "als Stärke auswählen",
 
 	// Practical Experience
-	"practicalExperience.question": "Wo hast du schon Erfahrungen gesammelt?",
-	"practicalExperience.subtitle":
-		"Dabei geht es nicht nur um Praktikum oder Jobs – auch Aufgaben im Alltag zählen!",
+	"practicalExperience.question": "Hast du mal gearbeitet oder geholfen?",
+	"practicalExperience.subtitle": "Alles zählt - auch Aufgaben im Alltag!",
 	"practicalExperience.suggestion.label": "Vorschläge",
+	"practicalExperience.bottomSheet.rating.title": "Wie hat dir das gefallen?",
 	"practicalExperience.suggestion.addedByYouLabel": "Deine Erfahrungen",
 	"practicalExperience.addCustomPracticalExperienceButton.label":
 		"Etwas Eigenes hinzufügen",
@@ -260,84 +260,71 @@ export const content = {
 		"Etwas Eigenes hinzufügen",
 	"practicalExperience.bottomSheet.input.addPlaceholder":
 		"Etwas Eigenes hinzufügen",
-	"practicalExperience.bottomSheet.nextButtonLabel": "weiter",
-	"practicalExperience.bottomSheet.nextButtonAriaLabel": "weiter",
+	"practicalExperience.bottomSheet.nextButtonLabel": "Weiter",
+	"practicalExperience.bottomSheet.nextButtonAriaLabel": "Weiter",
 	"practicalExperience.bottomSheet.saveButtonLabel": "Speichern",
 	"practicalExperience.pill.label.postfix":
 		"als praktische Erfahrung auswählen",
 	"practicalExperience.bottomSheet.submitButtonLabel": "Speichern",
 	"practicalExperience.bottomSheet.submitButtonAriaLabel": "Speichern",
-	"practicalExperience.bottomSheet.rating.custom.ariaLabel":
-		"Eigenes Tag hinzufügen",
-	"practicalExperience.bottomSheet.rating.custom.title":
-		"Eigenes Tag hinzufügen",
-	"practicalExperience.bottomSheet.rating.custom.input.placeholder":
-		"etwas eigenes hinzufügen",
-	"practicalExperience.bottomSheet.rating.custom.input.ariaLabel":
-		"etwas eigenes hinzufügen",
+
 	// Practical Experience Bottom Sheet Questions
 	"practicalExperience.bottomSheet.addInternship.title":
 		"Welches Praktikum hast du gemacht?",
 	"practicalExperience.bottomSheet.addHomeHelp.title":
-		"Wobei hast du Zuhause geholfen?",
-	"practicalExperience.bottomSheet.addNeighborhood.title":
-		"Wobei hast du in der Nachbarschaft geholfen?",
+		"Wobei hast du zu Hause geholfen?",
+	"practicalExperience.bottomSheet.friends.title":
+		"Wobei hast du Freund:innen geholfen?",
 	"practicalExperience.bottomSheet.addClub.title":
 		"Wobei hast du im Verein geholfen?",
 	"practicalExperience.bottomSheet.addJob.title":
 		"Welchen Job hast du gemacht?",
 	"practicalExperience.bottomSheet.school.title":
-		"Wobei hast du in der Schule geholfen?",
+		"Was hast du in der Schule gemacht?",
 	"practicalExperience.bottomSheet.addOwn.title":
-		"Wo hast du Erfahrung gesammelt?",
+		"Wo hast du schon mal gearbeitet oder geholfen",
 	"practicalExperience.bottomSheet.rating.ariaLabel":
 		"Wie hat dir das gefallen?",
 	"starRating.groupAriaLabel": "Bewertung auswählen",
 	"starRating.starAriaLabel": "{value} von {max} Sterne",
 	//Placeholders
-	"practicalExperience.bottomSheet.input.homeHelp.placeholder":
-		"z.B. Putzen, Kochen, Waschen",
+	"practicalExperience.bottomSheet.input.homeHelp.placeholder": "z. B. kochen",
 	"practicalExperience.bottomSheet.input.school.placeholder":
-		"z.B. Schule, Uni, Berufsschule, Nachhilfe",
-	"practicalExperience.bottomSheet.input.neighborhood.placeholder":
-		"z.B. Nachbarschaft, Stadtbezirk, Gemeinde",
+		"z.B. Streit schlichten",
+	"practicalExperience.bottomSheet.input.friends.placeholder":
+		"z.B. traurige Freundin getröstet",
 	"practicalExperience.bottomSheet.input.club.placeholder":
-		"z.B. Verein, Sportverein, Kulturverein",
+		"z.B. bei einer Veranstaltung geholfen",
 	"practicalExperience.bottomSheet.input.internship.placeholder":
-		"z.B. Kita, Werkstatt oder Einzelhandel",
+		"z.B. beim Bäcker",
 	"practicalExperience.bottomSheet.input.job.placeholder":
-		"z.B. Job, Freelance, Selbstständig",
+		"z.B. Zeitung austragen, Küchenhilfe",
 	"practicalExperience.bottomSheet.input.ariaLabel": "Erfahrung hinzufügen",
-	// Rating and Tags
-	"practicalExperience.bottomSheet.rating.title": "Wie hat dir das gefallen?",
-	"practicalExperience.bottomSheet.rating.bad.label": "Was war nicht so gut?",
-	"practicalExperience.bottomSheet.rating.medium.label":
-		"Was hätte besser sein können?",
-	"practicalExperience.bottomSheet.rating.good.label": "Was war gut?",
-	// Tags - bad rating
-	"practicalExperience.bottomSheet.rating.bad.tag.stressful": "Stressig",
-	"practicalExperience.bottomSheet.rating.bad.tag.difficult": "Anstrengend",
-	"practicalExperience.bottomSheet.rating.bad.tag.pressure": "Viel Druck",
-	"practicalExperience.bottomSheet.rating.bad.tag.uninteresting":
-		"Wenig Abwechslung",
-	"practicalExperience.bottomSheet.rating.bad.tag.tasks": "Aufgaben",
-	"practicalExperience.bottomSheet.rating.bad.tag.notMine":
-		"Einfach nicht meins",
-	// Tags - medium rating
-	"practicalExperience.bottomSheet.rating.medium.tag.lessStress":
-		"Weniger Stress",
-	"practicalExperience.bottomSheet.rating.medium.tag.moreVariety":
-		"Mehr Abwechslung",
-	"practicalExperience.bottomSheet.rating.medium.tag.tasks": "Aufgaben",
-	"practicalExperience.bottomSheet.rating.medium.tag.otherLocation":
-		"Anderer Arbeitsort",
-	"practicalExperience.bottomSheet.rating.medium.tag.notMine":
-		"Einfach nicht meins",
-	// Tags - good rating
-	"practicalExperience.bottomSheet.rating.good.tag.tasks": "Aufgaben",
-	"practicalExperience.bottomSheet.rating.good.tag.location": "Arbeitsort",
-	"practicalExperience.bottomSheet.rating.good.tag.variety": "Abwechslung",
-	"practicalExperience.bottomSheet.rating.good.tag.mine": "Genau meins",
+	"practicalExperience.bottomSheet.input.addOwn.placeholder": "z. B. kochen",
+	// Example suggestions
+	"practicalExperience.bottomSheet.example.label": "Zum Beispiel",
+	"practicalExperience.bottomSheet.example.homeHelp.li1":
+		"Geschwister betreuen",
+	"practicalExperience.bottomSheet.example.homeHelp.li2":
+		"Beim Übersetzen helfen",
+	"practicalExperience.bottomSheet.example.homeHelp.li3": "Etwas reparieren",
+	"practicalExperience.bottomSheet.example.school.li1":
+		"Theater oder Garten AG",
+	"practicalExperience.bottomSheet.example.school.li2":
+		"Mitschüler:innen helfen",
+	"practicalExperience.bottomSheet.example.school.li3": "Klassensprecher:in",
+	"practicalExperience.bottomSheet.example.friends.li1":
+		"Bei Problemen zuhören",
+	"practicalExperience.bottomSheet.example.friends.li2": "Streit schlichten",
+	"practicalExperience.bottomSheet.example.friends.li3":
+		"Fotos oder Videos machen",
+	"practicalExperience.bottomSheet.example.club.li1": "Teamkapitän:in",
+	"practicalExperience.bottomSheet.example.club.li2": "Jüngere trainieren",
+	"practicalExperience.bottomSheet.example.club.li3": "Spenden sammeln",
+	"practicalExperience.bottomSheet.example.internship.li1": "Schulpraktikum",
+	"practicalExperience.bottomSheet.example.internship.li2": "Pflichtpraktikum",
+	"practicalExperience.bottomSheet.example.job.li1": "Nebenjob",
+	"practicalExperience.bottomSheet.example.job.li2": "Minijob",
 
 	//Work Expectations
 	"workExpectations.question": "Was ist dir in deinem Beruf wichtig?",

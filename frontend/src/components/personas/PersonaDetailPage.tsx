@@ -228,7 +228,6 @@ function resolvePracticalExperiences(raw: Persona["profile"]): {
 					selectedExperienceId: null,
 					selectedExperienceLabel: null,
 					rating: 0,
-					tags: [],
 				},
 			],
 			selectedPracticalExperienceIds: [id],
@@ -390,7 +389,6 @@ function ProfileEditorSection({
 												selectedExperienceId: null,
 												selectedExperienceLabel: null,
 												rating: 0,
-												tags: [],
 											},
 										]
 									: [],

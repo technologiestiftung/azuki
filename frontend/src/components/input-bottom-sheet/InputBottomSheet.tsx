@@ -1,8 +1,5 @@
-import { useEffect, useRef, useState } from "react";
-import {
-	BottomSheet,
-	type BottomSheetStackTier,
-} from "../primitives/bottom-sheet/BottomSheet";
+import { useEffect, useRef, useState, ReactNode } from "react";
+import { BottomSheet } from "../primitives/bottom-sheet/BottomSheet";
 import { PrimaryThemedButton } from "../primitives/buttons/PrimaryThemedButton";
 import { SecondaryButton } from "../primitives/buttons/SecondaryButton";
 import { content } from "../../content";
@@ -17,10 +14,9 @@ export interface InputBottomSheetProps {
 	inputPlaceholder: string;
 	onSubmit: (value: string) => void;
 	title?: string;
+	description?: string | ReactNode;
 	submitButtonLabel?: string;
 	isCancelButtonVisible?: boolean;
-	stackTier?: BottomSheetStackTier;
-	onShellHeightChange?: (height: number) => void;
 	errorMessage?: string;
 }
 
@@ -31,10 +27,9 @@ export function InputBottomSheet({
 	inputPlaceholder,
 	onSubmit,
 	title,
+	description,
 	submitButtonLabel,
 	isCancelButtonVisible = true,
-	stackTier = "default",
-	onShellHeightChange,
 	errorMessage = content["common.bottomSheet.errorMessage"],
 }: InputBottomSheetProps) {
 	const [value, setValue] = useState("");
@@ -67,18 +62,17 @@ export function InputBottomSheet({
 	};
 
 	return (
-		<BottomSheet
-			open={open}
-			onClose={onClose}
-			ariaLabel={sheetAriaLabel}
-			stackTier={stackTier}
-			onShellHeightChange={onShellHeightChange}
-		>
+		<BottomSheet open={open} onClose={onClose} ariaLabel={sheetAriaLabel}>
 			<div className="flex flex-col items-center gap-3 pt-1 pb-4 px-4 w-full">
-				{title && (
-					<h2 className="text-2xl font-semibold text-gray-900">{title}</h2>
-				)}
-				<div className="flex flex-col gap-2 w-full">
+				<div className="flex flex-col gap-2.5 w-full pl-1">
+					{title && (
+						<h2 className="text-2xl font-semibold text-gray-900">{title}</h2>
+					)}
+					{description && (
+						<div className="text-gray-500 text-base">{description}</div>
+					)}
+				</div>
+				<div className="flex flex-col gap-2 w-full pt-4">
 					<TextInput
 						placeholder={inputPlaceholder}
 						value={value}

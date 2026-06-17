@@ -15,14 +15,15 @@ const NoGoAnswerSchema = z.enum(["rejected", "accepted"]);
 
 const WorkPreferenceChoiceSchema = z.enum(["a", "b"]);
 
-const PracticalExperienceEntrySchema = z.object({
-	id: z.string(),
-	description: z.string(),
-	selectedExperienceId: z.string().nullable(),
-	selectedExperienceLabel: z.string().nullable(),
-	rating: z.number(),
-	tags: z.array(z.string()),
-});
+const PracticalExperienceEntrySchema = z
+	.object({
+		id: z.string(),
+		description: z.string(),
+		selectedExperienceId: z.string().nullable(),
+		selectedExperienceLabel: z.string().nullable(),
+		rating: z.number(),
+	})
+	.strip();
 
 function normalizeLegacyProfile(input: unknown): unknown {
 	if (input === null || typeof input !== "object") {
@@ -54,7 +55,6 @@ function normalizeLegacyProfile(input: unknown): unknown {
 				selectedExperienceId: null,
 				selectedExperienceLabel: null,
 				rating: 0,
-				tags: [],
 			},
 		],
 		selectedPracticalExperienceIds: [id],

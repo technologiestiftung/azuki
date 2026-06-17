@@ -13,7 +13,6 @@ describe("useAppStore — practical experiences", () => {
 			selectedExperienceId: "internship",
 			selectedExperienceLabel: "Praktikum",
 			rating: 4,
-			tags: ["handwerk"],
 		});
 
 		const { profile } = useAppStore.getState();
@@ -21,6 +20,7 @@ describe("useAppStore — practical experiences", () => {
 		expect(profile.practicalExperiences[0]?.description).toBe(
 			"Praktikum in der Tischlerei",
 		);
+		expect(profile.practicalExperiences[0]?.rating).toBe(4);
 		expect(profile.selectedPracticalExperienceIds).toEqual([
 			profile.practicalExperiences[0]?.id,
 		]);
@@ -32,10 +32,13 @@ describe("useAppStore — practical experiences", () => {
 			selectedExperienceId: null,
 			selectedExperienceLabel: null,
 			rating: 0,
-			tags: [],
 		});
 		const entryId = useAppStore.getState().profile.practicalExperiences[0]?.id;
-		useAppStore.getState().togglePracticalExperience(entryId!);
+		expect(entryId).toBeDefined();
+		if (!entryId) {
+			return;
+		}
+		useAppStore.getState().togglePracticalExperience(entryId);
 
 		const { profile } = useAppStore.getState();
 		expect(profile.practicalExperiences).toHaveLength(1);
@@ -48,11 +51,14 @@ describe("useAppStore — practical experiences", () => {
 			selectedExperienceId: null,
 			selectedExperienceLabel: null,
 			rating: 0,
-			tags: [],
 		});
 		const entryId = useAppStore.getState().profile.practicalExperiences[0]?.id;
-		useAppStore.getState().togglePracticalExperience(entryId!);
-		useAppStore.getState().togglePracticalExperience(entryId!);
+		expect(entryId).toBeDefined();
+		if (!entryId) {
+			return;
+		}
+		useAppStore.getState().togglePracticalExperience(entryId);
+		useAppStore.getState().togglePracticalExperience(entryId);
 
 		const { profile } = useAppStore.getState();
 		expect(profile.selectedPracticalExperienceIds).toEqual([entryId]);
