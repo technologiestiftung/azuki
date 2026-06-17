@@ -26,6 +26,7 @@ export const content = {
 	"start.description":
 		"Wir stellen dir ein paar Fragen. In nur wenigen Minuten erhältst du dein eigenes Stärkenprofil und siehst Ausbildungen, die gut zu dir passen.",
 	"start.cta": "Los geht's!",
+	"start.cta.prefill": "Zur Ergebnisseite",
 
 	// In School
 	"inSchool.question": "Gehst du zur Schule?",

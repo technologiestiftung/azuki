@@ -1,6 +1,8 @@
 import type { UserProfile } from "../common";
+import { shouldPrefillProfile } from "./prefillConfig";
+import { prefillUserProfile } from "./prefillUserProfile";
 
-export const initialUserProfile: UserProfile = {
+const emptyUserProfile: UserProfile = {
 	inSchool: null,
 	educationLevel: null,
 	favoriteSubjects: [],
@@ -17,3 +19,7 @@ export const initialUserProfile: UserProfile = {
 	noGos: {},
 	customNoGos: [],
 };
+
+export const initialUserProfile: UserProfile = shouldPrefillProfile
+	? prefillUserProfile
+	: emptyUserProfile;
