@@ -39,7 +39,9 @@ export function InSchoolStep() {
 						key={option.value.toString()}
 						onClick={() => {
 							setInSchool(option.value);
-							goNext();
+							setTimeout(() => {
+								goNext();
+							}, 500);
 						}}
 					/>
 				))}

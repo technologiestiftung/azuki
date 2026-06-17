@@ -55,7 +55,7 @@ export function SchoolDegreeStep() {
 						onClick={() => {
 							handleSelect(degree.value);
 							if (degree.value !== "foreign_degree") {
-								goNext();
+								setTimeout(() => goNext(), 500);
 							}
 						}}
 					>
