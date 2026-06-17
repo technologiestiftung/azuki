@@ -3,6 +3,8 @@ import { content } from "../../../content";
 import { PrimaryThemedButton } from "../../primitives/buttons/PrimaryThemedButton";
 import { BackButton } from "../../back-button/BackButton";
 import { useFlowNavigation } from "../../../routing/useFlowNavigation";
+import { shouldPrefillProfile } from "../../../profile/prefillConfig";
+import { GhostButton } from "../../primitives/buttons/GhostButton";
 
 export function StartScreen() {
 	const navigate = useNavigate();
@@ -33,6 +35,11 @@ export function StartScreen() {
 				<PrimaryThemedButton onClick={goNext} className="w-full">
 					{content["start.cta"]}
 				</PrimaryThemedButton>
+				{shouldPrefillProfile && (
+					<GhostButton onClick={() => navigate("/loading")} className="w-full">
+						{content["start.cta.prefill"]}
+					</GhostButton>
+				)}
 			</div>
 		</div>
 	);

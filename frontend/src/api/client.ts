@@ -1,7 +1,7 @@
 import type {
 	UserProfile,
 	MatchResult,
-	AusbildungsplaetzeResponse,
+	VacanciesResponse,
 	EvalSnapshot,
 	Persona,
 } from "@azuki/shared";
@@ -58,21 +58,47 @@ export async function unlock(password: string): Promise<boolean> {
 	return false;
 }
 
-export async function fetchAusbildungsplaetze(
-	plz: string,
-	berufe: string[],
-	options: { umkreis?: number; signal?: AbortSignal } = {},
-): Promise<AusbildungsplaetzeResponse> {
-	const { umkreis, signal } = options;
-	const res = await fetch(`${API_BASE}/ausbildungsplaetze`, {
+export async function fetchVacancies(
+	postcode: string,
+	occupations: string[],
+	options: { distance?: number; signal?: AbortSignal } = {},
+): Promise<VacanciesResponse> {
+	const { distance, signal } = options;
+	const res = await fetch(`${API_BASE}/vacancies`, {
 		method: "POST",
 		headers: headers(),
-		body: JSON.stringify({ plz, berufe, umkreis }),
+		body: JSON.stringify({ postcode, occupations, distance }),
 		signal,
 	});
 
 	if (!res.ok) {
-		throw new Error(`Ausbildungsplaetze fetch failed: ${res.status}`);
+		throw new Error(`Vacancies fetch failed: ${res.status}`);
+	}
+
+	return res.json();
+}
+
+export interface ReverseGeocodeResult {
+	postcode: string;
+	locality: string | null;
+}
+
+export async function reverseGeocode(
+	latitude: number,
+	longitude: number,
+): Promise<ReverseGeocodeResult | null> {
+	const res = await fetch(`${API_BASE}/reverse-geocode`, {
+		method: "POST",
+		headers: headers(),
+		body: JSON.stringify({ latitude, longitude }),
+	});
+
+	if (res.status === 404) {
+		return null;
+	}
+
+	if (!res.ok) {
+		throw new Error(`Reverse geocode failed: ${res.status}`);
 	}
 
 	return res.json();

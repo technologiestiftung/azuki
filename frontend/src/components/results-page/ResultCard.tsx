@@ -6,7 +6,7 @@ import { Badge } from "../primitives/badge/Badge";
 import { useMatchResultsStore } from "../../store/useMatchResultsStore";
 import { FavoriteButton } from "../favorite-button/FavoriteButton";
 import { content } from "../../content";
-import { fitPercent } from "./fitPercent";
+import { fitPercent } from "./utils/fitPercent";
 
 interface ResultCardProps {
 	occupation: MatchedOccupation;
@@ -74,9 +74,9 @@ export function ResultCard({ occupation }: ResultCardProps) {
 					</div>
 				)}
 
-				{occupation.taskSummary && (
+				{occupation.shortDescription && (
 					<p className="text-base text-gray-700 line-clamp-3">
-						{occupation.taskSummary}
+						{occupation.shortDescription}
 					</p>
 				)}
 			</div>

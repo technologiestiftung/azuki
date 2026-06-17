@@ -5,12 +5,14 @@ import type { MatchResult } from "../common";
 interface MatchResultsState {
 	matchResults: MatchResult | null;
 	favoriteOccupationIds: number[];
+	favoriteVacancyKeys: string[];
 }
 
 interface MatchResultsActions {
 	setMatchResults: (results: MatchResult) => void;
 	clearMatchResults: () => void;
 	toggleFavorite: (occupationId: number) => void;
+	toggleVacancyFavorite: (vacancyKey: string) => void;
 }
 
 export const useMatchResultsStore = create<
@@ -20,6 +22,7 @@ export const useMatchResultsStore = create<
 		(set) => ({
 			matchResults: null,
 			favoriteOccupationIds: [],
+			favoriteVacancyKeys: [],
 
 			setMatchResults: (results) =>
 				set((state) => {
@@ -33,7 +36,11 @@ export const useMatchResultsStore = create<
 				}),
 
 			clearMatchResults: () =>
-				set({ matchResults: null, favoriteOccupationIds: [] }),
+				set({
+					matchResults: null,
+					favoriteOccupationIds: [],
+					favoriteVacancyKeys: [],
+				}),
 
 			toggleFavorite: (occupationId) =>
 				set((state) => ({
@@ -43,6 +50,13 @@ export const useMatchResultsStore = create<
 						? state.favoriteOccupationIds.filter((id) => id !== occupationId)
 						: [...state.favoriteOccupationIds, occupationId],
 				})),
+
+			toggleVacancyFavorite: (vacancyKey) =>
+				set((state) => ({
+					favoriteVacancyKeys: state.favoriteVacancyKeys.includes(vacancyKey)
+						? state.favoriteVacancyKeys.filter((key) => key !== vacancyKey)
+						: [...state.favoriteVacancyKeys, vacancyKey],
+				})),
 		}),
 		{
 			name: "azuki-match-results-store",
@@ -50,6 +64,7 @@ export const useMatchResultsStore = create<
 			partialize: (state) => ({
 				matchResults: state.matchResults,
 				favoriteOccupationIds: state.favoriteOccupationIds,
+				favoriteVacancyKeys: state.favoriteVacancyKeys,
 			}),
 		},
 	),

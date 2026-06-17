@@ -127,9 +127,6 @@ export function PracticalExperienceStep() {
 			onNext={handleNext}
 			onSkip={goNext}
 			isNextDisabled={false}
-			isSkipConfirmDialogOpen={false}
-			skipConfirmTitleKey="skipConfirmDialog.textInput.title"
-			skipConfirmDescriptionKey="skipConfirmDialog.textInput.description"
 		>
 			<div className="overflow-y-auto">
 				{profile.practicalExperiences.length > 0 && (

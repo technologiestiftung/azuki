@@ -27,6 +27,7 @@ export const content = {
 	"start.description":
 		"Wir stellen dir ein paar Fragen. In nur wenigen Minuten erhältst du dein eigenes Stärkenprofil und siehst Ausbildungen, die gut zu dir passen.",
 	"start.cta": "Los geht's!",
+	"start.cta.prefill": "Zur Ergebnisseite",
 
 	// In School
 	"inSchool.question": "Gehst du zur Schule?",
@@ -52,7 +53,7 @@ export const content = {
 
 	// School Subjects
 	"schoolSubjects.question": "Welche Schulfächer machen dir Spaß?",
-	"schoolSubjects.skipButton.label": "Überspringen",
+	"schoolSubjects.skipButton.label": "Ich weiß es nicht",
 	"schoolSubjects.pill.label.postfix": "als lieblingsfach auswählen",
 	"schoolSubjects.addCustomSubjectButton.label": "Schulfach hinzufügen",
 	"schoolSubjects.addCustomSubjectButton.ariaLabel": "Schulfach hinzufügen",
@@ -202,7 +203,7 @@ export const content = {
 	"strengths.question": "Was kannst du gut?",
 	"strengths.sliderMin": "0%",
 	"strengths.sliderMax": "100%",
-	"strengths.skipButton.label": "Überspringen",
+	"strengths.skipButton.label": "Ich weiß es nicht",
 	// Teamwork
 	"strengths.cards.teamwork.title": "Teamarbeit",
 	"strengths.cards.teamwork.description":
@@ -327,7 +328,7 @@ export const content = {
 
 	//Work Expectations
 	"workExpectations.question": "Was ist dir in deinem Beruf wichtig?",
-	"workExpectations.skipButton.label": "Überspringen",
+	"workExpectations.skipButton.label": "Ich weiß es nicht",
 	"workExpectations.option.goodSalary": "Gutes Gehalt",
 	"workExpectations.option.peopleWork": "Mit Menschen arbeiten",
 	"workExpectations.option.teamWork": "Teamarbeit",
@@ -368,7 +369,7 @@ export const content = {
 	"noGos.ariaLabel.reject": "Als geht nicht markieren",
 	"noGos.acceptLabel": "Ist okay",
 	"noGos.ariaLabel.accept": "Als ist okay markieren",
-	"noGos.skipButton.label": "Überspringen",
+	"noGos.skipButton.label": "Ich weiß es nicht",
 	"noGos.customNoGo.label": "Von dir hinzugefügt",
 	"noGos.addCustomNoGoButton.addMore": "No-Go hinzufügen",
 	"noGos.addCustomNoGoButton.label": "Eigenes No-Go hinzufügen",
@@ -410,14 +411,18 @@ export const content = {
 	"navigation.back": "Zurück",
 
 	// Loading
-	"loading.title": "Wir suchen die besten Ausbildungen für dich...",
+	"loading.success.title": "High five",
+	"loading.success.description": "Du hast alle Fragen beantwortet.",
+	"loading.waiting.title": "Wir suchen nach Ausbildungen, die zu dir passen.",
+	"loading.waiting.description":
+		"Einen Moment - gleich geht's zu deinen Ergebnissen.",
 
 	// Results
 	"results.title": "Deine Ergebnisse",
 	"results.tab.results": "Ausbildungsberufe",
 	"results.tab.results.ariaLabel": "Zur Ausbildungsberufe-Ansicht",
-	"results.tab.freeSpots": "Freie Plätze",
-	"results.tab.freeSpots.ariaLabel": "Zur Freie Plätze-Ansicht",
+	"results.tab.freeSpots": "Freie Stellen",
+	"results.tab.freeSpots.ariaLabel": "Zur Freie Stellen-Ansicht",
 	"results.bottomCard.title": "Kein passender Ausbildungsberuf dabei?",
 	"results.bottomCard.resetCta": "Fragen wiederholen",
 	"results.bottomCard.consultationCta": "Beratung anfragen",
@@ -430,46 +435,69 @@ export const content = {
 	"results.card.score.label": "Passt zu",
 	"results.occupationType.dual": "Duale Ausbildung",
 	"results.occupationType.school": "Schulische Ausbildung",
+	"results.noResults":
+		"Wir haben leider keine Ausbildungsberufe zu deiner Auswahl gefunden.",
 	// Filter Bottom Sheet
-	"results.filter.title": "Filter",
-	"results.filter.showFavorites": "Meine Favoriten anzeigen",
-	"results.filter.occupationTypeSection": "Art des Berufs",
+	"results.filter.tags.title": "Berufsgruppe",
+	"results.filter.tags.title.short": "Beruf",
+	"results.filter.tags.filterButton.ariaLabel": "Berufsgruppen filtern",
+	"results.filter.favorites.title": "Meine Favoriten",
+	"results.filter.favorites.filterButton.ariaLabel": "Meine Favoriten filtern",
 	"results.filter.reset": "Zurücksetzen",
-	"results.filter.apply": "Anwenden",
+	"results.filter.apply": "Ergebnisse anzeigen",
 	"results.filter.settingsAria": "Filtereinstellungen",
 	"results.filter.dismissOverlay": "Schließen",
 	// Standort + Ausbildungsplätze (Arbeitsagentur API integration)
+	"results.filter.location.title": "Ort",
+	"results.filter.location.filterButton.ariaLabel": "Ort filtern",
 	"results.region": "Berlin und Brandenburg",
+	"results.filter.location.distance.title": "Umkreis",
+	"results.filter.location.currentLocation.button.label":
+		"In meiner Nähe suchen",
+	"results.filter.location.currentLocation.ariaLabel": "in meiner Nähe suchen",
+	"results.filter.location.error.unavailable":
+		"Standortbestimmung wird von diesem Gerät nicht unterstützt.",
+	"results.filter.location.error.permissionDenied":
+		"Standortzugriff wurde verweigert. Bitte erlaube den Zugriff in den Einstellungen.",
+	"results.filter.location.error.geocodeFailed":
+		"Dein Standort konnte nicht ermittelt werden. Bitte versuche es erneut.",
 	"results.badge.suffix": "Stellen",
 	"results.badge.empty": "Keine offenen Stellen",
 	"results.previewHeading": "Beispiele in deiner Nähe",
 	"results.startDatePrefix": "Start:",
+	// Vacancies
+	"vacancies.filter.occupations.title": "Beruf",
+	"vacancies.filter.occupations.title.short": "Beruf",
+	"vacancies.filter.occupations.filterButton.ariaLabel": "Berufe filtern",
+	"vacancies.startDate": "Beginn ab",
+	"vacancies.location.openMaps": "{location} in Karte öffnen",
+	"vacancies.published.today": "Heute veröffentlicht",
+	"vacancies.published.yesterday": "Gestern veröffentlicht",
+	"vacancies.published.daysAgo": "Vor {days} Tagen veröffentlicht",
+	"vacancies.published.oneDayAgo": "Vor 1 Tag veröffentlicht",
+	"vacancies.badge.new": "Neu",
 	"results.showAllLink": "Alle Stellen auf arbeitsagentur.de ansehen",
 	"results.fetchError":
 		"Die Stellen konnten gerade nicht geladen werden. Versuch es später noch einmal.",
 	"standort.label": "Standort:",
 	"standort.plzAriaLabel": "Postleitzahl",
-	"freiePlaetze.noResults":
+	"vacancies.noResults":
 		"Noch keine passenden Berufe. Geh zuerst zurück zur Ergebnisliste.",
+	"vacancies.noResults.p1": "Aktuell gibt es keine freien Stellen.",
+	"vacancies.noResults.p2":
+		"Bald kommen Neue - Schau einfach später wieder rein.",
+	"vacancies.noResultsFound":
+		"Wir haben leider keine freien Stellen zu deiner Auswahl gefunden.",
 
-	// Skip confirm dialog
-	"skipConfirmDialog.default.title": "Du hast noch nichts ausgewählt",
-	"skipConfirmDialog.default.description":
-		"Wenn du mehr auswählst, können wir dir passendere Berufe vorschlagen.",
-	"skipConfirmDialog.confirm.selection": "Auswählen",
-	"skipConfirmDialog.confirm.answerMultiple": "Fragen beantworten",
-	"skipConfirmDialog.confirm.answerSingle": "Frage beantworten",
-	"skipConfirmDialog.cancel": "Überspringen",
-	"skipConfirmDialog.singleChoice.title": "Bitte wähle eine Option",
-	"skipConfirmDialog.singleChoice.description":
-		"Wenn du etwas auswählst, können wir dir passendere Berufe vorschlagen.",
-	"skipConfirmDialog.multipleChoice.title": "Wähle eine oder mehrere Optionen",
-	"skipConfirmDialog.multipleChoice.description":
-		"Mehr Auswahl ermöglicht passendere Berufsvorschläge.",
-	"skipConfirmDialog.skipAll.title": "Du hast alle Fragen übersprungen",
-	"skipConfirmDialog.skipAll.description":
-		"Beantworte möglichst viele Fragen, um passendere Berufsvorschläge zu erhalten.",
-	"skipConfirmDialog.textInput.title": "Gib eine Antwort ein",
-	"skipConfirmDialog.textInput.description":
-		"Ergänze hier, was noch wichtig ist um passendere Berufsvorschläge zu erhalten.",
+	"vacancies.bottomCard.title": "Du brauchst Hilfe bei deiner Bewerbung?",
+	"vacancies.bottomCard.description":
+		"Kein Problem, das Joblinge Team ist an deiner Seite. Das kostenlose Beratungsprogramm hilft dir.",
+	"vacancies.bottomCard.consultationLink": "https://joblinge.de",
+	"vacancies.bottomCard.consultationCta": "Zum Beratungsprogramm",
+	"vacancies.bottomCard.consultationCta.ariaLabel": "Zum Beratungsprogramm",
+	// Skip toast
+	"toast.inSchool.description": "Wähle Ja oder Nein, um weiter zu machen.",
+	"toast.schoolDegree.description":
+		"Wähle einen Schulabschluss, um weiter zu machen.",
+	"toast.close.ariaLabel": "Schließen",
 };

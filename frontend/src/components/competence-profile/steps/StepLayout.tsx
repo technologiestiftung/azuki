@@ -7,13 +7,12 @@ import { PrimaryButton } from "../../primitives/buttons/PrimaryButton";
 import { GhostButton } from "../../primitives/buttons/GhostButton";
 import { BackButton } from "../../back-button/BackButton";
 import { pathnameToStep, getPreviousPath } from "../../../routing/routes";
-import {
-	type SkipConfirmDescriptionContentKey,
-	type SkipConfirmTitleContentKey,
-	SkipConfirmDialog,
-	showSkipConfirmDialog,
-} from "../../skip-confirm-dialog/SkipConfirmDialog";
+import { Toast } from "../../primitives/toast/Toast";
+import { useToastStore } from "../../../store/useToastStore";
 
+function closeToast() {
+	useToastStore.getState().close();
+}
 interface StepLayoutProps {
 	question: string;
 	subtitle?: string;
@@ -26,10 +25,6 @@ interface StepLayoutProps {
 	hasNextButton?: boolean;
 	skipLabel?: string;
 	bottomContent?: ReactNode;
-	isSkipConfirmDialogOpen?: boolean;
-	skipConfirmTitleKey?: SkipConfirmTitleContentKey;
-	skipConfirmDescriptionKey?: SkipConfirmDescriptionContentKey;
-	skipConfirmOnStay?: () => void;
 }
 
 export function StepLayout({
@@ -44,20 +39,28 @@ export function StepLayout({
 	hasNextButton = true,
 	skipLabel,
 	bottomContent,
-	isSkipConfirmDialogOpen,
-	skipConfirmTitleKey,
-	skipConfirmDescriptionKey,
-	skipConfirmOnStay,
 }: StepLayoutProps) {
 	const { pathname, hash } = useLocation();
 	const navigate = useNavigate();
 	const progressStep = pathnameToStep(pathname);
 
-	const handleBack =
-		onBack ?? (() => navigate(getPreviousPath(pathname, hash)));
+	const handleBack = () => {
+		closeToast();
+		if (onBack) {
+			onBack();
+			return;
+		}
+		navigate(getPreviousPath(pathname, hash));
+	};
+
+	const handleSkip = () => {
+		closeToast();
+		onSkip?.();
+	};
 
 	return (
-		<div className="flex flex-col h-[100dvh] py-4">
+		<div className="relative flex flex-col h-[100dvh] py-4">
+			<Toast />
 			<div className="flex items-center gap-3 pb-1 shrink-0 px-4">
 				<BackButton onClick={handleBack} />
 				<div className="flex-1">
@@ -82,7 +85,7 @@ export function StepLayout({
 				{bottomContent}
 				{hasNextButton && (
 					<PrimaryButton
-						onClick={isSkipConfirmDialogOpen ? showSkipConfirmDialog : onNext}
+						onClick={onNext}
 						disabled={isNextDisabled}
 						className="w-full"
 					>
@@ -91,19 +94,9 @@ export function StepLayout({
 				)}
 
 				{hasSkipButton && (
-					<GhostButton
-						onClick={isSkipConfirmDialogOpen ? showSkipConfirmDialog : onSkip}
-					>
+					<GhostButton onClick={handleSkip}>
 						{skipLabel || content["navigation.skip"]}
 					</GhostButton>
-				)}
-				{isSkipConfirmDialogOpen && (
-					<SkipConfirmDialog
-						onSkip={onSkip}
-						onStay={skipConfirmOnStay}
-						titleKey={skipConfirmTitleKey}
-						descriptionKey={skipConfirmDescriptionKey}
-					/>
 				)}
 			</div>
 		</div>

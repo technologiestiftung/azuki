@@ -178,18 +178,6 @@ export function NoGosStep() {
 		stackRef.current?.goBack();
 	}, [isCustomNoGoCard, navigate, customNoGoCardIndex]);
 
-	const hasAnyExplicitNoGoAnswer = noGos.some((card) => {
-		const value = noGosValues[card.id];
-		return value === "accepted" || value === "rejected";
-	});
-	const isOnLastPredefinedCard = cardIndex === customNoGoCardIndex - 1;
-	const isSkipConfirmDialogOpen =
-		isOnLastPredefinedCard && !hasAnyExplicitNoGoAnswer;
-
-	const skipConfirmOnStay = useCallback(() => {
-		navigate({ pathname, hash: "#0" }, { replace: true });
-	}, [navigate, pathname]);
-
 	return (
 		<StepLayout
 			question={content["noGos.question"]}
@@ -199,10 +187,6 @@ export function NoGosStep() {
 			hasSkipButton={true}
 			hasNextButton={isCustomNoGoCard}
 			skipLabel={content["noGos.skipButton.label"]}
-			isSkipConfirmDialogOpen={isSkipConfirmDialogOpen}
-			skipConfirmTitleKey="skipConfirmDialog.skipAll.title"
-			skipConfirmDescriptionKey="skipConfirmDialog.skipAll.description"
-			skipConfirmOnStay={skipConfirmOnStay}
 			bottomContent={
 				!isCustomNoGoCard ? (
 					<div

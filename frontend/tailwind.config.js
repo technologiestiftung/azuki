@@ -168,8 +168,7 @@ export default {
 				/** Custom strength screen grows from stack ghost size to full card height. */
 				customStrengthCardExpand: {
 					from: {
-						transform:
-							"scale(var(--stack-ghost-scale, 0.84)) translateY(41px)",
+						transform: "scale(var(--stack-ghost-scale, 0.84)) translateY(41px)",
 					},
 					to: {
 						transform: "scale(1) translateY(0)",
@@ -188,6 +187,12 @@ export default {
 				progressFill: {
 					from: { width: "0%" },
 					to: { width: "100%" },
+				},
+				shake: {
+					"0%, 100%": { transform: "translateX(0)" },
+					"25%": { transform: "translateX(-5px)" },
+					"50%": { transform: "translateX(5px)" },
+					"75%": { transform: "translateX(-5px)" },
 				},
 			},
 			animation: {
@@ -216,6 +221,7 @@ export default {
 					"customStrengthCardExpand 800ms cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards",
 				slideInTop: "slideInTop 0.4s ease-out forwards",
 				progressFill: "progressFill 4s linear forwards",
+				shake: "shake 0.4s ease-in-out forwards",
 			},
 		},
 	},

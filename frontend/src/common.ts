@@ -11,7 +11,7 @@ export type {
 	MatchedOccupation,
 	MatchResult,
 	SubjectDefinition,
-	AusbildungsplaetzeResponse,
+	VacanciesResponse,
 } from "@azuki/shared";
 
 export { formatPracticalExperiencesForApi } from "@azuki/shared";
