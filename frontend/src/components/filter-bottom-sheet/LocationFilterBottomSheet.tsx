@@ -8,7 +8,6 @@ import { Pill } from "../primitives/buttons/Pill";
 import { getSelectedLocationDisplay } from "./plzLocality";
 
 export const RADIUS_OPTIONS = [2, 5, 10, 20, 25, 30, 50, 100] as const;
-const PLZ_REGEX = /^\d{5}$/;
 
 export interface LocationFilterState {
 	postcode: string;
@@ -116,9 +115,9 @@ export function LocationFilterBottomSheet({
 	}, [locating]);
 
 	const handleApply = () => {
-		const postcode = PLZ_REGEX.test(draftPlz)
+		const postcode = regionSelected
 			? draftPlz
-			: (initialFilters?.postcode ?? DEFAULT_LOCATION_FILTER.postcode);
+			: DEFAULT_LOCATION_FILTER.postcode;
 
 		onApply?.({ postcode, distance: draftDistance, locality: draftLocality });
 		onClose();

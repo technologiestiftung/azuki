@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import type { VacancyPreview, MatchedOccupation } from "@azuki/shared";
 import { useMatchResultsStore } from "../../../store/useMatchResultsStore";
 import { useAppStore } from "../../../store/useAppStore";
@@ -95,6 +95,7 @@ export function VacanciesPage() {
 	const locationFilter = useFilterSheet(DEFAULT_LOCATION_FILTER, {
 		postcode: location.postcode,
 		distance: location.distance,
+		locality: location.locality ?? null,
 	});
 	const [showFavoritesOnly, setShowFavoritesOnly] = useState(false);
 	const loading =
@@ -130,7 +131,11 @@ export function VacanciesPage() {
 	const applyLocationFilter = useCallback(
 		(filters: LocationFilterState) => {
 			locationFilter.apply(filters);
-			setLocation({ postcode: filters.postcode, distance: filters.distance });
+			setLocation({
+				postcode: filters.postcode,
+				distance: filters.distance,
+				locality: filters.locality ?? null,
+			});
 		},
 		[locationFilter.apply, setLocation],
 	);
@@ -140,8 +145,22 @@ export function VacanciesPage() {
 		setLocation({
 			postcode: DEFAULT_LOCATION_FILTER.postcode,
 			distance: DEFAULT_LOCATION_FILTER.distance,
+			locality: null,
 		});
 	}, [locationFilter.reset, setLocation]);
+
+	useEffect(() => {
+		locationFilter.apply({
+			postcode: location.postcode,
+			distance: location.distance,
+			locality: location.locality ?? null,
+		});
+	}, [
+		location.postcode,
+		location.distance,
+		location.locality,
+		locationFilter.apply,
+	]);
 
 	const vacanciesByName = useMemo(
 		() =>

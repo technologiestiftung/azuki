@@ -10,10 +10,13 @@ import {
 } from "@azuki/shared";
 import { occupationMatchMeta } from "./occupationMeta";
 import { preFilter, PREFILTER_TOP_K } from "./matching/index.js";
+import { resolveOccupationShortDescription } from "@azuki/shared";
 import { aiRank, buildSystemPrompt } from "./ai/index.js";
 import occupationsData from "./data/berufe.json";
 import { VacanciesRequestSchema } from "./schemas/vacancies.js";
+import { ReverseGeocodeRequestSchema } from "./schemas/reverseGeocode.js";
 import { searchVacancies } from "./jobsuche/client.js";
+import { resolveLocationFromCoordinates } from "./nominatim/client.js";
 import { runEval } from "../eval/run.js";
 import { z } from "zod";
 import { getSupabase } from "./supabase.js";
@@ -143,7 +146,7 @@ app.post("/api/match", async (c) => {
 				rawName: scored.occupation.name,
 				score: scored.score,
 				images: scored.occupation.images.slice(0, 3),
-				taskSummary: scored.occupation.taskSummary || "",
+				shortDescription: resolveOccupationShortDescription(scored.occupation),
 				reasoning: "Dieser Beruf passt zu deinem Profil.",
 				...occupationMatchMeta(scored.occupation),
 			})),
@@ -179,6 +182,34 @@ app.post("/api/vacancies", async (c) => {
 
 	const response: VacanciesResponse = { results };
 	return c.json(response);
+});
+
+app.post("/api/reverse-geocode", async (c) => {
+	if (!isAuthorized(c)) {
+		return c.json({ error: "Unauthorized" }, 401);
+	}
+
+	let body: unknown;
+	try {
+		body = await c.req.json();
+	} catch {
+		return c.json({ error: "Invalid request body" }, 400);
+	}
+
+	const parsed = ReverseGeocodeRequestSchema.safeParse(body);
+	if (!parsed.success) {
+		return c.json({ error: "Invalid request body" }, 400);
+	}
+
+	const location = await resolveLocationFromCoordinates(
+		parsed.data.latitude,
+		parsed.data.longitude,
+	);
+	if (!location) {
+		return c.json({ error: "No location found" }, 404);
+	}
+
+	return c.json(location);
 });
 
 app.get("/api/occupations/:id", (c) => {

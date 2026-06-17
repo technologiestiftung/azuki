@@ -25,6 +25,7 @@ const noopStorage: Storage = {
 export interface Location {
 	postcode: string;
 	distance: number;
+	locality?: string | null;
 }
 
 export const DEFAULT_LOCATION: Location = { postcode: "10115", distance: 25 };

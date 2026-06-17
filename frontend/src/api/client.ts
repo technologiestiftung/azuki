@@ -79,6 +79,32 @@ export async function fetchVacancies(
 	return res.json();
 }
 
+export interface ReverseGeocodeResult {
+	postcode: string;
+	locality: string | null;
+}
+
+export async function reverseGeocode(
+	latitude: number,
+	longitude: number,
+): Promise<ReverseGeocodeResult | null> {
+	const res = await fetch(`${API_BASE}/reverse-geocode`, {
+		method: "POST",
+		headers: headers(),
+		body: JSON.stringify({ latitude, longitude }),
+	});
+
+	if (res.status === 404) {
+		return null;
+	}
+
+	if (!res.ok) {
+		throw new Error(`Reverse geocode failed: ${res.status}`);
+	}
+
+	return res.json();
+}
+
 export async function getDefaultPrompt(): Promise<string> {
 	const res = await fetch(`${API_BASE}/eval/default-prompt`, {
 		headers: headers(),
