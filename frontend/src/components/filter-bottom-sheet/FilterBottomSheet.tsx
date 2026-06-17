@@ -1,21 +1,19 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useState } from "react";
 import { GhostIconButton } from "../primitives/buttons/GhostIconButton";
 import { BottomSheet } from "../primitives/bottom-sheet/BottomSheet";
-import { SecondaryButton } from "../primitives/buttons/SecondaryButton";
 import { content } from "../../content";
 import { ToggleButton } from "../primitives/buttons/ToggleButton";
-import { Pill } from "../primitives/buttons/Pill";
-import { PrimaryThemedButton } from "../primitives/buttons/PrimaryThemedButton";
+import { PrimaryButton } from "../primitives/buttons/PrimaryButton";
+import { SelectableRowButton } from "../primitives/buttons/SelectableRowButton";
 
-export interface FilterOccupationTypeChip {
+export interface FilterOccupationTypeTagChip {
 	id: string;
 	label: string;
-	emoji?: string;
 }
 
 export interface FilterBottomSheetState {
 	showFavoritesOnly: boolean;
-	selectedOccupationTypeIds: string[];
+	selectedOccupationTypeTagIds: string[];
 }
 
 export function getAppliedFilterCount(filters: FilterBottomSheetState): number {
@@ -23,7 +21,7 @@ export function getAppliedFilterCount(filters: FilterBottomSheetState): number {
 	if (filters.showFavoritesOnly) {
 		count++;
 	}
-	count += filters.selectedOccupationTypeIds.length;
+	count += filters.selectedOccupationTypeTagIds.length;
 	return count;
 }
 
@@ -31,7 +29,7 @@ export interface FilterBottomSheetProps {
 	open: boolean;
 	onClose: () => void;
 	initialFilters?: Partial<FilterBottomSheetState>;
-	occupationTypeChips?: FilterOccupationTypeChip[];
+	occupationTypeTagChips?: FilterOccupationTypeTagChip[];
 	onApply?: (state: FilterBottomSheetState) => void;
 	onReset?: () => void;
 	onOpenSettings?: () => void;
@@ -41,28 +39,20 @@ export function FilterBottomSheet({
 	open,
 	onClose,
 	initialFilters,
-	occupationTypeChips,
+	occupationTypeTagChips,
 	onApply,
 	onReset,
 }: FilterBottomSheetProps) {
 	const [showFavoritesOnly, setShowFavoritesOnly] = useState(
 		initialFilters?.showFavoritesOnly ?? false,
 	);
-	const [selectedIds, setSelectedIds] = useState<Set<string>>(
-		() => new Set(initialFilters?.selectedOccupationTypeIds ?? []),
-	);
-
-	const wasOpen = useRef(false);
-	useEffect(() => {
-		if (open && !wasOpen.current) {
-			setShowFavoritesOnly(initialFilters?.showFavoritesOnly ?? false);
-			setSelectedIds(new Set(initialFilters?.selectedOccupationTypeIds ?? []));
-		}
-		wasOpen.current = open;
-	}, [open, initialFilters]);
+	const [selectedOccupationTypeTagIds, setSelectedOccupationTypeTagIds] =
+		useState<Set<string>>(
+			() => new Set(initialFilters?.selectedOccupationTypeTagIds ?? []),
+		);
 
 	const toggleChip = useCallback((id: string) => {
-		setSelectedIds((prev) => {
+		setSelectedOccupationTypeTagIds((prev) => {
 			const next = new Set(prev);
 			if (next.has(id)) {
 				next.delete(id);
@@ -75,14 +65,14 @@ export function FilterBottomSheet({
 
 	const handleReset = () => {
 		setShowFavoritesOnly(false);
-		setSelectedIds(new Set());
+		setSelectedOccupationTypeTagIds(new Set());
 		onReset?.();
 	};
 
 	const handleApply = () => {
 		onApply?.({
 			showFavoritesOnly,
-			selectedOccupationTypeIds: [...selectedIds],
+			selectedOccupationTypeTagIds: [...selectedOccupationTypeTagIds],
 		});
 		onClose();
 	};
@@ -94,36 +84,37 @@ export function FilterBottomSheet({
 			ariaLabel={content["results.filter.title"]}
 			overlayDismissLabel={content["results.filter.dismissOverlay"]}
 			footer={
-				<div className="flex gap-3">
-					<SecondaryButton
-						type="button"
-						className="min-w-0 flex-1"
-						onClick={handleReset}
-					>
-						{content["results.filter.reset"]}
-					</SecondaryButton>
-					<PrimaryThemedButton
-						onClick={handleApply}
-						ariaLabel={content["results.filter.apply"]}
-						title={content["results.filter.apply"]}
-						className="min-w-0 flex-1"
-					>
-						{content["results.filter.apply"]}
-					</PrimaryThemedButton>
-				</div>
+				<PrimaryButton
+					onClick={handleApply}
+					ariaLabel={content["results.filter.apply"]}
+					title={content["results.filter.apply"]}
+					className="min-w-0 flex-1"
+				>
+					{content["results.filter.apply"]}
+				</PrimaryButton>
 			}
 		>
-			<div className="flex items-center justify-between gap-2 py-2 px-4">
+			<div className="relative flex items-center justify-between py-2 px-4">
 				<GhostIconButton
+					className="relative z-10"
 					onClick={onClose}
 					ariaLabel={content["results.filter.close"]}
-					iconSrc="/icons/close-black.svg"
+					iconSrc="/icons/arrow-back-black.svg"
 				/>
 
-				<h2 className="flex-1 text-center text-lg font-semibold text-gray-900">
+				<h2 className="pointer-events-none absolute inset-x-4 text-center text-lg font-semibold text-gray-900">
 					{content["results.filter.title"]}
 				</h2>
-				<div className="w-10 h-10" />
+
+				<button
+					type="button"
+					onClick={handleReset}
+					aria-label={content["results.filter.reset"]}
+					title={content["results.filter.reset"]}
+					className="relative z-10 shrink-0 px-4 text-base font-medium text-gray-400 transition-colors rounded-2xl h-12 py-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-sky-500 md:hover:bg-gray-200 md:hover:text-gray-800 active:bg-gray-200 active:text-gray-800"
+				>
+					{content["results.filter.reset"]}
+				</button>
 			</div>
 
 			<div className="flex items-center justify-between px-4 pt-4">
@@ -136,21 +127,20 @@ export function FilterBottomSheet({
 					onChange={(next) => setShowFavoritesOnly(next)}
 				/>
 			</div>
-			{occupationTypeChips && occupationTypeChips.length > 0 && (
+			{(occupationTypeTagChips?.length ?? 0) > 0 && (
 				<h3 className="pl-5 pr-4 pt-6 text-2xl font-semibold text-gray-900">
-					{content["results.filter.occupationTypeSection"]}
+					{content["results.filter.tagSection"]}
 				</h3>
 			)}
 
-			<div className="flex min-w-0 flex-wrap gap-x-2 gap-y-3 px-4 pt-4 pb-8">
-				{occupationTypeChips?.map((chip) => {
-					const selected = selectedIds.has(chip.id);
+			<div className="flex flex-col min-w-0 gap-2 px-4 pt-4 pb-8">
+				{occupationTypeTagChips?.map((chip: FilterOccupationTypeTagChip) => {
+					const selected = selectedOccupationTypeTagIds.has(chip.id);
 					return (
-						<Pill
-							label={chip.label}
-							icon={chip.emoji}
-							selected={selected}
+						<SelectableRowButton
 							key={chip.id}
+							label={chip.label}
+							selected={selected}
 							onClick={() => toggleChip(chip.id)}
 							ariaLabel={chip.label}
 						/>

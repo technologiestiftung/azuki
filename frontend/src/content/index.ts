@@ -362,9 +362,9 @@ export const content = {
 	// Filter Bottom Sheet
 	"results.filter.title": "Filter",
 	"results.filter.showFavorites": "Meine Favoriten anzeigen",
-	"results.filter.occupationTypeSection": "Art des Berufs",
+	"results.filter.tagSection": "Berufsgruppen",
 	"results.filter.reset": "Zurücksetzen",
-	"results.filter.apply": "Anwenden",
+	"results.filter.apply": "Ergebnisse anzeigen",
 	"results.filter.settingsAria": "Filtereinstellungen",
 	"results.filter.dismissOverlay": "Schließen",
 	// Standort + Ausbildungsplätze (Arbeitsagentur API integration)

@@ -150,6 +150,7 @@ export interface MatchedOccupation {
 	shortDescription: string;
 	reasoning: string;
 	occupationType: string;
+	occupationTag: string;
 	occupationDuration: string;
 	occupationEarnings: string;
 }
