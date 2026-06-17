@@ -12,7 +12,7 @@ export interface FinalEntry {
 	score: number;
 	reasoning: string;
 	images?: OccupationImage[];
-	taskSummary?: string;
+	shortDescription?: string;
 }
 
 export type PersonaResult =

@@ -14,7 +14,7 @@ import { WorkPreferencesStep } from "./components/competence-profile/steps/WorkP
 import { NoGosStep } from "./components/competence-profile/steps/no-gos-step/NoGosStep";
 import { LoadingScreen } from "./components/loading-screen/LoadingScreen";
 import { ResultsPage } from "./components/results-page/ResultsPage";
-import { FreiePlaetzePage } from "./components/results-page/FreiePlaetzePage";
+import { VacanciesPage } from "./components/results-page/vacancies-page/VacanciesPage";
 import { WorkExpectationsStep } from "./components/competence-profile/steps/WorkExpectationsStep";
 import { EvalPage } from "./components/eval/EvalPage";
 import { PersonasPage } from "./components/personas/PersonasPage";
@@ -73,7 +73,7 @@ function App() {
 					<Route path={ROUTE_PATHS.resultsList} element={<ResultsPage />} />
 					<Route
 						path={ROUTE_PATHS.resultsFreeSpots}
-						element={<FreiePlaetzePage />}
+						element={<VacanciesPage />}
 					/>
 					<Route path={ROUTE_PATHS.eval} element={<EvalPage />} />
 					<Route path={ROUTE_PATHS.personas} element={<PersonasPage />} />

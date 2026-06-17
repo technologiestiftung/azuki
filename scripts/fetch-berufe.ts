@@ -5,7 +5,7 @@
  * Usage: npx tsx scripts/fetch-berufe.ts
  */
 
-import { writeFileSync, mkdirSync } from "node:fs";
+import { writeFileSync, mkdirSync, readFileSync, existsSync } from "node:fs";
 import { resolve, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 import type {
@@ -271,6 +271,47 @@ function median(values: number[]): number {
   return sorted[mid];
 }
 
+// BERUFENET field b50-0 cites tariff examples in mixed units: hourly
+// ("in der Stunde"), weekly ("Wochengage"), or monthly ("monatlich").
+// Convert each amount to a monthly equivalent before taking the median —
+// otherwise hourly trade wages are dropped (<€100) and weekly rates are
+// stored as if they were monthly. Used by `good_salary` percentile bands.
+const HOURS_PER_MONTH = 165; // ~38 h/week × 52 weeks / 12 months
+const WEEKS_PER_MONTH = 4.33; // 52 weeks / 12 months
+
+type SalaryUnit = "hourly" | "weekly" | "monthly";
+
+function detectSalaryUnit(context: string): SalaryUnit | null {
+  if (/stunde|std\.?|\b\/\s*h\b|stundenlohn|stundenentgelt/i.test(context)) {
+    return "hourly";
+  }
+  if (/woche|wochengage|wöchentlich/i.test(context)) {
+    return "weekly";
+  }
+  if (/monat|monatlich|monatsgehalt|monatslohn|monatsentgelt/i.test(context)) {
+    return "monthly";
+  }
+  return null;
+}
+
+function inferSalaryUnit(amount: number, detected: SalaryUnit | null): SalaryUnit {
+  if (detected) return detected;
+  // Tariff hourly rates in BERUFENET are typically well below €100.
+  if (amount <= 100) return "hourly";
+  return "monthly";
+}
+
+function normalizeToMonthly(amount: number, unit: SalaryUnit): number {
+  switch (unit) {
+    case "hourly":
+      return amount * HOURS_PER_MONTH;
+    case "weekly":
+      return amount * WEEKS_PER_MONTH;
+    default:
+      return amount;
+  }
+}
+
 const INTEREST_CATEGORY_MAP: Record<string, string> = {
   "praktisch-konkreten Tätigkeiten": "praktisch-konkret",
   "theoretisch-abstrakten Tätigkeiten": "theoretisch-abstrakt",
@@ -418,7 +459,7 @@ function extractSkillTags(infofelder: Infofeld[]): string[] {
   );
 }
 
-function extractSalarySignal(infofelder: Infofeld[]): {
+export function extractSalarySignal(infofelder: Infofeld[]): {
   salaryMonthlyMedian: number | null;
   salaryKnown: boolean;
 } {
@@ -434,32 +475,27 @@ function extractSalarySignal(infofelder: Infofeld[]): {
   const euros = [
     ...plain.matchAll(/(\d{1,3}(?:\.\d{3})*(?:,\d+)?)\s*(?:€|euro)/gi),
   ];
-  const monthlyMatches: number[] = [];
-  const allMatches: number[] = [];
+  const monthlyValues: number[] = [];
 
   for (const match of euros) {
     const raw = match[1];
     const num = parseEuroToNumber(raw);
-    if (Number.isNaN(num) || num <= 100) continue;
-
-    allMatches.push(num);
+    if (Number.isNaN(num) || num <= 0) continue;
 
     const idx = match.index ?? 0;
     const start = Math.max(0, idx - 50);
     const end = Math.min(plain.length, idx + 50);
-    const context = plain.slice(start, end).toLowerCase();
-    if (/monat/i.test(context)) {
-      monthlyMatches.push(num);
-    }
+    const context = plain.slice(start, end);
+    const unit = inferSalaryUnit(num, detectSalaryUnit(context));
+    monthlyValues.push(normalizeToMonthly(num, unit));
   }
 
-  const values = monthlyMatches.length > 0 ? monthlyMatches : allMatches;
-  if (values.length === 0) {
+  if (monthlyValues.length === 0) {
     return { salaryMonthlyMedian: null, salaryKnown: false };
   }
 
   return {
-    salaryMonthlyMedian: median(values),
+    salaryMonthlyMedian: Math.round(median(monthlyValues)),
     salaryKnown: true,
   };
 }
@@ -739,6 +775,27 @@ async function main() {
   const outDir = resolve(__dirname, "../backend/src/data");
   mkdirSync(outDir, { recursive: true });
   const outPath = resolve(outDir, "berufe.json");
+
+  if (existsSync(outPath)) {
+    const previous: Occupation[] = JSON.parse(readFileSync(outPath, "utf-8"));
+    const shortById = new Map(
+      previous
+        .filter((occ) => occ.shortDescription?.trim())
+        .map((occ) => [occ.id, occ.shortDescription!.trim()] as const),
+    );
+    let preserved = 0;
+    for (const occ of occupations) {
+      const existing = shortById.get(occ.id);
+      if (existing) {
+        occ.shortDescription = existing;
+        preserved++;
+      }
+    }
+    console.log(
+      `Step 2e: Preserved ${preserved} pre-generated shortDescription(s) from existing catalog.\n`,
+    );
+  }
+
   writeFileSync(outPath, JSON.stringify(occupations, null, 2), "utf-8");
   console.log(`Step 3: Saved to ${outPath}`);
 

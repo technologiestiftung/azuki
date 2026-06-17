@@ -1,0 +1,327 @@
+import { useCallback, useEffect, useMemo, useState } from "react";
+import type { VacancyPreview, MatchedOccupation } from "@azuki/shared";
+import { useMatchResultsStore } from "../../../store/useMatchResultsStore";
+import { useAppStore } from "../../../store/useAppStore";
+import { content } from "../../../content";
+import {
+	OccupationsFilterBottomSheet,
+	type OccupationsFilterState,
+} from "../../filter-bottom-sheet/OccupationsFilterBottomSheet";
+import { useFilterSheet } from "../../filter-bottom-sheet/useFilterSheet";
+import { ResultsPageHeader } from "../ResultsPageHeader";
+import { ResultsFilterBar } from "../ResultsFilterBar";
+import {
+	buildOccupationFilterChips,
+	getOccupationFilterLabel,
+} from "../utils/occupationFilterChips";
+import { applyVacancyOccupationFilters } from "../utils/applyVacancyOccupationFilters";
+import { buildVacancyCardKey } from "../utils/vacancyCardKey";
+import {
+	LocationFilterBottomSheet,
+	DEFAULT_LOCATION_FILTER,
+	type LocationFilterState,
+} from "../../filter-bottom-sheet/LocationFilterBottomSheet";
+import { hasCustomLocationFilter } from "../../filter-bottom-sheet/plzLocality";
+import { VacancyCard } from "./VacancyCard";
+
+const DEFAULT_OCCUPATION_FILTERS: OccupationsFilterState = {
+	selectedOccupationIds: [],
+};
+
+interface VacancyListItem {
+	key: string;
+	occupation: MatchedOccupation;
+	preview: VacancyPreview;
+}
+
+function publishedAtTimestamp(iso: string | undefined): number {
+	if (!iso) {
+		return 0;
+	}
+	const time = new Date(iso).getTime();
+	return Number.isNaN(time) ? 0 : time;
+}
+
+function compareVacanciesByPublishedAt(
+	a: VacancyListItem,
+	b: VacancyListItem,
+): number {
+	return (
+		publishedAtTimestamp(b.preview.publishedAt) -
+		publishedAtTimestamp(a.preview.publishedAt)
+	);
+}
+
+function getVacancyEmptyState({
+	visibleOccupationCount,
+	locationFilterApplied,
+	showFavoritesOnly,
+	loading,
+	noVacancyResults,
+}: {
+	visibleOccupationCount: number;
+	locationFilterApplied: boolean;
+	showFavoritesOnly: boolean;
+	loading: boolean;
+	noVacancyResults: boolean;
+}) {
+	const showSimpleEmpty =
+		visibleOccupationCount === 0 ||
+		(locationFilterApplied && !loading && noVacancyResults) ||
+		(showFavoritesOnly && !loading && noVacancyResults);
+	const showDetailedEmpty =
+		!locationFilterApplied &&
+		!showFavoritesOnly &&
+		!loading &&
+		noVacancyResults &&
+		visibleOccupationCount > 0;
+	return { showSimpleEmpty, showDetailedEmpty };
+}
+
+export function VacanciesPage() {
+	const matchResults = useMatchResultsStore((state) => state.matchResults);
+	const favoriteVacancyKeys = useMatchResultsStore(
+		(state) => state.favoriteVacancyKeys,
+	);
+	const toggleVacancyFavorite = useMatchResultsStore(
+		(state) => state.toggleVacancyFavorite,
+	);
+	const vacancies = useAppStore((state) => state.vacancies);
+	const fetchError = useAppStore((state) => state.vacanciesFetchError);
+	const location = useAppStore((state) => state.location);
+	const setLocation = useAppStore((state) => state.setLocation);
+	const occupations = matchResults?.occupations ?? [];
+	const occupationFilter = useFilterSheet(DEFAULT_OCCUPATION_FILTERS);
+	const locationFilter = useFilterSheet(DEFAULT_LOCATION_FILTER, {
+		postcode: location.postcode,
+		distance: location.distance,
+		locality: location.locality ?? null,
+	});
+	const [showFavoritesOnly, setShowFavoritesOnly] = useState(false);
+	const loading =
+		occupations.length > 0 && vacancies === null && fetchError === null;
+
+	const favoriteVacancyKeySet = useMemo(
+		() => new Set(favoriteVacancyKeys),
+		[favoriteVacancyKeys],
+	);
+
+	const visibleOccupations = useMemo(
+		() =>
+			applyVacancyOccupationFilters(occupations, {
+				filters: occupationFilter.appliedValue,
+			}),
+		[occupations, occupationFilter.appliedValue],
+	);
+
+	const occupationFilterChips = useMemo(
+		() => buildOccupationFilterChips(occupations),
+		[occupations],
+	);
+
+	const openOccupationFilter = occupationFilter.open;
+	const closeOccupationFilter = occupationFilter.close;
+	const openLocationFilter = locationFilter.open;
+	const closeLocationFilter = locationFilter.close;
+
+	const toggleFavoritesOnly = useCallback(() => {
+		setShowFavoritesOnly((prev) => !prev);
+	}, []);
+
+	const applyLocationFilter = useCallback(
+		(filters: LocationFilterState) => {
+			locationFilter.apply(filters);
+			setLocation({
+				postcode: filters.postcode,
+				distance: filters.distance,
+				locality: filters.locality ?? null,
+			});
+		},
+		[locationFilter.apply, setLocation],
+	);
+
+	const resetLocationFilter = useCallback(() => {
+		locationFilter.reset();
+		setLocation({
+			postcode: DEFAULT_LOCATION_FILTER.postcode,
+			distance: DEFAULT_LOCATION_FILTER.distance,
+			locality: null,
+		});
+	}, [locationFilter.reset, setLocation]);
+
+	useEffect(() => {
+		locationFilter.apply({
+			postcode: location.postcode,
+			distance: location.distance,
+			locality: location.locality ?? null,
+		});
+	}, [
+		location.postcode,
+		location.distance,
+		location.locality,
+		locationFilter.apply,
+	]);
+
+	const vacanciesByName = useMemo(
+		() =>
+			new Map(
+				vacancies?.results.map((result) => [result.occupation, result]) ?? [],
+			),
+		[vacancies],
+	);
+
+	const vacancyCards = useMemo((): VacancyListItem[] => {
+		const cards: VacancyListItem[] = [];
+		for (const occupation of visibleOccupations) {
+			const vacancyResult = vacanciesByName.get(occupation.rawName);
+			if (!vacancyResult?.previews.length) {
+				continue;
+			}
+			for (const [index, preview] of vacancyResult.previews.entries()) {
+				const key = buildVacancyCardKey(occupation.id, preview, index);
+				if (showFavoritesOnly && !favoriteVacancyKeySet.has(key)) {
+					continue;
+				}
+				cards.push({
+					key,
+					occupation,
+					preview,
+				});
+			}
+		}
+		return cards.sort(compareVacanciesByPublishedAt);
+	}, [
+		visibleOccupations,
+		vacanciesByName,
+		showFavoritesOnly,
+		favoriteVacancyKeySet,
+	]);
+
+	const locationFilterApplied = hasCustomLocationFilter(
+		locationFilter.appliedValue,
+	);
+	const hasLoadedVacancies = vacancies !== null && fetchError === null;
+	const noVacancyResults =
+		fetchError !== null || (hasLoadedVacancies && vacancyCards.length === 0);
+	const { showSimpleEmpty, showDetailedEmpty } = getVacancyEmptyState({
+		visibleOccupationCount: visibleOccupations.length,
+		locationFilterApplied,
+		showFavoritesOnly,
+		loading,
+		noVacancyResults,
+	});
+
+	return (
+		<>
+			<div className="flex flex-col h-full">
+				<ResultsPageHeader title={content["results.title"]} />
+				<ResultsFilterBar
+					hasLocationFilter={true}
+					appliedLocationFilter={locationFilter.appliedValue}
+					selectedOccupationIds={
+						occupationFilter.appliedValue.selectedOccupationIds
+					}
+					resolveOccupationFilterLabel={(id) =>
+						getOccupationFilterLabel(id, occupations)
+					}
+					occupationFilterTitle={content["vacancies.filter.occupations.title"]}
+					occupationFilterTitleShort={
+						content["vacancies.filter.occupations.title.short"]
+					}
+					occupationFilterAriaLabel={
+						content["vacancies.filter.occupations.filterButton.ariaLabel"]
+					}
+					onOpenTagFilter={openOccupationFilter}
+					onOpenLocationFilter={openLocationFilter}
+					showFavoritesOnly={showFavoritesOnly}
+					onToggleFavoritesOnly={toggleFavoritesOnly}
+				/>
+				<OccupationsFilterBottomSheet
+					key={`occupation-${occupationFilter.sheetKey}`}
+					open={occupationFilter.isOpen}
+					onClose={closeOccupationFilter}
+					initialFilters={occupationFilter.appliedValue}
+					occupationChips={occupationFilterChips}
+					onApply={occupationFilter.apply}
+					onReset={occupationFilter.reset}
+				/>
+				<LocationFilterBottomSheet
+					key={`location-${locationFilter.sheetKey}`}
+					open={locationFilter.isOpen}
+					onClose={closeLocationFilter}
+					initialFilters={locationFilter.appliedValue}
+					onApply={applyLocationFilter}
+					onReset={resetLocationFilter}
+				/>
+
+				{showSimpleEmpty || showDetailedEmpty ? (
+					<div className="flex px-4 pb-4 items-center h-full">
+						<div className="flex flex-col items-center justify-center gap-5 px-5">
+							<div className="flex items-center justify-center object-contain p-2">
+								<img
+									src="/illustrations/no-results-star.svg"
+									alt=""
+									className="w-[200px]"
+								/>
+							</div>
+							{showSimpleEmpty ? (
+								<p className="text-lg font-medium text-gray-1000 text-center">
+									{content["vacancies.noResultsFound"]}
+								</p>
+							) : (
+								<div>
+									<h3 className="text-lg font-bold text-gray-1000 mb-1.5 text-center">
+										{content["vacancies.noResults.p1"]}
+									</h3>
+									<p className="text-lg font-medium text-gray-1000 text-center">
+										{content["vacancies.noResults.p2"]}
+									</p>
+								</div>
+							)}
+						</div>
+					</div>
+				) : (
+					<div className="flex-1 px-4 pb-4 space-y-3 overflow-y-auto">
+						{loading && vacancyCards.length === 0 ? (
+							<p className="py-8 text-center text-sm text-gray-500">…</p>
+						) : (
+							vacancyCards.map(({ key, occupation, preview }) => (
+								<VacancyCard
+									key={key}
+									occupationName={occupation.name}
+									preview={preview}
+									isFavorite={favoriteVacancyKeySet.has(key)}
+									onToggleFavorite={() => toggleVacancyFavorite(key)}
+								/>
+							))
+						)}
+						<div className="flex flex-col gap-5 px-3 py-5 rounded-2xl border border-sky-100 bg-sky-50">
+							<div>
+								<h3 className="text-2xl font-semibold text-sky-1000 text-center mb-[7px]">
+									{content["vacancies.bottomCard.title"]}
+								</h3>
+								<p className="text-lg text-sky-1000 text-center">
+									{content["vacancies.bottomCard.description"]}
+								</p>
+							</div>
+							<div className="flex flex-col">
+								<a
+									href={content["vacancies.bottomCard.consultationLink"]}
+									target="_blank"
+									rel="noopener noreferrer"
+									aria-label={
+										content["vacancies.bottomCard.consultationCta.ariaLabel"]
+									}
+									className="h-12 flex items-center justify-center gap-2 w-full py-2 px-5 rounded-2xl text-base font-medium transition-colors bg-sky-300 text-sky-1000
+									focus-visible:outline focus-visible:outline-2 focus-visible:outline-sky-500 active:bg-sky-200 active:text-sky-900 md:hover:bg-sky-200 md:hover:text-sky-900"
+								>
+									{content["vacancies.bottomCard.consultationCta"]}
+								</a>
+							</div>
+						</div>
+					</div>
+				)}
+			</div>
+		</>
+	);
+}

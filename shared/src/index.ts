@@ -11,9 +11,9 @@ export type {
 	MatchedOccupation,
 	MatchResult,
 	GenerationInfo,
-	AusbildungsplatzPreview,
-	AusbildungsplatzResult,
-	AusbildungsplaetzeResponse,
+	VacancyPreview,
+	VacancyResult,
+	VacanciesResponse,
 } from "./types";
 
 export {
@@ -49,6 +49,20 @@ export { type Verdict, type ScoreReport } from "./eval-rubrics/types";
 export type { Persona } from "./persona";
 
 export { formatOccupationDisplayName } from "./occupationDisplayName";
+
+export {
+	OCCUPATION_TAGS,
+	OCCUPATION_TAG_BY_ID,
+	resolveOccupationTag,
+	getOccupationTagDefinition,
+	type OccupationTagId,
+	type OccupationTagDefinition,
+} from "./occupationTags";
+
+export {
+	SHORT_DESCRIPTION_PROMPT,
+	resolveOccupationShortDescription,
+} from "./shortDescription";
 
 export {
 	type Bundesland,

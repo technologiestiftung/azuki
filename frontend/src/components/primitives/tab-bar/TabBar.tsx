@@ -6,6 +6,7 @@ export interface TabBarProps {
 		href: string;
 		ariaLabel: string;
 		isDisabled?: boolean;
+		vacanciesCount?: number;
 	}[];
 	activeTab: string;
 }
@@ -36,6 +37,11 @@ export function TabBar({ tabs, activeTab }: TabBarProps) {
 							}`}
 						>
 							{tab.label}
+							{tab.vacanciesCount !== undefined && tab.vacanciesCount > 0 && (
+								<span className="flex items-center justify-center w-[22px] h-[22px] ml-1 bg-sky-300 rounded-full text-gray-900 leading-[22px] text-sm font-normal">
+									{tab.vacanciesCount}
+								</span>
+							)}
 						</Link>
 					),
 				)}

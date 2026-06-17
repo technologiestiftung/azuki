@@ -1,24 +1,44 @@
-import type {
-	AusbildungsplatzResult,
-	AusbildungsplatzPreview,
-} from "@azuki/shared";
+import type { VacancyResult, VacancyPreview } from "@azuki/shared";
 
 const JOBSUCHE_BASE =
 	"https://rest.arbeitsagentur.de/jobboerse/jobsuche-service/pc/v4/jobs";
 const API_KEY = "jobboerse-jobsuche";
 const DEFAULT_RADIUS_KM = 25;
-const MAX_PREVIEWS = 3;
-// Fetch more than we display so client-side filtering (Duales Studium removal)
-// can drop entries without leaving us short of previews.
+// limit to 10 weeks to avoid showing vacancies that are too old
+const MAX_PUBLISHED_WEEKS = 10;
+// Convert weeks to ms so we can compare against `Date.now() - published.getTime()`.
+const MS_PER_WEEK = 7 * 24 * 60 * 60 * 1000;
+const MAX_PUBLISHED_AGE_MS = MAX_PUBLISHED_WEEKS * MS_PER_WEEK;
 const SAMPLE_SIZE = 10;
 const REQUEST_TIMEOUT_MS = 5000;
+
+function normalizeLocationField(
+	value: string | number | undefined,
+): string | undefined {
+	if (value === undefined || value === null) {
+		return undefined;
+	}
+	const text = String(value).trim();
+	if (!text || text === "null") {
+		return undefined;
+	}
+	return text;
+}
 
 interface JobsucheJob {
 	arbeitgeber: string;
 	arbeitsort?: {
+		plz?: string | number;
 		ort?: string;
+		ortsteil?: string;
+		strasse?: string;
+		koordinaten?: {
+			lat?: number;
+			lon?: number;
+		};
 	};
 	eintrittsdatum?: string;
+	aktuelleVeroeffentlichungsdatum?: string;
 	// `beruf` is set on Ausbildung postings, absent on Duales Studium.
 	// `studiengang` is the opposite. We filter on this distinction since
 	// the API has no server-side flag for Ausbildung-only.
@@ -31,14 +51,30 @@ interface JobsucheResponse {
 	maxErgebnisse: number;
 }
 
-function buildSearchUrl(beruf: string, plz: string, umkreis: number): string {
+function buildSearchUrl(
+	occupation: string,
+	postcode: string,
+	distance: number,
+): string {
 	const params = new URLSearchParams({
-		was: beruf,
-		wo: plz,
-		umkreis: String(umkreis),
+		was: occupation,
+		wo: postcode,
+		umkreis: String(distance),
 		angebotsart: "4",
 	});
 	return `https://www.arbeitsagentur.de/jobsuche/suche?${params.toString()}`;
+}
+
+function isPublishedWithinMaxAge(publishedAt: string | undefined): boolean {
+	if (!publishedAt) {
+		return false;
+	}
+	const published = new Date(publishedAt);
+	if (Number.isNaN(published.getTime())) {
+		return false;
+	}
+	const ageMs = Date.now() - published.getTime();
+	return ageMs >= 0 && ageMs < MAX_PUBLISHED_AGE_MS;
 }
 
 function isAusbildung(job: JobsucheJob): boolean {
@@ -53,30 +89,30 @@ function isAusbildung(job: JobsucheJob): boolean {
 }
 
 function emptyResult(
-	beruf: string,
-	plz: string,
-	umkreis: number,
-): AusbildungsplatzResult {
+	occupation: string,
+	postcode: string,
+	distance: number,
+): VacancyResult {
 	return {
-		beruf,
+		occupation,
 		totalCount: 0,
 		previews: [],
-		searchUrl: buildSearchUrl(beruf, plz, umkreis),
+		searchUrl: buildSearchUrl(occupation, postcode, distance),
 	};
 }
 
 // Always resolves with a valid result shape — never rejects. Callers fan this
 // out via `Promise.all`, so any rejection (network error, JSON parse failure,
 // timeout) would 500 the whole batch even when only one beruf failed.
-export async function searchAusbildungsplaetze(
-	beruf: string,
-	plz: string,
-	umkreis: number = DEFAULT_RADIUS_KM,
-): Promise<AusbildungsplatzResult> {
+export async function searchVacancies(
+	occupation: string,
+	postcode: string,
+	distance: number = DEFAULT_RADIUS_KM,
+): Promise<VacancyResult> {
 	const params = new URLSearchParams({
-		was: beruf,
-		wo: plz,
-		umkreis: String(umkreis),
+		was: occupation,
+		wo: postcode,
+		umkreis: String(distance),
 		angebotsart: "4",
 		size: String(SAMPLE_SIZE),
 	});
@@ -88,8 +124,8 @@ export async function searchAusbildungsplaetze(
 		});
 
 		if (!res.ok) {
-			console.error(`Jobsuche API error for "${beruf}": ${res.status}`);
-			return emptyResult(beruf, plz, umkreis);
+			console.error(`Jobsuche API error for "${occupation}": ${res.status}`);
+			return emptyResult(occupation, postcode, distance);
 		}
 
 		const data: JobsucheResponse = await res.json();
@@ -106,19 +142,43 @@ export async function searchAusbildungsplaetze(
 				? Math.round((rawTotal * ausbildungenInSample.length) / sample.length)
 				: rawTotal;
 
-		const previews: AusbildungsplatzPreview[] = ausbildungenInSample
-			.slice(0, MAX_PREVIEWS)
-			.map((job) => ({
-				employer: job.arbeitgeber || "Unbekannter Arbeitgeber",
-				city: job.arbeitsort?.ort || "Unbekannter Ort",
-				eintrittsdatum: job.eintrittsdatum,
-			}));
+		const previews: VacancyPreview[] = [...ausbildungenInSample]
+			.filter((job) =>
+				isPublishedWithinMaxAge(job.aktuelleVeroeffentlichungsdatum),
+			)
+			.sort(
+				(a, b) =>
+					new Date(b.aktuelleVeroeffentlichungsdatum ?? 0).getTime() -
+					new Date(a.aktuelleVeroeffentlichungsdatum ?? 0).getTime(),
+			)
+			.map((job) => {
+				const location = job.arbeitsort;
+				const latitude = location?.koordinaten?.lat;
+				const longitude = location?.koordinaten?.lon;
+				return {
+					employer: job.arbeitgeber || "Unbekannter Arbeitgeber",
+					city: normalizeLocationField(location?.ort) || "Unbekannter Ort",
+					postcode: normalizeLocationField(location?.plz),
+					district: normalizeLocationField(location?.ortsteil),
+					street: normalizeLocationField(location?.strasse),
+					latitude:
+						typeof latitude === "number" && Number.isFinite(latitude)
+							? latitude
+							: undefined,
+					longitude:
+						typeof longitude === "number" && Number.isFinite(longitude)
+							? longitude
+							: undefined,
+					startDate: job.eintrittsdatum,
+					publishedAt: job.aktuelleVeroeffentlichungsdatum,
+				};
+			});
 
 		return {
-			beruf,
+			occupation,
 			totalCount,
 			previews,
-			searchUrl: buildSearchUrl(beruf, plz, umkreis),
+			searchUrl: buildSearchUrl(occupation, postcode, distance),
 		};
 	} catch (err) {
 		let reason: string;
@@ -129,7 +189,7 @@ export async function searchAusbildungsplaetze(
 		} else {
 			reason = String(err);
 		}
-		console.error(`Jobsuche API error for "${beruf}": ${reason}`);
-		return emptyResult(beruf, plz, umkreis);
+		console.error(`Jobsuche API error for "${occupation}": ${reason}`);
+		return emptyResult(occupation, postcode, distance);
 	}
 }
