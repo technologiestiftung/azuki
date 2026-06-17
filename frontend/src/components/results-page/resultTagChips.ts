@@ -1,8 +1,4 @@
-import {
-	getOccupationTagDefinition,
-	OCCUPATION_TAGS,
-	type MatchedOccupation,
-} from "@azuki/shared";
+import { OCCUPATION_TAGS, type MatchedOccupation } from "@azuki/shared";
 import type { FilterOccupationTypeTagChip } from "../filter-bottom-sheet/FilterBottomSheet";
 
 /** Supports match results cached before occupationTag was added to the API. */
