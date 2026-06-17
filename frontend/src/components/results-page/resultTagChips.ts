@@ -23,7 +23,3 @@ export function buildResultTagChips(
 		label: tag.label,
 	}));
 }
-
-export function getOccupationTagLabel(tagId: string): string {
-	return getOccupationTagDefinition(tagId)?.label ?? tagId;
-}
