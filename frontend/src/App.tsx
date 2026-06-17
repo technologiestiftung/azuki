@@ -1,4 +1,6 @@
+import { useEffect } from "react";
 import { Routes, Route, Navigate, useLocation } from "react-router-dom";
+import { useToastStore } from "./store/useToastStore";
 import { LoginScreen } from "./components/login-screen/LoginScreen";
 import { WelcomeCarousel } from "./components/welcome-screen/WelcomeCarousel";
 import { StartScreen } from "./components/competence-profile/start/StartScreen";
@@ -21,6 +23,11 @@ import { ROUTE_PATHS } from "./routing/routes";
 
 function App() {
 	const location = useLocation();
+
+	useEffect(() => {
+		useToastStore.getState().close();
+	}, [location.pathname, location.hash]);
+
 	return (
 		<div
 			className={

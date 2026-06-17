@@ -1,4 +1,4 @@
-import { useCallback, useEffect } from "react";
+import { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { content } from "../../../content";
 import { useAppStore } from "../../../store/useAppStore";
@@ -77,13 +77,6 @@ export function WorkPreferencesStep() {
 			? (OVERLAY_ILLUSTRATIONS[current.id]?.[activeChoice] ?? [])
 			: [];
 
-	const hasAnyExplicitWorkPreference = pairs.some((pair) => {
-		const choice = workPreferences[pair.id];
-		return choice === "a" || choice === "b";
-	});
-	const isOnLastPair = pairIndex >= pairs.length - 1;
-	const isSkipConfirmDialogOpen = isOnLastPair && !hasAnyExplicitWorkPreference;
-
 	useEffect(() => {
 		if (pathname === "/preferences" && !hash) {
 			navigate({ pathname: "/preferences", hash: "#0" }, { replace: true });
@@ -103,10 +96,6 @@ export function WorkPreferencesStep() {
 		goNext();
 	}
 
-	const skipConfirmOnStay = useCallback(() => {
-		navigate({ pathname, hash: "#0" }, { replace: true });
-	}, [navigate, pathname]);
-
 	return (
 		<StepLayout
 			question={content["workPreferences.question"]}
@@ -114,10 +103,6 @@ export function WorkPreferencesStep() {
 			onSkip={handleSkip}
 			hasSkipButton={true}
 			hasNextButton={true}
-			skipConfirmTitleKey="skipConfirmDialog.skipAll.title"
-			skipConfirmDescriptionKey="skipConfirmDialog.skipAll.description"
-			isSkipConfirmDialogOpen={isSkipConfirmDialogOpen}
-			skipConfirmOnStay={skipConfirmOnStay}
 		>
 			<div className="flex flex-1 flex-col justify-between gap-3">
 				<div className="relative flex h-[217px] shrink-0 items-center justify-center">

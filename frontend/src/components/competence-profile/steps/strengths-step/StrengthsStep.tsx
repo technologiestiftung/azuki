@@ -96,13 +96,7 @@ export function StrengthsStep() {
 	const currentCard = strengths[cardIndex];
 	const currentValue = strengthValues[currentCard?.id] ?? 0.5;
 
-	const hasAnyExplicitStrengthRating = strengths.some(
-		(strength) => strength.id in strengthValues,
-	);
 	const isOnLastPredefinedCard = cardIndex === customStrengthCardIndex - 1;
-
-	const isSkipConfirmDialogOpen =
-		isOnLastPredefinedCard && !hasAnyExplicitStrengthRating;
 
 	const goToCustomStrengthCard = useCallback(() => {
 		navigate(
@@ -171,10 +165,6 @@ export function StrengthsStep() {
 		stackRef.current?.goBack();
 	}, [isCustomStrengthCard, navigate, customStrengthCardIndex]);
 
-	const skipConfirmOnStay = useCallback(() => {
-		navigate({ pathname, hash: "#0" }, { replace: true });
-	}, [navigate, pathname]);
-
 	return (
 		<StepLayout
 			question={content["strengths.question"]}
@@ -183,10 +173,6 @@ export function StrengthsStep() {
 			onBack={handleBack}
 			hasSkipButton={true}
 			skipLabel={content["strengths.skipButton.label"]}
-			isSkipConfirmDialogOpen={isSkipConfirmDialogOpen}
-			skipConfirmTitleKey="skipConfirmDialog.skipAll.title"
-			skipConfirmDescriptionKey="skipConfirmDialog.skipAll.description"
-			skipConfirmOnStay={skipConfirmOnStay}
 		>
 			<div
 				className={`flex min-h-0 flex-1 flex-col items-center h-full pb-5 ${

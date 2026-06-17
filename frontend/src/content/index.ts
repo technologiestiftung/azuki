@@ -52,7 +52,7 @@ export const content = {
 
 	// School Subjects
 	"schoolSubjects.question": "Welche Schulfächer machen dir Spaß?",
-	"schoolSubjects.skipButton.label": "Überspringen",
+	"schoolSubjects.skipButton.label": "Ich weiß es nicht",
 	"schoolSubjects.pill.label.postfix": "als lieblingsfach auswählen",
 	"schoolSubjects.addCustomSubjectButton.label": "Schulfach hinzufügen",
 	"schoolSubjects.addCustomSubjectButton.ariaLabel": "Schulfach hinzufügen",
@@ -202,7 +202,7 @@ export const content = {
 	"strengths.question": "Was kannst du gut?",
 	"strengths.sliderMin": "0%",
 	"strengths.sliderMax": "100%",
-	"strengths.skipButton.label": "Überspringen",
+	"strengths.skipButton.label": "Ich weiß es nicht",
 	// Teamwork
 	"strengths.cards.teamwork.title": "Teamarbeit",
 	"strengths.cards.teamwork.description":
@@ -257,7 +257,7 @@ export const content = {
 
 	//Work Expectations
 	"workExpectations.question": "Was ist dir in deinem Beruf wichtig?",
-	"workExpectations.skipButton.label": "Überspringen",
+	"workExpectations.skipButton.label": "Ich weiß es nicht",
 	"workExpectations.option.goodSalary": "Gutes Gehalt",
 	"workExpectations.option.peopleWork": "Mit Menschen arbeiten",
 	"workExpectations.option.teamWork": "Teamarbeit",
@@ -298,7 +298,7 @@ export const content = {
 	"noGos.ariaLabel.reject": "Als geht nicht markieren",
 	"noGos.acceptLabel": "Ist okay",
 	"noGos.ariaLabel.accept": "Als ist okay markieren",
-	"noGos.skipButton.label": "Überspringen",
+	"noGos.skipButton.label": "Ich weiß es nicht",
 	"noGos.customNoGo.label": "Von dir hinzugefügt",
 	"noGos.addCustomNoGoButton.addMore": "No Go hinzufügen",
 	"noGos.addCustomNoGoButton.label": "Weitere hinzufügen",
@@ -394,6 +394,7 @@ export const content = {
 	"results.badge.empty": "Keine offenen Stellen",
 	"results.previewHeading": "Beispiele in deiner Nähe",
 	"results.startDatePrefix": "Start:",
+	// Vacancies
 	"vacancies.filter.occupations.title": "Beruf",
 	"vacancies.filter.occupations.title.short": "Beruf",
 	"vacancies.filter.occupations.filterButton.ariaLabel": "Berufe filtern",
@@ -411,7 +412,6 @@ export const content = {
 	"standort.plzAriaLabel": "Postleitzahl",
 	"vacancies.noResults":
 		"Noch keine passenden Berufe. Geh zuerst zurück zur Ergebnisliste.",
-
 	"vacancies.noResults.p1": "Aktuell gibt es keine freien Stellen.",
 	"vacancies.noResults.p2":
 		"Bald kommen Neue - Schau einfach später wieder rein.",
@@ -424,25 +424,9 @@ export const content = {
 	"vacancies.bottomCard.consultationLink": "https://joblinge.de",
 	"vacancies.bottomCard.consultationCta": "Zum Beratungsprogramm",
 	"vacancies.bottomCard.consultationCta.ariaLabel": "Zum Beratungsprogramm",
-
-	// Skip confirm dialog
-	"skipConfirmDialog.default.title": "Du hast noch nichts ausgewählt",
-	"skipConfirmDialog.default.description":
-		"Wenn du mehr auswählst, können wir dir passendere Berufe vorschlagen.",
-	"skipConfirmDialog.confirm.selection": "Auswählen",
-	"skipConfirmDialog.confirm.answerMultiple": "Fragen beantworten",
-	"skipConfirmDialog.confirm.answerSingle": "Frage beantworten",
-	"skipConfirmDialog.cancel": "Überspringen",
-	"skipConfirmDialog.singleChoice.title": "Bitte wähle eine Option",
-	"skipConfirmDialog.singleChoice.description":
-		"Wenn du etwas auswählst, können wir dir passendere Berufe vorschlagen.",
-	"skipConfirmDialog.multipleChoice.title": "Wähle eine oder mehrere Optionen",
-	"skipConfirmDialog.multipleChoice.description":
-		"Mehr Auswahl ermöglicht passendere Berufsvorschläge.",
-	"skipConfirmDialog.skipAll.title": "Du hast alle Fragen übersprungen",
-	"skipConfirmDialog.skipAll.description":
-		"Beantworte möglichst viele Fragen, um passendere Berufsvorschläge zu erhalten.",
-	"skipConfirmDialog.textInput.title": "Gib eine Antwort ein",
-	"skipConfirmDialog.textInput.description":
-		"Ergänze hier, was noch wichtig ist um passendere Berufsvorschläge zu erhalten.",
+	// Skip toast
+	"toast.inSchool.description": "Wähle Ja oder Nein, um weiter zu machen.",
+	"toast.schoolDegree.description":
+		"Wähle einen Schulabschluss, um weiter zu machen.",
+	"toast.close.ariaLabel": "Schließen",
 };
