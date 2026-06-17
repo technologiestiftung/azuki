@@ -38,9 +38,6 @@ export function SchoolSubjectsStep() {
 			onSkip={goNext}
 			hasSkipButton={false}
 			skipLabel={content["schoolSubjects.skipButton.label"]}
-			isSkipConfirmDialogOpen={profile.favoriteSubjects.length === 0}
-			skipConfirmTitleKey="skipConfirmDialog.multipleChoice.title"
-			skipConfirmDescriptionKey="skipConfirmDialog.multipleChoice.description"
 			subtitle={content["common.multiSelect.subline"]}
 		>
 			<div className="flex flex-col gap-8">

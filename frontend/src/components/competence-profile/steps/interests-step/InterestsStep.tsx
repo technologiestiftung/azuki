@@ -36,9 +36,6 @@ export function InterestsStep() {
 			question={content["interests.question"]}
 			onNext={goNext}
 			onSkip={goNext}
-			isSkipConfirmDialogOpen={profile.interests.length === 0}
-			skipConfirmTitleKey="skipConfirmDialog.multipleChoice.title"
-			skipConfirmDescriptionKey="skipConfirmDialog.multipleChoice.description"
 			subtitle={content["common.multiSelect.subline"]}
 		>
 			<div className="flex flex-col gap-8">

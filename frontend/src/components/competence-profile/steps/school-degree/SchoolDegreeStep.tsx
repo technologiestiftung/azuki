@@ -1,5 +1,6 @@
 import { content } from "../../../../content";
 import { useAppStore } from "../../../../store/useAppStore";
+import { useToastStore } from "../../../../store/useToastStore";
 import { type EducationLevel } from "../../../../common";
 import { StepLayout } from "../StepLayout";
 import { schoolDegrees } from "./school-degrees";
@@ -25,6 +26,14 @@ export function SchoolDegreeStep() {
 		setEducationLevel(value as EducationLevel);
 	}
 
+	const handleNext = () => {
+		if (profile.educationLevel === null) {
+			useToastStore.getState().showOrShake("toast.schoolDegree.description");
+			return;
+		}
+		goNext();
+	};
+
 	return (
 		<StepLayout
 			question={
@@ -32,12 +41,9 @@ export function SchoolDegreeStep() {
 					? content["schoolDegree.question.inSchool"]
 					: content["schoolDegree.question"]
 			}
-			onNext={goNext}
+			onNext={handleNext}
 			onSkip={goNext}
 			hasSkipButton={false}
-			isSkipConfirmDialogOpen={!profile.educationLevel}
-			skipConfirmTitleKey="skipConfirmDialog.singleChoice.title"
-			skipConfirmDescriptionKey="skipConfirmDialog.singleChoice.description"
 			subtitle={content["common.singleSelect.subline"]}
 		>
 			<div className="flex flex-col gap-3">
@@ -46,7 +52,12 @@ export function SchoolDegreeStep() {
 						key={degree.value}
 						label={degree.label}
 						selected={profile.educationLevel === degree.value}
-						onClick={() => handleSelect(degree.value)}
+						onClick={() => {
+							handleSelect(degree.value);
+							if (degree.value !== "foreign_degree") {
+								goNext();
+							}
+						}}
 					>
 						{profile.educationLevel === "foreign_degree" &&
 							degree.value === "foreign_degree" && (
