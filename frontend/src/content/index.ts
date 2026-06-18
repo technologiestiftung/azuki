@@ -250,7 +250,7 @@ export const content = {
 
 	// Practical Experience
 	"practicalExperience.question": "Hast du mal gearbeitet oder geholfen?",
-	"practicalExperience.subtitle": "Alles zählt - auch Aufgaben im Alltag!",
+	"practicalExperience.subtitle": "Alles zählt - auch Aufgaben im Alltag.",
 	"practicalExperience.suggestion.label": "Vorschläge",
 	"practicalExperience.bottomSheet.rating.title": "Wie hat dir das gefallen?",
 	"practicalExperience.suggestion.addedByYouLabel": "Deine Erfahrungen",
@@ -276,13 +276,13 @@ export const content = {
 	"practicalExperience.bottomSheet.friends.title":
 		"Wobei hast du Freund:innen geholfen?",
 	"practicalExperience.bottomSheet.addClub.title":
-		"Wobei hast du im Verein geholfen?",
+		"Was hast du im Verein gemacht?",
 	"practicalExperience.bottomSheet.addJob.title":
 		"Welchen Job hast du gemacht?",
 	"practicalExperience.bottomSheet.school.title":
 		"Was hast du in der Schule gemacht?",
 	"practicalExperience.bottomSheet.addOwn.title":
-		"Wo hast du schon mal gearbeitet oder geholfen",
+		"Wo hast du schon mal gearbeitet oder geholfen?",
 	"practicalExperience.bottomSheet.rating.ariaLabel":
 		"Wie hat dir das gefallen?",
 	"starRating.groupAriaLabel": "Bewertung auswählen",

@@ -34,7 +34,7 @@ export function RatingBottomSheet({
 
 	return (
 		<BottomSheet open={open} onClose={onClose} ariaLabel={ariaLabel}>
-			<div className="flex flex-col items-center pb-4  w-full">
+			<div className="flex flex-col items-center pb-10 w-full">
 				<div className="flex w-full px-2">
 					<GhostIconButton
 						className="w-12 h-12"
@@ -49,7 +49,7 @@ export function RatingBottomSheet({
 							{title || content["practicalExperience.bottomSheet.rating.title"]}
 						</h2>
 					)}
-					<div className="flex flex-col gap-2 w-full">
+					<div className="flex flex-col gap-2 w-full justify-center items-center">
 						<StarRating
 							rating={selectedRating}
 							maxRating={5}

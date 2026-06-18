@@ -186,7 +186,7 @@ export function PracticalExperienceStep() {
 									>
 										{item.label}
 										<img
-											src="/icons/plus-black.svg"
+											src="/icons/plus-gray.svg"
 											alt=""
 											className="w-6 h-6"
 										/>
@@ -246,7 +246,9 @@ export function PracticalExperienceStep() {
 							}
 							description={
 								<div>
-									{content["practicalExperience.bottomSheet.example.label"]}{" "}
+									{selectedSuggestion?.examples?.length &&
+										selectedSuggestion.examples.length > 0 &&
+										content["practicalExperience.bottomSheet.example.label"]}
 									{selectedSuggestion?.examples.map((example) => (
 										<ul className="list-disc list-inside" key={example}>
 											<li key={example}>{example}</li>
