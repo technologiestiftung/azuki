@@ -2,18 +2,18 @@ import { useEffect, useRef } from "react";
 
 type LoadingProgressBarProps = {
 	durationMs: number;
-	onComplete: () => void;
+	startTime?: number;
 };
 
 export function LoadingProgressBar({
 	durationMs,
-	onComplete,
+	startTime,
 }: LoadingProgressBarProps) {
 	const fillRef = useRef<HTMLDivElement>(null);
 	const trackRef = useRef<HTMLDivElement>(null);
 
 	useEffect(() => {
-		const start = performance.now();
+		const start = startTime ?? performance.now();
 		let frame = 0;
 
 		const setProgress = (ratio: number) => {
@@ -33,7 +33,6 @@ export function LoadingProgressBar({
 			const elapsed = now - start;
 			if (elapsed >= durationMs) {
 				setProgress(1);
-				onComplete();
 				return;
 			}
 			setProgress(elapsed / durationMs);
@@ -42,7 +41,7 @@ export function LoadingProgressBar({
 
 		frame = requestAnimationFrame(tick);
 		return () => cancelAnimationFrame(frame);
-	}, [durationMs, onComplete]);
+	}, [durationMs, startTime]);
 
 	return (
 		<div

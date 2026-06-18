@@ -18,14 +18,14 @@ type ContentPhase = "success" | "waiting";
 
 export function LoadingScreen() {
 	const profile = useAppStore((state) => state.profile);
-	const matchResults = useMatchResultsStore((state) => state.matchResults);
 	const setMatchResults = useMatchResultsStore(
 		(state) => state.setMatchResults,
 	);
 	const navigate = useNavigate();
 	const called = useRef(false);
 	const apiDone = useRef(false);
-	const waitingMinDone = useRef(false);
+	const minDurationDone = useRef(false);
+	const minDurationStart = useRef(performance.now());
 	const [contentPhase, setContentPhase] = useState<ContentPhase>("success");
 	const [overlayOpacity, setOverlayOpacity] = useState(0);
 	const overlayTarget = useRef<"in" | "out" | null>(null);
@@ -42,7 +42,7 @@ export function LoadingScreen() {
 	}
 
 	const tryNavigate = useCallback(() => {
-		if (apiDone.current && waitingMinDone.current) {
+		if (apiDone.current && minDurationDone.current) {
 			navigate("/results/list");
 		}
 	}, [navigate]);
@@ -50,11 +50,6 @@ export function LoadingScreen() {
 	const handleSuccessComplete = useCallback(() => {
 		freezeTimer.current = setTimeout(startTransition, SUCCESS_FREEZE_MS);
 	}, []);
-
-	const handleWaitingProgressComplete = useCallback(() => {
-		waitingMinDone.current = true;
-		tryNavigate();
-	}, [tryNavigate]);
 
 	useEffect(() => {
 		return () => {
@@ -65,14 +60,33 @@ export function LoadingScreen() {
 	}, []);
 
 	useEffect(() => {
-		if (matchResults) {
-			navigate("/results/list", { replace: true });
-			return;
-		}
+		let frame = 0;
+
+		const tick = (now: number) => {
+			const elapsed = now - minDurationStart.current;
+			if (elapsed >= LOADING_MIN_MS) {
+				minDurationDone.current = true;
+				tryNavigate();
+				return;
+			}
+			frame = requestAnimationFrame(tick);
+		};
+
+		frame = requestAnimationFrame(tick);
+		return () => cancelAnimationFrame(frame);
+	}, [tryNavigate]);
+
+	useEffect(() => {
 		if (called.current) {
 			return;
 		}
 		called.current = true;
+
+		if (useMatchResultsStore.getState().matchResults) {
+			apiDone.current = true;
+			tryNavigate();
+			return;
+		}
 
 		const doMatch = async () => {
 			try {
@@ -87,7 +101,7 @@ export function LoadingScreen() {
 		};
 
 		void doMatch();
-	}, [profile, matchResults, setMatchResults, navigate, tryNavigate]);
+	}, [profile, setMatchResults, tryNavigate]);
 
 	function handleOverlayTransitionEnd() {
 		if (overlayTarget.current === "in" && overlayOpacity === 1) {
@@ -133,7 +147,7 @@ export function LoadingScreen() {
 					</div>
 					<LoadingProgressBar
 						durationMs={LOADING_MIN_MS}
-						onComplete={handleWaitingProgressComplete}
+						startTime={minDurationStart.current}
 					/>
 				</>
 			)}
