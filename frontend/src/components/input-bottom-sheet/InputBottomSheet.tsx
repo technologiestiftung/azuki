@@ -62,7 +62,12 @@ export function InputBottomSheet({
 	};
 
 	return (
-		<BottomSheet open={open} onClose={onClose} ariaLabel={sheetAriaLabel}>
+		<BottomSheet
+			open={open}
+			onClose={onClose}
+			ariaLabel={sheetAriaLabel}
+			initialFocus="container"
+		>
 			<div className="flex flex-col items-center gap-3 pt-1 pb-4 px-4 w-full">
 				<div className="flex flex-col gap-2.5 w-full pl-1">
 					{title && (
