@@ -28,8 +28,7 @@ export const prefillUserProfile: UserProfile = {
 	practicalExperiences: [
 		{
 			id: "prefill-1",
-			description:
-				"Praktikum in einem IT-Unternehmen und Ferienjob im Einzelhandel.",
+			description: "Ferienjob im Einzelhandel.",
 			selectedExperienceId: null,
 			selectedExperienceLabel: null,
 			rating: 0,
