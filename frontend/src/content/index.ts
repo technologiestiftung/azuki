@@ -300,7 +300,8 @@ export const content = {
 	"practicalExperience.bottomSheet.input.job.placeholder":
 		"z.B. Zeitung austragen, Küchenhilfe",
 	"practicalExperience.bottomSheet.input.ariaLabel": "Erfahrung hinzufügen",
-	"practicalExperience.bottomSheet.input.addOwn.placeholder": "z. B. kochen",
+	"practicalExperience.bottomSheet.input.addOwn.placeholder":
+		"z. B. Möbel aufbauen, Babysitting",
 	// Example suggestions
 	"practicalExperience.bottomSheet.example.label": "Zum Beispiel",
 	"practicalExperience.bottomSheet.example.homeHelp.li1":

@@ -149,7 +149,17 @@ export function PracticalExperienceStep() {
 											ariaLabel={entry.description}
 											className="text-left"
 										>
-											{entry.description}
+											<div className="flex gap-1.5 items-center justify-center">
+												{entry.description}{" "}
+												<span className="flex items-center text-sm text-sky-300">
+													{entry.rating}
+													<img
+														src="/icons/theme-colored-star.svg"
+														alt=""
+														className="w-3 h-3"
+													/>
+												</span>
+											</div>
 										</Pill>
 									))}
 								</ul>
