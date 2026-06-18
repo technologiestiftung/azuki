@@ -7,6 +7,24 @@ export type WorkPreferenceOptionChecks = {
 };
 export type WorkExpectationPredicate = (occupation: Occupation) => boolean;
 
+/** BERUFENET b20-2 skill tags that indicate creativity. */
+export const CREATIVITY_SKILL_TAGS: readonly string[] = [
+	"Sinn und Gespür für Ästhetik",
+	"Zeichnerische Befähigung",
+] as const;
+
+/** BERUFENET b20-4 strength tag for creativity. */
+export const CREATIVITY_STRENGTH_TAG = "Kreativität";
+
+/** Occupations with kreativ-gestaltend interest, Kreativität strength, or creativity skill tags. */
+export function hasCreativitySignal(o: Occupation): boolean {
+	return (
+		o.interests.includes("kreativ-gestaltend") ||
+		o.strengthTags.includes(CREATIVITY_STRENGTH_TAG) ||
+		CREATIVITY_SKILL_TAGS.some((tag) => o.skillTags.includes(tag))
+	);
+}
+
 export const NO_GO_MAP: Record<string, OccupationPredicate> = {
 	noise: (o) => o.conditions.noise,
 	dirt: (o) => o.conditions.dirt,
@@ -44,8 +62,8 @@ export const WORK_PREF_MAP: Record<string, WorkPreferenceOptionChecks> = {
 		b: (o) => o.conditions.office,
 	},
 	structure: {
-		a: (o) => o.conditions.regulatedWork,
-		b: (o) => !o.conditions.regulatedWork,
+		a: (o) => !hasCreativitySignal(o),
+		b: hasCreativitySignal,
 	},
 	environment: {
 		// "Drinnen" — any indoor workplace, not just office/workshop.
@@ -58,7 +76,7 @@ export const STRENGTH_TO_TAGS: Record<string, string[]> = {
 	// Translates frontend strength ids to BERUFENET tags from b20-4.
 	teamwork: ["Befähigung zu Gruppenarbeit / Teamfähigkeit"],
 	"logical-thinking": ["Umsicht"],
-	creativity: ["Kreativität"],
+	creativity: [CREATIVITY_STRENGTH_TAG],
 	// No b20-4 tags; scored via conditions fallback in dimensions.ts.
 	craftsmanship: [],
 	communication: ["Kommunikationsfähigkeit", "Kontaktbereitschaft"],
@@ -79,12 +97,6 @@ export const STRENGTH_TO_TAGS: Record<string, string[]> = {
 export const CONCENTRATION_SKILL_TAGS: readonly string[] = [
 	"Konzentration",
 	"Daueraufmerksamkeit",
-] as const;
-
-/** BERUFENET b20-2 skill tags that indicate creativity. */
-export const CREATIVITY_SKILL_TAGS: readonly string[] = [
-	"Sinn und Gespür für Ästhetik",
-	"Zeichnerische Befähigung",
 ] as const;
 
 /** BERUFENET b20-2 skill tags that indicate precision. */
