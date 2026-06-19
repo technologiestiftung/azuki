@@ -37,8 +37,7 @@ function normalizeProfile(
 ): UserProfile {
 	const merged = { ...initialUserProfile, ...profile };
 	const practicalExperiences =
-		merged.practicalExperiences ??
-		initialUserProfile.practicalExperiences;
+		merged.practicalExperiences ?? initialUserProfile.practicalExperiences;
 	const selectedPracticalExperienceIds =
 		merged.selectedPracticalExperienceIds ??
 		practicalExperiences.map((entry) => entry.id);
