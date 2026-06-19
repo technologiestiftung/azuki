@@ -149,8 +149,8 @@ export function PracticalExperienceStep() {
 											ariaLabel={entry.description}
 											className="text-left"
 										>
-											<div className="flex gap-1.5 items-center justify-center">
-												{entry.description}{" "}
+											<div className="flex gap-1.5 items-center justify-center w-full">
+												<span className="truncate">{entry.description}</span>
 												<span className="flex items-center text-sm text-sky-300">
 													{entry.rating}
 													<img
