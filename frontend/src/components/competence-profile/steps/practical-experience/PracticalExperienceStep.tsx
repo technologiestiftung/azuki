@@ -151,7 +151,7 @@ export function PracticalExperienceStep() {
 										>
 											<div className="flex gap-1.5 items-center justify-center w-full">
 												<span className="truncate">{entry.description}</span>
-												<span className="flex items-center text-sm text-sky-300">
+												<span className="flex items-center justify-center text-sm text-sky-300">
 													{entry.rating}
 													<img
 														src="/icons/theme-colored-star.svg"
