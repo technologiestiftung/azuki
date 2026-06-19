@@ -250,7 +250,7 @@ export const content = {
 
 	// Practical Experience
 	"practicalExperience.question": "Hast du mal gearbeitet oder geholfen?",
-	"practicalExperience.subtitle": "Alles zählt - auch Aufgaben im Alltag.",
+	"practicalExperience.subtitle": "Alles zählt – auch Aufgaben im Alltag.",
 	"practicalExperience.suggestion.label": "Vorschläge",
 	"practicalExperience.bottomSheet.rating.title": "Wie hat dir das gefallen?",
 	"practicalExperience.suggestion.addedByYouLabel": "Deine Erfahrungen",
