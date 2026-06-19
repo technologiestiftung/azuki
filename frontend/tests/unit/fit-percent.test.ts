@@ -3,15 +3,16 @@ import { fitPercent } from "../../src/components/results-page/utils/fitPercent";
 
 describe("fitPercent", () => {
 	test("maps calibration anchor raw scores to expected percentages", () => {
-		// Logistic curve 100/(1+e^(-0.105*(raw-9))), tuned against eval personas.
+		// Logistic curve 100/(1+e^(-0.105*(raw-13))), tuned against eval personas.
+		// Midpoint +4 vs. pre–practical-experience curve to offset the new ±8 cap.
 		const anchors: Array<[number, number]> = [
-			[-20, 5],
-			[0, 28],
-			[8, 47],
-			[15, 65],
-			[22, 80],
-			[30, 90],
-			[40, 96],
+			[-20, 3],
+			[0, 20],
+			[8, 37],
+			[15, 55],
+			[22, 72],
+			[30, 86],
+			[40, 94],
 		];
 		for (const [raw, expected] of anchors) {
 			expect(fitPercent(raw)).toBeGreaterThanOrEqual(expected - 1);
