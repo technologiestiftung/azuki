@@ -132,28 +132,11 @@ export const WORK_EXPECTATIONS_CHECKS: Record<
 	remote: (o) => HOMEOFFICE_RE.test(o.workLocations),
 };
 
-/** Frontend practical-experience pill ids → base signal strength. */
-export const PRACTICAL_EXPERIENCE_CATEGORY_WEIGHT: Record<string, number> = {
-	internship: 1,
-	job: 1,
-	school: 0.65,
-	club: 0.65,
-	"home-help": 0.35,
-	friends: 0.35,
-};
-
-export const PRACTICAL_EXPERIENCE_DEFAULT_CATEGORY_WEIGHT = 0.5;
-
-/** Star rating → multiplier on keyword-match boost (3★ = neutral). */
-export const PRACTICAL_EXPERIENCE_RATING_MULTIPLIER: Record<number, number> = {
-	5: 1,
-	4: 0.85,
-	3: 0,
-	2: 0.25,
-	1: 0.1,
-};
-
-/** Points per keyword hit before category/rating multipliers; total capped at ±8. */
-export const PRACTICAL_EXPERIENCE_POINT_PER_HIT = 2;
-export const PRACTICAL_EXPERIENCE_SCORE_CAP = 8;
-export const PRACTICAL_EXPERIENCE_KEYWORD_HIT_CAP = 3;
+export {
+	PRACTICAL_EXPERIENCE_CATEGORY_WEIGHT,
+	PRACTICAL_EXPERIENCE_DEFAULT_CATEGORY_WEIGHT,
+	PRACTICAL_EXPERIENCE_KEYWORD_HIT_CAP,
+	PRACTICAL_EXPERIENCE_POINT_PER_HIT,
+	PRACTICAL_EXPERIENCE_RATING_MULTIPLIER,
+	PRACTICAL_EXPERIENCE_SCORE_CAP,
+} from "@azuki/shared";

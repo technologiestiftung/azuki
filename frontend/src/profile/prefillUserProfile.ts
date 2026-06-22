@@ -29,9 +29,9 @@ export const prefillUserProfile: UserProfile = {
 		{
 			id: "prefill-1",
 			description: "Ferienjob im Einzelhandel.",
-			selectedExperienceId: null,
-			selectedExperienceLabel: null,
-			rating: 0,
+			selectedExperienceId: "job",
+			selectedExperienceLabel: "Job",
+			rating: 4,
 		},
 	],
 	selectedPracticalExperienceIds: ["prefill-1"],

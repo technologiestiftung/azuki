@@ -50,8 +50,18 @@ export type { Persona } from "./persona";
 
 export { formatOccupationDisplayName } from "./occupationDisplayName";
 
-export type { PracticalExperienceEntry } from "./practicalExperience";
+export type {
+	PracticalExperienceEntry,
+	PracticalExperienceCategoryId,
+} from "./practicalExperience";
 export {
+	PRACTICAL_EXPERIENCE_CATEGORY_IDS,
+	PRACTICAL_EXPERIENCE_CATEGORY_WEIGHT,
+	PRACTICAL_EXPERIENCE_DEFAULT_CATEGORY_WEIGHT,
+	PRACTICAL_EXPERIENCE_KEYWORD_HIT_CAP,
+	PRACTICAL_EXPERIENCE_POINT_PER_HIT,
+	PRACTICAL_EXPERIENCE_RATING_MULTIPLIER,
+	PRACTICAL_EXPERIENCE_SCORE_CAP,
 	formatPracticalExperiencesForApi,
 	getActivePracticalExperiences,
 } from "./practicalExperience";
