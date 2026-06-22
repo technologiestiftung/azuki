@@ -6,17 +6,17 @@ import type {
 	Verdict,
 } from "@azuki/shared";
 
-const TOP_8 = 8;
-const MAX_POINTS = 16;
+const TOP_FINAL = 20;
 const POINTS_TIER_S = 2;
 const POINTS_TIER_A = 1;
+const MAX_POINTS = TOP_FINAL * POINTS_TIER_S;
 
 function isError(r: { error?: string }): boolean {
 	return "error" in r && typeof (r as { error: string }).error === "string";
 }
 
-function deriveVerdict(percent: number, tierCInTop8: number): Verdict {
-	if (tierCInTop8 > 0) {
+function deriveVerdict(percent: number, tierCInTopFinal: number): Verdict {
+	if (tierCInTopFinal > 0) {
 		return "fail";
 	}
 	if (percent < 50) {
@@ -50,14 +50,14 @@ export function scoreSnapshot(
 			continue;
 		}
 		const final = (result as { final: FinalEntry[] }).final;
-		const top8 = final.slice(0, TOP_8);
+		const topFinal = final.slice(0, TOP_FINAL);
 		const tierSSet = new Set(persona.tierS);
 		const tierASet = new Set(persona.tierA);
 		const tierCSet = new Set(persona.tierC);
 		let tierSCount = 0;
 		let tierACount = 0;
 		let tierCCount = 0;
-		for (const entry of top8) {
+		for (const entry of topFinal) {
 			if (tierCSet.has(entry.id)) {
 				tierCCount += 1;
 			} else if (tierSSet.has(entry.id)) {

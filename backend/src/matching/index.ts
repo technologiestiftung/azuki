@@ -15,6 +15,7 @@ import { buildSalaryBands, scoreOccupation } from "./score/index.js";
 // persona — Tier-S items he matches sit in the rank-40-to-60 band of
 // preFilter, so smaller K systematically misses them.
 export const PREFILTER_TOP_K = 60;
+export const FINAL_MATCH_COUNT = 20;
 
 export interface ScoredOccupation {
 	occupation: Occupation;
@@ -52,7 +53,7 @@ export function filterByRegionalAvailability(
 export function preFilter(
 	occupations: Occupation[],
 	profile: UserProfile,
-	topN: number = 30,
+	topN: number = PREFILTER_TOP_K,
 ): ScoredOccupation[] {
 	const candidates = filterByRegionalAvailability(occupations);
 

@@ -9,7 +9,11 @@ import {
 	AI_MODEL_IDS,
 } from "@azuki/shared";
 import { occupationMatchMeta } from "./occupationMeta";
-import { preFilter, PREFILTER_TOP_K } from "./matching/index.js";
+import {
+	FINAL_MATCH_COUNT,
+	preFilter,
+	PREFILTER_TOP_K,
+} from "./matching/index.js";
 import { resolveOccupationShortDescription } from "@azuki/shared";
 import { aiRank, buildSystemPrompt } from "./ai/index.js";
 import occupationsData from "./data/berufe.json";
@@ -140,7 +144,7 @@ app.post("/api/match", async (c) => {
 			}
 		}
 		const fallback: MatchResult = {
-			occupations: topCandidates.slice(0, 8).map((scored) => ({
+			occupations: topCandidates.slice(0, FINAL_MATCH_COUNT).map((scored) => ({
 				id: scored.occupation.id,
 				name: formatOccupationDisplayName(scored.occupation.name),
 				rawName: scored.occupation.name,
