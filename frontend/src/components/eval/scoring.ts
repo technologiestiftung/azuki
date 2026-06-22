@@ -5,11 +5,15 @@ import type {
 	ScoreReport,
 	Verdict,
 } from "@azuki/shared";
-
-const TOP_8 = 8;
-const MAX_POINTS = 16;
-const POINTS_TIER_S = 2;
-const POINTS_TIER_A = 1;
+import {
+	EVAL_MAX_POINTS,
+	EVAL_POINTS_TIER_A,
+	EVAL_POINTS_TIER_S,
+	EVAL_TOP_N,
+	EVAL_VERDICT_CONCERNS_BELOW,
+	EVAL_VERDICT_FAIL_BELOW,
+	EVAL_VERDICT_PASS_BELOW,
+} from "@azuki/shared";
 
 function isError(r: { error?: string }): boolean {
 	return "error" in r && typeof (r as { error: string }).error === "string";
@@ -19,13 +23,13 @@ function deriveVerdict(percent: number, tierCInTop8: number): Verdict {
 	if (tierCInTop8 > 0) {
 		return "fail";
 	}
-	if (percent < 50) {
+	if (percent < EVAL_VERDICT_FAIL_BELOW) {
 		return "fail";
 	}
-	if (percent < 80) {
+	if (percent < EVAL_VERDICT_CONCERNS_BELOW) {
 		return "concerns";
 	}
-	if (percent < 100) {
+	if (percent < EVAL_VERDICT_PASS_BELOW) {
 		return "pass";
 	}
 	return "strong-pass";
@@ -50,7 +54,7 @@ export function scoreSnapshot(
 			continue;
 		}
 		const final = (result as { final: FinalEntry[] }).final;
-		const top8 = final.slice(0, TOP_8);
+		const top8 = final.slice(0, EVAL_TOP_N);
 		const tierSSet = new Set(persona.tierS);
 		const tierASet = new Set(persona.tierA);
 		const tierCSet = new Set(persona.tierC);
@@ -66,8 +70,9 @@ export function scoreSnapshot(
 				tierACount += 1;
 			}
 		}
-		const points = tierSCount * POINTS_TIER_S + tierACount * POINTS_TIER_A;
-		const percent = Math.round((points / MAX_POINTS) * 100);
+		const points =
+			tierSCount * EVAL_POINTS_TIER_S + tierACount * EVAL_POINTS_TIER_A;
+		const percent = Math.round((points / EVAL_MAX_POINTS) * 100);
 		out[persona.id] = {
 			verdict: deriveVerdict(percent, tierCCount),
 			percent,
