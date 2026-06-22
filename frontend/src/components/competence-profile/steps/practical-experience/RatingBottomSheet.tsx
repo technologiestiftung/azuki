@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { BottomSheet } from "../../../primitives/bottom-sheet/BottomSheet";
 import { content } from "../../../../content";
 import { StarRating } from "../../../competence-profile/star-rating/StarRating";
@@ -20,15 +20,21 @@ export function RatingBottomSheet({
 	onSubmit: (rating: number) => void;
 }) {
 	const [selectedRating, setSelectedRating] = useState(0);
+	const submittedRef = useRef(false);
 
 	useEffect(() => {
 		if (open) {
 			setSelectedRating(0);
+			submittedRef.current = false;
 		}
 	}, [open]);
 
 	function handleRatingChange(value: number) {
 		setSelectedRating(value);
+		if (submittedRef.current) {
+			return;
+		}
+		submittedRef.current = true;
 		onSubmit(value);
 	}
 
