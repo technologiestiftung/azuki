@@ -344,7 +344,7 @@ export const content = {
 	"loading.success.description": "Du hast alle Fragen beantwortet.",
 	"loading.waiting.title": "Wir suchen nach Ausbildungen, die zu dir passen.",
 	"loading.waiting.description":
-		"Einen Moment - gleich geht's zu deinen Ergebnissen.",
+		"Einen Moment – gleich geht's zu deinen Ergebnissen.",
 
 	// Results
 	"results.title": "Deine Ergebnisse",

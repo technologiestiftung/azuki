@@ -12,7 +12,7 @@ const LOOP_LOTTIE = "/animations/loop.lottie";
 
 const SUCCESS_FREEZE_MS = 3200;
 const WHITE_FADE_MS = 400;
-const LOADING_MIN_MS = 40_000;
+const LOADING_MIN_MS = 30_000;
 
 type ContentPhase = "success" | "waiting";
 
@@ -145,10 +145,12 @@ export function LoadingScreen() {
 							{content["loading.waiting.description"]}
 						</p>
 					</div>
-					<LoadingProgressBar
-						durationMs={LOADING_MIN_MS}
-						startTime={minDurationStart.current}
-					/>
+					<div className="px-10 w-full">
+						<LoadingProgressBar
+							durationMs={LOADING_MIN_MS}
+							startTime={minDurationStart.current}
+						/>
+					</div>
 				</>
 			)}
 
