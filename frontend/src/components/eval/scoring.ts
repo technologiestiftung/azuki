@@ -19,8 +19,8 @@ function isError(r: { error?: string }): boolean {
 	return "error" in r && typeof (r as { error: string }).error === "string";
 }
 
-function deriveVerdict(percent: number, tierCInTop8: number): Verdict {
-	if (tierCInTop8 > 0) {
+function deriveVerdict(percent: number, tierCInTopFinal: number): Verdict {
+	if (tierCInTopFinal > 0) {
 		return "fail";
 	}
 	if (percent < EVAL_VERDICT_FAIL_BELOW) {
@@ -54,14 +54,14 @@ export function scoreSnapshot(
 			continue;
 		}
 		const final = (result as { final: FinalEntry[] }).final;
-		const top8 = final.slice(0, EVAL_TOP_N);
+		const topFinal = final.slice(0, EVAL_TOP_N);
 		const tierSSet = new Set(persona.tierS);
 		const tierASet = new Set(persona.tierA);
 		const tierCSet = new Set(persona.tierC);
 		let tierSCount = 0;
 		let tierACount = 0;
 		let tierCCount = 0;
-		for (const entry of top8) {
+		for (const entry of topFinal) {
 			if (tierCSet.has(entry.id)) {
 				tierCCount += 1;
 			} else if (tierSSet.has(entry.id)) {
