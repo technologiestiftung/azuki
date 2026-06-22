@@ -157,7 +157,7 @@ export function PracticalExperienceStep() {
 													<img
 														src="/icons/theme-colored-star.svg"
 														alt=""
-														className="w-3 h-3"
+														className="w-3 h-3 shrink-0"
 													/>
 												</span>
 											</div>

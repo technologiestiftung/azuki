@@ -26,6 +26,24 @@ export const PRACTICAL_EXPERIENCE_CATEGORY_WEIGHT: Record<
 
 export const PRACTICAL_EXPERIENCE_DEFAULT_CATEGORY_WEIGHT = 0.5;
 
+const PRACTICAL_EXPERIENCE_CATEGORY_ID_SET = new Set<string>(
+	PRACTICAL_EXPERIENCE_CATEGORY_IDS,
+);
+
+export function getPracticalExperienceCategoryWeight(
+	selectedExperienceId: string | null,
+): number {
+	if (
+		selectedExperienceId &&
+		PRACTICAL_EXPERIENCE_CATEGORY_ID_SET.has(selectedExperienceId)
+	) {
+		return PRACTICAL_EXPERIENCE_CATEGORY_WEIGHT[
+			selectedExperienceId as PracticalExperienceCategoryId
+		];
+	}
+	return PRACTICAL_EXPERIENCE_DEFAULT_CATEGORY_WEIGHT;
+}
+
 /** 1–5 star rating → multiplier (3★ = neutral, matching the rating sheet). */
 export const PRACTICAL_EXPERIENCE_RATING_MULTIPLIER: Record<number, number> = {
 	5: 1,

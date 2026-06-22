@@ -64,6 +64,7 @@ export {
 	PRACTICAL_EXPERIENCE_SCORE_CAP,
 	formatPracticalExperiencesForApi,
 	getActivePracticalExperiences,
+	getPracticalExperienceCategoryWeight,
 } from "./practicalExperience";
 export {
 	OCCUPATION_TAGS,

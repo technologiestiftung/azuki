@@ -8,6 +8,7 @@ import type {
 import {
 	INTERESTS,
 	getActivePracticalExperiences,
+	getPracticalExperienceCategoryWeight,
 	getPopularityTier,
 } from "@azuki/shared";
 import type { SalaryBands } from "./salaryScoreBands.js";
@@ -22,8 +23,6 @@ import {
 	STRENGTH_TO_TAGS,
 	WORK_PREF_MAP,
 	WORK_EXPECTATIONS_CHECKS,
-	PRACTICAL_EXPERIENCE_CATEGORY_WEIGHT,
-	PRACTICAL_EXPERIENCE_DEFAULT_CATEGORY_WEIGHT,
 	PRACTICAL_EXPERIENCE_KEYWORD_HIT_CAP,
 	PRACTICAL_EXPERIENCE_POINT_PER_HIT,
 	PRACTICAL_EXPERIENCE_RATING_MULTIPLIER,
@@ -487,18 +486,6 @@ function countPracticalExperienceKeywordHits(
 	return Math.min(hits, PRACTICAL_EXPERIENCE_KEYWORD_HIT_CAP);
 }
 
-function practicalExperienceCategoryWeight(
-	selectedExperienceId: string | null,
-): number {
-	if (!selectedExperienceId) {
-		return PRACTICAL_EXPERIENCE_DEFAULT_CATEGORY_WEIGHT;
-	}
-	return (
-		PRACTICAL_EXPERIENCE_CATEGORY_WEIGHT[selectedExperienceId] ??
-		PRACTICAL_EXPERIENCE_DEFAULT_CATEGORY_WEIGHT
-	);
-}
-
 function practicalExperienceRatingMultiplier(rating: number): number {
 	return PRACTICAL_EXPERIENCE_RATING_MULTIPLIER[rating] ?? 0;
 }
@@ -531,7 +518,7 @@ export function scorePracticalExperience(
 			continue;
 		}
 
-		const categoryWeight = practicalExperienceCategoryWeight(
+		const categoryWeight = getPracticalExperienceCategoryWeight(
 			entry.selectedExperienceId,
 		);
 		const ratingMultiplier = practicalExperienceRatingMultiplier(entry.rating);
