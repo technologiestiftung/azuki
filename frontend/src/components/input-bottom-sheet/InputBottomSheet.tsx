@@ -18,6 +18,7 @@ export interface InputBottomSheetProps {
 	submitButtonLabel?: string;
 	isCancelButtonVisible?: boolean;
 	errorMessage?: string;
+	initialValue?: string;
 }
 
 export function InputBottomSheet({
@@ -31,18 +32,22 @@ export function InputBottomSheet({
 	submitButtonLabel,
 	isCancelButtonVisible = true,
 	errorMessage = content["common.bottomSheet.errorMessage"],
+	initialValue = "",
 }: InputBottomSheetProps) {
 	const [value, setValue] = useState("");
 	const [error, setError] = useState(false);
 	const wasOpen = useRef(false);
 
 	useEffect(() => {
-		if (!open && wasOpen.current) {
+		if (open && !wasOpen.current) {
+			setValue(initialValue);
+			setError(false);
+		} else if (!open && wasOpen.current) {
 			setValue("");
 			setError(false);
 		}
 		wasOpen.current = open;
-	}, [open]);
+	}, [open, initialValue]);
 
 	const submit = () => {
 		const trimmed = value.trim();

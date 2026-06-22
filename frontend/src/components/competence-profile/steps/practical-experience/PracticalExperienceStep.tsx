@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { content } from "../../../../content";
 import { useAppStore } from "../../../../store/useAppStore";
 import { StepLayout } from "../StepLayout";
@@ -27,6 +27,7 @@ export function PracticalExperienceStep() {
 		useState<string | null>(null);
 	const [pendingSelectedExperienceLabel, setPendingSelectedExperienceLabel] =
 		useState<string | null>(null);
+	const advancingToRatingRef = useRef(false);
 
 	function handleNext() {
 		goNext();
@@ -178,6 +179,7 @@ export function PracticalExperienceStep() {
 									<Pill
 										key={item.value}
 										onClick={() => {
+											resetPendingEntry();
 											setSelectedExperience(item.value);
 											setInputSheetOpen(true);
 										}}
@@ -197,6 +199,7 @@ export function PracticalExperienceStep() {
 						<PrimaryThemedButton
 							className="mt-[18px] shrink-0"
 							onClick={() => {
+								resetPendingEntry();
 								setSelectedExperience(null);
 								setInputSheetOpen(true);
 							}}
@@ -212,9 +215,15 @@ export function PracticalExperienceStep() {
 						</PrimaryThemedButton>
 						<InputBottomSheet
 							open={inputSheetOpen}
+							initialValue={pendingDescription}
 							onClose={() => {
 								setInputSheetOpen(false);
-								setSelectedExperience(null);
+								if (advancingToRatingRef.current) {
+									advancingToRatingRef.current = false;
+								} else {
+									resetPendingEntry();
+									setSelectedExperience(null);
+								}
 							}}
 							sheetAriaLabel={
 								content["practicalExperience.bottomSheet.input.ariaLabel"]
@@ -229,11 +238,10 @@ export function PracticalExperienceStep() {
 								const suggestion = experienceSuggestions.find(
 									(item) => item.value === selectedExperience,
 								);
+								advancingToRatingRef.current = true;
 								setPendingDescription(value);
 								setPendingSelectedExperienceId(selectedExperience);
 								setPendingSelectedExperienceLabel(suggestion?.label ?? null);
-								setInputSheetOpen(false);
-								setSelectedExperience(null);
 								setRatingSheetOpen(true);
 							}}
 							submitButtonLabel={
