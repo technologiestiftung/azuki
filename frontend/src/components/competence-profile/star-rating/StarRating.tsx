@@ -18,17 +18,23 @@ export const StarRating: React.FC<StarRatingProps> = ({
 	maxRating,
 	onRatingChange,
 }) => {
-	const [isFilled, setIsFilled] = useState(rating);
+	const [committedRating, setCommittedRating] = useState(rating);
+	const [focusedIndex, setFocusedIndex] = useState(rating > 0 ? rating - 1 : 0);
+	const [previewRating, setPreviewRating] = useState(0);
 	const buttonRefs = useRef<(HTMLButtonElement | null)[]>([]);
 
 	useEffect(() => {
-		setIsFilled(rating);
+		setCommittedRating(rating);
+		setFocusedIndex(rating > 0 ? rating - 1 : 0);
+		setPreviewRating(0);
 	}, [rating]);
 
-	const focusIndex = isFilled > 0 ? isFilled - 1 : 0;
+	const displayRating = previewRating > 0 ? previewRating : committedRating;
 
-	function selectRating(value: number) {
-		setIsFilled(value);
+	function commitRating(value: number) {
+		setCommittedRating(value);
+		setPreviewRating(0);
+		setFocusedIndex(value - 1);
 		onRatingChange?.(value);
 	}
 
@@ -36,11 +42,22 @@ export const StarRating: React.FC<StarRatingProps> = ({
 		buttonRefs.current[index]?.focus();
 	}
 
+	function previewStar(index: number) {
+		setFocusedIndex(index);
+		setPreviewRating(index + 1);
+		focusStar(index);
+	}
+
+	function handleGroupBlur(event: React.FocusEvent<HTMLDivElement>) {
+		if (!event.currentTarget.contains(event.relatedTarget as Node | null)) {
+			setPreviewRating(0);
+		}
+	}
+
 	function handleKeyDown(
 		event: React.KeyboardEvent<HTMLButtonElement>,
 		index: number,
 	) {
-		const current = index + 1;
 		let nextIndex: number | null = null;
 
 		switch (event.key) {
@@ -61,16 +78,14 @@ export const StarRating: React.FC<StarRatingProps> = ({
 			case " ":
 			case "Enter":
 				event.preventDefault();
-				selectRating(current);
+				commitRating(previewRating > 0 ? previewRating : index + 1);
 				return;
 			default:
 				return;
 		}
 
 		event.preventDefault();
-		const nextValue = nextIndex + 1;
-		selectRating(nextValue);
-		focusStar(nextIndex);
+		previewStar(nextIndex);
 	}
 
 	return (
@@ -78,10 +93,11 @@ export const StarRating: React.FC<StarRatingProps> = ({
 			role="radiogroup"
 			aria-label={content["starRating.groupAriaLabel"]}
 			className="flex items-center gap-4"
+			onBlur={handleGroupBlur}
 		>
 			{Array.from({ length: maxRating }).map((_, index) => {
 				const starValue = index + 1;
-				const isSelected = isFilled === starValue;
+				const isSelected = committedRating === starValue;
 
 				return (
 					<button
@@ -93,22 +109,23 @@ export const StarRating: React.FC<StarRatingProps> = ({
 						role="radio"
 						aria-checked={isSelected}
 						aria-label={starAriaLabel(starValue, maxRating)}
-						tabIndex={index === focusIndex ? 0 : -1}
+						tabIndex={index === focusedIndex ? 0 : -1}
 						className="rounded focus-visible:outline focus-visible:outline-2 focus-visible:outline-sky-500"
-						onClick={() => selectRating(starValue)}
+						onClick={() => commitRating(starValue)}
+						onFocus={() => setFocusedIndex(index)}
 						onKeyDown={(event) => handleKeyDown(event, index)}
 					>
 						<img
 							src="/icons/star.svg"
 							alt=""
 							aria-hidden
-							className={isFilled >= starValue ? "hidden" : "block"}
+							className={displayRating >= starValue ? "hidden" : "block"}
 						/>
 						<img
 							src="/icons/star-filled.svg"
 							alt=""
 							aria-hidden
-							className={isFilled >= starValue ? "block" : "hidden"}
+							className={displayRating >= starValue ? "block" : "hidden"}
 						/>
 					</button>
 				);
