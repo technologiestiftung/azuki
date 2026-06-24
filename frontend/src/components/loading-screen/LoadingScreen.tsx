@@ -12,7 +12,7 @@ const LOOP_LOTTIE = "/animations/loop.lottie";
 
 const SUCCESS_FREEZE_MS = 3200;
 const WHITE_FADE_MS = 400;
-const LOADING_MIN_MS = 30_000;
+const PROGRESS_BAR_DURATION_MS = 30_000;
 
 type ContentPhase = "success" | "waiting";
 
@@ -24,8 +24,7 @@ export function LoadingScreen() {
 	const navigate = useNavigate();
 	const called = useRef(false);
 	const apiDone = useRef(false);
-	const minDurationDone = useRef(false);
-	const minDurationStart = useRef(performance.now());
+	const waitingStartTime = useRef<number | null>(null);
 	const [contentPhase, setContentPhase] = useState<ContentPhase>("success");
 	const [overlayOpacity, setOverlayOpacity] = useState(0);
 	const overlayTarget = useRef<"in" | "out" | null>(null);
@@ -42,7 +41,7 @@ export function LoadingScreen() {
 	}
 
 	const tryNavigate = useCallback(() => {
-		if (apiDone.current && minDurationDone.current) {
+		if (apiDone.current) {
 			navigate("/results/list");
 		}
 	}, [navigate]);
@@ -58,23 +57,6 @@ export function LoadingScreen() {
 			}
 		};
 	}, []);
-
-	useEffect(() => {
-		let frame = 0;
-
-		const tick = (now: number) => {
-			const elapsed = now - minDurationStart.current;
-			if (elapsed >= LOADING_MIN_MS) {
-				minDurationDone.current = true;
-				tryNavigate();
-				return;
-			}
-			frame = requestAnimationFrame(tick);
-		};
-
-		frame = requestAnimationFrame(tick);
-		return () => cancelAnimationFrame(frame);
-	}, [tryNavigate]);
 
 	useEffect(() => {
 		if (called.current) {
@@ -105,9 +87,11 @@ export function LoadingScreen() {
 
 	function handleOverlayTransitionEnd() {
 		if (overlayTarget.current === "in" && overlayOpacity === 1) {
+			waitingStartTime.current = performance.now();
 			setContentPhase("waiting");
 			overlayTarget.current = "out";
 			requestAnimationFrame(() => setOverlayOpacity(0));
+			tryNavigate();
 			return;
 		}
 		if (overlayTarget.current === "out" && overlayOpacity === 0) {
@@ -147,8 +131,8 @@ export function LoadingScreen() {
 					</div>
 					<div className="px-10 w-full">
 						<LoadingProgressBar
-							durationMs={LOADING_MIN_MS}
-							startTime={minDurationStart.current}
+							durationMs={PROGRESS_BAR_DURATION_MS}
+							startTime={waitingStartTime.current ?? undefined}
 						/>
 					</div>
 				</>
