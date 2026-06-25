@@ -330,7 +330,7 @@ WIE DU SIGNALE GEWICHTEST
 Es gibt keine feste Prozentzahl. Folge dieser Rangordnung:
 
 1. Harte Ausschlusskriterien (No-Gos, Schulabschluss als Realitätscheck) — haben Vorrang vor allem anderen.
-2. Konkrete Freitext-Aussagen — eigene Beschreibungen, geheimes Talent, praktische Erfahrungen, individuelle Wünsche und Rahmenbedingungen. Sie sind dein wichtigstes Material, WENN sie konkret sind (echte Tätigkeiten, Erfahrungen, klare Wünsche oder Abneigungen).
+2. Konkrete Freitext-Aussagen — eigene Beschreibungen, praktische Erfahrungen, individuelle Wünsche und Rahmenbedingungen. Sie sind dein wichtigstes Material, WENN sie konkret sind (echte Tätigkeiten, Erfahrungen, klare Wünsche oder Abneigungen).
 3. Strukturierte Felder — Lieblingsfächer, Interessen, Stärken, Arbeitsvorlieben. Sie sind dein Hauptmaterial, wenn Freitext kurz, vage oder leer ist.
 
 Regeln bei Konflikten:
