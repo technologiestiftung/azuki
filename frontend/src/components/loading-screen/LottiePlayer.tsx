@@ -6,7 +6,7 @@ import {
 	useState,
 	type ComponentType,
 } from "react";
-import { loadDotLottie } from "./dotlottieLoader";
+import { getLoadedDotLottie, loadDotLottie } from "./dotlottieLoader";
 
 const CANVAS_BG = "#fafdff";
 
@@ -24,15 +24,19 @@ type LottiePlayerProps = {
 	src: string;
 	loop?: boolean;
 	onComplete?: () => void;
+	onReady?: () => void;
 };
 
 export const LottiePlayer = memo(function LottiePlayer({
 	src,
 	loop = false,
 	onComplete,
+	onReady,
 }: LottiePlayerProps) {
 	const [DotLottieReact, setDotLottieReact] =
-		useState<ComponentType<DotLottieReactProps> | null>(null);
+		useState<ComponentType<DotLottieReactProps> | null>(
+			() => getLoadedDotLottie()?.DotLottieReact ?? null,
+		);
 
 	useEffect(() => {
 		let cancelled = false;
@@ -59,6 +63,7 @@ export const LottiePlayer = memo(function LottiePlayer({
 					const end = Math.ceil(dotLottie.totalFrames) - 1;
 					dotLottie.setSegment(0, end);
 				}
+				onReady?.();
 			};
 
 			dotLottie.addEventListener("load", onLoad);
@@ -70,7 +75,7 @@ export const LottiePlayer = memo(function LottiePlayer({
 				dotLottie.addEventListener("complete", onComplete);
 			}
 		},
-		[loop, onComplete],
+		[loop, onComplete, onReady],
 	);
 
 	if (!DotLottieReact) {

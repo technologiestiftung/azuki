@@ -6,9 +6,7 @@ import { useMatchResultsStore } from "../../store/useMatchResultsStore";
 import { matchProfile } from "../../api/client";
 import { LoadingProgressBar } from "./LoadingProgressBar";
 import { LottiePlayer } from "./LottiePlayer";
-
-const HIGH_FIVE_LOTTIE = "/animations/high-five.lottie";
-const LOOP_LOTTIE = "/animations/loop.lottie";
+import { LOADING_ANIMATION_URLS } from "./dotlottieLoader";
 
 const SUCCESS_FREEZE_MS = 3200;
 const WHITE_FADE_MS = 400;
@@ -26,6 +24,7 @@ export function LoadingScreen() {
 	const apiDone = useRef(false);
 	const waitingStartTime = useRef<number | null>(null);
 	const [contentPhase, setContentPhase] = useState<ContentPhase>("success");
+	const [successAnimationReady, setSuccessAnimationReady] = useState(false);
 	const [overlayOpacity, setOverlayOpacity] = useState(0);
 	const overlayTarget = useRef<"in" | "out" | null>(null);
 	const freezeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -104,23 +103,26 @@ export function LoadingScreen() {
 			{contentPhase === "success" && (
 				<>
 					<LottiePlayer
-						src={HIGH_FIVE_LOTTIE}
+						src={LOADING_ANIMATION_URLS.highFive}
 						onComplete={handleSuccessComplete}
+						onReady={() => setSuccessAnimationReady(true)}
 					/>
-					<div className="flex flex-col items-center justify-center gap-3 px-4">
-						<h2 className="text-4xl leading-[120%] font-bold text-center">
-							{content["loading.success.title"]}
-						</h2>
-						<p className="text-xl font-normal text-center">
-							{content["loading.success.description"]}
-						</p>
-					</div>
+					{successAnimationReady && (
+						<div className="flex flex-col items-center justify-center gap-3 px-4">
+							<h2 className="text-4xl leading-[120%] font-bold text-center">
+								{content["loading.success.title"]}
+							</h2>
+							<p className="text-xl font-normal text-center">
+								{content["loading.success.description"]}
+							</p>
+						</div>
+					)}
 				</>
 			)}
 
 			{contentPhase === "waiting" && (
 				<>
-					<LottiePlayer src={LOOP_LOTTIE} loop />
+					<LottiePlayer src={LOADING_ANIMATION_URLS.loop} loop />
 					<div className="flex flex-col items-center justify-center gap-3 px-4">
 						<h2 className="text-4xl leading-[120%] font-bold text-center">
 							{content["loading.waiting.title"]}
