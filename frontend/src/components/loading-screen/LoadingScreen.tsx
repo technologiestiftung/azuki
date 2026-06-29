@@ -8,7 +8,7 @@ import { LoadingProgressBar } from "./LoadingProgressBar";
 import { LottiePlayer } from "./LottiePlayer";
 import { LOADING_ANIMATION_URLS } from "./dotlottieLoader";
 
-const SUCCESS_FREEZE_MS = 3200;
+const SUCCESS_FREEZE_MS = 2000;
 const WHITE_FADE_MS = 400;
 const PROGRESS_BAR_DURATION_MS = 30_000;
 
