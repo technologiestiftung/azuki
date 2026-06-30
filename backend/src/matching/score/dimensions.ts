@@ -372,6 +372,11 @@ export function scoreInterests(
 			score += 2;
 		} else if (interestIndex >= 2) {
 			score += 1;
+		} else if (
+			cat === "kreativ-gestaltend" &&
+			CREATIVITY_SKILL_TAGS.some((tag) => occupation.skillTags.includes(tag))
+		) {
+			score += 1;
 		}
 	}
 

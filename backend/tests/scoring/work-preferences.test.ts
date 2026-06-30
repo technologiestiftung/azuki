@@ -48,3 +48,48 @@ describe("scoreWorkPreferences — location:a (Fester Arbeitsort)", () => {
 		expect(scoreWorkPreferences(occ, profile)).toBe(0);
 	});
 });
+
+describe("scoreWorkPreferences — structure:b (Neue Ideen entwickeln)", () => {
+	const profile = makeProfile({ workPreferences: { structure: "b" } });
+
+	test("matches kreativ-gestaltend Berufe", () => {
+		const occ = makeOccupation({ interests: ["kreativ-gestaltend"] });
+		expect(scoreWorkPreferences(occ, profile)).toBe(2);
+	});
+
+	test("matches via Kreativität strength tag", () => {
+		const occ = makeOccupation({ strengthTags: ["Kreativität"] });
+		expect(scoreWorkPreferences(occ, profile)).toBe(2);
+	});
+
+	test("matches via creativity skill tags", () => {
+		const occ = makeOccupation({
+			skillTags: ["Sinn und Gespür für Ästhetik"],
+		});
+		expect(scoreWorkPreferences(occ, profile)).toBe(2);
+	});
+
+	test("does not match retail Berufe without creativity signals", () => {
+		// Verkäufer/in shape: customer contact, no creativity tags.
+		const occ = makeOccupation({
+			conditions: { customerContact: true, indoor: true },
+		});
+		expect(scoreWorkPreferences(occ, profile)).toBe(0);
+	});
+});
+
+describe("scoreWorkPreferences — structure:a (Aufgaben erledigen)", () => {
+	const profile = makeProfile({ workPreferences: { structure: "a" } });
+
+	test("matches retail Berufe without creativity signals", () => {
+		const occ = makeOccupation({
+			conditions: { customerContact: true, indoor: true },
+		});
+		expect(scoreWorkPreferences(occ, profile)).toBe(2);
+	});
+
+	test("does not match kreativ-gestaltend Berufe", () => {
+		const occ = makeOccupation({ interests: ["kreativ-gestaltend"] });
+		expect(scoreWorkPreferences(occ, profile)).toBe(0);
+	});
+});
