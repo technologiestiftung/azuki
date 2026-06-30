@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, ReactNode } from "react";
 import { BottomSheet } from "../primitives/bottom-sheet/BottomSheet";
 import { PrimaryThemedButton } from "../primitives/buttons/PrimaryThemedButton";
 import { SecondaryButton } from "../primitives/buttons/SecondaryButton";
@@ -12,8 +12,13 @@ export interface InputBottomSheetProps {
 	onClose: () => void;
 	sheetAriaLabel: string;
 	inputPlaceholder: string;
-	errorMessage: string;
 	onSubmit: (value: string) => void;
+	title?: string;
+	description?: string | ReactNode;
+	submitButtonLabel?: string;
+	isCancelButtonVisible?: boolean;
+	errorMessage?: string;
+	initialValue?: string;
 }
 
 export function InputBottomSheet({
@@ -21,20 +26,28 @@ export function InputBottomSheet({
 	onClose,
 	sheetAriaLabel,
 	inputPlaceholder,
-	errorMessage,
 	onSubmit,
+	title,
+	description,
+	submitButtonLabel,
+	isCancelButtonVisible = true,
+	errorMessage = content["common.bottomSheet.errorMessage"],
+	initialValue = "",
 }: InputBottomSheetProps) {
 	const [value, setValue] = useState("");
 	const [error, setError] = useState(false);
 	const wasOpen = useRef(false);
 
 	useEffect(() => {
-		if (!open && wasOpen.current) {
+		if (open && !wasOpen.current) {
+			setValue(initialValue);
+			setError(false);
+		} else if (!open && wasOpen.current) {
 			setValue("");
 			setError(false);
 		}
 		wasOpen.current = open;
-	}, [open]);
+	}, [open, initialValue]);
 
 	const submit = () => {
 		const trimmed = value.trim();
@@ -54,9 +67,22 @@ export function InputBottomSheet({
 	};
 
 	return (
-		<BottomSheet open={open} onClose={onClose} ariaLabel={sheetAriaLabel}>
+		<BottomSheet
+			open={open}
+			onClose={onClose}
+			ariaLabel={sheetAriaLabel}
+			initialFocus="container"
+		>
 			<div className="flex flex-col items-center gap-3 pt-1 pb-4 px-4 w-full">
-				<div className="flex flex-col gap-2 w-full">
+				<div className="flex flex-col gap-2.5 w-full pl-1">
+					{title && (
+						<h2 className="text-2xl font-semibold text-gray-900">{title}</h2>
+					)}
+					{description && (
+						<div className="text-gray-500 text-base">{description}</div>
+					)}
+				</div>
+				<div className="flex flex-col gap-2 w-full pt-4">
 					<TextInput
 						placeholder={inputPlaceholder}
 						value={value}
@@ -85,17 +111,20 @@ export function InputBottomSheet({
 				</div>
 
 				<div className="flex gap-3 w-full">
-					<SecondaryButton
-						onClick={onClose}
-						ariaLabel={content["common.bottomSheet.cancelButtonAriaLabel"]}
-					>
-						{content["common.bottomSheet.cancelButtonLabel"]}
-					</SecondaryButton>
+					{isCancelButtonVisible && (
+						<SecondaryButton
+							onClick={onClose}
+							ariaLabel={content["common.bottomSheet.cancelButtonAriaLabel"]}
+						>
+							{content["common.bottomSheet.cancelButtonLabel"]}
+						</SecondaryButton>
+					)}
 					<PrimaryThemedButton
 						onClick={submit}
 						ariaLabel={content["common.bottomSheet.submitButtonAriaLabel"]}
 					>
-						{content["common.bottomSheet.submitButtonLabel"]}
+						{submitButtonLabel ||
+							content["common.bottomSheet.submitButtonLabel"]}
 					</PrimaryThemedButton>
 				</div>
 			</div>

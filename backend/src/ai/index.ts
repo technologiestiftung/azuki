@@ -7,6 +7,7 @@ import {
 	type MatchResult,
 	type GenerationInfo,
 	formatOccupationDisplayName,
+	formatPracticalExperiencesForApi,
 	getPopularityRecord,
 	resolveOccupationShortDescription,
 	AI_MODEL_IDS,
@@ -319,11 +320,11 @@ Dein Job ist nicht, neue Berufe zu suchen.
 Dein Job ist, die ${topK} vorgefilterten Berufe neu zu bewerten, neu zu sortieren und die ${MIN_RESULTS} bis ${MAX_RESULTS} Berufe auszuwählen, die am besten zum Jugendlichen passen.
 
 KONTEXT ZUM MATCHING
-Die Top-${topK} stammt aus einem deterministischen Pre-Filter (Schulabschluss, No-Gos, Arbeitsvorlieben, Lieblingsfächer, Interessen, Stärken, Rahmenbedingungen). Nutze sie als starke Grundlage und unterscheide *innerhalb* dieser Liste — vor allem über die freien Texte und die Realität des deutschen Ausbildungsmarkts.
+Die Top-${topK} stammt aus einem deterministischen Pre-Filter (Schulabschluss, No-Gos, Arbeitsvorlieben, Lieblingsfächer, Interessen, Stärken, Rahmenbedingungen, praktische Erfahrungen). Nutze sie als starke Grundlage und unterscheide *innerhalb* dieser Liste — vor allem über die freien Texte und die Realität des deutschen Ausbildungsmarkts.
 
 PRIORISIERUNG
-- freie Texte / eigene Worte: 70 %
-- strukturierte Felder: 30 %
+- freie Texte / eigene Worte: 60 %
+- strukturierte Felder (inkl. praktische Erfahrungen im Pre-Filter): 40 %
 Bei Widerspruch gewinnen freie Aussagen. Ausnahme: harte Ausschlüsse (No-Gos, abgebrochene Ausbildung, ausdrückliche Ablehnung) gelten immer.
 
 HARTE REGELN
@@ -408,15 +409,15 @@ Dein Job ist, die ${topK} vorgefilterten Berufe neu zu bewerten, neu zu sortiere
 
 KONTEXT ZUM MATCHING
 Die Liste mit ${topK} Berufen wurde bereits durch einen deterministischen Matching-Algorithmus berechnet.
-Dabei wurden strukturierte Kriterien wie Schulabschluss, No-Gos, Arbeitsvorlieben, Lieblingsfächer, Interessen, Stärken und Rahmenbedingungen berücksichtigt.
+Dabei wurden strukturierte Kriterien wie Schulabschluss, No-Gos, Arbeitsvorlieben, Lieblingsfächer, Interessen, Stärken, Rahmenbedingungen und praktische Erfahrungen berücksichtigt.
 
 Nutze dieses Pre-Filtering als starke Grundlage.
 Nutze das LLM-Re-Ranking, um innerhalb dieser ${topK} Berufe feiner zu unterscheiden.
 
 PRIORISIERUNG
 Gewichte die Signale ungefähr so:
-- freie Texte / eigene Worte des Jugendlichen: 70 %
-- strukturierte Profilfelder: 30 %
+- freie Texte / eigene Worte des Jugendlichen: 60 %
+- strukturierte Profilfelder (inkl. praktische Erfahrungen im Pre-Filter): 40 %
 
 Freie Texte sind besonders wichtig, zum Beispiel:
 - eigene Beschreibungen
@@ -630,9 +631,13 @@ export function formatProfileSections(profile: UserProfile): string {
 		);
 	}
 
-	if (profile.practicalExperience) {
+	const practicalExperienceText = formatPracticalExperiencesForApi(
+		profile.practicalExperiences,
+		profile.selectedPracticalExperienceIds,
+	);
+	if (practicalExperienceText) {
 		parts.push(
-			`Praktische Erfahrungen (eigene Angaben): ${profile.practicalExperience}`,
+			`Praktische Erfahrungen (eigene Angaben): ${practicalExperienceText}`,
 		);
 	}
 

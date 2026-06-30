@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import {
 	POPULARITY_INDEX,
+	formatPracticalExperiencesForApi,
 	type EducationLevel,
 	type Persona,
 } from "@azuki/shared";
@@ -196,12 +197,50 @@ function BasicInfoSection({
 	);
 }
 
+function resolveSelectedCustomStrengths(
+	raw: Persona["profile"],
+	customStrengths: string[],
+): string[] {
+	if ((raw.selectedCustomStrengths?.length ?? 0) > 0) {
+		return raw.selectedCustomStrengths;
+	}
+	return customStrengths;
+}
+
+function resolvePracticalExperiences(raw: Persona["profile"]): {
+	practicalExperiences: Persona["profile"]["practicalExperiences"];
+	selectedPracticalExperienceIds: string[];
+} {
+	const practicalExperiences = raw.practicalExperiences ?? [];
+	const selectedPracticalExperienceIds =
+		raw.selectedPracticalExperienceIds ?? [];
+	const legacyText = (
+		raw as { practicalExperience?: string }
+	).practicalExperience?.trim();
+
+	if (practicalExperiences.length === 0 && legacyText) {
+		const id = "legacy";
+		return {
+			practicalExperiences: [
+				{
+					id,
+					description: legacyText,
+					selectedExperienceId: null,
+					selectedExperienceLabel: null,
+					rating: 0,
+				},
+			],
+			selectedPracticalExperienceIds: [id],
+		};
+	}
+
+	return { practicalExperiences, selectedPracticalExperienceIds };
+}
+
 function normalizePersonaProfile(raw: Persona["profile"]): Persona["profile"] {
 	const customStrengths = raw.customStrengths ?? [];
-	const selectedCustomStrengths =
-		(raw.selectedCustomStrengths?.length ?? 0) > 0
-			? raw.selectedCustomStrengths
-			: customStrengths;
+	const { practicalExperiences, selectedPracticalExperienceIds } =
+		resolvePracticalExperiences(raw);
 
 	return {
 		inSchool: raw.inSchool ?? null,
@@ -214,8 +253,12 @@ function normalizePersonaProfile(raw: Persona["profile"]): Persona["profile"] {
 		customWorkExpectations: raw.customWorkExpectations ?? [],
 		strengths: raw.strengths ?? {},
 		customStrengths,
-		selectedCustomStrengths,
-		practicalExperience: raw.practicalExperience ?? "",
+		selectedCustomStrengths: resolveSelectedCustomStrengths(
+			raw,
+			customStrengths,
+		),
+		practicalExperiences,
+		selectedPracticalExperienceIds,
 		workPreferences: raw.workPreferences ?? {},
 		noGos: raw.noGos ?? {},
 		customNoGos: raw.customNoGos ?? [],
@@ -332,9 +375,27 @@ function ProfileEditorSection({
 						Praktische Erfahrungen (freier Text)
 					</span>
 					<textarea
-						value={profile.practicalExperience}
+						value={formatPracticalExperiencesForApi(
+							profile.practicalExperiences,
+							profile.selectedPracticalExperienceIds,
+						)}
 						onChange={(e) =>
-							patchProfile({ practicalExperience: e.target.value })
+							patchProfile({
+								practicalExperiences: e.target.value
+									? [
+											{
+												id: "eval-draft",
+												description: e.target.value,
+												selectedExperienceId: null,
+												selectedExperienceLabel: null,
+												rating: 0,
+											},
+										]
+									: [],
+								selectedPracticalExperienceIds: e.target.value
+									? ["eval-draft"]
+									: [],
+							})
 						}
 						rows={4}
 						className="border border-gray-300 rounded px-2 py-1"

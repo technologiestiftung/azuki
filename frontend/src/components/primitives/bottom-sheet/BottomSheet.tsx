@@ -19,6 +19,7 @@ export interface BottomSheetProps {
 	footer?: ReactNode;
 	ariaLabel?: string;
 	overlayDismissLabel?: string;
+	initialFocus?: "first" | "container";
 }
 
 type DragSample = { t: number; y: number };
@@ -30,6 +31,7 @@ export function BottomSheet({
 	footer,
 	ariaLabel = content["common.bottomSheet.ariaLabel"],
 	overlayDismissLabel = content["common.bottomSheet.overlayDismissLabel"],
+	initialFocus = "first",
 }: BottomSheetProps) {
 	const [visible, setVisible] = useState(open);
 	const [isClosing, setIsClosing] = useState(false);
@@ -95,12 +97,17 @@ export function BottomSheet({
 					el.offsetParent !== null,
 			);
 
-		const focusables = getFocusable();
-		if (focusables.length > 0) {
-			focusables[0]?.focus();
-		} else {
+		if (initialFocus === "container") {
 			container.setAttribute("tabindex", "-1");
 			container.focus();
+		} else {
+			const focusables = getFocusable();
+			if (focusables.length > 0) {
+				focusables[0]?.focus();
+			} else {
+				container.setAttribute("tabindex", "-1");
+				container.focus();
+			}
 		}
 
 		const onKeyDown = (e: KeyboardEvent) => {
@@ -146,7 +153,7 @@ export function BottomSheet({
 				toRestore.focus();
 			}
 		};
-	}, [visible]);
+	}, [visible, initialFocus]);
 
 	const pushDragSample = (clientY: number) => {
 		const t = performance.now();

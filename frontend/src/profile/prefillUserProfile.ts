@@ -25,8 +25,16 @@ export const prefillUserProfile: UserProfile = {
 	},
 	customStrengths: [],
 	selectedCustomStrengths: [],
-	practicalExperience:
-		"Praktikum in einem IT-Unternehmen und Ferienjob im Einzelhandel.",
+	practicalExperiences: [
+		{
+			id: "prefill-1",
+			description: "Ferienjob im Einzelhandel.",
+			selectedExperienceId: "job",
+			selectedExperienceLabel: "Job",
+			rating: 4,
+		},
+	],
+	selectedPracticalExperienceIds: ["prefill-1"],
 	workPreferences: {
 		environment: "a",
 		location: "a",

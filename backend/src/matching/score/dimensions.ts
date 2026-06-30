@@ -5,7 +5,12 @@ import type {
 	PopularityTier,
 	UserProfile,
 } from "@azuki/shared";
-import { INTERESTS, getPopularityTier } from "@azuki/shared";
+import {
+	INTERESTS,
+	getActivePracticalExperiences,
+	getPracticalExperienceCategoryWeight,
+	getPopularityTier,
+} from "@azuki/shared";
 import type { SalaryBands } from "./salaryScoreBands.js";
 import {
 	COMMUNICATION_SKILL_TAGS,
@@ -18,6 +23,10 @@ import {
 	STRENGTH_TO_TAGS,
 	WORK_PREF_MAP,
 	WORK_EXPECTATIONS_CHECKS,
+	PRACTICAL_EXPERIENCE_KEYWORD_HIT_CAP,
+	PRACTICAL_EXPERIENCE_POINT_PER_HIT,
+	PRACTICAL_EXPERIENCE_RATING_MULTIPLIER,
+	PRACTICAL_EXPERIENCE_SCORE_CAP,
 } from "./config.js";
 
 const INTEREST_BY_ID = new Map(
@@ -394,6 +403,142 @@ export function scoreInterests(
 	score += Math.min(keywordHits, 3);
 
 	return score;
+}
+
+const PRACTICAL_EXPERIENCE_STOP_WORDS = new Set([
+	"der",
+	"die",
+	"das",
+	"den",
+	"dem",
+	"des",
+	"ein",
+	"eine",
+	"einer",
+	"eines",
+	"einem",
+	"einen",
+	"und",
+	"oder",
+	"mit",
+	"ohne",
+	"für",
+	"von",
+	"auf",
+	"im",
+	"in",
+	"am",
+	"an",
+	"aus",
+	"bei",
+	"zu",
+	"zur",
+	"zum",
+	"auch",
+	"mal",
+]);
+
+function tokenizePracticalExperienceText(text: string): string[] {
+	return text
+		.toLowerCase()
+		.replace(/[^\p{L}\p{N}\s-]+/gu, " ")
+		.split(/[\s-]+/)
+		.map((token) => token.trim())
+		.filter(
+			(token) =>
+				token.length >= 4 && !PRACTICAL_EXPERIENCE_STOP_WORDS.has(token),
+		);
+}
+
+function buildOccupationMatchTerms(occupation: Occupation): Set<string> {
+	const terms = new Set<string>();
+	for (const token of tokenizePracticalExperienceText(occupation.name)) {
+		terms.add(token);
+	}
+	for (const keyword of occupation.interestKeywords) {
+		terms.add(keyword.toLowerCase());
+	}
+	for (const tag of occupation.skillTags) {
+		terms.add(tag.toLowerCase());
+	}
+	return terms;
+}
+
+function countPracticalExperienceKeywordHits(
+	description: string,
+	occupation: Occupation,
+): number {
+	const descTokens = tokenizePracticalExperienceText(description);
+	if (descTokens.length === 0) {
+		return 0;
+	}
+
+	const descNorm = description.toLowerCase();
+	const occupationTerms = buildOccupationMatchTerms(occupation);
+	let hits = 0;
+
+	for (const term of occupationTerms) {
+		const exactTokenMatch = descTokens.includes(term);
+		const termInDescription = descNorm.includes(term);
+		const tokenOverlap = descTokens.some(
+			(token) => term.includes(token) || token.includes(term),
+		);
+		if (exactTokenMatch || termInDescription || tokenOverlap) {
+			hits++;
+		}
+	}
+
+	return Math.min(hits, PRACTICAL_EXPERIENCE_KEYWORD_HIT_CAP);
+}
+
+function practicalExperienceRatingMultiplier(rating: number): number {
+	return PRACTICAL_EXPERIENCE_RATING_MULTIPLIER[rating] ?? 0;
+}
+
+/**
+ * Scores how well an occupation matches the user's practical experiences.
+ * Combines category weight (internship/job > school/club > home/friends),
+ * keyword overlap with occupation metadata (name, interestKeywords, skillTags),
+ * and a star-rating multiplier. Capped at ±8 to nudge the prefilter shortlist.
+ */
+export function scorePracticalExperience(
+	occupation: Occupation,
+	profile: UserProfile,
+): number {
+	const experiences = getActivePracticalExperiences(
+		profile.practicalExperiences,
+		profile.selectedPracticalExperienceIds,
+	);
+	if (experiences.length === 0) {
+		return 0;
+	}
+
+	let score = 0;
+	for (const entry of experiences) {
+		const keywordHits = countPracticalExperienceKeywordHits(
+			entry.description,
+			occupation,
+		);
+		if (keywordHits === 0) {
+			continue;
+		}
+
+		const categoryWeight = getPracticalExperienceCategoryWeight(
+			entry.selectedExperienceId,
+		);
+		const ratingMultiplier = practicalExperienceRatingMultiplier(entry.rating);
+		if (ratingMultiplier === 0) {
+			continue;
+		}
+
+		score +=
+			keywordHits *
+			PRACTICAL_EXPERIENCE_POINT_PER_HIT *
+			categoryWeight *
+			ratingMultiplier;
+	}
+
+	return Math.min(score, PRACTICAL_EXPERIENCE_SCORE_CAP);
 }
 
 // Dispatcher over 7 fixed strength dimensions, each with bespoke checks.
