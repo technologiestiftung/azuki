@@ -1,4 +1,5 @@
 import { describe, expect, test } from "vitest";
+import { FINAL_MATCH_COUNT } from "../../src/matching/index.js";
 import { filterAndDedupeRankings } from "../../src/ai/index.js";
 
 describe("filterAndDedupeRankings", () => {
@@ -59,15 +60,17 @@ describe("filterAndDedupeRankings", () => {
 
 	test("caps the result to `limit`, keeping the top-N in order", () => {
 		// A non-compliant LLM could echo the whole candidate list; the
-		// frontend renders a top-8, so the result must be capped.
+		// frontend renders the final shortlist, so the result must be capped.
 		const rankings = Array.from({ length: 40 }, (_, i) => ({
 			id: i + 1,
 			begruendung: `b${i + 1}`,
 		}));
 		const validIds = new Set(rankings.map((r) => r.id));
-		const out = filterAndDedupeRankings(rankings, validIds, 8);
-		expect(out).toHaveLength(8);
-		expect(out.map((r) => r.id)).toEqual([1, 2, 3, 4, 5, 6, 7, 8]);
+		const out = filterAndDedupeRankings(rankings, validIds, FINAL_MATCH_COUNT);
+		expect(out).toHaveLength(FINAL_MATCH_COUNT);
+		expect(out.map((r) => r.id)).toEqual(
+			Array.from({ length: FINAL_MATCH_COUNT }, (_, i) => i + 1),
+		);
 	});
 
 	test("cap counts valid, unique rankings — duplicates and rogue ids don't consume a slot", () => {
