@@ -852,7 +852,7 @@
       }
     ],
     "degreeStats": null,
-    "accessLevel": "fachhochschulreife",
+    "accessLevel": "realschule",
     "subjects": [
       "german",
       "chemistry",
@@ -18378,7 +18378,7 @@
       }
     ],
     "degreeStats": null,
-    "accessLevel": "fachhochschulreife",
+    "accessLevel": "realschule",
     "subjects": [
       "math",
       "german",
@@ -22827,7 +22827,7 @@
       }
     ],
     "degreeStats": null,
-    "accessLevel": "fachhochschulreife",
+    "accessLevel": "realschule",
     "subjects": [
       "german",
       "biology"
@@ -28572,7 +28572,7 @@
       }
     ],
     "degreeStats": null,
-    "accessLevel": "fachhochschulreife",
+    "accessLevel": "realschule",
     "subjects": [
       "chemistry",
       "biology"
@@ -29251,153 +29251,6 @@
     "workLocations": "Fachkräfte für Metalltechnik der Fachrichtung Zerspanungstechnik arbeiten in erster Linie in Produktionshallen in Maschinenhallen in Werkstätten",
     "competenciesText": "Kernkompetenzen: Drehen Fräsen Maschinenführung, Anlagenführung, -bedienung Metallbearbeiten, Metallverarbeiten Schleifen (Metall) Wartung, Reparatur, Instandhaltung Zerspanungstechnik Weitere Kompetenzen: Automatendrehen Bohren Bohrwerksdrehen (Horizontalbohren) CNC-Kenntnisse, CNC-Programmieren Hobeln (Metall) Maschineneinrichtung, Anlageneinrichtung Messen, Prüfen (Metalltechnik) Polieren Qualitätskontrolle (einfache Kontrolltätigkeit) Revolverdrehen Schleifscheibenherrichten Werkzeugmaschinentechnik Werkzeugvoreinstellung Weitere Fertigkeiten und Kenntnisse: Kompetenzgruppe \" CNC-, NC-Programme \" Kompetenzgruppe \" Zerspanungstechnische Verfahren \"",
     "shortDescription": "Metallteile mit Fräs-, Dreh- oder Schleifmaschinen in die richtige Form bringen."
-  },
-  {
-    "id": 34980,
-    "name": "Fachkraft - Möbel-, Küchen- und Umzugsservice",
-    "descriptionShort": "Berufstyp Anerkannter Ausbildungsberuf Ausbildungsart Duale Ausbildung in Industrie und Handel (geregelt durch Ausbildungsverordnung) Ausbildungsdauer 3 Jahre Lernorte Ausbildungsbetrieb und Berufsschule (duale Ausbildung)",
-    "descriptionLong": "Was macht man in diesem Beruf? Fachkräfte für Möbel-, Küchen- und Umzugsservice liefern Küchen, Möbel und Geräte oder andere Artikel aus, verpacken Umzugsgüter und arbeiten im Lager mit. Sie bauen Küchen sowie Möbel auf und ab, installieren elektrische Geräte und sorgen für den fachgerechten Anschluss an Wasserleitungen und Lüftungsanlagen. Über die handwerklichen Tätigkeiten hinaus bearbeiten sie Reklamationen, prüfen Rechnungen und Lieferunterlagen und nehmen Zahlungen entgegen. Zudem beraten sie Kunden über die Serviceleistungen des Unternehmens. Sie planen und dokumentieren ihre Arbeit und achten auf die Einhaltung von Qualitätsstandards. Alle Arbeitsaufträge erledigen sie eigenständig, allein oder im Team und stets unter Berücksichtigung betriebswirtschaftlicher Gesichtspunkte sowie der Wünsche des Kunden. Wo arbeitet man? Beschäftigungsbetriebe: Fachkräfte für Möbel-, Küchen- und Umzugsservice finden Beschäftigung in erster Linie bei Umzugsfirmen und Möbelspeditionen in Unternehmen des Küchen- und Möbelhandels Arbeitsorte: Fachkräfte für Möbel-, Küchen- und Umzugsservice arbeiten in erster Linie in Lagerräumen und Werkstätten in Transportfahrzeugen und beim Kunden Darüber hinaus arbeiten sie ggf. auch in Büroräumen. Welcher Schulabschluss wird erwartet? Rechtlich ist keine bestimmte Schulbildung vorgeschrieben. In der Praxis haben Auszubildende folgende Bildungsabschlüsse: text { fill: ButtonText; } Ausbildungsanfänger/innen 2024 Ausbildungsanfänger/innen 2024 (in %) ohne Hauptschulabschluss* [8.0%] 8 Hauptschulabschluss* [55.0%] 55 mittlerer Bildungsabschluss [26.0%] 26 Hochschulreife [3.0%] Sonstige [8.0%] 8 *je nach Bundesland auch (Einfache) Berufsbildungsreife, Berufsreife, Erfolgreicher Abschluss der Mittelschule, Erster (allgemeinbildender) Schulabschluss Worauf kommt es an? Anforderungen: Gute körperliche Konstitution (z.B. Be- und Entladen der Umzugsfahrzeuge, Transportieren schwerer Möbelstücke) Handwerkliches Geschick (z.B. beim Bearbeiten und Montieren von Küchen- und Möbelteilen) Sorgfalt und technisches Verständnis (z.B. Installieren elektrischer Geräte und Dichtigkeitsprüfungen) Kunden- und Serviceorientierung (z.B. Berücksichtigen von Kundenwünschen bei der Auftragsabwicklung) Teamfähigkeit (z.B. beim Transportieren und Montieren von schweren Einbauteilen) Schulfächer: Mathematik (z.B. um Werkstückabmaße zu berechnen) Werken/Technik (z.B. um Küchen und Möbel aufzubauen) Was verdient man in der Ausbildung? Beispielhafte Ausbildungsvergütungen pro Monat: 1. Ausbildungsjahr: 940 € bis 1.120 € (Handel*), 825 € bis 1.270 € (Verkehrsgewerbe*) 2. Ausbildungsjahr: 1.000 € bis 1.250 € (Handel*), 885 € bis 1.333 € (Verkehrsgewerbe*) 3. Ausbildungsjahr: 1.150 € bis 1.390 € (Handel*), 977 € bis 1.401 € (Verkehrsgewerbe*) *je nach Bundesland unterschiedlich",
-    "germanOccupationCode": "22342",
-    "taskSummary": "Fachkräfte für Möbel-, Küchen- und Umzugsservice liefern Küchen, Möbel und Geräte oder andere Artikel aus, verpacken Umzugsgüter und arbeiten im Lager mit. Sie bauen Küchen sowie Möbel auf und ab, installieren elektrische Geräte und sorgen für den fachgerechten Anschluss an Wasserleitungen und Lüftungsanlagen. Über die handwerklichen Tätigkeiten hinaus bearbeiten sie Reklamationen, prüfen Rechnungen und Lieferunterlagen und nehmen Zahlungen entgegen. Zudem beraten sie Kunden über die Serviceleistungen des Unternehmens. Sie planen und dokumentieren ihre Arbeit und achten auf die Einhaltung von Qualitätsstandards. Alle Arbeitsaufträge erledigen sie eigenständig, allein oder im Team und stets unter Berücksichtigung betriebswirtschaftlicher Gesichtspunkte sowie der Wünsche des Kunden.",
-    "images": [
-      {
-        "url": "https://rest.arbeitsagentur.de/infosysbub/berufepool-rest/ct/v1/bilder/dkz_34984_17.jpg",
-        "caption": "Im Lager Möbel und Geräte nach Montageauftrag zusammenstellen",
-        "imageGroup": "Arbeitsort"
-      },
-      {
-        "url": "https://rest.arbeitsagentur.de/infosysbub/berufepool-rest/ct/v1/bilder/dkz_34984_19.jpg",
-        "caption": "Möbel und Geräte im Transportfahrzeug sicher verstauen",
-        "imageGroup": "Tätigkeit"
-      },
-      {
-        "url": "https://rest.arbeitsagentur.de/infosysbub/berufepool-rest/ct/v1/bilder/dkz_34984_20.jpg",
-        "caption": "Besonderheiten des Küchenaufbaus besprechen",
-        "imageGroup": "Tätigkeit"
-      },
-      {
-        "url": "https://rest.arbeitsagentur.de/infosysbub/berufepool-rest/ct/v1/bilder/dkz_34984_23.jpg",
-        "caption": "Ein Möbelteil vor Ort auf Maß ablängen",
-        "imageGroup": "Tätigkeit"
-      },
-      {
-        "url": "https://rest.arbeitsagentur.de/infosysbub/berufepool-rest/ct/v1/bilder/dkz_34984_12.jpg",
-        "caption": "Möbel passgenau und waagerecht einbauen",
-        "imageGroup": "Tätigkeit"
-      },
-      {
-        "url": "https://rest.arbeitsagentur.de/infosysbub/berufepool-rest/ct/v1/bilder/dkz_34984_13.jpg",
-        "caption": "Beim Kunden Möbel ausladen",
-        "imageGroup": "Arbeitsort"
-      },
-      {
-        "url": "https://rest.arbeitsagentur.de/infosysbub/berufepool-rest/ct/v1/bilder/dkz_34984_14.jpg",
-        "caption": "Zollstock, Schreinerwinkel, Zimmermannsstift, Bauzeichnung",
-        "imageGroup": "Arbeitsgegenstand"
-      },
-      {
-        "url": "https://rest.arbeitsagentur.de/infosysbub/berufepool-rest/ct/v1/bilder/dkz_34984_15.jpg",
-        "caption": "Kapp- und Gehrungssäge auf mobilem Untergestell",
-        "imageGroup": "Arbeitsgegenstand"
-      },
-      {
-        "url": "https://rest.arbeitsagentur.de/infosysbub/berufepool-rest/ct/v1/bilder/dkz_34984_16.jpg",
-        "caption": "Das Transportgut mit dem Montageauftrag abgleichen",
-        "imageGroup": "Tätigkeit"
-      },
-      {
-        "url": "https://rest.arbeitsagentur.de/infosysbub/berufepool-rest/ct/v1/bilder/dkz_34984_25.jpg",
-        "caption": "Möbelteile auspacken und montieren",
-        "imageGroup": "Beruf"
-      }
-    ],
-    "degreeStats": {
-      "noQualification": 8,
-      "secondary": 55,
-      "intermediate": 26,
-      "universityEntrance": 3
-    },
-    "accessLevel": "unrestricted",
-    "subjects": [
-      "math",
-      "crafts_technology"
-    ],
-    "interests": [
-      "praktisch-konkret",
-      "verwaltend-organisatorisch"
-    ],
-    "interestKeywords": [
-      "entladen",
-      "umzugsfahrzeuge",
-      "abbauen",
-      "küchen",
-      "möbeln",
-      "anschließen",
-      "waschmaschinen",
-      "anderen",
-      "geräten",
-      "planen",
-      "einzelnen",
-      "aufträge",
-      "touren",
-      "zeitverluste",
-      "vermeiden",
-      "abrechnen",
-      "leistungen"
-    ],
-    "strengthTags": [
-      "Leistungs- und Einsatzbereitschaft",
-      "Sorgfalt",
-      "Selbstständige Arbeitsweise",
-      "Umsicht",
-      "Flexibilität",
-      "Befähigung zu Gruppenarbeit / Teamfähigkeit",
-      "Kunden- und Serviceorientierung"
-    ],
-    "skillTags": [
-      "Allgemeines intellektuelles Leistungsvermögen",
-      "Figural-räumliches Denken",
-      "Handgeschick",
-      "Körperbeherrschung",
-      "Handwerkliches Geschick",
-      "Befähigung zum Planen und Organisieren",
-      "Interessierte an beruflicher Erstausbildung",
-      "Rechenfertigkeiten",
-      "Verständnis für mündliche Äußerungen",
-      "Mündliches Ausdrucksvermögen"
-    ],
-    "conditions": {
-      "outdoor": true,
-      "office": false,
-      "workshop": false,
-      "indoor": true,
-      "constructionSite": false,
-      "screenWork": false,
-      "manualLabor": true,
-      "machinery": true,
-      "noise": true,
-      "dirt": false,
-      "heavyLifting": true,
-      "heights": false,
-      "shiftWork": false,
-      "customerContact": true,
-      "teamwork": true,
-      "standingWalking": true,
-      "irregularHours": false,
-      "changingTasks": true,
-      "regulatedWork": false,
-      "animalWork": false,
-      "accidentRisk": false,
-      "precisionWork": false,
-      "frequentAbsence": false,
-      "changingWorkplaces": true
-    },
-    "salaryMonthlyMedian": 3549,
-    "salaryKnown": true,
-    "digitalizationSignal": true,
-    "workLocations": "Fachkräfte für Möbel-, Küchen- und Umzugsservice arbeiten in erster Linie in Lagerräumen in Werkstätten in Transportfahrzeugen beim Kunden Darüber hinaus arbeiten sie ggf. auch in Büroräumen",
-    "competenciesText": "Kernkompetenzen: Beladen, Entladen Bohren Kundenberatung, -betreuung Möbelauslieferung Montage (Möbel, Küchen) Neueinbau Sägen Transport Umzüge Weitere Kompetenzen: Arbeitsvorbereitung Elektroinstallation Exoskelette Hobeln (Holz) Justieren Kleben Qualitätsprüfung, Qualitätssicherung Reklamationsbearbeitung Speditions-, Lieferverkehr Tourenplanung Wartung, Reparatur, Instandhaltung Weitere Fertigkeiten und Kenntnisse: Kompetenzgruppe \" Möbel \"",
-    "shortDescription": "Möbel und Küchen liefern, aufbauen und Geräte anschließen."
   },
   {
     "id": 14463,
@@ -32732,161 +32585,6 @@
     "shortDescription": "Blumensträuße binden, Gestecke anfertigen und Kunden beraten."
   },
   {
-    "id": 93274,
-    "name": "Fachpraktiker/in für Floristik (§66 BBiG/§42r HwO)",
-    "descriptionShort": "Berufstyp Ausbildungsberuf für besondere Personengruppen Ausbildungsart Duale Berufsausbildung, geregelt nach Kammerregelungen gemäß &sect;66 Berufsbildungsgesetz (BBiG)/&sect;42r Handwerksordnung (HwO) Ausbildungsdauer 3 Jahre Lernorte Betrieb und Berufsschule oder Einrichtung der beruflichen Rehabilitation",
-    "descriptionLong": "Was macht man in diesem Beruf? Fachpraktiker/innen in der Floristik binden Blumensträuße und fertigen Blumen- und Pflanzengestecke an. Zudem bedienen sie Kunden und beraten diese über Pflanzen- und Blumenschmuck. Sie nehmen Warenlieferungen entgegen und lagern Pflanzen und Arbeitsmaterialien ein. Auch versorgen und pflegen Fachpraktiker/innen in der Floristik Pflanzen und Pflanzenteile. Dazu schneiden sie zum Beispiel einzelne Blumen zurecht oder stellen fertige Sträuße ins Wasser. Wo arbeitet man? Beschäftigungsbetriebe: Blumenfachgeschäfte Gartencenter Gärtnereien mit Blumengeschäft Arbeitsorte: Verkaufsräume Lagerräume Treibhäuser Was ist wichtig? Anforderungen: Geschicklichkeit (z.B. beim Binden eines Blumenstraußes) Kunden- und Serviceorientierung (z.B. Umsetzen von Kundenwünschen) Kreativität (z.B. beim Dekorieren der Verkaufsräume) Schulfächer: Kunst (z.B. um Blumensträuße zu binden) Mathematik (z.B. um die Kosten eines Blumenstraußes zu berechnen) Welche Voraussetzungen braucht man für die Ausbildung? Die Ausbildung zum Fachpraktiker bzw. zur Fachpraktikerin in der Floristik kann man auch ohne Schulabschluss beginnen. Die Agentur für Arbeit stellt fest, wer sich dafür eignet. Was lernt man in der Ausbildung? Die Auszubildenden lernen beispielsweise: wie man Arbeitsabläufe plant wie man Werkstoffe und Betriebsmittel bereitstellt wie man Pflanzen und Pflanzenteile pflegt und versorgt wie man Pflanzen- und Blumenschmuck gestaltet wie man Waren annimmt und lagert wie man Verkaufsgespräche mit Kunden und Kundinnen führt wie man Produkte verkauft",
-    "germanOccupationCode": "12202",
-    "taskSummary": null,
-    "images": [
-      {
-        "url": "https://rest.arbeitsagentur.de/infosysbub/berufepool-rest/ct/v1/bilder/dkz_93274_06.jpg",
-        "caption": "In der Floristik-Werkstatt ein Blumengesteck fertigen",
-        "imageGroup": "Ausbildung"
-      },
-      {
-        "url": "https://rest.arbeitsagentur.de/infosysbub/berufepool-rest/ct/v1/bilder/dkz_93274_08.jpg",
-        "caption": "Pflanzen auspreisen und präsentieren",
-        "imageGroup": "Ausbildung"
-      },
-      {
-        "url": "https://rest.arbeitsagentur.de/infosysbub/berufepool-rest/ct/v1/bilder/dkz_93274_07.jpg",
-        "caption": "Einen Blumenstrauß nach Kundenwunsch binden",
-        "imageGroup": "Ausbildung"
-      },
-      {
-        "url": "https://rest.arbeitsagentur.de/infosysbub/berufepool-rest/ct/v1/bilder/dkz_93274_14.jpg",
-        "caption": "Im Verkaufsraum einen Blumenstrauß verpacken",
-        "imageGroup": "Ausbildung"
-      },
-      {
-        "url": "https://rest.arbeitsagentur.de/infosysbub/berufepool-rest/ct/v1/bilder/dkz_93274_16.jpg",
-        "caption": "Blumenstrauß, Tisch- und Grabgestecke, Dekorationsartikel",
-        "imageGroup": "Ausbildung"
-      },
-      {
-        "url": "https://rest.arbeitsagentur.de/infosysbub/berufepool-rest/ct/v1/bilder/dkz_93274_19.jpg",
-        "caption": "Eine Kundin bei der Auswahl der Blumen beraten",
-        "imageGroup": "Ausbildung"
-      },
-      {
-        "url": "https://rest.arbeitsagentur.de/infosysbub/berufepool-rest/ct/v1/bilder/dkz_93274_21.jpg",
-        "caption": "Im Lager Dekorationsartikel für ein Gesteck auswählen",
-        "imageGroup": "Ausbildung"
-      },
-      {
-        "url": "https://rest.arbeitsagentur.de/infosysbub/berufepool-rest/ct/v1/bilder/dkz_93274_15.jpg",
-        "caption": "Heißklebepistole, Stützdraht, Handschuhe, Schneidgeräte",
-        "imageGroup": "Ausbildung"
-      },
-      {
-        "url": "https://rest.arbeitsagentur.de/infosysbub/berufepool-rest/ct/v1/bilder/dkz_93274_17.jpg",
-        "caption": "Blumen putzen, Blätter entfernen und schräg anschneiden",
-        "imageGroup": "Ausbildung"
-      },
-      {
-        "url": "https://rest.arbeitsagentur.de/infosysbub/berufepool-rest/ct/v1/bilder/dkz_93274_20.jpg",
-        "caption": "Den Preis eines Blumenarrangements eingeben und kassieren",
-        "imageGroup": "Ausbildung"
-      }
-    ],
-    "degreeStats": null,
-    "accessLevel": "unrestricted",
-    "subjects": [
-      "math",
-      "art"
-    ],
-    "interests": [
-      "praktisch-konkret",
-      "kreativ-gestaltend",
-      "kaufmännisch-organisatorisch",
-      "sozial-beratend"
-    ],
-    "interestKeywords": [
-      "fertigen",
-      "kränzen",
-      "binden",
-      "blumenstraußes",
-      "versorgen",
-      "pflegen",
-      "schnittblumen",
-      "pflanzen",
-      "ideenreiches",
-      "entwerfen",
-      "gestalten",
-      "blumensträußen",
-      "dekoration",
-      "schaufensters",
-      "kosteneffizientes",
-      "bestellen",
-      "waren",
-      "bearbeiten",
-      "anfragen",
-      "blumenbestellungen",
-      "nach",
-      "wirtschaftlichen",
-      "gesichtspunkten",
-      "flexibles",
-      "eingehen",
-      "kundenwünsche"
-    ],
-    "strengthTags": [
-      "Leistungs- und Einsatzbereitschaft",
-      "Sorgfalt",
-      "Selbstständige Arbeitsweise",
-      "Kreativität",
-      "Kommunikationsfähigkeit",
-      "Kontaktbereitschaft",
-      "Freundlich-gewinnendes Wesen",
-      "Kunden- und Serviceorientierung"
-    ],
-    "skillTags": [
-      "Allgemeines intellektuelles Leistungsvermögen",
-      "Figural-räumliches Denken",
-      "Merkfähigkeit",
-      "Handgeschick",
-      "Auge-Hand-Koordination",
-      "Kaufmännische Befähigung",
-      "Sinn und Gespür für Ästhetik",
-      "Interessierte an beruflicher Erstausbildung",
-      "Rechenfertigkeiten",
-      "Verständnis für mündliche Äußerungen",
-      "Mündliches Ausdrucksvermögen"
-    ],
-    "conditions": {
-      "outdoor": false,
-      "office": false,
-      "workshop": true,
-      "indoor": true,
-      "constructionSite": false,
-      "screenWork": false,
-      "manualLabor": true,
-      "machinery": false,
-      "noise": false,
-      "dirt": false,
-      "heavyLifting": false,
-      "heights": false,
-      "shiftWork": false,
-      "customerContact": true,
-      "teamwork": false,
-      "standingWalking": true,
-      "irregularHours": false,
-      "changingTasks": false,
-      "regulatedWork": false,
-      "animalWork": false,
-      "accidentRisk": false,
-      "precisionWork": false,
-      "frequentAbsence": false,
-      "changingWorkplaces": false
-    },
-    "salaryMonthlyMedian": null,
-    "salaryKnown": false,
-    "digitalizationSignal": true,
-    "workLocations": "Floristen und Floristinnen arbeiten in erster Linie in Verkaufsräumen in Werk- und Lagerräumen in Büroräumen beim Kunden, z.T. im Freien Darüber hinaus arbeiten sie ggf. auch in Gewächshäusern",
-    "competenciesText": "",
-    "parentId": 680
-  },
-  {
     "id": 134513,
     "name": "Fachpraktiker/in für Friseur (§66 BBiG/§42r HwO)",
     "descriptionShort": "Berufstyp Ausbildungsberuf für besondere Personengruppen Ausbildungsart Duale Berufsausbildung, geregelt nach Kammerregelungen gemäß &sect;66 Berufsbildungsgesetz (BBiG)/&sect;42r Handwerksordnung (HwO) Ausbildungsdauer 3 Jahre Lernorte Betrieb und Berufsschule oder Einrichtung der beruflichen Rehabilitation",
@@ -36105,82 +35803,41 @@
       "math",
       "crafts_technology"
     ],
-    "interests": [
-      "praktisch-konkret",
-      "verwaltend-organisatorisch"
-    ],
-    "interestKeywords": [
-      "entladen",
-      "umzugsfahrzeuge",
-      "abbauen",
-      "küchen",
-      "möbeln",
-      "anschließen",
-      "waschmaschinen",
-      "anderen",
-      "geräten",
-      "planen",
-      "einzelnen",
-      "aufträge",
-      "touren",
-      "zeitverluste",
-      "vermeiden",
-      "abrechnen",
-      "leistungen"
-    ],
-    "strengthTags": [
-      "Leistungs- und Einsatzbereitschaft",
-      "Sorgfalt",
-      "Selbstständige Arbeitsweise",
-      "Umsicht",
-      "Flexibilität",
-      "Befähigung zu Gruppenarbeit / Teamfähigkeit",
-      "Kunden- und Serviceorientierung"
-    ],
-    "skillTags": [
-      "Allgemeines intellektuelles Leistungsvermögen",
-      "Figural-räumliches Denken",
-      "Handgeschick",
-      "Körperbeherrschung",
-      "Handwerkliches Geschick",
-      "Befähigung zum Planen und Organisieren",
-      "Interessierte an beruflicher Erstausbildung",
-      "Rechenfertigkeiten",
-      "Verständnis für mündliche Äußerungen",
-      "Mündliches Ausdrucksvermögen"
-    ],
+    "interests": [],
+    "interestKeywords": [],
+    "strengthTags": [],
+    "skillTags": [],
     "conditions": {
-      "outdoor": true,
+      "outdoor": false,
       "office": false,
       "workshop": false,
-      "indoor": true,
+      "indoor": false,
       "constructionSite": false,
       "screenWork": false,
-      "manualLabor": true,
-      "machinery": true,
-      "noise": true,
+      "manualLabor": false,
+      "machinery": false,
+      "noise": false,
       "dirt": false,
-      "heavyLifting": true,
+      "heavyLifting": false,
       "heights": false,
       "shiftWork": false,
-      "customerContact": true,
-      "teamwork": true,
-      "standingWalking": true,
+      "customerContact": false,
+      "teamwork": false,
+      "standingWalking": false,
       "irregularHours": false,
-      "changingTasks": true,
+      "changingTasks": false,
       "regulatedWork": false,
       "animalWork": false,
       "accidentRisk": false,
       "precisionWork": false,
       "frequentAbsence": false,
-      "changingWorkplaces": true
+      "changingWorkplaces": false
     },
     "salaryMonthlyMedian": null,
     "salaryKnown": false,
-    "digitalizationSignal": true,
-    "workLocations": "Fachkräfte für Möbel-, Küchen- und Umzugsservice arbeiten in erster Linie in Lagerräumen in Werkstätten in Transportfahrzeugen beim Kunden Darüber hinaus arbeiten sie ggf. auch in Büroräumen",
+    "digitalizationSignal": false,
+    "workLocations": "",
     "competenciesText": "",
-    "parentId": 34980,
     "shortDescription": "Möbel und Küchen liefern, aufbauen und bei Umzügen transportieren."
   },
   {
@@ -69414,7 +69071,7 @@
       }
     ],
     "degreeStats": null,
-    "accessLevel": "fachhochschulreife",
+    "accessLevel": "realschule",
     "subjects": [
       "german",
       "biology",
@@ -75538,7 +75195,7 @@
       }
     ],
     "degreeStats": null,
-    "accessLevel": "fachhochschulreife",
+    "accessLevel": "realschule",
     "subjects": [
       "math",
       "german",
@@ -75708,7 +75365,7 @@
       }
     ],
     "degreeStats": null,
-    "accessLevel": "fachhochschulreife",
+    "accessLevel": "realschule",
     "subjects": [
       "math",
       "german",
@@ -75881,7 +75538,7 @@
       }
     ],
     "degreeStats": null,
-    "accessLevel": "fachhochschulreife",
+    "accessLevel": "realschule",
     "subjects": [
       "math",
       "german",
@@ -76058,7 +75715,7 @@
       }
     ],
     "degreeStats": null,
-    "accessLevel": "fachhochschulreife",
+    "accessLevel": "realschule",
     "subjects": [
       "math",
       "german",
@@ -79922,7 +79579,7 @@
       }
     ],
     "degreeStats": null,
-    "accessLevel": "fachhochschulreife",
+    "accessLevel": "realschule",
     "subjects": [
       "math",
       "german",
@@ -80423,7 +80080,7 @@
       }
     ],
     "degreeStats": null,
-    "accessLevel": "fachhochschulreife",
+    "accessLevel": "realschule",
     "subjects": [
       "german",
       "chemistry",
@@ -81317,7 +80974,7 @@
       }
     ],
     "degreeStats": null,
-    "accessLevel": "fachhochschulreife",
+    "accessLevel": "realschule",
     "subjects": [
       "german",
       "physics",
@@ -83562,7 +83219,7 @@
       }
     ],
     "degreeStats": null,
-    "accessLevel": "fachhochschulreife",
+    "accessLevel": "realschule",
     "subjects": [
       "german",
       "biology",
@@ -84069,7 +83726,7 @@
       }
     ],
     "degreeStats": null,
-    "accessLevel": "fachhochschulreife",
+    "accessLevel": "realschule",
     "subjects": [
       "math",
       "german",
@@ -84718,7 +84375,7 @@
       }
     ],
     "degreeStats": null,
-    "accessLevel": "fachhochschulreife",
+    "accessLevel": "realschule",
     "subjects": [
       "german",
       "biology",
@@ -85058,7 +84715,7 @@
       }
     ],
     "degreeStats": null,
-    "accessLevel": "fachhochschulreife",
+    "accessLevel": "realschule",
     "subjects": [
       "german",
       "chemistry",

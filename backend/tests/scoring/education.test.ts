@@ -117,8 +117,7 @@ describe("scoreEducation — accessLevel fallback (when degreeStats is null)", (
 
 	test("-12 for foreign_degree user × fachhochschulreife Beruf (gap 2)", () => {
 		// The Amira case: foreign_degree treated as tier 0 (same as
-		// secondary), facing FHR-gated Berufe like Erzieher (9162) and
-		// Pflegefachmann (132173). The -12 magnitude was chosen via the
+		// secondary), facing FHR-gated Berufe like Erzieher (9162). The -12
 		// access-penalty sweep to push these Berufe out of the
 		// prefilter top-60 without affecting personas at intermediate level.
 		expect(
