@@ -24,6 +24,15 @@ export interface BottomSheetProps {
 
 type DragSample = { t: number; y: number };
 
+function readVisualViewportLayout() {
+	const vv = window.visualViewport;
+	const height = vv?.height ?? window.innerHeight;
+	const bottomInset = vv
+		? Math.max(0, window.innerHeight - vv.height - vv.offsetTop)
+		: 0;
+	return { height, bottomInset };
+}
+
 export function BottomSheet({
 	open,
 	onClose,
@@ -37,6 +46,9 @@ export function BottomSheet({
 	const [isClosing, setIsClosing] = useState(false);
 	const [enterComplete, setEnterComplete] = useState(false);
 	const [isDragging, setIsDragging] = useState(false);
+	const [viewportLayout, setViewportLayout] = useState(
+		readVisualViewportLayout,
+	);
 
 	const motionShellRef = useRef<HTMLDivElement>(null);
 	const dialogRef = useRef<HTMLDivElement>(null);
@@ -68,6 +80,28 @@ export function BottomSheet({
 			setIsClosing(true);
 		}
 	}, [open, visible]);
+
+	useEffect(() => {
+		if (!visible) {
+			return () => {};
+		}
+		const visualViewport = window.visualViewport;
+		if (!visualViewport) {
+			return () => {};
+		}
+
+		const update = () => {
+			setViewportLayout(readVisualViewportLayout());
+		};
+
+		update();
+		visualViewport.addEventListener("resize", update);
+		visualViewport.addEventListener("scroll", update);
+		return () => {
+			visualViewport.removeEventListener("resize", update);
+			visualViewport.removeEventListener("scroll", update);
+		};
+	}, [visible]);
 
 	useEffect(() => {
 		if (!visible) {
@@ -344,7 +378,11 @@ export function BottomSheet({
 				role="dialog"
 				aria-modal="true"
 				aria-label={ariaLabel}
-				className="pointer-events-none fixed bottom-0 left-0 right-0 z-50 mx-auto flex max-h-[min(90vh,900px)] max-w-[430px] flex-col"
+				className="pointer-events-none fixed left-0 right-0 z-50 mx-auto flex max-w-[430px] flex-col"
+				style={{
+					bottom: viewportLayout.bottomInset,
+					maxHeight: Math.min(viewportLayout.height * 0.9, 900),
+				}}
 			>
 				<div
 					ref={motionShellRef}
