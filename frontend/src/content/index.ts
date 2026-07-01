@@ -466,6 +466,33 @@ export const content = {
 	"results.badge.empty": "Keine offenen Stellen",
 	"results.previewHeading": "Beispiele in deiner Nähe",
 	"results.startDatePrefix": "Start:",
+	// Occupation Detail
+	"results.detail.salaryTitle": "Einstiegsgehalt",
+	"results.detail.salarySuffix": "/ Monat",
+	"results.detail.salaryInfo.title": "Einstiegsgehalt",
+	"results.detail.salaryInfo.description":
+		"Das Einstiegsgehalt ist das Geld, das du verdienst, wenn du nach der Ausbildung deinen ersten Job anfängst.",
+	"results.detail.durationTitle": "Dauer",
+	"results.detail.durationSuffix": "Jahre",
+	"results.detail.schoolDegreeTitle": "Empfohlener Schulabschluss",
+	"results.detail.schoolDegreeInfo.title": "Empfohlener Schulsabschluss",
+	"results.detail.schoolDegreeInfo.description":
+		"Mit diesem Abschluss hast du gute Chancen auf einen Ausbildungsplatz. Hast du einen anderen Abschluss, kannst du es trotzdem schaffen – vielleicht musst du dann mehr Bewerbungen schreiben und es dauert länger bis du einen Platz findest.",
+	"results.detail.notFound": "Dieser Beruf wurde nicht gefunden.",
+	"results.detail.loadError":
+		"Die Berufsdetails konnten gerade nicht geladen werden.",
+	"results.share": "Teilen",
+	"results.share.ariaLabel": "Teilen",
+	"results.detail.tasksTitle": "Typische Aufgaben",
+	"results.detail.tasks.matchTitle": "So gut passt der Beruf zu dir",
+	"results.detail.tasks.matchInfo.title": "Wie wird das berechnet?",
+	"results.detail.tasks.matchInfo.ariaLabel":
+		"Wie wird das berechnet?, Mehr erfahren",
+	"results.detail.tasks.matchInfo.description":
+		"Du hast ein paar Fragen beantwortet, z.B. zu deiner Schulbildung, deinen Interessen und deinen Stärken. Für deine Antworten berechnen wir Punkte. So finden wir Ausbildungsberufe, die am besten zu dir passen.",
+	"results.detail.whyItMatches.title": "Warum dieser Beruf zu dir passt",
+	"results.detail.whyItMatches.notMatchTitle":
+		"Passt nicht zu dir, aber gehört zum Beruf",
 	// Vacancies
 	"vacancies.filter.occupations.title": "Beruf",
 	"vacancies.filter.occupations.title.short": "Beruf",

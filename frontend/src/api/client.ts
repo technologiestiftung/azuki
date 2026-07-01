@@ -4,6 +4,7 @@ import type {
 	VacanciesResponse,
 	EvalSnapshot,
 	Persona,
+	Occupation,
 } from "@azuki/shared";
 type HeadersInit = Record<string, string>;
 
@@ -30,6 +31,16 @@ function headers(): HeadersInit {
 		h["x-app-password"] = appPassword;
 	}
 	return h;
+}
+
+export async function getOccupation(id: number): Promise<Occupation> {
+	const res = await fetch(`${API_BASE}/occupations/${id}`, {
+		headers: headers(),
+	});
+	if (!res.ok) {
+		throw new Error(`getOccupation failed: ${res.status}`);
+	}
+	return res.json();
 }
 
 export async function matchProfile(profile: UserProfile): Promise<MatchResult> {
