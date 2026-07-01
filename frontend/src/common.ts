@@ -7,13 +7,21 @@ export type {
 	NoGoAnswer,
 	WorkPreferenceChoice,
 	UserProfile,
+	PracticalExperienceEntry,
 	MatchedOccupation,
 	MatchResult,
 	SubjectDefinition,
 	VacanciesResponse,
 } from "@azuki/shared";
 
-import type { WorkPreferenceChoice } from "@azuki/shared";
+export { formatPracticalExperiencesForApi } from "@azuki/shared";
+
+import type {
+	PracticalExperienceEntry,
+	WorkPreferenceChoice,
+} from "@azuki/shared";
+
+export type PracticalExperienceInput = Omit<PracticalExperienceEntry, "id">;
 
 export interface StrengthRating {
 	id: string;

@@ -1,5 +1,5 @@
 const CURVE_STEEPNESS = 0.105;
-const CURVE_MIDPOINT = 9;
+const CURVE_MIDPOINT = 13;
 
 export function fitPercent(rawScore: number): number {
 	const logistic =

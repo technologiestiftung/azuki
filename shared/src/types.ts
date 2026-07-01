@@ -123,6 +123,10 @@ export type WorkPreferenceChoice = "a" | "b";
 
 // --- User Profile (POST /api/match body) ---
 
+import type { PracticalExperienceEntry } from "./practicalExperience";
+
+export type { PracticalExperienceEntry };
+
 export interface UserProfile {
 	inSchool: boolean | null;
 	educationLevel: EducationLevel | null;
@@ -135,7 +139,8 @@ export interface UserProfile {
 	strengths: Record<string, number>;
 	customStrengths: string[];
 	selectedCustomStrengths: string[];
-	practicalExperience: string;
+	practicalExperiences: PracticalExperienceEntry[];
+	selectedPracticalExperienceIds: string[];
 	workPreferences: Record<string, WorkPreferenceChoice | null>;
 	noGos: Record<string, NoGoAnswer | null>;
 	customNoGos: string[];

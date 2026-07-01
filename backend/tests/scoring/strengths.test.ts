@@ -2,8 +2,28 @@ import { describe, expect, test } from "vitest";
 import { scoreStrengths } from "../../src/matching/score/dimensions.js";
 import { makeOccupation, makeProfile } from "./helpers.js";
 
+describe("scoreStrengths — UI tier points", () => {
+	test("stark (1.0) awards +2 on match", () => {
+		const profile = makeProfile({ strengths: { empathy: 1 } });
+		const occ = makeOccupation({ strengthTags: ["Einfühlungsvermögen"] });
+		expect(scoreStrengths(occ, profile)).toBe(2);
+	});
+
+	test("etwas (0.5) awards +1 on match", () => {
+		const profile = makeProfile({ strengths: { empathy: 0.5 } });
+		const occ = makeOccupation({ strengthTags: ["Einfühlungsvermögen"] });
+		expect(scoreStrengths(occ, profile)).toBe(1);
+	});
+
+	test("nicht (0) awards nothing", () => {
+		const profile = makeProfile({ strengths: { empathy: 0 } });
+		const occ = makeOccupation({ strengthTags: ["Einfühlungsvermögen"] });
+		expect(scoreStrengths(occ, profile)).toBe(0);
+	});
+});
+
 describe("scoreStrengths — empathy", () => {
-	const profile = makeProfile({ strengths: { empathy: 0.8 } });
+	const profile = makeProfile({ strengths: { empathy: 1 } });
 
 	test("awards +2 when occupation has 'Einfühlungsvermögen' strengthTag", () => {
 		const occ = makeOccupation({ strengthTags: ["Einfühlungsvermögen"] });
@@ -24,7 +44,7 @@ describe("scoreStrengths — empathy", () => {
 
 describe("scoreStrengths — logical-thinking", () => {
 	const profile = makeProfile({
-		strengths: { "logical-thinking": 0.8 },
+		strengths: { "logical-thinking": 1 },
 	});
 
 	test("awards +2 when occupation has Umsicht tag", () => {
@@ -47,7 +67,7 @@ describe("scoreStrengths — logical-thinking", () => {
 
 describe("scoreStrengths — precision", () => {
 	const profile = makeProfile({
-		strengths: { precision: 0.7 },
+		strengths: { precision: 1 },
 	});
 
 	test("awards +2 when occupation has precisionWork condition", () => {
@@ -72,7 +92,7 @@ describe("scoreStrengths — precision", () => {
 
 describe("scoreStrengths — concentration", () => {
 	const profile = makeProfile({
-		strengths: { concentration: 0.6 },
+		strengths: { concentration: 1 },
 	});
 
 	test("awards +2 when occupation has Konzentration in skillTags", () => {
@@ -107,8 +127,8 @@ describe("scoreStrengths — multiple strengths score independently", () => {
 		const profile = makeProfile({
 			strengths: {
 				"logical-thinking": 1.0,
-				precision: 0.8,
-				concentration: 0.7,
+				precision: 0.5,
+				concentration: 0.5,
 			},
 		});
 		const occ = makeOccupation({
@@ -116,15 +136,15 @@ describe("scoreStrengths — multiple strengths score independently", () => {
 			conditions: { precisionWork: true },
 			skillTags: ["Konzentration"],
 		});
-		expect(scoreStrengths(occ, profile)).toBe(6);
+		expect(scoreStrengths(occ, profile)).toBe(4);
 	});
 
 	test("only awards for matching signals, not all three", () => {
 		const profile = makeProfile({
 			strengths: {
 				"logical-thinking": 1.0,
-				precision: 0.8,
-				concentration: 0.7,
+				precision: 0.5,
+				concentration: 0.5,
 			},
 		});
 		const occ = makeOccupation({
@@ -136,13 +156,13 @@ describe("scoreStrengths — multiple strengths score independently", () => {
 
 describe("scoreStrengths — unchanged strengths still work", () => {
 	test("craftsmanship still uses conditions fallback", () => {
-		const profile = makeProfile({ strengths: { craftsmanship: 0.8 } });
+		const profile = makeProfile({ strengths: { craftsmanship: 1 } });
 		const occ = makeOccupation({ conditions: { manualLabor: true } });
 		expect(scoreStrengths(occ, profile)).toBe(2);
 	});
 
 	test("teamwork still uses strengthTags", () => {
-		const profile = makeProfile({ strengths: { teamwork: 0.8 } });
+		const profile = makeProfile({ strengths: { teamwork: 1 } });
 		const occ = makeOccupation({
 			strengthTags: ["Befähigung zu Gruppenarbeit / Teamfähigkeit"],
 		});
@@ -157,7 +177,7 @@ describe("scoreStrengths — unchanged strengths still work", () => {
 });
 
 describe("scoreStrengths — creativity b20-2 fallback", () => {
-	const profile = makeProfile({ strengths: { creativity: 0.8 } });
+	const profile = makeProfile({ strengths: { creativity: 1 } });
 
 	test("awards +2 for Ästhetik skillTag", () => {
 		const occ = makeOccupation({
@@ -188,7 +208,7 @@ describe("scoreStrengths — creativity b20-2 fallback", () => {
 });
 
 describe("scoreStrengths — precision b20-2 fallback", () => {
-	const profile = makeProfile({ strengths: { precision: 0.7 } });
+	const profile = makeProfile({ strengths: { precision: 1 } });
 
 	test("awards +2 for Beobachtungsgenauigkeit skillTag", () => {
 		const occ = makeOccupation({
@@ -204,7 +224,7 @@ describe("scoreStrengths — precision b20-2 fallback", () => {
 });
 
 describe("scoreStrengths — craftsmanship b20-2 fallback", () => {
-	const profile = makeProfile({ strengths: { craftsmanship: 0.8 } });
+	const profile = makeProfile({ strengths: { craftsmanship: 1 } });
 
 	test("awards +2 for Fingergeschick skillTag", () => {
 		const occ = makeOccupation({
@@ -220,7 +240,7 @@ describe("scoreStrengths — craftsmanship b20-2 fallback", () => {
 });
 
 describe("scoreStrengths — logical-thinking b20-2 fallback", () => {
-	const profile = makeProfile({ strengths: { "logical-thinking": 0.8 } });
+	const profile = makeProfile({ strengths: { "logical-thinking": 1 } });
 
 	test("awards +2 for Numerisches Denken skillTag", () => {
 		const occ = makeOccupation({
@@ -236,7 +256,7 @@ describe("scoreStrengths — logical-thinking b20-2 fallback", () => {
 });
 
 describe("scoreStrengths — communication b20-2 fallback", () => {
-	const profile = makeProfile({ strengths: { communication: 0.8 } });
+	const profile = makeProfile({ strengths: { communication: 1 } });
 
 	test("awards +2 for Mündliches Ausdrucksvermögen skillTag", () => {
 		const occ = makeOccupation({
