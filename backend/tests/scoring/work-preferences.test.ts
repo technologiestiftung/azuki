@@ -68,10 +68,28 @@ describe("scoreWorkPreferences — pace:a (Immer viel zu tun)", () => {
 describe("scoreWorkPreferences — pace:b (Entspanntes Tempo)", () => {
 	const profile = makeProfile({ workPreferences: { pace: "b" } });
 
-	test("matches routine Berufe without Psychische Belastbarkeit", () => {
-		// Verkäufer/in shape: indoor retail, no stress tag, no shift/irregular hours.
+	test("matches Berufe without Psychische Belastbarkeit", () => {
+		const occ = makeOccupation({ strengthTags: ["Sorgfalt"] });
+		expect(scoreWorkPreferences(occ, profile)).toBe(2);
+	});
+
+	test("matches shift-work Berufe without the stress tag (Lagerlogistik shape)", () => {
+		// BERUFENET tags Schichtarbeit in b16-3 for warehouse roles, but they
+		// lack Psychische Belastbarkeit — shift scheduling is not Zeitdruck.
 		const occ = makeOccupation({
-			conditions: { indoor: true, shiftWork: false, irregularHours: false },
+			strengthTags: [
+				"Leistungs- und Einsatzbereitschaft",
+				"Sorgfalt",
+				"Umsicht",
+			],
+			conditions: { indoor: true, shiftWork: true },
+		});
+		expect(scoreWorkPreferences(occ, profile)).toBe(2);
+	});
+
+	test("matches Berufe with irregular hours when no stress tag", () => {
+		const occ = makeOccupation({
+			conditions: { irregularHours: true, shiftWork: false },
 		});
 		expect(scoreWorkPreferences(occ, profile)).toBe(2);
 	});
@@ -79,21 +97,6 @@ describe("scoreWorkPreferences — pace:b (Entspanntes Tempo)", () => {
 	test("does not match Berufe tagged with Psychische Belastbarkeit", () => {
 		const occ = makeOccupation({
 			strengthTags: ["Psychische Belastbarkeit"],
-			conditions: { shiftWork: false, irregularHours: false },
-		});
-		expect(scoreWorkPreferences(occ, profile)).toBe(0);
-	});
-
-	test("does not match shift-work Berufe even without the stress tag", () => {
-		const occ = makeOccupation({
-			conditions: { shiftWork: true, irregularHours: false },
-		});
-		expect(scoreWorkPreferences(occ, profile)).toBe(0);
-	});
-
-	test("does not match Berufe with irregular hours", () => {
-		const occ = makeOccupation({
-			conditions: { shiftWork: false, irregularHours: true },
 		});
 		expect(scoreWorkPreferences(occ, profile)).toBe(0);
 	});

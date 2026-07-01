@@ -41,10 +41,7 @@ export const WORK_PREF_MAP: Record<string, WorkPreferenceOptionChecks> = {
 	pace: {
 		// BERUFENET b20-4: "Psychische Belastbarkeit" explicitly cites Zeitdruck
 		a: (o) => o.strengthTags.includes("Psychische Belastbarkeit"),
-		b: (o) =>
-			!o.strengthTags.includes("Psychische Belastbarkeit") &&
-			!o.conditions.shiftWork &&
-			!o.conditions.irregularHours,
+		b: (o) => !o.strengthTags.includes("Psychische Belastbarkeit"),
 	},
 	structure: {
 		a: (o) => o.conditions.regulatedWork,
