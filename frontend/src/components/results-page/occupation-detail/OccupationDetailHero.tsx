@@ -29,7 +29,7 @@ export function OccupationDetailHero({
 				className="w-full h-full object-cover"
 			/>
 			<div
-				className="absolute inset-0 bg-black pointer-events-none transition-opacity duration-150"
+				className="absolute inset-0 bg-white pointer-events-none transition-opacity duration-150"
 				style={{ opacity: overlayOpacity }}
 				aria-hidden
 			/>
@@ -45,7 +45,7 @@ export function OccupationDetailHero({
 					onClick={() => navigate(ROUTE_PATHS.resultsList)}
 					ariaLabel={content["navigation.back"]}
 					title={content["navigation.back"]}
-					className="bg-[#F2F4F580] rounded-xl"
+					className="bg-[#F2F4F580]/50  rounded-xl backdrop-blur-[4.5px]"
 				/>
 
 				<div className="flex gap-1.5 items-center">
@@ -54,11 +54,11 @@ export function OccupationDetailHero({
 						onClick={() => {}}
 						ariaLabel={content["results.share"]}
 						title={content["results.share"]}
-						className="bg-[#F2F4F580] rounded-xl"
+						className="bg-[#F2F4F580]/50 rounded-xl backdrop-blur-[4.5px]"
 					/>
 					<button
 						type="button"
-						className="flex items-center justify-center z-10 w-10 h-10 bg-[#F2F4F580] rounded-xl"
+						className="flex items-center justify-center z-10 w-10 h-10 bg-[#F2F4F580]/50 rounded-xl backdrop-blur-[4.5px]"
 						onClick={onToggleFavorite}
 						aria-pressed={isFavorite}
 						aria-label={
