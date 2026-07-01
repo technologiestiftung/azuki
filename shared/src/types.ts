@@ -79,6 +79,7 @@ export interface Occupation {
 	descriptionLong: string | null;
 	taskSummary: string | null;
 	shortDescription?: string | null;
+	taskBullets?: string[] | null;
 	images: OccupationImage[];
 	degreeStats: DegreeDistribution | null;
 	// Parsed from BERUFENET a30-0 (legal Zugangsvoraussetzungen). Used as

@@ -7,6 +7,10 @@ import { OccupationDetailHero } from "./OccupationDetailHero";
 import { OccupationDetailHeaderCollapsed } from "./OccupationDetailHeaderCollapsed";
 import { useOccupationDetailScroll } from "./useOccupationDetailScroll";
 import { fitPercent } from "../utils/fitPercent";
+import {
+	resolveOccupationShortDescription,
+	resolveOccupationTaskBullets,
+} from "@azuki/shared";
 import { InfoBottomSheet } from "./InfoBottomSheet";
 import { FitDonutChart } from "./FitDonutChart";
 
@@ -27,6 +31,16 @@ export function OccupationDetailPage() {
 		detail.matchedOccupation !== undefined
 			? fitPercent(detail.matchedOccupation.score)
 			: undefined;
+	const taskBullets = detail.occupation
+		? resolveOccupationTaskBullets(detail.occupation)
+		: [];
+	const fallbackShortDescription = detail.occupation
+		? resolveOccupationShortDescription(detail.occupation)
+		: (detail.matchedOccupation?.shortDescription ?? "");
+	let taskItems = taskBullets;
+	if (taskItems.length === 0 && fallbackShortDescription) {
+		taskItems = [fallbackShortDescription];
+	}
 
 	return (
 		<div className="flex flex-col h-full relative overflow-x-hidden">
@@ -70,8 +84,14 @@ export function OccupationDetailPage() {
 							{content["results.detail.tasksTitle"]}
 						</h2>
 						<ul className="flex flex-col gap-2 list-disc pl-[18px]">
-							{/* TODO: task list */}
-							<li>{detail.occupation?.shortDescription}</li>
+							{taskItems.map((task) => (
+								<li
+									key={task}
+									className="text-sky-900 text-lg leading-6 font-normal"
+								>
+									{task}
+								</li>
+							))}
 						</ul>
 					</div>
 					<div className="flex flex-col px-4 gap-0.5">
@@ -103,7 +123,7 @@ export function OccupationDetailPage() {
 						</div>
 						<div className="flex flex-col gap-0.5 px-4 pt-5 pb-4 bg-sky-10">
 							<div className="flex gap-[9px]">
-								<div className="flex items-center justify-center w-fit h-[30px] bg-sky-300 rounded-md px-[5px] pt[5px] pb[7px]">
+								<div className="flex items-center justify-center w-fit w-[30px] h-[30px] bg-sky-300 rounded-md px-[5px] pt[5px] pb[7px]">
 									<img src="/icons/thumb-up.svg" alt="" className="w-4 h-4" />
 								</div>
 								<h2 className="text-sky-900 text-xl font-semibold self-center">
@@ -113,7 +133,7 @@ export function OccupationDetailPage() {
 						</div>
 						<div className="flex flex-col gap-0.5 px-4 pt-5 pb-4 rounded-b-[20px] bg-sky-10">
 							<div className="flex gap-[9px]">
-								<div className="flex items-center justify-center w-fit h-[30px] bg-orange-400 rounded-md px-[5px] pt[5px] pb[7px]">
+								<div className="flex items-center justify-center w-[30px] h-[30px] bg-orange-400 rounded-md px-[5px] pt[5px] pb[7px]">
 									<img src="/icons/thumb-down.svg" alt="" className="w-4 h-4" />
 								</div>
 								<h2 className="text-sky-900 text-xl font-semibold self-center">

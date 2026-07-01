@@ -91,6 +91,11 @@ export {
 } from "./shortDescription";
 
 export {
+	TASK_BULLETS_PROMPT,
+	resolveOccupationTaskBullets,
+} from "./taskBullets";
+
+export {
 	type Bundesland,
 	BUNDESLAENDER,
 	isBundesland,
