@@ -15,7 +15,7 @@ import {
 } from "@azuki/shared";
 import { occupationMatchMeta } from "../occupationMeta";
 import type { ScoredOccupation } from "../matching/index.js";
-import { PREFILTER_TOP_K } from "../matching/index.js";
+import { FINAL_MATCH_COUNT, PREFILTER_TOP_K } from "../matching/index.js";
 import {
 	EDUCATION_LABELS,
 	INTEREST_LABELS,
@@ -30,7 +30,7 @@ const OPENROUTER_API_KEY = process.env.OPENROUTER_API_KEY;
 const DEFAULT_MODEL = DEFAULT_MODEL_ID;
 const MAX_DESCRIPTION_LENGTH = 400;
 const MIN_RESULTS = 5;
-const MAX_RESULTS = 8;
+const MAX_RESULTS = FINAL_MATCH_COUNT;
 const DEFAULT_REASONING = "Dieser Beruf passt zu deinem Profil.";
 
 // Lazy client construction. Constructing OpenAI at module load throws when
@@ -473,7 +473,7 @@ HARTE REGELN
    • Ausländischer Abschluss + erkennbar einfaches Deutsch (kurze Sätze, A2-Wortwahl im Profil): pflegerische/pädagogische Berufe (Pflege, Erzieher, Sozialassistent) verlangen praktisch B2 — nur wählen, wenn der freie Text klare Sprach-Selbsteinschätzung dagegen liefert.
 4. FACHPRAKTIKER (§66 BBiG) SICHTBAR MACHEN. Wenn das Profil auf eingeschränkten Schulabschluss, abgebrochene Ausbildung oder begrenzte Deutschkenntnisse hindeutet UND die Top-${topK} Fachpraktiker-Varianten der Wunschrichtung enthält, muss mindestens eine in die Empfehlungen. Diese Berufe sind genau für solche Profile gemacht.
 5. FINDBARKEIT ZÄHLT. Bevorzuge bekannte Ausbildungen mit deutlicher Marktpräsenz (Verkäufer/in, Fachkraft Lagerlogistik, Kaufmann/-frau Büromanagement, Pflegefachmann/-frau, Maler/in, Koch/Köchin, Mediengestalter/in …). Berufe, die im Alltag praktisch nie genannt werden (Bogenmacher, Pelzveredler, Edelsteinschleifer, exotische Designer-Fachrichtungen, Geigenbauer u. ä.), nur dann empfehlen, wenn der freie Text das Handwerk wörtlich nennt.
-6. VIELFALT BEI AMBIVALENZ. Wenn der/die Jugendliche unentschieden zwischen Richtungen ist („ich weiß nicht ob X oder Y"), spiegele beide Richtungen in der Top-Liste — nicht 8 Varianten einer Richtung.
+6. VIELFALT BEI AMBIVALENZ. Wenn der/die Jugendliche unentschieden zwischen Richtungen ist („ich weiß nicht ob X oder Y"), spiegele beide Richtungen in der Top-Liste — nicht ${MAX_RESULTS} Varianten einer Richtung.
 7. KEINE BEGRÜNDUNG, KEIN PLATZ. Wenn du für einen Beruf keine konkrete Begründung aus dem Profil ableiten kannst, wähle einen anderen.
 
 WORAUF DU BESONDERS ACHTEN SOLLST

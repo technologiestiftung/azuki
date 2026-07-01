@@ -44,12 +44,22 @@ export {
 	type PopularityRecord,
 } from "./popularity";
 
+export {
+	EVAL_TOP_N,
+	EVAL_MAX_POINTS,
+	EVAL_POINTS_TIER_S,
+	EVAL_POINTS_TIER_A,
+	EVAL_VERDICT_CONCERNS_BELOW,
+	EVAL_VERDICT_FAIL_BELOW,
+	EVAL_VERDICT_PASS_BELOW,
+} from "./eval-rubrics/scoring";
 export { type Verdict, type ScoreReport } from "./eval-rubrics/types";
 
 export type { Persona } from "./persona";
 
 export { formatOccupationDisplayName } from "./occupationDisplayName";
 
+export { strengthScorePoints } from "./strengthScoring";
 export type {
 	PracticalExperienceEntry,
 	PracticalExperienceCategoryId,
