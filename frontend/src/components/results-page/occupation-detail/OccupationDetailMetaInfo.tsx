@@ -70,8 +70,7 @@ export function OccupationDetailMetaInfo({
 							/>
 						</span>
 						<span className="text-sky-900 text-xl font-semibold text-start">
-							{formatOccupationSalary(salaryMedian)}{" "}
-							{content["results.detail.salarySuffix"]}
+							{formatOccupationSalary(salaryMedian)}
 						</span>
 					</button>
 				</div>

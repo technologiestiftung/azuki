@@ -8,6 +8,7 @@ import { OccupationDetailHeaderCollapsed } from "./OccupationDetailHeaderCollaps
 import { useOccupationDetailScroll } from "./useOccupationDetailScroll";
 import { fitPercent } from "../utils/fitPercent";
 import { InfoBottomSheet } from "./InfoBottomSheet";
+import { FitDonutChart } from "./FitDonutChart";
 
 type InfoSheet = "matchInfo";
 
@@ -22,6 +23,10 @@ export function OccupationDetailPage() {
 	const handleMatchInfoClick = () => {
 		setActiveInfoSheet("matchInfo");
 	};
+	const matchPercent =
+		detail.matchedOccupation !== undefined
+			? fitPercent(detail.matchedOccupation.score)
+			: undefined;
 
 	return (
 		<div className="flex flex-col h-full relative overflow-x-hidden">
@@ -87,11 +92,12 @@ export function OccupationDetailPage() {
 									<img src="/icons/info.svg" alt="" className="w-5 h-5" />
 								</button>
 							</div>
-							{detail.matchedOccupation !== undefined && (
-								<div>
-									<span className="text-sky-900 text-[85px] font-medium">
-										{fitPercent(detail.matchedOccupation.score)} %
+							{matchPercent !== undefined && (
+								<div className="flex items-center justify-between gap-4">
+									<span className="text-sky-900 text-[85px] font-medium leading-none">
+										{matchPercent} %
 									</span>
+									<FitDonutChart percent={matchPercent} />
 								</div>
 							)}
 						</div>
