@@ -7,9 +7,10 @@ import type {
 } from "@azuki/shared";
 import {
 	INTERESTS,
+	getPopularityTier,
+	strengthScorePoints,
 	getActivePracticalExperiences,
 	getPracticalExperienceCategoryWeight,
-	getPopularityTier,
 } from "@azuki/shared";
 import type { SalaryBands } from "./salaryScoreBands.js";
 import {
@@ -551,7 +552,8 @@ export function scoreStrengths(
 	let score = 0;
 
 	for (const [strengthId, value] of Object.entries(profile.strengths)) {
-		if (value < 0.5) {
+		const points = strengthScorePoints(value);
+		if (points === 0) {
 			continue;
 		}
 
@@ -563,7 +565,7 @@ export function scoreStrengths(
 					occupation.skillTags.includes(tag),
 				)
 			) {
-				score += 2;
+				score += points;
 			}
 			continue;
 		}
@@ -573,7 +575,7 @@ export function scoreStrengths(
 				occupation.conditions.precisionWork ||
 				PRECISION_SKILL_TAGS.some((tag) => occupation.skillTags.includes(tag))
 			) {
-				score += 2;
+				score += points;
 			}
 			continue;
 		}
@@ -584,7 +586,7 @@ export function scoreStrengths(
 					occupation.skillTags.includes(tag),
 				)
 			) {
-				score += 2;
+				score += points;
 			}
 			continue;
 		}
@@ -595,7 +597,7 @@ export function scoreStrengths(
 				tags?.some((tag) => occupation.strengthTags.includes(tag)) ||
 				CREATIVITY_SKILL_TAGS.some((tag) => occupation.skillTags.includes(tag))
 			) {
-				score += 2;
+				score += points;
 			}
 			continue;
 		}
@@ -608,7 +610,7 @@ export function scoreStrengths(
 					occupation.skillTags.includes(tag),
 				)
 			) {
-				score += 2;
+				score += points;
 			}
 			continue;
 		}
@@ -621,7 +623,7 @@ export function scoreStrengths(
 					occupation.skillTags.includes(tag),
 				)
 			) {
-				score += 2;
+				score += points;
 			}
 			continue;
 		}
@@ -632,7 +634,7 @@ export function scoreStrengths(
 		}
 
 		if (tags.some((tag) => occupation.strengthTags.includes(tag))) {
-			score += 2;
+			score += points;
 		}
 	}
 

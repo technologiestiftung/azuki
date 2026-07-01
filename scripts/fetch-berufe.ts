@@ -160,30 +160,49 @@ const ACCESS_LEVEL_PATTERNS: Array<{ level: AccessLevel; re: RegExp }> = [
   },
 ];
 
-// Detects explicit entry prerequisites beyond the school degree in a30-0.
-// Berufe like Erzieher and several care/therapy variants legally accept a
-// Realschulabschluss but require an additional vocational background or
-// Praktikum at the entry point. The practical access level for a typical
-// 16-year-old is closer to Fachhochschulreife. We upgrade `realschule`
-// classifications to `fachhochschulreife` when these phrases appear.
-function hasAdditionalEntryPrerequisite(text: string): boolean {
-  return (
-    /und nachweis einer beruflich/i.test(text) ||
-    /in verbindung mit einer.{0,80}(berufsausbildung|t[äa]tigkeit|praktikum)/i.test(
-      text,
-    ) ||
-    /mindestens (?:2|zwei)[- ]?j[äa]hrig/i.test(text) ||
-    /und abschluss einer beruflich/i.test(text) ||
-    /einschl[äa]gige berufliche vorbildung/i.test(text) ||
-    /entweder eine abgeschlossene/i.test(text) ||
-    /mehrj[äa]hrige.{0,30}einschl[äa]gige.{0,30}berufst[äa]tigkeit/i.test(text)
+// BERUFENET often lists equivalent entry paths as
+// "mittlerer Bildungsabschluss ODER Hauptschulabschluss in Verbindung mit …
+// Berufsausbildung". The Berufsausbildung clause belongs to the Hauptschule
+// branch only — Realschule alone is sufficient on the primary path.
+function isHauptschuleBerufsausbildungAlternative(text: string): boolean {
+  return /mittlerer bildungsabschluss[\s\S]{0,900}?\boder\b[\s\S]{0,900}?hauptschulabschluss in verbindung mit[\s\S]{0,250}?berufsausbildung/i.test(
+    text,
   );
 }
 
-function extractAccessLevel(infofelder: Infofeld[]): AccessLevel | null {
-  const field = infofelder.find((f) => f.id === INFOFELD_IDS.zugang);
-  if (!field?.content) return null;
-  const text = stripHtml(field.content);
+// Detects explicit entry prerequisites beyond the school degree in a30-0.
+// Berufe like Erzieher and Heilerziehungspfleger legally accept a
+// Realschulabschluss but require an additional vocational background at entry.
+// The practical access level for a typical 16-year-old is closer to
+// Fachhochschulreife. We upgrade `realschule` to `fachhochschulreife` only
+// for these AND-combined cases — not when Berufsausbildung appears solely as
+// the Hauptschule alternative path (see isHauptschuleBerufsausbildungAlternative).
+function hasAdditionalEntryPrerequisite(text: string): boolean {
+  if (isHauptschuleBerufsausbildungAlternative(text)) {
+    return false;
+  }
+
+  return (
+    /zudem ist i\.?d\.?r\./i.test(text) ||
+    /mittlerer bildungsabschluss[\s\S]{0,160}?\bund\b[\s\S]{0,300}?entweder eine abgeschlossene/i.test(
+      text,
+    ) ||
+    /und nachweis einer beruflich/i.test(text) ||
+    /und abschluss einer beruflich/i.test(text) ||
+    /einschl[äa]gige berufliche vorbildung/i.test(text) ||
+    /entweder eine abgeschlossene/i.test(text) ||
+    /mehrj[äa]hrige[\s\S]{0,30}?einschl[äa]gige[\s\S]{0,30}?berufst[äa]tigkeit/i.test(
+      text,
+    ) ||
+    /in verbindung mit einer[\s\S]{0,80}?(t[äa]tigkeit|praktikum)/i.test(
+      text,
+    ) ||
+    /mindestens (?:2|zwei)[- ]?j[äa]hrig/i.test(text)
+  );
+}
+
+/** Parses stripped BERUFENET a30-0 text. Exported for unit tests. */
+export function extractAccessLevelFromText(text: string): AccessLevel | null {
   if (!text) return null;
 
   if (/keine bestimmte vorbildung|keine schulische vorbildung/i.test(text)) {
@@ -205,6 +224,12 @@ function extractAccessLevel(infofelder: Infofeld[]): AccessLevel | null {
     return "fachhochschulreife";
   }
   return level;
+}
+
+function extractAccessLevel(infofelder: Infofeld[]): AccessLevel | null {
+  const field = infofelder.find((f) => f.id === INFOFELD_IDS.zugang);
+  if (!field?.content) return null;
+  return extractAccessLevelFromText(stripHtml(field.content));
 }
 
 function extractConditions(infofelder: Infofeld[]): WorkConditions {
