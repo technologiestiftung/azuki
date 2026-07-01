@@ -1,7 +1,7 @@
 /**
  * Occupation–profile scoring engine.
  *
- * Each occupation is scored against a user profile across eight dimensions:
+ * Each occupation is scored against a user profile across nine dimensions:
  *
  *   1. Education — penalizes occupations where the user's degree level
  *      is underrepresented among current practitioners.
@@ -23,6 +23,9 @@
  *      profile signal is exceptionally strong. Includes a §66 Fachpraktiker
  *      boost when educationLevel ∈ {secondary, foreign_degree, none}, since
  *      §66 records exist specifically for limited-education profiles.
+ *   9. Practical experience — keyword overlap between free-text descriptions
+ *      and occupation metadata, weighted by category (internship/job strongest)
+ *      and star rating (5★ full boost, 3★ neutral). Capped at ±8.
  *
  * SalaryBands is built from the occupation set and provides salary
  * percentile thresholds used by the good_salary work value.
@@ -35,6 +38,7 @@ import {
 	scoreInterests,
 	scoreNoGos,
 	scorePopularity,
+	scorePracticalExperience,
 	scoreStrengths,
 	scoreSubjects,
 	scoreWorkPreferences,
@@ -56,6 +60,7 @@ export function scoreOccupation(
 	score += scoreWorkPreferences(occupation, profile);
 	score += scoreSubjects(occupation, profile);
 	score += scoreInterests(occupation, profile);
+	score += scorePracticalExperience(occupation, profile);
 	score += scoreStrengths(occupation, profile);
 	score += scoreWorkExpectations(occupation, profile, salaryBands);
 	score += scorePopularity(occupation, profile);

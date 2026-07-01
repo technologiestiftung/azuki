@@ -19,9 +19,19 @@ export interface BottomSheetProps {
 	footer?: ReactNode;
 	ariaLabel?: string;
 	overlayDismissLabel?: string;
+	initialFocus?: "first" | "container";
 }
 
 type DragSample = { t: number; y: number };
+
+function readVisualViewportLayout() {
+	const vv = window.visualViewport;
+	const height = vv?.height ?? window.innerHeight;
+	const bottomInset = vv
+		? Math.max(0, window.innerHeight - vv.height - vv.offsetTop)
+		: 0;
+	return { height, bottomInset };
+}
 
 export function BottomSheet({
 	open,
@@ -30,11 +40,15 @@ export function BottomSheet({
 	footer,
 	ariaLabel = content["common.bottomSheet.ariaLabel"],
 	overlayDismissLabel = content["common.bottomSheet.overlayDismissLabel"],
+	initialFocus = "first",
 }: BottomSheetProps) {
 	const [visible, setVisible] = useState(open);
 	const [isClosing, setIsClosing] = useState(false);
 	const [enterComplete, setEnterComplete] = useState(false);
 	const [isDragging, setIsDragging] = useState(false);
+	const [viewportLayout, setViewportLayout] = useState(
+		readVisualViewportLayout,
+	);
 
 	const motionShellRef = useRef<HTMLDivElement>(null);
 	const dialogRef = useRef<HTMLDivElement>(null);
@@ -71,6 +85,28 @@ export function BottomSheet({
 		if (!visible) {
 			return () => {};
 		}
+		const visualViewport = window.visualViewport;
+		if (!visualViewport) {
+			return () => {};
+		}
+
+		const update = () => {
+			setViewportLayout(readVisualViewportLayout());
+		};
+
+		update();
+		visualViewport.addEventListener("resize", update);
+		visualViewport.addEventListener("scroll", update);
+		return () => {
+			visualViewport.removeEventListener("resize", update);
+			visualViewport.removeEventListener("scroll", update);
+		};
+	}, [visible]);
+
+	useEffect(() => {
+		if (!visible) {
+			return () => {};
+		}
 		const container = dialogRef.current;
 		if (!container) {
 			return () => {};
@@ -95,12 +131,17 @@ export function BottomSheet({
 					el.offsetParent !== null,
 			);
 
-		const focusables = getFocusable();
-		if (focusables.length > 0) {
-			focusables[0]?.focus();
-		} else {
+		if (initialFocus === "container") {
 			container.setAttribute("tabindex", "-1");
 			container.focus();
+		} else {
+			const focusables = getFocusable();
+			if (focusables.length > 0) {
+				focusables[0]?.focus();
+			} else {
+				container.setAttribute("tabindex", "-1");
+				container.focus();
+			}
 		}
 
 		const onKeyDown = (e: KeyboardEvent) => {
@@ -146,7 +187,7 @@ export function BottomSheet({
 				toRestore.focus();
 			}
 		};
-	}, [visible]);
+	}, [visible, initialFocus]);
 
 	const pushDragSample = (clientY: number) => {
 		const t = performance.now();
@@ -337,7 +378,11 @@ export function BottomSheet({
 				role="dialog"
 				aria-modal="true"
 				aria-label={ariaLabel}
-				className="pointer-events-none fixed bottom-0 left-0 right-0 z-50 mx-auto flex max-h-[min(90vh,900px)] max-w-[430px] flex-col"
+				className="pointer-events-none fixed left-0 right-0 z-50 mx-auto flex max-w-[430px] flex-col"
+				style={{
+					bottom: viewportLayout.bottomInset,
+					maxHeight: Math.min(viewportLayout.height * 0.9, 900),
+				}}
 			>
 				<div
 					ref={motionShellRef}

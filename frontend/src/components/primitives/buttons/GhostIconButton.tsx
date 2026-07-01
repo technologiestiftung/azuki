@@ -26,7 +26,7 @@ export const GhostIconButton: React.FC<GhostIconButtonProps> = ({
 			aria-label={ariaLabel}
 			title={title}
 		>
-			{iconSrc && <img src={iconSrc} alt="" className="w-5 h-5" />}
+			{iconSrc && <img src={iconSrc} alt="" className="w-6 h-6" />}
 			{children}
 		</button>
 	);

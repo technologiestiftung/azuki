@@ -12,6 +12,7 @@ export const content = {
 	"common.bottomSheet.errorMessage": "Bitte gib etwas ein",
 	"common.bottomSheet.overlayDismissLabel": "Schließen",
 	"common.bottomSheet.ariaLabel": "Dialog",
+	"common.bottomSheet.backButtonAriaLabel": "Zurück gehen",
 	// Welcome
 	"welcome.slide.1.title": "Du suchst eine Ausbildung, die gut zu dir passt?",
 	"welcome.slide.2.title": "Lerne deine Stärken kennen!",
@@ -237,10 +238,10 @@ export const content = {
 		"Ich mache weiter, auch wenn eine Aufgabe anstrengend ist.",
 	// Custom Strengths
 	"strengths.customStrength.label": "Von dir hinzugefügt",
-	"strengths.addCustomStrengthButton.addMore": "Weitere hinzufügen",
-	"strengths.addCustomStrengthButton.label": "Stärke hinzufügen",
-	"strengths.addCustomStrengthButton.ariaLabel": "Stärke hinzufügen",
-	"strengths.bottomSheet.input.addPlaceholder": "Stärke von dir hinzufügen",
+	"strengths.addCustomStrengthButton.addMore": "Stärke hinzufügen",
+	"strengths.addCustomStrengthButton.label": "Eigene Stärke hinzufügen",
+	"strengths.addCustomStrengthButton.ariaLabel": "Eigene Stärke hinzufügen",
+	"strengths.bottomSheet.input.addPlaceholder": "Eine Stärke von dir",
 	"strengths.bottomSheet.errorMessage": "Bitte gib ein, was du gut kannst.",
 	"strengths.customStrength.title": "Fehlt noch etwas?",
 	"strengths.customStrength.description":
@@ -248,12 +249,83 @@ export const content = {
 	"strengths.customStrength.pill.label.postfix": "als Stärke auswählen",
 
 	// Practical Experience
-	"practicalExperience.question": "Wo hast du schon Erfahrungen gesammelt?",
-	"practicalExperience.subtitle":
-		"Dabei geht es nicht nur um Praktikum und Jobs – auch Aufgaben im Alltag zählen!",
-	"practicalExperience.placeholder": "Deine Eingabe",
-	"practicalExperience.cancelLabel": "Abbrechen",
-	"practicalExperience.saveLabel": "Speichern",
+	"practicalExperience.question": "Hast du mal gearbeitet oder geholfen?",
+	"practicalExperience.subtitle": "Alles zählt – auch Aufgaben im Alltag.",
+	"practicalExperience.suggestion.label": "Vorschläge",
+	"practicalExperience.bottomSheet.rating.title": "Wie hat dir das gefallen?",
+	"practicalExperience.suggestion.addedByYouLabel": "Deine Erfahrungen",
+	"practicalExperience.addCustomPracticalExperienceButton.label":
+		"Etwas Eigenes hinzufügen",
+	"practicalExperience.addCustomPracticalExperienceButton.ariaLabel":
+		"Etwas Eigenes hinzufügen",
+	"practicalExperience.bottomSheet.input.addPlaceholder":
+		"Etwas Eigenes hinzufügen",
+	"practicalExperience.bottomSheet.nextButtonLabel": "Weiter",
+	"practicalExperience.bottomSheet.nextButtonAriaLabel": "Weiter",
+	"practicalExperience.bottomSheet.saveButtonLabel": "Speichern",
+	"practicalExperience.pill.label.postfix":
+		"als praktische Erfahrung auswählen",
+	"practicalExperience.bottomSheet.submitButtonLabel": "Speichern",
+	"practicalExperience.bottomSheet.submitButtonAriaLabel": "Speichern",
+
+	// Practical Experience Bottom Sheet Questions
+	"practicalExperience.bottomSheet.addInternship.title":
+		"Welches Praktikum hast du gemacht?",
+	"practicalExperience.bottomSheet.addHomeHelp.title":
+		"Wobei hast du zu Hause geholfen?",
+	"practicalExperience.bottomSheet.friends.title":
+		"Wobei hast du Freund:innen geholfen?",
+	"practicalExperience.bottomSheet.addClub.title":
+		"Was hast du im Verein gemacht?",
+	"practicalExperience.bottomSheet.addJob.title":
+		"Welchen Job hast du gemacht?",
+	"practicalExperience.bottomSheet.school.title":
+		"Was hast du in der Schule gemacht?",
+	"practicalExperience.bottomSheet.addOwn.title":
+		"Wo hast du schon mal gearbeitet oder geholfen?",
+	"practicalExperience.bottomSheet.rating.ariaLabel":
+		"Wie hat dir das gefallen?",
+	"starRating.groupAriaLabel": "Bewertung auswählen",
+	"starRating.starAriaLabel": "{value} von {max} Sterne",
+	//Placeholders
+	"practicalExperience.bottomSheet.input.homeHelp.placeholder": "z. B. kochen",
+	"practicalExperience.bottomSheet.input.school.placeholder":
+		"z.B. Streit schlichten",
+	"practicalExperience.bottomSheet.input.friends.placeholder":
+		"z.B. traurige Freundin getröstet",
+	"practicalExperience.bottomSheet.input.club.placeholder":
+		"z.B. bei einer Veranstaltung geholfen",
+	"practicalExperience.bottomSheet.input.internship.placeholder":
+		"z.B. beim Bäcker",
+	"practicalExperience.bottomSheet.input.job.placeholder":
+		"z.B. Zeitung austragen, Küchenhilfe",
+	"practicalExperience.bottomSheet.input.ariaLabel": "Erfahrung hinzufügen",
+	"practicalExperience.bottomSheet.input.addOwn.placeholder":
+		"z. B. Möbel aufbauen, Babysitting",
+	// Example suggestions
+	"practicalExperience.bottomSheet.example.label": "Zum Beispiel",
+	"practicalExperience.bottomSheet.example.homeHelp.li1":
+		"Geschwister betreuen",
+	"practicalExperience.bottomSheet.example.homeHelp.li2":
+		"Beim Übersetzen helfen",
+	"practicalExperience.bottomSheet.example.homeHelp.li3": "Etwas reparieren",
+	"practicalExperience.bottomSheet.example.school.li1":
+		"Theater oder Garten AG",
+	"practicalExperience.bottomSheet.example.school.li2":
+		"Mitschüler:innen helfen",
+	"practicalExperience.bottomSheet.example.school.li3": "Klassensprecher:in",
+	"practicalExperience.bottomSheet.example.friends.li1":
+		"Bei Problemen zuhören",
+	"practicalExperience.bottomSheet.example.friends.li2": "Streit schlichten",
+	"practicalExperience.bottomSheet.example.friends.li3":
+		"Fotos oder Videos machen",
+	"practicalExperience.bottomSheet.example.club.li1": "Teamkapitän:in",
+	"practicalExperience.bottomSheet.example.club.li2": "Jüngere trainieren",
+	"practicalExperience.bottomSheet.example.club.li3": "Spenden sammeln",
+	"practicalExperience.bottomSheet.example.internship.li1": "Schulpraktikum",
+	"practicalExperience.bottomSheet.example.internship.li2": "Pflichtpraktikum",
+	"practicalExperience.bottomSheet.example.job.li1": "Nebenjob",
+	"practicalExperience.bottomSheet.example.job.li2": "Minijob",
 
 	//Work Expectations
 	"workExpectations.question": "Was ist dir in deinem Beruf wichtig?",
@@ -272,21 +344,21 @@ export const content = {
 	"workExpectations.option.remote": "Remote möglich",
 	"workExpectations.customWorkExpectation.label": "Von dir hinzugefügt",
 	"workExpectations.addCustomWorkExpectationButton.addMore":
-		"Weitere hinzufügen",
-	"workExpectations.addCustomWorkExpectationButton.label": "Wunsch hinzufügen",
+		"Weiteres hinzufügen",
+	"workExpectations.addCustomWorkExpectationButton.label":
+		"Etwas eigenes hinzufügen",
 	"workExpectations.addCustomWorkExpectationButton.ariaLabel":
-		"Wunsch hinzufügen",
+		"Etwas eigenes hinzufügen",
 	"workExpectations.bottomSheet.sheetAriaLabel":
 		"Bitte gib ein, was dir im Beruf wichtig ist.",
 	"workExpectations.bottomSheet.input.addPlaceholder":
-		"Bitte gib ein, was dir im Beruf wichtig ist.",
+		"Etwas eigenes hinzufügen",
 	"workExpectations.bottomSheet.submitButtonLabel": "Hinzufügen",
 	"workExpectations.bottomSheet.submitButtonAriaLabel": "Hinzufügen",
 	"workExpectations.bottomSheet.cancelButtonLabel": "Abbrechen",
 	"workExpectations.bottomSheet.cancelButtonAriaLabel": "Abbrechen",
 	"workExpectations.bottomSheet.clearButtonAriaLabel": "Eingabe löschen",
-	"workExpectations.bottomSheet.errorMessage":
-		"Bitte beschreibe, was dir im Beruf wichtig ist.",
+	"workExpectations.bottomSheet.errorMessage": "Bitte gib etwas ein",
 
 	// Work Preferences
 	"workPreferences.question": "Wie möchtest du lieber arbeiten?",
@@ -300,9 +372,9 @@ export const content = {
 	"noGos.ariaLabel.accept": "Als ist okay markieren",
 	"noGos.skipButton.label": "Ich weiß es nicht",
 	"noGos.customNoGo.label": "Von dir hinzugefügt",
-	"noGos.addCustomNoGoButton.addMore": "No Go hinzufügen",
-	"noGos.addCustomNoGoButton.label": "Weitere hinzufügen",
-	"noGos.addCustomNoGoButton.ariaLabel": "No Go hinzufügen",
+	"noGos.addCustomNoGoButton.addMore": "No-Go hinzufügen",
+	"noGos.addCustomNoGoButton.label": "Eigenes No-Go hinzufügen",
+	"noGos.addCustomNoGoButton.ariaLabel": "Eigenes No-Go hinzufügen",
 	"noGos.bottomSheet.input.addPlaceholder": "Etwas das für dich nicht geht",
 	"noGos.bottomSheet.errorMessage": "Bitte gib ein No Go ein.",
 	"noGos.customNoGo.title": "Fehlt noch etwas?",

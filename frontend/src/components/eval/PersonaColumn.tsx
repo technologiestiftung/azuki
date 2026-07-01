@@ -1,5 +1,10 @@
 import { useState } from "react";
-import type { Persona, PersonaResult, ScoreReport } from "@azuki/shared";
+import {
+	formatPracticalExperiencesForApi,
+	type Persona,
+	type PersonaResult,
+	type ScoreReport,
+} from "@azuki/shared";
 import type { RubricReachability } from "./reachability";
 import { JobCard } from "./JobCard";
 import { ScoreBanner } from "./ScoreBanner";
@@ -34,16 +39,20 @@ function PersonaHeader({ persona }: { persona: Persona }) {
 		`${profile.favoriteSubjects.length} Fächer`,
 		`${profile.interests.length} Interessen`,
 	].join(" · ");
+	const practicalSummary = formatPracticalExperiencesForApi(
+		profile.practicalExperiences,
+		profile.selectedPracticalExperienceIds,
+	);
 	return (
 		<div className="border-b border-gray-200 pb-2 mb-2">
 			<div className="font-semibold">{persona.name}</div>
 			<div className="text-xs text-gray-600">{summary}</div>
 			<div
 				className="text-xs text-gray-500 mt-1 truncate"
-				title={profile.practicalExperience}
+				title={practicalSummary}
 			>
-				{profile.practicalExperience.slice(0, 60)}
-				{profile.practicalExperience.length > 60 ? "…" : ""}
+				{practicalSummary.slice(0, 60)}
+				{practicalSummary.length > 60 ? "…" : ""}
 			</div>
 		</div>
 	);

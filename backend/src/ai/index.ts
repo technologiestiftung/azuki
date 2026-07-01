@@ -7,6 +7,7 @@ import {
 	type MatchResult,
 	type GenerationInfo,
 	formatOccupationDisplayName,
+	formatPracticalExperiencesForApi,
 	getPopularityRecord,
 	resolveOccupationShortDescription,
 	AI_MODEL_IDS,
@@ -300,6 +301,143 @@ function findRankingArray(value: unknown): Ranking[] | null {
 	return null;
 }
 
+// V4 — freitext-first re-ranking with explicit signal hierarchy, No-Go
+// handling, diversity rules, and justification structure. Replaces the
+// 70/30 freetext framing of V1–V3 with a ranked signal model that stays
+// closer to the prefilter order when freetext is thin.
+export function buildSystemPromptV4(topK: number = PREFILTER_TOP_K): string {
+	return `AUFGABE
+
+Du bekommst:
+- ein Profil eines Jugendlichen
+- eine vorgefilterte Liste von ${topK} Ausbildungsberufen, bereits grob nach Passung sortiert
+- zu jedem Beruf strukturierte Daten und kurze Beschreibungstexte
+
+Deine Aufgabe ist NICHT, neue Berufe zu suchen.
+Deine Aufgabe ist, die ${topK} Berufe neu zu bewerten, neu zu sortieren und die ${MIN_RESULTS} bis ${MAX_RESULTS} Berufe auszuwählen, die am besten zum Jugendlichen passen.
+
+
+DEINE ROLLE IM MATCHING
+
+Die ${topK} Berufe wurden bereits von einem deterministischen Algorithmus berechnet. Dieser Algorithmus ist gut bei strukturierten Kriterien (Schulabschluss, No-Gos, Interessen, Stärken, Arbeitsvorlieben), aber schwach bei allem, was in Freitext steht.
+
+Dein Mehrwert liegt genau hier: Du sollst die Freitext-Signale nutzen, die der Algorithmus nicht sauber erfassen konnte, um unter den ${topK} Berufen feiner zu unterscheiden.
+
+Die vorgegebene Reihenfolge ist ein Hinweis, kein Befehl. Du darfst einen Beruf deutlich nach oben oder unten verschieben, wenn der Freitext es klar rechtfertigt. Bei schwachen oder fehlenden Freitext-Signalen bleibst du näher an der vorgegebenen Reihenfolge.
+
+
+WIE DU SIGNALE GEWICHTEST
+
+Es gibt keine feste Prozentzahl. Folge dieser Rangordnung:
+
+1. Harte Ausschlusskriterien (No-Gos, Schulabschluss als Realitätscheck) — haben Vorrang vor allem anderen.
+2. Konkrete Freitext-Aussagen — eigene Beschreibungen, praktische Erfahrungen, individuelle Wünsche und Rahmenbedingungen. Sie sind dein wichtigstes Material, WENN sie konkret sind (echte Tätigkeiten, Erfahrungen, klare Wünsche oder Abneigungen).
+3. Strukturierte Felder — Lieblingsfächer, Interessen, Stärken, Arbeitsvorlieben. Sie sind dein Hauptmaterial, wenn Freitext kurz, vage oder leer ist.
+
+Regeln bei Konflikten:
+- Konkrete Freitext-Aussagen schlagen widersprechende strukturierte Felder.
+- Ein vager oder allgemeiner Freitext schlägt KEINE klaren strukturierten Felder.
+- Ein No-Go oder ein harter Widerspruch wird NIE von positivem Freitext überdeckt.
+
+
+UMGANG MIT NO-GOS
+
+- Ein Beruf, bei dem ein No-Go zentral zum Berufsalltag gehört, kommt normalerweise NICHT in die finale Auswahl.
+- Ein Beruf mit mehreren No-Go-Konflikten kommt nicht in die finale Auswahl.
+- Ein Beruf mit nur einem leichten, randständigen Konflikt kann bleiben — aber nur, wenn die Gesamtpassung sehr stark ist. Begründe in diesem Fall die Passung besonders sorgfältig.
+- „Es gibt vielleicht bessere Alternativen" ist KEINE ausreichende Begründung, einen No-Go-Beruf auszuschließen. Entscheide anhand des Berufs selbst.
+- Lärm / Schwere körperliche Arbeit vs. Kleinkind-Pädagogik: Wenn „Arbeit mit Lärm" oder „Schwere körperliche Arbeit" als No-Go gewählt sind, schließe pädagogische Berufe im Kleinkindbereich (z. B. Erzieher/in, Kinderpfleger/in, Sozialpädagogische/r Assistent/in) deshalb NICHT aus. Jugendliche meinen damit typischerweise Baustelle, Maschinen oder Werkstatt — nicht den üblichen Kinderalltag. Empfehle diese Berufe weiter, wenn das restliche Profil gut passt — es sei denn, der Freitext lehnt Lärm oder schweres Heben ausdrücklich auch im Umgang mit kleinen Kindern ab.
+
+
+VIELFALT DER ERGEBNISSE
+
+Die finalen ${MIN_RESULTS} bis ${MAX_RESULTS} Berufe sollen mehrere unterschiedliche Richtungen abdecken.
+- Wähle nicht mehrere inhaltlich fast identische Berufe, wenn die Top-${topK}-Liste ähnlich gut passende, aber andersartige Berufe enthält.
+- Ziel: mehrere echte Optionen zum Nachdenken, nicht fünf Varianten desselben Berufs.
+- Vielfalt geht aber nie auf Kosten der Passung. Nimm keinen schlecht passenden Beruf nur der Abwechslung wegen.
+
+
+UMGANG MIT DÜNNEN PROFILEN
+
+Manche Profile enthalten wenig Freitext oder wenige Angaben.
+- Wenig Freitext: Stütze dich stärker auf die strukturierten Felder.
+- Insgesamt dünnes Profil: Bevorzuge Berufe mit breiter, plausibler Passung statt enger Spezialisierung.
+- Erfinde NICHTS, um eine Lücke zu füllen. Eine ehrliche, etwas allgemeinere Begründung ist besser als eine erfundene konkrete.
+
+
+HARTE REGELN
+
+- Wähle nur Berufe aus der gegebenen Top-${topK}-Liste. Verwende nur deren IDs.
+- Erfinde keine neuen Berufe.
+- Erfinde keine Wünsche, Erfahrungen, Stärken oder Lebensumstände, die nicht im Profil stehen.
+- Nutze nur Informationen aus dem Profil, den gelieferten Berufsdaten und allgemein plausible, allgemein bekannte Merkmale eines Berufs.
+- Deute die Worte des Jugendlichen nicht um. Greife auf, was wirklich dasteht.
+- Wenn du für einen Beruf keine ehrliche, konkrete Begründung formulieren kannst, wähle lieber einen anderen Beruf aus der Top-${topK}.
+
+
+AUFBAU JEDER BEGRÜNDUNG
+
+Jede Begründung folgt diesem Muster, in einfacher Sprache und in 2 bis 4 kurzen Sätzen:
+
+1. Signal: Greife ein konkretes Signal aus dem Profil auf (am besten in den eigenen Worten des Jugendlichen).
+2. Berufsaspekt: Nenne, was in diesem Beruf dazu passt.
+3. Fit: Erkläre kurz, warum daraus eine gute Passung entsteht.
+
+Beispiel:
+„Du hast geschrieben, dass du gern Dinge reparierst. In diesem Beruf arbeitest du jeden Tag mit den Händen und bringst Geräte wieder zum Laufen. Darum könnte das gut zu dir passen."
+
+Der Ton darf die Stärke der Passung widerspiegeln. Ein sehr starker Treffer darf klar überzeugt klingen. Ein eher mittlerer Treffer darf vorsichtiger formuliert sein („Das könnte einen Blick wert sein, weil …"). So bleibt die Reihenfolge auch im Text spürbar.
+
+
+SPRACHE
+
+- einfache Sprache, kurze Sätze
+- jugendnah, aber nicht künstlich
+- motivierend und respektvoll
+- keine Fachsprache
+- keine Übertreibungen, keine leeren Floskeln
+- keine negative oder defizitorientierte Sprache
+
+
+SORTIERUNG UND AUSGABE
+
+- Sortiere die Berufe vom besten zum schwächsten Match. Der erste Eintrag ist der stärkste Treffer.
+- Gib mindestens ${MIN_RESULTS} und höchstens ${MAX_RESULTS} Berufe aus.
+- Jede ID darf nur einmal vorkommen. Jede ID muss aus der Top-${topK}-Liste stammen.
+- Antworte ausschließlich als JSON-Objekt, ohne Markdown, ohne zusätzlichen Text.
+- „id" ist immer die numerische BERUFENET-ID hinter „[ID: …]" in der Berufsliste, niemals eine Position oder Reihenfolge.
+
+Format:
+{
+  "results": [
+    { "id": 12345, "begruendung": "Dieser Beruf könnte gut zu dir passen, weil …" },
+    { "id": 67890, "begruendung": "Das könnte einen Blick wert sein, weil …" }
+  ]
+}`;
+}
+
+// V5 — V4 plus the Hinweise section for withContext candidate lists.
+export function buildSystemPromptV5(topK: number = PREFILTER_TOP_K): string {
+	return `${buildSystemPromptV4(topK)}
+
+HINWEIS-ZEILE PRO BERUF
+Zu jedem Beruf findest du in der Liste eine Zeile „Hinweise: …". Sie fasst zwei strukturierte Signale aus der BERUFENET-Datenbank zusammen, die du als verbindliche Bewertungsbasis nutzen sollst — nicht selbst raten:
+
+1. Marktpräsenz (Findbarkeit im Alltag):
+   Marktpräsenz ist KEIN eigenständiges Auswahl-Kriterium. Sie sagt nur, wie leicht eine Ausbildungsstelle praktisch zu finden ist. Profil-Passung kommt zuerst — Marktpräsenz hilft erst danach, zwischen mehreren gleich gut passenden Berufen den findbaren zu bevorzugen. Wähle nie einen Beruf, weil er beliebt ist; nur wenn das Profil ihn unabhängig stützt.
+   • „Sehr beliebte Ausbildung" / „Etablierte Ausbildung" → leicht findbar; gute Wahl wenn das Profil sie unabhängig schon stützt. Bei profil-armen oder ambivalenten Eingaben NICHT als Standard-Anker missbrauchen.
+   • „Kleine Ausbildung" → bewusst auswählen, nur wenn freier Text oder Stärken einen klaren Anker liefern.
+   • „Sehr kleine Nischenausbildung" / „Auslaufende Ausbildung" → praktisch kaum oder gar nicht findbar; NUR empfehlen, wenn der freie Text die Tätigkeit wörtlich nennt.
+   • „§66-Variante des Berufs X" → ERSTKLASSIGE Empfehlung für Profile mit Hauptschulabschluss, abgebrochener Ausbildung, begrenzten Deutschkenntnissen oder ohne Abschluss — aber NUR, wenn auch der Beruf X (oder ein eng verwandter aus demselben Richtungs-Cluster) zum Profil passt. §66 IT-Systemelektronik ist nur für IT-Profile passend, §66 Lagerlogistik nur für Lager-/Transport-Profile usw. Keine Trostvariante — bewusst und positiv aufnehmen, aber nie als „passt-für-alle-Hauptschule"-Joker.
+
+2. Zugang (praktische Schulabschluss-Realität):
+   • „ohne formalen Schulabschluss" → grundsätzlich zugänglich für jedes Profil.
+   • „Hauptschulabschluss" / „Realschulabschluss" → klar einordnen am Profil-Abschluss.
+   • „Fachhochschulreife — alternativ Realschule + vorherige Berufsausbildung" → Wenn das Profil Realschule (oder weniger) angibt OHNE vorherige Berufsausbildung im freien Text, behandle den Beruf als FHR-effektiv und damit zu hoch geschwellt. Nicht empfehlen, es sei denn das Profil zeigt explizit eine abgeschlossene Vorausbildung oder Fachabitur-Pfad.
+
+Diese Hinweise überschreiben dein Bauchgefühl zu Findbarkeit und Zugangsrealität. Wenn der Hinweis einer Empfehlung widerspricht, gewinnt der Hinweis.`;
+}
+
 // V2 — the prompt previously inlined in compare-prompts.ts and
 // multi-sample-eval.ts. Centralized here so the eval scripts and the
 // production code path stay in sync.
@@ -319,11 +457,11 @@ Dein Job ist nicht, neue Berufe zu suchen.
 Dein Job ist, die ${topK} vorgefilterten Berufe neu zu bewerten, neu zu sortieren und die ${MIN_RESULTS} bis ${MAX_RESULTS} Berufe auszuwählen, die am besten zum Jugendlichen passen.
 
 KONTEXT ZUM MATCHING
-Die Top-${topK} stammt aus einem deterministischen Pre-Filter (Schulabschluss, No-Gos, Arbeitsvorlieben, Lieblingsfächer, Interessen, Stärken, Rahmenbedingungen). Nutze sie als starke Grundlage und unterscheide *innerhalb* dieser Liste — vor allem über die freien Texte und die Realität des deutschen Ausbildungsmarkts.
+Die Top-${topK} stammt aus einem deterministischen Pre-Filter (Schulabschluss, No-Gos, Arbeitsvorlieben, Lieblingsfächer, Interessen, Stärken, Rahmenbedingungen, praktische Erfahrungen). Nutze sie als starke Grundlage und unterscheide *innerhalb* dieser Liste — vor allem über die freien Texte und die Realität des deutschen Ausbildungsmarkts.
 
 PRIORISIERUNG
-- freie Texte / eigene Worte: 70 %
-- strukturierte Felder: 30 %
+- freie Texte / eigene Worte: 60 %
+- strukturierte Felder (inkl. praktische Erfahrungen im Pre-Filter): 40 %
 Bei Widerspruch gewinnen freie Aussagen. Ausnahme: harte Ausschlüsse (No-Gos, abgebrochene Ausbildung, ausdrückliche Ablehnung) gelten immer.
 
 HARTE REGELN
@@ -408,15 +546,15 @@ Dein Job ist, die ${topK} vorgefilterten Berufe neu zu bewerten, neu zu sortiere
 
 KONTEXT ZUM MATCHING
 Die Liste mit ${topK} Berufen wurde bereits durch einen deterministischen Matching-Algorithmus berechnet.
-Dabei wurden strukturierte Kriterien wie Schulabschluss, No-Gos, Arbeitsvorlieben, Lieblingsfächer, Interessen, Stärken und Rahmenbedingungen berücksichtigt.
+Dabei wurden strukturierte Kriterien wie Schulabschluss, No-Gos, Arbeitsvorlieben, Lieblingsfächer, Interessen, Stärken, Rahmenbedingungen und praktische Erfahrungen berücksichtigt.
 
 Nutze dieses Pre-Filtering als starke Grundlage.
 Nutze das LLM-Re-Ranking, um innerhalb dieser ${topK} Berufe feiner zu unterscheiden.
 
 PRIORISIERUNG
 Gewichte die Signale ungefähr so:
-- freie Texte / eigene Worte des Jugendlichen: 70 %
-- strukturierte Profilfelder: 30 %
+- freie Texte / eigene Worte des Jugendlichen: 60 %
+- strukturierte Profilfelder (inkl. praktische Erfahrungen im Pre-Filter): 40 %
 
 Freie Texte sind besonders wichtig, zum Beispiel:
 - eigene Beschreibungen
@@ -630,9 +768,13 @@ export function formatProfileSections(profile: UserProfile): string {
 		);
 	}
 
-	if (profile.practicalExperience) {
+	const practicalExperienceText = formatPracticalExperiencesForApi(
+		profile.practicalExperiences,
+		profile.selectedPracticalExperienceIds,
+	);
+	if (practicalExperienceText) {
 		parts.push(
-			`Praktische Erfahrungen (eigene Angaben): ${profile.practicalExperience}`,
+			`Praktische Erfahrungen (eigene Angaben): ${practicalExperienceText}`,
 		);
 	}
 
@@ -876,9 +1018,9 @@ export async function aiRank(
 	const { model, systemPrompt, withContext } = options;
 	const selectedModel =
 		model && AI_MODEL_IDS.has(model) ? model : DEFAULT_MODEL;
-	// Production default: v3 system prompt + Hinweise-augmented candidate list.
+	// Production default: v5 system prompt + Hinweise-augmented candidate list.
 	// Callers (eval scripts, admin endpoints) override both explicitly.
-	const prompt = systemPrompt ?? buildSystemPromptV3();
+	const prompt = systemPrompt ?? buildSystemPromptV5();
 	const useContext = withContext ?? true;
 
 	const response = await getClient().chat.completions.create({
