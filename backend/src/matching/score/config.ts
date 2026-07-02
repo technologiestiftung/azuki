@@ -57,9 +57,9 @@ export const WORK_PREF_MAP: Record<string, WorkPreferenceOptionChecks> = {
 		b: (o) => o.conditions.customerContact || o.conditions.teamwork,
 	},
 	pace: {
-		// No BERUFENET signal for "Arbeit unter Zeitdruck".
-		a: () => false,
-		b: (o) => o.conditions.office,
+		// BERUFENET b20-4: "Psychische Belastbarkeit" explicitly cites Zeitdruck
+		a: (o) => o.strengthTags.includes("Psychische Belastbarkeit"),
+		b: (o) => !o.strengthTags.includes("Psychische Belastbarkeit"),
 	},
 	structure: {
 		a: (o) => !hasCreativitySignal(o),
