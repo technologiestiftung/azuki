@@ -12,5 +12,7 @@ export function formatOccupationDisplayName(name: string): string {
 	for (const pattern of REDUNDANT_TITLE_SUFFIXES) {
 		result = result.replace(pattern, "");
 	}
-	return result.replace(/\s+/g, " ").trim();
+	result = result.replace(/\s+/g, " ").trim();
+	// Specialization separator " - " → spaced en-dash; compound hyphens have no flanking spaces.
+	return result.replace(/ - /g, " – ");
 }

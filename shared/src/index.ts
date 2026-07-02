@@ -59,6 +59,8 @@ export type { Persona } from "./persona";
 
 export { formatOccupationDisplayName } from "./occupationDisplayName";
 
+export { getDurationOverride } from "./durationOverride";
+
 export { strengthScorePoints } from "./strengthScoring";
 export type {
 	PracticalExperienceEntry,

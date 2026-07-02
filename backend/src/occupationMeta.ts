@@ -1,5 +1,6 @@
 import {
 	resolveOccupationTag,
+	getDurationOverride,
 	type Occupation,
 	type OccupationTagId,
 } from "@azuki/shared";
@@ -88,8 +89,9 @@ export function occupationMatchMeta(occupation: Occupation): {
 	const occupationType = artText ? resolveOccupationTypeKey(artText) : "";
 
 	const rawDuration = durationMatch?.[1]?.trim() ?? "";
-	const occupationDuration = rawDuration
-		? formatOccupationDuration(rawDuration)
+	const durationSource = getDurationOverride(occupation.id) ?? rawDuration;
+	const occupationDuration = durationSource
+		? formatOccupationDuration(durationSource)
 		: "";
 
 	let occupationEarnings = "";
