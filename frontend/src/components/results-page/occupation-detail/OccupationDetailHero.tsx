@@ -45,7 +45,7 @@ export function OccupationDetailHero({
 					onClick={() => navigate(ROUTE_PATHS.resultsList)}
 					ariaLabel={content["navigation.back"]}
 					title={content["navigation.back"]}
-					className="bg-[#F2F4F580]/50  rounded-xl backdrop-blur-[4.5px]"
+					className="bg-sky-10/50  rounded-xl backdrop-blur-[4.5px]"
 				/>
 
 				<div className="flex gap-1.5 items-center">
@@ -54,11 +54,11 @@ export function OccupationDetailHero({
 						onClick={() => {}}
 						ariaLabel={content["results.share"]}
 						title={content["results.share"]}
-						className="bg-[#F2F4F580]/50 rounded-xl backdrop-blur-[4.5px]"
+						className="bg-sky-10/50 rounded-xl backdrop-blur-[4.5px]"
 					/>
 					<button
 						type="button"
-						className="flex items-center justify-center z-10 w-10 h-10 bg-[#F2F4F580]/50 rounded-xl backdrop-blur-[4.5px]"
+						className="flex items-center justify-center z-10 w-10 h-10 bg-sky-10/50 rounded-xl backdrop-blur-[4.5px]"
 						onClick={onToggleFavorite}
 						aria-pressed={isFavorite}
 						aria-label={

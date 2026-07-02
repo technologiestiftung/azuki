@@ -17,6 +17,7 @@ import { FitDonutChart } from "./FitDonutChart";
 import { useAppStore } from "../../../store/useAppStore";
 import { useMatchResultsStore } from "../../../store/useMatchResultsStore";
 import { useFetchVacancies } from "../useFetchVacancies";
+import { OccupationImageCarousel } from "./OccupationImageCarousel";
 
 type InfoSheet = "matchInfo";
 
@@ -162,6 +163,14 @@ export function OccupationDetailPage() {
 							</div>
 						</div>
 					</div>
+					{detail.occupation && detail.occupation.images.length > 0 && (
+						<div className="flex flex-col gap-2">
+							<h3 className="text-sky-900 text-2xl font-semibold px-[18px]">
+								{content["results.detail.images.title"]}
+							</h3>
+							<OccupationImageCarousel images={detail.occupation.images} />
+						</div>
+					)}
 					<div className="px-4">
 						<div className="flex flex-col gap-5 px-4 py-5 rounded-2xl bg-sky-50 border border-sky-100">
 							<div className="flex flex-col gap-[7px] text-center">
