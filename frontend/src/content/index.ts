@@ -492,6 +492,10 @@ export const content = {
 	"results.detail.whyItMatches.title": "Warum dieser Beruf zu dir passt",
 	"results.detail.whyItMatches.notMatchTitle":
 		"Passt nicht zu dir, aber gehört zum Beruf",
+	"results.detail.apply.title": "Du möchtest dich auf diesen Beruf bewerben?",
+	"results.detail.apply.description": "Entdecke jetzt freie Stellen.",
+	"results.detail.apply.cta": "Freie Stellen anzeigen",
+	"results.detail.apply.cta.ariaLabel": "Freie Stellen anzeigen",
 	// Vacancies
 	"vacancies.filter.occupations.title": "Beruf",
 	"vacancies.filter.occupations.title.short": "Beruf",

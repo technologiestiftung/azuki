@@ -28,6 +28,15 @@ const DEFAULT_OCCUPATION_FILTERS: OccupationsFilterState = {
 	selectedOccupationIds: [],
 };
 
+function getVacancyOccupationFilterIdsFromStore(): number[] {
+	const { vacancyOccupationFilterIds, matchResults } =
+		useMatchResultsStore.getState();
+	const validOccupationIds = new Set(
+		matchResults?.occupations.map((occupation) => occupation.id) ?? [],
+	);
+	return vacancyOccupationFilterIds.filter((id) => validOccupationIds.has(id));
+}
+
 interface VacancyListItem {
 	key: string;
 	occupation: MatchedOccupation;
@@ -91,7 +100,16 @@ export function VacanciesPage() {
 	const location = useAppStore((state) => state.location);
 	const setLocation = useAppStore((state) => state.setLocation);
 	const occupations = matchResults?.occupations ?? [];
-	const occupationFilter = useFilterSheet(DEFAULT_OCCUPATION_FILTERS);
+	const setVacancyOccupationFilterIds = useMatchResultsStore(
+		(state) => state.setVacancyOccupationFilterIds,
+	);
+	const [initialOccupationFilters] = useState<OccupationsFilterState>(() => ({
+		selectedOccupationIds: getVacancyOccupationFilterIdsFromStore(),
+	}));
+	const occupationFilter = useFilterSheet(
+		DEFAULT_OCCUPATION_FILTERS,
+		initialOccupationFilters,
+	);
 	const locationFilter = useFilterSheet(DEFAULT_LOCATION_FILTER, {
 		postcode: location.postcode,
 		distance: location.distance,
@@ -148,6 +166,19 @@ export function VacanciesPage() {
 			locality: null,
 		});
 	}, [locationFilter.reset, setLocation]);
+
+	const applyOccupationFilter = useCallback(
+		(filters: OccupationsFilterState) => {
+			occupationFilter.apply(filters);
+			setVacancyOccupationFilterIds(filters.selectedOccupationIds);
+		},
+		[occupationFilter.apply, setVacancyOccupationFilterIds],
+	);
+
+	const resetOccupationFilter = useCallback(() => {
+		occupationFilter.reset();
+		setVacancyOccupationFilterIds([]);
+	}, [occupationFilter.reset, setVacancyOccupationFilterIds]);
 
 	useEffect(() => {
 		locationFilter.apply({
@@ -242,8 +273,8 @@ export function VacanciesPage() {
 					onClose={closeOccupationFilter}
 					initialFilters={occupationFilter.appliedValue}
 					occupationChips={occupationFilterChips}
-					onApply={occupationFilter.apply}
-					onReset={occupationFilter.reset}
+					onApply={applyOccupationFilter}
+					onReset={resetOccupationFilter}
 				/>
 				<LocationFilterBottomSheet
 					key={`location-${locationFilter.sheetKey}`}

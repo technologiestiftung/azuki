@@ -1,5 +1,6 @@
-import { useState } from "react";
-import { useParams } from "react-router-dom";
+import { useMemo, useState } from "react";
+import { Link, useParams } from "react-router-dom";
+import { ROUTE_PATHS } from "../../../routing/routes";
 import { content } from "../../../content";
 import { OccupationDetailMetaInfo } from "./OccupationDetailMetaInfo";
 import { useOccupationDetail } from "./useOccupationDetail";
@@ -13,12 +14,20 @@ import {
 } from "@azuki/shared";
 import { InfoBottomSheet } from "./InfoBottomSheet";
 import { FitDonutChart } from "./FitDonutChart";
+import { useAppStore } from "../../../store/useAppStore";
+import { useMatchResultsStore } from "../../../store/useMatchResultsStore";
+import { useFetchVacancies } from "../useFetchVacancies";
 
 type InfoSheet = "matchInfo";
 
 export function OccupationDetailPage() {
 	const occupationId = Number(useParams().id);
 	const detail = useOccupationDetail(occupationId);
+	useFetchVacancies();
+	const vacancies = useAppStore((state) => state.vacancies);
+	const setVacancyOccupationFilterIds = useMatchResultsStore(
+		(state) => state.setVacancyOccupationFilterIds,
+	);
 	const { onScroll, collapseProgress, overlayOpacity, heroControlsOpacity } =
 		useOccupationDetailScroll();
 	const [activeInfoSheet, setActiveInfoSheet] = useState<InfoSheet | null>(
@@ -41,6 +50,17 @@ export function OccupationDetailPage() {
 	if (taskItems.length === 0 && fallbackShortDescription) {
 		taskItems = [fallbackShortDescription];
 	}
+	const occupationVacanciesCount = useMemo(() => {
+		const occupationName =
+			detail.matchedOccupation?.rawName ?? detail.occupation?.name;
+		if (!occupationName || !vacancies) {
+			return undefined;
+		}
+		return (
+			vacancies.results.find((result) => result.occupation === occupationName)
+				?.previews.length ?? 0
+		);
+	}, [detail.matchedOccupation?.rawName, detail.occupation?.name, vacancies]);
 
 	return (
 		<div className="flex flex-col h-full relative overflow-x-hidden">
@@ -123,7 +143,7 @@ export function OccupationDetailPage() {
 						</div>
 						<div className="flex flex-col gap-0.5 px-4 pt-5 pb-4 bg-sky-10">
 							<div className="flex gap-[9px]">
-								<div className="flex items-center justify-center w-fit w-[30px] h-[30px] bg-sky-300 rounded-md px-[5px] pt[5px] pb[7px]">
+								<div className="flex items-center justify-center w-[30px] h-[30px] bg-sky-300 rounded-md px-[5px] pt[5px] pb[7px]">
 									<img src="/icons/thumb-up.svg" alt="" className="w-4 h-4" />
 								</div>
 								<h2 className="text-sky-900 text-xl font-semibold self-center">
@@ -140,6 +160,35 @@ export function OccupationDetailPage() {
 									{content["results.detail.whyItMatches.notMatchTitle"]}
 								</h2>
 							</div>
+						</div>
+					</div>
+					<div className="px-4">
+						<div className="flex flex-col gap-5 px-4 py-5 rounded-2xl bg-sky-50 border border-sky-100">
+							<div className="flex flex-col gap-[7px] text-center">
+								<h3 className="text-sky-1000 text-2xl font-semibold">
+									{content["results.detail.apply.title"]}
+								</h3>
+								<p className="text-lg font-normal text-sky-1000">
+									{content["results.detail.apply.description"]}
+								</p>
+							</div>
+							<Link
+								to={ROUTE_PATHS.resultsFreeSpots}
+								onClick={() => {
+									if (Number.isFinite(occupationId)) {
+										setVacancyOccupationFilterIds([occupationId]);
+									}
+								}}
+								aria-label={content["results.detail.apply.cta.ariaLabel"]}
+								className="h-12 flex items-center justify-center gap-2 w-full py-2 px-5 rounded-2xl text-base font-medium transition-colors
+								focus-visible:outline focus-visible:outline-2 focus-visible:outline-sky-500 active:bg-sky-200 active:text-sky-900
+								bg-sky-300 text-sky-1000 md:hover:bg-sky-200 md:hover:text-sky-900"
+							>
+								{content["results.detail.apply.cta"]}
+								{occupationVacanciesCount !== undefined &&
+									occupationVacanciesCount > 0 &&
+									` (${occupationVacanciesCount})`}
+							</Link>
 						</div>
 					</div>
 				</div>
