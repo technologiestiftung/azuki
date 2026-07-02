@@ -1,5 +1,5 @@
 {
-	"projectName": "template-default",
+	"projectName": "azuki",
 	"projectOwner": "technologiestiftung",
 	"repoType": "github",
 	"repoHost": "https://github.com",
@@ -7,7 +7,50 @@
 	"imageSize": 64,
 	"commit": true,
 	"commitConvention": "angular",
-	"contributors": [],
+	"contributors": [
+		{
+			"login": "zainab-tariq",
+			"name": "Zainab Tariq",
+			"avatar_url": "https://avatars.githubusercontent.com/u/15946816?v=4",
+			"profile": "https://github.com/zainab-tariq",
+			"contributions": ["code", "a11y", "review"]
+		},
+		{
+			"login": "elona-m",
+			"name": "Elona Müller",
+			"avatar_url": "https://avatars.githubusercontent.com/u/177862132?v=4",
+			"profile": "https://github.com/elona-m",
+			"contributions": ["design"]
+		},
+		{
+			"login": "aeschi",
+			"name": "Anna Eschenbacher",
+			"avatar_url": "https://avatars.githubusercontent.com/u/56318362?v=4",
+			"profile": "http://annaeschenbacher.com",
+			"contributions": ["code", "review"]
+		},
+		{
+			"login": "nlspnsgen",
+			"name": "Niels Poensgen",
+			"avatar_url": "https://avatars.githubusercontent.com/u/12913491?v=4",
+			"profile": "https://github.com/nlspnsgen",
+			"contributions": ["code", "infra", "review"]
+		},
+		{
+			"login": "niclasstengeltsberlin",
+			"name": "Niclas Stengel",
+			"avatar_url": "https://avatars.githubusercontent.com/u/224381257?v=4",
+			"profile": "https://github.com/niclasstengeltsberlin",
+			"contributions": ["design"]
+		},
+		{
+			"login": "myrigal",
+			"name": "Myrian Rigal",
+			"avatar_url": "https://avatars.githubusercontent.com/u/124904583?v=4",
+			"profile": "https://github.com/myrigal",
+			"contributions": ["ideas"]
+		}
+	],
 	"contributorsPerLine": 7,
 	"skipCi": true
 }
