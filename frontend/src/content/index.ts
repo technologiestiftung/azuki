@@ -616,6 +616,12 @@ export const content = {
 	"results.detail.apply.description": "Entdecke jetzt freie Stellen.",
 	"results.detail.apply.cta": "Freie Stellen anzeigen",
 	"results.detail.apply.cta.ariaLabel": "Freie Stellen anzeigen",
+	// Occupation Detail Images
+	"results.detail.images.title": "So sieht der Arbeitsalltag aus",
+	"results.detail.images.carousel.ariaLabel": "Bild {current} von {total}",
+	"results.detail.images.carousel.slideAriaLabel": "Bild {index}",
+	// More Occupations
+	"results.detail.moreOccupations.title": "Mehr Ausbildungsberufe",
 	// Vacancies
 	"vacancies.filter.occupations.title": "Beruf",
 	"vacancies.filter.occupations.title.short": "Beruf",
