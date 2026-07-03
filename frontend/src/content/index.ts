@@ -474,7 +474,7 @@ export const content = {
 	"results.detail.durationTitle": "Dauer",
 	"results.detail.durationSuffix": "Jahre",
 	"results.detail.schoolDegreeTitle": "Empfohlener Schulabschluss",
-	"results.detail.schoolDegreeInfo.title": "Empfohlener Schulsabschluss",
+	"results.detail.schoolDegreeInfo.title": "Empfohlener Schulabschluss",
 	"results.detail.schoolDegreeInfo.description":
 		"Mit diesem Abschluss hast du gute Chancen auf einen Ausbildungsplatz. Hast du einen anderen Abschluss, kannst du es trotzdem schaffen – vielleicht musst du dann mehr Bewerbungen schreiben und es dauert länger bis du einen Platz findest.",
 	"results.detail.notFound": "Dieser Beruf wurde nicht gefunden.",
