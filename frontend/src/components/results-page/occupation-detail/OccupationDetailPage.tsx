@@ -34,8 +34,13 @@ export function OccupationDetailPage() {
 	const setVacancyOccupationFilterIds = useMatchResultsStore(
 		(state) => state.setVacancyOccupationFilterIds,
 	);
-	const { onScroll, collapseProgress, overlayOpacity, heroControlsOpacity } =
-		useOccupationDetailScroll();
+	const {
+		onScroll,
+		collapseProgress,
+		overlayOpacity,
+		heroControlsOpacity,
+		heroImageParallaxY,
+	} = useOccupationDetailScroll();
 	const [activeInfoSheet, setActiveInfoSheet] = useState<InfoSheet | null>(
 		null,
 	);
@@ -118,6 +123,7 @@ export function OccupationDetailPage() {
 						onToggleFavorite={detail.toggleFavorite}
 						overlayOpacity={overlayOpacity}
 						controlsOpacity={heroControlsOpacity}
+						imageParallaxY={heroImageParallaxY}
 					/>
 				</div>
 				<div className="relative -mt-4 flex flex-col gap-8 bg-sky-white rounded-t-[20px] pb-8 z-10">

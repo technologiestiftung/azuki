@@ -2,6 +2,7 @@ import { useCallback, useState, type UIEventHandler } from "react";
 
 const COLLAPSE_START = 60;
 const COLLAPSE_END = 180;
+const HERO_PARALLAX_MAX_PX = 18;
 
 export function useOccupationDetailScroll() {
 	const [scrollY, setScrollY] = useState(0);
@@ -16,11 +17,16 @@ export function useOccupationDetailScroll() {
 	);
 	const overlayOpacity = collapseProgress;
 	const heroControlsOpacity = 1 - collapseProgress;
+	const heroImageParallaxY = Math.min(
+		HERO_PARALLAX_MAX_PX,
+		(scrollY / COLLAPSE_END) * HERO_PARALLAX_MAX_PX,
+	);
 
 	return {
 		onScroll,
 		collapseProgress,
 		overlayOpacity,
 		heroControlsOpacity,
+		heroImageParallaxY,
 	};
 }
