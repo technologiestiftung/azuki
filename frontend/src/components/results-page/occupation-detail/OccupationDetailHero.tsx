@@ -10,6 +10,7 @@ interface OccupationDetailHeroProps {
 	onToggleFavorite: () => void;
 	overlayOpacity: number;
 	controlsOpacity: number;
+	imageParallaxY: number;
 }
 
 export function OccupationDetailHero({
@@ -19,6 +20,7 @@ export function OccupationDetailHero({
 	onToggleFavorite,
 	overlayOpacity,
 	controlsOpacity,
+	imageParallaxY,
 }: OccupationDetailHeroProps) {
 	const navigate = useNavigate();
 	return (
@@ -26,7 +28,10 @@ export function OccupationDetailHero({
 			<img
 				src={heroImage ?? "/illustrations/occupation-placeholder.svg"}
 				alt={displayName}
-				className="w-full h-full object-cover"
+				className="absolute inset-0 w-full h-full object-cover will-change-transform"
+				style={{
+					transform: `translate3d(0, ${-imageParallaxY}px, 0) scale(${1 + imageParallaxY * 0.003})`,
+				}}
 			/>
 			<div
 				className="absolute inset-0 bg-white pointer-events-none transition-opacity duration-150"
