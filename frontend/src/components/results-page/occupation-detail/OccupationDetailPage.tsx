@@ -1,5 +1,5 @@
-import { useMemo } from "react";
-import { Link, useParams } from "react-router-dom";
+import { useCallback, useEffect, useMemo } from "react";
+import { Link, useParams, useSearchParams } from "react-router-dom";
 import { formatOccupationDisplayName } from "@azuki/shared";
 import {
 	ROUTE_PATHS,
@@ -21,9 +21,23 @@ import { useAppStore } from "../../../store/useAppStore";
 import { useMatchResultsStore } from "../../../store/useMatchResultsStore";
 import { useFetchVacancies } from "../useFetchVacancies";
 import { OccupationImageCarousel } from "./OccupationImageCarousel";
+import { buildOccupationMatchPills } from "../utils/occupationMatchPills";
+import {
+	buildOccupationShareState,
+	buildOccupationShareUrl,
+	parseOccupationShareState,
+	resolveSharedPills,
+} from "./occupationShareState";
+import { shareOccupationLink } from "./shareOccupationLink";
+import { useSharedNextOccupations } from "./useSharedNextOccupations";
 
 export function OccupationDetailPage() {
 	const occupationId = Number(useParams().id);
+	const [searchParams] = useSearchParams();
+	const shareState = useMemo(
+		() => parseOccupationShareState(searchParams),
+		[searchParams],
+	);
 	const detail = useOccupationDetail(occupationId);
 	useFetchVacancies();
 	const vacancies = useAppStore((state) => state.vacancies);
@@ -41,10 +55,15 @@ export function OccupationDetailPage() {
 		heroImageParallaxY,
 	} = useOccupationDetailScroll();
 
-	const matchPercent =
+	const liveMatchPercent =
 		detail.matchedOccupation !== undefined
 			? fitPercent(detail.matchedOccupation.score)
 			: undefined;
+	const matchPercentValue = shareState?.fitPercent ?? liveMatchPercent;
+	const sharedPills = useMemo(
+		() => (shareState ? resolveSharedPills(shareState) : undefined),
+		[shareState],
+	);
 
 	const taskBullets = detail.occupation
 		? resolveOccupationTaskBullets(detail.occupation)
@@ -71,10 +90,7 @@ export function OccupationDetailPage() {
 		);
 	}, [detail.matchedOccupation?.rawName, detail.occupation?.name, vacancies]);
 
-	/**
-	 * Get the next 3 occupations that are not the current occupation
-	 */
-	const nextOccupations = useMemo(() => {
+	const liveNextOccupations = useMemo(() => {
 		if (!matchResults) {
 			return [];
 		}
@@ -86,6 +102,78 @@ export function OccupationDetailPage() {
 		}
 		return matchResults.occupations.slice(currentIndex + 1, currentIndex + 4);
 	}, [matchResults, occupationId]);
+
+	const sharedNextOccupations = useSharedNextOccupations(
+		shareState?.nextOccupationIds,
+	);
+
+	const nextOccupationCards = useMemo(() => {
+		if (shareState) {
+			return sharedNextOccupations;
+		}
+		return liveNextOccupations.map((occupation) => ({
+			id: occupation.id,
+			displayName: formatOccupationDisplayName(occupation.name),
+			imageUrl:
+				occupation.images[0]?.url ??
+				"/illustrations/occupation-placeholder.svg",
+		}));
+	}, [shareState, sharedNextOccupations, liveNextOccupations]);
+
+	const handleShare = useCallback(() => {
+		if (!Number.isFinite(occupationId)) {
+			return;
+		}
+
+		const pills =
+			detail.occupation !== null
+				? buildOccupationMatchPills(profile, detail.occupation)
+				: { matching: [], notMatching: [] };
+		const state = buildOccupationShareState(
+			matchPercentValue,
+			liveNextOccupations.map((occupation) => occupation.id),
+			pills,
+		);
+
+		const url = state
+			? buildOccupationShareUrl(occupationId, state)
+			: new URL(
+					buildResultsOccupationPath(occupationId),
+					window.location.origin,
+				).toString();
+
+		const shareText =
+			matchPercentValue !== undefined
+				? `${matchPercentValue} % Passung – ${detail.displayName}`
+				: detail.displayName;
+
+		void shareOccupationLink({
+			url,
+			title: detail.displayName,
+			text: shareText,
+		});
+	}, [
+		occupationId,
+		detail.occupation,
+		detail.displayName,
+		profile,
+		matchPercentValue,
+		liveNextOccupations,
+	]);
+
+	useEffect(() => {
+		if (!detail.displayName) {
+			return undefined;
+		}
+		const previousTitle = document.title;
+		document.title =
+			matchPercentValue !== undefined
+				? `${detail.displayName} – ${matchPercentValue} % Passung`
+				: detail.displayName;
+		return () => {
+			document.title = previousTitle;
+		};
+	}, [detail.displayName, matchPercentValue]);
 
 	return (
 		<div className="flex flex-col h-full relative overflow-x-hidden">
@@ -101,6 +189,7 @@ export function OccupationDetailPage() {
 					displayName={detail.displayName}
 					isFavorite={detail.isFavorite}
 					onToggleFavorite={detail.toggleFavorite}
+					onShare={handleShare}
 				/>
 			</div>
 			<div
@@ -113,6 +202,7 @@ export function OccupationDetailPage() {
 						heroImage={detail.heroImage}
 						isFavorite={detail.isFavorite}
 						onToggleFavorite={detail.toggleFavorite}
+						onShare={handleShare}
 						overlayOpacity={overlayOpacity}
 						controlsOpacity={heroControlsOpacity}
 						imageParallaxY={heroImageParallaxY}
@@ -141,9 +231,10 @@ export function OccupationDetailPage() {
 						</ul>
 					</div>
 					<OccupationDetailMatchSection
-						matchPercent={matchPercent}
+						matchPercent={matchPercentValue}
 						occupation={detail.occupation}
 						profile={profile}
+						sharedPills={sharedPills}
 					/>
 					{detail.occupation && detail.occupation.images.length > 0 && (
 						<div className="flex flex-col gap-2">
@@ -182,39 +273,30 @@ export function OccupationDetailPage() {
 							</Link>
 						</div>
 					</div>
-					{nextOccupations.length > 0 && (
+					{nextOccupationCards.length > 0 && (
 						<div className="flex flex-col gap-2 pl-4 pt-[25px] pb-4 bg-sky-50">
 							<h3 className="text-sky-900 text-2xl font-semibold text-left">
 								{content["results.detail.moreOccupations.title"]}
 							</h3>
 							<div className="flex gap-2 w-full overflow-x-scroll">
-								{nextOccupations.map((occupation) => {
-									const displayName = formatOccupationDisplayName(
-										occupation.name,
-									);
-									const imageUrl =
-										occupation.images[0]?.url ??
-										"/illustrations/occupation-placeholder.svg";
+								{nextOccupationCards.map((occupation) => (
+									<Link
+										key={occupation.id}
+										to={buildResultsOccupationPath(occupation.id)}
+										className="flex flex-col min-w-[300px] gap-3 px-2 pt-2 pb-4 bg-white rounded-[20px] focus-visible:outline focus-visible:outline-2 focus-visible:outline-sky-500 last:mr-4"
+										aria-label={`${occupation.displayName}, ${content["results.moreInfo"]}`}
+									>
+										<img
+											src={occupation.imageUrl}
+											alt=""
+											className="w-full h-[190px] object-cover rounded-xl aspect-[3/2]"
+										/>
 
-									return (
-										<Link
-											key={occupation.id}
-											to={buildResultsOccupationPath(occupation.id)}
-											className="flex flex-col min-w-[300px] gap-3 px-2 pt-2 pb-4 bg-white rounded-[20px] focus-visible:outline focus-visible:outline-2 focus-visible:outline-sky-500 last:mr-4"
-											aria-label={`${displayName}, ${content["results.moreInfo"]}`}
-										>
-											<img
-												src={imageUrl}
-												alt=""
-												className="w-full h-[190px] object-cover rounded-xl aspect-[3/2]"
-											/>
-
-											<p className="text-base font-medium px-[3px]">
-												{displayName}
-											</p>
-										</Link>
-									);
-								})}
+										<p className="text-base font-medium px-[3px]">
+											{occupation.displayName}
+										</p>
+									</Link>
+								))}
 							</div>
 						</div>
 					)}

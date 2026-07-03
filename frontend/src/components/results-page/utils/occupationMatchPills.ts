@@ -515,3 +515,64 @@ export function buildOccupationMatchPills(
 		notMatching: takeTopPills(buildNotMatchingPills(profile, occupation)),
 	};
 }
+
+export function matchPillIdToShareKey(pillId: string): string {
+	return pillId.startsWith("match-") ? pillId.slice("match-".length) : pillId;
+}
+
+export function notMatchPillIdToShareToken(pillId: string): string {
+	if (pillId.startsWith("not-match-custom-")) {
+		const label = pillId.slice("not-match-custom-".length);
+		return `custom:${encodeURIComponent(label)}`;
+	}
+	if (pillId.startsWith("not-match-")) {
+		return pillId.slice("not-match-".length);
+	}
+	return pillId;
+}
+
+export function resolveMatchPillFromShareKey(
+	pillKey: string,
+): OccupationMatchPill | null {
+	return candidateToPill({ pillKey, score: 0 });
+}
+
+export function resolveNotMatchPillFromShareToken(
+	token: string,
+): OccupationMatchPill | null {
+	if (token.startsWith("custom:")) {
+		const label = decodeURIComponent(token.slice("custom:".length));
+		return {
+			id: `not-match-custom-${label}`,
+			label: shortCustomLabel(label),
+			icon: "⛔",
+			summary: content["results.detail.notMatchPills.custom.description"],
+			score: 0,
+		};
+	}
+	return {
+		id: `not-match-${token}`,
+		...getNotMatchPillMeta(token),
+		score: 0,
+	};
+}
+
+export function resolvePillsFromShareParams(
+	matchingKeysParam: string | null,
+	notMatchingTokensParam: string | null,
+): OccupationMatchPillGroups {
+	const matching = splitShareParam(matchingKeysParam)
+		.map(resolveMatchPillFromShareKey)
+		.filter((pill): pill is OccupationMatchPill => pill !== null);
+	const notMatching = splitShareParam(notMatchingTokensParam)
+		.map(resolveNotMatchPillFromShareToken)
+		.filter((pill): pill is OccupationMatchPill => pill !== null);
+	return { matching, notMatching };
+}
+
+function splitShareParam(value: string | null): string[] {
+	if (!value) {
+		return [];
+	}
+	return value.split(",").filter((token) => token.length > 0);
+}

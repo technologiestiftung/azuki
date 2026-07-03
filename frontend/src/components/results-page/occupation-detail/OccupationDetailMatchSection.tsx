@@ -3,19 +3,24 @@ import type { Occupation, UserProfile } from "@azuki/shared";
 import { content } from "../../../content";
 import { FitDonutChart } from "./FitDonutChart";
 import { InfoBottomSheet } from "./InfoBottomSheet";
-import { buildOccupationMatchPills } from "../utils/occupationMatchPills";
+import {
+	buildOccupationMatchPills,
+	type OccupationMatchPillGroups,
+} from "../utils/occupationMatchPills";
 import { MatchPillGroup } from "./MatchPillGroup";
 
 interface OccupationDetailMatchSectionProps {
 	matchPercent?: number;
 	occupation: Occupation | null;
 	profile: UserProfile;
+	sharedPills?: OccupationMatchPillGroups;
 }
 
 export function OccupationDetailMatchSection({
 	matchPercent,
 	occupation,
 	profile,
+	sharedPills,
 }: OccupationDetailMatchSectionProps) {
 	const [isMatchInfoOpen, setIsMatchInfoOpen] = useState(false);
 	const [selectedMatchPillId, setSelectedMatchPillId] = useState<string | null>(
@@ -26,11 +31,14 @@ export function OccupationDetailMatchSection({
 	>(null);
 
 	const { matching, notMatching } = useMemo(() => {
+		if (sharedPills) {
+			return sharedPills;
+		}
 		if (!occupation) {
 			return { matching: [], notMatching: [] };
 		}
 		return buildOccupationMatchPills(profile, occupation);
-	}, [occupation, profile]);
+	}, [sharedPills, occupation, profile]);
 
 	useEffect(() => {
 		setSelectedMatchPillId(null);
