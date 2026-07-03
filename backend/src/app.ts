@@ -226,6 +226,7 @@ app.get("/api/occupations/:id", (c) => {
 	return c.json(occupation);
 });
 
+app.get("/results/:id", (c) => renderOccupationPreviewPage(c, occupations));
 app.get("/api/results/:id", (c) => renderOccupationPreviewPage(c, occupations));
 
 app.get("/api/eval/default-prompt", (c) => {

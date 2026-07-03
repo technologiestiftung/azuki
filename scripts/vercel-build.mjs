@@ -43,7 +43,7 @@ writeFileSync(
 		routes: [
 			{ handle: "filesystem" },
 			{ src: "/api/(.*)", dest: "/api/[...route]" },
-			{ src: "/results/(\\d+)", dest: "/api/results/$1" },
+			{ src: "/results/(\\d+)", dest: "/api/[...route]" },
 			{ src: "/(.*)", dest: "/index.html" },
 		],
 	}),

@@ -30,6 +30,25 @@ function resolveRequestOrigin(requestUrl: string): string {
 	return new URL(requestUrl).origin;
 }
 
+function resolvePublicRequestUrl(
+	c: Context,
+	occupationId: number | undefined,
+): string {
+	const incoming = new URL(c.req.url);
+	const protocol =
+		c.req.header("x-forwarded-proto") ?? incoming.protocol.replace(":", "");
+	const host =
+		c.req.header("x-forwarded-host") ?? c.req.header("host") ?? incoming.host;
+	const pathname =
+		occupationId !== undefined && incoming.pathname.startsWith("/api/results/")
+			? `/results/${occupationId}`
+			: incoming.pathname;
+
+	return new URL(
+		`${protocol}://${host}${pathname}${incoming.search}`,
+	).toString();
+}
+
 function resolveAbsoluteImageUrl(
 	imageUrl: string | undefined,
 	origin: string,
@@ -136,9 +155,14 @@ export function renderOccupationPreviewPage(
 		? occupations.find((entry) => entry.id === occupationId)
 		: undefined;
 	const fitPercent = parseFitPercentParam(c.req.query("fit"));
+	const publicRequestUrl = resolvePublicRequestUrl(
+		c,
+		occupation?.id ??
+			(Number.isFinite(occupationId) ? occupationId : undefined),
+	);
 	const meta = occupation
-		? buildOccupationPageMeta(occupation, c.req.url, fitPercent)
-		: buildDefaultPageMeta(c.req.url);
+		? buildOccupationPageMeta(occupation, publicRequestUrl, fitPercent)
+		: buildDefaultPageMeta(publicRequestUrl);
 	const html = injectPageMetaIntoSpaHtml(SPA_INDEX_HTML, meta);
 	return c.html(html);
 }
