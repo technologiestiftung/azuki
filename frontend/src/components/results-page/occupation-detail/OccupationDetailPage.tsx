@@ -123,7 +123,12 @@ export function OccupationDetailPage() {
 						{detail.displayName}
 					</h1>
 					<div className="px-4">
-						<OccupationDetailMetaInfo occupation={detail.occupation} />
+						<OccupationDetailMetaInfo
+							occupation={detail.occupation}
+							occupationDuration={
+								detail.matchedOccupation?.occupationDuration ?? ""
+							}
+						/>
 					</div>
 					<div className="px-[18px] flex flex-col gap-3">
 						<h2 className="text-sky-900 text-2xl font-semibold">

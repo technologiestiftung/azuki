@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { content } from "../../../content";
+import { formatOccupationAccessLevel } from "../utils/formatOccupationAccessLevel";
 import { formatOccupationSalary } from "../utils/formatOccupationSalary";
 import { InfoBottomSheet } from "./InfoBottomSheet";
 import type { Occupation } from "@azuki/shared";
@@ -8,10 +9,12 @@ type MetaInfoSheet = "salary" | "schoolDegree";
 
 interface OccupationDetailMetaInfoProps {
 	occupation: Occupation | null;
+	occupationDuration: string;
 }
 
 export function OccupationDetailMetaInfo({
 	occupation,
+	occupationDuration,
 }: OccupationDetailMetaInfoProps) {
 	const salaryMedian = occupation?.salaryMonthlyMedian ?? 0;
 	const [activeInfoSheet, setActiveInfoSheet] = useState<MetaInfoSheet | null>(
@@ -51,7 +54,7 @@ export function OccupationDetailMetaInfo({
 							{content["results.detail.durationTitle"]}
 						</span>
 						<span className="text-sky-900 text-xl font-semibold text-start">
-							{/* TODO: duration */}3 Jahre
+							{occupationDuration}
 						</span>
 					</div>
 					<button
@@ -85,8 +88,7 @@ export function OccupationDetailMetaInfo({
 						<img src="/icons/info.svg" alt="" className="w-5 h-5" aria-hidden />
 					</span>
 					<span className="text-sky-900 text-xl font-semibold text-start">
-						{/* TODO: accessLevel content */}
-						{occupation?.accessLevel ?? "Unbekannt"}
+						{formatOccupationAccessLevel(occupation?.accessLevel)}
 					</span>
 				</button>
 			</div>
