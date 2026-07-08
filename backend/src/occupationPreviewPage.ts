@@ -66,19 +66,6 @@ export function buildOccupationPreviewTitle(displayName: string): string {
 	return displayName;
 }
 
-export function parseFitPercentParam(
-	value: string | undefined,
-): number | undefined {
-	if (value === undefined) {
-		return undefined;
-	}
-	const fitPercent = Number(value);
-	if (!Number.isFinite(fitPercent) || fitPercent < 0 || fitPercent > 100) {
-		return undefined;
-	}
-	return Math.round(fitPercent);
-}
-
 export function buildOccupationPageMeta(
 	occupation: Occupation,
 	requestUrl: string,

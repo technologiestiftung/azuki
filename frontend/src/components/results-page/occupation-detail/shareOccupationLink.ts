@@ -27,6 +27,9 @@ export async function shareOccupationLink(
 		}
 	}
 
-	await navigator.clipboard.writeText(url);
+	const shareText = text ?? title;
+	const clipboardText =
+		shareText === title ? `${title}\n${url}` : `${shareText}\n${url}`;
+	await navigator.clipboard.writeText(clipboardText);
 	return "copied";
 }

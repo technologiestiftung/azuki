@@ -28,6 +28,8 @@ function parseOccupationIdList(value: string | null): number[] {
 		.filter((id) => Number.isFinite(id) && id > 0);
 }
 
+// Share URLs encode a snapshot of the sender's view (fit %, pills, next
+// occupations). Values are restored as-is for recipients without re-scoring.
 export function parseOccupationShareState(
 	searchParams: URLSearchParams,
 ): OccupationShareState | null {

@@ -3,7 +3,6 @@ import {
 	buildOccupationPageMeta,
 	buildOccupationPreviewTitle,
 	injectPageMetaIntoSpaHtml,
-	parseFitPercentParam,
 	renderPageMetaTags,
 } from "../src/occupationPreviewPage.js";
 import { makeOccupation } from "./scoring/helpers.js";
@@ -24,13 +23,6 @@ describe("occupationPreviewPage", () => {
 		expect(buildOccupationPreviewTitle("Mechaniker/in")).toBe("Mechaniker/in");
 	});
 
-	test("parseFitPercentParam validates range", () => {
-		expect(parseFitPercentParam("85")).toBe(85);
-		expect(parseFitPercentParam("85.6")).toBe(86);
-		expect(parseFitPercentParam("150")).toBeUndefined();
-		expect(parseFitPercentParam("abc")).toBeUndefined();
-	});
-
 	test("buildOccupationPageMeta uses occupation fields", () => {
 		const occupation = makeOccupation({
 			name: "Anlagenmechaniker/in",
@@ -45,13 +37,30 @@ describe("occupationPreviewPage", () => {
 
 		const meta = buildOccupationPageMeta(
 			occupation,
-			"https://azuki.example/results/15164?fit=72",
+			"https://azuki.example/results/15164",
 		);
 
 		expect(meta.title).toBe("Anlagenmechaniker/in");
 		expect(meta.description).toBe("Dauer: 3 Jahre · Einstiegsgehalt: 2.800 €");
 		expect(meta.imageUrl).toBe("https://example.com/hero.jpg");
-		expect(meta.pageUrl).toBe("https://azuki.example/results/15164?fit=72");
+		expect(meta.pageUrl).toBe("https://azuki.example/results/15164");
+	});
+
+	test("buildOccupationPageMeta ignores fit percent in share URL", () => {
+		const occupation = makeOccupation({
+			name: "Anlagenmechaniker/in",
+			descriptionShort:
+				"Ausbildungsdauer 3 Jahre Lernorte Betrieb und Berufsschule",
+			salaryKnown: true,
+			salaryMonthlyMedian: 2800,
+		});
+
+		const meta = buildOccupationPageMeta(
+			occupation,
+			"https://azuki.example/results/15164?fit=72",
+		);
+
+		expect(meta.description).toBe("Dauer: 3 Jahre · Einstiegsgehalt: 2.800 €");
 	});
 
 	test("injectPageMetaIntoSpaHtml replaces social meta tags", () => {

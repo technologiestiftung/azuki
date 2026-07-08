@@ -167,7 +167,7 @@ export function OccupationDetailPage() {
 		return () => {
 			document.title = previousTitle;
 		};
-	}, [detail.displayName, matchPercent]);
+	}, [detail.displayName]);
 
 	const statusMessage =
 		detail.error ??

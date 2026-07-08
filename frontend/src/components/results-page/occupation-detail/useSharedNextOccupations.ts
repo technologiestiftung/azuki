@@ -23,7 +23,7 @@ export function useSharedNextOccupations(
 
 		let cancelled = false;
 
-		void Promise.all(
+		void Promise.allSettled(
 			occupationIds.map(async (id) => {
 				const occupation = await getOccupation(id);
 				return {
@@ -32,17 +32,15 @@ export function useSharedNextOccupations(
 					imageUrl: occupation.images[0]?.url ?? PLACEHOLDER_IMAGE,
 				};
 			}),
-		)
-			.then((results) => {
-				if (!cancelled) {
-					setCards(results);
-				}
-			})
-			.catch(() => {
-				if (!cancelled) {
-					setCards([]);
-				}
-			});
+		).then((results) => {
+			if (cancelled) {
+				return;
+			}
+			const fulfilled = results.flatMap((result) =>
+				result.status === "fulfilled" ? [result.value] : [],
+			);
+			setCards(fulfilled);
+		});
 
 		return () => {
 			cancelled = true;
