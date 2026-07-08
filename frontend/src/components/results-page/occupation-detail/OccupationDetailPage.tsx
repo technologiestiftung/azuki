@@ -215,9 +215,7 @@ export function OccupationDetailPage() {
 					<div className="px-4">
 						<OccupationDetailMetaInfo
 							occupation={detail.occupation}
-							occupationDuration={
-								detail.matchedOccupation?.occupationDuration ?? ""
-							}
+							occupationDuration={detail.occupationDuration}
 						/>
 					</div>
 					<div className="px-[18px] flex flex-col gap-3">

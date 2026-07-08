@@ -91,6 +91,11 @@ export {
 } from "./shortDescription";
 
 export {
+	formatOccupationDuration,
+	resolveOccupationDuration,
+} from "./occupationDuration";
+
+export {
 	TASK_BULLETS_PROMPT,
 	resolveOccupationTaskBullets,
 } from "./taskBullets";
