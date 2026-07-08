@@ -25,6 +25,7 @@ import {
 } from "./occupationShareState";
 import { shareOccupationLink } from "./shareOccupationLink";
 import { useSharedNextOccupations } from "./useSharedNextOccupations";
+import { buildOccupationShareText } from "./buildOccupationShareText";
 
 export function OccupationDetailPage() {
 	const occupationId = Number(useParams().id);
@@ -140,11 +141,16 @@ export function OccupationDetailPage() {
 		void shareOccupationLink({
 			url,
 			title: detail.displayName,
+			text: buildOccupationShareText(
+				detail.occupation,
+				detail.occupationDuration,
+			),
 		});
 	}, [
 		occupationId,
 		detail.occupation,
 		detail.displayName,
+		detail.occupationDuration,
 		profile,
 		matchPercent,
 		liveNextOccupations,
