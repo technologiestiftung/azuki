@@ -468,6 +468,8 @@ export const content = {
 	"results.startDatePrefix": "Start:",
 	// Occupation Detail
 	"results.detail.salaryTitle": "Einstiegsgehalt",
+	"results.detail.salary.unknown": "Unbekannt",
+	"results.detail.loading": "Berufsdetails werden geladen…",
 	"results.detail.salaryInfo.title": "Einstiegsgehalt",
 	"results.detail.salaryInfo.description":
 		"Das Einstiegsgehalt ist das Geld, das du verdienst, wenn du nach der Ausbildung deinen ersten Job anfängst.",
