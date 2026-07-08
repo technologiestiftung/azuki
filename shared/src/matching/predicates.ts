@@ -63,8 +63,11 @@ export const WORK_PREF_MAP: Record<string, WorkPreferenceOptionChecks> = {
 			occupation.conditions.customerContact || occupation.conditions.teamwork,
 	},
 	pace: {
-		a: () => false,
-		b: (occupation) => occupation.conditions.office,
+		// BERUFENET b20-4: "Psychische Belastbarkeit" explicitly cites Zeitdruck
+		a: (occupation) =>
+			occupation.strengthTags.includes("Psychische Belastbarkeit"),
+		b: (occupation) =>
+			!occupation.strengthTags.includes("Psychische Belastbarkeit"),
 	},
 	structure: {
 		a: (occupation) => !hasCreativitySignal(occupation),

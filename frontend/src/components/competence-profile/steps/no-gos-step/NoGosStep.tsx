@@ -17,6 +17,7 @@ import { parseHashCardIndex } from "../../../../routing/routes";
 import type { TopCardHorizontalAccentBg } from "../../../primitives/swipe-card-stack/swipe-card-utils";
 import { InputBottomSheet } from "../../../input-bottom-sheet/InputBottomSheet";
 import { CustomSwipeStepCard } from "../../CustomSwipeStepCard";
+import { preloadLoadingAnimations } from "../../../loading-screen/dotlottieLoader";
 
 export const STACK_GHOST_LAYER_SCALE = 86 / 100;
 
@@ -48,6 +49,10 @@ export function NoGosStep() {
 			navigate({ pathname: "/nogos", hash: "#0" }, { replace: true });
 		}
 	}, [pathname, hash, navigate]);
+
+	useEffect(() => {
+		void preloadLoadingAnimations();
+	}, []);
 
 	useEffect(() => {
 		if (!isCustomNoGoCard) {

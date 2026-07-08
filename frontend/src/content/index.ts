@@ -416,7 +416,7 @@ export const content = {
 	"loading.success.description": "Du hast alle Fragen beantwortet.",
 	"loading.waiting.title": "Wir suchen nach Ausbildungen, die zu dir passen.",
 	"loading.waiting.description":
-		"Einen Moment - gleich geht's zu deinen Ergebnissen.",
+		"Einen Moment – gleich geht's zu deinen Ergebnissen.",
 
 	// Results
 	"results.title": "Deine Ergebnisse",
@@ -468,6 +468,8 @@ export const content = {
 	"results.startDatePrefix": "Start:",
 	// Occupation Detail
 	"results.detail.salaryTitle": "Einstiegsgehalt",
+	"results.detail.salary.unknown": "Unbekannt",
+	"results.detail.loading": "Berufsdetails werden geladen…",
 	"results.detail.salaryInfo.title": "Einstiegsgehalt",
 	"results.detail.salaryInfo.description":
 		"Das Einstiegsgehalt ist das Geld, das du verdienst, wenn du nach der Ausbildung deinen ersten Job anfängst.",
@@ -481,6 +483,12 @@ export const content = {
 	"results.detail.schoolDegree.accessLevel.fachhochschulreife":
 		"Fachhochschulreife",
 	"results.detail.schoolDegree.accessLevel.unknown": "Unbekannt",
+	"results.detail.schoolDegree.degreeStats.noQualification":
+		"Ohne Schulabschluss",
+	"results.detail.schoolDegree.degreeStats.secondary": "Hauptschulabschluss",
+	"results.detail.schoolDegree.degreeStats.intermediate": "Realschulabschluss",
+	"results.detail.schoolDegree.degreeStats.universityEntrance":
+		"Hochschulreife",
 	"results.detail.schoolDegreeInfo.title": "Empfohlener Schulabschluss",
 	"results.detail.schoolDegreeInfo.description":
 		"Mit diesem Abschluss hast du gute Chancen auf einen Ausbildungsplatz. Hast du einen anderen Abschluss, kannst du es trotzdem schaffen – vielleicht musst du dann mehr Bewerbungen schreiben und es dauert länger bis du einen Platz findest.",
