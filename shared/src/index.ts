@@ -95,6 +95,46 @@ export {
 	resolveOccupationTaskBullets,
 } from "./taskBullets";
 
+export type {
+	OccupationPredicate,
+	WorkExpectationPredicate,
+	WorkPreferenceOptionChecks,
+} from "./matching/predicates";
+export {
+	CREATIVITY_SKILL_TAGS,
+	CREATIVITY_STRENGTH_TAG,
+	CRAFTSMANSHIP_SKILL_TAGS,
+	COMMUNICATION_SKILL_TAGS,
+	CONCENTRATION_SKILL_TAGS,
+	hasCreativitySignal,
+	LOGICAL_THINKING_SKILL_TAGS,
+	NO_GO_MAP,
+	occupationHasOutdoorWork,
+	PRECISION_SKILL_TAGS,
+	STRENGTH_TO_TAGS,
+	WORK_EXPECTATIONS_CHECKS,
+	WORK_PREF_MAP,
+} from "./matching/predicates";
+export { occupationMatchesStrength } from "./matching/strengthMatching";
+export { scoreSingleInterestMatch } from "./matching/interestMatching";
+export {
+	getOccupationSearchTerms,
+	scoreCustomTextMatch,
+} from "./matching/textMatching";
+export {
+	inferNotMatchPillIdFromText,
+	NO_GO_TO_PILL_ID,
+	occupationMatchesNotMatchPill,
+	profilePrefersIndoors,
+} from "./matching/noGoPills";
+export {
+	collectMatchSignals,
+	type MatchSignal,
+	type MatchSignalDimension,
+	type MatchSignalGroups,
+	type MatchSignalKind,
+} from "./matching/signals";
+
 export {
 	type Bundesland,
 	BUNDESLAENDER,
