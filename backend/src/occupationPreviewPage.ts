@@ -62,13 +62,7 @@ function resolveAbsoluteImageUrl(
 	return `${origin}${imageUrl.startsWith("/") ? imageUrl : `/${imageUrl}`}`;
 }
 
-export function buildOccupationPreviewTitle(
-	displayName: string,
-	fitPercent: number | undefined,
-): string {
-	if (fitPercent !== undefined) {
-		return `${displayName} – ${fitPercent} % Passung`;
-	}
+export function buildOccupationPreviewTitle(displayName: string): string {
 	return displayName;
 }
 
@@ -88,7 +82,6 @@ export function parseFitPercentParam(
 export function buildOccupationPageMeta(
 	occupation: Occupation,
 	requestUrl: string,
-	fitPercent: number | undefined,
 ): PageMetaTags {
 	const origin = resolveRequestOrigin(requestUrl);
 	const displayName = formatOccupationDisplayName(occupation.name);
@@ -96,7 +89,7 @@ export function buildOccupationPageMeta(
 		resolveOccupationShortDescription(occupation) || DEFAULT_SITE_DESCRIPTION;
 
 	return {
-		title: buildOccupationPreviewTitle(displayName, fitPercent),
+		title: buildOccupationPreviewTitle(displayName),
 		description,
 		imageUrl: resolveAbsoluteImageUrl(occupation.images[0]?.url, origin),
 		pageUrl: requestUrl,
@@ -154,14 +147,13 @@ export function renderOccupationPreviewPage(
 	const occupation = Number.isFinite(occupationId)
 		? occupations.find((entry) => entry.id === occupationId)
 		: undefined;
-	const fitPercent = parseFitPercentParam(c.req.query("fit"));
 	const publicRequestUrl = resolvePublicRequestUrl(
 		c,
 		occupation?.id ??
 			(Number.isFinite(occupationId) ? occupationId : undefined),
 	);
 	const meta = occupation
-		? buildOccupationPageMeta(occupation, publicRequestUrl, fitPercent)
+		? buildOccupationPageMeta(occupation, publicRequestUrl)
 		: buildDefaultPageMeta(publicRequestUrl);
 	const html = injectPageMetaIntoSpaHtml(SPA_INDEX_HTML, meta);
 	return c.html(html);

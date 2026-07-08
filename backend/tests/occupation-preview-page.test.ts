@@ -20,13 +20,8 @@ const SPA_TEMPLATE = `<!doctype html>
 </html>`;
 
 describe("occupationPreviewPage", () => {
-	test("buildOccupationPreviewTitle includes fit percent when provided", () => {
-		expect(buildOccupationPreviewTitle("Mechaniker/in", 85)).toBe(
-			"Mechaniker/in – 85 % Passung",
-		);
-		expect(buildOccupationPreviewTitle("Mechaniker/in", undefined)).toBe(
-			"Mechaniker/in",
-		);
+	test("buildOccupationPreviewTitle uses display name only", () => {
+		expect(buildOccupationPreviewTitle("Mechaniker/in")).toBe("Mechaniker/in");
 	});
 
 	test("parseFitPercentParam validates range", () => {
@@ -48,10 +43,9 @@ describe("occupationPreviewPage", () => {
 		const meta = buildOccupationPageMeta(
 			occupation,
 			"https://azuki.example/results/15164?fit=72",
-			72,
 		);
 
-		expect(meta.title).toBe("Anlagenmechaniker/in – 72 % Passung");
+		expect(meta.title).toBe("Anlagenmechaniker/in");
 		expect(meta.description).toBe(
 			"Heizungen montieren und Wasserleitungen verlegen.",
 		);

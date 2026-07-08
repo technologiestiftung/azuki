@@ -137,15 +137,9 @@ export function OccupationDetailPage() {
 					window.location.origin,
 				).toString();
 
-		const shareText =
-			matchPercent !== undefined
-				? `${matchPercent} % Passung – ${detail.displayName}`
-				: detail.displayName;
-
 		void shareOccupationLink({
 			url,
 			title: detail.displayName,
-			text: shareText,
 		});
 	}, [
 		occupationId,
@@ -161,10 +155,7 @@ export function OccupationDetailPage() {
 			return undefined;
 		}
 		const previousTitle = document.title;
-		document.title =
-			matchPercent !== undefined
-				? `${detail.displayName} – ${matchPercent} % Passung`
-				: detail.displayName;
+		document.title = detail.displayName;
 		return () => {
 			document.title = previousTitle;
 		};
