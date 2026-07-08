@@ -483,6 +483,12 @@ export const content = {
 	"results.detail.schoolDegree.accessLevel.fachhochschulreife":
 		"Fachhochschulreife",
 	"results.detail.schoolDegree.accessLevel.unknown": "Unbekannt",
+	"results.detail.schoolDegree.degreeStats.noQualification":
+		"Ohne Schulabschluss",
+	"results.detail.schoolDegree.degreeStats.secondary": "Hauptschulabschluss",
+	"results.detail.schoolDegree.degreeStats.intermediate": "Realschulabschluss",
+	"results.detail.schoolDegree.degreeStats.universityEntrance":
+		"Hochschulreife",
 	"results.detail.schoolDegreeInfo.title": "Empfohlener Schulabschluss",
 	"results.detail.schoolDegreeInfo.description":
 		"Mit diesem Abschluss hast du gute Chancen auf einen Ausbildungsplatz. Hast du einen anderen Abschluss, kannst du es trotzdem schaffen – vielleicht musst du dann mehr Bewerbungen schreiben und es dauert länger bis du einen Platz findest.",

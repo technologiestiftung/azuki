@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { content } from "../../../content";
-import { formatOccupationAccessLevel } from "../utils/formatOccupationAccessLevel";
+import { formatOccupationSchoolDegree } from "../utils/formatOccupationSchoolDegree";
 import { formatOccupationSalary } from "../utils/formatOccupationSalary";
 import { InfoBottomSheet } from "./InfoBottomSheet";
 import type { Occupation } from "@azuki/shared";
@@ -47,6 +47,10 @@ export function OccupationDetailMetaInfo({
 		return null;
 	};
 	const infoSheetContent = getInfoSheetContent();
+	const schoolDegreeLabel = formatOccupationSchoolDegree(
+		occupation?.degreeStats,
+		occupation?.accessLevel,
+	);
 
 	return (
 		<>
@@ -83,7 +87,7 @@ export function OccupationDetailMetaInfo({
 				<button
 					type="button"
 					onClick={handleSchoolDegreeInfoClick}
-					aria-label={`${content["results.detail.schoolDegreeTitle"]}, ${content["results.moreInfo"]}`}
+					aria-label={`${content["results.detail.schoolDegreeTitle"]}: ${schoolDegreeLabel}, ${content["results.moreInfo"]}`}
 					className="flex flex-col gap-1.5 flex-1 px-4 py-3 bg-sky-50 rounded-b-xl text-start focus-visible:outline focus-visible:outline-2 focus-visible:outline-sky-500"
 				>
 					<span className="flex justify-between items-center text-sky-110 text-base font-normal">
@@ -91,7 +95,7 @@ export function OccupationDetailMetaInfo({
 						<img src="/icons/info.svg" alt="" className="w-5 h-5" aria-hidden />
 					</span>
 					<span className="text-sky-900 text-xl font-semibold text-start">
-						{formatOccupationAccessLevel(occupation?.accessLevel)}
+						{schoolDegreeLabel}
 					</span>
 				</button>
 			</div>
