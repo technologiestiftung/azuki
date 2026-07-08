@@ -1,7 +1,7 @@
 import type { Context } from "hono";
 import {
+	buildOccupationShareText,
 	formatOccupationDisplayName,
-	resolveOccupationShortDescription,
 	type Occupation,
 } from "@azuki/shared";
 import { SPA_INDEX_HTML } from "./generated/spaIndexTemplate.js";
@@ -86,7 +86,7 @@ export function buildOccupationPageMeta(
 	const origin = resolveRequestOrigin(requestUrl);
 	const displayName = formatOccupationDisplayName(occupation.name);
 	const description =
-		resolveOccupationShortDescription(occupation) || DEFAULT_SITE_DESCRIPTION;
+		buildOccupationShareText(occupation) || DEFAULT_SITE_DESCRIPTION;
 
 	return {
 		title: buildOccupationPreviewTitle(displayName),

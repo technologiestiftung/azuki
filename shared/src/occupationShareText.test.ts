@@ -1,6 +1,6 @@
 import { describe, expect, test } from "vitest";
-import { buildOccupationShareText } from "../../src/components/results-page/occupation-detail/buildOccupationShareText";
-import type { Occupation } from "@azuki/shared";
+import { buildOccupationShareText } from "./occupationShareText.js";
+import type { Occupation } from "./types.js";
 
 function makeOccupation(overrides: Partial<Occupation> = {}): Occupation {
 	return {

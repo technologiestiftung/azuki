@@ -1,6 +1,9 @@
 import { useCallback, useEffect, useMemo } from "react";
 import { useParams, useSearchParams } from "react-router-dom";
-import { formatOccupationDisplayName } from "@azuki/shared";
+import {
+	buildOccupationShareText,
+	formatOccupationDisplayName,
+} from "@azuki/shared";
 import { buildResultsOccupationPath } from "../../../routing/routes";
 import { content } from "../../../content";
 import { useOccupationDetail } from "./useOccupationDetail";
@@ -25,7 +28,6 @@ import {
 } from "./occupationShareState";
 import { shareOccupationLink } from "./shareOccupationLink";
 import { useSharedNextOccupations } from "./useSharedNextOccupations";
-import { buildOccupationShareText } from "./buildOccupationShareText";
 
 export function OccupationDetailPage() {
 	const occupationId = Number(useParams().id);

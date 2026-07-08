@@ -34,7 +34,10 @@ describe("occupationPreviewPage", () => {
 	test("buildOccupationPageMeta uses occupation fields", () => {
 		const occupation = makeOccupation({
 			name: "Anlagenmechaniker/in",
-			shortDescription: "Heizungen montieren und Wasserleitungen verlegen.",
+			descriptionShort:
+				"Ausbildungsdauer 3 Jahre Lernorte Betrieb und Berufsschule",
+			salaryKnown: true,
+			salaryMonthlyMedian: 2800,
 			images: [
 				{ url: "https://example.com/hero.jpg", caption: "", imageGroup: "" },
 			],
@@ -46,9 +49,7 @@ describe("occupationPreviewPage", () => {
 		);
 
 		expect(meta.title).toBe("Anlagenmechaniker/in");
-		expect(meta.description).toBe(
-			"Heizungen montieren und Wasserleitungen verlegen.",
-		);
+		expect(meta.description).toBe("Dauer: 3 Jahre · Einstiegsgehalt: 2.800 €");
 		expect(meta.imageUrl).toBe("https://example.com/hero.jpg");
 		expect(meta.pageUrl).toBe("https://azuki.example/results/15164?fit=72");
 	});
