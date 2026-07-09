@@ -51,7 +51,7 @@ export function MatchPillGroup({
 						onClick={() => onSelect(pill.id)}
 						aria-label={pill.label}
 						aria-pressed={selectedId === pill.id}
-						className={`h-12 flex min-w-0 max-w-full shrink-0 items-center px-[14px] py-1 rounded-[100px] border-2 text-lg text-sky-900 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-sky-500 ${
+						className={`h-12 flex min-w-0 max-w-full shrink-0 items-center px-[14px] py-1 rounded-[100px] border-2 text-lg text-sky-900 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-sky-500 box-border ${
 							selectedId === pill.id ? selectedClassName : unselectedClassName
 						}`}
 					>

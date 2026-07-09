@@ -97,11 +97,11 @@ export function OccupationDetailBody({
 				</div>
 			</div>
 			{nextOccupations.length > 0 && (
-				<div className="flex flex-col gap-2 pl-4 pt-[25px] pb-4 bg-sky-50">
+				<div className="flex flex-col gap-2 pt-[25px] pb-4 bg-sky-50">
 					<h3 className="text-sky-900 text-2xl font-semibold text-left">
 						{content["results.detail.moreOccupations.title"]}
 					</h3>
-					<div className="flex gap-2 w-full overflow-x-scroll">
+					<div className="flex gap-2 w-full overflow-x-scroll [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
 						{nextOccupations.map((nextOccupation) => {
 							const displayName = formatOccupationDisplayName(
 								nextOccupation.name,
@@ -114,7 +114,7 @@ export function OccupationDetailBody({
 								<Link
 									key={nextOccupation.id}
 									to={buildResultsOccupationPath(nextOccupation.id)}
-									className="flex flex-col min-w-[300px] gap-3 px-2 pt-2 pb-4 bg-white rounded-[20px] focus-visible:outline focus-visible:outline-2 focus-visible:outline-sky-500 last:mr-4"
+									className="flex flex-col min-w-[300px] gap-3 px-2 pt-2 pb-4 bg-white rounded-[20px] focus-visible:outline focus-visible:outline-2 focus-visible:outline-sky-500 last:mr-4 first:ml-4"
 									aria-label={`${displayName}, ${content["results.moreInfo"]}`}
 								>
 									<img

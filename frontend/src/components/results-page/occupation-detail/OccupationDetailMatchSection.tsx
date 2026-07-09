@@ -67,7 +67,7 @@ export function OccupationDetailMatchSection({
 					{matchPercent !== undefined && (
 						<div className="flex items-center justify-between gap-4">
 							<span className="text-sky-900 text-[85px] font-medium leading-none">
-								{matchPercent} %
+								{matchPercent}%
 							</span>
 							<FitDonutChart percent={matchPercent} />
 						</div>

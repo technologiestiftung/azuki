@@ -27,7 +27,7 @@ export function OccupationDetailHeaderCollapsed({
 			<h1 className="text-sm font-semibold text-gray-900 flex-1 text-center truncate">
 				{displayName}
 			</h1>
-			<div className="flex items-center">
+			<div className="flex items-center gap-1.5">
 				<GhostIconButton
 					iconSrc="/icons/share.svg"
 					onClick={() => {}}
