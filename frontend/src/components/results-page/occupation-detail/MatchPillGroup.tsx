@@ -35,7 +35,9 @@ export function MatchPillGroup({
 
 	if (pills.length === 0) {
 		return emptyMessage ? (
-			<p className="text-lg text-sky-900 px-[5px]">{emptyMessage}</p>
+			<p className="text-center text-base text-sky-110 px-[21px]">
+				{emptyMessage}
+			</p>
 		) : null;
 	}
 

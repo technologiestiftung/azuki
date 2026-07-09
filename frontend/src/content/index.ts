@@ -508,9 +508,9 @@ export const content = {
 	"results.detail.whyItMatches.notMatchTitle":
 		"Passt nicht zu dir, aber gehört zum Beruf",
 	"results.detail.whyItMatches.empty":
-		"Aus deinen Angaben konnten wir hier keine konkreten Übereinstimmungen ableiten.",
+		"Bei diesem Beruf ist gerade nichts dabei, das zu dir passt. Vielleicht gefällt er dir trotzdem.",
 	"results.detail.whyItMatches.notMatchEmpty":
-		"Aus deinen Angaben ergibt sich hier kein klarer Widerspruch zu diesem Beruf.",
+		"Der Beruf scheint gut zu dir zu passen. Nichts spricht dagegen.",
 	// Match Pills
 	"results.detail.matchPills.natur.label": "Natur",
 	"results.detail.matchPills.natur.icon": "🌿",
