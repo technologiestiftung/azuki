@@ -19,11 +19,7 @@ export function OccupationDetailPage() {
 	const occupationId = Number(useParams().id);
 	const detail = useOccupationDetail(occupationId);
 	useFetchVacancies();
-	const vacancies = useAppStore((state) => state.vacancies);
 	const matchResults = useMatchResultsStore((state) => state.matchResults);
-	const setVacancyOccupationFilterIds = useMatchResultsStore(
-		(state) => state.setVacancyOccupationFilterIds,
-	);
 	const profile = useAppStore((state) => state.profile);
 
 	const {
@@ -51,18 +47,6 @@ export function OccupationDetailPage() {
 	if (taskItems.length === 0 && fallbackShortDescription) {
 		taskItems = [fallbackShortDescription];
 	}
-
-	const occupationVacanciesCount = useMemo(() => {
-		const occupationName =
-			detail.matchedOccupation?.rawName ?? detail.occupation?.name;
-		if (!occupationName || !vacancies) {
-			return undefined;
-		}
-		return (
-			vacancies.results.find((result) => result.occupation === occupationName)
-				?.previews.length ?? 0
-		);
-	}, [detail.matchedOccupation?.rawName, detail.occupation?.name, vacancies]);
 
 	const nextOccupations = useMemo(() => {
 		if (!matchResults) {
@@ -127,13 +111,7 @@ export function OccupationDetailPage() {
 							matchPercent={matchPercent}
 							taskItems={taskItems}
 							profile={profile}
-							occupationVacanciesCount={occupationVacanciesCount}
 							nextOccupations={nextOccupations}
-							onApplyClick={() => {
-								if (Number.isFinite(occupationId)) {
-									setVacancyOccupationFilterIds([occupationId]);
-								}
-							}}
 						/>
 					)}
 				</div>

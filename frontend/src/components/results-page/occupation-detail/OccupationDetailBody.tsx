@@ -1,3 +1,4 @@
+import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import {
 	formatOccupationDisplayName,
@@ -5,14 +6,12 @@ import {
 	type Occupation,
 	type UserProfile,
 } from "@azuki/shared";
-import {
-	ROUTE_PATHS,
-	buildResultsOccupationPath,
-} from "../../../routing/routes";
+import { buildResultsOccupationPath } from "../../../routing/routes";
 import { content } from "../../../content";
 import { OccupationDetailMetaInfo } from "./OccupationDetailMetaInfo";
 import { OccupationDetailMatchSection } from "./OccupationDetailMatchSection";
 import { OccupationImageCarousel } from "./OccupationImageCarousel";
+import { OccupationDetailApplyLink } from "./OccupationDetailApplyLink";
 
 interface OccupationDetailBodyProps {
 	occupation: Occupation | null;
@@ -20,9 +19,7 @@ interface OccupationDetailBodyProps {
 	matchPercent: number | undefined;
 	taskItems: string[];
 	profile: UserProfile;
-	occupationVacanciesCount: number | undefined;
 	nextOccupations: MatchedOccupation[];
-	onApplyClick: () => void;
 }
 
 export function OccupationDetailBody({
@@ -31,10 +28,28 @@ export function OccupationDetailBody({
 	matchPercent,
 	taskItems,
 	profile,
-	occupationVacanciesCount,
 	nextOccupations,
-	onApplyClick,
 }: OccupationDetailBodyProps) {
+	const inlineApplyRef = useRef<HTMLAnchorElement>(null);
+	const [isInlineApplyVisible, setIsInlineApplyVisible] = useState(false);
+
+	useEffect(() => {
+		const element = inlineApplyRef.current;
+		if (!element) {
+			return undefined;
+		}
+
+		const observer = new IntersectionObserver(
+			([entry]) => {
+				setIsInlineApplyVisible(entry.isIntersecting);
+			},
+			{ rootMargin: "0px 0px -80px 0px", threshold: 0 },
+		);
+
+		observer.observe(element);
+		return () => observer.disconnect();
+	}, []);
+
 	return (
 		<>
 			<div className="px-4">
@@ -72,7 +87,7 @@ export function OccupationDetailBody({
 				</div>
 			)}
 			<div className="px-4">
-				<div className="flex flex-col gap-5 px-4 py-5 rounded-2xl bg-sky-50 border border-sky-100">
+				<div className="flex flex-col gap-5 px-3 py-5 rounded-2xl bg-sky-50 border border-sky-100">
 					<div className="flex flex-col gap-[7px] text-center">
 						<h3 className="text-sky-1000 text-2xl font-semibold">
 							{content["results.detail.apply.title"]}
@@ -81,19 +96,10 @@ export function OccupationDetailBody({
 							{content["results.detail.apply.description"]}
 						</p>
 					</div>
-					<Link
-						to={ROUTE_PATHS.resultsFreeSpots}
-						onClick={onApplyClick}
-						aria-label={content["results.detail.apply.cta.ariaLabel"]}
-						className="h-12 flex items-center justify-center gap-2 w-full py-2 px-5 rounded-2xl text-base font-medium transition-colors
-								focus-visible:outline focus-visible:outline-2 focus-visible:outline-sky-500 active:bg-sky-200 active:text-sky-900
-								bg-sky-300 text-sky-1000 md:hover:bg-sky-200 md:hover:text-sky-900"
-					>
-						{content["results.detail.apply.cta"]}
-						{occupationVacanciesCount !== undefined &&
-							occupationVacanciesCount > 0 &&
-							` (${occupationVacanciesCount})`}
-					</Link>
+					<OccupationDetailApplyLink
+						ref={inlineApplyRef}
+						hidden={!isInlineApplyVisible}
+					/>
 				</div>
 			</div>
 			{nextOccupations.length > 0 && (
@@ -129,6 +135,13 @@ export function OccupationDetailBody({
 								</Link>
 							);
 						})}
+					</div>
+				</div>
+			)}
+			{!isInlineApplyVisible && (
+				<div className="fixed bottom-0 left-0 right-0 p-4 z-50">
+					<div className="px-3">
+						<OccupationDetailApplyLink />
 					</div>
 				</div>
 			)}
