@@ -8,17 +8,19 @@ import {
 } from "../filter-bottom-sheet/OccupationTagsFilterBottomSheet";
 import { useFilterSheet } from "../filter-bottom-sheet/useFilterSheet";
 import { ResultCard } from "./ResultCard";
-import { ResultsPageHeader } from "./ResultsPageHeader";
 import { BottomCard } from "./BottomCard";
 import { ResultsFilterBar } from "./ResultsFilterBar";
 import { buildResultTagChips } from "./utils/resultTagChips";
 import { applyOccupationFilters } from "./utils/applyOccupationFilters";
+import { BottomNav } from "../bottom-nav/BottomNav";
+import { useFetchVacancies } from "./useFetchVacancies";
 
 const DEFAULT_TAG_FILTERS: OccupationTagsFilterState = {
 	selectedOccupationTypeTagIds: [],
 };
 
 export function ResultsPage() {
+	useFetchVacancies();
 	const matchResults = useMatchResultsStore((state) => state.matchResults);
 	const favoriteOccupationIds = useMatchResultsStore(
 		(state) => state.favoriteOccupationIds,
@@ -55,8 +57,10 @@ export function ResultsPage() {
 	}, []);
 
 	return (
-		<div className="flex flex-col h-full">
-			<ResultsPageHeader title={content["results.title"]} />
+		<div className="flex flex-col h-full pb-16">
+			<h1 className="text-3xl font-semibold text-sky-900 text-left py-2 px-[18px]">
+				{content["results.title"]}
+			</h1>
 			<ResultsFilterBar
 				hasLocationFilter={false}
 				selectedOccupationTypeTagIds={
@@ -102,6 +106,7 @@ export function ResultsPage() {
 					</div>
 				)}
 			</div>
+			<BottomNav />
 		</div>
 	);
 }

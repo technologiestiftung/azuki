@@ -8,7 +8,6 @@ import {
 	type OccupationsFilterState,
 } from "../../filter-bottom-sheet/OccupationsFilterBottomSheet";
 import { useFilterSheet } from "../../filter-bottom-sheet/useFilterSheet";
-import { ResultsPageHeader } from "../ResultsPageHeader";
 import { ResultsFilterBar } from "../ResultsFilterBar";
 import {
 	buildOccupationFilterChips,
@@ -23,6 +22,8 @@ import {
 } from "../../filter-bottom-sheet/LocationFilterBottomSheet";
 import { hasCustomLocationFilter } from "../../filter-bottom-sheet/plzLocality";
 import { VacancyCard } from "./VacancyCard";
+import { BottomNav } from "../../bottom-nav/BottomNav";
+import { useFetchVacancies } from "../useFetchVacancies";
 
 const DEFAULT_OCCUPATION_FILTERS: OccupationsFilterState = {
 	selectedOccupationIds: [],
@@ -86,6 +87,7 @@ export function VacanciesPage() {
 	const toggleVacancyFavorite = useMatchResultsStore(
 		(state) => state.toggleVacancyFavorite,
 	);
+	const vacanciesCount = useMatchResultsStore((state) => state.vacanciesCount);
 	const vacancies = useAppStore((state) => state.vacancies);
 	const fetchError = useAppStore((state) => state.vacanciesFetchError);
 	const location = useAppStore((state) => state.location);
@@ -213,8 +215,12 @@ export function VacanciesPage() {
 
 	return (
 		<>
-			<div className="flex flex-col h-full">
-				<ResultsPageHeader title={content["results.title"]} />
+			<div className="flex flex-col h-full pb-16">
+				<h1 className="text-3xl font-semibold text-sky-900 text-left py-2 px-[18px]">
+					<span className="text-sky-400">{vacanciesCount}</span>{" "}
+					{content["vacancies.filter.occupations.title"]}
+				</h1>
+
 				<ResultsFilterBar
 					hasLocationFilter={true}
 					appliedLocationFilter={locationFilter.appliedValue}
@@ -322,6 +328,7 @@ export function VacanciesPage() {
 					</div>
 				)}
 			</div>
+			<BottomNav />
 		</>
 	);
 }

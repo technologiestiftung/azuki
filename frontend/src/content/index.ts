@@ -418,12 +418,16 @@ export const content = {
 	"loading.waiting.description":
 		"Einen Moment – gleich geht's zu deinen Ergebnissen.",
 
+	//Bottom Navigation
+
+	"bottomNav.results.ariaLabel": "Zur Ausbildungsberufe",
+	"bottomNav.results.label": "Berufe",
+	"bottomNav.vacancies.ariaLabel": "Zur Freie Stellen-Ansicht",
+	"bottomNav.vacancies.label": "Freie Stellen",
+	"bottomNav.profile.ariaLabel": "Zur Profil-Ansicht",
+	"bottomNav.profile.label": "Profil",
 	// Results
-	"results.title": "Deine Ergebnisse",
-	"results.tab.results": "Ausbildungsberufe",
-	"results.tab.results.ariaLabel": "Zur Ausbildungsberufe-Ansicht",
-	"results.tab.freeSpots": "Freie Stellen",
-	"results.tab.freeSpots.ariaLabel": "Zur Freie Stellen-Ansicht",
+	"results.title": "Ausbildungsberufe für dich",
 	"results.bottomCard.title": "Kein passender Ausbildungsberuf dabei?",
 	"results.bottomCard.resetCta": "Fragen wiederholen",
 	"results.bottomCard.consultationCta": "Beratung anfragen",
@@ -467,7 +471,7 @@ export const content = {
 	"results.previewHeading": "Beispiele in deiner Nähe",
 	"results.startDatePrefix": "Start:",
 	// Vacancies
-	"vacancies.filter.occupations.title": "Beruf",
+	"vacancies.filter.occupations.title": "Freie Stellen für dich",
 	"vacancies.filter.occupations.title.short": "Beruf",
 	"vacancies.filter.occupations.filterButton.ariaLabel": "Berufe filtern",
 	"vacancies.startDate": "Beginn ab",
