@@ -66,7 +66,7 @@ export const BottomNav = () => {
 								</div>
 
 								<span
-									className={`text-sm font-normal ${pathname === item.href ? "text-sky-400" : "text-sky-shade-110"}`}
+									className={`text-sm font-normal text-center ${pathname === item.href ? "text-sky-400" : "text-sky-shade-110"}`}
 								>
 									{item.label}
 								</span>
