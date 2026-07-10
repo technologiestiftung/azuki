@@ -80,6 +80,7 @@ function getVacancyEmptyState({
 }
 
 export function VacanciesPage() {
+	useFetchVacancies();
 	const matchResults = useMatchResultsStore((state) => state.matchResults);
 	const favoriteVacancyKeys = useMatchResultsStore(
 		(state) => state.favoriteVacancyKeys,
