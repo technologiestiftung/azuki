@@ -45,9 +45,12 @@ export function FitDonutChart({
 	const radius = (size - strokeWidth) / 2;
 	const circumference = 2 * Math.PI * radius;
 	const clampedPercent = Math.min(100, Math.max(0, animatedPercent));
+	// Round caps extend the arc by half the stroke width at the end; subtract
+	// that so the visible leading edge matches the displayed percentage.
+	const capOffset = strokeWidth / 2;
 	const progressLength = Math.max(
 		0,
-		(clampedPercent / 100) * circumference - strokeWidth,
+		(clampedPercent / 100) * circumference - capOffset,
 	);
 	const strokeDashoffset = circumference - progressLength;
 	const center = size / 2;

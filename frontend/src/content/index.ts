@@ -506,7 +506,7 @@ export const content = {
 		"Du hast ein paar Fragen beantwortet, z.B. zu deiner Schulbildung, deinen Interessen und deinen Stärken. Für deine Antworten berechnen wir Punkte. So finden wir Ausbildungsberufe, die am besten zu dir passen.",
 	"results.detail.whyItMatches.title": "Warum dieser Beruf zu dir passt",
 	"results.detail.whyItMatches.notMatchTitle":
-		"Passt nicht zu dir, aber gehört zum Beruf",
+		"Warum dieser Beruf nicht zu dir passt",
 	"results.detail.whyItMatches.empty":
 		"Bei diesem Beruf ist gerade nichts dabei, das zu dir passt. Vielleicht gefällt er dir trotzdem.",
 	"results.detail.whyItMatches.notMatchEmpty":

@@ -98,7 +98,7 @@ export function OccupationDetailBody({
 			</div>
 			{nextOccupations.length > 0 && (
 				<div className="flex flex-col gap-2 pt-[25px] pb-4 bg-sky-50">
-					<h3 className="text-sky-900 text-2xl font-semibold text-left">
+					<h3 className="text-sky-900 text-2xl font-semibold text-left px-[19px]">
 						{content["results.detail.moreOccupations.title"]}
 					</h3>
 					<div className="flex gap-2 w-full overflow-x-scroll [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
