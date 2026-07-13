@@ -438,8 +438,6 @@ export const content = {
 	"results.favorite.add": "Zu Favoriten hinzufügen",
 	"results.favorite.remove": "Aus Favoriten entfernen",
 	"results.card.score.label": "Passt zu",
-	"results.occupationType.dual": "Duale Ausbildung",
-	"results.occupationType.school": "Schulische Ausbildung",
 	"results.noResults":
 		"Wir haben leider keine Ausbildungsberufe zu deiner Auswahl gefunden.",
 	// Filter Bottom Sheet

@@ -23,7 +23,7 @@ export const BottomNav = () => {
 			iconInactive: "/icons/briefcase-gray.svg",
 		},
 		{
-			href: ROUTE_PATHS.resultsFreeSpots,
+			href: ROUTE_PATHS.resultsVacancies,
 			ariaLabel: content["bottomNav.vacancies.ariaLabel"],
 			label: content["bottomNav.vacancies.label"],
 			iconActive: "/icons/list-blue.svg",
