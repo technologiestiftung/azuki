@@ -62,6 +62,13 @@ export function ResultsPage() {
 		setShowFavoritesOnly((prev) => !prev);
 	}, []);
 
+	const handleDownload = useCallback(async () => {
+		const { exportOccupationsPdf } = await import(
+			"./utils/exportOccupationsPdf"
+		);
+		exportOccupationsPdf(visibleOccupations);
+	}, [visibleOccupations]);
+
 	return (
 		<div className="flex flex-col h-full pb-16">
 			<ResultsPageHeader
@@ -69,6 +76,8 @@ export function ResultsPage() {
 				title={content["results.title"]}
 				shareAriaLabel={content["results.share.ariaLabel"]}
 				downloadAriaLabel={content["results.download.ariaLabel"]}
+				onDownload={handleDownload}
+				downloadDisabled={visibleOccupations.length === 0}
 			/>
 			<ResultsFilterBar
 				hasLocationFilter={false}

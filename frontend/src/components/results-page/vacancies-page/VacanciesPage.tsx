@@ -207,6 +207,11 @@ export function VacanciesPage() {
 		favoriteVacancyKeySet,
 	]);
 
+	const handleDownload = useCallback(async () => {
+		const { exportVacanciesPdf } = await import("../utils/exportVacanciesPdf");
+		exportVacanciesPdf(vacancyCards);
+	}, [vacancyCards]);
+
 	const locationFilterApplied = hasCustomLocationFilter(
 		locationFilter.appliedValue,
 	);
@@ -234,6 +239,8 @@ export function VacanciesPage() {
 					}
 					shareAriaLabel={content["vacancies.share.ariaLabel"]}
 					downloadAriaLabel={content["vacancies.download.ariaLabel"]}
+					onDownload={handleDownload}
+					downloadDisabled={vacancyCards.length === 0}
 				/>
 
 				<ResultsFilterBar
