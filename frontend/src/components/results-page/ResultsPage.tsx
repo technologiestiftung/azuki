@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useMemo, useState, type UIEvent } from "react";
 import { useMatchResultsStore } from "../../store/useMatchResultsStore";
 import { content } from "../../content";
 import { type MatchedOccupation } from "@azuki/shared";
@@ -14,10 +14,13 @@ import { buildResultTagChips } from "./utils/resultTagChips";
 import { applyOccupationFilters } from "./utils/applyOccupationFilters";
 import { BottomNav } from "../bottom-nav/BottomNav";
 import { useFetchVacancies } from "./useFetchVacancies";
+import { ResultsListHeaderCollapsed } from "./ResultsListHeaderCollapsed";
 
 const DEFAULT_TAG_FILTERS: OccupationTagsFilterState = {
 	selectedOccupationTypeTagIds: [],
 };
+
+const COLLAPSED_HEADER_SCROLL_THRESHOLD = 64;
 
 export function ResultsPage() {
 	useFetchVacancies();
@@ -52,15 +55,43 @@ export function ResultsPage() {
 	const openTagFilter = tagFilter.open;
 	const closeTagFilter = tagFilter.close;
 
+	const [scrollProgress, setScrollProgress] = useState(0);
+
 	const toggleFavoritesOnly = useCallback(() => {
 		setShowFavoritesOnly((prev) => !prev);
 	}, []);
 
+	const handleListScroll = useCallback((event: UIEvent<HTMLDivElement>) => {
+		const { scrollTop } = event.currentTarget;
+		setScrollProgress(
+			Math.min(1, scrollTop / COLLAPSED_HEADER_SCROLL_THRESHOLD),
+		);
+	}, []);
+
 	return (
 		<div className="flex flex-col h-full pb-16">
-			<h1 className="text-3xl font-semibold text-sky-900 text-left py-2 px-[18px]">
-				{content["results.title"]}
-			</h1>
+			<div className="relative shrink-0">
+				<div
+					className="absolute top-0 inset-x-0 z-10 bg-white transition-opacity duration-150"
+					style={{
+						opacity: scrollProgress,
+						pointerEvents: scrollProgress < 0.5 ? "none" : "auto",
+					}}
+					aria-hidden={scrollProgress < 0.5}
+				>
+					<ResultsListHeaderCollapsed />
+				</div>
+				<h1
+					className="text-3xl font-semibold text-sky-900 text-left py-2 px-[18px] transition-opacity duration-150"
+					style={{
+						opacity: 1 - scrollProgress,
+						pointerEvents: scrollProgress >= 0.5 ? "none" : "auto",
+					}}
+					aria-hidden={scrollProgress >= 0.5}
+				>
+					{content["results.title"]}
+				</h1>
+			</div>
 			<ResultsFilterBar
 				hasLocationFilter={false}
 				selectedOccupationTypeTagIds={
@@ -80,7 +111,10 @@ export function ResultsPage() {
 				onReset={tagFilter.reset}
 			/>
 
-			<div className="flex-1 px-4 pb-4 space-y-3 overflow-y-auto">
+			<div
+				className="flex-1 px-4 pb-4 space-y-3 overflow-y-auto"
+				onScroll={handleListScroll}
+			>
 				{visibleOccupations.length > 0 ? (
 					<>
 						{visibleOccupations.map((occupation: MatchedOccupation) => (
