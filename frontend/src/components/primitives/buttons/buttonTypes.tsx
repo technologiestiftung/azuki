@@ -13,4 +13,5 @@ export interface ButtonProps {
 	testId?: string;
 	icon?: ReactNode;
 	iconSrc?: string;
+	iconSize?: string;
 }

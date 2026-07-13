@@ -19,12 +19,14 @@ export const ResultsPageHeaderCollapsed = ({
 			<div className="flex gap-2 justify-end">
 				<div className="flex gap-1.5 items-center">
 					<GhostIconButton
-						iconSrc="/icons/share.svg"
-						ariaLabel={shareAriaLabel}
+						iconSrc="/icons/download.svg"
+						iconSize="w-5 h-5"
+						ariaLabel={downloadAriaLabel}
 					/>
 					<GhostIconButton
-						iconSrc="/icons/download.svg"
-						ariaLabel={downloadAriaLabel}
+						iconSrc="/icons/share.svg"
+						iconSize="w-5 h-5"
+						ariaLabel={shareAriaLabel}
 					/>
 				</div>
 			</div>
