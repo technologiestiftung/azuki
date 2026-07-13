@@ -367,7 +367,7 @@ export function BottomSheet({
 		<>
 			<button
 				type="button"
-				className={`fixed inset-0 z-40 bg-sky-1000/80 bg-blur-[2px] ${
+				className={`z-50 fixed inset-0 bg-sky-1000/80 bg-blur-[2px] ${
 					isClosing ? "pointer-events-none animate-fadeOut" : "animate-fadeIn"
 				}`}
 				aria-label={overlayDismissLabel}

@@ -33,7 +33,7 @@ export const BottomNav = () => {
 	];
 
 	return (
-		<div className="max-w-[430px] mx-auto z-50 fixed bottom-0 left-0 right-0 py-[7px] px-2 bg-white border-t border-sky-shade-20">
+		<div className="max-w-[430px] mx-auto z-40 fixed bottom-0 left-0 right-0 py-[7px] px-2 bg-white border-t border-sky-shade-20">
 			<nav className="flex justify-between items-center">
 				<ul className="flex items-center w-full justify-between">
 					{navItems.map((item) => (

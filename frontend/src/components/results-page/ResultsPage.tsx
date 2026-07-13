@@ -14,7 +14,7 @@ import { buildResultTagChips } from "./utils/resultTagChips";
 import { applyOccupationFilters } from "./utils/applyOccupationFilters";
 import { BottomNav } from "../bottom-nav/BottomNav";
 import { useFetchVacancies } from "./useFetchVacancies";
-import { ResultsListHeaderCollapsed } from "./ResultsListHeaderCollapsed";
+import { ResultsPageHeaderCollapsed } from "./ResultsPageHeaderCollapsed";
 
 const DEFAULT_TAG_FILTERS: OccupationTagsFilterState = {
 	selectedOccupationTypeTagIds: [],
@@ -79,7 +79,7 @@ export function ResultsPage() {
 					}}
 					aria-hidden={scrollProgress < 0.5}
 				>
-					<ResultsListHeaderCollapsed />
+					<ResultsPageHeaderCollapsed title={content["results.title"]} />
 				</div>
 				<h1
 					className="text-3xl font-semibold text-sky-900 text-left py-2 px-[18px] transition-opacity duration-150"

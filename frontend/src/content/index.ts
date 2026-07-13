@@ -469,7 +469,7 @@ export const content = {
 	"results.previewHeading": "Beispiele in deiner Nähe",
 	"results.startDatePrefix": "Start:",
 	// Vacancies
-	"vacancies.filter.occupations.title": "Freie Stellen für dich",
+	"vacancies.title": "Freie Stellen für dich",
 	"vacancies.filter.occupations.title.short": "Beruf",
 	"vacancies.filter.occupations.filterButton.ariaLabel": "Berufe filtern",
 	"vacancies.startDate": "Beginn ab",

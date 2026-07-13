@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState, type UIEvent } from "react";
 import type { VacancyPreview, MatchedOccupation } from "@azuki/shared";
 import { useMatchResultsStore } from "../../../store/useMatchResultsStore";
 import { useAppStore } from "../../../store/useAppStore";
@@ -24,10 +24,13 @@ import { hasCustomLocationFilter } from "../../filter-bottom-sheet/plzLocality";
 import { VacancyCard } from "./VacancyCard";
 import { BottomNav } from "../../bottom-nav/BottomNav";
 import { useFetchVacancies } from "../useFetchVacancies";
+import { ResultsPageHeaderCollapsed } from "../ResultsPageHeaderCollapsed";
 
 const DEFAULT_OCCUPATION_FILTERS: OccupationsFilterState = {
 	selectedOccupationIds: [],
 };
+
+const COLLAPSED_HEADER_SCROLL_THRESHOLD = 64;
 
 interface VacancyListItem {
 	key: string;
@@ -93,6 +96,7 @@ export function VacanciesPage() {
 	const fetchError = useAppStore((state) => state.vacanciesFetchError);
 	const location = useAppStore((state) => state.location);
 	const setLocation = useAppStore((state) => state.setLocation);
+
 	const occupations = matchResults?.occupations ?? [];
 	const occupationFilter = useFilterSheet(DEFAULT_OCCUPATION_FILTERS);
 	const locationFilter = useFilterSheet(DEFAULT_LOCATION_FILTER, {
@@ -121,6 +125,15 @@ export function VacanciesPage() {
 		() => buildOccupationFilterChips(occupations),
 		[occupations],
 	);
+
+	const [scrollProgress, setScrollProgress] = useState(0);
+
+	const handleListScroll = useCallback((event: UIEvent<HTMLDivElement>) => {
+		const { scrollTop } = event.currentTarget;
+		setScrollProgress(
+			Math.min(1, scrollTop / COLLAPSED_HEADER_SCROLL_THRESHOLD),
+		);
+	}, []);
 
 	const openOccupationFilter = occupationFilter.open;
 	const closeOccupationFilter = occupationFilter.close;
@@ -217,10 +230,22 @@ export function VacanciesPage() {
 	return (
 		<>
 			<div className="flex flex-col h-full pb-16">
-				<h1 className="text-3xl font-semibold text-sky-900 text-left py-2 px-[18px]">
-					<span className="text-sky-400">{vacanciesCount}</span>{" "}
-					{content["vacancies.filter.occupations.title"]}
-				</h1>
+				<div className="relative shrink-0">
+					<div
+						className="absolute top-0 inset-x-0 z-10 bg-white transition-opacity duration-150"
+						style={{
+							opacity: scrollProgress,
+							pointerEvents: scrollProgress < 0.5 ? "none" : "auto",
+						}}
+						aria-hidden={scrollProgress < 0.5}
+					>
+						<ResultsPageHeaderCollapsed title={content["vacancies.title"]} />
+					</div>
+					<h1 className="text-3xl font-semibold text-sky-900 text-left py-2 px-[18px]">
+						<span className="text-sky-400">{vacanciesCount}</span>{" "}
+						{content["vacancies.title"]}
+					</h1>
+				</div>
 
 				<ResultsFilterBar
 					hasLocationFilter={true}
@@ -231,8 +256,7 @@ export function VacanciesPage() {
 					resolveOccupationFilterLabel={(id) =>
 						getOccupationFilterLabel(id, occupations)
 					}
-					occupationFilterTitle={content["vacancies.filter.occupations.title"]}
-					occupationFilterTitleShort={
+					occupationFilterTitle={
 						content["vacancies.filter.occupations.title.short"]
 					}
 					occupationFilterAriaLabel={
@@ -288,7 +312,10 @@ export function VacanciesPage() {
 						</div>
 					</div>
 				) : (
-					<div className="flex-1 px-4 pb-4 space-y-3 overflow-y-auto">
+					<div
+						className="flex-1 px-4 pb-4 space-y-3 overflow-y-auto"
+						onScroll={handleListScroll}
+					>
 						{loading && vacancyCards.length === 0 ? (
 							<p className="py-8 text-center text-sm text-gray-500">…</p>
 						) : (
