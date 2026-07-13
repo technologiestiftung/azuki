@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState, type UIEvent } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import type { VacancyPreview, MatchedOccupation } from "@azuki/shared";
 import { useMatchResultsStore } from "../../../store/useMatchResultsStore";
 import { useAppStore } from "../../../store/useAppStore";
@@ -24,13 +24,14 @@ import { hasCustomLocationFilter } from "../../filter-bottom-sheet/plzLocality";
 import { VacancyCard } from "./VacancyCard";
 import { BottomNav } from "../../bottom-nav/BottomNav";
 import { useFetchVacancies } from "../useFetchVacancies";
-import { ResultsPageHeaderCollapsed } from "../ResultsPageHeaderCollapsed";
+import {
+	ResultsPageHeader,
+	useResultsPageScrollProgress,
+} from "../ResultsPageHeader";
 
 const DEFAULT_OCCUPATION_FILTERS: OccupationsFilterState = {
 	selectedOccupationIds: [],
 };
-
-const COLLAPSED_HEADER_SCROLL_THRESHOLD = 64;
 
 interface VacancyListItem {
 	key: string;
@@ -126,14 +127,7 @@ export function VacanciesPage() {
 		[occupations],
 	);
 
-	const [scrollProgress, setScrollProgress] = useState(0);
-
-	const handleListScroll = useCallback((event: UIEvent<HTMLDivElement>) => {
-		const { scrollTop } = event.currentTarget;
-		setScrollProgress(
-			Math.min(1, scrollTop / COLLAPSED_HEADER_SCROLL_THRESHOLD),
-		);
-	}, []);
+	const { scrollProgress, handleListScroll } = useResultsPageScrollProgress();
 
 	const openOccupationFilter = occupationFilter.open;
 	const closeOccupationFilter = occupationFilter.close;
@@ -230,22 +224,17 @@ export function VacanciesPage() {
 	return (
 		<>
 			<div className="flex flex-col h-full pb-16">
-				<div className="relative shrink-0">
-					<div
-						className="absolute top-0 inset-x-0 z-10 bg-white transition-opacity duration-150"
-						style={{
-							opacity: scrollProgress,
-							pointerEvents: scrollProgress < 0.5 ? "none" : "auto",
-						}}
-						aria-hidden={scrollProgress < 0.5}
-					>
-						<ResultsPageHeaderCollapsed title={content["vacancies.title"]} />
-					</div>
-					<h1 className="text-3xl font-semibold text-sky-900 text-left py-2 px-[18px]">
-						<span className="text-sky-400">{vacanciesCount}</span>{" "}
-						{content["vacancies.title"]}
-					</h1>
-				</div>
+				<ResultsPageHeader
+					scrollProgress={scrollProgress}
+					title={
+						<>
+							<span className="text-sky-400">{vacanciesCount}</span>{" "}
+							{content["vacancies.title"]}
+						</>
+					}
+					shareAriaLabel={content["vacancies.share.ariaLabel"]}
+					downloadAriaLabel={content["vacancies.download.ariaLabel"]}
+				/>
 
 				<ResultsFilterBar
 					hasLocationFilter={true}

@@ -428,6 +428,8 @@ export const content = {
 	"bottomNav.profile.label": "Profil",
 	// Results
 	"results.title": "Ausbildungsberufe für dich",
+	"results.share.ariaLabel": "Ausbildungsberufe teilen",
+	"results.download.ariaLabel": "Ausbildungsberufe herunterladen",
 	"results.bottomCard.title": "Kein passender Ausbildungsberuf dabei?",
 	"results.bottomCard.resetCta": "Fragen wiederholen",
 	"results.bottomCard.consultationCta": "Beratung anfragen",
@@ -470,6 +472,8 @@ export const content = {
 	"results.startDatePrefix": "Start:",
 	// Vacancies
 	"vacancies.title": "Freie Stellen für dich",
+	"vacancies.share.ariaLabel": "Freie Stellen teilen",
+	"vacancies.download.ariaLabel": "Freie Stellen herunterladen",
 	"vacancies.filter.occupations.title.short": "Beruf",
 	"vacancies.filter.occupations.filterButton.ariaLabel": "Berufe filtern",
 	"vacancies.startDate": "Beginn ab",
