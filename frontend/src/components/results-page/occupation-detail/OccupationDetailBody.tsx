@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useMemo } from "react";
 import { Link } from "react-router-dom";
 import {
 	formatOccupationDisplayName,
@@ -12,6 +12,7 @@ import { OccupationDetailMetaInfo } from "./OccupationDetailMetaInfo";
 import { OccupationDetailMatchSection } from "./OccupationDetailMatchSection";
 import { OccupationImageCarousel } from "./OccupationImageCarousel";
 import { OccupationDetailApplyLink } from "./OccupationDetailApplyLink";
+import { useAppStore } from "../../../store/useAppStore";
 
 interface OccupationDetailBodyProps {
 	occupation: Occupation | null;
@@ -49,6 +50,19 @@ export function OccupationDetailBody({
 		observer.observe(element);
 		return () => observer.disconnect();
 	}, []);
+
+	const vacancies = useAppStore((state) => state.vacancies);
+
+	const occupationVacanciesCount = useMemo(() => {
+		const occupationName = matchedOccupation?.rawName;
+		if (!occupationName || !vacancies) {
+			return undefined;
+		}
+		return (
+			vacancies.results.find((result) => result.occupation === occupationName)
+				?.previews.length ?? 0
+		);
+	}, [matchedOccupation?.rawName, vacancies]);
 
 	return (
 		<>
@@ -90,15 +104,22 @@ export function OccupationDetailBody({
 				<div className="flex flex-col gap-5 px-3 py-5 rounded-2xl bg-sky-50 border border-sky-100">
 					<div className="flex flex-col gap-[7px] text-center">
 						<h3 className="text-sky-1000 text-2xl font-semibold">
-							{content["results.detail.apply.title"]}
+							{occupationVacanciesCount !== undefined &&
+							occupationVacanciesCount > 0
+								? content["results.detail.apply.title"]
+								: content["results.detail.apply.empty.title"]}
 						</h3>
 						<p className="text-lg font-normal text-sky-1000">
-							{content["results.detail.apply.description"]}
+							{occupationVacanciesCount !== undefined &&
+							occupationVacanciesCount > 0
+								? content["results.detail.apply.description"]
+								: content["results.detail.apply.empty.description"]}
 						</p>
 					</div>
 					<OccupationDetailApplyLink
 						ref={inlineApplyRef}
 						hidden={!isInlineApplyVisible}
+						occupationVacanciesCount={occupationVacanciesCount}
 					/>
 				</div>
 			</div>
@@ -138,13 +159,17 @@ export function OccupationDetailBody({
 					</div>
 				</div>
 			)}
-			{!isInlineApplyVisible && (
-				<div className="fixed bottom-0 left-0 right-0 p-4 z-50">
-					<div className="px-3">
-						<OccupationDetailApplyLink />
+			{!isInlineApplyVisible &&
+				occupationVacanciesCount !== undefined &&
+				occupationVacanciesCount > 0 && (
+					<div className="fixed bottom-0 left-0 right-0 p-4 z-50">
+						<div className="px-3">
+							<OccupationDetailApplyLink
+								occupationVacanciesCount={occupationVacanciesCount}
+							/>
+						</div>
 					</div>
-				</div>
-			)}
+				)}
 		</>
 	);
 }

@@ -631,6 +631,9 @@ export const content = {
 	"results.detail.apply.description": "Entdecke jetzt freie Stellen.",
 	"results.detail.apply.cta": "Freie Stellen anzeigen",
 	"results.detail.apply.cta.ariaLabel": "Freie Stellen anzeigen",
+	"results.detail.apply.empty.title": "Aktuell gibt es keine freien Stellen",
+	"results.detail.apply.empty.description":
+		"Bald kommen Neue – Schau einfach später wieder rein.",
 	// Occupation Detail Images
 	"results.detail.images.title": "So sieht der Arbeitsalltag aus",
 	"results.detail.images.carousel.ariaLabel": "Bild {current} von {total}",
