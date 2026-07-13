@@ -41,7 +41,7 @@ export const OccupationDetailApplyLink = forwardRef<
 			aria-label={content["results.detail.apply.cta.ariaLabel"]}
 			aria-hidden={hidden}
 			tabIndex={hidden ? -1 : undefined}
-			className={`h-12 flex items-center justify-center gap-2 w-full max-w-[374px] mx-auto py-2 px-5 rounded-2xl text-base font-medium transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-sky-500 active:bg-sky-200 active:text-sky-900 bg-sky-300 text-sky-1000 md:hover:bg-sky-200 md:hover:text-sky-900${hidden ? " invisible pointer-events-none" : ""}`}
+			className={`h-12 flex items-center justify-center gap-2 w-full max-w-[374px] mx-auto py-2 px-5 rounded-2xl text-base font-medium transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-sky-500 active:bg-sky-200 active:text-sky-900 bg-sky-300 text-sky-1000 md:hover:bg-sky-200 md:hover:text-sky-900 ${hidden ? " invisible pointer-events-none" : ""}`}
 		>
 			{label}
 		</Link>

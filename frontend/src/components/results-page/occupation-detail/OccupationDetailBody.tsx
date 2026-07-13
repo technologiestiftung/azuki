@@ -162,7 +162,7 @@ export function OccupationDetailBody({
 			{!isInlineApplyVisible &&
 				occupationVacanciesCount !== undefined &&
 				occupationVacanciesCount > 0 && (
-					<div className="fixed bottom-0 left-0 right-0 p-4 z-50">
+					<div className="fixed bottom-0 left-0 right-0 p-4 z-40">
 						<div className="px-3">
 							<OccupationDetailApplyLink
 								occupationVacanciesCount={occupationVacanciesCount}
