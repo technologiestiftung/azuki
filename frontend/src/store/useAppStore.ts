@@ -47,6 +47,7 @@ function normalizeProfile(
 		favoriteSubjects: merged.favoriteSubjects ?? [],
 		customSubjects: merged.customSubjects ?? [],
 		interests: merged.interests ?? [],
+		preferredJobs: merged.preferredJobs ?? [],
 		customInterests: merged.customInterests ?? [],
 		workExpectations: merged.workExpectations ?? [],
 		customWorkExpectations: merged.customWorkExpectations ?? [],
@@ -86,6 +87,8 @@ interface AppActions {
 	toggleWorkExpectation: (value: string) => void;
 	toggleInterest: (interest: string) => void;
 	addCustomInterest: (interest: string) => void;
+	addPreferredJobs: (preferredJobs: string[]) => void;
+	togglePreferredJob: (preferredJob: string) => void;
 	addCustomSubject: (subject: string) => void;
 	addCustomWorkExpectation: (workExpectation: string) => void;
 	addCustomStrength: (strength: string) => void;
@@ -172,6 +175,36 @@ export const useAppStore = create<AppState & AppActions>()(
 						profile: { ...state.profile, interests },
 					};
 				}),
+			addPreferredJobs: (preferredJobs) => {
+				clearMatchResults();
+				set((state) => {
+					const currentPreferredJobs = state.profile.preferredJobs;
+					const newPreferredJobs = preferredJobs.filter(
+						(preferredJob) => !currentPreferredJobs.includes(preferredJob),
+					);
+					if (newPreferredJobs.length === 0) {
+						return state;
+					}
+					return {
+						profile: {
+							...state.profile,
+							preferredJobs: [...currentPreferredJobs, ...newPreferredJobs],
+						},
+					};
+				});
+			},
+			togglePreferredJob: (preferredJob) => {
+				clearMatchResults();
+				set((state) => {
+					const currentPreferredJobs = state.profile.preferredJobs ?? [];
+					const preferredJobs = currentPreferredJobs.includes(preferredJob)
+						? currentPreferredJobs.filter((job) => job !== preferredJob)
+						: [...currentPreferredJobs, preferredJob];
+					return {
+						profile: { ...state.profile, preferredJobs },
+					};
+				});
+			},
 
 			addCustomInterest: (interest) => {
 				clearMatchResults();
