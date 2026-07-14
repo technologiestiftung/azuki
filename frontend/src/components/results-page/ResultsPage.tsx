@@ -28,12 +28,8 @@ const DEFAULT_TAG_FILTERS: OccupationTagsFilterState = {
 };
 
 export function ResultsPage() {
-	const {
-		isLoadingShared,
-		sharedLoadError,
-		hasSharedParam,
-		sharedVacancyParams,
-	} = useSharedMatchResults();
+	const { isLoadingShared, hasSharedParam, sharedVacancyParams } =
+		useSharedMatchResults();
 	useFetchVacancies({
 		pauseWhileLoadingShared: hasSharedParam && isLoadingShared,
 		sharedVacancyParams,
