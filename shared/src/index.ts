@@ -59,6 +59,17 @@ export type { Persona } from "./persona";
 
 export { formatOccupationDisplayName } from "./occupationDisplayName";
 
+export { fitPercent, scoreFromFitPercent } from "./fitPercent";
+
+export {
+	SHARED_OCCUPATIONS_PARAM,
+	SHARED_POSTCODE_PARAM,
+	SHARED_DISTANCE_PARAM,
+	parseSharedOccupationsParam,
+	buildSharedOccupationsParam,
+	type SharedOccupationEntry,
+} from "./sharedMatchParams";
+
 export { strengthScorePoints } from "./strengthScoring";
 export type {
 	PracticalExperienceEntry,

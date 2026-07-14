@@ -429,6 +429,9 @@ export const content = {
 	// Results
 	"results.title": "Ausbildungsberufe für dich",
 	"results.share.ariaLabel": "Ausbildungsberufe teilen",
+	"results.share.title": "Ausbildungsberufe für dich",
+	"results.share.text": "Schau dir diese passenden Ausbildungsberufe an.",
+
 	"results.download.ariaLabel": "Ausbildungsberufe herunterladen",
 	"results.export.filename": "ausbildungsberufe.pdf",
 	"results.export.occupation": "Beruf",
@@ -479,6 +482,8 @@ export const content = {
 	// Vacancies
 	"vacancies.title": "Freie Stellen für dich",
 	"vacancies.share.ariaLabel": "Freie Stellen teilen",
+	"vacancies.share.title": "Freie Stellen für dich",
+	"vacancies.share.text": "Schau dir diese freien Ausbildungsstellen an.",
 	"vacancies.download.ariaLabel": "Freie Stellen herunterladen",
 	"vacancies.export.filename": "freie-stellen.pdf",
 	"vacancies.export.occupation": "Beruf",

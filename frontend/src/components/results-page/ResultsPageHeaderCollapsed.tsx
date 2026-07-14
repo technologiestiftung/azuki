@@ -5,7 +5,9 @@ interface ResultsPageHeaderCollapsedProps {
 	shareAriaLabel: string;
 	downloadAriaLabel: string;
 	onDownload: () => void;
+	onShare: () => void;
 	downloadDisabled?: boolean;
+	shareDisabled?: boolean;
 }
 
 export const ResultsPageHeaderCollapsed = ({
@@ -13,7 +15,9 @@ export const ResultsPageHeaderCollapsed = ({
 	shareAriaLabel,
 	downloadAriaLabel,
 	onDownload,
+	onShare,
 	downloadDisabled = false,
+	shareDisabled = false,
 }: ResultsPageHeaderCollapsedProps) => {
 	return (
 		<div className="h-[60px] flex w-full items-center justify-between px-4 pt-3 pb-2 shrink-0 border-b border-sky-20 z-50">
@@ -33,6 +37,8 @@ export const ResultsPageHeaderCollapsed = ({
 						iconSrc="/icons/share.svg"
 						iconSize="w-5 h-5"
 						ariaLabel={shareAriaLabel}
+						onClick={onShare}
+						disabled={shareDisabled}
 					/>
 				</div>
 			</div>

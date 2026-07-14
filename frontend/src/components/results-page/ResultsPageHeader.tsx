@@ -26,7 +26,9 @@ interface ResultsPageHeaderProps {
 	shareAriaLabel: string;
 	downloadAriaLabel: string;
 	onDownload: () => void;
+	onShare: () => void;
 	downloadDisabled?: boolean;
+	shareDisabled?: boolean;
 }
 
 export function ResultsPageHeader({
@@ -35,7 +37,9 @@ export function ResultsPageHeader({
 	shareAriaLabel,
 	downloadAriaLabel,
 	onDownload,
+	onShare,
 	downloadDisabled = false,
+	shareDisabled = false,
 }: ResultsPageHeaderProps) {
 	const expandedHeight =
 		EXPANDED_HEADER_HEIGHT -
@@ -56,7 +60,9 @@ export function ResultsPageHeader({
 					shareAriaLabel={shareAriaLabel}
 					downloadAriaLabel={downloadAriaLabel}
 					onDownload={onDownload}
+					onShare={onShare}
 					downloadDisabled={downloadDisabled}
+					shareDisabled={shareDisabled}
 				/>
 			</div>
 			<div
@@ -79,6 +85,8 @@ export function ResultsPageHeader({
 						<SecondaryIconButton
 							iconSrc="/icons/share.svg"
 							ariaLabel={shareAriaLabel}
+							onClick={onShare}
+							disabled={shareDisabled}
 						/>
 					</div>
 				</div>

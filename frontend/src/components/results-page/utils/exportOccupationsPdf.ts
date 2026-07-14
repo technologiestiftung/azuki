@@ -1,9 +1,9 @@
 import {
+	fitPercent,
 	formatOccupationDisplayName,
 	type MatchedOccupation,
 } from "@azuki/shared";
 import { content } from "../../../content";
-import { fitPercent } from "./fitPercent";
 import { exportPdfTable } from "./exportPdfTable";
 
 const TABLE_HEADERS = [
