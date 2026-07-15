@@ -19,6 +19,7 @@ const EMPTY_PROFILE = {
 	favoriteSubjects: [],
 	customSubjects: [],
 	interests: [],
+	preferredJobs: [],
 	customInterests: [],
 	workExpectations: [],
 	customWorkExpectations: [],
