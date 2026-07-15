@@ -13,6 +13,7 @@ export function useFetchVacancies(): void {
 		(state) => state.setVacanciesFetchError,
 	);
 	const location = useAppStore((state) => state.location);
+	const preferredJobs = useAppStore((state) => state.profile.preferredJobs);
 	const occupations = matchResults?.occupations ?? [];
 
 	useEffect(() => {
@@ -31,6 +32,7 @@ export function useFetchVacancies(): void {
 					occupationNames,
 					{
 						distance: location.distance,
+						preferredJobs,
 						signal: controller.signal,
 					},
 				);
@@ -54,6 +56,7 @@ export function useFetchVacancies(): void {
 	}, [
 		vacancies,
 		occupations,
+		preferredJobs,
 		setVacancies,
 		setVacanciesFetchError,
 		location.postcode,

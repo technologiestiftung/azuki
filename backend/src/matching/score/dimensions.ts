@@ -11,7 +11,11 @@ import {
 	strengthScorePoints,
 	getActivePracticalExperiences,
 	getPracticalExperienceCategoryWeight,
+	PREFERRED_JOB_BOOST_BY_TIER,
+	PREFERRED_JOB_KEYWORD_POINT_PER_HIT,
+	PREFERRED_JOB_SCORE_CAP,
 } from "@azuki/shared";
+import { getBestPreferredJobTierForOccupation } from "../resolvePreferredJobs.js";
 import type { SalaryBands } from "./salaryScoreBands.js";
 import {
 	COMMUNICATION_SKILL_TAGS,
@@ -540,6 +544,36 @@ export function scorePracticalExperience(
 	}
 
 	return Math.min(score, PRACTICAL_EXPERIENCE_SCORE_CAP);
+}
+
+/**
+ * Scores how well an occupation matches the user's explicitly preferred jobs.
+ * Exact name matches get the strongest boost; substring and keyword tiers
+ * handle gender variants and vague free text. Capped at +30 total.
+ */
+export function scorePreferredJobs(
+	occupation: Occupation,
+	profile: UserProfile,
+): number {
+	const preferredJobs = profile.preferredJobs ?? [];
+	if (preferredJobs.length === 0) {
+		return 0;
+	}
+	if (scoreNoGos(occupation, profile) < 0) {
+		return 0;
+	}
+
+	const match = getBestPreferredJobTierForOccupation(occupation, preferredJobs);
+	if (!match) {
+		return 0;
+	}
+
+	let score = PREFERRED_JOB_BOOST_BY_TIER[match.tier];
+	if (match.tier === "keyword") {
+		score = match.keywordHits * PREFERRED_JOB_KEYWORD_POINT_PER_HIT;
+	}
+
+	return Math.min(score, PREFERRED_JOB_SCORE_CAP);
 }
 
 // Dispatcher over 7 fixed strength dimensions, each with bespoke checks.

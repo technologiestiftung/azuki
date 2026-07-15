@@ -61,13 +61,17 @@ export async function unlock(password: string): Promise<boolean> {
 export async function fetchVacancies(
 	postcode: string,
 	occupations: string[],
-	options: { distance?: number; signal?: AbortSignal } = {},
+	options: {
+		distance?: number;
+		signal?: AbortSignal;
+		preferredJobs?: string[];
+	} = {},
 ): Promise<VacanciesResponse> {
-	const { distance, signal } = options;
+	const { distance, signal, preferredJobs = [] } = options;
 	const res = await fetch(`${API_BASE}/vacancies`, {
 		method: "POST",
 		headers: headers(),
-		body: JSON.stringify({ postcode, occupations, distance }),
+		body: JSON.stringify({ postcode, occupations, preferredJobs, distance }),
 		signal,
 	});
 

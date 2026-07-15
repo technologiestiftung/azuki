@@ -5,7 +5,9 @@
  * byte-identical.
  */
 export function normName(s: string): string {
-	if (!s) return "";
+	if (!s) {
+		return "";
+	}
 	let n = s.toLowerCase().replace(/\s+/g, " ").trim();
 	n = n.replace(/\s*\([^)]*\)/g, "");
 	n = n.replace(/(\w+mann)\/(-?)\2?\1?(?:kauf|fach)?frau/g, "$1");

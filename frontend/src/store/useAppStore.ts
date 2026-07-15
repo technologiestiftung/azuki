@@ -9,6 +9,10 @@ import {
 	type VacanciesResponse,
 } from "../common";
 import { initialUserProfile } from "../profile/initialUserProfile";
+import {
+	dedupePreferredJobs,
+	isDuplicatePreferredJob,
+} from "../profile/preferredJobUtils";
 import { shouldPrefillProfile } from "../profile/prefillConfig";
 import { useMatchResultsStore } from "./useMatchResultsStore";
 
@@ -47,7 +51,7 @@ function normalizeProfile(
 		favoriteSubjects: merged.favoriteSubjects ?? [],
 		customSubjects: merged.customSubjects ?? [],
 		interests: merged.interests ?? [],
-		preferredJobs: merged.preferredJobs ?? [],
+		preferredJobs: dedupePreferredJobs(merged.preferredJobs ?? []),
 		customInterests: merged.customInterests ?? [],
 		workExpectations: merged.workExpectations ?? [],
 		customWorkExpectations: merged.customWorkExpectations ?? [],
@@ -178,17 +182,21 @@ export const useAppStore = create<AppState & AppActions>()(
 			addPreferredJobs: (preferredJobs) => {
 				clearMatchResults();
 				set((state) => {
-					const currentPreferredJobs = state.profile.preferredJobs;
-					const newPreferredJobs = preferredJobs.filter(
-						(preferredJob) => !currentPreferredJobs.includes(preferredJob),
-					);
-					if (newPreferredJobs.length === 0) {
+					const merged = [...state.profile.preferredJobs];
+					for (const preferredJob of preferredJobs) {
+						const trimmed = preferredJob.trim();
+						if (!trimmed || isDuplicatePreferredJob(merged, trimmed)) {
+							continue;
+						}
+						merged.push(trimmed);
+					}
+					if (merged.length === state.profile.preferredJobs.length) {
 						return state;
 					}
 					return {
 						profile: {
 							...state.profile,
-							preferredJobs: [...currentPreferredJobs, ...newPreferredJobs],
+							preferredJobs: merged,
 						},
 					};
 				});

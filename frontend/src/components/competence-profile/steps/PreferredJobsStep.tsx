@@ -4,6 +4,7 @@ import { content } from "../../../content/index";
 import { useFlowNavigation } from "../../../routing/useFlowNavigation";
 import { InputBottomSheet } from "../../input-bottom-sheet/InputBottomSheet";
 import { PrimaryThemedButton } from "../../primitives/buttons/PrimaryThemedButton";
+import { isDuplicatePreferredJob } from "../../../profile/preferredJobUtils";
 import { useAppStore } from "../../../store/useAppStore";
 import { Pill } from "../../primitives/buttons/Pill";
 
@@ -16,7 +17,10 @@ export const PreferredJobsStep = () => {
 
 	const handleAddPreferredJobs = (value: string) => {
 		const trimmedValue = value.trim();
-		if (trimmedValue && !profile.preferredJobs.includes(trimmedValue)) {
+		if (
+			trimmedValue &&
+			!isDuplicatePreferredJob(profile.preferredJobs, trimmedValue)
+		) {
 			addPreferredJobs([trimmedValue]);
 		}
 	};
