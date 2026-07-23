@@ -1,4 +1,10 @@
-import { useCallback, useState, type ReactNode, type UIEvent } from "react";
+import {
+	useCallback,
+	useState,
+	type HTMLAttributes,
+	type ReactNode,
+	type UIEvent,
+} from "react";
 import { GhostIconButton } from "../primitives/buttons/GhostIconButton";
 import { SecondaryIconButton } from "../primitives/buttons/SecondaryIconButton";
 
@@ -13,6 +19,33 @@ const COLLAPSED_TITLE_TOP = 1.3;
 
 export const RESULTS_PAGE_HEADER_EXPANDED_HEIGHT = `${EXPANDED_HEADER_HEIGHT}rem`;
 
+function sampleCubicBezier(t: number, point1: number, point2: number) {
+	const inverseT = 1 - t;
+	return (
+		3 * inverseT * inverseT * t * point1 +
+		3 * inverseT * t * t * point2 +
+		t * t * t
+	);
+}
+
+function easeHeaderProgress(progress: number) {
+	let lower = 0;
+	let upper = 1;
+
+	for (let iteration = 0; iteration < 12; iteration += 1) {
+		const midpoint = (lower + upper) / 2;
+		const x = sampleCubicBezier(midpoint, 0.72, 0.36);
+
+		if (x < progress) {
+			lower = midpoint;
+		} else {
+			upper = midpoint;
+		}
+	}
+
+	return sampleCubicBezier((lower + upper) / 2, 0, 1);
+}
+
 export function useResultsPageScrollProgress() {
 	const [scrollProgress, setScrollProgress] = useState(0);
 
@@ -22,7 +55,8 @@ export function useResultsPageScrollProgress() {
 			getComputedStyle(document.documentElement).fontSize,
 		);
 		const collapseDistance = HEADER_COLLAPSE_DISTANCE * rootFontSize;
-		setScrollProgress(Math.max(0, Math.min(1, scrollTop / collapseDistance)));
+		const progress = Math.max(0, Math.min(1, scrollTop / collapseDistance));
+		setScrollProgress(easeHeaderProgress(progress));
 	}, []);
 
 	return { scrollProgress, handleListScroll };
@@ -54,15 +88,8 @@ export function ResultsPageHeader({
 		EXPANDED_TITLE_FONT_SIZE -
 		scrollProgress * (EXPANDED_TITLE_FONT_SIZE - COLLAPSED_TITLE_FONT_SIZE);
 	const titleLineHeight = 1.3 + scrollProgress * 0.1;
-	const ActionButton =
-		scrollProgress < 0.5 ? SecondaryIconButton : GhostIconButton;
-	const actionButtonProps =
-		scrollProgress < 0.5
-			? {
-					className:
-						"bg-sky-shade-20 active:bg-sky-shade-20 md:hover:bg-sky-shade-20",
-				}
-			: { iconSize: "h-5 w-5" };
+	const ghostButtonsAreInteractive = scrollProgress >= 0.5;
+	const inertProps = { inert: "" } as unknown as HTMLAttributes<HTMLDivElement>;
 
 	return (
 		<div
@@ -71,17 +98,47 @@ export function ResultsPageHeader({
 			}`}
 			style={{ height: `${currentHeight}rem` }}
 		>
-			<div className="absolute right-4 top-3 z-10 flex gap-1.5">
-				<ActionButton
-					iconSrc="/icons/download.svg"
-					ariaLabel={downloadAriaLabel}
-					{...actionButtonProps}
-				/>
-				<ActionButton
-					iconSrc="/icons/share.svg"
-					ariaLabel={shareAriaLabel}
-					{...actionButtonProps}
-				/>
+			<div className="absolute right-4 top-3 z-10 h-10 w-[5.375rem]">
+				<div
+					className="absolute inset-0 flex gap-1.5"
+					style={{
+						opacity: 1 - scrollProgress,
+						pointerEvents: ghostButtonsAreInteractive ? "none" : "auto",
+					}}
+					aria-hidden={ghostButtonsAreInteractive}
+					{...(ghostButtonsAreInteractive ? inertProps : {})}
+				>
+					<SecondaryIconButton
+						iconSrc="/icons/download.svg"
+						ariaLabel={downloadAriaLabel}
+						className="bg-sky-shade-20 active:bg-sky-shade-20 md:hover:bg-sky-shade-20"
+					/>
+					<SecondaryIconButton
+						iconSrc="/icons/share.svg"
+						ariaLabel={shareAriaLabel}
+						className="bg-sky-shade-20 active:bg-sky-shade-20 md:hover:bg-sky-shade-20"
+					/>
+				</div>
+				<div
+					className="absolute inset-0 flex gap-1.5"
+					style={{
+						opacity: scrollProgress,
+						pointerEvents: ghostButtonsAreInteractive ? "auto" : "none",
+					}}
+					aria-hidden={!ghostButtonsAreInteractive}
+					{...(!ghostButtonsAreInteractive ? inertProps : {})}
+				>
+					<GhostIconButton
+						iconSrc="/icons/download.svg"
+						iconSize="h-5 w-5"
+						ariaLabel={downloadAriaLabel}
+					/>
+					<GhostIconButton
+						iconSrc="/icons/share.svg"
+						iconSize="h-5 w-5"
+						ariaLabel={shareAriaLabel}
+					/>
+				</div>
 			</div>
 
 			<h1
