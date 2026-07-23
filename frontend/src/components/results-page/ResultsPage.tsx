@@ -16,6 +16,7 @@ import { BottomNav } from "../bottom-nav/BottomNav";
 import { useFetchVacancies } from "./useFetchVacancies";
 import {
 	ResultsPageHeader,
+	RESULTS_PAGE_HEADER_EXPANDED_HEIGHT,
 	useResultsPageScrollProgress,
 } from "./ResultsPageHeader";
 
@@ -63,22 +64,7 @@ export function ResultsPage() {
 	}, []);
 
 	return (
-		<div className="flex flex-col h-full pb-16">
-			<ResultsPageHeader
-				scrollProgress={scrollProgress}
-				title={content["results.title"]}
-				shareAriaLabel={content["results.share.ariaLabel"]}
-				downloadAriaLabel={content["results.download.ariaLabel"]}
-			/>
-			<ResultsFilterBar
-				hasLocationFilter={false}
-				selectedOccupationTypeTagIds={
-					tagFilter.appliedValue.selectedOccupationTypeTagIds
-				}
-				onOpenTagFilter={openTagFilter}
-				showFavoritesOnly={showFavoritesOnly}
-				onToggleFavoritesOnly={toggleFavoritesOnly}
-			/>
+		<div className="relative flex h-full flex-col pb-16">
 			<OccupationTagsFilterBottomSheet
 				key={tagFilter.sheetKey}
 				open={tagFilter.isOpen}
@@ -89,34 +75,55 @@ export function ResultsPage() {
 				onReset={tagFilter.reset}
 			/>
 
-			<div
-				className="flex-1 px-4 pb-4 space-y-3 overflow-y-auto"
-				onScroll={handleListScroll}
+			<ResultsPageHeader
+				scrollProgress={scrollProgress}
+				title={content["results.title"]}
+				shareAriaLabel={content["results.share.ariaLabel"]}
+				downloadAriaLabel={content["results.download.ariaLabel"]}
 			>
-				{visibleOccupations.length > 0 ? (
-					<>
-						{visibleOccupations.map((occupation: MatchedOccupation) => (
-							<ResultCard key={occupation.id} occupation={occupation} />
-						))}
-						<BottomCard />
-					</>
-				) : (
-					<div className="flex px-4 pb-4 items-center h-full">
-						<div className="flex flex-col items-center justify-center gap-5 px-5">
-							<div className="flex items-center justify-center object-contain p-2">
-								<img
-									src="/illustrations/no-results-star.svg"
-									alt=""
-									className="w-[200px]"
-								/>
-							</div>
+				<ResultsFilterBar
+					scrollProgress={scrollProgress}
+					hasLocationFilter={false}
+					selectedOccupationTypeTagIds={
+						tagFilter.appliedValue.selectedOccupationTypeTagIds
+					}
+					onOpenTagFilter={openTagFilter}
+					showFavoritesOnly={showFavoritesOnly}
+					onToggleFavoritesOnly={toggleFavoritesOnly}
+				/>
+			</ResultsPageHeader>
 
-							<p className="text-lg font-medium text-gray-1000 text-center">
-								{content["results.noResults"]}
-							</p>
+			<div
+				className="flex-1 min-h-0 overflow-y-auto"
+				onScroll={handleListScroll}
+				style={{ paddingTop: RESULTS_PAGE_HEADER_EXPANDED_HEIGHT }}
+			>
+				<div className="px-4 pb-4 space-y-3">
+					{visibleOccupations.length > 0 ? (
+						<>
+							{visibleOccupations.map((occupation: MatchedOccupation) => (
+								<ResultCard key={occupation.id} occupation={occupation} />
+							))}
+							<BottomCard />
+						</>
+					) : (
+						<div className="flex px-4 pb-4 items-center h-full">
+							<div className="flex flex-col items-center justify-center gap-5 px-5">
+								<div className="flex items-center justify-center object-contain p-2">
+									<img
+										src="/illustrations/no-results-star.svg"
+										alt=""
+										className="w-[200px]"
+									/>
+								</div>
+
+								<p className="text-lg font-medium text-gray-1000 text-center">
+									{content["results.noResults"]}
+								</p>
+							</div>
 						</div>
-					</div>
-				)}
+					)}
+				</div>
 			</div>
 			<BottomNav />
 		</div>

@@ -26,6 +26,7 @@ import { BottomNav } from "../../bottom-nav/BottomNav";
 import { useFetchVacancies } from "../useFetchVacancies";
 import {
 	ResultsPageHeader,
+	RESULTS_PAGE_HEADER_EXPANDED_HEIGHT,
 	useResultsPageScrollProgress,
 } from "../ResultsPageHeader";
 
@@ -223,39 +224,7 @@ export function VacanciesPage() {
 
 	return (
 		<>
-			<div className="flex flex-col h-full pb-16">
-				<ResultsPageHeader
-					scrollProgress={scrollProgress}
-					title={
-						<>
-							<span className="text-sky-400">{vacanciesCount}</span>{" "}
-							{content["vacancies.title"]}
-						</>
-					}
-					shareAriaLabel={content["vacancies.share.ariaLabel"]}
-					downloadAriaLabel={content["vacancies.download.ariaLabel"]}
-				/>
-
-				<ResultsFilterBar
-					hasLocationFilter={true}
-					appliedLocationFilter={locationFilter.appliedValue}
-					selectedOccupationIds={
-						occupationFilter.appliedValue.selectedOccupationIds
-					}
-					resolveOccupationFilterLabel={(id) =>
-						getOccupationFilterLabel(id, occupations)
-					}
-					occupationFilterTitle={
-						content["vacancies.filter.occupations.title.short"]
-					}
-					occupationFilterAriaLabel={
-						content["vacancies.filter.occupations.filterButton.ariaLabel"]
-					}
-					onOpenTagFilter={openOccupationFilter}
-					onOpenLocationFilter={openLocationFilter}
-					showFavoritesOnly={showFavoritesOnly}
-					onToggleFavoritesOnly={toggleFavoritesOnly}
-				/>
+			<div className="relative flex h-full flex-col pb-16">
 				<OccupationsFilterBottomSheet
 					key={`occupation-${occupationFilter.sheetKey}`}
 					open={occupationFilter.isOpen}
@@ -274,76 +243,113 @@ export function VacanciesPage() {
 					onReset={resetLocationFilter}
 				/>
 
-				{showSimpleEmpty || showDetailedEmpty ? (
-					<div className="flex px-4 pb-4 items-center h-full">
-						<div className="flex flex-col items-center justify-center gap-5 px-5">
-							<div className="flex items-center justify-center object-contain p-2">
-								<img
-									src="/illustrations/no-results-star.svg"
-									alt=""
-									className="w-[200px]"
-								/>
-							</div>
-							{showSimpleEmpty ? (
-								<p className="text-lg font-medium text-gray-1000 text-center">
-									{content["vacancies.noResultsFound"]}
-								</p>
-							) : (
-								<div>
-									<h3 className="text-lg font-bold text-gray-1000 mb-1.5 text-center">
-										{content["vacancies.noResults.p1"]}
-									</h3>
+				<ResultsPageHeader
+					scrollProgress={scrollProgress}
+					title={
+						<>
+							<span className="text-sky-400">{vacanciesCount}</span>{" "}
+							{content["vacancies.title"]}
+						</>
+					}
+					shareAriaLabel={content["vacancies.share.ariaLabel"]}
+					downloadAriaLabel={content["vacancies.download.ariaLabel"]}
+				>
+					<ResultsFilterBar
+						scrollProgress={scrollProgress}
+						hasLocationFilter={true}
+						appliedLocationFilter={locationFilter.appliedValue}
+						selectedOccupationIds={
+							occupationFilter.appliedValue.selectedOccupationIds
+						}
+						resolveOccupationFilterLabel={(id) =>
+							getOccupationFilterLabel(id, occupations)
+						}
+						occupationFilterTitle={
+							content["vacancies.filter.occupations.title.short"]
+						}
+						occupationFilterAriaLabel={
+							content["vacancies.filter.occupations.filterButton.ariaLabel"]
+						}
+						onOpenTagFilter={openOccupationFilter}
+						onOpenLocationFilter={openLocationFilter}
+						showFavoritesOnly={showFavoritesOnly}
+						onToggleFavoritesOnly={toggleFavoritesOnly}
+					/>
+				</ResultsPageHeader>
+
+				<div
+					className="flex min-h-0 flex-1 flex-col overflow-y-auto"
+					onScroll={handleListScroll}
+					style={{ paddingTop: RESULTS_PAGE_HEADER_EXPANDED_HEIGHT }}
+				>
+					{showSimpleEmpty || showDetailedEmpty ? (
+						<div className="flex px-4 pb-4 items-center h-full">
+							<div className="flex flex-col items-center justify-center gap-5 px-5">
+								<div className="flex items-center justify-center object-contain p-2">
+									<img
+										src="/illustrations/no-results-star.svg"
+										alt=""
+										className="w-[200px]"
+									/>
+								</div>
+								{showSimpleEmpty ? (
 									<p className="text-lg font-medium text-gray-1000 text-center">
-										{content["vacancies.noResults.p2"]}
+										{content["vacancies.noResultsFound"]}
+									</p>
+								) : (
+									<div>
+										<h3 className="text-lg font-bold text-gray-1000 mb-1.5 text-center">
+											{content["vacancies.noResults.p1"]}
+										</h3>
+										<p className="text-lg font-medium text-gray-1000 text-center">
+											{content["vacancies.noResults.p2"]}
+										</p>
+									</div>
+								)}
+							</div>
+						</div>
+					) : (
+						<div className="flex-1 px-4 pb-4 space-y-3">
+							{loading && vacancyCards.length === 0 ? (
+								<p className="py-8 text-center text-sm text-gray-500">…</p>
+							) : (
+								vacancyCards.map(({ key, occupation, preview }) => (
+									<VacancyCard
+										key={key}
+										occupationName={occupation.name}
+										preview={preview}
+										isFavorite={favoriteVacancyKeySet.has(key)}
+										onToggleFavorite={() => toggleVacancyFavorite(key)}
+									/>
+								))
+							)}
+							<div className="flex flex-col gap-5 px-3 py-5 rounded-2xl border border-sky-100 bg-sky-50">
+								<div>
+									<h3 className="text-2xl font-semibold text-sky-1000 text-center mb-[7px]">
+										{content["vacancies.bottomCard.title"]}
+									</h3>
+									<p className="text-lg text-sky-1000 text-center">
+										{content["vacancies.bottomCard.description"]}
 									</p>
 								</div>
-							)}
-						</div>
-					</div>
-				) : (
-					<div
-						className="flex-1 px-4 pb-4 space-y-3 overflow-y-auto"
-						onScroll={handleListScroll}
-					>
-						{loading && vacancyCards.length === 0 ? (
-							<p className="py-8 text-center text-sm text-gray-500">…</p>
-						) : (
-							vacancyCards.map(({ key, occupation, preview }) => (
-								<VacancyCard
-									key={key}
-									occupationName={occupation.name}
-									preview={preview}
-									isFavorite={favoriteVacancyKeySet.has(key)}
-									onToggleFavorite={() => toggleVacancyFavorite(key)}
-								/>
-							))
-						)}
-						<div className="flex flex-col gap-5 px-3 py-5 rounded-2xl border border-sky-100 bg-sky-50">
-							<div>
-								<h3 className="text-2xl font-semibold text-sky-1000 text-center mb-[7px]">
-									{content["vacancies.bottomCard.title"]}
-								</h3>
-								<p className="text-lg text-sky-1000 text-center">
-									{content["vacancies.bottomCard.description"]}
-								</p>
-							</div>
-							<div className="flex flex-col">
-								<a
-									href={content["vacancies.bottomCard.consultationLink"]}
-									target="_blank"
-									rel="noopener noreferrer"
-									aria-label={
-										content["vacancies.bottomCard.consultationCta.ariaLabel"]
-									}
-									className="h-12 flex items-center justify-center gap-2 w-full py-2 px-5 rounded-2xl text-base font-medium transition-colors bg-sky-300 text-sky-1000
+								<div className="flex flex-col">
+									<a
+										href={content["vacancies.bottomCard.consultationLink"]}
+										target="_blank"
+										rel="noopener noreferrer"
+										aria-label={
+											content["vacancies.bottomCard.consultationCta.ariaLabel"]
+										}
+										className="h-12 flex items-center justify-center gap-2 w-full py-2 px-5 rounded-2xl text-base font-medium transition-colors bg-sky-300 text-sky-1000
 									focus-visible:outline focus-visible:outline-2 focus-visible:outline-sky-500 active:bg-sky-200 active:text-sky-900 md:hover:bg-sky-200 md:hover:text-sky-900"
-								>
-									{content["vacancies.bottomCard.consultationCta"]}
-								</a>
+									>
+										{content["vacancies.bottomCard.consultationCta"]}
+									</a>
+								</div>
 							</div>
 						</div>
-					</div>
-				)}
+					)}
+				</div>
 			</div>
 			<BottomNav />
 		</>

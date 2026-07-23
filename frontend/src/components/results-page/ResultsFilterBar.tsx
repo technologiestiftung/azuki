@@ -8,6 +8,7 @@ import { FilterChipButton } from "../primitives/buttons/FilterChipButton";
 import { getOccupationTagLabel } from "./utils/resultTagChips";
 
 export interface ResultsFilterBarProps {
+	scrollProgress?: number;
 	hasLocationFilter: boolean;
 	appliedLocationFilter?: LocationFilterState;
 	selectedOccupationTypeTagIds?: string[];
@@ -22,6 +23,7 @@ export interface ResultsFilterBarProps {
 }
 
 export function ResultsFilterBar({
+	scrollProgress = 0,
 	hasLocationFilter,
 	appliedLocationFilter,
 	selectedOccupationTypeTagIds = [],
@@ -34,6 +36,7 @@ export function ResultsFilterBar({
 	showFavoritesOnly,
 	onToggleFavoritesOnly,
 }: ResultsFilterBarProps) {
+	const topPadding = 3.75 - scrollProgress * 3.25;
 	const useOccupationFilter =
 		selectedOccupationIds !== undefined &&
 		resolveOccupationFilterLabel !== undefined;
@@ -61,7 +64,12 @@ export function ResultsFilterBar({
 		: content["results.filter.location.title"];
 
 	return (
-		<div className="sticky top-[60px] z-10 bg-white px-4 py-[18px] flex gap-3 w-full">
+		<div
+			className="flex w-full gap-3 px-4 pb-2"
+			style={{
+				paddingTop: `${topPadding}rem`,
+			}}
+		>
 			<div className="p-2 w-10 h-10 flex items-center justify-center">
 				<img src="/icons/filter.svg" alt="" className="h-5 w-5 shrink-0" />
 			</div>

@@ -1,35 +1,28 @@
-import {
-	useCallback,
-	useEffect,
-	useRef,
-	useState,
-	type ReactNode,
-	type UIEvent,
-} from "react";
+import { useCallback, useState, type ReactNode, type UIEvent } from "react";
+import { GhostIconButton } from "../primitives/buttons/GhostIconButton";
 import { SecondaryIconButton } from "../primitives/buttons/SecondaryIconButton";
 
-export const COLLAPSED_HEADER_SCROLL_THRESHOLD = 64;
+const EXPANDED_HEADER_HEIGHT = 10.75;
+const COLLAPSED_HEADER_HEIGHT = 7.5;
+const HEADER_COLLAPSE_DISTANCE =
+	EXPANDED_HEADER_HEIGHT - COLLAPSED_HEADER_HEIGHT;
+const EXPANDED_TITLE_FONT_SIZE = 1.875;
+const COLLAPSED_TITLE_FONT_SIZE = 1;
+const EXPANDED_TITLE_TOP = 4;
+const COLLAPSED_TITLE_TOP = 1.3;
 
-const COLLAPSED_HEADER_HEIGHT = 60;
-const EXPANDED_TITLE_FONT_SIZE = 30;
-const COLLAPSED_TITLE_FONT_SIZE = 16;
-const EXPANDED_TITLE_LINE_HEIGHT = 36;
-const COLLAPSED_TITLE_LINE_HEIGHT = 20;
-const EXPANDED_TITLE_TOP = 54;
-const COLLAPSED_TITLE_TOP = 18;
-const EXPANDED_TITLE_LEFT = 18;
-const COLLAPSED_TITLE_LEFT = 16;
-const TITLE_RIGHT_PADDING = 112;
-const EXPANDED_HEADER_BOTTOM_PADDING = 16;
+export const RESULTS_PAGE_HEADER_EXPANDED_HEIGHT = `${EXPANDED_HEADER_HEIGHT}rem`;
 
 export function useResultsPageScrollProgress() {
 	const [scrollProgress, setScrollProgress] = useState(0);
 
 	const handleListScroll = useCallback((event: UIEvent<HTMLDivElement>) => {
 		const { scrollTop } = event.currentTarget;
-		setScrollProgress(
-			Math.min(1, scrollTop / COLLAPSED_HEADER_SCROLL_THRESHOLD),
+		const rootFontSize = Number.parseFloat(
+			getComputedStyle(document.documentElement).fontSize,
 		);
+		const collapseDistance = HEADER_COLLAPSE_DISTANCE * rootFontSize;
+		setScrollProgress(Math.min(1, scrollTop / collapseDistance));
 	}, []);
 
 	return { scrollProgress, handleListScroll };
@@ -40,6 +33,7 @@ interface ResultsPageHeaderProps {
 	title: ReactNode;
 	shareAriaLabel: string;
 	downloadAriaLabel: string;
+	children: ReactNode;
 }
 
 export function ResultsPageHeader({
@@ -47,101 +41,63 @@ export function ResultsPageHeader({
 	title,
 	shareAriaLabel,
 	downloadAriaLabel,
+	children,
 }: ResultsPageHeaderProps) {
-	const measureTitleRef = useRef<HTMLHeadingElement>(null);
-	const [expandedHeaderHeight, setExpandedHeaderHeight] = useState(0);
-
-	useEffect(() => {
-		const element = measureTitleRef.current;
-
-		if (!element) {
-			return;
-		}
-
-		const updateHeight = () => {
-			setExpandedHeaderHeight(
-				EXPANDED_TITLE_TOP + element.offsetHeight + EXPANDED_HEADER_BOTTOM_PADDING,
-			);
-		};
-
-		updateHeight();
-
-		const resizeObserver = new ResizeObserver(updateHeight);
-		resizeObserver.observe(element);
-
-		return () => {
-			resizeObserver.disconnect();
-		};
-	}, [title]);
-
-	const expandedHeight =
-		expandedHeaderHeight > 0 ? expandedHeaderHeight : COLLAPSED_HEADER_HEIGHT;
 	const currentHeight =
-		expandedHeight -
-		scrollProgress * (expandedHeight - COLLAPSED_HEADER_HEIGHT);
+		EXPANDED_HEADER_HEIGHT -
+		scrollProgress * (EXPANDED_HEADER_HEIGHT - COLLAPSED_HEADER_HEIGHT);
 	const titleTop =
 		EXPANDED_TITLE_TOP -
 		scrollProgress * (EXPANDED_TITLE_TOP - COLLAPSED_TITLE_TOP);
-	const titleLeft =
-		EXPANDED_TITLE_LEFT -
-		scrollProgress * (EXPANDED_TITLE_LEFT - COLLAPSED_TITLE_LEFT);
+	const titleRight = 16 + scrollProgress * 86;
 	const titleFontSize =
 		EXPANDED_TITLE_FONT_SIZE -
 		scrollProgress * (EXPANDED_TITLE_FONT_SIZE - COLLAPSED_TITLE_FONT_SIZE);
-	const titleLineHeight =
-		EXPANDED_TITLE_LINE_HEIGHT -
-		scrollProgress * (EXPANDED_TITLE_LINE_HEIGHT - COLLAPSED_TITLE_LINE_HEIGHT);
-	const buttonBackgroundOpacity = 1 - scrollProgress;
+	const titleLineHeight = 1.3 + scrollProgress * 0.1;
+	const ActionButton =
+		scrollProgress < 0.5 ? SecondaryIconButton : GhostIconButton;
+	const actionButtonProps =
+		scrollProgress < 0.5
+			? {
+					className:
+						"bg-sky-shade-20 active:bg-sky-shade-20 md:hover:bg-sky-shade-20",
+				}
+			: { iconSize: "h-5 w-5" };
 
 	return (
 		<div
-			className="sticky top-0 z-20 shrink-0 overflow-hidden border-b border-sky-20 bg-white"
-			style={{ height: `${currentHeight}px` }}
+			className={`absolute inset-x-0 top-0 z-20 overflow-hidden border-b bg-gradient-to-b from-white to-sky-white ${
+				scrollProgress === 1 ? "border-sky-shade-20" : "border-transparent"
+			}`}
+			style={{ height: `${currentHeight}rem` }}
 		>
 			<div className="absolute right-4 top-3 z-10 flex gap-1.5">
-				<SecondaryIconButton
+				<ActionButton
 					iconSrc="/icons/download.svg"
 					ariaLabel={downloadAriaLabel}
-					style={{
-						backgroundColor: `rgba(209, 213, 219, ${buttonBackgroundOpacity})`,
-					}}
+					{...actionButtonProps}
 				/>
-				<SecondaryIconButton
+				<ActionButton
 					iconSrc="/icons/share.svg"
 					ariaLabel={shareAriaLabel}
-					style={{
-						backgroundColor: `rgba(209, 213, 219, ${buttonBackgroundOpacity})`,
-					}}
+					{...actionButtonProps}
 				/>
 			</div>
 
 			<h1
-				className="absolute font-semibold text-sky-900 text-left"
+				className="absolute left-4 overflow-hidden text-ellipsis whitespace-nowrap text-left font-semibold text-sky-900"
 				style={{
-					top: `${titleTop}px`,
-					left: `${titleLeft}px`,
-					right: `${TITLE_RIGHT_PADDING}px`,
-					fontSize: `${titleFontSize}px`,
-					lineHeight: `${titleLineHeight}px`,
+					top: `${titleTop}rem`,
+					right: `${titleRight / 16}rem`,
+					fontSize: `${titleFontSize}rem`,
+					lineHeight: titleLineHeight,
+					willChange: "top, font-size, line-height",
 				}}
 			>
 				{title}
 			</h1>
 
-			<h1
-				ref={measureTitleRef}
-				className="pointer-events-none absolute opacity-0 font-semibold text-sky-900 text-left"
-				style={{
-					top: `${EXPANDED_TITLE_TOP}px`,
-					left: `${EXPANDED_TITLE_LEFT}px`,
-					right: `${TITLE_RIGHT_PADDING}px`,
-					fontSize: `${EXPANDED_TITLE_FONT_SIZE}px`,
-					lineHeight: `${EXPANDED_TITLE_LINE_HEIGHT}px`,
-				}}
-				aria-hidden="true"
-			>
-				{title}
-			</h1>
+			<div className="absolute inset-x-0 top-16">{children}</div>
 		</div>
 	);
 }
