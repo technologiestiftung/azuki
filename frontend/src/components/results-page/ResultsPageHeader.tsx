@@ -22,7 +22,7 @@ export function useResultsPageScrollProgress() {
 			getComputedStyle(document.documentElement).fontSize,
 		);
 		const collapseDistance = HEADER_COLLAPSE_DISTANCE * rootFontSize;
-		setScrollProgress(Math.min(1, scrollTop / collapseDistance));
+		setScrollProgress(Math.max(0, Math.min(1, scrollTop / collapseDistance)));
 	}, []);
 
 	return { scrollProgress, handleListScroll };
