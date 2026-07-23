@@ -61,7 +61,7 @@ export function ResultsFilterBar({
 		: content["results.filter.location.title"];
 
 	return (
-		<div className="px-4 py-[18px] flex gap-3 w-full">
+		<div className="sticky top-[60px] z-10 bg-white px-4 py-[18px] flex gap-3 w-full">
 			<div className="p-2 w-10 h-10 flex items-center justify-center">
 				<img src="/icons/filter.svg" alt="" className="h-5 w-5 shrink-0" />
 			</div>

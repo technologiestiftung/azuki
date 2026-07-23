@@ -12,6 +12,7 @@ export const SecondaryIconButton: React.FC<SecondaryButtonProps> = ({
 	className = "",
 	children,
 	iconSrc,
+	style,
 }) => {
 	return (
 		<button
@@ -25,6 +26,7 @@ export const SecondaryIconButton: React.FC<SecondaryButtonProps> = ({
 			type={type}
 			aria-label={ariaLabel}
 			title={title}
+			style={style}
 		>
 			{iconSrc && <img src={iconSrc} alt="" className="w-5 h-5" />}
 			{children}
