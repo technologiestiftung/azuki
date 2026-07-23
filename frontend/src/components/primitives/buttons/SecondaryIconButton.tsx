@@ -1,7 +1,9 @@
 import React from "react";
 import { type ButtonProps } from "./buttonTypes";
 
-export type SecondaryButtonProps = ButtonProps;
+export type SecondaryButtonProps = ButtonProps & {
+	style?: React.CSSProperties;
+};
 
 export const SecondaryIconButton: React.FC<SecondaryButtonProps> = ({
 	onClick,
