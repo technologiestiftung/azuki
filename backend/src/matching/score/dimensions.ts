@@ -539,7 +539,6 @@ export function scorePracticalExperience(
 
 // Dispatcher over 7 fixed strength dimensions, each with bespoke checks.
 // Revisit if growing past ~10 dimensions or adding cross-cutting logic.
-// eslint-disable-next-line complexity
 export function scoreStrengths(
 	occupation: Occupation,
 	profile: UserProfile,

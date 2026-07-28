@@ -25,7 +25,11 @@ export type MatchSignalDimension =
 	| "workPref"
 	| "expectation"
 	| "noGo"
-	| "outdoorMismatch";
+	| "outdoorMismatch"
+	| "workPrefMismatch"
+	| "expectationMismatch"
+	| "subjectMismatch"
+	| "strengthMismatch";
 
 export interface MatchSignal {
 	kind: MatchSignalKind;
@@ -277,6 +281,170 @@ function collectNoGoSignals(
 	return signals;
 }
 
+/**
+ * Work preferences that clearly conflict with the occupation (preferred
+ * side fails, opposite side matches). Indoor/outdoor is covered by
+ * outdoorMismatch — skip environment/location here to avoid duplicate
+ * Natur pills.
+ */
+function collectWorkPrefMismatchSignals(
+	profile: UserProfile,
+	occupation: Occupation,
+): MatchSignal[] {
+	const signals: MatchSignal[] = [];
+	const prefersIndoors = profilePrefersIndoors(profile);
+
+	for (const [prefId, checks] of Object.entries(WORK_PREF_MAP)) {
+		const choice = profile.workPreferences[prefId];
+		if (!choice) {
+			continue;
+		}
+
+		if (
+			prefersIndoors &&
+			(prefId === "environment" || prefId === "location") &&
+			occupationHasOutdoorWork(occupation)
+		) {
+			continue;
+		}
+
+		const preferredCheck = choice === "a" ? checks.a : checks.b;
+		const oppositeCheck = choice === "a" ? checks.b : checks.a;
+		if (preferredCheck(occupation)) {
+			continue;
+		}
+		if (!oppositeCheck(occupation)) {
+			continue;
+		}
+
+		signals.push({
+			kind: "notMatch",
+			dimension: "workPrefMismatch",
+			sourceId: `${prefId}:${choice}`,
+			weight: 2,
+		});
+	}
+
+	return signals;
+}
+
+/** Selected work expectations whose occupation check exists and fails. */
+function collectExpectationMismatchSignals(
+	profile: UserProfile,
+	occupation: Occupation,
+): MatchSignal[] {
+	const signals: MatchSignal[] = [];
+	const customExpectationSet = new Set(profile.customWorkExpectations);
+
+	for (const expectation of profile.workExpectations) {
+		if (customExpectationSet.has(expectation)) {
+			const score = scoreCustomTextMatch(expectation, occupation);
+			if (score > 0) {
+				continue;
+			}
+			signals.push({
+				kind: "notMatch",
+				dimension: "expectationMismatch",
+				sourceId: expectation,
+				weight: 2,
+				isCustom: true,
+			});
+			continue;
+		}
+
+		const check = WORK_EXPECTATIONS_CHECKS[expectation];
+		if (!check) {
+			continue;
+		}
+		// No reliable occupation signal for flexible hours — skip false negatives.
+		if (expectation === "flexible_hours") {
+			continue;
+		}
+		if (check(occupation)) {
+			continue;
+		}
+		signals.push({
+			kind: "notMatch",
+			dimension: "expectationMismatch",
+			sourceId: expectation,
+			weight: 2,
+		});
+	}
+
+	return signals;
+}
+
+/** Favorite subjects that are not used by this occupation. */
+function collectSubjectMismatchSignals(
+	profile: UserProfile,
+	occupation: Occupation,
+): MatchSignal[] {
+	if (occupation.subjects.length === 0) {
+		return [];
+	}
+
+	const signals: MatchSignal[] = [];
+	const customSubjectSet = new Set(profile.customSubjects);
+
+	for (const subjectId of profile.favoriteSubjects) {
+		if (customSubjectSet.has(subjectId)) {
+			const score = scoreCustomTextMatch(subjectId, occupation);
+			if (score > 0) {
+				continue;
+			}
+			signals.push({
+				kind: "notMatch",
+				dimension: "subjectMismatch",
+				sourceId: subjectId,
+				weight: 1,
+				isCustom: true,
+			});
+			continue;
+		}
+
+		if (occupation.subjects.includes(subjectId)) {
+			continue;
+		}
+		signals.push({
+			kind: "notMatch",
+			dimension: "subjectMismatch",
+			sourceId: subjectId,
+			weight: 1,
+		});
+	}
+
+	return signals;
+}
+
+/**
+ * Strengths the user rated highly that this occupation does not call for.
+ * Only include clearly rated strengths (≥1 = "stark").
+ */
+function collectStrengthMismatchSignals(
+	profile: UserProfile,
+	occupation: Occupation,
+): MatchSignal[] {
+	const signals: MatchSignal[] = [];
+
+	for (const [strengthId, value] of Object.entries(profile.strengths)) {
+		const points = strengthScorePoints(value);
+		if (points < 2) {
+			continue;
+		}
+		if (occupationMatchesStrength(strengthId, occupation)) {
+			continue;
+		}
+		signals.push({
+			kind: "notMatch",
+			dimension: "strengthMismatch",
+			sourceId: strengthId,
+			weight: 1,
+		});
+	}
+
+	return signals;
+}
+
 export function collectMatchSignals(
 	profile: UserProfile,
 	occupation: Occupation,
@@ -289,6 +457,12 @@ export function collectMatchSignals(
 			...collectExpectationSignals(profile, occupation),
 			...collectWorkPrefSignals(profile, occupation),
 		],
-		notMatching: collectNoGoSignals(profile, occupation),
+		notMatching: [
+			...collectNoGoSignals(profile, occupation),
+			...collectWorkPrefMismatchSignals(profile, occupation),
+			...collectExpectationMismatchSignals(profile, occupation),
+			...collectSubjectMismatchSignals(profile, occupation),
+			...collectStrengthMismatchSignals(profile, occupation),
+		],
 	};
 }

@@ -160,6 +160,46 @@ describe("collectMatchSignals", () => {
 		);
 	});
 
+	test("adds work pref mismatch when opposite preference matches", () => {
+		const profile = makeProfile({
+			workPreferences: { people: "a" },
+		});
+		const occupation = makeOccupation({
+			conditions: { customerContact: true },
+		});
+
+		const { notMatching } = collectMatchSignals(profile, occupation);
+
+		expect(notMatching).toContainEqual(
+			expect.objectContaining({
+				dimension: "workPrefMismatch",
+				sourceId: "people:a",
+			}),
+		);
+	});
+
+	test("adds expectation mismatch when modern_technology lacks real tech", () => {
+		const profile = makeProfile({
+			workExpectations: ["modern_technology"],
+		});
+		const occupation = makeOccupation({
+			digitalizationSignal: true,
+			conditions: { machinery: false, screenWork: false },
+		});
+
+		const { matching, notMatching } = collectMatchSignals(profile, occupation);
+
+		expect(matching.some((s) => s.sourceId === "modern_technology")).toBe(
+			false,
+		);
+		expect(notMatching).toContainEqual(
+			expect.objectContaining({
+				dimension: "expectationMismatch",
+				sourceId: "modern_technology",
+			}),
+		);
+	});
+
 	test("structure preference a matches non-creative occupations", () => {
 		const profile = makeProfile({
 			workPreferences: { structure: "a" },

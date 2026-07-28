@@ -1,4 +1,9 @@
-import { OccupationMatchPill } from "../utils/occupationMatchPills";
+export interface OccupationMatchPill {
+	id: string;
+	label: string;
+	icon: string;
+	summary: string;
+}
 
 interface MatchPillGroupProps {
 	pills: OccupationMatchPill[];
@@ -6,6 +11,10 @@ interface MatchPillGroupProps {
 	onSelect: (id: string) => void;
 	variant: "match" | "notMatch";
 	emptyMessage?: string;
+	loading?: boolean;
+	unavailable?: boolean;
+	loadingMessage?: string;
+	unavailableMessage?: string;
 }
 
 function MatchPillIcon({ icon }: { icon: string }) {
@@ -22,6 +31,10 @@ export function MatchPillGroup({
 	onSelect,
 	variant,
 	emptyMessage,
+	loading = false,
+	unavailable = false,
+	loadingMessage,
+	unavailableMessage,
 }: MatchPillGroupProps) {
 	const selectedPill = pills.find((pill) => pill.id === selectedId);
 	const selectedClassName =
@@ -32,6 +45,22 @@ export function MatchPillGroup({
 		variant === "match"
 			? "border-sky-200 bg-sky-0"
 			: "border-orange-200 bg-orange-0";
+
+	if (loading) {
+		return loadingMessage ? (
+			<p className="text-center text-base text-sky-110 px-[21px]">
+				{loadingMessage}
+			</p>
+		) : null;
+	}
+
+	if (unavailable && pills.length === 0) {
+		return unavailableMessage ? (
+			<p className="text-center text-base text-sky-110 px-[21px]">
+				{unavailableMessage}
+			</p>
+		) : null;
+	}
 
 	if (pills.length === 0) {
 		return emptyMessage ? (
