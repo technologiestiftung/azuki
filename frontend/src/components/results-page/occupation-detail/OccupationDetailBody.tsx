@@ -6,7 +6,6 @@ import { content } from "../../../content";
 import { OccupationDetailMetaInfo } from "./OccupationDetailMetaInfo";
 import { OccupationDetailMatchSection } from "./OccupationDetailMatchSection";
 import { OccupationImageCarousel } from "./OccupationImageCarousel";
-import type { OccupationMatchPillGroups } from "../utils/occupationMatchPills";
 import type { SharedNextOccupationCard } from "./useSharedNextOccupations";
 import { OccupationDetailApplyLink } from "./OccupationDetailApplyLink";
 
@@ -15,7 +14,6 @@ interface OccupationDetailBodyProps {
 	matchPercent: number | undefined;
 	taskItems: string[];
 	profile: UserProfile;
-	sharedPills?: OccupationMatchPillGroups;
 	occupationDuration: string;
 	occupationVacanciesCount: number | undefined;
 	nextOccupationCards: SharedNextOccupationCard[];
@@ -26,7 +24,6 @@ export function OccupationDetailBody({
 	matchPercent,
 	taskItems,
 	profile,
-	sharedPills,
 	occupationDuration,
 	occupationVacanciesCount,
 	nextOccupationCards,
@@ -78,7 +75,6 @@ export function OccupationDetailBody({
 				matchPercent={matchPercent}
 				occupation={occupation}
 				profile={profile}
-				sharedPills={sharedPills}
 			/>
 			{occupation && occupation.images.length > 0 && (
 				<div className="flex flex-col gap-2">

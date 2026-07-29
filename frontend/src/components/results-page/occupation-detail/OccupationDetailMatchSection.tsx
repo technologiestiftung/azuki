@@ -7,14 +7,12 @@ import {
 import { content } from "../../../content";
 import { FitDonutChart } from "./FitDonutChart";
 import { InfoBottomSheet } from "./InfoBottomSheet";
-import type { OccupationMatchPillGroups } from "../utils/occupationMatchPills";
 import { MatchPillGroup, type OccupationMatchPill } from "./MatchPillGroup";
 
 interface OccupationDetailMatchSectionProps {
 	matchPercent?: number;
 	occupation: Occupation | null;
 	profile: UserProfile;
-	sharedPills?: OccupationMatchPillGroups;
 }
 
 interface AiPillGroups {
@@ -52,7 +50,6 @@ export function OccupationDetailMatchSection({
 	matchPercent,
 	occupation,
 	profile,
-	sharedPills,
 }: OccupationDetailMatchSectionProps) {
 	const [isMatchInfoOpen, setIsMatchInfoOpen] = useState(false);
 	const [selectedMatchPillId, setSelectedMatchPillId] = useState<string | null>(
@@ -79,16 +76,6 @@ export function OccupationDetailMatchSection({
 	const profileKey = JSON.stringify(profile);
 
 	useEffect(() => {
-		if (sharedPills) {
-			setPills({
-				matching: toPills(sharedPills.matching),
-				notMatching: toPills(sharedPills.notMatching),
-			});
-			setLoading(false);
-			setFailed(false);
-			return undefined;
-		}
-
 		if (!occupation) {
 			return undefined;
 		}
@@ -135,7 +122,7 @@ export function OccupationDetailMatchSection({
 		return () => {
 			controller.abort();
 		};
-	}, [occupation?.id, profileKey, sharedPills]);
+	}, [occupation?.id, profileKey]);
 
 	const { matching, notMatching } = pills;
 

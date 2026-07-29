@@ -19,12 +19,10 @@ import { useAppStore } from "../../../store/useAppStore";
 import { useMatchResultsStore } from "../../../store/useMatchResultsStore";
 import { useFetchVacancies } from "../useFetchVacancies";
 import { OccupationDetailBody } from "./OccupationDetailBody";
-import { buildOccupationMatchPills } from "../utils/occupationMatchPills";
 import {
 	buildOccupationShareState,
 	buildOccupationShareUrl,
 	parseOccupationShareState,
-	resolveSharedPills,
 } from "./occupationShareState";
 import { shareOccupationLink } from "./shareOccupationLink";
 import { useSharedNextOccupations } from "./useSharedNextOccupations";
@@ -55,10 +53,6 @@ export function OccupationDetailPage() {
 			? fitPercent(detail.matchedOccupation.score)
 			: undefined;
 	const matchPercent = shareState?.fitPercent ?? liveMatchPercent;
-	const sharedPills = useMemo(
-		() => (shareState ? resolveSharedPills(shareState) : undefined),
-		[shareState],
-	);
 
 	const taskBullets = detail.occupation
 		? resolveOccupationTaskBullets(detail.occupation)
@@ -120,14 +114,9 @@ export function OccupationDetailPage() {
 			return;
 		}
 
-		const pills =
-			detail.occupation !== null
-				? buildOccupationMatchPills(profile, detail.occupation)
-				: { matching: [], notMatching: [] };
 		const state = buildOccupationShareState(
 			matchPercent,
 			liveNextOccupations.map((occupation) => occupation.id),
-			pills,
 		);
 
 		const url = state
@@ -150,7 +139,6 @@ export function OccupationDetailPage() {
 		detail.occupation,
 		detail.displayName,
 		detail.occupationDuration,
-		profile,
 		matchPercent,
 		liveNextOccupations,
 	]);
@@ -217,7 +205,6 @@ export function OccupationDetailPage() {
 							matchPercent={matchPercent}
 							taskItems={taskItems}
 							profile={profile}
-							sharedPills={sharedPills}
 							occupationDuration={detail.occupationDuration}
 							occupationVacanciesCount={occupationVacanciesCount}
 							nextOccupationCards={nextOccupationCards}
