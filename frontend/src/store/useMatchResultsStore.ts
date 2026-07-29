@@ -1,17 +1,19 @@
 import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
-import type { MatchResult } from "../common";
+import type { MatchResult, VacanciesResponse } from "../common";
 
 interface MatchResultsState {
 	matchResults: MatchResult | null;
 	favoriteOccupationIds: number[];
 	favoriteVacancyKeys: string[];
 	vacancyOccupationFilterIds: number[];
+	vacanciesCount: number | undefined;
 }
 
 interface MatchResultsActions {
 	setMatchResults: (results: MatchResult) => void;
 	clearMatchResults: () => void;
+	syncVacanciesCount: (vacancies: VacanciesResponse | null) => void;
 	toggleFavorite: (occupationId: number) => void;
 	toggleVacancyFavorite: (vacancyKey: string) => void;
 	setVacancyOccupationFilterIds: (occupationIds: number[]) => void;
@@ -26,6 +28,7 @@ export const useMatchResultsStore = create<
 			favoriteOccupationIds: [],
 			favoriteVacancyKeys: [],
 			vacancyOccupationFilterIds: [],
+			vacanciesCount: undefined,
 
 			setMatchResults: (results) =>
 				set((state) => {
@@ -44,6 +47,29 @@ export const useMatchResultsStore = create<
 					favoriteOccupationIds: [],
 					favoriteVacancyKeys: [],
 					vacancyOccupationFilterIds: [],
+					vacanciesCount: undefined,
+				}),
+
+			syncVacanciesCount: (vacancies) =>
+				set((state) => {
+					if (!state.matchResults || !vacancies) {
+						return { vacanciesCount: undefined };
+					}
+
+					const vacanciesByName = new Map(
+						vacancies.results.map((result) => [result.occupation, result]),
+					);
+
+					return {
+						vacanciesCount: state.matchResults.occupations.reduce(
+							(count, occupation) => {
+								const previews =
+									vacanciesByName.get(occupation.rawName)?.previews.length ?? 0;
+								return count + previews;
+							},
+							0,
+						),
+					};
 				}),
 
 			toggleFavorite: (occupationId) =>

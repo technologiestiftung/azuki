@@ -355,22 +355,26 @@ export const useAppStore = create<AppState & AppActions>()(
 				});
 			},
 
-			setVacancies: (results) =>
+			setVacancies: (results) => {
 				set({
 					vacancies: results,
 					vacanciesFetchError: null,
-				}),
+				});
+				useMatchResultsStore.getState().syncVacanciesCount(results);
+			},
 
 			setVacanciesFetchError: (error) => set({ vacanciesFetchError: error }),
 
-			setLocation: (location) =>
+			setLocation: (location) => {
 				set((state) => ({
 					location: { ...state.location, ...location },
 					// Changing location invalidates per-beruf counts since they
 					// were fetched for the previous location.
 					vacancies: null,
 					vacanciesFetchError: null,
-				})),
+				}));
+				useMatchResultsStore.getState().syncVacanciesCount(null);
+			},
 
 			resetProfile: () => {
 				clearMatchResults();

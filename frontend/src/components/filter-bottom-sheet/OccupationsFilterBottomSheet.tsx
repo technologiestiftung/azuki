@@ -61,8 +61,8 @@ export function OccupationsFilterBottomSheet({
 		<FilterBottomSheetShell
 			open={open}
 			onClose={onClose}
-			title={content["vacancies.filter.occupations.title"]}
-			ariaLabel={content["vacancies.filter.occupations.title"]}
+			title={content["vacancies.filter.occupations.title.short"]}
+			ariaLabel={content["vacancies.filter.occupations.title.short"]}
 			onReset={handleReset}
 			resetDisabled={selectedOccupationIds.size === 0}
 			onApply={handleApply}
