@@ -8,17 +8,23 @@ import {
 } from "../filter-bottom-sheet/OccupationTagsFilterBottomSheet";
 import { useFilterSheet } from "../filter-bottom-sheet/useFilterSheet";
 import { ResultCard } from "./ResultCard";
-import { ResultsPageHeader } from "./ResultsPageHeader";
 import { BottomCard } from "./BottomCard";
 import { ResultsFilterBar } from "./ResultsFilterBar";
 import { buildResultTagChips } from "./utils/resultTagChips";
 import { applyOccupationFilters } from "./utils/applyOccupationFilters";
+import { BottomNav } from "../bottom-nav/BottomNav";
+import { useFetchVacancies } from "./useFetchVacancies";
+import {
+	ResultsPageHeader,
+	useResultsPageScrollProgress,
+} from "./ResultsPageHeader";
 
 const DEFAULT_TAG_FILTERS: OccupationTagsFilterState = {
 	selectedOccupationTypeTagIds: [],
 };
 
 export function ResultsPage() {
+	useFetchVacancies();
 	const matchResults = useMatchResultsStore((state) => state.matchResults);
 	const favoriteOccupationIds = useMatchResultsStore(
 		(state) => state.favoriteOccupationIds,
@@ -50,13 +56,20 @@ export function ResultsPage() {
 	const openTagFilter = tagFilter.open;
 	const closeTagFilter = tagFilter.close;
 
+	const { scrollProgress, handleListScroll } = useResultsPageScrollProgress();
+
 	const toggleFavoritesOnly = useCallback(() => {
 		setShowFavoritesOnly((prev) => !prev);
 	}, []);
 
 	return (
-		<div className="flex flex-col h-full">
-			<ResultsPageHeader title={content["results.title"]} />
+		<div className="flex flex-col h-full pb-16">
+			<ResultsPageHeader
+				scrollProgress={scrollProgress}
+				title={content["results.title"]}
+				shareAriaLabel={content["results.share.ariaLabel"]}
+				downloadAriaLabel={content["results.download.ariaLabel"]}
+			/>
 			<ResultsFilterBar
 				hasLocationFilter={false}
 				selectedOccupationTypeTagIds={
@@ -76,7 +89,10 @@ export function ResultsPage() {
 				onReset={tagFilter.reset}
 			/>
 
-			<div className="flex-1 px-4 pb-4 space-y-3 overflow-y-auto">
+			<div
+				className="flex-1 px-4 pb-4 space-y-3 overflow-y-auto"
+				onScroll={handleListScroll}
+			>
 				{visibleOccupations.length > 0 ? (
 					<>
 						{visibleOccupations.map((occupation: MatchedOccupation) => (
@@ -102,6 +118,7 @@ export function ResultsPage() {
 					</div>
 				)}
 			</div>
+			<BottomNav />
 		</div>
 	);
 }

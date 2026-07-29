@@ -67,6 +67,10 @@ export default {
 					1000: "#010c13",
 					white: "#fafdff",
 				},
+				"sky-shade": {
+					20: "#E4E8EB",
+					110: "#6B8392",
+				},
 				"card-fill": "#EEF2F6",
 				"fill-secondary": "#1325491C",
 				"fill-primary": "#020919F0",

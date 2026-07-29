@@ -84,7 +84,7 @@ function App() {
 					/>
 					<Route path={ROUTE_PATHS.resultsList} element={<ResultsPage />} />
 					<Route
-						path={ROUTE_PATHS.resultsFreeSpots}
+						path={ROUTE_PATHS.resultsVacancies}
 						element={<VacanciesPage />}
 					/>
 					<Route path={ROUTE_PATHS.eval} element={<EvalPage />} />

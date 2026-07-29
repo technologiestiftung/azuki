@@ -1,65 +1,83 @@
-import { useMemo } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
-import { GhostIconButton } from "../primitives/buttons/GhostIconButton";
-import { content } from "../../content";
-import { useAppStore } from "../../store/useAppStore";
-import { useMatchResultsStore } from "../../store/useMatchResultsStore";
-import { TabBar } from "../primitives/tab-bar/TabBar";
-import { useFetchVacancies } from "./useFetchVacancies";
+import { useCallback, useState, type ReactNode, type UIEvent } from "react";
+import { ResultsPageHeaderCollapsed } from "./ResultsPageHeaderCollapsed";
+import { SecondaryIconButton } from "../primitives/buttons/SecondaryIconButton";
 
-interface ResultsPageHeaderProps {
-	title: string;
+export const COLLAPSED_HEADER_SCROLL_THRESHOLD = 64;
+
+const EXPANDED_HEADER_HEIGHT = 120;
+const COLLAPSED_HEADER_HEIGHT = 60;
+
+export function useResultsPageScrollProgress() {
+	const [scrollProgress, setScrollProgress] = useState(0);
+
+	const handleListScroll = useCallback((event: UIEvent<HTMLDivElement>) => {
+		const { scrollTop } = event.currentTarget;
+		setScrollProgress(
+			Math.min(1, scrollTop / COLLAPSED_HEADER_SCROLL_THRESHOLD),
+		);
+	}, []);
+
+	return { scrollProgress, handleListScroll };
 }
 
-export function ResultsPageHeader({ title }: ResultsPageHeaderProps) {
-	useFetchVacancies();
-	const navigate = useNavigate();
-	const { pathname } = useLocation();
-	const matchResults = useMatchResultsStore((state) => state.matchResults);
-	const vacancies = useAppStore((state) => state.vacancies);
+interface ResultsPageHeaderProps {
+	scrollProgress: number;
+	title: ReactNode;
+	shareAriaLabel: string;
+	downloadAriaLabel: string;
+}
 
-	const vacanciesCount = useMemo(() => {
-		if (!matchResults || !vacancies) {
-			return undefined;
-		}
-		const vacanciesByName = new Map(
-			vacancies.results.map((result) => [result.occupation, result]),
-		);
-		return matchResults.occupations.reduce((count, occupation) => {
-			const previews =
-				vacanciesByName.get(occupation.rawName)?.previews.length ?? 0;
-			return count + previews;
-		}, 0);
-	}, [matchResults, vacancies]);
-
-	const tabs = [
-		{
-			label: content["results.tab.results"],
-			href: "/results/list",
-			ariaLabel: content["results.tab.results"],
-		},
-		{
-			label: content["results.tab.freeSpots"],
-			href: "/results/free-spots",
-			ariaLabel: content["results.tab.freeSpots.ariaLabel"],
-			vacanciesCount,
-		},
-	];
+export function ResultsPageHeader({
+	scrollProgress,
+	title,
+	shareAriaLabel,
+	downloadAriaLabel,
+}: ResultsPageHeaderProps) {
+	const expandedHeight =
+		EXPANDED_HEADER_HEIGHT -
+		scrollProgress * (EXPANDED_HEADER_HEIGHT - COLLAPSED_HEADER_HEIGHT);
 
 	return (
-		<>
-			<div className="flex w-full items-center justify-between px-4 py-2">
-				<GhostIconButton
-					iconSrc="/icons/arrow-back-black.svg"
-					onClick={() => navigate("/NoGos")}
-					ariaLabel={content["navigation.back"]}
-					title={content["navigation.back"]}
+		<div className="relative shrink-0">
+			<div
+				className="absolute top-0 inset-x-0 z-10 bg-white"
+				style={{
+					opacity: scrollProgress,
+					pointerEvents: scrollProgress < 0.5 ? "none" : "auto",
+				}}
+				aria-hidden={scrollProgress < 0.5}
+			>
+				<ResultsPageHeaderCollapsed
+					title={title}
+					shareAriaLabel={shareAriaLabel}
+					downloadAriaLabel={downloadAriaLabel}
 				/>
-				<h1 className="text-lg font-semibold text-gray-900 flex-1 text-center">
+			</div>
+			<div
+				className="overflow-hidden"
+				style={{
+					height: `${expandedHeight}px`,
+					opacity: 1 - scrollProgress,
+					pointerEvents: scrollProgress >= 0.5 ? "none" : "auto",
+				}}
+				aria-hidden={scrollProgress >= 0.5}
+			>
+				<div className="flex gap-2 px-4 pt-3 justify-end">
+					<div className="flex gap-1.5 items-center">
+						<SecondaryIconButton
+							iconSrc="/icons/download.svg"
+							ariaLabel={downloadAriaLabel}
+						/>
+						<SecondaryIconButton
+							iconSrc="/icons/share.svg"
+							ariaLabel={shareAriaLabel}
+						/>
+					</div>
+				</div>
+				<h1 className="text-3xl font-semibold text-sky-900 text-left py-2 px-[18px]">
 					{title}
 				</h1>
 			</div>
-			<TabBar tabs={tabs} activeTab={pathname} />
-		</>
+		</div>
 	);
 }

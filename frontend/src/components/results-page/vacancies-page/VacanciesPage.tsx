@@ -8,7 +8,6 @@ import {
 	type OccupationsFilterState,
 } from "../../filter-bottom-sheet/OccupationsFilterBottomSheet";
 import { useFilterSheet } from "../../filter-bottom-sheet/useFilterSheet";
-import { ResultsPageHeader } from "../ResultsPageHeader";
 import { ResultsFilterBar } from "../ResultsFilterBar";
 import {
 	buildOccupationFilterChips,
@@ -23,6 +22,12 @@ import {
 } from "../../filter-bottom-sheet/LocationFilterBottomSheet";
 import { hasCustomLocationFilter } from "../../filter-bottom-sheet/plzLocality";
 import { VacancyCard } from "./VacancyCard";
+import { BottomNav } from "../../bottom-nav/BottomNav";
+import { useFetchVacancies } from "../useFetchVacancies";
+import {
+	ResultsPageHeader,
+	useResultsPageScrollProgress,
+} from "../ResultsPageHeader";
 
 const DEFAULT_OCCUPATION_FILTERS: OccupationsFilterState = {
 	selectedOccupationIds: [],
@@ -79,6 +84,7 @@ function getVacancyEmptyState({
 }
 
 export function VacanciesPage() {
+	useFetchVacancies();
 	const matchResults = useMatchResultsStore((state) => state.matchResults);
 	const favoriteVacancyKeys = useMatchResultsStore(
 		(state) => state.favoriteVacancyKeys,
@@ -86,10 +92,12 @@ export function VacanciesPage() {
 	const toggleVacancyFavorite = useMatchResultsStore(
 		(state) => state.toggleVacancyFavorite,
 	);
+	const vacanciesCount = useMatchResultsStore((state) => state.vacanciesCount);
 	const vacancies = useAppStore((state) => state.vacancies);
 	const fetchError = useAppStore((state) => state.vacanciesFetchError);
 	const location = useAppStore((state) => state.location);
 	const setLocation = useAppStore((state) => state.setLocation);
+
 	const occupations = matchResults?.occupations ?? [];
 	const occupationFilter = useFilterSheet(DEFAULT_OCCUPATION_FILTERS);
 	const locationFilter = useFilterSheet(DEFAULT_LOCATION_FILTER, {
@@ -118,6 +126,8 @@ export function VacanciesPage() {
 		() => buildOccupationFilterChips(occupations),
 		[occupations],
 	);
+
+	const { scrollProgress, handleListScroll } = useResultsPageScrollProgress();
 
 	const openOccupationFilter = occupationFilter.open;
 	const closeOccupationFilter = occupationFilter.close;
@@ -213,8 +223,19 @@ export function VacanciesPage() {
 
 	return (
 		<>
-			<div className="flex flex-col h-full">
-				<ResultsPageHeader title={content["results.title"]} />
+			<div className="flex flex-col h-full pb-16">
+				<ResultsPageHeader
+					scrollProgress={scrollProgress}
+					title={
+						<>
+							<span className="text-sky-400">{vacanciesCount}</span>{" "}
+							{content["vacancies.title"]}
+						</>
+					}
+					shareAriaLabel={content["vacancies.share.ariaLabel"]}
+					downloadAriaLabel={content["vacancies.download.ariaLabel"]}
+				/>
+
 				<ResultsFilterBar
 					hasLocationFilter={true}
 					appliedLocationFilter={locationFilter.appliedValue}
@@ -224,8 +245,7 @@ export function VacanciesPage() {
 					resolveOccupationFilterLabel={(id) =>
 						getOccupationFilterLabel(id, occupations)
 					}
-					occupationFilterTitle={content["vacancies.filter.occupations.title"]}
-					occupationFilterTitleShort={
+					occupationFilterTitle={
 						content["vacancies.filter.occupations.title.short"]
 					}
 					occupationFilterAriaLabel={
@@ -281,7 +301,10 @@ export function VacanciesPage() {
 						</div>
 					</div>
 				) : (
-					<div className="flex-1 px-4 pb-4 space-y-3 overflow-y-auto">
+					<div
+						className="flex-1 px-4 pb-4 space-y-3 overflow-y-auto"
+						onScroll={handleListScroll}
+					>
 						{loading && vacancyCards.length === 0 ? (
 							<p className="py-8 text-center text-sm text-gray-500">…</p>
 						) : (
@@ -322,6 +345,7 @@ export function VacanciesPage() {
 					</div>
 				)}
 			</div>
+			<BottomNav />
 		</>
 	);
 }
