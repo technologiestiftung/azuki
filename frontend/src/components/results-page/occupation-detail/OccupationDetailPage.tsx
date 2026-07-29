@@ -2,7 +2,10 @@ import { useCallback, useEffect, useMemo } from "react";
 import { useParams, useSearchParams } from "react-router-dom";
 import {
 	buildOccupationShareText,
+	fitPercent,
 	formatOccupationDisplayName,
+	resolveOccupationShortDescription,
+	resolveOccupationTaskBullets,
 } from "@azuki/shared";
 import { buildResultsOccupationPath } from "../../../routing/routes";
 import { content } from "../../../content";
@@ -10,11 +13,6 @@ import { useOccupationDetail } from "./useOccupationDetail";
 import { OccupationDetailHero } from "./OccupationDetailHero";
 import { OccupationDetailHeaderCollapsed } from "./OccupationDetailHeaderCollapsed";
 import { useOccupationDetailScroll } from "./useOccupationDetailScroll";
-import { fitPercent } from "../utils/fitPercent";
-import {
-	resolveOccupationShortDescription,
-	resolveOccupationTaskBullets,
-} from "@azuki/shared";
 import { useAppStore } from "../../../store/useAppStore";
 import { useMatchResultsStore } from "../../../store/useMatchResultsStore";
 import { useFetchVacancies } from "../useFetchVacancies";
