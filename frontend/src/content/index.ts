@@ -500,7 +500,6 @@ export const content = {
 	"results.detail.loadError":
 		"Die Berufsdetails konnten gerade nicht geladen werden.",
 	"results.share": "Teilen",
-	"results.share.ariaLabel": "Teilen",
 	"results.detail.tasksTitle": "Typische Aufgaben",
 	"results.detail.tasks.matchTitle": "So gut passt der Beruf zu dir",
 	"results.detail.tasks.matchInfo.title": "Wie wird das berechnet?",

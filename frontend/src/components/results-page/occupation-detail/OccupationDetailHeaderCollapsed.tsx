@@ -33,7 +33,7 @@ export function OccupationDetailHeaderCollapsed({
 				<GhostIconButton
 					iconSrc="/icons/share.svg"
 					onClick={onShare}
-					ariaLabel={content["results.share.ariaLabel"]}
+					ariaLabel={content["results.share"]}
 					title={content["results.share"]}
 					iconSize="w-5 h-5"
 				/>
