@@ -25,7 +25,7 @@ export function useSharedMatchResults() {
 		if (!sharedParam) {
 			setIsLoadingShared(false);
 			setSharedLoadError(false);
-			return;
+			return () => {};
 		}
 
 		useAppStore.setState({

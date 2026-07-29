@@ -2,6 +2,8 @@ export const SHARED_OCCUPATIONS_PARAM = "o";
 export const SHARED_POSTCODE_PARAM = "plz";
 export const SHARED_DISTANCE_PARAM = "d";
 
+export const MAX_SHARED_OCCUPATIONS = 20;
+
 const ENTRY_SEPARATOR = "_";
 const FIT_SEPARATOR = "-";
 
@@ -54,16 +56,29 @@ export function parseSharedOccupationsParam(
 	}
 
 	const separator = param.includes(ENTRY_SEPARATOR) ? ENTRY_SEPARATOR : ",";
-	return param
-		.split(separator)
-		.map(parseSharedOccupationEntry)
-		.filter((entry): entry is SharedOccupationEntry => entry !== null);
+	const entries: SharedOccupationEntry[] = [];
+	const seenIds = new Set<number>();
+
+	for (const part of param.split(separator)) {
+		if (entries.length >= MAX_SHARED_OCCUPATIONS) {
+			break;
+		}
+		const entry = parseSharedOccupationEntry(part);
+		if (!entry || seenIds.has(entry.id)) {
+			continue;
+		}
+		seenIds.add(entry.id);
+		entries.push(entry);
+	}
+
+	return entries;
 }
 
 export function buildSharedOccupationsParam(
 	entries: SharedOccupationEntry[],
 ): string {
 	return entries
+		.slice(0, MAX_SHARED_OCCUPATIONS)
 		.map((entry) => `${entry.id}${FIT_SEPARATOR}${entry.fit}`)
 		.join(ENTRY_SEPARATOR);
 }

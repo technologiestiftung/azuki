@@ -65,6 +65,7 @@ export {
 	SHARED_OCCUPATIONS_PARAM,
 	SHARED_POSTCODE_PARAM,
 	SHARED_DISTANCE_PARAM,
+	MAX_SHARED_OCCUPATIONS,
 	parseSharedOccupationsParam,
 	buildSharedOccupationsParam,
 	type SharedOccupationEntry,
