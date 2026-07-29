@@ -1,5 +1,5 @@
 import { describe, expect, test } from "vitest";
-import { fitPercent } from "../../src/components/results-page/utils/fitPercent";
+import { fitPercent, scoreFromFitPercent } from "@azuki/shared";
 
 describe("fitPercent", () => {
 	test("maps calibration anchor raw scores to expected percentages", () => {
@@ -39,6 +39,16 @@ describe("fitPercent", () => {
 	test("returns an integer", () => {
 		for (const raw of [-37, -3, 0, 7, 13, 19, 26, 41]) {
 			expect(Number.isInteger(fitPercent(raw))).toBe(true);
+		}
+	});
+});
+
+describe("scoreFromFitPercent", () => {
+	test("round-trips common display percentages", () => {
+		for (const fit of [20, 37, 55, 72, 86]) {
+			const score = scoreFromFitPercent(fit);
+			expect(fitPercent(score)).toBeGreaterThanOrEqual(fit - 1);
+			expect(fitPercent(score)).toBeLessThanOrEqual(fit + 1);
 		}
 	});
 });
