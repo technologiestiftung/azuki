@@ -1,4 +1,9 @@
-import { OccupationMatchPill } from "../utils/occupationMatchPills";
+export interface OccupationMatchPill {
+	id: string;
+	label: string;
+	icon: string;
+	summary: string;
+}
 
 interface MatchPillGroupProps {
 	pills: OccupationMatchPill[];
@@ -6,6 +11,10 @@ interface MatchPillGroupProps {
 	onSelect: (id: string) => void;
 	variant: "match" | "notMatch";
 	emptyMessage?: string;
+	loading?: boolean;
+	unavailable?: boolean;
+	loadingMessage?: string;
+	unavailableMessage?: string;
 }
 
 function MatchPillIcon({ icon }: { icon: string }) {
@@ -22,6 +31,10 @@ export function MatchPillGroup({
 	onSelect,
 	variant,
 	emptyMessage,
+	loading = false,
+	unavailable = false,
+	loadingMessage,
+	unavailableMessage,
 }: MatchPillGroupProps) {
 	const selectedPill = pills.find((pill) => pill.id === selectedId);
 	const selectedClassName =
@@ -33,9 +46,27 @@ export function MatchPillGroup({
 			? "border-sky-200 bg-sky-0"
 			: "border-orange-200 bg-orange-0";
 
+	if (loading) {
+		return loadingMessage ? (
+			<p className="text-center text-base text-sky-110 px-[21px]">
+				{loadingMessage}
+			</p>
+		) : null;
+	}
+
+	if (unavailable && pills.length === 0) {
+		return unavailableMessage ? (
+			<p className="text-center text-base text-sky-110 px-[21px]">
+				{unavailableMessage}
+			</p>
+		) : null;
+	}
+
 	if (pills.length === 0) {
 		return emptyMessage ? (
-			<p className="text-lg text-sky-900 px-[5px]">{emptyMessage}</p>
+			<p className="text-center text-base text-sky-110 px-[21px]">
+				{emptyMessage}
+			</p>
 		) : null;
 	}
 
@@ -49,7 +80,7 @@ export function MatchPillGroup({
 						onClick={() => onSelect(pill.id)}
 						aria-label={pill.label}
 						aria-pressed={selectedId === pill.id}
-						className={`h-12 flex min-w-0 max-w-full shrink-0 items-center px-[14px] py-1 rounded-[100px] border-2 text-lg text-sky-900 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-sky-500 ${
+						className={`h-9 flex min-w-0 max-w-full shrink-0 items-center px-[14px] py-1 rounded-[100px] border-2 text-lg text-sky-900 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-sky-500 box-border ${
 							selectedId === pill.id ? selectedClassName : unselectedClassName
 						}`}
 					>

@@ -141,6 +141,6 @@ export const WORK_EXPECTATIONS_CHECKS: Record<
 		!occupation.conditions.accidentRisk &&
 		!occupation.conditions.irregularHours,
 	modern_technology: (occupation) =>
-		occupation.conditions.machinery || occupation.digitalizationSignal,
+		occupation.conditions.machinery || occupation.conditions.screenWork,
 	remote: (occupation) => HOMEOFFICE_RE.test(occupation.workLocations),
 };

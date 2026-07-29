@@ -104,6 +104,35 @@ describe("collectMatchSignals", () => {
 		expect(notMatching[0]?.dimension).toBe("noGo");
 	});
 
+	test("themed custom no-go does not fuzzy-match unrelated occupation text", () => {
+		const profile = makeProfile({
+			customNoGos: ["Arbeit mit Tieren"],
+			noGos: { "Arbeit mit Tieren": "rejected" },
+		});
+		const occupation = makeOccupation({
+			taskBullets: ["Heizungen montieren und in Betrieb nehmen"],
+			conditions: { animalWork: false },
+		});
+
+		expect(collectMatchSignals(profile, occupation).notMatching).toHaveLength(
+			0,
+		);
+	});
+
+	test("themed custom animal no-go uses animalWork predicate", () => {
+		const profile = makeProfile({
+			customNoGos: ["Arbeit mit Tieren"],
+			noGos: { "Arbeit mit Tieren": "rejected" },
+		});
+		const occupation = makeOccupation({
+			conditions: { animalWork: true },
+		});
+
+		expect(collectMatchSignals(profile, occupation).notMatching).toEqual([
+			expect.objectContaining({ sourceId: "tiere", dimension: "noGo" }),
+		]);
+	});
+
 	test("shift-work no-go uses shiftWork only, not irregularHours", () => {
 		const profile = makeProfile({
 			noGos: { "shift-work": "rejected" },
@@ -157,6 +186,83 @@ describe("collectMatchSignals", () => {
 				dimension: "outdoorMismatch",
 				sourceId: "natur",
 			}),
+		);
+	});
+
+	test("adds work pref mismatch when opposite preference matches", () => {
+		const profile = makeProfile({
+			workPreferences: { people: "a" },
+		});
+		const occupation = makeOccupation({
+			conditions: { customerContact: true },
+		});
+
+		const { notMatching } = collectMatchSignals(profile, occupation);
+
+		expect(notMatching).toContainEqual(
+			expect.objectContaining({
+				dimension: "workPrefMismatch",
+				sourceId: "people:a",
+			}),
+		);
+	});
+
+	test("adds expectation mismatch when modern_technology lacks real tech", () => {
+		const profile = makeProfile({
+			workExpectations: ["modern_technology"],
+		});
+		const occupation = makeOccupation({
+			digitalizationSignal: true,
+			conditions: { machinery: false, screenWork: false },
+		});
+
+		const { matching, notMatching } = collectMatchSignals(profile, occupation);
+
+		expect(matching.some((s) => s.sourceId === "modern_technology")).toBe(
+			false,
+		);
+		expect(notMatching).toContainEqual(
+			expect.objectContaining({
+				dimension: "expectationMismatch",
+				sourceId: "modern_technology",
+			}),
+		);
+	});
+
+	test("does not treat Object.prototype keys as work-expectation checks", () => {
+		const profile = makeProfile({
+			workExpectations: ["valueOf", "toString", "constructor"],
+			customWorkExpectations: ["valueOf", "toString", "constructor"],
+		});
+		const occupation = makeOccupation();
+
+		expect(() => collectMatchSignals(profile, occupation)).not.toThrow();
+
+		const { matching, notMatching } = collectMatchSignals(profile, occupation);
+		expect(
+			matching.some(
+				(s) =>
+					s.dimension === "expectation" &&
+					["valueOf", "toString", "constructor"].includes(s.sourceId),
+			),
+		).toBe(false);
+		expect(
+			notMatching.filter((s) => s.dimension === "expectationMismatch"),
+		).toEqual(
+			expect.arrayContaining([
+				expect.objectContaining({
+					sourceId: "valueOf",
+					isCustom: true,
+				}),
+				expect.objectContaining({
+					sourceId: "toString",
+					isCustom: true,
+				}),
+				expect.objectContaining({
+					sourceId: "constructor",
+					isCustom: true,
+				}),
+			]),
 		);
 	});
 

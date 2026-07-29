@@ -40,9 +40,6 @@ export function OccupationDetailPage() {
 	useFetchVacancies();
 	const vacancies = useAppStore((state) => state.vacancies);
 	const matchResults = useMatchResultsStore((state) => state.matchResults);
-	const setVacancyOccupationFilterIds = useMatchResultsStore(
-		(state) => state.setVacancyOccupationFilterIds,
-	);
 	const profile = useAppStore((state) => state.profile);
 
 	const {
@@ -224,11 +221,6 @@ export function OccupationDetailPage() {
 							occupationDuration={detail.occupationDuration}
 							occupationVacanciesCount={occupationVacanciesCount}
 							nextOccupationCards={nextOccupationCards}
-							onApplyClick={() => {
-								if (Number.isFinite(occupationId)) {
-									setVacancyOccupationFilterIds([occupationId]);
-								}
-							}}
 						/>
 					)}
 				</div>

@@ -1,19 +1,51 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import type { Occupation, UserProfile } from "@azuki/shared";
+import {
+	fetchMatchExplanations,
+	getCachedMatchExplanations,
+} from "../../../api/client";
 import { content } from "../../../content";
 import { FitDonutChart } from "./FitDonutChart";
 import { InfoBottomSheet } from "./InfoBottomSheet";
-import {
-	buildOccupationMatchPills,
-	type OccupationMatchPillGroups,
-} from "../utils/occupationMatchPills";
-import { MatchPillGroup } from "./MatchPillGroup";
+import type { OccupationMatchPillGroups } from "../utils/occupationMatchPills";
+import { MatchPillGroup, type OccupationMatchPill } from "./MatchPillGroup";
 
 interface OccupationDetailMatchSectionProps {
 	matchPercent?: number;
 	occupation: Occupation | null;
 	profile: UserProfile;
 	sharedPills?: OccupationMatchPillGroups;
+}
+
+interface AiPillGroups {
+	matching: OccupationMatchPill[];
+	notMatching: OccupationMatchPill[];
+}
+
+function toPills(
+	items: Array<{ id: string; label: string; icon: string; summary: string }>,
+): OccupationMatchPill[] {
+	return items.map((item) => ({
+		id: item.id,
+		label: item.label,
+		icon: item.icon,
+		summary: item.summary,
+	}));
+}
+
+function groupsFromResponse(
+	matching: Array<{ id: string; label: string; icon: string; summary: string }>,
+	notMatching: Array<{
+		id: string;
+		label: string;
+		icon: string;
+		summary: string;
+	}>,
+): AiPillGroups {
+	return {
+		matching: toPills(matching),
+		notMatching: toPills(notMatching),
+	};
 }
 
 export function OccupationDetailMatchSection({
@@ -29,21 +61,83 @@ export function OccupationDetailMatchSection({
 	const [selectedNotMatchPillId, setSelectedNotMatchPillId] = useState<
 		string | null
 	>(null);
-
-	const { matching, notMatching } = useMemo(() => {
-		if (sharedPills) {
-			return sharedPills;
-		}
-		if (!occupation) {
-			return { matching: [], notMatching: [] };
-		}
-		return buildOccupationMatchPills(profile, occupation);
-	}, [sharedPills, occupation, profile]);
+	const [pills, setPills] = useState<AiPillGroups>({
+		matching: [],
+		notMatching: [],
+	});
+	const [loading, setLoading] = useState(false);
+	const [failed, setFailed] = useState(false);
 
 	useEffect(() => {
 		setSelectedMatchPillId(null);
 		setSelectedNotMatchPillId(null);
+		setPills({ matching: [], notMatching: [] });
+		setLoading(false);
+		setFailed(false);
 	}, [occupation?.id]);
+
+	const profileKey = JSON.stringify(profile);
+
+	useEffect(() => {
+		if (sharedPills) {
+			setPills({
+				matching: toPills(sharedPills.matching),
+				notMatching: toPills(sharedPills.notMatching),
+			});
+			setLoading(false);
+			setFailed(false);
+			return undefined;
+		}
+
+		if (!occupation) {
+			return undefined;
+		}
+
+		const occupationId = occupation.id;
+		const cached = getCachedMatchExplanations(occupationId, profile);
+		if (cached) {
+			setPills(groupsFromResponse(cached.matching, cached.notMatching));
+			setLoading(false);
+			setFailed(false);
+			return undefined;
+		}
+
+		const controller = new AbortController();
+		setLoading(true);
+		setFailed(false);
+
+		void (async () => {
+			try {
+				const result = await fetchMatchExplanations(
+					occupationId,
+					profile,
+					controller.signal,
+				);
+				if (controller.signal.aborted) {
+					return;
+				}
+				setPills(groupsFromResponse(result.matching, result.notMatching));
+				setFailed(false);
+			} catch (err) {
+				if (controller.signal.aborted) {
+					return;
+				}
+				console.error("Failed to load match explanations:", err);
+				setPills({ matching: [], notMatching: [] });
+				setFailed(true);
+			} finally {
+				if (!controller.signal.aborted) {
+					setLoading(false);
+				}
+			}
+		})();
+
+		return () => {
+			controller.abort();
+		};
+	}, [occupation?.id, profileKey, sharedPills]);
+
+	const { matching, notMatching } = pills;
 
 	const activeMatchPillId =
 		matching.find((pill) => pill.id === selectedMatchPillId)?.id ??
@@ -75,7 +169,7 @@ export function OccupationDetailMatchSection({
 					{matchPercent !== undefined && (
 						<div className="flex items-center justify-between gap-4">
 							<span className="text-sky-900 text-[85px] font-medium leading-none">
-								{matchPercent} %
+								{matchPercent}%
 							</span>
 							<FitDonutChart percent={matchPercent} />
 						</div>
@@ -96,6 +190,12 @@ export function OccupationDetailMatchSection({
 						onSelect={setSelectedMatchPillId}
 						variant="match"
 						emptyMessage={content["results.detail.whyItMatches.empty"]}
+						loading={loading}
+						unavailable={failed}
+						loadingMessage={content["results.detail.matchExplanations.loading"]}
+						unavailableMessage={
+							content["results.detail.matchExplanations.unavailable"]
+						}
 					/>
 				</div>
 				<div className="flex flex-col gap-6 px-4 pt-5 pb-4 rounded-b-[20px] bg-sky-10">
@@ -113,6 +213,12 @@ export function OccupationDetailMatchSection({
 						onSelect={setSelectedNotMatchPillId}
 						variant="notMatch"
 						emptyMessage={content["results.detail.whyItMatches.notMatchEmpty"]}
+						loading={loading}
+						unavailable={failed}
+						loadingMessage={content["results.detail.matchExplanations.loading"]}
+						unavailableMessage={
+							content["results.detail.matchExplanations.unavailable"]
+						}
 					/>
 				</div>
 			</div>

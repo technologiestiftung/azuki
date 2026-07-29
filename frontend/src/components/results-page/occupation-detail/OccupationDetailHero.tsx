@@ -52,6 +52,7 @@ export function OccupationDetailHero({
 					onClick={() => navigate(ROUTE_PATHS.resultsList)}
 					ariaLabel={content["navigation.back"]}
 					title={content["navigation.back"]}
+					iconSize="w-5 h-5"
 					className="bg-sky-10/50  rounded-xl backdrop-blur-[4.5px]"
 				/>
 
@@ -61,6 +62,7 @@ export function OccupationDetailHero({
 						onClick={onShare}
 						ariaLabel={content["results.share"]}
 						title={content["results.share"]}
+						iconSize="w-5 h-5"
 						className="bg-sky-10/50 rounded-xl backdrop-blur-[4.5px]"
 					/>
 					<button

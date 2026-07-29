@@ -19,8 +19,8 @@ export function InfoBottomSheet({
 }: InfoBottomSheetProps) {
 	return (
 		<BottomSheet open={open} onClose={onClose} ariaLabel={ariaLabel ?? title}>
-			<div className="flex flex-col gap-4">
-				<div className="flex w-full justify-end pb-3.5 px-2">
+			<div className="flex flex-col">
+				<div className="flex w-full justify-end px-2">
 					<GhostIconButton
 						onClick={onClose}
 						ariaLabel={content["common.bottomSheet.backButtonAriaLabel"]}
