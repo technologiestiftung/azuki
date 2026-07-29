@@ -156,7 +156,12 @@ function collectExpectationSignals(
 	const customExpectationSet = new Set(profile.customWorkExpectations);
 
 	for (const expectation of profile.workExpectations) {
-		if (!Object.hasOwn(WORK_EXPECTATIONS_CHECKS, expectation)) {
+		if (
+			!Object.prototype.hasOwnProperty.call(
+				WORK_EXPECTATIONS_CHECKS,
+				expectation,
+			)
+		) {
 			continue;
 		}
 		const check = WORK_EXPECTATIONS_CHECKS[expectation];
@@ -355,7 +360,12 @@ function collectExpectationMismatchSignals(
 			continue;
 		}
 
-		if (!Object.hasOwn(WORK_EXPECTATIONS_CHECKS, expectation)) {
+		if (
+			!Object.prototype.hasOwnProperty.call(
+				WORK_EXPECTATIONS_CHECKS,
+				expectation,
+			)
+		) {
 			continue;
 		}
 		const check = WORK_EXPECTATIONS_CHECKS[expectation];
