@@ -37,7 +37,7 @@ export const BottomNav = () => {
 			<nav className="flex justify-between items-center">
 				<ul className="flex items-center w-full justify-between">
 					{navItems.map((item) => (
-						<li className="flex-1">
+						<li key={item.href} className="flex-1">
 							<Link
 								to={item.href}
 								aria-label={item.ariaLabel}
