@@ -1,4 +1,4 @@
-import React, { type ReactNode } from "react";
+import React, { type CSSProperties, type ReactNode } from "react";
 
 export interface ButtonProps {
 	label?: string | React.ReactNode;
@@ -9,6 +9,7 @@ export interface ButtonProps {
 	title?: string;
 	isLoading?: boolean;
 	className?: string;
+	style?: CSSProperties;
 	children?: string | ReactNode;
 	testId?: string;
 	icon?: ReactNode;

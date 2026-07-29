@@ -20,6 +20,7 @@ import { EvalPage } from "./components/eval/EvalPage";
 import { PersonasPage } from "./components/personas/PersonasPage";
 import { PersonaDetailPage } from "./components/personas/PersonaDetailPage";
 import { ROUTE_PATHS } from "./routing/routes";
+import { Profile } from "./profile/Profile";
 
 const LoadingScreen = lazy(() =>
 	import("./components/loading-screen/LoadingScreen").then((mod) => ({
@@ -102,6 +103,7 @@ function App() {
 						path="*"
 						element={<Navigate to={ROUTE_PATHS.welcome} replace />}
 					/>
+					<Route path={ROUTE_PATHS.profile} element={<Profile />} />
 				</Routes>
 			</div>
 		</div>

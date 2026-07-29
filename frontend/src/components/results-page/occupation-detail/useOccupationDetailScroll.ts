@@ -1,7 +1,7 @@
 import { useCallback, useState, type UIEventHandler } from "react";
 
-const COLLAPSE_START = 60;
-const COLLAPSE_END = 180;
+export const COLLAPSE_START = 60;
+export const COLLAPSE_END = 180;
 const HERO_PARALLAX_MAX_PX = 18;
 
 export function useOccupationDetailScroll() {

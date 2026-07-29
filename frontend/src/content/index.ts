@@ -1,6 +1,43 @@
 import { workPreferencePairs } from "./work-preference-pairs";
 
 export const content = {
+	// Profile
+	"profile.title": "Das bist du",
+	"profile.shortDescriptionPlaceholder":
+		"Natur und Pflanzen – das ist deine Welt.",
+	"profile.topOccupationsTitle": "Deine Top-Berufe",
+	"profile.aboutYou": "Über dich",
+	"profile.schoolDegreeLabel.planned": "Dein geplanter Schulabschluss",
+	"profile.schoolDegreeLabel.inSchool": "Dein Schulabschluss",
+	"profile.topOccupationWithMostVacancies": "Besonders gesucht",
+	"profile.favoriteSubjects": "Deine Lieblingsfächer",
+	"profile.interests": "Das magst du gerne",
+	"profile.strengths": "Deine Stärken",
+	"profile.hardships": "Was dir noch schwerfällt",
+	"profile.workExpectations": "Was du von einem Beruf erwartest",
+	"profile.practicalExperiences": "Deine Arbeitserfahrung",
+	"profile.workPreferences": "So möchtest du arbeiten",
+	"profile.noGos": "Das magst du nicht im Beruf",
+	"profile.resetCard.title": "Du möchtest deine Antworten ändern?",
+	"profile.resetCard.description":
+		"Du kannst alle Fragen nochmal beantworten, um dein Profil zu ändern.",
+	"profile.resetCard.cta": "Fragen wiederholen",
+	"profile.resetDialog.title": "Möchtest du wirklich alle Fragen wiederholen?",
+	"profile.resetDialog.description":
+		"Deine passenden Berufe, freie Stellen und Antworten werden gelöscht und können nicht wieder hergestellt werden.",
+	"profile.resetDialog.cta": "Fragen wiederholen",
+	"profile.resetDialog.downloadCta": "Mein Profil speichern",
+	"profile.footerLinks.about": "Über das Projekt",
+	"profile.footerLinks.feedback": "Feedback geben",
+	"profile.footerLinks.feedback.link":
+		"https://www.technologiestiftung-berlin.de/feedback",
+	"profile.footerLinks.imprint": "Impressum",
+	"profile.footerLinks.imprint.link":
+		"https://www.technologiestiftung-berlin.de/impressum",
+	"profile.footerLinks.privacyPolicy": "Datenschutz",
+	"profile.footerLinks.privacyPolicy.link":
+		"https://www.technologiestiftung-berlin.de/datenschutz",
+
 	// Common
 	"common.multiSelect.subline": "Wähle alle aus, die zutreffen.",
 	"common.singleSelect.subline": "Wähle eine Option aus.",
@@ -438,6 +475,14 @@ export const content = {
 	"results.occupationType.school": "Schulische Ausbildung",
 	"results.noResults":
 		"Wir haben leider keine Ausbildungsberufe zu deiner Auswahl gefunden.",
+	"results.contactCard.title": "Du weißt nicht, wo du anfangen sollst?",
+	"results.contactCard.description":
+		"Wir beraten dich zu deinen <strong>Stärken</strong>, <strong>passenden Berufen</strong> und <strong>Bewerbungen</strong>. Gemeinsam finden wir deinen nächsten Schritt!",
+	"results.contactCard.item.1": "100% kostenlos und persönlich",
+	"results.contactCard.item.2": "Rückmeldung in 48h",
+	"results.contactCard.item.3":
+		"Du entscheidest was du brauchst – alle Fragen sind erlaubt",
+	"results.contactCard.consultationCta": "Beratung anfragen",
 	// Filter Bottom Sheet
 	"results.filter.tags.title": "Berufsgruppe",
 	"results.filter.tags.title.short": "Beruf",
@@ -497,6 +542,8 @@ export const content = {
 		"Die Berufsdetails konnten gerade nicht geladen werden.",
 	"results.share": "Teilen",
 	"results.share.ariaLabel": "Teilen",
+	"results.download": "Download",
+	"results.download.ariaLabel": "Download",
 	"results.detail.tasksTitle": "Typische Aufgaben",
 	"results.detail.tasks.matchTitle": "So gut passt der Beruf zu dir",
 	"results.detail.tasks.matchInfo.title": "Wie wird das berechnet?",

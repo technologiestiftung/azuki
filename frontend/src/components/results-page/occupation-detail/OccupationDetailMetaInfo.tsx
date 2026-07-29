@@ -57,7 +57,7 @@ export function OccupationDetailMetaInfo({
 			<div className="flex flex-col gap-0.5">
 				<div className="flex w-full gap-0.5">
 					<div className="flex flex-col gap-1.5 rounded-tl-xl flex-1 px-4 py-3  bg-sky-50">
-						<span className="text-sky-110 text-base font-normal">
+						<span className="text-sky-shade-110 text-base font-normal">
 							{content["results.detail.durationTitle"]}
 						</span>
 						<span className="text-sky-900 text-xl font-semibold text-start">
@@ -70,7 +70,7 @@ export function OccupationDetailMetaInfo({
 						aria-label={`${content["results.detail.salaryTitle"]}, ${content["results.moreInfo"]}`}
 						className="flex flex-col gap-1.5 flex-1 px-4 py-3 bg-sky-50 rounded-tr-xl text-start focus-visible:outline focus-visible:outline-2 focus-visible:outline-sky-500"
 					>
-						<span className="flex justify-between items-center text-sky-110 text-base font-normal">
+						<span className="flex justify-between items-center text-sky-shade-110 text-base font-normal">
 							{content["results.detail.salaryTitle"]}
 							<img
 								src="/icons/info.svg"
@@ -90,7 +90,7 @@ export function OccupationDetailMetaInfo({
 					aria-label={`${content["results.detail.schoolDegreeTitle"]}: ${schoolDegreeLabel}, ${content["results.moreInfo"]}`}
 					className="flex flex-col gap-1.5 flex-1 px-4 py-3 bg-sky-50 rounded-b-xl text-start focus-visible:outline focus-visible:outline-2 focus-visible:outline-sky-500"
 				>
-					<span className="flex justify-between items-center text-sky-110 text-base font-normal">
+					<span className="flex justify-between items-center text-sky-shade-110 text-base font-normal">
 						{content["results.detail.schoolDegreeTitle"]}
 						<img src="/icons/info.svg" alt="" className="w-5 h-5" aria-hidden />
 					</span>

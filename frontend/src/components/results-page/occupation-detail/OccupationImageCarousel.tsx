@@ -135,7 +135,7 @@ function Indicators({
 						event.stopPropagation();
 						onSelect(index);
 					}}
-					className="w-1.5 h-1.5 rounded-full border-none p-0 cursor-pointer shrink-0 transition-opacity duration-[350ms] ease-in-out bg-sky-10"
+					className="w-1.5 h-1.5 rounded-full border-none p-0 cursor-pointer shrink-0 transition-opacity duration-[350ms] ease-in-out bg-sky-shade-10"
 					style={{
 						opacity: index === current ? 1 : 0.7,
 						backdropFilter: index === current ? "none" : "blur(2px)",

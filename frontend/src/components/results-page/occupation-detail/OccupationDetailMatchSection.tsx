@@ -147,7 +147,7 @@ export function OccupationDetailMatchSection({
 							type="button"
 							aria-label={content["results.detail.tasks.matchInfo.ariaLabel"]}
 							onClick={() => setIsMatchInfoOpen(true)}
-							className="h-10 flex gap-1 items-center justify-start text-sky-140 text-base font-medium underline underline-offset-2 text-start"
+							className="h-10 flex gap-1 items-center justify-start text-sky-shade-140 text-base font-medium underline underline-offset-2 text-start"
 						>
 							{content["results.detail.tasks.matchInfo.title"]}
 							<img src="/icons/info.svg" alt="" className="w-5 h-5" />
@@ -162,7 +162,7 @@ export function OccupationDetailMatchSection({
 						</div>
 					)}
 				</div>
-				<div className="flex flex-col gap-6 px-4 pt-5 pb-4 bg-sky-10">
+				<div className="flex flex-col gap-6 px-4 pt-5 pb-4 bg-sky-shade-10">
 					<div className="flex gap-[9px]">
 						<div className="flex items-center justify-center w-[30px] h-[30px] bg-sky-300 rounded-md px-[5px] pt-[5px] pb-[7px]">
 							<img src="/icons/thumb-up.svg" alt="" className="w-4 h-4" />
@@ -185,7 +185,7 @@ export function OccupationDetailMatchSection({
 						}
 					/>
 				</div>
-				<div className="flex flex-col gap-6 px-4 pt-5 pb-4 rounded-b-[20px] bg-sky-10">
+				<div className="flex flex-col gap-6 px-4 pt-5 pb-4 rounded-b-[20px] bg-sky-shade-10">
 					<div className="flex gap-[9px]">
 						<div className="flex items-center justify-center w-[30px] h-[30px] bg-orange-400 rounded-md px-[5px] pt-[5px] pb-[7px]">
 							<img src="/icons/thumb-down.svg" alt="" className="w-4 h-4" />
