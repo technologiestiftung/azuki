@@ -91,6 +91,15 @@ export {
 } from "./shortDescription";
 
 export {
+	formatOccupationDuration,
+	resolveOccupationDuration,
+} from "./occupationDuration";
+
+export { formatOccupationSalary } from "./formatOccupationSalary";
+
+export { buildOccupationShareText } from "./occupationShareText";
+
+export {
 	TASK_BULLETS_PROMPT,
 	resolveOccupationTaskBullets,
 } from "./taskBullets";

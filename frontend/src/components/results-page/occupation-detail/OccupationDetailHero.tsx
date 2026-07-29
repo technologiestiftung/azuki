@@ -8,6 +8,7 @@ interface OccupationDetailHeroProps {
 	heroImage: string | undefined;
 	isFavorite: boolean;
 	onToggleFavorite: () => void;
+	onShare: () => void;
 	overlayOpacity: number;
 	controlsOpacity: number;
 	imageParallaxY: number;
@@ -18,6 +19,7 @@ export function OccupationDetailHero({
 	heroImage,
 	isFavorite,
 	onToggleFavorite,
+	onShare,
 	overlayOpacity,
 	controlsOpacity,
 	imageParallaxY,
@@ -57,7 +59,7 @@ export function OccupationDetailHero({
 				<div className="flex gap-1.5 items-center">
 					<GhostIconButton
 						iconSrc="/icons/share.svg"
-						onClick={() => {}}
+						onClick={onShare}
 						ariaLabel={content["results.share"]}
 						title={content["results.share"]}
 						iconSize="w-5 h-5"

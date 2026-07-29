@@ -7,12 +7,14 @@ interface OccupationDetailHeaderCollapsedProps {
 	displayName: string;
 	isFavorite: boolean;
 	onToggleFavorite: () => void;
+	onShare: () => void;
 }
 
 export function OccupationDetailHeaderCollapsed({
 	displayName,
 	isFavorite,
 	onToggleFavorite,
+	onShare,
 }: OccupationDetailHeaderCollapsedProps) {
 	const navigate = useNavigate();
 	return (
@@ -30,7 +32,7 @@ export function OccupationDetailHeaderCollapsed({
 			<div className="flex items-center gap-1.5">
 				<GhostIconButton
 					iconSrc="/icons/share.svg"
-					onClick={() => {}}
+					onClick={onShare}
 					ariaLabel={content["results.share.ariaLabel"]}
 					title={content["results.share"]}
 					iconSize="w-5 h-5"

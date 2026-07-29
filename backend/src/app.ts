@@ -30,6 +30,7 @@ import {
 	UpdatePersonaSchema,
 } from "./personas/schemas.js";
 import { rowToPersona, type PersonaInsertRow } from "./personas/mappers.js";
+import { renderOccupationPreviewPage } from "./occupationPreviewPage.js";
 
 const occupations: Occupation[] = occupationsData as Occupation[];
 
@@ -224,6 +225,9 @@ app.get("/api/occupations/:id", (c) => {
 	}
 	return c.json(occupation);
 });
+
+app.get("/results/:id", (c) => renderOccupationPreviewPage(c, occupations));
+app.get("/api/results/:id", (c) => renderOccupationPreviewPage(c, occupations));
 
 const MatchExplanationsRequestSchema = z.object({
 	profile: z.unknown(),
