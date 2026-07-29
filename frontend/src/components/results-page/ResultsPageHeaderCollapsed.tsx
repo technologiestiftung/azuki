@@ -4,12 +4,20 @@ interface ResultsPageHeaderCollapsedProps {
 	title: string | React.ReactNode;
 	shareAriaLabel: string;
 	downloadAriaLabel: string;
+	onDownload: () => void;
+	onShare: () => void;
+	downloadDisabled?: boolean;
+	shareDisabled?: boolean;
 }
 
 export const ResultsPageHeaderCollapsed = ({
 	title,
 	shareAriaLabel,
 	downloadAriaLabel,
+	onDownload,
+	onShare,
+	downloadDisabled = false,
+	shareDisabled = false,
 }: ResultsPageHeaderCollapsedProps) => {
 	return (
 		<div className="h-[60px] flex w-full items-center justify-between px-4 pt-3 pb-2 shrink-0 border-b border-sky-20 z-50">
@@ -22,11 +30,15 @@ export const ResultsPageHeaderCollapsed = ({
 						iconSrc="/icons/download.svg"
 						iconSize="w-5 h-5"
 						ariaLabel={downloadAriaLabel}
+						onClick={onDownload}
+						disabled={downloadDisabled}
 					/>
 					<GhostIconButton
 						iconSrc="/icons/share.svg"
 						iconSize="w-5 h-5"
 						ariaLabel={shareAriaLabel}
+						onClick={onShare}
+						disabled={shareDisabled}
 					/>
 				</div>
 			</div>

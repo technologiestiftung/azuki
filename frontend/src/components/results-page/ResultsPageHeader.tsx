@@ -25,6 +25,10 @@ interface ResultsPageHeaderProps {
 	title: ReactNode;
 	shareAriaLabel: string;
 	downloadAriaLabel: string;
+	onDownload: () => void;
+	onShare: () => void;
+	downloadDisabled?: boolean;
+	shareDisabled?: boolean;
 }
 
 export function ResultsPageHeader({
@@ -32,6 +36,10 @@ export function ResultsPageHeader({
 	title,
 	shareAriaLabel,
 	downloadAriaLabel,
+	onDownload,
+	onShare,
+	downloadDisabled = false,
+	shareDisabled = false,
 }: ResultsPageHeaderProps) {
 	const expandedHeight =
 		EXPANDED_HEADER_HEIGHT -
@@ -51,6 +59,10 @@ export function ResultsPageHeader({
 					title={title}
 					shareAriaLabel={shareAriaLabel}
 					downloadAriaLabel={downloadAriaLabel}
+					onDownload={onDownload}
+					onShare={onShare}
+					downloadDisabled={downloadDisabled}
+					shareDisabled={shareDisabled}
 				/>
 			</div>
 			<div
@@ -67,10 +79,14 @@ export function ResultsPageHeader({
 						<SecondaryIconButton
 							iconSrc="/icons/download.svg"
 							ariaLabel={downloadAriaLabel}
+							onClick={onDownload}
+							disabled={downloadDisabled}
 						/>
 						<SecondaryIconButton
 							iconSrc="/icons/share.svg"
 							ariaLabel={shareAriaLabel}
+							onClick={onShare}
+							disabled={shareDisabled}
 						/>
 					</div>
 				</div>

@@ -24,6 +24,10 @@ import { hasCustomLocationFilter } from "../../filter-bottom-sheet/plzLocality";
 import { VacancyCard } from "./VacancyCard";
 import { BottomNav } from "../../bottom-nav/BottomNav";
 import { useFetchVacancies } from "../useFetchVacancies";
+import { useSharedMatchResults } from "../useSharedMatchResults";
+import { buildShareUrl } from "../utils/buildShareUrl";
+import { shareResultsLink } from "../utils/shareResults";
+import { ROUTE_PATHS } from "../../../routing/routes";
 import {
 	ResultsPageHeader,
 	useResultsPageScrollProgress,
@@ -93,7 +97,16 @@ function getVacancyEmptyState({
 }
 
 export function VacanciesPage() {
-	useFetchVacancies();
+	const {
+		isLoadingShared,
+		sharedLoadError,
+		hasSharedParam,
+		sharedVacancyParams,
+	} = useSharedMatchResults();
+	useFetchVacancies({
+		pauseWhileLoadingShared: hasSharedParam && isLoadingShared,
+		sharedVacancyParams,
+	});
 	const matchResults = useMatchResultsStore((state) => state.matchResults);
 	const favoriteVacancyKeys = useMatchResultsStore(
 		(state) => state.favoriteVacancyKeys,
@@ -125,7 +138,8 @@ export function VacanciesPage() {
 	});
 	const [showFavoritesOnly, setShowFavoritesOnly] = useState(false);
 	const loading =
-		occupations.length > 0 && vacancies === null && fetchError === null;
+		isLoadingShared ||
+		(occupations.length > 0 && vacancies === null && fetchError === null);
 
 	const favoriteVacancyKeySet = useMemo(
 		() => new Set(favoriteVacancyKeys),
@@ -238,6 +252,30 @@ export function VacanciesPage() {
 		favoriteVacancyKeySet,
 	]);
 
+	const handleDownload = useCallback(async () => {
+		const { exportVacanciesPdf } = await import("../utils/exportVacanciesPdf");
+		exportVacanciesPdf(vacancyCards);
+	}, [vacancyCards]);
+
+	const handleShare = useCallback(async () => {
+		const url = buildShareUrl(
+			ROUTE_PATHS.resultsVacancies,
+			visibleOccupations,
+			location,
+		);
+		try {
+			await shareResultsLink({
+				title: content["vacancies.share.title"],
+				text: content["vacancies.share.text"],
+				url,
+			});
+		} catch (err) {
+			if (err instanceof DOMException && err.name === "AbortError") {
+				return;
+			}
+		}
+	}, [visibleOccupations, location]);
+
 	const locationFilterApplied = hasCustomLocationFilter(
 		locationFilter.appliedValue,
 	);
@@ -265,6 +303,10 @@ export function VacanciesPage() {
 					}
 					shareAriaLabel={content["vacancies.share.ariaLabel"]}
 					downloadAriaLabel={content["vacancies.download.ariaLabel"]}
+					onDownload={handleDownload}
+					onShare={handleShare}
+					downloadDisabled={vacancyCards.length === 0}
+					shareDisabled={visibleOccupations.length === 0}
 				/>
 
 				<ResultsFilterBar
@@ -305,7 +347,7 @@ export function VacanciesPage() {
 					onReset={resetLocationFilter}
 				/>
 
-				{showSimpleEmpty || showDetailedEmpty ? (
+				{showSimpleEmpty || showDetailedEmpty || sharedLoadError ? (
 					<div className="flex px-4 pb-4 items-center h-full">
 						<div className="flex flex-col items-center justify-center gap-5 px-5">
 							<div className="flex items-center justify-center object-contain p-2">
@@ -336,19 +378,15 @@ export function VacanciesPage() {
 						className="flex-1 px-4 pb-4 space-y-3 overflow-y-auto"
 						onScroll={handleListScroll}
 					>
-						{loading && vacancyCards.length === 0 ? (
-							<p className="py-8 text-center text-sm text-gray-500">…</p>
-						) : (
-							vacancyCards.map(({ key, occupation, preview }) => (
-								<VacancyCard
-									key={key}
-									occupationName={occupation.name}
-									preview={preview}
-									isFavorite={favoriteVacancyKeySet.has(key)}
-									onToggleFavorite={() => toggleVacancyFavorite(key)}
-								/>
-							))
-						)}
+						{vacancyCards.map(({ key, occupation, preview }) => (
+							<VacancyCard
+								key={key}
+								occupationName={occupation.name}
+								preview={preview}
+								isFavorite={favoriteVacancyKeySet.has(key)}
+								onToggleFavorite={() => toggleVacancyFavorite(key)}
+							/>
+						))}
 						<div className="flex flex-col gap-5 px-3 py-5 rounded-2xl border border-sky-100 bg-sky-50">
 							<div>
 								<h3 className="text-2xl font-semibold text-sky-1000 text-center mb-[7px]">

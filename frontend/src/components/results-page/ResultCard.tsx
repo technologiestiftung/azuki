@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import {
 	type MatchedOccupation,
+	fitPercent,
 	formatOccupationDisplayName,
 } from "@azuki/shared";
 import { Badge } from "../primitives/badge/Badge";
@@ -8,7 +9,6 @@ import { useMatchResultsStore } from "../../store/useMatchResultsStore";
 import { FavoriteButton } from "../favorite-button/FavoriteButton";
 import { content } from "../../content";
 import { buildResultsOccupationPath } from "../../routing/routes";
-import { fitPercent } from "./utils/fitPercent";
 
 interface ResultCardProps {
 	occupation: MatchedOccupation;
