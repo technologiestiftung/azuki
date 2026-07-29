@@ -37,7 +37,7 @@ export const BottomNav = () => {
 			<nav className="flex justify-between items-center">
 				<ul className="flex items-center w-full justify-between">
 					{navItems.map((item) => (
-						<li className="flex-1">
+						<li key={item.href} className="flex-1">
 							<Link
 								to={item.href}
 								aria-label={item.ariaLabel}
@@ -59,7 +59,7 @@ export const BottomNav = () => {
 									/>
 
 									{item.badge !== undefined && item.badge > 0 && (
-										<span className="absolute -top-1 -right-2 flex items-center justify-center w-[15px] h-[15px] ml-[1px] mb-[1px] bg-sky-300 rounded-full text-[10px] text-center text-sky-900 leading-[14px] font-normal">
+										<span className="absolute -top-1 -right-2 flex items-center justify-center w-[18px] h-[18px] ml-[1px] mb-[1px] bg-sky-300 rounded-full text-[10px] text-center text-sky-900 leading-[14px] font-normal">
 											{item.badge}
 										</span>
 									)}
