@@ -5,6 +5,7 @@ import { DefaultDialog } from "../components/primitives/dialogs/DefaultDialog";
 import { content } from "../content";
 import { ROUTE_PATHS } from "../routing/routes";
 import { useAppStore } from "../store/useAppStore";
+import { downloadProfile } from "./downloadProfile";
 
 interface ProfileResetDialogProps {
 	isOpen: boolean;
@@ -41,9 +42,7 @@ export function ProfileResetDialog({
 				<div className="flex flex-col gap-2">
 					<PrimaryThemedButton
 						className="w-full flex items-center justify-center gap-2"
-						onClick={() => {
-							//TODO: download profile
-						}}
+						onClick={() => downloadProfile()}
 					>
 						<img src="/icons/download.svg" alt="" className="w-6 h-6" />
 						{content["profile.resetDialog.downloadCta"]}

@@ -39,6 +39,7 @@ export function ContactCard() {
 			</div>
 			<PrimaryThemedButton
 				className="w-full"
+				disabled
 				onClick={() => {
 					//TODO: open contact form
 				}}

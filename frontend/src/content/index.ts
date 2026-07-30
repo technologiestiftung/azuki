@@ -27,10 +27,19 @@ export const content = {
 		"Deine passenden Berufe, freie Stellen und Antworten werden gelöscht und können nicht wieder hergestellt werden.",
 	"profile.resetDialog.cta": "Fragen wiederholen",
 	"profile.resetDialog.downloadCta": "Mein Profil speichern",
+	"profile.download": "Download",
+	"profile.download.ariaLabel": "Profil herunterladen",
+	"profile.share": "Teilen",
+	"profile.share.ariaLabel": "Profil teilen",
+	"profile.share.title": "Mein Profil",
+	"profile.share.text":
+		"Schau dir dieses Profil und passende Ausbildungsberufe an.",
+	"profile.export.filename": "mein-profil.pdf",
+	"profile.export.category": "Bereich",
+	"profile.export.details": "Angaben",
 	"profile.footerLinks.about": "Über das Projekt",
 	"profile.footerLinks.feedback": "Feedback geben",
-	"profile.footerLinks.feedback.link":
-		"https://www.technologiestiftung-berlin.de/feedback",
+	"profile.footerLinks.feedback.link": "",
 	"profile.footerLinks.imprint": "Impressum",
 	"profile.footerLinks.imprint.link":
 		"https://www.technologiestiftung-berlin.de/impressum",

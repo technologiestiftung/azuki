@@ -21,6 +21,8 @@ import { TopOccupationsCarousel } from "./TopOccupationsCarousel";
 import { ProfileAboutSection } from "./ProfileAboutSection";
 import { ContactCard } from "../components/results-page/ContactCard";
 import { ProfileResetCard } from "./ProfileResetCard";
+import { BottomNav } from "../components/bottom-nav/BottomNav";
+import { useSharedProfile } from "./useSharedProfile";
 
 const HERO_TITLE_SIZE_PX = 32;
 const COLLAPSED_TITLE_SIZE_PX = 14;
@@ -44,7 +46,10 @@ export function Profile() {
 	const { collapseProgress, heroControlsOpacity, onScroll } =
 		useOccupationDetailScroll();
 	const matchResults = useMatchResultsStore((state) => state.matchResults);
-	const profile = useAppStore((state) => state.profile);
+	const ownProfile = useAppStore((state) => state.profile);
+	const { isSharedView, sharedProfile, sharedOccupations, isLoadingShared } =
+		useSharedProfile();
+	const profile = sharedProfile ?? ownProfile;
 
 	const heroTitleSlotRef = useRef<HTMLDivElement>(null);
 	const collapsedTitleSlotRef = useRef<HTMLDivElement>(null);
@@ -53,13 +58,14 @@ export function Profile() {
 	const [isMorphing, setIsMorphing] = useState(false);
 	const [titleStyle, setTitleStyle] = useState<CSSProperties | undefined>();
 
-	const topOccupations = useMemo(
-		() =>
-			[...(matchResults?.occupations ?? [])]
-				.sort((a, b) => b.score - a.score)
-				.slice(0, 3),
-		[matchResults],
-	);
+	const topOccupations = useMemo(() => {
+		if (isSharedView) {
+			return sharedOccupations.slice(0, 3);
+		}
+		return [...(matchResults?.occupations ?? [])]
+			.sort((a, b) => b.score - a.score)
+			.slice(0, 3);
+	}, [isSharedView, sharedOccupations, matchResults]);
 
 	const syncMorphTitle = useCallback((scrollY: number) => {
 		const fromEl = heroTitleSlotRef.current;
@@ -154,10 +160,15 @@ export function Profile() {
 	];
 
 	return (
-		<div className="flex flex-col h-full relative overflow-x-hidden bg-sky-100">
+		<div
+			className={`flex flex-col h-full relative overflow-x-hidden bg-sky-100 ${
+				isSharedView ? "" : "pb-16"
+			}`}
+		>
 			<ProfileHeaderCollapsed
 				collapseProgress={collapseProgress}
 				titleSlotRef={collapsedTitleSlotRef}
+				isSharedView={isSharedView}
 			/>
 			{isMorphing && (
 				<h1
@@ -175,14 +186,17 @@ export function Profile() {
 					heroControlsOpacity={heroControlsOpacity}
 					titleSlotRef={heroTitleSlotRef}
 					showTitle={!isMorphing}
+					isSharedView={isSharedView}
 				/>
-				{topOccupations.length > 0 && (
+				{!isLoadingShared && topOccupations.length > 0 && (
 					<TopOccupationsCarousel occupations={topOccupations} />
 				)}
 				<ProfileAboutSection profile={profile} />
-				<div className="flex flex-col gap-[28px] px-4 bg-white">
+				<div className="flex flex-col gap-[28px] px-4 bg-white pb-[28px]">
 					<ContactCard />
-					<ProfileResetCard />
+					{!isSharedView && <ProfileResetCard />}
+				</div>
+				<div className="bg-white">
 					<div className="flex flex-col gap-4 pt-6 px-8 pb-8 rounded-t-4xl bg-sky-100">
 						{footerLinks.map((link) => (
 							<a
@@ -206,6 +220,7 @@ export function Profile() {
 					</div>
 				</div>
 			</div>
+			{!isSharedView && <BottomNav />}
 		</div>
 	);
 }

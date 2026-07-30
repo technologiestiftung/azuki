@@ -99,11 +99,11 @@ function App() {
 						path={ROUTE_PATHS.personaDetail}
 						element={<PersonaDetailPage />}
 					/>
+					<Route path={ROUTE_PATHS.profile} element={<Profile />} />
 					<Route
 						path="*"
 						element={<Navigate to={ROUTE_PATHS.welcome} replace />}
 					/>
-					<Route path={ROUTE_PATHS.profile} element={<Profile />} />
 				</Routes>
 			</div>
 		</div>

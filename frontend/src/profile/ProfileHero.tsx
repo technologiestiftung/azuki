@@ -6,33 +6,41 @@ interface ProfileHeroProps {
 	heroControlsOpacity: number;
 	titleSlotRef: Ref<HTMLDivElement>;
 	showTitle: boolean;
+	isSharedView?: boolean;
 }
 
 export function ProfileHero({
 	heroControlsOpacity,
 	titleSlotRef,
 	showTitle,
+	isSharedView = false,
 }: ProfileHeroProps) {
 	const hasFrostedBg = heroControlsOpacity > 0.5;
 
 	return (
 		<>
+			{!isSharedView && (
+				<div
+					className="sticky top-0 px-4 pt-3 pb-2 z-[1] flex items-center justify-end transition-opacity duration-150"
+					style={{
+						opacity: heroControlsOpacity,
+						pointerEvents: heroControlsOpacity < 0.5 ? "none" : "auto",
+					}}
+				>
+					<ProfileActionButtons
+						buttonClassName={`rounded-xl transition-[background-color,backdrop-filter] duration-150 ${
+							hasFrostedBg
+								? "bg-sky-shade-10/80 backdrop-blur-[4.5px]"
+								: "bg-transparent backdrop-blur-none"
+						}`}
+					/>
+				</div>
+			)}
 			<div
-				className="sticky top-0 px-4 pt-3 pb-2 z-[1] flex items-center justify-end transition-opacity duration-150"
-				style={{
-					opacity: heroControlsOpacity,
-					pointerEvents: heroControlsOpacity < 0.5 ? "none" : "auto",
-				}}
+				className={`flex flex-col gap-3 px-[45px] items-center mb-9 ${
+					isSharedView ? "pt-6" : ""
+				}`}
 			>
-				<ProfileActionButtons
-					buttonClassName={`rounded-xl transition-[background-color,backdrop-filter] duration-150 ${
-						hasFrostedBg
-							? "bg-sky-shade-10/80 backdrop-blur-[4.5px]"
-							: "bg-transparent backdrop-blur-none"
-					}`}
-				/>
-			</div>
-			<div className="flex flex-col gap-3 px-[45px] items-center mb-9">
 				<div className="relative w-[102px] h-[102px] z-10">
 					<div className="w-full h-full rounded-full overflow-hidden bg-sky-0 border-4 border-sky-50">
 						<img
@@ -41,9 +49,11 @@ export function ProfileHero({
 							className="w-full h-full object-cover"
 						/>
 					</div>
-					<div className="absolute bottom-0 right-0 bg-sky-900 rounded-full w-8 h-8 flex items-center justify-center">
-						<img src="/icons/edit.svg" alt="" className="w-4 h-4" />
-					</div>
+					{!isSharedView && (
+						<div className="absolute bottom-0 right-0 bg-sky-900 rounded-full w-8 h-8 flex items-center justify-center">
+							<img src="/icons/edit.svg" alt="" className="w-4 h-4" />
+						</div>
+					)}
 				</div>
 
 				<div className="flex flex-col items-center">

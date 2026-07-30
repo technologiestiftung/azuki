@@ -5,11 +5,13 @@ import { ProfileActionButtons } from "./ProfileActionButtons";
 interface ProfileHeaderCollapsedProps {
 	collapseProgress: number;
 	titleSlotRef: Ref<HTMLDivElement>;
+	isSharedView?: boolean;
 }
 
 export function ProfileHeaderCollapsed({
 	collapseProgress,
 	titleSlotRef,
+	isSharedView = false,
 }: ProfileHeaderCollapsedProps) {
 	return (
 		<div
@@ -29,7 +31,7 @@ export function ProfileHeaderCollapsed({
 				>
 					{content["profile.title"]}
 				</div>
-				<ProfileActionButtons />
+				{!isSharedView && <ProfileActionButtons />}
 			</div>
 		</div>
 	);
