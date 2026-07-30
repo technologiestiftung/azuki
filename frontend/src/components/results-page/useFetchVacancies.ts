@@ -15,13 +15,13 @@ interface UseFetchVacanciesOptions {
 	sharedVacancyParams?: SharedVacancyParams;
 }
 
-function buildVacancyFetchKey(
-	occupationNames: string[],
-	postcode: string,
-	distance: number,
-	preferredJobs: string[],
-): string {
-	return `${postcode}:${distance}:${occupationNames.join("|")}:${preferredJobs.join("|")}`;
+function buildVacancyFetchKey(params: {
+	occupationNames: string[];
+	postcode: string;
+	distance: number;
+	preferredJobs: string[];
+}): string {
+	return `${params.postcode}:${params.distance}:${params.occupationNames.join("|")}:${params.preferredJobs.join("|")}`;
 }
 
 function buildSharedVacancyFetchKey(params: SharedVacancyParams): string {
@@ -72,12 +72,12 @@ export function useFetchVacancies(
 			const occupationNames = occupations.map(
 				(occupation) => occupation.rawName,
 			);
-			fetchKey = buildVacancyFetchKey(
+			fetchKey = buildVacancyFetchKey({
 				occupationNames,
-				location.postcode,
-				location.distance,
+				postcode: location.postcode,
+				distance: location.distance,
 				preferredJobs,
-			);
+			});
 			fetchPromise = fetchVacancies(location.postcode, occupationNames, {
 				distance: location.distance,
 				preferredJobs,
