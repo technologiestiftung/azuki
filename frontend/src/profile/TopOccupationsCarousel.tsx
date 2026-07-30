@@ -1,11 +1,11 @@
 import { Link } from "react-router-dom";
 import {
 	formatOccupationDisplayName,
+	fitPercent,
 	type MatchedOccupation,
 } from "@azuki/shared";
 import { content } from "../content";
 import { buildResultsOccupationPath } from "../routing/routes";
-import { fitPercent } from "../components/results-page/utils/fitPercent";
 
 interface TopOccupationsCarouselProps {
 	occupations: MatchedOccupation[];
