@@ -7,7 +7,7 @@ export const prefillUserProfile: UserProfile = {
 	favoriteSubjects: ["math", "english", "sports"],
 	customSubjects: [],
 	interests: ["computer", "gaming", "music"],
-	preferredJobs: ["Mediengestalter", "Pflege"],
+	preferredJobs: ["Fachinformatiker", "Mediengestalter"],
 	customInterests: [],
 	workExpectations: [
 		"good_salary",
