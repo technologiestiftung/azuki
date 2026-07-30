@@ -235,6 +235,48 @@ export async function matchProfile(profile: UserProfile): Promise<MatchResult> {
 	return res.json();
 }
 
+export async function fetchSharedMatch(
+	occupationsParam: string,
+): Promise<MatchResult> {
+	const res = await fetch(
+		`${API_BASE}/shared-match?${new URLSearchParams({ o: occupationsParam })}`,
+	);
+
+	if (!res.ok) {
+		throw new Error(`Shared match fetch failed: ${res.status}`);
+	}
+
+	return res.json();
+}
+
+export async function fetchSharedVacancies(
+	occupationsParam: string,
+	options: {
+		postcode?: string;
+		distance?: number;
+		signal?: AbortSignal;
+	} = {},
+): Promise<VacanciesResponse> {
+	const { postcode, distance, signal } = options;
+	const params = new URLSearchParams({ o: occupationsParam });
+	if (postcode) {
+		params.set("plz", postcode);
+	}
+	if (distance !== undefined) {
+		params.set("d", String(distance));
+	}
+
+	const res = await fetch(`${API_BASE}/shared-vacancies?${params}`, {
+		signal,
+	});
+
+	if (!res.ok) {
+		throw new Error(`Shared vacancies fetch failed: ${res.status}`);
+	}
+
+	return res.json();
+}
+
 export async function unlock(password: string): Promise<boolean> {
 	const res = await fetch(`${API_BASE}/unlock`, {
 		method: "POST",

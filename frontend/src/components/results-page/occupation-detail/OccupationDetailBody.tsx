@@ -1,35 +1,32 @@
-import { useEffect, useRef, useState, useMemo } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import {
-	formatOccupationDisplayName,
-	type MatchedOccupation,
-	type Occupation,
-	type UserProfile,
-} from "@azuki/shared";
+import type { Occupation, UserProfile } from "@azuki/shared";
 import { buildResultsOccupationPath } from "../../../routing/routes";
 import { content } from "../../../content";
 import { OccupationDetailMetaInfo } from "./OccupationDetailMetaInfo";
 import { OccupationDetailMatchSection } from "./OccupationDetailMatchSection";
 import { OccupationImageCarousel } from "./OccupationImageCarousel";
+import type { SharedNextOccupationCard } from "./useSharedNextOccupations";
 import { OccupationDetailApplyLink } from "./OccupationDetailApplyLink";
-import { useAppStore } from "../../../store/useAppStore";
 
 interface OccupationDetailBodyProps {
 	occupation: Occupation | null;
-	matchedOccupation: MatchedOccupation | undefined;
 	matchPercent: number | undefined;
 	taskItems: string[];
 	profile: UserProfile;
-	nextOccupations: MatchedOccupation[];
+	occupationDuration: string;
+	occupationVacanciesCount: number | undefined;
+	nextOccupationCards: SharedNextOccupationCard[];
 }
 
 export function OccupationDetailBody({
 	occupation,
-	matchedOccupation,
 	matchPercent,
 	taskItems,
 	profile,
-	nextOccupations,
+	occupationDuration,
+	occupationVacanciesCount,
+	nextOccupationCards,
 }: OccupationDetailBodyProps) {
 	const inlineApplyRef = useRef<HTMLAnchorElement>(null);
 	const [isInlineApplyVisible, setIsInlineApplyVisible] = useState(false);
@@ -51,25 +48,12 @@ export function OccupationDetailBody({
 		return () => observer.disconnect();
 	}, []);
 
-	const vacancies = useAppStore((state) => state.vacancies);
-
-	const occupationVacanciesCount = useMemo(() => {
-		const occupationName = matchedOccupation?.rawName;
-		if (!occupationName || !vacancies) {
-			return undefined;
-		}
-		return (
-			vacancies.results.find((result) => result.occupation === occupationName)
-				?.previews.length ?? 0
-		);
-	}, [matchedOccupation?.rawName, vacancies]);
-
 	return (
 		<>
 			<div className="px-4">
 				<OccupationDetailMetaInfo
 					occupation={occupation}
-					occupationDuration={matchedOccupation?.occupationDuration ?? ""}
+					occupationDuration={occupationDuration}
 				/>
 			</div>
 			<div className="px-[18px] flex flex-col gap-3">
@@ -123,39 +107,30 @@ export function OccupationDetailBody({
 					/>
 				</div>
 			</div>
-			{nextOccupations.length > 0 && (
+			{nextOccupationCards.length > 0 && (
 				<div className="flex flex-col gap-2 pt-[25px] pb-4 bg-sky-50">
 					<h3 className="text-sky-900 text-2xl font-semibold text-left px-[19px]">
 						{content["results.detail.moreOccupations.title"]}
 					</h3>
 					<div className="flex gap-2 w-full overflow-x-scroll [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-						{nextOccupations.map((nextOccupation) => {
-							const displayName = formatOccupationDisplayName(
-								nextOccupation.name,
-							);
-							const imageUrl =
-								nextOccupation.images[0]?.url ??
-								"/illustrations/occupation-placeholder.svg";
+						{nextOccupationCards.map((nextOccupation) => (
+							<Link
+								key={nextOccupation.id}
+								to={buildResultsOccupationPath(nextOccupation.id)}
+								className="flex flex-col min-w-[300px] gap-3 px-2 pt-2 pb-4 bg-white rounded-[20px] focus-visible:outline focus-visible:outline-2 focus-visible:outline-sky-500 last:mr-4 first:ml-4"
+								aria-label={`${nextOccupation.displayName}, ${content["results.moreInfo"]}`}
+							>
+								<img
+									src={nextOccupation.imageUrl}
+									alt=""
+									className="w-full h-[190px] object-cover rounded-xl aspect-[3/2]"
+								/>
 
-							return (
-								<Link
-									key={nextOccupation.id}
-									to={buildResultsOccupationPath(nextOccupation.id)}
-									className="flex flex-col min-w-[300px] gap-3 px-2 pt-2 pb-4 bg-white rounded-[20px] focus-visible:outline focus-visible:outline-2 focus-visible:outline-sky-500 last:mr-4 first:ml-4"
-									aria-label={`${displayName}, ${content["results.moreInfo"]}`}
-								>
-									<img
-										src={imageUrl}
-										alt=""
-										className="w-full h-[190px] object-cover rounded-xl aspect-[3/2]"
-									/>
-
-									<p className="text-base font-medium px-[3px]">
-										{displayName}
-									</p>
-								</Link>
-							);
-						})}
+								<p className="text-base font-medium px-[3px]">
+									{nextOccupation.displayName}
+								</p>
+							</Link>
+						))}
 					</div>
 				</div>
 			)}

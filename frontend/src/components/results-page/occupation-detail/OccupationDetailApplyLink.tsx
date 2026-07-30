@@ -36,7 +36,7 @@ export const OccupationDetailApplyLink = forwardRef<
 	return (
 		<Link
 			ref={ref}
-			to={ROUTE_PATHS.resultsFreeSpots}
+			to={ROUTE_PATHS.resultsVacancies}
 			onClick={handleApplyClick}
 			aria-label={content["results.detail.apply.cta.ariaLabel"]}
 			aria-hidden={hidden}

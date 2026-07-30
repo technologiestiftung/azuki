@@ -1,5 +1,9 @@
 import { useEffect, useMemo, useState } from "react";
-import { formatOccupationDisplayName, type Occupation } from "@azuki/shared";
+import {
+	formatOccupationDisplayName,
+	resolveOccupationDuration,
+	type Occupation,
+} from "@azuki/shared";
 import { getOccupation } from "../../../api/client";
 import { content } from "../../../content";
 import { useMatchResultsStore } from "../../../store/useMatchResultsStore";
@@ -13,6 +17,7 @@ interface OccupationDetailState {
 	toggleFavorite: () => void;
 	displayName: string;
 	heroImage: string | undefined;
+	occupationDuration: string;
 }
 
 function findMatchedOccupation(
@@ -86,6 +91,10 @@ export function useOccupationDetail(
 	const heroImage =
 		matchedOccupation?.images[0]?.url ?? occupation?.images[0]?.url;
 
+	const occupationDuration =
+		matchedOccupation?.occupationDuration ??
+		resolveOccupationDuration(occupation);
+
 	return {
 		occupation,
 		loading,
@@ -95,5 +104,6 @@ export function useOccupationDetail(
 		toggleFavorite: () => toggleFavoriteStore(occupationId),
 		displayName,
 		heroImage,
+		occupationDuration,
 	};
 }

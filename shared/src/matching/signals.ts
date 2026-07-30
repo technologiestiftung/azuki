@@ -156,8 +156,16 @@ function collectExpectationSignals(
 	const customExpectationSet = new Set(profile.customWorkExpectations);
 
 	for (const expectation of profile.workExpectations) {
+		if (
+			!Object.prototype.hasOwnProperty.call(
+				WORK_EXPECTATIONS_CHECKS,
+				expectation,
+			)
+		) {
+			continue;
+		}
 		const check = WORK_EXPECTATIONS_CHECKS[expectation];
-		if (!check?.(occupation)) {
+		if (!check(occupation)) {
 			continue;
 		}
 		signals.push({
@@ -251,16 +259,16 @@ function collectNoGoSignals(
 		}
 
 		const themedPillId = inferNotMatchPillIdFromText(noGo);
-		if (
-			themedPillId &&
-			occupationMatchesNotMatchPill(themedPillId, occupation)
-		) {
-			signals.push({
-				kind: "notMatch",
-				dimension: "noGo",
-				sourceId: themedPillId,
-				weight: 3,
-			});
+		if (themedPillId) {
+			// Themed no-go: predicate only, no fuzzy text fallback.
+			if (occupationMatchesNotMatchPill(themedPillId, occupation)) {
+				signals.push({
+					kind: "notMatch",
+					dimension: "noGo",
+					sourceId: themedPillId,
+					weight: 3,
+				});
+			}
 			continue;
 		}
 
@@ -352,10 +360,15 @@ function collectExpectationMismatchSignals(
 			continue;
 		}
 
-		const check = WORK_EXPECTATIONS_CHECKS[expectation];
-		if (!check) {
+		if (
+			!Object.prototype.hasOwnProperty.call(
+				WORK_EXPECTATIONS_CHECKS,
+				expectation,
+			)
+		) {
 			continue;
 		}
+		const check = WORK_EXPECTATIONS_CHECKS[expectation];
 		// No reliable occupation signal for flexible hours — skip false negatives.
 		if (expectation === "flexible_hours") {
 			continue;

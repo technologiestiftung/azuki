@@ -13,14 +13,25 @@ export function getOccupationSearchTerms(occupation: Occupation): string[] {
 		.map((term) => term.toLowerCase());
 }
 
+function tokenize(text: string): string[] {
+	return text
+		.toLowerCase()
+		.split(/[^a-zäöüß0-9]+/i)
+		.filter((token) => token.length >= 4);
+}
+
+/** Exact or prefix token match (avoids "tieren"∈"montieren"). */
+function termMatchesToken(term: string, token: string): boolean {
+	return tokenize(term).some(
+		(word) => word === token || word.startsWith(token),
+	);
+}
+
 export function scoreCustomTextMatch(
 	text: string,
 	occupation: Occupation,
 ): number {
-	const tokens = text
-		.toLowerCase()
-		.split(/[\s,.;:-]+/)
-		.filter((token) => token.length >= 4);
+	const tokens = tokenize(text);
 	if (tokens.length === 0) {
 		return 0;
 	}
@@ -29,7 +40,7 @@ export function scoreCustomTextMatch(
 
 	let hits = 0;
 	for (const token of tokens) {
-		if (occupationTerms.some((term) => term.includes(token))) {
+		if (occupationTerms.some((term) => termMatchesToken(term, token))) {
 			hits++;
 		}
 	}

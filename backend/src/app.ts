@@ -7,6 +7,9 @@ import {
 	type VacanciesResponse,
 	formatOccupationDisplayName,
 	AI_MODEL_IDS,
+	parseSharedOccupationsParam,
+	scoreFromFitPercent,
+	resolveOccupationShortDescription,
 } from "@azuki/shared";
 import { occupationMatchMeta } from "./occupationMeta";
 import {
@@ -14,7 +17,6 @@ import {
 	preFilter,
 	PREFILTER_TOP_K,
 } from "./matching/index.js";
-import { resolveOccupationShortDescription } from "@azuki/shared";
 import { aiRank, buildSystemPromptV5 } from "./ai/index.js";
 import occupationsData from "./data/berufe.json";
 import { VacanciesRequestSchema } from "./schemas/vacancies.js";
@@ -30,6 +32,7 @@ import {
 	UpdatePersonaSchema,
 } from "./personas/schemas.js";
 import { rowToPersona, type PersonaInsertRow } from "./personas/mappers.js";
+import { renderOccupationPreviewPage } from "./occupationPreviewPage.js";
 
 const occupations: Occupation[] = occupationsData as Occupation[];
 
@@ -188,6 +191,80 @@ app.post("/api/vacancies", async (c) => {
 	return c.json(response);
 });
 
+app.get("/api/shared-match", (c) => {
+	const occupationsParam = c.req.query("o") ?? "";
+	const entries = parseSharedOccupationsParam(occupationsParam);
+	if (entries.length === 0) {
+		return c.json({ error: "Invalid or empty occupations parameter" }, 400);
+	}
+
+	const occupationById = new Map(occupations.map((entry) => [entry.id, entry]));
+	const matched = entries.flatMap(({ id, fit }) => {
+		const occupation = occupationById.get(id);
+		if (!occupation) {
+			return [];
+		}
+		return [
+			{
+				id: occupation.id,
+				name: formatOccupationDisplayName(occupation.name),
+				rawName: occupation.name,
+				score: scoreFromFitPercent(fit),
+				images: occupation.images.slice(0, 3),
+				shortDescription: resolveOccupationShortDescription(occupation),
+				reasoning: "",
+				...occupationMatchMeta(occupation),
+			},
+		];
+	});
+
+	if (matched.length === 0) {
+		return c.json({ error: "No matching occupations found" }, 404);
+	}
+
+	const result: MatchResult = { occupations: matched };
+	return c.json(result);
+});
+
+app.get("/api/shared-vacancies", async (c) => {
+	const occupationsParam = c.req.query("o") ?? "";
+	const entries = parseSharedOccupationsParam(occupationsParam);
+	if (entries.length === 0) {
+		return c.json({ error: "Invalid or empty occupations parameter" }, 400);
+	}
+
+	const postcodeMatch = /^\d{5}$/.exec(c.req.query("plz") ?? "10115");
+	if (!postcodeMatch) {
+		return c.json({ error: "Invalid postcode" }, 400);
+	}
+	const postcode = postcodeMatch[0];
+
+	const distanceRaw = c.req.query("d");
+	const distance = distanceRaw ? Number.parseInt(distanceRaw, 10) : 25;
+	if (!Number.isFinite(distance) || distance < 2 || distance > 200) {
+		return c.json({ error: "Invalid distance" }, 400);
+	}
+
+	const occupationById = new Map(occupations.map((entry) => [entry.id, entry]));
+	const occupationNames = entries.flatMap(({ id }) => {
+		const occupation = occupationById.get(id);
+		return occupation ? [occupation.name] : [];
+	});
+
+	if (occupationNames.length === 0) {
+		return c.json({ error: "No matching occupations found" }, 404);
+	}
+
+	const results = await Promise.all(
+		occupationNames.map((occupationName) =>
+			searchVacancies(occupationName, postcode, distance),
+		),
+	);
+
+	const response: VacanciesResponse = { results };
+	return c.json(response);
+});
+
 app.post("/api/reverse-geocode", async (c) => {
 	if (!isAuthorized(c)) {
 		return c.json({ error: "Unauthorized" }, 401);
@@ -224,6 +301,9 @@ app.get("/api/occupations/:id", (c) => {
 	}
 	return c.json(occupation);
 });
+
+app.get("/results/:id", (c) => renderOccupationPreviewPage(c, occupations));
+app.get("/api/results/:id", (c) => renderOccupationPreviewPage(c, occupations));
 
 const MatchExplanationsRequestSchema = z.object({
 	profile: z.unknown(),

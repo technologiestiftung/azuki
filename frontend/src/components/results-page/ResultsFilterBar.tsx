@@ -14,7 +14,6 @@ export interface ResultsFilterBarProps {
 	selectedOccupationIds?: number[];
 	resolveOccupationFilterLabel?: (id: number) => string;
 	occupationFilterTitle?: string;
-	occupationFilterTitleShort?: string;
 	occupationFilterAriaLabel?: string;
 	onOpenTagFilter: () => void;
 	onOpenLocationFilter?: () => void;
@@ -29,7 +28,6 @@ export function ResultsFilterBar({
 	selectedOccupationIds,
 	resolveOccupationFilterLabel,
 	occupationFilterTitle,
-	occupationFilterTitleShort,
 	occupationFilterAriaLabel,
 	onOpenTagFilter,
 	onOpenLocationFilter,
@@ -46,8 +44,6 @@ export function ResultsFilterBar({
 	const extraTagCount = activeFilterIds.length - 1;
 	const filterTitle =
 		occupationFilterTitle ?? content["results.filter.tags.title"];
-	const filterTitleShort =
-		occupationFilterTitleShort ?? content["results.filter.tags.title.short"];
 	const filterAriaLabel =
 		occupationFilterAriaLabel ??
 		content["results.filter.tags.filterButton.ariaLabel"];
@@ -65,11 +61,11 @@ export function ResultsFilterBar({
 		: content["results.filter.location.title"];
 
 	return (
-		<div className="px-4 py-[18px] flex gap-3">
+		<div className="px-4 py-[18px] flex gap-3 w-full">
 			<div className="p-2 w-10 h-10 flex items-center justify-center">
-				<img src="/icons/filter.svg" alt="" className="h-5 w-5" />
+				<img src="/icons/filter.svg" alt="" className="h-5 w-5 shrink-0" />
 			</div>
-			<div className="flex items-center gap-2">
+			<div className="flex items-center gap-2 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
 				{hasLocationFilter && (
 					<FilterChipButton
 						variant="dropdown"
@@ -80,7 +76,7 @@ export function ResultsFilterBar({
 						}
 						title={locationChipLabel}
 					>
-						<span className="min-w-0">{locationChipLabel}</span>
+						<span className="min-w-0 flex-1 truncate">{locationChipLabel}</span>
 					</FilterChipButton>
 				)}
 				<FilterChipButton
@@ -100,9 +96,7 @@ export function ResultsFilterBar({
 							)}
 						</>
 					) : (
-						<span className="min-w-0 flex-1 truncate">
-							{hasLocationFilter ? filterTitleShort : filterTitle}
-						</span>
+						<span className="min-w-0 flex-1 truncate">{filterTitle}</span>
 					)}
 				</FilterChipButton>
 				<FilterChipButton
@@ -112,7 +106,11 @@ export function ResultsFilterBar({
 					ariaLabel={content["results.filter.favorites.filterButton.ariaLabel"]}
 					title={content["results.filter.favorites.title"]}
 				>
-					<img src="/icons/favorite-outline.svg" alt="" className="h-4 w-4" />
+					<img
+						src="/icons/favorite-outline.svg"
+						alt=""
+						className="h-4 w-4 shrink-0"
+					/>
 				</FilterChipButton>
 			</div>
 		</div>

@@ -8,7 +8,6 @@ import {
 	type OccupationsFilterState,
 } from "../../filter-bottom-sheet/OccupationsFilterBottomSheet";
 import { useFilterSheet } from "../../filter-bottom-sheet/useFilterSheet";
-import { ResultsPageHeader } from "../ResultsPageHeader";
 import { ResultsFilterBar } from "../ResultsFilterBar";
 import {
 	buildOccupationFilterChips,
@@ -23,6 +22,16 @@ import {
 } from "../../filter-bottom-sheet/LocationFilterBottomSheet";
 import { hasCustomLocationFilter } from "../../filter-bottom-sheet/plzLocality";
 import { VacancyCard } from "./VacancyCard";
+import { BottomNav } from "../../bottom-nav/BottomNav";
+import { useFetchVacancies } from "../useFetchVacancies";
+import { useSharedMatchResults } from "../useSharedMatchResults";
+import { buildShareUrl } from "../utils/buildShareUrl";
+import { shareResultsLink } from "../utils/shareResults";
+import { ROUTE_PATHS } from "../../../routing/routes";
+import {
+	ResultsPageHeader,
+	useResultsPageScrollProgress,
+} from "../ResultsPageHeader";
 
 const DEFAULT_OCCUPATION_FILTERS: OccupationsFilterState = {
 	selectedOccupationIds: [],
@@ -88,6 +97,16 @@ function getVacancyEmptyState({
 }
 
 export function VacanciesPage() {
+	const {
+		isLoadingShared,
+		sharedLoadError,
+		hasSharedParam,
+		sharedVacancyParams,
+	} = useSharedMatchResults();
+	useFetchVacancies({
+		pauseWhileLoadingShared: hasSharedParam && isLoadingShared,
+		sharedVacancyParams,
+	});
 	const matchResults = useMatchResultsStore((state) => state.matchResults);
 	const favoriteVacancyKeys = useMatchResultsStore(
 		(state) => state.favoriteVacancyKeys,
@@ -95,10 +114,12 @@ export function VacanciesPage() {
 	const toggleVacancyFavorite = useMatchResultsStore(
 		(state) => state.toggleVacancyFavorite,
 	);
+	const vacanciesCount = useMatchResultsStore((state) => state.vacanciesCount);
 	const vacancies = useAppStore((state) => state.vacancies);
 	const fetchError = useAppStore((state) => state.vacanciesFetchError);
 	const location = useAppStore((state) => state.location);
 	const setLocation = useAppStore((state) => state.setLocation);
+
 	const occupations = matchResults?.occupations ?? [];
 	const setVacancyOccupationFilterIds = useMatchResultsStore(
 		(state) => state.setVacancyOccupationFilterIds,
@@ -117,7 +138,8 @@ export function VacanciesPage() {
 	});
 	const [showFavoritesOnly, setShowFavoritesOnly] = useState(false);
 	const loading =
-		occupations.length > 0 && vacancies === null && fetchError === null;
+		isLoadingShared ||
+		(occupations.length > 0 && vacancies === null && fetchError === null);
 
 	const favoriteVacancyKeySet = useMemo(
 		() => new Set(favoriteVacancyKeys),
@@ -136,6 +158,8 @@ export function VacanciesPage() {
 		() => buildOccupationFilterChips(occupations),
 		[occupations],
 	);
+
+	const { scrollProgress, handleListScroll } = useResultsPageScrollProgress();
 
 	const openOccupationFilter = occupationFilter.open;
 	const closeOccupationFilter = occupationFilter.close;
@@ -228,6 +252,30 @@ export function VacanciesPage() {
 		favoriteVacancyKeySet,
 	]);
 
+	const handleDownload = useCallback(async () => {
+		const { exportVacanciesPdf } = await import("../utils/exportVacanciesPdf");
+		exportVacanciesPdf(vacancyCards);
+	}, [vacancyCards]);
+
+	const handleShare = useCallback(async () => {
+		const url = buildShareUrl(
+			ROUTE_PATHS.resultsVacancies,
+			visibleOccupations,
+			location,
+		);
+		try {
+			await shareResultsLink({
+				title: content["vacancies.share.title"],
+				text: content["vacancies.share.text"],
+				url,
+			});
+		} catch (err) {
+			if (err instanceof DOMException && err.name === "AbortError") {
+				return;
+			}
+		}
+	}, [visibleOccupations, location]);
+
 	const locationFilterApplied = hasCustomLocationFilter(
 		locationFilter.appliedValue,
 	);
@@ -244,8 +292,23 @@ export function VacanciesPage() {
 
 	return (
 		<>
-			<div className="flex flex-col h-full">
-				<ResultsPageHeader title={content["results.title"]} />
+			<div className="flex flex-col h-full pb-16">
+				<ResultsPageHeader
+					scrollProgress={scrollProgress}
+					title={
+						<>
+							<span className="text-sky-400">{vacanciesCount}</span>{" "}
+							{content["vacancies.title"]}
+						</>
+					}
+					shareAriaLabel={content["vacancies.share.ariaLabel"]}
+					downloadAriaLabel={content["vacancies.download.ariaLabel"]}
+					onDownload={handleDownload}
+					onShare={handleShare}
+					downloadDisabled={vacancyCards.length === 0}
+					shareDisabled={visibleOccupations.length === 0}
+				/>
+
 				<ResultsFilterBar
 					hasLocationFilter={true}
 					appliedLocationFilter={locationFilter.appliedValue}
@@ -255,8 +318,7 @@ export function VacanciesPage() {
 					resolveOccupationFilterLabel={(id) =>
 						getOccupationFilterLabel(id, occupations)
 					}
-					occupationFilterTitle={content["vacancies.filter.occupations.title"]}
-					occupationFilterTitleShort={
+					occupationFilterTitle={
 						content["vacancies.filter.occupations.title.short"]
 					}
 					occupationFilterAriaLabel={
@@ -285,7 +347,7 @@ export function VacanciesPage() {
 					onReset={resetLocationFilter}
 				/>
 
-				{showSimpleEmpty || showDetailedEmpty ? (
+				{showSimpleEmpty || showDetailedEmpty || sharedLoadError ? (
 					<div className="flex px-4 pb-4 items-center h-full">
 						<div className="flex flex-col items-center justify-center gap-5 px-5">
 							<div className="flex items-center justify-center object-contain p-2">
@@ -312,20 +374,19 @@ export function VacanciesPage() {
 						</div>
 					</div>
 				) : (
-					<div className="flex-1 px-4 pb-4 space-y-3 overflow-y-auto">
-						{loading && vacancyCards.length === 0 ? (
-							<p className="py-8 text-center text-sm text-gray-500">…</p>
-						) : (
-							vacancyCards.map(({ key, occupation, preview }) => (
-								<VacancyCard
-									key={key}
-									occupationName={occupation.name}
-									preview={preview}
-									isFavorite={favoriteVacancyKeySet.has(key)}
-									onToggleFavorite={() => toggleVacancyFavorite(key)}
-								/>
-							))
-						)}
+					<div
+						className="flex-1 px-4 pb-4 space-y-3 overflow-y-auto"
+						onScroll={handleListScroll}
+					>
+						{vacancyCards.map(({ key, occupation, preview }) => (
+							<VacancyCard
+								key={key}
+								occupationName={occupation.name}
+								preview={preview}
+								isFavorite={favoriteVacancyKeySet.has(key)}
+								onToggleFavorite={() => toggleVacancyFavorite(key)}
+							/>
+						))}
 						<div className="flex flex-col gap-5 px-3 py-5 rounded-2xl border border-sky-100 bg-sky-50">
 							<div>
 								<h3 className="text-2xl font-semibold text-sky-1000 text-center mb-[7px]">
@@ -353,6 +414,7 @@ export function VacanciesPage() {
 					</div>
 				)}
 			</div>
+			<BottomNav />
 		</>
 	);
 }

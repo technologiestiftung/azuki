@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import {
 	type MatchedOccupation,
+	fitPercent,
 	formatOccupationDisplayName,
 } from "@azuki/shared";
 import { Badge } from "../primitives/badge/Badge";
@@ -8,7 +9,6 @@ import { useMatchResultsStore } from "../../store/useMatchResultsStore";
 import { FavoriteButton } from "../favorite-button/FavoriteButton";
 import { content } from "../../content";
 import { buildResultsOccupationPath } from "../../routing/routes";
-import { fitPercent } from "./utils/fitPercent";
 
 interface ResultCardProps {
 	occupation: MatchedOccupation;
@@ -19,14 +19,7 @@ export function ResultCard({ occupation }: ResultCardProps) {
 		state.favoriteOccupationIds.includes(occupation.id),
 	);
 	const toggleFavorite = useMatchResultsStore((state) => state.toggleFavorite);
-	const occupationTypeLabels: Record<string, string> = {
-		dual: content["results.occupationType.dual"],
-		school: content["results.occupationType.school"],
-	};
-	const occupationTypeBadge = occupation.occupationType
-		? (occupationTypeLabels[occupation.occupationType] ??
-			occupation.occupationType)
-		: "";
+
 	const displayName = formatOccupationDisplayName(occupation.name);
 
 	return (
@@ -61,11 +54,8 @@ export function ResultCard({ occupation }: ResultCardProps) {
 					<h3 className="text-xl font-semibold text-sky-1000 mb-3">
 						{displayName}
 					</h3>
-					{(occupationTypeBadge ||
-						occupation.occupationDuration ||
-						occupation.occupationEarnings) && (
+					{(occupation.occupationDuration || occupation.occupationEarnings) && (
 						<div className="mb-[9px] flex min-w-0 flex-wrap items-center gap-2">
-							{occupationTypeBadge && <Badge label={occupationTypeBadge} />}
 							{occupation.occupationDuration && (
 								<Badge label={occupation.occupationDuration} />
 							)}
