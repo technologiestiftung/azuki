@@ -41,7 +41,7 @@ export function LoadingScreen() {
 
 	const tryNavigate = useCallback(() => {
 		if (apiDone.current) {
-			navigate("/results/list");
+			navigate("/results/apprenticeships");
 		}
 	}, [navigate]);
 

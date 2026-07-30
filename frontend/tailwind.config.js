@@ -54,8 +54,12 @@ export default {
 				},
 				sky: {
 					0: "#f0f9ff",
+					10: "#F2F4F5",
+					20: "#E4E8EB",
 					50: "#ddf4ff",
 					100: "#bae6fd",
+					110: "#6B8392",
+					140: "#436174",
 					200: "#7dd3fc",
 					300: "#38bdf8",
 					400: "#009ee0",
@@ -66,6 +70,10 @@ export default {
 					900: "#002842",
 					1000: "#010c13",
 					white: "#fafdff",
+				},
+				"sky-shade": {
+					20: "#E4E8EB",
+					110: "#6B8392",
 				},
 				"card-fill": "#EEF2F6",
 				"fill-secondary": "#1325491C",

@@ -4,6 +4,7 @@ import type {
 	VacanciesResponse,
 	EvalSnapshot,
 	Persona,
+	Occupation,
 } from "@azuki/shared";
 type HeadersInit = Record<string, string>;
 
@@ -32,6 +33,194 @@ function headers(): HeadersInit {
 	return h;
 }
 
+export async function getOccupation(id: number): Promise<Occupation> {
+	const res = await fetch(`${API_BASE}/occupations/${id}`, {
+		headers: headers(),
+	});
+	if (!res.ok) {
+		throw new Error(`getOccupation failed: ${res.status}`);
+	}
+	return res.json();
+}
+
+export interface MatchExplanationsResponse {
+	matching: Array<{
+		id: string;
+		label: string;
+		icon: string;
+		summary: string;
+	}>;
+	notMatching: Array<{
+		id: string;
+		label: string;
+		icon: string;
+		summary: string;
+	}>;
+}
+
+const MATCH_EXPLANATIONS_CACHE_PREFIX = "azuki-match-explanations:";
+const MATCH_EXPLANATIONS_CACHE_INDEX_KEY = "azuki-match-explanations-index";
+const MATCH_EXPLANATIONS_CACHE_MAX = 30;
+
+const matchExplanationsMemory = new Map<string, MatchExplanationsResponse>();
+const matchExplanationsInflight = new Map<
+	string,
+	Promise<MatchExplanationsResponse>
+>();
+
+function matchExplanationsCacheKey(
+	occupationId: number,
+	profile: UserProfile,
+): string {
+	return `${occupationId}:${JSON.stringify(profile)}`;
+}
+
+function readMatchExplanationsCache(
+	key: string,
+): MatchExplanationsResponse | null {
+	const fromMemory = matchExplanationsMemory.get(key);
+	if (fromMemory) {
+		return fromMemory;
+	}
+	try {
+		const raw = sessionStorage.getItem(
+			`${MATCH_EXPLANATIONS_CACHE_PREFIX}${key}`,
+		);
+		if (!raw) {
+			return null;
+		}
+		const parsed = JSON.parse(raw) as MatchExplanationsResponse;
+		if (
+			!parsed ||
+			!Array.isArray(parsed.matching) ||
+			!Array.isArray(parsed.notMatching)
+		) {
+			return null;
+		}
+		matchExplanationsMemory.set(key, parsed);
+		return parsed;
+	} catch {
+		return null;
+	}
+}
+
+/** Sync lookup for UI hydration (memory + sessionStorage). */
+export function getCachedMatchExplanations(
+	occupationId: number,
+	profile: UserProfile,
+): MatchExplanationsResponse | null {
+	return readMatchExplanationsCache(
+		matchExplanationsCacheKey(occupationId, profile),
+	);
+}
+
+function writeMatchExplanationsCache(
+	key: string,
+	value: MatchExplanationsResponse,
+): void {
+	matchExplanationsMemory.set(key, value);
+	try {
+		sessionStorage.setItem(
+			`${MATCH_EXPLANATIONS_CACHE_PREFIX}${key}`,
+			JSON.stringify(value),
+		);
+		const indexRaw = sessionStorage.getItem(MATCH_EXPLANATIONS_CACHE_INDEX_KEY);
+		const index: string[] = indexRaw ? (JSON.parse(indexRaw) as string[]) : [];
+		const next = [key, ...index.filter((entry) => entry !== key)].slice(
+			0,
+			MATCH_EXPLANATIONS_CACHE_MAX,
+		);
+		for (const evicted of index) {
+			if (!next.includes(evicted)) {
+				sessionStorage.removeItem(
+					`${MATCH_EXPLANATIONS_CACHE_PREFIX}${evicted}`,
+				);
+			}
+		}
+		sessionStorage.setItem(
+			MATCH_EXPLANATIONS_CACHE_INDEX_KEY,
+			JSON.stringify(next),
+		);
+	} catch {
+		// Quota / private mode — memory cache still helps within the page.
+	}
+}
+
+async function requestMatchExplanations(
+	occupationId: number,
+	profile: UserProfile,
+): Promise<MatchExplanationsResponse> {
+	const res = await fetch(
+		`${API_BASE}/occupations/${occupationId}/match-explanations`,
+		{
+			method: "POST",
+			headers: headers(),
+			body: JSON.stringify({ profile }),
+		},
+	);
+	if (!res.ok) {
+		throw new Error(`fetchMatchExplanations failed: ${res.status}`);
+	}
+	return res.json();
+}
+
+export async function fetchMatchExplanations(
+	occupationId: number,
+	profile: UserProfile,
+	signal?: AbortSignal,
+): Promise<MatchExplanationsResponse> {
+	const key = matchExplanationsCacheKey(occupationId, profile);
+	const cached = readMatchExplanationsCache(key);
+	if (cached) {
+		return cached;
+	}
+
+	if (signal?.aborted) {
+		throw new DOMException("Aborted", "AbortError");
+	}
+
+	let pending = matchExplanationsInflight.get(key);
+	if (!pending) {
+		pending = requestMatchExplanations(occupationId, profile)
+			.then((result) => {
+				writeMatchExplanationsCache(key, result);
+				matchExplanationsInflight.delete(key);
+				return result;
+			})
+			.catch((err) => {
+				matchExplanationsInflight.delete(key);
+				throw err;
+			});
+		matchExplanationsInflight.set(key, pending);
+	}
+
+	if (!signal) {
+		return pending;
+	}
+
+	const request = pending;
+	return new Promise<MatchExplanationsResponse>((resolve, reject) => {
+		const onAbort = () => {
+			reject(new DOMException("Aborted", "AbortError"));
+		};
+		signal.addEventListener("abort", onAbort, { once: true });
+		request.then(
+			(value) => {
+				signal.removeEventListener("abort", onAbort);
+				if (signal.aborted) {
+					reject(new DOMException("Aborted", "AbortError"));
+					return;
+				}
+				resolve(value);
+			},
+			(err) => {
+				signal.removeEventListener("abort", onAbort);
+				reject(err);
+			},
+		);
+	});
+}
+
 export async function matchProfile(profile: UserProfile): Promise<MatchResult> {
 	const res = await fetch(`${API_BASE}/match`, {
 		method: "POST",
@@ -41,6 +230,48 @@ export async function matchProfile(profile: UserProfile): Promise<MatchResult> {
 
 	if (!res.ok) {
 		throw new Error(`Match failed: ${res.status}`);
+	}
+
+	return res.json();
+}
+
+export async function fetchSharedMatch(
+	occupationsParam: string,
+): Promise<MatchResult> {
+	const res = await fetch(
+		`${API_BASE}/shared-match?${new URLSearchParams({ o: occupationsParam })}`,
+	);
+
+	if (!res.ok) {
+		throw new Error(`Shared match fetch failed: ${res.status}`);
+	}
+
+	return res.json();
+}
+
+export async function fetchSharedVacancies(
+	occupationsParam: string,
+	options: {
+		postcode?: string;
+		distance?: number;
+		signal?: AbortSignal;
+	} = {},
+): Promise<VacanciesResponse> {
+	const { postcode, distance, signal } = options;
+	const params = new URLSearchParams({ o: occupationsParam });
+	if (postcode) {
+		params.set("plz", postcode);
+	}
+	if (distance !== undefined) {
+		params.set("d", String(distance));
+	}
+
+	const res = await fetch(`${API_BASE}/shared-vacancies?${params}`, {
+		signal,
+	});
+
+	if (!res.ok) {
+		throw new Error(`Shared vacancies fetch failed: ${res.status}`);
 	}
 
 	return res.json();

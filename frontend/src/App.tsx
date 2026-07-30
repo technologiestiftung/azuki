@@ -13,6 +13,7 @@ import { PracticalExperienceStep } from "./components/competence-profile/steps/p
 import { WorkPreferencesStep } from "./components/competence-profile/steps/WorkPreferencesStep";
 import { NoGosStep } from "./components/competence-profile/steps/no-gos-step/NoGosStep";
 import { ResultsPage } from "./components/results-page/ResultsPage";
+import { OccupationDetailPage } from "./components/results-page/occupation-detail/OccupationDetailPage";
 import { VacanciesPage } from "./components/results-page/vacancies-page/VacanciesPage";
 import { WorkExpectationsStep } from "./components/competence-profile/steps/WorkExpectationsStep";
 import { EvalPage } from "./components/eval/EvalPage";
@@ -89,8 +90,12 @@ function App() {
 					/>
 					<Route path={ROUTE_PATHS.resultsList} element={<ResultsPage />} />
 					<Route
-						path={ROUTE_PATHS.resultsFreeSpots}
+						path={ROUTE_PATHS.resultsVacancies}
 						element={<VacanciesPage />}
+					/>
+					<Route
+						path={ROUTE_PATHS.resultsOccupationDetail}
+						element={<OccupationDetailPage />}
 					/>
 					<Route path={ROUTE_PATHS.eval} element={<EvalPage />} />
 					<Route path={ROUTE_PATHS.personas} element={<PersonasPage />} />

@@ -4,9 +4,14 @@ import { content } from "../../content";
 interface FavoriteButtonProps {
 	onClick: () => void;
 	isFavorite: boolean;
+	className?: string;
 }
 
-export function FavoriteButton({ onClick, isFavorite }: FavoriteButtonProps) {
+export function FavoriteButton({
+	onClick,
+	isFavorite,
+	className,
+}: FavoriteButtonProps) {
 	const handleClick = (event: MouseEvent) => {
 		event.stopPropagation();
 		onClick();
@@ -15,7 +20,7 @@ export function FavoriteButton({ onClick, isFavorite }: FavoriteButtonProps) {
 	return (
 		<button
 			type="button"
-			className="absolute flex items-center justify-center z-10 w-10 h-10 -top-[9px] right-1"
+			className={`absolute flex items-center justify-center z-10 w-10 h-10 -top-[9px] right-1 ${className}`}
 			onClick={handleClick}
 			aria-pressed={isFavorite}
 			aria-label={

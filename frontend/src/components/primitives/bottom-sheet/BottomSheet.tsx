@@ -367,7 +367,7 @@ export function BottomSheet({
 		<>
 			<button
 				type="button"
-				className={`fixed inset-0 z-40 bg-sky-1000/80 bg-blur-[2px] ${
+				className={`z-50 fixed inset-0 bg-sky-1000/80 bg-blur-[2px] ${
 					isClosing ? "pointer-events-none animate-fadeOut" : "animate-fadeIn"
 				}`}
 				aria-label={overlayDismissLabel}
@@ -391,7 +391,7 @@ export function BottomSheet({
 					style={motionShellStyle}
 				>
 					<div
-						className="flex shrink-0 cursor-grab touch-none flex-col items-center py-3 select-none active:cursor-grabbing"
+						className="flex shrink-0 cursor-grab touch-none flex-col items-center py-[5px] select-none active:cursor-grabbing"
 						onPointerDown={handleGrabPointerDown}
 						onPointerMove={handleGrabPointerMove}
 						onPointerUp={handleGrabPointerUp}

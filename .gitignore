@@ -35,3 +35,4 @@ backend/dist/
 materialien/
 .worktrees/
 api/[...route].js
+.vercel/output
