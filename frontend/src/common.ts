@@ -56,6 +56,7 @@ export const QUESTIONNAIRE_STEPS = [
 	Step.SchoolDegreeStep,
 	Step.SchoolSubjects,
 	Step.Interests,
+	Step.PreferredJob,
 	Step.Strengths,
 	Step.WorkExpectations,
 	Step.PracticalExperience,

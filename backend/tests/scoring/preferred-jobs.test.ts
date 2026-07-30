@@ -11,6 +11,7 @@ import {
 	mergeVacancyOccupationNames,
 	resolvePreferredJobs,
 	resolvePreferredJobsForText,
+	resolvePreferredJobVacancyNames,
 } from "../../src/matching/resolvePreferredJobs.js";
 import { scorePreferredJobs } from "../../src/matching/score/dimensions.js";
 import { makeOccupation, makeProfile } from "./helpers.js";
@@ -45,6 +46,27 @@ describe("resolvePreferredJobsForText", () => {
 		expect(matches.find((match) => match.occupation.id === 10)?.tier).toBe(
 			"keyword",
 		);
+	});
+
+	test("does not match unrelated Berufe via keyword substring overlap", () => {
+		const occupations = [
+			makeOccupation({
+				id: 1,
+				name: "Fleischer/in",
+				interestKeywords: ["fleisch", "pflegen", "maschinen"],
+			}),
+			makeOccupation({
+				id: 2,
+				name: "Altenpflegehelfer/in",
+				interestKeywords: ["pflege", "betreuung"],
+			}),
+		];
+
+		const matches = resolvePreferredJobsForText(
+			"ein Job in der Pflege",
+			occupations,
+		);
+		expect(matches.map((match) => match.occupation.id)).toEqual([2]);
 	});
 });
 
@@ -150,7 +172,23 @@ describe("preFilter preferred-job injection", () => {
 });
 
 describe("mergeVacancyOccupationNames", () => {
-	test("prioritizes preferred names and dedupes against match results", () => {
+	test("prioritizes match-list names so free-spots always gets searched", () => {
+		const merged = mergeVacancyOccupationNames(
+			["Altenpfleger/in", "Gesundheits- und Krankenpfleger/in"],
+			[
+				"Kaufmann/-frau für Büromanagement",
+				"Fachinformatiker/in - Fachrichtung Anwendungsentwicklung",
+			],
+		);
+
+		expect(merged.slice(0, 2)).toEqual([
+			"Kaufmann/-frau für Büromanagement",
+			"Fachinformatiker/in - Fachrichtung Anwendungsentwicklung",
+		]);
+		expect(merged).toContain("Altenpfleger/in");
+	});
+
+	test("dedupes preferred names against match results", () => {
 		const merged = mergeVacancyOccupationNames(
 			["Fachinformatiker/in - Fachrichtung Anwendungsentwicklung"],
 			[
@@ -164,6 +202,36 @@ describe("mergeVacancyOccupationNames", () => {
 			"Fachinformatiker/in - Fachrichtung Anwendungsentwicklung",
 		);
 		expect(merged[1]).toBe("Kaufmann/-frau für Büromanagement");
+	});
+});
+
+describe("resolvePreferredJobVacancyNames", () => {
+	test("caps resolved preferred occupations and skips raw text when resolved", () => {
+		const occupations = Array.from({ length: 12 }, (_, index) =>
+			makeOccupation({
+				id: index + 1,
+				name: `Pflegeberuf ${index + 1}`,
+				interestKeywords: ["Pflege"],
+			}),
+		);
+
+		const names = resolvePreferredJobVacancyNames(
+			["ein Job in der Pflege"],
+			occupations,
+		);
+
+		expect(names.length).toBeLessThanOrEqual(5);
+		expect(names).not.toContain("ein Job in der Pflege");
+	});
+
+	test("falls back to raw preferred text when nothing resolves", () => {
+		const occupations = [
+			makeOccupation({ id: 1, name: "Kaufmann/-frau für Büromanagement" }),
+		];
+
+		expect(
+			resolvePreferredJobVacancyNames(["Quantenphysiker"], occupations),
+		).toEqual(["Quantenphysiker"]);
 	});
 });
 

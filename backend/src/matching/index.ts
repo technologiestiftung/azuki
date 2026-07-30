@@ -52,6 +52,9 @@ export function filterByRegionalAvailability(
 	});
 }
 
+// Cap injections so vague keywords (e.g. "Pflege") cannot rewrite the shortlist.
+const MAX_PREFERRED_SHORTLIST_INJECTIONS = 5;
+
 function injectPreferredJobsIntoShortlist(
 	shortlist: ScoredOccupation[],
 	allScored: ScoredOccupation[],
@@ -73,8 +76,12 @@ function injectPreferredJobsIntoShortlist(
 	);
 	const shortlistIds = new Set(shortlist.map((entry) => entry.occupation.id));
 	const result = [...shortlist];
+	let injections = 0;
 
 	for (const match of resolved) {
+		if (injections >= MAX_PREFERRED_SHORTLIST_INJECTIONS) {
+			break;
+		}
 		const occupationId = match.occupation.id;
 		if (shortlistIds.has(occupationId)) {
 			continue;
@@ -98,6 +105,7 @@ function injectPreferredJobsIntoShortlist(
 		shortlistIds.delete(result[lowestIdx].occupation.id);
 		result[lowestIdx] = scoredEntry;
 		shortlistIds.add(occupationId);
+		injections++;
 	}
 
 	result.sort((a, b) => b.score - a.score);

@@ -95,13 +95,11 @@ function countKeywordHits(
 	const occupationTerms = buildOccupationMatchTerms(occupation);
 	let hits = 0;
 
+	// Exact term or name substring only — no keyword overlap ("pflege" ⊂ "pflegen").
 	for (const token of tokens) {
 		const exactTokenMatch = occupationTerms.has(token);
 		const tokenInOccupationName = occupation.name.toLowerCase().includes(token);
-		const tokenOverlap = [...occupationTerms].some(
-			(term) => term.includes(token) || token.includes(term),
-		);
-		if (exactTokenMatch || tokenInOccupationName || tokenOverlap) {
+		if (exactTokenMatch || tokenInOccupationName) {
 			hits++;
 		}
 	}
@@ -241,9 +239,10 @@ export function getBestPreferredJobTierForOccupation(
 }
 
 const VACANCY_OCCUPATION_LIMIT = 20;
+const VACANCY_PREFERRED_RESOLVED_LIMIT = 5;
 
 export function mergeVacancyOccupationNames(
-	preferredJobs: string[],
+	preferredOccupationNames: string[],
 	matchOccupationNames: string[],
 ): string[] {
 	const merged: string[] = [];
@@ -258,10 +257,11 @@ export function mergeVacancyOccupationNames(
 		merged.push(name);
 	};
 
-	for (const name of preferredJobs) {
+	// Match results first — the vacancies UI keys previews by these names.
+	for (const name of matchOccupationNames) {
 		addName(name);
 	}
-	for (const name of matchOccupationNames) {
+	for (const name of preferredOccupationNames) {
 		addName(name);
 	}
 
@@ -275,19 +275,26 @@ export function resolvePreferredJobVacancyNames(
 	const resolved = resolvePreferredJobs(preferredJobs, occupations);
 	const names: string[] = [];
 	const seen = new Set<string>();
+	const resolvedPreferredTexts = new Set<string>();
 
 	for (const match of resolved) {
+		if (names.length >= VACANCY_PREFERRED_RESOLVED_LIMIT) {
+			break;
+		}
 		const key = normName(match.occupation.name);
 		if (!key || seen.has(key)) {
 			continue;
 		}
 		seen.add(key);
+		resolvedPreferredTexts.add(normName(match.preferredJob));
 		names.push(match.occupation.name);
 	}
 
+	// Only fall back to raw free text when nothing resolved — otherwise
+	// phrases like "ein Job in der Pflege" waste slots and aren't displayable.
 	for (const preferredJob of preferredJobs) {
 		const key = normName(preferredJob);
-		if (!key || seen.has(key)) {
+		if (!key || seen.has(key) || resolvedPreferredTexts.has(key)) {
 			continue;
 		}
 		seen.add(key);
