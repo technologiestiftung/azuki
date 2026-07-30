@@ -1,7 +1,9 @@
-import React from "react";
+import type { ReactNode, Ref } from "react";
 import { GhostIconButton } from "../primitives/buttons/GhostIconButton";
+
 interface ResultsPageHeaderCollapsedProps {
-	title: string | React.ReactNode;
+	title: ReactNode;
+	titleSlotRef: Ref<HTMLDivElement>;
 	shareAriaLabel: string;
 	downloadAriaLabel: string;
 	onDownload: () => void;
@@ -12,6 +14,7 @@ interface ResultsPageHeaderCollapsedProps {
 
 export const ResultsPageHeaderCollapsed = ({
 	title,
+	titleSlotRef,
 	shareAriaLabel,
 	downloadAriaLabel,
 	onDownload,
@@ -21,10 +24,15 @@ export const ResultsPageHeaderCollapsed = ({
 }: ResultsPageHeaderCollapsedProps) => {
 	return (
 		<div className="h-[60px] flex w-full items-center justify-between px-4 pt-3 pb-2 shrink-0 border-b border-sky-20 z-50">
-			<h1 className="text-base font-semibold text-sky-900 text-left pr-1.5">
+			{/* Invisible slot for morph target; visible title lives in ResultsPageHeader */}
+			<div
+				ref={titleSlotRef}
+				className="text-base font-semibold leading-6 text-sky-900 flex-1 text-left truncate pr-1.5 opacity-0"
+				aria-hidden
+			>
 				{title}
-			</h1>
-			<div className="flex gap-2 justify-end">
+			</div>
+			<div className="flex gap-2 justify-end shrink-0">
 				<div className="flex gap-1.5 items-center">
 					<GhostIconButton
 						iconSrc="/icons/download.svg"
