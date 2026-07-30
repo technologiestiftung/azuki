@@ -18,6 +18,7 @@ export const ROUTE_PATHS = {
 	preferences: "/preferences",
 	nogos: "/nogos",
 	loading: "/loading",
+	resultsOccupationDetail: "/results/:id",
 	resultsList: "/results/apprenticeships",
 	resultsVacancies: "/results/vacancies",
 	eval: "/eval",
@@ -26,6 +27,10 @@ export const ROUTE_PATHS = {
 } as const;
 
 export const RESULTS_PATH_PREFIX = "/results" as const;
+
+export function buildResultsOccupationPath(id: number): string {
+	return `/results/${id}`;
+}
 
 interface FlowNode {
 	path: string;

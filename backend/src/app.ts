@@ -32,6 +32,7 @@ import {
 	UpdatePersonaSchema,
 } from "./personas/schemas.js";
 import { rowToPersona, type PersonaInsertRow } from "./personas/mappers.js";
+import { renderOccupationPreviewPage } from "./occupationPreviewPage.js";
 
 const occupations: Occupation[] = occupationsData as Occupation[];
 
@@ -299,6 +300,56 @@ app.get("/api/occupations/:id", (c) => {
 		return c.json({ error: "Occupation not found" }, 404);
 	}
 	return c.json(occupation);
+});
+
+app.get("/results/:id", (c) => renderOccupationPreviewPage(c, occupations));
+app.get("/api/results/:id", (c) => renderOccupationPreviewPage(c, occupations));
+
+const MatchExplanationsRequestSchema = z.object({
+	profile: z.unknown(),
+});
+
+app.post("/api/occupations/:id/match-explanations", async (c) => {
+	if (!isAuthorized(c)) {
+		return c.json({ error: "Unauthorized" }, 401);
+	}
+
+	const id = parseInt(c.req.param("id"), 10);
+	const occupation = occupations.find((o) => o.id === id);
+	if (!occupation) {
+		return c.json({ error: "Occupation not found" }, 404);
+	}
+
+	let body: unknown;
+	try {
+		body = await c.req.json();
+	} catch {
+		return c.json({ error: "Invalid request body" }, 400);
+	}
+
+	const parsed = MatchExplanationsRequestSchema.safeParse(body);
+	if (!parsed.success) {
+		return c.json({ error: "Invalid request body" }, 400);
+	}
+
+	const parsedProfile = UserProfileSchema.safeParse(parsed.data.profile);
+	if (!parsedProfile.success) {
+		return c.json({ error: "Invalid request body" }, 400);
+	}
+
+	try {
+		const { generateMatchExplanations } = await import(
+			"./ai/matchExplanations.js"
+		);
+		const result = await generateMatchExplanations(
+			occupation,
+			parsedProfile.data,
+		);
+		return c.json(result);
+	} catch (err) {
+		console.error("Match explanations error:", err);
+		return c.json({ error: "Match explanations unavailable" }, 503);
+	}
 });
 
 app.get("/api/eval/default-prompt", (c) => {

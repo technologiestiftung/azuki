@@ -1,4 +1,5 @@
 import {
+	formatOccupationDuration,
 	resolveOccupationTag,
 	type Occupation,
 	type OccupationTagId,
@@ -50,26 +51,6 @@ export function formatFirstYearEarnings(firstYearText: string): string {
 		return `${formatGermanEuro(min)}${EARNINGS_PERIOD_SUFFIX}`;
 	}
 	return `${min.toLocaleString("de-DE", { maximumFractionDigits: 0 })}-${max.toLocaleString("de-DE", { maximumFractionDigits: 0 })} €${EARNINGS_PERIOD_SUFFIX}`;
-}
-
-/** Badge-friendly duration without "i.d.R." / "i. d. R." qualifiers. */
-export function formatOccupationDuration(raw: string): string {
-	const cleaned = raw
-		.replace(/\s*,?\s*i\.\s*d\.\s*R\.?\s*/gi, " ")
-		.replace(/\s+/g, " ")
-		.replace(/,\s*$/, "")
-		.trim();
-
-	if (cleaned.length === 0) {
-		return "";
-	}
-	if (/^unterschiedlich/i.test(cleaned)) {
-		return "";
-	}
-	if (cleaned.length <= 80) {
-		return cleaned;
-	}
-	return `${cleaned.slice(0, 77)}…`;
 }
 
 export function occupationMatchMeta(occupation: Occupation): {

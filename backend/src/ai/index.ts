@@ -49,6 +49,10 @@ function getClient(): OpenAI {
 	return _client;
 }
 
+export function getOpenRouterClient(): OpenAI {
+	return getClient();
+}
+
 export interface Ranking {
 	id: number;
 	begruendung: string;
