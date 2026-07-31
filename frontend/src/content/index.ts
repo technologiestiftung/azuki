@@ -641,4 +641,18 @@ export const content = {
 	"toast.schoolDegree.description":
 		"Wähle einen Schulabschluss, um weiter zu machen.",
 	"toast.close.ariaLabel": "Schließen",
+	// about
+	"about.title": "Was ist AzuKi?",
+	"about.description.p1":
+		"AzuKi ist ein KI-basierter Ausbildungsassistent, der jungen Menschen hilft einen passenden Ausbildungsberuf zu finden. Nach einigen Fragen zu Schulbildung, Interessen, Stärken, Arbeitserfahrung und Erwartungen an den zukünftigen Beruf wird ein Profil erstellt. Basierend auf diesem Profil schlägt die KI passende Ausbildungsberufe vor und zeigt freie Stellen in der Nähe.",
+	"about.description.p2":
+		"Das Projekt ist eine Kollaboration mit <a href='https://joblinge.de' target='_blank'>Joblinge Berlin</a>, gefördert von der <a href='https://www.civic-innovation.de/' target='_blank'>Civic Innovation Platform</a> des <a href='https://www.bmas.de/' target='_blank'>Bundesministerium für Arbeit und Soziales</a>.",
+	"about.logobanner.projectOf": "Ein Projekt der",
+	"about.logobanner.technologieStiftungBerlin.logoLink":
+		"https://logos.citylab-berlin.org/logo-technologiestiftung-berlin-de.svg",
+	"about.logobanner.developedBy": "Entwickelt von",
+	"about.logobanner.cityLabBerlin.logoLink":
+		"https://logos.citylab-berlin.org/logo-citylab-color.svg",
+	"about.logobanner.sponsoredBy": "Gefördert durch",
+	"about.backButton.ariaLabel": "Zurück zur Profil-Ansicht",
 };
