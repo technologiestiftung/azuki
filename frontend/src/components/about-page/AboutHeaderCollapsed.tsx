@@ -1,4 +1,4 @@
-import type { Ref } from "react";
+import type { RefObject } from "react";
 import { content } from "../../content";
 import { GhostIconButton } from "../primitives/buttons/GhostIconButton";
 import { useNavigate } from "react-router-dom";
@@ -6,7 +6,7 @@ import { ROUTE_PATHS } from "../../routing/routes";
 
 interface AboutHeaderCollapsedProps {
 	collapseProgress: number;
-	titleSlotRef: Ref<HTMLDivElement>;
+	titleSlotRef: RefObject<HTMLDivElement>;
 }
 
 export function AboutHeaderCollapsed({

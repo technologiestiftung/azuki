@@ -1,10 +1,10 @@
-import type { Ref } from "react";
+import type { RefObject } from "react";
 import { content } from "../content";
 import { ProfileActionButtons } from "./ProfileActionButtons";
 
 interface ProfileHeroProps {
 	heroControlsOpacity: number;
-	titleSlotRef: Ref<HTMLDivElement>;
+	titleSlotRef: RefObject<HTMLDivElement>;
 	showTitle: boolean;
 	isSharedView?: boolean;
 }

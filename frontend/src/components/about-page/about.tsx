@@ -1,11 +1,4 @@
-import {
-	useCallback,
-	useEffect,
-	useRef,
-	useState,
-	type CSSProperties,
-	type UIEventHandler,
-} from "react";
+import { useCallback, useState, type UIEventHandler } from "react";
 import { Footer } from "../footer/Footer";
 import { content } from "../../content";
 import { BottomNav } from "../bottom-nav/BottomNav";
@@ -13,31 +6,14 @@ import { SecondaryIconButton } from "../primitives/buttons/SecondaryIconButton";
 import { useNavigate } from "react-router-dom";
 import { ROUTE_PATHS } from "../../routing/routes";
 import {
-	COLLAPSE_END,
-	COLLAPSE_START,
+	collapseProgressFromScrollY,
 	useOccupationDetailScroll,
 } from "../results-page/occupation-detail/useOccupationDetailScroll";
 import { AboutHeaderCollapsed } from "./AboutHeaderCollapsed";
+import { useTitleMorph } from "../../hooks/useTitleMorph";
+import { MorphingTitle } from "../morphing-title/MorphingTitle";
 
 const SCROLL_OUT_THRESHOLD_PX = 8;
-const TITLE_TOP_OFFSET_PX = 8;
-const HERO_TITLE_SIZE_PX = 30;
-const COLLAPSED_TITLE_SIZE_PX = 14;
-const HERO_LINE_HEIGHT_PX = 36;
-const COLLAPSED_LINE_HEIGHT_PX = 20;
-
-type TitleRect = {
-	left: number;
-	top: number;
-	width: number;
-};
-
-function titleMorphProgressFromScrollY(scrollY: number): number {
-	return Math.min(
-		1,
-		Math.max(0, (scrollY - COLLAPSE_START) / (COLLAPSE_END - COLLAPSE_START)),
-	);
-}
 
 export const AboutPage = () => {
 	const navigate = useNavigate();
@@ -45,80 +21,29 @@ export const AboutPage = () => {
 		useOccupationDetailScroll();
 	const [isScrolledAway, setIsScrolledAway] = useState(false);
 
-	const heroTitleSlotRef = useRef<HTMLDivElement>(null);
-	const collapsedTitleSlotRef = useRef<HTMLDivElement>(null);
-	const scrollYRef = useRef(0);
-	const morphOriginRef = useRef<TitleRect | null>(null);
-	const [isMorphing, setIsMorphing] = useState(false);
-	const [titleStyle, setTitleStyle] = useState<CSSProperties | undefined>();
-
-	const syncMorphTitle = useCallback((scrollY: number) => {
-		const fromEl = heroTitleSlotRef.current;
-		const toEl = collapsedTitleSlotRef.current;
-		if (!fromEl || !toEl) {
-			return;
-		}
-
-		const progress = titleMorphProgressFromScrollY(scrollY);
-
-		if (progress <= 0) {
-			morphOriginRef.current = null;
-			setIsMorphing(false);
-			setTitleStyle(undefined);
-			return;
-		}
-
-		if (!morphOriginRef.current) {
-			const rect = fromEl.getBoundingClientRect();
-			morphOriginRef.current = {
-				left: rect.left,
-				top: rect.top,
-				width: rect.width,
-			};
-		}
-
-		const from = morphOriginRef.current;
-		const to = toEl.getBoundingClientRect();
-		const morphTop = from.top + (to.top - from.top) * progress;
-
-		setIsMorphing(true);
-		setTitleStyle({
-			position: "fixed",
-			left: from.left + (to.left - from.left) * progress,
-			top: Math.max(TITLE_TOP_OFFSET_PX, morphTop),
-			width: from.width + (to.width - from.width) * progress,
-			fontSize:
-				HERO_TITLE_SIZE_PX +
-				(COLLAPSED_TITLE_SIZE_PX - HERO_TITLE_SIZE_PX) * progress,
-			lineHeight: `${
-				HERO_LINE_HEIGHT_PX +
-				(COLLAPSED_LINE_HEIGHT_PX - HERO_LINE_HEIGHT_PX) * progress
-			}px`,
-			zIndex: 40,
-			pointerEvents: "none",
-			margin: 0,
-		});
-	}, []);
+	const {
+		heroTitleSlotRef,
+		collapsedTitleSlotRef,
+		isMorphing,
+		titleStyle,
+		syncMorphTitle,
+	} = useTitleMorph({
+		heroFontSizePx: 30,
+		collapsedFontSizePx: 14,
+		heroLineHeightPx: 36,
+		collapsedLineHeightPx: 20,
+		minTopPx: 8,
+	});
 
 	const handleScroll: UIEventHandler<HTMLDivElement> = useCallback(
 		(event) => {
 			onScroll(event);
 			const scrollY = event.currentTarget.scrollTop;
-			scrollYRef.current = scrollY;
 			setIsScrolledAway(scrollY > SCROLL_OUT_THRESHOLD_PX);
-			syncMorphTitle(scrollY);
+			syncMorphTitle(collapseProgressFromScrollY(scrollY));
 		},
 		[onScroll, syncMorphTitle],
 	);
-
-	useEffect(() => {
-		const onResize = () => {
-			morphOriginRef.current = null;
-			syncMorphTitle(scrollYRef.current);
-		};
-		window.addEventListener("resize", onResize);
-		return () => window.removeEventListener("resize", onResize);
-	}, [syncMorphTitle]);
 
 	return (
 		<div className="flex flex-col h-full relative overflow-x-hidden pb-16">
@@ -126,14 +51,9 @@ export const AboutPage = () => {
 				collapseProgress={collapseProgress}
 				titleSlotRef={collapsedTitleSlotRef}
 			/>
-			{isMorphing && (
-				<h1
-					className="font-semibold text-left truncate will-change-[left,top,width,font-size]"
-					style={titleStyle}
-				>
-					{content["about.title"]}
-				</h1>
-			)}
+			<MorphingTitle isMorphing={isMorphing} style={titleStyle}>
+				{content["about.title"]}
+			</MorphingTitle>
 			<div
 				className="relative flex-1 overflow-y-auto overflow-x-hidden"
 				onScroll={handleScroll}
