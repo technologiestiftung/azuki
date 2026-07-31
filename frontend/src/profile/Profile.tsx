@@ -22,6 +22,7 @@ import { ProfileAboutSection } from "./ProfileAboutSection";
 import { ContactCard } from "../components/results-page/ContactCard";
 import { ProfileResetCard } from "./ProfileResetCard";
 import { BottomNav } from "../components/bottom-nav/BottomNav";
+import { Footer } from "../components/footer/Footer";
 import { useSharedProfile } from "./useSharedProfile";
 
 const HERO_TITLE_SIZE_PX = 32;
@@ -136,29 +137,6 @@ export function Profile() {
 		return () => window.removeEventListener("resize", onResize);
 	}, [syncMorphTitle]);
 
-	const footerLinks = [
-		{
-			label: content["profile.footerLinks.about"],
-			href: "/about",
-			external: false,
-		},
-		{
-			label: content["profile.footerLinks.feedback"],
-			href: content["profile.footerLinks.feedback.link"],
-			external: true,
-		},
-		{
-			label: content["profile.footerLinks.imprint"],
-			href: content["profile.footerLinks.imprint.link"],
-			external: true,
-		},
-		{
-			label: content["profile.footerLinks.privacyPolicy"],
-			href: content["profile.footerLinks.privacyPolicy.link"],
-			external: true,
-		},
-	];
-
 	return (
 		<div
 			className={`flex flex-col h-full relative overflow-x-hidden bg-sky-100 ${
@@ -196,29 +174,7 @@ export function Profile() {
 					<ContactCard />
 					{!isSharedView && <ProfileResetCard />}
 				</div>
-				<div className="bg-white">
-					<div className="flex flex-col gap-4 pt-6 px-8 pb-8 rounded-t-4xl bg-sky-100">
-						{footerLinks.map((link) => (
-							<a
-								key={link.label}
-								href={link.href}
-								target={link.external ? "_blank" : undefined}
-								rel={link.external ? "noopener noreferrer" : undefined}
-								className="flex gap-2 text-lg font-medium text-sky-900 disabled:text-gray-400 active:text-sky-800 disabled:text-sky-shade-70"
-							>
-								{link.label}
-								{link.external && (
-									<img
-										src="/icons/open-in-new-dark.svg"
-										alt=""
-										width={20}
-										height={20}
-									/>
-								)}
-							</a>
-						))}
-					</div>
-				</div>
+				<Footer />
 			</div>
 			{!isSharedView && <BottomNav />}
 		</div>

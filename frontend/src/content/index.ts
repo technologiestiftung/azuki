@@ -37,14 +37,14 @@ export const content = {
 	"profile.export.filename": "mein-profil.pdf",
 	"profile.export.category": "Bereich",
 	"profile.export.details": "Angaben",
-	"profile.footerLinks.about": "Über das Projekt",
-	"profile.footerLinks.feedback": "Feedback geben",
-	"profile.footerLinks.feedback.link": "",
-	"profile.footerLinks.imprint": "Impressum",
-	"profile.footerLinks.imprint.link":
-		"https://www.technologiestiftung-berlin.de/impressum",
-	"profile.footerLinks.privacyPolicy": "Datenschutz",
-	"profile.footerLinks.privacyPolicy.link":
+	// Footer
+	"footer.about": "Über das Projekt",
+	"footer.feedback": "Feedback geben",
+	"footer.feedback.link": "",
+	"footer.imprint": "Impressum",
+	"footer.imprint.link": "https://www.technologiestiftung-berlin.de/impressum",
+	"footer.privacyPolicy": "Datenschutz",
+	"footer.privacyPolicy.link":
 		"https://www.technologiestiftung-berlin.de/datenschutz",
 
 	// Common
