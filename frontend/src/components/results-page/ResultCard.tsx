@@ -59,14 +59,14 @@ export function ResultCard({ occupation }: ResultCardProps) {
 					<h3 className="text-xl font-semibold text-sky-1000 mb-3">
 						{displayName}
 					</h3>
-				{(occupation.occupationDuration || salaryLabel) && (
-					<div className="mb-[9px] flex min-w-0 flex-wrap items-center gap-2">
-						{occupation.occupationDuration && (
-							<Badge label={occupation.occupationDuration} />
-						)}
-						<Badge label={salaryLabel} />
-					</div>
-				)}
+					{(occupation.occupationDuration || salaryLabel) && (
+						<div className="mb-[9px] flex min-w-0 flex-wrap items-center gap-2">
+							{occupation.occupationDuration && (
+								<Badge label={occupation.occupationDuration} />
+							)}
+							<Badge label={salaryLabel} />
+						</div>
+					)}
 
 					{occupation.shortDescription && (
 						<p className="text-base text-gray-700 line-clamp-3">
