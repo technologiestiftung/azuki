@@ -6,7 +6,6 @@ import { STRENGTH_STEP_CARD_COUNT } from "../components/competence-profile/steps
 
 export const ROUTE_PATHS = {
 	login: "/",
-	welcome: "/welcome",
 	start: "/start",
 	educationInSchool: "/education/inschool",
 	educationDegree: "/education/degree",
@@ -44,7 +43,6 @@ interface FlowNode {
  */
 const ORDERED_NAVIGATION_STEPS: FlowNode[] = [
 	{ path: ROUTE_PATHS.login, step: Step.Login },
-	{ path: ROUTE_PATHS.welcome, step: Step.Welcome },
 	{ path: ROUTE_PATHS.start, step: Step.Start },
 	{ path: ROUTE_PATHS.educationInSchool, step: Step.InSchool },
 	{ path: ROUTE_PATHS.educationDegree, step: Step.SchoolDegreeStep },
