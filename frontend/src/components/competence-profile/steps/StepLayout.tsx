@@ -6,10 +6,7 @@ import { content } from "../../../content";
 import { PrimaryButton } from "../../primitives/buttons/PrimaryButton";
 import { GhostButton } from "../../primitives/buttons/GhostButton";
 import { BackButton } from "../../back-button/BackButton";
-import {
-	getGranularProgress,
-	getPreviousPath,
-} from "../../../routing/routes";
+import { getGranularProgress, getPreviousPath } from "../../../routing/routes";
 import { Toast } from "../../primitives/toast/Toast";
 import { useToastStore } from "../../../store/useToastStore";
 
