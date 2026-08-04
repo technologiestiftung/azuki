@@ -155,6 +155,8 @@ app.post("/api/match", async (c) => {
 				images: scored.occupation.images.slice(0, 3),
 				shortDescription: resolveOccupationShortDescription(scored.occupation),
 				reasoning: "Dieser Beruf passt zu deinem Profil.",
+				salaryKnown: scored.occupation.salaryKnown,
+				salaryMonthlyMedian: scored.occupation.salaryMonthlyMedian,
 				...occupationMatchMeta(scored.occupation),
 			})),
 		};
@@ -213,6 +215,8 @@ app.get("/api/shared-match", (c) => {
 				images: occupation.images.slice(0, 3),
 				shortDescription: resolveOccupationShortDescription(occupation),
 				reasoning: "",
+				salaryKnown: occupation.salaryKnown,
+				salaryMonthlyMedian: occupation.salaryMonthlyMedian,
 				...occupationMatchMeta(occupation),
 			},
 		];

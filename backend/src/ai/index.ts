@@ -974,6 +974,8 @@ function toOccupationResult(
 		images: item.occupation.images.slice(0, 3),
 		shortDescription: resolveOccupationShortDescription(item.occupation),
 		reasoning,
+		salaryKnown: item.occupation.salaryKnown,
+		salaryMonthlyMedian: item.occupation.salaryMonthlyMedian,
 		...meta,
 	};
 }
