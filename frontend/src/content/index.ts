@@ -474,6 +474,8 @@ export const content = {
 	"bottomNav.profile.label": "Profil",
 	// Results
 	"results.title": "Ausbildungsberufe für dich",
+	"results.shared.title": "Mit dir geteilte Ausbildungsberufe",
+	"results.shared.ownProfileCta": "Zu eigenem Profil gehen",
 	"results.share.ariaLabel": "Ausbildungsberufe teilen",
 	"results.share.title": "Ausbildungsberufe für dich",
 	"results.share.text": "Schau dir diese passenden Ausbildungsberufe an.",

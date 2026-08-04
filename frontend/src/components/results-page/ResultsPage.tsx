@@ -1,4 +1,5 @@
 import { useCallback, useMemo, useState } from "react";
+import { Link } from "react-router-dom";
 import { useMatchResultsStore } from "../../store/useMatchResultsStore";
 import { content } from "../../content";
 import { type MatchedOccupation } from "@azuki/shared";
@@ -28,13 +29,13 @@ const DEFAULT_TAG_FILTERS: OccupationTagsFilterState = {
 };
 
 export function ResultsPage() {
-	const { isLoadingShared, hasSharedParam, sharedVacancyParams } =
-		useSharedMatchResults();
+	const { isLoadingShared, hasSharedParam, sharedMatchResults } =
+		useSharedMatchResults({ preserveOwnState: true });
 	useFetchVacancies({
-		pauseWhileLoadingShared: hasSharedParam && isLoadingShared,
-		sharedVacancyParams,
+		pauseWhileLoadingShared: hasSharedParam,
 	});
-	const matchResults = useMatchResultsStore((state) => state.matchResults);
+	const ownMatchResults = useMatchResultsStore((state) => state.matchResults);
+	const matchResults = hasSharedParam ? sharedMatchResults : ownMatchResults;
 	const favoriteOccupationIds = useMatchResultsStore(
 		(state) => state.favoriteOccupationIds,
 	);
@@ -79,7 +80,7 @@ export function ResultsPage() {
 	}, [visibleOccupations]);
 
 	const handleShare = useCallback(async () => {
-		const url = buildShareUrl(ROUTE_PATHS.resultsVacancies, visibleOccupations);
+		const url = buildShareUrl(ROUTE_PATHS.resultsList, occupations);
 		try {
 			await shareResultsLink({
 				title: content["results.share.title"],
@@ -91,19 +92,26 @@ export function ResultsPage() {
 				return;
 			}
 		}
-	}, [visibleOccupations]);
+	}, [occupations]);
 
 	return (
-		<div className="flex flex-col h-full pb-16">
+		<div
+			className={`flex flex-col h-full ${hasSharedParam ? "pb-20" : "pb-16"}`}
+		>
 			<ResultsPageHeader
 				scrollProgress={scrollProgress}
-				title={content["results.title"]}
+				title={
+					hasSharedParam
+						? content["results.shared.title"]
+						: content["results.title"]
+				}
 				shareAriaLabel={content["results.share.ariaLabel"]}
 				downloadAriaLabel={content["results.download.ariaLabel"]}
 				onDownload={handleDownload}
 				onShare={handleShare}
 				downloadDisabled={visibleOccupations.length === 0}
-				shareDisabled={visibleOccupations.length === 0}
+				shareDisabled={occupations.length === 0}
+				multilineTitle={hasSharedParam}
 			/>
 			<ResultsFilterBar
 				hasLocationFilter={false}
@@ -113,6 +121,7 @@ export function ResultsPage() {
 				onOpenTagFilter={openTagFilter}
 				showFavoritesOnly={showFavoritesOnly}
 				onToggleFavoritesOnly={toggleFavoritesOnly}
+				showFavoritesFilter={!hasSharedParam}
 			/>
 			<OccupationTagsFilterBottomSheet
 				key={tagFilter.sheetKey}
@@ -131,9 +140,13 @@ export function ResultsPage() {
 				{!isLoadingShared && visibleOccupations.length > 0 && (
 					<>
 						{visibleOccupations.map((occupation: MatchedOccupation) => (
-							<ResultCard key={occupation.id} occupation={occupation} />
+							<ResultCard
+								key={occupation.id}
+								occupation={occupation}
+								readOnly={hasSharedParam}
+							/>
 						))}
-						<BottomCard />
+						{!hasSharedParam && <BottomCard />}
 					</>
 				)}
 				{!isLoadingShared && visibleOccupations.length === 0 && (
@@ -154,7 +167,18 @@ export function ResultsPage() {
 					</div>
 				)}
 			</div>
-			<BottomNav />
+			{hasSharedParam ? (
+				<div className="fixed bottom-0 left-1/2 z-40 w-full max-w-[430px] -translate-x-1/2 px-4 py-4">
+					<Link
+						to={ROUTE_PATHS.profile}
+						className="flex h-12 w-full items-center justify-center rounded-2xl bg-sky-300 px-5 py-2 text-base font-medium text-sky-1000 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-sky-500 active:bg-sky-200 active:text-sky-900 md:hover:bg-sky-200 md:hover:text-sky-900"
+					>
+						{content["results.shared.ownProfileCta"]}
+					</Link>
+				</div>
+			) : (
+				<BottomNav />
+			)}
 		</div>
 	);
 }

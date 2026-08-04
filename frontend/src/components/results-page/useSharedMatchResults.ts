@@ -4,12 +4,20 @@ import {
 	SHARED_DISTANCE_PARAM,
 	SHARED_OCCUPATIONS_PARAM,
 	SHARED_POSTCODE_PARAM,
+	type MatchResult,
 } from "@azuki/shared";
 import { fetchSharedMatch } from "../../api/client";
 import { useMatchResultsStore } from "../../store/useMatchResultsStore";
 import { DEFAULT_LOCATION, useAppStore } from "../../store/useAppStore";
 
-export function useSharedMatchResults() {
+interface UseSharedMatchResultsOptions {
+	preserveOwnState?: boolean;
+}
+
+export function useSharedMatchResults(
+	options: UseSharedMatchResultsOptions = {},
+) {
+	const { preserveOwnState = false } = options;
 	const [searchParams] = useSearchParams();
 	const setMatchResults = useMatchResultsStore(
 		(state) => state.setMatchResults,
@@ -20,21 +28,26 @@ export function useSharedMatchResults() {
 	const sharedDistance = searchParams.get(SHARED_DISTANCE_PARAM);
 	const [isLoadingShared, setIsLoadingShared] = useState(Boolean(sharedParam));
 	const [sharedLoadError, setSharedLoadError] = useState(false);
+	const [sharedMatchResults, setSharedMatchResults] =
+		useState<MatchResult | null>(null);
 
 	useEffect(() => {
 		if (!sharedParam) {
 			setIsLoadingShared(false);
 			setSharedLoadError(false);
+			setSharedMatchResults(null);
 			return () => {};
 		}
 
-		useAppStore.setState({
-			vacancies: null,
-			vacanciesFetchError: null,
-		});
-		useMatchResultsStore.getState().syncVacanciesCount(null);
+		if (!preserveOwnState) {
+			useAppStore.setState({
+				vacancies: null,
+				vacanciesFetchError: null,
+			});
+			useMatchResultsStore.getState().syncVacanciesCount(null);
+		}
 
-		if (sharedPostcode) {
+		if (!preserveOwnState && sharedPostcode) {
 			const distance = sharedDistance
 				? Number.parseInt(sharedDistance, 10)
 				: DEFAULT_LOCATION.distance;
@@ -57,10 +70,14 @@ export function useSharedMatchResults() {
 				if (cancelled) {
 					return;
 				}
-				setMatchResults(results);
+				setSharedMatchResults(results);
+				if (!preserveOwnState) {
+					setMatchResults(results);
+				}
 				setIsLoadingShared(false);
 			} catch {
 				if (!cancelled) {
+					setSharedMatchResults(null);
 					setSharedLoadError(true);
 					setIsLoadingShared(false);
 				}
@@ -74,6 +91,7 @@ export function useSharedMatchResults() {
 		sharedParam,
 		sharedPostcode,
 		sharedDistance,
+		preserveOwnState,
 		setLocation,
 		setMatchResults,
 	]);
@@ -94,6 +112,7 @@ export function useSharedMatchResults() {
 		isLoadingShared,
 		sharedLoadError,
 		hasSharedParam: Boolean(sharedParam),
+		sharedMatchResults,
 		sharedVacancyParams,
 	};
 }

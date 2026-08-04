@@ -19,6 +19,7 @@ export interface ResultsFilterBarProps {
 	onOpenLocationFilter?: () => void;
 	showFavoritesOnly: boolean;
 	onToggleFavoritesOnly: () => void;
+	showFavoritesFilter?: boolean;
 }
 
 export function ResultsFilterBar({
@@ -33,6 +34,7 @@ export function ResultsFilterBar({
 	onOpenLocationFilter,
 	showFavoritesOnly,
 	onToggleFavoritesOnly,
+	showFavoritesFilter = true,
 }: ResultsFilterBarProps) {
 	const useOccupationFilter =
 		selectedOccupationIds !== undefined &&
@@ -99,19 +101,23 @@ export function ResultsFilterBar({
 						<span className="min-w-0 flex-1 truncate">{filterTitle}</span>
 					)}
 				</FilterChipButton>
-				<FilterChipButton
-					active={showFavoritesOnly}
-					onClick={onToggleFavoritesOnly}
-					ariaPressed={showFavoritesOnly}
-					ariaLabel={content["results.filter.favorites.filterButton.ariaLabel"]}
-					title={content["results.filter.favorites.title"]}
-				>
-					<img
-						src="/icons/favorite-outline.svg"
-						alt=""
-						className="h-4 w-4 shrink-0"
-					/>
-				</FilterChipButton>
+				{showFavoritesFilter && (
+					<FilterChipButton
+						active={showFavoritesOnly}
+						onClick={onToggleFavoritesOnly}
+						ariaPressed={showFavoritesOnly}
+						ariaLabel={
+							content["results.filter.favorites.filterButton.ariaLabel"]
+						}
+						title={content["results.filter.favorites.title"]}
+					>
+						<img
+							src="/icons/favorite-outline.svg"
+							alt=""
+							className="h-4 w-4 shrink-0"
+						/>
+					</FilterChipButton>
+				)}
 			</div>
 		</div>
 	);

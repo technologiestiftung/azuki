@@ -48,6 +48,7 @@ interface ResultsPageHeaderProps {
 	onShare: () => void;
 	downloadDisabled?: boolean;
 	shareDisabled?: boolean;
+	multilineTitle?: boolean;
 }
 
 export function ResultsPageHeader({
@@ -59,10 +60,14 @@ export function ResultsPageHeader({
 	onShare,
 	downloadDisabled = false,
 	shareDisabled = false,
+	multilineTitle = false,
 }: ResultsPageHeaderProps) {
+	const expandedHeaderHeight = multilineTitle
+		? EXPANDED_HEADER_HEIGHT + EXPANDED_LINE_HEIGHT_PX
+		: EXPANDED_HEADER_HEIGHT;
 	const expandedHeight =
-		EXPANDED_HEADER_HEIGHT -
-		scrollProgress * (EXPANDED_HEADER_HEIGHT - COLLAPSED_HEADER_HEIGHT);
+		expandedHeaderHeight -
+		scrollProgress * (expandedHeaderHeight - COLLAPSED_HEADER_HEIGHT);
 
 	const heroTitleSlotRef = useRef<HTMLDivElement>(null);
 	const collapsedTitleSlotRef = useRef<HTMLDivElement>(null);
