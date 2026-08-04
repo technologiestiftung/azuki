@@ -1,5 +1,5 @@
 import type { To } from "react-router-dom";
-import { Step } from "../common";
+import { QUESTIONNAIRE_STEPS, Step } from "../common";
 import { workPreferencePairs } from "../content/work-preference-pairs";
 import { NO_GO_STEP_CARD_COUNT } from "../components/competence-profile/steps/no-gos-step/no-gos";
 import { STRENGTH_STEP_CARD_COUNT } from "../components/competence-profile/steps/strengths-step/strengths";
@@ -95,6 +95,36 @@ export function pathnameToStep(pathname: string): Step | undefined {
 		return undefined;
 	}
 	return ORDERED_NAVIGATION_STEPS[index].step;
+}
+
+const QUESTIONNAIRE_FLOW_NODES = ORDERED_NAVIGATION_STEPS.filter(
+	(node) => node.step !== undefined && QUESTIONNAIRE_STEPS.includes(node.step),
+);
+
+/**
+ * Granular progress across questionnaire screens, counting hash cards
+ * within multi-card steps (Strengths, WorkPreferences, NoGos).
+ */
+export function getGranularProgress(pathname: string, hash: string): number {
+	const nodeIndex = QUESTIONNAIRE_FLOW_NODES.findIndex(
+		(node) => node.path === pathname,
+	);
+	if (nodeIndex === -1) {
+		return 0;
+	}
+
+	const total = QUESTIONNAIRE_FLOW_NODES.reduce(
+		(sum, node) => sum + (node.cardCount ?? 1),
+		0,
+	);
+
+	let current = 0;
+	for (let i = 0; i < nodeIndex; i++) {
+		current += QUESTIONNAIRE_FLOW_NODES[i].cardCount ?? 1;
+	}
+	current += parseHashCardIndex(hash) + 1;
+
+	return current / total;
 }
 
 export function getNextPath(pathname: string, hash: string): To {
