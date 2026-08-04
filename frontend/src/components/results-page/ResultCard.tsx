@@ -22,10 +22,6 @@ export function ResultCard({ occupation }: ResultCardProps) {
 	const toggleFavorite = useMatchResultsStore((state) => state.toggleFavorite);
 
 	const displayName = formatOccupationDisplayName(occupation.name);
-	const salaryLabel =
-		occupation.salaryKnown && occupation.salaryMonthlyMedian !== null
-			? formatOccupationSalary(occupation.salaryMonthlyMedian)
-			: content["results.detail.salary.unknown"];
 
 	return (
 		<div className="relative bg-gray-100 rounded-2xl border border-gray-200 overflow-hidden">
@@ -59,12 +55,20 @@ export function ResultCard({ occupation }: ResultCardProps) {
 					<h3 className="text-xl font-semibold text-sky-1000 mb-3">
 						{displayName}
 					</h3>
-					{(occupation.occupationDuration || salaryLabel) && (
+					{(occupation.occupationDuration || occupation.salaryKnown) && (
 						<div className="mb-[9px] flex min-w-0 flex-wrap items-center gap-2">
 							{occupation.occupationDuration && (
 								<Badge label={occupation.occupationDuration} />
 							)}
-							<Badge label={salaryLabel} />
+
+							{occupation.salaryKnown &&
+								occupation.salaryMonthlyMedian !== null && (
+									<Badge
+										label={formatOccupationSalary(
+											occupation.salaryMonthlyMedian,
+										)}
+									/>
+								)}
 						</div>
 					)}
 
