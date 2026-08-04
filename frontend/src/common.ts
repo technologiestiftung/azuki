@@ -40,13 +40,13 @@ export enum Step {
 	SchoolDegreeStep = 3,
 	SchoolSubjects = 4,
 	Interests = 5,
-	Strengths = 7,
-	WorkExpectations = 9,
-	PracticalExperience = 10,
-	WorkPreferences = 11,
-	NoGos = 12,
-	Loading = 13,
-	Results = 14,
+	Strengths = 6,
+	WorkExpectations = 7,
+	PracticalExperience = 8,
+	WorkPreferences = 9,
+	NoGos = 10,
+	Loading = 11,
+	Results = 12,
 }
 
 export const QUESTIONNAIRE_STEPS = [
