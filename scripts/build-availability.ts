@@ -16,8 +16,7 @@
 import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
 import { resolve, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
-import { isBundesland, type Bundesland } from "@azuki/shared";
-import { normName } from "./normName.js";
+import { isBundesland, normName, type Bundesland } from "@azuki/shared";
 import { normalizeKldb } from "./normalizeKldb.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -25,7 +24,10 @@ const ROOT = resolve(__dirname, "..");
 const POP_INDEX = resolve(ROOT, "shared/data/popularity-index.json");
 const BERUFE = resolve(ROOT, "backend/src/data/berufe.json");
 const DAZUBI_FIXTURE = resolve(ROOT, "shared/data/dazubi-trainee-starts.json");
-const DESTATIS_FIXTURE = resolve(ROOT, "shared/data/destatis-trainee-starts.json");
+const DESTATIS_FIXTURE = resolve(
+	ROOT,
+	"shared/data/destatis-trainee-starts.json",
+);
 const OUT = resolve(ROOT, "shared/data/availability-by-state.json");
 
 export interface PopRecord {
@@ -173,12 +175,23 @@ export function buildAvailability(
 function main() {
 	const pop = JSON.parse(readFileSync(POP_INDEX, "utf8")) as PopRecord[];
 	const berufe = JSON.parse(readFileSync(BERUFE, "utf8")) as Beruf[];
-	const dazubi = JSON.parse(readFileSync(DAZUBI_FIXTURE, "utf8")) as DazubiRow[];
-	const destatis = JSON.parse(readFileSync(DESTATIS_FIXTURE, "utf8")) as DestatisRow[];
+	const dazubi = JSON.parse(
+		readFileSync(DAZUBI_FIXTURE, "utf8"),
+	) as DazubiRow[];
+	const destatis = JSON.parse(
+		readFileSync(DESTATIS_FIXTURE, "utf8"),
+	) as DestatisRow[];
 
-	console.log(`  ${dazubi.length} DAZUBI rows, ${destatis.length} Destatis rows`);
+	console.log(
+		`  ${dazubi.length} DAZUBI rows, ${destatis.length} Destatis rows`,
+	);
 
-	const { availability, stats } = buildAvailability(berufe, pop, dazubi, destatis);
+	const { availability, stats } = buildAvailability(
+		berufe,
+		pop,
+		dazubi,
+		destatis,
+	);
 
 	console.log(
 		`  DAZUBI matched: ${stats.dazubiMatched} (${stats.dazubiRollupMatched} via parent-rollup), unmatched: ${stats.dazubiUnmatched}`,

@@ -6,7 +6,14 @@ import type {
 	Persona,
 	Occupation,
 } from "@azuki/shared";
+import {
+	MOCK_MATCH_RESULT,
+	MOCK_OCCUPATIONS,
+	MOCK_VACANCIES_RESPONSE,
+} from "./mockResults";
 type HeadersInit = Record<string, string>;
+
+const USE_MOCK_RESULTS = import.meta.env.VITE_USE_MOCK_RESULTS === "true";
 
 const API_BASE = import.meta.env.VITE_API_URL || "/api";
 
@@ -34,6 +41,13 @@ function headers(): HeadersInit {
 }
 
 export async function getOccupation(id: number): Promise<Occupation> {
+	if (USE_MOCK_RESULTS) {
+		const mock = MOCK_OCCUPATIONS.get(id);
+		if (mock) {
+			return Promise.resolve(mock);
+		}
+	}
+
 	const res = await fetch(`${API_BASE}/occupations/${id}`, {
 		headers: headers(),
 	});
@@ -222,6 +236,10 @@ export async function fetchMatchExplanations(
 }
 
 export async function matchProfile(profile: UserProfile): Promise<MatchResult> {
+	if (USE_MOCK_RESULTS) {
+		return Promise.resolve(MOCK_MATCH_RESULT);
+	}
+
 	const res = await fetch(`${API_BASE}/match`, {
 		method: "POST",
 		headers: headers(),
@@ -257,6 +275,10 @@ export async function fetchSharedVacancies(
 		signal?: AbortSignal;
 	} = {},
 ): Promise<VacanciesResponse> {
+	if (USE_MOCK_RESULTS) {
+		return Promise.resolve(MOCK_VACANCIES_RESPONSE);
+	}
+
 	const { postcode, distance, signal } = options;
 	const params = new URLSearchParams({ o: occupationsParam });
 	if (postcode) {
@@ -292,13 +314,21 @@ export async function unlock(password: string): Promise<boolean> {
 export async function fetchVacancies(
 	postcode: string,
 	occupations: string[],
-	options: { distance?: number; signal?: AbortSignal } = {},
+	options: {
+		distance?: number;
+		signal?: AbortSignal;
+		preferredJobs?: string[];
+	} = {},
 ): Promise<VacanciesResponse> {
-	const { distance, signal } = options;
+	const { distance, signal, preferredJobs = [] } = options;
+	if (USE_MOCK_RESULTS) {
+		return Promise.resolve(MOCK_VACANCIES_RESPONSE);
+	}
+
 	const res = await fetch(`${API_BASE}/vacancies`, {
 		method: "POST",
 		headers: headers(),
-		body: JSON.stringify({ postcode, occupations, distance }),
+		body: JSON.stringify({ postcode, occupations, preferredJobs, distance }),
 		signal,
 	});
 

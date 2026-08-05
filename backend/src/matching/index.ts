@@ -1,6 +1,8 @@
 import type { Bundesland, Occupation, UserProfile } from "@azuki/shared";
 import { hasAvailabilityData, traineeCountAcrossStates } from "@azuki/shared";
 import { buildSalaryBands, scoreOccupation } from "./score/index.js";
+import { scoreNoGos } from "./score/dimensions.js";
+import { resolvePreferredJobs } from "./resolvePreferredJobs.js";
 
 // Number of Berufe preFilter forwards to the LLM ranker. Set after a
 // three-model K sweep on v3 prompt + Hinweise context (Sonnet 4.6,
@@ -50,6 +52,66 @@ export function filterByRegionalAvailability(
 	});
 }
 
+// Cap injections so vague keywords (e.g. "Pflege") cannot rewrite the shortlist.
+const MAX_PREFERRED_SHORTLIST_INJECTIONS = 5;
+
+function injectPreferredJobsIntoShortlist(
+	shortlist: ScoredOccupation[],
+	allScored: ScoredOccupation[],
+	profile: UserProfile,
+): ScoredOccupation[] {
+	const preferredJobs = profile.preferredJobs ?? [];
+	if (preferredJobs.length === 0) {
+		return shortlist;
+	}
+
+	const occupations = allScored.map((entry) => entry.occupation);
+	const resolved = resolvePreferredJobs(preferredJobs, occupations);
+	if (resolved.length === 0) {
+		return shortlist;
+	}
+
+	const scoredById = new Map(
+		allScored.map((entry) => [entry.occupation.id, entry]),
+	);
+	const shortlistIds = new Set(shortlist.map((entry) => entry.occupation.id));
+	const result = [...shortlist];
+	let injections = 0;
+
+	for (const match of resolved) {
+		if (injections >= MAX_PREFERRED_SHORTLIST_INJECTIONS) {
+			break;
+		}
+		const occupationId = match.occupation.id;
+		if (shortlistIds.has(occupationId)) {
+			continue;
+		}
+		if (scoreNoGos(match.occupation, profile) < 0) {
+			continue;
+		}
+
+		const scoredEntry = scoredById.get(occupationId);
+		if (!scoredEntry) {
+			continue;
+		}
+
+		let lowestIdx = 0;
+		for (let i = 1; i < result.length; i++) {
+			if (result[i].score < result[lowestIdx].score) {
+				lowestIdx = i;
+			}
+		}
+
+		shortlistIds.delete(result[lowestIdx].occupation.id);
+		result[lowestIdx] = scoredEntry;
+		shortlistIds.add(occupationId);
+		injections++;
+	}
+
+	result.sort((a, b) => b.score - a.score);
+	return result;
+}
+
 export function preFilter(
 	occupations: Occupation[],
 	profile: UserProfile,
@@ -65,5 +127,6 @@ export function preFilter(
 
 	scored.sort((a, b) => b.score - a.score);
 
-	return scored.slice(0, topN);
+	const shortlist = scored.slice(0, topN);
+	return injectPreferredJobsIntoShortlist(shortlist, scored, profile);
 }

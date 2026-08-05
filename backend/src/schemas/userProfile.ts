@@ -67,6 +67,7 @@ const UserProfileObjectSchema = z.object({
 	favoriteSubjects: z.array(z.string()),
 	customSubjects: z.array(z.string()).default([]),
 	interests: z.array(z.string()),
+	preferredJobs: z.array(z.string()).default([]),
 	customInterests: z.array(z.string()),
 	workExpectations: z.array(z.string()),
 	customWorkExpectations: z.array(z.string()).default([]),

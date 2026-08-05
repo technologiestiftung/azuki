@@ -1,6 +1,7 @@
 import {
 	fitPercent,
 	formatOccupationDisplayName,
+	formatOccupationSalary,
 	type MatchedOccupation,
 } from "@azuki/shared";
 import { content } from "../../../content";
@@ -27,7 +28,9 @@ export function exportOccupationsPdf(occupations: MatchedOccupation[]): void {
 			formatOccupationDisplayName(occupation.name),
 			`${fitPercent(occupation.score)}%`,
 			occupation.occupationDuration,
-			occupation.occupationEarnings,
+			occupation.salaryKnown
+				? formatOccupationSalary(occupation.salaryMonthlyMedian ?? 0)
+				: content["results.detail.salary.unknown"],
 			occupation.shortDescription,
 		]),
 		columnWeights: [2.5, 1, 1.2, 1.2, 3],

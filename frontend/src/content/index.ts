@@ -193,6 +193,27 @@ export const content = {
 	"interests.people.planning.label": "Party planen",
 	"interests.people.planning.icon": "🎉",
 
+	// preffered job
+	"preferredJob.question": "Gibt es eine Ausbildung, die dir gefällt?",
+	"preferredJob.subtitle": "Oder welche Berufsrichtung gefällt dir?",
+	"preferredJob.addButton.label": "Ausbildung hinzufügen",
+	"preferredJob.addButton.ariaLabel": "Ausbildung hinzufügen",
+	"preferredJob.bottomSheet.sheetAriaLabel": "Eine Ausbildung hinzufügen",
+	"preferredJob.bottomSheet.title": "Welche Ausbildung gefällt dir?",
+	"preferredJob.bottomSheet.example.label": "Zum Beispiel",
+	"preferredJob.bottomSheet.example.li1": "Elektrikerin",
+	"preferredJob.bottomSheet.example.li2": "Kosmetiker",
+	"preferredJob.bottomSheet.example.li3": "ein Job in der Pflege",
+	"preferredJob.bottomSheet.input.addPlaceholder": "z.B. irgendwas mit Medien",
+	"preferredJob.bottomSheet.submitButtonLabel": "Hinzufügen",
+	"preferredJob.bottomSheet.submitButtonAriaLabel": "Hinzufügen",
+	"preferredJob.bottomSheet.cancelButtonLabel": "Abbrechen",
+	"preferredJob.bottomSheet.cancelButtonAriaLabel": "Abbrechen",
+	"preferredJob.bottomSheet.errorMessage":
+		"Bitte gib einen Ausbildungsberuf ein.",
+	"preferredJob.addedByYouLabel": "Von dir hinzugefügt",
+	"preferredJob.skipButton.pill.label.postfix": "als Ausbildung auswählen",
+
 	// Strengths
 	"strengths.question": "Was kannst du gut?",
 	"strengths.sliderMin": "0%",

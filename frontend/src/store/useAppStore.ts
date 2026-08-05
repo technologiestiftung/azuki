@@ -9,6 +9,10 @@ import {
 	type VacanciesResponse,
 } from "../common";
 import { initialUserProfile } from "../profile/initialUserProfile";
+import {
+	dedupePreferredJobs,
+	isDuplicatePreferredJob,
+} from "../profile/preferredJobUtils";
 import { shouldPrefillProfile } from "../profile/prefillConfig";
 import { useMatchResultsStore } from "./useMatchResultsStore";
 
@@ -47,6 +51,7 @@ function normalizeProfile(
 		favoriteSubjects: merged.favoriteSubjects ?? [],
 		customSubjects: merged.customSubjects ?? [],
 		interests: merged.interests ?? [],
+		preferredJobs: dedupePreferredJobs(merged.preferredJobs ?? []),
 		customInterests: merged.customInterests ?? [],
 		workExpectations: merged.workExpectations ?? [],
 		customWorkExpectations: merged.customWorkExpectations ?? [],
@@ -86,6 +91,8 @@ interface AppActions {
 	toggleWorkExpectation: (value: string) => void;
 	toggleInterest: (interest: string) => void;
 	addCustomInterest: (interest: string) => void;
+	addPreferredJobs: (preferredJobs: string[]) => void;
+	togglePreferredJob: (preferredJob: string) => void;
 	addCustomSubject: (subject: string) => void;
 	addCustomWorkExpectation: (workExpectation: string) => void;
 	addCustomStrength: (strength: string) => void;
@@ -172,6 +179,40 @@ export const useAppStore = create<AppState & AppActions>()(
 						profile: { ...state.profile, interests },
 					};
 				}),
+			addPreferredJobs: (preferredJobs) => {
+				clearMatchResults();
+				set((state) => {
+					const merged = [...state.profile.preferredJobs];
+					for (const preferredJob of preferredJobs) {
+						const trimmed = preferredJob.trim();
+						if (!trimmed || isDuplicatePreferredJob(merged, trimmed)) {
+							continue;
+						}
+						merged.push(trimmed);
+					}
+					if (merged.length === state.profile.preferredJobs.length) {
+						return state;
+					}
+					return {
+						profile: {
+							...state.profile,
+							preferredJobs: merged,
+						},
+					};
+				});
+			},
+			togglePreferredJob: (preferredJob) => {
+				clearMatchResults();
+				set((state) => {
+					const currentPreferredJobs = state.profile.preferredJobs ?? [];
+					const preferredJobs = currentPreferredJobs.includes(preferredJob)
+						? currentPreferredJobs.filter((job) => job !== preferredJob)
+						: [...currentPreferredJobs, preferredJob];
+					return {
+						profile: { ...state.profile, preferredJobs },
+					};
+				});
+			},
 
 			addCustomInterest: (interest) => {
 				clearMatchResults();
