@@ -1,10 +1,10 @@
 import React, { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { content } from "../../../content";
-import { PrimaryThemedButton } from "../../primitives/buttons/PrimaryThemedButton";
 import { useFlowNavigation } from "../../../routing/useFlowNavigation";
 import { shouldPrefillProfile } from "../../../profile/prefillConfig";
 import { GhostButton } from "../../primitives/buttons/GhostButton";
+import { StartCtaButton } from "./StartCtaButton";
 
 interface Slide {
 	image: string;
@@ -271,18 +271,14 @@ export function StartScreen() {
 
 				<div className="bg-sky-white">
 					<div className="w-full flex flex-col px-4 pb-4 pt-4 gap-y-2 max-w-[430px] mx-auto">
-						<PrimaryThemedButton onClick={handleNext} className="w-full">
-							<span
-								key={currentSlide}
-								className={`inline-block ${
-									slideDirection === "prev"
-										? "animate-slideInDown"
-										: "animate-slideInUp"
-								}`}
-							>
-								{activeSlide.cta}
-							</span>
-						</PrimaryThemedButton>
+						<StartCtaButton
+							activeCta={activeSlide.cta}
+							previousCta={
+								previousSlide !== null ? slides[previousSlide].cta : null
+							}
+							direction={slideDirection}
+							onClick={handleNext}
+						/>
 						{shouldPrefillProfile && (
 							<GhostButton
 								onClick={() => navigate("/loading")}

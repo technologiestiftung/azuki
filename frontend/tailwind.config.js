@@ -98,12 +98,20 @@ export default {
 					to: { opacity: "1", transform: "translateY(0)" },
 				},
 				slideInUp: {
-					from: { transform: "translateY(1rem)" },
-					to: { transform: "translateY(0)" },
+					"0%": {
+						transform: "translateY(0)",
+					},
+					"100%": {
+						transform: "translateY(-56px)",
+					},
 				},
 				slideInDown: {
-					from: { transform: "translateY(-1rem)" },
-					to: { transform: "translateY(0)" },
+					"0%": {
+						transform: "translateY(-56px)",
+					},
+					"100%": {
+						transform: "translateY(0)",
+					},
 				},
 				fadeOut: {
 					from: { opacity: "1" },
@@ -221,8 +229,8 @@ export default {
 			animation: {
 				fadeIn: "fadeIn 0.2s ease-in-out",
 				fadeInUp: "fadeInUp 0.2s ease-in-out",
-				slideInUp: "slideInUp 0.2s var(--ease-spring)",
-				slideInDown: "slideInDown 0.2s var(--ease-spring)",
+				slideInUp: "slideInUp 0.5s var(--ease-spring) forwards",
+				slideInDown: "slideInDown 0.5s var(--ease-spring) forwards",
 				fadeOut: "fadeOut 0.2s ease-in-out forwards",
 				slideInBottom:
 					"slideInBottom 0.32s cubic-bezier(0.32, 0.72, 0, 1) forwards",
