@@ -8,6 +8,7 @@ import type {
 } from "@azuki/shared";
 import {
 	MOCK_MATCH_RESULT,
+	MOCK_OCCUPATIONS,
 	MOCK_VACANCIES_RESPONSE,
 } from "./mockResults";
 type HeadersInit = Record<string, string>;
@@ -40,6 +41,13 @@ function headers(): HeadersInit {
 }
 
 export async function getOccupation(id: number): Promise<Occupation> {
+	if (USE_MOCK_RESULTS) {
+		const mock = MOCK_OCCUPATIONS.get(id);
+		if (mock) {
+			return Promise.resolve(mock);
+		}
+	}
+
 	const res = await fetch(`${API_BASE}/occupations/${id}`, {
 		headers: headers(),
 	});
