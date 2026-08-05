@@ -63,5 +63,3 @@ export const QUESTIONNAIRE_STEPS = [
 	Step.WorkPreferences,
 	Step.NoGos,
 ];
-
-export const TOTAL_QUESTIONNAIRE_STEPS = QUESTIONNAIRE_STEPS.length;
