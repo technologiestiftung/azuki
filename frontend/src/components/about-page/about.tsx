@@ -81,7 +81,7 @@ export const AboutPage = () => {
 						</h1>
 					</div>
 					<div
-						className={`absolute top-0 right-0 pt-2 [animation-duration:0.4s] ${
+						className={`absolute top-0 right-0 pt-2 [animation-duration:0.6s] ${
 							isScrolledAway ? "animate-slideOutRight" : "animate-slideInRight"
 						}`}
 					>
