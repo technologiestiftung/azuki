@@ -11,9 +11,16 @@ const repoRoot = path.resolve(
 export default defineConfig({
 	envDir: repoRoot,
 	plugins: [react()],
+	optimizeDeps: {
+		include: ["@lottiefiles/dotlottie-react"],
+	},
 	server: {
 		proxy: {
 			"/api": {
+				target: "http://localhost:3001",
+				changeOrigin: true,
+			},
+			"^/results/\\d+$": {
 				target: "http://localhost:3001",
 				changeOrigin: true,
 			},

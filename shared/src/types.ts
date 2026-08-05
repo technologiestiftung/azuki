@@ -78,6 +78,7 @@ export interface Occupation {
 	descriptionLong: string | null;
 	taskSummary: string | null;
 	shortDescription?: string | null;
+	taskBullets?: string[] | null;
 	images: OccupationImage[];
 	degreeStats: DegreeDistribution | null;
 	// Parsed from BERUFENET a30-0 (legal Zugangsvoraussetzungen). Used as
@@ -128,6 +129,7 @@ export interface UserProfile {
 	favoriteSubjects: string[];
 	customSubjects: string[];
 	interests: string[];
+	preferredJobs: string[];
 	customInterests: string[];
 	workExpectations: string[];
 	customWorkExpectations: string[];
@@ -155,6 +157,8 @@ export interface MatchedOccupation {
 	occupationTag: OccupationTagId;
 	occupationDuration: string;
 	occupationEarnings: string;
+	salaryKnown: boolean;
+	salaryMonthlyMedian: number | null;
 }
 
 export interface MatchResult {

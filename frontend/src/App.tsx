@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { lazy, Suspense, useEffect } from "react";
 import { Routes, Route, Navigate, useLocation } from "react-router-dom";
 import { useToastStore } from "./store/useToastStore";
 import { LoginScreen } from "./components/login-screen/LoginScreen";
@@ -12,14 +12,21 @@ import { StrengthsStep } from "./components/competence-profile/steps/strengths-s
 import { PracticalExperienceStep } from "./components/competence-profile/steps/practical-experience/PracticalExperienceStep";
 import { WorkPreferencesStep } from "./components/competence-profile/steps/WorkPreferencesStep";
 import { NoGosStep } from "./components/competence-profile/steps/no-gos-step/NoGosStep";
-import { LoadingScreen } from "./components/loading-screen/LoadingScreen";
 import { ResultsPage } from "./components/results-page/ResultsPage";
+import { OccupationDetailPage } from "./components/results-page/occupation-detail/OccupationDetailPage";
 import { VacanciesPage } from "./components/results-page/vacancies-page/VacanciesPage";
 import { WorkExpectationsStep } from "./components/competence-profile/steps/WorkExpectationsStep";
 import { EvalPage } from "./components/eval/EvalPage";
 import { PersonasPage } from "./components/personas/PersonasPage";
 import { PersonaDetailPage } from "./components/personas/PersonaDetailPage";
 import { ROUTE_PATHS } from "./routing/routes";
+import { PreferredJobsStep } from "./components/competence-profile/steps/PreferredJobsStep";
+
+const LoadingScreen = lazy(() =>
+	import("./components/loading-screen/LoadingScreen").then((mod) => ({
+		default: mod.LoadingScreen,
+	})),
+);
 
 function App() {
 	const location = useLocation();
@@ -55,6 +62,10 @@ function App() {
 						element={<SchoolSubjectsStep />}
 					/>
 					<Route path={ROUTE_PATHS.interests} element={<InterestsStep />} />
+					<Route
+						path={ROUTE_PATHS.preferredJob}
+						element={<PreferredJobsStep />}
+					/>
 					<Route path={ROUTE_PATHS.strengths} element={<StrengthsStep />} />
 					<Route
 						path={ROUTE_PATHS.expectations}
@@ -69,11 +80,22 @@ function App() {
 						element={<WorkPreferencesStep />}
 					/>
 					<Route path={ROUTE_PATHS.nogos} element={<NoGosStep />} />
-					<Route path={ROUTE_PATHS.loading} element={<LoadingScreen />} />
+					<Route
+						path={ROUTE_PATHS.loading}
+						element={
+							<Suspense fallback={null}>
+								<LoadingScreen />
+							</Suspense>
+						}
+					/>
 					<Route path={ROUTE_PATHS.resultsList} element={<ResultsPage />} />
 					<Route
-						path={ROUTE_PATHS.resultsFreeSpots}
+						path={ROUTE_PATHS.resultsVacancies}
 						element={<VacanciesPage />}
+					/>
+					<Route
+						path={ROUTE_PATHS.resultsOccupationDetail}
+						element={<OccupationDetailPage />}
 					/>
 					<Route path={ROUTE_PATHS.eval} element={<EvalPage />} />
 					<Route path={ROUTE_PATHS.personas} element={<PersonasPage />} />

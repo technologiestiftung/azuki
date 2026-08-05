@@ -804,16 +804,31 @@ async function main() {
         .filter((occ) => occ.shortDescription?.trim())
         .map((occ) => [occ.id, occ.shortDescription!.trim()] as const),
     );
-    let preserved = 0;
+    const taskBulletsById = new Map(
+      previous
+        .filter(
+          (occ) =>
+            (occ.taskBullets?.filter((bullet) => bullet.trim()).length ?? 0) >
+            0,
+        )
+        .map((occ) => [occ.id, occ.taskBullets!] as const),
+    );
+    let preservedShort = 0;
+    let preservedTaskBullets = 0;
     for (const occ of occupations) {
-      const existing = shortById.get(occ.id);
-      if (existing) {
-        occ.shortDescription = existing;
-        preserved++;
+      const existingShort = shortById.get(occ.id);
+      if (existingShort) {
+        occ.shortDescription = existingShort;
+        preservedShort++;
+      }
+      const existingTaskBullets = taskBulletsById.get(occ.id);
+      if (existingTaskBullets) {
+        occ.taskBullets = existingTaskBullets;
+        preservedTaskBullets++;
       }
     }
     console.log(
-      `Step 2e: Preserved ${preserved} pre-generated shortDescription(s) from existing catalog.\n`,
+      `Step 2e: Preserved ${preservedShort} pre-generated shortDescription(s) and ${preservedTaskBullets} taskBullets set(s) from existing catalog.\n`,
     );
   }
 

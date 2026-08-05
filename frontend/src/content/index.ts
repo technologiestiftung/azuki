@@ -199,6 +199,27 @@ export const content = {
 	"interests.people.planning.label": "Party planen",
 	"interests.people.planning.icon": "🎉",
 
+	// preffered job
+	"preferredJob.question": "Gibt es eine Ausbildung, die dir gefällt?",
+	"preferredJob.subtitle": "Oder welche Berufsrichtung gefällt dir?",
+	"preferredJob.addButton.label": "Ausbildung hinzufügen",
+	"preferredJob.addButton.ariaLabel": "Ausbildung hinzufügen",
+	"preferredJob.bottomSheet.sheetAriaLabel": "Eine Ausbildung hinzufügen",
+	"preferredJob.bottomSheet.title": "Welche Ausbildung gefällt dir?",
+	"preferredJob.bottomSheet.example.label": "Zum Beispiel",
+	"preferredJob.bottomSheet.example.li1": "Elektrikerin",
+	"preferredJob.bottomSheet.example.li2": "Kosmetiker",
+	"preferredJob.bottomSheet.example.li3": "ein Job in der Pflege",
+	"preferredJob.bottomSheet.input.addPlaceholder": "z.B. irgendwas mit Medien",
+	"preferredJob.bottomSheet.submitButtonLabel": "Hinzufügen",
+	"preferredJob.bottomSheet.submitButtonAriaLabel": "Hinzufügen",
+	"preferredJob.bottomSheet.cancelButtonLabel": "Abbrechen",
+	"preferredJob.bottomSheet.cancelButtonAriaLabel": "Abbrechen",
+	"preferredJob.bottomSheet.errorMessage":
+		"Bitte gib einen Ausbildungsberuf ein.",
+	"preferredJob.addedByYouLabel": "Von dir hinzugefügt",
+	"preferredJob.skipButton.pill.label.postfix": "als Ausbildung auswählen",
+
 	// Strengths
 	"strengths.question": "Was kannst du gut?",
 	"strengths.sliderMin": "0%",
@@ -416,14 +437,29 @@ export const content = {
 	"loading.success.description": "Du hast alle Fragen beantwortet.",
 	"loading.waiting.title": "Wir suchen nach Ausbildungen, die zu dir passen.",
 	"loading.waiting.description":
-		"Einen Moment - gleich geht's zu deinen Ergebnissen.",
+		"Einen Moment – gleich geht's zu deinen Ergebnissen.",
 
+	//Bottom Navigation
+
+	"bottomNav.results.ariaLabel": "Zur Ausbildungsberufe",
+	"bottomNav.results.label": "Berufe",
+	"bottomNav.vacancies.ariaLabel": "Zur Freie Stellen-Ansicht",
+	"bottomNav.vacancies.label": "Freie Stellen",
+	"bottomNav.profile.ariaLabel": "Zur Profil-Ansicht",
+	"bottomNav.profile.label": "Profil",
 	// Results
-	"results.title": "Deine Ergebnisse",
-	"results.tab.results": "Ausbildungsberufe",
-	"results.tab.results.ariaLabel": "Zur Ausbildungsberufe-Ansicht",
-	"results.tab.freeSpots": "Freie Stellen",
-	"results.tab.freeSpots.ariaLabel": "Zur Freie Stellen-Ansicht",
+	"results.title": "Ausbildungsberufe für dich",
+	"results.share.ariaLabel": "Ausbildungsberufe teilen",
+	"results.share.title": "Ausbildungsberufe für dich",
+	"results.share.text": "Schau dir diese passenden Ausbildungsberufe an.",
+
+	"results.download.ariaLabel": "Ausbildungsberufe herunterladen",
+	"results.export.filename": "ausbildungsberufe.pdf",
+	"results.export.occupation": "Beruf",
+	"results.export.fit": "Passt zu",
+	"results.export.duration": "Dauer",
+	"results.export.earnings": "Verdienst",
+	"results.export.description": "Beschreibung",
 	"results.bottomCard.title": "Kein passender Ausbildungsberuf dabei?",
 	"results.bottomCard.resetCta": "Fragen wiederholen",
 	"results.bottomCard.consultationCta": "Beratung anfragen",
@@ -434,8 +470,6 @@ export const content = {
 	"results.favorite.add": "Zu Favoriten hinzufügen",
 	"results.favorite.remove": "Aus Favoriten entfernen",
 	"results.card.score.label": "Passt zu",
-	"results.occupationType.dual": "Duale Ausbildung",
-	"results.occupationType.school": "Schulische Ausbildung",
 	"results.noResults":
 		"Wir haben leider keine Ausbildungsberufe zu deiner Auswahl gefunden.",
 	// Filter Bottom Sheet
@@ -466,8 +500,80 @@ export const content = {
 	"results.badge.empty": "Keine offenen Stellen",
 	"results.previewHeading": "Beispiele in deiner Nähe",
 	"results.startDatePrefix": "Start:",
+	// Occupation Detail
+	"results.detail.salaryTitle": "Einstiegsgehalt",
+	"results.detail.salary.unknown": "Unbekannt",
+	"results.detail.loading": "Berufsdetails werden geladen…",
+	"results.detail.salaryInfo.title": "Einstiegsgehalt",
+	"results.detail.salaryInfo.description":
+		"Das Einstiegsgehalt ist das Geld, das du verdienst, wenn du nach der Ausbildung deinen ersten Job anfängst.",
+	"results.detail.durationTitle": "Dauer",
+	"results.detail.durationSuffix": "Jahre",
+	"results.detail.schoolDegreeTitle": "Empfohlener Schulabschluss",
+	"results.detail.schoolDegree.accessLevel.unrestricted":
+		"Ohne bestimmten Abschluss",
+	"results.detail.schoolDegree.accessLevel.hauptschule": "Hauptschulabschluss",
+	"results.detail.schoolDegree.accessLevel.realschule": "Realschulabschluss",
+	"results.detail.schoolDegree.accessLevel.fachhochschulreife":
+		"Fachhochschulreife",
+	"results.detail.schoolDegree.accessLevel.unknown": "Unbekannt",
+	"results.detail.schoolDegree.degreeStats.noQualification":
+		"Ohne Schulabschluss",
+	"results.detail.schoolDegree.degreeStats.secondary": "Hauptschulabschluss",
+	"results.detail.schoolDegree.degreeStats.intermediate": "Realschulabschluss",
+	"results.detail.schoolDegree.degreeStats.universityEntrance":
+		"Hochschulreife",
+	"results.detail.schoolDegreeInfo.title": "Empfohlener Schulabschluss",
+	"results.detail.schoolDegreeInfo.description":
+		"Mit diesem Abschluss hast du gute Chancen auf einen Ausbildungsplatz. Hast du einen anderen Abschluss, kannst du es trotzdem schaffen – vielleicht musst du dann mehr Bewerbungen schreiben und es dauert länger bis du einen Platz findest.",
+	"results.detail.notFound": "Dieser Beruf wurde nicht gefunden.",
+	"results.detail.loadError":
+		"Die Berufsdetails konnten gerade nicht geladen werden.",
+	"results.share": "Teilen",
+	"results.detail.tasksTitle": "Typische Aufgaben",
+	"results.detail.tasks.matchTitle": "So gut passt der Beruf zu dir",
+	"results.detail.tasks.matchInfo.title": "Wie wird das berechnet?",
+	"results.detail.tasks.matchInfo.ariaLabel":
+		"Wie wird das berechnet?, Mehr erfahren",
+	"results.detail.tasks.matchInfo.description":
+		"Du hast ein paar Fragen beantwortet, z.B. zu deiner Schulbildung, deinen Interessen und deinen Stärken. Für deine Antworten berechnen wir Punkte. So finden wir Ausbildungsberufe, die am besten zu dir passen.",
+	"results.detail.whyItMatches.title": "Warum dieser Beruf zu dir passt",
+	"results.detail.whyItMatches.notMatchTitle":
+		"Warum dieser Beruf nicht zu dir passt",
+	"results.detail.whyItMatches.empty":
+		"Bei diesem Beruf ist gerade nichts dabei, das zu dir passt. Vielleicht gefällt er dir trotzdem.",
+	"results.detail.whyItMatches.notMatchEmpty":
+		"Der Beruf scheint gut zu dir zu passen. Nichts spricht dagegen.",
+	"results.detail.matchExplanations.loading": "Wird geladen…",
+	"results.detail.matchExplanations.unavailable":
+		"Die Erklärung konnte gerade nicht geladen werden.",
+	// Apply
+	"results.detail.apply.title": "Du möchtest dich auf diesen Beruf bewerben?",
+	"results.detail.apply.description": "Entdecke jetzt freie Stellen.",
+	"results.detail.apply.cta": "Freie Stellen anzeigen",
+	"results.detail.apply.cta.ariaLabel": "Freie Stellen anzeigen",
+	"results.detail.apply.empty.title": "Aktuell gibt es keine freien Stellen",
+	"results.detail.apply.empty.description":
+		"Bald kommen Neue – Schau einfach später wieder rein.",
+	// Occupation Detail Images
+	"results.detail.images.title": "So sieht der Arbeitsalltag aus",
+	"results.detail.images.carousel.ariaLabel": "Bild {current} von {total}",
+	"results.detail.images.carousel.slideAriaLabel": "Bild {index}",
+	// More Occupations
+	"results.detail.moreOccupations.title": "Mehr Ausbildungsberufe",
 	// Vacancies
-	"vacancies.filter.occupations.title": "Beruf",
+	"vacancies.title": "Freie Stellen für dich",
+	"vacancies.share.ariaLabel": "Freie Stellen teilen",
+	"vacancies.share.title": "Freie Stellen für dich",
+	"vacancies.share.text": "Schau dir diese freien Ausbildungsstellen an.",
+	"vacancies.download.ariaLabel": "Freie Stellen herunterladen",
+	"vacancies.export.filename": "freie-stellen.pdf",
+	"vacancies.export.occupation": "Beruf",
+	"vacancies.export.employer": "Arbeitgeber",
+	"vacancies.export.location": "Ort",
+	"vacancies.export.startDate": "Beginn ab",
+	"vacancies.export.publishedAt": "Veröffentlicht",
+	"vacancies.filter.occupations.title": "Berufe",
 	"vacancies.filter.occupations.title.short": "Beruf",
 	"vacancies.filter.occupations.filterButton.ariaLabel": "Berufe filtern",
 	"vacancies.startDate": "Beginn ab",

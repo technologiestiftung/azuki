@@ -1,8 +1,8 @@
 import { describe, expect, it } from "vitest";
 import { formatOccupationDisplayName } from "@azuki/shared";
+import { formatOccupationDuration } from "@azuki/shared";
 import {
 	formatFirstYearEarnings,
-	formatOccupationDuration,
 	occupationMatchMeta,
 	resolveOccupationTypeKey,
 } from "../src/occupationMeta.js";

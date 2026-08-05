@@ -1,5 +1,5 @@
 import type { To } from "react-router-dom";
-import { Step } from "../common";
+import { QUESTIONNAIRE_STEPS, Step } from "../common";
 import { workPreferencePairs } from "../content/work-preference-pairs";
 import { NO_GO_STEP_CARD_COUNT } from "../components/competence-profile/steps/no-gos-step/no-gos";
 import { STRENGTH_STEP_CARD_COUNT } from "../components/competence-profile/steps/strengths-step/strengths";
@@ -12,20 +12,26 @@ export const ROUTE_PATHS = {
 	educationDegree: "/education/degree",
 	educationSubjects: "/education/subjects",
 	interests: "/interests",
+	preferredJob: "/preferred-job",
 	strengths: "/strengths",
 	expectations: "/expectations",
 	experience: "/experience",
 	preferences: "/preferences",
 	nogos: "/nogos",
 	loading: "/loading",
-	resultsList: "/results/list",
-	resultsFreeSpots: "/results/free-spots",
+	resultsOccupationDetail: "/results/:id",
+	resultsList: "/results/apprenticeships",
+	resultsVacancies: "/results/vacancies",
 	eval: "/eval",
 	personas: "/personas",
 	personaDetail: "/personas/:id",
 } as const;
 
 export const RESULTS_PATH_PREFIX = "/results" as const;
+
+export function buildResultsOccupationPath(id: number): string {
+	return `/results/${id}`;
+}
 
 interface FlowNode {
 	path: string;
@@ -45,6 +51,7 @@ const ORDERED_NAVIGATION_STEPS: FlowNode[] = [
 	{ path: ROUTE_PATHS.educationDegree, step: Step.SchoolDegreeStep },
 	{ path: ROUTE_PATHS.educationSubjects, step: Step.SchoolSubjects },
 	{ path: ROUTE_PATHS.interests, step: Step.Interests },
+	{ path: ROUTE_PATHS.preferredJob, step: Step.PreferredJob },
 	{
 		path: ROUTE_PATHS.strengths,
 		step: Step.Strengths,
@@ -81,15 +88,34 @@ export function parseHashCardIndex(hash: string): number {
 	return Math.max(0, parseInt(hashMatch[1], 10));
 }
 
-export function pathnameToStep(pathname: string): Step | undefined {
-	if (pathname.startsWith(RESULTS_PATH_PREFIX)) {
-		return Step.Results;
+const QUESTIONNAIRE_FLOW_NODES = ORDERED_NAVIGATION_STEPS.filter(
+	(node) => node.step !== undefined && QUESTIONNAIRE_STEPS.includes(node.step),
+);
+
+/**
+ * Granular progress across questionnaire screens, counting hash cards
+ * within multi-card steps (Strengths, WorkPreferences, NoGos).
+ */
+export function getGranularProgress(pathname: string, hash: string): number {
+	const nodeIndex = QUESTIONNAIRE_FLOW_NODES.findIndex(
+		(node) => node.path === pathname,
+	);
+	if (nodeIndex === -1) {
+		return 0;
 	}
-	const index = orderedStepIndexByPath.get(pathname);
-	if (index === undefined) {
-		return undefined;
+
+	const total = QUESTIONNAIRE_FLOW_NODES.reduce(
+		(sum, node) => sum + (node.cardCount ?? 1),
+		0,
+	);
+
+	let current = 0;
+	for (let i = 0; i < nodeIndex; i++) {
+		current += QUESTIONNAIRE_FLOW_NODES[i].cardCount ?? 1;
 	}
-	return ORDERED_NAVIGATION_STEPS[index].step;
+	current += parseHashCardIndex(hash) + 1;
+
+	return current / total;
 }
 
 export function getNextPath(pathname: string, hash: string): To {
