@@ -6,7 +6,13 @@ import type {
 	Persona,
 	Occupation,
 } from "@azuki/shared";
+import {
+	MOCK_MATCH_RESULT,
+	MOCK_VACANCIES_RESPONSE,
+} from "./mockResults";
 type HeadersInit = Record<string, string>;
+
+const USE_MOCK_RESULTS = import.meta.env.VITE_USE_MOCK_RESULTS === "true";
 
 const API_BASE = import.meta.env.VITE_API_URL || "/api";
 
@@ -222,6 +228,10 @@ export async function fetchMatchExplanations(
 }
 
 export async function matchProfile(profile: UserProfile): Promise<MatchResult> {
+	if (USE_MOCK_RESULTS) {
+		return Promise.resolve(MOCK_MATCH_RESULT);
+	}
+
 	const res = await fetch(`${API_BASE}/match`, {
 		method: "POST",
 		headers: headers(),
@@ -257,6 +267,10 @@ export async function fetchSharedVacancies(
 		signal?: AbortSignal;
 	} = {},
 ): Promise<VacanciesResponse> {
+	if (USE_MOCK_RESULTS) {
+		return Promise.resolve(MOCK_VACANCIES_RESPONSE);
+	}
+
 	const { postcode, distance, signal } = options;
 	const params = new URLSearchParams({ o: occupationsParam });
 	if (postcode) {
@@ -294,6 +308,10 @@ export async function fetchVacancies(
 	occupations: string[],
 	options: { distance?: number; signal?: AbortSignal } = {},
 ): Promise<VacanciesResponse> {
+	if (USE_MOCK_RESULTS) {
+		return Promise.resolve(MOCK_VACANCIES_RESPONSE);
+	}
+
 	const { distance, signal } = options;
 	const res = await fetch(`${API_BASE}/vacancies`, {
 		method: "POST",
