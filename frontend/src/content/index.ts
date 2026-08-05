@@ -13,20 +13,14 @@ export const content = {
 	"common.bottomSheet.overlayDismissLabel": "Schließen",
 	"common.bottomSheet.ariaLabel": "Dialog",
 	"common.bottomSheet.backButtonAriaLabel": "Zurück gehen",
-	// Welcome
-	"welcome.slide.1.title": "Du suchst eine Ausbildung, die gut zu dir passt?",
-	"welcome.slide.2.title": "Lerne deine Stärken kennen!",
-	"welcome.slide.3.title": "Entdecke welche Ausbildungen zu dir passen",
-	"welcome.slide.4.title": "Finde freie Plätze in deiner Nähe",
-	"welcome.slide.ariaLabelPrefix": "Gehe zu Folie",
-	"welcome.carousel.ariaLabel": "Folie {current} von {total}",
-	"welcome.cta": "Ausbildung finden",
 
 	// Start
-	"start.title": "Zeig uns was dich besonders macht!",
-	"start.description":
-		"Wir stellen dir ein paar Fragen. In nur wenigen Minuten erhältst du dein eigenes Stärkenprofil und siehst Ausbildungen, die gut zu dir passen.",
-	"start.cta": "Los geht's!",
+	"start.step1.title": "Finde eine Ausbildung, die zu dir passt",
+	"start.step1.cta.label": "Wie funktioniert das?",
+	"start.step2.title": "Beantworte ein paar Fragen",
+	"start.step2.description":
+		"AzuKI erstellt dir ein Stärkenprofil und zeigt dir passende Ausbildungen in deiner Nähe.",
+	"start.step2.cta.label": "Fragen starten",
 	"start.cta.prefill": "Zur Ergebnisseite",
 
 	// In School
