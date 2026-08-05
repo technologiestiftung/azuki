@@ -250,19 +250,28 @@ export function mergeVacancyOccupationNames(
 
 	const addName = (name: string) => {
 		const key = normName(name);
-		if (!key || seen.has(key) || merged.length >= VACANCY_OCCUPATION_LIMIT) {
+		if (!key || seen.has(key)) {
 			return;
 		}
 		seen.add(key);
 		merged.push(name);
 	};
 
-	// Match results first — the vacancies UI keys previews by these names.
-	for (const name of matchOccupationNames) {
+	for (const name of preferredOccupationNames) {
+		if (merged.length >= VACANCY_OCCUPATION_LIMIT) {
+			break;
+		}
 		addName(name);
 	}
-	for (const name of preferredOccupationNames) {
+
+	const remainingSlots = VACANCY_OCCUPATION_LIMIT - merged.length;
+	let filled = 0;
+	for (const name of matchOccupationNames) {
+		if (filled >= remainingSlots) {
+			break;
+		}
 		addName(name);
+		filled++;
 	}
 
 	return merged;
