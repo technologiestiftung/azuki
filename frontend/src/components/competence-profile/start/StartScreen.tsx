@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { content } from "../../../content";
 import { PrimaryThemedButton } from "../../primitives/buttons/PrimaryThemedButton";
@@ -49,18 +49,10 @@ function useSlideCarousel(slideCount: number) {
 	const [slideDirection, setSlideDirection] = useState<"next" | "prev" | null>(
 		null,
 	);
+
 	const [illustrationKeys, setIllustrationKeys] = useState(() =>
 		Array(slideCount).fill(0),
 	);
-
-	// Remount first illustration so its SVG CSS entrance animation plays on load.
-	useEffect(() => {
-		setIllustrationKeys((keys) => {
-			const next = [...keys];
-			next[0] += 1;
-			return next;
-		});
-	}, []);
 
 	function moveSlide(direction: "next" | "prev") {
 		if (direction === "next" && currentSlide >= slideCount - 1) {
@@ -171,7 +163,7 @@ export function StartScreen() {
 	return (
 		<div className="flex flex-col h-[100dvh] pt-4 overflow-hidden min-h-0 bg-sky-100">
 			<div className="flex-1 min-h-0 flex flex-col">
-				<div className="flex-1 min-h-0 relative overflow-hidden px-4">
+				<div className="flex-1 min-h-0 relative overflow-hidden">
 					{slides.map((slide, index) => {
 						if (!isSlideVisible(index, currentSlide, previousSlide)) {
 							return null;
@@ -195,16 +187,20 @@ export function StartScreen() {
 						return (
 							<div
 								key={index}
-								className={`absolute inset-x-4 inset-y-0 flex w-full ${slide.imageAlign} justify-center ${animationClass}`}
+								className={`absolute inset-0 flex overflow-hidden bg-sky-100 ${animationClass}`}
 								style={{ zIndex: index === currentSlide ? 10 : 0 }}
 							>
-								<img
+								<div
 									key={`${index}-${playKey}`}
-									src={`${slide.image}?v=${playKey}`}
-									alt=""
-									className="max-h-full max-w-full object-contain pointer-events-none"
-									draggable={false}
-								/>
+									className={`flex h-full w-full px-4 ${slide.imageAlign} justify-center animate-illustrationEnter`}
+								>
+									<img
+										src={`${slide.image}?v=${playKey}`}
+										alt=""
+										className="max-h-full max-w-full object-contain pointer-events-none"
+										draggable={false}
+									/>
+								</div>
 							</div>
 						);
 					})}

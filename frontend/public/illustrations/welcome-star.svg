@@ -1,63 +1,6 @@
 <svg width="390" height="336" viewBox="0 0 390 336" fill="none" xmlns="http://www.w3.org/2000/svg">
 <style>
-@keyframes kf_illustration-welcome_opacity_0 {
-  0% {
-    animation-timing-function: linear;
-    opacity: 0;
-  }
-  3% {
-    animation-timing-function: cubic-bezier(0.5, 0, 0.5, 1);
-    opacity: 0;
-  }
-  5% {
-    animation-timing-function: linear;
-    opacity: 1;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-#illustration-welcome {
-  animation: kf_illustration-welcome_opacity_0 5.9s linear forwards;
-}
-@keyframes kf_star_transform_0 {
-  0% {
-    transform: translateX(16px) translateX(0px) translateY(225px);
-  }
-  5% {
-    animation-timing-function: linear(0, 0.0137, 0.0491, 0.0992, 0.1584, 0.2228, 0.2891, 0.3552, 0.4193, 0.4803, 0.5376, 0.5907, 0.6393, 0.6836, 0.7236, 0.7595, 0.7914, 0.8198, 0.8448, 0.8667, 0.8859, 0.9027, 0.9172, 0.9298, 0.9406, 0.9499, 0.9579, 0.9647, 0.9705, 0.9755, 0.9796, 0.9832, 0.9861, 0.9886, 0.9907, 0.9924, 0.9939, 0.9951, 0.996, 0.9968, 0.9975, 0.998, 0.9985, 0.9988, 0.9991, 0.9993, 0.9995, 0.9997, 0.9998, 0.9999, 0.9999);
-    transform: translateX(16px) translateX(0px) translateY(225px);
-  }
-  18.48% {
-    transform: translateX(16px) translateX(-0.004px) translateY(0px);
-  }
-  100% {
-    transform: translateX(16px) translateX(-0.004px) translateY(0px);
-  }
-}
-#star {
-  transform-origin: 0 0;
-  animation: kf_star_transform_0 5.9s linear forwards;
-}
-@keyframes kf_binoculars_transform_0 {
-  0% {
-    transform: translateX(120.35px) translateY(148px) translateX(0px) translateY(225px);
-  }
-  7.67% {
-    animation-timing-function: linear(0, 0.0188, 0.0679, 0.1374, 0.2195, 0.308, 0.3978, 0.4856, 0.5686, 0.6452, 0.7142, 0.7753, 0.8283, 0.8735, 0.9113, 0.9423, 0.9671, 0.9866, 1.0014, 1.0123, 1.0198, 1.0247, 1.0274, 1.0283, 1.0281, 1.0268, 1.025, 1.0227, 1.0202, 1.0177, 1.0152, 1.0128, 1.0106, 1.0085, 1.0068, 1.0052, 1.0039, 1.0028, 1.0018, 1.0011, 1.0005, 1, 0.9997, 0.9995, 0.9993, 0.9992, 0.9992, 0.9992, 0.9992, 0.9993, 0.9993);
-    transform: translateX(120.35px) translateY(148px) translateX(0px) translateY(225px);
-  }
-  22.03% {
-    transform: translateX(120.35px) translateY(148px) translateX(0px) translateY(0.002px);
-  }
-  100% {
-    transform: translateX(120.35px) translateY(148px) translateX(0px) translateY(0.002px);
-  }
-}
-#binoculars {
-  transform-origin: 0 0;
-  animation: kf_binoculars_transform_0 5.9s linear forwards;
-}
+
 @keyframes kf_eye-left_offset_distance_0 {
   0% {
     offset-distance: 0%;

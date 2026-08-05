@@ -110,6 +110,10 @@ export default {
 					from: { transform: "translateY(100%)" },
 					to: { transform: "translateY(0)" },
 				},
+				illustrationEnter: {
+					from: { opacity: "0", transform: "translateY(100%)" },
+					to: { opacity: "1", transform: "translateY(0)" },
+				},
 				slideOutBottom: {
 					from: { transform: "translateY(var(--sheet-drag-y, 0px))" },
 					to: { transform: "translateY(100%)" },
@@ -219,6 +223,8 @@ export default {
 				fadeOut: "fadeOut 0.2s ease-in-out forwards",
 				slideInBottom:
 					"slideInBottom 0.32s cubic-bezier(0.32, 0.72, 0, 1) forwards",
+				illustrationEnter:
+					"illustrationEnter 0.7s cubic-bezier(0.32, 0.72, 0, 1) forwards",
 				slideOutBottom:
 					"slideOutBottom 0.28s cubic-bezier(0.4, 0, 1, 1) forwards",
 				slideInNext: "slideInNext 0.3s ease-in-out",
