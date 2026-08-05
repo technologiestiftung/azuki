@@ -428,7 +428,6 @@ Zu jedem Beruf findest du in der Liste eine Zeile „Hinweise: …". Sie fasst z
    • „Sehr beliebte Ausbildung" / „Etablierte Ausbildung" → leicht findbar; gute Wahl wenn das Profil sie unabhängig schon stützt. Bei profil-armen oder ambivalenten Eingaben NICHT als Standard-Anker missbrauchen.
    • „Kleine Ausbildung" → bewusst auswählen, nur wenn freier Text oder Stärken einen klaren Anker liefern.
    • „Sehr kleine Nischenausbildung" / „Auslaufende Ausbildung" → praktisch kaum oder gar nicht findbar; NUR empfehlen, wenn der freie Text die Tätigkeit wörtlich nennt.
-   • „§66-Variante des Berufs X" → ERSTKLASSIGE Empfehlung für Profile mit Hauptschulabschluss, abgebrochener Ausbildung, begrenzten Deutschkenntnissen oder ohne Abschluss — aber NUR, wenn auch der Beruf X (oder ein eng verwandter aus demselben Richtungs-Cluster) zum Profil passt. §66 IT-Systemelektronik ist nur für IT-Profile passend, §66 Lagerlogistik nur für Lager-/Transport-Profile usw. Keine Trostvariante — bewusst und positiv aufnehmen, aber nie als „passt-für-alle-Hauptschule"-Joker.
 
 2. Zugang (praktische Schulabschluss-Realität):
    • „ohne formalen Schulabschluss" → grundsätzlich zugänglich für jedes Profil.
@@ -443,9 +442,8 @@ Diese Hinweise überschreiben dein Bauchgefühl zu Findbarkeit und Zugangsrealit
 // production code path stay in sync.
 //
 // Differences from v1: explicit harte Regeln including practical-FHR
-// realism (rule 3), §66 visibility (rule 4), findability (rule 5),
-// ambivalence handling (rule 6). German-language adaptation (rule 7
-// equivalent).
+// realism (rule 3), findability (rule 4), ambivalence handling (rule 5).
+// German-language adaptation.
 export function buildSystemPromptV2(topK: number = PREFILTER_TOP_K): string {
 	return `AUFGABE
 Du bekommst:
@@ -466,15 +464,14 @@ Bei Widerspruch gewinnen freie Aussagen. Ausnahme: harte Ausschlüsse (No-Gos, a
 
 HARTE REGELN
 1. Nur Berufe aus der Top-${topK} wählen. Keine neuen erfinden.
-2. ABGEBROCHEN/ABGELEHNT = NO-GO. Wenn der/die Jugendliche eine Ausbildung oder Tätigkeit explizit abgebrochen oder abgelehnt hat („ich habe Kfz abgebrochen", „kein Bürojob"), gilt das als No-Go für genau diesen Beruf UND für eng verwandte (gleiche Werkstatt-/Umgebungsfamilie, gleicher Tätigkeitskern). Ausnahme: eine vereinfachte Variante (z. B. Fachpraktiker §66) ist erlaubt, wenn die Begründung den Abbruch ausdrücklich aufgreift.
+2. ABGEBROCHEN/ABGELEHNT = NO-GO. Wenn der/die Jugendliche eine Ausbildung oder Tätigkeit explizit abgebrochen oder abgelehnt hat („ich habe Kfz abgebrochen", „kein Bürojob"), gilt das als No-Go für genau diesen Beruf UND für eng verwandte (gleiche Werkstatt-/Umgebungsfamilie, gleicher Tätigkeitskern).
 3. REALITÄTSCHECK SCHULABSCHLUSS — nicht nur Mindestabschluss, sondern praktische Zugänglichkeit:
    • Hauptschulabschluss: Berufe mit Titel „Assistent/in" oder „Designer/in" sind in der Praxis fast immer Realschule-gegated — nur wählen, wenn ein freier Text dort explizit hinzeigt.
    • Realschule + offen für Fachabitur: Pflege/Erzieher/Therapieberufe sind anschlussfähig, ruhig im Set lassen.
    • Ausländischer Abschluss + erkennbar einfaches Deutsch (kurze Sätze, A2-Wortwahl im Profil): pflegerische/pädagogische Berufe (Pflege, Erzieher, Sozialassistent) verlangen praktisch B2 — nur wählen, wenn der freie Text klare Sprach-Selbsteinschätzung dagegen liefert.
-4. FACHPRAKTIKER (§66 BBiG) SICHTBAR MACHEN. Wenn das Profil auf eingeschränkten Schulabschluss, abgebrochene Ausbildung oder begrenzte Deutschkenntnisse hindeutet UND die Top-${topK} Fachpraktiker-Varianten der Wunschrichtung enthält, muss mindestens eine in die Empfehlungen. Diese Berufe sind genau für solche Profile gemacht.
-5. FINDBARKEIT ZÄHLT. Bevorzuge bekannte Ausbildungen mit deutlicher Marktpräsenz (Verkäufer/in, Fachkraft Lagerlogistik, Kaufmann/-frau Büromanagement, Pflegefachmann/-frau, Maler/in, Koch/Köchin, Mediengestalter/in …). Berufe, die im Alltag praktisch nie genannt werden (Bogenmacher, Pelzveredler, Edelsteinschleifer, exotische Designer-Fachrichtungen, Geigenbauer u. ä.), nur dann empfehlen, wenn der freie Text das Handwerk wörtlich nennt.
-6. VIELFALT BEI AMBIVALENZ. Wenn der/die Jugendliche unentschieden zwischen Richtungen ist („ich weiß nicht ob X oder Y"), spiegele beide Richtungen in der Top-Liste — nicht ${MAX_RESULTS} Varianten einer Richtung.
-7. KEINE BEGRÜNDUNG, KEIN PLATZ. Wenn du für einen Beruf keine konkrete Begründung aus dem Profil ableiten kannst, wähle einen anderen.
+4. FINDBARKEIT ZÄHLT. Bevorzuge bekannte Ausbildungen mit deutlicher Marktpräsenz (Verkäufer/in, Fachkraft Lagerlogistik, Kaufmann/-frau Büromanagement, Pflegefachmann/-frau, Maler/in, Koch/Köchin, Mediengestalter/in …). Berufe, die im Alltag praktisch nie genannt werden (Bogenmacher, Pelzveredler, Edelsteinschleifer, exotische Designer-Fachrichtungen, Geigenbauer u. ä.), nur dann empfehlen, wenn der freie Text das Handwerk wörtlich nennt.
+5. VIELFALT BEI AMBIVALENZ. Wenn der/die Jugendliche unentschieden zwischen Richtungen ist („ich weiß nicht ob X oder Y"), spiegele beide Richtungen in der Top-Liste — nicht ${MAX_RESULTS} Varianten einer Richtung.
+6. KEINE BEGRÜNDUNG, KEIN PLATZ. Wenn du für einen Beruf keine konkrete Begründung aus dem Profil ableiten kannst, wähle einen anderen.
 
 WORAUF DU BESONDERS ACHTEN SOLLST
 - freie Texte und individuelle Formulierungen — greife eigene Worte in mindestens einer Begründung wieder auf, am besten als Zitat oder enge Paraphrase
@@ -508,10 +505,10 @@ Format:
 
 // V3 — V2 plus a section that teaches the model how to read the
 // "Hinweise" line that appears under each Beruf when the user prompt is
-// built with `withContext: true`. Rules 3 / 4 / 5 stay in place but the
-// new section makes them anchored to the structured signal rather than
-// vibes-based heuristics. Use together with `buildUserPrompt(..., {
-// withContext: true })`.
+// built with `withContext: true`. The Realitätscheck and Findbarkeit rules
+// stay in place; the new section anchors them to the structured signal
+// rather than vibes-based heuristics. Use together with
+// `buildUserPrompt(..., { withContext: true })`.
 export function buildSystemPromptV3(topK: number = PREFILTER_TOP_K): string {
 	return `${buildSystemPromptV2(topK)}
 
@@ -523,7 +520,6 @@ Zu jedem Beruf findest du in der Liste eine Zeile "Hinweise: ...". Sie fasst zwe
    • "Sehr beliebte Ausbildung" / "Etablierte Ausbildung" → leicht findbar; gute Wahl wenn das Profil sie unabhängig schon stützt. Bei profil-armen oder ambivalenten Eingaben NICHT als Standard-Anker missbrauchen.
    • "Kleine Ausbildung" → bewusst auswählen, nur wenn freier Text oder Stärken einen klaren Anker liefern.
    • "Sehr kleine Nischenausbildung" / "Auslaufende Ausbildung" → praktisch kaum oder gar nicht findbar; NUR empfehlen, wenn der freie Text die Tätigkeit wörtlich nennt.
-   • "§66-Variante des Berufs X" → ERSTKLASSIGE Empfehlung für Profile mit Hauptschulabschluss, abgebrochener Ausbildung, begrenzten Deutschkenntnissen oder ohne Abschluss — aber NUR, wenn auch der Beruf X (oder ein eng verwandter aus demselben Richtungs-Cluster) zum Profil passt. §66 IT-Systemelektronik ist nur für IT-Profile passend, §66 Lagerlogistik nur für Lager-/Transport-Profile usw. Keine Trostvariante — bewusst und positiv aufnehmen, aber nie als „passt-für-alle-Hauptschule"-Joker.
 
 2. Zugang (praktische Schulabschluss-Realität):
    • "ohne formalen Schulabschluss" → grundsätzlich zugänglich für jedes Profil.
@@ -785,7 +781,7 @@ export function formatProfileSections(profile: UserProfile): string {
 // the per-Beruf context line so the LLM can weigh findability. Dual Berufe
 // use the DAZUBI new-contract count (a31-12 source); schulische Berufe use
 // the destatis student count where DAZUBI is null. Returns null if neither
-// is available (mostly §66 records and a few G_unknown).
+// is available (a few G_unknown Berufe).
 function approximateYearlyStarts(occupationId: number): number | null {
 	const rec = getPopularityRecord(occupationId);
 	if (!rec) {
@@ -821,18 +817,8 @@ function roundStarts(n: number): string {
 
 // Translates the popularity tier into a one-line German signal that the
 // LLM can use as a findability heuristic. Numbers are derived from the
-// DAZUBI / destatis-Schüler counts in popularity-index.json. The §66
-// tier replaces the popularity phrasing with a design-intent message —
-// when the parent Ausbildung is resolvable, the message names it so the
-// LLM treats §66 IT as IT-direction only, §66 Lager as Lager-direction
-// only, etc. (Earlier generic phrasing led the model to pick §66 IT for
-// a non-IT Hauptschule profile, since the message read as a universal
-// "good for Hauptschule" rather than a direction-specific one.)
-function popularityPhrase(
-	tier: PopularityTier,
-	starts: number | null,
-	parentName: string | null,
-): string {
+// DAZUBI / destatis-Schüler counts in popularity-index.json.
+function popularityPhrase(tier: PopularityTier, starts: number | null): string {
 	const startsSuffix =
 		starts !== null ? ` (${roundStarts(starts)} Plätze/Jahr)` : "";
 	switch (tier) {
@@ -846,11 +832,6 @@ function popularityPhrase(
 			return `Sehr kleine Nischenausbildung${startsSuffix}, im Alltag kaum findbar`;
 		case "E_vanishing":
 			return `Auslaufende Ausbildung${startsSuffix}, praktisch kaum noch findbar`;
-		case "F_fachpraktiker":
-			if (parentName) {
-				return `§66-Variante des Berufs „${parentName}" — vereinfachte Form für Lernende mit Hauptschulabschluss oder ohne Schulabschluss`;
-			}
-			return `Pfad nach §66 BBiG / §42r HwO — vereinfachte Form für Lernende mit Hauptschulabschluss oder ohne Schulabschluss`;
 		case "F_doppelqual":
 			return `Doppelqualifizierungs-Pfad (Ausbildung + zusätzlicher Abschluss)`;
 		case "G_unknown":
@@ -889,16 +870,7 @@ export function formatOccupationContext(occupation: Occupation): string | null {
 	const tier = rec?.popularityTier;
 	const starts = approximateYearlyStarts(occupation.id);
 	const access = accessLevelPhrase(occupation.accessLevel ?? null);
-	// For §66 records the parent name names the *direction* (IT, Lager,
-	// Friseur, ...). hydrate-fachpraktiker sets `parentId`; we resolve the
-	// name from POPULARITY_INDEX which carries names for every Beruf the
-	// scoring layer knows about. Falls back to the generic phrasing if
-	// unresolved (rare).
-	const parentName =
-		tier === "F_fachpraktiker" && typeof occupation.parentId === "number"
-			? (getPopularityRecord(occupation.parentId)?.name ?? null)
-			: null;
-	const popularity = tier ? popularityPhrase(tier, starts, parentName) : null;
+	const popularity = tier ? popularityPhrase(tier, starts) : null;
 
 	const parts = [popularity, access].filter((s): s is string => s !== null);
 	if (parts.length === 0) {

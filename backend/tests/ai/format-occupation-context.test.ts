@@ -26,35 +26,6 @@ describe("formatOccupationContext", () => {
 		expect(ctx).toContain("Realschule + vorherige Berufsausbildung");
 	});
 
-	test("F_fachpraktiker with resolved parent names the parent direction", () => {
-		// id 4708 = FP Lagerlogistik §66; parent 27448 = Fachkraft Lagerlogistik.
-		// The direction-named phrasing prevents the LLM from treating §66 as
-		// a universal "good-for-Hauptschule" pick (Nico-IT-§66 regression).
-		const occ = makeOccupation({
-			id: 4708,
-			parentId: 27448,
-			accessLevel: "unrestricted",
-		});
-		const ctx = formatOccupationContext(occ);
-		expect(ctx).toContain("§66-Variante des Berufs");
-		expect(ctx).toContain("Fachkraft - Lagerlogistik");
-		expect(ctx).toContain("vereinfachte Form");
-		// §66 records have no DAZUBI/schulische counts; no "Plätze/Jahr" suffix.
-		expect(ctx).not.toContain("Plätze/Jahr");
-	});
-
-	test("F_fachpraktiker without parentId falls back to generic §66 phrasing", () => {
-		const occ = makeOccupation({
-			id: 4708,
-			parentId: null,
-			accessLevel: "unrestricted",
-		});
-		const ctx = formatOccupationContext(occ);
-		expect(ctx).toContain("§66 BBiG / §42r HwO");
-		expect(ctx).toContain("vereinfachte Form");
-		expect(ctx).not.toContain("§66-Variante des Berufs");
-	});
-
 	test("A_anchor schulische Beruf — Erzieher/in (practical-FHR)", () => {
 		const occ = makeOccupation({
 			id: 9162,

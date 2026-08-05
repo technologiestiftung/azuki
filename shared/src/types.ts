@@ -49,13 +49,12 @@ export interface DegreeDistribution {
 //
 // Parsed from BERUFENET field a30-0. Used as a fallback for scoreEducation
 // when degreeStats (field a31-12, percentage breakdowns) is null — which is
-// the case for ~49% of Berufe including all §66 Fachpraktiker, schulische
-// Ausbildungen (Erzieher, Sozialassistent, Altenpflegehelfer), and most
-// Assistent/in variants.
+// the case for ~49% of Berufe including schulische Ausbildungen (Erzieher,
+// Sozialassistent, Altenpflegehelfer) and most Assistent/in variants.
 //
 // Ordered from least to most restrictive. `unrestricted` covers Berufe
 // that explicitly say "keine bestimmte Vorbildung vorgeschrieben" (e.g.
-// §66 records, MFA, ZFA in practice).
+// MFA, ZFA in practice).
 export type AccessLevel =
 	| "unrestricted"
 	| "hauptschule"
@@ -95,10 +94,6 @@ export interface Occupation {
 	digitalizationSignal: boolean;
 	workLocations: string;
 	competenciesText: string;
-	// Set on §66 BBiG / §42r HwO Fachpraktiker records by hydrate-fachpraktiker.
-	// Points to the regular Ausbildung whose tags were inherited. Used by
-	// scorePopularity to make §66 popularity track its parent's tier.
-	parentId?: number | null;
 	/** Klassifikation der Berufe 2010 (KldB 2010) — joint Bundesagentur/Destatis classification, used to join external datasets. */
 	germanOccupationCode: string | null;
 }

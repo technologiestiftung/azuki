@@ -38,9 +38,7 @@ const INTEREST_BY_ID = new Map(
  * Additive bonus/penalty per popularity tier. Reflects findability in the
  * German Ausbildungsmarkt: A-anchor roles (≥5,000 starts/yr) get a small
  * lift; D/E/G roles get penalized because in practice almost nobody can find
- * an Ausbildungsplatz. F_fachpraktiker stays neutral — the §66 records were
- * hydrated from their parent Ausbildung and stand on the parent's signals;
- * a separate popularity bonus would double-count.
+ * an Ausbildungsplatz.
  *
  * Magnitudes chosen so the A→E spread (+5 to -6 = 11 points) is just enough
  * to flip the typical 8-12 point gap between a niche-but-profile-matched
@@ -54,70 +52,17 @@ const POPULARITY_TIER_SCORE: Record<PopularityTier, number> = {
 	C_smallReal: 0,
 	D_niche: -3,
 	E_vanishing: -6,
-	F_fachpraktiker: 0,
 	F_doppelqual: 0,
 	G_unknown: -2,
 };
 
-/**
- * §66 BBiG / §42r HwO Fachpraktiker variants are designed specifically for
- * learners with limited education or learning support needs. The popularity
- * tier alone doesn't reflect that: their absolute starts/yr are small, but
- * they're the *intended* path for these profiles. For design-intent users
- * (secondary/foreign_degree/none), replace the F_fachpraktiker score with
- * `parent's tier score + 1` so each §66 record sits just above its parent.
- *
- * Parent-aware tracking comes from hydrate-fachpraktiker, which sets
- * `parentId` on every resolved §66 record. Unresolved §66 records (no
- * algorithmic or override match) fall back to the flat bonus.
- */
-const FACHPRAKTIKER_BOOST_EDU_LEVELS = new Set<EducationLevel>([
-	"secondary",
-	"foreign_degree",
-	"none",
-]);
-const FACHPRAKTIKER_DESIGN_INTENT_BONUS = 1;
-const FACHPRAKTIKER_FALLBACK_BOOST = 3;
-
-export function scorePopularity(
-	occupation: Occupation,
-	profile?: UserProfile,
-): number {
+export function scorePopularity(occupation: Occupation): number {
 	const tier = getPopularityTier(occupation.id);
 	if (!tier) {
 		// Off-index Berufe (mostly newly added). Treat like G_unknown.
 		return POPULARITY_TIER_SCORE.G_unknown;
 	}
-
-	const eduLevel = profile?.educationLevel;
-	const isDesignIntent =
-		tier === "F_fachpraktiker" &&
-		eduLevel !== undefined &&
-		eduLevel !== null &&
-		FACHPRAKTIKER_BOOST_EDU_LEVELS.has(eduLevel);
-
-	if (!isDesignIntent) {
-		return POPULARITY_TIER_SCORE[tier];
-	}
-
-	// Parent-aware: §66 sits just above its parent's popularity tier, but
-	// never below the F_fachpraktiker baseline. A vanishing/niche-tier parent
-	// must not make the §66 variant score worse for its intended audience than
-	// the flat baseline a general user receives — that would invert the boost.
-	if (typeof occupation.parentId === "number") {
-		const parentTier = getPopularityTier(occupation.parentId);
-		const parentScore = parentTier
-			? POPULARITY_TIER_SCORE[parentTier]
-			: POPULARITY_TIER_SCORE.G_unknown;
-		return Math.max(
-			POPULARITY_TIER_SCORE.F_fachpraktiker,
-			parentScore + FACHPRAKTIKER_DESIGN_INTENT_BONUS,
-		);
-	}
-
-	// Unresolved §66 record (rare): use the flat fallback so it doesn't
-	// sit at the F_fachpraktiker baseline of 0 for its intended audience.
-	return POPULARITY_TIER_SCORE[tier] + FACHPRAKTIKER_FALLBACK_BOOST;
+	return POPULARITY_TIER_SCORE[tier];
 }
 
 // AccessLevel tier ordering. Higher number = harder to access.
@@ -238,9 +183,9 @@ export function scoreEducation(
 	}
 
 	// Fallback signal: legal access requirements (BERUFENET field a30-0).
-	// Used when degreeStats is null — covers all §66 Fachpraktiker, schulische
-	// Ausbildungen (Erzieher, Sozialassistent, Altenpflegehelfer), most
-	// Assistent/in variants. ~49% of all Berufe.
+	// Used when degreeStats is null — covers schulische Ausbildungen
+	// (Erzieher, Sozialassistent, Altenpflegehelfer) and most Assistent/in
+	// variants. ~49% of all Berufe.
 	if (occupation.accessLevel) {
 		return accessLevelPenalty(occupation.accessLevel, effectiveLevel);
 	}

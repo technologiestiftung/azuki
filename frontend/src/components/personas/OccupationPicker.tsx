@@ -20,7 +20,6 @@ const TIER_LABEL: Record<PopularityTier, string> = {
 	C_smallReal: "klein",
 	D_niche: "Nische",
 	E_vanishing: "Rarität",
-	F_fachpraktiker: "Fachpraktiker",
 	F_doppelqual: "doppelt qual.",
 	G_unknown: "?",
 };
@@ -33,7 +32,6 @@ const TIER_LABEL_LONG: Record<PopularityTier, string> = {
 	C_smallReal: "klein (200–1.000/Jahr)",
 	D_niche: "Nische (50–200/Jahr)",
 	E_vanishing: "Rarität (< 50/Jahr)",
-	F_fachpraktiker: "Fachpraktiker (§66 BBiG)",
 	F_doppelqual: "doppelt qualifizierend",
 	G_unknown: "ohne Zahlen",
 };
@@ -45,8 +43,6 @@ const TIER_TOOLTIP: Record<PopularityTier, string> = {
 	C_smallReal: "200–1.000 neue Auszubildende pro Jahr",
 	D_niche: "50–200 neue Auszubildende pro Jahr",
 	E_vanishing: "weniger als 50 neue Auszubildende pro Jahr",
-	F_fachpraktiker:
-		"Fachpraktiker (§66 BBiG / §42r HwO) — vereinfachte Variante; eigene Statistik, nicht in DAZUBI",
 	F_doppelqual: "Doppelt qualifizierend (Ausbildung + Fachhochschulreife)",
 	G_unknown: "Keine Häufigkeitsdaten verfügbar",
 };
@@ -57,7 +53,6 @@ const TIER_BADGE: Record<PopularityTier, string> = {
 	C_smallReal: "bg-amber-100 text-amber-800",
 	D_niche: "bg-orange-100 text-orange-800",
 	E_vanishing: "bg-red-100 text-red-800",
-	F_fachpraktiker: "bg-blue-100 text-blue-800",
 	F_doppelqual: "bg-blue-50 text-blue-700",
 	G_unknown: "bg-gray-100 text-gray-700",
 };

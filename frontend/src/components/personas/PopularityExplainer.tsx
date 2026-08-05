@@ -65,7 +65,7 @@ export function PopularityExplainer({
 							</li>
 						</ul>
 						<p className="mt-1 text-gray-500">
-							Insgesamt 600 von 728 Berufen haben eine echte Zahl. Der Rest sind
+							Insgesamt 511 von 668 Berufen haben eine echte Zahl. Der Rest sind
 							Sonderfälle (siehe unten).
 						</p>
 					</div>
@@ -112,21 +112,6 @@ export function PopularityExplainer({
 					<div>
 						<p className="mb-1 font-medium text-gray-800">Sonderfälle</p>
 						<ul className="ml-2 space-y-1">
-							<li>
-								<span className="inline-block w-32 font-medium text-blue-800 align-top">
-									Fachpraktiker
-								</span>
-								<span>
-									Vereinfachte Variante regulärer Ausbildungen, geregelt nach{" "}
-									<strong>§66 BBiG</strong> bzw. <strong>§42r HwO</strong>.
-									Geringere theoretische Anforderungen, mehr praktische
-									Tätigkeit. Gedacht für Jugendliche mit Lernschwierigkeiten,
-									ohne deutschen Schulabschluss oder mit besonderem
-									Förderbedarf. Beispiele: Fachpraktiker/in für Fahrzeugpflege,
-									Fachpraktiker/in für Lagerlogistik. Eigene Statistik
-									(Reha-Berufe), nicht in DAZUBI.
-								</span>
-							</li>
 							<li>
 								<span className="inline-block w-32 font-medium text-blue-700 align-top">
 									doppelt qualifizierend
