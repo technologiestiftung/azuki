@@ -86,17 +86,6 @@ export function parseHashCardIndex(hash: string): number {
 	return Math.max(0, parseInt(hashMatch[1], 10));
 }
 
-export function pathnameToStep(pathname: string): Step | undefined {
-	if (pathname.startsWith(RESULTS_PATH_PREFIX)) {
-		return Step.Results;
-	}
-	const index = orderedStepIndexByPath.get(pathname);
-	if (index === undefined) {
-		return undefined;
-	}
-	return ORDERED_NAVIGATION_STEPS[index].step;
-}
-
 const QUESTIONNAIRE_FLOW_NODES = ORDERED_NAVIGATION_STEPS.filter(
 	(node) => node.step !== undefined && QUESTIONNAIRE_STEPS.includes(node.step),
 );
