@@ -172,7 +172,7 @@ describe("preFilter preferred-job injection", () => {
 });
 
 describe("mergeVacancyOccupationNames", () => {
-	test("prioritizes match-list names so free-spots always gets searched", () => {
+	test("prioritizes preferred-job names, then appends match-list names", () => {
 		const merged = mergeVacancyOccupationNames(
 			["Altenpfleger/in", "Gesundheits- und Krankenpfleger/in"],
 			[
@@ -182,10 +182,10 @@ describe("mergeVacancyOccupationNames", () => {
 		);
 
 		expect(merged.slice(0, 2)).toEqual([
-			"Kaufmann/-frau für Büromanagement",
-			"Fachinformatiker/in - Fachrichtung Anwendungsentwicklung",
+			"Altenpfleger/in",
+			"Gesundheits- und Krankenpfleger/in",
 		]);
-		expect(merged).toContain("Altenpfleger/in");
+		expect(merged).toContain("Kaufmann/-frau für Büromanagement");
 	});
 
 	test("dedupes preferred names against match results", () => {
