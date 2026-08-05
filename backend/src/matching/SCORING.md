@@ -8,19 +8,21 @@ Wie aus den Antworten im Fragebogen die Berufsvorschläge entstehen.
 Katalog (538 Berufe)
   → Regionalfilter (Berlin + Brandenburg)        ~347 Kandidaten
   → Pre-Filter: regelbasierter Score je Beruf    Top 60
+  → Wunschberufe in die Shortlist einsetzen      max. 5 Plätze
   → LLM-Re-Ranking (Claude Sonnet 4.6)           5–20 Berufe mit Begründung
 ```
 
 - **Katalog**: 538 Berufe aus BERUFENET. §66/§42r-Fachpraktiker (Reha-Zielgruppe) und die von Joblinge als „nein"/„gelb" markierten Berufe sind entfernt (vorher 726).
 - **Regionalfilter**: Berufe mit weniger als 5 neuen Ausbildungsverträgen bzw. Schüler:innen pro Jahr in Berlin + Brandenburg fallen raus (~191 Berufe). Berufe **ohne** Verfügbarkeitsdaten (27) bleiben drin — fehlende Daten sind kein Beleg für „gibt's nicht".
-- **Pre-Filter**: jeder Kandidat bekommt einen Punktwert aus 9 Dimensionen (siehe unten), die besten 60 gehen weiter (`PREFILTER_TOP_K`).
+- **Pre-Filter**: jeder Kandidat bekommt einen Punktwert aus 10 Dimensionen (siehe unten), die besten 60 gehen weiter (`PREFILTER_TOP_K`).
+- **Wunschberufe**: aufgelöste Wunschberufe, die der Score nicht in die Top 60 gehoben hat, verdrängen die schwächsten Einträge der Shortlist — höchstens 5 (`MAX_PREFERRED_SHORTLIST_INJECTIONS`, siehe „Wunschberufe").
 - **LLM**: bewertet die 60 neu, gewichtet vor allem die Freitexte, und wählt 5–20 Berufe mit individueller Begründung aus. Ohne `OPENROUTER_API_KEY` oder bei einem Fehler werden die Top 20 des Pre-Filters mit Standard-Begründung zurückgegeben.
 
-Die **Reihenfolge** der Ergebnisse kommt vom LLM, die **„Passt zu X %"**-Angabe auf der Karte aus dem Pre-Filter-Score (siehe „Fit-Prozent").
+Das LLM entscheidet, **welche** Berufe in den Ergebnissen landen und wie sie begründet werden. Die **Reihenfolge** der Karten und die **„Passt zu X %"**-Angabe kommen beide aus dem Pre-Filter-Score (`sortMatchResultsByScore`).
 
 ---
 
-## Pre-Filter: die 9 Dimensionen
+## Pre-Filter: die 10 Dimensionen
 
 | Dimension              | Bandbreite                            | Kurz                           |
 | ---------------------- | ------------------------------------- | ------------------------------ |
@@ -33,6 +35,7 @@ Die **Reihenfolge** der Ergebnisse kommt vom LLM, die **„Passt zu X %"**-Angab
 | Stärken                | +2 (stark) / +1 (etwas) je Treffer    | 8 Stärken                      |
 | Rahmenbedingungen      | -2 … +3 je Auswahl                    | „Was ist dir wichtig?"         |
 | Marktpräsenz           | -6 … +5                               | Findbarkeit der Ausbildung     |
+| Wunschberufe           | 0 … +20                               | Eigene Ausbildungswünsche      |
 
 ### Schulabschluss
 
@@ -154,11 +157,29 @@ Additiver Auf-/Abschlag nach Größe der Ausbildung (DAZUBI-Verträge bzw. Desta
 
 Die Spanne A→E (11 Punkte) reicht aus, um den typischen Abstand zwischen einem Nischenberuf mit gutem Profil-Match und einem populären mit dünnem Match zu kippen, ohne die Profilsignale zu überstimmen.
 
+### Wunschberufe
+
+Freitext-Angaben aus dem Schritt „Welche Ausbildung wünschst du dir?" (`profile.preferredJobs`). Jede Angabe wird gegen jeden Beruf aufgelöst; gewertet wird die **beste** Stufe über alle Angaben (`getBestPreferredJobTierForOccupation`).
+
+| Stufe     | Bedingung (normalisierte Namen, `normName`)          | Punkte                                 |
+| --------- | ---------------------------------------------------- | -------------------------------------- |
+| exact     | Wunsch == Berufsname                                 | **+20**                                |
+| substring | einer der beiden Namen enthält den anderen           | **+12**                                |
+| keyword   | Stichworttreffer im Berufsnamen / in Interessen-Tags | **+2 je Treffer, max. 4 Treffer (+8)** |
+
+`normName` senkt die Schreibweise, entfernt Klammerzusätze, Füllwörter und die Gender-Schreibweisen des Katalogs (`Kaufmann/-frau`, `/-in`). Ausgeschriebene weibliche Formen sind davon nicht erfasst: „Kfz-Mechatronikerin" trifft „Kfz-Mechatroniker/-in" auf der substring-Stufe, nicht auf exact. Die keyword-Stufe fängt vage Eingaben wie „irgendwas mit Medien" ab: Tokens unter 4 Zeichen und Füllwörter (`KEYWORD_STOP_WORDS`) fliegen raus, gezählt werden nur exakte Term- oder Namenstreffer — „pflege" trifft also nicht „pflegen". Die Gesamtsumme ist auf **+30** gedeckelt (`PREFERRED_JOB_SCORE_CAP`) — bei den aktuellen Stufenwerten greift der Deckel nie.
+
+**No-Gos schlagen den Wunsch:** Berufe mit negativem No-Go-Score bekommen 0 Punkte, egal wie exakt der Wunsch passt.
+
+**Shortlist-Injection.** Der Boost allein reicht nicht immer, um einen schwach bewerteten Wunschberuf in die Top 60 zu heben. Deshalb werden aufgelöste Wunschberufe danach direkt eingesetzt: bis zu 5 (`MAX_PREFERRED_SHORTLIST_INJECTIONS`), jeweils auf den Platz des schwächsten Shortlist-Eintrags, No-Go-Berufe ausgenommen. Der Regionalfilter bleibt bindend — ein Wunschberuf, den es in Berlin/Brandenburg praktisch nicht gibt, kommt nicht zurück in die Liste.
+
+Dieselbe Auflösung steuert die Stellensuche: die ersten 5 aufgelösten Wunschberufe stehen vor den Match-Ergebnissen in der Suchanfrage (`resolvePreferredJobVacancyNames`). Nur wenn nichts auflösbar war, wird der Rohtext als Suchbegriff genutzt.
+
 ---
 
 ## Was das LLM bekommt
 
-**Profil** (nur ausgefüllte Felder): Schulstatus, Schulabschluss, Lieblingsfächer, Interessen, Stärken (≥ 50 % mit „stark"/„etwas"), „Eher nicht so gut in" (> 0 und < 50 %), Arbeitsvorlieben, Rahmenbedingungen, No-Gos, praktische Erfahrungen — jeweils inklusive der Freitext-Ergänzungen.
+**Profil** (nur ausgefüllte Felder): Schulstatus, Schulabschluss, Lieblingsfächer, Interessen, Stärken (≥ 50 % mit „stark"/„etwas"), „Eher nicht so gut in" (> 0 und < 50 %), Arbeitsvorlieben, Rahmenbedingungen, No-Gos, praktische Erfahrungen, gewünschte Ausbildungen — jeweils inklusive der Freitext-Ergänzungen.
 
 **Je Beruf der Top 60**: Name, ID, Beschreibung (max. 400 Zeichen), Kompetenzen aus b20-32 (max. 400 Zeichen) und eine „Hinweise"-Zeile aus Marktpräsenz („Sehr beliebte Ausbildung (~20.000 Plätze/Jahr), im Alltag gut findbar") und Zugang („Zugang i.d.R. mit Realschulabschluss").
 
