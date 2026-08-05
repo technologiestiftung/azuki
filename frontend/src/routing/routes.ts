@@ -12,6 +12,7 @@ export const ROUTE_PATHS = {
 	educationDegree: "/education/degree",
 	educationSubjects: "/education/subjects",
 	interests: "/interests",
+	preferredJob: "/preferred-job",
 	strengths: "/strengths",
 	expectations: "/expectations",
 	experience: "/experience",
@@ -50,6 +51,7 @@ const ORDERED_NAVIGATION_STEPS: FlowNode[] = [
 	{ path: ROUTE_PATHS.educationDegree, step: Step.SchoolDegreeStep },
 	{ path: ROUTE_PATHS.educationSubjects, step: Step.SchoolSubjects },
 	{ path: ROUTE_PATHS.interests, step: Step.Interests },
+	{ path: ROUTE_PATHS.preferredJob, step: Step.PreferredJob },
 	{
 		path: ROUTE_PATHS.strengths,
 		step: Step.Strengths,

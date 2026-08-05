@@ -20,6 +20,7 @@ import { EvalPage } from "./components/eval/EvalPage";
 import { PersonasPage } from "./components/personas/PersonasPage";
 import { PersonaDetailPage } from "./components/personas/PersonaDetailPage";
 import { ROUTE_PATHS } from "./routing/routes";
+import { PreferredJobsStep } from "./components/competence-profile/steps/PreferredJobsStep";
 
 const LoadingScreen = lazy(() =>
 	import("./components/loading-screen/LoadingScreen").then((mod) => ({
@@ -61,6 +62,10 @@ function App() {
 						element={<SchoolSubjectsStep />}
 					/>
 					<Route path={ROUTE_PATHS.interests} element={<InterestsStep />} />
+					<Route
+						path={ROUTE_PATHS.preferredJob}
+						element={<PreferredJobsStep />}
+					/>
 					<Route path={ROUTE_PATHS.strengths} element={<StrengthsStep />} />
 					<Route
 						path={ROUTE_PATHS.expectations}

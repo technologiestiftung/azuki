@@ -389,3 +389,23 @@ describe("formatProfileSections — free-text fields labeled as eigene Angaben",
 		expect(output).not.toContain("Weitere Stärken");
 	});
 });
+
+describe("formatProfileSections — preferred jobs", () => {
+	test("includes preferred jobs when present", () => {
+		const profile = makeProfile({
+			preferredJobs: ["Fachinformatiker", "Mediengestalter"],
+		});
+
+		const output = formatProfileSections(profile);
+
+		expect(output).toContain(
+			"Gewünschte Ausbildungen (eigene Angaben): Fachinformatiker, Mediengestalter",
+		);
+	});
+
+	test("omits preferred jobs when empty", () => {
+		const profile = makeProfile({ preferredJobs: [] });
+		const output = formatProfileSections(profile);
+		expect(output).not.toContain("Gewünschte Ausbildungen");
+	});
+});

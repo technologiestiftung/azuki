@@ -305,10 +305,10 @@ function findRankingArray(value: unknown): Ranking[] | null {
 	return null;
 }
 
-// V4 — freitext-first re-ranking with explicit signal hierarchy, No-Go
-// handling, diversity rules, and justification structure. Replaces the
-// 70/30 freetext framing of V1–V3 with a ranked signal model that stays
-// closer to the prefilter order when freetext is thin.
+// V4 — freitext-first selection with explicit signal hierarchy, No-Go
+// handling, diversity rules, and justification structure. The LLM picks
+// which Berufe to include and writes reasoning; final card order comes
+// from the deterministic pre-filter score (see sortMatchResultsByScore).
 export function buildSystemPromptV4(topK: number = PREFILTER_TOP_K): string {
 	return `AUFGABE
 
@@ -318,16 +318,16 @@ Du bekommst:
 - zu jedem Beruf strukturierte Daten und kurze Beschreibungstexte
 
 Deine Aufgabe ist NICHT, neue Berufe zu suchen.
-Deine Aufgabe ist, die ${topK} Berufe neu zu bewerten, neu zu sortieren und die ${MIN_RESULTS} bis ${MAX_RESULTS} Berufe auszuwählen, die am besten zum Jugendlichen passen.
+Deine Aufgabe ist, aus den ${topK} Berufen die ${MIN_RESULTS} bis ${MAX_RESULTS} auszuwählen, die am besten zum Jugendlichen passen, und für jeden eine passende Begründung zu schreiben.
 
 
 DEINE ROLLE IM MATCHING
 
-Die ${topK} Berufe wurden bereits von einem deterministischen Algorithmus berechnet. Dieser Algorithmus ist gut bei strukturierten Kriterien (Schulabschluss, No-Gos, Interessen, Stärken, Arbeitsvorlieben), aber schwach bei allem, was in Freitext steht.
+Die ${topK} Berufe wurden bereits von einem deterministischen Algorithmus berechnet und grob nach Passung sortiert. Dieser Algorithmus ist gut bei strukturierten Kriterien (Schulabschluss, No-Gos, Interessen, Stärken, Arbeitsvorlieben, gewünschte Ausbildungen), aber schwach bei allem, was in Freitext steht.
 
-Dein Mehrwert liegt genau hier: Du sollst die Freitext-Signale nutzen, die der Algorithmus nicht sauber erfassen konnte, um unter den ${topK} Berufen feiner zu unterscheiden.
+Dein Mehrwert liegt genau hier: Du sollst die Freitext-Signale nutzen, die der Algorithmus nicht sauber erfassen konnte, um unter den ${topK} Berufen feiner zu unterscheiden — welche in die Empfehlung gehören und welche nicht.
 
-Die vorgegebene Reihenfolge ist ein Hinweis, kein Befehl. Du darfst einen Beruf deutlich nach oben oder unten verschieben, wenn der Freitext es klar rechtfertigt. Bei schwachen oder fehlenden Freitext-Signalen bleibst du näher an der vorgegebenen Reihenfolge.
+Du sortierst nicht für die App. Du entscheidest die Auswahl und schreibst die Begründungen. Die finale Anzeige-Reihenfolge (Passungs-Badge, Ergebniskarten) wird danach automatisch aus dem Algorithmus-Score abgeleitet, nicht aus der Reihenfolge in deiner JSON-Antwort. Die vorgegebene Liste-Reihenfolge ist ein Hinweis für deine Auswahl, kein Sortierauftrag.
 
 
 WIE DU SIGNALE GEWICHTEST
@@ -335,7 +335,7 @@ WIE DU SIGNALE GEWICHTEST
 Es gibt keine feste Prozentzahl. Folge dieser Rangordnung:
 
 1. Harte Ausschlusskriterien (No-Gos, Schulabschluss als Realitätscheck) — haben Vorrang vor allem anderen.
-2. Konkrete Freitext-Aussagen — eigene Beschreibungen, praktische Erfahrungen, individuelle Wünsche und Rahmenbedingungen. Sie sind dein wichtigstes Material, WENN sie konkret sind (echte Tätigkeiten, Erfahrungen, klare Wünsche oder Abneigungen).
+2. Konkrete Freitext-Aussagen — eigene Beschreibungen, praktische Erfahrungen, gewünschte Ausbildungen, individuelle Wünsche und Rahmenbedingungen. Sie sind dein wichtigstes Material, WENN sie konkret sind (echte Tätigkeiten, Erfahrungen, klare Wünsche oder Abneigungen).
 3. Strukturierte Felder — Lieblingsfächer, Interessen, Stärken, Arbeitsvorlieben. Sie sind dein Hauptmaterial, wenn Freitext kurz, vage oder leer ist.
 
 Regeln bei Konflikten:
@@ -390,7 +390,7 @@ Jede Begründung folgt diesem Muster, in einfacher Sprache und in 2 bis 4 kurzen
 Beispiel:
 „Du hast geschrieben, dass du gern Dinge reparierst. In diesem Beruf arbeitest du jeden Tag mit den Händen und bringst Geräte wieder zum Laufen. Darum könnte das gut zu dir passen."
 
-Der Ton darf die Stärke der Passung widerspiegeln. Ein sehr starker Treffer darf klar überzeugt klingen. Ein eher mittlerer Treffer darf vorsichtiger formuliert sein („Das könnte einen Blick wert sein, weil …"). So bleibt die Reihenfolge auch im Text spürbar.
+Der Ton darf die Stärke der Passung widerspiegeln. Ein sehr starker Treffer darf klar überzeugt klingen. Ein eher mittlerer Treffer darf vorsichtiger formuliert sein („Das könnte einen Blick wert sein, weil …").
 
 
 SPRACHE
@@ -403,11 +403,11 @@ SPRACHE
 - keine negative oder defizitorientierte Sprache
 
 
-SORTIERUNG UND AUSGABE
+AUSGABE
 
-- Sortiere die Berufe vom besten zum schwächsten Match. Der erste Eintrag ist der stärkste Treffer.
 - Gib mindestens ${MIN_RESULTS} und höchstens ${MAX_RESULTS} Berufe aus.
 - Jede ID darf nur einmal vorkommen. Jede ID muss aus der Top-${topK}-Liste stammen.
+- Die Reihenfolge im JSON-Array bestimmt nicht die Anzeige in der App — die wird nach Algorithmus-Score sortiert. Ordne die Einträge für dich selbst, wenn dir das beim Schreiben hilft.
 - Antworte ausschließlich als JSON-Objekt, ohne Markdown, ohne zusätzlichen Text.
 - „id" ist immer die numerische BERUFENET-ID hinter „[ID: …]" in der Berufsliste, niemals eine Position oder Reihenfolge.
 
@@ -461,7 +461,7 @@ Dein Job ist nicht, neue Berufe zu suchen.
 Dein Job ist, die ${topK} vorgefilterten Berufe neu zu bewerten, neu zu sortieren und die ${MIN_RESULTS} bis ${MAX_RESULTS} Berufe auszuwählen, die am besten zum Jugendlichen passen.
 
 KONTEXT ZUM MATCHING
-Die Top-${topK} stammt aus einem deterministischen Pre-Filter (Schulabschluss, No-Gos, Arbeitsvorlieben, Lieblingsfächer, Interessen, Stärken, Rahmenbedingungen, praktische Erfahrungen). Nutze sie als starke Grundlage und unterscheide *innerhalb* dieser Liste — vor allem über die freien Texte und die Realität des deutschen Ausbildungsmarkts.
+Die Top-${topK} stammt aus einem deterministischen Pre-Filter (Schulabschluss, No-Gos, Arbeitsvorlieben, Lieblingsfächer, Interessen, Stärken, Rahmenbedingungen, praktische Erfahrungen, gewünschte Ausbildungen). Nutze sie als starke Grundlage und unterscheide *innerhalb* dieser Liste — vor allem über die freien Texte und die Realität des deutschen Ausbildungsmarkts.
 
 PRIORISIERUNG
 - freie Texte / eigene Worte: 60 %
@@ -782,6 +782,12 @@ export function formatProfileSections(profile: UserProfile): string {
 		);
 	}
 
+	if (profile.preferredJobs.length > 0) {
+		parts.push(
+			`Gewünschte Ausbildungen (eigene Angaben): ${profile.preferredJobs.join(", ")}`,
+		);
+	}
+
 	return parts.join("\n");
 }
 
@@ -961,6 +967,22 @@ AUSBILDUNGSBERUFE (wähle die ${MIN_RESULTS}-${MAX_RESULTS} besten aus):
 ${formatOccupationList(scored, options)}`;
 }
 
+/**
+ * Sorts matched occupations by pre-filter score descending. The LLM picks
+ * which Berufe to include and writes reasoning, but card order and the fit
+ * badge both come from the deterministic score — keep them aligned.
+ */
+export function sortMatchResultsByScore(
+	occupations: MatchResult["occupations"],
+): MatchResult["occupations"] {
+	return [...occupations].sort((a, b) => {
+		if (b.score !== a.score) {
+			return b.score - a.score;
+		}
+		return a.name.localeCompare(b.name, "de");
+	});
+}
+
 function toOccupationResult(
 	item: ScoredOccupation,
 	reasoning: string,
@@ -1106,13 +1128,16 @@ export async function aiRank(
 		result.generation = generation;
 	}
 
+	result.occupations = sortMatchResultsByScore(result.occupations);
 	return result;
 }
 
 function fallbackResult(scored: ScoredOccupation[]): MatchResult {
 	return {
-		occupations: scored
-			.slice(0, MAX_RESULTS)
-			.map((item) => toOccupationResult(item, DEFAULT_REASONING)),
+		occupations: sortMatchResultsByScore(
+			scored
+				.slice(0, MAX_RESULTS)
+				.map((item) => toOccupationResult(item, DEFAULT_REASONING)),
+		),
 	};
 }

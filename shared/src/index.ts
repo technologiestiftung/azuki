@@ -164,3 +164,15 @@ export {
 	traineeCountAcrossStates,
 	hasAvailabilityData,
 } from "./availability";
+
+export { normName } from "./normName";
+
+export {
+	type PreferredJobMatchTier,
+	PREFERRED_JOB_EXACT_BOOST,
+	PREFERRED_JOB_SUBSTRING_BOOST,
+	PREFERRED_JOB_KEYWORD_POINT_PER_HIT,
+	PREFERRED_JOB_KEYWORD_HIT_CAP,
+	PREFERRED_JOB_SCORE_CAP,
+	PREFERRED_JOB_BOOST_BY_TIER,
+} from "./preferredJobs";
