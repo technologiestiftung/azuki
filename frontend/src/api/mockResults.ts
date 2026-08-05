@@ -543,8 +543,7 @@ const MOCK_OCCUPATIONS_LIST: Occupation[] = [
 		salaryKnown: true,
 		digitalizationSignal: false,
 		workLocations: "Werkstätten, Baustellen, Kundenräume",
-		competenciesText:
-			"Handwerkliches Geschick, Sinn für Ästhetik, Präzision",
+		competenciesText: "Handwerkliches Geschick, Sinn für Ästhetik, Präzision",
 		germanOccupationCode: "34304",
 	},
 	{
