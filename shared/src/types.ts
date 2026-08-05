@@ -162,6 +162,8 @@ export interface MatchedOccupation {
 	occupationTag: OccupationTagId;
 	occupationDuration: string;
 	occupationEarnings: string;
+	salaryKnown: boolean;
+	salaryMonthlyMedian: number | null;
 }
 
 export interface MatchResult {
