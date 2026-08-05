@@ -85,6 +85,9 @@ export default {
 			borderRadius: {
 				"4xl": "32px",
 			},
+			transitionTimingFunction: {
+				spring: "var(--ease-spring)",
+			},
 			keyframes: {
 				fadeIn: {
 					from: { opacity: "0" },
@@ -218,19 +221,18 @@ export default {
 			animation: {
 				fadeIn: "fadeIn 0.2s ease-in-out",
 				fadeInUp: "fadeInUp 0.2s ease-in-out",
-				slideInUp: "slideInUp 0.2s ease-in-out",
-				slideInDown: "slideInDown 0.2s ease-in-out",
+				slideInUp: "slideInUp 0.2s var(--ease-spring)",
+				slideInDown: "slideInDown 0.2s var(--ease-spring)",
 				fadeOut: "fadeOut 0.2s ease-in-out forwards",
 				slideInBottom:
 					"slideInBottom 0.32s cubic-bezier(0.32, 0.72, 0, 1) forwards",
-				illustrationEnter:
-					"illustrationEnter 0.7s cubic-bezier(0.32, 0.72, 0, 1) forwards",
+				illustrationEnter: "illustrationEnter 0.7s var(--ease-spring) forwards",
 				slideOutBottom:
 					"slideOutBottom 0.28s cubic-bezier(0.4, 0, 1, 1) forwards",
-				slideInNext: "slideInNext 0.3s ease-in-out",
-				slideOutPrev: "slideOutPrev 0.3s ease-in-out forwards",
-				slideInPrev: "slideInPrev 0.3s ease-in-out",
-				slideOutNext: "slideOutNext 0.3s ease-in-out forwards",
+				slideInNext: "slideInNext 0.3s var(--ease-spring)",
+				slideOutPrev: "slideOutPrev 0.3s var(--ease-spring) forwards",
+				slideInPrev: "slideInPrev 0.3s var(--ease-spring)",
+				slideOutNext: "slideOutNext 0.3s var(--ease-spring) forwards",
 				slideInLeft: "slideInLeft 0.3s ease-out forwards",
 				slideInRight: "slideInRight 0.3s ease-out forwards",
 				slideInLeftTint:

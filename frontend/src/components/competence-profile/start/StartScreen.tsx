@@ -257,7 +257,7 @@ export function StartScreen() {
 								{slides.map((_, index) => (
 									<div
 										key={index}
-										className={`h-full rounded-full transition-all duration-500 ease-out ${
+										className={`h-full rounded-full transition-all duration-500 ease-spring ${
 											index === currentSlide
 												? "w-6 bg-sky-300"
 												: "w-3 bg-gray-200"
