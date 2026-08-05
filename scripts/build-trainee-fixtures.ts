@@ -5,19 +5,15 @@
  * Run rarely — only when refreshing snapshots. Pure Node + exceljs;
  * no Python or external runtime needed.
  *
- * Source xlsx files (not in git — download once, place under tools/popularity-data/):
- *   - dazubi-all-berufe-2024.xlsx
- *     BIBB DAZUBI 2024, sheet "Alle Berufe nach Ländern".
- *     https://www.bibb.de/dazubi (Auswertungen → Tabellen, "Alle Berufe nach Ländern")
- *   - destatis-2024-25.xlsx
- *     Statistisches Bundesamt, Berufliche Schulen 2024/25.
- *     Tables 21121-10, -11, -12, -13 from GENESIS-Online (destatis.de).
+ * The xlsx are too large to commit: download them once into
+ * data/popularity-source/ (see the README there), or point
+ * POPULARITY_DATA_DIR at wherever you keep them.
  *
- * Usage: npx tsx scripts/build-trainee-fixtures.ts
+ * Usage: npm run data:build-trainee-fixtures
  */
 
 import ExcelJS, { type CellValue } from "exceljs";
-import { writeFileSync, mkdirSync } from "node:fs";
+import { existsSync, writeFileSync, mkdirSync } from "node:fs";
 import { resolve, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 import { isBundesland } from "@azuki/shared";
@@ -31,14 +27,37 @@ function logSkipped(source: string, skipped: Map<string, number>) {
 	const summary = [...skipped.entries()].map(([k, v]) => `${k}=${v}`).join(", ");
 	console.log(`  ${source} skipped non-Bundesland rows: ${summary}`);
 }
-const DAZUBI_XLSX = resolve(
-	ROOT,
-	"tools/popularity-data/dazubi-all-berufe-2024.xlsx",
-);
-const DESTATIS_XLSX = resolve(
-	ROOT,
-	"tools/popularity-data/destatis-2024-25.xlsx",
-);
+const SOURCE_DIR = process.env.POPULARITY_DATA_DIR
+	? resolve(process.env.POPULARITY_DATA_DIR)
+	: resolve(ROOT, "data/popularity-source");
+const DAZUBI_XLSX = resolve(SOURCE_DIR, "dazubi-all-berufe-2024.xlsx");
+const DESTATIS_XLSX = resolve(SOURCE_DIR, "destatis-2024-25.xlsx");
+
+const SOURCES = [
+	{
+		path: DAZUBI_XLSX,
+		origin: "BIBB DAZUBI 2024 — https://www.bibb.de/dazubi",
+		where: 'Auswertungen → Tabellen → "Alle Berufe nach Ländern"',
+	},
+	{
+		path: DESTATIS_XLSX,
+		origin:
+			"Destatis, Berufliche Schulen 2024/25 — https://www-genesis.destatis.de",
+		where: "tables 21121-10, -11, -12, -13",
+	},
+];
+
+function assertSourcesPresent() {
+	const missing = SOURCES.filter((s) => !existsSync(s.path));
+	if (missing.length === 0) return;
+	const details = missing
+		.map((s) => `  ${s.path}\n    ${s.origin}\n    ${s.where}`)
+		.join("\n");
+	throw new Error(
+		`Missing xlsx snapshot(s) — they are not in git, download them once:\n${details}\n\n` +
+			`Then re-run, or set POPULARITY_DATA_DIR to the directory holding them.`,
+	);
+}
 const OUT_DAZUBI = resolve(ROOT, "shared/data/dazubi-trainee-starts.json");
 const OUT_DESTATIS = resolve(ROOT, "shared/data/destatis-trainee-starts.json");
 
@@ -197,6 +216,7 @@ async function readDestatis(): Promise<DestatisRow[]> {
 }
 
 async function main() {
+	assertSourcesPresent();
 	console.log("Reading xlsx via exceljs...");
 	const dazubi = await readDazubi();
 	const destatis = await readDestatis();

@@ -286,10 +286,12 @@ After:
 
 *Fixture builder.* Reads the two yearly xlsx snapshots (BIBB DAZUBI "Alle Berufe nach Ländern" + Destatis Berufliche Schulen 21121-10..13) with `exceljs` and writes slim JSON fixtures consumed by `build-availability.ts`. Run rarely — only when refreshing the underlying xlsx.
 
+The xlsx are ~17 MB and therefore gitignored: download them once into `data/popularity-source/` ([how](../data/popularity-source/README.md)), or point `POPULARITY_DATA_DIR` at them. The script fails with the download instructions if they are absent. Its committed output means a normal checkout never needs them.
+
 | | |
 |---|---|
 | **Runs** | `npm run data:build-trainee-fixtures` |
-| **Reads** | `tools/popularity-data/dazubi-all-berufe-2024.xlsx`, `tools/popularity-data/destatis-2024-25.xlsx` |
+| **Reads** | `data/popularity-source/dazubi-all-berufe-2024.xlsx`, `data/popularity-source/destatis-2024-25.xlsx` (override dir via `POPULARITY_DATA_DIR`) |
 | **Writes** | `shared/data/dazubi-trainee-starts.json`, `shared/data/destatis-trainee-starts.json` |
 
 **Example — output row shapes**
@@ -368,9 +370,9 @@ normalizeKldb("B 28X12")   →  "28X12"  // + console.warn
 
 ### `normName.ts`
 
-Normalizes DAZUBI-style Berufsbezeichnungen so name-based joins line up: lowercases, strips parenthesized suffixes, collapses gender forms (Kaufmann/-frau, /-in, /-r), and drops joining particles (für, im, in, der, und, …). Byte-identical to the older `tools/eval-baseline` implementation.
+Normalizes DAZUBI-style Berufsbezeichnungen so name-based joins line up: lowercases, strips parenthesized suffixes, collapses gender forms (Kaufmann/-frau, /-in, /-r), and drops joining particles (für, im, in, der, und, …).
 
-Used by `build-availability.ts`. No CLI.
+Used by `build-availability.ts` and at runtime by `resolvePreferredJobs.ts` / the frontend's `preferredJobUtils.ts`.
 
 **Example inputs → outputs**
 ```

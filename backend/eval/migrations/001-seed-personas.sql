@@ -1245,7 +1245,6 @@ on conflict (id) do update set
 
 -- ────────────────────────────────────────────────────────────────────────
 -- lukas — Hauptschule, German native, confident Bau-direction
--- See `tools/eval-rubrics/lukas.md` v1 for full rationale.
 -- HG 3 (Bau/Architektur/Gebäudetechnik) coverage — ~10% of Joblinge TN.
 -- Stepfather is Tiefbau-Polier; 3+ years of Wochenend-Baustellen-Hilfe.
 -- Criterion-first tier assignment + judgment-audit applied: Tier S = 4
@@ -1430,7 +1429,6 @@ on conflict (id) do update set
 
 -- ────────────────────────────────────────────────────────────────────────
 -- lara — Realschule, 2nd-gen Turkish, confident kaufmännisch-direction
--- See `tools/eval-rubrics/lara.md` v1 for full rationale.
 -- HG 6 (Kaufmännische Dienstleistungen/Warenhandel) coverage — currently
 -- only side-covered (Tom-stretch, Elina). Joblinge demographic: Realschule-
 -- Frau cluster, confident Büro-direction.

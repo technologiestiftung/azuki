@@ -185,7 +185,7 @@ function accessLevelPenalty(
 	// out of Amira's prefilter top-60 with zero collateral on the 7 other
 	// personas (intermediate-level users hit gap=1, unaffected; other
 	// Hauptschule-level personas don't have FHR-gated Berufe in their
-	// direction). See tools/eval-baseline/access-penalty-sweep.ts.
+	// direction).
 	return -12;
 }
 
