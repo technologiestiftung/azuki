@@ -79,7 +79,7 @@ export function ResultsPage() {
 	}, [visibleOccupations]);
 
 	const handleShare = useCallback(async () => {
-		const url = buildShareUrl(ROUTE_PATHS.resultsVacancies, visibleOccupations);
+		const url = buildShareUrl(ROUTE_PATHS.resultsList, visibleOccupations);
 		try {
 			await shareResultsLink({
 				title: content["results.share.title"],

@@ -22,7 +22,7 @@ export const LoginScreen = () => {
 		setLoading(false);
 
 		if (ok) {
-			navigate("/welcome");
+			navigate("/start");
 		} else {
 			setError(true);
 		}

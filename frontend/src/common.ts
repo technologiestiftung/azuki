@@ -35,12 +35,12 @@ export interface WorkPreference {
 
 export enum Step {
 	Login = 0,
-	Welcome = 1,
-	Start = 2,
-	InSchool = 3,
-	SchoolDegreeStep = 4,
-	SchoolSubjects = 5,
-	Interests = 6,
+	Start = 1,
+	InSchool = 2,
+	SchoolDegreeStep = 3,
+	SchoolSubjects = 4,
+	Interests = 5,
+	PreferredJob = 6,
 	Strengths = 7,
 	WorkExpectations = 8,
 	PracticalExperience = 9,
@@ -55,11 +55,10 @@ export const QUESTIONNAIRE_STEPS = [
 	Step.SchoolDegreeStep,
 	Step.SchoolSubjects,
 	Step.Interests,
+	Step.PreferredJob,
 	Step.Strengths,
 	Step.WorkExpectations,
 	Step.PracticalExperience,
 	Step.WorkPreferences,
 	Step.NoGos,
 ];
-
-export const TOTAL_QUESTIONNAIRE_STEPS = QUESTIONNAIRE_STEPS.length;

@@ -57,20 +57,14 @@ export const content = {
 	"common.bottomSheet.overlayDismissLabel": "Schließen",
 	"common.bottomSheet.ariaLabel": "Dialog",
 	"common.bottomSheet.backButtonAriaLabel": "Zurück gehen",
-	// Welcome
-	"welcome.slide.1.title": "Du suchst eine Ausbildung, die gut zu dir passt?",
-	"welcome.slide.2.title": "Lerne deine Stärken kennen!",
-	"welcome.slide.3.title": "Entdecke welche Ausbildungen zu dir passen",
-	"welcome.slide.4.title": "Finde freie Plätze in deiner Nähe",
-	"welcome.slide.ariaLabelPrefix": "Gehe zu Folie",
-	"welcome.carousel.ariaLabel": "Folie {current} von {total}",
-	"welcome.cta": "Ausbildung finden",
 
 	// Start
-	"start.title": "Zeig uns was dich besonders macht!",
-	"start.description":
-		"Wir stellen dir ein paar Fragen. In nur wenigen Minuten erhältst du dein eigenes Stärkenprofil und siehst Ausbildungen, die gut zu dir passen.",
-	"start.cta": "Los geht's!",
+	"start.step1.title": "Finde eine Ausbildung, die zu dir passt",
+	"start.step1.cta.label": "Wie funktioniert das?",
+	"start.step2.title": "Beantworte ein paar Fragen",
+	"start.step2.description":
+		"AzuKI erstellt dir ein Stärkenprofil und zeigt dir passende Ausbildungen in deiner Nähe.",
+	"start.step2.cta.label": "Fragen starten",
 	"start.cta.prefill": "Zur Ergebnisseite",
 
 	// In School
@@ -242,6 +236,27 @@ export const content = {
 	"interests.people.petCare.icon": "🐕",
 	"interests.people.planning.label": "Party planen",
 	"interests.people.planning.icon": "🎉",
+
+	// preffered job
+	"preferredJob.question": "Gibt es eine Ausbildung, die dir gefällt?",
+	"preferredJob.subtitle": "Oder welche Berufsrichtung gefällt dir?",
+	"preferredJob.addButton.label": "Ausbildung hinzufügen",
+	"preferredJob.addButton.ariaLabel": "Ausbildung hinzufügen",
+	"preferredJob.bottomSheet.sheetAriaLabel": "Eine Ausbildung hinzufügen",
+	"preferredJob.bottomSheet.title": "Welche Ausbildung gefällt dir?",
+	"preferredJob.bottomSheet.example.label": "Zum Beispiel",
+	"preferredJob.bottomSheet.example.li1": "Elektrikerin",
+	"preferredJob.bottomSheet.example.li2": "Kosmetiker",
+	"preferredJob.bottomSheet.example.li3": "ein Job in der Pflege",
+	"preferredJob.bottomSheet.input.addPlaceholder": "z.B. irgendwas mit Medien",
+	"preferredJob.bottomSheet.submitButtonLabel": "Hinzufügen",
+	"preferredJob.bottomSheet.submitButtonAriaLabel": "Hinzufügen",
+	"preferredJob.bottomSheet.cancelButtonLabel": "Abbrechen",
+	"preferredJob.bottomSheet.cancelButtonAriaLabel": "Abbrechen",
+	"preferredJob.bottomSheet.errorMessage":
+		"Bitte gib einen Ausbildungsberuf ein.",
+	"preferredJob.addedByYouLabel": "Von dir hinzugefügt",
+	"preferredJob.skipButton.pill.label.postfix": "als Ausbildung auswählen",
 
 	// Strengths
 	"strengths.question": "Was kannst du gut?",

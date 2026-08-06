@@ -134,6 +134,7 @@ export interface UserProfile {
 	favoriteSubjects: string[];
 	customSubjects: string[];
 	interests: string[];
+	preferredJobs: string[];
 	customInterests: string[];
 	workExpectations: string[];
 	customWorkExpectations: string[];
@@ -161,6 +162,8 @@ export interface MatchedOccupation {
 	occupationTag: OccupationTagId;
 	occupationDuration: string;
 	occupationEarnings: string;
+	salaryKnown: boolean;
+	salaryMonthlyMedian: number | null;
 }
 
 export interface MatchResult {

@@ -1,5 +1,5 @@
 import { describe, expect, test } from "vitest";
-import { normName } from "../../../scripts/normName.js";
+import { normName } from "@azuki/shared";
 
 describe("normName — frozen verbatim behavior", () => {
 	const cases: Array<[string, string]> = [

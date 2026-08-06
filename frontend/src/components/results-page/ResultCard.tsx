@@ -3,6 +3,7 @@ import {
 	type MatchedOccupation,
 	fitPercent,
 	formatOccupationDisplayName,
+	formatOccupationSalary,
 } from "@azuki/shared";
 import { Badge } from "../primitives/badge/Badge";
 import { useMatchResultsStore } from "../../store/useMatchResultsStore";
@@ -54,14 +55,20 @@ export function ResultCard({ occupation }: ResultCardProps) {
 					<h3 className="text-xl font-semibold text-sky-1000 mb-3">
 						{displayName}
 					</h3>
-					{(occupation.occupationDuration || occupation.occupationEarnings) && (
+					{(occupation.occupationDuration || occupation.salaryKnown) && (
 						<div className="mb-[9px] flex min-w-0 flex-wrap items-center gap-2">
 							{occupation.occupationDuration && (
 								<Badge label={occupation.occupationDuration} />
 							)}
-							{occupation.occupationEarnings && (
-								<Badge label={occupation.occupationEarnings} />
-							)}
+
+							{occupation.salaryKnown &&
+								occupation.salaryMonthlyMedian !== null && (
+									<Badge
+										label={formatOccupationSalary(
+											occupation.salaryMonthlyMedian,
+										)}
+									/>
+								)}
 						</div>
 					)}
 

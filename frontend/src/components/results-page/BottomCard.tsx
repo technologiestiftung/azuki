@@ -7,7 +7,7 @@ export function BottomCard() {
 	const navigate = useNavigate();
 	const handleNewStart = () => {
 		useAppStore.getState().resetProfile();
-		navigate("/welcome");
+		navigate("/start");
 	};
 
 	return (
