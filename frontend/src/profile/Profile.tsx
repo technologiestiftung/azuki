@@ -165,6 +165,7 @@ export function Profile() {
 					titleSlotRef={heroTitleSlotRef}
 					showTitle={!isMorphing}
 					isSharedView={isSharedView}
+					profile={profile}
 				/>
 				{!isLoadingShared && topOccupations.length > 0 && (
 					<TopOccupationsCarousel occupations={topOccupations} />

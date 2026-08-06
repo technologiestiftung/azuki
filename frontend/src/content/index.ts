@@ -3,8 +3,6 @@ import { workPreferencePairs } from "./work-preference-pairs";
 export const content = {
 	// Profile
 	"profile.title": "Das bist du",
-	"profile.shortDescriptionPlaceholder":
-		"Natur und Pflanzen – das ist deine Welt.",
 	"profile.topOccupationsTitle": "Deine Top-Berufe",
 	"profile.aboutYou": "Über dich",
 	"profile.schoolDegreeLabel.planned": "Dein geplanter Schulabschluss",

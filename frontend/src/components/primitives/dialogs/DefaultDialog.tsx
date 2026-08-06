@@ -42,7 +42,6 @@ export const DefaultDialog: React.FC<DefaultDialogProps> = ({
 			}
 
 			/**
-			 * This is confusing, yet correct. The dialog element spreads over the whole screen.
 			 * If the user clicks on something inside the dialog, the event target won't be the dialog itself.
 			 */
 			if (event.target === dialog) {

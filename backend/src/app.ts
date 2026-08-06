@@ -352,6 +352,37 @@ app.post("/api/occupations/:id/match-explanations", async (c) => {
 	}
 });
 
+app.post("/api/profile/short-description", async (c) => {
+	if (!isAuthorized(c)) {
+		return c.json({ error: "Unauthorized" }, 401);
+	}
+
+	let body: unknown;
+	try {
+		body = await c.req.json();
+	} catch {
+		return c.json({ error: "Invalid request body" }, 400);
+	}
+
+	const parsedProfile = UserProfileSchema.safeParse(body);
+	if (!parsedProfile.success) {
+		return c.json({ error: "Invalid request body" }, 400);
+	}
+
+	try {
+		const { generateProfileShortDescription } = await import(
+			"./ai/profileShortDescription.js"
+		);
+		const shortDescription = await generateProfileShortDescription(
+			parsedProfile.data,
+		);
+		return c.json({ shortDescription });
+	} catch (err) {
+		console.error("Profile short description error:", err);
+		return c.json({ error: "Profile short description unavailable" }, 503);
+	}
+});
+
 app.get("/api/eval/default-prompt", (c) => {
 	if (!isAuthorized(c)) {
 		return c.json({ error: "Unauthorized" }, 401);
