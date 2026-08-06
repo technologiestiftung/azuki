@@ -81,13 +81,19 @@ export function OccupationDetailPage() {
 		if (!matchResults) {
 			return [];
 		}
-		const currentIndex = matchResults.occupations.findIndex(
+		const { occupations } = matchResults;
+		const currentIndex = occupations.findIndex(
 			(occupation) => occupation.id === occupationId,
 		);
 		if (currentIndex === -1) {
 			return [];
 		}
-		return matchResults.occupations.slice(currentIndex + 1, currentIndex + 4);
+		const count = Math.min(3, occupations.length - 1);
+		return Array.from(
+			{ length: count },
+			(_, offset) =>
+				occupations[(currentIndex + 1 + offset) % occupations.length],
+		);
 	}, [matchResults, occupationId]);
 
 	const sharedNextOccupations = useSharedNextOccupations(
