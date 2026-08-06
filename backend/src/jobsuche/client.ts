@@ -1,8 +1,13 @@
 import type { VacancyResult, VacancyPreview } from "@azuki/shared";
 
 const JOBSUCHE_BASE =
-	"https://rest.arbeitsagentur.de/jobboerse/jobsuche-service/pc/v4/jobs";
+	"https://rest.arbeitsagentur.de/jobboerse/jobsuche-service/pc/v6/jobs";
 const API_KEY = "jobboerse-jobsuche";
+// `angebotsart=4` scopes to Ausbildung + Duales Studium, `ausbildungsart=0`
+// narrows that to betriebliche Ausbildung.
+
+const ANGEBOTSART_AUSBILDUNG = "4";
+const AUSBILDUNGSART_BETRIEBLICH = "0";
 const DEFAULT_RADIUS_KM = 25;
 // limit to 10 weeks to avoid showing vacancies that are too old
 const MAX_PUBLISHED_WEEKS = 10;
@@ -25,30 +30,44 @@ function normalizeLocationField(
 	return text;
 }
 
-interface JobsucheJob {
-	arbeitgeber: string;
-	arbeitsort?: {
+interface JobsucheLocation {
+	adresse?: {
+		strasse?: string;
+		hausnummer?: string;
 		plz?: string | number;
 		ort?: string;
 		ortsteil?: string;
-		strasse?: string;
-		koordinaten?: {
-			lat?: number;
-			lon?: number;
-		};
 	};
-	eintrittsdatum?: string;
-	aktuelleVeroeffentlichungsdatum?: string;
-	// `beruf` is set on Ausbildung postings, absent on Duales Studium.
-	// `studiengang` is the opposite. We filter on this distinction since
-	// the API has no server-side flag for Ausbildung-only.
-	beruf?: string;
-	studiengang?: string;
+	breite?: number;
+	laenge?: number;
+}
+
+interface JobsucheJob {
+	firma?: string;
+	stellenlokationen?: JobsucheLocation[];
+	eintrittszeitraum?: { von?: string };
+	veroeffentlichungszeitraum?: { von?: string };
+	datumErsteVeroeffentlichung?: string;
+	ausbildungsart?: string;
 }
 
 interface JobsucheResponse {
-	stellenangebote?: JobsucheJob[];
-	maxErgebnisse: number;
+	ergebnisliste?: JobsucheJob[];
+	maxErgebnisse?: number;
+}
+
+function searchParams(
+	occupation: string,
+	postcode: string,
+	distance: number,
+): URLSearchParams {
+	return new URLSearchParams({
+		was: occupation,
+		wo: postcode,
+		umkreis: String(distance),
+		angebotsart: ANGEBOTSART_AUSBILDUNG,
+		ausbildungsart: AUSBILDUNGSART_BETRIEBLICH,
+	});
 }
 
 function buildSearchUrl(
@@ -56,13 +75,7 @@ function buildSearchUrl(
 	postcode: string,
 	distance: number,
 ): string {
-	const params = new URLSearchParams({
-		was: occupation,
-		wo: postcode,
-		umkreis: String(distance),
-		angebotsart: "4",
-	});
-	return `https://www.arbeitsagentur.de/jobsuche/suche?${params.toString()}`;
+	return `https://www.arbeitsagentur.de/jobsuche/suche?${searchParams(occupation, postcode, distance)}`;
 }
 
 function isPublishedWithinMaxAge(publishedAt: string | undefined): boolean {
@@ -78,14 +91,58 @@ function isPublishedWithinMaxAge(publishedAt: string | undefined): boolean {
 }
 
 function isAusbildung(job: JobsucheJob): boolean {
-	// CONTRACT: this predicate only works because the search call above uses
-	// `angebotsart=4` (Ausbildung + Duales Studium scope). Within that scope,
-	// `beruf` is set whenever an Ausbildung component is offered — pure
-	// Ausbildung or hybrid Ausbildung+Studium. Pure Duales Studium has empty
-	// `beruf`. If `angebotsart` is ever changed or dropped, this filter alone
-	// is NOT enough — regular full-time jobs (angebotsart=1) also have
-	// `beruf` set.
-	return Boolean(job.beruf);
+	return job.ausbildungsart === "AUSBILDUNG";
+}
+
+function publishedTime(preview: VacancyPreview): number {
+	return preview.publishedAt ? Date.parse(preview.publishedAt) : 0;
+}
+
+function toStreet(adresse: JobsucheLocation["adresse"]): string | undefined {
+	const street = normalizeLocationField(adresse?.strasse);
+	if (!street) {
+		return undefined;
+	}
+	const houseNumber = normalizeLocationField(adresse?.hausnummer);
+	return houseNumber ? `${street} ${houseNumber}` : street;
+}
+
+function toPreview(job: JobsucheJob): VacancyPreview {
+	const location = job.stellenlokationen?.[0];
+	const adresse = location?.adresse;
+	const latitude = location?.breite;
+	const longitude = location?.laenge;
+	return {
+		employer: job.firma || "Unbekannter Arbeitgeber",
+		city: normalizeLocationField(adresse?.ort) || "Unbekannter Ort",
+		postcode: normalizeLocationField(adresse?.plz),
+		district: normalizeLocationField(adresse?.ortsteil),
+		street: toStreet(adresse),
+		latitude:
+			typeof latitude === "number" && Number.isFinite(latitude)
+				? latitude
+				: undefined,
+		longitude:
+			typeof longitude === "number" && Number.isFinite(longitude)
+				? longitude
+				: undefined,
+		startDate: job.eintrittszeitraum?.von,
+		publishedAt:
+			job.veroeffentlichungszeitraum?.von ?? job.datumErsteVeroeffentlichung,
+	};
+}
+
+export function parseJobsucheResponse(data: JobsucheResponse): {
+	totalCount: number;
+	previews: VacancyPreview[];
+} {
+	const previews = (data.ergebnisliste ?? [])
+		.filter(isAusbildung)
+		.map(toPreview)
+		.filter((preview) => isPublishedWithinMaxAge(preview.publishedAt))
+		.sort((a, b) => publishedTime(b) - publishedTime(a));
+
+	return { totalCount: data.maxErgebnisse ?? 0, previews };
 }
 
 function emptyResult(
@@ -109,16 +166,11 @@ export async function searchVacancies(
 	postcode: string,
 	distance: number = DEFAULT_RADIUS_KM,
 ): Promise<VacancyResult> {
-	const params = new URLSearchParams({
-		was: occupation,
-		wo: postcode,
-		umkreis: String(distance),
-		angebotsart: "4",
-		size: String(SAMPLE_SIZE),
-	});
+	const params = searchParams(occupation, postcode, distance);
+	params.set("size", String(SAMPLE_SIZE));
 
 	try {
-		const res = await fetch(`${JOBSUCHE_BASE}?${params.toString()}`, {
+		const res = await fetch(`${JOBSUCHE_BASE}?${params}`, {
 			headers: { "X-API-Key": API_KEY },
 			signal: AbortSignal.timeout(REQUEST_TIMEOUT_MS),
 		});
@@ -128,51 +180,7 @@ export async function searchVacancies(
 			return emptyResult(occupation, postcode, distance);
 		}
 
-		const data: JobsucheResponse = await res.json();
-		const sample = data.stellenangebote ?? [];
-		const ausbildungenInSample = sample.filter(isAusbildung);
-
-		// `maxErgebnisse` counts everything matching `angebotsart=4` — Ausbildung
-		// AND Duales Studium together. Scale by the in-sample Ausbildung ratio
-		// so the badge doesn't overstate. If the sample is empty, fall back to
-		// the raw total (we have nothing to scale by).
-		const rawTotal = data.maxErgebnisse ?? 0;
-		const totalCount =
-			sample.length > 0
-				? Math.round((rawTotal * ausbildungenInSample.length) / sample.length)
-				: rawTotal;
-
-		const previews: VacancyPreview[] = [...ausbildungenInSample]
-			.filter((job) =>
-				isPublishedWithinMaxAge(job.aktuelleVeroeffentlichungsdatum),
-			)
-			.sort(
-				(a, b) =>
-					new Date(b.aktuelleVeroeffentlichungsdatum ?? 0).getTime() -
-					new Date(a.aktuelleVeroeffentlichungsdatum ?? 0).getTime(),
-			)
-			.map((job) => {
-				const location = job.arbeitsort;
-				const latitude = location?.koordinaten?.lat;
-				const longitude = location?.koordinaten?.lon;
-				return {
-					employer: job.arbeitgeber || "Unbekannter Arbeitgeber",
-					city: normalizeLocationField(location?.ort) || "Unbekannter Ort",
-					postcode: normalizeLocationField(location?.plz),
-					district: normalizeLocationField(location?.ortsteil),
-					street: normalizeLocationField(location?.strasse),
-					latitude:
-						typeof latitude === "number" && Number.isFinite(latitude)
-							? latitude
-							: undefined,
-					longitude:
-						typeof longitude === "number" && Number.isFinite(longitude)
-							? longitude
-							: undefined,
-					startDate: job.eintrittsdatum,
-					publishedAt: job.aktuelleVeroeffentlichungsdatum,
-				};
-			});
+		const { totalCount, previews } = parseJobsucheResponse(await res.json());
 
 		return {
 			occupation,
