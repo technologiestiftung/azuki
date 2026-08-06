@@ -19,6 +19,8 @@ import { EvalPage } from "./components/eval/EvalPage";
 import { PersonasPage } from "./components/personas/PersonasPage";
 import { PersonaDetailPage } from "./components/personas/PersonaDetailPage";
 import { ROUTE_PATHS } from "./routing/routes";
+import { Profile } from "./profile/Profile";
+import { AboutPage } from "./components/about-page/about";
 import { PreferredJobsStep } from "./components/competence-profile/steps/PreferredJobsStep";
 
 const LoadingScreen = lazy(() =>
@@ -101,6 +103,8 @@ function App() {
 						path={ROUTE_PATHS.personaDetail}
 						element={<PersonaDetailPage />}
 					/>
+					<Route path={ROUTE_PATHS.profile} element={<Profile />} />
+					<Route path={ROUTE_PATHS.about} element={<AboutPage />} />
 					<Route
 						path="*"
 						element={<Navigate to={ROUTE_PATHS.start} replace />}

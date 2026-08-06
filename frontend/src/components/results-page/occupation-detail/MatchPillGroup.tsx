@@ -48,7 +48,7 @@ export function MatchPillGroup({
 
 	if (loading) {
 		return loadingMessage ? (
-			<p className="text-center text-base text-sky-110 px-[21px]">
+			<p className="text-center text-base text-sky-shade-110 px-[21px]">
 				{loadingMessage}
 			</p>
 		) : null;
@@ -56,7 +56,7 @@ export function MatchPillGroup({
 
 	if (unavailable && pills.length === 0) {
 		return unavailableMessage ? (
-			<p className="text-center text-base text-sky-110 px-[21px]">
+			<p className="text-center text-base text-sky-shade-110 px-[21px]">
 				{unavailableMessage}
 			</p>
 		) : null;
@@ -64,7 +64,7 @@ export function MatchPillGroup({
 
 	if (pills.length === 0) {
 		return emptyMessage ? (
-			<p className="text-center text-base text-sky-110 px-[21px]">
+			<p className="text-center text-base text-sky-shade-110 px-[21px]">
 				{emptyMessage}
 			</p>
 		) : null;

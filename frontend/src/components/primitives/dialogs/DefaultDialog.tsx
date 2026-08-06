@@ -15,41 +15,45 @@ export const DefaultDialog: React.FC<DefaultDialogProps> = ({
 	className,
 	id,
 	afterClose,
+	isOpen = false,
 	"aria-label": ariaLabel,
 	"aria-labelledby": ariaLabelledBy,
 }) => {
 	const dialogRef = useRef<HTMLDialogElement | null>(null);
 
 	useEffect(() => {
-		document.addEventListener("mousedown", handleClickListener);
+		const dialog = dialogRef.current;
+		if (!dialog) {
+			return;
+		}
 
+		if (isOpen && !dialog.open) {
+			dialog.showModal();
+		} else if (!isOpen && dialog.open) {
+			dialog.close();
+		}
+	}, [isOpen]);
+
+	useEffect(() => {
+		const handleClickListener = (event: MouseEvent) => {
+			const dialog = dialogRef.current;
+			if (!dialog) {
+				return;
+			}
+
+			/**
+			 * If the user clicks on something inside the dialog, the event target won't be the dialog itself.
+			 */
+			if (event.target === dialog) {
+				dialog.close();
+			}
+		};
+
+		document.addEventListener("mousedown", handleClickListener);
 		return () => {
 			document.removeEventListener("mousedown", handleClickListener);
 		};
 	}, []);
-
-	const handleClickListener = (event: MouseEvent) => {
-		if (!dialogRef.current) {
-			return;
-		}
-
-		/**
-		 * This is confusing, yet correct. The dialog element spreads over the whole screen.
-		 * If the user clicks on something inside the dialog, the event target won't be the dialog itself.
-		 */
-		const isClickOnDialogBackground = event.target === dialogRef.current;
-
-		if (!isClickOnDialogBackground) {
-			return;
-		}
-
-		closeDialog();
-	};
-
-	const closeDialog = () => {
-		dialogRef.current?.close();
-		afterClose?.();
-	};
 
 	return (
 		<dialog
@@ -57,8 +61,8 @@ export const DefaultDialog: React.FC<DefaultDialogProps> = ({
 			id={id}
 			aria-label={ariaLabel}
 			aria-labelledby={ariaLabelledBy}
-			onClose={closeDialog}
-			className={`${className} backdrop:bg-sky-1000/80 backdrop:backdrop-blur-[2px] bg-gray-100 opacity-100 z-40 rounded-4xl p-4`}
+			onClose={afterClose}
+			className={`${className ?? ""} backdrop:bg-sky-1000/80 backdrop:backdrop-blur-[2px] bg-gray-100 opacity-100 z-40 rounded-4xl p-4`}
 		>
 			{children}
 		</dialog>

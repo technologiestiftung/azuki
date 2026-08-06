@@ -53,7 +53,7 @@ export function OccupationDetailHero({
 					ariaLabel={content["navigation.back"]}
 					title={content["navigation.back"]}
 					iconSize="w-5 h-5"
-					className="bg-sky-10/50  rounded-xl backdrop-blur-[4.5px]"
+					className="bg-sky-shade-10/50  rounded-xl backdrop-blur-[4.5px]"
 				/>
 
 				<div className="flex gap-1.5 items-center">
@@ -63,11 +63,11 @@ export function OccupationDetailHero({
 						ariaLabel={content["results.share"]}
 						title={content["results.share"]}
 						iconSize="w-5 h-5"
-						className="bg-sky-10/50 rounded-xl backdrop-blur-[4.5px]"
+						className="bg-sky-shade-10/50 rounded-xl backdrop-blur-[4.5px]"
 					/>
 					<button
 						type="button"
-						className="flex items-center justify-center z-10 w-10 h-10 bg-sky-10/50 rounded-xl backdrop-blur-[4.5px]"
+						className="flex items-center justify-center z-10 w-10 h-10 bg-sky-shade-10/50 rounded-xl backdrop-blur-[4.5px]"
 						onClick={onToggleFavorite}
 						aria-pressed={isFavorite}
 						aria-label={

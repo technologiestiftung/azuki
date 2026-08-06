@@ -1,30 +1,19 @@
 import {
 	useCallback,
 	useEffect,
-	useRef,
 	useState,
-	type CSSProperties,
 	type ReactNode,
 	type UIEvent,
 } from "react";
 import { ResultsPageHeaderCollapsed } from "./ResultsPageHeaderCollapsed";
 import { SecondaryIconButton } from "../primitives/buttons/SecondaryIconButton";
+import { useTitleMorph } from "../../hooks/useTitleMorph";
+import { MorphingTitle } from "../morphing-title/MorphingTitle";
 
 export const COLLAPSED_HEADER_SCROLL_THRESHOLD = 120;
 
 const EXPANDED_HEADER_HEIGHT = 120;
 const COLLAPSED_HEADER_HEIGHT = 60;
-
-const EXPANDED_TITLE_SIZE_PX = 30;
-const COLLAPSED_TITLE_SIZE_PX = 16;
-const EXPANDED_LINE_HEIGHT_PX = 36;
-const COLLAPSED_LINE_HEIGHT_PX = 24;
-
-type TitleRect = {
-	left: number;
-	top: number;
-	width: number;
-};
 
 export function useResultsPageScrollProgress() {
 	const [scrollProgress, setScrollProgress] = useState(0);
@@ -64,75 +53,22 @@ export function ResultsPageHeader({
 		EXPANDED_HEADER_HEIGHT -
 		scrollProgress * (EXPANDED_HEADER_HEIGHT - COLLAPSED_HEADER_HEIGHT);
 
-	const heroTitleSlotRef = useRef<HTMLDivElement>(null);
-	const collapsedTitleSlotRef = useRef<HTMLDivElement>(null);
-	const morphOriginRef = useRef<TitleRect | null>(null);
-	const scrollProgressRef = useRef(scrollProgress);
-	const [isMorphing, setIsMorphing] = useState(false);
-	const [titleStyle, setTitleStyle] = useState<CSSProperties | undefined>();
-
-	scrollProgressRef.current = scrollProgress;
-
-	const syncMorphTitle = useCallback((progress: number) => {
-		const fromEl = heroTitleSlotRef.current;
-		const toEl = collapsedTitleSlotRef.current;
-		if (!fromEl || !toEl) {
-			return;
-		}
-
-		// Below threshold: title stays in expanded header flow — no fixed morph.
-		if (progress <= 0) {
-			morphOriginRef.current = null;
-			setIsMorphing(false);
-			setTitleStyle(undefined);
-			return;
-		}
-
-		// Freeze start position when morph begins so the title peels off
-		// from where it was in the expanded header, then travels to the collapsed slot.
-		if (!morphOriginRef.current) {
-			const rect = fromEl.getBoundingClientRect();
-			morphOriginRef.current = {
-				left: rect.left,
-				top: rect.top,
-				width: rect.width,
-			};
-		}
-
-		const from = morphOriginRef.current;
-		const to = toEl.getBoundingClientRect();
-
-		setIsMorphing(true);
-		setTitleStyle({
-			position: "fixed",
-			left: from.left + (to.left - from.left) * progress,
-			top: from.top + (to.top - from.top) * progress,
-			width: from.width + (to.width - from.width) * progress,
-			fontSize:
-				EXPANDED_TITLE_SIZE_PX +
-				(COLLAPSED_TITLE_SIZE_PX - EXPANDED_TITLE_SIZE_PX) * progress,
-			lineHeight: `${
-				EXPANDED_LINE_HEIGHT_PX +
-				(COLLAPSED_LINE_HEIGHT_PX - EXPANDED_LINE_HEIGHT_PX) * progress
-			}px`,
-			zIndex: 40,
-			pointerEvents: "none",
-			margin: 0,
-		});
-	}, []);
+	const {
+		heroTitleSlotRef,
+		collapsedTitleSlotRef,
+		isMorphing,
+		titleStyle,
+		syncMorphTitle,
+	} = useTitleMorph({
+		heroFontSizePx: 30,
+		collapsedFontSizePx: 16,
+		heroLineHeightPx: 36,
+		collapsedLineHeightPx: 24,
+	});
 
 	useEffect(() => {
 		syncMorphTitle(scrollProgress);
 	}, [scrollProgress, syncMorphTitle]);
-
-	useEffect(() => {
-		const onResize = () => {
-			morphOriginRef.current = null;
-			syncMorphTitle(scrollProgressRef.current);
-		};
-		window.addEventListener("resize", onResize);
-		return () => window.removeEventListener("resize", onResize);
-	}, [syncMorphTitle]);
 
 	return (
 		<div className="relative shrink-0">
@@ -155,14 +91,13 @@ export function ResultsPageHeader({
 					shareDisabled={shareDisabled}
 				/>
 			</div>
-			{isMorphing && (
-				<h1
-					className="font-semibold text-sky-900 text-left truncate will-change-[left,top,width,font-size]"
-					style={titleStyle}
-				>
-					{title}
-				</h1>
-			)}
+			<MorphingTitle
+				isMorphing={isMorphing}
+				style={titleStyle}
+				className="text-sky-900"
+			>
+				{title}
+			</MorphingTitle>
 			<div
 				className="overflow-hidden"
 				style={{

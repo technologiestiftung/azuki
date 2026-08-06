@@ -10,6 +10,7 @@ export const GhostIconButton: React.FC<GhostIconButtonProps> = ({
 	ariaLabel,
 	title,
 	className = "",
+	style,
 	children,
 	iconSrc,
 	iconSize = "",
@@ -21,6 +22,7 @@ export const GhostIconButton: React.FC<GhostIconButtonProps> = ({
 				md:hover:bg-gray-200 md:hover:text-gray-800 active:bg-gray-200 active:text-gray-800
 				${disabled ? "text-gray-400" : "text-gray-900 hover:text-gray-700"}
 				${className}`}
+			style={style}
 			disabled={disabled}
 			onClick={onClick}
 			type={type}

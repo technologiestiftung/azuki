@@ -253,6 +253,162 @@ export async function matchProfile(profile: UserProfile): Promise<MatchResult> {
 	return res.json();
 }
 
+export interface ProfileShortDescriptionResponse {
+	shortDescription: string;
+}
+
+const PROFILE_SHORT_DESCRIPTION_CACHE_PREFIX =
+	"azuki-profile-short-description:";
+const PROFILE_SHORT_DESCRIPTION_CACHE_INDEX_KEY =
+	"azuki-profile-short-description-index";
+const PROFILE_SHORT_DESCRIPTION_CACHE_MAX = 10;
+
+const profileShortDescriptionMemory = new Map<string, string>();
+const profileShortDescriptionInflight = new Map<string, Promise<string>>();
+
+function profileShortDescriptionCacheKey(profile: UserProfile): string {
+	return JSON.stringify(profile);
+}
+
+function readProfileShortDescriptionCache(key: string): string | null {
+	if (profileShortDescriptionMemory.has(key)) {
+		return profileShortDescriptionMemory.get(key) ?? "";
+	}
+	try {
+		const raw = sessionStorage.getItem(
+			`${PROFILE_SHORT_DESCRIPTION_CACHE_PREFIX}${key}`,
+		);
+		if (!raw) {
+			return null;
+		}
+		const parsed = JSON.parse(raw) as ProfileShortDescriptionResponse;
+		if (!parsed || typeof parsed.shortDescription !== "string") {
+			return null;
+		}
+		const value = parsed.shortDescription.trim();
+		profileShortDescriptionMemory.set(key, value);
+		return value;
+	} catch {
+		return null;
+	}
+}
+
+/** Sync lookup for UI hydration (memory + sessionStorage). */
+export function getCachedProfileShortDescription(
+	profile: UserProfile,
+): string | null {
+	return readProfileShortDescriptionCache(
+		profileShortDescriptionCacheKey(profile),
+	);
+}
+
+function writeProfileShortDescriptionCache(key: string, value: string): void {
+	profileShortDescriptionMemory.set(key, value);
+	try {
+		sessionStorage.setItem(
+			`${PROFILE_SHORT_DESCRIPTION_CACHE_PREFIX}${key}`,
+			JSON.stringify({
+				shortDescription: value,
+			} satisfies ProfileShortDescriptionResponse),
+		);
+		const indexRaw = sessionStorage.getItem(
+			PROFILE_SHORT_DESCRIPTION_CACHE_INDEX_KEY,
+		);
+		const index: string[] = indexRaw ? (JSON.parse(indexRaw) as string[]) : [];
+		const next = [key, ...index.filter((entry) => entry !== key)].slice(
+			0,
+			PROFILE_SHORT_DESCRIPTION_CACHE_MAX,
+		);
+		for (const evicted of index) {
+			if (!next.includes(evicted)) {
+				sessionStorage.removeItem(
+					`${PROFILE_SHORT_DESCRIPTION_CACHE_PREFIX}${evicted}`,
+				);
+			}
+		}
+		sessionStorage.setItem(
+			PROFILE_SHORT_DESCRIPTION_CACHE_INDEX_KEY,
+			JSON.stringify(next),
+		);
+	} catch {
+		// Quota / private mode — memory cache still helps within the page.
+	}
+}
+
+async function requestProfileShortDescription(
+	profile: UserProfile,
+): Promise<string> {
+	const res = await fetch(`${API_BASE}/profile/short-description`, {
+		method: "POST",
+		headers: headers(),
+		body: JSON.stringify(profile),
+	});
+	if (!res.ok) {
+		throw new Error(`fetchProfileShortDescription failed: ${res.status}`);
+	}
+	const data = (await res.json()) as ProfileShortDescriptionResponse;
+	if (typeof data.shortDescription !== "string") {
+		throw new Error("fetchProfileShortDescription: invalid shortDescription");
+	}
+	return data.shortDescription.trim();
+}
+
+export async function fetchProfileShortDescription(
+	profile: UserProfile,
+	signal?: AbortSignal,
+): Promise<string> {
+	const key = profileShortDescriptionCacheKey(profile);
+	const cached = readProfileShortDescriptionCache(key);
+	if (cached !== null) {
+		return cached;
+	}
+
+	if (signal?.aborted) {
+		throw new DOMException("Aborted", "AbortError");
+	}
+
+	let pending = profileShortDescriptionInflight.get(key);
+	if (!pending) {
+		pending = requestProfileShortDescription(profile)
+			.then((result) => {
+				writeProfileShortDescriptionCache(key, result);
+				profileShortDescriptionInflight.delete(key);
+				return result;
+			})
+			.catch((err) => {
+				profileShortDescriptionInflight.delete(key);
+				throw err;
+			});
+		profileShortDescriptionInflight.set(key, pending);
+	}
+
+	if (!signal) {
+		return pending;
+	}
+
+	const request = pending;
+	return new Promise<string>((resolve, reject) => {
+		const onAbort = () => {
+			reject(new DOMException("Aborted", "AbortError"));
+		};
+		signal.addEventListener("abort", onAbort, { once: true });
+		request.then(
+			(value) => {
+				signal.removeEventListener("abort", onAbort);
+				if (signal.aborted) {
+					reject(new DOMException("Aborted", "AbortError"));
+					return;
+				}
+				resolve(value);
+			},
+			(err) => {
+				signal.removeEventListener("abort", onAbort);
+				reject(err);
+			},
+		);
+	});
+}
+
 export async function fetchSharedMatch(
 	occupationsParam: string,
 ): Promise<MatchResult> {

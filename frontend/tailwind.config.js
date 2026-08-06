@@ -72,8 +72,24 @@ export default {
 					white: "#fafdff",
 				},
 				"sky-shade": {
+					10: "#F2F4F5",
 					20: "#E4E8EB",
+					30: "#D7DDE1",
+					40: "#C9D2D7",
+					50: "#BCC6CD",
+					60: "#AEBBC3",
+					70: "#A1B0B9",
+					80: "#94A4AF",
+					90: "#8699A5",
+					100: "#798E9C",
 					110: "#6B8392",
+					120: "#5E7788",
+					130: "#516C7E",
+					140: "#436174",
+					150: "#36556A",
+					160: "#284A60",
+					170: "#1B3F56",
+					180: "#0D334C",
 				},
 				"card-fill": "#EEF2F6",
 				"fill-secondary": "#1325491C",
@@ -170,6 +186,16 @@ export default {
 						transform: "translateX(0) rotate(0deg) translateY(0)",
 					},
 				},
+				slideOutRight: {
+					from: {
+						opacity: "1",
+						transform: "translateX(0) rotate(0deg) translateY(0)",
+					},
+					to: {
+						opacity: "0",
+						transform: "translateX(100vw) rotate(20deg) translateY(-40px)",
+					},
+				},
 				slideInRightTint: {
 					"0%, 45%": { opacity: "1" },
 					"100%": { opacity: "0" },
@@ -243,6 +269,7 @@ export default {
 				slideOutNext: "slideOutNext 0.3s var(--ease-spring) forwards",
 				slideInLeft: "slideInLeft 0.3s ease-out forwards",
 				slideInRight: "slideInRight 0.3s ease-out forwards",
+				slideOutRight: "slideOutRight 0.3s ease-in forwards",
 				slideInLeftTint:
 					"slideInLeftTint 800ms cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards",
 				slideInRightTint:

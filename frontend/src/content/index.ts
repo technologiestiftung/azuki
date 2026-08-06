@@ -1,6 +1,50 @@
 import { workPreferencePairs } from "./work-preference-pairs";
 
 export const content = {
+	// Profile
+	"profile.title": "Das bist du",
+	"profile.topOccupationsTitle": "Deine Top-Berufe",
+	"profile.aboutYou": "Über dich",
+	"profile.schoolDegreeLabel.planned": "Dein geplanter Schulabschluss",
+	"profile.schoolDegreeLabel.inSchool": "Dein Schulabschluss",
+	"profile.topOccupationWithMostVacancies": "Besonders gesucht",
+	"profile.favoriteSubjects": "Deine Lieblingsfächer",
+	"profile.interests": "Das magst du gerne",
+	"profile.strengths": "Deine Stärken",
+	"profile.hardships": "Was dir noch schwerfällt",
+	"profile.workExpectations": "Was du von einem Beruf erwartest",
+	"profile.practicalExperiences": "Deine Arbeitserfahrung",
+	"profile.workPreferences": "So möchtest du arbeiten",
+	"profile.noGos": "Das magst du nicht im Beruf",
+	"profile.resetCard.title": "Du möchtest deine Antworten ändern?",
+	"profile.resetCard.description":
+		"Du kannst alle Fragen nochmal beantworten, um dein Profil zu ändern.",
+	"profile.resetCard.cta": "Fragen wiederholen",
+	"profile.resetDialog.title": "Möchtest du wirklich alle Fragen wiederholen?",
+	"profile.resetDialog.description":
+		"Deine passenden Berufe, freie Stellen und Antworten werden gelöscht und können nicht wieder hergestellt werden.",
+	"profile.resetDialog.cta": "Fragen wiederholen",
+	"profile.resetDialog.downloadCta": "Mein Profil speichern",
+	"profile.download": "Download",
+	"profile.download.ariaLabel": "Profil herunterladen",
+	"profile.share": "Teilen",
+	"profile.share.ariaLabel": "Profil teilen",
+	"profile.share.title": "Mein Profil",
+	"profile.share.text":
+		"Schau dir dieses Profil und passende Ausbildungsberufe an.",
+	"profile.export.filename": "mein-profil.pdf",
+	"profile.export.category": "Bereich",
+	"profile.export.details": "Angaben",
+	// Footer
+	"footer.about": "Über das Projekt",
+	"footer.feedback": "Feedback geben",
+	"footer.feedback.link": "",
+	"footer.imprint": "Impressum",
+	"footer.imprint.link": "https://www.technologiestiftung-berlin.de/impressum",
+	"footer.privacyPolicy": "Datenschutz",
+	"footer.privacyPolicy.link":
+		"https://www.technologiestiftung-berlin.de/datenschutz",
+
 	// Common
 	"common.multiSelect.subline": "Wähle alle aus, die zutreffen.",
 	"common.singleSelect.subline": "Wähle eine Option aus.",
@@ -466,6 +510,14 @@ export const content = {
 	"results.card.score.label": "Passt zu",
 	"results.noResults":
 		"Wir haben leider keine Ausbildungsberufe zu deiner Auswahl gefunden.",
+	"results.contactCard.title": "Du weißt nicht, wo du anfangen sollst?",
+	"results.contactCard.description":
+		"Wir beraten dich zu deinen <strong>Stärken</strong>, <strong>passenden Berufen</strong> und <strong>Bewerbungen</strong>. Gemeinsam finden wir deinen nächsten Schritt!",
+	"results.contactCard.item.1": "100% kostenlos und persönlich",
+	"results.contactCard.item.2": "Rückmeldung in 48h",
+	"results.contactCard.item.3":
+		"Du entscheidest was du brauchst – alle Fragen sind erlaubt",
+	"results.contactCard.consultationCta": "Beratung anfragen",
 	// Filter Bottom Sheet
 	"results.filter.tags.title": "Berufsgruppe",
 	"results.filter.tags.title.short": "Beruf",
@@ -524,6 +576,7 @@ export const content = {
 	"results.detail.loadError":
 		"Die Berufsdetails konnten gerade nicht geladen werden.",
 	"results.share": "Teilen",
+	"results.download": "Download",
 	"results.detail.tasksTitle": "Typische Aufgaben",
 	"results.detail.tasks.matchTitle": "So gut passt der Beruf zu dir",
 	"results.detail.tasks.matchInfo.title": "Wie wird das berechnet?",
@@ -601,4 +654,18 @@ export const content = {
 	"toast.schoolDegree.description":
 		"Wähle einen Schulabschluss, um weiter zu machen.",
 	"toast.close.ariaLabel": "Schließen",
+	// about
+	"about.title": "Was ist AzuKi?",
+	"about.description.p1":
+		"AzuKi ist ein KI-basierter Ausbildungsassistent, der jungen Menschen hilft einen passenden Ausbildungsberuf zu finden. Nach einigen Fragen zu Schulbildung, Interessen, Stärken, Arbeitserfahrung und Erwartungen an den zukünftigen Beruf wird ein Profil erstellt. Basierend auf diesem Profil schlägt die KI passende Ausbildungsberufe vor und zeigt freie Stellen in der Nähe.",
+	"about.description.p2":
+		"Das Projekt ist eine Kollaboration mit <a href='https://joblinge.de' target='_blank'>Joblinge Berlin</a>, gefördert von der <a href='https://www.civic-innovation.de/' target='_blank'>Civic Innovation Platform</a> des <a href='https://www.bmas.de/' target='_blank'>Bundesministerium für Arbeit und Soziales</a>.",
+	"about.logobanner.projectOf": "Ein Projekt der",
+	"about.logobanner.technologieStiftungBerlin.logoLink":
+		"https://logos.citylab-berlin.org/logo-technologiestiftung-berlin-de.svg",
+	"about.logobanner.developedBy": "Entwickelt von",
+	"about.logobanner.cityLabBerlin.logoLink":
+		"https://logos.citylab-berlin.org/logo-citylab-color.svg",
+	"about.logobanner.sponsoredBy": "Gefördert durch",
+	"about.backButton.ariaLabel": "Zurück zur Profil-Ansicht",
 };

@@ -10,6 +10,7 @@ export const SecondaryIconButton: React.FC<SecondaryButtonProps> = ({
 	ariaLabel,
 	title,
 	className = "",
+	style,
 	children,
 	iconSrc,
 }) => {
@@ -20,6 +21,7 @@ export const SecondaryIconButton: React.FC<SecondaryButtonProps> = ({
 				md:hover:bg-gray-200 md:hover:text-gray-800 active:bg-gray-200 active:text-gray-800
 				${disabled ? "text-gray-400" : "text-gray-900 md:hover:text-gray-800"}
 				${className}`}
+			style={style}
 			disabled={disabled}
 			onClick={onClick}
 			type={type}

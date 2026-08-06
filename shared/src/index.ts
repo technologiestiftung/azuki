@@ -71,6 +71,14 @@ export {
 	type SharedOccupationEntry,
 } from "./sharedMatchParams";
 
+export {
+	SHARED_PROFILE_PARAM,
+	buildSharedProfileParam,
+	parseSharedProfileParam,
+	compactSharedProfile,
+	expandSharedProfile,
+} from "./sharedProfileParams";
+
 export { strengthScorePoints } from "./strengthScoring";
 export type {
 	PracticalExperienceEntry,
