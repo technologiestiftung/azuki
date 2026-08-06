@@ -81,6 +81,7 @@ describe("formatProfileForShortDescription", () => {
 			workPreferences: { indoor_outdoor: "a" },
 			noGos: { laerm: "rejected" },
 			customNoGos: [],
+			preferredJobs: [],
 		});
 
 		expect(text).toContain("Lieblingsfächer");
@@ -117,6 +118,7 @@ describe("formatProfileForShortDescription", () => {
 				workPreferences: {},
 				noGos: {},
 				customNoGos: [],
+				preferredJobs: [],
 			}),
 		).toBe("(keine Angaben)");
 	});

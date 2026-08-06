@@ -36,6 +36,7 @@ const EMPTY_PROFILE: UserProfile = {
 	workPreferences: {},
 	noGos: {},
 	customNoGos: [],
+	preferredJobs: [],
 };
 
 function utf8ToBase64Url(text: string): string {
@@ -205,6 +206,9 @@ export function compactSharedProfile(
 	if (profile.customNoGos.length > 0) {
 		compact.customNoGos = profile.customNoGos;
 	}
+	if (profile.preferredJobs.length > 0) {
+		compact.preferredJobs = profile.preferredJobs;
+	}
 
 	return compact;
 }
@@ -240,6 +244,7 @@ export function expandSharedProfile(raw: unknown): UserProfile | null {
 		workPreferences: asWorkPreferences(raw.workPreferences),
 		noGos: asNoGos(raw.noGos),
 		customNoGos: asStringArray(raw.customNoGos),
+		preferredJobs: asStringArray(raw.preferredJobs),
 	};
 }
 

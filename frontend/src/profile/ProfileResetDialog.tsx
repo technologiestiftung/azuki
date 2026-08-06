@@ -21,7 +21,7 @@ export function ProfileResetDialog({
 	const handleReset = () => {
 		useAppStore.getState().resetProfile();
 		onClose();
-		navigate(ROUTE_PATHS.welcome);
+		navigate(ROUTE_PATHS.start);
 	};
 
 	return (
