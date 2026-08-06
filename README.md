@@ -79,8 +79,8 @@ npm run install:all
 
 ## Environment variables
 
-The backend reads its configuration from `backend/.env` — copy
-`backend/.env.example` and fill in the values you need:
+The backend reads its configuration from `.env` in the repository root — copy
+`.env.example` and fill in the values you need:
 
 - `OPENROUTER_API_KEY` — enables AI re-ranking of matches via
   [OpenRouter](https://openrouter.ai/). Without it, the pipeline falls back to

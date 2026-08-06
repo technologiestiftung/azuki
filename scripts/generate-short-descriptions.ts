@@ -3,9 +3,9 @@
  * berufe.json using OpenRouter. Resumable: skips entries that already have one.
  *
  * Usage:
- *   npx tsx --env-file=backend/.env scripts/generate-short-descriptions.ts
- *   npx tsx --env-file=backend/.env scripts/generate-short-descriptions.ts --limit 20
- *   npx tsx --env-file=backend/.env scripts/generate-short-descriptions.ts --force
+ *   npx tsx --env-file=.env scripts/generate-short-descriptions.ts
+ *   npx tsx --env-file=.env scripts/generate-short-descriptions.ts --limit 20
+ *   npx tsx --env-file=.env scripts/generate-short-descriptions.ts --force
  */
 
 import { readFileSync, writeFileSync } from "node:fs";
@@ -187,7 +187,7 @@ async function main() {
 
 	if (!OPENROUTER_API_KEY) {
 		throw new Error(
-			"OPENROUTER_API_KEY is required. Set it in backend/.env or pass via --env-file.",
+			"OPENROUTER_API_KEY is required. Set it in .env or pass via --env-file.",
 		);
 	}
 

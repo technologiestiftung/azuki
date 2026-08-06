@@ -199,7 +199,7 @@ async function main() {
 
 	if (!OPENROUTER_API_KEY) {
 		throw new Error(
-			"OPENROUTER_API_KEY is required. Set it in backend/.env or pass via --env-file.",
+			"OPENROUTER_API_KEY is required. Set it in .env or pass via --env-file.",
 		);
 	}
 
