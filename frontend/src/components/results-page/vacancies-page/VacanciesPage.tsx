@@ -30,6 +30,7 @@ import { shareResultsLink } from "../utils/shareResults";
 import { ROUTE_PATHS } from "../../../routing/routes";
 import {
 	ResultsPageHeader,
+	TOP_ROW_HEIGHT_PX,
 	useResultsPageScrollProgress,
 } from "../ResultsPageHeader";
 
@@ -290,44 +291,25 @@ export function VacanciesPage() {
 		noVacancyResults,
 	});
 
+	const vacancyTitle = (
+		<>
+			<span className="text-sky-400">{vacanciesCount}</span>{" "}
+			{content["vacancies.title"]}
+		</>
+	);
+
 	return (
 		<>
-			<div className="flex flex-col h-full pb-16">
+			<div className="relative flex flex-col h-full pb-16">
 				<ResultsPageHeader
 					scrollProgress={scrollProgress}
-					title={
-						<>
-							<span className="text-sky-400">{vacanciesCount}</span>{" "}
-							{content["vacancies.title"]}
-						</>
-					}
+					title={vacancyTitle}
 					shareAriaLabel={content["vacancies.share.ariaLabel"]}
 					downloadAriaLabel={content["vacancies.download.ariaLabel"]}
 					onDownload={handleDownload}
 					onShare={handleShare}
 					downloadDisabled={vacancyCards.length === 0}
 					shareDisabled={visibleOccupations.length === 0}
-				/>
-
-				<ResultsFilterBar
-					hasLocationFilter={true}
-					appliedLocationFilter={locationFilter.appliedValue}
-					selectedOccupationIds={
-						occupationFilter.appliedValue.selectedOccupationIds
-					}
-					resolveOccupationFilterLabel={(id) =>
-						getOccupationFilterLabel(id, occupations)
-					}
-					occupationFilterTitle={
-						content["vacancies.filter.occupations.title.short"]
-					}
-					occupationFilterAriaLabel={
-						content["vacancies.filter.occupations.filterButton.ariaLabel"]
-					}
-					onOpenTagFilter={openOccupationFilter}
-					onOpenLocationFilter={openLocationFilter}
-					showFavoritesOnly={showFavoritesOnly}
-					onToggleFavoritesOnly={toggleFavoritesOnly}
 				/>
 				<OccupationsFilterBottomSheet
 					key={`occupation-${occupationFilter.sheetKey}`}
@@ -347,72 +329,102 @@ export function VacanciesPage() {
 					onReset={resetLocationFilter}
 				/>
 
-				{showSimpleEmpty || showDetailedEmpty || sharedLoadError ? (
-					<div className="flex px-4 pb-4 items-center h-full">
-						<div className="flex flex-col items-center justify-center gap-5 px-5">
-							<div className="flex items-center justify-center object-contain p-2">
-								<img
-									src="/illustrations/no-results-star.svg"
-									alt=""
-									className="w-[200px]"
-								/>
-							</div>
-							{showSimpleEmpty ? (
-								<p className="text-lg font-medium text-gray-1000 text-center">
-									{content["vacancies.noResultsFound"]}
-								</p>
-							) : (
-								<div>
-									<h3 className="text-lg font-bold text-gray-1000 mb-1.5 text-center">
-										{content["vacancies.noResults.p1"]}
-									</h3>
+				<div className="flex-1 overflow-y-auto" onScroll={handleListScroll}>
+					<h1
+						className="text-3xl font-semibold text-left text-sky-900 py-2 px-[18px]"
+						style={{
+							marginTop: TOP_ROW_HEIGHT_PX,
+							opacity: 1 - scrollProgress,
+						}}
+						aria-hidden={scrollProgress >= 0.5}
+					>
+						{vacancyTitle}
+					</h1>
+					<ResultsFilterBar
+						hasLocationFilter={true}
+						appliedLocationFilter={locationFilter.appliedValue}
+						selectedOccupationIds={
+							occupationFilter.appliedValue.selectedOccupationIds
+						}
+						resolveOccupationFilterLabel={(id) =>
+							getOccupationFilterLabel(id, occupations)
+						}
+						occupationFilterTitle={
+							content["vacancies.filter.occupations.title.short"]
+						}
+						occupationFilterAriaLabel={
+							content["vacancies.filter.occupations.filterButton.ariaLabel"]
+						}
+						onOpenTagFilter={openOccupationFilter}
+						onOpenLocationFilter={openLocationFilter}
+						showFavoritesOnly={showFavoritesOnly}
+						onToggleFavoritesOnly={toggleFavoritesOnly}
+						scrollProgress={scrollProgress}
+					/>
+					{showSimpleEmpty || showDetailedEmpty || sharedLoadError ? (
+						<div className="flex px-4 pb-4 items-center h-full">
+							<div className="flex flex-col items-center justify-center gap-5 px-5">
+								<div className="flex items-center justify-center object-contain p-2">
+									<img
+										src="/illustrations/no-results-star.svg"
+										alt=""
+										className="w-[200px]"
+									/>
+								</div>
+								{showSimpleEmpty ? (
 									<p className="text-lg font-medium text-gray-1000 text-center">
-										{content["vacancies.noResults.p2"]}
+										{content["vacancies.noResultsFound"]}
+									</p>
+								) : (
+									<div>
+										<h3 className="text-lg font-bold text-gray-1000 mb-1.5 text-center">
+											{content["vacancies.noResults.p1"]}
+										</h3>
+										<p className="text-lg font-medium text-gray-1000 text-center">
+											{content["vacancies.noResults.p2"]}
+										</p>
+									</div>
+								)}
+							</div>
+						</div>
+					) : (
+						<div className="px-4 pb-4 space-y-3">
+							{vacancyCards.map(({ key, occupation, preview }) => (
+								<VacancyCard
+									key={key}
+									occupationName={occupation.name}
+									preview={preview}
+									isFavorite={favoriteVacancyKeySet.has(key)}
+									onToggleFavorite={() => toggleVacancyFavorite(key)}
+								/>
+							))}
+							<div className="flex flex-col gap-5 px-3 py-5 rounded-2xl border border-sky-100 bg-sky-50">
+								<div>
+									<h3 className="text-2xl font-semibold text-sky-1000 text-center mb-[7px]">
+										{content["vacancies.bottomCard.title"]}
+									</h3>
+									<p className="text-lg text-sky-1000 text-center">
+										{content["vacancies.bottomCard.description"]}
 									</p>
 								</div>
-							)}
-						</div>
-					</div>
-				) : (
-					<div
-						className="flex-1 px-4 pb-4 space-y-3 overflow-y-auto"
-						onScroll={handleListScroll}
-					>
-						{vacancyCards.map(({ key, occupation, preview }) => (
-							<VacancyCard
-								key={key}
-								occupationName={occupation.name}
-								preview={preview}
-								isFavorite={favoriteVacancyKeySet.has(key)}
-								onToggleFavorite={() => toggleVacancyFavorite(key)}
-							/>
-						))}
-						<div className="flex flex-col gap-5 px-3 py-5 rounded-2xl border border-sky-100 bg-sky-50">
-							<div>
-								<h3 className="text-2xl font-semibold text-sky-1000 text-center mb-[7px]">
-									{content["vacancies.bottomCard.title"]}
-								</h3>
-								<p className="text-lg text-sky-1000 text-center">
-									{content["vacancies.bottomCard.description"]}
-								</p>
-							</div>
-							<div className="flex flex-col">
-								<a
-									href={content["vacancies.bottomCard.consultationLink"]}
-									target="_blank"
-									rel="noopener noreferrer"
-									aria-label={
-										content["vacancies.bottomCard.consultationCta.ariaLabel"]
-									}
-									className="h-12 flex items-center justify-center gap-2 w-full py-2 px-5 rounded-2xl text-base font-medium transition-colors bg-sky-300 text-sky-1000
+								<div className="flex flex-col">
+									<a
+										href={content["vacancies.bottomCard.consultationLink"]}
+										target="_blank"
+										rel="noopener noreferrer"
+										aria-label={
+											content["vacancies.bottomCard.consultationCta.ariaLabel"]
+										}
+										className="h-12 flex items-center justify-center gap-2 w-full py-2 px-5 rounded-2xl text-base font-medium transition-colors bg-sky-300 text-sky-1000
 									focus-visible:outline focus-visible:outline-2 focus-visible:outline-sky-500 active:bg-sky-200 active:text-sky-900 md:hover:bg-sky-200 md:hover:text-sky-900"
-								>
-									{content["vacancies.bottomCard.consultationCta"]}
-								</a>
+									>
+										{content["vacancies.bottomCard.consultationCta"]}
+									</a>
+								</div>
 							</div>
 						</div>
-					</div>
-				)}
+					)}
+				</div>
 			</div>
 			<BottomNav />
 		</>
