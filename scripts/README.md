@@ -255,7 +255,7 @@ First few entries:
 
 | | |
 |---|---|
-| **Runs** | `npm run data:generate-short-descriptions` (requires `OPENROUTER_API_KEY` in `backend/.env`) |
+| **Runs** | `npm run data:generate-short-descriptions` (requires `OPENROUTER_API_KEY` in `.env`) |
 | **Flags** | `--limit N`, `--force` |
 | **Modifies** | `berufe.json`: `shortDescription` field |
 
