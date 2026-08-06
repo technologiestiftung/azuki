@@ -33,6 +33,8 @@ frontend/dist/
 backend/node_modules/
 backend/dist/
 materialien/
+# Yearly xlsx snapshots — see data/popularity-source/README.md
+data/popularity-source/*.xlsx
 .worktrees/
 api/[...route].js
 .vercel/output

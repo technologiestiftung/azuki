@@ -1,8 +1,6 @@
 /**
  * Strips DAZUBI's bracketed Ausbildungsbereich suffixes, collapses gender
- * forms (Kaufmann/-frau, /-in, /-r) and joining particles. Lifted verbatim
- * from the previous tools/eval-baseline implementation so output stays
- * byte-identical.
+ * forms (Kaufmann/-frau, /-in, /-r) and joining particles.
  */
 export function normName(s: string): string {
 	if (!s) {
