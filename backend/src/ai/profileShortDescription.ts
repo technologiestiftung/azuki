@@ -33,6 +33,7 @@ FORMAT:
 - Genau 1 Satz, ca. 4–8 Wörter (max. 60 Zeichen)
 - Keine Anführungszeichen, keine Emojis
 - Ausgabe NUR der fertige Satz – keine Erklärung, kein Meta-Kommentar
+- NICHT mit "Das bist du" beginnen oder diese Phrase enthalten – das steht bereits als Titel darüber
 
 QUALITÄTSREGELN:
 - Keine wörtliche Wiederholung der Eingabe – eigene Formulierung finden

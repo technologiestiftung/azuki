@@ -36,21 +36,15 @@ function resolveInterestLabel(id: string): string {
 }
 
 export function ProfileAboutSection({ profile }: ProfileAboutSectionProps) {
-	const favoriteSubjects = [
-		...profile.favoriteSubjects,
-		...profile.customSubjects,
-	];
-	const interests = [...profile.interests, ...profile.customInterests];
+	const favoriteSubjects = profile.favoriteSubjects;
+	const interests = profile.interests;
 	const strengthScores = Object.entries(profile.strengths);
 	const strongStrengths = strengthScores.filter(([, value]) => value >= 0.5);
 	const hardships = strengthScores.filter(([, value]) => value < 0.5);
 	const selectedCustomStrengths = profile.selectedCustomStrengths.filter(
 		(strength) => profile.customStrengths.includes(strength),
 	);
-	const workExpectations = [
-		...profile.workExpectations,
-		...profile.customWorkExpectations,
-	];
+	const workExpectations = profile.workExpectations;
 	const workPreferences = Object.entries(profile.workPreferences).filter(
 		(entry): entry is [string, "a" | "b"] =>
 			entry[1] === "a" || entry[1] === "b",
@@ -207,17 +201,12 @@ export function ProfileAboutSection({ profile }: ProfileAboutSectionProps) {
 					})}
 				</ProfileWrapCollapsible>
 			)}
-			{(rejectedNoGos.length > 0 || profile.customNoGos.length > 0) && (
+			{rejectedNoGos.length > 0 && (
 				<ProfileWrapCollapsible title={content["profile.noGos"]}>
 					{rejectedNoGos.map((noGoId) => (
 						<ProfileChip key={noGoId} variant="noGo" className="gap-1.5">
 							{noGoOptions.find((entry) => entry.id === noGoId)?.title ??
 								noGoId}
-						</ProfileChip>
-					))}
-					{profile.customNoGos.map((customNoGo) => (
-						<ProfileChip key={customNoGo} variant="noGo" className="gap-1.5">
-							{customNoGo}
 						</ProfileChip>
 					))}
 				</ProfileWrapCollapsible>

@@ -56,10 +56,7 @@ function buildProfileRows(
 		]);
 	}
 
-	const favoriteSubjects = [
-		...profile.favoriteSubjects,
-		...profile.customSubjects,
-	].map(resolveSubjectLabel);
+	const favoriteSubjects = profile.favoriteSubjects.map(resolveSubjectLabel);
 	if (favoriteSubjects.length > 0) {
 		rows.push([
 			content["profile.favoriteSubjects"],
@@ -67,9 +64,7 @@ function buildProfileRows(
 		]);
 	}
 
-	const interests = [...profile.interests, ...profile.customInterests].map(
-		resolveInterestLabel,
-	);
+	const interests = profile.interests.map(resolveInterestLabel);
 	if (interests.length > 0) {
 		rows.push([content["profile.interests"], joinLabels(interests)]);
 	}
@@ -106,10 +101,7 @@ function buildProfileRows(
 		rows.push([content["profile.hardships"], joinLabels(hardshipLabels)]);
 	}
 
-	const workExpectations = [
-		...profile.workExpectations,
-		...profile.customWorkExpectations,
-	].map(
+	const workExpectations = profile.workExpectations.map(
 		(expectation) =>
 			workExpectationOptions.find((option) => option.value === expectation)
 				?.label ?? expectation,
@@ -150,13 +142,12 @@ function buildProfileRows(
 		]);
 	}
 
-	const rejectedNoGos = Object.entries(profile.noGos)
+	const noGoLabels = Object.entries(profile.noGos)
 		.filter(([, value]) => value === "rejected")
 		.map(
 			([noGoId]) =>
 				noGoOptions.find((entry) => entry.id === noGoId)?.title ?? noGoId,
 		);
-	const noGoLabels = [...rejectedNoGos, ...profile.customNoGos];
 	if (noGoLabels.length > 0) {
 		rows.push([content["profile.noGos"], joinLabels(noGoLabels)]);
 	}
