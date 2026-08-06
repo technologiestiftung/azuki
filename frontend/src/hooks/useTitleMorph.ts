@@ -85,7 +85,7 @@ export function useTitleMorph({
 			setTitleStyle({
 				position: "fixed",
 				left: from.left + (to.left - from.left) * progress,
-				top: minTopPx != null ? Math.max(minTopPx, morphTop) : morphTop,
+				top: minTopPx !== undefined ? Math.max(minTopPx, morphTop) : morphTop,
 				width: from.width + (to.width - from.width) * progress,
 				fontSize:
 					heroFontSizePx + (collapsedFontSizePx - heroFontSizePx) * progress,
