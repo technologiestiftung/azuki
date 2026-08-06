@@ -1,15 +1,6 @@
+import { useCallback, useMemo, type UIEventHandler } from "react";
 import {
-	useCallback,
-	useEffect,
-	useMemo,
-	useRef,
-	useState,
-	type CSSProperties,
-	type UIEventHandler,
-} from "react";
-import {
-	COLLAPSE_END,
-	COLLAPSE_START,
+	collapseProgressFromScrollY,
 	useOccupationDetailScroll,
 } from "../components/results-page/occupation-detail/useOccupationDetailScroll";
 import { content } from "../content";
@@ -24,24 +15,8 @@ import { ProfileResetCard } from "./ProfileResetCard";
 import { BottomNav } from "../components/bottom-nav/BottomNav";
 import { Footer } from "../components/footer/Footer";
 import { useSharedProfile } from "./useSharedProfile";
-
-const HERO_TITLE_SIZE_PX = 32;
-const COLLAPSED_TITLE_SIZE_PX = 14;
-const HERO_LINE_HEIGHT_PX = 42;
-const COLLAPSED_LINE_HEIGHT_PX = 20;
-
-type TitleRect = {
-	left: number;
-	top: number;
-	width: number;
-};
-
-function titleMorphProgressFromScrollY(scrollY: number): number {
-	return Math.min(
-		1,
-		Math.max(0, (scrollY - COLLAPSE_START) / (COLLAPSE_END - COLLAPSE_START)),
-	);
-}
+import { useTitleMorph } from "../hooks/useTitleMorph";
+import { MorphingTitle } from "../components/morphing-title/MorphingTitle";
 
 export function Profile() {
 	const { collapseProgress, heroControlsOpacity, onScroll } =
@@ -52,12 +27,18 @@ export function Profile() {
 		useSharedProfile();
 	const profile = sharedProfile ?? ownProfile;
 
-	const heroTitleSlotRef = useRef<HTMLDivElement>(null);
-	const collapsedTitleSlotRef = useRef<HTMLDivElement>(null);
-	const scrollYRef = useRef(0);
-	const morphOriginRef = useRef<TitleRect | null>(null);
-	const [isMorphing, setIsMorphing] = useState(false);
-	const [titleStyle, setTitleStyle] = useState<CSSProperties | undefined>();
+	const {
+		heroTitleSlotRef,
+		collapsedTitleSlotRef,
+		isMorphing,
+		titleStyle,
+		syncMorphTitle,
+	} = useTitleMorph({
+		heroFontSizePx: 32,
+		collapsedFontSizePx: 14,
+		heroLineHeightPx: 42,
+		collapsedLineHeightPx: 20,
+	});
 
 	const topOccupations = useMemo(() => {
 		if (isSharedView) {
@@ -68,74 +49,15 @@ export function Profile() {
 			.slice(0, 3);
 	}, [isSharedView, sharedOccupations, matchResults]);
 
-	const syncMorphTitle = useCallback((scrollY: number) => {
-		const fromEl = heroTitleSlotRef.current;
-		const toEl = collapsedTitleSlotRef.current;
-		if (!fromEl || !toEl) {
-			return;
-		}
-
-		const progress = titleMorphProgressFromScrollY(scrollY);
-
-		// Below threshold: title stays in normal hero flow — no fixed morph.
-		if (progress <= 0) {
-			morphOriginRef.current = null;
-			setIsMorphing(false);
-			setTitleStyle(undefined);
-			return;
-		}
-
-		// Freeze start position when morph begins so the title peels off
-		// from where it was in the hero, then travels to the header.
-		if (!morphOriginRef.current) {
-			const rect = fromEl.getBoundingClientRect();
-			morphOriginRef.current = {
-				left: rect.left,
-				top: rect.top,
-				width: rect.width,
-			};
-		}
-
-		const from = morphOriginRef.current;
-		const to = toEl.getBoundingClientRect();
-
-		setIsMorphing(true);
-		setTitleStyle({
-			position: "fixed",
-			left: from.left + (to.left - from.left) * progress,
-			top: from.top + (to.top - from.top) * progress,
-			width: from.width + (to.width - from.width) * progress,
-			fontSize:
-				HERO_TITLE_SIZE_PX +
-				(COLLAPSED_TITLE_SIZE_PX - HERO_TITLE_SIZE_PX) * progress,
-			lineHeight: `${
-				HERO_LINE_HEIGHT_PX +
-				(COLLAPSED_LINE_HEIGHT_PX - HERO_LINE_HEIGHT_PX) * progress
-			}px`,
-			zIndex: 40,
-			pointerEvents: "none",
-			margin: 0,
-		});
-	}, []);
-
 	const handleScroll: UIEventHandler<HTMLDivElement> = useCallback(
 		(event) => {
 			onScroll(event);
-			const scrollY = event.currentTarget.scrollTop;
-			scrollYRef.current = scrollY;
-			syncMorphTitle(scrollY);
+			syncMorphTitle(
+				collapseProgressFromScrollY(event.currentTarget.scrollTop),
+			);
 		},
 		[onScroll, syncMorphTitle],
 	);
-
-	useEffect(() => {
-		const onResize = () => {
-			morphOriginRef.current = null;
-			syncMorphTitle(scrollYRef.current);
-		};
-		window.addEventListener("resize", onResize);
-		return () => window.removeEventListener("resize", onResize);
-	}, [syncMorphTitle]);
 
 	return (
 		<div
@@ -148,14 +70,13 @@ export function Profile() {
 				titleSlotRef={collapsedTitleSlotRef}
 				isSharedView={isSharedView}
 			/>
-			{isMorphing && (
-				<h1
-					className="font-semibold text-sky-900 text-left truncate will-change-[left,top,width,font-size]"
-					style={titleStyle}
-				>
-					{content["profile.title"]}
-				</h1>
-			)}
+			<MorphingTitle
+				isMorphing={isMorphing}
+				style={titleStyle}
+				className="text-sky-900"
+			>
+				{content["profile.title"]}
+			</MorphingTitle>
 			<div
 				className="relative flex-1 overflow-y-auto overflow-x-hidden"
 				onScroll={handleScroll}

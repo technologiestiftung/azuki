@@ -1,4 +1,5 @@
-import { useEffect, useState, type Ref } from "react";
+import type { RefObject } from "react";
+import { useEffect, useState } from "react";
 import type { UserProfile } from "@azuki/shared";
 import {
 	fetchProfileShortDescription,
@@ -9,7 +10,7 @@ import { ProfileActionButtons } from "./ProfileActionButtons";
 
 interface ProfileHeroProps {
 	heroControlsOpacity: number;
-	titleSlotRef: Ref<HTMLDivElement>;
+	titleSlotRef: RefObject<HTMLDivElement>;
 	showTitle: boolean;
 	isSharedView?: boolean;
 	profile: UserProfile;

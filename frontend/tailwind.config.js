@@ -186,6 +186,16 @@ export default {
 						transform: "translateX(0) rotate(0deg) translateY(0)",
 					},
 				},
+				slideOutRight: {
+					from: {
+						opacity: "1",
+						transform: "translateX(0) rotate(0deg) translateY(0)",
+					},
+					to: {
+						opacity: "0",
+						transform: "translateX(100vw) rotate(20deg) translateY(-40px)",
+					},
+				},
 				slideInRightTint: {
 					"0%, 45%": { opacity: "1" },
 					"100%": { opacity: "0" },
@@ -259,6 +269,7 @@ export default {
 				slideOutNext: "slideOutNext 0.3s var(--ease-spring) forwards",
 				slideInLeft: "slideInLeft 0.3s ease-out forwards",
 				slideInRight: "slideInRight 0.3s ease-out forwards",
+				slideOutRight: "slideOutRight 0.3s ease-in forwards",
 				slideInLeftTint:
 					"slideInLeftTint 800ms cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards",
 				slideInRightTint:

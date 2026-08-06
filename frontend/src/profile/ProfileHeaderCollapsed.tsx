@@ -1,10 +1,10 @@
-import type { Ref } from "react";
+import type { RefObject } from "react";
 import { content } from "../content";
 import { ProfileActionButtons } from "./ProfileActionButtons";
 
 interface ProfileHeaderCollapsedProps {
 	collapseProgress: number;
-	titleSlotRef: Ref<HTMLDivElement>;
+	titleSlotRef: RefObject<HTMLDivElement>;
 	isSharedView?: boolean;
 }
 

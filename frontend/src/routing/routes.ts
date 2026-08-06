@@ -25,6 +25,7 @@ export const ROUTE_PATHS = {
 	personas: "/personas",
 	personaDetail: "/personas/:id",
 	profile: "/profile",
+	about: "/about",
 } as const;
 
 export const RESULTS_PATH_PREFIX = "/results" as const;

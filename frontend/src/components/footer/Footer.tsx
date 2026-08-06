@@ -1,4 +1,6 @@
 import { content } from "../../content";
+import { useLocation } from "react-router-dom";
+import { ROUTE_PATHS } from "../../routing/routes";
 
 const footerLinks = [
 	{
@@ -24,6 +26,8 @@ const footerLinks = [
 ] as const;
 
 export function Footer() {
+	const isOnAboutPage = useLocation().pathname === ROUTE_PATHS.about;
+
 	return (
 		<div className="bg-white">
 			<div className="flex flex-col gap-4 pt-6 px-8 pb-8 rounded-t-4xl bg-sky-100">
@@ -35,7 +39,15 @@ export function Footer() {
 						rel={link.external ? "noopener noreferrer" : undefined}
 						className="flex gap-2 text-lg font-medium text-sky-900 disabled:text-gray-400 active:text-sky-800 disabled:text-sky-shade-70"
 					>
-						{link.label}
+						<span
+							className={
+								isOnAboutPage && link.label === content["footer.about"]
+									? "font-bold"
+									: "font-medium"
+							}
+						>
+							{link.label}
+						</span>
 						{link.external && (
 							<img
 								src="/icons/open-in-new-dark.svg"

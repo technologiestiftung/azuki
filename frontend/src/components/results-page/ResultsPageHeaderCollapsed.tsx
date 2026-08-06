@@ -1,9 +1,9 @@
-import type { ReactNode, Ref } from "react";
+import type { ReactNode, RefObject } from "react";
 import { GhostIconButton } from "../primitives/buttons/GhostIconButton";
 
 interface ResultsPageHeaderCollapsedProps {
 	title: ReactNode;
-	titleSlotRef: Ref<HTMLDivElement>;
+	titleSlotRef: RefObject<HTMLDivElement>;
 	shareAriaLabel: string;
 	downloadAriaLabel: string;
 	onDownload: () => void;
