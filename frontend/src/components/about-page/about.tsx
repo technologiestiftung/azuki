@@ -29,25 +29,24 @@ export const AboutPage = () => {
 
 	return (
 		<div className="flex flex-col h-full relative overflow-x-hidden pb-16">
-			<CollapsingHeaderTopRow
-				title={content["about.title"]}
-				progress={collapseProgress}
-				collapsedFill
-				leading={
-					<SecondaryIconButton
-						iconSrc="/icons/arrow-back-black.svg"
-						ariaLabel={content["about.backButton.ariaLabel"]}
-						onClick={() => navigate(ROUTE_PATHS.profile)}
-						className="transition-[background-color] duration-150"
-						style={expandedButtonBackgroundStyle(collapseProgress)}
-					/>
-				}
-			/>
-			<SecondaryIconButton />
 			<div
 				className="relative flex-1 overflow-y-auto overflow-x-hidden"
 				onScroll={handleScroll}
 			>
+				<CollapsingHeaderTopRow
+					title={content["about.title"]}
+					progress={collapseProgress}
+					collapsedFill
+					leading={
+						<SecondaryIconButton
+							iconSrc="/icons/arrow-back-black.svg"
+							ariaLabel={content["about.backButton.ariaLabel"]}
+							onClick={() => navigate(ROUTE_PATHS.profile)}
+							className="transition-[background-color] duration-150"
+							style={expandedButtonBackgroundStyle(collapseProgress)}
+						/>
+					}
+				/>
 				<div className="relative flex flex-col px-4 pt-14 pb-2">
 					<h1
 						className="text-3xl font-semibold py-2 text-sky-900"
@@ -57,7 +56,7 @@ export const AboutPage = () => {
 						{content["about.title"]}
 					</h1>
 					<div
-						className={`absolute top-0 right-0 pt-2 [animation-duration:0.6s] ${
+						className={`absolute top-0 right-0 pt-2 [animation-duration:0.6s] z-40 ${
 							isScrolledAway ? "animate-slideOutRight" : "animate-slideInRight"
 						}`}
 					>
