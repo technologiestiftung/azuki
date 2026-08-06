@@ -1,4 +1,10 @@
 import type { RefObject } from "react";
+import { useEffect, useState } from "react";
+import type { UserProfile } from "@azuki/shared";
+import {
+	fetchProfileShortDescription,
+	getCachedProfileShortDescription,
+} from "../api/client";
 import { content } from "../content";
 import { ProfileActionButtons } from "./ProfileActionButtons";
 
@@ -7,6 +13,7 @@ interface ProfileHeroProps {
 	titleSlotRef: RefObject<HTMLDivElement>;
 	showTitle: boolean;
 	isSharedView?: boolean;
+	profile: UserProfile;
 }
 
 export function ProfileHero({
@@ -14,8 +21,45 @@ export function ProfileHero({
 	titleSlotRef,
 	showTitle,
 	isSharedView = false,
+	profile,
 }: ProfileHeroProps) {
 	const hasFrostedBg = heroControlsOpacity > 0.5;
+	const [shortDescription, setShortDescription] = useState(
+		() => getCachedProfileShortDescription(profile) ?? "",
+	);
+
+	useEffect(() => {
+		const cached = getCachedProfileShortDescription(profile);
+		if (cached !== null) {
+			setShortDescription(cached);
+			return undefined;
+		}
+
+		const controller = new AbortController();
+		setShortDescription("");
+
+		void (async () => {
+			try {
+				const result = await fetchProfileShortDescription(
+					profile,
+					controller.signal,
+				);
+				if (controller.signal.aborted) {
+					return;
+				}
+				setShortDescription(result);
+			} catch {
+				if (controller.signal.aborted) {
+					return;
+				}
+				setShortDescription("");
+			}
+		})();
+
+		return () => {
+			controller.abort();
+		};
+	}, [profile]);
 
 	return (
 		<>
@@ -49,11 +93,11 @@ export function ProfileHero({
 							className="w-full h-full object-cover"
 						/>
 					</div>
-					{!isSharedView && (
+					{/* {!isSharedView && (
 						<div className="absolute bottom-0 right-0 bg-sky-900 rounded-full w-8 h-8 flex items-center justify-center">
 							<img src="/icons/edit.svg" alt="" className="w-4 h-4" />
 						</div>
-					)}
+					)} */}
 				</div>
 
 				<div className="flex flex-col items-center">
@@ -71,7 +115,7 @@ export function ProfileHero({
 						className="text-xl font-normal leading-7 text-sky-900 text-center transition-opacity duration-150"
 						style={{ opacity: heroControlsOpacity }}
 					>
-						{content["profile.shortDescriptionPlaceholder"]}
+						{shortDescription}
 					</p>
 				</div>
 			</div>

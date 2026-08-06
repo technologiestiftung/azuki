@@ -8,6 +8,7 @@ const emptyUserProfile: UserProfile = {
 	favoriteSubjects: [],
 	customSubjects: [],
 	interests: [],
+	preferredJobs: [],
 	customInterests: [],
 	workExpectations: [],
 	customWorkExpectations: [],

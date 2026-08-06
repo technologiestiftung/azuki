@@ -7,7 +7,8 @@ import { strengths as strengthOptions } from "../components/competence-profile/s
 import { workExpectationOptions } from "../components/competence-profile/steps/work-expectation-options";
 import { workPreferencePairs } from "../content/work-preference-pairs";
 import { noGos as noGoOptions } from "../components/competence-profile/steps/no-gos-step/no-gos";
-import { ProfileCollapsible } from "./ProfileCollapsible";
+import { ProfileWrapCollapsible } from "./ProfileWrapCollapsible";
+import { ProfileStackCollapsible } from "./ProfileStackCollapsible";
 import { ProfileChip } from "./ProfileChip";
 
 interface ProfileAboutSectionProps {
@@ -35,21 +36,15 @@ function resolveInterestLabel(id: string): string {
 }
 
 export function ProfileAboutSection({ profile }: ProfileAboutSectionProps) {
-	const favoriteSubjects = [
-		...profile.favoriteSubjects,
-		...profile.customSubjects,
-	];
-	const interests = [...profile.interests, ...profile.customInterests];
+	const favoriteSubjects = profile.favoriteSubjects;
+	const interests = profile.interests;
 	const strengthScores = Object.entries(profile.strengths);
 	const strongStrengths = strengthScores.filter(([, value]) => value >= 0.5);
 	const hardships = strengthScores.filter(([, value]) => value < 0.5);
 	const selectedCustomStrengths = profile.selectedCustomStrengths.filter(
 		(strength) => profile.customStrengths.includes(strength),
 	);
-	const workExpectations = [
-		...profile.workExpectations,
-		...profile.customWorkExpectations,
-	];
+	const workExpectations = profile.workExpectations;
 	const workPreferences = Object.entries(profile.workPreferences).filter(
 		(entry): entry is [string, "a" | "b"] =>
 			entry[1] === "a" || entry[1] === "b",
@@ -83,29 +78,25 @@ export function ProfileAboutSection({ profile }: ProfileAboutSectionProps) {
 				</div>
 			</div>
 			{favoriteSubjects.length > 0 && (
-				<ProfileCollapsible title={content["profile.favoriteSubjects"]}>
+				<ProfileWrapCollapsible title={content["profile.favoriteSubjects"]}>
 					{favoriteSubjects.map((subject) => (
 						<ProfileChip key={subject}>
 							{resolveSubjectLabel(subject)}
 						</ProfileChip>
 					))}
-				</ProfileCollapsible>
+				</ProfileWrapCollapsible>
 			)}
 			{interests.length > 0 && (
-				<ProfileCollapsible title={content["profile.interests"]}>
+				<ProfileWrapCollapsible title={content["profile.interests"]}>
 					{interests.map((interest) => (
 						<ProfileChip key={interest}>
 							{resolveInterestLabel(interest)}
 						</ProfileChip>
 					))}
-				</ProfileCollapsible>
+				</ProfileWrapCollapsible>
 			)}
 			{(strongStrengths.length > 0 || selectedCustomStrengths.length > 0) && (
-				<ProfileCollapsible
-					title={content["profile.strengths"]}
-					layout="stack"
-					fullyCollapsible
-				>
+				<ProfileStackCollapsible title={content["profile.strengths"]}>
 					{strongStrengths.map(([strengthId, value]) => {
 						const label =
 							strengthOptions.find((strength) => strength.id === strengthId)
@@ -135,14 +126,10 @@ export function ProfileAboutSection({ profile }: ProfileAboutSectionProps) {
 							</div>
 						</div>
 					))}
-				</ProfileCollapsible>
+				</ProfileStackCollapsible>
 			)}
 			{hardships.length > 0 && (
-				<ProfileCollapsible
-					title={content["profile.hardships"]}
-					layout="stack"
-					fullyCollapsible
-				>
+				<ProfileStackCollapsible title={content["profile.hardships"]}>
 					{hardships.map(([strengthId, value]) => {
 						const label =
 							strengthOptions.find((strength) => strength.id === strengthId)
@@ -163,10 +150,10 @@ export function ProfileAboutSection({ profile }: ProfileAboutSectionProps) {
 							</div>
 						);
 					})}
-				</ProfileCollapsible>
+				</ProfileStackCollapsible>
 			)}
 			{workExpectations.length > 0 && (
-				<ProfileCollapsible title={content["profile.workExpectations"]}>
+				<ProfileWrapCollapsible title={content["profile.workExpectations"]}>
 					{workExpectations.map((expectation) => (
 						<ProfileChip key={expectation}>
 							{workExpectationOptions.find(
@@ -174,14 +161,16 @@ export function ProfileAboutSection({ profile }: ProfileAboutSectionProps) {
 							)?.label ?? expectation}
 						</ProfileChip>
 					))}
-				</ProfileCollapsible>
+				</ProfileWrapCollapsible>
 			)}
 			{profile.practicalExperiences.length > 0 && (
-				<ProfileCollapsible title={content["profile.practicalExperiences"]}>
+				<ProfileWrapCollapsible title={content["profile.practicalExperiences"]}>
 					{profile.practicalExperiences.map((experience) => (
 						<ProfileChip key={experience.id} className="gap-1.5">
-							<span className="truncate">{experience.description}</span>
-							<span className="flex items-center justify-center text-sm text-sky-300">
+							<span data-chip-label className="min-w-0">
+								{experience.description}
+							</span>
+							<span className="flex shrink-0 items-center justify-center text-sm text-sky-300">
 								{experience.rating}
 								<img
 									src="/icons/theme-colored-star.svg"
@@ -191,10 +180,10 @@ export function ProfileAboutSection({ profile }: ProfileAboutSectionProps) {
 							</span>
 						</ProfileChip>
 					))}
-				</ProfileCollapsible>
+				</ProfileWrapCollapsible>
 			)}
 			{workPreferences.length > 0 && (
-				<ProfileCollapsible title={content["profile.workPreferences"]}>
+				<ProfileWrapCollapsible title={content["profile.workPreferences"]}>
 					{workPreferences.map(([preferenceId, choice]) => {
 						const pair = workPreferencePairs.find(
 							(item) => item.id === preferenceId,
@@ -210,22 +199,17 @@ export function ProfileAboutSection({ profile }: ProfileAboutSectionProps) {
 							</ProfileChip>
 						);
 					})}
-				</ProfileCollapsible>
+				</ProfileWrapCollapsible>
 			)}
-			{(rejectedNoGos.length > 0 || profile.customNoGos.length > 0) && (
-				<ProfileCollapsible title={content["profile.noGos"]}>
+			{rejectedNoGos.length > 0 && (
+				<ProfileWrapCollapsible title={content["profile.noGos"]}>
 					{rejectedNoGos.map((noGoId) => (
 						<ProfileChip key={noGoId} variant="noGo" className="gap-1.5">
 							{noGoOptions.find((entry) => entry.id === noGoId)?.title ??
 								noGoId}
 						</ProfileChip>
 					))}
-					{profile.customNoGos.map((customNoGo) => (
-						<ProfileChip key={customNoGo} variant="noGo" className="gap-1.5">
-							{customNoGo}
-						</ProfileChip>
-					))}
-				</ProfileCollapsible>
+				</ProfileWrapCollapsible>
 			)}
 		</div>
 	);

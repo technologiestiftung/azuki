@@ -248,6 +248,7 @@ function normalizePersonaProfile(raw: Persona["profile"]): Persona["profile"] {
 		favoriteSubjects: raw.favoriteSubjects ?? [],
 		customSubjects: raw.customSubjects ?? [],
 		interests: raw.interests ?? [],
+		preferredJobs: raw.preferredJobs ?? [],
 		customInterests: raw.customInterests ?? [],
 		workExpectations: raw.workExpectations ?? [],
 		customWorkExpectations: raw.customWorkExpectations ?? [],

@@ -26,6 +26,9 @@
  *   9. Practical experience — keyword overlap between free-text descriptions
  *      and occupation metadata, weighted by category (internship/job strongest)
  *      and star rating (5★ full boost, 3★ neutral). Capped at ±8.
+ *  10. Preferred jobs — explicit user-stated Ausbildungswünsche; exact name
+ *      matches get the strongest boost, with substring/keyword tiers for
+ *      gender variants and vague text. Capped at +30.
  *
  * SalaryBands is built from the occupation set and provides salary
  * percentile thresholds used by the good_salary work value.
@@ -39,6 +42,7 @@ import {
 	scoreNoGos,
 	scorePopularity,
 	scorePracticalExperience,
+	scorePreferredJobs,
 	scoreStrengths,
 	scoreSubjects,
 	scoreWorkPreferences,
@@ -61,6 +65,7 @@ export function scoreOccupation(
 	score += scoreSubjects(occupation, profile);
 	score += scoreInterests(occupation, profile);
 	score += scorePracticalExperience(occupation, profile);
+	score += scorePreferredJobs(occupation, profile);
 	score += scoreStrengths(occupation, profile);
 	score += scoreWorkExpectations(occupation, profile, salaryBands);
 	score += scorePopularity(occupation, profile);

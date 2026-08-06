@@ -8,11 +8,11 @@ const footerLinks = [
 		href: "/about",
 		external: false,
 	},
-	{
-		label: content["footer.feedback"],
-		href: content["footer.feedback.link"],
-		external: true,
-	},
+	// {
+	// 	label: content["footer.feedback"],
+	// 	href: content["footer.feedback.link"],
+	// 	external: true,
+	// },
 	{
 		label: content["footer.imprint"],
 		href: content["footer.imprint.link"],

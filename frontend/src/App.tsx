@@ -2,7 +2,6 @@ import { lazy, Suspense, useEffect } from "react";
 import { Routes, Route, Navigate, useLocation } from "react-router-dom";
 import { useToastStore } from "./store/useToastStore";
 import { LoginScreen } from "./components/login-screen/LoginScreen";
-import { WelcomeCarousel } from "./components/welcome-screen/WelcomeCarousel";
 import { StartScreen } from "./components/competence-profile/start/StartScreen";
 import { InSchoolStep } from "./components/competence-profile/steps/InSchoolStep";
 import { SchoolDegreeStep } from "./components/competence-profile/steps/school-degree/SchoolDegreeStep";
@@ -22,6 +21,7 @@ import { PersonaDetailPage } from "./components/personas/PersonaDetailPage";
 import { ROUTE_PATHS } from "./routing/routes";
 import { Profile } from "./profile/Profile";
 import { AboutPage } from "./components/about-page/about";
+import { PreferredJobsStep } from "./components/competence-profile/steps/PreferredJobsStep";
 
 const LoadingScreen = lazy(() =>
 	import("./components/loading-screen/LoadingScreen").then((mod) => ({
@@ -48,7 +48,6 @@ function App() {
 			<div key={location.pathname} className="animate-fadeIn h-full">
 				<Routes>
 					<Route path={ROUTE_PATHS.login} element={<LoginScreen />} />
-					<Route path={ROUTE_PATHS.welcome} element={<WelcomeCarousel />} />
 					<Route path={ROUTE_PATHS.start} element={<StartScreen />} />
 					<Route
 						path={ROUTE_PATHS.educationInSchool}
@@ -63,6 +62,10 @@ function App() {
 						element={<SchoolSubjectsStep />}
 					/>
 					<Route path={ROUTE_PATHS.interests} element={<InterestsStep />} />
+					<Route
+						path={ROUTE_PATHS.preferredJob}
+						element={<PreferredJobsStep />}
+					/>
 					<Route path={ROUTE_PATHS.strengths} element={<StrengthsStep />} />
 					<Route
 						path={ROUTE_PATHS.expectations}
@@ -104,7 +107,7 @@ function App() {
 					<Route path={ROUTE_PATHS.about} element={<AboutPage />} />
 					<Route
 						path="*"
-						element={<Navigate to={ROUTE_PATHS.welcome} replace />}
+						element={<Navigate to={ROUTE_PATHS.start} replace />}
 					/>
 				</Routes>
 			</div>

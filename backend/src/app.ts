@@ -22,6 +22,10 @@ import occupationsData from "./data/berufe.json";
 import { VacanciesRequestSchema } from "./schemas/vacancies.js";
 import { ReverseGeocodeRequestSchema } from "./schemas/reverseGeocode.js";
 import { searchVacancies } from "./jobsuche/client.js";
+import {
+	mergeVacancyOccupationNames,
+	resolvePreferredJobVacancyNames,
+} from "./matching/resolvePreferredJobs.js";
 import { resolveLocationFromCoordinates } from "./nominatim/client.js";
 import { runEval } from "../eval/run.js";
 import { z } from "zod";
@@ -155,6 +159,8 @@ app.post("/api/match", async (c) => {
 				images: scored.occupation.images.slice(0, 3),
 				shortDescription: resolveOccupationShortDescription(scored.occupation),
 				reasoning: "Dieser Beruf passt zu deinem Profil.",
+				salaryKnown: scored.occupation.salaryKnown,
+				salaryMonthlyMedian: scored.occupation.salaryMonthlyMedian,
 				...occupationMatchMeta(scored.occupation),
 			})),
 		};
@@ -179,10 +185,24 @@ app.post("/api/vacancies", async (c) => {
 		return c.json({ error: "Invalid request body" }, 400);
 	}
 
-	const { postcode, occupations: occupationNames, distance } = parsed.data;
+	const {
+		postcode,
+		occupations: occupationNames,
+		preferredJobs,
+		distance,
+	} = parsed.data;
+
+	const preferredOccupationNames = resolvePreferredJobVacancyNames(
+		preferredJobs,
+		occupations,
+	);
+	const mergedOccupationNames = mergeVacancyOccupationNames(
+		preferredOccupationNames,
+		occupationNames,
+	);
 
 	const results = await Promise.all(
-		occupationNames.map((occupationName) =>
+		mergedOccupationNames.map((occupationName) =>
 			searchVacancies(occupationName, postcode, distance),
 		),
 	);
@@ -213,6 +233,8 @@ app.get("/api/shared-match", (c) => {
 				images: occupation.images.slice(0, 3),
 				shortDescription: resolveOccupationShortDescription(occupation),
 				reasoning: "",
+				salaryKnown: occupation.salaryKnown,
+				salaryMonthlyMedian: occupation.salaryMonthlyMedian,
 				...occupationMatchMeta(occupation),
 			},
 		];
@@ -349,6 +371,37 @@ app.post("/api/occupations/:id/match-explanations", async (c) => {
 	} catch (err) {
 		console.error("Match explanations error:", err);
 		return c.json({ error: "Match explanations unavailable" }, 503);
+	}
+});
+
+app.post("/api/profile/short-description", async (c) => {
+	if (!isAuthorized(c)) {
+		return c.json({ error: "Unauthorized" }, 401);
+	}
+
+	let body: unknown;
+	try {
+		body = await c.req.json();
+	} catch {
+		return c.json({ error: "Invalid request body" }, 400);
+	}
+
+	const parsedProfile = UserProfileSchema.safeParse(body);
+	if (!parsedProfile.success) {
+		return c.json({ error: "Invalid request body" }, 400);
+	}
+
+	try {
+		const { generateProfileShortDescription } = await import(
+			"./ai/profileShortDescription.js"
+		);
+		const shortDescription = await generateProfileShortDescription(
+			parsedProfile.data,
+		);
+		return c.json({ shortDescription });
+	} catch (err) {
+		console.error("Profile short description error:", err);
+		return c.json({ error: "Profile short description unavailable" }, 503);
 	}
 });
 

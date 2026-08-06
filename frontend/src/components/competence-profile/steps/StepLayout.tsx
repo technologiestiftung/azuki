@@ -6,7 +6,7 @@ import { content } from "../../../content";
 import { PrimaryButton } from "../../primitives/buttons/PrimaryButton";
 import { GhostButton } from "../../primitives/buttons/GhostButton";
 import { BackButton } from "../../back-button/BackButton";
-import { pathnameToStep, getPreviousPath } from "../../../routing/routes";
+import { getGranularProgress, getPreviousPath } from "../../../routing/routes";
 import { Toast } from "../../primitives/toast/Toast";
 import { useToastStore } from "../../../store/useToastStore";
 
@@ -42,7 +42,7 @@ export function StepLayout({
 }: StepLayoutProps) {
 	const { pathname, hash } = useLocation();
 	const navigate = useNavigate();
-	const progressStep = pathnameToStep(pathname);
+	const progress = getGranularProgress(pathname, hash);
 
 	const handleBack = () => {
 		closeToast();
@@ -64,7 +64,7 @@ export function StepLayout({
 			<div className="flex items-center gap-3 pb-1 shrink-0 px-4">
 				<BackButton onClick={handleBack} />
 				<div className="flex-1">
-					<ProgressBar currentStep={progressStep} />
+					<ProgressBar progress={progress} />
 				</div>
 			</div>
 			<div className="flex flex-1 flex-col min-h-0">

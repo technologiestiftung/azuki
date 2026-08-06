@@ -30,6 +30,7 @@ const sampleProfile: UserProfile = {
 	workPreferences: { environment: "a", people: null },
 	noGos: { laerm: "rejected", schmutz: null },
 	customNoGos: ["Nachtarbeit"],
+	preferredJobs: ["Fachinformatiker"],
 };
 
 describe("sharedProfileParams", () => {
