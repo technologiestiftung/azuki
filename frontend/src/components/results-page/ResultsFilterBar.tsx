@@ -5,6 +5,8 @@ import {
 	hasCustomLocationFilter,
 } from "../filter-bottom-sheet/plzLocality";
 import { FilterChipButton } from "../primitives/buttons/FilterChipButton";
+import { COLLAPSED_THRESHOLD } from "../collapsing-header/CollapsingHeaderTopRow";
+import { TOP_ROW_HEIGHT_PX } from "./ResultsPageHeader";
 import { getOccupationTagLabel } from "./utils/resultTagChips";
 
 export interface ResultsFilterBarProps {
@@ -19,6 +21,8 @@ export interface ResultsFilterBarProps {
 	onOpenLocationFilter?: () => void;
 	showFavoritesOnly: boolean;
 	onToggleFavoritesOnly: () => void;
+	/** 0–1 scroll progress; drives collapse border visibility. */
+	scrollProgress?: number;
 }
 
 export function ResultsFilterBar({
@@ -33,6 +37,7 @@ export function ResultsFilterBar({
 	onOpenLocationFilter,
 	showFavoritesOnly,
 	onToggleFavoritesOnly,
+	scrollProgress = 0,
 }: ResultsFilterBarProps) {
 	const useOccupationFilter =
 		selectedOccupationIds !== undefined &&
@@ -59,9 +64,17 @@ export function ResultsFilterBar({
 	const locationChipLabel = hasLocationApplied
 		? formatLocationFilterChipLabel(appliedLocationFilter)
 		: content["results.filter.location.title"];
+	const collapsed = scrollProgress > COLLAPSED_THRESHOLD;
 
 	return (
-		<div className="px-4 py-[18px] flex gap-3 w-full">
+		<div
+			className={`sticky z-20 px-4 py-2 flex gap-3 w-full bg-white transition-[border-color] duration-150 ease-[cubic-bezier(0.25,0,0.25,1)] ${
+				collapsed
+					? "border-b-2 border-sky-shade-20"
+					: "border-b-2 border-transparent"
+			}`}
+			style={{ top: TOP_ROW_HEIGHT_PX }}
+		>
 			<div className="p-2 w-10 h-10 flex items-center justify-center">
 				<img src="/icons/filter.svg" alt="" className="h-5 w-5 shrink-0" />
 			</div>

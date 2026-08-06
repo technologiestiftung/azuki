@@ -20,6 +20,7 @@ import { shareResultsLink } from "./utils/shareResults";
 import { ROUTE_PATHS } from "../../routing/routes";
 import {
 	ResultsPageHeader,
+	TOP_ROW_HEIGHT_PX,
 	useResultsPageScrollProgress,
 } from "./ResultsPageHeader";
 
@@ -94,7 +95,7 @@ export function ResultsPage() {
 	}, [visibleOccupations]);
 
 	return (
-		<div className="flex flex-col h-full pb-16">
+		<div className="relative flex flex-col h-full pb-16">
 			<ResultsPageHeader
 				scrollProgress={scrollProgress}
 				title={content["results.title"]}
@@ -105,15 +106,6 @@ export function ResultsPage() {
 				downloadDisabled={visibleOccupations.length === 0}
 				shareDisabled={visibleOccupations.length === 0}
 			/>
-			<ResultsFilterBar
-				hasLocationFilter={false}
-				selectedOccupationTypeTagIds={
-					tagFilter.appliedValue.selectedOccupationTypeTagIds
-				}
-				onOpenTagFilter={openTagFilter}
-				showFavoritesOnly={showFavoritesOnly}
-				onToggleFavoritesOnly={toggleFavoritesOnly}
-			/>
 			<OccupationTagsFilterBottomSheet
 				key={tagFilter.sheetKey}
 				open={tagFilter.isOpen}
@@ -123,36 +115,54 @@ export function ResultsPage() {
 				onApply={tagFilter.apply}
 				onReset={tagFilter.reset}
 			/>
+			<div className="flex-1 overflow-y-auto" onScroll={handleListScroll}>
+				<h1
+					className="text-3xl font-semibold text-left text-sky-900 py-2 px-[18px]"
+					style={{
+						marginTop: TOP_ROW_HEIGHT_PX,
+						opacity: 1 - scrollProgress,
+					}}
+					aria-hidden={scrollProgress >= 0.5}
+				>
+					{content["results.title"]}
+				</h1>
+				<ResultsFilterBar
+					hasLocationFilter={false}
+					selectedOccupationTypeTagIds={
+						tagFilter.appliedValue.selectedOccupationTypeTagIds
+					}
+					onOpenTagFilter={openTagFilter}
+					showFavoritesOnly={showFavoritesOnly}
+					onToggleFavoritesOnly={toggleFavoritesOnly}
+					scrollProgress={scrollProgress}
+				/>
+				<div className="px-4 pb-4 space-y-3">
+					{!isLoadingShared && visibleOccupations.length > 0 && (
+						<>
+							{visibleOccupations.map((occupation: MatchedOccupation) => (
+								<ResultCard key={occupation.id} occupation={occupation} />
+							))}
+							<BottomCard />
+						</>
+					)}
+					{!isLoadingShared && visibleOccupations.length === 0 && (
+						<div className="flex px-4 pb-4 items-center h-full">
+							<div className="flex flex-col items-center justify-center gap-5 px-5">
+								<div className="flex items-center justify-center object-contain p-2">
+									<img
+										src="/illustrations/no-results-star.svg"
+										alt=""
+										className="w-[200px]"
+									/>
+								</div>
 
-			<div
-				className="flex-1 px-4 pb-4 space-y-3 overflow-y-auto"
-				onScroll={handleListScroll}
-			>
-				{!isLoadingShared && visibleOccupations.length > 0 && (
-					<>
-						{visibleOccupations.map((occupation: MatchedOccupation) => (
-							<ResultCard key={occupation.id} occupation={occupation} />
-						))}
-						<BottomCard />
-					</>
-				)}
-				{!isLoadingShared && visibleOccupations.length === 0 && (
-					<div className="flex px-4 pb-4 items-center h-full">
-						<div className="flex flex-col items-center justify-center gap-5 px-5">
-							<div className="flex items-center justify-center object-contain p-2">
-								<img
-									src="/illustrations/no-results-star.svg"
-									alt=""
-									className="w-[200px]"
-								/>
+								<p className="text-lg font-medium text-gray-1000 text-center">
+									{content["results.noResults"]}
+								</p>
 							</div>
-
-							<p className="text-lg font-medium text-gray-1000 text-center">
-								{content["results.noResults"]}
-							</p>
 						</div>
-					</div>
-				)}
+					)}
+				</div>
 			</div>
 			<BottomNav />
 		</div>
