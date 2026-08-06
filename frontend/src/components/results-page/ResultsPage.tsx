@@ -95,17 +95,7 @@ export function ResultsPage() {
 	}, [visibleOccupations]);
 
 	return (
-		<div className="relative flex flex-col h-full pb-16">
-			<ResultsPageHeader
-				scrollProgress={scrollProgress}
-				title={content["results.title"]}
-				shareAriaLabel={content["results.share.ariaLabel"]}
-				downloadAriaLabel={content["results.download.ariaLabel"]}
-				onDownload={handleDownload}
-				onShare={handleShare}
-				downloadDisabled={visibleOccupations.length === 0}
-				shareDisabled={visibleOccupations.length === 0}
-			/>
+		<div className="relative flex flex-col h-full pb-16 bg-white">
 			<OccupationTagsFilterBottomSheet
 				key={tagFilter.sheetKey}
 				open={tagFilter.isOpen}
@@ -116,8 +106,18 @@ export function ResultsPage() {
 				onReset={tagFilter.reset}
 			/>
 			<div className="flex-1 overflow-y-auto" onScroll={handleListScroll}>
+				<ResultsPageHeader
+					scrollProgress={scrollProgress}
+					title={content["results.title"]}
+					shareAriaLabel={content["results.share.ariaLabel"]}
+					downloadAriaLabel={content["results.download.ariaLabel"]}
+					onDownload={handleDownload}
+					onShare={handleShare}
+					downloadDisabled={visibleOccupations.length === 0}
+					shareDisabled={visibleOccupations.length === 0}
+				/>
 				<h1
-					className="text-3xl font-semibold text-left text-sky-900 py-2 px-[18px]"
+					className="text-3xl font-semibold text-left bg-white text-sky-900 py-2 px-[18px]"
 					style={{
 						marginTop: TOP_ROW_HEIGHT_PX,
 						opacity: 1 - scrollProgress,

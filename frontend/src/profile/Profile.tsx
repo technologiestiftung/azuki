@@ -41,24 +41,24 @@ export function Profile() {
 				isSharedView ? "" : "pb-16"
 			}`}
 		>
-			<CollapsingHeaderTopRow
-				title={content["profile.title"]}
-				progress={collapseProgress}
-				collapsedFill
-				gradientFrom="sky-100"
-				trailing={
-					!isSharedView ? (
-						<ProfileActionButtons
-							buttonClassName="transition-[background-color] duration-150"
-							buttonStyle={expandedButtonBackgroundStyle(collapseProgress)}
-						/>
-					) : undefined
-				}
-			/>
 			<div
 				className="relative flex-1 overflow-y-auto overflow-x-hidden"
 				onScroll={onScroll}
 			>
+				<CollapsingHeaderTopRow
+					title={content["profile.title"]}
+					progress={collapseProgress}
+					collapsedFill
+					gradientFrom="sky-100"
+					trailing={
+						!isSharedView ? (
+							<ProfileActionButtons
+								buttonClassName="transition-[background-color] duration-150"
+								buttonStyle={expandedButtonBackgroundStyle(collapseProgress)}
+							/>
+						) : undefined
+					}
+				/>
 				<ProfileHero
 					heroControlsOpacity={heroControlsOpacity}
 					titleOpacity={1 - collapseProgress}

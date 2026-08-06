@@ -1,4 +1,11 @@
-import { useCallback, useEffect, useMemo } from "react";
+import {
+	useCallback,
+	useEffect,
+	useMemo,
+	useRef,
+	useState,
+	type UIEventHandler,
+} from "react";
 import { useParams, useSearchParams } from "react-router-dom";
 import {
 	buildOccupationShareText,
@@ -45,6 +52,28 @@ export function OccupationDetailPage() {
 		heroControlsOpacity,
 		heroImageParallaxY,
 	} = useOccupationDetailScroll();
+
+	const titleRef = useRef<HTMLHeadingElement>(null);
+	const [smallTitleOpacity, setSmallTitleOpacity] = useState(0);
+
+	const handleScroll: UIEventHandler<HTMLDivElement> = useCallback(
+		(event) => {
+			onScroll(event);
+			const titleEl = titleRef.current;
+			if (!titleEl) {
+				return;
+			}
+			const distanceFromTop =
+				titleEl.getBoundingClientRect().bottom -
+				event.currentTarget.getBoundingClientRect().top;
+			const FADE_START_PX = 64;
+			const FADE_END_PX = 8;
+			const progress =
+				(FADE_START_PX - distanceFromTop) / (FADE_START_PX - FADE_END_PX);
+			setSmallTitleOpacity(Math.min(1, Math.max(0, progress)));
+		},
+		[onScroll],
+	);
 
 	const liveMatchPercent =
 		detail.matchedOccupation !== undefined
@@ -179,11 +208,12 @@ export function OccupationDetailPage() {
 					isFavorite={detail.isFavorite}
 					onToggleFavorite={detail.toggleFavorite}
 					onShare={handleShare}
+					titleOpacity={smallTitleOpacity}
 				/>
 			</div>
 			<div
 				className="relative flex-1 overflow-y-auto overflow-x-hidden"
-				onScroll={onScroll}
+				onScroll={handleScroll}
 			>
 				<div className="sticky top-0 z-0">
 					<OccupationDetailHero
@@ -198,7 +228,10 @@ export function OccupationDetailPage() {
 					/>
 				</div>
 				<div className="relative -mt-4 flex flex-col gap-8 bg-sky-white rounded-t-[20px] pb-8 z-10">
-					<h1 className="text-3xl font-semibold text-sky-900 px-[18px] pt-4 ">
+					<h1
+						ref={titleRef}
+						className="text-3xl font-semibold text-sky-900 px-[18px] pt-4 "
+					>
 						{detail.displayName}
 					</h1>
 					{statusMessage ? (
