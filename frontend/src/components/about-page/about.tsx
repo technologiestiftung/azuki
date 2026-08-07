@@ -1,7 +1,6 @@
 import { useCallback, useState, type UIEventHandler } from "react";
 import { Footer } from "../footer/Footer";
 import { content } from "../../content";
-import { BottomNav } from "../bottom-nav/BottomNav";
 import { SecondaryIconButton } from "../primitives/buttons/SecondaryIconButton";
 import { useNavigate } from "react-router-dom";
 import { ROUTE_PATHS } from "../../routing/routes";
@@ -46,7 +45,7 @@ export const AboutPage = () => {
 	);
 
 	return (
-		<div className="flex flex-col h-full relative overflow-x-hidden pb-16">
+		<div className="flex flex-col h-full relative overflow-x-hidden">
 			<AboutHeaderCollapsed
 				collapseProgress={collapseProgress}
 				titleSlotRef={collapsedTitleSlotRef}
@@ -132,7 +131,6 @@ export const AboutPage = () => {
 				</div>
 				<Footer />
 			</div>
-			<BottomNav />
 		</div>
 	);
 };

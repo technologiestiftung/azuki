@@ -62,8 +62,8 @@ export function ProfileAboutSection({ profile }: ProfileAboutSectionProps) {
 				<div className="flex flex-col gap-3 bg-sky-shade-10 rounded-xl p-4">
 					<h3 className="pl-1 font-semibold text-base text-sky-900">
 						{profile.inSchool
-							? content["profile.schoolDegreeLabel.inSchool"]
-							: content["profile.schoolDegreeLabel.planned"]}
+							? content["profile.schoolDegreeLabel.planned"]
+							: content["profile.schoolDegreeLabel.inSchool"]}
 					</h3>
 					<div className="flex gap-2 items-center justify-start">
 						<img src="/icons/school.svg" alt="" className="w-5 h-5" />
