@@ -1,6 +1,33 @@
 <svg width="390" height="336" viewBox="0 0 390 336" fill="none" xmlns="http://www.w3.org/2000/svg">
 <style>
 
+@keyframes kf_binoculars_transform_0 {
+  0% {
+    transform: translate(120.35px, 373px);
+  }
+  7.666% {
+    transform: translate(120.35px, 373px);
+    animation-timing-function: cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  22.034% {
+    transform: translate(120.35px, 148px);
+  }
+  100% {
+    transform: translate(120.35px, 148px);
+  }
+}
+#binoculars {
+  transform-origin: 0 0;
+  transform: translate(120.35px, 148px);
+  animation: kf_binoculars_transform_0 5.9s linear forwards;
+}
+@media (prefers-reduced-motion: reduce) {
+  #binoculars {
+    animation: none;
+    transform: translate(120.35px, 148px);
+  }
+}
+
 @keyframes kf_eye-left_offset_distance_0 {
   0% {
     offset-distance: 0%;

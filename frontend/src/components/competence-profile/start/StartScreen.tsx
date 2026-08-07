@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { content } from "../../../content";
 import { useFlowNavigation } from "../../../routing/useFlowNavigation";
@@ -12,6 +12,63 @@ interface Slide {
 	description: string | null;
 	cta: string;
 	imageAlign: "items-end" | "items-center";
+}
+
+function WelcomeStarIllustration({
+	image,
+	imageAlign,
+	playKey,
+	isFirstLoad,
+}: {
+	image: string;
+	imageAlign: Slide["imageAlign"];
+	playKey: number;
+	isFirstLoad: boolean;
+}) {
+	const wrapperRef = useRef<HTMLDivElement>(null);
+
+	useEffect(() => {
+		if (isFirstLoad) {
+			return () => {};
+		}
+		const el = wrapperRef.current;
+		if (!el) {
+			return () => {};
+		}
+
+		const easing =
+			getComputedStyle(el).getPropertyValue("--ease-spring").trim() ||
+			"ease-out";
+		const animation = el.animate(
+			[
+				{ opacity: 0, transform: "translateY(100%)" },
+				{ opacity: 1, transform: "translateY(0)" },
+			],
+			{ duration: 700, easing, fill: "forwards" },
+		);
+
+		return () => {
+			animation.cancel();
+		};
+	}, [playKey, isFirstLoad]);
+
+	return (
+		<div
+			ref={wrapperRef}
+			className={`flex h-full w-full px-4 ${imageAlign} justify-center ${
+				isFirstLoad ? "animate-welcomeStarRise" : ""
+			}`}
+		>
+			<img
+				src={image}
+				alt=""
+				className={`max-h-full max-w-full object-contain pointer-events-none ${
+					isFirstLoad ? "animate-welcomeStarFade" : ""
+				}`}
+				draggable={false}
+			/>
+		</div>
+	);
 }
 
 const slides: Slide[] = [
@@ -183,6 +240,8 @@ export function StartScreen() {
 						}
 
 						const playKey = illustrationKeys[index];
+						const isWelcomeStar = index === 0;
+						const isFirstLoad = isWelcomeStar && playKey === 0;
 
 						return (
 							<div
@@ -190,29 +249,38 @@ export function StartScreen() {
 								className={`absolute inset-0 flex overflow-hidden bg-sky-100 ${animationClass}`}
 								style={{ zIndex: index === currentSlide ? 10 : 0 }}
 							>
-								<div
-									key={`${index}-${playKey}`}
-									className={`flex h-full w-full px-4 ${slide.imageAlign} justify-center animate-illustrationEnter`}
-								>
-									<img
-										src={`${slide.image}?v=${playKey}`}
-										alt=""
-										className="max-h-full max-w-full object-contain pointer-events-none"
-										draggable={false}
+								{isWelcomeStar ? (
+									<WelcomeStarIllustration
+										image={slide.image}
+										imageAlign={slide.imageAlign}
+										playKey={playKey}
+										isFirstLoad={isFirstLoad}
 									/>
-								</div>
+								) : (
+									<div
+										key={`${index}-${playKey}`}
+										className={`flex h-full w-full px-4 ${slide.imageAlign} justify-center animate-illustrationEnter`}
+									>
+										<img
+											src={`${slide.image}?v=${playKey}`}
+											alt=""
+											className="max-h-full max-w-full object-contain pointer-events-none"
+											draggable={false}
+										/>
+									</div>
+								)}
 							</div>
 						);
 					})}
 				</div>
-				<div className="animate-slideInBottom [animation-duration:0.5s]">
-					<div className="flex flex-col gap-3 pt-6 bg-sky-white rounded-t-4xl">
+				<div className="animate-startSheetEnter bg-sky-white rounded-t-4xl">
+					<div className="flex flex-col gap-3 pt-6">
 						<div
 							role="region"
 							aria-roledescription="carousel"
 							aria-label={`${currentSlide + 1} / ${SLIDE_COUNT}`}
 							tabIndex={0}
-							className="relative overflow-hidden text-sky-900 h-44 touch-none select-none focus-visible:outline-1 focus-visible:outline-sky-500 rounded-[7px]"
+							className="relative overflow-hidden text-sky-900 h-44 touch-none select-none focus-visible:outline-1 focus-visible:outline-sky-500 rounded-[7px] animate-startSheetContentFade"
 							{...swipeHandlers}
 						>
 							{slides.map((slide, index) => {
@@ -267,26 +335,25 @@ export function StartScreen() {
 							</div>
 						</div>
 					</div>
-				</div>
-
-				<div className="bg-sky-white">
-					<div className="w-full flex flex-col px-4 pb-4 pt-4 gap-y-2 max-w-[430px] mx-auto">
-						<StartCtaButton
-							activeCta={activeSlide.cta}
-							previousCta={
-								previousSlide !== null ? slides[previousSlide].cta : null
-							}
-							direction={slideDirection}
-							onClick={handleNext}
-						/>
-						{shouldPrefillProfile && (
-							<GhostButton
-								onClick={() => navigate("/loading")}
-								className="w-full"
-							>
-								{content["start.cta.prefill"]}
-							</GhostButton>
-						)}
+					<div className="bg-sky-white animate-startSheetCtaEnter">
+						<div className="w-full flex flex-col px-4 pb-4 pt-4 gap-y-2 max-w-[430px] mx-auto">
+							<StartCtaButton
+								activeCta={activeSlide.cta}
+								previousCta={
+									previousSlide !== null ? slides[previousSlide].cta : null
+								}
+								direction={slideDirection}
+								onClick={handleNext}
+							/>
+							{shouldPrefillProfile && (
+								<GhostButton
+									onClick={() => navigate("/loading")}
+									className="w-full"
+								>
+									{content["start.cta.prefill"]}
+								</GhostButton>
+							)}
+						</div>
 					</div>
 				</div>
 			</div>

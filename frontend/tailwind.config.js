@@ -141,6 +141,26 @@ export default {
 					from: { opacity: "0", transform: "translateY(100%)" },
 					to: { opacity: "1", transform: "translateY(0)" },
 				},
+				welcomeStarRise: {
+					from: { transform: "translateY(225px)" },
+					to: { transform: "translateY(0)" },
+				},
+				welcomeStarFade: {
+					from: { opacity: "0" },
+					to: { opacity: "1" },
+				},
+				startSheetEnter: {
+					from: { transform: "translateY(100%)" },
+					to: { transform: "translateY(0)" },
+				},
+				startSheetContentFade: {
+					from: { opacity: "0" },
+					to: { opacity: "1" },
+				},
+				startSheetCtaEnter: {
+					from: { opacity: "0", transform: "translateY(89px)" },
+					to: { opacity: "1", transform: "translateY(0)" },
+				},
 				slideOutBottom: {
 					from: { transform: "translateY(var(--sheet-drag-y, 0px))" },
 					to: { transform: "translateY(100%)" },
@@ -261,6 +281,15 @@ export default {
 				slideInBottom:
 					"slideInBottom 0.32s cubic-bezier(0.32, 0.72, 0, 1) forwards",
 				illustrationEnter: "illustrationEnter 0.7s var(--ease-spring) forwards",
+				welcomeStarRise: "welcomeStarRise 795ms var(--ease-spring) 295ms both",
+				welcomeStarFade:
+					"welcomeStarFade 222ms cubic-bezier(0.5, 0, 0.5, 1) 377ms both",
+				startSheetEnter:
+					"startSheetEnter 502ms cubic-bezier(0.5, 0, 0.5, 1) forwards",
+				startSheetContentFade:
+					"startSheetContentFade 502ms cubic-bezier(0.5, 0, 0.5, 1) 169ms both",
+				startSheetCtaEnter:
+					"startSheetCtaEnter 599ms cubic-bezier(0.5, 0, 0.5, 1) 60ms both",
 				slideOutBottom:
 					"slideOutBottom 0.28s cubic-bezier(0.4, 0, 1, 1) forwards",
 				slideInNext: "slideInNext 0.3s var(--ease-spring)",

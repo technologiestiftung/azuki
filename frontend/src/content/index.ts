@@ -63,7 +63,7 @@ export const content = {
 	"start.step1.cta.label": "Wie funktioniert das?",
 	"start.step2.title": "Beantworte ein paar Fragen",
 	"start.step2.description":
-		"AzuKI erstellt dir ein Stärkenprofil und zeigt dir passende Ausbildungen in deiner Nähe.",
+		"AzuKi erstellt dir ein Stärkenprofil. So findest du passende Ausbildungen in deiner Nähe.",
 	"start.step2.cta.label": "Fragen starten",
 	"start.cta.prefill": "Zur Ergebnisseite",
 
