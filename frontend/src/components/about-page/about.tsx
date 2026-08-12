@@ -10,6 +10,7 @@ import {
 	expandedButtonBackgroundStyle,
 } from "../collapsing-header/CollapsingHeaderTopRow";
 import { SecondaryIconButton } from "../primitives/buttons/SecondaryIconButton";
+import { useCollapsedTitleReveal } from "../collapsing-header/useCollapsedTitleReveal";
 
 const SCROLL_OUT_THRESHOLD_PX = 8;
 
@@ -17,14 +18,17 @@ export const AboutPage = () => {
 	const navigate = useNavigate();
 	const { collapseProgress, onScroll } = useOccupationDetailScroll();
 	const [isScrolledAway, setIsScrolledAway] = useState(false);
+	const { titleRef, titleRevealProgress, updateTitleReveal } =
+		useCollapsedTitleReveal();
 
 	const handleScroll: UIEventHandler<HTMLDivElement> = useCallback(
 		(event) => {
 			onScroll(event);
+			updateTitleReveal(event.currentTarget);
 			const scrollY = event.currentTarget.scrollTop;
 			setIsScrolledAway(scrollY > SCROLL_OUT_THRESHOLD_PX);
 		},
-		[onScroll],
+		[onScroll, updateTitleReveal],
 	);
 
 	return (
@@ -36,6 +40,7 @@ export const AboutPage = () => {
 				<CollapsingHeaderTopRow
 					title={content["about.title"]}
 					progress={collapseProgress}
+					titleRevealProgress={titleRevealProgress}
 					collapsedFill
 					leading={
 						<SecondaryIconButton
@@ -49,6 +54,7 @@ export const AboutPage = () => {
 				/>
 				<div className="relative flex flex-col px-4 pt-14 pb-2">
 					<h1
+						ref={titleRef}
 						className="text-3xl font-semibold py-2 text-sky-900"
 						style={{ opacity: 1 - collapseProgress }}
 						aria-hidden={collapseProgress >= 0.5}

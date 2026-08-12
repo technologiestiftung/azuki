@@ -18,6 +18,7 @@ type GradientFrom = "white" | "sky-100";
 interface CollapsingHeaderTopRowProps {
 	title: ReactNode;
 	progress: number;
+	titleRevealProgress?: number;
 	leading?: ReactNode;
 	trailing?: ReactNode;
 	collapsedFill?: boolean;
@@ -28,6 +29,7 @@ interface CollapsingHeaderTopRowProps {
 export function CollapsingHeaderTopRow({
 	title,
 	progress,
+	titleRevealProgress = progress,
 	leading,
 	trailing,
 	collapsedFill = true,
@@ -63,12 +65,12 @@ export function CollapsingHeaderTopRow({
 						<div className="shrink-0 pointer-events-auto">{leading}</div>
 					)}
 					<div
-						className={`flex-1 min-w-0 text-base font-semibold leading-[1.4] text-sky-900 text-left truncate transition-[opacity,transform] duration-150 ease-[cubic-bezier(0.25,0,0.25,1)] ${
-							collapsed
-								? "opacity-100 translate-y-0"
-								: "opacity-0 translate-y-2"
-						}`}
-						aria-hidden={!collapsed}
+						className="flex-1 min-w-0 text-base font-semibold leading-[1.4] text-sky-900 text-left truncate transition-[opacity,transform] duration-150 ease-[cubic-bezier(0.25,0,0.25,1)]"
+						style={{
+							opacity: titleRevealProgress,
+							transform: `translateY(${(1 - titleRevealProgress) * 8}px)`,
+						}}
+						aria-hidden={titleRevealProgress < 0.5}
 					>
 						{title}
 					</div>

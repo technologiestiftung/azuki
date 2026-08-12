@@ -53,7 +53,7 @@ export function OccupationDetailHero({
 					ariaLabel={content["navigation.back"]}
 					title={content["navigation.back"]}
 					iconSize="w-5 h-5"
-					className="bg-sky-shade-10/50  rounded-xl backdrop-blur-[4.5px]"
+					className="bg-sky-shade-10/50 rounded-xl backdrop-blur-[4.5px]"
 				/>
 
 				<div className="flex gap-1.5 items-center">

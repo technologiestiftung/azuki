@@ -25,6 +25,7 @@ export function useResultsPageScrollProgress() {
 
 interface ResultsPageHeaderProps {
 	scrollProgress: number;
+	titleRevealProgress: number;
 	title: ReactNode;
 	shareAriaLabel: string;
 	downloadAriaLabel: string;
@@ -36,6 +37,7 @@ interface ResultsPageHeaderProps {
 
 export function ResultsPageHeader({
 	scrollProgress,
+	titleRevealProgress,
 	title,
 	shareAriaLabel,
 	downloadAriaLabel,
@@ -48,6 +50,7 @@ export function ResultsPageHeader({
 		<CollapsingHeaderTopRow
 			title={title}
 			progress={scrollProgress}
+			titleRevealProgress={titleRevealProgress}
 			collapsedBorder={false}
 			trailing={
 				<>
