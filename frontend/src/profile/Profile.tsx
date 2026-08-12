@@ -88,9 +88,7 @@ export function Profile() {
 									}}
 									aria-hidden={!collapsed}
 								>
-									<ProfileActionButtons
-										tabIndex={collapsed ? undefined : -1}
-									/>
+									<ProfileActionButtons tabIndex={collapsed ? undefined : -1} />
 								</div>
 							</div>
 						) : undefined
