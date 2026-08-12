@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useMemo, useState, type UIEvent } from "react";
 import { useMatchResultsStore } from "../../store/useMatchResultsStore";
 import { content } from "../../content";
 import { type MatchedOccupation } from "@azuki/shared";
@@ -23,6 +23,7 @@ import {
 	TOP_ROW_HEIGHT_PX,
 	useResultsPageScrollProgress,
 } from "./ResultsPageHeader";
+import { useCollapsedTitleReveal } from "../collapsing-header/useCollapsedTitleReveal";
 
 const DEFAULT_TAG_FILTERS: OccupationTagsFilterState = {
 	selectedOccupationTypeTagIds: [],
@@ -67,6 +68,15 @@ export function ResultsPage() {
 	const closeTagFilter = tagFilter.close;
 
 	const { scrollProgress, handleListScroll } = useResultsPageScrollProgress();
+	const { titleRef, titleRevealProgress, updateTitleReveal } =
+		useCollapsedTitleReveal();
+	const handleScroll = useCallback(
+		(event: UIEvent<HTMLDivElement>) => {
+			handleListScroll(event);
+			updateTitleReveal(event.currentTarget);
+		},
+		[handleListScroll, updateTitleReveal],
+	);
 
 	const toggleFavoritesOnly = useCallback(() => {
 		setShowFavoritesOnly((prev) => !prev);
@@ -105,9 +115,10 @@ export function ResultsPage() {
 				onApply={tagFilter.apply}
 				onReset={tagFilter.reset}
 			/>
-			<div className="flex-1 overflow-y-auto" onScroll={handleListScroll}>
+			<div className="flex-1 overflow-y-auto" onScroll={handleScroll}>
 				<ResultsPageHeader
 					scrollProgress={scrollProgress}
+					titleRevealProgress={titleRevealProgress}
 					title={content["results.title"]}
 					shareAriaLabel={content["results.share.ariaLabel"]}
 					downloadAriaLabel={content["results.download.ariaLabel"]}
@@ -117,6 +128,7 @@ export function ResultsPage() {
 					shareDisabled={visibleOccupations.length === 0}
 				/>
 				<h1
+					ref={titleRef}
 					className="text-3xl font-semibold text-left bg-white text-sky-900 py-2 px-[18px]"
 					style={{
 						marginTop: TOP_ROW_HEIGHT_PX,

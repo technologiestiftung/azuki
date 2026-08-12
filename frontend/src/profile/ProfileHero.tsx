@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, type Ref } from "react";
 import type { UserProfile } from "@azuki/shared";
 import {
 	fetchProfileShortDescription,
@@ -9,6 +9,7 @@ import { content } from "../content";
 interface ProfileHeroProps {
 	heroControlsOpacity: number;
 	titleOpacity: number;
+	titleRef?: Ref<HTMLHeadingElement>;
 	isSharedView?: boolean;
 	profile: UserProfile;
 }
@@ -16,6 +17,7 @@ interface ProfileHeroProps {
 export function ProfileHero({
 	heroControlsOpacity,
 	titleOpacity,
+	titleRef,
 	isSharedView = false,
 	profile,
 }: ProfileHeroProps) {
@@ -74,6 +76,7 @@ export function ProfileHero({
 
 			<div className="flex flex-col items-center">
 				<h1
+					ref={titleRef}
 					className="text-[32px] font-semibold leading-[42px] text-center text-sky-900"
 					style={{ opacity: titleOpacity }}
 					aria-hidden={titleOpacity < 0.5}

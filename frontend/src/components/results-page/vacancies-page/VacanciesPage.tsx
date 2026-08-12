@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState, type UIEvent } from "react";
 import type { VacancyPreview, MatchedOccupation } from "@azuki/shared";
 import { useMatchResultsStore } from "../../../store/useMatchResultsStore";
 import { useAppStore } from "../../../store/useAppStore";
@@ -33,6 +33,7 @@ import {
 	TOP_ROW_HEIGHT_PX,
 	useResultsPageScrollProgress,
 } from "../ResultsPageHeader";
+import { useCollapsedTitleReveal } from "../../collapsing-header/useCollapsedTitleReveal";
 
 const DEFAULT_OCCUPATION_FILTERS: OccupationsFilterState = {
 	selectedOccupationIds: [],
@@ -161,6 +162,15 @@ export function VacanciesPage() {
 	);
 
 	const { scrollProgress, handleListScroll } = useResultsPageScrollProgress();
+	const { titleRef, titleRevealProgress, updateTitleReveal } =
+		useCollapsedTitleReveal();
+	const handleScroll = useCallback(
+		(event: UIEvent<HTMLDivElement>) => {
+			handleListScroll(event);
+			updateTitleReveal(event.currentTarget);
+		},
+		[handleListScroll, updateTitleReveal],
+	);
 
 	const openOccupationFilter = occupationFilter.open;
 	const closeOccupationFilter = occupationFilter.close;
@@ -319,9 +329,10 @@ export function VacanciesPage() {
 					onReset={resetLocationFilter}
 				/>
 
-				<div className="flex-1 overflow-y-auto" onScroll={handleListScroll}>
+				<div className="flex-1 overflow-y-auto" onScroll={handleScroll}>
 					<ResultsPageHeader
 						scrollProgress={scrollProgress}
+						titleRevealProgress={titleRevealProgress}
 						title={vacancyTitle}
 						shareAriaLabel={content["vacancies.share.ariaLabel"]}
 						downloadAriaLabel={content["vacancies.download.ariaLabel"]}
@@ -331,6 +342,7 @@ export function VacanciesPage() {
 						shareDisabled={visibleOccupations.length === 0}
 					/>
 					<h1
+						ref={titleRef}
 						className="text-3xl font-semibold text-left bg-white text-sky-900 py-2 px-[18px]"
 						style={{
 							marginTop: TOP_ROW_HEIGHT_PX,

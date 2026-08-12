@@ -1,11 +1,4 @@
-import {
-	useCallback,
-	useEffect,
-	useMemo,
-	useRef,
-	useState,
-	type UIEventHandler,
-} from "react";
+import { useCallback, useEffect, useMemo, type UIEventHandler } from "react";
 import { useParams, useSearchParams } from "react-router-dom";
 import {
 	buildOccupationShareText,
@@ -31,6 +24,7 @@ import {
 } from "./occupationShareState";
 import { shareOccupationLink } from "./shareOccupationLink";
 import { useSharedNextOccupations } from "./useSharedNextOccupations";
+import { useCollapsedTitleReveal } from "../../collapsing-header/useCollapsedTitleReveal";
 
 export function OccupationDetailPage() {
 	const occupationId = Number(useParams().id);
@@ -53,26 +47,15 @@ export function OccupationDetailPage() {
 		heroImageParallaxY,
 	} = useOccupationDetailScroll();
 
-	const titleRef = useRef<HTMLHeadingElement>(null);
-	const [smallTitleOpacity, setSmallTitleOpacity] = useState(0);
+	const { titleRef, titleRevealProgress, updateTitleReveal } =
+		useCollapsedTitleReveal();
 
 	const handleScroll: UIEventHandler<HTMLDivElement> = useCallback(
 		(event) => {
 			onScroll(event);
-			const titleEl = titleRef.current;
-			if (!titleEl) {
-				return;
-			}
-			const distanceFromTop =
-				titleEl.getBoundingClientRect().bottom -
-				event.currentTarget.getBoundingClientRect().top;
-			const FADE_START_PX = 64;
-			const FADE_END_PX = 8;
-			const progress =
-				(FADE_START_PX - distanceFromTop) / (FADE_START_PX - FADE_END_PX);
-			setSmallTitleOpacity(Math.min(1, Math.max(0, progress)));
+			updateTitleReveal(event.currentTarget);
 		},
-		[onScroll],
+		[onScroll, updateTitleReveal],
 	);
 
 	const liveMatchPercent =
@@ -208,7 +191,7 @@ export function OccupationDetailPage() {
 					isFavorite={detail.isFavorite}
 					onToggleFavorite={detail.toggleFavorite}
 					onShare={handleShare}
-					titleOpacity={smallTitleOpacity}
+					titleOpacity={titleRevealProgress}
 				/>
 			</div>
 			<div
