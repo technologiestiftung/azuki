@@ -5,10 +5,12 @@ import { shareProfileLink } from "./shareProfileLink";
 
 interface ProfileActionButtonsProps {
 	buttonClassName?: string;
+	tabIndex?: number;
 }
 
 export function ProfileActionButtons({
 	buttonClassName,
+	tabIndex,
 }: ProfileActionButtonsProps) {
 	return (
 		<div className="flex items-center gap-1.5">
@@ -21,6 +23,7 @@ export function ProfileActionButtons({
 				title={content["profile.download"]}
 				iconSize="w-5 h-5"
 				className={buttonClassName}
+				tabIndex={tabIndex}
 			/>
 			<GhostIconButton
 				iconSrc="/icons/share.svg"
@@ -31,6 +34,7 @@ export function ProfileActionButtons({
 				title={content["profile.share"]}
 				iconSize="w-5 h-5"
 				className={buttonClassName}
+				tabIndex={tabIndex}
 			/>
 		</div>
 	);

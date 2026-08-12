@@ -75,7 +75,10 @@ export function Profile() {
 									}}
 									aria-hidden={collapsed}
 								>
-									<ProfileActionButtons buttonClassName="bg-sky-shade-10/50 rounded-xl backdrop-blur-[4.5px]" />
+									<ProfileActionButtons
+										buttonClassName="bg-sky-shade-10/50 rounded-xl backdrop-blur-[4.5px]"
+										tabIndex={collapsed ? -1 : undefined}
+									/>
 								</div>
 								<div
 									className="[grid-area:1/1] transition-opacity duration-150"
@@ -85,7 +88,9 @@ export function Profile() {
 									}}
 									aria-hidden={!collapsed}
 								>
-									<ProfileActionButtons />
+									<ProfileActionButtons
+										tabIndex={collapsed ? undefined : -1}
+									/>
 								</div>
 							</div>
 						) : undefined

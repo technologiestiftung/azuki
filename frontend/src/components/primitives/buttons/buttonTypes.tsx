@@ -12,6 +12,7 @@ export interface ButtonProps {
 	style?: CSSProperties;
 	children?: string | ReactNode;
 	testId?: string;
+	tabIndex?: number;
 	icon?: ReactNode;
 	iconSrc?: string;
 	iconSize?: string;
