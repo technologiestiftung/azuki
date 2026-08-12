@@ -769,6 +769,11 @@ async function main() {
   console.log(
     `  -> ${excl.removed.length} removed (${excl66} §66, ${excl.removed.length - excl66} nein/yellow), ${occupations.length} remain.\n`,
   );
+  if (excl.unmatchedExclusionIds.length > 0) {
+    console.warn(
+      `  [STALE EXCLUSION] joblinge exclusion id(s) not in catalog: ${excl.unmatchedExclusionIds.join(", ")}`,
+    );
+  }
 
   console.log(
     "Step 2c: Applying curated condition overrides for BERUFENET tag mismatches...",
@@ -834,6 +839,25 @@ async function main() {
 
   writeFileSync(outPath, JSON.stringify(occupations, null, 2), "utf-8");
   console.log(`Step 3: Saved to ${outPath}`);
+
+  // Stale ids the report cannot recompute: they need the pre-exclusion id list.
+  const summaryPath = resolve(__dirname, "../data-refresh-summary.json");
+  writeFileSync(
+    summaryPath,
+    JSON.stringify(
+      {
+        fetchedIdCount: ids.length,
+        errorCount: errors,
+        unmatchedExclusionIds: excl.unmatchedExclusionIds,
+        staleConditionOverrideIds: conditionOverrides.unresolvedIds,
+        staleAccessOverrideIds: accessOverrides.unresolvedIds,
+      },
+      null,
+      2,
+    ),
+    "utf-8",
+  );
+  console.log(`Step 4: Wrote run summary to ${summaryPath}`);
 
   const withDescription = occupations.filter((o) => o.descriptionLong).length;
   const withDegreeStats = occupations.filter((o) => o.degreeStats).length;

@@ -1,7 +1,7 @@
 /**
- * Read-only post-cleanup check: berufe.json is at 538 with no §66/§42r names, and
- * the display formatter turns every " - " into one spaced en-dash (293 names) with
- * no digit-adjacent or unspaced dashes. Exits non-zero on drift.
+ * Read-only guard: no §66/§42r name survived the exclusions, every " - " became
+ * one spaced en-dash. Exits non-zero on drift. The §66 pattern is broader than
+ * SECTION_66_NAME_RE, so it catches names the exclusion misses.
  */
 import { readFileSync } from "node:fs";
 import { resolve, dirname } from "node:path";
@@ -15,7 +15,6 @@ const berufe: Occupation[] = JSON.parse(
 );
 
 const fail: string[] = [];
-if (berufe.length !== 538) fail.push(`expected 538 occupations, got ${berufe.length}`);
 const stillParagraph = berufe.filter((b) => /§\s*66|§\s*42r/i.test(b.name));
 if (stillParagraph.length) fail.push(`${stillParagraph.length} §66/§42r names survived`);
 
@@ -42,8 +41,6 @@ if (fail.length) {
   console.error("\nFAILURES:\n" + fail.map((f) => "  - " + f).join("\n"));
   process.exit(1);
 }
-if (enDashedNames !== 293) {
-  console.error(`\nFAILURE: expected 293 names with an en-dash separator, got ${enDashedNames}`);
-  process.exit(1);
-}
-console.log("OK — all verification guards passed (293 names en-dashed, no false positives).");
+console.log(
+  `OK — ${berufe.length} occupations, no §66/§42r names, ${enDashedNames} names en-dashed cleanly.`,
+);

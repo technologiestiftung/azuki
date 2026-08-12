@@ -475,16 +475,8 @@
     "Thüringen": 6
   },
   "1169": {
-    "Nordrhein-Westfalen": 336,
-    "Schleswig-Holstein": 3,
-    "Baden-Württemberg": 243,
-    "Bayern": 42,
-    "Berlin": 64,
-    "Bremen": 15,
-    "Hamburg": 46,
-    "Hessen": 73,
-    "Niedersachsen": 89,
-    "Thüringen": 11
+    "Nordrhein-Westfalen": 6,
+    "Schleswig-Holstein": 3
   },
   "1534": {
     "Brandenburg": 3,
@@ -677,9 +669,6 @@
     "Sachsen": 33,
     "Schleswig-Holstein": 3
   },
-  "2574": {
-    "Baden-Württemberg": 43
-  },
   "2610": {
     "Baden-Württemberg": 46,
     "Rheinland-Pfalz": 3
@@ -756,10 +745,6 @@
   "2710": {
     "Bayern": 6
   },
-  "2713": {
-    "Nordrhein-Westfalen": 25,
-    "Berlin": 20
-  },
   "2757": {
     "Baden-Württemberg": 24,
     "Bayern": 18,
@@ -782,9 +767,6 @@
     "Sachsen": 15,
     "Schleswig-Holstein": 3,
     "Thüringen": 27
-  },
-  "2858": {
-    "Berlin": 37
   },
   "2868": {
     "Baden-Württemberg": 1944,
@@ -828,12 +810,6 @@
   "3045": {
     "Bremen": 3,
     "Sachsen": 3
-  },
-  "3258": {
-    "Bayern": 7,
-    "Berlin": 30,
-    "Nordrhein-Westfalen": 195,
-    "Rheinland-Pfalz": 11
   },
   "3353": {
     "Bayern": 10,
@@ -1399,12 +1375,6 @@
     "Nordrhein-Westfalen": 195,
     "Rheinland-Pfalz": 11
   },
-  "6025": {
-    "Berlin": 102,
-    "Nordrhein-Westfalen": 505,
-    "Rheinland-Pfalz": 1813,
-    "Thüringen": 16
-  },
   "6045": {
     "Berlin": 8,
     "Hessen": 21,
@@ -1447,21 +1417,18 @@
     "Niedersachsen": 16
   },
   "6342": {
-    "Baden-Württemberg": 253,
-    "Bayern": 128,
-    "Brandenburg": 20,
-    "Hessen": 94,
+    "Baden-Württemberg": 12,
+    "Bayern": 60,
+    "Brandenburg": 3,
+    "Hessen": 3,
     "Mecklenburg-Vorpommern": 6,
-    "Niedersachsen": 178,
-    "Nordrhein-Westfalen": 217,
-    "Rheinland-Pfalz": 112,
+    "Niedersachsen": 24,
+    "Nordrhein-Westfalen": 12,
+    "Rheinland-Pfalz": 3,
     "Sachsen": 9,
-    "Sachsen-Anhalt": 27,
+    "Sachsen-Anhalt": 3,
     "Schleswig-Holstein": 12,
-    "Thüringen": 18,
-    "Berlin": 90,
-    "Bremen": 17,
-    "Hamburg": 62
+    "Thüringen": 3
   },
   "6351": {
     "Baden-Württemberg": 25,
@@ -1518,23 +1485,15 @@
     "Nordrhein-Westfalen": 36
   },
   "6419": {
-    "Baden-Württemberg": 246,
-    "Bayern": 51,
-    "Nordrhein-Westfalen": 345,
+    "Baden-Württemberg": 3,
+    "Bayern": 9,
+    "Nordrhein-Westfalen": 15,
     "Sachsen": 6,
-    "Thüringen": 14,
-    "Berlin": 64,
-    "Bremen": 15,
-    "Hamburg": 46,
-    "Hessen": 73,
-    "Niedersachsen": 89
+    "Thüringen": 3
   },
   "6461": {
     "Baden-Württemberg": 169,
     "Berlin": 187
-  },
-  "6496": {
-    "Baden-Württemberg": 4
   },
   "6515": {
     "Baden-Württemberg": 59,
@@ -1690,11 +1649,6 @@
     "Niedersachsen": 3,
     "Nordrhein-Westfalen": 24
   },
-  "7017": {
-    "Berlin": 10,
-    "Hamburg": 52,
-    "Hessen": 184
-  },
   "7018": {
     "Baden-Württemberg": 9,
     "Bayern": 15,
@@ -1779,36 +1733,6 @@
     "Schleswig-Holstein": 294,
     "Thüringen": 111
   },
-  "7743": {
-    "Bayern": 212,
-    "Berlin": 67,
-    "Bremen": 44,
-    "Hessen": 215,
-    "Mecklenburg-Vorpommern": 8,
-    "Thüringen": 56
-  },
-  "7789": {
-    "Bayern": 117,
-    "Berlin": 10,
-    "Bremen": 75,
-    "Hessen": 844,
-    "Niedersachsen": 141,
-    "Nordrhein-Westfalen": 380,
-    "Sachsen-Anhalt": 45
-  },
-  "7798": {
-    "Bayern": 117,
-    "Berlin": 10,
-    "Bremen": 75,
-    "Hessen": 844,
-    "Niedersachsen": 141,
-    "Nordrhein-Westfalen": 380,
-    "Sachsen-Anhalt": 45
-  },
-  "7799": {
-    "Berlin": 8,
-    "Brandenburg": 9
-  },
   "7847": {
     "Baden-Württemberg": 2692,
     "Bayern": 3402,
@@ -1835,15 +1759,6 @@
     "Baden-Württemberg": 31,
     "Nordrhein-Westfalen": 85
   },
-  "7855": {
-    "Baden-Württemberg": 37,
-    "Bayern": 21,
-    "Berlin": 133,
-    "Niedersachsen": 345,
-    "Nordrhein-Westfalen": 1685,
-    "Rheinland-Pfalz": 468,
-    "Sachsen-Anhalt": 30
-  },
   "7856": {
     "Baden-Württemberg": 2655,
     "Bayern": 3381,
@@ -1862,10 +1777,6 @@
     "Schleswig-Holstein": 450,
     "Thüringen": 216
   },
-  "7883": {
-    "Berlin": 8,
-    "Brandenburg": 9
-  },
   "7889": {
     "Baden-Württemberg": 201,
     "Bayern": 264,
@@ -1883,12 +1794,6 @@
     "Sachsen-Anhalt": 48,
     "Schleswig-Holstein": 60,
     "Thüringen": 69
-  },
-  "7891": {
-    "Berlin": 102,
-    "Nordrhein-Westfalen": 505,
-    "Rheinland-Pfalz": 1813,
-    "Thüringen": 16
   },
   "7893": {
     "Berlin": 8,
@@ -2158,14 +2063,6 @@
     "Niedersachsen": 152,
     "Nordrhein-Westfalen": 240
   },
-  "7991": {
-    "Berlin": 102,
-    "Bremen": 37,
-    "Hamburg": 62,
-    "Hessen": 229,
-    "Niedersachsen": 152,
-    "Nordrhein-Westfalen": 240
-  },
   "8010": {
     "Baden-Württemberg": 3
   },
@@ -2364,23 +2261,6 @@
     "Sachsen-Anhalt": 138,
     "Schleswig-Holstein": 146
   },
-  "8888": {
-    "Mecklenburg-Vorpommern": 106,
-    "Sachsen": 298,
-    "Thüringen": 107,
-    "Baden-Württemberg": 735,
-    "Bayern": 643,
-    "Berlin": 164,
-    "Brandenburg": 95,
-    "Bremen": 64,
-    "Hamburg": 136,
-    "Hessen": 753,
-    "Niedersachsen": 425,
-    "Nordrhein-Westfalen": 635,
-    "Rheinland-Pfalz": 179,
-    "Sachsen-Anhalt": 258,
-    "Schleswig-Holstein": 578
-  },
   "8899": {
     "Mecklenburg-Vorpommern": 19,
     "Sachsen": 33,
@@ -2414,22 +2294,6 @@
   "9013": {
     "Nordrhein-Westfalen": 25,
     "Berlin": 20
-  },
-  "9015": {
-    "Mecklenburg-Vorpommern": 40,
-    "Sachsen": 64,
-    "Sachsen-Anhalt": 48,
-    "Thüringen": 37,
-    "Baden-Württemberg": 197,
-    "Bayern": 197,
-    "Berlin": 35,
-    "Brandenburg": 72,
-    "Bremen": 19,
-    "Hamburg": 38,
-    "Hessen": 52,
-    "Niedersachsen": 123,
-    "Nordrhein-Westfalen": 265,
-    "Rheinland-Pfalz": 52
   },
   "9031": {
     "Bayern": 836,
@@ -2470,23 +2334,6 @@
     "Nordrhein-Westfalen": 70
   },
   "9106": {
-    "Baden-Württemberg": 5583,
-    "Mecklenburg-Vorpommern": 876,
-    "Bayern": 4663,
-    "Berlin": 2955,
-    "Brandenburg": 1414,
-    "Bremen": 463,
-    "Hamburg": 778,
-    "Hessen": 2345,
-    "Niedersachsen": 3012,
-    "Nordrhein-Westfalen": 7000,
-    "Rheinland-Pfalz": 1977,
-    "Saarland": 346,
-    "Sachsen": 2381,
-    "Sachsen-Anhalt": 1164,
-    "Thüringen": 844
-  },
-  "9108": {
     "Baden-Württemberg": 5583,
     "Mecklenburg-Vorpommern": 876,
     "Bayern": 4663,
@@ -2580,23 +2427,6 @@
   },
   "9598": {
     "Bayern": 2
-  },
-  "9599": {
-    "Mecklenburg-Vorpommern": 29,
-    "Niedersachsen": 166,
-    "Sachsen": 199,
-    "Sachsen-Anhalt": 24,
-    "Thüringen": 35,
-    "Baden-Württemberg": 275,
-    "Bayern": 212,
-    "Berlin": 64,
-    "Brandenburg": 32,
-    "Bremen": 20,
-    "Hamburg": 59,
-    "Hessen": 26,
-    "Nordrhein-Westfalen": 290,
-    "Rheinland-Pfalz": 56,
-    "Schleswig-Holstein": 40
   },
   "9603": {
     "Baden-Württemberg": 242,
@@ -2744,11 +2574,6 @@
   "13620": {
     "Hamburg": 23
   },
-  "13622": {
-    "Baden-Württemberg": 10,
-    "Bayern": 486,
-    "Berlin": 87
-  },
   "13727": {
     "Baden-Württemberg": 18,
     "Bayern": 30,
@@ -2766,7 +2591,7 @@
     "Thüringen": 6
   },
   "13741": {
-    "Baden-Württemberg": 340,
+    "Baden-Württemberg": 336,
     "Bayern": 531,
     "Berlin": 36,
     "Brandenburg": 18,
@@ -2872,13 +2697,6 @@
     "Schleswig-Holstein": 63,
     "Thüringen": 29
   },
-  "13968": {
-    "Baden-Württemberg": 792,
-    "Bayern": 76,
-    "Berlin": 116,
-    "Bremen": 47,
-    "Sachsen": 64
-  },
   "13991": {
     "Bayern": 9
   },
@@ -2924,20 +2742,6 @@
     "Baden-Württemberg": 8,
     "Mecklenburg-Vorpommern": 7,
     "Hessen": 8
-  },
-  "14427": {
-    "Mecklenburg-Vorpommern": 16,
-    "Sachsen": 66,
-    "Thüringen": 32,
-    "Baden-Württemberg": 55,
-    "Bayern": 61,
-    "Berlin": 44,
-    "Hessen": 55,
-    "Niedersachsen": 65,
-    "Nordrhein-Westfalen": 70,
-    "Rheinland-Pfalz": 11,
-    "Sachsen-Anhalt": 27,
-    "Schleswig-Holstein": 24
   },
   "14448": {
     "Baden-Württemberg": 159,
@@ -2998,32 +2802,6 @@
   },
   "14506": {
     "Niedersachsen": 4
-  },
-  "14517": {
-    "Bayern": 117,
-    "Berlin": 10,
-    "Bremen": 75,
-    "Hessen": 844,
-    "Niedersachsen": 141,
-    "Nordrhein-Westfalen": 380,
-    "Sachsen-Anhalt": 45
-  },
-  "14532": {
-    "Nordrhein-Westfalen": 1750,
-    "Baden-Württemberg": 1072,
-    "Bayern": 1002,
-    "Berlin": 57,
-    "Brandenburg": 3,
-    "Bremen": 9,
-    "Hamburg": 43,
-    "Hessen": 407,
-    "Mecklenburg-Vorpommern": 7,
-    "Niedersachsen": 390,
-    "Rheinland-Pfalz": 387,
-    "Saarland": 104,
-    "Sachsen": 155,
-    "Sachsen-Anhalt": 12,
-    "Thüringen": 69
   },
   "14557": {
     "Baden-Württemberg": 43
@@ -3390,10 +3168,6 @@
     "Hamburg": 42,
     "Nordrhein-Westfalen": 300
   },
-  "15652": {
-    "Baden-Württemberg": 92,
-    "Brandenburg": 93
-  },
   "15658": {
     "Baden-Württemberg": 242,
     "Bayern": 51,
@@ -3711,29 +3485,8 @@
     "Schleswig-Holstein": 81,
     "Thüringen": 51
   },
-  "30191": {
-    "Baden-Württemberg": 896,
-    "Bremen": 147,
-    "Niedersachsen": 1691,
-    "Sachsen": 1392,
-    "Sachsen-Anhalt": 960,
-    "Thüringen": 241,
-    "Bayern": 1511,
-    "Berlin": 585,
-    "Brandenburg": 303,
-    "Hessen": 546,
-    "Nordrhein-Westfalen": 3560,
-    "Rheinland-Pfalz": 447,
-    "Schleswig-Holstein": 332
-  },
   "33197": {
     "Nordrhein-Westfalen": 25
-  },
-  "33207": {
-    "Sachsen": 13,
-    "Thüringen": 13,
-    "Berlin": 21,
-    "Niedersachsen": 15
   },
   "33209": {
     "Bayern": 16,
@@ -3898,9 +3651,6 @@
     "Sachsen": 9,
     "Schleswig-Holstein": 6,
     "Thüringen": 6
-  },
-  "34976": {
-    "Berlin": 37
   },
   "34980": {
     "Baden-Württemberg": 33,
@@ -4383,9 +4133,9 @@
     "Schleswig-Holstein": 6
   },
   "76789": {
-    "Baden-Württemberg": 26,
+    "Baden-Württemberg": 18,
     "Bayern": 42,
-    "Berlin": 28,
+    "Berlin": 3,
     "Bremen": 6,
     "Hamburg": 9,
     "Hessen": 9,
@@ -5254,27 +5004,13 @@
     "Berlin": 3,
     "Nordrhein-Westfalen": 3
   },
-  "129985": {
-    "Bayern": 905,
-    "Berlin": 19,
-    "Nordrhein-Westfalen": 305,
-    "Rheinland-Pfalz": 58
-  },
   "130315": {
     "Bayern": 6
   },
   "130893": {
-    "Nordrhein-Westfalen": 333,
+    "Nordrhein-Westfalen": 3,
     "Rheinland-Pfalz": 3,
-    "Sachsen-Anhalt": 3,
-    "Baden-Württemberg": 243,
-    "Bayern": 42,
-    "Berlin": 64,
-    "Bremen": 15,
-    "Hamburg": 46,
-    "Hessen": 73,
-    "Niedersachsen": 89,
-    "Thüringen": 11
+    "Sachsen-Anhalt": 3
   },
   "130918": {
     "Baden-Württemberg": 48,
@@ -6223,24 +5959,6 @@
   "136559": {
     "Bayern": 96
   },
-  "137038": {
-    "Baden-Württemberg": 37,
-    "Bayern": 21,
-    "Berlin": 133,
-    "Niedersachsen": 345,
-    "Nordrhein-Westfalen": 1685,
-    "Rheinland-Pfalz": 468,
-    "Sachsen-Anhalt": 30
-  },
-  "137121": {
-    "Bayern": 117,
-    "Berlin": 10,
-    "Bremen": 75,
-    "Hessen": 844,
-    "Niedersachsen": 141,
-    "Nordrhein-Westfalen": 380,
-    "Sachsen-Anhalt": 45
-  },
   "137338": {
     "Baden-Württemberg": 112,
     "Bremen": 46,
@@ -6552,12 +6270,6 @@
     "Schleswig-Holstein": 6,
     "Thüringen": 3
   },
-  "138818": {
-    "Bayern": 905,
-    "Berlin": 19,
-    "Nordrhein-Westfalen": 305,
-    "Rheinland-Pfalz": 58
-  },
   "139139": {
     "Baden-Württemberg": 27,
     "Bayern": 105,
@@ -6620,23 +6332,6 @@
   "142203": {
     "Baden-Württemberg": 43
   },
-  "142441": {
-    "Mecklenburg-Vorpommern": 106,
-    "Sachsen": 298,
-    "Thüringen": 107,
-    "Baden-Württemberg": 735,
-    "Bayern": 643,
-    "Berlin": 164,
-    "Brandenburg": 95,
-    "Bremen": 64,
-    "Hamburg": 136,
-    "Hessen": 753,
-    "Niedersachsen": 425,
-    "Nordrhein-Westfalen": 635,
-    "Rheinland-Pfalz": 179,
-    "Sachsen-Anhalt": 258,
-    "Schleswig-Holstein": 578
-  },
   "142962": {
     "Baden-Württemberg": 4
   },
@@ -6645,5 +6340,20 @@
   },
   "142964": {
     "Baden-Württemberg": 4
+  },
+  "143399": {
+    "Baden-Württemberg": 896,
+    "Bremen": 147,
+    "Niedersachsen": 1691,
+    "Sachsen": 1392,
+    "Sachsen-Anhalt": 960,
+    "Thüringen": 241,
+    "Bayern": 1511,
+    "Berlin": 585,
+    "Brandenburg": 303,
+    "Hessen": 546,
+    "Nordrhein-Westfalen": 3560,
+    "Rheinland-Pfalz": 447,
+    "Schleswig-Holstein": 332
   }
 }
