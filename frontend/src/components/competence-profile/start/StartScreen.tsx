@@ -5,6 +5,7 @@ import { useFlowNavigation } from "../../../routing/useFlowNavigation";
 import { shouldPrefillProfile } from "../../../profile/prefillConfig";
 import { GhostButton } from "../../primitives/buttons/GhostButton";
 import { StartCtaButton } from "./StartCtaButton";
+import { StartHeroIllustration } from "./StartHeroIllustration";
 
 interface Slide {
 	image: string;
@@ -50,9 +51,7 @@ function useSlideCarousel(slideCount: number) {
 		null,
 	);
 
-	const [illustrationKeys, setIllustrationKeys] = useState(() =>
-		Array(slideCount).fill(0),
-	);
+	const [clipboardPlayKey, setClipboardPlayKey] = useState(0);
 
 	function moveSlide(direction: "next" | "prev") {
 		if (direction === "next" && currentSlide >= slideCount - 1) {
@@ -64,11 +63,9 @@ function useSlideCarousel(slideCount: number) {
 
 		const nextIndex =
 			direction === "next" ? currentSlide + 1 : currentSlide - 1;
-		setIllustrationKeys((keys) => {
-			const next = [...keys];
-			next[nextIndex] += 1;
-			return next;
-		});
+		if (nextIndex === 1) {
+			setClipboardPlayKey((key) => key + 1);
+		}
 		setPreviousSlide(currentSlide);
 		setSlideDirection(direction);
 		setCurrentSlide(nextIndex);
@@ -78,7 +75,7 @@ function useSlideCarousel(slideCount: number) {
 		currentSlide,
 		previousSlide,
 		slideDirection,
-		illustrationKeys,
+		clipboardPlayKey,
 		moveSlide,
 	};
 }
@@ -145,7 +142,7 @@ export function StartScreen() {
 		currentSlide,
 		previousSlide,
 		slideDirection,
-		illustrationKeys,
+		clipboardPlayKey,
 		moveSlide,
 	} = useSlideCarousel(SLIDE_COUNT);
 	const swipeHandlers = useSwipeNavigation(moveSlide);
@@ -164,55 +161,23 @@ export function StartScreen() {
 		<div className="flex flex-col h-[100dvh] pt-4 overflow-hidden min-h-0 bg-sky-100">
 			<div className="flex-1 min-h-0 flex flex-col">
 				<div className="flex-1 min-h-0 relative overflow-hidden">
-					{slides.map((slide, index) => {
-						if (!isSlideVisible(index, currentSlide, previousSlide)) {
-							return null;
-						}
-
-						let animationClass = "";
-						if (slideDirection === "next") {
-							animationClass =
-								index === currentSlide
-									? "animate-slideInNext"
-									: "animate-slideOutPrev";
-						} else if (slideDirection === "prev") {
-							animationClass =
-								index === currentSlide
-									? "animate-slideInPrev"
-									: "animate-slideOutNext";
-						}
-
-						const playKey = illustrationKeys[index];
-
-						return (
-							<div
-								key={index}
-								className={`absolute inset-0 flex overflow-hidden bg-sky-100 ${animationClass}`}
-								style={{ zIndex: index === currentSlide ? 10 : 0 }}
-							>
-								<div
-									key={`${index}-${playKey}`}
-									className={`flex h-full w-full px-4 ${slide.imageAlign} justify-center animate-illustrationEnter`}
-								>
-									<img
-										src={`${slide.image}?v=${playKey}`}
-										alt=""
-										className="max-h-full max-w-full object-contain pointer-events-none"
-										draggable={false}
-									/>
-								</div>
-							</div>
-						);
-					})}
+					<StartHeroIllustration
+						currentSlide={currentSlide}
+						previousSlide={previousSlide}
+						direction={slideDirection}
+						clipboardPlayKey={clipboardPlayKey}
+						star={slides[0]}
+						clipboard={slides[1]}
+					/>
 				</div>
-				<div className="animate-slideInBottom [animation-duration:0.5s]">
-					<div className="flex flex-col gap-3 pt-6 bg-sky-white rounded-t-4xl">
+				<div className="relative z-10 animate-startSheetEnter bg-sky-white rounded-t-4xl">
+					<div className="flex flex-col gap-3 pt-6">
 						<div
 							role="region"
 							aria-roledescription="carousel"
 							aria-label={`${currentSlide + 1} / ${SLIDE_COUNT}`}
 							tabIndex={0}
-							className="relative overflow-hidden text-sky-900 h-44 touch-none select-none focus-visible:outline-1 focus-visible:outline-sky-500 rounded-[7px]"
+							className="relative overflow-hidden text-sky-900 h-44 touch-none select-none focus-visible:outline-1 focus-visible:outline-sky-500 rounded-[7px] animate-startSheetContentFade"
 							{...swipeHandlers}
 						>
 							{slides.map((slide, index) => {
@@ -267,26 +232,25 @@ export function StartScreen() {
 							</div>
 						</div>
 					</div>
-				</div>
-
-				<div className="bg-sky-white">
-					<div className="w-full flex flex-col px-4 pb-4 pt-4 gap-y-2 max-w-[430px] mx-auto">
-						<StartCtaButton
-							activeCta={activeSlide.cta}
-							previousCta={
-								previousSlide !== null ? slides[previousSlide].cta : null
-							}
-							direction={slideDirection}
-							onClick={handleNext}
-						/>
-						{shouldPrefillProfile && (
-							<GhostButton
-								onClick={() => navigate("/loading")}
-								className="w-full"
-							>
-								{content["start.cta.prefill"]}
-							</GhostButton>
-						)}
+					<div className="bg-sky-white animate-startSheetCtaEnter">
+						<div className="w-full flex flex-col px-4 pb-4 pt-4 gap-y-2 max-w-[430px] mx-auto">
+							<StartCtaButton
+								activeCta={activeSlide.cta}
+								previousCta={
+									previousSlide !== null ? slides[previousSlide].cta : null
+								}
+								direction={slideDirection}
+								onClick={handleNext}
+							/>
+							{shouldPrefillProfile && (
+								<GhostButton
+									onClick={() => navigate("/loading")}
+									className="w-full"
+								>
+									{content["start.cta.prefill"]}
+								</GhostButton>
+							)}
+						</div>
 					</div>
 				</div>
 			</div>
