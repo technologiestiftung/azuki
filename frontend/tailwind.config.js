@@ -161,6 +161,22 @@ export default {
 					from: { opacity: "0", transform: "translateY(89px)" },
 					to: { opacity: "1", transform: "translateY(0)" },
 				},
+				startSheetCtaExit: {
+					from: { opacity: "1", transform: "translateY(0)" },
+					to: { opacity: "0", transform: "translateY(89px)" },
+				},
+				startSheetContentFadeOut: {
+					from: { opacity: "1" },
+					to: { opacity: "0" },
+				},
+				stepEnterFromTop: {
+					from: { opacity: "0", transform: "translateY(-48px)" },
+					to: { opacity: "1", transform: "translateY(0)" },
+				},
+				stepCtaEnterFromBottom: {
+					from: { opacity: "0", transform: "translateY(89px)" },
+					to: { opacity: "1", transform: "translateY(0)" },
+				},
 				slideOutBottom: {
 					from: { transform: "translateY(var(--sheet-drag-y, 0px))" },
 					to: { transform: "translateY(100%)" },
@@ -290,6 +306,14 @@ export default {
 					"startSheetContentFade 502ms cubic-bezier(0.5, 0, 0.5, 1) 169ms both",
 				startSheetCtaEnter:
 					"startSheetCtaEnter 599ms cubic-bezier(0.5, 0, 0.5, 1) 60ms both",
+				startSheetCtaExit:
+					"startSheetCtaExit 400ms cubic-bezier(0.5, 0, 0.5, 1) forwards",
+				startSheetContentFadeOut:
+					"startSheetContentFadeOut 320ms cubic-bezier(0.5, 0, 0.5, 1) forwards",
+				stepEnterFromTop:
+					"stepEnterFromTop 502ms cubic-bezier(0.5, 0, 0.5, 1) both",
+				stepCtaEnterFromBottom:
+					"stepCtaEnterFromBottom 599ms cubic-bezier(0.5, 0, 0.5, 1) 60ms both",
 				slideOutBottom:
 					"slideOutBottom 0.28s cubic-bezier(0.4, 0, 1, 1) forwards",
 				slideInNext: "slideInNext 0.3s var(--ease-spring)",
