@@ -16,7 +16,7 @@ import type {
   OccupationImage,
 } from "@azuki/shared";
 import { SUBJECTS } from "@azuki/shared";
-import { hydrateFachpraktiker } from "./hydrate-fachpraktiker.js";
+import { applyJoblingeExclusions } from "./apply-joblinge-exclusions.js";
 import { applyConditionOverrides } from "./apply-condition-overrides.js";
 import { applyAccessOverrides } from "./apply-access-overrides.js";
 import { normalizeKldb } from "./normalizeKldb.js";
@@ -760,19 +760,15 @@ async function main() {
   }
 
   console.log(
-    "Step 2b: Hydrating Fachpraktiker (§66 BBiG) records from parent Ausbildungen...",
+    "Step 2b: Removing §66 Fachpraktiker + Joblinge-excluded (nein/yellow) occupations...",
   );
-  const hyd = hydrateFachpraktiker(occupations);
+  const excl = applyJoblingeExclusions(occupations);
+  occupations.length = 0;
+  occupations.push(...excl.occupations);
+  const excl66 = excl.removed.filter((r) => r.reason === "section66").length;
   console.log(
-    `  -> ${hyd.hydrated} hydrated, ${hyd.unresolved} unresolved.\n`,
+    `  -> ${excl.removed.length} removed (${excl66} §66, ${excl.removed.length - excl66} nein/yellow), ${occupations.length} remain.\n`,
   );
-  if (hyd.unresolved > 0) {
-    for (const r of hyd.report) {
-      if (r.parentId === null) {
-        console.log(`  [UNRESOLVED] ${r.id}  ${r.name}`);
-      }
-    }
-  }
 
   console.log(
     "Step 2c: Applying curated condition overrides for BERUFENET tag mismatches...",

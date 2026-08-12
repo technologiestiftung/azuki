@@ -37,9 +37,9 @@ const MIN_TRAINEES = 5;
  * Drop berufe that don't reach MIN_TRAINEES new contracts/enrollments
  * per year across the service region.
  *
- * Berufe with no availability record (Fachpraktiker, G_unknown, anything
- * DAZUBI+Destatis don't cover) are conservatively kept — absence of data
- * is not the same as unavailable.
+ * Berufe with no availability record (G_unknown, anything DAZUBI+Destatis
+ * don't cover) are conservatively kept — absence of data is not the same
+ * as unavailable.
  */
 export function filterByRegionalAvailability(
 	occupations: Occupation[],

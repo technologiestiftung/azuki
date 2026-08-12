@@ -20,7 +20,7 @@ describe("formatOccupationDisplayName", () => {
 	it("removes inline (Ausbildung) before a specialization", () => {
 		expect(
 			formatOccupationDisplayName("Designer/in (Ausbildung) - Grafik"),
-		).toBe("Designer/in - Grafik");
+		).toBe("Designer/in – Grafik");
 	});
 
 	it("removes training-type parentheticals", () => {
@@ -37,6 +37,34 @@ describe("formatOccupationDisplayName", () => {
 	it("leaves titles without redundant qualifiers unchanged", () => {
 		expect(formatOccupationDisplayName("Kaufmann/-frau im Einzelhandel")).toBe(
 			"Kaufmann/-frau im Einzelhandel",
+		);
+	});
+
+	it("converts the specialization separator to an en-dash", () => {
+		expect(formatOccupationDisplayName("Kaufmann/-frau - Einzelhandel")).toBe(
+			"Kaufmann/-frau – Einzelhandel",
+		);
+	});
+
+	it("converts every separator in multi-part names", () => {
+		expect(
+			formatOccupationDisplayName(
+				"Verfahrensmechaniker/in - Steine- und Erdenindustrie - Baustoffe",
+			),
+		).toBe("Verfahrensmechaniker/in – Steine- und Erdenindustrie – Baustoffe");
+	});
+
+	it("leaves compound-word hyphens untouched", () => {
+		expect(
+			formatOccupationDisplayName(
+				"Anlagenmechaniker/in - Sanitär-, Heizungs- und Klimatechnik",
+			),
+		).toBe("Anlagenmechaniker/in – Sanitär-, Heizungs- und Klimatechnik");
+	});
+
+	it("composes with suffix stripping (dash after (Ausbildung) removal)", () => {
+		expect(formatOccupationDisplayName("Designer/in (Ausbildung) - Foto")).toBe(
+			"Designer/in – Foto",
 		);
 	});
 });
@@ -124,6 +152,29 @@ describe("occupationMatchMeta", () => {
 			}),
 		);
 		expect(meta.occupationEarnings).toBe("");
+	});
+
+	it("prefers the curated duration override over the descriptionShort value", () => {
+		// 9162 = Erzieher/in, override "2-3 Jahre".
+		const meta = occupationMatchMeta(
+			makeOccupation({
+				id: 9162,
+				descriptionShort:
+					"Ausbildungsart Schulische Ausbildung Ausbildungsdauer 2-6 Jahre (Vollzeit/Teilzeit) Lernorte Fachschule",
+			}),
+		);
+		expect(meta.occupationDuration).toBe("2-3 Jahre");
+	});
+
+	it("falls back to the descriptionShort duration when no override exists", () => {
+		const meta = occupationMatchMeta(
+			makeOccupation({
+				id: 999999,
+				descriptionShort:
+					"Ausbildungsart Duale Ausbildung Ausbildungsdauer 3 Jahre Lernorte Betrieb",
+			}),
+		);
+		expect(meta.occupationDuration).toBe("3 Jahre");
 	});
 });
 

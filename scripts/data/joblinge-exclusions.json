@@ -1,0 +1,642 @@
+[
+  {
+    "id": 13952,
+    "name": "Amtliche/r Fachassistent/in (Fleischkontrolleur/in)",
+    "reason": "not_suitable"
+  },
+  {
+    "id": 14616,
+    "name": "Assistent/in - Gesundheits- und Sozialwesen",
+    "reason": "not_suitable"
+  },
+  {
+    "id": 7743,
+    "name": "Assistent/in - Informatik (technische Informatik)",
+    "reason": "not_suitable"
+  },
+  {
+    "id": 7798,
+    "name": "Assistent/in - Informatik (Wirtschaftsinformatik)",
+    "reason": "not_suitable"
+  },
+  {
+    "id": 14532,
+    "name": "Assistent/in - Maschinenbautechnik",
+    "reason": "not_suitable"
+  },
+  {
+    "id": 9599,
+    "name": "Atem-, Sprech- und Stimmlehrer/in",
+    "reason": "not_suitable"
+  },
+  {
+    "id": 59038,
+    "name": "Audiodesigner/in - Musik (Ausbildung)",
+    "reason": "not_suitable"
+  },
+  {
+    "id": 14050,
+    "name": "Außenhandelsassistent/in (doppelt qualifizierende Ausbildung)",
+    "reason": "not_suitable"
+  },
+  {
+    "id": 8626,
+    "name": "Berg- und Skiführer/in",
+    "reason": "not_suitable"
+  },
+  {
+    "id": 6025,
+    "name": "Betriebsassistent/in - Handwerk (doppelt qualifizierende Ausbildung)",
+    "reason": "not_suitable"
+  },
+  {
+    "id": 2674,
+    "name": "Bogenmacher/in",
+    "reason": "flagged"
+  },
+  {
+    "id": 3789,
+    "name": "Brauer/in und Mälzer/in",
+    "reason": "flagged"
+  },
+  {
+    "id": 3813,
+    "name": "Brenner/in",
+    "reason": "flagged"
+  },
+  {
+    "id": 8502,
+    "name": "Bühnenmaler/in und Bühnenplastiker/in - Malerei",
+    "reason": "flagged"
+  },
+  {
+    "id": 14080,
+    "name": "Bühnenmaler/in und Bühnenplastiker/in - Plastik",
+    "reason": "flagged"
+  },
+  {
+    "id": 14688,
+    "name": "Callcenteragent/in",
+    "reason": "not_suitable"
+  },
+  {
+    "id": 1169,
+    "name": "Chemielaborjungwerker/in",
+    "reason": "not_suitable"
+  },
+  {
+    "id": 27289,
+    "name": "Clown/in",
+    "reason": "not_suitable"
+  },
+  {
+    "id": 14345,
+    "name": "Croupier/Croupière",
+    "reason": "not_suitable"
+  },
+  {
+    "id": 13968,
+    "name": "Designer/in (Ausbildung) - Kommunikationsdesign",
+    "reason": "not_suitable"
+  },
+  {
+    "id": 13624,
+    "name": "Desinfektor/in",
+    "reason": "not_suitable"
+  },
+  {
+    "id": 14346,
+    "name": "Detektiv/in",
+    "reason": "not_suitable"
+  },
+  {
+    "id": 142441,
+    "name": "Disponent/in - Integrierte Leitstelle",
+    "reason": "not_suitable"
+  },
+  {
+    "id": 30226,
+    "name": "Dramaturg/in (Ausbildung)",
+    "reason": "not_suitable"
+  },
+  {
+    "id": 1528,
+    "name": "Drechsler/in (Elfenbeinschnitzer/in) - Drechseln",
+    "reason": "flagged"
+  },
+  {
+    "id": 1539,
+    "name": "Drechsler/in (Elfenbeinschnitzer/in) - Elfenbeinschnitzen",
+    "reason": "flagged"
+  },
+  {
+    "id": 59034,
+    "name": "Drehbuchautor/in",
+    "reason": "not_suitable"
+  },
+  {
+    "id": 13622,
+    "name": "Eurokaufmann/-frau (doppelt qualifizierende Ausbildung)",
+    "reason": "not_suitable"
+  },
+  {
+    "id": 7855,
+    "name": "Fachberater/in - Integrierte Systeme (doppelt qualifizierende Ausbildung)",
+    "reason": "not_suitable"
+  },
+  {
+    "id": 15657,
+    "name": "Fechtlehrer/in",
+    "reason": "not_suitable"
+  },
+  {
+    "id": 995,
+    "name": "Figurenkeramformer/in",
+    "reason": "flagged"
+  },
+  {
+    "id": 14197,
+    "name": "Filmproduzent/in",
+    "reason": "not_suitable"
+  },
+  {
+    "id": 76910,
+    "name": "Finanzassistent/in (doppelt qualifizierende Ausbildung)",
+    "reason": "not_suitable"
+  },
+  {
+    "id": 50909,
+    "name": "Flechtwerkgestalter/in",
+    "reason": "flagged"
+  },
+  {
+    "id": 10058,
+    "name": "Flugbegleiter/in",
+    "reason": "not_suitable"
+  },
+  {
+    "id": 100790,
+    "name": "Flugdatenbearbeiter/in",
+    "reason": "not_suitable"
+  },
+  {
+    "id": 14030,
+    "name": "Flugdienstberater/in",
+    "reason": "not_suitable"
+  },
+  {
+    "id": 9572,
+    "name": "Fluglehrer/in",
+    "reason": "not_suitable"
+  },
+  {
+    "id": 9405,
+    "name": "Förderlehrer/in",
+    "reason": "not_suitable"
+  },
+  {
+    "id": 727,
+    "name": "Forstwirt/in",
+    "reason": "flagged"
+  },
+  {
+    "id": 76789,
+    "name": "Fotograf/in",
+    "reason": "flagged"
+  },
+  {
+    "id": 14712,
+    "name": "Fußballtrainer/in",
+    "reason": "not_suitable"
+  },
+  {
+    "id": 2673,
+    "name": "Geigenbauer/in",
+    "reason": "flagged"
+  },
+  {
+    "id": 30191,
+    "name": "Gesundheits- und Krankenpflegehelfer/in",
+    "reason": "not_suitable"
+  },
+  {
+    "id": 4653,
+    "name": "Glas- und Porzellanmaler/in",
+    "reason": "flagged"
+  },
+  {
+    "id": 1092,
+    "name": "Glasbläser/in - Christbaumschmuck",
+    "reason": "flagged"
+  },
+  {
+    "id": 1091,
+    "name": "Glasbläser/in - Glasgestaltung",
+    "reason": "flagged"
+  },
+  {
+    "id": 1095,
+    "name": "Glasbläser/in - Kunstaugen",
+    "reason": "flagged"
+  },
+  {
+    "id": 1048,
+    "name": "Glasmacher/in",
+    "reason": "flagged"
+  },
+  {
+    "id": 15660,
+    "name": "Golflehrer/in",
+    "reason": "not_suitable"
+  },
+  {
+    "id": 2694,
+    "name": "Handzuginstrumentenmacher/in",
+    "reason": "flagged"
+  },
+  {
+    "id": 33207,
+    "name": "HNO-Audiologieassistent/in",
+    "reason": "not_suitable"
+  },
+  {
+    "id": 29057,
+    "name": "Holzbearbeitungsmechaniker/in",
+    "reason": "flagged"
+  },
+  {
+    "id": 7055,
+    "name": "Immobilienassistent/in (doppelt qualifizierende Ausbildung)",
+    "reason": "not_suitable"
+  },
+  {
+    "id": 34938,
+    "name": "Industriekeramiker/in Modelltechnik",
+    "reason": "flagged"
+  },
+  {
+    "id": 59113,
+    "name": "Journalist/in (Ausbildung)",
+    "reason": "not_suitable"
+  },
+  {
+    "id": 142040,
+    "name": "Judolehrer/in",
+    "reason": "not_suitable"
+  },
+  {
+    "id": 8589,
+    "name": "Kameramann/-frau (Ausbildung)",
+    "reason": "not_suitable"
+  },
+  {
+    "id": 7134,
+    "name": "Kaufmann/-frau - Eisenbahn- und Straßenverkehr",
+    "reason": "flagged"
+  },
+  {
+    "id": 143179,
+    "name": "Kaufmann/-frau - Mobilität und Verkehrsservice",
+    "reason": "not_suitable"
+  },
+  {
+    "id": 14517,
+    "name": "Kaufmännische/r Assistent/in/Wirtschaftsassistent/in - Betriebsinformatik",
+    "reason": "not_suitable"
+  },
+  {
+    "id": 7891,
+    "name": "Kaufmännische/r Assistent/in/Wirtschaftsassistent/in - Betriebswirtschaft",
+    "reason": "not_suitable"
+  },
+  {
+    "id": 137121,
+    "name": "Kaufmännische/r Assistent/in/Wirtschaftsassistent/in - E-Business Management",
+    "reason": "not_suitable"
+  },
+  {
+    "id": 7991,
+    "name": "Kaufmännische/r Assistent/in/Wirtschaftsassistent/in - Fremdsprachen",
+    "reason": "not_suitable"
+  },
+  {
+    "id": 7789,
+    "name": "Kaufmännische/r Assistent/in/Wirtschaftsassistent/in - Informationsverarbeitung",
+    "reason": "not_suitable"
+  },
+  {
+    "id": 7017,
+    "name": "Kaufmännische/r Assistent/in/Wirtschaftsassistent/in - Medien",
+    "reason": "not_suitable"
+  },
+  {
+    "id": 9108,
+    "name": "Kinderdorfmutter/-vater",
+    "reason": "not_suitable"
+  },
+  {
+    "id": 7799,
+    "name": "Kommunikationsassistent/in",
+    "reason": "not_suitable"
+  },
+  {
+    "id": 15844,
+    "name": "Kulturmanager/in (Ausbildung)",
+    "reason": "not_suitable"
+  },
+  {
+    "id": 59055,
+    "name": "Kunsttherapeut/in (Ausbildung)",
+    "reason": "not_suitable"
+  },
+  {
+    "id": 59445,
+    "name": "Lehrer/in - Waldorfschulen (Ausbildung)",
+    "reason": "not_suitable"
+  },
+  {
+    "id": 139146,
+    "name": "Leitungsbauer/in - Infrastrukturtechnik",
+    "reason": "not_suitable"
+  },
+  {
+    "id": 1088,
+    "name": "Leuchtröhrenglasbläser/in",
+    "reason": "flagged"
+  },
+  {
+    "id": 1708,
+    "name": "Metall- und Glockengießer/in - Kunst- und Glockengusstechnik",
+    "reason": "flagged"
+  },
+  {
+    "id": 1696,
+    "name": "Metall- und Glockengießer/in - Metallgusstechnik",
+    "reason": "flagged"
+  },
+  {
+    "id": 1702,
+    "name": "Metall- und Glockengießer/in - Zinngusstechnik",
+    "reason": "flagged"
+  },
+  {
+    "id": 77248,
+    "name": "Milchtechnologe/-technologin",
+    "reason": "flagged"
+  },
+  {
+    "id": 6342,
+    "name": "Milchwirtschaftliche/r Laborant/in",
+    "reason": "not_suitable"
+  },
+  {
+    "id": 77800,
+    "name": "Moderator/in (Funk, Fernsehen)",
+    "reason": "not_suitable"
+  },
+  {
+    "id": 15421,
+    "name": "Musiktherapeut/in (Ausbildung)",
+    "reason": "not_suitable"
+  },
+  {
+    "id": 3602,
+    "name": "Pelzveredler/in",
+    "reason": "flagged"
+  },
+  {
+    "id": 77694,
+    "name": "Pferdewirt/in - Pferderennen",
+    "reason": "flagged"
+  },
+  {
+    "id": 77699,
+    "name": "Pferdewirt/in - Pferdezucht",
+    "reason": "flagged"
+  },
+  {
+    "id": 77697,
+    "name": "Pferdewirt/in - Spezialreitweisen",
+    "reason": "flagged"
+  },
+  {
+    "id": 8042,
+    "name": "Phonotypist/in",
+    "reason": "not_suitable"
+  },
+  {
+    "id": 14427,
+    "name": "Podologe/Podologin",
+    "reason": "not_suitable"
+  },
+  {
+    "id": 2713,
+    "name": "Präparationstechnische/r Assistent/in",
+    "reason": "not_suitable"
+  },
+  {
+    "id": 51106,
+    "name": "Produktprüfer/in - Textil",
+    "reason": "flagged"
+  },
+  {
+    "id": 130893,
+    "name": "Prüftechnologe/-technologin Keramik",
+    "reason": "flagged"
+  },
+  {
+    "id": 59025,
+    "name": "Public-Relations-Manager/in (Ausbildung)",
+    "reason": "not_suitable"
+  },
+  {
+    "id": 14512,
+    "name": "Pyrotechniker/in",
+    "reason": "not_suitable"
+  },
+  {
+    "id": 14647,
+    "name": "Redakteur/in",
+    "reason": "not_suitable"
+  },
+  {
+    "id": 15663,
+    "name": "Reitlehrer/in",
+    "reason": "not_suitable"
+  },
+  {
+    "id": 14404,
+    "name": "Rettungshelfer/in",
+    "reason": "not_suitable"
+  },
+  {
+    "id": 8888,
+    "name": "Rettungssanitäter/in",
+    "reason": "not_suitable"
+  },
+  {
+    "id": 8401,
+    "name": "Sänger/in (Ausbildung)",
+    "reason": "not_suitable"
+  },
+  {
+    "id": 9495,
+    "name": "Segellehrer/in",
+    "reason": "not_suitable"
+  },
+  {
+    "id": 13874,
+    "name": "Skilehrer/in",
+    "reason": "not_suitable"
+  },
+  {
+    "id": 15650,
+    "name": "Snowboardlehrer/in",
+    "reason": "not_suitable"
+  },
+  {
+    "id": 15652,
+    "name": "Sportassistent/in",
+    "reason": "not_suitable"
+  },
+  {
+    "id": 14408,
+    "name": "Sporttauchlehrer/in",
+    "reason": "not_suitable"
+  },
+  {
+    "id": 9497,
+    "name": "Surflehrer/in",
+    "reason": "not_suitable"
+  },
+  {
+    "id": 14302,
+    "name": "Technische/r Assistent/in - Automatisierungstechnik",
+    "reason": "not_suitable"
+  },
+  {
+    "id": 13625,
+    "name": "Technische/r Assistent/in - naturkundliche Museen und Forschungsinstitute",
+    "reason": "not_suitable"
+  },
+  {
+    "id": 9546,
+    "name": "Tennislehrer/in",
+    "reason": "not_suitable"
+  },
+  {
+    "id": 6419,
+    "name": "Textillaborant/in",
+    "reason": "not_suitable"
+  },
+  {
+    "id": 1083,
+    "name": "Thermometermacher/in - Thermometerblasen",
+    "reason": "flagged"
+  },
+  {
+    "id": 1084,
+    "name": "Thermometermacher/in - Thermometerjustieren",
+    "reason": "flagged"
+  },
+  {
+    "id": 565,
+    "name": "Tierheilpraktiker/in",
+    "reason": "not_suitable"
+  },
+  {
+    "id": 139600,
+    "name": "Tierphysiotherapeut/in",
+    "reason": "not_suitable"
+  },
+  {
+    "id": 15146,
+    "name": "Verfahrensmechaniker/in - Brillenoptik",
+    "reason": "flagged"
+  },
+  {
+    "id": 27429,
+    "name": "Verfahrensmechaniker/in - Steine- und Erdenindustrie - Asphalttechnik",
+    "reason": "flagged"
+  },
+  {
+    "id": 946,
+    "name": "Verfahrensmechaniker/in - Steine- und Erdenindustrie - Baustoffe",
+    "reason": "flagged"
+  },
+  {
+    "id": 948,
+    "name": "Verfahrensmechaniker/in - Steine- und Erdenindustrie - Gipsplatten oder Faserzement",
+    "reason": "flagged"
+  },
+  {
+    "id": 949,
+    "name": "Verfahrensmechaniker/in - Steine- und Erdenindustrie - Kalksandsteine oder Porenbeton",
+    "reason": "flagged"
+  },
+  {
+    "id": 947,
+    "name": "Verfahrensmechaniker/in - Steine- und Erdenindustrie - Transportbeton",
+    "reason": "flagged"
+  },
+  {
+    "id": 950,
+    "name": "Verfahrensmechaniker/in - Steine- und Erdenindustrie - vorgefertigte Betonerzeugnisse",
+    "reason": "flagged"
+  },
+  {
+    "id": 130257,
+    "name": "Verfahrenstechnologe/-technologin - Mühlen- und Getreidewirtschaft - Agrarlager",
+    "reason": "flagged"
+  },
+  {
+    "id": 130255,
+    "name": "Verfahrenstechnologe/-technologin - Mühlen- und Getreidewirtschaft - Müllerei",
+    "reason": "flagged"
+  },
+  {
+    "id": 130918,
+    "name": "Verfahrenstechnologe/-technologin Metall - Eisen- und Stahlmetallurgie",
+    "reason": "flagged"
+  },
+  {
+    "id": 130919,
+    "name": "Verfahrenstechnologe/-technologin Metall - Nichteisenmetallurgie",
+    "reason": "flagged"
+  },
+  {
+    "id": 130923,
+    "name": "Verfahrenstechnologe/-technologin Metall - Stahlumformung",
+    "reason": "flagged"
+  },
+  {
+    "id": 4640,
+    "name": "Vergolder/in",
+    "reason": "flagged"
+  },
+  {
+    "id": 15524,
+    "name": "Verkehrsüberwacher/in / Hilfspolizist/in",
+    "reason": "not_suitable"
+  },
+  {
+    "id": 77492,
+    "name": "Vermessungstechniker/in - Bergvermessung",
+    "reason": "flagged"
+  },
+  {
+    "id": 14200,
+    "name": "Video-Journalist/in",
+    "reason": "not_suitable"
+  },
+  {
+    "id": 126855,
+    "name": "Werksteinhersteller/in",
+    "reason": "flagged"
+  },
+  {
+    "id": 9015,
+    "name": "Zytologieassistent/in",
+    "reason": "not_suitable"
+  }
+]

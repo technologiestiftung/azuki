@@ -6,14 +6,12 @@ export type PopularityTier =
 	| "C_smallReal"
 	| "D_niche"
 	| "E_vanishing"
-	| "F_fachpraktiker"
 	| "F_doppelqual"
 	| "G_unknown";
 
 export type OccupationCategory =
 	| "dual"
 	| "schulisch"
-	| "fachpraktiker"
 	| "doppelqual"
 	| "schulisch_or_other";
 
