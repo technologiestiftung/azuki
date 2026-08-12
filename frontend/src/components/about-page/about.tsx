@@ -1,8 +1,7 @@
 import { useCallback, useState, type UIEventHandler } from "react";
 import { Footer } from "../footer/Footer";
 import { content } from "../../content";
-import { BottomNav } from "../bottom-nav/BottomNav";
-import { SecondaryIconButton } from "../primitives/buttons/SecondaryIconButton";
+import { GhostIconButton } from "../primitives/buttons/GhostIconButton";
 import { useNavigate } from "react-router-dom";
 import { ROUTE_PATHS } from "../../routing/routes";
 import {
@@ -17,8 +16,7 @@ const SCROLL_OUT_THRESHOLD_PX = 8;
 
 export const AboutPage = () => {
 	const navigate = useNavigate();
-	const { collapseProgress, heroControlsOpacity, onScroll } =
-		useOccupationDetailScroll();
+	const { collapseProgress, onScroll } = useOccupationDetailScroll();
 	const [isScrolledAway, setIsScrolledAway] = useState(false);
 
 	const {
@@ -46,7 +44,7 @@ export const AboutPage = () => {
 	);
 
 	return (
-		<div className="flex flex-col h-full relative overflow-x-hidden pb-16">
+		<div className="flex flex-col h-full relative overflow-x-hidden">
 			<AboutHeaderCollapsed
 				collapseProgress={collapseProgress}
 				titleSlotRef={collapsedTitleSlotRef}
@@ -60,14 +58,10 @@ export const AboutPage = () => {
 			>
 				<div className="sticky top-0 z-[1] flex flex-col px-4 pt-2 pb-2">
 					<div className="flex items-center h-10 transition-opacity duration-150">
-						<SecondaryIconButton
+						<GhostIconButton
 							iconSrc="/icons/arrow-back-black.svg"
 							ariaLabel={content["about.backButton.ariaLabel"]}
 							onClick={() => navigate(ROUTE_PATHS.profile)}
-							className="transition-[background-color] duration-150"
-							style={{
-								backgroundColor: `rgba(209, 213, 219, ${heroControlsOpacity})`,
-							}}
 						/>
 					</div>
 					<div ref={heroTitleSlotRef} className="w-fit">
@@ -132,7 +126,6 @@ export const AboutPage = () => {
 				</div>
 				<Footer />
 			</div>
-			<BottomNav />
 		</div>
 	);
 };

@@ -50,8 +50,8 @@ function buildProfileRows(
 	if (schoolDegreeLabel) {
 		rows.push([
 			profile.inSchool
-				? content["profile.schoolDegreeLabel.inSchool"]
-				: content["profile.schoolDegreeLabel.planned"],
+				? content["profile.schoolDegreeLabel.planned"]
+				: content["profile.schoolDegreeLabel.inSchool"],
 			schoolDegreeLabel,
 		]);
 	}
