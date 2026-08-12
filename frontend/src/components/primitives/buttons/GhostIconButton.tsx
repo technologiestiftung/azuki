@@ -14,6 +14,7 @@ export const GhostIconButton: React.FC<GhostIconButtonProps> = ({
 	children,
 	iconSrc,
 	iconSize = "",
+	tabIndex,
 }) => {
 	return (
 		<button
@@ -28,6 +29,7 @@ export const GhostIconButton: React.FC<GhostIconButtonProps> = ({
 			type={type}
 			aria-label={ariaLabel}
 			title={title}
+			tabIndex={tabIndex}
 		>
 			{iconSrc && (
 				<img src={iconSrc} alt="" className={`${iconSize ?? "w-6 h-6"}`} />
