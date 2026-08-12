@@ -1,12 +1,8 @@
 import { useCallback, useMemo, type UIEventHandler } from "react";
-import {
-	collapseProgressFromScrollY,
-	useOccupationDetailScroll,
-} from "../components/results-page/occupation-detail/useOccupationDetailScroll";
+import { useOccupationDetailScroll } from "../components/results-page/occupation-detail/useOccupationDetailScroll";
 import { content } from "../content";
 import { useMatchResultsStore } from "../store/useMatchResultsStore";
 import { useAppStore } from "../store/useAppStore";
-import { ProfileHeaderCollapsed } from "./ProfileHeaderCollapsed";
 import { ProfileHero } from "./ProfileHero";
 import { TopOccupationsCarousel } from "./TopOccupationsCarousel";
 import { ProfileAboutSection } from "./ProfileAboutSection";
@@ -15,8 +11,12 @@ import { ProfileResetCard } from "./ProfileResetCard";
 import { BottomNav } from "../components/bottom-nav/BottomNav";
 import { Footer } from "../components/footer/Footer";
 import { useSharedProfile } from "./useSharedProfile";
-import { useTitleMorph } from "../hooks/useTitleMorph";
-import { MorphingTitle } from "../components/morphing-title/MorphingTitle";
+import {
+	COLLAPSED_THRESHOLD,
+	CollapsingHeaderTopRow,
+} from "../components/collapsing-header/CollapsingHeaderTopRow";
+import { ProfileActionButtons } from "./ProfileActionButtons";
+import { useCollapsedTitleReveal } from "../components/collapsing-header/useCollapsedTitleReveal";
 
 export function Profile() {
 	const { collapseProgress, heroControlsOpacity, onScroll } =
@@ -26,19 +26,15 @@ export function Profile() {
 	const { isSharedView, sharedProfile, sharedOccupations, isLoadingShared } =
 		useSharedProfile();
 	const profile = sharedProfile ?? ownProfile;
-
-	const {
-		heroTitleSlotRef,
-		collapsedTitleSlotRef,
-		isMorphing,
-		titleStyle,
-		syncMorphTitle,
-	} = useTitleMorph({
-		heroFontSizePx: 32,
-		collapsedFontSizePx: 14,
-		heroLineHeightPx: 42,
-		collapsedLineHeightPx: 20,
-	});
+	const { titleRef, titleRevealProgress, updateTitleReveal } =
+		useCollapsedTitleReveal();
+	const handleScroll: UIEventHandler<HTMLDivElement> = useCallback(
+		(event) => {
+			onScroll(event);
+			updateTitleReveal(event.currentTarget);
+		},
+		[onScroll, updateTitleReveal],
+	);
 
 	const topOccupations = useMemo(() => {
 		if (isSharedView) {
@@ -48,16 +44,7 @@ export function Profile() {
 			.sort((a, b) => b.score - a.score)
 			.slice(0, 3);
 	}, [isSharedView, sharedOccupations, matchResults]);
-
-	const handleScroll: UIEventHandler<HTMLDivElement> = useCallback(
-		(event) => {
-			onScroll(event);
-			syncMorphTitle(
-				collapseProgressFromScrollY(event.currentTarget.scrollTop),
-			);
-		},
-		[onScroll, syncMorphTitle],
-	);
+	const collapsed = collapseProgress > COLLAPSED_THRESHOLD;
 
 	return (
 		<div
@@ -65,26 +52,52 @@ export function Profile() {
 				isSharedView ? "" : "pb-16"
 			}`}
 		>
-			<ProfileHeaderCollapsed
-				collapseProgress={collapseProgress}
-				titleSlotRef={collapsedTitleSlotRef}
-				isSharedView={isSharedView}
-			/>
-			<MorphingTitle
-				isMorphing={isMorphing}
-				style={titleStyle}
-				className="text-sky-900"
-			>
-				{content["profile.title"]}
-			</MorphingTitle>
 			<div
 				className="relative flex-1 overflow-y-auto overflow-x-hidden"
 				onScroll={handleScroll}
 			>
+				<CollapsingHeaderTopRow
+					title={content["profile.title"]}
+					progress={collapseProgress}
+					titleRevealProgress={titleRevealProgress}
+					collapsedFill
+					gradientFrom="sky-100"
+					trailing={
+						!isSharedView ? (
+							<div className="grid">
+								{/* Frosted over the blue hero, cross-fading with the plain
+								    set once the header fill turns solid. */}
+								<div
+									className="[grid-area:1/1] transition-opacity duration-150"
+									style={{
+										opacity: 1 - collapseProgress,
+										pointerEvents: collapsed ? "none" : "auto",
+									}}
+									aria-hidden={collapsed}
+								>
+									<ProfileActionButtons
+										buttonClassName="bg-sky-shade-10/50 rounded-xl backdrop-blur-[4.5px]"
+										tabIndex={collapsed ? -1 : undefined}
+									/>
+								</div>
+								<div
+									className="[grid-area:1/1] transition-opacity duration-150"
+									style={{
+										opacity: collapseProgress,
+										pointerEvents: collapsed ? "auto" : "none",
+									}}
+									aria-hidden={!collapsed}
+								>
+									<ProfileActionButtons tabIndex={collapsed ? undefined : -1} />
+								</div>
+							</div>
+						) : undefined
+					}
+				/>
 				<ProfileHero
 					heroControlsOpacity={heroControlsOpacity}
-					titleSlotRef={heroTitleSlotRef}
-					showTitle={!isMorphing}
+					titleOpacity={1 - collapseProgress}
+					titleRef={titleRef}
 					isSharedView={isSharedView}
 					profile={profile}
 				/>

@@ -8,6 +8,7 @@ interface OccupationDetailHeaderCollapsedProps {
 	isFavorite: boolean;
 	onToggleFavorite: () => void;
 	onShare: () => void;
+	titleOpacity?: number;
 }
 
 export function OccupationDetailHeaderCollapsed({
@@ -15,6 +16,7 @@ export function OccupationDetailHeaderCollapsed({
 	isFavorite,
 	onToggleFavorite,
 	onShare,
+	titleOpacity = 1,
 }: OccupationDetailHeaderCollapsedProps) {
 	const navigate = useNavigate();
 	return (
@@ -26,7 +28,11 @@ export function OccupationDetailHeaderCollapsed({
 				title={content["navigation.back"]}
 				iconSize="w-5 h-5"
 			/>
-			<h1 className="text-sm font-semibold text-gray-900 flex-1 text-center truncate">
+			<h1
+				className="text-sm font-semibold text-gray-900 flex-1 text-center truncate transition-opacity duration-150 ease-[cubic-bezier(0.25,0,0.25,1)]"
+				style={{ opacity: titleOpacity }}
+				aria-hidden={titleOpacity < 0.5}
+			>
 				{displayName}
 			</h1>
 			<div className="flex items-center gap-1.5">

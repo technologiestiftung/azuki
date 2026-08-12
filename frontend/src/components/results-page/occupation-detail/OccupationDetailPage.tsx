@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo } from "react";
+import { useCallback, useEffect, useMemo, type UIEventHandler } from "react";
 import { useParams, useSearchParams } from "react-router-dom";
 import {
 	buildOccupationShareText,
@@ -24,6 +24,7 @@ import {
 } from "./occupationShareState";
 import { shareOccupationLink } from "./shareOccupationLink";
 import { useSharedNextOccupations } from "./useSharedNextOccupations";
+import { useCollapsedTitleReveal } from "../../collapsing-header/useCollapsedTitleReveal";
 
 export function OccupationDetailPage() {
 	const occupationId = Number(useParams().id);
@@ -45,6 +46,17 @@ export function OccupationDetailPage() {
 		heroControlsOpacity,
 		heroImageParallaxY,
 	} = useOccupationDetailScroll();
+
+	const { titleRef, titleRevealProgress, updateTitleReveal } =
+		useCollapsedTitleReveal();
+
+	const handleScroll: UIEventHandler<HTMLDivElement> = useCallback(
+		(event) => {
+			onScroll(event);
+			updateTitleReveal(event.currentTarget);
+		},
+		[onScroll, updateTitleReveal],
+	);
 
 	const liveMatchPercent =
 		detail.matchedOccupation !== undefined
@@ -179,11 +191,12 @@ export function OccupationDetailPage() {
 					isFavorite={detail.isFavorite}
 					onToggleFavorite={detail.toggleFavorite}
 					onShare={handleShare}
+					titleOpacity={titleRevealProgress}
 				/>
 			</div>
 			<div
 				className="relative flex-1 overflow-y-auto overflow-x-hidden"
-				onScroll={onScroll}
+				onScroll={handleScroll}
 			>
 				<div className="sticky top-0 z-0">
 					<OccupationDetailHero
@@ -198,7 +211,10 @@ export function OccupationDetailPage() {
 					/>
 				</div>
 				<div className="relative -mt-4 flex flex-col gap-8 bg-sky-white rounded-t-[20px] pb-8 z-10">
-					<h1 className="text-3xl font-semibold text-sky-900 px-[18px] pt-4 ">
+					<h1
+						ref={titleRef}
+						className="text-3xl font-semibold text-sky-900 px-[18px] pt-4 "
+					>
 						{detail.displayName}
 					</h1>
 					{statusMessage ? (
