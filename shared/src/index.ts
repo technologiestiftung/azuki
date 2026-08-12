@@ -14,6 +14,8 @@ export type {
 	VacancyPreview,
 	VacancyResult,
 	VacanciesResponse,
+	VacancyAddress,
+	VacancyDetail,
 } from "./types";
 
 export {

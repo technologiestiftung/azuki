@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { parseJobsucheResponse } from "../../src/jobsuche/client.js";
+import { parseJobsucheResponse, toDetail } from "../../src/jobsuche/client.js";
 
 const DAY_MS = 24 * 60 * 60 * 1000;
 
@@ -13,6 +13,7 @@ function ausbildungJob(overrides: Record<string, unknown> = {}) {
 		ausbildungsart: "AUSBILDUNG",
 		firma: "Beispiel GmbH",
 		hauptberuf: "Fachinformatiker/in - Systemintegration",
+		referenznummer: "10000-1000000000-S",
 		stellenlokationen: [
 			{
 				adresse: {
@@ -42,6 +43,7 @@ describe("parseJobsucheResponse", () => {
 
 		expect(previews).toEqual([
 			{
+				referenznummer: "10000-1000000000-S",
 				employer: "Beispiel GmbH",
 				city: "Berlin",
 				postcode: "10785",
@@ -126,6 +128,7 @@ describe("parseJobsucheResponse", () => {
 		expect(totalCount).toBe(1);
 		expect(previews).toEqual([
 			{
+				referenznummer: "",
 				employer: "Unbekannter Arbeitgeber",
 				city: "Unbekannter Ort",
 				postcode: undefined,
@@ -143,6 +146,117 @@ describe("parseJobsucheResponse", () => {
 		expect(parseJobsucheResponse({})).toEqual({
 			totalCount: 0,
 			previews: [],
+		});
+	});
+});
+
+// Fixture shaped like the real `pc/v4/jobdetails/{encryptedJobCode}` response
+// (verified live against the Jobsuche API).
+function jobDetailsFixture(overrides: Record<string, unknown> = {}) {
+	return {
+		stellenangebotsTitel: "Kaufmann Büromanagement (m/w/d)",
+		stellenangebotsBeschreibung: "Zur Verstärkung unseres Teams...",
+		geforderterBildungsabschluss: "MITTLERE_REIFE_MITTLERER_BILDUNGSABSCHLUSS",
+		arbeitszeitVollzeit: true,
+		eintrittszeitraum: { von: "2026-08-12" },
+		stellenlokationen: [
+			{
+				adresse: {
+					strasse: "Wilhelmstr.",
+					hausnummer: "50",
+					plz: "52146",
+					ort: "Würselen",
+				},
+				breite: 50.82066,
+				laenge: 6.138243,
+			},
+		],
+		hauptberuf: "Kaufmann/-frau - Büromanagement",
+		firma: "K H S Steuerberater Kaulhausen Helmel Spirovski PartGmbB",
+		referenznummer: "10000-1207517553-S",
+		...overrides,
+	};
+}
+
+describe("toDetail", () => {
+	it("maps a full jobdetails response", () => {
+		expect(toDetail(jobDetailsFixture(), "10000-1207517553-S")).toEqual({
+			referenznummer: "10000-1207517553-S",
+			occupationName: "Kaufmann/-frau - Büromanagement",
+			title: "Kaufmann Büromanagement (m/w/d)",
+			employer: "K H S Steuerberater Kaulhausen Helmel Spirovski PartGmbB",
+			description: "Zur Verstärkung unseres Teams...",
+			isFullTime: true,
+			educationLevel: "MITTLERE_REIFE_MITTLERER_BILDUNGSABSCHLUSS",
+			startDate: "2026-08-12",
+			addresses: [
+				{
+					street: "Wilhelmstr. 50",
+					postcode: "52146",
+					city: "Würselen",
+					latitude: 50.82066,
+					longitude: 6.138243,
+				},
+			],
+		});
+	});
+
+	it("maps NICHT_RELEVANT and missing education level through as-is", () => {
+		expect(
+			toDetail(
+				jobDetailsFixture({ geforderterBildungsabschluss: "NICHT_RELEVANT" }),
+				"10000-1207517553-S",
+			).educationLevel,
+		).toBe("NICHT_RELEVANT");
+
+		expect(
+			toDetail(
+				jobDetailsFixture({ geforderterBildungsabschluss: undefined }),
+				"10000-1207517553-S",
+			).educationLevel,
+		).toBeNull();
+	});
+
+	it("maps multiple stellenlokationen entries", () => {
+		const { addresses } = toDetail(
+			jobDetailsFixture({
+				stellenlokationen: [
+					{ adresse: { strasse: "Bahnhofstr.", hausnummer: "1", plz: "10115", ort: "Berlin" } },
+					{ adresse: { strasse: "Hauptstr.", hausnummer: "2", plz: "10245", ort: "Berlin" } },
+				],
+			}),
+			"10000-1207517553-S",
+		);
+
+		expect(addresses).toEqual([
+			{
+				street: "Bahnhofstr. 1",
+				postcode: "10115",
+				city: "Berlin",
+				latitude: undefined,
+				longitude: undefined,
+			},
+			{
+				street: "Hauptstr. 2",
+				postcode: "10245",
+				city: "Berlin",
+				latitude: undefined,
+				longitude: undefined,
+			},
+		]);
+	});
+
+	it("falls back when optional fields are missing", () => {
+		expect(toDetail({}, "10000-0000000000-S")).toEqual({
+			referenznummer: "10000-0000000000-S",
+			occupationName: "",
+			title: "",
+			employer: "Unbekannter Arbeitgeber",
+			description: "",
+			isFullTime: null,
+			educationLevel: null,
+			startDate: undefined,
+			addresses: [],
 		});
 	});
 });

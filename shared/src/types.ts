@@ -176,6 +176,8 @@ export interface GenerationInfo {
 // --- Vacancy search (POST /api/vacancies response) ---
 
 export interface VacancyPreview {
+	/** Jobsuche API's stable posting id (`referenznummer`). */
+	referenznummer: string;
 	employer: string;
 	city: string;
 	postcode?: string;
@@ -198,4 +200,26 @@ export interface VacancyResult {
 
 export interface VacanciesResponse {
 	results: VacancyResult[];
+}
+
+// --- Vacancy detail (GET /api/vacancies/:refnr response) ---
+
+export interface VacancyAddress {
+	street?: string;
+	postcode?: string;
+	city?: string;
+	latitude?: number;
+	longitude?: number;
+}
+
+export interface VacancyDetail {
+	referenznummer: string;
+	occupationName: string;
+	title: string;
+	employer: string;
+	description: string;
+	isFullTime: boolean | null;
+	educationLevel: string | null;
+	startDate?: string;
+	addresses: VacancyAddress[];
 }
