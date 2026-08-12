@@ -3,10 +3,6 @@ import { useCallback, useRef, useState } from "react";
 const FADE_START_PX = 54;
 const FADE_END_PX = 8;
 
-/**
- * Reveals the small header title only as the body's large title finishes
- * scrolling behind the top row.
- */
 export function useCollapsedTitleReveal() {
 	const titleRef = useRef<HTMLHeadingElement>(null);
 	const [titleRevealProgress, setTitleRevealProgress] = useState(0);

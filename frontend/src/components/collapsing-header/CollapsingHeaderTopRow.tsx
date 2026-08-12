@@ -2,11 +2,6 @@ import type { CSSProperties, ReactNode } from "react";
 
 export const COLLAPSED_THRESHOLD = 0.5;
 
-/**
- * Gray (gray-300) action-button background that fades out as the header
- * collapses, so buttons read as SecondaryIconButtons while expanded and as
- * plain ghost buttons once collapsed.
- */
 export function expandedButtonBackgroundStyle(progress: number): CSSProperties {
 	return {
 		backgroundColor: `rgba(209, 213, 219, ${Math.max(0, 1 - progress)})`,
@@ -40,9 +35,6 @@ export function CollapsingHeaderTopRow({
 	const fromClass = gradientFrom === "sky-100" ? "from-sky-100" : "from-white";
 
 	return (
-		// Zero-height sticky wrapper: lives inside the scroll container (so the
-		// native scrollbar always paints on top) but takes no layout space, so the
-		// large title still starts at the top and scrolls behind it.
 		<div className="sticky top-0 z-30 h-0 pointer-events-none">
 			<div className="relative w-full">
 				{/* Always-present soft gradient so the large title fades behind it. */}
