@@ -150,8 +150,6 @@ describe("parseJobsucheResponse", () => {
 	});
 });
 
-// Fixture shaped like the real `pc/v4/jobdetails/{encryptedJobCode}` response
-// (verified live against the Jobsuche API).
 function jobDetailsFixture(overrides: Record<string, unknown> = {}) {
 	return {
 		stellenangebotsTitel: "Kaufmann Büromanagement (m/w/d)",

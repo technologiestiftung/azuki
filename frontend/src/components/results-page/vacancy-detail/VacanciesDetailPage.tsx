@@ -19,7 +19,7 @@ const TITLE_REVEAL_RANGE = 40;
 export function VacanciesDetailPage() {
 	const navigate = useNavigate();
 	const referenznummer = decodeURIComponent(useParams().refnr ?? "");
-	const { detail, loading, error, isFavorite, toggleFavorite } =
+	const { detail, preview, loading, error, isFavorite, toggleFavorite } =
 		useVacancyDetail(referenznummer);
 	const navState = useLocation().state as VacancyDetailNavState | null;
 
@@ -119,8 +119,8 @@ export function VacanciesDetailPage() {
 				onScroll={handleScroll}
 			>
 				<VacancyDetailHero
-					referenznummer={referenznummer}
 					displayName={displayName}
+					employer={detail?.employer ?? preview?.employer}
 				/>
 				<div className="relative flex mt-8 flex-col gap-8 bg-sky-white rounded-t-[20px] pb-8 z-10">
 					{statusMessage ? (

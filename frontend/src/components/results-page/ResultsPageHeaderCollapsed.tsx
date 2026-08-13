@@ -24,7 +24,6 @@ export const ResultsPageHeaderCollapsed = ({
 }: ResultsPageHeaderCollapsedProps) => {
 	return (
 		<div className="h-[60px] flex w-full items-center justify-between px-4 pt-3 pb-2 shrink-0 border-b border-sky-20 z-50">
-			{/* Invisible slot for morph target; visible title lives in ResultsPageHeader */}
 			<div
 				ref={titleSlotRef}
 				className="text-base font-semibold leading-6 text-sky-900 flex-1 text-left truncate pr-1.5 opacity-0"
