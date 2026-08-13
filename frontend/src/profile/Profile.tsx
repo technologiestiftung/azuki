@@ -1,4 +1,4 @@
-import { useCallback, useMemo, type UIEventHandler } from "react";
+import { useMemo, type UIEvent } from "react";
 import { useOccupationDetailScroll } from "../components/results-page/occupation-detail/useOccupationDetailScroll";
 import { content } from "../content";
 import { useMatchResultsStore } from "../store/useMatchResultsStore";
@@ -28,13 +28,10 @@ export function Profile() {
 	const profile = sharedProfile ?? ownProfile;
 	const { titleRef, titleRevealProgress, updateTitleReveal } =
 		useCollapsedTitleReveal();
-	const handleScroll: UIEventHandler<HTMLDivElement> = useCallback(
-		(event) => {
-			onScroll(event);
-			updateTitleReveal(event.currentTarget);
-		},
-		[onScroll, updateTitleReveal],
-	);
+	const handleScroll = (event: UIEvent<HTMLDivElement>) => {
+		onScroll(event);
+		updateTitleReveal(event.currentTarget);
+	};
 
 	const topOccupations = useMemo(() => {
 		if (isSharedView) {

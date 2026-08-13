@@ -613,13 +613,6 @@ export const content = {
 	"vacancies.share.ariaLabel": "Freie Stellen teilen",
 	"vacancies.share.title": "Freie Stellen für dich",
 	"vacancies.share.text": "Schau dir diese freien Ausbildungsstellen an.",
-	"vacancies.download.ariaLabel": "Freie Stellen herunterladen",
-	"vacancies.export.filename": "freie-stellen.pdf",
-	"vacancies.export.occupation": "Beruf",
-	"vacancies.export.employer": "Arbeitgeber",
-	"vacancies.export.location": "Ort",
-	"vacancies.export.startDate": "Beginn ab",
-	"vacancies.export.publishedAt": "Veröffentlicht",
 	"vacancies.filter.occupations.title": "Berufe",
 	"vacancies.filter.occupations.title.short": "Beruf",
 	"vacancies.filter.occupations.filterButton.ariaLabel": "Berufe filtern",
@@ -630,6 +623,32 @@ export const content = {
 	"vacancies.published.daysAgo": "Vor {days} Tagen veröffentlicht",
 	"vacancies.published.oneDayAgo": "Vor 1 Tag veröffentlicht",
 	"vacancies.badge.new": "Neu",
+	// Vacancy Detail
+	"vacancies.detail.loading": "Stellendetails werden geladen…",
+	"vacancies.detail.notFound": "Diese Stelle wurde nicht gefunden.",
+	"vacancies.detail.loadError":
+		"Die Stellendetails konnten gerade nicht geladen werden. Versuch es später noch einmal.",
+	"vacancies.detail.startTitle": "Beginn",
+	"vacancies.detail.employmentTypeTitle": "Anstellungsart",
+	"vacancies.detail.employmentType.fullTime": "Vollzeit",
+	"vacancies.detail.employmentType.partTime": "Teilzeit",
+	"vacancies.detail.educationLevel.fachgebundeneHochschulreife":
+		"Fachgebundene Hochschulreife",
+	"vacancies.detail.locationTitle": "Arbeitsort",
+	"vacancies.detail.location.showMore": "+{count} weitere Arbeitsorte",
+	"vacancies.detail.location.showLess": "Weniger anzeigen",
+	"vacancies.detail.aboutTitle": "Über diese Stelle",
+	"vacancies.detail.description.showMore": "Mehr anzeigen",
+	"vacancies.detail.description.showLess": "Weniger anzeigen",
+	"vacancies.detail.applyCard.title":
+		"Schau dir das vollständige Stellenangebot an",
+	"vacancies.detail.applyCard.description":
+		"Dort findest du auch alle Infos zur Bewerbung.",
+	"vacancies.detail.applyCard.cta": "Zum Stellenangebot",
+	"vacancies.detail.applyCard.cta.ariaLabel": "Zum Stellenangebot",
+	"vacancies.detail.contactCard.title": "Bewerben – wie geht das?",
+	"vacancies.detail.contactCard.description":
+		"Wir von PLAN A beraten dich zu <strong>Lebenslauf, Bewerbung</strong> und <strong>Vorstellungsgespräch</strong>. So wird Ausbildungssuche ganz einfach.",
 	"results.showAllLink": "Alle Stellen auf arbeitsagentur.de ansehen",
 	"results.fetchError":
 		"Die Stellen konnten gerade nicht geladen werden. Versuch es später noch einmal.",

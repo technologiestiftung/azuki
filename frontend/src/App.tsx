@@ -14,6 +14,7 @@ import { NoGosStep } from "./components/competence-profile/steps/no-gos-step/NoG
 import { ResultsPage } from "./components/results-page/ResultsPage";
 import { OccupationDetailPage } from "./components/results-page/occupation-detail/OccupationDetailPage";
 import { VacanciesPage } from "./components/results-page/vacancies-page/VacanciesPage";
+import { VacanciesDetailPage } from "./components/results-page/vacancy-detail/VacanciesDetailPage";
 import { WorkExpectationsStep } from "./components/competence-profile/steps/WorkExpectationsStep";
 import { EvalPage } from "./components/eval/EvalPage";
 import { PersonasPage } from "./components/personas/PersonasPage";
@@ -96,6 +97,10 @@ function App() {
 					<Route
 						path={ROUTE_PATHS.resultsOccupationDetail}
 						element={<OccupationDetailPage />}
+					/>
+					<Route
+						path={ROUTE_PATHS.resultsVacancyDetail}
+						element={<VacanciesDetailPage />}
 					/>
 					<Route path={ROUTE_PATHS.eval} element={<EvalPage />} />
 					<Route path={ROUTE_PATHS.personas} element={<PersonasPage />} />

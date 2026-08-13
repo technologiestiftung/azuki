@@ -21,7 +21,7 @@ import { aiRank, buildSystemPromptV5 } from "./ai/index.js";
 import occupationsData from "./data/berufe.json";
 import { VacanciesRequestSchema } from "./schemas/vacancies.js";
 import { ReverseGeocodeRequestSchema } from "./schemas/reverseGeocode.js";
-import { searchVacancies } from "./jobsuche/client.js";
+import { searchVacancies, getJobDetails } from "./jobsuche/client.js";
 import {
 	mergeVacancyOccupationNames,
 	resolvePreferredJobVacancyNames,
@@ -285,6 +285,21 @@ app.get("/api/shared-vacancies", async (c) => {
 
 	const response: VacanciesResponse = { results };
 	return c.json(response);
+});
+
+const REFERENZNUMMER_PATTERN = /^[A-Za-z0-9-]+$/;
+
+app.get("/api/vacancies/:refnr", async (c) => {
+	const refnr = c.req.param("refnr");
+	if (!REFERENZNUMMER_PATTERN.test(refnr)) {
+		return c.json({ error: "Invalid referenznummer" }, 400);
+	}
+
+	const detail = await getJobDetails(refnr);
+	if (!detail) {
+		return c.json({ error: "Vacancy not found" }, 404);
+	}
+	return c.json(detail);
 });
 
 app.post("/api/reverse-geocode", async (c) => {

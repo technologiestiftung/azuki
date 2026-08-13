@@ -11,12 +11,10 @@ const DEGREE_STAT_ORDER: DegreeStatKey[] = [
 ];
 
 const DEGREE_STAT_LABELS: Record<DegreeStatKey, string> = {
-	noQualification:
-		content["results.detail.schoolDegree.degreeStats.noQualification"],
-	secondary: content["results.detail.schoolDegree.degreeStats.secondary"],
-	intermediate: content["results.detail.schoolDegree.degreeStats.intermediate"],
-	universityEntrance:
-		content["results.detail.schoolDegree.degreeStats.universityEntrance"],
+	noQualification: content["schoolDegree.option.none.label"],
+	secondary: content["schoolDegree.option.secondary.label"],
+	intermediate: content["schoolDegree.option.intermediate.label"],
+	universityEntrance: content["schoolDegree.option.universityEntrance.label"],
 };
 
 function predominantDegreeStat(stats: DegreeDistribution): DegreeStatKey {

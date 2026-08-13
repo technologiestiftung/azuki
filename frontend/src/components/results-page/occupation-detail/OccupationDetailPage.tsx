@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, type UIEventHandler } from "react";
+import { useCallback, useEffect, useMemo, type UIEvent } from "react";
 import { useParams, useSearchParams } from "react-router-dom";
 import {
 	buildOccupationShareText,
@@ -50,13 +50,10 @@ export function OccupationDetailPage() {
 	const { titleRef, titleRevealProgress, updateTitleReveal } =
 		useCollapsedTitleReveal();
 
-	const handleScroll: UIEventHandler<HTMLDivElement> = useCallback(
-		(event) => {
-			onScroll(event);
-			updateTitleReveal(event.currentTarget);
-		},
-		[onScroll, updateTitleReveal],
-	);
+	const handleScroll = (event: UIEvent<HTMLDivElement>) => {
+		onScroll(event);
+		updateTitleReveal(event.currentTarget);
+	};
 
 	const liveMatchPercent =
 		detail.matchedOccupation !== undefined

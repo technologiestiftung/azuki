@@ -28,6 +28,7 @@ export function useOccupationDetailScroll() {
 
 	return {
 		onScroll,
+		scrollY,
 		collapseProgress,
 		overlayOpacity,
 		heroControlsOpacity,

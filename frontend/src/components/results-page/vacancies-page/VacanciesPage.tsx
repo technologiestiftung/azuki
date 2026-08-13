@@ -14,7 +14,6 @@ import {
 	getOccupationFilterLabel,
 } from "../utils/occupationFilterChips";
 import { applyVacancyOccupationFilters } from "../utils/applyVacancyOccupationFilters";
-import { buildVacancyCardKey } from "../utils/vacancyCardKey";
 import {
 	LocationFilterBottomSheet,
 	DEFAULT_LOCATION_FILTER,
@@ -49,6 +48,7 @@ function getVacancyOccupationFilterIdsFromStore(): number[] {
 }
 
 interface VacancyListItem {
+	listKey: string;
 	key: string;
 	occupation: MatchedOccupation;
 	preview: VacancyPreview;
@@ -243,12 +243,16 @@ export function VacanciesPage() {
 			if (!vacancyResult?.previews.length) {
 				continue;
 			}
-			for (const [index, preview] of vacancyResult.previews.entries()) {
-				const key = buildVacancyCardKey(occupation.id, preview, index);
+			for (const preview of vacancyResult.previews) {
+				const key = preview.referenznummer;
+				if (!key) {
+					continue;
+				}
 				if (showFavoritesOnly && !favoriteVacancyKeySet.has(key)) {
 					continue;
 				}
 				cards.push({
+					listKey: `${occupation.id}-${key}`,
 					key,
 					occupation,
 					preview,
@@ -262,11 +266,6 @@ export function VacanciesPage() {
 		showFavoritesOnly,
 		favoriteVacancyKeySet,
 	]);
-
-	const handleDownload = useCallback(async () => {
-		const { exportVacanciesPdf } = await import("../utils/exportVacanciesPdf");
-		exportVacanciesPdf(vacancyCards);
-	}, [vacancyCards]);
 
 	const handleShare = useCallback(async () => {
 		const url = buildShareUrl(
@@ -335,10 +334,7 @@ export function VacanciesPage() {
 						titleRevealProgress={titleRevealProgress}
 						title={vacancyTitle}
 						shareAriaLabel={content["vacancies.share.ariaLabel"]}
-						downloadAriaLabel={content["vacancies.download.ariaLabel"]}
-						onDownload={handleDownload}
 						onShare={handleShare}
-						downloadDisabled={vacancyCards.length === 0}
 						shareDisabled={visibleOccupations.length === 0}
 					/>
 					<h1
@@ -401,9 +397,9 @@ export function VacanciesPage() {
 						</div>
 					) : (
 						<div className="px-4 pb-4 space-y-3">
-							{vacancyCards.map(({ key, occupation, preview }) => (
+							{vacancyCards.map(({ listKey, key, occupation, preview }) => (
 								<VacancyCard
-									key={key}
+									key={listKey}
 									occupationName={occupation.name}
 									preview={preview}
 									isFavorite={favoriteVacancyKeySet.has(key)}

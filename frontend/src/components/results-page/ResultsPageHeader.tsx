@@ -28,8 +28,8 @@ interface ResultsPageHeaderProps {
 	titleRevealProgress: number;
 	title: ReactNode;
 	shareAriaLabel: string;
-	downloadAriaLabel: string;
-	onDownload: () => void;
+	downloadAriaLabel?: string;
+	onDownload?: () => void;
 	onShare: () => void;
 	downloadDisabled?: boolean;
 	shareDisabled?: boolean;
@@ -54,14 +54,16 @@ export function ResultsPageHeader({
 			collapsedBorder={false}
 			trailing={
 				<>
-					<SecondaryIconButton
-						iconSrc="/icons/download.svg"
-						ariaLabel={downloadAriaLabel}
-						onClick={onDownload}
-						disabled={downloadDisabled}
-						className="transition-[background-color] duration-150"
-						style={expandedButtonBackgroundStyle(scrollProgress)}
-					/>
+					{onDownload && (
+						<SecondaryIconButton
+							iconSrc="/icons/download.svg"
+							ariaLabel={downloadAriaLabel}
+							onClick={onDownload}
+							disabled={downloadDisabled}
+							className="transition-[background-color] duration-150"
+							style={expandedButtonBackgroundStyle(scrollProgress)}
+						/>
+					)}
 					<SecondaryIconButton
 						iconSrc="/icons/share.svg"
 						ariaLabel={shareAriaLabel}
