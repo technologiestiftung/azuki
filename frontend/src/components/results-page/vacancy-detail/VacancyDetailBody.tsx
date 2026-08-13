@@ -4,6 +4,7 @@ import { content } from "../../../content";
 import { VacancyDetailMetaInfo } from "./VacancyDetailMetaInfo";
 import { ContactCard } from "../ContactCard";
 import { buildJobsucheApplyUrl } from "../utils/buildJobsucheApplyUrl";
+import ReactMarkdown from "react-markdown";
 
 interface VacancyDetailBodyProps {
 	detail: VacancyDetail;
@@ -29,11 +30,28 @@ export function VacancyDetailBody({ detail }: VacancyDetailBodyProps) {
 				{detail.description && (
 					<div className="flex flex-col gap-2">
 						<p
-							className={`text-sky-900 text-lg leading-6 font-normal whitespace-pre-line ${
+							className={`text-sky-900 text-lg leading-[140%] font-normal whitespace-pre-line ${
 								isDescriptionExpanded ? "" : "line-clamp-6"
 							}`}
 						>
-							{detail.description}
+							<ReactMarkdown
+								components={{
+									p: ({ children }) => <p>{children}</p>,
+									strong: ({ children }) => (
+										<strong className="font-semibold">{children}</strong>
+									),
+									ul: ({ children }) => (
+										<ul className="list-disc pl-5 whitespace-normal">
+											{children}
+										</ul>
+									),
+									li: ({ children }) => (
+										<li className="leading-tight py-1">{children}</li>
+									),
+								}}
+							>
+								{detail.description}
+							</ReactMarkdown>
 						</p>
 						<button
 							type="button"

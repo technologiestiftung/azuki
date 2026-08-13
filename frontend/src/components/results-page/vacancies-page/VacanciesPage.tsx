@@ -397,9 +397,9 @@ export function VacanciesPage() {
 						</div>
 					) : (
 						<div className="px-4 pb-4 space-y-3">
-						{vacancyCards.map(({ listKey, key, occupation, preview }) => (
-							<VacancyCard
-								key={listKey}
+							{vacancyCards.map(({ listKey, key, occupation, preview }) => (
+								<VacancyCard
+									key={listKey}
 									occupationName={occupation.name}
 									preview={preview}
 									isFavorite={favoriteVacancyKeySet.has(key)}
