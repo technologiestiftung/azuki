@@ -1,8 +1,8 @@
 import { useState } from "react";
 import type { VacancyDetail } from "@azuki/shared";
 import { content } from "../../../content";
-import { formatStartDate } from "../vacancies-page/VacancyCard";
 import { formatVacancyEducationLevel } from "../utils/formatVacancyEducationLevel";
+import { formatVacancyStartDate } from "../utils/formatVacancyStartDate";
 import { InfoBottomSheet } from "../occupation-detail/InfoBottomSheet";
 import { VacancyAddressList } from "./VacancyAddressList";
 
@@ -20,7 +20,7 @@ function formatEmploymentType(isFullTime: boolean | null) {
 }
 
 export function VacancyDetailMetaInfo({ detail }: VacancyDetailMetaInfoProps) {
-	const startDate = formatStartDate(detail.startDate);
+	const startDate = formatVacancyStartDate(detail.startDate);
 
 	const employmentTypeLabel = formatEmploymentType(detail.isFullTime);
 	const schoolDegreeLabel = formatVacancyEducationLevel(detail.educationLevel);

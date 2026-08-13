@@ -3,25 +3,12 @@ import type { VacancyPreview } from "@azuki/shared";
 import { formatOccupationDisplayName } from "@azuki/shared";
 import { content } from "../../../content";
 import { formatVacancyLocation } from "../utils/formatVacancyLocation";
+import { formatVacancyStartDate } from "../utils/formatVacancyStartDate";
 import { FavoriteButton } from "../../favorite-button/FavoriteButton";
 import { buildResultsVacancyDetailPath } from "../../../routing/routes";
 import type { VacancyDetailNavState } from "../vacancy-detail/vacancyDetailNavState";
 
 const NEW_VACANCY_MAX_DAYS = 3;
-
-export function formatStartDate(iso: string | undefined): string | null {
-	if (!iso) {
-		return null;
-	}
-	const parsed = new Date(iso);
-	if (Number.isNaN(parsed.getTime())) {
-		return null;
-	}
-	const dd = String(parsed.getDate()).padStart(2, "0");
-	const mm = String(parsed.getMonth() + 1).padStart(2, "0");
-	const yyyy = parsed.getFullYear();
-	return `${dd}.${mm}.${yyyy}`;
-}
 
 function startOfDay(date: Date): Date {
 	return new Date(date.getFullYear(), date.getMonth(), date.getDate());
@@ -68,7 +55,7 @@ export function VacancyCard({
 	isFavorite,
 	onToggleFavorite,
 }: VacancyCardProps) {
-	const startDate = formatStartDate(preview.startDate);
+	const startDate = formatVacancyStartDate(preview.startDate);
 	const publishedLabel = formatPublishedLabel(preview.publishedAt);
 	const daysSince = daysSincePublished(preview.publishedAt);
 	const isNew = daysSince !== null && daysSince <= NEW_VACANCY_MAX_DAYS;
