@@ -22,6 +22,7 @@ Every file in this folder, what it does, and a concrete before → after example
 
 **Standalone tools**
 - [`vercel-build.mjs`](#vercel-buildmjs) — deploy
+- [`report-data-refresh.ts`](#report-data-refreshts) — refresh PR body
 - [`verify-cleanup.ts`](#verify-cleanupts) — guard
 
 ## Pipeline overview
@@ -201,7 +202,7 @@ After (patch: `changingWorkplaces=false`):
 |---|---|
 | **Runs** | Inside `fetch-berufe.ts`; or standalone `npx tsx scripts/apply-joblinge-exclusions.ts` |
 | **Removes by** | Name regex `/\(§\s*66\s*BBiG\|§\s*42r\s*HwO/i` OR id in exclusion list |
-| **Post-run count** | ≈538 kept (verified by `verify-cleanup.ts`) |
+| **Post-run count** | ≈538 kept |
 
 **Example — three removals**
 
@@ -407,9 +408,40 @@ normName("")                                          →  ""
 
 ---
 
+### `report-data-refresh.ts`
+
+*Refresh PR body.* Diffs the committed `berufe.json` against the working copy and prints Markdown for the quarterly refresh PR opened by `.github/workflows/refresh-berufe.yml`: what BERUFENET added, removed and renamed, which fields churned, and which occupations still lack a popularity tier, an availability record or enrichment. Reads the stale-id lists from `data-refresh-summary.json`, which `fetch-berufe.ts` writes during the run. Exits 1 when more than 10 % of the previous catalog's occupations disappeared, which fails the workflow step before the PR is opened.
+
+| | |
+|---|---|
+| **Runs** | `npx tsx scripts/report-data-refresh.ts > refresh-report.md` |
+| **Reads** | `git show HEAD:backend/src/data/berufe.json`, the working `berufe.json`, `popularity-index.json`, `availability-by-state.json`, `data-refresh-summary.json` |
+| **Writes** | nothing — Markdown on stdout |
+
+**Example — the 2026-08-12 run**
+
+```markdown
+## BERUFENET refresh
+
+Catalog: **538 → 534** (+2 / −6)
+
+### Added — needs a suitability decision and a popularity tier
+- `143399` Pflegefachassistent/in — accessLevel `hauptschule`, KldB `81301`
+
+### Removed — check whether a successor exists under a new id
+- `13741` Bauzeichner/in
+
+| Field | Records changed |
+| --- | --- |
+| `descriptionLong` | 532 |
+| `taskSummary` | 513 |
+```
+
+---
+
 ### `verify-cleanup.ts`
 
-*Guard.* Read-only post-cleanup check. Asserts that `berufe.json` holds exactly 538 entries, that no §66/§42r Fachpraktiker names survived the exclusions, and that `formatOccupationDisplayName` produces exactly 293 names with a spaced en-dash separator (with no digit-adjacent or unspaced dashes). Exits non-zero on any drift.
+*Guard.* Read-only check: no §66/§42r name survived the exclusions, and `formatOccupationDisplayName` turns every `" - "` into one spaced en-dash — none digit-adjacent, none inside a compound word. Its §66 pattern is broader than `SECTION_66_NAME_RE`, so it catches names the exclusion regex misses. Worth re-running after every refresh.
 
 | | |
 |---|---|
@@ -424,14 +456,13 @@ Sample OK output:
     -> Fachinformatiker/in – Anwendungsentwicklung
   ...
 
-names with an en-dash separator: 293
-OK — all verification guards passed (293 names en-dashed, no false positives).
+names with an en-dash separator: 291
+OK — 534 occupations, no §66/§42r names, 291 names en-dashed cleanly.
 ```
 
 Sample failure output:
 ```
 FAILURES:
-  - expected 538 occupations, got 537
   - 2 §66/§42r names survived
   - digit-adjacent en-dash: Bauzeichner/in – 3D
 

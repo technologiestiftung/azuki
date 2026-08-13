@@ -40,4 +40,21 @@ describe("applyJoblingeExclusions", () => {
 		applyJoblingeExclusions(input);
 		expect(input).toHaveLength(1);
 	});
+
+	test("reports exclusion ids that matched nothing in the catalog", () => {
+		const { unmatchedExclusionIds } = applyJoblingeExclusions([
+			makeOccupation({ id: 13952, name: "Amtliche/r Fachassistent/in" }),
+		]);
+		expect(unmatchedExclusionIds).not.toContain(13952);
+		expect(unmatchedExclusionIds.length).toBeGreaterThan(0);
+	});
+
+	test("an exclusion id present in the catalog is not reported as unmatched", () => {
+		const { unmatchedExclusionIds, removed } = applyJoblingeExclusions([
+			makeOccupation({ id: 13952, name: "Amtliche/r Fachassistent/in" }),
+			makeOccupation({ id: 999999, name: "Nicht in der Liste" }),
+		]);
+		expect(removed.map((r) => r.id)).toEqual([13952]);
+		expect(unmatchedExclusionIds).not.toContain(13952);
+	});
 });
