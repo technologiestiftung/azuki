@@ -31,9 +31,9 @@ describe("formatVacancyLocation", () => {
 	});
 
 	test("excludes the string 'null' from the assembled parts", () => {
-		expect(
-			formatVacancyLocation({ city: "Berlin", street: "null" }),
-		).toBe("Berlin");
+		expect(formatVacancyLocation({ city: "Berlin", street: "null" })).toBe(
+			"Berlin",
+		);
 	});
 
 	test("works with a VacancyAddress-shaped object (no district field)", () => {
@@ -50,7 +50,11 @@ describe("formatVacancyLocation", () => {
 describe("buildVacancyMapsUrl", () => {
 	test("prefers coordinates when available", () => {
 		expect(
-			buildVacancyMapsUrl({ latitude: 52.52, longitude: 13.405, city: "Berlin" }),
+			buildVacancyMapsUrl({
+				latitude: 52.52,
+				longitude: 13.405,
+				city: "Berlin",
+			}),
 		).toBe("https://www.google.com/maps/search/?api=1&query=52.52%2C13.405");
 	});
 

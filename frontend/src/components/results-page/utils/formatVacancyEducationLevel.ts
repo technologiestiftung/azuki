@@ -11,7 +11,8 @@ const EDUCATION_LEVEL_LABELS: Record<string, string> = {
 	FACHHOCHSCHULREIFE: content["schoolDegree.option.vocationalDiploma.label"],
 	FACHGEBUNDENE_HOCHSCHULREIFE:
 		content["vacancies.detail.educationLevel.fachgebundeneHochschulreife"],
-	ABITUR_HOCHSCHULREIFE: content["schoolDegree.option.universityEntrance.label"],
+	ABITUR_HOCHSCHULREIFE:
+		content["schoolDegree.option.universityEntrance.label"],
 	ALLGEMEINE_HOCHSCHULREIFE:
 		content["schoolDegree.option.universityEntrance.label"],
 };

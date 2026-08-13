@@ -306,7 +306,7 @@ export function VacanciesPage() {
 
 	return (
 		<>
-		<div className="relative flex flex-col h-full pb-16 bg-white">
+			<div className="relative flex flex-col h-full pb-16 bg-white">
 				<OccupationsFilterBottomSheet
 					key={`occupation-${occupationFilter.sheetKey}`}
 					open={occupationFilter.isOpen}
@@ -326,14 +326,14 @@ export function VacanciesPage() {
 				/>
 
 				<div className="flex-1 overflow-y-auto" onScroll={handleScroll}>
-				<ResultsPageHeader
-					scrollProgress={scrollProgress}
-					titleRevealProgress={titleRevealProgress}
-					title={vacancyTitle}
-					shareAriaLabel={content["vacancies.share.ariaLabel"]}
-					onShare={handleShare}
-					shareDisabled={visibleOccupations.length === 0}
-				/>
+					<ResultsPageHeader
+						scrollProgress={scrollProgress}
+						titleRevealProgress={titleRevealProgress}
+						title={vacancyTitle}
+						shareAriaLabel={content["vacancies.share.ariaLabel"]}
+						onShare={handleShare}
+						shareDisabled={visibleOccupations.length === 0}
+					/>
 					<h1
 						ref={titleRef}
 						className="text-3xl font-semibold text-left bg-white text-sky-900 py-2 px-[18px]"
@@ -412,15 +412,15 @@ export function VacanciesPage() {
 										{content["vacancies.bottomCard.description"]}
 									</p>
 								</div>
-						<div className="flex flex-col">
-							<a
-								href={content["vacancies.bottomCard.consultationLink"]}
-								target="_blank"
-								rel="noopener noreferrer"
-								aria-label={
-									content["vacancies.bottomCard.consultationCta.ariaLabel"]
-								}
-								className="h-12 flex items-center justify-center gap-2 w-full py-2 px-5 rounded-2xl text-base font-medium transition-colors bg-sky-300 text-sky-1000
+								<div className="flex flex-col">
+									<a
+										href={content["vacancies.bottomCard.consultationLink"]}
+										target="_blank"
+										rel="noopener noreferrer"
+										aria-label={
+											content["vacancies.bottomCard.consultationCta.ariaLabel"]
+										}
+										className="h-12 flex items-center justify-center gap-2 w-full py-2 px-5 rounded-2xl text-base font-medium transition-colors bg-sky-300 text-sky-1000
 									focus-visible:outline focus-visible:outline-2 focus-visible:outline-sky-500 active:bg-sky-200 active:text-sky-900 md:hover:bg-sky-200 md:hover:text-sky-900"
 									>
 										{content["vacancies.bottomCard.consultationCta"]}

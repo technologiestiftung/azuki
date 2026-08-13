@@ -221,8 +221,22 @@ describe("toDetail", () => {
 		const { addresses } = toDetail(
 			jobDetailsFixture({
 				stellenlokationen: [
-					{ adresse: { strasse: "Bahnhofstr.", hausnummer: "1", plz: "10115", ort: "Berlin" } },
-					{ adresse: { strasse: "Hauptstr.", hausnummer: "2", plz: "10245", ort: "Berlin" } },
+					{
+						adresse: {
+							strasse: "Bahnhofstr.",
+							hausnummer: "1",
+							plz: "10115",
+							ort: "Berlin",
+						},
+					},
+					{
+						adresse: {
+							strasse: "Hauptstr.",
+							hausnummer: "2",
+							plz: "10245",
+							ort: "Berlin",
+						},
+					},
 				],
 			}),
 			"10000-1207517553-S",

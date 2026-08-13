@@ -48,7 +48,9 @@ function hasCoordinates(location: VacancyLocationLike): boolean {
 	);
 }
 
-export function buildVacancyMapsUrl(location: VacancyLocationLike): string | null {
+export function buildVacancyMapsUrl(
+	location: VacancyLocationLike,
+): string | null {
 	if (hasCoordinates(location)) {
 		const query = `${location.latitude},${location.longitude}`;
 		return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(query)}`;
