@@ -1,4 +1,4 @@
-import { useCallback, useEffect, type UIEventHandler } from "react";
+import { useEffect } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { formatOccupationDisplayName } from "@azuki/shared";
 import { content } from "../../../content";
@@ -29,13 +29,6 @@ export function VacanciesDetailPage() {
 	const titleRevealProgress = Math.min(
 		1,
 		Math.max(0, (scrollY - COLLAPSE_END) / TITLE_REVEAL_RANGE),
-	);
-
-	const handleScroll: UIEventHandler<HTMLDivElement> = useCallback(
-		(event) => {
-			onScroll(event);
-		},
-		[onScroll],
 	);
 
 	const displayName = formatOccupationDisplayName(
@@ -116,7 +109,7 @@ export function VacanciesDetailPage() {
 
 			<div
 				className="relative flex-1 overflow-y-auto overflow-x-hidden"
-				onScroll={handleScroll}
+				onScroll={onScroll}
 			>
 				<VacancyDetailHero
 					displayName={displayName}

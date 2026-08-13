@@ -48,7 +48,7 @@ export function VacancyAddressList({ addresses }: VacancyAddressListProps) {
 
 	return (
 		<div className="flex flex-col gap-3">
-			<span className="text-sky-900 text-xl leading-[140%] font-semibold underline underline-offset-4">
+			<span className="text-sky-900 text-xl leading-[140%] font-semibold">
 				<AddressLink address={first} />
 			</span>
 

@@ -4,16 +4,16 @@ import { formatVacancyEducationLevel } from "../../src/components/results-page/u
 describe("formatVacancyEducationLevel", () => {
 	test("maps known enum values to display labels", () => {
 		expect(formatVacancyEducationLevel("HAUPTSCHULABSCHLUSS")).toBe(
-			"Hauptschulabschluss",
+			"Hauptschulabschluss (BBR)",
 		);
 		expect(
 			formatVacancyEducationLevel("MITTLERE_REIFE_MITTLERER_BILDUNGSABSCHLUSS"),
-		).toBe("Mittlere Reife / Mittlerer Bildungsabschluss");
+		).toBe("Realschulabschluss (MSA)");
 		expect(formatVacancyEducationLevel("FACHHOCHSCHULREIFE")).toBe(
-			"Fachhochschulreife",
+			"Fachabitur",
 		);
 		expect(formatVacancyEducationLevel("OHNE_ABSCHLUSS")).toBe(
-			"Ohne Schulabschluss",
+			"Ohne Abschluss",
 		);
 	});
 

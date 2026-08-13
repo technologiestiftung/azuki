@@ -632,13 +632,6 @@ export const content = {
 	"vacancies.detail.employmentTypeTitle": "Anstellungsart",
 	"vacancies.detail.employmentType.fullTime": "Vollzeit",
 	"vacancies.detail.employmentType.partTime": "Teilzeit",
-	"vacancies.detail.educationLevel.hauptschulabschluss": "Hauptschulabschluss",
-	"vacancies.detail.educationLevel.mittlereReife":
-		"Mittlere Reife / Mittlerer Bildungsabschluss",
-	"vacancies.detail.educationLevel.fachhochschulreife": "Fachhochschulreife",
-	"vacancies.detail.educationLevel.abitur":
-		"Abitur / Allgemeine Hochschulreife",
-	"vacancies.detail.educationLevel.ohneAbschluss": "Ohne Schulabschluss",
 	"vacancies.detail.educationLevel.fachgebundeneHochschulreife":
 		"Fachgebundene Hochschulreife",
 	"vacancies.detail.locationTitle": "Arbeitsort",

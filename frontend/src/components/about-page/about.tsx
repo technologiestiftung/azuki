@@ -1,4 +1,4 @@
-import { useCallback, useState, type UIEventHandler } from "react";
+import { useState, type UIEvent } from "react";
 import { Footer } from "../footer/Footer";
 import { content } from "../../content";
 import { BottomNav } from "../bottom-nav/BottomNav";
@@ -21,15 +21,12 @@ export const AboutPage = () => {
 	const { titleRef, titleRevealProgress, updateTitleReveal } =
 		useCollapsedTitleReveal();
 
-	const handleScroll: UIEventHandler<HTMLDivElement> = useCallback(
-		(event) => {
-			onScroll(event);
-			updateTitleReveal(event.currentTarget);
-			const scrollY = event.currentTarget.scrollTop;
-			setIsScrolledAway(scrollY > SCROLL_OUT_THRESHOLD_PX);
-		},
-		[onScroll, updateTitleReveal],
-	);
+	const handleScroll = (event: UIEvent<HTMLDivElement>) => {
+		onScroll(event);
+		updateTitleReveal(event.currentTarget);
+		const scrollY = event.currentTarget.scrollTop;
+		setIsScrolledAway(scrollY > SCROLL_OUT_THRESHOLD_PX);
+	};
 
 	return (
 		<div className="flex flex-col h-full relative overflow-x-hidden pb-16">
