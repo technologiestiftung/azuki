@@ -639,6 +639,8 @@ export const content = {
 	"vacancies.detail.educationLevel.abitur":
 		"Abitur / Allgemeine Hochschulreife",
 	"vacancies.detail.educationLevel.ohneAbschluss": "Ohne Schulabschluss",
+	"vacancies.detail.educationLevel.fachgebundeneHochschulreife":
+		"Fachgebundene Hochschulreife",
 	"vacancies.detail.locationTitle": "Arbeitsort",
 	"vacancies.detail.location.showMore": "+{count} weitere Arbeitsorte",
 	"vacancies.detail.location.showLess": "Weniger anzeigen",

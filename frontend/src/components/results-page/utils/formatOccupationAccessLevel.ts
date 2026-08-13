@@ -2,11 +2,10 @@ import type { AccessLevel } from "@azuki/shared";
 import { content } from "../../../content";
 
 const ACCESS_LEVEL_LABELS: Record<AccessLevel, string> = {
-	unrestricted: content["results.detail.schoolDegree.accessLevel.unrestricted"],
-	hauptschule: content["results.detail.schoolDegree.accessLevel.hauptschule"],
-	realschule: content["results.detail.schoolDegree.accessLevel.realschule"],
-	fachhochschulreife:
-		content["results.detail.schoolDegree.accessLevel.fachhochschulreife"],
+	unrestricted: content["schoolDegree.option.none.label"],
+	hauptschule: content["schoolDegree.option.secondary.label"],
+	realschule: content["schoolDegree.option.intermediate.label"],
+	fachhochschulreife: content["schoolDegree.option.vocationalDiploma.label"],
 };
 
 export function formatOccupationAccessLevel(

@@ -1,15 +1,19 @@
 import { content } from "../../../content";
 
 const EDUCATION_LEVEL_LABELS: Record<string, string> = {
-	HAUPTSCHULABSCHLUSS:
-		content["vacancies.detail.educationLevel.hauptschulabschluss"],
+	KEIN_SCHULABSCHLUSS: content["schoolDegree.option.none.label"],
+	OHNE_ABSCHLUSS: content["schoolDegree.option.none.label"],
+	HAUPTSCHULABSCHLUSS: content["schoolDegree.option.secondary.label"],
+	QUALIFIZIERENDER_ERWEITERTER_HAUPTSCHULABSCHLUSS:
+		content["schoolDegree.option.extendedSecondary.label"],
 	MITTLERE_REIFE_MITTLERER_BILDUNGSABSCHLUSS:
-		content["vacancies.detail.educationLevel.mittlereReife"],
-	FACHHOCHSCHULREIFE:
-		content["vacancies.detail.educationLevel.fachhochschulreife"],
-	ABITUR_HOCHSCHULREIFE: content["vacancies.detail.educationLevel.abitur"],
-	ALLGEMEINE_HOCHSCHULREIFE: content["vacancies.detail.educationLevel.abitur"],
-	OHNE_ABSCHLUSS: content["vacancies.detail.educationLevel.ohneAbschluss"],
+		content["schoolDegree.option.intermediate.label"],
+	FACHHOCHSCHULREIFE: content["schoolDegree.option.vocationalDiploma.label"],
+	FACHGEBUNDENE_HOCHSCHULREIFE:
+		content["vacancies.detail.educationLevel.fachgebundeneHochschulreife"],
+	ABITUR_HOCHSCHULREIFE: content["schoolDegree.option.universityEntrance.label"],
+	ALLGEMEINE_HOCHSCHULREIFE:
+		content["schoolDegree.option.universityEntrance.label"],
 };
 
 export function formatVacancyEducationLevel(
