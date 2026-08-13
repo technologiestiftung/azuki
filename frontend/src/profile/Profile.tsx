@@ -6,7 +6,7 @@ import { useAppStore } from "../store/useAppStore";
 import { ProfileHero } from "./ProfileHero";
 import { TopOccupationsCarousel } from "./TopOccupationsCarousel";
 import { ProfileAboutSection } from "./ProfileAboutSection";
-import { ContactCard } from "../components/results-page/ContactCard";
+import { ContactCard } from "../components/contact-card/ContactCard";
 import { ProfileResetCard } from "./ProfileResetCard";
 import { BottomNav } from "../components/bottom-nav/BottomNav";
 import { Footer } from "../components/footer/Footer";

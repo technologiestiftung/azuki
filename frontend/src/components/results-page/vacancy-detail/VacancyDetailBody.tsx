@@ -2,7 +2,7 @@ import { useState } from "react";
 import type { VacancyDetail } from "@azuki/shared";
 import { content } from "../../../content";
 import { VacancyDetailMetaInfo } from "./VacancyDetailMetaInfo";
-import { ContactCard } from "../ContactCard";
+import { ContactCard } from "../../contact-card/ContactCard";
 import { buildJobsucheApplyUrl } from "../utils/buildJobsucheApplyUrl";
 import ReactMarkdown from "react-markdown";
 

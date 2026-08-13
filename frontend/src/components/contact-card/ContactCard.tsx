@@ -1,5 +1,7 @@
 import { content } from "../../content";
 import { PrimaryThemedButton } from "../primitives/buttons/PrimaryThemedButton";
+import { ContactCardBottomSheet } from "./ContactCardBottomSheet";
+import { useState } from "react";
 
 interface ContactCardProps {
 	title?: string;
@@ -16,6 +18,12 @@ export function ContactCard({
 		content["results.contactCard.item.3"],
 	],
 }: ContactCardProps = {}) {
+	const [open, setOpen] = useState(false);
+
+	const onClose = () => {
+		setOpen(false);
+	};
+
 	return (
 		<div className="flex flex-col gap-5 rounded-[20px] bg-sky-50 p-4">
 			<div className="flex flex-col items-center gap-4">
@@ -39,13 +47,13 @@ export function ContactCard({
 			</div>
 			<PrimaryThemedButton
 				className="w-full"
-				disabled
 				onClick={() => {
-					//TODO: open contact form
+					setOpen(true);
 				}}
 			>
 				{content["results.contactCard.consultationCta"]}
 			</PrimaryThemedButton>
+			<ContactCardBottomSheet open={open} onClose={onClose} />
 		</div>
 	);
 }
