@@ -9,7 +9,6 @@ export type FormErrors = {
 	contactType?: boolean;
 	phonenumber?: boolean;
 	email?: boolean;
-	marketing?: boolean;
 };
 
 export const FORM_FIELD_FOCUS_ORDER: {
@@ -23,7 +22,6 @@ export const FORM_FIELD_FOCUS_ORDER: {
 	{ key: "contactType", focusId: "contact-call" },
 	{ key: "phonenumber", focusId: "phonenumber" },
 	{ key: "email", focusId: "email" },
-	{ key: "marketing", focusId: "marketing" },
 ];
 
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -81,10 +79,6 @@ export function validateRadioFields(
 		if (!email || !isValidEmail(email)) {
 			errs.email = true;
 		}
-	}
-	const marketing = data.get("marketing");
-	if (!marketing) {
-		errs.marketing = true;
 	}
 	return errs;
 }

@@ -567,6 +567,12 @@ export const content = {
 		"Bitte stimme zu, von JOBLINGE benachrichtigt zu werden, um fortzufahren.",
 	"results.contactCard.bottomSheet.form.error":
 		"Bitte fülle alle erforderlichen Felder aus, um fortzufahren.",
+	"results.contactCard.bottomSheet.success.title": "Check deine Mails",
+	"results.contactCard.bottomSheet.success.description":
+		"PLAN A hat eine E-Mail an <strong>{email}</strong> geschickt. Klicke auf den Link in der E-Mail, um deine Anfrage zu bestätigen. Das Team von PLAN A wird sich innerhalb von zwei Tagen bei dir für eine 1:1 Beratung melden.",
+	"results.contactCard.bottomSheet.success.button": "E-Mail Postfach öffnen",
+	"results.contactCard.bottomSheet.success.illustrationAlt":
+		"Briefumschlag mit Sternen",
 	// Filter Bottom Sheet
 	"results.filter.tags.title": "Berufsgruppe",
 	"results.filter.tags.title.short": "Beruf",
