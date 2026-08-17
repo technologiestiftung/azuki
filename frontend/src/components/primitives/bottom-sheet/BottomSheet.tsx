@@ -407,9 +407,7 @@ export function BottomSheet({
 							aria-hidden
 						/>
 					</div>
-					{header ? (
-						<div className="shrink-0">{header}</div>
-					) : null}
+					{header ? <div className="shrink-0">{header}</div> : null}
 					<div
 						className="min-h-0 flex-1 overflow-y-auto overscroll-contain"
 						onScroll={onScroll ? (e) => onScroll(e.currentTarget) : undefined}
