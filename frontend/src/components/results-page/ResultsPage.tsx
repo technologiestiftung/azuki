@@ -83,10 +83,14 @@ export function ResultsPage() {
 	}, []);
 
 	const handleDownload = useCallback(async () => {
-		const { exportOccupationsPdf } = await import(
-			"./utils/exportOccupationsPdf"
-		);
-		exportOccupationsPdf(visibleOccupations);
+		try {
+			const { exportOccupationsPdf } = await import(
+				"./utils/exportOccupationsPdf"
+			);
+			await exportOccupationsPdf(visibleOccupations);
+		} catch (err) {
+			console.error("Failed to export occupations PDF:", err);
+		}
 	}, [visibleOccupations]);
 
 	const handleShare = useCallback(async () => {

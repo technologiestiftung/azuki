@@ -80,6 +80,53 @@ app.get("/api/health", (c) =>
 	c.json({ ok: true, occupationCount: occupations.length }),
 );
 
+/** Same-origin proxy for Berufepool images (no CORS on the upstream host). */
+const IMAGE_PROXY_HOST = "rest.arbeitsagentur.de";
+const IMAGE_PROXY_PATH_PREFIX = "/infosysbub/berufepool-rest/";
+
+app.get("/api/image-proxy", async (c) => {
+	const rawUrl = c.req.query("url");
+	if (!rawUrl) {
+		return c.json({ error: "Missing url" }, 400);
+	}
+	let target: URL;
+	try {
+		target = new URL(rawUrl);
+	} catch {
+		return c.json({ error: "Invalid url" }, 400);
+	}
+	if (
+		target.protocol !== "https:" ||
+		target.hostname !== IMAGE_PROXY_HOST ||
+		!target.pathname.startsWith(IMAGE_PROXY_PATH_PREFIX)
+	) {
+		return c.json({ error: "URL not allowed" }, 400);
+	}
+	try {
+		const upstream = await fetch(target.toString(), {
+			headers: {
+				Accept: "image/*,*/*;q=0.8",
+				"User-Agent": "AzukiImageProxy/1.0",
+			},
+			signal: AbortSignal.timeout(15000),
+		});
+		if (!upstream.ok) {
+			return c.json({ error: "Upstream fetch failed" }, 502);
+		}
+		const contentType = upstream.headers.get("content-type") || "image/jpeg";
+		const body = await upstream.arrayBuffer();
+		return new Response(body, {
+			status: 200,
+			headers: {
+				"Content-Type": contentType,
+				"Cache-Control": "public, max-age=86400",
+			},
+		});
+	} catch {
+		return c.json({ error: "Upstream fetch failed" }, 502);
+	}
+});
+
 function isAuthorized(c: Context): boolean {
 	if (!APP_PASSWORD) {
 		// Reachable only in non-production (prod startup throws above).
