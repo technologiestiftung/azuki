@@ -1,6 +1,6 @@
 import { useLayoutEffect, useRef } from "react";
 
-const ILLUSTRATION_CROSS_MS = 500;
+const ILLUSTRATION_CROSS_MS = 400;
 
 export interface StartHeroIllustrationAsset {
 	image: string;
