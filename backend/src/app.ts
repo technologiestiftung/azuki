@@ -104,6 +104,7 @@ app.get("/api/image-proxy", async (c) => {
 	}
 	try {
 		const upstream = await fetch(target.toString(), {
+			redirect: "error",
 			headers: {
 				Accept: "image/*,*/*;q=0.8",
 				"User-Agent": "AzukiImageProxy/1.0",

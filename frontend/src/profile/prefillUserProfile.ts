@@ -19,8 +19,8 @@ export const prefillUserProfile: UserProfile = {
 	strengths: {
 		teamwork: 1,
 		"logical-thinking": 1,
-		creativity: 1,
-		communication: 1,
+		creativity: 0,
+		communication: 0.25,
 		craftsmanship: 0.5,
 		concentration: 1,
 	},

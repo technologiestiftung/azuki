@@ -7,7 +7,6 @@ export const content = {
 	"profile.aboutYou": "Über dich",
 	"profile.schoolDegreeLabel.planned": "Dein geplanter Schulabschluss",
 	"profile.schoolDegreeLabel.inSchool": "Dein Schulabschluss",
-	"profile.topOccupationWithMostVacancies": "Besonders gesucht",
 	"profile.favoriteSubjects": "Deine Lieblingsfächer",
 	"profile.interests": "Das magst du gerne",
 	"profile.strengths": "Deine Stärken",
@@ -16,6 +15,7 @@ export const content = {
 	"profile.practicalExperiences": "Deine Arbeitserfahrung",
 	"profile.workPreferences": "So möchtest du arbeiten",
 	"profile.noGos": "Das magst du nicht im Beruf",
+	"profile.preferredJobs": "Dein Jobwunsch",
 	"profile.resetCard.title": "Du möchtest deine Antworten ändern?",
 	"profile.resetCard.description":
 		"Du kannst alle Fragen nochmal beantworten, um dein Profil zu ändern.",
@@ -32,7 +32,7 @@ export const content = {
 	"profile.share.title": "Mein Profil",
 	"profile.share.text":
 		"Schau dir dieses Profil und passende Ausbildungsberufe an.",
-	"profile.export.filename": "mein-profil.pdf",
+	"profile.export.filename": "AzuKi-Profil.pdf",
 	"profile.export.category": "Bereich",
 	"profile.export.details": "Angaben",
 	// Footer
