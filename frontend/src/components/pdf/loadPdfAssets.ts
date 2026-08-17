@@ -1,15 +1,16 @@
 import { Buffer } from "buffer";
 
 const FETCH_TIMEOUT_MS = 8000;
-const PLACEHOLDER_TIMEOUT_MS = 20000;
-const MAX_RASTER_EDGE = 512;
-const PLACEHOLDER_SRC = "/illustrations/occupation-placeholder.svg";
+/** Caps CTA/avatar rasters (~56–64pt at ~2–3×). */
+const MAX_RASTER_EDGE = 192;
 /** Matches Figma card image aspect (width / height ≈ 31/18). */
 const CARD_IMAGE_ASPECT = 31 / 18;
-const CARD_IMAGE_OUT_HEIGHT = 220;
+/** ~2× the 92pt card frame — sharp enough without oversized embeds. */
+const CARD_IMAGE_OUT_HEIGHT = 184;
 /** ~5px radius on ~92pt-tall frame ≈ 0.05 of min edge. */
 const CARD_IMAGE_CORNER_RATIO = 5 / 92;
 const CARD_IMAGE_BG = "#F2F4F5";
+const JPEG_QUALITY = 0.72;
 
 export type PdfRasterOptions = {
 	coverAspect?: number;
@@ -33,10 +34,6 @@ export function yieldToBrowser(): Promise<void> {
 	return new Promise((resolve) => {
 		requestAnimationFrame(() => setTimeout(resolve, 0));
 	});
-}
-
-export function sleep(ms: number): Promise<void> {
-	return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
 export function triggerDownload(blob: Blob, filename: string): void {
@@ -170,7 +167,7 @@ function rasterizeToDataUrl(
 			drawHeight,
 		);
 		return format === "jpeg"
-			? canvas.toDataURL("image/jpeg", 0.75)
+			? canvas.toDataURL("image/jpeg", JPEG_QUALITY)
 			: canvas.toDataURL("image/png");
 	}
 
@@ -192,7 +189,7 @@ function rasterizeToDataUrl(
 	}
 	ctx.drawImage(image, 0, 0, width, height);
 	return format === "jpeg"
-		? canvas.toDataURL("image/jpeg", 0.75)
+		? canvas.toDataURL("image/jpeg", JPEG_QUALITY)
 		: canvas.toDataURL("image/png");
 }
 
@@ -236,7 +233,8 @@ export async function loadPdfIconSrc(
 	src: string,
 	backgroundColor: string,
 ): Promise<string | null> {
-	return loadPdfImageSrc(src, { format: "png", backgroundColor });
+	// Opaque JPEG — much smaller than PNG for mascot/QR flattened onto the CTA fill.
+	return loadPdfImageSrc(src, { format: "jpeg", backgroundColor });
 }
 
 function createSolidPlaceholderDataUrl(): string {
@@ -251,21 +249,11 @@ function createSolidPlaceholderDataUrl(): string {
 	}
 	ctx.fillStyle = CARD_IMAGE_BG;
 	ctx.fillRect(0, 0, outWidth, outHeight);
-	return canvas.toDataURL("image/jpeg", 0.9);
+	return canvas.toDataURL("image/jpeg", JPEG_QUALITY);
 }
 
 export async function loadPdfPlaceholderSrc(): Promise<string> {
-	const loaded = await loadPdfImageSrc(
-		PLACEHOLDER_SRC,
-		{
-			coverAspect: CARD_IMAGE_ASPECT,
-			cornerRadiusRatio: CARD_IMAGE_CORNER_RATIO,
-			format: "png",
-			backgroundColor: CARD_IMAGE_BG,
-		},
-		PLACEHOLDER_TIMEOUT_MS,
-	);
-	return loaded ?? createSolidPlaceholderDataUrl();
+	return createSolidPlaceholderDataUrl();
 }
 
 export async function loadPdfCardImageSrc(

@@ -11,7 +11,6 @@ import {
 	loadPdfIconSrc,
 	loadPdfImageSrc,
 	loadPdfPlaceholderSrc,
-	sleep,
 	triggerDownload,
 	yieldToBrowser,
 } from "../components/pdf/loadPdfAssets";
@@ -51,16 +50,12 @@ export async function exportProfilePdf({
 	const placeholderSrc = await loadPdfPlaceholderSrc();
 	await yieldToBrowser();
 
-	const topImageSrcs: string[] = [];
-	for (let i = 0; i < topOccupations.length; i++) {
-		if (i > 0) {
-			await sleep(80);
-		}
-		const imageUrl = topOccupations[i].images[0]?.url?.trim() || undefined;
-		const src = await loadPdfCardImageSrc(imageUrl, placeholderSrc);
-		topImageSrcs.push(src);
-		await yieldToBrowser();
-	}
+	const topImageSrcs = await Promise.all(
+		topOccupations.map((occupation) => {
+			const imageUrl = occupation.images[0]?.url?.trim() || undefined;
+			return loadPdfCardImageSrc(imageUrl, placeholderSrc);
+		}),
+	);
 
 	const [mascotSrc, qrSrc, avatarSrc, shortDescription] = await Promise.all([
 		loadPdfIconSrc(MASCOT_SRC, CTA_SURFACE_BG),
