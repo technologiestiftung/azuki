@@ -9,6 +9,7 @@ import {
 import {
 	fitPercent,
 	formatOccupationDisplayName,
+	formatOccupationSalary,
 	type MatchedOccupation,
 } from "@azuki/shared";
 import { content } from "../../../content";
@@ -193,9 +194,10 @@ function formatMatchLabel(score: number): string {
 }
 
 function formatSalaryLabel(occupation: MatchedOccupation): string {
-	return (
-		occupation.occupationEarnings || content["results.detail.salary.unknown"]
-	);
+	if (occupation.salaryKnown && occupation.salaryMonthlyMedian !== null) {
+		return formatOccupationSalary(occupation.salaryMonthlyMedian);
+	}
+	return content["results.detail.salary.unknown"];
 }
 
 function formatTopMeta(occupation: MatchedOccupation): string {
@@ -203,8 +205,8 @@ function formatTopMeta(occupation: MatchedOccupation): string {
 	if (occupation.occupationDuration) {
 		parts.push(occupation.occupationDuration);
 	}
-	if (occupation.occupationEarnings) {
-		parts.push(occupation.occupationEarnings);
+	if (occupation.salaryKnown && occupation.salaryMonthlyMedian !== null) {
+		parts.push(formatOccupationSalary(occupation.salaryMonthlyMedian));
 	}
 	return parts.join(" · ");
 }

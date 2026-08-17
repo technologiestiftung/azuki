@@ -21,6 +21,7 @@ import { workPreferencePairs } from "../content/work-preference-pairs";
 import { content } from "../content";
 import { CtaCard, PageFooter, PdfHeader } from "../components/pdf/PdfLayout";
 import { COLOR, styles } from "../components/pdf/pdfTheme";
+import { formatOccupationSalary } from "@azuki/shared";
 
 const profileStyles = StyleSheet.create({
 	hero: {
@@ -282,8 +283,8 @@ function formatTopMeta(occupation: MatchedOccupation): string {
 	if (occupation.occupationDuration) {
 		parts.push(occupation.occupationDuration);
 	}
-	if (occupation.occupationEarnings) {
-		parts.push(occupation.occupationEarnings);
+	if (occupation.salaryKnown && occupation.salaryMonthlyMedian !== null) {
+		parts.push(formatOccupationSalary(occupation.salaryMonthlyMedian));
 	}
 	return parts.join(" · ");
 }
