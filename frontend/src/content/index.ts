@@ -518,6 +518,55 @@ export const content = {
 	"results.contactCard.item.3":
 		"Du entscheidest was du brauchst – alle Fragen sind erlaubt",
 	"results.contactCard.consultationCta": "Beratung anfragen",
+	"results.contactCard.bottomSheet.ariaLabel": "Kontaktformular Beratung",
+	"results.contactCard.bottomSheet.title": "Kostenlose Beratung anfragen",
+	"results.contactCard.bottomSheet.description":
+		"Wir beraten dich persönlich zu deinen <strong>Stärken</strong>, <strong>passenden Berufen</strong> und <strong>Bewerbungen</strong>. Schick uns deine Anfrage und wir melden uns bei dir.",
+	"results.contactCard.bottomSheet.firstname.label": "Vorname",
+	"results.contactCard.bottomSheet.firstname.placeholder": "Angelina",
+	"results.contactCard.bottomSheet.postalcode.label": "Postleitzahl",
+	"results.contactCard.bottomSheet.postalcode.placeholder": "12345",
+	"results.contactCard.bottomSheet.under16.legend":
+		"Bist du unter 16 Jahre alt?",
+	"results.contactCard.bottomSheet.under16.yes": "Ja",
+	"results.contactCard.bottomSheet.under16.no": "Nein",
+	"results.contactCard.bottomSheet.birthdate.label": "Geburtsdatum",
+	"results.contactCard.bottomSheet.contactType.legend":
+		"Wie sollen wir dich erreichen?",
+	"results.contactCard.bottomSheet.contactType.call": "Anruf",
+	"results.contactCard.bottomSheet.contactType.whatsapp": "WhatsApp",
+	"results.contactCard.bottomSheet.contactType.mail": "E-Mail",
+	"results.contactCard.bottomSheet.phonenumber.label": "Handynummer",
+	"results.contactCard.bottomSheet.phonenumber.placeholder": "+49 1234567890",
+	"results.contactCard.bottomSheet.email.label": "E-Mail",
+	"results.contactCard.bottomSheet.email.placeholder":
+		"angelina@beispielmail.com",
+	"results.contactCard.bottomSheet.marketing.label":
+		"Ich stimme zu, von JOBLINGE über Angebote und andere Inhalte benachrichtigt zu werden.",
+	"results.contactCard.bottomSheet.privacy.notice":
+		"Weitere Informationen zu unseren Datenschutzverfahren und dazu, wie wir deine Privatsphäre schützen und respektieren, findest du in unserer <a href='https://www.lehrstellenportal.de/datenschutz' target='_blank' rel='noopener noreferrer'>Datenschutzrichtlinie</a>.",
+	"results.contactCard.bottomSheet.submit": "Kostenlose Beratung anfragen",
+	"results.contactCard.bottomSheet.lock.alt": "Schloss",
+	"results.contactCard.bottomSheet.dataProtection":
+		"Deine Daten werden nicht an Dritte weitergegeben",
+	"results.contactCard.bottomSheet.firstname.error":
+		"Bitte gib deinen Vornamen ein.",
+	"results.contactCard.bottomSheet.postalcode.error":
+		"Bitte gib deine gültige Postleitzahl ein (5 Zahlen).",
+	"results.contactCard.bottomSheet.under16.error":
+		"Bitte gib dein Alter an. Wir müssen dies aus rechtlichen Gründen für die Kontaktaufnahme wissen.",
+	"results.contactCard.bottomSheet.birthdate.error":
+		"Bitte gib dein Geburtsdatum an.",
+	"results.contactCard.bottomSheet.contactType.error":
+		"Bitte wähle einen Kontaktweg aus",
+	"results.contactCard.bottomSheet.phonenumber.error":
+		"Bitte gib eine gültige Handynummer ein, z. B. +49 123 4567890.",
+	"results.contactCard.bottomSheet.email.error":
+		"Bitte gib eine gültige E-Mail-Adresse ein, z.B. name@mail.de",
+	"results.contactCard.bottomSheet.marketing.error":
+		"Bitte stimme zu, von JOBLINGE benachrichtigt zu werden, um fortzufahren.",
+	"results.contactCard.bottomSheet.form.error":
+		"Bitte fülle alle erforderlichen Felder aus, um fortzufahren.",
 	// Filter Bottom Sheet
 	"results.filter.tags.title": "Berufsgruppe",
 	"results.filter.tags.title.short": "Beruf",
