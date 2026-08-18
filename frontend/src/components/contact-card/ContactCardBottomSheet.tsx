@@ -1,8 +1,10 @@
 import { useEffect, useState, type FormEvent } from "react";
 import { content } from "../../content";
+import { submitContactRequest } from "../../api/client";
 import { useCollapsedTitleReveal } from "../collapsing-header/useCollapsedTitleReveal";
 import { BottomSheet } from "../primitives/bottom-sheet/BottomSheet";
 import { GhostIconButton } from "../primitives/buttons/GhostIconButton";
+import { buildContactPayload } from "./buildContactPayload";
 import {
 	focusFirstInvalidField,
 	omitFormErrors,
@@ -29,25 +31,29 @@ export function ContactCardBottomSheet({
 	const [errors, setErrors] = useState<FormErrors>({});
 	const [submitted, setSubmitted] = useState(false);
 	const [submittedEmail, setSubmittedEmail] = useState("");
+	const [isSubmitting, setIsSubmitting] = useState(false);
+	const [submitError, setSubmitError] = useState(false);
 
 	const { titleRef, titleRevealProgress, updateTitleReveal, resetTitleReveal } =
 		useCollapsedTitleReveal({ fadeStartPx: 0, fadeEndPx: -32 });
 
 	useEffect(() => {
-		if (open) {
-			resetTitleReveal();
-		} else {
-			setSubmitted(false);
-			setSubmittedEmail("");
-			setUnder16(null);
-			setContactType(null);
-			setErrors({});
+		if (!open) {
+			return;
 		}
+		resetTitleReveal();
+		setSubmitted(false);
+		setSubmittedEmail("");
+		setUnder16(null);
+		setContactType(null);
+		setErrors({});
+		setIsSubmitting(false);
+		setSubmitError(false);
 	}, [open, resetTitleReveal]);
 
 	const collapsed = titleRevealProgress > 0.5;
 
-	const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+	const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
 		const data = new FormData(event.currentTarget);
 		const errs = {
@@ -63,10 +69,19 @@ export function ContactCardBottomSheet({
 			return;
 		}
 
-		const email = (data.get("email") as string | null) ?? "";
-		setSubmittedEmail(email);
-		// TODO: send data to API
-		setSubmitted(true);
+		const payload = buildContactPayload(data);
+		setSubmittedEmail(payload.email);
+		setSubmitError(false);
+		setIsSubmitting(true);
+		try {
+			await submitContactRequest(payload);
+			setSubmitted(true);
+		} catch (err) {
+			console.error("Contact form submission failed:", err);
+			setSubmitError(true);
+		} finally {
+			setIsSubmitting(false);
+		}
 	};
 
 	const clearError = (...fields: (keyof FormErrors)[]) => {
@@ -137,6 +152,8 @@ export function ContactCardBottomSheet({
 					errors={errors}
 					clearError={clearError}
 					onSubmit={handleSubmit}
+					isSubmitting={isSubmitting}
+					submitError={submitError}
 				/>
 			)}
 		</BottomSheet>

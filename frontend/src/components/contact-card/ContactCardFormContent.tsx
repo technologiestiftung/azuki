@@ -27,6 +27,8 @@ interface ContactCardFormContentProps {
 	errors: FormErrors;
 	clearError: (...fields: (keyof FormErrors)[]) => void;
 	onSubmit: (event: FormEvent<HTMLFormElement>) => void;
+	isSubmitting: boolean;
+	submitError: boolean;
 }
 
 export function ContactCardFormContent({
@@ -38,6 +40,8 @@ export function ContactCardFormContent({
 	errors,
 	clearError,
 	onSubmit,
+	isSubmitting,
+	submitError,
 }: ContactCardFormContentProps) {
 	const hasAnyError = Object.keys(errors).length > 0;
 
@@ -285,13 +289,21 @@ export function ContactCardFormContent({
 						{content["results.contactCard.bottomSheet.form.error"]}
 					</FieldError>
 				)}
+				{submitError && (
+					<FieldError id="contact-submit-error" className="text-center">
+						{content["results.contactCard.bottomSheet.submit.error"]}
+					</FieldError>
+				)}
 				<PrimaryThemedButton
 					type="submit"
+					disabled={isSubmitting}
 					ariaLabel={content["results.contactCard.bottomSheet.submit"]}
 					title={content["results.contactCard.bottomSheet.submit"]}
 					className="min-w-0 mt-1"
 				>
-					{content["results.contactCard.bottomSheet.submit"]}
+					{isSubmitting
+						? content["results.contactCard.bottomSheet.submit.loading"]
+						: content["results.contactCard.bottomSheet.submit"]}
 				</PrimaryThemedButton>
 				<span className="text-sm font-normal flex items-center gap-1.5 text-gray-500 leading-[140%] justify-center">
 					<img

@@ -567,6 +567,9 @@ export const content = {
 		"Bitte stimme zu, von JOBLINGE benachrichtigt zu werden, um fortzufahren.",
 	"results.contactCard.bottomSheet.form.error":
 		"Bitte fülle alle erforderlichen Felder aus, um fortzufahren.",
+	"results.contactCard.bottomSheet.submit.loading": "Wird gesendet …",
+	"results.contactCard.bottomSheet.submit.error":
+		"Leider ist etwas schiefgelaufen. Bitte versuche es später erneut.",
 	"results.contactCard.bottomSheet.success.title": "Check deine Mails",
 	"results.contactCard.bottomSheet.success.description":
 		"PLAN A hat eine E-Mail an <strong>{email}</strong> geschickt. Klicke auf den Link in der E-Mail, um deine Anfrage zu bestätigen. Das Team von PLAN A wird sich innerhalb von zwei Tagen bei dir für eine 1:1 Beratung melden.",
