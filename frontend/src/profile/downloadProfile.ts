@@ -8,6 +8,10 @@ export async function downloadProfile(): Promise<void> {
 		.sort((a, b) => b.score - a.score)
 		.slice(0, 3);
 
-	const { exportProfilePdf } = await import("./exportProfilePdf");
-	exportProfilePdf(profile, topOccupations);
+	try {
+		const { exportProfilePdf } = await import("./exportProfilePdf");
+		await exportProfilePdf({ profile, topOccupations });
+	} catch (err) {
+		console.error("Failed to export profile PDF:", err);
+	}
 }
