@@ -95,6 +95,49 @@ function loadHtmlImage(
 	});
 }
 
+async function fetchSvgAsSizedObjectUrl(
+	src: string,
+	targetEdge: number,
+): Promise<string | null> {
+	const response = await fetch(resolveFetchableImageUrl(src), {
+		signal: AbortSignal.timeout(FETCH_TIMEOUT_MS),
+	});
+	if (!response.ok) {
+		return null;
+	}
+	const text = await response.text();
+	const doc = new DOMParser().parseFromString(text, "image/svg+xml");
+	const svg = doc.documentElement;
+	if (svg.querySelector("parsererror") || svg.tagName.toLowerCase() !== "svg") {
+		return null;
+	}
+
+	const viewBox =
+		svg
+			.getAttribute("viewBox")
+			?.trim()
+			.split(/[\s,]+/) ?? [];
+	const viewBoxWidth = Number(viewBox[2]);
+	const viewBoxHeight = Number(viewBox[3]);
+	const intrinsicWidth =
+		parseFloat(svg.getAttribute("width") ?? "") || viewBoxWidth || targetEdge;
+	const intrinsicHeight =
+		parseFloat(svg.getAttribute("height") ?? "") || viewBoxHeight || targetEdge;
+	const scale = targetEdge / Math.max(intrinsicWidth, intrinsicHeight);
+	svg.setAttribute("width", String(Math.round(intrinsicWidth * scale)));
+	svg.setAttribute("height", String(Math.round(intrinsicHeight * scale)));
+
+	return URL.createObjectURL(
+		new Blob([new XMLSerializer().serializeToString(svg)], {
+			type: "image/svg+xml;charset=utf-8",
+		}),
+	);
+}
+
+function isSvgSrc(src: string): boolean {
+	return src.split("?")[0].toLowerCase().endsWith(".svg");
+}
+
 async function fetchAsObjectUrl(src: string): Promise<string | null> {
 	const fetchUrl = resolveFetchableImageUrl(src);
 	const response = await fetch(fetchUrl, {
@@ -200,6 +243,15 @@ export async function loadPdfImageSrc(
 ): Promise<string | null> {
 	let objectUrl: string | null = null;
 	try {
+		if (options.outHeight && isSvgSrc(src)) {
+			objectUrl = await fetchSvgAsSizedObjectUrl(src, options.outHeight);
+			if (!objectUrl) {
+				return null;
+			}
+			const image = await loadHtmlImage(objectUrl, timeoutMs);
+			return rasterizeToDataUrl(image, options);
+		}
+
 		const absolute = new URL(src, window.location.origin).toString();
 		if (absolute.startsWith(window.location.origin)) {
 			try {
