@@ -48,20 +48,26 @@ describe("formatVacancyLocation", () => {
 });
 
 describe("buildVacancyMapsUrl", () => {
-	test("prefers coordinates when available", () => {
+	test("prefers the formatted address over coordinates when an address is available", () => {
 		expect(
 			buildVacancyMapsUrl({
 				latitude: 52.52,
 				longitude: 13.405,
 				city: "Berlin",
 			}),
-		).toBe("https://www.google.com/maps/search/?api=1&query=52.52%2C13.405");
+		).toBe("https://www.google.com/maps/search/?api=1&query=Berlin");
 	});
 
-	test("falls back to the formatted address label", () => {
+	test("uses the formatted address when city and postcode are present", () => {
 		expect(buildVacancyMapsUrl({ postcode: "10115", city: "Berlin" })).toBe(
 			"https://www.google.com/maps/search/?api=1&query=10115%20Berlin",
 		);
+	});
+
+	test("falls back to coordinates when no address is available", () => {
+		expect(
+			buildVacancyMapsUrl({ latitude: 52.52, longitude: 13.405 }),
+		).toBe("https://www.google.com/maps/search/?api=1&query=52.52%2C13.405");
 	});
 
 	test("returns null when no location info is available", () => {
