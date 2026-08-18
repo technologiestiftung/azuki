@@ -38,7 +38,7 @@ const profileStyles = StyleSheet.create({
 		height: 64,
 		borderRadius: 32,
 		overflow: "hidden",
-		backgroundColor: COLOR.white,
+		backgroundColor: COLOR.sky0,
 		borderWidth: 4,
 		borderStyle: "solid",
 		borderColor: COLOR.sky100,
@@ -46,15 +46,23 @@ const profileStyles = StyleSheet.create({
 		flexShrink: 0,
 		alignItems: "center",
 		justifyContent: "center",
+		padding: 8,
 	},
 	heroAvatar: {
-		width: 56,
-		height: 56,
-		borderRadius: 28,
-		objectFit: "cover",
+		width: 93.379,
+		height: 93.379,
+		objectFit: "contain",
 	},
 	heroTextCol: {
 		flex: 1,
+		gap: 4,
+	},
+	heroName: {
+		fontFamily: "Asap",
+		fontWeight: 600,
+		fontSize: 18,
+		lineHeight: 1.3,
+		color: COLOR.sky900,
 	},
 	heroText: {
 		fontFamily: "Asap",
@@ -233,6 +241,7 @@ export interface ProfilePdfDocumentProps {
 	profile: UserProfile;
 	topOccupations: MatchedOccupation[];
 	shortDescription: string;
+	profileName: string;
 	assets: ProfilePdfAssets;
 }
 
@@ -306,13 +315,15 @@ function PdfPageHeader() {
 }
 
 function HeroCard({
+	profileName,
 	shortDescription,
 	avatarSrc,
 }: {
+	profileName: string;
 	shortDescription: string;
 	avatarSrc: string | null;
 }) {
-	if (!shortDescription && !avatarSrc) {
+	if (!profileName && !shortDescription && !avatarSrc) {
 		return null;
 	}
 	return (
@@ -322,11 +333,14 @@ function HeroCard({
 					<Image src={avatarSrc} style={profileStyles.heroAvatar} />
 				) : null}
 			</View>
-			{shortDescription ? (
-				<View style={profileStyles.heroTextCol}>
+			<View style={profileStyles.heroTextCol}>
+				{profileName ? (
+					<Text style={profileStyles.heroName}>{profileName}</Text>
+				) : null}
+				{shortDescription ? (
 					<Text style={profileStyles.heroText}>{shortDescription}</Text>
-				</View>
-			) : null}
+				) : null}
+			</View>
 		</View>
 	);
 }
@@ -597,6 +611,7 @@ export function ProfilePdfDocument({
 	profile,
 	topOccupations,
 	shortDescription,
+	profileName,
 	assets,
 }: ProfilePdfDocumentProps) {
 	const { strengths, hardships } = buildMeterItems(profile);
@@ -614,6 +629,7 @@ export function ProfilePdfDocument({
 			<Page size="A4" style={styles.page}>
 				<PdfPageHeader />
 				<HeroCard
+					profileName={profileName}
 					shortDescription={shortDescription}
 					avatarSrc={assets.avatarSrc}
 				/>

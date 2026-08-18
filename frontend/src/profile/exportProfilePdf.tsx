@@ -14,14 +14,16 @@ import {
 	triggerDownload,
 	yieldToBrowser,
 } from "../components/pdf/loadPdfAssets";
+import { COLOR } from "../components/pdf/pdfTheme";
 import {
 	ProfilePdfDocument,
 	type ProfilePdfAssets,
 } from "./ProfilePdfDocument";
+import { PROFILE_AVATARS } from "./profile-avatars";
 
 const MASCOT_SRC = "/illustrations/star-neutral.svg";
 const QR_SRC = "/illustrations/qr-code.svg";
-const AVATAR_SRC = "/illustrations/profile-star.png";
+const FALLBACK_AVATAR_SRC = "/illustrations/profile/avatar-1.svg";
 /** CTA card fill — used behind mascot/QR so transparent SVGs don't get a white box. */
 const CTA_SURFACE_BG = "#DDF4FF";
 
@@ -40,9 +42,13 @@ async function loadShortDescription(profile: UserProfile): Promise<string> {
 export async function exportProfilePdf({
 	profile,
 	topOccupations,
+	profileName,
+	profileAvatarId,
 }: {
 	profile: UserProfile;
 	topOccupations: MatchedOccupation[];
+	profileName: string;
+	profileAvatarId: string;
 }): Promise<void> {
 	ensureBufferPolyfill();
 	await yieldToBrowser();
@@ -57,10 +63,18 @@ export async function exportProfilePdf({
 		}),
 	);
 
+	const avatarPath =
+		PROFILE_AVATARS.find((avatar) => avatar.id === profileAvatarId)?.url ??
+		FALLBACK_AVATAR_SRC;
+
 	const [mascotSrc, qrSrc, avatarSrc, shortDescription] = await Promise.all([
 		loadPdfIconSrc(MASCOT_SRC, CTA_SURFACE_BG),
 		loadPdfIconSrc(QR_SRC, CTA_SURFACE_BG),
-		loadPdfImageSrc(AVATAR_SRC, { format: "png" }),
+		loadPdfImageSrc(avatarPath, {
+			format: "png",
+			backgroundColor: COLOR.sky0,
+			outHeight: 256,
+		}),
 		loadShortDescription(profile),
 	]);
 
@@ -79,6 +93,7 @@ export async function exportProfilePdf({
 			profile={profile}
 			topOccupations={topOccupations}
 			shortDescription={shortDescription}
+			profileName={profileName}
 			assets={assets}
 		/>,
 	).toBlob();

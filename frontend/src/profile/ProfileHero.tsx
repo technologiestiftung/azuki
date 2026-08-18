@@ -117,7 +117,7 @@ export function ProfileHero({
 						/>
 					</div>
 					<button
-						className="absolute bottom-0 right-0 w-8 h-8 bg-sky-900 rounded-full flex items-center justify-center hover:bg-sky-shade-160 focus-visible:outline focus-visible:outline-2 focus-visible:outline-sky-500 "
+						className="absolute bottom-0 right-0 w-8 h-8 bg-sky-900 rounded-full flex items-center justify-center hover:bg-sky-shade-160 focus-visible:outline focus-visible:outline-2 focus-visible:outline-sky-500"
 						onClick={openEditProfile}
 						aria-label={content["profile.edit.open.ariaLabel"]}
 					>
@@ -198,12 +198,12 @@ export function ProfileHero({
 						<h3 className="text-lg font-medium text-gray-700 px-4">
 							{content["profile.edit.images.label"]}
 						</h3>
-						<div className="flex gap-2 overflow-x-scroll [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+						<div className="flex gap-2 overflow-x-scroll [scrollbar-width:none] [&::-webkit-scrollbar]:hidden py-0.5">
 							{PROFILE_AVATARS.map((avatar) => (
 								<button
 									type="button"
 									key={avatar.id}
-									className={`w-16 h-16 rounded-full border-2 bg-sky-0 flex items-center justify-center aspect-square p-2 first:ml-4 last:mr-4 ${draftAvatarId === avatar.id ? "border-sky-300" : "border-sky-50"}`}
+									className={`w-16 h-16 rounded-full border-2 bg-sky-0 flex items-center justify-center aspect-square p-2 first:ml-4 last:mr-4 focus-visible:outline focus-visible:outline-2 focus-visible:outline-sky-500 ${draftAvatarId === avatar.id ? "border-sky-300" : "border-sky-50"}`}
 									onClick={() => setDraftAvatarId(avatar.id)}
 									aria-label={`${avatar.alt} ${content["profile.edit.images.ariaLabel"]}`}
 								>
