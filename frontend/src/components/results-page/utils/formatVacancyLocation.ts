@@ -51,15 +51,17 @@ function hasCoordinates(location: VacancyLocationLike): boolean {
 export function buildVacancyMapsUrl(
 	location: VacancyLocationLike,
 ): string | null {
+	const label = formatVacancyLocation(location);
+	const hasAddress = label && label !== UNKNOWN_LOCATION;
+
+	if (hasAddress) {
+		return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(label)}`;
+	}
+
 	if (hasCoordinates(location)) {
 		const query = `${location.latitude},${location.longitude}`;
 		return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(query)}`;
 	}
 
-	const label = formatVacancyLocation(location);
-	if (!label || label === UNKNOWN_LOCATION) {
-		return null;
-	}
-
-	return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(label)}`;
+	return null;
 }
