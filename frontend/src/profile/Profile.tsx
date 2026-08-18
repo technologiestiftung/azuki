@@ -3,6 +3,7 @@ import { useOccupationDetailScroll } from "../components/results-page/occupation
 import { content } from "../content";
 import { useMatchResultsStore } from "../store/useMatchResultsStore";
 import { useAppStore } from "../store/useAppStore";
+import { useProfileStore } from "../store/useProfileStore";
 import { ProfileHero } from "./ProfileHero";
 import { TopOccupationsCarousel } from "./TopOccupationsCarousel";
 import { ProfileAboutSection } from "./ProfileAboutSection";
@@ -23,6 +24,7 @@ export function Profile() {
 		useOccupationDetailScroll();
 	const matchResults = useMatchResultsStore((state) => state.matchResults);
 	const ownProfile = useAppStore((state) => state.profile);
+	const profileName = useProfileStore((state) => state.profileName);
 	const { isSharedView, sharedProfile, sharedOccupations, isLoadingShared } =
 		useSharedProfile();
 	const profile = sharedProfile ?? ownProfile;
@@ -54,7 +56,7 @@ export function Profile() {
 				onScroll={handleScroll}
 			>
 				<CollapsingHeaderTopRow
-					title={content["profile.title"]}
+					title={isSharedView ? content["profile.title"] : profileName}
 					progress={collapseProgress}
 					titleRevealProgress={titleRevealProgress}
 					collapsedFill
