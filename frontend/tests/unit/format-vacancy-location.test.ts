@@ -65,9 +65,9 @@ describe("buildVacancyMapsUrl", () => {
 	});
 
 	test("falls back to coordinates when no address is available", () => {
-		expect(
-			buildVacancyMapsUrl({ latitude: 52.52, longitude: 13.405 }),
-		).toBe("https://www.google.com/maps/search/?api=1&query=52.52%2C13.405");
+		expect(buildVacancyMapsUrl({ latitude: 52.52, longitude: 13.405 })).toBe(
+			"https://www.google.com/maps/search/?api=1&query=52.52%2C13.405",
+		);
 	});
 
 	test("returns null when no location info is available", () => {
