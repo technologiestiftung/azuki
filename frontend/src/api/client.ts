@@ -630,3 +630,26 @@ export async function deletePersona(id: string): Promise<void> {
 		throw new Error(`deletePersona failed: ${res.status}`);
 	}
 }
+
+export interface ContactRequestPayload {
+	firstname: string;
+	postalcode: string;
+	contactType: "call" | "whatsapp" | "mail";
+	phonenumber?: string;
+	email: string;
+	birthdate?: string;
+	marketingConsent: boolean;
+}
+
+export async function submitContactRequest(
+	payload: ContactRequestPayload,
+): Promise<void> {
+	const res = await fetch(`${API_BASE}/contact`, {
+		method: "POST",
+		headers: headers(),
+		body: JSON.stringify(payload),
+	});
+	if (!res.ok) {
+		throw new Error(`submitContactRequest failed: ${res.status}`);
+	}
+}

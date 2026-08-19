@@ -287,6 +287,14 @@ export default {
 					"50%": { transform: "translateX(5px)" },
 					"75%": { transform: "translateX(-5px)" },
 				},
+				successIllustrationEnter: {
+					from: { opacity: "0" },
+					to: { opacity: "1" },
+				},
+				successContentEnter: {
+					from: { opacity: "0", transform: "translateY(1rem)" },
+					to: { opacity: "1", transform: "translateY(0)" },
+				},
 			},
 			animation: {
 				fadeIn: "fadeIn 0.2s ease-in-out",
@@ -336,6 +344,12 @@ export default {
 				slideInTop: "slideInTop 0.4s ease-out forwards",
 				progressFill: "progressFill 4s linear forwards",
 				shake: "shake 0.4s ease-in-out forwards",
+				successIllustrationEnter:
+					"successIllustrationEnter 500ms cubic-bezier(0.5, 0, 0.5, 1) 120ms both",
+				successContentEnter:
+					"successContentEnter 500ms cubic-bezier(0.5, 0, 0.5, 1) 120ms both",
+				successCtaEnter:
+					"successContentEnter 500ms cubic-bezier(0.5, 0, 0.5, 1) 220ms both",
 			},
 		},
 	},

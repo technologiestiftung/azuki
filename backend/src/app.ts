@@ -1,6 +1,8 @@
 import { Hono, type Context } from "hono";
 import { cors } from "hono/cors";
 import { UserProfileSchema } from "./schemas/userProfile.js";
+import { ContactRequestSchema } from "./schemas/contact.js";
+import { submitContactToHubSpot } from "./hubspot/client.js";
 import {
 	type Occupation,
 	type MatchResult,
@@ -376,6 +378,34 @@ app.post("/api/reverse-geocode", async (c) => {
 	}
 
 	return c.json(location);
+});
+
+app.post("/api/contact", async (c) => {
+	if (!isAuthorized(c)) {
+		return c.json({ error: "Unauthorized" }, 401);
+	}
+
+	let body: unknown;
+	try {
+		body = await c.req.json();
+	} catch {
+		return c.json({ error: "Invalid request body" }, 400);
+	}
+
+	const parsed = ContactRequestSchema.safeParse(body);
+	if (!parsed.success) {
+		return c.json({ error: "Invalid request body" }, 400);
+	}
+
+	try {
+		await submitContactToHubSpot(parsed.data);
+	} catch (err) {
+		const msg = err instanceof Error ? err.message : String(err);
+		console.error("HubSpot contact submission error:", msg);
+		return c.json({ error: msg }, 502);
+	}
+
+	return c.json({ ok: true });
 });
 
 app.get("/api/occupations/:id", (c) => {

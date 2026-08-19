@@ -33,6 +33,7 @@ import {
 	useResultsPageScrollProgress,
 } from "../ResultsPageHeader";
 import { useCollapsedTitleReveal } from "../../collapsing-header/useCollapsedTitleReveal";
+import { ContactCardBottomSheet } from "../../contact-card/ContactCardBottomSheet";
 
 const DEFAULT_OCCUPATION_FILTERS: OccupationsFilterState = {
 	selectedOccupationIds: [],
@@ -139,6 +140,7 @@ export function VacanciesPage() {
 		locality: location.locality ?? null,
 	});
 	const [showFavoritesOnly, setShowFavoritesOnly] = useState(false);
+	const [contactSheetOpen, setContactSheetOpen] = useState(false);
 	const loading =
 		isLoadingShared ||
 		(occupations.length > 0 && vacancies === null && fetchError === null);
@@ -416,10 +418,9 @@ export function VacanciesPage() {
 									</p>
 								</div>
 								<div className="flex flex-col">
-									<a
-										href={content["vacancies.bottomCard.consultationLink"]}
-										target="_blank"
-										rel="noopener noreferrer"
+									<button
+										type="button"
+										onClick={() => setContactSheetOpen(true)}
 										aria-label={
 											content["vacancies.bottomCard.consultationCta.ariaLabel"]
 										}
@@ -427,13 +428,17 @@ export function VacanciesPage() {
 									focus-visible:outline focus-visible:outline-2 focus-visible:outline-sky-500 active:bg-sky-200 active:text-sky-900 md:hover:bg-sky-200 md:hover:text-sky-900"
 									>
 										{content["vacancies.bottomCard.consultationCta"]}
-									</a>
+									</button>
 								</div>
 							</div>
 						</div>
 					)}
 				</div>
 			</div>
+			<ContactCardBottomSheet
+				open={contactSheetOpen}
+				onClose={() => setContactSheetOpen(false)}
+			/>
 			<BottomNav />
 		</>
 	);
