@@ -9,6 +9,7 @@ import {
 import { useFilterSheet } from "../filter-bottom-sheet/useFilterSheet";
 import { ResultCard } from "./ResultCard";
 import { BottomCard } from "./BottomCard";
+import { WildcardCarousel } from "./WildcardCarousel";
 import { ResultsFilterBar } from "./ResultsFilterBar";
 import { buildResultTagChips } from "./utils/resultTagChips";
 import { applyOccupationFilters } from "./utils/applyOccupationFilters";
@@ -158,6 +159,9 @@ export function ResultsPage() {
 							{visibleOccupations.map((occupation: MatchedOccupation) => (
 								<ResultCard key={occupation.id} occupation={occupation} />
 							))}
+							<WildcardCarousel
+								occupations={matchResults?.wildcardOccupations ?? []}
+							/>
 							<BottomCard />
 						</>
 					)}

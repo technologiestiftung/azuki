@@ -1,5 +1,4 @@
 import { useCallback, useEffect, useMemo, useState, type UIEvent } from "react";
-import type { VacancyPreview, MatchedOccupation } from "@azuki/shared";
 import { useMatchResultsStore } from "../../../store/useMatchResultsStore";
 import { useAppStore } from "../../../store/useAppStore";
 import { content } from "../../../content";
@@ -14,6 +13,10 @@ import {
 	getOccupationFilterLabel,
 } from "../utils/occupationFilterChips";
 import { applyVacancyOccupationFilters } from "../utils/applyVacancyOccupationFilters";
+import {
+	buildVacancyCards,
+	getVacancyEmptyState,
+} from "../utils/buildVacancyCards";
 import {
 	LocationFilterBottomSheet,
 	DEFAULT_LOCATION_FILTER,
@@ -45,57 +48,6 @@ function getVacancyOccupationFilterIdsFromStore(): number[] {
 		matchResults?.occupations.map((occupation) => occupation.id) ?? [],
 	);
 	return vacancyOccupationFilterIds.filter((id) => validOccupationIds.has(id));
-}
-
-interface VacancyListItem {
-	listKey: string;
-	key: string;
-	occupation: MatchedOccupation;
-	preview: VacancyPreview;
-}
-
-function publishedAtTimestamp(iso: string | undefined): number {
-	if (!iso) {
-		return 0;
-	}
-	const time = new Date(iso).getTime();
-	return Number.isNaN(time) ? 0 : time;
-}
-
-function compareVacanciesByPublishedAt(
-	a: VacancyListItem,
-	b: VacancyListItem,
-): number {
-	return (
-		publishedAtTimestamp(b.preview.publishedAt) -
-		publishedAtTimestamp(a.preview.publishedAt)
-	);
-}
-
-function getVacancyEmptyState({
-	visibleOccupationCount,
-	locationFilterApplied,
-	showFavoritesOnly,
-	loading,
-	noVacancyResults,
-}: {
-	visibleOccupationCount: number;
-	locationFilterApplied: boolean;
-	showFavoritesOnly: boolean;
-	loading: boolean;
-	noVacancyResults: boolean;
-}) {
-	const showSimpleEmpty =
-		visibleOccupationCount === 0 ||
-		(locationFilterApplied && !loading && noVacancyResults) ||
-		(showFavoritesOnly && !loading && noVacancyResults);
-	const showDetailedEmpty =
-		!locationFilterApplied &&
-		!showFavoritesOnly &&
-		!loading &&
-		noVacancyResults &&
-		visibleOccupationCount > 0;
-	return { showSimpleEmpty, showDetailedEmpty };
 }
 
 export function VacanciesPage() {
@@ -236,36 +188,42 @@ export function VacanciesPage() {
 		[vacancies],
 	);
 
-	const vacancyCards = useMemo((): VacancyListItem[] => {
-		const cards: VacancyListItem[] = [];
-		for (const occupation of visibleOccupations) {
-			const vacancyResult = vacanciesByName.get(occupation.rawName);
-			if (!vacancyResult?.previews.length) {
-				continue;
-			}
-			for (const preview of vacancyResult.previews) {
-				const key = preview.referenznummer;
-				if (!key) {
-					continue;
-				}
-				if (showFavoritesOnly && !favoriteVacancyKeySet.has(key)) {
-					continue;
-				}
-				cards.push({
-					listKey: `${occupation.id}-${key}`,
-					key,
-					occupation,
-					preview,
-				});
-			}
-		}
-		return cards.sort(compareVacanciesByPublishedAt);
-	}, [
-		visibleOccupations,
-		vacanciesByName,
-		showFavoritesOnly,
-		favoriteVacancyKeySet,
-	]);
+	const vacancyCards = useMemo(
+		() =>
+			buildVacancyCards({
+				occupations: visibleOccupations,
+				vacanciesByName,
+				showFavoritesOnly,
+				favoriteVacancyKeySet,
+			}),
+		[
+			visibleOccupations,
+			vacanciesByName,
+			showFavoritesOnly,
+			favoriteVacancyKeySet,
+		],
+	);
+
+	const wildcardOccupations = useMemo(
+		() => matchResults?.wildcardOccupations ?? [],
+		[matchResults?.wildcardOccupations],
+	);
+	const wildcardVacancyCards = useMemo(
+		() =>
+			buildVacancyCards({
+				occupations: wildcardOccupations,
+				vacanciesByName,
+				showFavoritesOnly,
+				favoriteVacancyKeySet,
+				listKeyPrefix: "wildcard-",
+			}),
+		[
+			wildcardOccupations,
+			vacanciesByName,
+			showFavoritesOnly,
+			favoriteVacancyKeySet,
+		],
+	);
 
 	const handleShare = useCallback(async () => {
 		const url = buildShareUrl(
@@ -406,6 +364,24 @@ export function VacanciesPage() {
 									onToggleFavorite={() => toggleVacancyFavorite(key)}
 								/>
 							))}
+							{wildcardVacancyCards.length > 0 && (
+								<div className="space-y-3 pt-8">
+									<h2 className="text-2xl font-semibold text-sky-900 pb-2">
+										{content["vacancies.wildcard.title"]}
+									</h2>
+									{wildcardVacancyCards.map(
+										({ listKey, key, occupation, preview }) => (
+											<VacancyCard
+												key={listKey}
+												occupationName={occupation.name}
+												preview={preview}
+												isFavorite={favoriteVacancyKeySet.has(key)}
+												onToggleFavorite={() => toggleVacancyFavorite(key)}
+											/>
+										),
+									)}
+								</div>
+							)}
 							<div className="flex flex-col gap-5 px-3 py-5 rounded-2xl border border-sky-100 bg-sky-50">
 								<div>
 									<h3 className="text-2xl font-semibold text-sky-1000 text-center mb-[7px]">

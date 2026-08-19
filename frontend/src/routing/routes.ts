@@ -31,8 +31,11 @@ export const ROUTE_PATHS = {
 
 export const RESULTS_PATH_PREFIX = "/results" as const;
 
-export function buildResultsOccupationPath(id: number): string {
-	return `/results/${id}`;
+export function buildResultsOccupationPath(
+	id: number,
+	options?: { wildcard?: boolean },
+): string {
+	return options?.wildcard ? `/results/${id}?wildcard=1` : `/results/${id}`;
 }
 
 export function buildResultsVacancyDetailPath(referenznummer: string): string {

@@ -144,6 +144,40 @@ export const MOCK_MATCH_RESULT: MatchResult = {
 			salaryMonthlyMedian: null,
 		},
 	],
+	wildcardOccupations: [
+		{
+			id: 20001,
+			name: "Gärtner/in Garten- und Landschaftsbau",
+			rawName: "Gärtner Garten- und Landschaftsbau",
+			score: 0,
+			images: [],
+			shortDescription:
+				"Anlage, Gestaltung und Pflege von Außenanlagen wie Gärten, Parks und Grünflächen.",
+			reasoning: "",
+			occupationType: "dual",
+			occupationTag: "bauen-handwerk",
+			occupationDuration: "3 Jahre",
+			occupationEarnings: "620-800 € / Monat",
+			salaryKnown: true,
+			salaryMonthlyMedian: 2500,
+		},
+		{
+			id: 20002,
+			name: "Dachdecker/in",
+			rawName: "Dachdecker",
+			score: 0,
+			images: [],
+			shortDescription:
+				"Dächer eindecken und abdichten, Dämmungen einbauen, Fassaden verkleiden, Bauteile instand setzen.",
+			reasoning: "",
+			occupationType: "dual",
+			occupationTag: "bauen-handwerk",
+			occupationDuration: "2 Jahre",
+			occupationEarnings: "650-820 € / Monat",
+			salaryKnown: true,
+			salaryMonthlyMedian: 2600,
+		},
+	],
 };
 
 export const MOCK_VACANCIES_RESPONSE: VacanciesResponse = {

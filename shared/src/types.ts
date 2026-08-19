@@ -163,6 +163,7 @@ export interface MatchedOccupation {
 
 export interface MatchResult {
 	occupations: MatchedOccupation[];
+	wildcardOccupations: MatchedOccupation[];
 	generation?: GenerationInfo;
 }
 
