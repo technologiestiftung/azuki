@@ -548,7 +548,7 @@ export const content = {
 	"results.contactCard.bottomSheet.submit": "Kostenlose Beratung anfragen",
 	"results.contactCard.bottomSheet.lock.alt": "Schloss",
 	"results.contactCard.bottomSheet.dataProtection":
-		"Deine Daten werden nicht an Dritte weitergegeben",
+		"Deine Daten werden nicht an Dritte weitergegeben.",
 	"results.contactCard.bottomSheet.firstname.error":
 		"Bitte gib deinen Vornamen ein.",
 	"results.contactCard.bottomSheet.postalcode.error":
@@ -558,11 +558,11 @@ export const content = {
 	"results.contactCard.bottomSheet.birthdate.error":
 		"Bitte gib dein Geburtsdatum an.",
 	"results.contactCard.bottomSheet.contactType.error":
-		"Bitte wähle einen Kontaktweg aus",
+		"Bitte wähle einen Kontaktweg aus.",
 	"results.contactCard.bottomSheet.phonenumber.error":
-		"Bitte gib eine gültige Handynummer ein, z. B. +49 123 4567890.",
+		"Bitte gib eine gültige Handynummer ein.",
 	"results.contactCard.bottomSheet.email.error":
-		"Bitte gib eine gültige E-Mail-Adresse ein, z.B. name@mail.de",
+		"Bitte gib eine gültige E-Mail Adresse ein.",
 	"results.contactCard.bottomSheet.marketing.error":
 		"Bitte stimme zu, von JOBLINGE benachrichtigt zu werden, um fortzufahren.",
 	"results.contactCard.bottomSheet.form.error":

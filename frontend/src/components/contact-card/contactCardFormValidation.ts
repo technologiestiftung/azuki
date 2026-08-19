@@ -74,11 +74,9 @@ export function validateRadioFields(
 			errs.phonenumber = true;
 		}
 	}
-	if (contactType === "mail") {
-		const email = (data.get("email") as string | null)?.trim() ?? "";
-		if (!email || !isValidEmail(email)) {
-			errs.email = true;
-		}
+	const email = (data.get("email") as string | null)?.trim() ?? "";
+	if (!email || !isValidEmail(email)) {
+		errs.email = true;
 	}
 	return errs;
 }
