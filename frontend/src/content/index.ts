@@ -716,6 +716,7 @@ export const content = {
 		"Fachgebundene Hochschulreife",
 	"vacancies.detail.locationTitle": "Arbeitsort",
 	"vacancies.detail.location.showMore": "+{count} weitere Arbeitsorte",
+	"vacancies.detail.location.showMore.one": "1 weiterer Arbeitsort",
 	"vacancies.detail.location.showLess": "Weniger anzeigen",
 	"vacancies.detail.aboutTitle": "Über diese Stelle",
 	"vacancies.detail.description.showMore": "Mehr anzeigen",
