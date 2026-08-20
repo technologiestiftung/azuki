@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useMemo, useState, type UIEvent } from "react";
+import { useSearchParams } from "react-router-dom";
 import type { VacancyPreview, MatchedOccupation } from "@azuki/shared";
 import { useMatchResultsStore } from "../../../store/useMatchResultsStore";
 import { useAppStore } from "../../../store/useAppStore";
@@ -27,6 +28,7 @@ import { useSharedMatchResults } from "../useSharedMatchResults";
 import { buildShareUrl } from "../utils/buildShareUrl";
 import { shareResultsLink } from "../utils/shareResults";
 import { ROUTE_PATHS } from "../../../routing/routes";
+import { hasShareQueryParams } from "../../../routing/sessionGuard";
 import {
 	ResultsPageHeader,
 	TOP_ROW_HEIGHT_PX,
@@ -100,6 +102,7 @@ function getVacancyEmptyState({
 }
 
 export function VacanciesPage() {
+	const [searchParams] = useSearchParams();
 	const {
 		isLoadingShared,
 		sharedLoadError,
@@ -122,6 +125,8 @@ export function VacanciesPage() {
 	const fetchError = useAppStore((state) => state.vacanciesFetchError);
 	const location = useAppStore((state) => state.location);
 	const setLocation = useAppStore((state) => state.setLocation);
+	const inSchool = useAppStore((state) => state.profile.inSchool);
+	const showBottomNav = inSchool !== null && !hasShareQueryParams(searchParams);
 
 	const occupations = matchResults?.occupations ?? [];
 	const setVacancyOccupationFilterIds = useMatchResultsStore(
@@ -311,7 +316,11 @@ export function VacanciesPage() {
 
 	return (
 		<>
-			<div className="relative flex flex-col h-full pb-16 bg-white">
+			<div
+				className={`relative flex flex-col h-full bg-white ${
+					showBottomNav ? "pb-16" : ""
+				}`}
+			>
 				<OccupationsFilterBottomSheet
 					key={`occupation-${occupationFilter.sheetKey}`}
 					open={occupationFilter.isOpen}
@@ -439,7 +448,7 @@ export function VacanciesPage() {
 				open={contactSheetOpen}
 				onClose={() => setContactSheetOpen(false)}
 			/>
-			<BottomNav />
+			{showBottomNav && <BottomNav />}
 		</>
 	);
 }

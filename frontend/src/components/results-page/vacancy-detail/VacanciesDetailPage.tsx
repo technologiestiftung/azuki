@@ -1,5 +1,10 @@
 import { useEffect } from "react";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import {
+	useLocation,
+	useNavigate,
+	useParams,
+	useSearchParams,
+} from "react-router-dom";
 import { formatOccupationDisplayName } from "@azuki/shared";
 import { content } from "../../../content";
 import { useVacancyDetail } from "./useVacancyDetail";
@@ -13,11 +18,13 @@ import {
 import type { VacancyDetailNavState } from "./vacancyDetailNavState";
 import { GhostIconButton } from "../../primitives/buttons/GhostIconButton";
 import { ROUTE_PATHS } from "../../../routing/routes";
+import { toWithShareSearch } from "../../../routing/sessionGuard";
 
 const TITLE_REVEAL_RANGE = 40;
 
 export function VacanciesDetailPage() {
 	const navigate = useNavigate();
+	const [searchParams] = useSearchParams();
 	const referenznummer = decodeURIComponent(useParams().refnr ?? "");
 	const { detail, preview, loading, error, isFavorite, toggleFavorite } =
 		useVacancyDetail(referenznummer);
@@ -49,6 +56,10 @@ export function VacanciesDetailPage() {
 	const statusMessage =
 		error ?? (loading && !detail ? content["vacancies.detail.loading"] : null);
 
+	const goBackToVacancies = () => {
+		navigate(toWithShareSearch(ROUTE_PATHS.resultsVacancies, searchParams));
+	};
+
 	return (
 		<div className="flex flex-col h-full relative overflow-x-hidden">
 			<div
@@ -77,7 +88,7 @@ export function VacanciesDetailPage() {
 			>
 				<GhostIconButton
 					iconSrc="/icons/arrow-back-black.svg"
-					onClick={() => navigate(ROUTE_PATHS.resultsVacancies)}
+					onClick={goBackToVacancies}
 					ariaLabel={content["navigation.back"]}
 					title={content["navigation.back"]}
 					iconSize="w-5 h-5"

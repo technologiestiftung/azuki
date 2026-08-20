@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import {
 	type MatchedOccupation,
 	fitPercent,
@@ -10,12 +10,14 @@ import { useMatchResultsStore } from "../../store/useMatchResultsStore";
 import { FavoriteButton } from "../favorite-button/FavoriteButton";
 import { content } from "../../content";
 import { buildResultsOccupationPath } from "../../routing/routes";
+import { toWithShareSearch } from "../../routing/sessionGuard";
 
 interface ResultCardProps {
 	occupation: MatchedOccupation;
 }
 
 export function ResultCard({ occupation }: ResultCardProps) {
+	const [searchParams] = useSearchParams();
 	const isFavorite = useMatchResultsStore((state) =>
 		state.favoriteOccupationIds.includes(occupation.id),
 	);
@@ -26,7 +28,10 @@ export function ResultCard({ occupation }: ResultCardProps) {
 	return (
 		<div className="relative bg-gray-100 rounded-2xl border border-gray-200 overflow-hidden">
 			<Link
-				to={buildResultsOccupationPath(occupation.id)}
+				to={toWithShareSearch(
+					buildResultsOccupationPath(occupation.id),
+					searchParams,
+				)}
 				className="block focus-visible:outline focus-visible:outline-2 focus-visible:outline-sky-500 rounded-2xl md:hover:bg-gray-200/40 active:bg-gray-200/40"
 				aria-label={`${displayName}, ${content["results.moreInfo"]}`}
 			>

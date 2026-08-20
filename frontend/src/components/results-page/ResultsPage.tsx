@@ -1,5 +1,7 @@
 import { useCallback, useMemo, useState, type UIEvent } from "react";
+import { useSearchParams } from "react-router-dom";
 import { useMatchResultsStore } from "../../store/useMatchResultsStore";
+import { useAppStore } from "../../store/useAppStore";
 import { content } from "../../content";
 import { type MatchedOccupation } from "@azuki/shared";
 import {
@@ -18,6 +20,7 @@ import { useSharedMatchResults } from "./useSharedMatchResults";
 import { buildShareUrl } from "./utils/buildShareUrl";
 import { shareResultsLink } from "./utils/shareResults";
 import { ROUTE_PATHS } from "../../routing/routes";
+import { hasShareQueryParams } from "../../routing/sessionGuard";
 import {
 	ResultsPageHeader,
 	TOP_ROW_HEIGHT_PX,
@@ -30,6 +33,7 @@ const DEFAULT_TAG_FILTERS: OccupationTagsFilterState = {
 };
 
 export function ResultsPage() {
+	const [searchParams] = useSearchParams();
 	const { isLoadingShared, hasSharedParam, sharedVacancyParams } =
 		useSharedMatchResults();
 	useFetchVacancies({
@@ -40,6 +44,8 @@ export function ResultsPage() {
 	const favoriteOccupationIds = useMatchResultsStore(
 		(state) => state.favoriteOccupationIds,
 	);
+	const inSchool = useAppStore((state) => state.profile.inSchool);
+	const showBottomNav = inSchool !== null && !hasShareQueryParams(searchParams);
 	const occupations = matchResults?.occupations ?? [];
 	const tagFilter = useFilterSheet(DEFAULT_TAG_FILTERS);
 	const [showFavoritesOnly, setShowFavoritesOnly] = useState(false);
@@ -109,7 +115,11 @@ export function ResultsPage() {
 	}, [visibleOccupations]);
 
 	return (
-		<div className="relative flex flex-col h-full pb-16 bg-white">
+		<div
+			className={`relative flex flex-col h-full bg-white ${
+				showBottomNav ? "pb-16" : ""
+			}`}
+		>
 			<OccupationTagsFilterBottomSheet
 				key={tagFilter.sheetKey}
 				open={tagFilter.isOpen}
@@ -180,7 +190,7 @@ export function ResultsPage() {
 					)}
 				</div>
 			</div>
-			<BottomNav />
+			{showBottomNav && <BottomNav />}
 		</div>
 	);
 }

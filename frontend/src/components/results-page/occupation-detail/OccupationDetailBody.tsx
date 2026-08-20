@@ -1,7 +1,8 @@
 import { useEffect, useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import type { Occupation, UserProfile } from "@azuki/shared";
 import { buildResultsOccupationPath } from "../../../routing/routes";
+import { toWithShareSearch } from "../../../routing/sessionGuard";
 import { content } from "../../../content";
 import { OccupationDetailMetaInfo } from "./OccupationDetailMetaInfo";
 import { OccupationDetailMatchSection } from "./OccupationDetailMatchSection";
@@ -28,6 +29,7 @@ export function OccupationDetailBody({
 	occupationVacanciesCount,
 	nextOccupationCards,
 }: OccupationDetailBodyProps) {
+	const [searchParams] = useSearchParams();
 	const inlineApplyRef = useRef<HTMLAnchorElement>(null);
 	const [isInlineApplyVisible, setIsInlineApplyVisible] = useState(false);
 
@@ -116,7 +118,10 @@ export function OccupationDetailBody({
 						{nextOccupationCards.map((nextOccupation) => (
 							<Link
 								key={nextOccupation.id}
-								to={buildResultsOccupationPath(nextOccupation.id)}
+								to={toWithShareSearch(
+									buildResultsOccupationPath(nextOccupation.id),
+									searchParams,
+								)}
 								className="flex flex-col min-w-[300px] gap-3 px-2 pt-2 pb-4 bg-white rounded-[20px] focus-visible:outline focus-visible:outline-2 focus-visible:outline-sky-500 last:mr-4 first:ml-4"
 								aria-label={`${nextOccupation.displayName}, ${content["results.moreInfo"]}`}
 							>

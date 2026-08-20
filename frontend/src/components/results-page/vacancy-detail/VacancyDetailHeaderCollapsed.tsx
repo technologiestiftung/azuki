@@ -1,7 +1,8 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { content } from "../../../content";
 import { GhostIconButton } from "../../primitives/buttons/GhostIconButton";
 import { ROUTE_PATHS } from "../../../routing/routes";
+import { toWithShareSearch } from "../../../routing/sessionGuard";
 
 interface VacancyDetailHeaderCollapsedProps {
 	displayName: string;
@@ -17,11 +18,16 @@ export function VacancyDetailHeaderCollapsed({
 	titleOpacity = 1,
 }: VacancyDetailHeaderCollapsedProps) {
 	const navigate = useNavigate();
+	const [searchParams] = useSearchParams();
 	return (
 		<div className="flex w-full items-center justify-between px-4 pt-3 pb-2 shrink-0 border-b border-sky-shade-20">
 			<GhostIconButton
 				iconSrc="/icons/arrow-back-black.svg"
-				onClick={() => navigate(ROUTE_PATHS.resultsVacancies)}
+				onClick={() =>
+					navigate(
+						toWithShareSearch(ROUTE_PATHS.resultsVacancies, searchParams),
+					)
+				}
 				ariaLabel={content["navigation.back"]}
 				title={content["navigation.back"]}
 				iconSize="w-5 h-5"

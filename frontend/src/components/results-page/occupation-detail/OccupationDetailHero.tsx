@@ -1,5 +1,3 @@
-import { useNavigate } from "react-router-dom";
-import { ROUTE_PATHS } from "../../../routing/routes";
 import { content } from "../../../content";
 import { GhostIconButton } from "../../primitives/buttons/GhostIconButton";
 
@@ -9,6 +7,7 @@ interface OccupationDetailHeroProps {
 	isFavorite: boolean;
 	onToggleFavorite: () => void;
 	onShare: () => void;
+	onBack: () => void;
 	overlayOpacity: number;
 	controlsOpacity: number;
 	imageParallaxY: number;
@@ -20,11 +19,11 @@ export function OccupationDetailHero({
 	isFavorite,
 	onToggleFavorite,
 	onShare,
+	onBack,
 	overlayOpacity,
 	controlsOpacity,
 	imageParallaxY,
 }: OccupationDetailHeroProps) {
-	const navigate = useNavigate();
 	return (
 		<div className="relative h-[260px] shrink-0 overflow-hidden">
 			<img
@@ -49,7 +48,7 @@ export function OccupationDetailHero({
 			>
 				<GhostIconButton
 					iconSrc="/icons/arrow-back-black.svg"
-					onClick={() => navigate(ROUTE_PATHS.resultsList)}
+					onClick={onBack}
 					ariaLabel={content["navigation.back"]}
 					title={content["navigation.back"]}
 					iconSize="w-5 h-5"

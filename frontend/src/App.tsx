@@ -20,6 +20,7 @@ import { EvalPage } from "./components/eval/EvalPage";
 import { PersonasPage } from "./components/personas/PersonasPage";
 import { PersonaDetailPage } from "./components/personas/PersonaDetailPage";
 import { ROUTE_PATHS } from "./routing/routes";
+import { RequireSession } from "./routing/RequireSession";
 import { Profile } from "./profile/Profile";
 import { AboutPage } from "./components/about-page/about";
 import { PreferredJobsStep } from "./components/competence-profile/steps/PreferredJobsStep";
@@ -89,14 +90,29 @@ function App() {
 							</Suspense>
 						}
 					/>
-					<Route path={ROUTE_PATHS.resultsList} element={<ResultsPage />} />
+					<Route
+						path={ROUTE_PATHS.resultsList}
+						element={
+							<RequireSession requireMatchResults>
+								<ResultsPage />
+							</RequireSession>
+						}
+					/>
 					<Route
 						path={ROUTE_PATHS.resultsVacancies}
-						element={<VacanciesPage />}
+						element={
+							<RequireSession requireMatchResults>
+								<VacanciesPage />
+							</RequireSession>
+						}
 					/>
 					<Route
 						path={ROUTE_PATHS.resultsOccupationDetail}
-						element={<OccupationDetailPage />}
+						element={
+							<RequireSession requireMatchResults>
+								<OccupationDetailPage />
+							</RequireSession>
+						}
 					/>
 					<Route
 						path={ROUTE_PATHS.resultsVacancyDetail}
@@ -108,7 +124,14 @@ function App() {
 						path={ROUTE_PATHS.personaDetail}
 						element={<PersonaDetailPage />}
 					/>
-					<Route path={ROUTE_PATHS.profile} element={<Profile />} />
+					<Route
+						path={ROUTE_PATHS.profile}
+						element={
+							<RequireSession requireProfile>
+								<Profile />
+							</RequireSession>
+						}
+					/>
 					<Route path={ROUTE_PATHS.about} element={<AboutPage />} />
 					<Route
 						path="*"
