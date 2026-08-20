@@ -14,9 +14,13 @@ import { WildcardPoolBadge } from "./WildcardPoolBadge";
 
 interface ResultCardProps {
 	occupation: MatchedOccupation;
+	isWildcard?: boolean;
 }
 
-export function ResultCard({ occupation }: ResultCardProps) {
+export function ResultCard({
+	occupation,
+	isWildcard = false,
+}: ResultCardProps) {
 	const isFavorite = useMatchResultsStore((state) =>
 		state.favoriteOccupationIds.includes(occupation.id),
 	);
@@ -45,7 +49,9 @@ export function ResultCard({ occupation }: ResultCardProps) {
 								{fitPercent(occupation.score)}
 								{"%"}
 							</div>
-							{isInWildcardPool(occupation.id) && <WildcardPoolBadge />}
+							{(isWildcard || isInWildcardPool(occupation.id)) && (
+								<WildcardPoolBadge />
+							)}
 						</>
 					}
 				/>
