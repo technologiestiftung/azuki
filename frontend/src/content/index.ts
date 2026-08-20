@@ -574,7 +574,7 @@ export const content = {
 	"results.contactCard.bottomSheet.firstname.error":
 		"Bitte gib deinen Vornamen ein.",
 	"results.contactCard.bottomSheet.postalcode.error":
-		"Bitte gib deine gültige Postleitzahl ein (5 Zahlen).",
+		"Bitte gib eine gültige Postleitzahl ein.",
 	"results.contactCard.bottomSheet.under16.error":
 		"Bitte gib dein Alter an. Wir müssen dies aus rechtlichen Gründen für die Kontaktaufnahme wissen.",
 	"results.contactCard.bottomSheet.birthdate.error":
