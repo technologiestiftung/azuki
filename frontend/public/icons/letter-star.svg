@@ -208,8 +208,8 @@ svg { overflow: visible; }
 #illustration-wrapper {
   transform-origin: 0 0;
   animation:
-    kf_illustration-wrapper_transform_0 2s linear infinite,
-    kf_illustration-wrapper_opacity_0 2s linear infinite;
+    kf_illustration-wrapper_transform_0 2s linear 1 forwards,
+    kf_illustration-wrapper_opacity_0 2s linear 1 forwards;
 }
 @keyframes kf_star-1_transform_0 {
   0% {
@@ -228,7 +228,7 @@ svg { overflow: visible; }
 }
 #star-1 {
   transform-origin: 0 0;
-  animation: kf_star-1_transform_0 2s linear infinite;
+  animation: kf_star-1_transform_0 2s linear 1 forwards;
 }
 @keyframes kf_star-2_transform_0 {
   0% {
@@ -247,7 +247,7 @@ svg { overflow: visible; }
 }
 #star-2 {
   transform-origin: 0 0;
-  animation: kf_star-2_transform_0 2s linear infinite;
+  animation: kf_star-2_transform_0 2s linear 1 forwards;
 }
 @keyframes kf_star-3_transform_0 {
   0% {
@@ -266,7 +266,7 @@ svg { overflow: visible; }
 }
 #star-3 {
   transform-origin: 0 0;
-  animation: kf_star-3_transform_0 2s linear infinite;
+  animation: kf_star-3_transform_0 2s linear 1 forwards;
 }
 @keyframes kf_star-4_transform_0 {
   0% {
@@ -285,7 +285,7 @@ svg { overflow: visible; }
 }
 #star-4 {
   transform-origin: 0 0;
-  animation: kf_star-4_transform_0 2s linear infinite;
+  animation: kf_star-4_transform_0 2s linear 1 forwards;
 }
 @keyframes kf_star-5_transform_0 {
   0% {
@@ -304,7 +304,7 @@ svg { overflow: visible; }
 }
 #star-5 {
   transform-origin: 0 0;
-  animation: kf_star-5_transform_0 2s linear infinite;
+  animation: kf_star-5_transform_0 2s linear 1 forwards;
 }
 @keyframes kf_star-6_transform_0 {
   0% {
@@ -323,7 +323,7 @@ svg { overflow: visible; }
 }
 #star-6 {
   transform-origin: 0 0;
-  animation: kf_star-6_transform_0 2s linear infinite;
+  animation: kf_star-6_transform_0 2s linear 1 forwards;
 }
 @keyframes kf_star-7_transform_0 {
   0% {
@@ -342,7 +342,7 @@ svg { overflow: visible; }
 }
 #star-7 {
   transform-origin: 0 0;
-  animation: kf_star-7_transform_0 2s linear infinite;
+  animation: kf_star-7_transform_0 2s linear 1 forwards;
 }
 @keyframes kf_star-8_transform_0 {
   0% {
@@ -361,7 +361,7 @@ svg { overflow: visible; }
 }
 #star-8 {
   transform-origin: 0 0;
-  animation: kf_star-8_transform_0 2s linear infinite;
+  animation: kf_star-8_transform_0 2s linear 1 forwards;
 }
 @keyframes kf_star-9_transform_0 {
   0% {
@@ -380,7 +380,7 @@ svg { overflow: visible; }
 }
 #star-9 {
   transform-origin: 0 0;
-  animation: kf_star-9_transform_0 2s linear infinite;
+  animation: kf_star-9_transform_0 2s linear 1 forwards;
 }
 @keyframes kf_star-10_transform_0 {
   0% {
@@ -399,7 +399,7 @@ svg { overflow: visible; }
 }
 #star-10 {
   transform-origin: 0 0;
-  animation: kf_star-10_transform_0 2s linear infinite;
+  animation: kf_star-10_transform_0 2s linear 1 forwards;
 }
 @keyframes kf_star-11_transform_0 {
   0% {
@@ -418,7 +418,7 @@ svg { overflow: visible; }
 }
 #star-11 {
   transform-origin: 0 0;
-  animation: kf_star-11_transform_0 2s linear infinite;
+  animation: kf_star-11_transform_0 2s linear 1 forwards;
 }
 @keyframes kf_star-12_transform_0 {
   0% {
@@ -437,7 +437,7 @@ svg { overflow: visible; }
 }
 #star-12 {
   transform-origin: 0 0;
-  animation: kf_star-12_transform_0 2s linear infinite;
+  animation: kf_star-12_transform_0 2s linear 1 forwards;
 }
 @keyframes kf_paper_transform_0 {
   0% {
@@ -456,7 +456,7 @@ svg { overflow: visible; }
 }
 #paper {
   transform-origin: 0 0;
-  animation: kf_paper_transform_0 2s linear infinite;
+  animation: kf_paper_transform_0 2s linear 1 forwards;
 }
 </style>
 <g id="illustration-wrapper">
