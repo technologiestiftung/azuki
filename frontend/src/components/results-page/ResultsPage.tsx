@@ -20,7 +20,7 @@ import { useSharedMatchResults } from "./useSharedMatchResults";
 import { buildShareUrl } from "./utils/buildShareUrl";
 import { shareResultsLink } from "./utils/shareResults";
 import { ROUTE_PATHS } from "../../routing/routes";
-import { hasShareQueryParams } from "../../routing/sessionGuard";
+import { shouldShowBottomNav } from "../../routing/sessionGuard";
 import {
 	ResultsPageHeader,
 	TOP_ROW_HEIGHT_PX,
@@ -45,7 +45,7 @@ export function ResultsPage() {
 		(state) => state.favoriteOccupationIds,
 	);
 	const inSchool = useAppStore((state) => state.profile.inSchool);
-	const showBottomNav = inSchool !== null && !hasShareQueryParams(searchParams);
+	const showBottomNav = shouldShowBottomNav(inSchool, searchParams);
 	const occupations = matchResults?.occupations ?? [];
 	const tagFilter = useFilterSheet(DEFAULT_TAG_FILTERS);
 	const [showFavoritesOnly, setShowFavoritesOnly] = useState(false);

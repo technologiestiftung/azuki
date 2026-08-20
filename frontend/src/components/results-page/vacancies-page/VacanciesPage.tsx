@@ -28,7 +28,7 @@ import { useSharedMatchResults } from "../useSharedMatchResults";
 import { buildShareUrl } from "../utils/buildShareUrl";
 import { shareResultsLink } from "../utils/shareResults";
 import { ROUTE_PATHS } from "../../../routing/routes";
-import { hasShareQueryParams } from "../../../routing/sessionGuard";
+import { shouldShowBottomNav } from "../../../routing/sessionGuard";
 import {
 	ResultsPageHeader,
 	TOP_ROW_HEIGHT_PX,
@@ -126,7 +126,7 @@ export function VacanciesPage() {
 	const location = useAppStore((state) => state.location);
 	const setLocation = useAppStore((state) => state.setLocation);
 	const inSchool = useAppStore((state) => state.profile.inSchool);
-	const showBottomNav = inSchool !== null && !hasShareQueryParams(searchParams);
+	const showBottomNav = shouldShowBottomNav(inSchool, searchParams);
 
 	const occupations = matchResults?.occupations ?? [];
 	const setVacancyOccupationFilterIds = useMatchResultsStore(

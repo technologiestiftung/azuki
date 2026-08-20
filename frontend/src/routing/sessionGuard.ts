@@ -43,6 +43,14 @@ export function hasProfileShareParams(searchParams: URLSearchParams): boolean {
 	return searchParams.has(SHARED_PROFILE_PARAM);
 }
 
+/** Bottom nav only for users with their own questionnaire and no share URL. */
+export function shouldShowBottomNav(
+	inSchool: boolean | null,
+	searchParams: URLSearchParams,
+): boolean {
+	return inSchool !== null && !hasShareQueryParams(searchParams);
+}
+
 /** Keeps share-related query params when moving between results pages. */
 export function pickShareSearchParams(
 	searchParams: URLSearchParams,
