@@ -106,7 +106,11 @@ export function OccupationDetailBody({
 					</div>
 					<OccupationDetailApplyLink
 						ref={inlineApplyRef}
-						hidden={!isInlineApplyVisible}
+						hidden={
+							!isInlineApplyVisible &&
+							occupationVacanciesCount !== undefined &&
+							occupationVacanciesCount > 0
+						}
 						occupationVacanciesCount={occupationVacanciesCount}
 					/>
 				</div>
