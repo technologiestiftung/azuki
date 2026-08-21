@@ -120,11 +120,19 @@ export function ResultsPage() {
 			const { exportOccupationsPdf } = await import(
 				"./utils/exportOccupationsPdf"
 			);
-			await exportOccupationsPdf(visibleOccupations);
+			const wildcardsForExport = showFavoritesOnly
+				? favoritedWildcardOccupations
+				: wildcardOccupations;
+			await exportOccupationsPdf(visibleOccupations, wildcardsForExport);
 		} catch (err) {
 			console.error("Failed to export occupations PDF:", err);
 		}
-	}, [visibleOccupations]);
+	}, [
+		visibleOccupations,
+		wildcardOccupations,
+		favoritedWildcardOccupations,
+		showFavoritesOnly,
+	]);
 
 	const handleShare = useCallback(async () => {
 		const url = buildShareUrl(ROUTE_PATHS.resultsList, visibleOccupations);

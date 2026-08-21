@@ -127,10 +127,33 @@ const resultsListStyles = StyleSheet.create({
 		backgroundColor: COLOR.white,
 		alignSelf: "stretch",
 	},
-	colOccupation: { flex: 3.2 },
-	colFit: { flex: 1.15, alignItems: "center" },
-	colDuration: { flex: 1.35, alignItems: "center" },
-	colEarnings: { flex: 1.35, alignItems: "center" },
+	colOccupation: {
+		flexGrow: 3.2,
+		flexShrink: 1,
+		flexBasis: 0,
+		minWidth: 0,
+		paddingRight: 10,
+	},
+	colFit: {
+		flexGrow: 1.15,
+		flexShrink: 0,
+		flexBasis: 0,
+		alignItems: "flex-start",
+		paddingRight: 6,
+	},
+	colDuration: {
+		flexGrow: 1.35,
+		flexShrink: 0,
+		flexBasis: 0,
+		alignItems: "flex-start",
+		paddingRight: 6,
+	},
+	colEarnings: {
+		flexGrow: 1.35,
+		flexShrink: 0,
+		flexBasis: 0,
+		alignItems: "flex-start",
+	},
 	tableRow: {
 		flexDirection: "row",
 		alignItems: "flex-start",
@@ -147,6 +170,7 @@ const resultsListStyles = StyleSheet.create({
 		fontSize: 10,
 		marginBottom: 2,
 		lineHeight: 1.3,
+		width: "100%",
 	},
 	tableRowDescription: {
 		fontFamily: "Asap",
@@ -154,12 +178,13 @@ const resultsListStyles = StyleSheet.create({
 		fontSize: 10,
 		color: COLOR.muted,
 		lineHeight: 1.35,
+		width: "100%",
 	},
 	tableCellText: {
 		fontFamily: "Asap",
 		fontWeight: 400,
 		fontSize: 10,
-		textAlign: "center",
+		textAlign: "left",
 	},
 	demandBanner: {
 		backgroundColor: COLOR.skyShade30,
@@ -186,6 +211,7 @@ export interface OccupationsPdfAssets {
 
 export interface OccupationsPdfDocumentProps {
 	occupations: MatchedOccupation[];
+	wildcardOccupations?: MatchedOccupation[];
 	assets: OccupationsPdfAssets;
 }
 
@@ -264,11 +290,7 @@ function TableHeader() {
 			</Text>
 			<View style={resultsListStyles.tableHeaderDivider} />
 			<Text
-				style={[
-					resultsListStyles.tableHeaderCell,
-					resultsListStyles.colFit,
-					{ textAlign: "center" },
-				]}
+				style={[resultsListStyles.tableHeaderCell, resultsListStyles.colFit]}
 			>
 				{content["results.export.fit"]}
 			</Text>
@@ -277,7 +299,6 @@ function TableHeader() {
 				style={[
 					resultsListStyles.tableHeaderCell,
 					resultsListStyles.colDuration,
-					{ textAlign: "center" },
 				]}
 			>
 				{content["results.export.duration"]}
@@ -287,7 +308,6 @@ function TableHeader() {
 				style={[
 					resultsListStyles.tableHeaderCell,
 					resultsListStyles.colEarnings,
-					{ textAlign: "center" },
 				]}
 			>
 				{content["results.export.earnings"]}
@@ -307,9 +327,11 @@ function truncateText(value: string, maxChars: number): string {
 function TableRow({
 	occupation,
 	rowIndex,
+	showFit = true,
 }: {
 	occupation: MatchedOccupation;
 	rowIndex: number;
+	showFit?: boolean;
 }) {
 	const description = truncateText(occupation.shortDescription || "", 180);
 	return (
@@ -332,7 +354,11 @@ function TableRow({
 				) : null}
 			</View>
 			<View style={resultsListStyles.colFit}>
-				<MatchPill score={occupation.score} />
+				{showFit ? (
+					<MatchPill score={occupation.score} />
+				) : (
+					<Text style={resultsListStyles.tableCellText}>–</Text>
+				)}
 			</View>
 			<View style={resultsListStyles.colDuration}>
 				<Text style={resultsListStyles.tableCellText}>
@@ -350,11 +376,13 @@ function TableRow({
 
 export function OccupationsPdfDocument({
 	occupations,
+	wildcardOccupations = [],
 	assets,
 }: OccupationsPdfDocumentProps) {
 	const topOccupations = occupations.slice(0, 3);
 	const remaining = occupations.slice(3);
 	const hasTable = remaining.length > 0;
+	const hasWildcards = wildcardOccupations.length > 0;
 
 	return (
 		<Document
@@ -386,8 +414,13 @@ export function OccupationsPdfDocument({
 					<View
 						style={resultsListStyles.fixedTableHeader}
 						fixed
-						render={({ pageNumber }) => (
-							<View style={{ opacity: pageNumber > 1 ? 1 : 0 }}>
+						render={({ pageNumber, totalPages }) => (
+							// Skip page 1 (inline header) and the last page (often CTA-only).
+							<View
+								style={{
+									opacity: pageNumber > 1 && pageNumber < totalPages ? 1 : 0,
+								}}
+							>
 								<TableHeader />
 							</View>
 						)}
@@ -431,12 +464,25 @@ export function OccupationsPdfDocument({
 								rowIndex={index}
 							/>
 						))}
-						{/* In-demand rows will come from a separate source later. */}
+					</>
+				) : null}
+
+				{hasWildcards ? (
+					<>
 						<View style={resultsListStyles.demandBanner} wrap={false}>
 							<Text style={resultsListStyles.demandBannerText}>
 								{content["results.export.inDemandBanner"]} ↓
 							</Text>
 						</View>
+						{!hasTable ? <TableHeader /> : null}
+						{wildcardOccupations.map((occupation, index) => (
+							<TableRow
+								key={`wildcard-${occupation.id}`}
+								occupation={occupation}
+								rowIndex={index}
+								showFit={false}
+							/>
+						))}
 					</>
 				) : null}
 

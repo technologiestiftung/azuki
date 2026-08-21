@@ -304,8 +304,16 @@ function createSolidPlaceholderDataUrl(): string {
 	return canvas.toDataURL("image/jpeg", JPEG_QUALITY);
 }
 
+const OCCUPATION_PLACEHOLDER_SRC = "/illustrations/occupation-placeholder.svg";
+
 export async function loadPdfPlaceholderSrc(): Promise<string> {
-	return createSolidPlaceholderDataUrl();
+	const loaded = await loadPdfImageSrc(OCCUPATION_PLACEHOLDER_SRC, {
+		coverAspect: CARD_IMAGE_ASPECT,
+		cornerRadiusRatio: CARD_IMAGE_CORNER_RATIO,
+		format: "jpeg",
+		backgroundColor: CARD_IMAGE_BG,
+	});
+	return loaded ?? createSolidPlaceholderDataUrl();
 }
 
 export async function loadPdfCardImageSrc(

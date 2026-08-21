@@ -147,6 +147,10 @@ export const styles = StyleSheet.create({
 		fontSize: 11.5,
 		lineHeight: 1.3,
 	},
+	ctaBodyBold: {
+		fontFamily: "Asap",
+		fontWeight: 700,
+	},
 	ctaQrBlock: {
 		alignItems: "center",
 		width: 110,

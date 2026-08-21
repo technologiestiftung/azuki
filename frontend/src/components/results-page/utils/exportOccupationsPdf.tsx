@@ -21,8 +21,9 @@ const CTA_SURFACE_BG = "#DDF4FF";
 
 export async function exportOccupationsPdf(
 	occupations: MatchedOccupation[],
+	wildcardOccupations: MatchedOccupation[] = [],
 ): Promise<void> {
-	if (occupations.length === 0) {
+	if (occupations.length === 0 && wildcardOccupations.length === 0) {
 		return;
 	}
 
@@ -56,7 +57,11 @@ export async function exportOccupationsPdf(
 	};
 
 	const blob = await pdf(
-		<OccupationsPdfDocument occupations={occupations} assets={assets} />,
+		<OccupationsPdfDocument
+			occupations={occupations}
+			wildcardOccupations={wildcardOccupations}
+			assets={assets}
+		/>,
 	).toBlob();
 
 	triggerDownload(blob, content["results.export.filename"]);

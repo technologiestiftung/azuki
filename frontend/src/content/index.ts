@@ -517,8 +517,11 @@ export const content = {
 	"results.export.footer.2": "www.Azuki.de",
 	"results.export.page": "Seite {page} von {total}",
 	"results.export.ctaTitle": "Bewerben? Wie geht das eigentlich?",
-	"results.export.ctaBody":
-		"Unser kostenloses Beratungsprogramm Plan A unterstützt dich bei allen Fragen rund um Stellensuche, Anschreiben und vielem mehr.",
+	"results.export.ctaBody.before": "Unser ",
+	"results.export.ctaBody.boldProgram": "kostenloses Beratungsprogramm",
+	"results.export.ctaBody.planA": "PLAN A",
+	"results.export.ctaBody.after":
+		" unterstützt dich bei allen Fragen rund um Stellensuche, Anschreiben und vielem mehr.",
 	"results.export.ctaQrLabel": "Zum Anmeldeformular",
 	"results.bottomCard.title": "Kein passender Ausbildungsberuf dabei?",
 	"results.bottomCard.resetCta": "Fragen wiederholen",
