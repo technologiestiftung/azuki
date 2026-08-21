@@ -415,15 +415,18 @@ export function OccupationsPdfDocument({
 					<View
 						style={resultsListStyles.fixedTableHeader}
 						fixed
-						render={({ pageNumber, totalPages }) => (
-							<View
-								style={{
-									opacity: pageNumber > 1 && pageNumber < totalPages ? 1 : 0,
-								}}
-							>
-								<TableHeader />
-							</View>
-						)}
+						render={({ pageNumber, ...rest }) => {
+							// View typings omit totalPages; runtime matches Text's render props.
+							const totalPages = (rest as { totalPages?: number }).totalPages;
+							const visible =
+								pageNumber > 1 &&
+								(totalPages === undefined || pageNumber < totalPages);
+							return (
+								<View style={{ opacity: visible ? 1 : 0 }}>
+									<TableHeader />
+								</View>
+							);
+						}}
 					/>
 				) : null}
 
