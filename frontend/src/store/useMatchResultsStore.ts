@@ -8,6 +8,7 @@ interface MatchResultsState {
 	favoriteVacancyKeys: string[];
 	vacancyOccupationFilterIds: number[];
 	vacanciesCount: number | undefined;
+	resultsListScrollTop: number;
 }
 
 interface MatchResultsActions {
@@ -17,6 +18,7 @@ interface MatchResultsActions {
 	toggleFavorite: (occupationId: number) => void;
 	toggleVacancyFavorite: (vacancyKey: string) => void;
 	setVacancyOccupationFilterIds: (occupationIds: number[]) => void;
+	setResultsListScrollTop: (value: number) => void;
 }
 
 export const useMatchResultsStore = create<
@@ -29,10 +31,14 @@ export const useMatchResultsStore = create<
 			favoriteVacancyKeys: [],
 			vacancyOccupationFilterIds: [],
 			vacanciesCount: undefined,
+			resultsListScrollTop: 0,
 
 			setMatchResults: (results) =>
 				set((state) => {
-					const resultIds = new Set(results.occupations.map((o) => o.id));
+					const resultIds = new Set([
+						...results.occupations.map((o) => o.id),
+						...results.wildcardOccupations.map((o) => o.id),
+					]);
 					return {
 						matchResults: results,
 						favoriteOccupationIds: state.favoriteOccupationIds.filter((id) =>
@@ -90,6 +96,8 @@ export const useMatchResultsStore = create<
 
 			setVacancyOccupationFilterIds: (occupationIds) =>
 				set({ vacancyOccupationFilterIds: occupationIds }),
+
+			setResultsListScrollTop: (value) => set({ resultsListScrollTop: value }),
 		}),
 		{
 			name: "azuki-match-results-store",

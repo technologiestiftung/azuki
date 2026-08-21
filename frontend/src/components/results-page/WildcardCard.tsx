@@ -1,38 +1,32 @@
 import { Link } from "react-router-dom";
 import {
 	type MatchedOccupation,
-	fitPercent,
 	formatOccupationDisplayName,
-	isInWildcardPool,
 } from "@azuki/shared";
-import { useMatchResultsStore } from "../../store/useMatchResultsStore";
-import { FavoriteButton } from "../favorite-button/FavoriteButton";
 import { content } from "../../content";
 import { buildResultsOccupationPath } from "../../routing/routes";
 import { OccupationCardBody } from "./OccupationCardBody";
 import { WildcardPoolBadge } from "./WildcardPoolBadge";
+import { FavoriteButton } from "../favorite-button/FavoriteButton";
+import { useMatchResultsStore } from "../../store/useMatchResultsStore";
 
-interface ResultCardProps {
+interface WildcardCardProps {
 	occupation: MatchedOccupation;
-	isWildcard?: boolean;
 }
 
-export function ResultCard({
-	occupation,
-	isWildcard = false,
-}: ResultCardProps) {
+export function WildcardCard({ occupation }: WildcardCardProps) {
+	const displayName = formatOccupationDisplayName(occupation.name);
+
 	const isFavorite = useMatchResultsStore((state) =>
 		state.favoriteOccupationIds.includes(occupation.id),
 	);
 	const toggleFavorite = useMatchResultsStore((state) => state.toggleFavorite);
 
-	const displayName = formatOccupationDisplayName(occupation.name);
-
 	return (
-		<div className="relative bg-gray-100 rounded-2xl border border-gray-200 overflow-hidden">
+		<div className="relative shrink-0 w-[300px] first:ml-4 last:mr-4">
 			<Link
-				to={buildResultsOccupationPath(occupation.id)}
-				className="block focus-visible:outline focus-visible:outline-2 focus-visible:outline-sky-500 rounded-2xl md:hover:bg-gray-200/40 active:bg-gray-200/40"
+				to={buildResultsOccupationPath(occupation.id, { wildcard: true })}
+				className="relative block h-full bg-sky-shade-10 rounded-2xl overflow-hidden focus-visible:outline focus-visible:outline-2 focus-visible:outline-sky-500 md:hover:bg-sky-shade-20 active:bg-sky-shade-20"
 				aria-label={`${displayName}, ${content["results.moreInfo"]}`}
 			>
 				<OccupationCardBody
@@ -42,18 +36,7 @@ export function ResultCard({
 					salaryKnown={occupation.salaryKnown}
 					salaryMonthlyMedian={occupation.salaryMonthlyMedian}
 					shortDescription={occupation.shortDescription}
-					badgeSlot={
-						<>
-							<div className="flex items-center justify-center bg-fill-primary text-white text-sm leading-5 font-medium px-2 h-[22px] rounded-lg whitespace-nowrap">
-								{content["results.card.score.label"]}{" "}
-								{fitPercent(occupation.score)}
-								{"%"}
-							</div>
-							{(isWildcard || isInWildcardPool(occupation.id)) && (
-								<WildcardPoolBadge />
-							)}
-						</>
-					}
+					badgeSlot={<WildcardPoolBadge />}
 				/>
 			</Link>
 

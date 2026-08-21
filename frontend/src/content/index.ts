@@ -530,6 +530,8 @@ export const content = {
 	"results.favorite.add": "Zu Favoriten hinzufügen",
 	"results.favorite.remove": "Aus Favoriten entfernen",
 	"results.card.score.label": "Passt zu",
+	"results.wildcard.badge": "Besonders gesucht",
+	"results.wildcard.title": "Hier werden besonders viele Azubis gesucht",
 	"results.noResults":
 		"Wir haben leider keine Ausbildungsberufe zu deiner Auswahl gefunden.",
 	"results.contactCard.title": "Du weißt nicht, wo du anfangen sollst?",
@@ -690,6 +692,8 @@ export const content = {
 	"results.detail.moreOccupations.title": "Mehr Ausbildungsberufe",
 	// Vacancies
 	"vacancies.title": "Freie Stellen für dich",
+	"vacancies.wildcard.title":
+		"Weitere Stellen, für die besonders viele Azubis gesucht werden",
 	"vacancies.share.ariaLabel": "Freie Stellen teilen",
 	"vacancies.share.title": "Freie Stellen für dich",
 	"vacancies.share.text": "Schau dir diese freien Ausbildungsstellen an.",
