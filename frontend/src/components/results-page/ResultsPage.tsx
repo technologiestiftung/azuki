@@ -1,5 +1,6 @@
 import {
 	useCallback,
+	useEffect,
 	useLayoutEffect,
 	useMemo,
 	useRef,
@@ -32,6 +33,7 @@ import {
 	useResultsPageScrollProgress,
 } from "./ResultsPageHeader";
 import { useCollapsedTitleReveal } from "../collapsing-header/useCollapsedTitleReveal";
+import { warmPdfRuntime } from "../pdf/loadPdfAssets";
 
 const DEFAULT_TAG_FILTERS: OccupationTagsFilterState = {
 	selectedOccupationTypeTagIds: [],
@@ -109,6 +111,19 @@ export function ResultsPage() {
 		if (scrollContainerRef.current) {
 			scrollContainerRef.current.scrollTop = initialScrollTopRef.current;
 		}
+	}, []);
+
+	useEffect(() => {
+		const warm = () => {
+			void warmPdfRuntime();
+			void import("./utils/exportOccupationsPdf");
+		};
+		if (typeof window.requestIdleCallback === "function") {
+			const idleId = window.requestIdleCallback(warm, { timeout: 2500 });
+			return () => window.cancelIdleCallback(idleId);
+		}
+		const timeoutId = window.setTimeout(warm, 400);
+		return () => window.clearTimeout(timeoutId);
 	}, []);
 
 	const toggleFavoritesOnly = useCallback(() => {

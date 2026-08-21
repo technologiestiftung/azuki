@@ -60,6 +60,7 @@ const resultsListStyles = StyleSheet.create({
 	cardImage: {
 		width: "100%",
 		height: 92,
+		objectFit: "cover",
 	},
 	badgesRow: {
 		flexDirection: "row",
@@ -415,7 +416,6 @@ export function OccupationsPdfDocument({
 						style={resultsListStyles.fixedTableHeader}
 						fixed
 						render={({ pageNumber, totalPages }) => (
-							// Skip page 1 (inline header) and the last page (often CTA-only).
 							<View
 								style={{
 									opacity: pageNumber > 1 && pageNumber < totalPages ? 1 : 0,
@@ -439,7 +439,7 @@ export function OccupationsPdfDocument({
 								<TopCard
 									key={occupation.id}
 									occupation={occupation}
-									imageSrc={assets.topImageSrcs[index] ?? assets.placeholderSrc}
+									imageSrc={assets.topImageSrcs[index] || assets.placeholderSrc}
 								/>
 							))}
 						</View>

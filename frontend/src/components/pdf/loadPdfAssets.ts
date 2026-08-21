@@ -1,16 +1,32 @@
 import { Buffer } from "buffer";
 
-const FETCH_TIMEOUT_MS = 8000;
+const FETCH_TIMEOUT_MS = 6000;
 /** Caps CTA/avatar rasters (~56–64pt at ~2–3×). */
 const MAX_RASTER_EDGE = 192;
 /** Matches Figma card image aspect (width / height ≈ 31/18). */
 const CARD_IMAGE_ASPECT = 31 / 18;
-/** ~2× the 92pt card frame — sharp enough without oversized embeds. */
-const CARD_IMAGE_OUT_HEIGHT = 184;
+/** ~1.5× the 92pt card frame — sharp enough, faster to encode/embed. */
+const CARD_IMAGE_OUT_HEIGHT = 138;
 /** ~5px radius on ~92pt-tall frame ≈ 0.05 of min edge. */
 const CARD_IMAGE_CORNER_RATIO = 5 / 92;
 const CARD_IMAGE_BG = "#F2F4F5";
-const JPEG_QUALITY = 0.72;
+/** Matches occupation-placeholder.svg fill. */
+const PLACEHOLDER_BG = "#BAE6FD";
+const JPEG_QUALITY = 0.65;
+const PLACEHOLDER_LOAD_TIMEOUT_MS = 12000;
+const OCCUPATION_PLACEHOLDER_SRC = "/illustrations/occupation-placeholder.svg";
+/** Primary gallery URL is almost always enough. */
+const MAX_CARD_IMAGE_URL_CANDIDATES = 1;
+const PDF_FONT_URLS = [
+	"/fonts/asap/Asap-Regular.ttf",
+	"/fonts/asap/Asap-Medium.ttf",
+	"/fonts/asap/Asap-SemiBold.ttf",
+	"/fonts/asap/Asap-Bold.ttf",
+	"/fonts/asap/Asap-ExtraBold.ttf",
+] as const;
+const WARM_MASCOT_SRC = "/illustrations/star-neutral.svg";
+const WARM_QR_SRC = "/illustrations/qr-code.svg";
+const WARM_CTA_SURFACE_BG = "#DDF4FF";
 
 export type PdfRasterOptions = {
 	coverAspect?: number;
@@ -43,6 +59,17 @@ export function triggerDownload(blob: Blob, filename: string): void {
 	anchor.download = filename;
 	anchor.click();
 	URL.revokeObjectURL(url);
+}
+
+/** Drop temporary blob: URLs created for card images after the PDF is built. */
+export function revokePdfBlobUrls(
+	urls: Array<string | null | undefined>,
+): void {
+	for (const url of urls) {
+		if (url?.startsWith("blob:")) {
+			URL.revokeObjectURL(url);
+		}
+	}
 }
 
 function resolveFetchableImageUrl(src: string): string {
@@ -138,23 +165,154 @@ function isSvgSrc(src: string): boolean {
 	return src.split("?")[0].toLowerCase().endsWith(".svg");
 }
 
+function hasImageMagicBytes(bytes: Uint8Array): boolean {
+	if (bytes.length < 4) {
+		return false;
+	}
+	const isJpeg = bytes[0] === 0xff && bytes[1] === 0xd8;
+	const isPng =
+		bytes[0] === 0x89 &&
+		bytes[1] === 0x50 &&
+		bytes[2] === 0x4e &&
+		bytes[3] === 0x47;
+	const isGif = bytes[0] === 0x47 && bytes[1] === 0x49 && bytes[2] === 0x46;
+	const isWebp =
+		bytes[0] === 0x52 &&
+		bytes[1] === 0x49 &&
+		bytes[2] === 0x46 &&
+		bytes[3] === 0x46;
+	return isJpeg || isPng || isGif || isWebp;
+}
+
+async function fetchImageBlob(src: string): Promise<Blob | null> {
+	try {
+		const response = await fetch(resolveFetchableImageUrl(src), {
+			signal: AbortSignal.timeout(FETCH_TIMEOUT_MS),
+		});
+		if (!response.ok) {
+			return null;
+		}
+		const contentType = response.headers.get("content-type") || "";
+		if (contentType.includes("json") || contentType.includes("text/html")) {
+			return null;
+		}
+		const buffer = await response.arrayBuffer();
+		if (buffer.byteLength < 32) {
+			return null;
+		}
+		const bytes = new Uint8Array(buffer);
+		if (!hasImageMagicBytes(bytes)) {
+			return null;
+		}
+		return new Blob([buffer], {
+			type: contentType || "application/octet-stream",
+		});
+	} catch {
+		return null;
+	}
+}
+
 async function fetchAsObjectUrl(src: string): Promise<string | null> {
-	const fetchUrl = resolveFetchableImageUrl(src);
-	const response = await fetch(fetchUrl, {
-		signal: AbortSignal.timeout(FETCH_TIMEOUT_MS),
-	});
-	if (!response.ok) {
-		return null;
-	}
-	const contentType = response.headers.get("content-type") || "";
-	if (contentType.includes("json") || contentType.includes("text/html")) {
-		return null;
-	}
-	const blob = await response.blob();
-	if (blob.size < 32) {
+	const blob = await fetchImageBlob(src);
+	if (!blob) {
 		return null;
 	}
 	return URL.createObjectURL(blob);
+}
+
+/**
+ * Cover-crop to the PDF card aspect and export as a JPEG blob URL.
+ * Re-encoding strips broken BA JPEG metadata; blob URLs avoid base64 bloat.
+ * A cheap variance check rejects near-blank truncated Arbeitsagentur decodes.
+ */
+async function coverRasterizeToJpeg(
+	source: ImageBitmap | HTMLImageElement,
+): Promise<string | null> {
+	const width = Math.max(
+		1,
+		"naturalWidth" in source ? source.naturalWidth : source.width,
+	);
+	const height = Math.max(
+		1,
+		"naturalHeight" in source ? source.naturalHeight : source.height,
+	);
+	const outHeight = CARD_IMAGE_OUT_HEIGHT;
+	const outWidth = Math.max(1, Math.round(outHeight * CARD_IMAGE_ASPECT));
+	const canvas = document.createElement("canvas");
+	canvas.width = outWidth;
+	canvas.height = outHeight;
+	const ctx = canvas.getContext("2d", { willReadFrequently: true });
+	if (!ctx) {
+		return null;
+	}
+
+	ctx.fillStyle = CARD_IMAGE_BG;
+	ctx.fillRect(0, 0, outWidth, outHeight);
+
+	const scale = Math.max(outWidth / width, outHeight / height);
+	const drawWidth = width * scale;
+	const drawHeight = height * scale;
+	try {
+		ctx.drawImage(
+			source,
+			(outWidth - drawWidth) / 2,
+			(outHeight - drawHeight) / 2,
+			drawWidth,
+			drawHeight,
+		);
+	} catch {
+		return null;
+	}
+
+	if (isNearBlankRaster(ctx, outWidth, outHeight)) {
+		return null;
+	}
+
+	const blob = await new Promise<Blob | null>((resolve) => {
+		canvas.toBlob(resolve, "image/jpeg", JPEG_QUALITY);
+	});
+	if (!blob || blob.size < 32) {
+		return null;
+	}
+	return URL.createObjectURL(blob);
+}
+
+/** One getImageData + stride sampling (cheaper than many 1×1 reads). */
+function isNearBlankRaster(
+	ctx: CanvasRenderingContext2D,
+	width: number,
+	height: number,
+): boolean {
+	const { data } = ctx.getImageData(0, 0, width, height);
+	let sum = 0;
+	let sumSq = 0;
+	let samples = 0;
+	for (let i = 0; i < data.length; i += 4 * 96) {
+		const y = 0.3 * data[i] + 0.59 * data[i + 1] + 0.11 * data[i + 2];
+		sum += y;
+		sumSq += y * y;
+		samples += 1;
+	}
+	const mean = sum / Math.max(1, samples);
+	return sumSq / Math.max(1, samples) - mean * mean < 40;
+}
+
+/** Load a remote photo via blob → HTMLImage (handles truncated BA JPEGs) → JPEG. */
+async function loadRemoteCardImageDataUrl(src: string): Promise<string | null> {
+	const blob = await fetchImageBlob(src);
+	if (!blob) {
+		return null;
+	}
+
+	const objectUrl = URL.createObjectURL(blob);
+	try {
+		const image = await loadHtmlImage(objectUrl);
+		return await coverRasterizeToJpeg(image);
+	} catch {
+		return null;
+	} finally {
+		URL.revokeObjectURL(objectUrl);
+	}
 }
 
 function rasterizeToDataUrl(
@@ -244,7 +402,14 @@ export async function loadPdfImageSrc(
 	let objectUrl: string | null = null;
 	try {
 		if (options.outHeight && isSvgSrc(src)) {
-			objectUrl = await fetchSvgAsSizedObjectUrl(src, options.outHeight);
+			const targetEdge =
+				options.coverAspect && options.coverAspect > 0
+					? Math.max(
+							options.outHeight,
+							Math.round(options.outHeight * options.coverAspect),
+						)
+					: options.outHeight;
+			objectUrl = await fetchSvgAsSizedObjectUrl(src, targetEdge);
 			if (!objectUrl) {
 				return null;
 			}
@@ -281,12 +446,19 @@ export async function loadPdfImageSrc(
 }
 
 /** Rasterize a same-origin SVG/PNG onto an opaque fill for react-pdf. */
+const iconCache = new Map<string, Promise<string | null>>();
+
 export async function loadPdfIconSrc(
 	src: string,
 	backgroundColor: string,
 ): Promise<string | null> {
-	// Opaque JPEG — much smaller than PNG for mascot/QR flattened onto the CTA fill.
-	return loadPdfImageSrc(src, { format: "jpeg", backgroundColor });
+	const cacheKey = `${src}|${backgroundColor}`;
+	let pending = iconCache.get(cacheKey);
+	if (!pending) {
+		pending = loadPdfImageSrc(src, { format: "jpeg", backgroundColor });
+		iconCache.set(cacheKey, pending);
+	}
+	return pending;
 }
 
 function createSolidPlaceholderDataUrl(): string {
@@ -299,38 +471,111 @@ function createSolidPlaceholderDataUrl(): string {
 	if (!ctx) {
 		return "";
 	}
-	ctx.fillStyle = CARD_IMAGE_BG;
+	ctx.fillStyle = PLACEHOLDER_BG;
 	ctx.fillRect(0, 0, outWidth, outHeight);
 	return canvas.toDataURL("image/jpeg", JPEG_QUALITY);
 }
 
-const OCCUPATION_PLACEHOLDER_SRC = "/illustrations/occupation-placeholder.svg";
+let solidPlaceholderCache: string | null = null;
 
-export async function loadPdfPlaceholderSrc(): Promise<string> {
-	const loaded = await loadPdfImageSrc(OCCUPATION_PLACEHOLDER_SRC, {
-		coverAspect: CARD_IMAGE_ASPECT,
-		cornerRadiusRatio: CARD_IMAGE_CORNER_RATIO,
-		format: "jpeg",
-		backgroundColor: CARD_IMAGE_BG,
-	});
-	return loaded ?? createSolidPlaceholderDataUrl();
+/** Instant sky-blue fallback when the illustration SVG is not needed. */
+export function getSolidPdfPlaceholderSrc(): string {
+	return (solidPlaceholderCache ??= createSolidPlaceholderDataUrl());
 }
 
-export async function loadPdfCardImageSrc(
-	imageUrl: string | undefined,
-	placeholderSrc: string,
+let placeholderCache: Promise<string> | null = null;
+
+export async function loadPdfPlaceholderSrc(): Promise<string> {
+	if (!placeholderCache) {
+		placeholderCache = (async () => {
+			const loaded = await loadPdfImageSrc(
+				OCCUPATION_PLACEHOLDER_SRC,
+				{
+					coverAspect: CARD_IMAGE_ASPECT,
+					cornerRadiusRatio: CARD_IMAGE_CORNER_RATIO,
+					format: "jpeg",
+					backgroundColor: PLACEHOLDER_BG,
+					outHeight: CARD_IMAGE_OUT_HEIGHT,
+				},
+				PLACEHOLDER_LOAD_TIMEOUT_MS,
+			);
+			return loaded || getSolidPdfPlaceholderSrc();
+		})();
+	}
+	return placeholderCache;
+}
+
+type PlaceholderSource =
+	| string
+	| Promise<string>
+	| (() => string | Promise<string>);
+
+async function resolvePlaceholderSource(
+	placeholderSrc: PlaceholderSource,
 ): Promise<string> {
-	const options: PdfRasterOptions = {
-		coverAspect: CARD_IMAGE_ASPECT,
-		cornerRadiusRatio: CARD_IMAGE_CORNER_RATIO,
-		format: "jpeg",
-		backgroundColor: CARD_IMAGE_BG,
-	};
-	if (imageUrl) {
-		const loaded = await loadPdfImageSrc(imageUrl, options);
+	const value =
+		typeof placeholderSrc === "function" ? placeholderSrc() : placeholderSrc;
+	return (await value) || getSolidPdfPlaceholderSrc();
+}
+
+/** Try gallery URLs in order until one rasterizes. */
+export async function loadPdfCardImageSrc(
+	imageUrls: string[],
+	placeholderSrc: PlaceholderSource,
+): Promise<string> {
+	const urls = imageUrls
+		.map((url) => url.trim())
+		.filter(Boolean)
+		.slice(0, MAX_CARD_IMAGE_URL_CANDIDATES);
+
+	for (const imageUrl of urls) {
+		const loaded = await loadRemoteCardImageDataUrl(imageUrl);
 		if (loaded) {
 			return loaded;
 		}
 	}
-	return placeholderSrc;
+	return resolvePlaceholderSource(placeholderSrc);
+}
+
+/** Load Top card covers in parallel; placeholder may resolve lazily on miss. */
+export async function loadPdfTopCardImages(
+	occupations: Array<{ images: Array<{ url: string }> }>,
+	placeholderSrc: PlaceholderSource,
+): Promise<string[]> {
+	return Promise.all(
+		occupations.map((occupation) => {
+			const urls = occupation.images
+				.map((image) => image.url?.trim())
+				.filter((url): url is string => Boolean(url));
+			return loadPdfCardImageSrc(urls, placeholderSrc);
+		}),
+	);
+}
+
+let pdfWarmPromise: Promise<void> | null = null;
+
+/**
+ * Prefetch fonts, CTA icons, and react-pdf/theme while the user browses —
+ * so the first download click spends less time on cold setup.
+ */
+export function warmPdfRuntime(): Promise<void> {
+	if (!pdfWarmPromise) {
+		pdfWarmPromise = (async () => {
+			ensureBufferPolyfill();
+			await Promise.all([
+				import("./pdfTheme"),
+				import("@react-pdf/renderer"),
+				...PDF_FONT_URLS.map((src) =>
+					fetch(src)
+						.then((response) => (response.ok ? response.arrayBuffer() : null))
+						.catch(() => null),
+				),
+				loadPdfIconSrc(WARM_MASCOT_SRC, WARM_CTA_SURFACE_BG),
+				loadPdfIconSrc(WARM_QR_SRC, WARM_CTA_SURFACE_BG),
+			]);
+		})().catch(() => {
+			pdfWarmPromise = null;
+		});
+	}
+	return pdfWarmPromise ?? Promise.resolve();
 }

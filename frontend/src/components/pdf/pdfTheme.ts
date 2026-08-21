@@ -37,6 +37,8 @@ Font.register({
 	],
 });
 
+Font.registerHyphenationCallback((word) => [word]);
+
 export const styles = StyleSheet.create({
 	page: {
 		paddingTop: PAGE_PAD_TOP + PAGE_HEADER_HEIGHT + PAGE_HEADER_GAP,

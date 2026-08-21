@@ -96,6 +96,7 @@ const profileStyles = StyleSheet.create({
 	cardImage: {
 		width: "100%",
 		height: 92,
+		objectFit: "cover",
 	},
 	cardBadgeRow: {
 		flexDirection: "row",
@@ -696,7 +697,7 @@ export function ProfilePdfDocument({
 								<TopCard
 									key={occupation.id}
 									occupation={occupation}
-									imageSrc={assets.topImageSrcs[index] ?? assets.placeholderSrc}
+									imageSrc={assets.topImageSrcs[index] || assets.placeholderSrc}
 								/>
 							))}
 						</View>

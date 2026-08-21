@@ -1,4 +1,4 @@
-import { useMemo, type UIEvent } from "react";
+import { useEffect, useMemo, type UIEvent } from "react";
 import { useOccupationDetailScroll } from "../components/results-page/occupation-detail/useOccupationDetailScroll";
 import { content } from "../content";
 import { useMatchResultsStore } from "../store/useMatchResultsStore";
@@ -18,6 +18,7 @@ import {
 } from "../components/collapsing-header/CollapsingHeaderTopRow";
 import { ProfileActionButtons } from "./ProfileActionButtons";
 import { useCollapsedTitleReveal } from "../components/collapsing-header/useCollapsedTitleReveal";
+import { warmPdfRuntime } from "../components/pdf/loadPdfAssets";
 
 export function Profile() {
 	const { collapseProgress, heroControlsOpacity, onScroll } =
@@ -44,6 +45,19 @@ export function Profile() {
 			.slice(0, 3);
 	}, [isSharedView, sharedOccupations, matchResults]);
 	const collapsed = collapseProgress > COLLAPSED_THRESHOLD;
+
+	useEffect(() => {
+		const warm = () => {
+			void warmPdfRuntime();
+			void import("./exportProfilePdf");
+		};
+		if (typeof window.requestIdleCallback === "function") {
+			const idleId = window.requestIdleCallback(warm, { timeout: 2500 });
+			return () => window.cancelIdleCallback(idleId);
+		}
+		const timeoutId = window.setTimeout(warm, 400);
+		return () => window.clearTimeout(timeoutId);
+	}, []);
 
 	return (
 		<div
