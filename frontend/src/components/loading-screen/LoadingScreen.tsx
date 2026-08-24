@@ -7,12 +7,13 @@ import { matchProfile } from "../../api/client";
 import { LoadingProgressBar } from "./LoadingProgressBar";
 import { LottiePlayer } from "./LottiePlayer";
 import { LOADING_ANIMATION_URLS } from "./dotlottieLoader";
+import { ROUTE_PATHS } from "../../routing/routes";
 
 const SUCCESS_FREEZE_MS = 2000;
 const WHITE_FADE_MS = 400;
 const PROGRESS_BAR_DURATION_MS = 30_000;
 
-type ContentPhase = "success" | "waiting";
+type ContentPhase = "success" | "waiting" | "error";
 
 export function LoadingScreen() {
 	const profile = useAppStore((state) => state.profile);
@@ -41,7 +42,7 @@ export function LoadingScreen() {
 
 	const tryNavigate = useCallback(() => {
 		if (apiDone.current) {
-			navigate("/results/apprenticeships");
+			navigate(ROUTE_PATHS.resultsList);
 		}
 	}, [navigate]);
 
@@ -73,11 +74,25 @@ export function LoadingScreen() {
 			try {
 				const result = await matchProfile(profile);
 				setMatchResults(result);
-			} catch (err) {
-				console.error("Match API error:", err);
-			} finally {
 				apiDone.current = true;
 				tryNavigate();
+			} catch (err) {
+				console.error("Match API error:", err);
+				apiDone.current = false;
+				if (freezeTimer.current) {
+					clearTimeout(freezeTimer.current);
+					freezeTimer.current = null;
+				}
+				overlayTarget.current = null;
+				setOverlayOpacity(0);
+
+				const message = err instanceof Error ? err.message : "";
+				if (message.includes("401") || message.includes("403")) {
+					navigate(ROUTE_PATHS.login, { replace: true });
+					return;
+				}
+
+				setContentPhase("error");
 			}
 		};
 

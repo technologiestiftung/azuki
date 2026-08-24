@@ -11,7 +11,6 @@ export const BottomNav = () => {
 	const vacanciesCount = useMatchResultsStore((state) => state.vacanciesCount);
 	const inSchool = useAppStore((state) => state.profile.inSchool);
 
-	// Shared / received results are not a full user session — hide app chrome.
 	if (inSchool === null || hasShareQueryParams(searchParams)) {
 		return null;
 	}
