@@ -14,7 +14,9 @@ export function PdfHeader({
 	const compact = pageNumber > 1 || !tagline;
 	return (
 		<View style={styles.header}>
-			<Text style={styles.headerTitle}>{title}</Text>
+			<View style={styles.headerTitleWrap}>
+				<Text style={styles.headerTitle}>{title}</Text>
+			</View>
 			<View style={styles.brandBlock}>
 				<View style={styles.brandRow}>
 					<Text

@@ -693,6 +693,10 @@ export const content = {
 	"results.detail.images.carousel.slideAriaLabel": "Bild {index}",
 	// More Occupations
 	"results.detail.moreOccupations.title": "Mehr Ausbildungsberufe",
+	"results.detail.download.ariaLabel": "Beruf herunterladen",
+	"results.detail.export.tagline": "Finde deine Ausbildung.",
+	"results.detail.export.filename": "AzuKi-{name}.pdf",
+	"results.detail.export.filenameFallback": "AzuKi-Beruf.pdf",
 	// Vacancies
 	"vacancies.title": "Freie Stellen für dich",
 	"vacancies.wildcard.title":

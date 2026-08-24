@@ -4,11 +4,8 @@ import {
 	buildOccupationShareText,
 	fitPercent,
 	formatOccupationDisplayName,
-	resolveOccupationShortDescription,
-	resolveOccupationTaskBullets,
 } from "@azuki/shared";
 import { buildResultsOccupationPath } from "../../../routing/routes";
-import { content } from "../../../content";
 import { useOccupationDetail } from "./useOccupationDetail";
 import { OccupationDetailHero } from "./OccupationDetailHero";
 import { OccupationDetailHeaderCollapsed } from "./OccupationDetailHeaderCollapsed";
@@ -25,6 +22,13 @@ import {
 import { shareOccupationLink } from "./shareOccupationLink";
 import { useSharedNextOccupations } from "./useSharedNextOccupations";
 import { useCollapsedTitleReveal } from "../../collapsing-header/useCollapsedTitleReveal";
+import {
+	resolveDetailSalaryLabel,
+	resolveDetailSchoolDegreeLabel,
+	resolveDetailStatusMessage,
+	resolveDetailTaskItems,
+	resolveHeroImageUrls,
+} from "./occupationDetailPageHelpers";
 
 export function OccupationDetailPage() {
 	const occupationId = Number(useParams().id);
@@ -40,13 +44,8 @@ export function OccupationDetailPage() {
 	const matchResults = useMatchResultsStore((state) => state.matchResults);
 	const profile = useAppStore((state) => state.profile);
 
-	const {
-		onScroll,
-		collapseProgress,
-		overlayOpacity,
-		heroControlsOpacity,
-		heroImageParallaxY,
-	} = useOccupationDetailScroll();
+	const { onScroll, collapseProgress, overlayOpacity, heroImageParallaxY } =
+		useOccupationDetailScroll();
 
 	const { titleRef, titleRevealProgress, updateTitleReveal } =
 		useCollapsedTitleReveal();
@@ -61,19 +60,15 @@ export function OccupationDetailPage() {
 			? fitPercent(detail.matchedOccupation.score)
 			: undefined;
 	const matchPercent = shareState?.fitPercent ?? liveMatchPercent;
-
-	const taskBullets = detail.occupation
-		? resolveOccupationTaskBullets(detail.occupation)
-		: [];
-
-	const fallbackShortDescription = detail.occupation
-		? resolveOccupationShortDescription(detail.occupation)
-		: (detail.matchedOccupation?.shortDescription ?? "");
-
-	let taskItems = taskBullets;
-	if (taskItems.length === 0 && fallbackShortDescription) {
-		taskItems = [fallbackShortDescription];
-	}
+	const taskItems = resolveDetailTaskItems(
+		detail.occupation,
+		detail.matchedOccupation,
+	);
+	const salaryLabel = resolveDetailSalaryLabel(detail.occupation);
+	const schoolDegreeLabel = resolveDetailSchoolDegreeLabel(detail.occupation);
+	const downloadDisabled =
+		detail.loading || !detail.occupation || Boolean(detail.error);
+	const statusMessage = resolveDetailStatusMessage(detail);
 
 	const occupationVacanciesCount = useMemo(() => {
 		const occupationName =
@@ -158,6 +153,40 @@ export function OccupationDetailPage() {
 		isWildcard,
 	]);
 
+	const handleDownload = useCallback(async () => {
+		if (!detail.occupation || downloadDisabled) {
+			return;
+		}
+		try {
+			const { exportOccupationDetailPdf } = await import(
+				"./exportOccupationDetailPdf"
+			);
+			await exportOccupationDetailPdf({
+				displayName: detail.displayName,
+				occupationDuration: detail.occupationDuration,
+				salaryLabel,
+				schoolDegreeLabel,
+				taskItems,
+				matchPercent,
+				heroImageUrls: resolveHeroImageUrls(detail.occupation),
+				occupationId: detail.occupation.id,
+				profile,
+			});
+		} catch (err) {
+			console.error("Failed to export occupation detail PDF:", err);
+		}
+	}, [
+		detail.occupation,
+		detail.displayName,
+		detail.occupationDuration,
+		downloadDisabled,
+		salaryLabel,
+		schoolDegreeLabel,
+		taskItems,
+		matchPercent,
+		profile,
+	]);
+
 	useEffect(() => {
 		if (!detail.displayName) {
 			return undefined;
@@ -169,43 +198,27 @@ export function OccupationDetailPage() {
 		};
 	}, [detail.displayName]);
 
-	const statusMessage =
-		detail.error ??
-		(detail.loading && !detail.occupation
-			? content["results.detail.loading"]
-			: null);
-
 	return (
 		<div className="flex flex-col h-full relative overflow-x-hidden">
-			<div
-				className="absolute top-0 inset-x-0 z-30 bg-white transition-opacity duration-150"
-				style={{
-					opacity: collapseProgress,
-					pointerEvents: collapseProgress < 0.5 ? "none" : "auto",
-				}}
-				aria-hidden={collapseProgress < 0.5}
-			>
-				<OccupationDetailHeaderCollapsed
-					displayName={detail.displayName}
-					isFavorite={detail.isFavorite}
-					onToggleFavorite={detail.toggleFavorite}
-					onShare={handleShare}
-					titleOpacity={titleRevealProgress}
-				/>
-			</div>
 			<div
 				className="relative flex-1 overflow-y-auto overflow-x-hidden"
 				onScroll={handleScroll}
 			>
+				<OccupationDetailHeaderCollapsed
+					title={detail.displayName}
+					collapseProgress={collapseProgress}
+					titleRevealProgress={titleRevealProgress}
+					onDownload={handleDownload}
+					onShare={handleShare}
+					onToggleFavorite={detail.toggleFavorite}
+					isFavorite={detail.isFavorite}
+					downloadDisabled={downloadDisabled}
+				/>
 				<div className="sticky top-0 z-0">
 					<OccupationDetailHero
 						displayName={detail.displayName}
 						heroImage={detail.heroImage}
-						isFavorite={detail.isFavorite}
-						onToggleFavorite={detail.toggleFavorite}
-						onShare={handleShare}
 						overlayOpacity={overlayOpacity}
-						controlsOpacity={heroControlsOpacity}
 						imageParallaxY={heroImageParallaxY}
 					/>
 				</div>

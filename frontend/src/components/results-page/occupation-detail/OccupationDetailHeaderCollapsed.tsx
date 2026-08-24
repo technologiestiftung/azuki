@@ -1,71 +1,139 @@
-import { content } from "../../../content";
-import { GhostIconButton } from "../../primitives/buttons/GhostIconButton";
+import type { ReactNode } from "react";
 import { useNavigate } from "react-router-dom";
+import { content } from "../../../content";
 import { ROUTE_PATHS } from "../../../routing/routes";
+import {
+	COLLAPSED_THRESHOLD,
+	CollapsingHeaderTopRow,
+} from "../../collapsing-header/CollapsingHeaderTopRow";
+import { GhostIconButton } from "../../primitives/buttons/GhostIconButton";
+import { OccupationDetailActionButtons } from "./OccupationDetailActionButtons";
+
+interface CollapseCrossfadeProps {
+	progress: number;
+	collapsed: boolean;
+	expanded: ReactNode;
+	collapsedContent: ReactNode;
+}
+
+function CollapseCrossfade({
+	progress,
+	collapsed,
+	expanded,
+	collapsedContent,
+}: CollapseCrossfadeProps) {
+	return (
+		<div className="grid">
+			<div
+				className="[grid-area:1/1] transition-opacity duration-150"
+				style={{
+					opacity: 1 - progress,
+					pointerEvents: collapsed ? "none" : "auto",
+				}}
+				aria-hidden={collapsed}
+			>
+				{expanded}
+			</div>
+			<div
+				className="[grid-area:1/1] transition-opacity duration-150"
+				style={{
+					opacity: progress,
+					pointerEvents: collapsed ? "auto" : "none",
+				}}
+				aria-hidden={!collapsed}
+			>
+				{collapsedContent}
+			</div>
+		</div>
+	);
+}
 
 interface OccupationDetailHeaderCollapsedProps {
-	displayName: string;
-	isFavorite: boolean;
-	onToggleFavorite: () => void;
+	title: string;
+	collapseProgress: number;
+	titleRevealProgress: number;
+	onDownload: () => void;
 	onShare: () => void;
-	titleOpacity?: number;
+	onToggleFavorite: () => void;
+	isFavorite: boolean;
+	downloadDisabled: boolean;
 }
 
 export function OccupationDetailHeaderCollapsed({
-	displayName,
-	isFavorite,
-	onToggleFavorite,
+	title,
+	collapseProgress,
+	titleRevealProgress,
+	onDownload,
 	onShare,
-	titleOpacity = 1,
+	onToggleFavorite,
+	isFavorite,
+	downloadDisabled,
 }: OccupationDetailHeaderCollapsedProps) {
 	const navigate = useNavigate();
+	const collapsed = collapseProgress > COLLAPSED_THRESHOLD;
+	const goBack = () => navigate(ROUTE_PATHS.resultsList);
+
 	return (
-		<div className="flex w-full items-center justify-between px-4 pt-3 pb-2 shrink-0 border-b border-sky-shade-20">
-			<GhostIconButton
-				iconSrc="/icons/arrow-back-black.svg"
-				onClick={() => navigate(ROUTE_PATHS.resultsList)}
-				ariaLabel={content["navigation.back"]}
-				title={content["navigation.back"]}
-				iconSize="w-5 h-5"
-			/>
-			<h1
-				className="text-sm font-semibold text-gray-900 flex-1 text-center truncate transition-opacity duration-150 ease-[cubic-bezier(0.25,0,0.25,1)]"
-				style={{ opacity: titleOpacity }}
-				aria-hidden={titleOpacity < 0.5}
-			>
-				{displayName}
-			</h1>
-			<div className="flex items-center gap-1.5">
-				<GhostIconButton
-					iconSrc="/icons/share.svg"
-					onClick={onShare}
-					ariaLabel={content["results.share"]}
-					title={content["results.share"]}
-					iconSize="w-5 h-5"
-				/>
-				<button
-					type="button"
-					className="inline-flex h-10 w-10 items-center justify-center p-2"
-					onClick={onToggleFavorite}
-					aria-pressed={isFavorite}
-					aria-label={
-						isFavorite
-							? content["results.favorite.remove"]
-							: content["results.favorite.add"]
+		<CollapsingHeaderTopRow
+			title={title}
+			progress={collapseProgress}
+			titleRevealProgress={titleRevealProgress}
+			collapsedFill
+			gradientFrom="white"
+			leading={
+				<CollapseCrossfade
+					progress={collapseProgress}
+					collapsed={collapsed}
+					expanded={
+						<GhostIconButton
+							iconSrc="/icons/arrow-back-black.svg"
+							onClick={goBack}
+							ariaLabel={content["navigation.back"]}
+							title={content["navigation.back"]}
+							iconSize="w-5 h-5"
+							className="bg-sky-shade-10/50 rounded-xl backdrop-blur-[4.5px]"
+							tabIndex={collapsed ? -1 : undefined}
+						/>
 					}
-				>
-					<img
-						src="/icons/favorite-star.svg"
-						alt=""
-						className={`w-5 h-5 ${isFavorite ? "hidden" : "block"}`}
-					/>
-					<img
-						src="/icons/favorite-star-filled.svg"
-						alt=""
-						className={`w-5 h-5 ${isFavorite ? "block" : "hidden"}`}
-					/>
-				</button>
-			</div>
-		</div>
+					collapsedContent={
+						<GhostIconButton
+							iconSrc="/icons/arrow-back-black.svg"
+							onClick={goBack}
+							ariaLabel={content["navigation.back"]}
+							title={content["navigation.back"]}
+							iconSize="w-5 h-5"
+							tabIndex={collapsed ? undefined : -1}
+						/>
+					}
+				/>
+			}
+			trailing={
+				<CollapseCrossfade
+					progress={collapseProgress}
+					collapsed={collapsed}
+					expanded={
+						<OccupationDetailActionButtons
+							onDownload={onDownload}
+							onShare={onShare}
+							onToggleFavorite={onToggleFavorite}
+							isFavorite={isFavorite}
+							downloadDisabled={downloadDisabled}
+							buttonClassName="bg-sky-shade-10/50 rounded-xl backdrop-blur-[4.5px]"
+							tabIndex={collapsed ? -1 : undefined}
+						/>
+					}
+					collapsedContent={
+						<OccupationDetailActionButtons
+							onDownload={onDownload}
+							onShare={onShare}
+							onToggleFavorite={onToggleFavorite}
+							isFavorite={isFavorite}
+							downloadDisabled={downloadDisabled}
+							tabIndex={collapsed ? undefined : -1}
+						/>
+					}
+				/>
+			}
+		/>
 	);
 }

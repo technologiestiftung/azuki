@@ -65,9 +65,17 @@ export const styles = StyleSheet.create({
 	header: {
 		flexDirection: "row",
 		justifyContent: "space-between",
-		alignItems: "center",
+		alignItems: "flex-start",
+		gap: 12,
 		paddingLeft: 8,
 		backgroundColor: COLOR.white,
+	},
+	headerTitleWrap: {
+		flexGrow: 1,
+		flexShrink: 1,
+		flexBasis: 0,
+		minWidth: 0,
+		paddingRight: 4,
 	},
 	headerTitle: {
 		fontFamily: "Asap",
@@ -77,6 +85,7 @@ export const styles = StyleSheet.create({
 		fontSize: 26.5,
 	},
 	brandBlock: {
+		flexShrink: 0,
 		alignItems: "flex-end",
 	},
 	brandRow: {
