@@ -161,6 +161,22 @@ export default {
 					from: { opacity: "0", transform: "translateY(89px)" },
 					to: { opacity: "1", transform: "translateY(0)" },
 				},
+				startSheetCtaExit: {
+					from: { opacity: "1", transform: "translateY(0)" },
+					to: { opacity: "0", transform: "translateY(89px)" },
+				},
+				startSheetContentFadeOut: {
+					from: { opacity: "1" },
+					to: { opacity: "0" },
+				},
+				stepEnterFromTop: {
+					from: { opacity: "0", transform: "translateY(-48px)" },
+					to: { opacity: "1", transform: "translateY(0)" },
+				},
+				stepCtaEnterFromBottom: {
+					from: { opacity: "0", transform: "translateY(89px)" },
+					to: { opacity: "1", transform: "translateY(0)" },
+				},
 				slideOutBottom: {
 					from: { transform: "translateY(var(--sheet-drag-y, 0px))" },
 					to: { transform: "translateY(100%)" },
@@ -271,6 +287,14 @@ export default {
 					"50%": { transform: "translateX(5px)" },
 					"75%": { transform: "translateX(-5px)" },
 				},
+				successIllustrationEnter: {
+					from: { opacity: "0" },
+					to: { opacity: "1" },
+				},
+				successContentEnter: {
+					from: { opacity: "0", transform: "translateY(1rem)" },
+					to: { opacity: "1", transform: "translateY(0)" },
+				},
 			},
 			animation: {
 				fadeIn: "fadeIn 0.2s ease-in-out",
@@ -290,6 +314,14 @@ export default {
 					"startSheetContentFade 502ms cubic-bezier(0.5, 0, 0.5, 1) 169ms both",
 				startSheetCtaEnter:
 					"startSheetCtaEnter 599ms cubic-bezier(0.5, 0, 0.5, 1) 60ms both",
+				startSheetCtaExit:
+					"startSheetCtaExit 400ms cubic-bezier(0.5, 0, 0.5, 1) forwards",
+				startSheetContentFadeOut:
+					"startSheetContentFadeOut 320ms cubic-bezier(0.5, 0, 0.5, 1) forwards",
+				stepEnterFromTop:
+					"stepEnterFromTop 502ms cubic-bezier(0.5, 0, 0.5, 1) both",
+				stepCtaEnterFromBottom:
+					"stepCtaEnterFromBottom 599ms cubic-bezier(0.5, 0, 0.5, 1) 60ms both",
 				slideOutBottom:
 					"slideOutBottom 0.28s cubic-bezier(0.4, 0, 1, 1) forwards",
 				slideInNext: "slideInNext 0.3s var(--ease-spring)",
@@ -312,6 +344,12 @@ export default {
 				slideInTop: "slideInTop 0.4s ease-out forwards",
 				progressFill: "progressFill 4s linear forwards",
 				shake: "shake 0.4s ease-in-out forwards",
+				successIllustrationEnter:
+					"successIllustrationEnter 500ms cubic-bezier(0.5, 0, 0.5, 1) 120ms both",
+				successContentEnter:
+					"successContentEnter 500ms cubic-bezier(0.5, 0, 0.5, 1) 120ms both",
+				successCtaEnter:
+					"successContentEnter 500ms cubic-bezier(0.5, 0, 0.5, 1) 220ms both",
 			},
 		},
 	},

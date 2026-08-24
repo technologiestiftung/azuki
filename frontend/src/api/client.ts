@@ -2,6 +2,7 @@ import type {
 	UserProfile,
 	MatchResult,
 	VacanciesResponse,
+	VacancyDetail,
 	EvalSnapshot,
 	Persona,
 	Occupation,
@@ -10,6 +11,7 @@ import {
 	MOCK_MATCH_RESULT,
 	MOCK_OCCUPATIONS,
 	MOCK_VACANCIES_RESPONSE,
+	MOCK_VACANCY_DETAILS,
 } from "./mockResults";
 type HeadersInit = Record<string, string>;
 
@@ -53,6 +55,25 @@ export async function getOccupation(id: number): Promise<Occupation> {
 	});
 	if (!res.ok) {
 		throw new Error(`getOccupation failed: ${res.status}`);
+	}
+	return res.json();
+}
+
+export async function getVacancyDetail(
+	referenznummer: string,
+): Promise<VacancyDetail> {
+	if (USE_MOCK_RESULTS) {
+		const mock = MOCK_VACANCY_DETAILS.get(referenznummer);
+		if (mock) {
+			return Promise.resolve(mock);
+		}
+	}
+
+	const res = await fetch(`${API_BASE}/vacancies/${referenznummer}`, {
+		headers: headers(),
+	});
+	if (!res.ok) {
+		throw new Error(`getVacancyDetail failed: ${res.status}`);
 	}
 	return res.json();
 }
@@ -607,5 +628,28 @@ export async function deletePersona(id: string): Promise<void> {
 	});
 	if (!res.ok) {
 		throw new Error(`deletePersona failed: ${res.status}`);
+	}
+}
+
+export interface ContactRequestPayload {
+	firstname: string;
+	postalcode: string;
+	contactType: "call" | "whatsapp" | "mail";
+	phonenumber?: string;
+	email: string;
+	birthdate?: string;
+	marketingConsent: boolean;
+}
+
+export async function submitContactRequest(
+	payload: ContactRequestPayload,
+): Promise<void> {
+	const res = await fetch(`${API_BASE}/contact`, {
+		method: "POST",
+		headers: headers(),
+		body: JSON.stringify(payload),
+	});
+	if (!res.ok) {
+		throw new Error(`submitContactRequest failed: ${res.status}`);
 	}
 }

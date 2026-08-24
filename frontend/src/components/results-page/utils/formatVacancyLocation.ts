@@ -1,26 +1,33 @@
-import type { VacancyPreview } from "@azuki/shared";
-
 const UNKNOWN_LOCATION = "Unbekannter Ort";
+
+export interface VacancyLocationLike {
+	street?: string;
+	postcode?: string;
+	city?: string;
+	district?: string;
+	latitude?: number;
+	longitude?: number;
+}
 
 function hasValue(value: string | undefined): value is string {
 	return Boolean(value && value !== "null");
 }
 
-export function formatVacancyLocation(preview: VacancyPreview): string {
+export function formatVacancyLocation(location: VacancyLocationLike): string {
 	const parts: string[] = [];
 
-	if (hasValue(preview.street)) {
-		parts.push(preview.street);
+	if (hasValue(location.street)) {
+		parts.push(location.street);
 	}
 
 	const locality: string[] = [];
-	if (hasValue(preview.postcode)) {
-		locality.push(preview.postcode);
+	if (hasValue(location.postcode)) {
+		locality.push(location.postcode);
 	}
 
-	const city = hasValue(preview.city) ? preview.city : undefined;
-	if (city && hasValue(preview.district)) {
-		locality.push(`${city}-${preview.district}`);
+	const city = hasValue(location.city) ? location.city : undefined;
+	if (city && hasValue(location.district)) {
+		locality.push(`${city}-${location.district}`);
 	} else if (city) {
 		locality.push(city);
 	}
@@ -29,28 +36,32 @@ export function formatVacancyLocation(preview: VacancyPreview): string {
 		parts.push(locality.join(" "));
 	}
 
-	return parts.join(", ") || preview.city || UNKNOWN_LOCATION;
+	return parts.join(", ") || location.city || UNKNOWN_LOCATION;
 }
 
-function hasCoordinates(preview: VacancyPreview): boolean {
+function hasCoordinates(location: VacancyLocationLike): boolean {
 	return (
-		typeof preview.latitude === "number" &&
-		Number.isFinite(preview.latitude) &&
-		typeof preview.longitude === "number" &&
-		Number.isFinite(preview.longitude)
+		typeof location.latitude === "number" &&
+		Number.isFinite(location.latitude) &&
+		typeof location.longitude === "number" &&
+		Number.isFinite(location.longitude)
 	);
 }
 
-export function buildVacancyMapsUrl(preview: VacancyPreview): string | null {
-	if (hasCoordinates(preview)) {
-		const query = `${preview.latitude},${preview.longitude}`;
+export function buildVacancyMapsUrl(
+	location: VacancyLocationLike,
+): string | null {
+	const label = formatVacancyLocation(location);
+	const hasAddress = label && label !== UNKNOWN_LOCATION;
+
+	if (hasAddress) {
+		return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(label)}`;
+	}
+
+	if (hasCoordinates(location)) {
+		const query = `${location.latitude},${location.longitude}`;
 		return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(query)}`;
 	}
 
-	const label = formatVacancyLocation(preview);
-	if (!label || label === UNKNOWN_LOCATION) {
-		return null;
-	}
-
-	return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(label)}`;
+	return null;
 }

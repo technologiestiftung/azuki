@@ -1,4 +1,9 @@
-import type { MatchResult, Occupation, VacanciesResponse } from "@azuki/shared";
+import type {
+	MatchResult,
+	Occupation,
+	VacanciesResponse,
+	VacancyDetail,
+} from "@azuki/shared";
 
 export const MOCK_MATCH_RESULT: MatchResult = {
 	occupations: [
@@ -139,6 +144,40 @@ export const MOCK_MATCH_RESULT: MatchResult = {
 			salaryMonthlyMedian: null,
 		},
 	],
+	wildcardOccupations: [
+		{
+			id: 20001,
+			name: "Gärtner/in Garten- und Landschaftsbau",
+			rawName: "Gärtner Garten- und Landschaftsbau",
+			score: 0,
+			images: [],
+			shortDescription:
+				"Anlage, Gestaltung und Pflege von Außenanlagen wie Gärten, Parks und Grünflächen.",
+			reasoning: "",
+			occupationType: "dual",
+			occupationTag: "bauen-handwerk",
+			occupationDuration: "3 Jahre",
+			occupationEarnings: "620-800 € / Monat",
+			salaryKnown: true,
+			salaryMonthlyMedian: 2500,
+		},
+		{
+			id: 20002,
+			name: "Dachdecker/in",
+			rawName: "Dachdecker",
+			score: 0,
+			images: [],
+			shortDescription:
+				"Dächer eindecken und abdichten, Dämmungen einbauen, Fassaden verkleiden, Bauteile instand setzen.",
+			reasoning: "",
+			occupationType: "dual",
+			occupationTag: "bauen-handwerk",
+			occupationDuration: "2 Jahre",
+			occupationEarnings: "650-820 € / Monat",
+			salaryKnown: true,
+			salaryMonthlyMedian: 2600,
+		},
+	],
 };
 
 export const MOCK_VACANCIES_RESPONSE: VacanciesResponse = {
@@ -148,6 +187,7 @@ export const MOCK_VACANCIES_RESPONSE: VacanciesResponse = {
 			totalCount: 42,
 			previews: [
 				{
+					referenznummer: "10000-1000000001-S",
 					employer: "Muster GmbH",
 					city: "Berlin",
 					postcode: "10115",
@@ -156,6 +196,7 @@ export const MOCK_VACANCIES_RESPONSE: VacanciesResponse = {
 					publishedAt: "2025-03-15",
 				},
 				{
+					referenznummer: "10000-1000000002-S",
 					employer: "Tech Solutions AG",
 					city: "Berlin",
 					postcode: "10587",
@@ -172,6 +213,7 @@ export const MOCK_VACANCIES_RESPONSE: VacanciesResponse = {
 			totalCount: 28,
 			previews: [
 				{
+					referenznummer: "10000-1000000003-S",
 					employer: "Verwaltungs GmbH",
 					city: "Berlin",
 					postcode: "12043",
@@ -188,6 +230,7 @@ export const MOCK_VACANCIES_RESPONSE: VacanciesResponse = {
 			totalCount: 19,
 			previews: [
 				{
+					referenznummer: "10000-1000000004-S",
 					employer: "Energie Plus GmbH",
 					city: "Berlin",
 					postcode: "13347",
@@ -201,6 +244,100 @@ export const MOCK_VACANCIES_RESPONSE: VacanciesResponse = {
 		},
 	],
 };
+
+const MOCK_VACANCY_DETAILS_LIST: VacancyDetail[] = [
+	{
+		referenznummer: "10000-1000000001-S",
+		occupationName: "Fachinformatiker/-in - Anwendungsentwicklung",
+		title: "Fachinformatiker Anwendungsentwicklung (m/w/d)",
+		employer: "Muster GmbH",
+		description:
+			"Die Muster GmbH sucht zum 01.09.2025 eine Auszubildende oder einen Auszubildenden zum Fachinformatiker Anwendungsentwicklung (m/w/d).\n\nDu entwickelst gemeinsam mit unserem Team Software-Lösungen für unsere Kunden, von der ersten Idee bis zum fertigen Produkt.\n\nDein Profil:\n- Interesse an Programmierung und Logik\n- Gute Noten in Mathematik\n- Teamfähigkeit und Lernbereitschaft",
+		isFullTime: true,
+		educationLevel: "MITTLERE_REIFE_MITTLERER_BILDUNGSABSCHLUSS",
+		startDate: "2025-09-01",
+		addresses: [
+			{
+				street: "Musterstraße 12",
+				postcode: "10115",
+				city: "Berlin",
+				latitude: 52.532,
+				longitude: 13.3847,
+			},
+		],
+	},
+	{
+		referenznummer: "10000-1000000002-S",
+		occupationName: "Fachinformatiker/-in - Anwendungsentwicklung",
+		title: "Ausbildung Fachinformatiker Anwendungsentwicklung (m/w/d)",
+		employer: "Tech Solutions AG",
+		description:
+			"Werde Teil unseres Entwicklerteams! Die Tech Solutions AG bildet dich praxisnah zum Fachinformatiker Anwendungsentwicklung aus.\n\nDeine Aufgaben: Mitarbeit an echten Kundenprojekten, Testen von Software, Unterstützung bei der Wartung bestehender Systeme.",
+		isFullTime: true,
+		educationLevel: "FACHHOCHSCHULREIFE",
+		startDate: "2025-08-01",
+		addresses: [
+			{
+				street: "Kantstraße 45",
+				postcode: "10587",
+				city: "Berlin",
+				latitude: 52.5094,
+				longitude: 13.3197,
+			},
+			{
+				street: "Potsdamer Platz 3",
+				postcode: "10785",
+				city: "Berlin",
+				latitude: 52.5096,
+				longitude: 13.3759,
+			},
+		],
+	},
+	{
+		referenznummer: "10000-1000000003-S",
+		occupationName: "Kaufmann/-frau - Büromanagement",
+		title: "Kauffrau/-mann für Büromanagement (m/w/d)",
+		employer: "Verwaltungs GmbH",
+		description:
+			"Zur Verstärkung unseres Teams suchen wir zum 01.09.2025 eine Auszubildende oder einen Auszubildenden zur Kauffrau/zum Kaufmann für Büromanagement.\n\nDu übernimmst organisatorische und kaufmännische Aufgaben, koordinierst Termine und unterstützt unsere Abteilungen im Tagesgeschäft.",
+		isFullTime: false,
+		educationLevel: "MITTLERE_REIFE_MITTLERER_BILDUNGSABSCHLUSS",
+		startDate: "2025-09-01",
+		addresses: [
+			{
+				street: "Karl-Marx-Straße 78",
+				postcode: "12043",
+				city: "Berlin",
+				latitude: 52.4823,
+				longitude: 13.4351,
+			},
+		],
+	},
+	{
+		referenznummer: "10000-1000000004-S",
+		occupationName: "Elektroniker/-in - Energie- und Gebäudetechnik",
+		title: "Elektroniker Energie- und Gebäudetechnik (m/w/d)",
+		employer: "Energie Plus GmbH",
+		description:
+			"Die Energie Plus GmbH bildet dich zum Elektroniker für Energie- und Gebäudetechnik aus.\n\nDu installierst und wartest elektrische Anlagen in Gebäuden, von der Steckdose bis zur Heizungssteuerung, und lernst den sicheren Umgang mit modernster Technik.",
+		isFullTime: true,
+		educationLevel: "NICHT_RELEVANT",
+		startDate: "2025-09-01",
+		addresses: [
+			{
+				street: "Müllerstraße 156",
+				postcode: "13347",
+				city: "Berlin",
+				latitude: 52.5453,
+				longitude: 13.357,
+			},
+		],
+	},
+];
+
+export const MOCK_VACANCY_DETAILS = new Map<string, VacancyDetail>(
+	MOCK_VACANCY_DETAILS_LIST.map((detail) => [detail.referenznummer, detail]),
+);
 
 const BASE_CONDITIONS = {
 	outdoor: false,

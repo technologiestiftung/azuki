@@ -16,10 +16,12 @@ export interface BottomSheetProps {
 	open: boolean;
 	onClose: () => void;
 	children: ReactNode;
+	header?: ReactNode;
 	footer?: ReactNode;
 	ariaLabel?: string;
 	overlayDismissLabel?: string;
 	initialFocus?: "first" | "container";
+	onScroll?: (container: HTMLDivElement) => void;
 }
 
 type DragSample = { t: number; y: number };
@@ -37,10 +39,12 @@ export function BottomSheet({
 	open,
 	onClose,
 	children,
+	header,
 	footer,
 	ariaLabel = content["common.bottomSheet.ariaLabel"],
 	overlayDismissLabel = content["common.bottomSheet.overlayDismissLabel"],
 	initialFocus = "first",
+	onScroll,
 }: BottomSheetProps) {
 	const [visible, setVisible] = useState(open);
 	const [isClosing, setIsClosing] = useState(false);
@@ -403,7 +407,11 @@ export function BottomSheet({
 							aria-hidden
 						/>
 					</div>
-					<div className="min-h-0 flex-1 overflow-y-auto overscroll-contain">
+					{header ? <div className="shrink-0">{header}</div> : null}
+					<div
+						className="min-h-0 flex-1 overflow-y-auto overscroll-contain"
+						onScroll={onScroll ? (e) => onScroll(e.currentTarget) : undefined}
+					>
 						{children}
 					</div>
 					{footer ? (

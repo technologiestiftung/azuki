@@ -11,8 +11,16 @@ const repoRoot = path.resolve(
 export default defineConfig({
 	envDir: repoRoot,
 	plugins: [react()],
+	define: {
+		global: "globalThis",
+	},
+	resolve: {
+		alias: {
+			buffer: "buffer/",
+		},
+	},
 	optimizeDeps: {
-		include: ["@lottiefiles/dotlottie-react"],
+		include: ["@lottiefiles/dotlottie-react", "buffer"],
 	},
 	server: {
 		proxy: {

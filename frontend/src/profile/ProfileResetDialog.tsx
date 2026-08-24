@@ -42,7 +42,9 @@ export function ProfileResetDialog({
 				<div className="flex flex-col gap-2">
 					<PrimaryThemedButton
 						className="w-full flex items-center justify-center gap-2"
-						onClick={() => downloadProfile()}
+						onClick={() => {
+							void downloadProfile();
+						}}
 					>
 						<img src="/icons/download.svg" alt="" className="w-6 h-6" />
 						{content["profile.resetDialog.downloadCta"]}

@@ -8,7 +8,11 @@
 
 #avatar-scribbled {
   transform-origin: 0 0;
-  
+}
+#fill_2 {
+  transform-origin: 0 0;
+  vector-effect: non-scaling-stroke;
+  animation: kf_fill_2_transform_0 0.3s linear 0.4s both;
 }
 @keyframes kf_line-01_transform_0 {
   0% {
@@ -881,7 +885,7 @@
 }
 #line-01 {
   transform-origin: 0 0;
-  animation: kf_line-01_transform_0 1.7s linear 0.4s forwards;
+  animation: kf_line-01_transform_0 1.7s linear 0.4s both;
 }
 @keyframes kf_line-fill-01_transform_0 {
   0% {
@@ -1755,7 +1759,7 @@
 #line-fill-01 {
   transform-origin: 0 0;
   vector-effect: non-scaling-stroke;
-  animation: kf_line-fill-01_transform_0 1.7s linear 0.4s forwards;
+  animation: kf_line-fill-01_transform_0 1.7s linear 0.4s both;
 }
 @keyframes kf_line-02_transform_0 {
   0% {
@@ -2628,7 +2632,7 @@
 }
 #line-02 {
   transform-origin: 0 0;
-  animation: kf_line-02_transform_0 1.7s linear 0.4s forwards;
+  animation: kf_line-02_transform_0 1.7s linear 0.4s both;
 }
 @keyframes kf_line-fill-02_transform_0 {
   0% {
@@ -3502,7 +3506,7 @@
 #line-fill-02 {
   transform-origin: 0 0;
   vector-effect: non-scaling-stroke;
-  animation: kf_line-fill-02_transform_0 1.7s linear 0.4s forwards;
+  animation: kf_line-fill-02_transform_0 1.7s linear 0.4s both;
 }
 @keyframes kf_line-03_transform_0 {
   0% {
@@ -4375,7 +4379,7 @@
 }
 #line-03 {
   transform-origin: 0 0;
-  animation: kf_line-03_transform_0 1.7s linear 0.4s forwards;
+  animation: kf_line-03_transform_0 1.7s linear 0.4s both;
 }
 @keyframes kf_line-fill-03_transform_0 {
   0% {
@@ -5249,7 +5253,7 @@
 #line-fill-03 {
   transform-origin: 0 0;
   vector-effect: non-scaling-stroke;
-  animation: kf_line-fill-03_transform_0 1.7s linear 0.4s forwards;
+  animation: kf_line-fill-03_transform_0 1.7s linear 0.4s both;
 }
 @keyframes kf_line-04_transform_0 {
   0% {
@@ -6122,7 +6126,7 @@
 }
 #line-04 {
   transform-origin: 0 0;
-  animation: kf_line-04_transform_0 1.7s linear 0.4s forwards;
+  animation: kf_line-04_transform_0 1.7s linear 0.4s both;
 }
 @keyframes kf_line-fill-04_transform_0 {
   0% {
@@ -6996,7 +7000,7 @@
 #line-fill-04 {
   transform-origin: 0 0;
   vector-effect: non-scaling-stroke;
-  animation: kf_line-fill-04_transform_0 1.7s linear 0.4s forwards;
+  animation: kf_line-fill-04_transform_0 1.7s linear 0.4s both;
 }
 @keyframes kf_line-05_transform_0 {
   0% {
@@ -7869,7 +7873,7 @@
 }
 #line-05 {
   transform-origin: 0 0;
-  animation: kf_line-05_transform_0 1.7s linear 0.4s forwards;
+  animation: kf_line-05_transform_0 1.7s linear 0.4s both;
 }
 @keyframes kf_line-fill-05_transform_0 {
   0% {
@@ -8743,7 +8747,7 @@
 #line-fill-05 {
   transform-origin: 0 0;
   vector-effect: non-scaling-stroke;
-  animation: kf_line-fill-05_transform_0 1.7s linear 0.4s forwards;
+  animation: kf_line-fill-05_transform_0 1.7s linear 0.4s both;
 }
 @keyframes kf_line-06_transform_0 {
   0% {
@@ -9616,7 +9620,7 @@
 }
 #line-06 {
   transform-origin: 0 0;
-  animation: kf_line-06_transform_0 1.7s linear 0.4s forwards;
+  animation: kf_line-06_transform_0 1.7s linear 0.4s both;
 }
 @keyframes kf_line-fill-06_transform_0 {
   0% {
@@ -10490,37 +10494,35 @@
 #line-fill-06 {
   transform-origin: 0 0;
   vector-effect: non-scaling-stroke;
-  animation: kf_line-fill-06_transform_0 1.7s linear 0.4s forwards;
+  animation: kf_line-fill-06_transform_0 1.7s linear 0.4s both;
 }
 
 #star-fill {
   transform-origin: 0 0;
-  
 }
 
 #star_mask {
   transform-origin: 0 0;
-  
 }
 
 #fill_3 {
   transform-origin: 0 0;
-  
+  vector-effect: non-scaling-stroke;
+  animation: kf_fill_3_transform_0 0.3s linear 0.85s both;
 }
 
 #star-scribbled {
   transform-origin: 0 0;
-  
 }
 
 #star_mask_2 {
   transform-origin: 0 0;
-  
 }
 
 #fill_4 {
   transform-origin: 0 0;
-  
+  vector-effect: non-scaling-stroke;
+  animation: kf_fill_4_transform_0 0.3s linear 0.85s both;
 }
 @keyframes kf_line-07_transform_0 {
   0% {
@@ -11393,7 +11395,7 @@
 }
 #line-07 {
   transform-origin: 0 0;
-  animation: kf_line-07_transform_0 1.7s linear 0.4s forwards;
+  animation: kf_line-07_transform_0 1.7s linear 0.4s both;
 }
 @keyframes kf_line-fill-07_transform_0 {
   0% {
@@ -12267,7 +12269,7 @@
 #line-fill-07 {
   transform-origin: 0 0;
   vector-effect: non-scaling-stroke;
-  animation: kf_line-fill-07_transform_0 1.7s linear 0.4s forwards;
+  animation: kf_line-fill-07_transform_0 1.7s linear 0.4s both;
 }
 @keyframes kf_line-08_transform_0 {
   0% {
@@ -13140,7 +13142,7 @@
 }
 #line-08 {
   transform-origin: 0 0;
-  animation: kf_line-08_transform_0 1.7s linear 0.4s forwards;
+  animation: kf_line-08_transform_0 1.7s linear 0.4s both;
 }
 @keyframes kf_line-fill-08_transform_0 {
   0% {
@@ -14014,7 +14016,7 @@
 #line-fill-08 {
   transform-origin: 0 0;
   vector-effect: non-scaling-stroke;
-  animation: kf_line-fill-08_transform_0 1.7s linear 0.4s forwards;
+  animation: kf_line-fill-08_transform_0 1.7s linear 0.4s both;
 }
 @keyframes kf_line-09_transform_0 {
   0% {
@@ -14887,7 +14889,7 @@
 }
 #line-09 {
   transform-origin: 0 0;
-  animation: kf_line-09_transform_0 1.7s linear 0.4s forwards;
+  animation: kf_line-09_transform_0 1.7s linear 0.4s both;
 }
 @keyframes kf_line-fill-09_transform_0 {
   0% {
@@ -15761,7 +15763,7 @@
 #line-fill-09 {
   transform-origin: 0 0;
   vector-effect: non-scaling-stroke;
-  animation: kf_line-fill-09_transform_0 1.7s linear 0.4s forwards;
+  animation: kf_line-fill-09_transform_0 1.7s linear 0.4s both;
 }
 @keyframes kf_line-10_transform_0 {
   0% {
@@ -16634,7 +16636,7 @@
 }
 #line-10 {
   transform-origin: 0 0;
-  animation: kf_line-10_transform_0 1.7s linear 0.4s forwards;
+  animation: kf_line-10_transform_0 1.7s linear 0.4s both;
 }
 @keyframes kf_line-fill-10_transform_0 {
   0% {
@@ -17508,7 +17510,7 @@
 #line-fill-10 {
   transform-origin: 0 0;
   vector-effect: non-scaling-stroke;
-  animation: kf_line-fill-10_transform_0 1.7s linear 0.4s forwards;
+  animation: kf_line-fill-10_transform_0 1.7s linear 0.4s both;
 }
 @keyframes kf_line-11_transform_0 {
   0% {
@@ -18381,7 +18383,7 @@
 }
 #line-11 {
   transform-origin: 0 0;
-  animation: kf_line-11_transform_0 1.7s linear 0.4s forwards;
+  animation: kf_line-11_transform_0 1.7s linear 0.4s both;
 }
 @keyframes kf_line-fill-11_transform_0 {
   0% {
@@ -19255,7 +19257,7 @@
 #line-fill-11 {
   transform-origin: 0 0;
   vector-effect: non-scaling-stroke;
-  animation: kf_line-fill-11_transform_0 1.7s linear 0.4s forwards;
+  animation: kf_line-fill-11_transform_0 1.7s linear 0.4s both;
 }
 @keyframes kf_line-12_transform_0 {
   0% {
@@ -20128,7 +20130,7 @@
 }
 #line-12 {
   transform-origin: 0 0;
-  animation: kf_line-12_transform_0 1.7s linear 0.4s forwards;
+  animation: kf_line-12_transform_0 1.7s linear 0.4s both;
 }
 @keyframes kf_line-fill-12_transform_0 {
   0% {
@@ -21002,7 +21004,7 @@
 #line-fill-12 {
   transform-origin: 0 0;
   vector-effect: non-scaling-stroke;
-  animation: kf_line-fill-12_transform_0 1.7s linear 0.4s forwards;
+  animation: kf_line-fill-12_transform_0 1.7s linear 0.4s both;
 }
 @keyframes kf_line-13_transform_0 {
   0% {
@@ -21875,7 +21877,7 @@
 }
 #line-13 {
   transform-origin: 0 0;
-  animation: kf_line-13_transform_0 1.7s linear 0.4s forwards;
+  animation: kf_line-13_transform_0 1.7s linear 0.4s both;
 }
 @keyframes kf_line-fill-13_transform_0 {
   0% {
@@ -22749,7 +22751,33 @@
 #line-fill-13 {
   transform-origin: 0 0;
   vector-effect: non-scaling-stroke;
-  animation: kf_line-fill-13_transform_0 1.7s linear 0.4s forwards;
+  animation: kf_line-fill-13_transform_0 1.7s linear 0.4s both;
+}
+
+
+@keyframes kf_fill_2_transform_0 {
+  0% {
+    transform: translate(-7.285px, -2.920px) rotate(-0.1029rad) scaleX(1) scaleY(1) scaleX(0.015);
+  }
+  100% {
+    transform: translate(-7.285px, -2.920px) rotate(-0.1029rad) scaleX(1) scaleY(1) scaleX(1);
+  }
+}
+@keyframes kf_fill_3_transform_0 {
+  0% {
+    transform: translate(0px, 3.589px) rotate(-0.1029rad) scaleX(1) scaleY(1) scaleX(0.015);
+  }
+  100% {
+    transform: translate(0px, 3.589px) rotate(-0.1029rad) scaleX(1) scaleY(1) scaleX(1);
+  }
+}
+@keyframes kf_fill_4_transform_0 {
+  0% {
+    transform: translate(0px, 3.590px) rotate(-0.1029rad) scaleX(1) scaleY(1) scaleX(0.015);
+  }
+  100% {
+    transform: translate(0px, 3.590px) rotate(-0.1029rad) scaleX(1) scaleY(1) scaleX(1);
+  }
 }
 </style>
 <g id="illustration-welcome-updated-2">

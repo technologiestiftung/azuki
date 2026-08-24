@@ -1,6 +1,8 @@
 import { Hono, type Context } from "hono";
 import { cors } from "hono/cors";
 import { UserProfileSchema } from "./schemas/userProfile.js";
+import { ContactRequestSchema } from "./schemas/contact.js";
+import { submitContactToHubSpot } from "./hubspot/client.js";
 import {
 	type Occupation,
 	type MatchResult,
@@ -13,6 +15,10 @@ import {
 } from "@azuki/shared";
 import { occupationMatchMeta } from "./occupationMeta";
 import {
+	pickWildcardOccupations,
+	toWildcardMatchedOccupation,
+} from "./wildcards.js";
+import {
 	FINAL_MATCH_COUNT,
 	preFilter,
 	PREFILTER_TOP_K,
@@ -21,7 +27,7 @@ import { aiRank, buildSystemPromptV5 } from "./ai/index.js";
 import occupationsData from "./data/berufe.json";
 import { VacanciesRequestSchema } from "./schemas/vacancies.js";
 import { ReverseGeocodeRequestSchema } from "./schemas/reverseGeocode.js";
-import { searchVacancies } from "./jobsuche/client.js";
+import { searchVacancies, getJobDetails } from "./jobsuche/client.js";
 import {
 	mergeVacancyOccupationNames,
 	resolvePreferredJobVacancyNames,
@@ -80,6 +86,54 @@ app.get("/api/health", (c) =>
 	c.json({ ok: true, occupationCount: occupations.length }),
 );
 
+/** Same-origin proxy for Berufepool images (no CORS on the upstream host). */
+const IMAGE_PROXY_HOST = "rest.arbeitsagentur.de";
+const IMAGE_PROXY_PATH_PREFIX = "/infosysbub/berufepool-rest/";
+
+app.get("/api/image-proxy", async (c) => {
+	const rawUrl = c.req.query("url");
+	if (!rawUrl) {
+		return c.json({ error: "Missing url" }, 400);
+	}
+	let target: URL;
+	try {
+		target = new URL(rawUrl);
+	} catch {
+		return c.json({ error: "Invalid url" }, 400);
+	}
+	if (
+		target.protocol !== "https:" ||
+		target.hostname !== IMAGE_PROXY_HOST ||
+		!target.pathname.startsWith(IMAGE_PROXY_PATH_PREFIX)
+	) {
+		return c.json({ error: "URL not allowed" }, 400);
+	}
+	try {
+		const upstream = await fetch(target.toString(), {
+			redirect: "error",
+			headers: {
+				Accept: "image/*,*/*;q=0.8",
+				"User-Agent": "AzukiImageProxy/1.0",
+			},
+			signal: AbortSignal.timeout(15000),
+		});
+		if (!upstream.ok) {
+			return c.json({ error: "Upstream fetch failed" }, 502);
+		}
+		const contentType = upstream.headers.get("content-type") || "image/jpeg";
+		const body = await upstream.arrayBuffer();
+		return new Response(body, {
+			status: 200,
+			headers: {
+				"Content-Type": contentType,
+				"Cache-Control": "public, max-age=86400",
+			},
+		});
+	} catch {
+		return c.json({ error: "Upstream fetch failed" }, 502);
+	}
+});
+
 function isAuthorized(c: Context): boolean {
 	if (!APP_PASSWORD) {
 		// Reachable only in non-production (prod startup throws above).
@@ -134,7 +188,11 @@ app.post("/api/match", async (c) => {
 	try {
 		topCandidates = preFilter(occupations, profile, PREFILTER_TOP_K);
 		const result = await aiRank(topCandidates, profile);
-		return c.json(result);
+		const wildcardOccupations = pickWildcardOccupations(
+			occupations,
+			new Set(result.occupations.map((o) => o.id)),
+		).map(toWildcardMatchedOccupation);
+		return c.json({ ...result, wildcardOccupations });
 	} catch (err) {
 		console.error("Match error, falling back to pre-filter:", err);
 		if (topCandidates.length === 0) {
@@ -150,8 +208,9 @@ app.post("/api/match", async (c) => {
 					}));
 			}
 		}
-		const fallback: MatchResult = {
-			occupations: topCandidates.slice(0, FINAL_MATCH_COUNT).map((scored) => ({
+		const matchedOccupations = topCandidates
+			.slice(0, FINAL_MATCH_COUNT)
+			.map((scored) => ({
 				id: scored.occupation.id,
 				name: formatOccupationDisplayName(scored.occupation.name),
 				rawName: scored.occupation.name,
@@ -162,7 +221,13 @@ app.post("/api/match", async (c) => {
 				salaryKnown: scored.occupation.salaryKnown,
 				salaryMonthlyMedian: scored.occupation.salaryMonthlyMedian,
 				...occupationMatchMeta(scored.occupation),
-			})),
+			}));
+		const fallback: MatchResult = {
+			occupations: matchedOccupations,
+			wildcardOccupations: pickWildcardOccupations(
+				occupations,
+				new Set(matchedOccupations.map((o) => o.id)),
+			).map(toWildcardMatchedOccupation),
 		};
 		return c.json(fallback);
 	}
@@ -244,7 +309,13 @@ app.get("/api/shared-match", (c) => {
 		return c.json({ error: "No matching occupations found" }, 404);
 	}
 
-	const result: MatchResult = { occupations: matched };
+	const result: MatchResult = {
+		occupations: matched,
+		wildcardOccupations: pickWildcardOccupations(
+			occupations,
+			new Set(matched.map((o) => o.id)),
+		).map(toWildcardMatchedOccupation),
+	};
 	return c.json(result);
 });
 
@@ -287,6 +358,21 @@ app.get("/api/shared-vacancies", async (c) => {
 	return c.json(response);
 });
 
+const REFERENZNUMMER_PATTERN = /^[A-Za-z0-9-]+$/;
+
+app.get("/api/vacancies/:refnr", async (c) => {
+	const refnr = c.req.param("refnr");
+	if (!REFERENZNUMMER_PATTERN.test(refnr)) {
+		return c.json({ error: "Invalid referenznummer" }, 400);
+	}
+
+	const detail = await getJobDetails(refnr);
+	if (!detail) {
+		return c.json({ error: "Vacancy not found" }, 404);
+	}
+	return c.json(detail);
+});
+
 app.post("/api/reverse-geocode", async (c) => {
 	if (!isAuthorized(c)) {
 		return c.json({ error: "Unauthorized" }, 401);
@@ -313,6 +399,34 @@ app.post("/api/reverse-geocode", async (c) => {
 	}
 
 	return c.json(location);
+});
+
+app.post("/api/contact", async (c) => {
+	if (!isAuthorized(c)) {
+		return c.json({ error: "Unauthorized" }, 401);
+	}
+
+	let body: unknown;
+	try {
+		body = await c.req.json();
+	} catch {
+		return c.json({ error: "Invalid request body" }, 400);
+	}
+
+	const parsed = ContactRequestSchema.safeParse(body);
+	if (!parsed.success) {
+		return c.json({ error: "Invalid request body" }, 400);
+	}
+
+	try {
+		await submitContactToHubSpot(parsed.data);
+	} catch (err) {
+		const msg = err instanceof Error ? err.message : String(err);
+		console.error("HubSpot contact submission error:", msg);
+		return c.json({ error: msg }, 502);
+	}
+
+	return c.json({ ok: true });
 });
 
 app.get("/api/occupations/:id", (c) => {

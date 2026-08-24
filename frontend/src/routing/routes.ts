@@ -21,6 +21,7 @@ export const ROUTE_PATHS = {
 	resultsOccupationDetail: "/results/:id",
 	resultsList: "/results/apprenticeships",
 	resultsVacancies: "/results/vacancies",
+	resultsVacancyDetail: "/results/vacancies/:refnr",
 	eval: "/eval",
 	personas: "/personas",
 	personaDetail: "/personas/:id",
@@ -30,8 +31,15 @@ export const ROUTE_PATHS = {
 
 export const RESULTS_PATH_PREFIX = "/results" as const;
 
-export function buildResultsOccupationPath(id: number): string {
-	return `/results/${id}`;
+export function buildResultsOccupationPath(
+	id: number,
+	options?: { wildcard?: boolean },
+): string {
+	return options?.wildcard ? `/results/${id}?wildcard=1` : `/results/${id}`;
+}
+
+export function buildResultsVacancyDetailPath(referenznummer: string): string {
+	return `/results/vacancies/${encodeURIComponent(referenznummer)}`;
 }
 
 interface FlowNode {

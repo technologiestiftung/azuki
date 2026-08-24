@@ -15,6 +15,8 @@ interface UseFetchVacanciesOptions {
 	sharedVacancyParams?: SharedVacancyParams;
 }
 
+const MAX_VACANCY_OCCUPATION_NAMES = 20;
+
 function buildVacancyFetchKey(params: {
 	occupationNames: string[];
 	postcode: string;
@@ -42,6 +44,7 @@ export function useFetchVacancies(
 	const location = useAppStore((state) => state.location);
 	const preferredJobs = useAppStore((state) => state.profile.preferredJobs);
 	const occupations = matchResults?.occupations;
+	const wildcardOccupations = matchResults?.wildcardOccupations;
 	const activeFetchKeyRef = useRef<string | null>(null);
 
 	useEffect(() => {
@@ -69,9 +72,10 @@ export function useFetchVacancies(
 			if (!occupations?.length) {
 				return () => {};
 			}
-			const occupationNames = occupations.map(
-				(occupation) => occupation.rawName,
-			);
+			// Normal matches take priority; wildcard names only fill remaining slots.
+			const occupationNames = [...occupations, ...(wildcardOccupations ?? [])]
+				.map((occupation) => occupation.rawName)
+				.slice(0, MAX_VACANCY_OCCUPATION_NAMES);
 			fetchKey = buildVacancyFetchKey({
 				occupationNames,
 				postcode: location.postcode,
@@ -123,6 +127,7 @@ export function useFetchVacancies(
 		sharedVacancyParams,
 		vacancies,
 		occupations,
+		wildcardOccupations,
 		preferredJobs,
 		setVacancies,
 		setVacanciesFetchError,

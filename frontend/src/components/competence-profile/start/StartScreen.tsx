@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { content } from "../../../content";
 import { useFlowNavigation } from "../../../routing/useFlowNavigation";
@@ -35,6 +35,7 @@ const slides: Slide[] = [
 const SLIDE_COUNT = slides.length;
 const SWIPE_THRESHOLD = 50;
 const TAP_MAX_DURATION = 300;
+const SHEET_EXPAND_MS = 520;
 
 function isSlideVisible(
 	index: number,
@@ -44,13 +45,18 @@ function isSlideVisible(
 	return index === current || index === previous;
 }
 
+function getSpringEasing(el: Element) {
+	return (
+		getComputedStyle(el).getPropertyValue("--ease-spring").trim() || "ease-out"
+	);
+}
+
 function useSlideCarousel(slideCount: number) {
 	const [currentSlide, setCurrentSlide] = useState(0);
 	const [previousSlide, setPreviousSlide] = useState<number | null>(null);
 	const [slideDirection, setSlideDirection] = useState<"next" | "prev" | null>(
 		null,
 	);
-
 	const [clipboardPlayKey, setClipboardPlayKey] = useState(0);
 
 	function moveSlide(direction: "next" | "prev") {
@@ -145,11 +151,71 @@ export function StartScreen() {
 		clipboardPlayKey,
 		moveSlide,
 	} = useSlideCarousel(SLIDE_COUNT);
-	const swipeHandlers = useSwipeNavigation(moveSlide);
+	const [isExiting, setIsExiting] = useState(false);
+	const stageRef = useRef<HTMLDivElement>(null);
+	const sheetRef = useRef<HTMLDivElement>(null);
+
+	function handleMoveSlide(direction: "next" | "prev") {
+		if (isExiting) {
+			return;
+		}
+		moveSlide(direction);
+	}
+
+	const swipeHandlers = useSwipeNavigation(handleMoveSlide);
+
+	useEffect(() => {
+		if (!isExiting) {
+			return undefined;
+		}
+
+		const sheet = sheetRef.current;
+		const stage = stageRef.current;
+		if (!sheet || !stage) {
+			goNext();
+			return undefined;
+		}
+
+		const startTop =
+			sheet.getBoundingClientRect().top - stage.getBoundingClientRect().top;
+		const radius = getComputedStyle(sheet).borderTopLeftRadius || "32px";
+
+		Object.assign(sheet.style, {
+			position: "absolute",
+			left: "0",
+			right: "0",
+			bottom: "0",
+			top: `${startTop}px`,
+			zIndex: "20",
+			borderTopLeftRadius: radius,
+			borderTopRightRadius: radius,
+		});
+
+		const expandAnimation = sheet.animate(
+			[{ top: `${startTop}px` }, { top: "0px" }],
+			{
+				duration: SHEET_EXPAND_MS,
+				easing: getSpringEasing(sheet),
+				fill: "forwards",
+			},
+		);
+
+		expandAnimation.onfinish = () => {
+			goNext();
+		};
+
+		return () => {
+			expandAnimation.onfinish = null;
+			expandAnimation.cancel();
+		};
+	}, [isExiting, goNext]);
 
 	function handleNext() {
+		if (isExiting) {
+			return;
+		}
 		if (currentSlide >= SLIDE_COUNT - 1) {
-			goNext();
+			setIsExiting(true);
 			return;
 		}
 		moveSlide("next");
@@ -158,7 +224,10 @@ export function StartScreen() {
 	const activeSlide = slides[currentSlide];
 
 	return (
-		<div className="flex flex-col h-[100dvh] pt-4 overflow-hidden min-h-0 bg-sky-100">
+		<div
+			ref={stageRef}
+			className="relative flex flex-col h-[100dvh] pt-4 overflow-hidden min-h-0 bg-sky-100"
+		>
 			<div className="flex-1 min-h-0 flex flex-col">
 				<div className="flex-1 min-h-0 relative overflow-hidden">
 					<StartHeroIllustration
@@ -170,15 +239,29 @@ export function StartScreen() {
 						clipboard={slides[1]}
 					/>
 				</div>
-				<div className="relative z-10 animate-startSheetEnter bg-sky-white rounded-t-4xl">
-					<div className="flex flex-col gap-3 pt-6">
+				<div
+					ref={sheetRef}
+					className={`relative z-10 flex flex-col justify-end bg-sky-white rounded-t-4xl ${
+						isExiting ? "" : "animate-startSheetEnter"
+					}`}
+				>
+					<div
+						className={`flex flex-col gap-3 pt-6 ${
+							isExiting ? "animate-startSheetContentFadeOut" : ""
+						}`}
+					>
 						<div
 							role="region"
 							aria-roledescription="carousel"
 							aria-label={`${currentSlide + 1} / ${SLIDE_COUNT}`}
-							tabIndex={0}
-							className="relative overflow-hidden text-sky-900 h-44 touch-none select-none focus-visible:outline-1 focus-visible:outline-sky-500 rounded-[7px] animate-startSheetContentFade"
-							{...swipeHandlers}
+							aria-disabled={isExiting || undefined}
+							tabIndex={isExiting ? -1 : 0}
+							className={`relative overflow-hidden text-sky-900 h-44 touch-none select-none focus-visible:outline-1 focus-visible:outline-sky-500 rounded-[7px] ${
+								isExiting
+									? "pointer-events-none"
+									: "animate-startSheetContentFade"
+							}`}
+							{...(isExiting ? {} : swipeHandlers)}
 						>
 							{slides.map((slide, index) => {
 								if (!isSlideVisible(index, currentSlide, previousSlide)) {
@@ -232,7 +315,13 @@ export function StartScreen() {
 							</div>
 						</div>
 					</div>
-					<div className="bg-sky-white animate-startSheetCtaEnter">
+					<div
+						className={`bg-sky-white ${
+							isExiting
+								? "animate-startSheetCtaExit"
+								: "animate-startSheetCtaEnter"
+						}`}
+					>
 						<div className="w-full flex flex-col px-4 pb-4 pt-4 gap-y-2 max-w-[430px] mx-auto">
 							<StartCtaButton
 								activeCta={activeSlide.cta}
@@ -246,6 +335,7 @@ export function StartScreen() {
 								<GhostButton
 									onClick={() => navigate("/loading")}
 									className="w-full"
+									disabled={isExiting}
 								>
 									{content["start.cta.prefill"]}
 								</GhostButton>

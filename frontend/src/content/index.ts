@@ -7,7 +7,6 @@ export const content = {
 	"profile.aboutYou": "Über dich",
 	"profile.schoolDegreeLabel.planned": "Dein geplanter Schulabschluss",
 	"profile.schoolDegreeLabel.inSchool": "Dein Schulabschluss",
-	"profile.topOccupationWithMostVacancies": "Besonders gesucht",
 	"profile.favoriteSubjects": "Deine Lieblingsfächer",
 	"profile.interests": "Das magst du gerne",
 	"profile.strengths": "Deine Stärken",
@@ -16,6 +15,7 @@ export const content = {
 	"profile.practicalExperiences": "Deine Arbeitserfahrung",
 	"profile.workPreferences": "So möchtest du arbeiten",
 	"profile.noGos": "Das magst du nicht im Beruf",
+	"profile.preferredJobs": "Dein Jobwunsch",
 	"profile.resetCard.title": "Du möchtest deine Antworten ändern?",
 	"profile.resetCard.description":
 		"Du kannst alle Fragen nochmal beantworten, um dein Profil zu ändern.",
@@ -32,9 +32,18 @@ export const content = {
 	"profile.share.title": "Mein Profil",
 	"profile.share.text":
 		"Schau dir dieses Profil und passende Ausbildungsberufe an.",
-	"profile.export.filename": "mein-profil.pdf",
+	"profile.export.filename": "AzuKi-Profil.pdf",
 	"profile.export.category": "Bereich",
 	"profile.export.details": "Angaben",
+	"profile.edit.title": "Profil bearbeiten",
+	"profile.edit.close.ariaLabel": "Profil bearbeiten schließen",
+	"profile.edit.input.name": "Name",
+	"profile.edit.input.placeholder": "Das bist du",
+	"profile.edit.images.label": "Profilbild",
+	"profile.edit.images.ariaLabel": "Profilbild auswählen",
+	"profile.edit.images.altPrefix": "Profilbild",
+	"profile.edit.open.ariaLabel": "Profil bearbeiten öffnen",
+	"profile.edit.bottomSheet.ariaLabel": "Profil bearbeiten",
 	// Footer
 	"footer.about": "Über das Projekt",
 	"footer.feedback": "Feedback geben",
@@ -492,12 +501,25 @@ export const content = {
 	"results.share.text": "Schau dir diese passenden Ausbildungsberufe an.",
 
 	"results.download.ariaLabel": "Ausbildungsberufe herunterladen",
-	"results.export.filename": "ausbildungsberufe.pdf",
-	"results.export.occupation": "Beruf",
-	"results.export.fit": "Passt zu",
-	"results.export.duration": "Dauer",
-	"results.export.earnings": "Verdienst",
+	"results.brand.azu": "Azu",
+	"results.brand.ki": "Ki",
+	"results.export.filename": "AzuKi-Berufe.pdf",
+	"results.export.tagline": "Finde deine Ausbildung.",
+	"results.export.topTitle": "Deine Top 3 Berufe",
+	"results.export.occupation": "Ausbildungsberuf",
+	"results.export.fit": "Passt zu dir",
+	"results.export.duration": "Dauer Ausbildung",
+	"results.export.earnings": "Einstiegsgehalt",
 	"results.export.description": "Beschreibung",
+	"results.export.inDemandBanner":
+		"Bei diesen Berufen werden viele Azubis gesucht",
+	"results.export.footer.1": "Finde mehr Ausbildungsberufe auf",
+	"results.export.footer.2": "www.Azuki.de",
+	"results.export.page": "Seite {page} von {total}",
+	"results.export.ctaTitle": "Bewerben? Wie geht das eigentlich?",
+	"results.export.ctaBody":
+		"Unser kostenloses Beratungsprogramm Plan A unterstützt dich bei allen Fragen rund um Stellensuche, Anschreiben und vielem mehr.",
+	"results.export.ctaQrLabel": "Zum Anmeldeformular",
 	"results.bottomCard.title": "Kein passender Ausbildungsberuf dabei?",
 	"results.bottomCard.resetCta": "Fragen wiederholen",
 	"results.bottomCard.consultationCta": "Beratung anfragen",
@@ -508,6 +530,8 @@ export const content = {
 	"results.favorite.add": "Zu Favoriten hinzufügen",
 	"results.favorite.remove": "Aus Favoriten entfernen",
 	"results.card.score.label": "Passt zu",
+	"results.wildcard.badge": "Besonders gesucht",
+	"results.wildcard.title": "Hier werden besonders viele Azubis gesucht",
 	"results.noResults":
 		"Wir haben leider keine Ausbildungsberufe zu deiner Auswahl gefunden.",
 	"results.contactCard.title": "Du weißt nicht, wo du anfangen sollst?",
@@ -518,6 +542,64 @@ export const content = {
 	"results.contactCard.item.3":
 		"Du entscheidest was du brauchst – alle Fragen sind erlaubt",
 	"results.contactCard.consultationCta": "Beratung anfragen",
+	"results.contactCard.bottomSheet.ariaLabel": "Kontaktformular Beratung",
+	"results.contactCard.bottomSheet.title": "Kostenlose Beratung anfragen",
+	"results.contactCard.bottomSheet.description":
+		"Wir beraten dich persönlich zu deinen <strong>Stärken</strong>, <strong>passenden Berufen</strong> und <strong>Bewerbungen</strong>. Schick uns deine Anfrage und wir melden uns bei dir.",
+	"results.contactCard.bottomSheet.firstname.label": "Vorname",
+	"results.contactCard.bottomSheet.firstname.placeholder": "Angelina",
+	"results.contactCard.bottomSheet.postalcode.label": "Postleitzahl",
+	"results.contactCard.bottomSheet.postalcode.placeholder": "12345",
+	"results.contactCard.bottomSheet.under16.legend":
+		"Bist du unter 16 Jahre alt?",
+	"results.contactCard.bottomSheet.under16.yes": "Ja",
+	"results.contactCard.bottomSheet.under16.no": "Nein",
+	"results.contactCard.bottomSheet.birthdate.label": "Geburtsdatum",
+	"results.contactCard.bottomSheet.contactType.legend":
+		"Wie sollen wir dich erreichen?",
+	"results.contactCard.bottomSheet.contactType.call": "Anruf",
+	"results.contactCard.bottomSheet.contactType.whatsapp": "WhatsApp",
+	"results.contactCard.bottomSheet.contactType.mail": "E-Mail",
+	"results.contactCard.bottomSheet.phonenumber.label": "Handynummer",
+	"results.contactCard.bottomSheet.phonenumber.placeholder": "+49 1234567890",
+	"results.contactCard.bottomSheet.email.label": "E-Mail",
+	"results.contactCard.bottomSheet.email.placeholder":
+		"angelina@beispielmail.com",
+	"results.contactCard.bottomSheet.marketing.label":
+		"Ich stimme zu, von JOBLINGE über Angebote und andere Inhalte benachrichtigt zu werden.",
+	"results.contactCard.bottomSheet.privacy.notice":
+		"Weitere Informationen zu unseren Datenschutzverfahren und dazu, wie wir deine Privatsphäre schützen und respektieren, findest du in unserer <a href='https://www.lehrstellenportal.de/datenschutz' target='_blank' rel='noopener noreferrer'>Datenschutzrichtlinie</a>.",
+	"results.contactCard.bottomSheet.submit": "Kostenlose Beratung anfragen",
+	"results.contactCard.bottomSheet.lock.alt": "Schloss",
+	"results.contactCard.bottomSheet.dataProtection":
+		"Deine Daten werden nicht an Dritte weitergegeben.",
+	"results.contactCard.bottomSheet.firstname.error":
+		"Bitte gib deinen Vornamen ein.",
+	"results.contactCard.bottomSheet.postalcode.error":
+		"Bitte gib eine gültige Postleitzahl ein.",
+	"results.contactCard.bottomSheet.under16.error":
+		"Bitte gib dein Alter an. Wir müssen dies aus rechtlichen Gründen für die Kontaktaufnahme wissen.",
+	"results.contactCard.bottomSheet.birthdate.error":
+		"Bitte gib dein Geburtsdatum an.",
+	"results.contactCard.bottomSheet.contactType.error":
+		"Bitte wähle einen Kontaktweg aus.",
+	"results.contactCard.bottomSheet.phonenumber.error":
+		"Bitte gib eine gültige Handynummer ein.",
+	"results.contactCard.bottomSheet.email.error":
+		"Bitte gib eine gültige E-Mail Adresse ein.",
+	"results.contactCard.bottomSheet.marketing.error":
+		"Bitte stimme zu, von JOBLINGE benachrichtigt zu werden, um fortzufahren.",
+	"results.contactCard.bottomSheet.form.error":
+		"Bitte fülle alle erforderlichen Felder aus, um fortzufahren.",
+	"results.contactCard.bottomSheet.submit.loading": "Wird gesendet …",
+	"results.contactCard.bottomSheet.submit.error":
+		"Leider ist etwas schiefgelaufen. Bitte versuche es später erneut.",
+	"results.contactCard.bottomSheet.success.title": "Check deine Mails",
+	"results.contactCard.bottomSheet.success.description":
+		"PLAN A hat eine E-Mail an <strong>{email}</strong> geschickt. Klicke auf den Link in der E-Mail, um deine Anfrage zu bestätigen. Das Team von PLAN A wird sich innerhalb von zwei Tagen bei dir für eine 1:1 Beratung melden.",
+	"results.contactCard.bottomSheet.success.button": "E-Mail Postfach öffnen",
+	"results.contactCard.bottomSheet.success.illustrationAlt":
+		"Briefumschlag mit Sternen",
 	// Filter Bottom Sheet
 	"results.filter.tags.title": "Berufsgruppe",
 	"results.filter.tags.title.short": "Beruf",
@@ -610,16 +692,11 @@ export const content = {
 	"results.detail.moreOccupations.title": "Mehr Ausbildungsberufe",
 	// Vacancies
 	"vacancies.title": "Freie Stellen für dich",
+	"vacancies.wildcard.title":
+		"Weitere Stellen, für die besonders viele Azubis gesucht werden",
 	"vacancies.share.ariaLabel": "Freie Stellen teilen",
 	"vacancies.share.title": "Freie Stellen für dich",
 	"vacancies.share.text": "Schau dir diese freien Ausbildungsstellen an.",
-	"vacancies.download.ariaLabel": "Freie Stellen herunterladen",
-	"vacancies.export.filename": "freie-stellen.pdf",
-	"vacancies.export.occupation": "Beruf",
-	"vacancies.export.employer": "Arbeitgeber",
-	"vacancies.export.location": "Ort",
-	"vacancies.export.startDate": "Beginn ab",
-	"vacancies.export.publishedAt": "Veröffentlicht",
 	"vacancies.filter.occupations.title": "Berufe",
 	"vacancies.filter.occupations.title.short": "Beruf",
 	"vacancies.filter.occupations.filterButton.ariaLabel": "Berufe filtern",
@@ -630,6 +707,33 @@ export const content = {
 	"vacancies.published.daysAgo": "Vor {days} Tagen veröffentlicht",
 	"vacancies.published.oneDayAgo": "Vor 1 Tag veröffentlicht",
 	"vacancies.badge.new": "Neu",
+	// Vacancy Detail
+	"vacancies.detail.loading": "Stellendetails werden geladen…",
+	"vacancies.detail.notFound": "Diese Stelle wurde nicht gefunden.",
+	"vacancies.detail.loadError":
+		"Die Stellendetails konnten gerade nicht geladen werden. Versuch es später noch einmal.",
+	"vacancies.detail.startTitle": "Beginn",
+	"vacancies.detail.employmentTypeTitle": "Anstellungsart",
+	"vacancies.detail.employmentType.fullTime": "Vollzeit",
+	"vacancies.detail.employmentType.partTime": "Teilzeit",
+	"vacancies.detail.educationLevel.fachgebundeneHochschulreife":
+		"Fachgebundene Hochschulreife",
+	"vacancies.detail.locationTitle": "Arbeitsort",
+	"vacancies.detail.location.showMore": "+{count} weitere Arbeitsorte",
+	"vacancies.detail.location.showMore.one": "1 weiterer Arbeitsort",
+	"vacancies.detail.location.showLess": "Weniger anzeigen",
+	"vacancies.detail.aboutTitle": "Über diese Stelle",
+	"vacancies.detail.description.showMore": "Mehr anzeigen",
+	"vacancies.detail.description.showLess": "Weniger anzeigen",
+	"vacancies.detail.applyCard.title":
+		"Schau dir das vollständige Stellenangebot an",
+	"vacancies.detail.applyCard.description":
+		"Dort findest du auch alle Infos zur Bewerbung.",
+	"vacancies.detail.applyCard.cta": "Zum Stellenangebot",
+	"vacancies.detail.applyCard.cta.ariaLabel": "Zum Stellenangebot",
+	"vacancies.detail.contactCard.title": "Bewerben – wie geht das?",
+	"vacancies.detail.contactCard.description":
+		"Wir von PLAN A beraten dich zu <strong>Lebenslauf, Bewerbung</strong> und <strong>Vorstellungsgespräch</strong>. So wird Ausbildungssuche ganz einfach.",
 	"results.showAllLink": "Alle Stellen auf arbeitsagentur.de ansehen",
 	"results.fetchError":
 		"Die Stellen konnten gerade nicht geladen werden. Versuch es später noch einmal.",

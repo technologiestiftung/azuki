@@ -1,6 +1,6 @@
-import { useEffect, useRef } from "react";
+import { useLayoutEffect, useRef } from "react";
 
-const ILLUSTRATION_CROSS_MS = 500;
+const ILLUSTRATION_CROSS_MS = 400;
 
 export interface StartHeroIllustrationAsset {
 	image: string;
@@ -33,9 +33,8 @@ export function StartHeroIllustration({
 	const starRef = useRef<HTMLDivElement>(null);
 	const clipboardRef = useRef<HTMLDivElement>(null);
 	const isFirstLoad = previousSlide === null;
-	const showClipboard = currentSlide === 1 || previousSlide === 1;
 
-	useEffect(() => {
+	useLayoutEffect(() => {
 		if (previousSlide === null || direction === null) {
 			return undefined;
 		}
@@ -59,6 +58,8 @@ export function StartHeroIllustration({
 		);
 
 		return () => {
+			outgoingAnimation.commitStyles();
+			incomingAnimation.commitStyles();
 			outgoingAnimation.cancel();
 			incomingAnimation.cancel();
 		};
@@ -87,13 +88,18 @@ export function StartHeroIllustration({
 				</div>
 			</div>
 
-			{showClipboard ? (
-				<div
-					ref={clipboardRef}
-					className="absolute inset-0"
-					style={{ zIndex: currentSlide === 1 ? 2 : 1 }}
-				>
+			<div
+				ref={clipboardRef}
+				className="absolute inset-0"
+				style={{
+					zIndex: currentSlide === 1 ? 2 : 1,
+					...(isFirstLoad ? { transform: "translateY(100%)" } : {}),
+				}}
+				aria-hidden={currentSlide !== 1}
+			>
+				{clipboardPlayKey > 0 ? (
 					<div
+						key={clipboardPlayKey}
 						className={`flex h-full w-full px-4 ${clipboard.imageAlign} justify-center`}
 					>
 						<img
@@ -103,8 +109,8 @@ export function StartHeroIllustration({
 							draggable={false}
 						/>
 					</div>
-				</div>
-			) : null}
+				) : null}
+			</div>
 		</div>
 	);
 }

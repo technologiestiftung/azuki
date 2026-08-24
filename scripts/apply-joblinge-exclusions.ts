@@ -28,6 +28,7 @@ export interface Removal {
 export interface ExclusionResult {
   occupations: Occupation[];
   removed: Removal[];
+  unmatchedExclusionIds: number[];
 }
 
 export function applyJoblingeExclusions(occupations: Occupation[]): ExclusionResult {
@@ -45,23 +46,28 @@ export function applyJoblingeExclusions(occupations: Occupation[]): ExclusionRes
     }
     kept.push(occ);
   }
-  return { occupations: kept, removed };
+  const seen = new Set(occupations.map((o) => o.id));
+  const unmatchedExclusionIds = [...EXCLUDED_IDS.keys()].filter(
+    (id) => !seen.has(id),
+  );
+  return { occupations: kept, removed, unmatchedExclusionIds };
 }
 
 // Standalone entry point: read berufe.json, remove matches, write back.
 if (import.meta.url === `file://${process.argv[1]}`) {
   const dataPath = resolve(fileURLToPath(import.meta.url), "../../backend/src/data/berufe.json");
   const occupations: Occupation[] = JSON.parse(readFileSync(dataPath, "utf-8"));
-  const { occupations: kept, removed } = applyJoblingeExclusions(occupations);
+  const {
+    occupations: kept,
+    removed,
+    unmatchedExclusionIds,
+  } = applyJoblingeExclusions(occupations);
   const bySection66 = removed.filter((r) => r.reason === "section66").length;
   console.log(
     `Removed ${removed.length} occupations (${bySection66} §66, ${removed.length - bySection66} Joblinge-listed). ${kept.length} remain.`,
   );
-  const listedButAbsent = [...EXCLUDED_IDS.keys()].filter(
-    (id) => !occupations.some((o) => o.id === id),
-  );
-  if (listedButAbsent.length > 0) {
-    console.warn(`WARNING: ${listedButAbsent.length} exclusion id(s) not in catalog: ${listedButAbsent.join(", ")}`);
+  if (unmatchedExclusionIds.length > 0) {
+    console.warn(`WARNING: ${unmatchedExclusionIds.length} exclusion id(s) not in catalog: ${unmatchedExclusionIds.join(", ")}`);
   }
   writeFileSync(dataPath, JSON.stringify(kept, null, 2));
   console.log(`Wrote ${dataPath}`);

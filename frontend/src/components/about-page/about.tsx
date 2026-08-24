@@ -1,87 +1,65 @@
-import { useCallback, useState, type UIEventHandler } from "react";
+import { useState, type UIEvent } from "react";
 import { Footer } from "../footer/Footer";
 import { content } from "../../content";
 import { BottomNav } from "../bottom-nav/BottomNav";
-import { SecondaryIconButton } from "../primitives/buttons/SecondaryIconButton";
 import { useNavigate } from "react-router-dom";
 import { ROUTE_PATHS } from "../../routing/routes";
+import { useOccupationDetailScroll } from "../results-page/occupation-detail/useOccupationDetailScroll";
 import {
-	collapseProgressFromScrollY,
-	useOccupationDetailScroll,
-} from "../results-page/occupation-detail/useOccupationDetailScroll";
-import { AboutHeaderCollapsed } from "./AboutHeaderCollapsed";
-import { useTitleMorph } from "../../hooks/useTitleMorph";
-import { MorphingTitle } from "../morphing-title/MorphingTitle";
+	CollapsingHeaderTopRow,
+	expandedButtonBackgroundStyle,
+} from "../collapsing-header/CollapsingHeaderTopRow";
+import { SecondaryIconButton } from "../primitives/buttons/SecondaryIconButton";
+import { useCollapsedTitleReveal } from "../collapsing-header/useCollapsedTitleReveal";
 
 const SCROLL_OUT_THRESHOLD_PX = 8;
 
 export const AboutPage = () => {
 	const navigate = useNavigate();
-	const { collapseProgress, heroControlsOpacity, onScroll } =
-		useOccupationDetailScroll();
+	const { collapseProgress, onScroll } = useOccupationDetailScroll();
 	const [isScrolledAway, setIsScrolledAway] = useState(false);
+	const { titleRef, titleRevealProgress, updateTitleReveal } =
+		useCollapsedTitleReveal();
 
-	const {
-		heroTitleSlotRef,
-		collapsedTitleSlotRef,
-		isMorphing,
-		titleStyle,
-		syncMorphTitle,
-	} = useTitleMorph({
-		heroFontSizePx: 30,
-		collapsedFontSizePx: 14,
-		heroLineHeightPx: 36,
-		collapsedLineHeightPx: 20,
-		minTopPx: 8,
-	});
-
-	const handleScroll: UIEventHandler<HTMLDivElement> = useCallback(
-		(event) => {
-			onScroll(event);
-			const scrollY = event.currentTarget.scrollTop;
-			setIsScrolledAway(scrollY > SCROLL_OUT_THRESHOLD_PX);
-			syncMorphTitle(collapseProgressFromScrollY(scrollY));
-		},
-		[onScroll, syncMorphTitle],
-	);
+	const handleScroll = (event: UIEvent<HTMLDivElement>) => {
+		onScroll(event);
+		updateTitleReveal(event.currentTarget);
+		const scrollY = event.currentTarget.scrollTop;
+		setIsScrolledAway(scrollY > SCROLL_OUT_THRESHOLD_PX);
+	};
 
 	return (
 		<div className="flex flex-col h-full relative overflow-x-hidden pb-16">
-			<AboutHeaderCollapsed
-				collapseProgress={collapseProgress}
-				titleSlotRef={collapsedTitleSlotRef}
-			/>
-			<MorphingTitle isMorphing={isMorphing} style={titleStyle}>
-				{content["about.title"]}
-			</MorphingTitle>
 			<div
 				className="relative flex-1 overflow-y-auto overflow-x-hidden"
 				onScroll={handleScroll}
 			>
-				<div className="sticky top-0 z-[1] flex flex-col px-4 pt-2 pb-2">
-					<div className="flex items-center h-10 transition-opacity duration-150">
+				<CollapsingHeaderTopRow
+					title={content["about.title"]}
+					progress={collapseProgress}
+					titleRevealProgress={titleRevealProgress}
+					collapsedFill
+					leading={
 						<SecondaryIconButton
 							iconSrc="/icons/arrow-back-black.svg"
 							ariaLabel={content["about.backButton.ariaLabel"]}
 							onClick={() => navigate(ROUTE_PATHS.profile)}
 							className="transition-[background-color] duration-150"
-							style={{
-								backgroundColor: `rgba(209, 213, 219, ${heroControlsOpacity})`,
-							}}
+							style={expandedButtonBackgroundStyle(collapseProgress)}
 						/>
-					</div>
-					<div ref={heroTitleSlotRef} className="w-fit">
-						<h1
-							className={`text-3xl font-semibold py-2 ${
-								isMorphing ? "invisible" : ""
-							}`}
-							aria-hidden={isMorphing}
-						>
-							{content["about.title"]}
-						</h1>
-					</div>
+					}
+				/>
+				<div className="relative flex flex-col px-4 pt-14 pb-2">
+					<h1
+						ref={titleRef}
+						className="text-3xl font-semibold py-2 text-sky-900"
+						style={{ opacity: 1 - collapseProgress }}
+						aria-hidden={collapseProgress >= 0.5}
+					>
+						{content["about.title"]}
+					</h1>
 					<div
-						className={`absolute top-0 right-0 pt-2 [animation-duration:0.6s] ${
+						className={`absolute top-0 right-0 pt-2 [animation-duration:0.6s] z-40 ${
 							isScrolledAway ? "animate-slideOutRight" : "animate-slideInRight"
 						}`}
 					>

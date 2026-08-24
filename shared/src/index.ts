@@ -14,6 +14,8 @@ export type {
 	VacancyPreview,
 	VacancyResult,
 	VacanciesResponse,
+	VacancyAddress,
+	VacancyDetail,
 } from "./types";
 
 export {
@@ -43,6 +45,8 @@ export {
 	type DazubiMatchType,
 	type PopularityRecord,
 } from "./popularity";
+
+export { WILDCARD_POOL_OCCUPATION_IDS, isInWildcardPool } from "./wildcardPool";
 
 export {
 	EVAL_TOP_N,

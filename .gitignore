@@ -38,3 +38,4 @@ data/popularity-source/*.xlsx
 .worktrees/
 api/[...route].js
 .vercel/output
+data-refresh-summary.json

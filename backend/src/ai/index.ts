@@ -1078,6 +1078,7 @@ export async function aiRank(
 				return toOccupationResult(item, ranking.begruendung);
 			},
 		),
+		wildcardOccupations: [],
 	};
 
 	if (result.occupations.length < MIN_RESULTS) {
@@ -1111,5 +1112,6 @@ function fallbackResult(scored: ScoredOccupation[]): MatchResult {
 				.slice(0, MAX_RESULTS)
 				.map((item) => toOccupationResult(item, DEFAULT_REASONING)),
 		),
+		wildcardOccupations: [],
 	};
 }

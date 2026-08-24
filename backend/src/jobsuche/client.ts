@@ -1,7 +1,14 @@
-import type { VacancyResult, VacancyPreview } from "@azuki/shared";
+import type {
+	VacancyResult,
+	VacancyPreview,
+	VacancyDetail,
+	VacancyAddress,
+} from "@azuki/shared";
 
 const JOBSUCHE_BASE =
 	"https://rest.arbeitsagentur.de/jobboerse/jobsuche-service/pc/v6/jobs";
+const JOBDETAILS_BASE =
+	"https://rest.arbeitsagentur.de/jobboerse/jobsuche-service/pc/v4/jobdetails";
 const API_KEY = "jobboerse-jobsuche";
 // `angebotsart=4` scopes to Ausbildung + Duales Studium, `ausbildungsart=0`
 // narrows that to betriebliche Ausbildung.
@@ -49,11 +56,24 @@ interface JobsucheJob {
 	veroeffentlichungszeitraum?: { von?: string };
 	datumErsteVeroeffentlichung?: string;
 	ausbildungsart?: string;
+	referenznummer?: string;
 }
 
 interface JobsucheResponse {
 	ergebnisliste?: JobsucheJob[];
 	maxErgebnisse?: number;
+}
+
+interface JobsucheJobDetails {
+	stellenangebotsTitel?: string;
+	stellenangebotsBeschreibung?: string;
+	firma?: string;
+	hauptberuf?: string;
+	arbeitszeitVollzeit?: boolean;
+	geforderterBildungsabschluss?: string;
+	eintrittszeitraum?: { von?: string };
+	stellenlokationen?: JobsucheLocation[];
+	referenznummer?: string;
 }
 
 function searchParams(
@@ -113,6 +133,7 @@ function toPreview(job: JobsucheJob): VacancyPreview {
 	const latitude = location?.breite;
 	const longitude = location?.laenge;
 	return {
+		referenznummer: job.referenznummer ?? "",
 		employer: job.firma || "Unbekannter Arbeitgeber",
 		city: normalizeLocationField(adresse?.ort) || "Unbekannter Ort",
 		postcode: normalizeLocationField(adresse?.plz),
@@ -129,6 +150,45 @@ function toPreview(job: JobsucheJob): VacancyPreview {
 		startDate: job.eintrittszeitraum?.von,
 		publishedAt:
 			job.veroeffentlichungszeitraum?.von ?? job.datumErsteVeroeffentlichung,
+	};
+}
+
+function toAddress(location: JobsucheLocation): VacancyAddress {
+	const adresse = location.adresse;
+	const latitude = location.breite;
+	const longitude = location.laenge;
+	return {
+		street: toStreet(adresse),
+		postcode: normalizeLocationField(adresse?.plz),
+		city: normalizeLocationField(adresse?.ort),
+		latitude:
+			typeof latitude === "number" && Number.isFinite(latitude)
+				? latitude
+				: undefined,
+		longitude:
+			typeof longitude === "number" && Number.isFinite(longitude)
+				? longitude
+				: undefined,
+	};
+}
+
+export function toDetail(
+	job: JobsucheJobDetails,
+	referenznummer: string,
+): VacancyDetail {
+	return {
+		referenznummer,
+		occupationName: job.hauptberuf ?? "",
+		title: job.stellenangebotsTitel ?? "",
+		employer: job.firma || "Unbekannter Arbeitgeber",
+		description: job.stellenangebotsBeschreibung ?? "",
+		isFullTime:
+			typeof job.arbeitszeitVollzeit === "boolean"
+				? job.arbeitszeitVollzeit
+				: null,
+		educationLevel: job.geforderterBildungsabschluss ?? null,
+		startDate: job.eintrittszeitraum?.von,
+		addresses: (job.stellenlokationen ?? []).map(toAddress),
 	};
 }
 
@@ -199,5 +259,41 @@ export async function searchVacancies(
 		}
 		console.error(`Jobsuche API error for "${occupation}": ${reason}`);
 		return emptyResult(occupation, postcode, distance);
+	}
+}
+
+export async function getJobDetails(
+	referenznummer: string,
+): Promise<VacancyDetail | null> {
+	const encoded = Buffer.from(referenznummer, "utf-8").toString("base64");
+
+	try {
+		const res = await fetch(`${JOBDETAILS_BASE}/${encoded}`, {
+			headers: { "X-API-Key": API_KEY },
+			signal: AbortSignal.timeout(REQUEST_TIMEOUT_MS),
+		});
+
+		if (!res.ok) {
+			console.error(
+				`Jobsuche jobdetails error for "${referenznummer}": ${res.status}`,
+			);
+			return null;
+		}
+
+		const data = (await res.json()) as JobsucheJobDetails;
+		return toDetail(data, referenznummer);
+	} catch (err) {
+		let reason: string;
+		if (err instanceof Error && err.name === "TimeoutError") {
+			reason = "timeout";
+		} else if (err instanceof Error) {
+			reason = err.message;
+		} else {
+			reason = String(err);
+		}
+		console.error(
+			`Jobsuche jobdetails error for "${referenznummer}": ${reason}`,
+		);
+		return null;
 	}
 }

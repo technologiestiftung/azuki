@@ -30,6 +30,9 @@ export function InSchoolStep() {
 			onSkip={goNext}
 			hasSkipButton={false}
 			subtitle={content["common.singleSelect.subline"]}
+			animateEnter
+			themedNextButton
+			showFooterBorder={false}
 		>
 			<div className="flex flex-col gap-3">
 				{inSchoolOptions.map((option) => (
