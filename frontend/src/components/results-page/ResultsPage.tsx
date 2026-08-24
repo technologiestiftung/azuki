@@ -1,4 +1,11 @@
-import { useCallback, useMemo, useState, type UIEvent } from "react";
+import {
+	useCallback,
+	useLayoutEffect,
+	useMemo,
+	useRef,
+	useState,
+	type UIEvent,
+} from "react";
 import { useSearchParams } from "react-router-dom";
 import { useMatchResultsStore } from "../../store/useMatchResultsStore";
 import { useAppStore } from "../../store/useAppStore";
@@ -11,6 +18,7 @@ import {
 import { useFilterSheet } from "../filter-bottom-sheet/useFilterSheet";
 import { ResultCard } from "./ResultCard";
 import { BottomCard } from "./BottomCard";
+import { WildcardCarousel } from "./WildcardCarousel";
 import { ResultsFilterBar } from "./ResultsFilterBar";
 import { buildResultTagChips } from "./utils/resultTagChips";
 import { applyOccupationFilters } from "./utils/applyOccupationFilters";
@@ -46,7 +54,14 @@ export function ResultsPage() {
 	);
 	const inSchool = useAppStore((state) => state.profile.inSchool);
 	const showBottomNav = shouldShowBottomNav(inSchool, searchParams);
+	const resultsListScrollTop = useMatchResultsStore(
+		(state) => state.resultsListScrollTop,
+	);
+	const setResultsListScrollTop = useMatchResultsStore(
+		(state) => state.setResultsListScrollTop,
+	);
 	const occupations = matchResults?.occupations ?? [];
+	const wildcardOccupations = matchResults?.wildcardOccupations ?? [];
 	const tagFilter = useFilterSheet(DEFAULT_TAG_FILTERS);
 	const [showFavoritesOnly, setShowFavoritesOnly] = useState(false);
 
@@ -65,6 +80,15 @@ export function ResultsPage() {
 		[occupations, tagFilter.appliedValue, showFavoritesOnly, favoriteIds],
 	);
 
+	const favoritedWildcardOccupations = useMemo(
+		() => wildcardOccupations.filter((o) => favoriteIds.has(o.id)),
+		[wildcardOccupations, favoriteIds],
+	);
+
+	const hasVisibleContent =
+		visibleOccupations.length > 0 ||
+		(showFavoritesOnly && favoritedWildcardOccupations.length > 0);
+
 	const occupationTypeTagChips = useMemo(
 		() => buildResultTagChips(occupations),
 		[occupations],
@@ -76,13 +100,22 @@ export function ResultsPage() {
 	const { scrollProgress, handleListScroll } = useResultsPageScrollProgress();
 	const { titleRef, titleRevealProgress, updateTitleReveal } =
 		useCollapsedTitleReveal();
+	const scrollContainerRef = useRef<HTMLDivElement>(null);
 	const handleScroll = useCallback(
 		(event: UIEvent<HTMLDivElement>) => {
 			handleListScroll(event);
 			updateTitleReveal(event.currentTarget);
+			setResultsListScrollTop(event.currentTarget.scrollTop);
 		},
-		[handleListScroll, updateTitleReveal],
+		[handleListScroll, updateTitleReveal, setResultsListScrollTop],
 	);
+
+	const initialScrollTopRef = useRef(resultsListScrollTop);
+	useLayoutEffect(() => {
+		if (scrollContainerRef.current) {
+			scrollContainerRef.current.scrollTop = initialScrollTopRef.current;
+		}
+	}, []);
 
 	const toggleFavoritesOnly = useCallback(() => {
 		setShowFavoritesOnly((prev) => !prev);
@@ -129,7 +162,11 @@ export function ResultsPage() {
 				onApply={tagFilter.apply}
 				onReset={tagFilter.reset}
 			/>
-			<div className="flex-1 overflow-y-auto" onScroll={handleScroll}>
+			<div
+				ref={scrollContainerRef}
+				className="flex-1 overflow-y-auto"
+				onScroll={handleScroll}
+			>
 				<ResultsPageHeader
 					scrollProgress={scrollProgress}
 					titleRevealProgress={titleRevealProgress}
@@ -163,15 +200,26 @@ export function ResultsPage() {
 					scrollProgress={scrollProgress}
 				/>
 				<div className="px-4 pb-4 space-y-3">
-					{!isLoadingShared && visibleOccupations.length > 0 && (
+					{!isLoadingShared && hasVisibleContent && (
 						<>
 							{visibleOccupations.map((occupation: MatchedOccupation) => (
 								<ResultCard key={occupation.id} occupation={occupation} />
 							))}
+							{showFavoritesOnly ? (
+								favoritedWildcardOccupations.map((occupation) => (
+									<ResultCard
+										key={occupation.id}
+										occupation={occupation}
+										isWildcard
+									/>
+								))
+							) : (
+								<WildcardCarousel occupations={wildcardOccupations} />
+							)}
 							<BottomCard />
 						</>
 					)}
-					{!isLoadingShared && visibleOccupations.length === 0 && (
+					{!isLoadingShared && !hasVisibleContent && (
 						<div className="flex px-4 pb-4 items-center h-full">
 							<div className="flex flex-col items-center justify-center gap-5 px-5">
 								<div className="flex items-center justify-center object-contain p-2">

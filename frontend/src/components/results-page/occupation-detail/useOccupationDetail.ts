@@ -26,8 +26,13 @@ function findMatchedOccupation(
 		typeof useMatchResultsStore.getState
 	>["matchResults"],
 ) {
-	return matchResults?.occupations.find(
-		(occupation) => occupation.id === occupationId,
+	return (
+		matchResults?.occupations.find(
+			(occupation) => occupation.id === occupationId,
+		) ??
+		matchResults?.wildcardOccupations.find(
+			(occupation) => occupation.id === occupationId,
+		)
 	);
 }
 

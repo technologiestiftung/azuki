@@ -46,6 +46,8 @@ export {
 	type PopularityRecord,
 } from "./popularity";
 
+export { WILDCARD_POOL_OCCUPATION_IDS, isInWildcardPool } from "./wildcardPool";
+
 export {
 	EVAL_TOP_N,
 	EVAL_MAX_POINTS,

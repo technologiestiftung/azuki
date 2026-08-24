@@ -37,6 +37,7 @@ export function OccupationDetailPage() {
 	const navigate = useNavigate();
 	const occupationId = Number(useParams().id);
 	const [searchParams] = useSearchParams();
+	const isWildcard = searchParams.get("wildcard") === "1";
 	const shareState = useMemo(
 		() => parseOccupationShareState(searchParams),
 		[searchParams],
@@ -151,7 +152,7 @@ export function OccupationDetailPage() {
 		const url = state
 			? buildOccupationShareUrl(occupationId, state)
 			: new URL(
-					buildResultsOccupationPath(occupationId),
+					buildResultsOccupationPath(occupationId, { wildcard: isWildcard }),
 					window.location.origin,
 				).toString();
 
@@ -170,6 +171,7 @@ export function OccupationDetailPage() {
 		detail.occupationDuration,
 		matchPercent,
 		liveNextOccupations,
+		isWildcard,
 	]);
 
 	useEffect(() => {
@@ -243,6 +245,7 @@ export function OccupationDetailPage() {
 							occupationDuration={detail.occupationDuration}
 							occupationVacanciesCount={occupationVacanciesCount}
 							nextOccupationCards={nextOccupationCards}
+							isWildcard={isWildcard}
 						/>
 					)}
 				</div>

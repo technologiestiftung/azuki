@@ -18,6 +18,7 @@ interface OccupationDetailBodyProps {
 	occupationDuration: string;
 	occupationVacanciesCount: number | undefined;
 	nextOccupationCards: SharedNextOccupationCard[];
+	isWildcard?: boolean;
 }
 
 export function OccupationDetailBody({
@@ -28,6 +29,7 @@ export function OccupationDetailBody({
 	occupationDuration,
 	occupationVacanciesCount,
 	nextOccupationCards,
+	isWildcard = false,
 }: OccupationDetailBodyProps) {
 	const [searchParams] = useSearchParams();
 	const inlineApplyRef = useRef<HTMLAnchorElement>(null);
@@ -73,11 +75,13 @@ export function OccupationDetailBody({
 					))}
 				</ul>
 			</div>
-			<OccupationDetailMatchSection
-				matchPercent={matchPercent}
-				occupation={occupation}
-				profile={profile}
-			/>
+			{!isWildcard && (
+				<OccupationDetailMatchSection
+					matchPercent={matchPercent}
+					occupation={occupation}
+					profile={profile}
+				/>
+			)}
 			{occupation && occupation.images.length > 0 && (
 				<div className="flex flex-col gap-2">
 					<h3 className="text-sky-900 text-2xl font-semibold px-[18px]">
@@ -104,7 +108,11 @@ export function OccupationDetailBody({
 					</div>
 					<OccupationDetailApplyLink
 						ref={inlineApplyRef}
-						hidden={!isInlineApplyVisible}
+						hidden={
+							!isInlineApplyVisible &&
+							occupationVacanciesCount !== undefined &&
+							occupationVacanciesCount > 0
+						}
 						occupationVacanciesCount={occupationVacanciesCount}
 					/>
 				</div>

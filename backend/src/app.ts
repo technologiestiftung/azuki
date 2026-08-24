@@ -15,6 +15,10 @@ import {
 } from "@azuki/shared";
 import { occupationMatchMeta } from "./occupationMeta";
 import {
+	pickWildcardOccupations,
+	toWildcardMatchedOccupation,
+} from "./wildcards.js";
+import {
 	FINAL_MATCH_COUNT,
 	preFilter,
 	PREFILTER_TOP_K,
@@ -184,7 +188,11 @@ app.post("/api/match", async (c) => {
 	try {
 		topCandidates = preFilter(occupations, profile, PREFILTER_TOP_K);
 		const result = await aiRank(topCandidates, profile);
-		return c.json(result);
+		const wildcardOccupations = pickWildcardOccupations(
+			occupations,
+			new Set(result.occupations.map((o) => o.id)),
+		).map(toWildcardMatchedOccupation);
+		return c.json({ ...result, wildcardOccupations });
 	} catch (err) {
 		console.error("Match error, falling back to pre-filter:", err);
 		if (topCandidates.length === 0) {
@@ -200,8 +208,9 @@ app.post("/api/match", async (c) => {
 					}));
 			}
 		}
-		const fallback: MatchResult = {
-			occupations: topCandidates.slice(0, FINAL_MATCH_COUNT).map((scored) => ({
+		const matchedOccupations = topCandidates
+			.slice(0, FINAL_MATCH_COUNT)
+			.map((scored) => ({
 				id: scored.occupation.id,
 				name: formatOccupationDisplayName(scored.occupation.name),
 				rawName: scored.occupation.name,
@@ -212,7 +221,13 @@ app.post("/api/match", async (c) => {
 				salaryKnown: scored.occupation.salaryKnown,
 				salaryMonthlyMedian: scored.occupation.salaryMonthlyMedian,
 				...occupationMatchMeta(scored.occupation),
-			})),
+			}));
+		const fallback: MatchResult = {
+			occupations: matchedOccupations,
+			wildcardOccupations: pickWildcardOccupations(
+				occupations,
+				new Set(matchedOccupations.map((o) => o.id)),
+			).map(toWildcardMatchedOccupation),
 		};
 		return c.json(fallback);
 	}
@@ -294,7 +309,13 @@ app.get("/api/shared-match", (c) => {
 		return c.json({ error: "No matching occupations found" }, 404);
 	}
 
-	const result: MatchResult = { occupations: matched };
+	const result: MatchResult = {
+		occupations: matched,
+		wildcardOccupations: pickWildcardOccupations(
+			occupations,
+			new Set(matched.map((o) => o.id)),
+		).map(toWildcardMatchedOccupation),
+	};
 	return c.json(result);
 });
 

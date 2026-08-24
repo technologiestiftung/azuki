@@ -530,6 +530,8 @@ export const content = {
 	"results.favorite.add": "Zu Favoriten hinzufügen",
 	"results.favorite.remove": "Aus Favoriten entfernen",
 	"results.card.score.label": "Passt zu",
+	"results.wildcard.badge": "Besonders gesucht",
+	"results.wildcard.title": "Hier werden besonders viele Azubis gesucht",
 	"results.noResults":
 		"Wir haben leider keine Ausbildungsberufe zu deiner Auswahl gefunden.",
 	"results.contactCard.title": "Du weißt nicht, wo du anfangen sollst?",
@@ -574,7 +576,7 @@ export const content = {
 	"results.contactCard.bottomSheet.firstname.error":
 		"Bitte gib deinen Vornamen ein.",
 	"results.contactCard.bottomSheet.postalcode.error":
-		"Bitte gib deine gültige Postleitzahl ein (5 Zahlen).",
+		"Bitte gib eine gültige Postleitzahl ein.",
 	"results.contactCard.bottomSheet.under16.error":
 		"Bitte gib dein Alter an. Wir müssen dies aus rechtlichen Gründen für die Kontaktaufnahme wissen.",
 	"results.contactCard.bottomSheet.birthdate.error":
@@ -690,6 +692,8 @@ export const content = {
 	"results.detail.moreOccupations.title": "Mehr Ausbildungsberufe",
 	// Vacancies
 	"vacancies.title": "Freie Stellen für dich",
+	"vacancies.wildcard.title":
+		"Weitere Stellen, für die besonders viele Azubis gesucht werden",
 	"vacancies.share.ariaLabel": "Freie Stellen teilen",
 	"vacancies.share.title": "Freie Stellen für dich",
 	"vacancies.share.text": "Schau dir diese freien Ausbildungsstellen an.",
@@ -716,6 +720,7 @@ export const content = {
 		"Fachgebundene Hochschulreife",
 	"vacancies.detail.locationTitle": "Arbeitsort",
 	"vacancies.detail.location.showMore": "+{count} weitere Arbeitsorte",
+	"vacancies.detail.location.showMore.one": "1 weiterer Arbeitsort",
 	"vacancies.detail.location.showLess": "Weniger anzeigen",
 	"vacancies.detail.aboutTitle": "Über diese Stelle",
 	"vacancies.detail.description.showMore": "Mehr anzeigen",

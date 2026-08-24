@@ -46,6 +46,14 @@ export function VacancyAddressList({ addresses }: VacancyAddressListProps) {
 		);
 	}
 
+	const showMoreLabel =
+		rest.length === 1
+			? content["vacancies.detail.location.showMore.one"]
+			: content["vacancies.detail.location.showMore"].replace(
+					"{count}",
+					String(rest.length),
+				);
+
 	return (
 		<div className="flex flex-col gap-3">
 			<span className="text-sky-900 text-xl leading-[140%] font-semibold">
@@ -71,10 +79,7 @@ export function VacancyAddressList({ addresses }: VacancyAddressListProps) {
 				>
 					{isOpen
 						? content["vacancies.detail.location.showLess"]
-						: content["vacancies.detail.location.showMore"].replace(
-								"{count}",
-								String(rest.length),
-							)}
+						: showMoreLabel}
 					<img
 						src={
 							isOpen
