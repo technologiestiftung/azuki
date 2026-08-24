@@ -1,8 +1,6 @@
 import type { Occupation } from "@azuki/shared";
 import {
-	PREFERRED_JOB_BOOST_BY_TIER,
 	PREFERRED_JOB_KEYWORD_HIT_CAP,
-	PREFERRED_JOB_KEYWORD_POINT_PER_HIT,
 	normName,
 	type PreferredJobMatchTier,
 } from "@azuki/shared";
@@ -107,23 +105,45 @@ function countKeywordHits(
 	return Math.min(hits, PREFERRED_JOB_KEYWORD_HIT_CAP);
 }
 
+const MIN_DEGENDERED_STEM = 5;
+
+/**
+ * normName only collapses gender forms written with a slash ("Elektroniker/in").
+ * Users type the plain feminine ("Elektrikerin"), which then contains neither
+ * the occupation name nor vice versa, so the wish resolves to nothing. Offer
+ * the stem as a second candidate.
+ */
+function preferredJobNormCandidates(preferredJob: string): string[] {
+	const norm = normName(preferredJob);
+	if (!norm) {
+		return [];
+	}
+	const stem = norm.replace(/in$/, "");
+	return stem !== norm && stem.length >= MIN_DEGENDERED_STEM
+		? [norm, stem]
+		: [norm];
+}
+
 function resolveTierForOccupation(
 	preferredJob: string,
 	occupation: Occupation,
 ): PreferredJobMatchTier | null {
-	const preferredNorm = normName(preferredJob);
 	const occupationNorm = normName(occupation.name);
-	if (!preferredNorm || !occupationNorm) {
+	const candidates = preferredJobNormCandidates(preferredJob);
+	if (!occupationNorm || candidates.length === 0) {
 		return null;
 	}
 
-	if (preferredNorm === occupationNorm) {
+	if (candidates.some((candidate) => candidate === occupationNorm)) {
 		return "exact";
 	}
 
 	if (
-		occupationNorm.includes(preferredNorm) ||
-		preferredNorm.includes(occupationNorm)
+		candidates.some(
+			(candidate) =>
+				occupationNorm.includes(candidate) ||
+				candidate.includes(occupationNorm),
+		)
 	) {
 		return "substring";
 	}
@@ -132,20 +152,29 @@ function resolveTierForOccupation(
 	return keywordHits > 0 ? "keyword" : null;
 }
 
-function preferredJobMatchScore(match: ResolvedPreferredJobMatch): number {
-	if (match.tier === "keyword") {
-		return (match.keywordHits ?? 0) * PREFERRED_JOB_KEYWORD_POINT_PER_HIT;
-	}
-	return PREFERRED_JOB_BOOST_BY_TIER[match.tier];
-}
+const TIER_PRIORITY: Record<PreferredJobMatchTier, number> = {
+	exact: 0,
+	substring: 1,
+	keyword: 2,
+};
 
+/**
+ * Orders by match tier, not by boost points. Ranking by points would let a
+ * keyword hit outrank the exactly named Beruf whenever the keyword ceiling
+ * sits above the exact boost, which pushes the named Beruf out of the
+ * shortlist injection window.
+ */
 function sortPreferredJobMatches(
 	matches: ResolvedPreferredJobMatch[],
 ): ResolvedPreferredJobMatch[] {
 	return [...matches].sort((a, b) => {
-		const scoreDiff = preferredJobMatchScore(b) - preferredJobMatchScore(a);
-		if (scoreDiff !== 0) {
-			return scoreDiff;
+		const tierDiff = TIER_PRIORITY[a.tier] - TIER_PRIORITY[b.tier];
+		if (tierDiff !== 0) {
+			return tierDiff;
+		}
+		const hitDiff = (b.keywordHits ?? 0) - (a.keywordHits ?? 0);
+		if (hitDiff !== 0) {
+			return hitDiff;
 		}
 		return a.occupation.name.localeCompare(b.occupation.name, "de");
 	});
