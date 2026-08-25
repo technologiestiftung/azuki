@@ -37,6 +37,8 @@ Font.register({
 	],
 });
 
+Font.registerHyphenationCallback((word) => [word]);
+
 export const styles = StyleSheet.create({
 	page: {
 		paddingTop: PAGE_PAD_TOP + PAGE_HEADER_HEIGHT + PAGE_HEADER_GAP,
@@ -146,6 +148,10 @@ export const styles = StyleSheet.create({
 		fontWeight: 400,
 		fontSize: 11.5,
 		lineHeight: 1.3,
+	},
+	ctaBodyBold: {
+		fontFamily: "Asap",
+		fontWeight: 700,
 	},
 	ctaQrBlock: {
 		alignItems: "center",

@@ -3,11 +3,13 @@ import type { MatchedOccupation } from "@azuki/shared";
 import { content } from "../../../content";
 import {
 	ensureBufferPolyfill,
-	loadPdfCardImageSrc,
+	getSolidPdfPlaceholderSrc,
 	loadPdfIconSrc,
 	loadPdfPlaceholderSrc,
+	loadPdfTopCardImages,
+	revokePdfBlobUrls,
 	triggerDownload,
-	yieldToBrowser,
+	warmPdfRuntime,
 } from "../../pdf/loadPdfAssets";
 import {
 	OccupationsPdfDocument,
@@ -21,32 +23,31 @@ const CTA_SURFACE_BG = "#DDF4FF";
 
 export async function exportOccupationsPdf(
 	occupations: MatchedOccupation[],
+	wildcardOccupations: MatchedOccupation[] = [],
 ): Promise<void> {
-	if (occupations.length === 0) {
+	if (occupations.length === 0 && wildcardOccupations.length === 0) {
 		return;
 	}
 
 	ensureBufferPolyfill();
-	await yieldToBrowser();
-
-	const placeholderSrc = await loadPdfPlaceholderSrc();
-	await yieldToBrowser();
+	await warmPdfRuntime();
 
 	const topOccupations = occupations.slice(0, 3);
-	const topImageSrcs = await Promise.all(
-		topOccupations.map((occupation) => {
-			const imageUrl = occupation.images[0]?.url?.trim() || undefined;
-			return loadPdfCardImageSrc(imageUrl, placeholderSrc);
-		}),
-	);
-	await yieldToBrowser();
+	let placeholderPromise: Promise<string> | null = null;
+	const resolvePlaceholder = () => {
+		placeholderPromise ??= loadPdfPlaceholderSrc();
+		return placeholderPromise;
+	};
 
-	const [mascotSrc, qrSrc] = await Promise.all([
+	const [mascotSrc, qrSrc, topImageSrcs] = await Promise.all([
 		loadPdfIconSrc(MASCOT_SRC, CTA_SURFACE_BG),
 		loadPdfIconSrc(QR_SRC, CTA_SURFACE_BG),
+		loadPdfTopCardImages(topOccupations, resolvePlaceholder),
 	]);
 
-	await yieldToBrowser();
+	const placeholderSrc = placeholderPromise
+		? await placeholderPromise
+		: getSolidPdfPlaceholderSrc();
 
 	const assets: OccupationsPdfAssets = {
 		mascotSrc,
@@ -55,9 +56,17 @@ export async function exportOccupationsPdf(
 		topImageSrcs,
 	};
 
-	const blob = await pdf(
-		<OccupationsPdfDocument occupations={occupations} assets={assets} />,
-	).toBlob();
+	try {
+		const blob = await pdf(
+			<OccupationsPdfDocument
+				occupations={occupations}
+				wildcardOccupations={wildcardOccupations}
+				assets={assets}
+			/>,
+		).toBlob();
 
-	triggerDownload(blob, content["results.export.filename"]);
+		triggerDownload(blob, content["results.export.filename"]);
+	} finally {
+		revokePdfBlobUrls(topImageSrcs);
+	}
 }

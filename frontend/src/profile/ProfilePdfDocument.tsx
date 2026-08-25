@@ -15,6 +15,7 @@ import {
 import { categories as subjectCategories } from "../components/competence-profile/steps/school-subject-step/school-subjects";
 import { interests as interestCategories } from "../components/competence-profile/steps/interests-step/interests";
 import { strengths as strengthOptions } from "../components/competence-profile/steps/strengths-step/strengths";
+import { schoolDegrees } from "../components/competence-profile/steps/school-degree/school-degrees";
 import { workExpectationOptions } from "../components/competence-profile/steps/work-expectation-options";
 import { noGos as noGoOptions } from "../components/competence-profile/steps/no-gos-step/no-gos";
 import { workPreferencePairs } from "../content/work-preference-pairs";
@@ -95,6 +96,7 @@ const profileStyles = StyleSheet.create({
 	cardImage: {
 		width: "100%",
 		height: 92,
+		objectFit: "cover",
 	},
 	cardBadgeRow: {
 		flexDirection: "row",
@@ -145,6 +147,28 @@ const profileStyles = StyleSheet.create({
 	},
 	aboutBlock: {
 		marginTop: 4,
+	},
+	schoolDegreeBlock: {
+		backgroundColor: COLOR.skyShade10,
+		borderRadius: 13,
+		padding: 12,
+		marginBottom: 16,
+		marginLeft: 8,
+		alignSelf: "flex-start",
+	},
+	schoolDegreeTitle: {
+		fontFamily: "Asap",
+		fontWeight: 700,
+		fontSize: 12,
+		lineHeight: 1.25,
+		marginBottom: 8,
+		color: COLOR.sky900,
+	},
+	schoolDegreeValue: {
+		fontFamily: "Asap",
+		fontWeight: 400,
+		fontSize: 12,
+		color: COLOR.sky900,
 	},
 	chipSubtitle: {
 		fontFamily: "Asap",
@@ -550,6 +574,32 @@ function buildAboutChipSections(profile: UserProfile): Array<{
 	];
 }
 
+function resolveSchoolDegreeLabel(profile: UserProfile): string | null {
+	if (!profile.educationLevel) {
+		return null;
+	}
+	return (
+		schoolDegrees.find((degree) => degree.value === profile.educationLevel)
+			?.label ?? null
+	);
+}
+
+function SchoolDegreeSection({ profile }: { profile: UserProfile }) {
+	const label = resolveSchoolDegreeLabel(profile);
+	if (!label) {
+		return null;
+	}
+	const title = profile.inSchool
+		? content["profile.schoolDegreeLabel.planned"]
+		: content["profile.schoolDegreeLabel.inSchool"];
+	return (
+		<View style={profileStyles.schoolDegreeBlock} wrap={false}>
+			<Text style={profileStyles.schoolDegreeTitle}>{title}</Text>
+			<Text style={profileStyles.schoolDegreeValue}>{label}</Text>
+		</View>
+	);
+}
+
 function buildDetailChipSections(profile: UserProfile): Array<{
 	title: string;
 	items: ChipItem[];
@@ -618,7 +668,10 @@ export function ProfilePdfDocument({
 	const aboutSections = buildAboutChipSections(profile);
 	const detailSections = buildDetailChipSections(profile);
 	const hasMeters = strengths.length > 0 || hardships.length > 0;
-	const hasAbout = aboutSections.some((section) => section.items.length > 0);
+	const schoolDegreeLabel = resolveSchoolDegreeLabel(profile);
+	const hasAbout =
+		Boolean(schoolDegreeLabel) ||
+		aboutSections.some((section) => section.items.length > 0);
 
 	return (
 		<Document
@@ -644,7 +697,7 @@ export function ProfilePdfDocument({
 								<TopCard
 									key={occupation.id}
 									occupation={occupation}
-									imageSrc={assets.topImageSrcs[index] ?? assets.placeholderSrc}
+									imageSrc={assets.topImageSrcs[index] || assets.placeholderSrc}
 								/>
 							))}
 						</View>
@@ -656,6 +709,7 @@ export function ProfilePdfDocument({
 						<Text style={styles.sectionTitle}>
 							{content["profile.aboutYou"]}
 						</Text>
+						<SchoolDegreeSection profile={profile} />
 						{aboutSections.map((section) => (
 							<ChipSection
 								key={section.title}
@@ -666,12 +720,6 @@ export function ProfilePdfDocument({
 						))}
 					</View>
 				) : null}
-
-				<PageFooter />
-			</Page>
-
-			<Page size="A4" style={styles.page}>
-				<PdfPageHeader />
 
 				{hasMeters ? (
 					<View style={profileStyles.columns} wrap={false}>

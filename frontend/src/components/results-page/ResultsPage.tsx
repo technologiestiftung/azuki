@@ -1,5 +1,6 @@
 import {
 	useCallback,
+	useEffect,
 	useLayoutEffect,
 	useMemo,
 	useRef,
@@ -35,6 +36,7 @@ import {
 	useResultsPageScrollProgress,
 } from "./ResultsPageHeader";
 import { useCollapsedTitleReveal } from "../collapsing-header/useCollapsedTitleReveal";
+import { warmPdfRuntime } from "../pdf/loadPdfAssets";
 
 const DEFAULT_TAG_FILTERS: OccupationTagsFilterState = {
 	selectedOccupationTypeTagIds: [],
@@ -117,6 +119,19 @@ export function ResultsPage() {
 		}
 	}, []);
 
+	useEffect(() => {
+		const warm = () => {
+			void warmPdfRuntime();
+			void import("./utils/exportOccupationsPdf");
+		};
+		if (typeof window.requestIdleCallback === "function") {
+			const idleId = window.requestIdleCallback(warm, { timeout: 2500 });
+			return () => window.cancelIdleCallback(idleId);
+		}
+		const timeoutId = window.setTimeout(warm, 400);
+		return () => window.clearTimeout(timeoutId);
+	}, []);
+
 	const toggleFavoritesOnly = useCallback(() => {
 		setShowFavoritesOnly((prev) => !prev);
 	}, []);
@@ -126,11 +141,19 @@ export function ResultsPage() {
 			const { exportOccupationsPdf } = await import(
 				"./utils/exportOccupationsPdf"
 			);
-			await exportOccupationsPdf(visibleOccupations);
+			const wildcardsForExport = showFavoritesOnly
+				? favoritedWildcardOccupations
+				: wildcardOccupations;
+			await exportOccupationsPdf(visibleOccupations, wildcardsForExport);
 		} catch (err) {
 			console.error("Failed to export occupations PDF:", err);
 		}
-	}, [visibleOccupations]);
+	}, [
+		visibleOccupations,
+		wildcardOccupations,
+		favoritedWildcardOccupations,
+		showFavoritesOnly,
+	]);
 
 	const handleShare = useCallback(async () => {
 		const url = buildShareUrl(ROUTE_PATHS.resultsList, visibleOccupations);
@@ -175,7 +198,7 @@ export function ResultsPage() {
 					downloadAriaLabel={content["results.download.ariaLabel"]}
 					onDownload={handleDownload}
 					onShare={handleShare}
-					downloadDisabled={visibleOccupations.length === 0}
+					downloadDisabled={!hasVisibleContent}
 					shareDisabled={visibleOccupations.length === 0}
 				/>
 				<h1

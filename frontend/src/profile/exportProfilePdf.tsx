@@ -7,12 +7,14 @@ import {
 import { content } from "../content";
 import {
 	ensureBufferPolyfill,
-	loadPdfCardImageSrc,
+	getSolidPdfPlaceholderSrc,
 	loadPdfIconSrc,
 	loadPdfImageSrc,
 	loadPdfPlaceholderSrc,
+	loadPdfTopCardImages,
+	revokePdfBlobUrls,
 	triggerDownload,
-	yieldToBrowser,
+	warmPdfRuntime,
 } from "../components/pdf/loadPdfAssets";
 import { COLOR } from "../components/pdf/pdfTheme";
 import {
@@ -51,34 +53,34 @@ export async function exportProfilePdf({
 	profileAvatarId: string;
 }): Promise<void> {
 	ensureBufferPolyfill();
-	await yieldToBrowser();
-
-	const placeholderSrc = await loadPdfPlaceholderSrc();
-	await yieldToBrowser();
-
-	const topImageSrcs = await Promise.all(
-		topOccupations.map((occupation) => {
-			const imageUrl = occupation.images[0]?.url?.trim() || undefined;
-			return loadPdfCardImageSrc(imageUrl, placeholderSrc);
-		}),
-	);
+	await warmPdfRuntime();
 
 	const avatarPath =
 		PROFILE_AVATARS.find((avatar) => avatar.id === profileAvatarId)?.url ??
 		FALLBACK_AVATAR_SRC;
 
-	const [mascotSrc, qrSrc, avatarSrc, shortDescription] = await Promise.all([
-		loadPdfIconSrc(MASCOT_SRC, CTA_SURFACE_BG),
-		loadPdfIconSrc(QR_SRC, CTA_SURFACE_BG),
-		loadPdfImageSrc(avatarPath, {
-			format: "png",
-			backgroundColor: COLOR.sky0,
-			outHeight: 256,
-		}),
-		loadShortDescription(profile),
-	]);
+	let placeholderPromise: Promise<string> | null = null;
+	const resolvePlaceholder = () => {
+		placeholderPromise ??= loadPdfPlaceholderSrc();
+		return placeholderPromise;
+	};
 
-	await yieldToBrowser();
+	const [mascotSrc, qrSrc, avatarSrc, shortDescription, topImageSrcs] =
+		await Promise.all([
+			loadPdfIconSrc(MASCOT_SRC, CTA_SURFACE_BG),
+			loadPdfIconSrc(QR_SRC, CTA_SURFACE_BG),
+			loadPdfImageSrc(avatarPath, {
+				format: "png",
+				backgroundColor: COLOR.sky0,
+				outHeight: 192,
+			}),
+			loadShortDescription(profile),
+			loadPdfTopCardImages(topOccupations, resolvePlaceholder),
+		]);
+
+	const placeholderSrc = placeholderPromise
+		? await placeholderPromise
+		: getSolidPdfPlaceholderSrc();
 
 	const assets: ProfilePdfAssets = {
 		mascotSrc,
@@ -88,15 +90,19 @@ export async function exportProfilePdf({
 		topImageSrcs,
 	};
 
-	const blob = await pdf(
-		<ProfilePdfDocument
-			profile={profile}
-			topOccupations={topOccupations}
-			shortDescription={shortDescription}
-			profileName={profileName}
-			assets={assets}
-		/>,
-	).toBlob();
+	try {
+		const blob = await pdf(
+			<ProfilePdfDocument
+				profile={profile}
+				topOccupations={topOccupations}
+				shortDescription={shortDescription}
+				profileName={profileName}
+				assets={assets}
+			/>,
+		).toBlob();
 
-	triggerDownload(blob, content["profile.export.filename"]);
+		triggerDownload(blob, content["profile.export.filename"]);
+	} finally {
+		revokePdfBlobUrls(topImageSrcs);
+	}
 }

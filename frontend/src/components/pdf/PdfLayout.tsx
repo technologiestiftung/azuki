@@ -62,7 +62,16 @@ export function CtaCard({
 				<Text style={styles.ctaTitle}>
 					{content["results.export.ctaTitle"]}
 				</Text>
-				<Text style={styles.ctaBody}>{content["results.export.ctaBody"]}</Text>
+				<Text style={styles.ctaBody}>
+					{content["results.export.ctaBody.before"]}
+					<Text style={styles.ctaBodyBold}>
+						{content["results.export.ctaBody.boldProgram"]}
+					</Text>{" "}
+					<Text style={styles.ctaBodyBold}>
+						{content["results.export.ctaBody.planA"]}
+					</Text>
+					{content["results.export.ctaBody.after"]}
+				</Text>
 			</View>
 			<View style={styles.ctaQrBlock}>
 				{qrSrc ? (
