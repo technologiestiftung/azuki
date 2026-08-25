@@ -1,7 +1,5 @@
 import type { ReactNode } from "react";
-import { useNavigate } from "react-router-dom";
 import { content } from "../../../content";
-import { ROUTE_PATHS } from "../../../routing/routes";
 import {
 	COLLAPSED_THRESHOLD,
 	CollapsingHeaderTopRow,
@@ -55,6 +53,7 @@ interface OccupationDetailHeaderCollapsedProps {
 	onDownload: () => void;
 	onShare: () => void;
 	onToggleFavorite: () => void;
+	onBack: () => void;
 	isFavorite: boolean;
 	downloadDisabled: boolean;
 }
@@ -66,12 +65,11 @@ export function OccupationDetailHeaderCollapsed({
 	onDownload,
 	onShare,
 	onToggleFavorite,
+	onBack,
 	isFavorite,
 	downloadDisabled,
 }: OccupationDetailHeaderCollapsedProps) {
-	const navigate = useNavigate();
 	const collapsed = collapseProgress > COLLAPSED_THRESHOLD;
-	const goBack = () => navigate(ROUTE_PATHS.resultsList);
 
 	return (
 		<CollapsingHeaderTopRow
@@ -87,7 +85,7 @@ export function OccupationDetailHeaderCollapsed({
 					expanded={
 						<GhostIconButton
 							iconSrc="/icons/arrow-back-black.svg"
-							onClick={goBack}
+							onClick={onBack}
 							ariaLabel={content["navigation.back"]}
 							title={content["navigation.back"]}
 							iconSize="w-5 h-5"
@@ -98,7 +96,7 @@ export function OccupationDetailHeaderCollapsed({
 					collapsedContent={
 						<GhostIconButton
 							iconSrc="/icons/arrow-back-black.svg"
-							onClick={goBack}
+							onClick={onBack}
 							ariaLabel={content["navigation.back"]}
 							title={content["navigation.back"]}
 							iconSize="w-5 h-5"

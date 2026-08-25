@@ -1,11 +1,18 @@
 import { useCallback, useEffect, useMemo, type UIEvent } from "react";
-import { useParams, useSearchParams } from "react-router-dom";
+import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import {
 	buildOccupationShareText,
 	fitPercent,
 	formatOccupationDisplayName,
 } from "@azuki/shared";
-import { buildResultsOccupationPath } from "../../../routing/routes";
+import {
+	buildResultsOccupationPath,
+	ROUTE_PATHS,
+} from "../../../routing/routes";
+import {
+	hasShareQueryParams,
+	toWithShareSearch,
+} from "../../../routing/sessionGuard";
 import { useOccupationDetail } from "./useOccupationDetail";
 import { OccupationDetailHero } from "./OccupationDetailHero";
 import { OccupationDetailHeaderCollapsed } from "./OccupationDetailHeaderCollapsed";
@@ -31,6 +38,7 @@ import {
 } from "./occupationDetailPageHelpers";
 
 export function OccupationDetailPage() {
+	const navigate = useNavigate();
 	const occupationId = Number(useParams().id);
 	const [searchParams] = useSearchParams();
 	const isWildcard = searchParams.get("wildcard") === "1";
@@ -43,6 +51,14 @@ export function OccupationDetailPage() {
 	const vacancies = useAppStore((state) => state.vacancies);
 	const matchResults = useMatchResultsStore((state) => state.matchResults);
 	const profile = useAppStore((state) => state.profile);
+
+	const handleBack = useCallback(() => {
+		if (hasShareQueryParams(searchParams) && !matchResults) {
+			navigate(ROUTE_PATHS.start, { replace: true });
+			return;
+		}
+		navigate(toWithShareSearch(ROUTE_PATHS.resultsList, searchParams));
+	}, [matchResults, navigate, searchParams]);
 
 	const { onScroll, collapseProgress, overlayOpacity, heroImageParallaxY } =
 		useOccupationDetailScroll();
@@ -211,6 +227,7 @@ export function OccupationDetailPage() {
 					onDownload={handleDownload}
 					onShare={handleShare}
 					onToggleFavorite={detail.toggleFavorite}
+					onBack={handleBack}
 					isFavorite={detail.isFavorite}
 					downloadDisabled={downloadDisabled}
 				/>

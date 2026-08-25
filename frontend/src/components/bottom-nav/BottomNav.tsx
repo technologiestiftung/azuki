@@ -1,11 +1,19 @@
 import { content } from "../../content";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useSearchParams } from "react-router-dom";
 import { ROUTE_PATHS } from "../../routing/routes";
 import { useMatchResultsStore } from "../../store/useMatchResultsStore";
+import { useAppStore } from "../../store/useAppStore";
+import { hasShareQueryParams } from "../../routing/sessionGuard";
 
 export const BottomNav = () => {
 	const { pathname } = useLocation();
+	const [searchParams] = useSearchParams();
 	const vacanciesCount = useMatchResultsStore((state) => state.vacanciesCount);
+	const inSchool = useAppStore((state) => state.profile.inSchool);
+
+	if (inSchool === null || hasShareQueryParams(searchParams)) {
+		return null;
+	}
 
 	const navItems = [
 		{

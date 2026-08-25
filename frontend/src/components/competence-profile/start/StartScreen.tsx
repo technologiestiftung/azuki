@@ -3,6 +3,9 @@ import { useNavigate } from "react-router-dom";
 import { content } from "../../../content";
 import { useFlowNavigation } from "../../../routing/useFlowNavigation";
 import { shouldPrefillProfile } from "../../../profile/prefillConfig";
+import { prefillUserProfile } from "../../../profile/prefillUserProfile";
+import { ROUTE_PATHS } from "../../../routing/routes";
+import { useAppStore } from "../../../store/useAppStore";
 import { GhostButton } from "../../primitives/buttons/GhostButton";
 import { StartCtaButton } from "./StartCtaButton";
 import { StartHeroIllustration } from "./StartHeroIllustration";
@@ -333,7 +336,10 @@ export function StartScreen() {
 							/>
 							{shouldPrefillProfile && (
 								<GhostButton
-									onClick={() => navigate("/loading")}
+									onClick={() => {
+										useAppStore.setState({ profile: prefillUserProfile });
+										navigate(ROUTE_PATHS.loading);
+									}}
 									className="w-full"
 									disabled={isExiting}
 								>

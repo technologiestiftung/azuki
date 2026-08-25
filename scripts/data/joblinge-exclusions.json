@@ -5,6 +5,11 @@
     "reason": "not_suitable"
   },
   {
+    "id": 14509,
+    "name": "Animateur/in",
+    "reason": "not_suitable"
+  },
+  {
     "id": 14616,
     "name": "Assistent/in - Gesundheits- und Sozialwesen",
     "reason": "not_suitable"
@@ -42,6 +47,16 @@
   {
     "id": 8626,
     "name": "Berg- und Skiführer/in",
+    "reason": "not_suitable"
+  },
+  {
+    "id": 7342,
+    "name": "Berufspilot/in - Flugzeuge (CPL (A))",
+    "reason": "not_suitable"
+  },
+  {
+    "id": 7344,
+    "name": "Berufspilot/in - Hubschrauber (CPL (H))",
     "reason": "not_suitable"
   },
   {
@@ -300,6 +315,11 @@
     "reason": "not_suitable"
   },
   {
+    "id": 7131,
+    "name": "Kaufmann/-frau - Verkehrsservice",
+    "reason": "not_suitable"
+  },
+  {
     "id": 14517,
     "name": "Kaufmännische/r Assistent/in/Wirtschaftsassistent/in - Betriebsinformatik",
     "reason": "not_suitable"
@@ -307,6 +327,11 @@
   {
     "id": 7891,
     "name": "Kaufmännische/r Assistent/in/Wirtschaftsassistent/in - Betriebswirtschaft",
+    "reason": "not_suitable"
+  },
+  {
+    "id": 7893,
+    "name": "Kaufmännische/r Assistent/in/Wirtschaftsassistent/in - Bürowirtschaft",
     "reason": "not_suitable"
   },
   {
@@ -475,6 +500,11 @@
     "reason": "not_suitable"
   },
   {
+    "id": 59029,
+    "name": "Spa- und Wellnessmanager/in",
+    "reason": "not_suitable"
+  },
+  {
     "id": 8401,
     "name": "Sänger/in (Ausbildung)",
     "reason": "not_suitable"
@@ -613,6 +643,11 @@
     "id": 4640,
     "name": "Vergolder/in",
     "reason": "flagged"
+  },
+  {
+    "id": 7340,
+    "name": "Verkehrspilot/in - Flugzeuge (ATPL (A))",
+    "reason": "not_suitable"
   },
   {
     "id": 15524,
