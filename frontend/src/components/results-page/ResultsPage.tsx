@@ -222,7 +222,7 @@ export function ResultsPage() {
 					onToggleFavoritesOnly={toggleFavoritesOnly}
 					scrollProgress={scrollProgress}
 				/>
-				<div className="px-4 pb-4 space-y-3">
+				<div className="px-4 pb-4 space-y-10">
 					{!isLoadingShared && hasVisibleContent && (
 						<>
 							{visibleOccupations.map((occupation: MatchedOccupation) => (
