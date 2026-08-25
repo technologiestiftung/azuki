@@ -188,7 +188,7 @@ export function ResultsPage() {
 					downloadAriaLabel={content["results.download.ariaLabel"]}
 					onDownload={handleDownload}
 					onShare={handleShare}
-					downloadDisabled={visibleOccupations.length === 0}
+					downloadDisabled={!hasVisibleContent}
 					shareDisabled={visibleOccupations.length === 0}
 				/>
 				<h1
