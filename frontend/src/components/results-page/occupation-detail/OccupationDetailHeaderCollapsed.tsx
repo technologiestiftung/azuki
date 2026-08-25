@@ -1,13 +1,12 @@
 import { content } from "../../../content";
 import { GhostIconButton } from "../../primitives/buttons/GhostIconButton";
-import { useNavigate } from "react-router-dom";
-import { ROUTE_PATHS } from "../../../routing/routes";
 
 interface OccupationDetailHeaderCollapsedProps {
 	displayName: string;
 	isFavorite: boolean;
 	onToggleFavorite: () => void;
 	onShare: () => void;
+	onBack: () => void;
 	titleOpacity?: number;
 }
 
@@ -16,14 +15,14 @@ export function OccupationDetailHeaderCollapsed({
 	isFavorite,
 	onToggleFavorite,
 	onShare,
+	onBack,
 	titleOpacity = 1,
 }: OccupationDetailHeaderCollapsedProps) {
-	const navigate = useNavigate();
 	return (
 		<div className="flex w-full items-center justify-between px-4 pt-3 pb-2 shrink-0 border-b border-sky-shade-20">
 			<GhostIconButton
 				iconSrc="/icons/arrow-back-black.svg"
-				onClick={() => navigate(ROUTE_PATHS.resultsList)}
+				onClick={onBack}
 				ariaLabel={content["navigation.back"]}
 				title={content["navigation.back"]}
 				iconSize="w-5 h-5"

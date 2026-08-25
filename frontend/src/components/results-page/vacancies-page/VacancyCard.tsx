@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import type { VacancyPreview } from "@azuki/shared";
 import { formatOccupationDisplayName } from "@azuki/shared";
 import { content } from "../../../content";
@@ -6,6 +6,7 @@ import { formatVacancyLocation } from "../utils/formatVacancyLocation";
 import { formatVacancyStartDate } from "../utils/formatVacancyStartDate";
 import { FavoriteButton } from "../../favorite-button/FavoriteButton";
 import { buildResultsVacancyDetailPath } from "../../../routing/routes";
+import { toWithShareSearch } from "../../../routing/sessionGuard";
 import type { VacancyDetailNavState } from "../vacancy-detail/vacancyDetailNavState";
 
 const NEW_VACANCY_MAX_DAYS = 3;
@@ -55,6 +56,7 @@ export function VacancyCard({
 	isFavorite,
 	onToggleFavorite,
 }: VacancyCardProps) {
+	const [searchParams] = useSearchParams();
 	const startDate = formatVacancyStartDate(preview.startDate);
 	const publishedLabel = formatPublishedLabel(preview.publishedAt);
 	const daysSince = daysSincePublished(preview.publishedAt);
@@ -65,7 +67,10 @@ export function VacancyCard({
 	return (
 		<div className="relative bg-gray-100 rounded-2xl border border-gray-200 overflow-hidden">
 			<Link
-				to={buildResultsVacancyDetailPath(preview.referenznummer)}
+				to={toWithShareSearch(
+					buildResultsVacancyDetailPath(preview.referenznummer),
+					searchParams,
+				)}
 				state={{ occupationName } satisfies VacancyDetailNavState}
 				className="block focus-visible:outline focus-visible:outline-2 focus-visible:outline-sky-500 rounded-2xl md:hover:bg-gray-200/40 active:bg-gray-200/40"
 				aria-label={`${displayName}, ${content["results.moreInfo"]}`}

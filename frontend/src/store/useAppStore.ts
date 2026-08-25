@@ -13,19 +13,7 @@ import {
 	dedupePreferredJobs,
 	isDuplicatePreferredJob,
 } from "../profile/preferredJobUtils";
-import { shouldPrefillProfile } from "../profile/prefillConfig";
 import { useMatchResultsStore } from "./useMatchResultsStore";
-
-const noopStorage: Storage = {
-	get length() {
-		return 0;
-	},
-	key: () => null,
-	getItem: () => null,
-	setItem: () => {},
-	removeItem: () => {},
-	clear: () => {},
-};
 
 export interface Location {
 	postcode: string;
@@ -426,9 +414,7 @@ export const useAppStore = create<AppState & AppActions>()(
 		}),
 		{
 			name: "azuki-app-store",
-			storage: createJSONStorage(() =>
-				shouldPrefillProfile ? noopStorage : sessionStorage,
-			),
+			storage: createJSONStorage(() => sessionStorage),
 			partialize: (state) => ({
 				profile: state.profile,
 				location: state.location,

@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo, type UIEvent } from "react";
-import { useParams, useSearchParams } from "react-router-dom";
+import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import {
 	buildOccupationShareText,
 	fitPercent,
@@ -7,7 +7,14 @@ import {
 	resolveOccupationShortDescription,
 	resolveOccupationTaskBullets,
 } from "@azuki/shared";
-import { buildResultsOccupationPath } from "../../../routing/routes";
+import {
+	buildResultsOccupationPath,
+	ROUTE_PATHS,
+} from "../../../routing/routes";
+import {
+	hasShareQueryParams,
+	toWithShareSearch,
+} from "../../../routing/sessionGuard";
 import { content } from "../../../content";
 import { useOccupationDetail } from "./useOccupationDetail";
 import { OccupationDetailHero } from "./OccupationDetailHero";
@@ -27,6 +34,7 @@ import { useSharedNextOccupations } from "./useSharedNextOccupations";
 import { useCollapsedTitleReveal } from "../../collapsing-header/useCollapsedTitleReveal";
 
 export function OccupationDetailPage() {
+	const navigate = useNavigate();
 	const occupationId = Number(useParams().id);
 	const [searchParams] = useSearchParams();
 	const isWildcard = searchParams.get("wildcard") === "1";
@@ -39,6 +47,14 @@ export function OccupationDetailPage() {
 	const vacancies = useAppStore((state) => state.vacancies);
 	const matchResults = useMatchResultsStore((state) => state.matchResults);
 	const profile = useAppStore((state) => state.profile);
+
+	const handleBack = useCallback(() => {
+		if (hasShareQueryParams(searchParams) && !matchResults) {
+			navigate(ROUTE_PATHS.start, { replace: true });
+			return;
+		}
+		navigate(toWithShareSearch(ROUTE_PATHS.resultsList, searchParams));
+	}, [matchResults, navigate, searchParams]);
 
 	const {
 		onScroll,
@@ -190,6 +206,7 @@ export function OccupationDetailPage() {
 					isFavorite={detail.isFavorite}
 					onToggleFavorite={detail.toggleFavorite}
 					onShare={handleShare}
+					onBack={handleBack}
 					titleOpacity={titleRevealProgress}
 				/>
 			</div>
@@ -204,6 +221,7 @@ export function OccupationDetailPage() {
 						isFavorite={detail.isFavorite}
 						onToggleFavorite={detail.toggleFavorite}
 						onShare={handleShare}
+						onBack={handleBack}
 						overlayOpacity={overlayOpacity}
 						controlsOpacity={heroControlsOpacity}
 						imageParallaxY={heroImageParallaxY}
