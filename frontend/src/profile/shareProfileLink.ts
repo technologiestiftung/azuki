@@ -14,9 +14,7 @@ import { useMatchResultsStore } from "../store/useMatchResultsStore";
 export async function shareProfileLink(): Promise<void> {
 	const profile = useAppStore.getState().profile;
 	const matchResults = useMatchResultsStore.getState().matchResults;
-	const topOccupations = [...(matchResults?.occupations ?? [])]
-		.sort((a, b) => b.score - a.score)
-		.slice(0, 3);
+	const topOccupations = (matchResults?.occupations ?? []).slice(0, 3);
 
 	const url = new URL(ROUTE_PATHS.profile, window.location.origin);
 	url.searchParams.set(SHARED_PROFILE_PARAM, buildSharedProfileParam(profile));

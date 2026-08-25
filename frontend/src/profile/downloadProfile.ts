@@ -6,9 +6,7 @@ export async function downloadProfile(): Promise<void> {
 	const profile = useAppStore.getState().profile;
 	const { profileName, profileAvatarId } = useProfileStore.getState();
 	const matchResults = useMatchResultsStore.getState().matchResults;
-	const topOccupations = [...(matchResults?.occupations ?? [])]
-		.sort((a, b) => b.score - a.score)
-		.slice(0, 3);
+	const topOccupations = (matchResults?.occupations ?? []).slice(0, 3);
 
 	try {
 		const { exportProfilePdf } = await import("./exportProfilePdf");

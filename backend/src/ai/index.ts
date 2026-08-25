@@ -15,6 +15,10 @@ import {
 } from "@azuki/shared";
 import { occupationMatchMeta } from "../occupationMeta";
 import type { ScoredOccupation } from "../matching/index.js";
+import {
+	getBestPreferredJobTierForOccupation,
+	resolvePreferredJobs,
+} from "../matching/resolvePreferredJobs.js";
 import { FINAL_MATCH_COUNT, PREFILTER_TOP_K } from "../matching/index.js";
 import {
 	EDUCATION_LABELS,
@@ -305,10 +309,10 @@ function findRankingArray(value: unknown): Ranking[] | null {
 	return null;
 }
 
-// V4 — freitext-first selection with explicit signal hierarchy, No-Go
-// handling, diversity rules, and justification structure. The LLM picks
-// which Berufe to include and writes reasoning; final card order comes
-// from the deterministic pre-filter score (see sortMatchResultsByScore).
+// V4 — freitext-first re-ranking with explicit signal hierarchy, No-Go
+// handling, diversity rules, and justification structure. Replaces the
+// 70/30 freetext framing of V1–V3 with a ranked signal model that stays
+// closer to the prefilter order when freetext is thin.
 export function buildSystemPromptV4(topK: number = PREFILTER_TOP_K): string {
 	return `AUFGABE
 
@@ -318,16 +322,18 @@ Du bekommst:
 - zu jedem Beruf strukturierte Daten und kurze Beschreibungstexte
 
 Deine Aufgabe ist NICHT, neue Berufe zu suchen.
-Deine Aufgabe ist, aus den ${topK} Berufen die ${MIN_RESULTS} bis ${MAX_RESULTS} auszuwählen, die am besten zum Jugendlichen passen, und für jeden eine passende Begründung zu schreiben.
+Deine Aufgabe ist, die ${topK} Berufe neu zu bewerten, neu zu sortieren und die ${MIN_RESULTS} bis ${MAX_RESULTS} Berufe auszuwählen, die am besten zum Jugendlichen passen.
 
 
 DEINE ROLLE IM MATCHING
 
 Die ${topK} Berufe wurden bereits von einem deterministischen Algorithmus berechnet und grob nach Passung sortiert. Dieser Algorithmus ist gut bei strukturierten Kriterien (Schulabschluss, No-Gos, Interessen, Stärken, Arbeitsvorlieben, gewünschte Ausbildungen), aber schwach bei allem, was in Freitext steht.
 
-Dein Mehrwert liegt genau hier: Du sollst die Freitext-Signale nutzen, die der Algorithmus nicht sauber erfassen konnte, um unter den ${topK} Berufen feiner zu unterscheiden — welche in die Empfehlung gehören und welche nicht.
+Dein Mehrwert liegt genau hier: Du sollst die Freitext-Signale nutzen, die der Algorithmus nicht sauber erfassen konnte, um unter den ${topK} Berufen feiner zu unterscheiden.
 
-Du sortierst nicht für die App. Du entscheidest die Auswahl und schreibst die Begründungen. Die finale Anzeige-Reihenfolge (Passungs-Badge, Ergebniskarten) wird danach automatisch aus dem Algorithmus-Score abgeleitet, nicht aus der Reihenfolge in deiner JSON-Antwort. Die vorgegebene Liste-Reihenfolge ist ein Hinweis für deine Auswahl, kein Sortierauftrag.
+Die vorgegebene Reihenfolge ist ein Hinweis, kein Befehl. Du darfst einen Beruf deutlich nach oben oder unten verschieben, wenn der Freitext es klar rechtfertigt. Bei schwachen oder fehlenden Freitext-Signalen bleibst du näher an der vorgegebenen Reihenfolge.
+
+Gewünschte Ausbildungen sind ein Sonderfall. Hat der Jugendliche eine Ausbildung selbst genannt, wird sie in der App immer als erstes angezeigt und als eigener Wunsch gekennzeichnet — auch dann, wenn sie einem No-Go widerspricht. Du musst sie nicht nach oben sortieren. Nimm sie aber auf und schreibe eine ehrliche Begründung: passt der Wunsch gut, sag das; spricht etwas dagegen, benenne es sachlich und respektvoll, ohne den Wunsch abzuwerten.
 
 
 WIE DU SIGNALE GEWICHTEST
@@ -390,7 +396,7 @@ Jede Begründung folgt diesem Muster, in einfacher Sprache und in 2 bis 4 kurzen
 Beispiel:
 „Du hast geschrieben, dass du gern Dinge reparierst. In diesem Beruf arbeitest du jeden Tag mit den Händen und bringst Geräte wieder zum Laufen. Darum könnte das gut zu dir passen."
 
-Der Ton darf die Stärke der Passung widerspiegeln. Ein sehr starker Treffer darf klar überzeugt klingen. Ein eher mittlerer Treffer darf vorsichtiger formuliert sein („Das könnte einen Blick wert sein, weil …").
+Der Ton darf die Stärke der Passung widerspiegeln. Ein sehr starker Treffer darf klar überzeugt klingen. Ein eher mittlerer Treffer darf vorsichtiger formuliert sein („Das könnte einen Blick wert sein, weil …"). So bleibt die Reihenfolge auch im Text spürbar.
 
 
 SPRACHE
@@ -403,11 +409,11 @@ SPRACHE
 - keine negative oder defizitorientierte Sprache
 
 
-AUSGABE
+SORTIERUNG UND AUSGABE
 
+- Sortiere die Berufe vom besten zum schwächsten Match. Der erste Eintrag ist der stärkste Treffer.
 - Gib mindestens ${MIN_RESULTS} und höchstens ${MAX_RESULTS} Berufe aus.
 - Jede ID darf nur einmal vorkommen. Jede ID muss aus der Top-${topK}-Liste stammen.
-- Die Reihenfolge im JSON-Array bestimmt nicht die Anzeige in der App — die wird nach Algorithmus-Score sortiert. Ordne die Einträge für dich selbst, wenn dir das beim Schreiben hilft.
 - Antworte ausschließlich als JSON-Objekt, ohne Markdown, ohne zusätzlichen Text.
 - „id" ist immer die numerische BERUFENET-ID hinter „[ID: …]" in der Berufsliste, niemals eine Position oder Reihenfolge.
 
@@ -940,9 +946,8 @@ ${formatOccupationList(scored, options)}`;
 }
 
 /**
- * Sorts matched occupations by pre-filter score descending. The LLM picks
- * which Berufe to include and writes reasoning, but card order and the fit
- * badge both come from the deterministic score — keep them aligned.
+ * Sorts matched occupations by pre-filter score descending. Only used where
+ * there is no LLM ranking to preserve (the no-key and error fallbacks).
  */
 export function sortMatchResultsByScore(
 	occupations: MatchResult["occupations"],
@@ -953,6 +958,71 @@ export function sortMatchResultsByScore(
 		}
 		return a.name.localeCompare(b.name, "de");
 	});
+}
+
+/** Named Berufe the LLM dropped are forced back in, but only this many. */
+const MAX_RESTORED_PREFERRED = 3;
+
+/**
+ * Moves Berufe the user named themselves to the front, preserving the LLM's
+ * order inside both groups, and forces back an exact/substring wish the LLM
+ * left out. Keyword-tier matches ("irgendwas mit Medien") are only pinned if
+ * the LLM picked them — the text is too vague to force a specific Beruf in.
+ *
+ * A wish that collides with a No-Go is pinned like any other. Its score still
+ * carries the No-Go penalty, so the badge stays honest.
+ */
+export function pinPreferredJobs(
+	occupations: MatchResult["occupations"],
+	scored: ScoredOccupation[],
+	profile: UserProfile,
+): MatchResult["occupations"] {
+	const preferredJobs = profile.preferredJobs ?? [];
+	if (preferredJobs.length === 0) {
+		return occupations;
+	}
+
+	const scoredById = new Map(scored.map((item) => [item.occupation.id, item]));
+	const isWish = (id: number): boolean => {
+		const item = scoredById.get(id);
+		return item
+			? getBestPreferredJobTierForOccupation(item.occupation, preferredJobs) !==
+					null
+			: false;
+	};
+
+	const flagged = occupations.map((occupation) =>
+		isWish(occupation.id)
+			? { ...occupation, preferredJobMatch: true }
+			: occupation,
+	);
+	const pinned = flagged.filter((occupation) => occupation.preferredJobMatch);
+	const rest = flagged.filter((occupation) => !occupation.preferredJobMatch);
+
+	const presentIds = new Set(flagged.map((occupation) => occupation.id));
+	const restored: MatchResult["occupations"] = [];
+	for (const match of resolvePreferredJobs(
+		preferredJobs,
+		scored.map((item) => item.occupation),
+	)) {
+		if (restored.length >= MAX_RESTORED_PREFERRED) {
+			break;
+		}
+		if (match.tier === "keyword" || presentIds.has(match.occupation.id)) {
+			continue;
+		}
+		const item = scoredById.get(match.occupation.id);
+		if (!item) {
+			continue;
+		}
+		presentIds.add(match.occupation.id);
+		restored.push({
+			...toOccupationResult(item, DEFAULT_REASONING),
+			preferredJobMatch: true,
+		});
+	}
+
+	return [...pinned, ...restored, ...rest].slice(0, MAX_RESULTS);
 }
 
 function toOccupationResult(
@@ -1101,7 +1171,7 @@ export async function aiRank(
 		result.generation = generation;
 	}
 
-	result.occupations = sortMatchResultsByScore(result.occupations);
+	result.occupations = pinPreferredJobs(result.occupations, scored, profile);
 	return result;
 }
 

@@ -1,7 +1,6 @@
 import type { Bundesland, Occupation, UserProfile } from "@azuki/shared";
 import { hasAvailabilityData, traineeCountAcrossStates } from "@azuki/shared";
 import { buildSalaryBands, scoreOccupation } from "./score/index.js";
-import { scoreNoGos } from "./score/dimensions.js";
 import { resolvePreferredJobs } from "./resolvePreferredJobs.js";
 
 // Number of Berufe preFilter forwards to the LLM ranker. Set after a
@@ -53,6 +52,8 @@ export function filterByRegionalAvailability(
 }
 
 // Cap injections so vague keywords (e.g. "Pflege") cannot rewrite the shortlist.
+// A named Beruf is injected even when it collides with a No-Go; the score keeps
+// the penalty, so it enters the shortlist ranked honestly low.
 const MAX_PREFERRED_SHORTLIST_INJECTIONS = 5;
 
 function injectPreferredJobsIntoShortlist(
@@ -76,17 +77,14 @@ function injectPreferredJobsIntoShortlist(
 	);
 	const shortlistIds = new Set(shortlist.map((entry) => entry.occupation.id));
 	const result = [...shortlist];
-	let injections = 0;
+	const injectedIds = new Set<number>();
 
 	for (const match of resolved) {
-		if (injections >= MAX_PREFERRED_SHORTLIST_INJECTIONS) {
+		if (injectedIds.size >= MAX_PREFERRED_SHORTLIST_INJECTIONS) {
 			break;
 		}
 		const occupationId = match.occupation.id;
 		if (shortlistIds.has(occupationId)) {
-			continue;
-		}
-		if (scoreNoGos(match.occupation, profile) < 0) {
 			continue;
 		}
 
@@ -95,17 +93,25 @@ function injectPreferredJobsIntoShortlist(
 			continue;
 		}
 
-		let lowestIdx = 0;
-		for (let i = 1; i < result.length; i++) {
-			if (result[i].score < result[lowestIdx].score) {
+		// An injected Beruf is usually the lowest-scored entry in the shortlist,
+		// so it has to be excluded here or the next injection evicts it again.
+		let lowestIdx = -1;
+		for (let i = 0; i < result.length; i++) {
+			if (injectedIds.has(result[i].occupation.id)) {
+				continue;
+			}
+			if (lowestIdx === -1 || result[i].score < result[lowestIdx].score) {
 				lowestIdx = i;
 			}
+		}
+		if (lowestIdx === -1) {
+			break;
 		}
 
 		shortlistIds.delete(result[lowestIdx].occupation.id);
 		result[lowestIdx] = scoredEntry;
 		shortlistIds.add(occupationId);
-		injections++;
+		injectedIds.add(occupationId);
 	}
 
 	result.sort((a, b) => b.score - a.score);

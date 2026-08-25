@@ -490,6 +490,9 @@ export function scorePracticalExperience(
  * Scores how well an occupation matches the user's explicitly preferred jobs.
  * Exact name matches get the strongest boost; substring and keyword tiers
  * handle gender variants and vague free text. Capped at +30 total.
+ *
+ * A No-Go collision does not suppress the boost — a Beruf the user asked for
+ * stays in the running, and keeps the No-Go penalty from scoreNoGos.
  */
 export function scorePreferredJobs(
 	occupation: Occupation,
@@ -497,9 +500,6 @@ export function scorePreferredJobs(
 ): number {
 	const preferredJobs = profile.preferredJobs ?? [];
 	if (preferredJobs.length === 0) {
-		return 0;
-	}
-	if (scoreNoGos(occupation, profile) < 0) {
 		return 0;
 	}
 

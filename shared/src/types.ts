@@ -159,6 +159,8 @@ export interface MatchedOccupation {
 	occupationEarnings: string;
 	salaryKnown: boolean;
 	salaryMonthlyMedian: number | null;
+	/** Set when the user named this Beruf themselves in the Jobwunsch step. */
+	preferredJobMatch?: boolean;
 }
 
 export interface MatchResult {
