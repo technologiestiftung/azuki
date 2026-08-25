@@ -46,6 +46,11 @@ export function ProfileHero({
 		PROFILE_AVATARS.find((avatar) => avatar.id === displayedAvatarId)?.url ??
 		"/illustrations/profile/avatar-2.svg";
 
+	const [
+		isProfileShortDescriptionLoading,
+		setIsProfileShortDescriptionLoading,
+	] = useState(false);
+
 	useEffect(() => {
 		const cached = getCachedProfileShortDescription(profile);
 		if (cached !== null) {
@@ -58,6 +63,7 @@ export function ProfileHero({
 
 		void (async () => {
 			try {
+				setIsProfileShortDescriptionLoading(true);
 				const result = await fetchProfileShortDescription(
 					profile,
 					controller.signal,
@@ -65,7 +71,9 @@ export function ProfileHero({
 				if (controller.signal.aborted) {
 					return;
 				}
+
 				setShortDescription(result);
+				setIsProfileShortDescriptionLoading(false);
 			} catch {
 				if (controller.signal.aborted) {
 					return;
@@ -131,12 +139,36 @@ export function ProfileHero({
 					>
 						{displayedName}
 					</h1>
-					<p
-						className="max-w-full text-xl font-normal leading-7 text-sky-900 text-center transition-opacity duration-150 break-words"
-						style={{ opacity: heroControlsOpacity }}
-					>
-						{shortDescription}
-					</p>
+					{isProfileShortDescriptionLoading ? (
+						<div className="w-full flex flex-col gap-3 items-center justify-center px-5 py-1.5">
+							<div className="relative w-full h-4 bg-sky-0 rounded-[4px] overflow-hidden">
+								<div
+									className="absolute inset-0 w-full h-4 rounded-[4px] animate-skeletonShimmer"
+									style={{
+										background:
+											"linear-gradient(90deg, rgba(240, 249, 255, 0.00) 0%, rgba(186, 230, 253, 0.80) 20%, #BAE6FD 40%, #BAE6FD 60%, rgba(186, 230, 253, 0.80) 80%, rgba(240, 249, 255, 0.00) 100%)",
+									}}
+								/>
+							</div>
+							<div className="relative h-4 bg-sky-0 rounded-[4px] w-[calc(100%-44px)] overflow-hidden">
+								<div
+									className="absolute inset-0 w-full h-4 rounded-[4px] animate-skeletonShimmer"
+									style={{
+										animationDelay: "100ms",
+										background:
+											"linear-gradient(90deg, rgba(240, 249, 255, 0.00) 0%, rgba(186, 230, 253, 0.80) 20%, #BAE6FD 40%, #BAE6FD 60%, rgba(186, 230, 253, 0.80) 80%, rgba(240, 249, 255, 0.00) 100%)",
+									}}
+								/>
+							</div>
+						</div>
+					) : (
+						<p
+							className="max-w-full text-xl font-normal leading-7 text-sky-900 text-center transition-opacity duration-150 break-words"
+							style={{ opacity: heroControlsOpacity }}
+						>
+							{shortDescription}
+						</p>
+					)}
 				</div>
 			</div>
 			<ProfileEditDialog
