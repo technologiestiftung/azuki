@@ -253,7 +253,7 @@ export function ResultsPage() {
 									/>
 								</div>
 
-								<p className="text-lg font-medium text-gray-1000 text-center">
+								<p className="text-lg font-medium text-sky-900 text-center">
 									{content["results.noResults"]}
 								</p>
 							</div>

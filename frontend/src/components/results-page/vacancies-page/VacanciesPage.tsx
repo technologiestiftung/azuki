@@ -349,15 +349,15 @@ export function VacanciesPage() {
 									/>
 								</div>
 								{showSimpleEmpty ? (
-									<p className="text-lg font-medium text-gray-1000 text-center">
+									<p className="text-lg font-medium text-sky-900 text-center">
 										{content["vacancies.noResultsFound"]}
 									</p>
 								) : (
 									<div>
-										<h3 className="text-lg font-bold text-gray-1000 mb-1.5 text-center">
+										<h3 className="text-lg font-bold text-sky-900 mb-1.5 text-center">
 											{content["vacancies.noResults.p1"]}
 										</h3>
-										<p className="text-lg font-medium text-gray-1000 text-center">
+										<p className="text-lg font-medium text-sky-900 text-center">
 											{content["vacancies.noResults.p2"]}
 										</p>
 									</div>
