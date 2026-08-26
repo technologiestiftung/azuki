@@ -21,7 +21,7 @@ import { noGos as noGoOptions } from "../components/competence-profile/steps/no-
 import { workPreferencePairs } from "../content/work-preference-pairs";
 import { content } from "../content";
 import { CtaCard, PageFooter, PdfHeader } from "../components/pdf/PdfLayout";
-import { COLOR, styles } from "../components/pdf/pdfTheme";
+import { COLOR, px, styles } from "../components/pdf/pdfTheme";
 import { formatOccupationSalary } from "@azuki/shared";
 
 const profileStyles = StyleSheet.create({
@@ -29,10 +29,10 @@ const profileStyles = StyleSheet.create({
 		flexDirection: "row",
 		alignItems: "center",
 		backgroundColor: COLOR.sky50,
-		borderRadius: 16,
+		borderRadius: px(20),
 		paddingHorizontal: 20,
 		paddingVertical: 16,
-		marginBottom: 28,
+		marginBottom: px(52.77),
 	},
 	heroAvatarWrap: {
 		width: 64,
@@ -61,28 +61,28 @@ const profileStyles = StyleSheet.create({
 	heroName: {
 		fontFamily: "Asap",
 		fontWeight: 600,
-		fontSize: 18,
+		fontSize: px(32),
 		lineHeight: 1.3,
 		color: COLOR.sky900,
 	},
 	heroText: {
 		fontFamily: "Asap",
 		fontWeight: 400,
-		fontSize: 16,
+		fontSize: px(24),
 		lineHeight: 1.3,
 		color: COLOR.sky900,
 	},
 	cardsRow: {
 		flexDirection: "row",
-		gap: 8,
-		marginBottom: 28,
+		gap: px(9),
+		marginBottom: px(55.68),
 		alignItems: "stretch",
 	},
 	card: {
 		flex: 1,
 		backgroundColor: COLOR.skyShade10,
-		borderRadius: 13,
-		padding: 8,
+		borderRadius: px(16),
+		padding: px(8.101),
 		flexDirection: "column",
 	},
 	cardImageFrame: {
@@ -91,7 +91,7 @@ const profileStyles = StyleSheet.create({
 		borderRadius: 5,
 		overflow: "hidden",
 		backgroundColor: COLOR.skyShade10,
-		marginBottom: 10,
+		marginBottom: px(9.721),
 	},
 	cardImage: {
 		width: "100%",
@@ -101,13 +101,13 @@ const profileStyles = StyleSheet.create({
 	cardBadgeRow: {
 		flexDirection: "row",
 		flexWrap: "wrap",
-		gap: 6,
-		marginBottom: 10,
+		gap: px(8.101),
+		marginBottom: px(9.721),
 	},
 	pill: {
 		backgroundColor: COLOR.sky900,
-		borderRadius: 6.48,
-		paddingHorizontal: 8,
+		borderRadius: px(8),
+		paddingHorizontal: px(6.48),
 		paddingVertical: 3,
 	},
 	pillSoft: {
@@ -127,7 +127,7 @@ const profileStyles = StyleSheet.create({
 		fontWeight: 700,
 		fontSize: 11.5,
 		color: COLOR.sky900,
-		marginBottom: 5,
+		marginBottom: px(4.86),
 		lineHeight: 1.3,
 	},
 	cardDescription: {
@@ -146,13 +146,13 @@ const profileStyles = StyleSheet.create({
 		marginTop: "auto",
 	},
 	aboutBlock: {
-		marginTop: 4,
+		marginTop: 0,
 	},
 	schoolDegreeBlock: {
 		backgroundColor: COLOR.skyShade10,
 		borderRadius: 13,
 		padding: 12,
-		marginBottom: 16,
+		marginBottom: px(8),
 		marginLeft: 8,
 		alignSelf: "flex-start",
 	},
@@ -181,8 +181,8 @@ const profileStyles = StyleSheet.create({
 	},
 	columns: {
 		flexDirection: "row",
-		gap: 24,
-		marginBottom: 28,
+		gap: px(28),
+		marginBottom: px(8),
 	},
 	column: {
 		flex: 1,
@@ -190,8 +190,8 @@ const profileStyles = StyleSheet.create({
 	meterRow: {
 		flexDirection: "row",
 		alignItems: "center",
-		gap: 6,
-		marginBottom: 10,
+		gap: px(12),
+		marginBottom: px(8),
 		paddingLeft: 8,
 	},
 	meterLabel: {
@@ -199,13 +199,13 @@ const profileStyles = StyleSheet.create({
 		fontWeight: 400,
 		fontSize: 10,
 		color: COLOR.sky900,
-		width: 118,
+		width: px(170),
 	},
 	meterPercent: {
 		fontFamily: "Asap",
 		fontWeight: 600,
 		fontSize: 8,
-		width: 28,
+		width: px(28),
 		flexShrink: 0,
 		textAlign: "right",
 	},
@@ -213,29 +213,29 @@ const profileStyles = StyleSheet.create({
 		flexGrow: 1,
 		flexShrink: 1,
 		flexBasis: 48,
-		height: 8,
+		height: px(6),
 		borderRadius: 100,
 		overflow: "hidden",
 		flexDirection: "row",
 	},
 	meterFill: {
-		height: 8,
+		height: px(6),
 		borderRadius: 100,
 	},
 	chipSection: {
-		marginBottom: 22,
+		marginBottom: px(8),
 	},
 	chipRow: {
 		flexDirection: "row",
 		flexWrap: "wrap",
-		gap: 6,
+		gap: px(8),
 		paddingLeft: 8,
 	},
 	chip: {
-		borderWidth: 1.5,
+		borderWidth: px(2),
 		borderRadius: 100,
-		paddingHorizontal: 10,
-		paddingVertical: 4,
+		paddingHorizontal: px(14),
+		paddingVertical: px(4),
 	},
 	chipDefault: {
 		borderColor: COLOR.sky200,
@@ -248,7 +248,7 @@ const profileStyles = StyleSheet.create({
 	chipText: {
 		fontFamily: "Asap",
 		fontWeight: 400,
-		fontSize: 10,
+		fontSize: px(18),
 		color: COLOR.sky900,
 	},
 });
