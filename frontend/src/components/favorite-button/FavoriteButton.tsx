@@ -5,14 +5,17 @@ interface FavoriteButtonProps {
 	onClick: () => void;
 	isFavorite: boolean;
 	className?: string;
+	iconSize?: "small" | "medium";
 }
 
 export function FavoriteButton({
 	onClick,
 	isFavorite,
 	className,
+	iconSize = "small",
 }: FavoriteButtonProps) {
 	const handleClick = (event: MouseEvent) => {
+		event.preventDefault();
 		event.stopPropagation();
 		onClick();
 	};
@@ -20,7 +23,7 @@ export function FavoriteButton({
 	return (
 		<button
 			type="button"
-			className={`absolute flex items-center justify-center z-10 w-10 h-10 -top-[9px] right-1 ${className}`}
+			className={`flex items-center justify-center z-10 ${iconSize === "small" ? "w-6 h-6" : "w-7 h-7"} ${className} focus-visible:outline focus-visible:outline-2 focus-visible:outline-sky-500 rounded-sm`}
 			onClick={handleClick}
 			aria-pressed={isFavorite}
 			aria-label={
@@ -30,14 +33,22 @@ export function FavoriteButton({
 			}
 		>
 			<img
-				src="/icons/favorite.svg"
+				src="/icons/favorite-star.svg"
 				alt=""
-				className={isFavorite ? "hidden" : "block w-7 h-7"}
+				className={
+					isFavorite
+						? "hidden"
+						: `block ${iconSize === "small" ? "w-6 h-6" : "w-7 h-7"}`
+				}
 			/>
 			<img
-				src="/icons/favorite-filled.svg"
+				src="/icons/favorite-star-filled.svg"
 				alt=""
-				className={isFavorite ? "block  w-7 h-7" : "hidden"}
+				className={
+					isFavorite
+						? `block ${iconSize === "small" ? "w-6 h-6" : "w-7 h-7"}`
+						: "hidden"
+				}
 			/>
 		</button>
 	);

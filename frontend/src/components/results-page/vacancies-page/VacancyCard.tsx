@@ -130,8 +130,12 @@ export function VacancyCard({
 				)}
 			</Link>
 
-			<div className="absolute top-3 inset-0 h-fit">
-				<FavoriteButton onClick={onToggleFavorite} isFavorite={isFavorite} />
+			<div className="absolute top-3 right-3">
+				<FavoriteButton
+					onClick={onToggleFavorite}
+					isFavorite={isFavorite}
+					iconSize="medium"
+				/>
 			</div>
 		</div>
 	);
