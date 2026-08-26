@@ -161,6 +161,8 @@ export interface MatchedOccupation {
 	salaryMonthlyMedian: number | null;
 	/** Set when the user named this Beruf themselves in the Jobwunsch step. */
 	preferredJobMatch?: boolean;
+	/** Set once the list order is final; see fitPercentages. */
+	fitPercent?: number;
 }
 
 export interface MatchResult {

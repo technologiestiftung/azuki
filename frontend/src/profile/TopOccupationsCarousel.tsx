@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import {
 	formatOccupationDisplayName,
-	fitPercent,
+	displayFitPercent,
 	type MatchedOccupation,
 } from "@azuki/shared";
 import { content } from "../content";
@@ -25,7 +25,7 @@ export function TopOccupationsCarousel({
 					const imageUrl =
 						occupation.images[0]?.url ??
 						"/illustrations/occupation-placeholder.svg";
-					const matchPercent = fitPercent(occupation.score);
+					const matchPercent = displayFitPercent(occupation);
 
 					return (
 						<Link

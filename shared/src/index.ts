@@ -65,7 +65,12 @@ export { formatOccupationDisplayName } from "./occupationDisplayName";
 
 export { getDurationOverride } from "./durationOverride";
 
-export { fitPercent, scoreFromFitPercent } from "./fitPercent";
+export {
+	fitPercent,
+	fitPercentages,
+	displayFitPercent,
+	scoreFromFitPercent,
+} from "./fitPercent";
 
 export {
 	SHARED_OCCUPATIONS_PARAM,

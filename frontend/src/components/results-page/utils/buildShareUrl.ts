@@ -1,5 +1,5 @@
 import {
-	fitPercent,
+	displayFitPercent,
 	type MatchedOccupation,
 	buildSharedOccupationsParam,
 	SHARED_OCCUPATIONS_PARAM,
@@ -19,7 +19,7 @@ export function buildShareUrl(
 		buildSharedOccupationsParam(
 			occupations.map((occupation) => ({
 				id: occupation.id,
-				fit: fitPercent(occupation.score),
+				fit: displayFitPercent(occupation),
 			})),
 		),
 	);

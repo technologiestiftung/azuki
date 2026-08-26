@@ -1,7 +1,7 @@
 import { Link, useSearchParams } from "react-router-dom";
 import {
 	type MatchedOccupation,
-	fitPercent,
+	displayFitPercent,
 	formatOccupationDisplayName,
 	isInWildcardPool,
 } from "@azuki/shared";
@@ -51,7 +51,7 @@ export function ResultCard({
 						<>
 							<div className="flex items-center justify-center bg-fill-primary text-white text-sm leading-5 font-medium px-2 h-[22px] rounded-lg whitespace-nowrap">
 								{content["results.card.score.label"]}{" "}
-								{fitPercent(occupation.score)}
+								{displayFitPercent(occupation)}
 								{"%"}
 							</div>
 							{(isWildcard || isInWildcardPool(occupation.id)) && (

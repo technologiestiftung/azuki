@@ -10,6 +10,7 @@ Katalog (538 Berufe)
   → Pre-Filter: regelbasierter Score je Beruf    Top 60
   → Wunschberufe in die Shortlist einsetzen      max. 5 Plätze
   → LLM-Re-Ranking (Claude Sonnet 4.6)           5–20 Berufe mit Begründung
+  → Prozentwert monoton machen (isotone Regr.)   Reihenfolge bleibt vom LLM
 ```
 
 - **Katalog**: 538 Berufe aus BERUFENET. §66/§42r-Fachpraktiker (Reha-Zielgruppe) und die von Joblinge als „nein"/„gelb" markierten Berufe sind entfernt (vorher 726).
@@ -18,7 +19,13 @@ Katalog (538 Berufe)
 - **Wunschberufe**: aufgelöste Wunschberufe, die der Score nicht in die Top 60 gehoben hat, verdrängen die schwächsten Einträge der Shortlist — höchstens 5 (`MAX_PREFERRED_SHORTLIST_INJECTIONS`, siehe „Wunschberufe").
 - **LLM**: bewertet die 60 neu, gewichtet vor allem die Freitexte, und wählt 5–20 Berufe mit individueller Begründung aus. Ohne `OPENROUTER_API_KEY` oder bei einem Fehler werden die Top 20 des Pre-Filters mit Standard-Begründung zurückgegeben.
 
-Das LLM entscheidet, **welche** Berufe in den Ergebnissen landen und wie sie begründet werden. Die **Reihenfolge** der Karten und die **„Passt zu X %"**-Angabe kommen beide aus dem Pre-Filter-Score (`sortMatchResultsByScore`).
+Das LLM entscheidet, **welche** Berufe in den Ergebnissen landen, wie sie begründet werden und **in welcher Reihenfolge**. Die Reihenfolge wird danach nicht mehr angefasst — auch Wunschberufe stehen dort, wo das LLM sie einsortiert hat.
+
+Der Prozentwert **„Passt zu X %"** wird anschließend aus dem Pre-Filter-Score berechnet (`fitPercentages`). Weil das LLM keine eigene Zahl liefert, kann eine Karte weiter unten einen höheren Score haben als die darüber. Isotone Regression (Pool-Adjacent-Violators) löst das mit der kleinstmöglichen Änderung: Karten, die ohnehin passen, behalten ihren echten Wert; nur eine Folge, die die Reihenfolge tatsächlich verletzt, wird auf ihren Mittelwert zusammengelegt.
+
+Eine Karte, die die Reihenfolge nicht verletzt, behält ihren **exakten** Wert — auch wenn er sich wiederholt. Zwei Berufe, die das Scoring gleich bewertet, sollen dieselbe Zahl zeigen. Nur **innerhalb** einer zusammengelegten Folge läuft der Wert abwärts, ein Punkt je zwei Karten (`REPEATS_PER_STEP`), damit eine lange Folge nicht zu einer einzigen Zahl zusammenfällt.
+
+Diesen Abstieg steuert die LLM-Reihenfolge bei: Das Scoring kann die Berufe nicht trennen, das LLM hat sie gereiht, und der Prozentwert folgt dieser Reihung. Der Preis sind ein paar Prozentpunkte Genauigkeit innerhalb einer zusammengelegten Folge — gemessen an echten Ergebnislisten im Mittel 1–2 Punkte.
 
 ---
 
@@ -35,7 +42,7 @@ Das LLM entscheidet, **welche** Berufe in den Ergebnissen landen und wie sie beg
 | Stärken                | +2 (stark) / +1 (etwas) je Treffer    | 8 Stärken                      |
 | Rahmenbedingungen      | -2 … +3 je Auswahl                    | „Was ist dir wichtig?"         |
 | Marktpräsenz           | -6 … +5                               | Findbarkeit der Ausbildung     |
-| Wunschberufe           | 0 … +20                               | Eigene Ausbildungswünsche      |
+| Wunschberufe           | 0 … +30 (max. +10 je Wunsch)          | Eigene Ausbildungswünsche      |
 
 ### Schulabschluss
 
@@ -163,13 +170,13 @@ Freitext-Angaben aus dem Schritt „Welche Ausbildung wünschst du dir?" (`profi
 
 | Stufe     | Bedingung (normalisierte Namen, `normName`)          | Punkte                                 |
 | --------- | ---------------------------------------------------- | -------------------------------------- |
-| exact     | Wunsch == Berufsname                                 | **+20**                                |
-| substring | einer der beiden Namen enthält den anderen           | **+12**                                |
+| exact     | Wunsch == Berufsname                                 | **+10**                                |
+| substring | einer der beiden Namen enthält den anderen           | **+9**                                 |
 | keyword   | Stichworttreffer im Berufsnamen / in Interessen-Tags | **+2 je Treffer, max. 4 Treffer (+8)** |
 
-`normName` senkt die Schreibweise, entfernt Klammerzusätze, Füllwörter und die Gender-Schreibweisen des Katalogs (`Kaufmann/-frau`, `/-in`). Ausgeschriebene weibliche Formen sind davon nicht erfasst: „Kfz-Mechatronikerin" trifft „Kfz-Mechatroniker/-in" auf der substring-Stufe, nicht auf exact. Die keyword-Stufe fängt vage Eingaben wie „irgendwas mit Medien" ab: Tokens unter 4 Zeichen und Füllwörter (`KEYWORD_STOP_WORDS`) fliegen raus, gezählt werden nur exakte Term- oder Namenstreffer — „pflege" trifft also nicht „pflegen". Die Gesamtsumme ist auf **+30** gedeckelt (`PREFERRED_JOB_SCORE_CAP`) — bei den aktuellen Stufenwerten greift der Deckel nie.
+`normName` senkt die Schreibweise, entfernt Klammerzusätze, Füllwörter und die Gender-Schreibweisen des Katalogs (`Kaufmann/-frau`, `/-in`). Ausgeschriebene weibliche Formen fängt `preferredJobNormCandidates` zusätzlich ab, indem es die Endung „-in" abschneidet: „Kfz-Mechatronikerin" trifft „Kfz-Mechatroniker/-in" damit auf der exact-Stufe. Die keyword-Stufe fängt vage Eingaben wie „irgendwas mit Medien" ab: Tokens unter 4 Zeichen und Füllwörter (`KEYWORD_STOP_WORDS`) fliegen raus, gezählt werden nur exakte Term- oder Namenstreffer — „pflege" trifft also nicht „pflegen". Die Gesamtsumme ist auf **+30** gedeckelt (`PREFERRED_JOB_SCORE_CAP`) — bei den aktuellen Stufenwerten greift der Deckel nie.
 
-**No-Gos schlagen den Wunsch:** Berufe mit negativem No-Go-Score bekommen 0 Punkte, egal wie exakt der Wunsch passt.
+**No-Gos heben den Wunsch nicht auf:** Ein Beruf mit negativem No-Go-Score bekommt den Wunsch-Bonus trotzdem und behält zugleich den No-Go-Abzug. Wer einen Beruf ausdrücklich nennt, soll ihn in der Liste sehen — nur eben ehrlich niedrig bewertet.
 
 **Shortlist-Injection.** Der Boost allein reicht nicht immer, um einen schwach bewerteten Wunschberuf in die Top 60 zu heben. Deshalb werden aufgelöste Wunschberufe danach direkt eingesetzt: bis zu 5 (`MAX_PREFERRED_SHORTLIST_INJECTIONS`), jeweils auf den Platz des schwächsten Shortlist-Eintrags, No-Go-Berufe ausgenommen. Der Regionalfilter bleibt bindend — ein Wunschberuf, den es in Berlin/Brandenburg praktisch nicht gibt, kommt nicht zurück in die Liste.
 
