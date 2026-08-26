@@ -37,6 +37,7 @@ const WARM_CTA_SURFACE_BG = "#DDF4FF";
  */
 export const LOGO_WORDMARK_SRC = "/illustrations/azuki-wordmark.svg";
 export const LOGO_LOCKUP_SRC = "/illustrations/azuki-lockup.svg";
+export const LOGO_RASTER_EDGE = MAX_RASTER_EDGE;
 
 export type PdfRasterOptions = {
 	coverAspect?: number;
@@ -461,11 +462,16 @@ const iconCache = new Map<string, Promise<string | null>>();
 export async function loadPdfIconSrc(
 	src: string,
 	backgroundColor: string,
+	outHeight?: number,
 ): Promise<string | null> {
-	const cacheKey = `${src}|${backgroundColor}`;
+	const cacheKey = `${src}|${backgroundColor}|${outHeight ?? ""}`;
 	let pending = iconCache.get(cacheKey);
 	if (!pending) {
-		pending = loadPdfImageSrc(src, { format: "jpeg", backgroundColor });
+		pending = loadPdfImageSrc(src, {
+			format: "jpeg",
+			backgroundColor,
+			outHeight,
+		});
 		iconCache.set(cacheKey, pending);
 	}
 	return pending;
@@ -582,8 +588,8 @@ export function warmPdfRuntime(): Promise<void> {
 				),
 				loadPdfIconSrc(WARM_MASCOT_SRC, WARM_CTA_SURFACE_BG),
 				loadPdfIconSrc(WARM_QR_SRC, WARM_CTA_SURFACE_BG),
-				loadPdfIconSrc(LOGO_WORDMARK_SRC, WHITE),
-				loadPdfIconSrc(LOGO_LOCKUP_SRC, WHITE),
+				loadPdfIconSrc(LOGO_WORDMARK_SRC, WHITE, LOGO_RASTER_EDGE),
+				loadPdfIconSrc(LOGO_LOCKUP_SRC, WHITE, LOGO_RASTER_EDGE),
 			]);
 		})().catch(() => {
 			pdfWarmPromise = null;

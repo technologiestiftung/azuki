@@ -501,8 +501,6 @@ export const content = {
 	"results.share.text": "Schau dir diese passenden Ausbildungsberufe an.",
 
 	"results.download.ariaLabel": "Ausbildungsberufe herunterladen",
-	"results.brand.azu": "Azu",
-	"results.brand.ki": "Ki",
 	"results.export.filename": "AzuKi-Berufe.pdf",
 	"results.export.tagline": "Finde deine Ausbildung.",
 	"results.export.topTitle": "Deine Top 3 Berufe",
