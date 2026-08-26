@@ -20,7 +20,8 @@ export const COLOR = {
 /** Figma mockup frame is 935×1322.36 px representing an A4 (595.28×841.89 pt) page. */
 export const FIGMA_PX_TO_PT = 595.28 / 935;
 /** Converts a Figma dev-mode px value to the pt value react-pdf expects. */
-export const px = (figmaPx: number) => Math.round(figmaPx * FIGMA_PX_TO_PT * 100) / 100;
+export const px = (figmaPx: number) =>
+	Math.round(figmaPx * FIGMA_PX_TO_PT * 100) / 100;
 
 /** Page chrome — fixed headers need reserved padding so wrapped pages don't overlap. */
 export const PAGE_PAD_X = 24;
@@ -70,11 +71,16 @@ export const styles = StyleSheet.create({
 	header: {
 		flexDirection: "row",
 		justifyContent: "space-between",
-		alignItems: "center",
 		paddingLeft: 8,
 		backgroundColor: COLOR.white,
 	},
+	headerLogo: {
+		marginTop: "auto",
+		marginBottom: "auto",
+	},
 	headerTitle: {
+		marginTop: "auto",
+		marginBottom: "auto",
 		fontFamily: "Asap",
 		fontWeight: 600,
 		lineHeight: 1.2,

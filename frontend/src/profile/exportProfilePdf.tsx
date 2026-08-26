@@ -6,6 +6,8 @@ import {
 } from "../api/client";
 import { content } from "../content";
 import {
+	LOGO_LOCKUP_SRC,
+	LOGO_WORDMARK_SRC,
 	ensureBufferPolyfill,
 	getSolidPdfPlaceholderSrc,
 	loadPdfIconSrc,
@@ -65,18 +67,27 @@ export async function exportProfilePdf({
 		return placeholderPromise;
 	};
 
-	const [mascotSrc, qrSrc, avatarSrc, shortDescription, topImageSrcs] =
-		await Promise.all([
-			loadPdfIconSrc(MASCOT_SRC, CTA_SURFACE_BG),
-			loadPdfIconSrc(QR_SRC, CTA_SURFACE_BG),
-			loadPdfImageSrc(avatarPath, {
-				format: "png",
-				backgroundColor: COLOR.sky0,
-				outHeight: 192,
-			}),
-			loadShortDescription(profile),
-			loadPdfTopCardImages(topOccupations, resolvePlaceholder),
-		]);
+	const [
+		mascotSrc,
+		qrSrc,
+		avatarSrc,
+		shortDescription,
+		topImageSrcs,
+		wordmarkSrc,
+		lockupSrc,
+	] = await Promise.all([
+		loadPdfIconSrc(MASCOT_SRC, CTA_SURFACE_BG),
+		loadPdfIconSrc(QR_SRC, CTA_SURFACE_BG),
+		loadPdfImageSrc(avatarPath, {
+			format: "png",
+			backgroundColor: COLOR.sky0,
+			outHeight: 192,
+		}),
+		loadShortDescription(profile),
+		loadPdfTopCardImages(topOccupations, resolvePlaceholder),
+		loadPdfIconSrc(LOGO_WORDMARK_SRC, COLOR.white),
+		loadPdfIconSrc(LOGO_LOCKUP_SRC, COLOR.white),
+	]);
 
 	const placeholderSrc = placeholderPromise
 		? await placeholderPromise
@@ -88,6 +99,8 @@ export async function exportProfilePdf({
 		avatarSrc,
 		placeholderSrc,
 		topImageSrcs,
+		wordmarkSrc,
+		lockupSrc,
 	};
 
 	try {

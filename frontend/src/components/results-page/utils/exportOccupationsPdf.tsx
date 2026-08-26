@@ -2,6 +2,8 @@ import { pdf } from "@react-pdf/renderer";
 import type { MatchedOccupation } from "@azuki/shared";
 import { content } from "../../../content";
 import {
+	LOGO_LOCKUP_SRC,
+	LOGO_WORDMARK_SRC,
 	ensureBufferPolyfill,
 	getSolidPdfPlaceholderSrc,
 	loadPdfIconSrc,
@@ -11,6 +13,7 @@ import {
 	triggerDownload,
 	warmPdfRuntime,
 } from "../../pdf/loadPdfAssets";
+import { COLOR } from "../../pdf/pdfTheme";
 import {
 	OccupationsPdfDocument,
 	type OccupationsPdfAssets,
@@ -39,11 +42,14 @@ export async function exportOccupationsPdf(
 		return placeholderPromise;
 	};
 
-	const [mascotSrc, qrSrc, topImageSrcs] = await Promise.all([
-		loadPdfIconSrc(MASCOT_SRC, CTA_SURFACE_BG),
-		loadPdfIconSrc(QR_SRC, CTA_SURFACE_BG),
-		loadPdfTopCardImages(topOccupations, resolvePlaceholder),
-	]);
+	const [mascotSrc, qrSrc, topImageSrcs, wordmarkSrc, lockupSrc] =
+		await Promise.all([
+			loadPdfIconSrc(MASCOT_SRC, CTA_SURFACE_BG),
+			loadPdfIconSrc(QR_SRC, CTA_SURFACE_BG),
+			loadPdfTopCardImages(topOccupations, resolvePlaceholder),
+			loadPdfIconSrc(LOGO_WORDMARK_SRC, COLOR.white),
+			loadPdfIconSrc(LOGO_LOCKUP_SRC, COLOR.white),
+		]);
 
 	const placeholderSrc = placeholderPromise
 		? await placeholderPromise
@@ -54,6 +60,8 @@ export async function exportOccupationsPdf(
 		qrSrc,
 		placeholderSrc,
 		topImageSrcs,
+		wordmarkSrc,
+		lockupSrc,
 	};
 
 	try {

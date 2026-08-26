@@ -151,7 +151,7 @@ const profileStyles = StyleSheet.create({
 	schoolDegreeBlock: {
 		backgroundColor: COLOR.skyShade10,
 		borderRadius: 13,
-		padding: 12,
+		padding: px(12),
 		marginBottom: px(8),
 		marginLeft: 8,
 		alignSelf: "flex-start",
@@ -176,7 +176,6 @@ const profileStyles = StyleSheet.create({
 		fontSize: 12,
 		lineHeight: 1.25,
 		marginBottom: 8,
-		paddingLeft: 8,
 		color: COLOR.sky900,
 	},
 	columns: {
@@ -186,13 +185,13 @@ const profileStyles = StyleSheet.create({
 	},
 	column: {
 		flex: 1,
+		padding: px(12),
 	},
 	meterRow: {
 		flexDirection: "row",
 		alignItems: "center",
 		gap: px(12),
 		marginBottom: px(8),
-		paddingLeft: 8,
 	},
 	meterLabel: {
 		fontFamily: "Asap",
@@ -224,12 +223,12 @@ const profileStyles = StyleSheet.create({
 	},
 	chipSection: {
 		marginBottom: px(8),
+		padding: px(12),
 	},
 	chipRow: {
 		flexDirection: "row",
 		flexWrap: "wrap",
 		gap: px(8),
-		paddingLeft: 8,
 	},
 	chip: {
 		borderWidth: px(2),
@@ -259,6 +258,8 @@ export interface ProfilePdfAssets {
 	avatarSrc: string | null;
 	placeholderSrc: string;
 	topImageSrcs: string[];
+	wordmarkSrc: string | null;
+	lockupSrc: string | null;
 }
 
 export interface ProfilePdfDocumentProps {
@@ -322,7 +323,13 @@ function formatTopMeta(occupation: MatchedOccupation): string {
 	return parts.join(" · ");
 }
 
-function PdfPageHeader() {
+function PdfPageHeader({
+	wordmarkSrc,
+	lockupSrc,
+}: {
+	wordmarkSrc: string | null;
+	lockupSrc: string | null;
+}) {
 	return (
 		<View
 			style={styles.fixedPageHeader}
@@ -332,6 +339,8 @@ function PdfPageHeader() {
 					pageNumber={pageNumber}
 					title={content["profile.title"]}
 					tagline={content["results.export.tagline"]}
+					wordmarkSrc={wordmarkSrc}
+					lockupSrc={lockupSrc}
 				/>
 			)}
 		/>
@@ -481,7 +490,7 @@ function ChipSection({
 				style={
 					heading === "subtitle"
 						? profileStyles.chipSubtitle
-						: styles.sectionTitle
+						: [styles.sectionTitle, { paddingLeft: 0 }]
 				}
 			>
 				{title}
@@ -509,7 +518,7 @@ function MeterColumn({
 	}
 	return (
 		<View style={profileStyles.column}>
-			<Text style={styles.sectionTitle}>{title}</Text>
+			<Text style={[styles.sectionTitle, { paddingLeft: 0 }]}>{title}</Text>
 			{items.map((item) => (
 				<MeterBar key={item.id} item={item} tone={tone} />
 			))}
@@ -680,7 +689,10 @@ export function ProfilePdfDocument({
 			subject={content["results.export.tagline"]}
 		>
 			<Page size="A4" style={styles.page}>
-				<PdfPageHeader />
+				<PdfPageHeader
+					wordmarkSrc={assets.wordmarkSrc}
+					lockupSrc={assets.lockupSrc}
+				/>
 				<HeroCard
 					profileName={profileName}
 					shortDescription={shortDescription}

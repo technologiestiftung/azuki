@@ -208,6 +208,8 @@ export interface OccupationsPdfAssets {
 	qrSrc: string | null;
 	placeholderSrc: string;
 	topImageSrcs: string[];
+	wordmarkSrc: string | null;
+	lockupSrc: string | null;
 }
 
 export interface OccupationsPdfDocumentProps {
@@ -407,6 +409,8 @@ export function OccupationsPdfDocument({
 							pageNumber={pageNumber}
 							title={content["results.title"]}
 							tagline={content["results.export.tagline"]}
+							wordmarkSrc={assets.wordmarkSrc}
+							lockupSrc={assets.lockupSrc}
 						/>
 					)}
 				/>

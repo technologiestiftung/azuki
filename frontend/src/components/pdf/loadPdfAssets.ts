@@ -1,5 +1,7 @@
 import { Buffer } from "buffer";
 
+const WHITE = "#FFFFFF";
+
 const FETCH_TIMEOUT_MS = 6000;
 /** Caps CTA/avatar rasters (~56–64pt at ~2–3×). */
 const MAX_RASTER_EDGE = 192;
@@ -27,6 +29,14 @@ const PDF_FONT_URLS = [
 const WARM_MASCOT_SRC = "/illustrations/star-neutral.svg";
 const WARM_QR_SRC = "/illustrations/qr-code.svg";
 const WARM_CTA_SURFACE_BG = "#DDF4FF";
+/**
+ * Rendered as a raster Image rather than react-pdf's Svg/Path — Svg content
+ * inside the fixed page header's per-page `render` callback silently drops
+ * whenever any ancestor uses `alignItems`/`alignSelf: "center"` (a react-pdf
+ * Yoga-measurement bug), so a vector header logo is not reliable there.
+ */
+export const LOGO_WORDMARK_SRC = "/illustrations/azuki-wordmark.svg";
+export const LOGO_LOCKUP_SRC = "/illustrations/azuki-lockup.svg";
 
 export type PdfRasterOptions = {
 	coverAspect?: number;
@@ -572,6 +582,8 @@ export function warmPdfRuntime(): Promise<void> {
 				),
 				loadPdfIconSrc(WARM_MASCOT_SRC, WARM_CTA_SURFACE_BG),
 				loadPdfIconSrc(WARM_QR_SRC, WARM_CTA_SURFACE_BG),
+				loadPdfIconSrc(LOGO_WORDMARK_SRC, WHITE),
+				loadPdfIconSrc(LOGO_LOCKUP_SRC, WHITE),
 			]);
 		})().catch(() => {
 			pdfWarmPromise = null;
