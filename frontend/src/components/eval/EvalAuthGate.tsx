@@ -49,7 +49,7 @@ export function EvalAuthGate({ children }: Props) {
 					placeholder="Passwort"
 					autoFocus
 					className={`w-full px-4 py-3 rounded-2xl border-2 text-base outline-none transition-colors focus:outline-none focus-visible:border-sky-300 ${
-						error ? "border-red-500" : "border-gray-200"
+						error ? "border-red-500" : "border-sky-shade-20"
 					}`}
 				/>
 				{error && (

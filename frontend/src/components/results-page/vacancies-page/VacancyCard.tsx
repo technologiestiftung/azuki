@@ -65,20 +65,20 @@ export function VacancyCard({
 	const locationLabel = formatVacancyLocation(preview);
 
 	return (
-		<div className="relative bg-gray-100 rounded-2xl border border-gray-200 overflow-hidden">
+		<div className="relative bg-gray-100 rounded-2xl border border-sky-shade-20 overflow-hidden">
 			<Link
 				to={toWithShareSearch(
 					buildResultsVacancyDetailPath(preview.referenznummer),
 					searchParams,
 				)}
 				state={{ occupationName } satisfies VacancyDetailNavState}
-				className="block focus-visible:outline focus-visible:outline-2 focus-visible:outline-sky-500 rounded-2xl md:hover:bg-gray-200/40 active:bg-gray-200/40"
+				className="block focus-visible:outline focus-visible:outline-2 focus-visible:outline-sky-500 rounded-2xl md:hover:bg-sky-shade-20/40 active:bg-sky-shade-20/40"
 				aria-label={`${displayName}, ${content["results.moreInfo"]}`}
 			>
 				<div className="flex flex-col gap-5 p-3">
 					<div className="flex justify-between items-start gap-5">
 						<div className="flex flex-col gap-1">
-							<h3 className="text-xl font-semibold text-sky-1000">
+							<h3 className="text-xl font-semibold text-sky-900">
 								{displayName}
 							</h3>
 							<p className="text-gray-500">{preview.employer}</p>
@@ -88,7 +88,7 @@ export function VacancyCard({
 
 					<div className="flex flex-col gap-[3px]">
 						{startDate && (
-							<div className="flex items-center gap-[5px] text-sky-1000">
+							<div className="flex items-center gap-[5px] text-sky-900">
 								<img
 									src="/icons/calendar.svg"
 									alt=""
@@ -99,7 +99,7 @@ export function VacancyCard({
 								</span>
 							</div>
 						)}
-						<div className="flex items-center gap-[5px] text-gray-900">
+						<div className="flex items-center gap-[5px] text-sky-900">
 							<img
 								src="/icons/location.svg"
 								alt=""
@@ -113,7 +113,7 @@ export function VacancyCard({
 				{publishedLabel && (
 					<div
 						className={`flex items-center justify-between pl-[14px] pr-3 py-3 ${
-							isNew ? "bg-sky-100" : "bg-gray-100 border-t border-gray-200"
+							isNew ? "bg-sky-100" : "bg-gray-100 border-t border-sky-shade-20"
 						}`}
 					>
 						<span

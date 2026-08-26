@@ -31,13 +31,13 @@ export function ResultCard({
 	const displayName = formatOccupationDisplayName(occupation.name);
 
 	return (
-		<div className="relative bg-gray-100 rounded-2xl border border-gray-200 overflow-hidden">
+		<div className="relative bg-gray-100 rounded-2xl border border-sky-shade-20 overflow-hidden">
 			<Link
 				to={toWithShareSearch(
 					buildResultsOccupationPath(occupation.id),
 					searchParams,
 				)}
-				className="block focus-visible:outline focus-visible:outline-2 focus-visible:outline-sky-500 rounded-2xl md:hover:bg-gray-200/40 active:bg-gray-200/40"
+				className="block focus-visible:outline focus-visible:outline-2 focus-visible:outline-sky-500 rounded-2xl md:hover:bg-sky-shade-20/40 active:bg-sky-shade-20/40"
 				aria-label={`${displayName}, ${content["results.moreInfo"]}`}
 			>
 				<OccupationCardBody

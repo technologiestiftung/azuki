@@ -494,7 +494,7 @@ function TierColumn({
 	onRemove: (id: number) => void;
 }) {
 	return (
-		<div className="border border-gray-200 rounded p-2">
+		<div className="border border-sky-shade-20 rounded p-2">
 			<div className="font-medium mb-1">{title}</div>
 			{ids.length === 0 && <div className="text-gray-400">Leer</div>}
 			<ul className="space-y-0.5">

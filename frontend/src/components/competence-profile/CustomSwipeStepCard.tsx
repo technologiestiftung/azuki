@@ -43,7 +43,7 @@ export function CustomSwipeStepCard({
 				} as CSSProperties
 			}
 		>
-			<div className="flex h-full min-h-0 w-full flex-1 flex-col rounded-3xl bg-gray-200 py-5 px-6 mb-3">
+			<div className="flex h-full min-h-0 w-full flex-1 flex-col rounded-3xl bg-sky-shade-20 py-5 px-6 mb-3">
 				{items.length > 0 ? (
 					<>
 						<h3 className="text-lg font-semibold text-gray-500 mb-2 shrink-0">

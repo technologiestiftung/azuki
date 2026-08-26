@@ -93,13 +93,13 @@ export function OccupationDetailBody({
 			<div className="px-4">
 				<div className="flex flex-col gap-5 px-3 py-5 rounded-2xl bg-sky-50 border border-sky-100">
 					<div className="flex flex-col gap-[7px] text-center">
-						<h3 className="text-sky-1000 text-2xl font-semibold">
+						<h3 className="text-sky-900 text-2xl font-semibold">
 							{occupationVacanciesCount !== undefined &&
 							occupationVacanciesCount > 0
 								? content["results.detail.apply.title"]
 								: content["results.detail.apply.empty.title"]}
 						</h3>
-						<p className="text-lg font-normal text-sky-1000">
+						<p className="text-lg font-normal text-sky-900">
 							{occupationVacanciesCount !== undefined &&
 							occupationVacanciesCount > 0
 								? content["results.detail.apply.description"]

@@ -101,7 +101,7 @@ function PersonasPageInner() {
 			)}
 
 			{personas && personas.length > 0 && (
-				<ul className="divide-y divide-gray-200 border border-gray-200 rounded">
+				<ul className="divide-y divide-sky-shade-20 border border-sky-shade-20 rounded">
 					{personas.map((p) => (
 						<li key={p.id} className="flex gap-3 items-start p-3">
 							<Link

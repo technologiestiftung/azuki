@@ -49,7 +49,7 @@ export function FilterBottomSheetShell({
 					ariaLabel={content["navigation.back"]}
 					iconSrc="/icons/arrow-back-black.svg"
 				/>
-				<h2 className="pointer-events-none absolute inset-x-4 text-center text-lg font-semibold text-gray-900">
+				<h2 className="pointer-events-none absolute inset-x-4 text-center text-lg font-semibold text-sky-900">
 					{title}
 				</h2>
 				<button
@@ -61,7 +61,7 @@ export function FilterBottomSheetShell({
 					className={`relative z-10 shrink-0 px-4 text-base font-medium transition-colors rounded-2xl h-12 py-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-sky-500 disabled:cursor-default ${
 						resetDisabled
 							? "text-gray-400"
-							: "text-sky-300 md:hover:bg-gray-200 md:hover:text-gray-800 active:bg-gray-200 active:text-gray-800"
+							: "text-sky-300 md:hover:bg-sky-shade-20 md:hover:text-gray-800 active:bg-sky-shade-20 active:text-gray-800"
 					}`}
 				>
 					{content["results.filter.reset"]}

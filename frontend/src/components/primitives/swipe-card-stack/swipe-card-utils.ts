@@ -42,7 +42,7 @@ const SLIDE_IN_ANIMATION: Record<SwipeDirection, string> = {
 	up: "animate-slideInTop",
 };
 
-/** Tailwind `gray-300` / `gray-200` — back card surface lerps between these as it scales up. */
+/** Tailwind `gray-300` / `sky-shade-20` — back card surface lerps between these as it scales up. */
 const BACK_CARD_SURFACE_FROM = [0xd1, 0xd5, 0xdb] as const;
 const BACK_CARD_SURFACE_TO = [0xe5, 0xe7, 0xeb] as const;
 
@@ -101,7 +101,7 @@ const DEFAULT_ACCENT: TopCardHorizontalAccentBg = {
 	right: "bg-sky-300",
 };
 
-const IDLE_BG = "bg-gray-200";
+const IDLE_BG = "bg-sky-shade-20";
 
 /** Horizontal drag past this (px) tints even when vertical movement is larger. */
 const TINT_OVERRIDE_HORIZONTAL_DRAG_PX = 18;
@@ -128,11 +128,11 @@ export interface TopCardAccentBgInput {
 /**
  * Returns the Tailwind bg class for the top card.
  *
- * - Idle / up-swipe → `bg-gray-200`
+ * - Idle / up-swipe → `bg-sky-shade-20`
  * - Horizontal drag past a small threshold → `accent.left` or `accent.right`
  *
  * When `accent` is passed explicitly (asymmetric left/right stacks), the base stays
- * `bg-gray-200` so progressive tint can live only in the card overlay — avoids an
+ * `bg-sky-shade-20` so progressive tint can live only in the card overlay — avoids an
  * instant jump to full saturation while dragging.
  */
 export function getTopCardAccentBg(input: TopCardAccentBgInput): string {

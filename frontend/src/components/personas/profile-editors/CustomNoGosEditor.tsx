@@ -56,7 +56,7 @@ export function CustomNoGosEditor({ customNoGos, noGos, onChange }: Props) {
 							className={`inline-flex items-center gap-1 text-xs px-2 py-1 rounded border ${
 								noGos[value] === "rejected"
 									? "bg-orange-50 border-orange-200 text-orange-800"
-									: "bg-gray-50 border-gray-200 text-gray-600"
+									: "bg-gray-50 border-sky-shade-20 text-gray-600"
 							}`}
 						>
 							<button

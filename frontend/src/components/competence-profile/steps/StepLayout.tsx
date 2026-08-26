@@ -96,7 +96,7 @@ export function StepLayout({
 			<div
 				className={`fixed bottom-0 left-0 right-0 z-30 mx-auto w-full flex flex-col px-4 gap-y-1 max-w-[430px] ${
 					showFooterBorder
-						? "bg-sky-white border-t-2 border-gray-200"
+						? "bg-sky-white border-t-2 border-sky-shade-20"
 						: "border-t-0 bg-transparent"
 				} ${hasSkipButton ? "pt-4 pb-2" : "py-4"} ${
 					animateEnter ? "animate-stepCtaEnterFromBottom" : ""

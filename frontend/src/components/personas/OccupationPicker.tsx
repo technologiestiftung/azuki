@@ -77,7 +77,7 @@ export function OccupationPicker({
 	const isFiltered = query.trim().length > 0 || tierFilter !== "";
 
 	return (
-		<div className="border border-gray-200 rounded p-2 text-xs">
+		<div className="border border-sky-shade-20 rounded p-2 text-xs">
 			<PopularityExplainer storageKey="occupationPicker" />
 			<div className="flex gap-2 mb-2">
 				<input
@@ -104,7 +104,7 @@ export function OccupationPicker({
 				</select>
 			</div>
 
-			<div className="flex items-center gap-3 py-1 text-[10px] uppercase tracking-wide text-gray-500 border-b border-gray-200">
+			<div className="flex items-center gap-3 py-1 text-[10px] uppercase tracking-wide text-gray-500 border-b border-sky-shade-20">
 				<span className="flex-1 min-w-0">Beruf</span>
 				<span className="w-28">Häufigkeit</span>
 				<span

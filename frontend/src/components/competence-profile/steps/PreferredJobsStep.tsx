@@ -66,7 +66,7 @@ export const PreferredJobsStep = () => {
 					</div>
 				</div>
 			) : (
-				<div className="flex flex-col gap-2 px-6 pt-5 pb-6 bg-gray-200 rounded-3xl">
+				<div className="flex flex-col gap-2 px-6 pt-5 pb-6 bg-sky-shade-20 rounded-3xl">
 					<div className="w-full flex justify-center pb-2">
 						<img
 							src="/illustrations/preferred-job.svg"

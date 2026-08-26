@@ -145,7 +145,7 @@ export function LocationFilterBottomSheet({
 					className={`flex flex-col justify-center items-center gap-2 min-h-[52px] p-3 w-full rounded-xl border-2 text-lg font-medium ${
 						regionSelected
 							? "border-sky-300 bg-sky-50 text-sky-700"
-							: "border-gray-200 bg-transparent text-gray-700"
+							: "border-sky-shade-20 bg-transparent text-gray-700"
 					}`}
 				>
 					{selectedLocationDisplay}

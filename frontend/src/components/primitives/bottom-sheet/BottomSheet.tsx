@@ -371,7 +371,7 @@ export function BottomSheet({
 		<>
 			<button
 				type="button"
-				className={`z-50 fixed inset-0 bg-sky-1000/80 bg-blur-[2px] ${
+				className={`z-50 fixed inset-0 bg-sky-900/80 bg-blur-[2px] ${
 					isClosing ? "pointer-events-none animate-fadeOut" : "animate-fadeIn"
 				}`}
 				aria-label={overlayDismissLabel}
@@ -415,7 +415,7 @@ export function BottomSheet({
 						{children}
 					</div>
 					{footer ? (
-						<div className="shrink-0 border-t-2 border-gray-200 p-4">
+						<div className="shrink-0 border-t-2 border-sky-shade-20 p-4">
 							{footer}
 						</div>
 					) : null}

@@ -44,7 +44,7 @@ function PersonaHeader({ persona }: { persona: Persona }) {
 		profile.selectedPracticalExperienceIds,
 	);
 	return (
-		<div className="border-b border-gray-200 pb-2 mb-2">
+		<div className="border-b border-sky-shade-20 pb-2 mb-2">
 			<div className="font-semibold">{persona.name}</div>
 			<div className="text-xs text-gray-600">{summary}</div>
 			<div
@@ -69,7 +69,7 @@ export function PersonaColumn({
 	const isSuccess = current && !("error" in current);
 
 	return (
-		<div className="flex-1 min-w-0 border border-gray-200 rounded p-3">
+		<div className="flex-1 min-w-0 border border-sky-shade-20 rounded p-3">
 			<ScoreBanner report={report} />
 			<PersonaHeader persona={persona} />
 
@@ -119,7 +119,7 @@ export function PersonaColumn({
 								const tier = getRubricTier(entry.id, persona);
 								const borderClass = tier
 									? PREFILTER_TIER_BORDER[tier]
-									: "border-gray-200";
+									: "border-sky-shade-20";
 								return (
 									<div
 										key={entry.id}

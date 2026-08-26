@@ -52,7 +52,7 @@ describe("getTopCardAccentBg", () => {
 				flyDirection: "up",
 				animationDirection: null,
 			}),
-		).toBe("bg-gray-200");
+		).toBe("bg-sky-shade-20");
 
 		expect(
 			getTopCardAccentBg({
@@ -62,7 +62,7 @@ describe("getTopCardAccentBg", () => {
 				flyDirection: null,
 				animationDirection: "up",
 			}),
-		).toBe("bg-gray-200");
+		).toBe("bg-sky-shade-20");
 	});
 
 	test("returns gray when dominant up drag (skip gesture)", () => {
@@ -74,7 +74,7 @@ describe("getTopCardAccentBg", () => {
 				flyDirection: null,
 				animationDirection: null,
 			}),
-		).toBe("bg-gray-200");
+		).toBe("bg-sky-shade-20");
 	});
 
 	test("keeps neutral base when accent is explicit (tint is overlay-only)", () => {
@@ -87,7 +87,7 @@ describe("getTopCardAccentBg", () => {
 				animationDirection: null,
 				accent: customAccent,
 			}),
-		).toBe("bg-gray-200");
+		).toBe("bg-sky-shade-20");
 
 		expect(
 			getTopCardAccentBg({
@@ -98,7 +98,7 @@ describe("getTopCardAccentBg", () => {
 				animationDirection: null,
 				accent: customAccent,
 			}),
-		).toBe("bg-gray-200");
+		).toBe("bg-sky-shade-20");
 	});
 
 	test("uses flyDirection or animationDirection when accent uses defaults only", () => {
@@ -133,7 +133,7 @@ describe("getTopCardAccentBg", () => {
 				animationDirection: null,
 				accent: customAccent,
 			}),
-		).toBe("bg-gray-200");
+		).toBe("bg-sky-shade-20");
 
 		expect(
 			getTopCardAccentBg({
@@ -144,7 +144,7 @@ describe("getTopCardAccentBg", () => {
 				animationDirection: "left",
 				accent: customAccent,
 			}),
-		).toBe("bg-gray-200");
+		).toBe("bg-sky-shade-20");
 	});
 
 	test("returns idle when no side is determined", () => {
@@ -156,7 +156,7 @@ describe("getTopCardAccentBg", () => {
 				flyDirection: null,
 				animationDirection: null,
 			}),
-		).toBe("bg-gray-200");
+		).toBe("bg-sky-shade-20");
 	});
 });
 
@@ -183,7 +183,7 @@ describe("swipeFlyOutTopTransformTransition", () => {
 });
 
 describe("mixBackCardSurfaceColor", () => {
-	test("interpolates from gray-300 at 0 to gray-200 at 1", () => {
+	test("interpolates from gray-300 at 0 to sky-shade-20 at 1", () => {
 		expect(mixBackCardSurfaceColor(0)).toBe("rgb(209 213 219)");
 		expect(mixBackCardSurfaceColor(1)).toBe("rgb(229 231 235)");
 	});

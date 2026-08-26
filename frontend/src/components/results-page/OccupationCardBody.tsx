@@ -46,7 +46,7 @@ export function OccupationCardBody({
 			</div>
 
 			<div className="p-3 pt-4">
-				<h3 className="text-xl font-semibold text-sky-1000 mb-3">
+				<h3 className="text-xl font-semibold text-sky-900 mb-3">
 					{displayName}
 				</h3>
 				{(occupationDuration || salaryKnown) && (

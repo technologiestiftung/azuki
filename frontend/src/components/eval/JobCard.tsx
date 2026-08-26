@@ -20,7 +20,7 @@ const TIER_BADGE: Record<RubricTier, string> = {
 };
 
 export function JobCard({ entry, rank, tier }: Props) {
-	const borderClass = tier ? TIER_BORDER[tier] : "border-gray-200";
+	const borderClass = tier ? TIER_BORDER[tier] : "border-sky-shade-20";
 
 	return (
 		<div className={`p-2 border-l-2 ${borderClass}`}>

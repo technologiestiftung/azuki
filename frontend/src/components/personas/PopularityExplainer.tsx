@@ -32,7 +32,7 @@ export function PopularityExplainer({
 	}
 
 	return (
-		<div className="border border-gray-200 rounded mb-2 text-sm">
+		<div className="border border-sky-shade-20 rounded mb-2 text-sm">
 			<button
 				type="button"
 				onClick={toggle}
