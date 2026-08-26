@@ -59,7 +59,7 @@ DAZUBI + Destatis xlsx snapshots
 |---|---|
 | **Runs** | `npm run data:fetch-berufe` |
 | **Reads** | BERUFENET REST — `rest.arbeitsagentur.de/infosysbub/bnet/pc/v1` |
-| **Writes** | `backend/src/data/berufe.json` (≈538 occupations after exclusions) |
+| **Writes** | `backend/src/data/berufe.json` (≈528 occupations after exclusions) |
 | **Depends on** | `apply-*.ts`, `normalizeKldb.ts` |
 
 **Example — one API item → one Occupation record**
@@ -202,7 +202,7 @@ After (patch: `changingWorkplaces=false`):
 |---|---|
 | **Runs** | Inside `fetch-berufe.ts`; or standalone `npx tsx scripts/apply-joblinge-exclusions.ts` |
 | **Removes by** | Name regex `/\(§\s*66\s*BBiG\|§\s*42r\s*HwO/i` OR id in exclusion list |
-| **Post-run count** | ≈538 kept |
+| **Post-run count** | ≈528 kept |
 
 **Example — three removals**
 
@@ -220,9 +220,9 @@ After (patch: `changingWorkplaces=false`):
       → reason: "flagged"
 ```
 
-Sample console output:
+Sample console output — removal counts vary with each BERUFENET pull:
 ```
-Removed 189 occupations (73 §66, 116 Joblinge-listed). 538 remain.
+Removed 189 occupations (73 §66, 116 Joblinge-listed). 528 remain.
 Wrote backend/src/data/berufe.json
 ```
 
@@ -456,8 +456,8 @@ Sample OK output:
     -> Fachinformatiker/in – Anwendungsentwicklung
   ...
 
-names with an en-dash separator: 291
-OK — 534 occupations, no §66/§42r names, 291 names en-dashed cleanly.
+names with an en-dash separator: 287
+OK — 528 occupations, no §66/§42r names, 287 names en-dashed cleanly.
 ```
 
 Sample failure output:
