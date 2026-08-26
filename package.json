@@ -19,7 +19,9 @@
 		"data:generate-short-descriptions": "npx tsx --env-file-if-exists=.env scripts/generate-short-descriptions.ts",
 		"data:generate-task-bullets": "npx tsx --env-file-if-exists=.env scripts/generate-task-bullets.ts",
 		"data:build-trainee-fixtures": "npx tsx scripts/build-trainee-fixtures.ts",
-		"data:build-availability": "npx tsx scripts/build-availability.ts"
+		"data:build-availability": "npx tsx scripts/build-availability.ts",
+		"eval:audit-personas": "npx tsx scripts/audit-personas.ts",
+		"eval:rescore": "npx tsx scripts/rescore-snapshot.ts"
 	},
 	"workspaces": [
 		"shared",

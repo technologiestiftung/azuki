@@ -6,7 +6,7 @@ import type {
 	Verdict,
 } from "@azuki/shared";
 import {
-	EVAL_MAX_POINTS,
+	evalMaxPoints,
 	EVAL_POINTS_TIER_A,
 	EVAL_POINTS_TIER_S,
 	EVAL_TOP_N,
@@ -46,6 +46,9 @@ export function scoreSnapshot(
 			out[persona.id] = {
 				verdict: "fail",
 				percent: 0,
+				points: 0,
+				maxPoints: 0,
+				resultCount: 0,
 				tierSCount: 0,
 				tierACount: 0,
 				tierCCount: 0,
@@ -72,10 +75,19 @@ export function scoreSnapshot(
 		}
 		const points =
 			tierSCount * EVAL_POINTS_TIER_S + tierACount * EVAL_POINTS_TIER_A;
-		const percent = Math.round((points / EVAL_MAX_POINTS) * 100);
+		const maxPoints = evalMaxPoints(
+			persona.tierS.length,
+			persona.tierA.length,
+			topFinal.length,
+		);
+		const percent =
+			maxPoints === 0 ? 0 : Math.round((points / maxPoints) * 100);
 		out[persona.id] = {
 			verdict: deriveVerdict(percent, tierCCount),
 			percent,
+			points,
+			maxPoints,
+			resultCount: topFinal.length,
 			tierSCount,
 			tierACount,
 			tierCCount,

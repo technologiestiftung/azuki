@@ -16,6 +16,8 @@ export interface MissedEntry {
 }
 
 export interface RubricReachability {
+	/** How many candidates the prefilter actually shortlisted. */
+	prefilterSize: number;
 	tierSTotal: number;
 	tierSReached: ReachableEntry[];
 	tierSMissed: MissedEntry[];
@@ -66,6 +68,7 @@ export function rubricReachability(
 	}
 
 	return {
+		prefilterSize: prefilter.length,
 		tierSTotal: persona.tierS.length,
 		tierSReached,
 		tierSMissed,
