@@ -12,16 +12,6 @@ export const PROFILE_AVATARS = [
 		alt: `${content["profile.edit.images.altPrefix"]} 2`,
 	},
 	{
-		id: "avatar-3",
-		url: "/illustrations/profile/avatar-3.svg",
-		alt: `${content["profile.edit.images.altPrefix"]} 3`,
-	},
-	{
-		id: "avatar-4",
-		url: "/illustrations/profile/avatar-4.svg",
-		alt: `${content["profile.edit.images.altPrefix"]} 4`,
-	},
-	{
 		id: "avatar-5",
 		url: "/illustrations/profile/avatar-5.svg",
 		alt: `${content["profile.edit.images.altPrefix"]} 5`,

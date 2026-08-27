@@ -76,15 +76,18 @@ function computeWrapRowLayout(
 		};
 	}
 
+	const hiddenAfterTruncate = remaining - 1;
+
+	const rowBudget = hiddenAfterTruncate > 0 ? pillsBudget : containerWidth;
 	const spaceForTruncated =
-		fullCount === 0 ? pillsBudget : pillsBudget - used - GAP_PX;
+		fullCount === 0 ? rowBudget : rowBudget - used - GAP_PX;
 
 	if (spaceForTruncated >= MIN_TRUNCATED_PILL_PX) {
 		return {
 			visibleCount: fullCount + 1,
 			truncateLast: true,
 			truncatedMaxWidth: spaceForTruncated,
-			hiddenCount: remaining - 1,
+			hiddenCount: hiddenAfterTruncate,
 		};
 	}
 
@@ -193,14 +196,14 @@ export function ProfileWrapCollapsible({
 			: undefined;
 
 	return (
-		<div className="flex flex-col gap-2 bg-sky-shade-10 rounded-xl p-4">
-			<button
-				type="button"
-				className="flex w-full items-center justify-between"
-				onClick={() => setIsOpen((open) => !open)}
-				aria-expanded={isOpen}
-				disabled={!canCollapse}
-			>
+		<button
+			className="flex flex-col gap-2 bg-sky-shade-10 rounded-xl p-4"
+			type="button"
+			onClick={() => setIsOpen((open) => !open)}
+			aria-expanded={isOpen}
+			disabled={!canCollapse}
+		>
+			<div className="flex w-full items-center justify-between">
 				<h3 className="pl-1 font-semibold text-base text-sky-900">{title}</h3>
 				{canCollapse && (
 					<img
@@ -213,7 +216,7 @@ export function ProfileWrapCollapsible({
 						className="w-8 h-8"
 					/>
 				)}
-			</button>
+			</div>
 
 			<div
 				ref={containerRef}
@@ -256,7 +259,10 @@ export function ProfileWrapCollapsible({
 						shouldTruncate
 							? {
 									constrained: true,
-									style: { maxWidth: truncatedMaxWidth },
+									style: {
+										width: truncatedMaxWidth,
+										maxWidth: truncatedMaxWidth,
+									},
 								}
 							: {},
 					);
@@ -268,6 +274,6 @@ export function ProfileWrapCollapsible({
 					</span>
 				)}
 			</div>
-		</div>
+		</button>
 	);
 }
