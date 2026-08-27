@@ -31,7 +31,7 @@ export function TopOccupationsCarousel({
 						<Link
 							key={occupation.id}
 							to={buildResultsOccupationPath(occupation.id)}
-							className="flex flex-col min-w-[300px] gap-2 p-2.5 bg-white rounded-[20px] focus-visible:outline focus-visible:outline-2 focus-visible:outline-sky-500 last:mr-4 first:ml-4"
+							className="flex flex-col min-w-[300px] gap-2 p-2.5 bg-white rounded-[20px] focus-visible:outline focus-visible:outline-2 focus-visible:outline-sky-500 last:mr-12 first:ml-12"
 							aria-label={`${displayName}, ${content["results.moreInfo"]}`}
 						>
 							<img

@@ -523,10 +523,10 @@ export const content = {
 	"results.export.ctaBody.after":
 		" unterstützt dich bei allen Fragen rund um Stellensuche, Anschreiben und vielem mehr.",
 	"results.export.ctaQrLabel": "Zum Anmeldeformular",
-	"results.bottomCard.title": "Kein passender Ausbildungsberuf dabei?",
+	"results.bottomCard.title": "Da war nichts Passendes für dich dabei?",
+	"results.bottomCard.description":
+		"Wiederhole alle Fragen und entdecke andere Ausbildungsberufe.",
 	"results.bottomCard.resetCta": "Fragen wiederholen",
-	"results.bottomCard.consultationCta": "Beratung anfragen",
-	"results.bottomCard.consultationLink": "https://joblinge.de",
 	"results.moreInfo": "Mehr erfahren",
 	"results.restartCta": "Nochmal starten",
 	"results.filter.close": "Filter schließen",
@@ -535,6 +535,7 @@ export const content = {
 	"results.card.score.label": "Passt zu",
 	"results.wildcard.badge": "Besonders gesucht",
 	"results.wildcard.title": "Hier werden besonders viele Azubis gesucht",
+	"results.card.salary.monthly.label": "/ Monat",
 	"results.noResults":
 		"Wir haben leider keine Ausbildungsberufe zu deiner Auswahl gefunden.",
 	"results.contactCard.title": "Du weißt nicht, wo du anfangen sollst?",
@@ -603,6 +604,11 @@ export const content = {
 	"results.contactCard.bottomSheet.success.button": "E-Mail Postfach öffnen",
 	"results.contactCard.bottomSheet.success.illustrationAlt":
 		"Briefumschlag mit Sternen",
+	"results.resetDialog.title":
+		"Willst du wirklich alle Fragen nochmal beantworten?",
+	"results.resetDialog.description":
+		"Deine passenden Berufe, freie Stellen und Antworten werden gelöscht und können nicht wieder hergestellt werden.",
+	"results.resetDialog.download.label": "Passende Berufe speichern",
 	// Filter Bottom Sheet
 	"results.filter.tags.title": "Berufsgruppe",
 	"results.filter.tags.title.short": "Beruf",
