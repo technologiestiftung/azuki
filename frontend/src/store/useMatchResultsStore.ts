@@ -2,11 +2,16 @@ import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
 import type { MatchResult, VacanciesResponse } from "../common";
 
+export type ListFilterOrigin = "system" | "user";
+
 interface MatchResultsState {
 	matchResults: MatchResult | null;
 	favoriteOccupationIds: number[];
 	favoriteVacancyKeys: string[];
 	vacancyOccupationFilterIds: number[];
+	vacancyOccupationFilterOrigin: ListFilterOrigin | null;
+	occupationTypeTagFilterIds: string[];
+	occupationTypeTagFilterOrigin: ListFilterOrigin | null;
 	vacanciesCount: number | undefined;
 	resultsListScrollTop: number;
 }
@@ -17,7 +22,16 @@ interface MatchResultsActions {
 	syncVacanciesCount: (vacancies: VacanciesResponse | null) => void;
 	toggleFavorite: (occupationId: number) => void;
 	toggleVacancyFavorite: (vacancyKey: string) => void;
-	setVacancyOccupationFilterIds: (occupationIds: number[]) => void;
+	setVacancyOccupationFilterIds: (
+		occupationIds: number[],
+		origin?: ListFilterOrigin,
+	) => void;
+	clearSystemVacancyOccupationFilter: () => void;
+	setOccupationTypeTagFilterIds: (
+		tagIds: string[],
+		origin?: ListFilterOrigin,
+	) => void;
+	clearSystemOccupationTypeTagFilter: () => void;
 	setResultsListScrollTop: (value: number) => void;
 }
 
@@ -30,6 +44,9 @@ export const useMatchResultsStore = create<
 			favoriteOccupationIds: [],
 			favoriteVacancyKeys: [],
 			vacancyOccupationFilterIds: [],
+			vacancyOccupationFilterOrigin: null,
+			occupationTypeTagFilterIds: [],
+			occupationTypeTagFilterOrigin: null,
 			vacanciesCount: undefined,
 			resultsListScrollTop: 0,
 
@@ -53,6 +70,9 @@ export const useMatchResultsStore = create<
 					favoriteOccupationIds: [],
 					favoriteVacancyKeys: [],
 					vacancyOccupationFilterIds: [],
+					vacancyOccupationFilterOrigin: null,
+					occupationTypeTagFilterIds: [],
+					occupationTypeTagFilterOrigin: null,
 					vacanciesCount: undefined,
 				}),
 
@@ -94,8 +114,38 @@ export const useMatchResultsStore = create<
 						: [...state.favoriteVacancyKeys, vacancyKey],
 				})),
 
-			setVacancyOccupationFilterIds: (occupationIds) =>
-				set({ vacancyOccupationFilterIds: occupationIds }),
+			setVacancyOccupationFilterIds: (occupationIds, origin = "user") =>
+				set({
+					vacancyOccupationFilterIds: occupationIds,
+					vacancyOccupationFilterOrigin:
+						occupationIds.length === 0 ? null : origin,
+				}),
+
+			clearSystemVacancyOccupationFilter: () =>
+				set((state) =>
+					state.vacancyOccupationFilterOrigin === "system"
+						? {
+								vacancyOccupationFilterIds: [],
+								vacancyOccupationFilterOrigin: null,
+							}
+						: {},
+				),
+
+			setOccupationTypeTagFilterIds: (tagIds, origin = "user") =>
+				set({
+					occupationTypeTagFilterIds: tagIds,
+					occupationTypeTagFilterOrigin: tagIds.length === 0 ? null : origin,
+				}),
+
+			clearSystemOccupationTypeTagFilter: () =>
+				set((state) =>
+					state.occupationTypeTagFilterOrigin === "system"
+						? {
+								occupationTypeTagFilterIds: [],
+								occupationTypeTagFilterOrigin: null,
+							}
+						: {},
+				),
 
 			setResultsListScrollTop: (value) => set({ resultsListScrollTop: value }),
 		}),

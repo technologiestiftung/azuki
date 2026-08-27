@@ -21,7 +21,10 @@ import { ResultCard } from "./ResultCard";
 import { BottomCard } from "./BottomCard";
 import { WildcardCarousel } from "./WildcardCarousel";
 import { ResultsFilterBar } from "./ResultsFilterBar";
-import { buildResultTagChips } from "./utils/resultTagChips";
+import {
+	buildResultTagChips,
+	getOccupationTagId,
+} from "./utils/resultTagChips";
 import { applyOccupationFilters } from "./utils/applyOccupationFilters";
 import { BottomNav } from "../bottom-nav/BottomNav";
 import { useFetchVacancies } from "./useFetchVacancies";
@@ -41,6 +44,17 @@ import { warmPdfRuntime } from "../pdf/loadPdfAssets";
 const DEFAULT_TAG_FILTERS: OccupationTagsFilterState = {
 	selectedOccupationTypeTagIds: [],
 };
+
+function getOccupationTypeTagFilterIdsFromStore(): string[] {
+	const { occupationTypeTagFilterIds, matchResults } =
+		useMatchResultsStore.getState();
+	const validTagIds = new Set<string>(
+		matchResults?.occupations.map((occupation) =>
+			getOccupationTagId(occupation),
+		) ?? [],
+	);
+	return occupationTypeTagFilterIds.filter((id) => validTagIds.has(id));
+}
 
 export function ResultsPage() {
 	const [searchParams] = useSearchParams();
@@ -64,7 +78,13 @@ export function ResultsPage() {
 	);
 	const occupations = matchResults?.occupations ?? [];
 	const wildcardOccupations = matchResults?.wildcardOccupations ?? [];
-	const tagFilter = useFilterSheet(DEFAULT_TAG_FILTERS);
+	const setOccupationTypeTagFilterIds = useMatchResultsStore(
+		(state) => state.setOccupationTypeTagFilterIds,
+	);
+	const [initialTagFilters] = useState<OccupationTagsFilterState>(() => ({
+		selectedOccupationTypeTagIds: getOccupationTypeTagFilterIdsFromStore(),
+	}));
+	const tagFilter = useFilterSheet(DEFAULT_TAG_FILTERS, initialTagFilters);
 	const [showFavoritesOnly, setShowFavoritesOnly] = useState(false);
 
 	const favoriteIds = useMemo(
@@ -98,6 +118,22 @@ export function ResultsPage() {
 
 	const openTagFilter = tagFilter.open;
 	const closeTagFilter = tagFilter.close;
+
+	const applyTagFilter = useCallback(
+		(filters: OccupationTagsFilterState) => {
+			tagFilter.apply(filters);
+			setOccupationTypeTagFilterIds(
+				filters.selectedOccupationTypeTagIds,
+				"user",
+			);
+		},
+		[tagFilter.apply, setOccupationTypeTagFilterIds],
+	);
+
+	const resetTagFilter = useCallback(() => {
+		tagFilter.reset();
+		setOccupationTypeTagFilterIds([]);
+	}, [tagFilter.reset, setOccupationTypeTagFilterIds]);
 
 	const { scrollProgress, handleListScroll } = useResultsPageScrollProgress();
 	const { titleRef, titleRevealProgress, updateTitleReveal } =
@@ -182,8 +218,8 @@ export function ResultsPage() {
 				onClose={closeTagFilter}
 				initialFilters={tagFilter.appliedValue}
 				occupationTypeTagChips={occupationTypeTagChips}
-				onApply={tagFilter.apply}
-				onReset={tagFilter.reset}
+				onApply={applyTagFilter}
+				onReset={resetTagFilter}
 			/>
 			<div
 				ref={scrollContainerRef}
