@@ -27,13 +27,13 @@ export function ResultCard({
 	const displayName = formatOccupationDisplayName(occupation.name);
 
 	return (
-		<div className="relative bg-sky-shade-10 rounded-2xl">
+		<div className="relative flex h-full flex-col bg-sky-shade-10 rounded-2xl">
 			<Link
 				to={toWithShareSearch(
 					buildResultsOccupationPath(occupation.id),
 					searchParams,
 				)}
-				className="block focus-visible:outline focus-visible:outline-2 focus-visible:outline-sky-500 rounded-2xl md:hover:bg-sky-shade-20 active:bg-sky-shade-20 p-2.5"
+				className="flex flex-1 flex-col focus-visible:outline focus-visible:outline-2 focus-visible:outline-sky-500 rounded-2xl p-2.5"
 				aria-label={`${displayName}, ${content["results.moreInfo"]}`}
 			>
 				<OccupationCardBody

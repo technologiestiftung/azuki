@@ -535,6 +535,7 @@ export const content = {
 	"results.card.score.label": "Passt zu",
 	"results.wildcard.badge": "Besonders gesucht",
 	"results.wildcard.title": "Hier werden besonders viele Azubis gesucht",
+	"results.card.salary.monthly.label": "/ Monat",
 	"results.noResults":
 		"Wir haben leider keine Ausbildungsberufe zu deiner Auswahl gefunden.",
 	"results.contactCard.title": "Du weißt nicht, wo du anfangen sollst?",
