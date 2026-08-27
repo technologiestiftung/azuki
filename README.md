@@ -47,8 +47,8 @@ Azuki is a single monorepo with three [npm workspaces](https://docs.npmjs.com/cl
 - **`shared/`** — TypeScript types and constants shared by frontend and backend,
   imported as `@azuki/shared`.
 
-The occupation catalogue (~727 occupations, sourced from the Federal Employment
-Agency's BerufeNet data) lives in `backend/data/`.
+The occupation catalogue (~528 occupations, sourced from the Federal Employment
+Agency's BerufeNet data) lives in `backend/src/data/`.
 
 ### Matching pipeline
 
