@@ -1,6 +1,7 @@
 import { lazy, Suspense, useEffect } from "react";
 import { Routes, Route, Navigate, useLocation } from "react-router-dom";
 import { useToastStore } from "./store/useToastStore";
+import { useMatchResultsStore } from "./store/useMatchResultsStore";
 import { LoginScreen } from "./components/login-screen/LoginScreen";
 import { StartScreen } from "./components/competence-profile/start/StartScreen";
 import { InSchoolStep } from "./components/competence-profile/steps/InSchoolStep";
@@ -19,8 +20,8 @@ import { WorkExpectationsStep } from "./components/competence-profile/steps/Work
 import { EvalPage } from "./components/eval/EvalPage";
 import { PersonasPage } from "./components/personas/PersonasPage";
 import { PersonaDetailPage } from "./components/personas/PersonaDetailPage";
-import { ROUTE_PATHS } from "./routing/routes";
 import { RequireSession } from "./routing/RequireSession";
+import { isVacanciesSectionPath, ROUTE_PATHS } from "./routing/routes";
 import { Profile } from "./profile/Profile";
 import { AboutPage } from "./components/about-page/about";
 import { PreferredJobsStep } from "./components/competence-profile/steps/PreferredJobsStep";
@@ -37,6 +38,13 @@ function App() {
 	useEffect(() => {
 		useToastStore.getState().close();
 	}, [location.pathname, location.hash]);
+
+	useEffect(() => {
+		const store = useMatchResultsStore.getState();
+		if (!isVacanciesSectionPath(location.pathname)) {
+			store.clearSystemVacancyOccupationFilter();
+		}
+	}, [location.pathname]);
 
 	return (
 		<div

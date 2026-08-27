@@ -24,9 +24,9 @@ export function FilterChipButton({
 	return (
 		<button
 			type="button"
-			className={`h-8 flex items-center justify-center gap-1.5 py-[5px] text-gray-1000 border rounded-full 
+			className={`h-8 flex items-center justify-center gap-1.5 py-[5px] text-sky-900 border rounded-full 
 				focus-visible:outline focus-visible:outline-2 focus-visible:outline-sky-500 ${variant === "dropdown" ? "pl-3 pr-2" : "px-3"} ${
-					active ? "border-sky-300 bg-sky-50" : "border-gray-300"
+					active ? "border-sky-300 bg-sky-50" : "border-sky-shade-30"
 				} ${className}`}
 			onClick={onClick}
 			aria-label={ariaLabel}
