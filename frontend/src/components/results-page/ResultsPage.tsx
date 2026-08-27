@@ -37,6 +37,7 @@ import {
 } from "./ResultsPageHeader";
 import { useCollapsedTitleReveal } from "../collapsing-header/useCollapsedTitleReveal";
 import { warmPdfRuntime } from "../pdf/loadPdfAssets";
+import { ContactCard } from "../contact-card/ContactCard";
 
 const DEFAULT_TAG_FILTERS: OccupationTagsFilterState = {
 	selectedOccupationTypeTagIds: [],
@@ -222,7 +223,7 @@ export function ResultsPage() {
 					onToggleFavoritesOnly={toggleFavoritesOnly}
 					scrollProgress={scrollProgress}
 				/>
-				<div className="px-4 pb-4 space-y-10">
+				<div className="flex flex-col gap-3 px-4 pb-4">
 					{!isLoadingShared && hasVisibleContent && (
 						<>
 							{visibleOccupations.map((occupation: MatchedOccupation) => (
@@ -239,7 +240,15 @@ export function ResultsPage() {
 							) : (
 								<WildcardCarousel occupations={wildcardOccupations} />
 							)}
-							<BottomCard />
+							<BottomCard handleDownload={handleDownload} />
+							<div className="mt-7">
+								<ContactCard
+									title={content["vacancies.detail.contactCard.title"]}
+									description={
+										content["vacancies.detail.contactCard.description"]
+									}
+								/>
+							</div>
 						</>
 					)}
 					{!isLoadingShared && !hasVisibleContent && (
