@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { SecondaryButton } from "../components/primitives/buttons/SecondaryButton";
 import { content } from "../content";
-import { ProfileResetDialog } from "./ProfileResetDialog";
+import { ResetDialog } from "../components/ResetDialog";
+import { downloadProfile } from "./downloadProfile";
 
 export function ProfileResetCard() {
 	const [isResetDialogOpen, setIsResetDialogOpen] = useState(false);
@@ -27,9 +28,13 @@ export function ProfileResetCard() {
 					{content["profile.resetCard.cta"]}
 				</SecondaryButton>
 			</div>
-			<ProfileResetDialog
+			<ResetDialog
 				isOpen={isResetDialogOpen}
 				onClose={() => setIsResetDialogOpen(false)}
+				download={downloadProfile}
+				title={content["profile.resetDialog.title"]}
+				description={content["profile.resetDialog.description"]}
+				downloadLabel={content["profile.resetDialog.description"]}
 			/>
 		</>
 	);
