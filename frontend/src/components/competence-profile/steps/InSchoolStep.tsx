@@ -31,7 +31,6 @@ export function InSchoolStep() {
 			hasSkipButton={false}
 			subtitle={content["common.singleSelect.subline"]}
 			animateEnter
-			themedNextButton
 			showFooterBorder={false}
 		>
 			<div className="flex flex-col gap-3">
@@ -42,9 +41,6 @@ export function InSchoolStep() {
 						key={option.value.toString()}
 						onClick={() => {
 							setInSchool(option.value);
-							setTimeout(() => {
-								goNext();
-							}, 500);
 						}}
 					/>
 				))}
