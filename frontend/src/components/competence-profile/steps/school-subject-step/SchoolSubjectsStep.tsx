@@ -7,6 +7,7 @@ import { categories } from "./school-subjects";
 import { Pill } from "../../../primitives/buttons/Pill";
 import { PrimaryThemedButton } from "../../../primitives/buttons/PrimaryThemedButton";
 import { InputBottomSheet } from "../../../input-bottom-sheet/InputBottomSheet";
+import { SecondaryButton } from "../../../primitives/buttons/SecondaryButton";
 
 export function SchoolSubjectsStep() {
 	const profile = useAppStore((state) => state.profile);
@@ -41,6 +42,20 @@ export function SchoolSubjectsStep() {
 			subtitle={content["common.multiSelect.subline"]}
 		>
 			<div className="flex flex-col gap-8">
+				{profile.customSubjects && profile.customSubjects.length === 0 && (
+					<SecondaryButton
+						className="text-lg"
+						ariaLabel={
+							content["schoolSubjects.addCustomSubjectButton.ariaLabel"]
+						}
+						onClick={() => setInputSheetOpen(true)}
+					>
+						<div className="flex items-center gap-2 justify-center">
+							<img src="/icons/plus-black.svg" alt="" className="w-6 h-6" />
+							{content["schoolSubjects.addCustomSubjectButton.label"]}
+						</div>
+					</SecondaryButton>
+				)}
 				{profile.customSubjects && profile.customSubjects.length > 0 && (
 					<div ref={customSubjectsSectionRef} className="scroll-mt-4">
 						<h3 className="text-lg font-semibold text-gray-500 mb-2 px-3.5">
@@ -91,20 +106,6 @@ export function SchoolSubjectsStep() {
 						</div>
 					</div>
 				))}
-				{profile.customSubjects && profile.customSubjects.length === 0 && (
-					<PrimaryThemedButton
-						className="text-lg"
-						ariaLabel={
-							content["schoolSubjects.addCustomSubjectButton.ariaLabel"]
-						}
-						onClick={() => setInputSheetOpen(true)}
-					>
-						<div className="flex items-center gap-2 justify-center">
-							<img src="/icons/plus-black.svg" alt="" className="w-6 h-6" />
-							{content["schoolSubjects.addCustomSubjectButton.label"]}
-						</div>
-					</PrimaryThemedButton>
-				)}
 			</div>
 			<InputBottomSheet
 				open={inputSheetOpen}
