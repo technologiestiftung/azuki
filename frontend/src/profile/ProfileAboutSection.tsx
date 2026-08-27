@@ -54,7 +54,7 @@ export function ProfileAboutSection({ profile }: ProfileAboutSectionProps) {
 		.map(([noGoId]) => noGoId);
 
 	return (
-		<div className="flex flex-col gap-5 pt-4 px-4 pb-[28px] bg-white rounded-t-[20px]">
+		<div className="flex flex-col gap-3 pt-4 px-4 pb-[28px] bg-white rounded-t-[20px]">
 			<h2 className="text-3xl font-semibold leading-10 text-sky-900 px-0.5">
 				{content["profile.aboutYou"]}
 			</h2>
@@ -104,11 +104,14 @@ export function ProfileAboutSection({ profile }: ProfileAboutSectionProps) {
 						const percent = Math.round(value * 100);
 						return (
 							<div key={strengthId} className="contents">
-								<span className="text-base text-sky-900 pl-1">{label}</span>
-								<span className="text-xs font-semibold text-sky-300">
-									{percent} %
+								<span className="text-base text-sky-900 pl-1 pr-1.5">
+									{label}
 								</span>
-								<div className="h-2 min-w-0 rounded-full bg-sky-100 overflow-hidden mr-8">
+								<span className="text-xs font-semibold text-sky-300">
+									<span className="text-base">{percent}</span>
+									<span className="text-xs">%</span>
+								</span>
+								<div className="h-2 min-w-0 rounded-full bg-sky-100 overflow-hidden w-full">
 									<div
 										className="h-full bg-sky-300 rounded-full transition-all duration-500 ease-out"
 										style={{ width: `${percent}%` }}
@@ -119,8 +122,13 @@ export function ProfileAboutSection({ profile }: ProfileAboutSectionProps) {
 					})}
 					{selectedCustomStrengths.map((label) => (
 						<div key={label} className="contents">
-							<span className="text-base text-sky-900 pl-1">{label}</span>
-							<span className="text-xs font-semibold text-sky-300">100 %</span>
+							<span className="text-base text-sky-900 pl-1 pr-1.5">
+								{label}
+							</span>
+							<span className="text-base font-semibold text-sky-300">
+								<span className="text-base">100</span>
+								<span className="text-xs">%</span>
+							</span>
 							<div className="h-2 min-w-0 rounded-full bg-sky-100 overflow-hidden mr-8">
 								<div className="h-full w-full bg-sky-300 rounded-full" />
 							</div>
@@ -138,10 +146,11 @@ export function ProfileAboutSection({ profile }: ProfileAboutSectionProps) {
 						return (
 							<div key={strengthId} className="contents">
 								<span className="text-base text-sky-900 pl-1">{label}</span>
-								<span className="text-xs font-semibold text-orange-400">
-									{percent} %
+								<span className="text-base font-semibold text-orange-400">
+									<span className="text-base">{percent}</span>
+									<span className="text-xs">%</span>
 								</span>
-								<div className="h-2 min-w-0 rounded-full bg-orange-200 overflow-hidden mr-8">
+								<div className="h-2 min-w-0 rounded-full bg-orange-200 overflow-hidden">
 									<div
 										className="h-full bg-orange-400 rounded-full transition-all duration-500 ease-out"
 										style={{ width: `${percent}%` }}
@@ -167,7 +176,7 @@ export function ProfileAboutSection({ profile }: ProfileAboutSectionProps) {
 				<ProfileWrapCollapsible title={content["profile.practicalExperiences"]}>
 					{profile.practicalExperiences.map((experience) => (
 						<ProfileChip key={experience.id} className="gap-1.5">
-							<span data-chip-label className="min-w-0">
+							<span data-chip-label className="min-w-0 truncate">
 								{experience.description}
 							</span>
 							<span className="flex shrink-0 items-center justify-center text-sm text-sky-300">
