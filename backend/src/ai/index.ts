@@ -12,6 +12,7 @@ import {
 	resolveOccupationShortDescription,
 	AI_MODEL_IDS,
 	DEFAULT_MODEL_ID,
+	fitPercentages,
 } from "@azuki/shared";
 import { occupationMatchMeta } from "../occupationMeta";
 import type { ScoredOccupation } from "../matching/index.js";
@@ -964,15 +965,14 @@ export function sortMatchResultsByScore(
 const MAX_RESTORED_PREFERRED = 3;
 
 /**
- * Moves Berufe the user named themselves to the front, preserving the LLM's
- * order inside both groups, and forces back an exact/substring wish the LLM
- * left out. Keyword-tier matches ("irgendwas mit Medien") are only pinned if
- * the LLM picked them — the text is too vague to force a specific Beruf in.
+ * Flags Berufe the user named themselves and restores an exact/substring wish
+ * the LLM dropped, displacing its weakest pick to stay inside MAX_RESULTS.
+ * Keyword-tier matches ("irgendwas mit Medien") are too vague to force in.
  *
- * A wish that collides with a No-Go is pinned like any other. Its score still
- * carries the No-Go penalty, so the badge stays honest.
+ * Wishes keep the position the LLM gave them — they rank by fit like any other
+ * Beruf.
  */
-export function pinPreferredJobs(
+export function includePreferredJobs(
 	occupations: MatchResult["occupations"],
 	scored: ScoredOccupation[],
 	profile: UserProfile,
@@ -996,8 +996,6 @@ export function pinPreferredJobs(
 			? { ...occupation, preferredJobMatch: true }
 			: occupation,
 	);
-	const pinned = flagged.filter((occupation) => occupation.preferredJobMatch);
-	const rest = flagged.filter((occupation) => !occupation.preferredJobMatch);
 
 	const presentIds = new Set(flagged.map((occupation) => occupation.id));
 	const restored: MatchResult["occupations"] = [];
@@ -1022,7 +1020,23 @@ export function pinPreferredJobs(
 		});
 	}
 
-	return [...pinned, ...restored, ...rest].slice(0, MAX_RESULTS);
+	return [...flagged.slice(0, MAX_RESULTS - restored.length), ...restored];
+}
+
+/**
+ * Stamps the percentage each card displays. Must run last: the value depends on
+ * the whole list, not on one Beruf.
+ */
+export function withFitPercentages(
+	occupations: MatchResult["occupations"],
+): MatchResult["occupations"] {
+	const percentages = fitPercentages(
+		occupations.map((occupation) => occupation.score),
+	);
+	return occupations.map((occupation, index) => ({
+		...occupation,
+		fitPercent: percentages[index],
+	}));
 }
 
 function toOccupationResult(
@@ -1171,16 +1185,20 @@ export async function aiRank(
 		result.generation = generation;
 	}
 
-	result.occupations = pinPreferredJobs(result.occupations, scored, profile);
+	result.occupations = withFitPercentages(
+		includePreferredJobs(result.occupations, scored, profile),
+	);
 	return result;
 }
 
 function fallbackResult(scored: ScoredOccupation[]): MatchResult {
 	return {
-		occupations: sortMatchResultsByScore(
-			scored
-				.slice(0, MAX_RESULTS)
-				.map((item) => toOccupationResult(item, DEFAULT_REASONING)),
+		occupations: withFitPercentages(
+			sortMatchResultsByScore(
+				scored
+					.slice(0, MAX_RESULTS)
+					.map((item) => toOccupationResult(item, DEFAULT_REASONING)),
+			),
 		),
 		wildcardOccupations: [],
 	};

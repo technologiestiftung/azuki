@@ -1,6 +1,6 @@
 import { describe, expect, test } from "vitest";
 import type { MatchResult, UserProfile } from "@azuki/shared";
-import { pinPreferredJobs } from "../../src/ai/index.js";
+import { includePreferredJobs } from "../../src/ai/index.js";
 import type { ScoredOccupation } from "../../src/matching/index.js";
 import { makeOccupation, makeProfile } from "../scoring/helpers.js";
 
@@ -45,7 +45,7 @@ function profileWithWish(...preferredJobs: string[]): UserProfile {
 	return makeProfile({ preferredJobs });
 }
 
-describe("pinPreferredJobs", () => {
+describe("includePreferredJobs", () => {
 	test("leaves the LLM order untouched when no wish was entered", () => {
 		const ranked = [
 			matched(3, "Tischler/in", 20),
@@ -53,25 +53,29 @@ describe("pinPreferredJobs", () => {
 		];
 
 		expect(
-			pinPreferredJobs(ranked, SCORED, profileWithWish()).map((o) => o.id),
+			includePreferredJobs(ranked, SCORED, profileWithWish()).map((o) => o.id),
 		).toEqual([3, 1]);
 	});
 
-	test("moves a named Beruf to the front and flags it", () => {
+	test("flags a named Beruf without moving it", () => {
 		const ranked = [
 			matched(3, "Tischler/in", 20),
 			matched(1, "Friseur/in", 30),
 			matched(4, "Florist/in", 15),
 		];
 
-		const result = pinPreferredJobs(ranked, SCORED, profileWithWish("Florist"));
+		const result = includePreferredJobs(
+			ranked,
+			SCORED,
+			profileWithWish("Florist"),
+		);
 
-		expect(result.map((o) => o.id)).toEqual([4, 3, 1]);
-		expect(result[0].preferredJobMatch).toBe(true);
-		expect(result[1].preferredJobMatch).toBeUndefined();
+		expect(result.map((o) => o.id)).toEqual([3, 1, 4]);
+		expect(result[2].preferredJobMatch).toBe(true);
+		expect(result[0].preferredJobMatch).toBeUndefined();
 	});
 
-	test("keeps the LLM order inside both groups", () => {
+	test("keeps the LLM order regardless of how many wishes match", () => {
 		const ranked = [
 			matched(3, "Tischler/in", 20),
 			matched(4, "Florist/in", 15),
@@ -80,12 +84,12 @@ describe("pinPreferredJobs", () => {
 		];
 
 		expect(
-			pinPreferredJobs(
+			includePreferredJobs(
 				ranked,
 				SCORED,
 				profileWithWish("Florist", "Kosmetiker"),
 			).map((o) => o.id),
-		).toEqual([4, 2, 3, 1]);
+		).toEqual([3, 4, 2, 1]);
 	});
 
 	test("forces back a named Beruf the LLM left out", () => {
@@ -94,10 +98,14 @@ describe("pinPreferredJobs", () => {
 			matched(1, "Friseur/in", 30),
 		];
 
-		const result = pinPreferredJobs(ranked, SCORED, profileWithWish("Florist"));
+		const result = includePreferredJobs(
+			ranked,
+			SCORED,
+			profileWithWish("Florist"),
+		);
 
-		expect(result.map((o) => o.id)).toEqual([4, 3, 1]);
-		expect(result[0].preferredJobMatch).toBe(true);
+		expect(result.map((o) => o.id)).toEqual([3, 1, 4]);
+		expect(result[2].preferredJobMatch).toBe(true);
 	});
 
 	test("does not force in a vague keyword-tier match the LLM skipped", () => {
@@ -108,7 +116,7 @@ describe("pinPreferredJobs", () => {
 		const ranked = [matched(1, "Friseur/in", 30)];
 
 		expect(
-			pinPreferredJobs(
+			includePreferredJobs(
 				ranked,
 				scored,
 				profileWithWish("irgendwas mit Möbeln"),

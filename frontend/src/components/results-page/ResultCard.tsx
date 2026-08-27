@@ -1,6 +1,7 @@
 import { Link, useSearchParams } from "react-router-dom";
 import {
 	type MatchedOccupation,
+	displayFitPercent,
 	formatOccupationDisplayName,
 } from "@azuki/shared";
 import { useMatchResultsStore } from "../../store/useMatchResultsStore";
@@ -41,7 +42,7 @@ export function ResultCard({
 					images={occupation.images}
 					occupationDuration={occupation.occupationDuration}
 					occupationId={occupation.id}
-					occupationScore={occupation.score}
+					matchPercent={displayFitPercent(occupation)}
 					salaryKnown={occupation.salaryKnown}
 					salaryMonthlyMedian={occupation.salaryMonthlyMedian}
 					shortDescription={occupation.shortDescription}

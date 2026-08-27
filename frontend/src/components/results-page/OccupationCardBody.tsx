@@ -1,7 +1,7 @@
 import { formatOccupationSalary } from "@azuki/shared";
 import { FavoriteButton } from "../favorite-button/FavoriteButton";
 import { WildcardPoolBadge } from "./WildcardPoolBadge";
-import { fitPercent, isInWildcardPool } from "@azuki/shared";
+import { isInWildcardPool } from "@azuki/shared";
 import { content } from "../../content";
 
 interface OccupationCardBodyProps {
@@ -9,7 +9,7 @@ interface OccupationCardBodyProps {
 	images: { url: string }[];
 	occupationDuration: string;
 	occupationId: number;
-	occupationScore?: number;
+	matchPercent?: number;
 	salaryKnown: boolean;
 	salaryMonthlyMedian: number | null;
 	shortDescription: string;
@@ -23,7 +23,7 @@ export function OccupationCardBody({
 	images,
 	occupationDuration,
 	occupationId,
-	occupationScore,
+	matchPercent,
 	salaryKnown,
 	salaryMonthlyMedian,
 	shortDescription,
@@ -51,9 +51,9 @@ export function OccupationCardBody({
 
 			<div className="flex flex-1 flex-col gap-3">
 				<div className="flex justify-between items-center w-full">
-					{occupationScore && (
+					{matchPercent !== undefined && (
 						<div className="w-fit flex items-center justify-center bg-sky-900 text-sky-white text-sm leading-5 font-normal px-2 h-[22px] rounded-lg whitespace-nowrap">
-							{fitPercent(occupationScore)} {"%"}
+							{matchPercent} {"%"}
 						</div>
 					)}
 					{(isWildCard || isInWildcardPool(occupationId)) && (

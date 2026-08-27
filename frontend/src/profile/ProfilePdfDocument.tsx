@@ -7,7 +7,7 @@ import {
 	StyleSheet,
 } from "@react-pdf/renderer";
 import {
-	fitPercent,
+	displayFitPercent,
 	formatOccupationDisplayName,
 	type MatchedOccupation,
 	type UserProfile,
@@ -307,8 +307,8 @@ function strengthLabel(strengthId: string): string {
 	);
 }
 
-function formatMatchLabel(score: number): string {
-	return `${fitPercent(score)} %`;
+function formatMatchLabel(occupation: MatchedOccupation): string {
+	return `${displayFitPercent(occupation)} %`;
 }
 
 function formatTopMeta(occupation: MatchedOccupation): string {
@@ -386,7 +386,7 @@ function TopCard({
 			<View style={profileStyles.cardBadgeRow}>
 				<View style={profileStyles.pill}>
 					<Text style={profileStyles.pillText}>
-						{formatMatchLabel(occupation.score)}
+						{formatMatchLabel(occupation)}
 					</Text>
 				</View>
 			</View>
