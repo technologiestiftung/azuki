@@ -122,10 +122,7 @@ export function ResultsPage() {
 	const applyTagFilter = useCallback(
 		(filters: OccupationTagsFilterState) => {
 			tagFilter.apply(filters);
-			setOccupationTypeTagFilterIds(
-				filters.selectedOccupationTypeTagIds,
-				"user",
-			);
+			setOccupationTypeTagFilterIds(filters.selectedOccupationTypeTagIds);
 		},
 		[tagFilter.apply, setOccupationTypeTagFilterIds],
 	);

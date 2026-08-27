@@ -21,11 +21,7 @@ import { EvalPage } from "./components/eval/EvalPage";
 import { PersonasPage } from "./components/personas/PersonasPage";
 import { PersonaDetailPage } from "./components/personas/PersonaDetailPage";
 import { RequireSession } from "./routing/RequireSession";
-import {
-	isResultsSectionPath,
-	isVacanciesSectionPath,
-	ROUTE_PATHS,
-} from "./routing/routes";
+import { isVacanciesSectionPath, ROUTE_PATHS } from "./routing/routes";
 import { Profile } from "./profile/Profile";
 import { AboutPage } from "./components/about-page/about";
 import { PreferredJobsStep } from "./components/competence-profile/steps/PreferredJobsStep";
@@ -47,9 +43,6 @@ function App() {
 		const store = useMatchResultsStore.getState();
 		if (!isVacanciesSectionPath(location.pathname)) {
 			store.clearSystemVacancyOccupationFilter();
-		}
-		if (!isResultsSectionPath(location.pathname)) {
-			store.clearSystemOccupationTypeTagFilter();
 		}
 	}, [location.pathname]);
 

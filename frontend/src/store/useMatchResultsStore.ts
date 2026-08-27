@@ -11,7 +11,6 @@ interface MatchResultsState {
 	vacancyOccupationFilterIds: number[];
 	vacancyOccupationFilterOrigin: ListFilterOrigin | null;
 	occupationTypeTagFilterIds: string[];
-	occupationTypeTagFilterOrigin: ListFilterOrigin | null;
 	vacanciesCount: number | undefined;
 	resultsListScrollTop: number;
 }
@@ -27,11 +26,7 @@ interface MatchResultsActions {
 		origin?: ListFilterOrigin,
 	) => void;
 	clearSystemVacancyOccupationFilter: () => void;
-	setOccupationTypeTagFilterIds: (
-		tagIds: string[],
-		origin?: ListFilterOrigin,
-	) => void;
-	clearSystemOccupationTypeTagFilter: () => void;
+	setOccupationTypeTagFilterIds: (tagIds: string[]) => void;
 	setResultsListScrollTop: (value: number) => void;
 }
 
@@ -46,7 +41,6 @@ export const useMatchResultsStore = create<
 			vacancyOccupationFilterIds: [],
 			vacancyOccupationFilterOrigin: null,
 			occupationTypeTagFilterIds: [],
-			occupationTypeTagFilterOrigin: null,
 			vacanciesCount: undefined,
 			resultsListScrollTop: 0,
 
@@ -72,7 +66,6 @@ export const useMatchResultsStore = create<
 					vacancyOccupationFilterIds: [],
 					vacancyOccupationFilterOrigin: null,
 					occupationTypeTagFilterIds: [],
-					occupationTypeTagFilterOrigin: null,
 					vacanciesCount: undefined,
 				}),
 
@@ -131,21 +124,10 @@ export const useMatchResultsStore = create<
 						: {},
 				),
 
-			setOccupationTypeTagFilterIds: (tagIds, origin = "user") =>
+			setOccupationTypeTagFilterIds: (tagIds) =>
 				set({
 					occupationTypeTagFilterIds: tagIds,
-					occupationTypeTagFilterOrigin: tagIds.length === 0 ? null : origin,
 				}),
-
-			clearSystemOccupationTypeTagFilter: () =>
-				set((state) =>
-					state.occupationTypeTagFilterOrigin === "system"
-						? {
-								occupationTypeTagFilterIds: [],
-								occupationTypeTagFilterOrigin: null,
-							}
-						: {},
-				),
 
 			setResultsListScrollTop: (value) => set({ resultsListScrollTop: value }),
 		}),
