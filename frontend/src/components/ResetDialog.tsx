@@ -33,7 +33,7 @@ export function ResetDialog({
 
 	return (
 		<DefaultDialog isOpen={isOpen} afterClose={onClose} aria-label={title}>
-			<div className="flex flex-col gap-10 rounded-4xl bg-gray-100">
+			<div className="flex flex-col gap-10 rounded-4xl bg-sky-shade-10">
 				<div className="flex flex-col gap-1">
 					<h2 className="text-lg font-semibold text-sky-900 px-2">{title}</h2>
 					<p className="text-lg font-normal text-sky-900 px-2">{description}</p>

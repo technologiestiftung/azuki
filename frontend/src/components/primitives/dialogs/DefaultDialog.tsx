@@ -62,7 +62,7 @@ export const DefaultDialog: React.FC<DefaultDialogProps> = ({
 			aria-label={ariaLabel}
 			aria-labelledby={ariaLabelledBy}
 			onClose={afterClose}
-			className={`${className ?? ""} backdrop:bg-sky-900/80 backdrop:backdrop-blur-[2px] bg-gray-100 opacity-100 z-40 rounded-4xl p-4 max-w-[430px]`}
+			className={`${className ?? ""} backdrop:bg-sky-900/80 backdrop:backdrop-blur-[2px] bg-sky-shade-10 opacity-100 z-40 rounded-4xl p-4 max-w-[430px]`}
 		>
 			{children}
 		</dialog>

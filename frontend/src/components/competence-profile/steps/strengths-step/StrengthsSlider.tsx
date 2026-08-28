@@ -126,7 +126,7 @@ export function StrengthsSlider({
 		<div className="w-full mb-1">
 			<div
 				ref={trackRef}
-				className="relative h-12 rounded-xl bg-gray-100 cursor-pointer touch-none select-none"
+				className="relative h-12 rounded-xl bg-sky-shade-10 cursor-pointer touch-none select-none"
 				onPointerDown={onPointerDown}
 				onPointerMove={onPointerMove}
 				onPointerUp={onPointerUp}

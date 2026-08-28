@@ -54,7 +54,7 @@ const TIER_BADGE: Record<PopularityTier, string> = {
 	D_niche: "bg-orange-100 text-orange-800",
 	E_vanishing: "bg-red-100 text-red-800",
 	F_doppelqual: "bg-blue-50 text-blue-700",
-	G_unknown: "bg-gray-100 text-gray-700",
+	G_unknown: "bg-sky-shade-10 text-gray-700",
 };
 
 export function OccupationPicker({
@@ -118,7 +118,7 @@ export function OccupationPicker({
 				)}
 			</div>
 
-			<ul className="max-h-96 overflow-y-auto divide-y divide-gray-100">
+			<ul className="max-h-96 overflow-y-auto divide-y divide-sky-shade-10">
 				{results.map((r) => {
 					const excluded = excludeIds?.has(r.id);
 					return (
@@ -163,7 +163,7 @@ export function OccupationPicker({
 			</ul>
 
 			{results.length > 0 && (
-				<div className="mt-2 pt-2 border-t border-gray-100 text-[11px] text-gray-500">
+				<div className="mt-2 pt-2 border-t border-sky-shade-10 text-[11px] text-gray-500">
 					{results.length < total ? (
 						<>
 							Zeige {results.length} von {total}
