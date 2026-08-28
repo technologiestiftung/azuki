@@ -183,7 +183,7 @@ describe("swipeFlyOutTopTransformTransition", () => {
 });
 
 describe("mixBackCardSurfaceColor", () => {
-	test("interpolates from gray-300 at 0 to sky-shade-20 at 1", () => {
+	test("interpolates from sky-shade-30 at 0 to sky-shade-20 at 1", () => {
 		expect(mixBackCardSurfaceColor(0)).toBe("rgb(209 213 219)");
 		expect(mixBackCardSurfaceColor(1)).toBe("rgb(229 231 235)");
 	});

@@ -42,7 +42,7 @@ const SLIDE_IN_ANIMATION: Record<SwipeDirection, string> = {
 	up: "animate-slideInTop",
 };
 
-/** Tailwind `gray-300` / `sky-shade-20` — back card surface lerps between these as it scales up. */
+/** Tailwind `sky-shade-30` / `sky-shade-20` — back card surface lerps between these as it scales up. */
 const BACK_CARD_SURFACE_FROM = [0xd1, 0xd5, 0xdb] as const;
 const BACK_CARD_SURFACE_TO = [0xe5, 0xe7, 0xeb] as const;
 

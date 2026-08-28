@@ -42,7 +42,7 @@ export function StrengthsEditor({ strengths: state, onChange }: Props) {
 												className={`px-2 py-0.5 rounded border ${
 													current === lvl.value
 														? "bg-blue-100 border-blue-400 text-blue-800"
-														: "bg-gray-50 border-gray-300 text-gray-600"
+														: "bg-gray-50 border-sky-shade-30 text-gray-600"
 												}`}
 											>
 												{lvl.label}

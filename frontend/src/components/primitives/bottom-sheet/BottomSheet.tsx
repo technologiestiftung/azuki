@@ -413,7 +413,7 @@ export function BottomSheet({
 						onLostPointerCapture={handleGrabLostPointerCapture}
 					>
 						<div
-							className="pointer-events-none h-[5px] w-9 shrink-0 rounded-full bg-gray-300 mix-blend-plus-darker"
+							className="pointer-events-none h-[5px] w-9 shrink-0 rounded-full bg-sky-shade-30 mix-blend-plus-darker"
 							aria-hidden
 						/>
 					</div>

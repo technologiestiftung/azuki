@@ -47,7 +47,7 @@ export function InterestsEditor({
 							className={`text-xs px-2 py-1 rounded border ${
 								selected
 									? "bg-blue-100 border-blue-400 text-blue-800"
-									: "bg-gray-50 border-gray-300 text-gray-600"
+									: "bg-gray-50 border-sky-shade-30 text-gray-600"
 							}`}
 						>
 							{opt.dataLabel}
@@ -90,7 +90,7 @@ export function InterestsEditor({
 							}
 						}}
 						placeholder="z. B. Imkerei"
-						className="flex-1 border border-gray-300 rounded px-2 py-1 text-xs"
+						className="flex-1 border border-sky-shade-30 rounded px-2 py-1 text-xs"
 					/>
 					<button
 						type="button"

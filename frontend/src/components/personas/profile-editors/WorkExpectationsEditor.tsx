@@ -30,7 +30,7 @@ export function WorkExpectationsEditor({
 							className={`text-xs px-2 py-1 rounded border ${
 								isSelected
 									? "bg-blue-100 border-blue-400 text-blue-800"
-									: "bg-gray-50 border-gray-300 text-gray-600"
+									: "bg-gray-50 border-sky-shade-30 text-gray-600"
 							}`}
 						>
 							{opt.label}

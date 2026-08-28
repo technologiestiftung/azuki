@@ -90,7 +90,7 @@ export function CustomNoGosEditor({ customNoGos, noGos, onChange }: Props) {
 						}
 					}}
 					placeholder="z. B. lange Pendeln"
-					className="flex-1 border border-gray-300 rounded px-2 py-1 text-xs"
+					className="flex-1 border border-sky-shade-30 rounded px-2 py-1 text-xs"
 				/>
 				<button
 					type="button"

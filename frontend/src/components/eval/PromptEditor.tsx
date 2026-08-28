@@ -41,7 +41,7 @@ export function PromptEditor() {
 				value={prompt}
 				onChange={(e) => setPrompt(e.target.value)}
 				rows={12}
-				className="w-full font-mono text-xs p-3 border border-gray-300 rounded"
+				className="w-full font-mono text-xs p-3 border border-sky-shade-30 rounded"
 			/>
 		</div>
 	);

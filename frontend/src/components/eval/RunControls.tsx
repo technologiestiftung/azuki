@@ -53,7 +53,7 @@ export function RunControls() {
 								className={`text-xs px-2 py-1 rounded border ${
 									selected
 										? "bg-blue-100 border-blue-400 text-blue-800"
-										: "bg-gray-50 border-gray-300 text-gray-600"
+										: "bg-gray-50 border-sky-shade-30 text-gray-600"
 								}`}
 							>
 								{selected ? "☑ " : "☐ "}
@@ -84,7 +84,7 @@ export function RunControls() {
 					<select
 						value={model}
 						onChange={(e) => setModel(e.target.value)}
-						className="border border-gray-300 rounded px-2 py-1"
+						className="border border-sky-shade-30 rounded px-2 py-1"
 					>
 						{AI_MODELS.map((m) => (
 							<option key={m.id} value={m.id}>

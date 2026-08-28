@@ -44,7 +44,7 @@ export const TextInput = ({
 				<button
 					onClick={onClearInput}
 					disabled={submitDisabled}
-					className="bg-gray-300 rounded-full p-2 size-8 focus-visible:outline focus-visible:outline-2 focus-visible:outline-sky-500"
+					className="bg-sky-shade-30 rounded-full p-2 size-8 focus-visible:outline focus-visible:outline-2 focus-visible:outline-sky-500"
 				>
 					<img src="/icons/close-black.svg" alt="" className="w-4 h-4" />
 				</button>

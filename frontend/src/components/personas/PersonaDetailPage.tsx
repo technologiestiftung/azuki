@@ -180,7 +180,7 @@ function BasicInfoSection({
 						type="text"
 						value={draft.name}
 						onChange={(e) => patch({ name: e.target.value })}
-						className="border border-gray-300 rounded px-2 py-1"
+						className="border border-sky-shade-30 rounded px-2 py-1"
 					/>
 				</label>
 				<label className="flex flex-col gap-1">
@@ -189,7 +189,7 @@ function BasicInfoSection({
 						value={draft.description ?? ""}
 						onChange={(e) => patch({ description: e.target.value || null })}
 						rows={3}
-						className="border border-gray-300 rounded px-2 py-1"
+						className="border border-sky-shade-30 rounded px-2 py-1"
 					/>
 				</label>
 			</div>
@@ -302,7 +302,7 @@ function ProfileEditorSection({
 									null) as EducationLevel | null,
 							})
 						}
-						className="border border-gray-300 rounded px-2 py-1"
+						className="border border-sky-shade-30 rounded px-2 py-1"
 					>
 						<option value="">— nicht angegeben —</option>
 						{EDUCATION_LEVELS.map((opt) => (
@@ -399,7 +399,7 @@ function ProfileEditorSection({
 							})
 						}
 						rows={4}
-						className="border border-gray-300 rounded px-2 py-1"
+						className="border border-sky-shade-30 rounded px-2 py-1"
 					/>
 				</label>
 			</div>

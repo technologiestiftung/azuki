@@ -85,14 +85,14 @@ export function OccupationPicker({
 					value={query}
 					onChange={(e) => setQuery(e.target.value)}
 					placeholder="Beruf suchen…"
-					className="flex-1 border border-gray-300 rounded px-2 py-1"
+					className="flex-1 border border-sky-shade-30 rounded px-2 py-1"
 				/>
 				<select
 					value={tierFilter}
 					onChange={(e) =>
 						setTierFilter((e.target.value as PopularityTier) || "")
 					}
-					className="border border-gray-300 rounded px-2 py-1"
+					className="border border-sky-shade-30 rounded px-2 py-1"
 					title="Filter nach Häufigkeit (neue Auszubildende pro Jahr — Quelle: BIBB DAZUBI + Destatis)"
 				>
 					<option value="">Alle Häufigkeiten</option>
