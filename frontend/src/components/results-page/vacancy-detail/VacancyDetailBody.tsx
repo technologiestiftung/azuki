@@ -29,7 +29,7 @@ export function VacancyDetailBody({ detail }: VacancyDetailBodyProps) {
 				)}
 				{detail.description && (
 					<div className="flex flex-col gap-2">
-						<p
+						<div
 							className={`text-sky-900 text-lg leading-[140%] font-normal whitespace-pre-line ${
 								isDescriptionExpanded ? "" : "line-clamp-6"
 							}`}
@@ -52,7 +52,7 @@ export function VacancyDetailBody({ detail }: VacancyDetailBodyProps) {
 							>
 								{detail.description}
 							</ReactMarkdown>
-						</p>
+						</div>
 						<button
 							type="button"
 							className="self-start flex items-center gap-2 text-base font-medium text-sky-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-sky-500"

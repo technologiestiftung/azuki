@@ -54,9 +54,6 @@ export function SchoolDegreeStep() {
 						selected={profile.educationLevel === degree.value}
 						onClick={() => {
 							handleSelect(degree.value);
-							if (degree.value !== "foreign_degree") {
-								setTimeout(() => goNext(), 500);
-							}
 						}}
 					>
 						{profile.educationLevel === "foreign_degree" &&

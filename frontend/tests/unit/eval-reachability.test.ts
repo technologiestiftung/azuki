@@ -105,6 +105,13 @@ describe("rubricReachability", () => {
 		expect(result.tierCInPrefilter.length).toBe(1);
 	});
 
+	test("reports the shortlist size so the UI need not hardcode it", () => {
+		// The panel used to say "top 40" while PREFILTER_TOP_K was 60.
+		const persona = makePersona({ tierS: [1] });
+		const prefilter = Array.from({ length: 60 }, (_, i) => pf(i + 1));
+		expect(rubricReachability(prefilter, persona).prefilterSize).toBe(60);
+	});
+
 	test("empty persona → empty results, no crash", () => {
 		const persona = makePersona();
 		const prefilter = [pf(1), pf(2)];

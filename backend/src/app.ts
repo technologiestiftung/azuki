@@ -23,7 +23,7 @@ import {
 	preFilter,
 	PREFILTER_TOP_K,
 } from "./matching/index.js";
-import { aiRank, buildSystemPromptV5 } from "./ai/index.js";
+import { aiRank, withFitPercentages, buildSystemPromptV5 } from "./ai/index.js";
 import occupationsData from "./data/berufe.json";
 import { VacanciesRequestSchema } from "./schemas/vacancies.js";
 import { ReverseGeocodeRequestSchema } from "./schemas/reverseGeocode.js";
@@ -223,7 +223,7 @@ app.post("/api/match", async (c) => {
 				...occupationMatchMeta(scored.occupation),
 			}));
 		const fallback: MatchResult = {
-			occupations: matchedOccupations,
+			occupations: withFitPercentages(matchedOccupations),
 			wildcardOccupations: pickWildcardOccupations(
 				occupations,
 				new Set(matchedOccupations.map((o) => o.id)),
@@ -295,6 +295,7 @@ app.get("/api/shared-match", (c) => {
 				name: formatOccupationDisplayName(occupation.name),
 				rawName: occupation.name,
 				score: scoreFromFitPercent(fit),
+				fitPercent: fit,
 				images: occupation.images.slice(0, 3),
 				shortDescription: resolveOccupationShortDescription(occupation),
 				reasoning: "",

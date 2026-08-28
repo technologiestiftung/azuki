@@ -3,7 +3,7 @@ import {
 	SHARED_PROFILE_PARAM,
 	buildSharedOccupationsParam,
 	buildSharedProfileParam,
-	fitPercent,
+	displayFitPercent,
 } from "@azuki/shared";
 import { shareResultsLink } from "../components/results-page/utils/shareResults";
 import { content } from "../content";
@@ -24,7 +24,7 @@ export async function shareProfileLink(): Promise<void> {
 			buildSharedOccupationsParam(
 				topOccupations.map((occupation) => ({
 					id: occupation.id,
-					fit: fitPercent(occupation.score),
+					fit: displayFitPercent(occupation),
 				})),
 			),
 		);

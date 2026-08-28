@@ -65,14 +65,14 @@ export function VacancyCard({
 	const locationLabel = formatVacancyLocation(preview);
 
 	return (
-		<div className="relative bg-gray-100 rounded-2xl border border-sky-shade-20 overflow-hidden">
+		<div className="relative bg-sky-shade-10 rounded-2xl overflow-hidden">
 			<Link
 				to={toWithShareSearch(
 					buildResultsVacancyDetailPath(preview.referenznummer),
 					searchParams,
 				)}
 				state={{ occupationName } satisfies VacancyDetailNavState}
-				className="block focus-visible:outline focus-visible:outline-2 focus-visible:outline-sky-500 rounded-2xl md:hover:bg-sky-shade-20/40 active:bg-sky-shade-20/40"
+				className="block focus-visible:outline focus-visible:outline-2 focus-visible:outline-sky-500 rounded-2xl"
 				aria-label={`${displayName}, ${content["results.moreInfo"]}`}
 			>
 				<div className="flex flex-col gap-5 p-3">
@@ -81,7 +81,7 @@ export function VacancyCard({
 							<h3 className="text-xl font-semibold text-sky-900">
 								{displayName}
 							</h3>
-							<p className="text-gray-500">{preview.employer}</p>
+							<p className="text-sky-shade-120">{preview.employer}</p>
 						</div>
 						<div className="shrink-0 w-7 h-7" />
 					</div>
@@ -113,11 +113,13 @@ export function VacancyCard({
 				{publishedLabel && (
 					<div
 						className={`flex items-center justify-between pl-[14px] pr-3 py-3 ${
-							isNew ? "bg-sky-100" : "bg-gray-100 border-t border-sky-shade-20"
+							isNew
+								? "bg-sky-100"
+								: "bg-sky-shade-10 border-t border-sky-shade-20"
 						}`}
 					>
 						<span
-							className={`text-sm ${isNew ? "text-gray-700" : "text-gray-500"}`}
+							className={`text-sm ${isNew ? "text-sky-shade-160" : "text-sky-shade-120"}`}
 						>
 							{publishedLabel}
 						</span>
@@ -130,8 +132,12 @@ export function VacancyCard({
 				)}
 			</Link>
 
-			<div className="absolute top-3 inset-0 h-fit">
-				<FavoriteButton onClick={onToggleFavorite} isFavorite={isFavorite} />
+			<div className="absolute top-3 right-3">
+				<FavoriteButton
+					onClick={onToggleFavorite}
+					isFavorite={isFavorite}
+					iconSize="medium"
+				/>
 			</div>
 		</div>
 	);

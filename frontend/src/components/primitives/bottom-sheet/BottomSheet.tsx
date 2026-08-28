@@ -28,11 +28,19 @@ type DragSample = { t: number; y: number };
 
 function readVisualViewportLayout() {
 	const vv = window.visualViewport;
-	const height = vv?.height ?? window.innerHeight;
-	const bottomInset = vv
-		? Math.max(0, window.innerHeight - vv.height - vv.offsetTop)
-		: 0;
-	return { height, bottomInset };
+	return {
+		offsetTop: vv?.offsetTop ?? 0,
+		height: vv?.height ?? window.innerHeight,
+	};
+}
+
+function applyVisualViewportLayout(el: HTMLElement | null) {
+	if (!el) {
+		return;
+	}
+	const { offsetTop, height } = readVisualViewportLayout();
+	el.style.top = `${offsetTop}px`;
+	el.style.height = `${height}px`;
 }
 
 export function BottomSheet({
@@ -50,9 +58,6 @@ export function BottomSheet({
 	const [isClosing, setIsClosing] = useState(false);
 	const [enterComplete, setEnterComplete] = useState(false);
 	const [isDragging, setIsDragging] = useState(false);
-	const [viewportLayout, setViewportLayout] = useState(
-		readVisualViewportLayout,
-	);
 
 	const motionShellRef = useRef<HTMLDivElement>(null);
 	const dialogRef = useRef<HTMLDivElement>(null);
@@ -89,21 +94,24 @@ export function BottomSheet({
 		if (!visible) {
 			return () => {};
 		}
+
+		const update = () => {
+			applyVisualViewportLayout(dialogRef.current);
+		};
+
+		update();
 		const visualViewport = window.visualViewport;
 		if (!visualViewport) {
 			return () => {};
 		}
 
-		const update = () => {
-			setViewportLayout(readVisualViewportLayout());
-		};
-
-		update();
 		visualViewport.addEventListener("resize", update);
 		visualViewport.addEventListener("scroll", update);
+		window.addEventListener("resize", update);
 		return () => {
 			visualViewport.removeEventListener("resize", update);
 			visualViewport.removeEventListener("scroll", update);
+			window.removeEventListener("resize", update);
 		};
 	}, [visible]);
 
@@ -137,14 +145,14 @@ export function BottomSheet({
 
 		if (initialFocus === "container") {
 			container.setAttribute("tabindex", "-1");
-			container.focus();
+			container.focus({ preventScroll: true });
 		} else {
 			const focusables = getFocusable();
 			if (focusables.length > 0) {
-				focusables[0]?.focus();
+				focusables[0]?.focus({ preventScroll: true });
 			} else {
 				container.setAttribute("tabindex", "-1");
-				container.focus();
+				container.focus({ preventScroll: true });
 			}
 		}
 
@@ -168,15 +176,15 @@ export function BottomSheet({
 			const active = document.activeElement as HTMLElement | null;
 			if (!container.contains(active)) {
 				e.preventDefault();
-				(e.shiftKey ? last : first).focus();
+				(e.shiftKey ? last : first).focus({ preventScroll: true });
 				return;
 			}
 			if (e.shiftKey && active === first) {
 				e.preventDefault();
-				last.focus();
+				last.focus({ preventScroll: true });
 			} else if (!e.shiftKey && active === last) {
 				e.preventDefault();
-				first.focus();
+				first.focus({ preventScroll: true });
 			}
 		};
 
@@ -358,7 +366,7 @@ export function BottomSheet({
 	}
 
 	const baseMotionShellClass =
-		"pointer-events-auto flex min-h-0 max-h-full w-full flex-1 flex-col overflow-hidden rounded-t-3xl bg-white pb-[env(safe-area-inset-bottom,0px)] shadow-[0_-8px_30px_rgba(17,24,39,0.12)]";
+		"pointer-events-auto flex min-h-0 max-h-[min(90%,900px)] w-full flex-col overflow-hidden rounded-t-3xl bg-white pb-[env(safe-area-inset-bottom,0px)] shadow-[0_-8px_30px_rgba(17,24,39,0.12)]";
 	let motionAnimClass = "";
 	if (!enterComplete && !isClosing) {
 		motionAnimClass = "animate-slideInBottom";
@@ -366,6 +374,8 @@ export function BottomSheet({
 		motionAnimClass = "pointer-events-none animate-slideOutBottom";
 	}
 	const motionShellClass = `${baseMotionShellClass} ${motionAnimClass}`.trim();
+
+	const initialViewport = readVisualViewportLayout();
 
 	return (
 		<>
@@ -382,10 +392,10 @@ export function BottomSheet({
 				role="dialog"
 				aria-modal="true"
 				aria-label={ariaLabel}
-				className="pointer-events-none fixed left-0 right-0 z-50 mx-auto flex max-w-[430px] flex-col"
+				className="pointer-events-none fixed left-0 right-0 z-50 mx-auto flex max-w-[430px] flex-col justify-end"
 				style={{
-					bottom: viewportLayout.bottomInset,
-					maxHeight: Math.min(viewportLayout.height * 0.9, 900),
+					top: initialViewport.offsetTop,
+					height: initialViewport.height,
 				}}
 			>
 				<div

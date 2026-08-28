@@ -1,11 +1,14 @@
 import { describe, expect, test } from "vitest";
-import type { ScoreReport, Verdict } from "@azuki/shared";
+import { EVAL_TOP_N, type ScoreReport, type Verdict } from "@azuki/shared";
 import { aggregateRunScore } from "../../src/components/eval/run-score";
 
 function report(verdict: Verdict, percent: number): ScoreReport {
 	return {
 		verdict,
 		percent,
+		points: percent,
+		maxPoints: 100,
+		resultCount: EVAL_TOP_N,
 		tierSCount: 0,
 		tierACount: 0,
 		tierCCount: 0,

@@ -4,7 +4,6 @@ import { ProgressBar } from "../progress-bar/ProgressBar";
 import { QuestionBubble } from "../question-bubble/QuestionBubble";
 import { content } from "../../../content";
 import { PrimaryButton } from "../../primitives/buttons/PrimaryButton";
-import { PrimaryThemedButton } from "../../primitives/buttons/PrimaryThemedButton";
 import { GhostButton } from "../../primitives/buttons/GhostButton";
 import { BackButton } from "../../back-button/BackButton";
 import { getGranularProgress, getPreviousPath } from "../../../routing/routes";
@@ -27,7 +26,6 @@ interface StepLayoutProps {
 	skipLabel?: string;
 	bottomContent?: ReactNode;
 	animateEnter?: boolean;
-	themedNextButton?: boolean;
 	showFooterBorder?: boolean;
 }
 
@@ -44,13 +42,11 @@ export function StepLayout({
 	skipLabel,
 	bottomContent,
 	animateEnter = false,
-	themedNextButton = false,
 	showFooterBorder = true,
 }: StepLayoutProps) {
 	const { pathname, hash } = useLocation();
 	const navigate = useNavigate();
 	const progress = getGranularProgress(pathname, hash);
-	const NextButton = themedNextButton ? PrimaryThemedButton : PrimaryButton;
 
 	const handleBack = () => {
 		closeToast();
@@ -104,13 +100,13 @@ export function StepLayout({
 			>
 				{bottomContent}
 				{hasNextButton && (
-					<NextButton
+					<PrimaryButton
 						onClick={onNext}
 						disabled={isNextDisabled}
 						className="w-full"
 					>
 						{content["navigation.next"]}
-					</NextButton>
+					</PrimaryButton>
 				)}
 
 				{hasSkipButton && (

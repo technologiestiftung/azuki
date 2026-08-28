@@ -1,70 +1,101 @@
-import type { ReactNode } from "react";
 import { formatOccupationSalary } from "@azuki/shared";
-import { Badge } from "../primitives/badge/Badge";
+import { FavoriteButton } from "../favorite-button/FavoriteButton";
+import { WildcardPoolBadge } from "./WildcardPoolBadge";
+import { isInWildcardPool } from "@azuki/shared";
+import { content } from "../../content";
 
 interface OccupationCardBodyProps {
 	displayName: string;
 	images: { url: string }[];
 	occupationDuration: string;
+	occupationId: number;
+	matchPercent?: number;
 	salaryKnown: boolean;
 	salaryMonthlyMedian: number | null;
 	shortDescription: string;
-	badgeSlot?: ReactNode;
+	toggleFavorite: (id: number) => void;
+	isFavorite: boolean;
+	isWildCard: boolean;
 }
 
 export function OccupationCardBody({
 	displayName,
 	images,
 	occupationDuration,
+	occupationId,
+	matchPercent,
 	salaryKnown,
 	salaryMonthlyMedian,
 	shortDescription,
-	badgeSlot,
+	toggleFavorite,
+	isFavorite,
+	isWildCard,
 }: OccupationCardBodyProps) {
 	return (
-		<>
-			{badgeSlot && (
-				<div className="absolute top-3 left-3 z-[1] flex items-center gap-2">
-					{badgeSlot}
-				</div>
-			)}
-
-			<div className="relative w-full">
+		<div className="flex flex-1 flex-col">
+			<div className="w-full mb-3">
 				{images.length > 0 ? (
 					<img
 						src={images[0].url}
 						alt=""
-						className="w-full h-40 object-cover"
+						className="w-full h-[196px] object-cover rounded-md"
 					/>
 				) : (
 					<img
 						src="/illustrations/occupation-placeholder.svg"
 						alt=""
-						className="w-full h-40 object-cover border-t border-x border-sky-shade-10 rounded-t-2xl"
+						className="w-full h-[196px] object-cover"
 					/>
 				)}
 			</div>
 
-			<div className="p-3 pt-4">
-				<h3 className="text-xl font-semibold text-sky-900 mb-3">
-					{displayName}
-				</h3>
+			<div className="flex flex-1 flex-col gap-3">
+				<div className="flex justify-between items-center w-full">
+					{matchPercent !== undefined && (
+						<div className="w-fit flex items-center justify-center bg-sky-900 text-sky-white text-sm leading-5 font-normal px-2 h-[22px] rounded-lg whitespace-nowrap">
+							{matchPercent} {"%"}
+						</div>
+					)}
+					{(isWildCard || isInWildcardPool(occupationId)) && (
+						<WildcardPoolBadge />
+					)}
+					<div className="w-full flex justify-end z-10">
+						<FavoriteButton
+							onClick={() => toggleFavorite(occupationId)}
+							isFavorite={isFavorite}
+						/>
+					</div>
+				</div>
+				<div className="flex flex-col gap-1.5">
+					<h3 className="text-xl leading-[26px] font-semibold text-sky-900">
+						{displayName}
+					</h3>
+					{shortDescription && (
+						<p className="text-base text-sky-shade-170 line-clamp-3">
+							{shortDescription}
+						</p>
+					)}
+				</div>
 				{(occupationDuration || salaryKnown) && (
-					<div className="mb-[9px] flex min-w-0 flex-wrap items-center gap-2">
-						{occupationDuration && <Badge label={occupationDuration} />}
+					<div className="flex min-w-0 flex-wrap items-center gap-1 mt-auto">
+						{occupationDuration && (
+							<div className="text-sm font-medium text-sky-shade-170">
+								{occupationDuration}
+							</div>
+						)}
 
 						{salaryKnown && salaryMonthlyMedian !== null && (
-							<Badge label={formatOccupationSalary(salaryMonthlyMedian)} />
+							<>
+								<div className="text-sm text-sky-shade-170 text-center">•</div>
+								<div className="text-sm font-medium text-sky-shade-170">
+									{formatOccupationSalary(salaryMonthlyMedian)}{" "}
+									{content["results.card.salary.monthly.label"]}
+								</div>
+							</>
 						)}
 					</div>
 				)}
-
-				{shortDescription && (
-					<p className="text-base text-gray-700 line-clamp-3">
-						{shortDescription}
-					</p>
-				)}
 			</div>
-		</>
+		</div>
 	);
 }

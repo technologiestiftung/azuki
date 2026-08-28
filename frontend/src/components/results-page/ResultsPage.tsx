@@ -21,7 +21,10 @@ import { ResultCard } from "./ResultCard";
 import { BottomCard } from "./BottomCard";
 import { WildcardCarousel } from "./WildcardCarousel";
 import { ResultsFilterBar } from "./ResultsFilterBar";
-import { buildResultTagChips } from "./utils/resultTagChips";
+import {
+	buildResultTagChips,
+	getOccupationTagId,
+} from "./utils/resultTagChips";
 import { applyOccupationFilters } from "./utils/applyOccupationFilters";
 import { BottomNav } from "../bottom-nav/BottomNav";
 import { useFetchVacancies } from "./useFetchVacancies";
@@ -37,10 +40,22 @@ import {
 } from "./ResultsPageHeader";
 import { useCollapsedTitleReveal } from "../collapsing-header/useCollapsedTitleReveal";
 import { warmPdfRuntime } from "../pdf/loadPdfAssets";
+import { ContactCard } from "../contact-card/ContactCard";
 
 const DEFAULT_TAG_FILTERS: OccupationTagsFilterState = {
 	selectedOccupationTypeTagIds: [],
 };
+
+function getOccupationTypeTagFilterIdsFromStore(): string[] {
+	const { occupationTypeTagFilterIds, matchResults } =
+		useMatchResultsStore.getState();
+	const validTagIds = new Set<string>(
+		matchResults?.occupations.map((occupation) =>
+			getOccupationTagId(occupation),
+		) ?? [],
+	);
+	return occupationTypeTagFilterIds.filter((id) => validTagIds.has(id));
+}
 
 export function ResultsPage() {
 	const [searchParams] = useSearchParams();
@@ -64,7 +79,13 @@ export function ResultsPage() {
 	);
 	const occupations = matchResults?.occupations ?? [];
 	const wildcardOccupations = matchResults?.wildcardOccupations ?? [];
-	const tagFilter = useFilterSheet(DEFAULT_TAG_FILTERS);
+	const setOccupationTypeTagFilterIds = useMatchResultsStore(
+		(state) => state.setOccupationTypeTagFilterIds,
+	);
+	const [initialTagFilters] = useState<OccupationTagsFilterState>(() => ({
+		selectedOccupationTypeTagIds: getOccupationTypeTagFilterIdsFromStore(),
+	}));
+	const tagFilter = useFilterSheet(DEFAULT_TAG_FILTERS, initialTagFilters);
 	const [showFavoritesOnly, setShowFavoritesOnly] = useState(false);
 
 	const favoriteIds = useMemo(
@@ -98,6 +119,19 @@ export function ResultsPage() {
 
 	const openTagFilter = tagFilter.open;
 	const closeTagFilter = tagFilter.close;
+
+	const applyTagFilter = useCallback(
+		(filters: OccupationTagsFilterState) => {
+			tagFilter.apply(filters);
+			setOccupationTypeTagFilterIds(filters.selectedOccupationTypeTagIds);
+		},
+		[tagFilter.apply, setOccupationTypeTagFilterIds],
+	);
+
+	const resetTagFilter = useCallback(() => {
+		tagFilter.reset();
+		setOccupationTypeTagFilterIds([]);
+	}, [tagFilter.reset, setOccupationTypeTagFilterIds]);
 
 	const { scrollProgress, handleListScroll } = useResultsPageScrollProgress();
 	const { titleRef, titleRevealProgress, updateTitleReveal } =
@@ -182,8 +216,8 @@ export function ResultsPage() {
 				onClose={closeTagFilter}
 				initialFilters={tagFilter.appliedValue}
 				occupationTypeTagChips={occupationTypeTagChips}
-				onApply={tagFilter.apply}
-				onReset={tagFilter.reset}
+				onApply={applyTagFilter}
+				onReset={resetTagFilter}
 			/>
 			<div
 				ref={scrollContainerRef}
@@ -222,7 +256,7 @@ export function ResultsPage() {
 					onToggleFavoritesOnly={toggleFavoritesOnly}
 					scrollProgress={scrollProgress}
 				/>
-				<div className="px-4 pb-4 space-y-3">
+				<div className="flex flex-col gap-3 px-4 pb-4">
 					{!isLoadingShared && hasVisibleContent && (
 						<>
 							{visibleOccupations.map((occupation: MatchedOccupation) => (
@@ -239,7 +273,15 @@ export function ResultsPage() {
 							) : (
 								<WildcardCarousel occupations={wildcardOccupations} />
 							)}
-							<BottomCard />
+							<BottomCard handleDownload={handleDownload} />
+							<div className="mt-7">
+								<ContactCard
+									title={content["vacancies.detail.contactCard.title"]}
+									description={
+										content["vacancies.detail.contactCard.description"]
+									}
+								/>
+							</div>
 						</>
 					)}
 					{!isLoadingShared && !hasVisibleContent && (

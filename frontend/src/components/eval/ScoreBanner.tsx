@@ -1,5 +1,5 @@
 import { useState } from "react";
-import type { ScoreReport, Verdict } from "@azuki/shared";
+import { EVAL_TOP_N, type ScoreReport, type Verdict } from "@azuki/shared";
 
 interface Props {
 	report: ScoreReport | undefined;
@@ -64,25 +64,43 @@ export function ScoreBanner({ report }: Props) {
 			>
 				<span className="text-sm font-semibold">{style.label}</span>
 				<span className="text-xs">
-					{report.percent}% <span className="ml-1">{open ? "▾" : "▸"}</span>
+					{report.percent}%
+					{report.resultCount < EVAL_TOP_N && (
+						<span className="ml-1 opacity-70">
+							(nur {report.resultCount} Ergebnisse)
+						</span>
+					)}
+					<span className="ml-1">{open ? "▾" : "▸"}</span>
 				</span>
 			</button>
 			{open && (
 				<ul className="border-t border-current/10 px-2 py-1 space-y-1 text-xs">
 					<li className="flex gap-2">
 						<span className="text-emerald-700">●</span>
-						<span className="flex-1">Tier S im Top 8</span>
+						<span className="flex-1">Tier S im Top {EVAL_TOP_N}</span>
 						<span className="font-medium">{report.tierSCount}</span>
 					</li>
 					<li className="flex gap-2">
 						<span className="text-amber-700">●</span>
-						<span className="flex-1">Tier A im Top 8</span>
+						<span className="flex-1">Tier A im Top {EVAL_TOP_N}</span>
 						<span className="font-medium">{report.tierACount}</span>
 					</li>
 					<li className="flex gap-2">
 						<span className="text-red-700">●</span>
-						<span className="flex-1">Tier C im Top 8</span>
+						<span className="flex-1">Tier C im Top {EVAL_TOP_N}</span>
 						<span className="font-medium">{report.tierCCount}</span>
+					</li>
+					<li className="flex gap-2 border-t border-current/10 pt-1">
+						<span className="flex-1">Ergebnisse</span>
+						<span className="font-medium">
+							{report.resultCount} / {EVAL_TOP_N}
+						</span>
+					</li>
+					<li className="flex gap-2">
+						<span className="flex-1">Punkte</span>
+						<span className="font-medium">
+							{report.points} / {report.maxPoints}
+						</span>
 					</li>
 				</ul>
 			)}

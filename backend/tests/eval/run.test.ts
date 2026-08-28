@@ -20,6 +20,7 @@ const baseProfile = {
 	customSubjects: [],
 	interests: [],
 	customInterests: [],
+	preferredJobs: [],
 	workExpectations: [],
 	customWorkExpectations: [],
 	strengths: {},
@@ -41,7 +42,6 @@ function makePersona(id: string): Persona {
 		tierS: [],
 		tierA: [],
 		tierC: [],
-		criteria: [],
 		createdAt: "2026-04-30T00:00:00Z",
 		updatedAt: "2026-04-30T00:00:00Z",
 	};

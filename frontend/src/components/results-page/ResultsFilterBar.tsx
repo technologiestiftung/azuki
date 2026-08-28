@@ -75,10 +75,7 @@ export function ResultsFilterBar({
 			}`}
 			style={{ top: TOP_ROW_HEIGHT_PX }}
 		>
-			<div className="p-2 w-10 h-10 flex items-center justify-center">
-				<img src="/icons/filter.svg" alt="" className="h-5 w-5 shrink-0" />
-			</div>
-			<div className="flex items-center gap-2 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+			<div className="flex items-center gap-2 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden pl-1">
 				{hasLocationFilter && (
 					<FilterChipButton
 						variant="dropdown"

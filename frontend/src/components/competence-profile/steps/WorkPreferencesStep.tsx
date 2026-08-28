@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, type MouseEvent } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { content } from "../../../content";
 import { useAppStore } from "../../../store/useAppStore";
@@ -87,6 +87,16 @@ export function WorkPreferencesStep() {
 		setWorkPreference(current.id, choice);
 	}
 
+	function handleDeselectOutsideButtons(event: MouseEvent<HTMLDivElement>) {
+		if (!activeChoice) {
+			return;
+		}
+		if ((event.target as HTMLElement).closest("button")) {
+			return;
+		}
+		setWorkPreference(current.id, null);
+	}
+
 	function handleNext() {
 		goNext();
 	}
@@ -104,7 +114,10 @@ export function WorkPreferencesStep() {
 			hasSkipButton={true}
 			hasNextButton={true}
 		>
-			<div className="flex flex-1 flex-col justify-between gap-3">
+			<div
+				className="flex flex-1 flex-col justify-between gap-3"
+				onClick={handleDeselectOutsideButtons}
+			>
 				<div className="relative flex h-[217px] shrink-0 items-center justify-center">
 					<img
 						src={baseIllustration}

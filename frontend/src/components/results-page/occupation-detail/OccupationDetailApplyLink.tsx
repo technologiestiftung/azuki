@@ -31,7 +31,7 @@ export const OccupationDetailApplyLink = forwardRef<
 
 	const handleApplyClick = () => {
 		if (Number.isFinite(occupationId)) {
-			setVacancyOccupationFilterIds([occupationId]);
+			setVacancyOccupationFilterIds([occupationId], "system");
 		}
 	};
 

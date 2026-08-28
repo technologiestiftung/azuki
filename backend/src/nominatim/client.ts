@@ -90,7 +90,8 @@ export async function resolveLocationFromCoordinates(
 			headers: {
 				Accept: "application/json",
 				"Accept-Language": "de",
-				"User-Agent": "Azuki/1.0 (https://github.com/citylab/azuki)",
+				"User-Agent":
+					"Azuki/1.0 (https://github.com/technologiestiftung/azuki)",
 			},
 			signal: AbortSignal.timeout(REQUEST_TIMEOUT_MS),
 		});
