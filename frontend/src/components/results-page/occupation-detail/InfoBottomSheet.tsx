@@ -29,7 +29,7 @@ export function InfoBottomSheet({
 				</div>
 				<div className="flex flex-col gap-1 px-4 pb-5">
 					<h2 className="text-xl font-semibold text-sky-900">{title}</h2>
-					<p className="text-lg text-gray-700">{description}</p>
+					<p className="text-lg text-sky-900">{description}</p>
 				</div>
 			</div>
 		</BottomSheet>
