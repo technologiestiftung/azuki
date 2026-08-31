@@ -25,7 +25,7 @@ export function WildcardCarousel({ occupations }: WildcardCarouselProps) {
 	};
 
 	return (
-		<div className="-mx-4 flex flex-col gap-5 bg-sky-100 py-5">
+		<div className="-mx-4 flex flex-col gap-5 bg-sky-100 py-5 mt-7">
 			<h2 className="px-[22px] text-2xl font-semibold text-sky-900">
 				{content["results.wildcard.title"]}
 			</h2>

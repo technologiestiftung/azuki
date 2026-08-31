@@ -44,9 +44,7 @@ export function useSharedProfile() {
 				if (cancelled) {
 					return;
 				}
-				setSharedOccupations(
-					[...results.occupations].sort((a, b) => b.score - a.score),
-				);
+				setSharedOccupations(results.occupations);
 				setIsLoadingShared(false);
 			} catch {
 				if (!cancelled) {

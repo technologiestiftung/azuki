@@ -50,7 +50,7 @@ export { WILDCARD_POOL_OCCUPATION_IDS, isInWildcardPool } from "./wildcardPool";
 
 export {
 	EVAL_TOP_N,
-	EVAL_MAX_POINTS,
+	evalMaxPoints,
 	EVAL_POINTS_TIER_S,
 	EVAL_POINTS_TIER_A,
 	EVAL_VERDICT_CONCERNS_BELOW,
@@ -65,7 +65,12 @@ export { formatOccupationDisplayName } from "./occupationDisplayName";
 
 export { getDurationOverride } from "./durationOverride";
 
-export { fitPercent, scoreFromFitPercent } from "./fitPercent";
+export {
+	fitPercent,
+	fitPercentages,
+	displayFitPercent,
+	scoreFromFitPercent,
+} from "./fitPercent";
 
 export {
 	SHARED_OCCUPATIONS_PARAM,

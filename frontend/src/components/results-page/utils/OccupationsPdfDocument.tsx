@@ -7,7 +7,7 @@ import {
 	StyleSheet,
 } from "@react-pdf/renderer";
 import {
-	fitPercent,
+	displayFitPercent,
 	formatOccupationDisplayName,
 	formatOccupationSalary,
 	type MatchedOccupation,
@@ -208,6 +208,8 @@ export interface OccupationsPdfAssets {
 	qrSrc: string | null;
 	placeholderSrc: string;
 	topImageSrcs: string[];
+	wordmarkSrc: string | null;
+	lockupSrc: string | null;
 }
 
 export interface OccupationsPdfDocumentProps {
@@ -216,8 +218,8 @@ export interface OccupationsPdfDocumentProps {
 	assets: OccupationsPdfAssets;
 }
 
-function formatMatchLabel(score: number): string {
-	return `${fitPercent(score)} %`;
+function formatMatchLabel(occupation: MatchedOccupation): string {
+	return `${displayFitPercent(occupation)} %`;
 }
 
 function formatSalaryLabel(occupation: MatchedOccupation): string {
@@ -238,10 +240,12 @@ function formatTopMeta(occupation: MatchedOccupation): string {
 	return parts.join(" · ");
 }
 
-function MatchPill({ score }: { score: number }) {
+function MatchPill({ occupation }: { occupation: MatchedOccupation }) {
 	return (
 		<View style={resultsListStyles.pill}>
-			<Text style={resultsListStyles.pillText}>{formatMatchLabel(score)}</Text>
+			<Text style={resultsListStyles.pillText}>
+				{formatMatchLabel(occupation)}
+			</Text>
 		</View>
 	);
 }
@@ -265,7 +269,7 @@ function TopCard({
 				/>
 			</View>
 			<View style={resultsListStyles.badgesRow}>
-				<MatchPill score={occupation.score} />
+				<MatchPill occupation={occupation} />
 			</View>
 			<Text style={resultsListStyles.cardTitle}>
 				{formatOccupationDisplayName(occupation.name)}
@@ -356,7 +360,7 @@ function TableRow({
 			</View>
 			<View style={resultsListStyles.colFit}>
 				{showFit ? (
-					<MatchPill score={occupation.score} />
+					<MatchPill occupation={occupation} />
 				) : (
 					<Text style={resultsListStyles.tableCellText}>–</Text>
 				)}
@@ -407,6 +411,8 @@ export function OccupationsPdfDocument({
 							pageNumber={pageNumber}
 							title={content["results.title"]}
 							tagline={content["results.export.tagline"]}
+							wordmarkSrc={assets.wordmarkSrc}
+							lockupSrc={assets.lockupSrc}
 						/>
 					)}
 				/>

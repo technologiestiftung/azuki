@@ -2,7 +2,7 @@ import { useCallback, useEffect, useMemo, type UIEvent } from "react";
 import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import {
 	buildOccupationShareText,
-	fitPercent,
+	displayFitPercent,
 	formatOccupationDisplayName,
 } from "@azuki/shared";
 import {
@@ -73,7 +73,7 @@ export function OccupationDetailPage() {
 
 	const liveMatchPercent =
 		detail.matchedOccupation !== undefined
-			? fitPercent(detail.matchedOccupation.score)
+			? displayFitPercent(detail.matchedOccupation)
 			: undefined;
 	const matchPercent = shareState?.fitPercent ?? liveMatchPercent;
 	const taskItems = resolveDetailTaskItems(

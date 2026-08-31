@@ -17,6 +17,12 @@ export const COLOR = {
 	muted: "#6B7280",
 };
 
+/** Figma mockup frame is 935×1322.36 px representing an A4 (595.28×841.89 pt) page. */
+export const FIGMA_PX_TO_PT = 595.28 / 935;
+/** Converts a Figma dev-mode px value to the pt value react-pdf expects. */
+export const px = (figmaPx: number) =>
+	Math.round(figmaPx * FIGMA_PX_TO_PT * 100) / 100;
+
 /** Page chrome — fixed headers need reserved padding so wrapped pages don't overlap. */
 export const PAGE_PAD_X = 24;
 export const PAGE_PAD_TOP = 28;
@@ -65,73 +71,36 @@ export const styles = StyleSheet.create({
 	header: {
 		flexDirection: "row",
 		justifyContent: "space-between",
-		alignItems: "flex-start",
-		gap: 12,
 		paddingLeft: 8,
 		backgroundColor: COLOR.white,
 	},
-	headerTitleWrap: {
-		flexGrow: 1,
-		flexShrink: 1,
-		flexBasis: 0,
-		minWidth: 0,
-		paddingRight: 4,
+	headerLogo: {
+		marginTop: "auto",
+		marginBottom: "auto",
 	},
 	headerTitle: {
+		marginTop: "auto",
+		marginBottom: "auto",
 		fontFamily: "Asap",
 		fontWeight: 600,
 		lineHeight: 1.2,
 		color: COLOR.sky900,
 		fontSize: 26.5,
 	},
-	brandBlock: {
-		flexShrink: 0,
-		alignItems: "flex-end",
-	},
-	brandRow: {
-		flexDirection: "row",
-	},
-	brandAzu: {
-		fontFamily: "Asap",
-		fontWeight: 800,
-		letterSpacing: 0.36,
-		color: COLOR.sky900,
-		fontSize: 36,
-	},
-	brandKi: {
-		fontFamily: "Asap",
-		fontWeight: 800,
-		letterSpacing: 0.36,
-		color: COLOR.sky300,
-		fontSize: 36,
-	},
-	brandCompact: {
-		fontSize: 26.5,
-		letterSpacing: 0.27,
-	},
-	tagline: {
-		fontFamily: "Asap",
-		fontSize: 9,
-		fontWeight: 500,
-		lineHeight: 1.2,
-		letterSpacing: 0.09,
-		marginTop: 2,
-		color: COLOR.skyShade120,
-	},
 	sectionTitle: {
 		fontFamily: "Asap",
 		fontWeight: 700,
 		fontSize: 18,
 		lineHeight: 1.25,
-		marginBottom: 14,
+		marginBottom: px(14.78),
 		paddingLeft: 8,
 	},
 	cta: {
 		marginTop: 24,
 		backgroundColor: COLOR.sky50,
-		borderRadius: 16,
+		borderRadius: px(20),
 		paddingHorizontal: 20,
-		paddingVertical: 20,
+		paddingVertical: px(24),
 		flexDirection: "row",
 		alignItems: "center",
 	},

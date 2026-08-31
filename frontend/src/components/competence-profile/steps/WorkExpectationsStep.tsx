@@ -7,6 +7,7 @@ import { useFlowNavigation } from "../../../routing/useFlowNavigation";
 import { workExpectationOptions } from "./work-expectation-options";
 import { PrimaryThemedButton } from "../../primitives/buttons/PrimaryThemedButton";
 import { InputBottomSheet } from "../../input-bottom-sheet/InputBottomSheet";
+import { SecondaryButton } from "../../primitives/buttons/SecondaryButton";
 
 export function WorkExpectationsStep() {
 	const { goNext } = useFlowNavigation();
@@ -48,6 +49,27 @@ export function WorkExpectationsStep() {
 			subtitle={content["common.multiSelect.subline"]}
 		>
 			<div className="flex flex-col gap-3 pb-8">
+				{profile.customWorkExpectations &&
+					profile.customWorkExpectations.length === 0 && (
+						<SecondaryButton
+							className="text-lg mb-3"
+							ariaLabel={
+								content[
+									"workExpectations.addCustomWorkExpectationButton.ariaLabel"
+								]
+							}
+							onClick={() => setInputSheetOpen(true)}
+						>
+							<div className="flex items-center gap-2 justify-center">
+								<img src="/icons/plus-black.svg" alt="" className="w-6 h-6" />
+								{
+									content[
+										"workExpectations.addCustomWorkExpectationButton.label"
+									]
+								}
+							</div>
+						</SecondaryButton>
+					)}
 				{profile.customWorkExpectations &&
 					profile.customWorkExpectations.length > 0 && (
 						<div ref={customWorkExpectationsSectionRef} className="scroll-mt-4">
@@ -99,23 +121,6 @@ export function WorkExpectationsStep() {
 					);
 				})}
 			</div>
-			{profile.customWorkExpectations &&
-				profile.customWorkExpectations.length === 0 && (
-					<PrimaryThemedButton
-						className="text-lg"
-						ariaLabel={
-							content[
-								"workExpectations.addCustomWorkExpectationButton.ariaLabel"
-							]
-						}
-						onClick={() => setInputSheetOpen(true)}
-					>
-						<div className="flex items-center gap-2 justify-center">
-							<img src="/icons/plus-black.svg" alt="" className="w-6 h-6" />
-							{content["workExpectations.addCustomWorkExpectationButton.label"]}
-						</div>
-					</PrimaryThemedButton>
-				)}
 
 			<InputBottomSheet
 				open={inputSheetOpen}

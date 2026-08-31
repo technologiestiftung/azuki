@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { EVAL_TOP_N } from "@azuki/shared";
 
 interface Props {
 	storageKey?: string;
@@ -44,13 +45,14 @@ export function ScoringExplainer({
 			</button>
 			{open && (
 				<div className="px-3 pb-3 pt-1 text-xs text-gray-700 space-y-2">
-					<p>Pro Persona werden die Top 8 Ergebnisse bewertet:</p>
+					<p>Pro Persona werden die Top {EVAL_TOP_N} Ergebnisse bewertet:</p>
 					<ul className="space-y-0.5 ml-2">
 						<li>
 							<span className="inline-block w-20 font-medium text-emerald-800">
 								Tier S
 							</span>
-							ideale Treffer — <strong>2 Punkte</strong> je Eintrag im Top 8
+							ideale Treffer — <strong>2 Punkte</strong> je Eintrag im Top{" "}
+							{EVAL_TOP_N}
 						</li>
 						<li>
 							<span className="inline-block w-20 font-medium text-amber-800">
@@ -62,10 +64,23 @@ export function ScoringExplainer({
 							<span className="inline-block w-20 font-medium text-red-800">
 								Tier C
 							</span>
-							No-Gos — <strong>automatisches FAIL</strong> wenn im Top 8
+							No-Gos — <strong>automatisches FAIL</strong> wenn im Top{" "}
+							{EVAL_TOP_N}
 						</li>
 					</ul>
-					<p>Maximal 16 Punkte (8 × Tier S). Score in Prozent davon.</p>
+					<p>
+						Die Maximalpunktzahl richtet sich nach der jeweiligen Persona: ihre
+						Tier-S- und dann Tier-A-Einträge füllen die {EVAL_TOP_N} Plätze auf.
+						Eine Persona mit 6 Tier S und 14 Tier A kann also maximal 6 × 2 + 14
+						× 1 = 26 Punkte erreichen. Score in Prozent davon.
+					</p>
+					<p>
+						Liefert das Ranking weniger als {EVAL_TOP_N} Berufe, zählen nur die
+						tatsächlich gelieferten Plätze — sonst würde ein zu kurzes Ergebnis
+						den Score drücken, obwohl die Rubrik das gar nicht misst. Dafür ist
+						eine kurze Liste leichter „perfekt": die Anzahl der Ergebnisse steht
+						deshalb im Score-Banner.
+					</p>
 					<ul className="space-y-0.5 ml-2">
 						<li>
 							<span className="inline-block w-20">100 %</span>

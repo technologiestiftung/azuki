@@ -3,7 +3,7 @@ import {
 	SHARED_PROFILE_PARAM,
 	buildSharedOccupationsParam,
 	buildSharedProfileParam,
-	fitPercent,
+	displayFitPercent,
 } from "@azuki/shared";
 import { shareResultsLink } from "../components/results-page/utils/shareResults";
 import { content } from "../content";
@@ -14,9 +14,7 @@ import { useMatchResultsStore } from "../store/useMatchResultsStore";
 export async function shareProfileLink(): Promise<void> {
 	const profile = useAppStore.getState().profile;
 	const matchResults = useMatchResultsStore.getState().matchResults;
-	const topOccupations = [...(matchResults?.occupations ?? [])]
-		.sort((a, b) => b.score - a.score)
-		.slice(0, 3);
+	const topOccupations = (matchResults?.occupations ?? []).slice(0, 3);
 
 	const url = new URL(ROUTE_PATHS.profile, window.location.origin);
 	url.searchParams.set(SHARED_PROFILE_PARAM, buildSharedProfileParam(profile));
@@ -26,7 +24,7 @@ export async function shareProfileLink(): Promise<void> {
 			buildSharedOccupationsParam(
 				topOccupations.map((occupation) => ({
 					id: occupation.id,
-					fit: fitPercent(occupation.score),
+					fit: displayFitPercent(occupation),
 				})),
 			),
 		);

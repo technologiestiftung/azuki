@@ -40,9 +40,7 @@ export function Profile() {
 		if (isSharedView) {
 			return sharedOccupations.slice(0, 3);
 		}
-		return [...(matchResults?.occupations ?? [])]
-			.sort((a, b) => b.score - a.score)
-			.slice(0, 3);
+		return (matchResults?.occupations ?? []).slice(0, 3);
 	}, [isSharedView, sharedOccupations, matchResults]);
 	const collapsed = collapseProgress > COLLAPSED_THRESHOLD;
 

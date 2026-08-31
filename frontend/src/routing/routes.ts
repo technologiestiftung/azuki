@@ -42,6 +42,23 @@ export function buildResultsVacancyDetailPath(referenznummer: string): string {
 	return `/results/vacancies/${encodeURIComponent(referenznummer)}`;
 }
 
+export function isVacanciesSectionPath(pathname: string): boolean {
+	return (
+		pathname === ROUTE_PATHS.resultsVacancies ||
+		pathname.startsWith(`${ROUTE_PATHS.resultsVacancies}/`)
+	);
+}
+
+export function isOccupationDetailPath(pathname: string): boolean {
+	return /^\/results\/\d+$/.test(pathname);
+}
+
+export function isResultsSectionPath(pathname: string): boolean {
+	return (
+		pathname === ROUTE_PATHS.resultsList || isOccupationDetailPath(pathname)
+	);
+}
+
 interface FlowNode {
 	path: string;
 	step?: Step;

@@ -164,7 +164,7 @@ export function VacanciesPage() {
 	const applyOccupationFilter = useCallback(
 		(filters: OccupationsFilterState) => {
 			occupationFilter.apply(filters);
-			setVacancyOccupationFilterIds(filters.selectedOccupationIds);
+			setVacancyOccupationFilterIds(filters.selectedOccupationIds, "user");
 		},
 		[occupationFilter.apply, setVacancyOccupationFilterIds],
 	);

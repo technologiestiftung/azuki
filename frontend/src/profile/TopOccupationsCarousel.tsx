@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import {
 	formatOccupationDisplayName,
-	fitPercent,
+	displayFitPercent,
 	type MatchedOccupation,
 } from "@azuki/shared";
 import { content } from "../content";
@@ -25,13 +25,13 @@ export function TopOccupationsCarousel({
 					const imageUrl =
 						occupation.images[0]?.url ??
 						"/illustrations/occupation-placeholder.svg";
-					const matchPercent = fitPercent(occupation.score);
+					const matchPercent = displayFitPercent(occupation);
 
 					return (
 						<Link
 							key={occupation.id}
 							to={buildResultsOccupationPath(occupation.id)}
-							className="flex flex-col min-w-[300px] gap-2 p-2.5 bg-white rounded-[20px] focus-visible:outline focus-visible:outline-2 focus-visible:outline-sky-500 last:mr-4 first:ml-4"
+							className="flex flex-col min-w-[300px] gap-2 p-2.5 bg-white rounded-[20px] focus-visible:outline focus-visible:outline-2 focus-visible:outline-sky-500 last:mr-12 first:ml-12"
 							aria-label={`${displayName}, ${content["results.moreInfo"]}`}
 						>
 							<img

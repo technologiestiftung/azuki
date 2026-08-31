@@ -12,8 +12,13 @@ export function ReachabilityPanel({ reachability }: Props) {
 		return null;
 	}
 
-	const { tierSTotal, tierSReached, tierSMissed, tierCInPrefilter } =
-		reachability;
+	const {
+		prefilterSize,
+		tierSTotal,
+		tierSReached,
+		tierSMissed,
+		tierCInPrefilter,
+	} = reachability;
 	const reachedCount = tierSReached.length;
 	const allReached = reachedCount === tierSTotal;
 	const noTierC = tierCInPrefilter.length === 0;
@@ -45,7 +50,7 @@ export function ReachabilityPanel({ reachability }: Props) {
 						<>
 							{" · "}
 							<span className="text-red-700">
-								{tierCInPrefilter.length} Tier C in top 40
+								{tierCInPrefilter.length} Tier C in top {prefilterSize}
 							</span>
 						</>
 					)}
@@ -68,7 +73,9 @@ export function ReachabilityPanel({ reachability }: Props) {
 								<li key={`s-m-${e.id}`} className="flex gap-2">
 									<span className="text-red-700">✗</span>
 									<span className="flex-1 text-gray-500">{e.name}</span>
-									<span className="text-gray-500">not in top 40</span>
+									<span className="text-gray-500">
+										not in top {prefilterSize}
+									</span>
 								</li>
 							))}
 						</ul>

@@ -13,10 +13,27 @@ import {
 	resolvePreferredJobsForText,
 	resolvePreferredJobVacancyNames,
 } from "../../src/matching/resolvePreferredJobs.js";
-import { scorePreferredJobs } from "../../src/matching/score/dimensions.js";
+import {
+	scoreNoGos,
+	scorePreferredJobs,
+} from "../../src/matching/score/dimensions.js";
 import { makeOccupation, makeProfile } from "./helpers.js";
 
 describe("resolvePreferredJobsForText", () => {
+	test("matches a plain feminine form the occupation name does not contain", () => {
+		const occupations = [
+			makeOccupation({
+				id: 1,
+				name: "Industrieelektriker/in - Betriebstechnik",
+			}),
+			makeOccupation({ id: 2, name: "Florist/in" }),
+		];
+
+		const resolved = resolvePreferredJobsForText("Elektrikerin", occupations);
+
+		expect(resolved.map((match) => match.occupation.id)).toEqual([1]);
+	});
+
 	test("matches gender variant via normalized name", () => {
 		const occupations = [
 			makeOccupation({ id: 1, name: "Kosmetiker/in (duale Ausbildung)" }),
@@ -157,7 +174,7 @@ describe("preFilter preferred-job injection", () => {
 		expect(shortlist.some((entry) => entry.occupation.id === 999)).toBe(true);
 	});
 
-	test("does not boost preferred occupations blocked by hard no-gos", () => {
+	test("still boosts a preferred occupation that collides with a hard no-go", () => {
 		const occupation = makeOccupation({
 			name: "Kraftfahrzeugmechatroniker/in",
 			conditions: { noise: true, heavyLifting: true },
@@ -167,7 +184,33 @@ describe("preFilter preferred-job injection", () => {
 			noGos: { noise: "rejected", "heavy-work": "rejected" },
 		});
 
-		expect(scorePreferredJobs(occupation, profile)).toBe(0);
+		expect(scorePreferredJobs(occupation, profile)).toBe(
+			PREFERRED_JOB_EXACT_BOOST,
+		);
+		// The penalty is still applied, so the total stays below the boost.
+		expect(scoreNoGos(occupation, profile)).toBeLessThan(0);
+	});
+
+	test("injects a preferred occupation that collides with a hard no-go", () => {
+		const target = makeOccupation({
+			id: 999,
+			name: "Kraftfahrzeugmechatroniker/in",
+			conditions: { noise: true, heavyLifting: true },
+		});
+		const filler = Array.from({ length: 80 }, (_, index) =>
+			makeOccupation({
+				id: index + 1,
+				name: `Beliebter Beruf ${index + 1}`,
+				interestKeywords: ["Verkauf"],
+			}),
+		);
+		const profile = makeProfile({
+			preferredJobs: ["Kraftfahrzeugmechatroniker"],
+			noGos: { noise: "rejected", "heavy-work": "rejected" },
+		});
+
+		const shortlist = preFilter([...filler, target], profile, 60);
+		expect(shortlist.some((entry) => entry.occupation.id === 999)).toBe(true);
 	});
 });
 
@@ -236,6 +279,22 @@ describe("resolvePreferredJobVacancyNames", () => {
 });
 
 describe("resolvePreferredJobs", () => {
+	test("orders exact and substring matches ahead of keyword matches", () => {
+		const occupations = [
+			makeOccupation({ id: 1, name: "Anästhesietechnische/r Assistent/in" }),
+			makeOccupation({ id: 2, name: "Elektrotechnische/r Assistent/in" }),
+			makeOccupation({ id: 3, name: "Biologisch-technische/r Assistent/in" }),
+		];
+
+		const resolved = resolvePreferredJobs(
+			["Elektrotechnische/r Assistent/in"],
+			occupations,
+		);
+
+		expect(resolved[0].occupation.id).toBe(2);
+		expect(resolved[0].tier).toBe("exact");
+	});
+
 	test("dedupes occupations across multiple preferred job entries", () => {
 		const occupations = [
 			makeOccupation({ id: 1, name: "Kosmetiker/in (duale Ausbildung)" }),
