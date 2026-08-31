@@ -113,7 +113,7 @@ function PersonaDetailPageInner() {
 		return (
 			<div className="max-w-none w-full p-6 bg-white min-h-[100dvh]">
 				<EvalNav />
-				<div className="text-sm text-gray-500">Lädt…</div>
+				<div className="text-sm text-sky-shade-110">Lädt…</div>
 				{error && (
 					<div className="text-sm text-red-700 bg-red-50 border border-red-200 rounded p-2 mt-2">
 						{error}
@@ -175,7 +175,7 @@ function BasicInfoSection({
 			<h2 className="text-base font-medium mb-2">Basisinfo</h2>
 			<div className="flex flex-col gap-2 text-sm">
 				<label className="flex flex-col gap-1">
-					<span className="text-gray-600">Name</span>
+					<span className="text-sky-shade-160">Name</span>
 					<input
 						type="text"
 						value={draft.name}
@@ -184,7 +184,7 @@ function BasicInfoSection({
 					/>
 				</label>
 				<label className="flex flex-col gap-1">
-					<span className="text-gray-600">Beschreibung</span>
+					<span className="text-sky-shade-160">Beschreibung</span>
 					<textarea
 						value={draft.description ?? ""}
 						onChange={(e) => patch({ description: e.target.value || null })}
@@ -293,7 +293,7 @@ function ProfileEditorSection({
 				</label>
 
 				<label className="flex flex-col gap-1">
-					<span className="text-gray-600">Schulabschluss</span>
+					<span className="text-sky-shade-160">Schulabschluss</span>
 					<select
 						value={profile.educationLevel ?? ""}
 						onChange={(e) =>
@@ -372,7 +372,7 @@ function ProfileEditorSection({
 				/>
 
 				<label className="flex flex-col gap-1">
-					<span className="text-gray-600">
+					<span className="text-sky-shade-160">
 						Praktische Erfahrungen (freier Text)
 					</span>
 					<textarea
@@ -496,7 +496,7 @@ function TierColumn({
 	return (
 		<div className="border border-sky-shade-20 rounded p-2">
 			<div className="font-medium mb-1">{title}</div>
-			{ids.length === 0 && <div className="text-gray-400">Leer</div>}
+			{ids.length === 0 && <div className="text-sky-shade-80">Leer</div>}
 			<ul className="space-y-0.5">
 				{ids.map((id) => (
 					<li key={id} className="flex gap-1 items-baseline">

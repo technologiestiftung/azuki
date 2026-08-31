@@ -83,7 +83,7 @@ export function VacancyDetailBody({ detail }: VacancyDetailBodyProps) {
 							<h3 className="text-sky-900 text-2xl font-semibold">
 								{content["vacancies.detail.applyCard.title"]}
 							</h3>
-							<p className="text-lg font-normal text-gray-700 leading-[140%]">
+							<p className="text-lg font-normal text-sky-900 leading-[140%]">
 								{content["vacancies.detail.applyCard.description"]}
 							</p>
 						</div>

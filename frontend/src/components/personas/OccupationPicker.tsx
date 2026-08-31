@@ -54,7 +54,7 @@ const TIER_BADGE: Record<PopularityTier, string> = {
 	D_niche: "bg-orange-100 text-orange-800",
 	E_vanishing: "bg-red-100 text-red-800",
 	F_doppelqual: "bg-blue-50 text-blue-700",
-	G_unknown: "bg-sky-shade-10 text-gray-700",
+	G_unknown: "bg-sky-shade-10 text-sky-shade-170",
 };
 
 export function OccupationPicker({
@@ -104,7 +104,7 @@ export function OccupationPicker({
 				</select>
 			</div>
 
-			<div className="flex items-center gap-3 py-1 text-[10px] uppercase tracking-wide text-gray-500 border-b border-sky-shade-20">
+			<div className="flex items-center gap-3 py-1 text-[10px] uppercase tracking-wide text-sky-shade-110 border-b border-sky-shade-20">
 				<span className="flex-1 min-w-0">Beruf</span>
 				<span className="w-28">Häufigkeit</span>
 				<span
@@ -114,7 +114,7 @@ export function OccupationPicker({
 					Anf./Jahr
 				</span>
 				{actions.length > 0 && (
-					<span className="w-24 text-right text-gray-400">Hinzufügen</span>
+					<span className="w-24 text-right text-sky-shade-80">Hinzufügen</span>
 				)}
 			</div>
 
@@ -137,7 +137,7 @@ export function OccupationPicker({
 									{TIER_LABEL[r.popularityTier]}
 								</span>
 							</span>
-							<span className="w-16 text-right text-gray-500">
+							<span className="w-16 text-right text-sky-shade-110">
 								{r.dazubiContracts ?? "—"}
 							</span>
 							{actions.length > 0 && (
@@ -158,12 +158,12 @@ export function OccupationPicker({
 					);
 				})}
 				{results.length === 0 && (
-					<li className="text-gray-500 py-2">Keine Treffer</li>
+					<li className="text-sky-shade-110 py-2">Keine Treffer</li>
 				)}
 			</ul>
 
 			{results.length > 0 && (
-				<div className="mt-2 pt-2 border-t border-sky-shade-10 text-[11px] text-gray-500">
+				<div className="mt-2 pt-2 border-t border-sky-shade-10 text-[11px] text-sky-shade-110">
 					{results.length < total ? (
 						<>
 							Zeige {results.length} von {total}

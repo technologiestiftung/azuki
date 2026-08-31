@@ -23,7 +23,7 @@ export function StrengthsEditor({ strengths: state, onChange }: Props) {
 
 	return (
 		<div className="flex flex-col gap-2">
-			<span className="text-sm text-gray-600">Stärken</span>
+			<span className="text-sm text-sky-shade-160">Stärken</span>
 			<ul className="flex flex-col gap-1">
 				{strengths.map((s) => {
 					const recorded = s.id in state;
@@ -42,7 +42,7 @@ export function StrengthsEditor({ strengths: state, onChange }: Props) {
 												className={`px-2 py-0.5 rounded border ${
 													current === lvl.value
 														? "bg-blue-100 border-blue-400 text-blue-800"
-														: "bg-gray-50 border-sky-shade-30 text-gray-600"
+														: "bg-sky-shade-10 border-sky-shade-30 text-sky-shade-160"
 												}`}
 											>
 												{lvl.label}
@@ -60,7 +60,7 @@ export function StrengthsEditor({ strengths: state, onChange }: Props) {
 								</>
 							) : (
 								<>
-									<span className="text-gray-400 italic">
+									<span className="text-sky-shade-80 italic">
 										— nicht erfasst —
 									</span>
 									<button

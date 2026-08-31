@@ -37,14 +37,14 @@ export function ScoringExplainer({
 			<button
 				type="button"
 				onClick={toggle}
-				className="w-full flex items-center justify-between p-2 text-left text-gray-800"
+				className="w-full flex items-center justify-between p-2 text-left text-sky-900"
 				aria-expanded={open}
 			>
 				<span className="font-medium">So funktioniert die Bewertung</span>
 				<span className="text-xs">{open ? "▾" : "▸"}</span>
 			</button>
 			{open && (
-				<div className="px-3 pb-3 pt-1 text-xs text-gray-700 space-y-2">
+				<div className="px-3 pb-3 pt-1 text-xs text-sky-shade-170 space-y-2">
 					<p>Pro Persona werden die Top {EVAL_TOP_N} Ergebnisse bewertet:</p>
 					<ul className="space-y-0.5 ml-2">
 						<li>

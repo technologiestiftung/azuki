@@ -4,7 +4,7 @@ const radioClassName =
 	"size-[22px] border-2 border-sky-200 rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-300 bg-white checked:bg-white checked:border-[6px] checked:border-sky-300 appearance-none";
 
 const labelClassName =
-	"text-base font-normal leading-[140%] text-gray-700 cursor-pointer";
+	"text-base font-normal leading-[140%] text-sky-shade-170 cursor-pointer";
 
 export type RadioProps = Omit<InputHTMLAttributes<HTMLInputElement>, "type">;
 

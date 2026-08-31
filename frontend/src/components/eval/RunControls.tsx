@@ -39,7 +39,7 @@ export function RunControls() {
 		<div className="flex flex-col gap-2 text-sm">
 			{personas && personas.length > 0 && (
 				<div className="flex flex-wrap items-center gap-2">
-					<span className="text-gray-600">
+					<span className="text-sky-shade-160">
 						Personas in this run ({selectedPersonaIds.size} of {personas.length}
 						):
 					</span>
@@ -53,7 +53,7 @@ export function RunControls() {
 								className={`text-xs px-2 py-1 rounded border ${
 									selected
 										? "bg-blue-100 border-blue-400 text-blue-800"
-										: "bg-gray-50 border-sky-shade-30 text-gray-600"
+										: "bg-sky-shade-10 border-sky-shade-30 text-sky-shade-160"
 								}`}
 							>
 								{selected ? "☑ " : "☐ "}

@@ -60,8 +60,8 @@ export function FilterBottomSheetShell({
 					title={content["results.filter.reset"]}
 					className={`relative z-10 shrink-0 px-4 text-base font-medium transition-colors rounded-2xl h-12 py-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-sky-500 disabled:cursor-default ${
 						resetDisabled
-							? "text-gray-400"
-							: "text-sky-300 md:hover:bg-sky-shade-20 md:hover:text-gray-800 active:bg-sky-shade-20 active:text-gray-800"
+							? "text-sky-shade-70"
+							: "text-sky-400 md:hover:text-sky-600 active:text-sky-600"
 					}`}
 				>
 					{content["results.filter.reset"]}

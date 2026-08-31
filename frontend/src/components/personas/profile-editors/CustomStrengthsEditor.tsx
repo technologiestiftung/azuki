@@ -23,7 +23,7 @@ export function CustomStrengthsEditor({ customStrengths, onChange }: Props) {
 
 	return (
 		<div className="flex flex-col gap-1">
-			<span className="text-xs text-gray-500">Eigene Stärken</span>
+			<span className="text-xs text-sky-shade-110">Eigene Stärken</span>
 			{customStrengths.length > 0 && (
 				<div className="flex flex-wrap gap-1">
 					{customStrengths.map((value) => (
@@ -62,7 +62,7 @@ export function CustomStrengthsEditor({ customStrengths, onChange }: Props) {
 					type="button"
 					onClick={addCustom}
 					disabled={!draft.trim()}
-					className="text-xs border border-gray-400 rounded px-2 py-1 disabled:opacity-50"
+					className="text-xs border border-sky-shade-80 rounded px-2 py-1 disabled:opacity-50"
 				>
 					Hinzufügen
 				</button>

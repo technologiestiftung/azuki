@@ -155,7 +155,7 @@ export function StrengthsSlider({
 				/>
 				{/* Anchor dots */}
 				{ANCHOR_STOPS.map((stop) => {
-					let dotColor = "bg-gray-400";
+					let dotColor = "bg-sky-shade-90";
 					if (stop < value) {
 						dotColor = "bg-sky-600";
 					} else if (stop === value) {
@@ -176,7 +176,7 @@ export function StrengthsSlider({
 					);
 				})}
 			</div>
-			<div className="flex justify-between text-base font-medium text-gray-600 py-2">
+			<div className="flex justify-between text-base font-medium text-sky-shade-170 py-2">
 				<span>{minLabel}</span>
 				<span>{maxLabel}</span>
 			</div>

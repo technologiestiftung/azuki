@@ -91,7 +91,9 @@ function EvalPageInner() {
 						{error}
 					</div>
 				)}
-				{isRunning && <div className="text-sm text-gray-600">Running…</div>}
+				{isRunning && (
+					<div className="text-sm text-sky-shade-160">Running…</div>
+				)}
 			</div>
 
 			<ScoringExplainer storageKey="evalPage" defaultOpen={true} />

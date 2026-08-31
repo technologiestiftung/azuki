@@ -37,7 +37,7 @@ export function Footer() {
 						href={link.href}
 						target={link.external ? "_blank" : undefined}
 						rel={link.external ? "noopener noreferrer" : undefined}
-						className="flex gap-2 text-lg font-medium text-sky-900 disabled:text-gray-400 active:text-sky-800 disabled:text-sky-shade-70 hover:text-sky-800"
+						className="flex gap-2 text-lg font-medium text-sky-900 active:text-sky-800 disabled:text-sky-shade-70 hover:text-sky-800"
 					>
 						<span
 							className={

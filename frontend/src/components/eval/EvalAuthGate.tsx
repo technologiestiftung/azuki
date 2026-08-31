@@ -34,7 +34,7 @@ export function EvalAuthGate({ children }: Props) {
 	return (
 		<div className="flex flex-col items-center justify-center min-h-[100dvh] px-8 bg-white">
 			<h1 className="text-2xl font-semibold mb-2">Eval</h1>
-			<p className="text-sm text-gray-500 mb-6">
+			<p className="text-sm text-sky-shade-110 mb-6">
 				Passwort eingeben, um auf das Eval-Tool zuzugreifen.
 			</p>
 			<form onSubmit={handleSubmit} className="w-full max-w-xs space-y-3">

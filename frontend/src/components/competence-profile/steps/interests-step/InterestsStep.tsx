@@ -54,7 +54,7 @@ export function InterestsStep() {
 				)}
 				{profile.customInterests.length > 0 && (
 					<div ref={customInterestsSectionRef} className="scroll-mt-4">
-						<h3 className="text-lg font-semibold text-gray-500 mb-2 px-3.5">
+						<h3 className="text-lg font-semibold text-sky-shade-110 mb-2 px-3.5">
 							{content["interests.addedByYouLabel"]}
 						</h3>
 						<div className="flex min-w-0 flex-wrap gap-x-2 gap-y-2.5 rounded-2xl bg-card-fill p-3">
@@ -82,7 +82,7 @@ export function InterestsStep() {
 
 				{interests.map((category) => (
 					<div key={category.name}>
-						<h3 className="text-lg font-semibold text-gray-500 mb-2 px-3.5">
+						<h3 className="text-lg font-semibold text-sky-shade-110 mb-2 px-3.5">
 							{category.name}
 						</h3>
 						<div className="flex min-w-0 flex-wrap gap-x-2 gap-y-2.5 rounded-2xl bg-card-fill p-3">

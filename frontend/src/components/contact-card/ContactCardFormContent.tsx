@@ -271,14 +271,14 @@ export function ContactCardFormContent({
 						<div className="flex flex-col gap-1">
 							<label
 								htmlFor="marketing"
-								className="text-base font-normal leading-[140%] text-gray-700 cursor-pointer"
+								className="text-base font-normal leading-[140%] text-sky-shade-170 cursor-pointer"
 							>
 								{content["results.contactCard.bottomSheet.marketing.label"]}
 							</label>
 						</div>
 					</div>
 					<span
-						className="text-sm font-normal text-gray-500 leading-[140%] [&_a]:underline"
+						className="text-sm font-normal text-sky-shade-120 leading-[140%] [&_a]:underline"
 						dangerouslySetInnerHTML={{
 							__html: content["results.contactCard.bottomSheet.privacy.notice"],
 						}}
@@ -305,7 +305,7 @@ export function ContactCardFormContent({
 						? content["results.contactCard.bottomSheet.submit.loading"]
 						: content["results.contactCard.bottomSheet.submit"]}
 				</PrimaryThemedButton>
-				<span className="text-sm font-normal flex items-center gap-1.5 text-gray-500 leading-[140%] justify-center">
+				<span className="text-sm font-normal flex items-center gap-1.5 text-sky-shade-110 leading-[140%] justify-center">
 					<img
 						src="/icons/lock-gray.svg"
 						alt={content["results.contactCard.bottomSheet.lock.alt"]}

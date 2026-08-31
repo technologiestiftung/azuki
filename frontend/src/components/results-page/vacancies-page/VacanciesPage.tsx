@@ -393,7 +393,7 @@ export function VacanciesPage() {
 									)}
 								</div>
 							)}
-							<div className="flex flex-col gap-5 px-3 py-5 rounded-2xl border border-sky-100 bg-sky-50">
+							<div className="flex flex-col gap-5 px-3 py-5 rounded-2xl bg-sky-50">
 								<div>
 									<h3 className="text-2xl font-semibold text-sky-900 text-center mb-[7px]">
 										{content["vacancies.bottomCard.title"]}

@@ -30,12 +30,12 @@ export const TextInput = ({
 
 	return (
 		<div
-			className={`h-[60px] flex items-center gap-2 px-4 py-2.5 rounded-2xl border-2 focus-within:outline focus-within:outline-2 focus-within:outline-offset-1 focus-within:outline-sky-300 focus-within:border-gray-700 bg-white group transition-colors ${error ? "border-red-700 focus-within:outline-red-700" : "border-gray-500"} ${containerClassName}`}
+			className={`h-[60px] flex items-center gap-2 px-4 py-2.5 rounded-2xl border-2 focus-within:outline focus-within:outline-2 focus-within:outline-offset-1 focus-within:outline-sky-300 focus-within:border-sky-shade-180 bg-white group transition-colors ${error ? "border-red-700 focus-within:outline-red-700" : "border-sky-shade-110"} ${containerClassName}`}
 		>
 			<input
 				type="text"
 				onKeyDown={handleKeyDown}
-				className={`flex-1 placeholder:text-gray-400 text-sky-900 text-lg font-medium bg-white focus:outline-none ${className}`}
+				className={`flex-1 placeholder:text-sky-shade-70 text-sky-900 text-lg font-medium bg-white focus:outline-none ${className}`}
 				{...inputProps}
 				aria-invalid={error}
 				aria-describedby={error ? "input-error" : undefined}
