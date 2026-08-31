@@ -183,7 +183,7 @@ export function OccupationDetailPage() {
 				salaryLabel,
 				schoolDegreeLabel,
 				taskItems,
-				matchPercent,
+				matchPercent: isWildcard ? undefined : matchPercent,
 				heroImageUrls: resolveHeroImageUrls(detail.occupation),
 				occupationId: detail.occupation.id,
 				profile,
@@ -201,6 +201,7 @@ export function OccupationDetailPage() {
 		taskItems,
 		matchPercent,
 		profile,
+		isWildcard,
 	]);
 
 	useEffect(() => {
