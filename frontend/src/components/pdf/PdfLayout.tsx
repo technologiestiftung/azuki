@@ -1,43 +1,42 @@
 import { View, Text, Image } from "@react-pdf/renderer";
 import { content } from "../../content";
-import { COLOR, styles } from "./pdfTheme";
+import { COLOR, px, styles } from "./pdfTheme";
 
+/**
+ * The brand mark is rendered as a raster Image rather than react-pdf's
+ * Svg/Path: Svg content inside the fixed page header's per-page `render`
+ * callback silently drops whenever any ancestor uses
+ * `alignItems`/`alignSelf: "center"` — a react-pdf Yoga-measurement bug, not
+ * something fixable from userland layout. `wordmarkSrc`/`lockupSrc` are
+ * pre-rasterized via `loadPdfIconSrc` (see loadPdfAssets.ts) and passed down
+ * from the exporter, same as the CTA mascot/QR icons.
+ */
 export function PdfHeader({
 	pageNumber,
 	title,
 	tagline,
+	wordmarkSrc,
+	lockupSrc,
 }: {
 	pageNumber: number;
 	title: string;
 	tagline?: string;
+	wordmarkSrc: string | null;
+	lockupSrc: string | null;
 }) {
 	const compact = pageNumber > 1 || !tagline;
+	const logoWidth = compact ? px(105) * 0.7361 : px(150);
+	const logoHeight = compact ? px(31) * 0.7361 : px(70);
+	const logoSrc = compact ? wordmarkSrc : lockupSrc;
 	return (
 		<View style={styles.header}>
 			<Text style={styles.headerTitle}>{title}</Text>
-			<View style={styles.brandBlock}>
-				<View style={styles.brandRow}>
-					<Text
-						style={
-							compact ? [styles.brandAzu, styles.brandCompact] : styles.brandAzu
-						}
-					>
-						{content["results.brand.azu"]}
-					</Text>
-					<Text
-						style={
-							compact ? [styles.brandKi, styles.brandCompact] : styles.brandKi
-						}
-					>
-						{content["results.brand.ki"]}
-					</Text>
-				</View>
-				{tagline ? (
-					<Text style={[styles.tagline, { opacity: pageNumber === 1 ? 1 : 0 }]}>
-						{tagline}
-					</Text>
-				) : null}
-			</View>
+			{logoSrc ? (
+				<Image
+					src={logoSrc}
+					style={[styles.headerLogo, { width: logoWidth, height: logoHeight }]}
+				/>
+			) : null}
 		</View>
 	);
 }
