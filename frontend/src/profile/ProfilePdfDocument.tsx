@@ -204,7 +204,7 @@ const profileStyles = StyleSheet.create({
 		fontFamily: "Asap",
 		fontWeight: 600,
 		fontSize: 8,
-		width: px(28),
+		width: px(34),
 		flexShrink: 0,
 		textAlign: "right",
 	},
@@ -424,7 +424,7 @@ function MeterBar({
 		<View style={profileStyles.meterRow} wrap={false}>
 			<Text style={profileStyles.meterLabel}>{item.label}</Text>
 			<Text style={[profileStyles.meterPercent, { color: accent }]}>
-				{item.percent} %
+				{`${item.percent} %`}
 			</Text>
 			<View style={[profileStyles.meterTrack, { backgroundColor: track }]}>
 				<View
