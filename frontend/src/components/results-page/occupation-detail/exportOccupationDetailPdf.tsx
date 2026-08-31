@@ -7,6 +7,9 @@ import {
 } from "../../../api/client";
 import { content } from "../../../content";
 import {
+	LOGO_LOCKUP_SRC,
+	LOGO_RASTER_EDGE,
+	LOGO_WORDMARK_SRC,
 	ensureBufferPolyfill,
 	getSolidPdfPlaceholderSrc,
 	loadPdfHeroImageSrc,
@@ -16,6 +19,7 @@ import {
 	triggerDownload,
 	warmPdfRuntime,
 } from "../../pdf/loadPdfAssets";
+import { COLOR } from "../../pdf/pdfTheme";
 import {
 	OccupationDetailPdfDocument,
 	type OccupationDetailPdfAssets,
@@ -80,14 +84,21 @@ export async function exportOccupationDetailPdf({
 		return placeholderPromise;
 	};
 
-	const [mascotSrc, qrSrc, heroImageSrc, matchExplanations] = await Promise.all(
-		[
-			loadPdfIconSrc(MASCOT_SRC, CTA_SURFACE_BG),
-			loadPdfIconSrc(QR_SRC, CTA_SURFACE_BG),
-			loadPdfHeroImageSrc(heroImageUrls, resolvePlaceholder),
-			loadMatchExplanations(occupationId, profile),
-		],
-	);
+	const [
+		mascotSrc,
+		qrSrc,
+		heroImageSrc,
+		matchExplanations,
+		wordmarkSrc,
+		lockupSrc,
+	] = await Promise.all([
+		loadPdfIconSrc(MASCOT_SRC, CTA_SURFACE_BG),
+		loadPdfIconSrc(QR_SRC, CTA_SURFACE_BG),
+		loadPdfHeroImageSrc(heroImageUrls, resolvePlaceholder),
+		loadMatchExplanations(occupationId, profile),
+		loadPdfIconSrc(LOGO_WORDMARK_SRC, COLOR.white, LOGO_RASTER_EDGE),
+		loadPdfIconSrc(LOGO_LOCKUP_SRC, COLOR.white, LOGO_RASTER_EDGE),
+	]);
 
 	const placeholderSrc = placeholderPromise
 		? await placeholderPromise
@@ -97,6 +108,8 @@ export async function exportOccupationDetailPdf({
 		mascotSrc,
 		qrSrc,
 		heroImageSrc: heroImageSrc || placeholderSrc,
+		wordmarkSrc,
+		lockupSrc,
 	};
 
 	try {

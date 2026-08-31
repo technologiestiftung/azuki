@@ -230,6 +230,8 @@ export interface OccupationDetailPdfAssets {
 	mascotSrc: string | null;
 	qrSrc: string | null;
 	heroImageSrc: string;
+	wordmarkSrc: string | null;
+	lockupSrc: string | null;
 }
 
 export interface OccupationDetailPdfDocumentProps {
@@ -330,6 +332,8 @@ export function OccupationDetailPdfDocument({
 							pageNumber={pageNumber}
 							title={displayName}
 							tagline={content["results.detail.export.tagline"]}
+							wordmarkSrc={assets.wordmarkSrc}
+							lockupSrc={assets.lockupSrc}
 						/>
 					)}
 				/>
