@@ -73,7 +73,7 @@ export function VacancyDetailMetaInfo({ detail }: VacancyDetailMetaInfoProps) {
 				open={schoolDegreeInfoOpen}
 				onClose={() => setSchoolDegreeInfoOpen(false)}
 				title={content["results.detail.schoolDegreeInfo.title"]}
-				description={content["results.detail.schoolDegreeInfo.description"]}
+				description={content["vacancies.detail.schoolDegreeInfo.description"]}
 			/>
 		</>
 	);

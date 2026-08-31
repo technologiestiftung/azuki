@@ -660,7 +660,7 @@ export const content = {
 		"Hochschulreife",
 	"results.detail.schoolDegreeInfo.title": "Empfohlener Schulabschluss",
 	"results.detail.schoolDegreeInfo.description":
-		"Du hast gute Chancen mit diesem Abschluss. Hast du einen anderen Abschluss? Bewirb dich trotzdem. Betriebe schreiben oft nur ihren Wunsch auf, manchmal reichen auch andere Abschlüsse.",
+		"Mit diesem Abschluss hast du gute Chancen auf einen Ausbildungsplatz. Hast du einen anderen Abschluss, kannst du es trotzdem schaffen – vielleicht musst du dann mehr Bewerbungen schreiben und es dauert länger bis du einen Platz findest.",
 	"results.detail.notFound": "Dieser Beruf wurde nicht gefunden.",
 	"results.detail.loadError":
 		"Die Berufsdetails konnten gerade nicht geladen werden.",
@@ -729,6 +729,8 @@ export const content = {
 	"vacancies.detail.employmentType.partTime": "Teilzeit",
 	"vacancies.detail.educationLevel.fachgebundeneHochschulreife":
 		"Fachgebundene Hochschulreife",
+	"vacancies.detail.schoolDegreeInfo.description":
+		"Du hast gute Chancen mit diesem Abschluss. Hast du einen anderen Abschluss? Bewirb dich trotzdem. Betriebe schreiben oft nur ihren Wunsch auf, manchmal reichen auch andere Abschlüsse.",
 	"vacancies.detail.locationTitle": "Arbeitsort",
 	"vacancies.detail.location.showMore": "+{count} weitere Arbeitsorte",
 	"vacancies.detail.location.showMore.one": "1 weiterer Arbeitsort",
