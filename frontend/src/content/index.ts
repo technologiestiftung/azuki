@@ -660,7 +660,7 @@ export const content = {
 		"Hochschulreife",
 	"results.detail.schoolDegreeInfo.title": "Empfohlener Schulabschluss",
 	"results.detail.schoolDegreeInfo.description":
-		"Mit diesem Abschluss hast du gute Chancen auf einen Ausbildungsplatz. Hast du einen anderen Abschluss, kannst du es trotzdem schaffen – vielleicht musst du dann mehr Bewerbungen schreiben und es dauert länger bis du einen Platz findest.",
+		"Du hast gute Chancen mit diesem Abschluss. Hast du einen anderen Abschluss? Bewirb dich trotzdem. Betriebe schreiben oft nur ihren Wunsch auf, manchmal reichen auch andere Abschlüsse.",
 	"results.detail.notFound": "Dieser Beruf wurde nicht gefunden.",
 	"results.detail.loadError":
 		"Die Berufsdetails konnten gerade nicht geladen werden.",
