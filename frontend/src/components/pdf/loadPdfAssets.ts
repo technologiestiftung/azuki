@@ -1,5 +1,7 @@
 import { Buffer } from "buffer";
 
+const WHITE = "#FFFFFF";
+
 const FETCH_TIMEOUT_MS = 6000;
 /** Caps CTA/avatar rasters (~56–64pt at ~2–3×). */
 const MAX_RASTER_EDGE = 192;
@@ -10,6 +12,10 @@ const CARD_IMAGE_OUT_HEIGHT = 138;
 /** ~5px radius on ~92pt-tall frame ≈ 0.05 of min edge. */
 const CARD_IMAGE_CORNER_RATIO = 5 / 92;
 const CARD_IMAGE_BG = "#F2F4F5";
+/** Detail hero ~40% of content width × 172pt — ~2× for retina sharpness. */
+const HERO_IMAGE_ASPECT = 1.27;
+const HERO_IMAGE_OUT_HEIGHT = 344;
+const HERO_JPEG_QUALITY = 0.78;
 /** Matches occupation-placeholder.svg fill. */
 const PLACEHOLDER_BG = "#BAE6FD";
 const JPEG_QUALITY = 0.65;
@@ -27,6 +33,15 @@ const PDF_FONT_URLS = [
 const WARM_MASCOT_SRC = "/illustrations/star-neutral.svg";
 const WARM_QR_SRC = "/illustrations/qr-code.svg";
 const WARM_CTA_SURFACE_BG = "#DDF4FF";
+/**
+ * Rendered as a raster Image rather than react-pdf's Svg/Path — Svg content
+ * inside the fixed page header's per-page `render` callback silently drops
+ * whenever any ancestor uses `alignItems`/`alignSelf: "center"` (a react-pdf
+ * Yoga-measurement bug), so a vector header logo is not reliable there.
+ */
+export const LOGO_WORDMARK_SRC = "/illustrations/azuki-wordmark.svg";
+export const LOGO_LOCKUP_SRC = "/illustrations/azuki-lockup.svg";
+export const LOGO_RASTER_EDGE = MAX_RASTER_EDGE;
 
 export type PdfRasterOptions = {
 	coverAspect?: number;
@@ -221,12 +236,18 @@ async function fetchAsObjectUrl(src: string): Promise<string | null> {
 }
 
 /**
- * Cover-crop to the PDF card aspect and export as a JPEG blob URL.
+ * Cover-crop and export as a JPEG blob URL.
  * Re-encoding strips broken BA JPEG metadata; blob URLs avoid base64 bloat.
  * A cheap variance check rejects near-blank truncated Arbeitsagentur decodes.
  */
 async function coverRasterizeToJpeg(
 	source: ImageBitmap | HTMLImageElement,
+	options: {
+		outHeight?: number;
+		aspect?: number;
+		quality?: number;
+		backgroundColor?: string;
+	} = {},
 ): Promise<string | null> {
 	const width = Math.max(
 		1,
@@ -236,8 +257,9 @@ async function coverRasterizeToJpeg(
 		1,
 		"naturalHeight" in source ? source.naturalHeight : source.height,
 	);
-	const outHeight = CARD_IMAGE_OUT_HEIGHT;
-	const outWidth = Math.max(1, Math.round(outHeight * CARD_IMAGE_ASPECT));
+	const outHeight = options.outHeight ?? CARD_IMAGE_OUT_HEIGHT;
+	const aspect = options.aspect ?? CARD_IMAGE_ASPECT;
+	const outWidth = Math.max(1, Math.round(outHeight * aspect));
 	const canvas = document.createElement("canvas");
 	canvas.width = outWidth;
 	canvas.height = outHeight;
@@ -246,7 +268,7 @@ async function coverRasterizeToJpeg(
 		return null;
 	}
 
-	ctx.fillStyle = CARD_IMAGE_BG;
+	ctx.fillStyle = options.backgroundColor ?? CARD_IMAGE_BG;
 	ctx.fillRect(0, 0, outWidth, outHeight);
 
 	const scale = Math.max(outWidth / width, outHeight / height);
@@ -268,8 +290,9 @@ async function coverRasterizeToJpeg(
 		return null;
 	}
 
+	const quality = options.quality ?? JPEG_QUALITY;
 	const blob = await new Promise<Blob | null>((resolve) => {
-		canvas.toBlob(resolve, "image/jpeg", JPEG_QUALITY);
+		canvas.toBlob(resolve, "image/jpeg", quality);
 	});
 	if (!blob || blob.size < 32) {
 		return null;
@@ -308,6 +331,28 @@ async function loadRemoteCardImageDataUrl(src: string): Promise<string | null> {
 	try {
 		const image = await loadHtmlImage(objectUrl);
 		return await coverRasterizeToJpeg(image);
+	} catch {
+		return null;
+	} finally {
+		URL.revokeObjectURL(objectUrl);
+	}
+}
+
+async function loadRemoteHeroImageDataUrl(src: string): Promise<string | null> {
+	const blob = await fetchImageBlob(src);
+	if (!blob) {
+		return null;
+	}
+
+	const objectUrl = URL.createObjectURL(blob);
+	try {
+		const image = await loadHtmlImage(objectUrl);
+		return await coverRasterizeToJpeg(image, {
+			outHeight: HERO_IMAGE_OUT_HEIGHT,
+			aspect: HERO_IMAGE_ASPECT,
+			quality: HERO_JPEG_QUALITY,
+			backgroundColor: PLACEHOLDER_BG,
+		});
 	} catch {
 		return null;
 	} finally {
@@ -451,11 +496,16 @@ const iconCache = new Map<string, Promise<string | null>>();
 export async function loadPdfIconSrc(
 	src: string,
 	backgroundColor: string,
+	outHeight?: number,
 ): Promise<string | null> {
-	const cacheKey = `${src}|${backgroundColor}`;
+	const cacheKey = `${src}|${backgroundColor}|${outHeight ?? ""}`;
 	let pending = iconCache.get(cacheKey);
 	if (!pending) {
-		pending = loadPdfImageSrc(src, { format: "jpeg", backgroundColor });
+		pending = loadPdfImageSrc(src, {
+			format: "jpeg",
+			backgroundColor,
+			outHeight,
+		});
 		iconCache.set(cacheKey, pending);
 	}
 	return pending;
@@ -537,6 +587,37 @@ export async function loadPdfCardImageSrc(
 	return resolvePlaceholderSource(placeholderSrc);
 }
 
+/** Higher-res cover for the occupation detail PDF hero (~2× display size). */
+export async function loadPdfHeroImageSrc(
+	imageUrls: string[],
+	placeholderSrc: PlaceholderSource,
+): Promise<string> {
+	const urls = imageUrls
+		.map((url) => url.trim())
+		.filter(Boolean)
+		.slice(0, MAX_CARD_IMAGE_URL_CANDIDATES);
+
+	for (const imageUrl of urls) {
+		const loaded = await loadRemoteHeroImageDataUrl(imageUrl);
+		if (loaded) {
+			return loaded;
+		}
+	}
+
+	const placeholder = await resolvePlaceholderSource(placeholderSrc);
+	const heroPlaceholder = await loadPdfImageSrc(
+		OCCUPATION_PLACEHOLDER_SRC,
+		{
+			coverAspect: HERO_IMAGE_ASPECT,
+			format: "jpeg",
+			backgroundColor: PLACEHOLDER_BG,
+			outHeight: HERO_IMAGE_OUT_HEIGHT,
+		},
+		PLACEHOLDER_LOAD_TIMEOUT_MS,
+	);
+	return heroPlaceholder || placeholder;
+}
+
 /** Load Top card covers in parallel; placeholder may resolve lazily on miss. */
 export async function loadPdfTopCardImages(
 	occupations: Array<{ images: Array<{ url: string }> }>,
@@ -572,6 +653,8 @@ export function warmPdfRuntime(): Promise<void> {
 				),
 				loadPdfIconSrc(WARM_MASCOT_SRC, WARM_CTA_SURFACE_BG),
 				loadPdfIconSrc(WARM_QR_SRC, WARM_CTA_SURFACE_BG),
+				loadPdfIconSrc(LOGO_WORDMARK_SRC, WHITE, LOGO_RASTER_EDGE),
+				loadPdfIconSrc(LOGO_LOCKUP_SRC, WHITE, LOGO_RASTER_EDGE),
 			]);
 		})().catch(() => {
 			pdfWarmPromise = null;

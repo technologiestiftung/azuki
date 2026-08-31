@@ -1,5 +1,6 @@
 import { content } from "../../../content";
 import { GhostIconButton } from "../../primitives/buttons/GhostIconButton";
+import { OccupationDetailActionButtons } from "./OccupationDetailActionButtons";
 
 interface OccupationDetailHeroProps {
 	displayName: string;
@@ -8,6 +9,8 @@ interface OccupationDetailHeroProps {
 	onToggleFavorite: () => void;
 	onShare: () => void;
 	onBack: () => void;
+	onDownload: () => void;
+	downloadDisabled: boolean;
 	overlayOpacity: number;
 	controlsOpacity: number;
 	imageParallaxY: number;
@@ -20,6 +23,8 @@ export function OccupationDetailHero({
 	onToggleFavorite,
 	onShare,
 	onBack,
+	onDownload,
+	downloadDisabled,
 	overlayOpacity,
 	controlsOpacity,
 	imageParallaxY,
@@ -54,39 +59,14 @@ export function OccupationDetailHero({
 					iconSize="w-5 h-5"
 					className="bg-sky-shade-10/50 rounded-xl backdrop-blur-[4.5px]"
 				/>
-
-				<div className="flex gap-1.5 items-center">
-					<GhostIconButton
-						iconSrc="/icons/share.svg"
-						onClick={onShare}
-						ariaLabel={content["results.share"]}
-						title={content["results.share"]}
-						iconSize="w-5 h-5"
-						className="bg-sky-shade-10/50 rounded-xl backdrop-blur-[4.5px]"
-					/>
-					<button
-						type="button"
-						className="flex items-center justify-center z-10 w-10 h-10 bg-sky-shade-10/50 rounded-xl backdrop-blur-[4.5px]"
-						onClick={onToggleFavorite}
-						aria-pressed={isFavorite}
-						aria-label={
-							isFavorite
-								? content["results.favorite.remove"]
-								: content["results.favorite.add"]
-						}
-					>
-						<img
-							src="/icons/favorite-star.svg"
-							alt=""
-							className={isFavorite ? "hidden" : "block w-5 h-5"}
-						/>
-						<img
-							src="/icons/favorite-star-filled.svg"
-							alt=""
-							className={isFavorite ? "block  w-5 h-5" : "hidden"}
-						/>
-					</button>
-				</div>
+				<OccupationDetailActionButtons
+					onDownload={onDownload}
+					onShare={onShare}
+					onToggleFavorite={onToggleFavorite}
+					isFavorite={isFavorite}
+					downloadDisabled={downloadDisabled}
+					buttonClassName="bg-sky-shade-10/50 rounded-xl backdrop-blur-[4.5px]"
+				/>
 			</div>
 		</div>
 	);

@@ -1,21 +1,26 @@
 import { content } from "../../../content";
 import { GhostIconButton } from "../../primitives/buttons/GhostIconButton";
+import { OccupationDetailActionButtons } from "./OccupationDetailActionButtons";
 
 interface OccupationDetailHeaderCollapsedProps {
-	displayName: string;
+	title: string;
 	isFavorite: boolean;
 	onToggleFavorite: () => void;
 	onShare: () => void;
 	onBack: () => void;
+	onDownload: () => void;
+	downloadDisabled: boolean;
 	titleOpacity?: number;
 }
 
 export function OccupationDetailHeaderCollapsed({
-	displayName,
+	title,
 	isFavorite,
 	onToggleFavorite,
 	onShare,
 	onBack,
+	onDownload,
+	downloadDisabled,
 	titleOpacity = 1,
 }: OccupationDetailHeaderCollapsedProps) {
 	return (
@@ -32,39 +37,15 @@ export function OccupationDetailHeaderCollapsed({
 				style={{ opacity: titleOpacity }}
 				aria-hidden={titleOpacity < 0.5}
 			>
-				{displayName}
+				{title}
 			</h1>
-			<div className="flex items-center gap-1.5">
-				<GhostIconButton
-					iconSrc="/icons/share.svg"
-					onClick={onShare}
-					ariaLabel={content["results.share"]}
-					title={content["results.share"]}
-					iconSize="w-5 h-5"
-				/>
-				<button
-					type="button"
-					className="inline-flex h-10 w-10 items-center justify-center p-2"
-					onClick={onToggleFavorite}
-					aria-pressed={isFavorite}
-					aria-label={
-						isFavorite
-							? content["results.favorite.remove"]
-							: content["results.favorite.add"]
-					}
-				>
-					<img
-						src="/icons/favorite-star.svg"
-						alt=""
-						className={`w-5 h-5 ${isFavorite ? "hidden" : "block"}`}
-					/>
-					<img
-						src="/icons/favorite-star-filled.svg"
-						alt=""
-						className={`w-5 h-5 ${isFavorite ? "block" : "hidden"}`}
-					/>
-				</button>
-			</div>
+			<OccupationDetailActionButtons
+				onDownload={onDownload}
+				onShare={onShare}
+				onToggleFavorite={onToggleFavorite}
+				isFavorite={isFavorite}
+				downloadDisabled={downloadDisabled}
+			/>
 		</div>
 	);
 }

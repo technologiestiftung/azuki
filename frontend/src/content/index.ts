@@ -501,8 +501,6 @@ export const content = {
 	"results.share.text": "Schau dir diese passenden Ausbildungsberufe an.",
 
 	"results.download.ariaLabel": "Ausbildungsberufe herunterladen",
-	"results.brand.azu": "Azu",
-	"results.brand.ki": "Ki",
 	"results.export.filename": "AzuKi-Berufe.pdf",
 	"results.export.tagline": "Finde deine Ausbildung.",
 	"results.export.topTitle": "Deine Top 3 Berufe",
@@ -699,6 +697,10 @@ export const content = {
 	"results.detail.images.carousel.slideAriaLabel": "Bild {index}",
 	// More Occupations
 	"results.detail.moreOccupations.title": "Mehr Ausbildungsberufe",
+	"results.detail.download.ariaLabel": "Beruf herunterladen",
+	"results.detail.export.tagline": "Finde deine Ausbildung.",
+	"results.detail.export.filename": "AzuKi-{name}.pdf",
+	"results.detail.export.filenameFallback": "AzuKi-Beruf.pdf",
 	// Vacancies
 	"vacancies.title": "Freie Stellen für dich",
 	"vacancies.wildcard.title":
