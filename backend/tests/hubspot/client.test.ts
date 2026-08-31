@@ -5,7 +5,7 @@ import {
 	buildHubSpotLegalConsentOptions,
 	buildHubSpotSubmitBody,
 	contactTypeToKontaktweg,
-	isoDateToGermanDate,
+	isoDateToDDMMYYYY,
 	submitContactToHubSpot,
 } from "../../src/hubspot/client.js";
 
@@ -30,9 +30,9 @@ const mailRequest: ContactRequest = {
 	marketingConsent: false,
 };
 
-describe("isoDateToGermanDate", () => {
-	it("converts YYYY-MM-DD to DD.MM.YYYY", () => {
-		expect(isoDateToGermanDate("2010-01-01")).toBe("01.01.2010");
+describe("isoDateToDDMMYYYY", () => {
+	it("converts YYYY-MM-DD to DD/MM/YYYY", () => {
+		expect(isoDateToDDMMYYYY("2010-01-01")).toBe("01/01/2010");
 	});
 });
 
@@ -61,7 +61,7 @@ describe("buildHubSpotFields", () => {
 				value: "tester123@joblinge.de",
 			},
 			{ objectTypeId: "0-1", name: "phone", value: "015711223344" },
-			{ objectTypeId: "0-1", name: "geburtsdatum", value: "01.01.2010" },
+			{ objectTypeId: "0-1", name: "geburtsdatum", value: "01/01/2010" },
 			{
 				objectTypeId: "0-1",
 				name: "bevorzugter_kontaktweg",

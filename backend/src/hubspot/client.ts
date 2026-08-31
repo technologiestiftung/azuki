@@ -57,9 +57,9 @@ export function contactTypeToKontaktweg(
 	}
 }
 
-export function isoDateToGermanDate(iso: string): string {
+export function isoDateToDDMMYYYY(iso: string): string {
 	const [year, month, day] = iso.split("-");
-	return `${day}.${month}.${year}`;
+	return `${day}/${month}/${year}`;
 }
 
 function field(name: string, value: string): HubSpotField {
@@ -76,7 +76,7 @@ export function buildHubSpotFields(request: ContactRequest): HubSpotField[] {
 		fields.push(field("phone", request.phonenumber));
 	}
 	if (request.birthdate !== undefined) {
-		fields.push(field("geburtsdatum", isoDateToGermanDate(request.birthdate)));
+		fields.push(field("geburtsdatum", isoDateToDDMMYYYY(request.birthdate)));
 	}
 	fields.push(
 		field(
