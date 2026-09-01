@@ -531,7 +531,7 @@ export const content = {
 	"results.favorite.add": "Zu Favoriten hinzufügen",
 	"results.favorite.remove": "Aus Favoriten entfernen",
 	"results.card.score.label": "Passt zu",
-	"results.wildcard.badge": "Besonders gesucht",
+	"results.wildcard.badge": "Viele Azubis gesucht",
 	"results.wildcard.title": "Hier werden besonders viele Azubis gesucht",
 	"results.card.salary.monthly.label": "/ Monat",
 	"results.noResults":

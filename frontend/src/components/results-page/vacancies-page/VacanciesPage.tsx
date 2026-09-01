@@ -47,9 +47,11 @@ const DEFAULT_OCCUPATION_FILTERS: OccupationsFilterState = {
 function getVacancyOccupationFilterIdsFromStore(): number[] {
 	const { vacancyOccupationFilterIds, matchResults } =
 		useMatchResultsStore.getState();
-	const validOccupationIds = new Set(
-		matchResults?.occupations.map((occupation) => occupation.id) ?? [],
-	);
+	const validOccupationIds = new Set([
+		...(matchResults?.occupations.map((occupation) => occupation.id) ?? []),
+		...(matchResults?.wildcardOccupations.map((occupation) => occupation.id) ??
+			[]),
+	]);
 	return vacancyOccupationFilterIds.filter((id) => validOccupationIds.has(id));
 }
 
@@ -81,6 +83,14 @@ export function VacanciesPage() {
 	const showBottomNav = shouldShowBottomNav(inSchool, searchParams);
 
 	const occupations = matchResults?.occupations ?? [];
+	const wildcardOccupations = useMemo(
+		() => matchResults?.wildcardOccupations ?? [],
+		[matchResults?.wildcardOccupations],
+	);
+	const allOccupations = useMemo(
+		() => [...occupations, ...wildcardOccupations],
+		[occupations, wildcardOccupations],
+	);
 	const setVacancyOccupationFilterIds = useMatchResultsStore(
 		(state) => state.setVacancyOccupationFilterIds,
 	);
@@ -211,21 +221,28 @@ export function VacanciesPage() {
 		],
 	);
 
-	const wildcardOccupations = useMemo(
-		() => matchResults?.wildcardOccupations ?? [],
-		[matchResults?.wildcardOccupations],
-	);
+	const visibleWildcardOccupations = useMemo(() => {
+		const selectedIds = occupationFilter.appliedValue.selectedOccupationIds;
+		const hasWildcardSelection = selectedIds.some((id) =>
+			wildcardOccupations.some((occupation) => occupation.id === id),
+		);
+		return hasWildcardSelection
+			? applyVacancyOccupationFilters(wildcardOccupations, {
+					filters: occupationFilter.appliedValue,
+				})
+			: wildcardOccupations;
+	}, [wildcardOccupations, occupationFilter.appliedValue]);
 	const wildcardVacancyCards = useMemo(
 		() =>
 			buildVacancyCards({
-				occupations: wildcardOccupations,
+				occupations: visibleWildcardOccupations,
 				vacanciesByName,
 				showFavoritesOnly,
 				favoriteVacancyKeySet,
 				listKeyPrefix: "wildcard-",
 			}),
 		[
-			wildcardOccupations,
+			visibleWildcardOccupations,
 			vacanciesByName,
 			showFavoritesOnly,
 			favoriteVacancyKeySet,
@@ -324,7 +341,7 @@ export function VacanciesPage() {
 							occupationFilter.appliedValue.selectedOccupationIds
 						}
 						resolveOccupationFilterLabel={(id) =>
-							getOccupationFilterLabel(id, occupations)
+							getOccupationFilterLabel(id, allOccupations)
 						}
 						occupationFilterTitle={
 							content["vacancies.filter.occupations.title.short"]
