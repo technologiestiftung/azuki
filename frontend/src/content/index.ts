@@ -583,6 +583,8 @@ export const content = {
 		"Bitte gib dein Alter an. Wir müssen dies aus rechtlichen Gründen für die Kontaktaufnahme wissen.",
 	"results.contactCard.bottomSheet.birthdate.error":
 		"Bitte gib dein Geburtsdatum an.",
+	"results.contactCard.bottomSheet.birthdate.mismatchError":
+		"Dein Geburtsdatum passt nicht zu deiner Altersangabe.",
 	"results.contactCard.bottomSheet.contactType.error":
 		"Bitte wähle einen Kontaktweg aus.",
 	"results.contactCard.bottomSheet.phonenumber.error":
