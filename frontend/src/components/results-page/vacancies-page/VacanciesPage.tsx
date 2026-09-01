@@ -273,9 +273,13 @@ export function VacanciesPage() {
 	);
 	const hasLoadedVacancies = vacancies !== null && fetchError === null;
 	const noVacancyResults =
-		fetchError !== null || (hasLoadedVacancies && vacancyCards.length === 0);
+		fetchError !== null ||
+		(hasLoadedVacancies &&
+			vacancyCards.length === 0 &&
+			wildcardVacancyCards.length === 0);
 	const { showSimpleEmpty, showDetailedEmpty } = getVacancyEmptyState({
-		visibleOccupationCount: visibleOccupations.length,
+		visibleOccupationCount:
+			visibleOccupations.length + visibleWildcardOccupations.length,
 		locationFilterApplied,
 		showFavoritesOnly,
 		loading,

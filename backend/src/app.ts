@@ -253,6 +253,7 @@ app.post("/api/vacancies", async (c) => {
 	const {
 		postcode,
 		occupations: occupationNames,
+		wildcardOccupations: wildcardOccupationNames,
 		preferredJobs,
 		distance,
 	} = parsed.data;
@@ -264,6 +265,7 @@ app.post("/api/vacancies", async (c) => {
 	const mergedOccupationNames = mergeVacancyOccupationNames(
 		preferredOccupationNames,
 		occupationNames,
+		wildcardOccupationNames,
 	);
 
 	const results = await Promise.all(

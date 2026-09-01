@@ -22,11 +22,12 @@ const MAX_WILDCARD_VACANCY_OCCUPATION_NAMES = 5;
 
 function buildVacancyFetchKey(params: {
 	occupationNames: string[];
+	wildcardOccupationNames: string[];
 	postcode: string;
 	distance: number;
 	preferredJobs: string[];
 }): string {
-	return `${params.postcode}:${params.distance}:${params.occupationNames.join("|")}:${params.preferredJobs.join("|")}`;
+	return `${params.postcode}:${params.distance}:${params.occupationNames.join("|")}:${params.wildcardOccupationNames.join("|")}:${params.preferredJobs.join("|")}`;
 }
 
 function buildSharedVacancyFetchKey(params: SharedVacancyParams): string {
@@ -75,18 +76,18 @@ export function useFetchVacancies(
 			if (!occupations?.length) {
 				return () => {};
 			}
-			// Wildcard names get their own reserved slots so they aren't crowded
-			// out when regular matches already fill the main budget.
-			const occupationNames = [
-				...occupations
-					.map((occupation) => occupation.rawName)
-					.slice(0, MAX_VACANCY_OCCUPATION_NAMES),
-				...(wildcardOccupations ?? [])
-					.map((occupation) => occupation.rawName)
-					.slice(0, MAX_WILDCARD_VACANCY_OCCUPATION_NAMES),
-			];
+			// Wildcard names are sent as their own field so the backend can
+			// give them a reserved budget instead of letting regular/preferred
+			// names crowd them out of a shared limit.
+			const occupationNames = occupations
+				.map((occupation) => occupation.rawName)
+				.slice(0, MAX_VACANCY_OCCUPATION_NAMES);
+			const wildcardOccupationNames = (wildcardOccupations ?? [])
+				.map((occupation) => occupation.rawName)
+				.slice(0, MAX_WILDCARD_VACANCY_OCCUPATION_NAMES);
 			fetchKey = buildVacancyFetchKey({
 				occupationNames,
+				wildcardOccupationNames,
 				postcode: location.postcode,
 				distance: location.distance,
 				preferredJobs,
@@ -94,6 +95,7 @@ export function useFetchVacancies(
 			fetchPromise = fetchVacancies(location.postcode, occupationNames, {
 				distance: location.distance,
 				preferredJobs,
+				wildcardOccupations: wildcardOccupationNames,
 				signal: controller.signal,
 			});
 		}
