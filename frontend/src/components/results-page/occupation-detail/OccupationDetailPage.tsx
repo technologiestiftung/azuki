@@ -247,10 +247,7 @@ export function OccupationDetailPage() {
 						{(isWildcard || isInWildcardPool(occupationId)) && (
 							<WildcardPoolBadge />
 						)}
-						<h1
-							ref={titleRef}
-							className="text-3xl font-semibold text-sky-900 break-words hyphens-auto"
-						>
+						<h1 ref={titleRef} className="text-3xl font-semibold text-sky-900">
 							{detail.displayName}
 						</h1>
 					</div>

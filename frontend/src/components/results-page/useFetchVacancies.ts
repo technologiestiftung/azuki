@@ -16,6 +16,7 @@ interface UseFetchVacanciesOptions {
 }
 
 const MAX_VACANCY_OCCUPATION_NAMES = 20;
+const MAX_WILDCARD_VACANCY_OCCUPATION_NAMES = 5;
 
 function buildVacancyFetchKey(params: {
 	occupationNames: string[];
@@ -72,10 +73,16 @@ export function useFetchVacancies(
 			if (!occupations?.length) {
 				return () => {};
 			}
-			// Normal matches take priority; wildcard names only fill remaining slots.
-			const occupationNames = [...occupations, ...(wildcardOccupations ?? [])]
-				.map((occupation) => occupation.rawName)
-				.slice(0, MAX_VACANCY_OCCUPATION_NAMES);
+			// Wildcard names get their own reserved slots so they aren't crowded
+			// out when regular matches already fill the main budget.
+			const occupationNames = [
+				...occupations
+					.map((occupation) => occupation.rawName)
+					.slice(0, MAX_VACANCY_OCCUPATION_NAMES),
+				...(wildcardOccupations ?? [])
+					.map((occupation) => occupation.rawName)
+					.slice(0, MAX_WILDCARD_VACANCY_OCCUPATION_NAMES),
+			];
 			fetchKey = buildVacancyFetchKey({
 				occupationNames,
 				postcode: location.postcode,
