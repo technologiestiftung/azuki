@@ -15,6 +15,8 @@ interface UseFetchVacanciesOptions {
 	sharedVacancyParams?: SharedVacancyParams;
 }
 
+// Must stay in sync with the backend's `occupations` array cap
+// (see VacanciesRequestSchema in backend/src/schemas/vacancies.ts).
 const MAX_VACANCY_OCCUPATION_NAMES = 20;
 const MAX_WILDCARD_VACANCY_OCCUPATION_NAMES = 5;
 
