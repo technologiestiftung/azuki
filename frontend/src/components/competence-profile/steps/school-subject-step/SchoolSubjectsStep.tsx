@@ -11,7 +11,7 @@ import { SecondaryButton } from "../../../primitives/buttons/SecondaryButton";
 
 export function SchoolSubjectsStep() {
 	const profile = useAppStore((state) => state.profile);
-	const toggleSubject = useAppStore((state) => state.toggleSubject);
+	const { toggleSubject, removeCustomSubject } = useAppStore();
 	const addCustomSubject = useAppStore((state) => state.addCustomSubject);
 	const { goNext } = useFlowNavigation();
 	const customSubjectsSectionRef = useRef<HTMLDivElement>(null);
@@ -67,8 +67,9 @@ export function SchoolSubjectsStep() {
 									key={customSubject}
 									label={customSubject}
 									selected={profile.favoriteSubjects.includes(customSubject)}
-									onClick={() => toggleSubject(customSubject)}
+									onClick={() => removeCustomSubject(customSubject)}
 									ariaLabel={`${customSubject} ${content["schoolSubjects.pill.label.postfix"]}`}
+									removeButton
 								/>
 							))}
 							<PrimaryThemedButton

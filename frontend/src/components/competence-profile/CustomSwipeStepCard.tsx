@@ -17,7 +17,7 @@ export interface CustomSwipeStepCardProps {
 	stackGhostLayerScale: number;
 	items: string[];
 	isSelected: (item: string) => boolean;
-	onToggle: (item: string) => void;
+	onRemove: (item: string) => void;
 	onAddClick: () => void;
 	labels: CustomSwipeStepCardLabels;
 	illustrationSrc: string;
@@ -28,7 +28,7 @@ export function CustomSwipeStepCard({
 	stackGhostLayerScale,
 	items,
 	isSelected,
-	onToggle,
+	onRemove,
 	onAddClick,
 	labels,
 	illustrationSrc,
@@ -56,9 +56,10 @@ export function CustomSwipeStepCard({
 										key={item}
 										label={item}
 										selected={isSelected(item)}
-										onClick={() => onToggle(item)}
+										onClick={() => onRemove(item)}
 										ariaLabel={`${item} ${labels.pillAriaPostfix}`}
 										className="text-left w-fit"
+										removeButton
 									/>
 								))}
 							</ul>
