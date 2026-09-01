@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { unlock } from "../../api/client";
-import { PrimaryButton } from "../primitives/buttons/PrimaryButton";
+import { PrimaryThemedButton } from "../primitives/buttons/PrimaryThemedButton";
+import { content } from "../../content";
+import { TextInput } from "../primitives/text-inputs/TextInput";
 
 export const LoginScreen = () => {
 	const navigate = useNavigate();
@@ -29,19 +31,18 @@ export const LoginScreen = () => {
 	}
 
 	return (
-		<div className="flex flex-col items-center justify-center min-h-[100dvh] px-8">
+		<div className="flex flex-col items-center justify-center min-h-[100dvh] px-4">
 			<img
-				src="/illustrations/star.svg"
+				src="/illustrations/azuki-lockup.svg"
 				alt=""
-				className="w-32 h-32 object-contain mb-8"
+				className="h-[58px] object-contain mb-[130px]"
 			/>
-			<h1 className="text-3xl font-bold text-center mb-2">Azuki</h1>
-			<p className="text-base text-gray-500 text-center mb-8">
-				Bitte gib das Passwort ein, um fortzufahren.
+			<p className="text-xl text-sky-900 text-center mb-2">
+				{content["login.input.label"]}
 			</p>
 
-			<form onSubmit={handleSubmit} className="w-full max-w-xs space-y-4">
-				<input
+			<form onSubmit={handleSubmit} className="flex flex-col gap-6 w-full">
+				<TextInput
 					type="password"
 					name="password"
 					value={password}
@@ -49,24 +50,23 @@ export const LoginScreen = () => {
 						setPassword(e.target.value);
 						setError(false);
 					}}
+					onClearInput={() => {
+						setPassword("");
+						setError(false);
+					}}
 					placeholder="Passwort"
-					className={`w-full px-4 py-3 rounded-2xl border-2 text-base outline-none transition-colors focus:outline-none focus-visible:border-sky-300 ${
-						error ? "border-red-500" : "border-gray-200"
-					}`}
+					error={error}
+					errorMessage="Falsches Passwort"
 					autoFocus
+					submitDisabled={false}
 				/>
-				{error && (
-					<p className="text-sm text-red-500 text-center">
-						Falsches Passwort. Bitte versuche es erneut.
-					</p>
-				)}
-				<PrimaryButton
+				<PrimaryThemedButton
 					type="submit"
 					disabled={!password.trim() || loading}
 					className="w-full"
 				>
-					{loading ? "..." : "Weiter"}
-				</PrimaryButton>
+					{content["login.cta.label"]}
+				</PrimaryThemedButton>
 			</form>
 		</div>
 	);
