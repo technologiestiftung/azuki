@@ -112,6 +112,9 @@ export function ResultsPage() {
 		visibleOccupations.length > 0 ||
 		(showFavoritesOnly && favoritedWildcardOccupations.length > 0);
 
+	const hasActiveTagFilter =
+		tagFilter.appliedValue.selectedOccupationTypeTagIds.length > 0;
+
 	const occupationTypeTagChips = useMemo(
 		() => buildResultTagChips(occupations),
 		[occupations],
@@ -262,17 +265,17 @@ export function ResultsPage() {
 							{visibleOccupations.map((occupation: MatchedOccupation) => (
 								<ResultCard key={occupation.id} occupation={occupation} />
 							))}
-							{showFavoritesOnly ? (
-								favoritedWildcardOccupations.map((occupation) => (
-									<ResultCard
-										key={occupation.id}
-										occupation={occupation}
-										isWildcard
-									/>
-								))
-							) : (
-								<WildcardCarousel occupations={wildcardOccupations} />
-							)}
+							{showFavoritesOnly
+								? favoritedWildcardOccupations.map((occupation) => (
+										<ResultCard
+											key={occupation.id}
+											occupation={occupation}
+											isWildcard
+										/>
+									))
+								: !hasActiveTagFilter && (
+										<WildcardCarousel occupations={wildcardOccupations} />
+									)}
 							<BottomCard handleDownload={handleDownload} />
 							<div className="mt-7">
 								<ContactCard

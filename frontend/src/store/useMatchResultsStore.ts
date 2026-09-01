@@ -13,6 +13,7 @@ interface MatchResultsState {
 	occupationTypeTagFilterIds: string[];
 	vacanciesCount: number | undefined;
 	resultsListScrollTop: number;
+	wildcardCarouselScrollLeft: number;
 }
 
 interface MatchResultsActions {
@@ -28,6 +29,7 @@ interface MatchResultsActions {
 	clearSystemVacancyOccupationFilter: () => void;
 	setOccupationTypeTagFilterIds: (tagIds: string[]) => void;
 	setResultsListScrollTop: (value: number) => void;
+	setWildcardCarouselScrollLeft: (value: number) => void;
 }
 
 export const useMatchResultsStore = create<
@@ -43,6 +45,7 @@ export const useMatchResultsStore = create<
 			occupationTypeTagFilterIds: [],
 			vacanciesCount: undefined,
 			resultsListScrollTop: 0,
+			wildcardCarouselScrollLeft: 0,
 
 			setMatchResults: (results) =>
 				set((state) => {
@@ -130,6 +133,8 @@ export const useMatchResultsStore = create<
 				}),
 
 			setResultsListScrollTop: (value) => set({ resultsListScrollTop: value }),
+			setWildcardCarouselScrollLeft: (value) =>
+				set({ wildcardCarouselScrollLeft: value }),
 		}),
 		{
 			name: "azuki-match-results-store",
