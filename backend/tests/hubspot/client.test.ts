@@ -1,4 +1,4 @@
-import { afterEach, describe, expect, it, vi } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import type { ContactRequest } from "../../src/schemas/contact.js";
 import {
 	buildHubSpotFields,
@@ -9,8 +9,7 @@ import {
 	submitContactToHubSpot,
 } from "../../src/hubspot/client.js";
 
-const HUBSPOT_URL =
-	"https://api.hsforms.com/submissions/v3/integration/submit/8886739/c020e6fc-b891-44e3-ab7d-0ccede49b070";
+const HUBSPOT_URL = "https://api.hsforms.com/test-submit-url";
 
 const callRequest: ContactRequest = {
 	firstname: "Anna",
@@ -140,6 +139,10 @@ describe("buildHubSpotSubmitBody", () => {
 });
 
 describe("submitContactToHubSpot", () => {
+	beforeEach(() => {
+		vi.stubEnv("HUBSPOT_FORMS_SUBMIT_URL", HUBSPOT_URL);
+	});
+
 	afterEach(() => {
 		vi.unstubAllGlobals();
 		vi.unstubAllEnvs();
@@ -191,6 +194,17 @@ describe("submitContactToHubSpot", () => {
 		);
 
 		await expect(submitContactToHubSpot(callRequest)).rejects.toThrow();
+	});
+
+	it("throws when HUBSPOT_FORMS_SUBMIT_URL is not set", async () => {
+		vi.stubEnv("HUBSPOT_FORMS_SUBMIT_URL", "");
+		const fetchMock = vi.fn();
+		vi.stubGlobal("fetch", fetchMock);
+
+		await expect(submitContactToHubSpot(callRequest)).rejects.toThrow(
+			"HUBSPOT_FORMS_SUBMIT_URL must be set",
+		);
+		expect(fetchMock).not.toHaveBeenCalled();
 	});
 
 	it("skips the real request when HUBSPOT_MOCK_SUBMIT is true", async () => {

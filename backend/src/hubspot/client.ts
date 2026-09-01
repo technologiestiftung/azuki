@@ -1,7 +1,5 @@
 import type { ContactRequest } from "../schemas/contact.js";
 
-const HUBSPOT_FORMS_SUBMIT_URL =
-	"https://api.hsforms.com/submissions/v3/integration/submit/8886739/c020e6fc-b891-44e3-ab7d-0ccede49b070";
 const HUBSPOT_OBJECT_TYPE_ID = "0-1";
 const HUBSPOT_MARKETING_SUBSCRIPTION_TYPE_ID = 11024571;
 const HUBSPOT_LEGAL_CONSENT_FIELD_NAME = `LEGAL_CONSENT.subscription_type_${HUBSPOT_MARKETING_SUBSCRIPTION_TYPE_ID}`;
@@ -136,7 +134,12 @@ export async function submitContactToHubSpot(
 		return;
 	}
 
-	const res = await fetch(HUBSPOT_FORMS_SUBMIT_URL, {
+	const submitUrl = process.env.HUBSPOT_FORMS_SUBMIT_URL;
+	if (!submitUrl) {
+		throw new Error("HUBSPOT_FORMS_SUBMIT_URL must be set");
+	}
+
+	const res = await fetch(submitUrl, {
 		method: "POST",
 		headers: { "Content-Type": "application/json" },
 		body: JSON.stringify(body),
