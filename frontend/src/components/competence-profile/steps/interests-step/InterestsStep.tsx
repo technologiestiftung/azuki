@@ -7,7 +7,6 @@ import { interests } from "./interests";
 import { Pill } from "../../../primitives/buttons/Pill";
 import { PrimaryThemedButton } from "../../../primitives/buttons/PrimaryThemedButton";
 import { InputBottomSheet } from "../../../input-bottom-sheet/InputBottomSheet";
-import { SecondaryButton } from "../../../primitives/buttons/SecondaryButton";
 
 export function InterestsStep() {
 	const profile = useAppStore((state) => state.profile);
@@ -41,7 +40,7 @@ export function InterestsStep() {
 		>
 			<div className="flex flex-col gap-8">
 				{profile.customInterests && profile.customInterests.length === 0 && (
-					<SecondaryButton
+					<PrimaryThemedButton
 						className="text-lg"
 						ariaLabel={content["interests.addCustomInterestsButton.ariaLabel"]}
 						onClick={() => setInputSheetOpen(true)}
@@ -50,7 +49,7 @@ export function InterestsStep() {
 							<img src="/icons/plus-black.svg" alt="" className="w-6 h-6" />
 							{content["interests.addCustomInterestsButton.label"]}
 						</div>
-					</SecondaryButton>
+					</PrimaryThemedButton>
 				)}
 				{profile.customInterests.length > 0 && (
 					<div ref={customInterestsSectionRef} className="scroll-mt-4">
