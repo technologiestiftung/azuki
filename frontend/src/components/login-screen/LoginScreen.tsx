@@ -35,7 +35,7 @@ export const LoginScreen = () => {
 			<img
 				src="/illustrations/azuki-lockup.svg"
 				alt=""
-				className="h-[58px] object-contain mb-[130px]"
+				className="w-[146px] object-contain mb-[130px]"
 			/>
 			<p className="text-xl text-sky-900 text-center mb-2">
 				{content["login.input.label"]}
@@ -54,7 +54,7 @@ export const LoginScreen = () => {
 						setPassword("");
 						setError(false);
 					}}
-					placeholder="Passwort"
+					placeholder=""
 					error={error}
 					errorMessage="Falsches Passwort"
 					autoFocus
