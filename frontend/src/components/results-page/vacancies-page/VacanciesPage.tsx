@@ -126,8 +126,8 @@ export function VacanciesPage() {
 	);
 
 	const occupationFilterChips = useMemo(
-		() => buildOccupationFilterChips(occupations),
-		[occupations],
+		() => buildOccupationFilterChips(allOccupations),
+		[allOccupations],
 	);
 
 	const { scrollProgress, handleListScroll } = useResultsPageScrollProgress();

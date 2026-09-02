@@ -638,7 +638,6 @@ export const content = {
 	// Occupation Detail
 	"results.detail.salaryTitle": "Einstiegsgehalt",
 	"results.detail.salary.unknown": "Unbekannt",
-	"results.detail.loading": "Berufsdetails werden geladen…",
 	"results.detail.salaryInfo.title": "Einstiegsgehalt",
 	"results.detail.salaryInfo.description":
 		"Das Einstiegsgehalt ist das Geld, das du verdienst, wenn du nach der Ausbildung deinen ersten Job anfängst.",
@@ -719,7 +718,6 @@ export const content = {
 	"vacancies.published.oneDayAgo": "Vor 1 Tag veröffentlicht",
 	"vacancies.badge.new": "Neu",
 	// Vacancy Detail
-	"vacancies.detail.loading": "Stellendetails werden geladen…",
 	"vacancies.detail.notFound": "Diese Stelle wurde nicht gefunden.",
 	"vacancies.detail.loadError":
 		"Die Stellendetails konnten gerade nicht geladen werden. Versuch es später noch einmal.",

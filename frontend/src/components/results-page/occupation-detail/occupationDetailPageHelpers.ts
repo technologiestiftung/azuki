@@ -50,9 +50,7 @@ export function resolveDetailStatusMessage(detail: {
 	if (detail.error) {
 		return detail.error;
 	}
-	if (detail.loading && !detail.occupation) {
-		return content["results.detail.loading"];
-	}
+
 	return null;
 }
 
