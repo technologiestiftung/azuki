@@ -107,11 +107,9 @@ export function BottomSheet({
 
 		visualViewport.addEventListener("resize", update);
 		visualViewport.addEventListener("scroll", update);
-		window.addEventListener("resize", update);
 		return () => {
 			visualViewport.removeEventListener("resize", update);
 			visualViewport.removeEventListener("scroll", update);
-			window.removeEventListener("resize", update);
 		};
 	}, [visible]);
 
