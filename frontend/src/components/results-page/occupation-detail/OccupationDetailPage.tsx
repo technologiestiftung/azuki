@@ -259,6 +259,7 @@ export function OccupationDetailPage() {
 							occupationVacanciesCount={occupationVacanciesCount}
 							nextOccupationCards={nextOccupationCards}
 							isWildcard={isWildcard}
+							isShared={Boolean(shareState)}
 						/>
 					)}
 				</div>
