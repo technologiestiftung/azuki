@@ -33,7 +33,7 @@ export function InSchoolStep() {
 			animateEnter
 			showFooterBorder={false}
 		>
-			<div className="flex flex-col gap-3">
+			<div className="flex flex-col gap-3" role="radiogroup">
 				{inSchoolOptions.map((option) => (
 					<SelectableCardButton
 						label={option.label}
