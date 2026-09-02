@@ -720,7 +720,7 @@ export const content = {
 	// Vacancy Detail
 	"vacancies.detail.notFound": "Diese Stelle wurde nicht gefunden.",
 	"vacancies.detail.loadError":
-		"Die Stellendetails konnten gerade nicht geladen werden. Versuch es später noch einmal.",
+		"Die Stellendetails konnten gerade nicht geladen werden.",
 	"vacancies.detail.startTitle": "Beginn",
 	"vacancies.detail.employmentTypeTitle": "Anstellungsart",
 	"vacancies.detail.employmentType.fullTime": "Vollzeit",
@@ -744,8 +744,7 @@ export const content = {
 	"vacancies.detail.contactCard.description":
 		"Wir von PLAN A beraten dich zu <strong>Lebenslauf, Bewerbung</strong> und <strong>Vorstellungsgespräch</strong>. So wird Ausbildungssuche ganz einfach.",
 	"results.showAllLink": "Alle Stellen auf arbeitsagentur.de ansehen",
-	"results.fetchError":
-		"Die Stellen konnten gerade nicht geladen werden. Versuch es später noch einmal.",
+	"results.fetchError": "Die Stellen konnten gerade nicht geladen werden.",
 	"standort.label": "Standort:",
 	"standort.plzAriaLabel": "Postleitzahl",
 	"vacancies.noResults":

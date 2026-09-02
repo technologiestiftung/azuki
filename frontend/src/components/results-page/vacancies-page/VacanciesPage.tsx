@@ -14,6 +14,7 @@ import {
 	getOccupationFilterLabel,
 } from "../utils/occupationFilterChips";
 import { applyVacancyOccupationFilters } from "../utils/applyVacancyOccupationFilters";
+import { VacanciesEmptyState } from "./VacanciesEmptyState";
 import {
 	buildVacancyCards,
 	getVacancyEmptyState,
@@ -360,31 +361,7 @@ export function VacanciesPage() {
 						scrollProgress={scrollProgress}
 					/>
 					{showSimpleEmpty || showDetailedEmpty || sharedLoadError ? (
-						<div className="flex px-4 pb-4 items-center h-full">
-							<div className="flex flex-col items-center justify-center gap-5 px-5">
-								<div className="flex items-center justify-center object-contain p-2">
-									<img
-										src="/illustrations/no-results-star.svg"
-										alt=""
-										className="w-[200px]"
-									/>
-								</div>
-								{showSimpleEmpty ? (
-									<p className="text-lg font-medium text-gray-1000 text-center">
-										{content["vacancies.noResultsFound"]}
-									</p>
-								) : (
-									<div>
-										<h3 className="text-lg font-bold text-gray-1000 mb-1.5 text-center">
-											{content["vacancies.noResults.p1"]}
-										</h3>
-										<p className="text-lg font-medium text-gray-1000 text-center">
-											{content["vacancies.noResults.p2"]}
-										</p>
-									</div>
-								)}
-							</div>
-						</div>
+						<VacanciesEmptyState detailed={showDetailedEmpty} />
 					) : (
 						<div className="px-4 pb-4 space-y-3">
 							{vacancyCards.map(({ listKey, key, occupation, preview }) => (

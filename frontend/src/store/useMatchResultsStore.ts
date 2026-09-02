@@ -1,6 +1,7 @@
 import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
 import type { MatchResult, VacanciesResponse } from "../common";
+import { computeVacanciesCount } from "../utils/vacancies";
 
 export type ListFilterOrigin = "system" | "user";
 
@@ -12,6 +13,7 @@ interface MatchResultsState {
 	vacancyOccupationFilterOrigin: ListFilterOrigin | null;
 	occupationTypeTagFilterIds: string[];
 	vacanciesCount: number | undefined;
+	cachedVacancies: VacanciesResponse | null;
 	resultsListScrollTop: number;
 	wildcardCarouselScrollLeft: number;
 }
@@ -44,6 +46,7 @@ export const useMatchResultsStore = create<
 			vacancyOccupationFilterOrigin: null,
 			occupationTypeTagFilterIds: [],
 			vacanciesCount: undefined,
+			cachedVacancies: null,
 			resultsListScrollTop: 0,
 			wildcardCarouselScrollLeft: 0,
 
@@ -70,29 +73,18 @@ export const useMatchResultsStore = create<
 					vacancyOccupationFilterOrigin: null,
 					occupationTypeTagFilterIds: [],
 					vacanciesCount: undefined,
+					cachedVacancies: null,
 				}),
 
 			syncVacanciesCount: (vacancies) =>
-				set((state) => {
-					if (!state.matchResults || !vacancies) {
-						return { vacanciesCount: undefined };
-					}
-
-					const vacanciesByName = new Map(
-						vacancies.results.map((result) => [result.occupation, result]),
-					);
-
-					return {
-						vacanciesCount: state.matchResults.occupations.reduce(
-							(count, occupation) => {
-								const previews =
-									vacanciesByName.get(occupation.rawName)?.previews.length ?? 0;
-								return count + previews;
-							},
-							0,
-						),
-					};
-				}),
+				set((state) => ({
+					cachedVacancies: vacancies,
+					vacanciesCount: computeVacanciesCount(
+						state.matchResults,
+						vacancies,
+						state.vacancyOccupationFilterIds,
+					),
+				})),
 
 			toggleFavorite: (occupationId) =>
 				set((state) => ({
@@ -111,11 +103,16 @@ export const useMatchResultsStore = create<
 				})),
 
 			setVacancyOccupationFilterIds: (occupationIds, origin = "user") =>
-				set({
+				set((state) => ({
 					vacancyOccupationFilterIds: occupationIds,
 					vacancyOccupationFilterOrigin:
 						occupationIds.length === 0 ? null : origin,
-				}),
+					vacanciesCount: computeVacanciesCount(
+						state.matchResults,
+						state.cachedVacancies,
+						occupationIds,
+					),
+				})),
 
 			clearSystemVacancyOccupationFilter: () =>
 				set((state) =>
@@ -123,6 +120,11 @@ export const useMatchResultsStore = create<
 						? {
 								vacancyOccupationFilterIds: [],
 								vacancyOccupationFilterOrigin: null,
+								vacanciesCount: computeVacanciesCount(
+									state.matchResults,
+									state.cachedVacancies,
+									[],
+								),
 							}
 						: {},
 				),

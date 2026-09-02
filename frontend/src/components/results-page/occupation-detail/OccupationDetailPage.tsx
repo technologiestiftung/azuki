@@ -37,6 +37,7 @@ import {
 	resolveHeroImageUrls,
 } from "./occupationDetailPageHelpers";
 import { WildcardPoolBadge } from "../WildcardPoolBadge";
+import { EmptyState } from "../EmptyState";
 import { isInWildcardPool } from "@azuki/shared";
 
 export function OccupationDetailPage() {
@@ -252,7 +253,7 @@ export function OccupationDetailPage() {
 						</h1>
 					</div>
 					{statusMessage ? (
-						<p className="px-[18px] text-lg text-sky-900">{statusMessage}</p>
+						<EmptyState message={statusMessage} />
 					) : (
 						<OccupationDetailBody
 							occupation={detail.occupation}
