@@ -262,38 +262,65 @@ export async function searchVacancies(
 	}
 }
 
+const JOBDETAILS_MAX_ATTEMPTS = 2;
+const JOBDETAILS_RETRY_DELAY_MS = 300;
+
+function sleep(ms: number): Promise<void> {
+	return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
 export async function getJobDetails(
 	referenznummer: string,
 ): Promise<VacancyDetail | null> {
 	const encoded = Buffer.from(referenznummer, "utf-8").toString("base64");
 
-	try {
-		const res = await fetch(`${JOBDETAILS_BASE}/${encoded}`, {
-			headers: { "X-API-Key": API_KEY },
-			signal: AbortSignal.timeout(REQUEST_TIMEOUT_MS),
-		});
+	for (let attempt = 1; attempt <= JOBDETAILS_MAX_ATTEMPTS; attempt++) {
+		try {
+			const res = await fetch(`${JOBDETAILS_BASE}/${encoded}`, {
+				headers: { "X-API-Key": API_KEY },
+				signal: AbortSignal.timeout(REQUEST_TIMEOUT_MS),
+			});
 
-		if (!res.ok) {
+			if (!res.ok) {
+				// Retry transient server-side failures, but not client errors
+				if (res.status >= 500 && attempt < JOBDETAILS_MAX_ATTEMPTS) {
+					console.error(
+						`Jobsuche jobdetails error for "${referenznummer}": ${res.status}, retrying`,
+					);
+					await sleep(JOBDETAILS_RETRY_DELAY_MS);
+					continue;
+				}
+				console.error(
+					`Jobsuche jobdetails error for "${referenznummer}": ${res.status}`,
+				);
+				return null;
+			}
+
+			const data = (await res.json()) as JobsucheJobDetails;
+			return toDetail(data, referenznummer);
+		} catch (err) {
+			let reason: string;
+			if (err instanceof Error && err.name === "TimeoutError") {
+				reason = "timeout";
+			} else if (err instanceof Error) {
+				reason = err.message;
+			} else {
+				reason = String(err);
+			}
+
+			if (attempt < JOBDETAILS_MAX_ATTEMPTS) {
+				console.error(
+					`Jobsuche jobdetails error for "${referenznummer}": ${reason}, retrying`,
+				);
+				await sleep(JOBDETAILS_RETRY_DELAY_MS);
+				continue;
+			}
 			console.error(
-				`Jobsuche jobdetails error for "${referenznummer}": ${res.status}`,
+				`Jobsuche jobdetails error for "${referenznummer}": ${reason}`,
 			);
 			return null;
 		}
-
-		const data = (await res.json()) as JobsucheJobDetails;
-		return toDetail(data, referenznummer);
-	} catch (err) {
-		let reason: string;
-		if (err instanceof Error && err.name === "TimeoutError") {
-			reason = "timeout";
-		} else if (err instanceof Error) {
-			reason = err.message;
-		} else {
-			reason = String(err);
-		}
-		console.error(
-			`Jobsuche jobdetails error for "${referenznummer}": ${reason}`,
-		);
-		return null;
 	}
+
+	return null;
 }
