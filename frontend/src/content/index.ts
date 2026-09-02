@@ -662,7 +662,7 @@ export const content = {
 		"Mit diesem Abschluss hast du gute Chancen auf einen Ausbildungsplatz. Hast du einen anderen Abschluss, kannst du es trotzdem schaffen – vielleicht musst du dann mehr Bewerbungen schreiben und es dauert länger bis du einen Platz findest.",
 	"results.detail.notFound": "Dieser Beruf wurde nicht gefunden.",
 	"results.detail.loadError":
-		"Die Berufsdetails konnten gerade nicht geladen werden.",
+		"Die Infos für diesen Beruf konnten gerade nicht geladen werden. Prüfe deine Internetverbindung und versuche es noch einmal.",
 	"results.share": "Teilen",
 	"results.download": "Download",
 	"results.detail.tasksTitle": "Typische Aufgaben",
@@ -720,7 +720,7 @@ export const content = {
 	// Vacancy Detail
 	"vacancies.detail.notFound": "Diese Stelle wurde nicht gefunden.",
 	"vacancies.detail.loadError":
-		"Die Stellendetails konnten gerade nicht geladen werden.",
+		"Die Infos für diese Stelle konnten gerade nicht geladen werden. Prüfe deine Internetverbindung und versuche es noch einmal.",
 	"vacancies.detail.startTitle": "Beginn",
 	"vacancies.detail.employmentTypeTitle": "Anstellungsart",
 	"vacancies.detail.employmentType.fullTime": "Vollzeit",
