@@ -231,7 +231,7 @@ export function VacanciesPage() {
 			? applyVacancyOccupationFilters(wildcardOccupations, {
 					filters: occupationFilter.appliedValue,
 				})
-			: wildcardOccupations;
+			: [];
 	}, [wildcardOccupations, occupationFilter.appliedValue]);
 	const wildcardVacancyCards = useMemo(
 		() =>
@@ -373,23 +373,16 @@ export function VacanciesPage() {
 									onToggleFavorite={() => toggleVacancyFavorite(key)}
 								/>
 							))}
-							{wildcardVacancyCards.length > 0 && (
-								<div className="space-y-3 pt-8">
-									<h2 className="text-2xl font-semibold text-sky-900 pb-2">
-										{content["vacancies.wildcard.title"]}
-									</h2>
-									{wildcardVacancyCards.map(
-										({ listKey, key, occupation, preview }) => (
-											<VacancyCard
-												key={listKey}
-												occupationName={occupation.name}
-												preview={preview}
-												isFavorite={favoriteVacancyKeySet.has(key)}
-												onToggleFavorite={() => toggleVacancyFavorite(key)}
-											/>
-										),
-									)}
-								</div>
+							{wildcardVacancyCards.map(
+								({ listKey, key, occupation, preview }) => (
+									<VacancyCard
+										key={listKey}
+										occupationName={occupation.name}
+										preview={preview}
+										isFavorite={favoriteVacancyKeySet.has(key)}
+										onToggleFavorite={() => toggleVacancyFavorite(key)}
+									/>
+								),
 							)}
 							<div className="flex flex-col gap-5 px-3 py-5 rounded-2xl border border-sky-100 bg-sky-50">
 								<div>

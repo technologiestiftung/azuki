@@ -16,22 +16,14 @@ export function computeVacanciesCount(
 	const filterSet =
 		filterOccupationIds.length > 0 ? new Set(filterOccupationIds) : null;
 	const occupations = filterSet
-		? matchResults.occupations.filter((occupation) =>
-				filterSet.has(occupation.id),
+		? [...matchResults.occupations, ...matchResults.wildcardOccupations].filter(
+				(occupation) => filterSet.has(occupation.id),
 			)
 		: matchResults.occupations;
-	const wildcardOccupations = filterSet
-		? matchResults.wildcardOccupations.filter((occupation) =>
-				filterSet.has(occupation.id),
-			)
-		: matchResults.wildcardOccupations;
 
-	return [...occupations, ...wildcardOccupations].reduce(
-		(count, occupation) => {
-			const previews =
-				vacanciesByName.get(occupation.rawName)?.previews.length ?? 0;
-			return count + previews;
-		},
-		0,
-	);
+	return occupations.reduce((count, occupation) => {
+		const previews =
+			vacanciesByName.get(occupation.rawName)?.previews.length ?? 0;
+		return count + previews;
+	}, 0);
 }

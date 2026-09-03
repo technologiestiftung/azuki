@@ -702,8 +702,6 @@ export const content = {
 	"results.detail.export.filenameFallback": "AzuKi-Beruf.pdf",
 	// Vacancies
 	"vacancies.title": "Freie Stellen für dich",
-	"vacancies.wildcard.title":
-		"Weitere Stellen, für die besonders viele Azubis gesucht werden",
 	"vacancies.share.ariaLabel": "Freie Stellen teilen",
 	"vacancies.share.title": "Freie Stellen für dich",
 	"vacancies.share.text": "Schau dir diese freien Ausbildungsstellen an.",
