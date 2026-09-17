@@ -267,5 +267,8 @@ export const content = {
 	results: {
 		title: "Deine Ergebnisse",
 		moreInfo: "Mehr erfahren",
+		errorTitle: "Deine Ergebnisse konnten nicht geladen werden.",
+		errorMessage:
+			"Bitte überprüfe deine Internetverbindung und versuche es erneut.",
 	},
 };
