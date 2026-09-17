@@ -3,7 +3,7 @@ import { Step } from "../types";
 import { content } from "../content/de";
 
 export function ResultsScreen() {
-	const { matchResults, profile } = useAppState();
+	const { matchResults, matchError, profile } = useAppState();
 	const dispatch = useAppDispatch();
 
 	const berufe = matchResults?.berufe ?? [];
@@ -52,6 +52,18 @@ export function ResultsScreen() {
 							</div>
 						</div>
 					))
+				) : matchError ? (
+					<div
+						className="rounded-3xl p-6"
+						style={{ backgroundColor: "var(--card-fill)" }}
+					>
+						<p className="text-body font-semibold text-red-500 mb-2">
+							{content.results.errorTitle}
+						</p>
+						<p className="text-caption text-gray-500">
+							{content.results.errorMessage}
+						</p>
+					</div>
 				) : (
 					<div
 						className="rounded-3xl p-6"

@@ -18,6 +18,7 @@ interface AppState {
 	currentStep: Step;
 	profile: UserProfile;
 	matchResults: MatchResult | null;
+	matchError: boolean;
 	strengthSubIndex: number;
 	noGoSubIndex: number;
 	workPrefSubIndex: number;
@@ -37,6 +38,7 @@ type Action =
 	| { type: "SET_WORK_PREFERENCE"; id: string; choice: WorkPreferenceChoice }
 	| { type: "SET_NOGO"; id: string; answer: NoGoAnswer }
 	| { type: "SET_MATCH_RESULTS"; results: MatchResult }
+	| { type: "SET_MATCH_ERROR"; value: boolean }
 	| { type: "SET_STRENGTH_SUB_INDEX"; index: number }
 	| { type: "SET_NOGO_SUB_INDEX"; index: number }
 	| { type: "SET_WORK_PREF_SUB_INDEX"; index: number };
@@ -74,6 +76,7 @@ const initialState: AppState = {
 	currentStep: Step.Login,
 	profile: initialProfile,
 	matchResults: null,
+	matchError: false,
 	strengthSubIndex: 0,
 	noGoSubIndex: 0,
 	workPrefSubIndex: 0,
@@ -179,7 +182,10 @@ function reducer(state: AppState, action: Action): AppState {
 			};
 
 		case "SET_MATCH_RESULTS":
-			return { ...state, matchResults: action.results };
+			return { ...state, matchResults: action.results, matchError: false };
+
+		case "SET_MATCH_ERROR":
+			return { ...state, matchError: action.value };
 
 		case "SET_STRENGTH_SUB_INDEX":
 			return { ...state, strengthSubIndex: action.index };

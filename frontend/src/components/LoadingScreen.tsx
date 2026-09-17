@@ -20,6 +20,7 @@ export function LoadingScreen() {
 				dispatch({ type: "SET_MATCH_RESULTS", results: result });
 			} catch (err) {
 				console.error("Match API error:", err);
+				dispatch({ type: "SET_MATCH_ERROR", value: true });
 			}
 		};
 
