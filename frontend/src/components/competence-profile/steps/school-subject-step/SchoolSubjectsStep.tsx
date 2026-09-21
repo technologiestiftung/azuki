@@ -7,11 +7,10 @@ import { categories } from "./school-subjects";
 import { Pill } from "../../../primitives/buttons/Pill";
 import { PrimaryThemedButton } from "../../../primitives/buttons/PrimaryThemedButton";
 import { InputBottomSheet } from "../../../input-bottom-sheet/InputBottomSheet";
-import { SecondaryButton } from "../../../primitives/buttons/SecondaryButton";
 
 export function SchoolSubjectsStep() {
 	const profile = useAppStore((state) => state.profile);
-	const toggleSubject = useAppStore((state) => state.toggleSubject);
+	const { toggleSubject, removeCustomSubject } = useAppStore();
 	const addCustomSubject = useAppStore((state) => state.addCustomSubject);
 	const { goNext } = useFlowNavigation();
 	const customSubjectsSectionRef = useRef<HTMLDivElement>(null);
@@ -43,7 +42,7 @@ export function SchoolSubjectsStep() {
 		>
 			<div className="flex flex-col gap-8">
 				{profile.customSubjects && profile.customSubjects.length === 0 && (
-					<SecondaryButton
+					<PrimaryThemedButton
 						className="text-lg"
 						ariaLabel={
 							content["schoolSubjects.addCustomSubjectButton.ariaLabel"]
@@ -54,7 +53,7 @@ export function SchoolSubjectsStep() {
 							<img src="/icons/plus-black.svg" alt="" className="w-6 h-6" />
 							{content["schoolSubjects.addCustomSubjectButton.label"]}
 						</div>
-					</SecondaryButton>
+					</PrimaryThemedButton>
 				)}
 				{profile.customSubjects && profile.customSubjects.length > 0 && (
 					<div ref={customSubjectsSectionRef} className="scroll-mt-4">
@@ -67,8 +66,9 @@ export function SchoolSubjectsStep() {
 									key={customSubject}
 									label={customSubject}
 									selected={profile.favoriteSubjects.includes(customSubject)}
-									onClick={() => toggleSubject(customSubject)}
+									onClick={() => removeCustomSubject(customSubject)}
 									ariaLabel={`${customSubject} ${content["schoolSubjects.pill.label.postfix"]}`}
+									removeButton
 								/>
 							))}
 							<PrimaryThemedButton

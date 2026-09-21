@@ -1,6 +1,8 @@
 import {
 	cloneElement,
 	isValidElement,
+	useEffect,
+	useRef,
 	type ReactElement,
 	type ReactNode,
 } from "react";
@@ -78,18 +80,33 @@ export function FormFieldset({
 	id,
 }: FormFieldsetProps) {
 	const errorId = id ? `${id}-error` : undefined;
+	const fieldsetRef = useRef<HTMLFieldSetElement>(null);
+
+	useEffect(() => {
+		// Safari can cache a stale (too-tall) intrinsic height for a <fieldset>
+		// rendered while an ancestor (e.g. a bottom sheet) is still animating in.
+		// Mutating its child list once forces WebKit to recompute the real height.
+		const fieldset = fieldsetRef.current;
+		if (!fieldset) {
+			return;
+		}
+		const probe = document.createElement("span");
+		fieldset.appendChild(probe);
+		void fieldset.offsetHeight;
+		probe.remove();
+	}, []);
 
 	return (
 		<div className={`flex flex-col gap-1.5 ${className}`}>
 			<fieldset
-				className="flex flex-col gap-1.5"
+				ref={fieldsetRef}
 				aria-describedby={error && errorId ? errorId : undefined}
 				aria-invalid={error ? true : undefined}
 			>
 				<legend className={`${labelClassName} mb-1.5 ${legendClassName}`}>
 					{legend}
 				</legend>
-				{children}
+				<div className="flex flex-col gap-1.5">{children}</div>
 			</fieldset>
 			{error ? <FieldError id={errorId}>{error}</FieldError> : null}
 		</div>

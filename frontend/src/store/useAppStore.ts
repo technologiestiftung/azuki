@@ -79,19 +79,25 @@ interface AppActions {
 	toggleWorkExpectation: (value: string) => void;
 	toggleInterest: (interest: string) => void;
 	addCustomInterest: (interest: string) => void;
+	removeCustomInterest: (interest: string) => void;
 	addPreferredJobs: (preferredJobs: string[]) => void;
 	togglePreferredJob: (preferredJob: string) => void;
+	removePreferredJob: (preferredJob: string) => void;
 	addCustomSubject: (subject: string) => void;
+	removeCustomSubject: (subject: string) => void;
 	addCustomWorkExpectation: (workExpectation: string) => void;
 	addCustomStrength: (strength: string) => void;
 	toggleCustomStrength: (strength: string) => void;
+	removeCustomStrength: (strength: string) => void;
 	setStrength: (id: string, value: number) => void;
 	addPracticalExperience: (entry: PracticalExperienceInput) => void;
 	togglePracticalExperience: (id: string) => void;
+	removePracticalExperience: (id: string) => void;
 	setWorkPreference: (id: string, choice: WorkPreferenceChoice | null) => void;
 	setNoGo: (id: string, answer: NoGoAnswer | null) => void;
 	addCustomNoGo: (noGo: string) => void;
 	toggleCustomNoGo: (noGo: string) => void;
+	removeCustomNoGo: (noGo: string) => void;
 	setVacancies: (results: VacanciesResponse | null) => void;
 	setVacanciesFetchError: (error: string | null) => void;
 	setLocation: (location: Partial<Location>) => void;
@@ -138,6 +144,19 @@ export const useAppStore = create<AppState & AppActions>()(
 					clearMatchResults();
 					return {
 						profile: { ...state.profile, favoriteSubjects: subjects },
+					};
+				}),
+			removeCustomSubject: (subject) =>
+				set((state) => {
+					const favoriteSubjects = state.profile.favoriteSubjects.filter(
+						(favoriteSubject: string) => favoriteSubject !== subject,
+					);
+					const customSubjects = (state.profile.customSubjects ?? []).filter(
+						(customSubject: string) => customSubject !== subject,
+					);
+					clearMatchResults();
+					return {
+						profile: { ...state.profile, favoriteSubjects, customSubjects },
 					};
 				}),
 			toggleWorkExpectation: (value) =>
@@ -202,6 +221,18 @@ export const useAppStore = create<AppState & AppActions>()(
 				});
 			},
 
+			removePreferredJob: (preferredJob) => {
+				clearMatchResults();
+				set((state) => {
+					const preferredJobs = (state.profile.preferredJobs ?? []).filter(
+						(job) => job !== preferredJob,
+					);
+					return {
+						profile: { ...state.profile, preferredJobs },
+					};
+				});
+			},
+
 			addCustomInterest: (interest) => {
 				clearMatchResults();
 				set((state) => ({
@@ -212,6 +243,20 @@ export const useAppStore = create<AppState & AppActions>()(
 					},
 				}));
 			},
+
+			removeCustomInterest: (interest) =>
+				set((state) => {
+					const interests = state.profile.interests.filter(
+						(value: string) => value !== interest,
+					);
+					const customInterests = state.profile.customInterests.filter(
+						(value: string) => value !== interest,
+					);
+					clearMatchResults();
+					return {
+						profile: { ...state.profile, interests, customInterests },
+					};
+				}),
 
 			addCustomWorkExpectation: (workExpectation) => {
 				clearMatchResults();
@@ -263,6 +308,26 @@ export const useAppStore = create<AppState & AppActions>()(
 						profile: {
 							...state.profile,
 							selectedCustomStrengths: selected,
+						},
+					};
+				});
+			},
+
+			removeCustomStrength: (strength) => {
+				clearMatchResults();
+				set((state) => {
+					const customStrengths = state.profile.customStrengths.filter(
+						(value) => value !== strength,
+					);
+					const selectedCustomStrengths =
+						state.profile.selectedCustomStrengths.filter(
+							(value) => value !== strength,
+						);
+					return {
+						profile: {
+							...state.profile,
+							customStrengths,
+							selectedCustomStrengths,
 						},
 					};
 				});
@@ -330,6 +395,27 @@ export const useAppStore = create<AppState & AppActions>()(
 				});
 			},
 
+			removePracticalExperience: (id) => {
+				clearMatchResults();
+				set((state) => {
+					const practicalExperiences =
+						state.profile.practicalExperiences.filter(
+							(entry) => entry.id !== id,
+						);
+					const selectedPracticalExperienceIds =
+						state.profile.selectedPracticalExperienceIds.filter(
+							(entryId) => entryId !== id,
+						);
+					return {
+						profile: {
+							...state.profile,
+							practicalExperiences,
+							selectedPracticalExperienceIds,
+						},
+					};
+				});
+			},
+
 			setWorkPreference: (id, choice) => {
 				clearMatchResults();
 				set((state) => ({
@@ -380,6 +466,19 @@ export const useAppStore = create<AppState & AppActions>()(
 							...state.profile,
 							noGos: { ...state.profile.noGos, [noGo]: next },
 						},
+					};
+				});
+			},
+
+			removeCustomNoGo: (noGo) => {
+				clearMatchResults();
+				set((state) => {
+					const customNoGos = state.profile.customNoGos.filter(
+						(value) => value !== noGo,
+					);
+					const noGos = { ...state.profile.noGos, [noGo]: null };
+					return {
+						profile: { ...state.profile, customNoGos, noGos },
 					};
 				});
 			},

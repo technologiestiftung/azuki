@@ -1,6 +1,10 @@
 import { workPreferencePairs } from "./work-preference-pairs";
 
 export const content = {
+	// login screen
+	"login.input.label": "Bitte gib das Passwort ein",
+	"login.cta.label": "Starten",
+	"login.error.message": "Falsches Passwort",
 	// Profile
 	"profile.title": "Das bist du",
 	"profile.topOccupationsTitle": "Deine Top-Berufe",
@@ -583,6 +587,8 @@ export const content = {
 		"Bitte gib dein Alter an. Wir müssen dies aus rechtlichen Gründen für die Kontaktaufnahme wissen.",
 	"results.contactCard.bottomSheet.birthdate.error":
 		"Bitte gib dein Geburtsdatum an.",
+	"results.contactCard.bottomSheet.birthdate.mismatchError":
+		"Dein Geburtsdatum passt nicht zu deiner Altersangabe.",
 	"results.contactCard.bottomSheet.contactType.error":
 		"Bitte wähle einen Kontaktweg aus.",
 	"results.contactCard.bottomSheet.phonenumber.error":
@@ -729,6 +735,8 @@ export const content = {
 	"vacancies.detail.employmentType.partTime": "Teilzeit",
 	"vacancies.detail.educationLevel.fachgebundeneHochschulreife":
 		"Fachgebundene Hochschulreife",
+	"vacancies.detail.schoolDegreeInfo.description":
+		"Du hast gute Chancen mit diesem Abschluss. Hast du einen anderen Abschluss? Bewirb dich trotzdem. Betriebe schreiben oft nur ihren Wunsch auf, manchmal reichen auch andere Abschlüsse.",
 	"vacancies.detail.locationTitle": "Arbeitsort",
 	"vacancies.detail.location.showMore": "+{count} weitere Arbeitsorte",
 	"vacancies.detail.location.showMore.one": "1 weiterer Arbeitsort",

@@ -7,12 +7,14 @@ import { interests } from "./interests";
 import { Pill } from "../../../primitives/buttons/Pill";
 import { PrimaryThemedButton } from "../../../primitives/buttons/PrimaryThemedButton";
 import { InputBottomSheet } from "../../../input-bottom-sheet/InputBottomSheet";
-import { SecondaryButton } from "../../../primitives/buttons/SecondaryButton";
 
 export function InterestsStep() {
 	const profile = useAppStore((state) => state.profile);
 	const toggleInterest = useAppStore((state) => state.toggleInterest);
 	const addCustomInterest = useAppStore((state) => state.addCustomInterest);
+	const removeCustomInterest = useAppStore(
+		(state) => state.removeCustomInterest,
+	);
 	const { goNext } = useFlowNavigation();
 	const [inputSheetOpen, setInputSheetOpen] = useState(false);
 	const customInterestsSectionRef = useRef<HTMLDivElement>(null);
@@ -41,7 +43,7 @@ export function InterestsStep() {
 		>
 			<div className="flex flex-col gap-8">
 				{profile.customInterests && profile.customInterests.length === 0 && (
-					<SecondaryButton
+					<PrimaryThemedButton
 						className="text-lg"
 						ariaLabel={content["interests.addCustomInterestsButton.ariaLabel"]}
 						onClick={() => setInputSheetOpen(true)}
@@ -50,7 +52,7 @@ export function InterestsStep() {
 							<img src="/icons/plus-black.svg" alt="" className="w-6 h-6" />
 							{content["interests.addCustomInterestsButton.label"]}
 						</div>
-					</SecondaryButton>
+					</PrimaryThemedButton>
 				)}
 				{profile.customInterests.length > 0 && (
 					<div ref={customInterestsSectionRef} className="scroll-mt-4">
@@ -63,8 +65,9 @@ export function InterestsStep() {
 									key={interest}
 									label={interest}
 									selected={profile.interests.includes(interest)}
-									onClick={() => toggleInterest(interest)}
+									onClick={() => removeCustomInterest(interest)}
 									ariaLabel={`${interest} ${content["interests.skipButton.pill.label.postfix"]}`}
+									removeButton
 								/>
 							))}
 							<PrimaryThemedButton
