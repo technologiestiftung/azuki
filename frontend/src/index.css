@@ -116,8 +116,8 @@
 	}
 
 	body {
-		@apply bg-gray-200;
-		@apply text-sky-1000;
+		@apply bg-sky-shade-20;
+		@apply text-sky-900;
 	}
 }
 

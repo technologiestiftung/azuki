@@ -142,10 +142,10 @@ export function LocationFilterBottomSheet({
 		>
 			<div className="flex flex-col min-w-0 gap-2 px-4 pt-4 pb-8">
 				<div
-					className={`flex flex-col justify-center items-center gap-2 min-h-[52px] p-3 w-full rounded-xl border-2 text-lg font-medium ${
+					className={`flex flex-col justify-center items-center gap-2 min-h-[52px] p-3 w-full rounded-xl text-lg ${
 						regionSelected
-							? "border-sky-300 bg-sky-50 text-sky-700"
-							: "border-gray-200 bg-transparent text-gray-700"
+							? "border-2 border-sky-300 bg-sky-50 text-sky-700"
+							: "text-sky-shade-160"
 					}`}
 				>
 					{selectedLocationDisplay}
@@ -170,7 +170,7 @@ export function LocationFilterBottomSheet({
 				)}
 				{regionSelected && (
 					<>
-						<div className="text-lg text-gray-400 pt-4 px-1">
+						<div className="text-lg text-sky-shade-70 pt-4 px-1">
 							{content["results.filter.location.distance.title"]}
 						</div>
 						<div className="flex gap-x-2 gap-y-3 flex-wrap pt-2">

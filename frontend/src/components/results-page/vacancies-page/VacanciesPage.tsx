@@ -14,6 +14,7 @@ import {
 	getOccupationFilterLabel,
 } from "../utils/occupationFilterChips";
 import { applyVacancyOccupationFilters } from "../utils/applyVacancyOccupationFilters";
+import { VacanciesEmptyState } from "./VacanciesEmptyState";
 import {
 	buildVacancyCards,
 	getVacancyEmptyState,
@@ -47,9 +48,11 @@ const DEFAULT_OCCUPATION_FILTERS: OccupationsFilterState = {
 function getVacancyOccupationFilterIdsFromStore(): number[] {
 	const { vacancyOccupationFilterIds, matchResults } =
 		useMatchResultsStore.getState();
-	const validOccupationIds = new Set(
-		matchResults?.occupations.map((occupation) => occupation.id) ?? [],
-	);
+	const validOccupationIds = new Set([
+		...(matchResults?.occupations.map((occupation) => occupation.id) ?? []),
+		...(matchResults?.wildcardOccupations.map((occupation) => occupation.id) ??
+			[]),
+	]);
 	return vacancyOccupationFilterIds.filter((id) => validOccupationIds.has(id));
 }
 
@@ -81,6 +84,14 @@ export function VacanciesPage() {
 	const showBottomNav = shouldShowBottomNav(inSchool, searchParams);
 
 	const occupations = matchResults?.occupations ?? [];
+	const wildcardOccupations = useMemo(
+		() => matchResults?.wildcardOccupations ?? [],
+		[matchResults?.wildcardOccupations],
+	);
+	const allOccupations = useMemo(
+		() => [...occupations, ...wildcardOccupations],
+		[occupations, wildcardOccupations],
+	);
 	const setVacancyOccupationFilterIds = useMatchResultsStore(
 		(state) => state.setVacancyOccupationFilterIds,
 	);
@@ -116,8 +127,8 @@ export function VacanciesPage() {
 	);
 
 	const occupationFilterChips = useMemo(
-		() => buildOccupationFilterChips(occupations),
-		[occupations],
+		() => buildOccupationFilterChips(allOccupations),
+		[allOccupations],
 	);
 
 	const { scrollProgress, handleListScroll } = useResultsPageScrollProgress();
@@ -211,21 +222,28 @@ export function VacanciesPage() {
 		],
 	);
 
-	const wildcardOccupations = useMemo(
-		() => matchResults?.wildcardOccupations ?? [],
-		[matchResults?.wildcardOccupations],
-	);
+	const visibleWildcardOccupations = useMemo(() => {
+		const selectedIds = occupationFilter.appliedValue.selectedOccupationIds;
+		const hasWildcardSelection = selectedIds.some((id) =>
+			wildcardOccupations.some((occupation) => occupation.id === id),
+		);
+		return hasWildcardSelection
+			? applyVacancyOccupationFilters(wildcardOccupations, {
+					filters: occupationFilter.appliedValue,
+				})
+			: [];
+	}, [wildcardOccupations, occupationFilter.appliedValue]);
 	const wildcardVacancyCards = useMemo(
 		() =>
 			buildVacancyCards({
-				occupations: wildcardOccupations,
+				occupations: visibleWildcardOccupations,
 				vacanciesByName,
 				showFavoritesOnly,
 				favoriteVacancyKeySet,
 				listKeyPrefix: "wildcard-",
 			}),
 		[
-			wildcardOccupations,
+			visibleWildcardOccupations,
 			vacanciesByName,
 			showFavoritesOnly,
 			favoriteVacancyKeySet,
@@ -256,9 +274,13 @@ export function VacanciesPage() {
 	);
 	const hasLoadedVacancies = vacancies !== null && fetchError === null;
 	const noVacancyResults =
-		fetchError !== null || (hasLoadedVacancies && vacancyCards.length === 0);
+		fetchError !== null ||
+		(hasLoadedVacancies &&
+			vacancyCards.length === 0 &&
+			wildcardVacancyCards.length === 0);
 	const { showSimpleEmpty, showDetailedEmpty } = getVacancyEmptyState({
-		visibleOccupationCount: visibleOccupations.length,
+		visibleOccupationCount:
+			visibleOccupations.length + visibleWildcardOccupations.length,
 		locationFilterApplied,
 		showFavoritesOnly,
 		loading,
@@ -324,7 +346,7 @@ export function VacanciesPage() {
 							occupationFilter.appliedValue.selectedOccupationIds
 						}
 						resolveOccupationFilterLabel={(id) =>
-							getOccupationFilterLabel(id, occupations)
+							getOccupationFilterLabel(id, allOccupations)
 						}
 						occupationFilterTitle={
 							content["vacancies.filter.occupations.title.short"]
@@ -339,31 +361,7 @@ export function VacanciesPage() {
 						scrollProgress={scrollProgress}
 					/>
 					{showSimpleEmpty || showDetailedEmpty || sharedLoadError ? (
-						<div className="flex px-4 pb-4 items-center h-full">
-							<div className="flex flex-col items-center justify-center gap-5 px-5">
-								<div className="flex items-center justify-center object-contain p-2">
-									<img
-										src="/illustrations/no-results-star.svg"
-										alt=""
-										className="w-[200px]"
-									/>
-								</div>
-								{showSimpleEmpty ? (
-									<p className="text-lg font-medium text-gray-1000 text-center">
-										{content["vacancies.noResultsFound"]}
-									</p>
-								) : (
-									<div>
-										<h3 className="text-lg font-bold text-gray-1000 mb-1.5 text-center">
-											{content["vacancies.noResults.p1"]}
-										</h3>
-										<p className="text-lg font-medium text-gray-1000 text-center">
-											{content["vacancies.noResults.p2"]}
-										</p>
-									</div>
-								)}
-							</div>
-						</div>
+						<VacanciesEmptyState detailed={showDetailedEmpty} />
 					) : (
 						<div className="px-4 pb-4 space-y-3">
 							{vacancyCards.map(({ listKey, key, occupation, preview }) => (
@@ -375,30 +373,23 @@ export function VacanciesPage() {
 									onToggleFavorite={() => toggleVacancyFavorite(key)}
 								/>
 							))}
-							{wildcardVacancyCards.length > 0 && (
-								<div className="space-y-3 pt-8">
-									<h2 className="text-2xl font-semibold text-sky-900 pb-2">
-										{content["vacancies.wildcard.title"]}
-									</h2>
-									{wildcardVacancyCards.map(
-										({ listKey, key, occupation, preview }) => (
-											<VacancyCard
-												key={listKey}
-												occupationName={occupation.name}
-												preview={preview}
-												isFavorite={favoriteVacancyKeySet.has(key)}
-												onToggleFavorite={() => toggleVacancyFavorite(key)}
-											/>
-										),
-									)}
-								</div>
+							{wildcardVacancyCards.map(
+								({ listKey, key, occupation, preview }) => (
+									<VacancyCard
+										key={listKey}
+										occupationName={occupation.name}
+										preview={preview}
+										isFavorite={favoriteVacancyKeySet.has(key)}
+										onToggleFavorite={() => toggleVacancyFavorite(key)}
+									/>
+								),
 							)}
-							<div className="flex flex-col gap-5 px-3 py-5 rounded-2xl border border-sky-100 bg-sky-50">
+							<div className="flex flex-col gap-5 px-3 py-5 rounded-2xl bg-sky-50">
 								<div>
-									<h3 className="text-2xl font-semibold text-sky-1000 text-center mb-[7px]">
+									<h3 className="text-2xl font-semibold text-sky-900 text-center mb-[7px]">
 										{content["vacancies.bottomCard.title"]}
 									</h3>
-									<p className="text-lg text-sky-1000 text-center">
+									<p className="text-lg text-sky-900 text-center">
 										{content["vacancies.bottomCard.description"]}
 									</p>
 								</div>
@@ -409,7 +400,7 @@ export function VacanciesPage() {
 										aria-label={
 											content["vacancies.bottomCard.consultationCta.ariaLabel"]
 										}
-										className="h-12 flex items-center justify-center gap-2 w-full py-2 px-5 rounded-2xl text-base font-medium transition-colors bg-sky-300 text-sky-1000
+										className="h-12 flex items-center justify-center gap-2 w-full py-2 px-5 rounded-2xl text-base font-medium transition-colors bg-sky-300 text-sky-900
 									focus-visible:outline focus-visible:outline-2 focus-visible:outline-sky-500 active:bg-sky-200 active:text-sky-900 md:hover:bg-sky-200 md:hover:text-sky-900"
 									>
 										{content["vacancies.bottomCard.consultationCta"]}

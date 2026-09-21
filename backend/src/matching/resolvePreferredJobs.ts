@@ -267,12 +267,16 @@ export function getBestPreferredJobTierForOccupation(
 	return best;
 }
 
+// Must stay in sync with the max occupation count in VacanciesRequestSchema
+// (backend/src/schemas/vacancies.ts).
 const VACANCY_OCCUPATION_LIMIT = 20;
 const VACANCY_PREFERRED_RESOLVED_LIMIT = 5;
+const VACANCY_WILDCARD_LIMIT = 5;
 
 export function mergeVacancyOccupationNames(
 	preferredOccupationNames: string[],
 	matchOccupationNames: string[],
+	wildcardOccupationNames: string[] = [],
 ): string[] {
 	const merged: string[] = [];
 	const seen = new Set<string>();
@@ -301,6 +305,17 @@ export function mergeVacancyOccupationNames(
 		}
 		addName(name);
 		filled++;
+	}
+
+	// Wildcard names get their own reserved budget, on top of the regular
+	// limit, so they can never be crowded out by preferred/regular names.
+	let wildcardFilled = 0;
+	for (const name of wildcardOccupationNames) {
+		if (wildcardFilled >= VACANCY_WILDCARD_LIMIT) {
+			break;
+		}
+		addName(name);
+		wildcardFilled++;
 	}
 
 	return merged;

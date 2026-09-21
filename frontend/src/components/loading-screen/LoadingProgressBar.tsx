@@ -46,7 +46,7 @@ export function LoadingProgressBar({
 	return (
 		<div
 			ref={trackRef}
-			className="h-2 w-full rounded-full bg-gray-200 overflow-hidden"
+			className="h-2 w-full rounded-full bg-sky-shade-20 overflow-hidden"
 			role="progressbar"
 			aria-valuenow={0}
 			aria-valuemin={0}

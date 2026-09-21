@@ -44,6 +44,13 @@ export function ContactCardFormContent({
 	submitError,
 }: ContactCardFormContentProps) {
 	const hasAnyError = Object.keys(errors).length > 0;
+	const birthdateError = errors.birthdate
+		? content["results.contactCard.bottomSheet.birthdate.error"]
+		: undefined;
+	const birthdateMismatchError = errors.birthdateMismatch
+		? content["results.contactCard.bottomSheet.birthdate.mismatchError"]
+		: undefined;
+	const birthdateFieldError = birthdateError ?? birthdateMismatchError;
 
 	return (
 		<div className="flex flex-col gap-2 px-4 pb-5">
@@ -125,7 +132,7 @@ export function ContactCardFormContent({
 							checked={under16 === "yes"}
 							onChange={() => {
 								setUnder16("yes");
-								clearError("under16", "birthdate");
+								clearError("under16", "birthdate", "birthdateMismatch");
 							}}
 							label={content["results.contactCard.bottomSheet.under16.yes"]}
 						/>
@@ -137,7 +144,7 @@ export function ContactCardFormContent({
 							checked={under16 === "no"}
 							onChange={() => {
 								setUnder16("no");
-								clearError("under16", "birthdate");
+								clearError("under16", "birthdate", "birthdateMismatch");
 							}}
 							label={content["results.contactCard.bottomSheet.under16.no"]}
 						/>
@@ -146,22 +153,39 @@ export function ContactCardFormContent({
 						<FormField
 							label={content["results.contactCard.bottomSheet.birthdate.label"]}
 							htmlFor="birthdate"
-							error={
-								errors.birthdate
-									? content["results.contactCard.bottomSheet.birthdate.error"]
-									: undefined
-							}
+							error={birthdateFieldError}
 						>
 							<DateInput
 								id="birthdate"
 								name="birthdate"
-								onChange={() => clearError("birthdate")}
-								error={errors.birthdate}
+								onChange={() => clearError("birthdate", "birthdateMismatch")}
+								error={errors.birthdate || errors.birthdateMismatch}
 							/>
 						</FormField>
 					)}
 				</div>
-				<div className="flex flex-col gap-1.5">
+				<FormField
+					label={content["results.contactCard.bottomSheet.email.label"]}
+					htmlFor="email"
+					error={
+						errors.email
+							? content["results.contactCard.bottomSheet.email.error"]
+							: undefined
+					}
+				>
+					<FormTextInput
+						type="email"
+						autoComplete="email"
+						id="email"
+						name="email"
+						placeholder={
+							content["results.contactCard.bottomSheet.email.placeholder"]
+						}
+						onChange={() => clearError("email")}
+						error={errors.email}
+					/>
+				</FormField>
+				<div className="flex flex-col gap-6">
 					<FormFieldset
 						id="contactType"
 						legend={
@@ -242,28 +266,6 @@ export function ContactCardFormContent({
 							/>
 						</FormField>
 					)}
-
-					<FormField
-						label={content["results.contactCard.bottomSheet.email.label"]}
-						htmlFor="email"
-						error={
-							errors.email
-								? content["results.contactCard.bottomSheet.email.error"]
-								: undefined
-						}
-					>
-						<FormTextInput
-							type="email"
-							autoComplete="email"
-							id="email"
-							name="email"
-							placeholder={
-								content["results.contactCard.bottomSheet.email.placeholder"]
-							}
-							onChange={() => clearError("email")}
-							error={errors.email}
-						/>
-					</FormField>
 				</div>
 				<div className="flex flex-col gap-1.5">
 					<div className="flex items-start gap-2">
@@ -271,14 +273,14 @@ export function ContactCardFormContent({
 						<div className="flex flex-col gap-1">
 							<label
 								htmlFor="marketing"
-								className="text-base font-normal leading-[140%] text-gray-700 cursor-pointer"
+								className="text-base font-normal leading-[140%] text-sky-shade-170 cursor-pointer"
 							>
 								{content["results.contactCard.bottomSheet.marketing.label"]}
 							</label>
 						</div>
 					</div>
 					<span
-						className="text-sm font-normal text-gray-500 leading-[140%] [&_a]:underline"
+						className="text-sm font-normal text-sky-shade-120 leading-[140%] [&_a]:underline"
 						dangerouslySetInnerHTML={{
 							__html: content["results.contactCard.bottomSheet.privacy.notice"],
 						}}
@@ -305,7 +307,7 @@ export function ContactCardFormContent({
 						? content["results.contactCard.bottomSheet.submit.loading"]
 						: content["results.contactCard.bottomSheet.submit"]}
 				</PrimaryThemedButton>
-				<span className="text-sm font-normal flex items-center gap-1.5 text-gray-500 leading-[140%] justify-center">
+				<span className="text-sm font-normal flex items-center gap-1.5 text-sky-shade-110 leading-[140%] justify-center">
 					<img
 						src="/icons/lock-gray.svg"
 						alt={content["results.contactCard.bottomSheet.lock.alt"]}

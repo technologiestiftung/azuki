@@ -62,7 +62,10 @@ export function ProfileEditDialog({
 				</div>
 				<div className="flex flex-col gap-6 px-4">
 					<div className="flex flex-col gap-1.5">
-						<label htmlFor="name" className="text-lg font-medium text-gray-700">
+						<label
+							htmlFor="name"
+							className="text-lg font-medium text-sky-shade-170"
+						>
 							{content["profile.edit.input.name"]}
 						</label>
 						<TextInput
@@ -77,7 +80,7 @@ export function ProfileEditDialog({
 					</div>
 				</div>
 				<div className="flex flex-col gap-1.5">
-					<h3 className="text-lg font-medium text-gray-700 px-4">
+					<h3 className="text-lg font-medium text-sky-shade-170 px-4">
 						{content["profile.edit.images.label"]}
 					</h3>
 					<div className="flex gap-2 overflow-x-scroll [scrollbar-width:none] [&::-webkit-scrollbar]:hidden py-0.5">

@@ -495,9 +495,15 @@ export async function fetchVacancies(
 		distance?: number;
 		signal?: AbortSignal;
 		preferredJobs?: string[];
+		wildcardOccupations?: string[];
 	} = {},
 ): Promise<VacanciesResponse> {
-	const { distance, signal, preferredJobs = [] } = options;
+	const {
+		distance,
+		signal,
+		preferredJobs = [],
+		wildcardOccupations = [],
+	} = options;
 	if (USE_MOCK_RESULTS) {
 		return Promise.resolve(MOCK_VACANCIES_RESPONSE);
 	}
@@ -505,7 +511,13 @@ export async function fetchVacancies(
 	const res = await fetch(`${API_BASE}/vacancies`, {
 		method: "POST",
 		headers: headers(),
-		body: JSON.stringify({ postcode, occupations, preferredJobs, distance }),
+		body: JSON.stringify({
+			postcode,
+			occupations,
+			wildcardOccupations,
+			preferredJobs,
+			distance,
+		}),
 		signal,
 	});
 

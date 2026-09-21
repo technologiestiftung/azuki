@@ -46,7 +46,7 @@ export function SchoolDegreeStep() {
 			hasSkipButton={false}
 			subtitle={content["common.singleSelect.subline"]}
 		>
-			<div className="flex flex-col gap-3">
+			<div className="flex flex-col gap-3" role="radiogroup">
 				{filteredDegrees.map((degree) => (
 					<SelectableCardButton
 						key={degree.value}

@@ -1,6 +1,10 @@
 import { workPreferencePairs } from "./work-preference-pairs";
 
 export const content = {
+	// login screen
+	"login.input.label": "Bitte gib das Passwort ein",
+	"login.cta.label": "Starten",
+	"login.error.message": "Falsches Passwort",
 	// Profile
 	"profile.title": "Das bist du",
 	"profile.topOccupationsTitle": "Deine Top-Berufe",
@@ -512,7 +516,7 @@ export const content = {
 	"results.export.inDemandBanner":
 		"Bei diesen Berufen werden viele Azubis gesucht",
 	"results.export.footer.1": "Finde mehr Ausbildungsberufe auf",
-	"results.export.footer.2": "www.Azuki.de",
+	"results.export.footer.2": "www.azuki-app.de",
 	"results.export.page": "Seite {page} von {total}",
 	"results.export.ctaTitle": "Bewerben? Wie geht das eigentlich?",
 	"results.export.ctaBody.before": "Unser ",
@@ -531,7 +535,7 @@ export const content = {
 	"results.favorite.add": "Zu Favoriten hinzufügen",
 	"results.favorite.remove": "Aus Favoriten entfernen",
 	"results.card.score.label": "Passt zu",
-	"results.wildcard.badge": "Besonders gesucht",
+	"results.wildcard.badge": "Viele Azubis gesucht",
 	"results.wildcard.title": "Hier werden besonders viele Azubis gesucht",
 	"results.card.salary.monthly.label": "/ Monat",
 	"results.noResults":
@@ -583,6 +587,8 @@ export const content = {
 		"Bitte gib dein Alter an. Wir müssen dies aus rechtlichen Gründen für die Kontaktaufnahme wissen.",
 	"results.contactCard.bottomSheet.birthdate.error":
 		"Bitte gib dein Geburtsdatum an.",
+	"results.contactCard.bottomSheet.birthdate.mismatchError":
+		"Dein Geburtsdatum passt nicht zu deiner Altersangabe.",
 	"results.contactCard.bottomSheet.contactType.error":
 		"Bitte wähle einen Kontaktweg aus.",
 	"results.contactCard.bottomSheet.phonenumber.error":
@@ -638,7 +644,6 @@ export const content = {
 	// Occupation Detail
 	"results.detail.salaryTitle": "Einstiegsgehalt",
 	"results.detail.salary.unknown": "Unbekannt",
-	"results.detail.loading": "Berufsdetails werden geladen…",
 	"results.detail.salaryInfo.title": "Einstiegsgehalt",
 	"results.detail.salaryInfo.description":
 		"Das Einstiegsgehalt ist das Geld, das du verdienst, wenn du nach der Ausbildung deinen ersten Job anfängst.",
@@ -663,7 +668,7 @@ export const content = {
 		"Mit diesem Abschluss hast du gute Chancen auf einen Ausbildungsplatz. Hast du einen anderen Abschluss, kannst du es trotzdem schaffen – vielleicht musst du dann mehr Bewerbungen schreiben und es dauert länger bis du einen Platz findest.",
 	"results.detail.notFound": "Dieser Beruf wurde nicht gefunden.",
 	"results.detail.loadError":
-		"Die Berufsdetails konnten gerade nicht geladen werden.",
+		"Die Infos für diesen Beruf konnten gerade nicht geladen werden. Prüfe deine Internetverbindung und versuche es noch einmal.",
 	"results.share": "Teilen",
 	"results.download": "Download",
 	"results.detail.tasksTitle": "Typische Aufgaben",
@@ -703,8 +708,6 @@ export const content = {
 	"results.detail.export.filenameFallback": "AzuKi-Beruf.pdf",
 	// Vacancies
 	"vacancies.title": "Freie Stellen für dich",
-	"vacancies.wildcard.title":
-		"Weitere Stellen, für die besonders viele Azubis gesucht werden",
 	"vacancies.share.ariaLabel": "Freie Stellen teilen",
 	"vacancies.share.title": "Freie Stellen für dich",
 	"vacancies.share.text": "Schau dir diese freien Ausbildungsstellen an.",
@@ -719,16 +722,17 @@ export const content = {
 	"vacancies.published.oneDayAgo": "Vor 1 Tag veröffentlicht",
 	"vacancies.badge.new": "Neu",
 	// Vacancy Detail
-	"vacancies.detail.loading": "Stellendetails werden geladen…",
 	"vacancies.detail.notFound": "Diese Stelle wurde nicht gefunden.",
 	"vacancies.detail.loadError":
-		"Die Stellendetails konnten gerade nicht geladen werden. Versuch es später noch einmal.",
+		"Die Infos für diese Stelle konnten gerade nicht geladen werden. Prüfe deine Internetverbindung und versuche es noch einmal.",
 	"vacancies.detail.startTitle": "Beginn",
 	"vacancies.detail.employmentTypeTitle": "Anstellungsart",
 	"vacancies.detail.employmentType.fullTime": "Vollzeit",
 	"vacancies.detail.employmentType.partTime": "Teilzeit",
 	"vacancies.detail.educationLevel.fachgebundeneHochschulreife":
 		"Fachgebundene Hochschulreife",
+	"vacancies.detail.schoolDegreeInfo.description":
+		"Du hast gute Chancen mit diesem Abschluss. Hast du einen anderen Abschluss? Bewirb dich trotzdem. Betriebe schreiben oft nur ihren Wunsch auf, manchmal reichen auch andere Abschlüsse.",
 	"vacancies.detail.locationTitle": "Arbeitsort",
 	"vacancies.detail.location.showMore": "+{count} weitere Arbeitsorte",
 	"vacancies.detail.location.showMore.one": "1 weiterer Arbeitsort",
@@ -746,8 +750,7 @@ export const content = {
 	"vacancies.detail.contactCard.description":
 		"Wir von PLAN A beraten dich zu <strong>Lebenslauf, Bewerbung</strong> und <strong>Vorstellungsgespräch</strong>. So wird Ausbildungssuche ganz einfach.",
 	"results.showAllLink": "Alle Stellen auf arbeitsagentur.de ansehen",
-	"results.fetchError":
-		"Die Stellen konnten gerade nicht geladen werden. Versuch es später noch einmal.",
+	"results.fetchError": "Die Stellen konnten gerade nicht geladen werden.",
 	"standort.label": "Standort:",
 	"standort.plzAriaLabel": "Postleitzahl",
 	"vacancies.noResults":

@@ -52,6 +52,16 @@ const OVERLAY_ILLUSTRATIONS: Partial<
 	},
 } as const;
 
+const ALL_ILLUSTRATION_SRCS = Array.from(
+	new Set([
+		"/illustrations/work-preferences/star.svg",
+		"/illustrations/work-preferences/clock.svg",
+		...Object.values(OVERLAY_ILLUSTRATIONS).flatMap((choices) =>
+			[...(choices?.a ?? []), ...(choices?.b ?? [])].map(({ src }) => src),
+		),
+	]),
+);
+
 export function WorkPreferencesStep() {
 	const { pathname, hash } = useLocation();
 	const navigate = useNavigate();
@@ -82,6 +92,13 @@ export function WorkPreferencesStep() {
 			navigate({ pathname: "/preferences", hash: "#0" }, { replace: true });
 		}
 	}, [pathname, hash, navigate]);
+
+	useEffect(() => {
+		ALL_ILLUSTRATION_SRCS.forEach((src) => {
+			const image = new Image();
+			image.src = src;
+		});
+	}, []);
 
 	function handleChoice(choice: WorkPreferenceChoice) {
 		setWorkPreference(current.id, choice);
@@ -135,18 +152,24 @@ export function WorkPreferencesStep() {
 						/>
 					))}
 				</div>
-				<div className="flex shrink-0 gap-3 pb-4" key={current.id}>
+				<div
+					className="flex shrink-0 gap-3 pb-4"
+					key={current.id}
+					role="radiogroup"
+				>
 					<SelectableCardButton
 						label={current.a}
 						selected={workPreferences[current.id] === "a"}
 						onClick={() => handleChoice("a")}
 						className="items-center text-center"
+						showIndicator={false}
 					/>
 					<SelectableCardButton
 						label={current.b}
 						selected={workPreferences[current.id] === "b"}
 						onClick={() => handleChoice("b")}
 						className="items-center text-center"
+						showIndicator={false}
 					/>
 				</div>
 			</div>

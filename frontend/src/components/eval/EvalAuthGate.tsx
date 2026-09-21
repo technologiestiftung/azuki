@@ -34,7 +34,7 @@ export function EvalAuthGate({ children }: Props) {
 	return (
 		<div className="flex flex-col items-center justify-center min-h-[100dvh] px-8 bg-white">
 			<h1 className="text-2xl font-semibold mb-2">Eval</h1>
-			<p className="text-sm text-gray-500 mb-6">
+			<p className="text-sm text-sky-shade-110 mb-6">
 				Passwort eingeben, um auf das Eval-Tool zuzugreifen.
 			</p>
 			<form onSubmit={handleSubmit} className="w-full max-w-xs space-y-3">
@@ -49,7 +49,7 @@ export function EvalAuthGate({ children }: Props) {
 					placeholder="Passwort"
 					autoFocus
 					className={`w-full px-4 py-3 rounded-2xl border-2 text-base outline-none transition-colors focus:outline-none focus-visible:border-sky-300 ${
-						error ? "border-red-500" : "border-gray-200"
+						error ? "border-red-500" : "border-sky-shade-20"
 					}`}
 				/>
 				{error && (

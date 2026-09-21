@@ -15,15 +15,19 @@ interface UseFetchVacanciesOptions {
 	sharedVacancyParams?: SharedVacancyParams;
 }
 
+// Must stay in sync with the backend's `occupations` array cap
+// (see VacanciesRequestSchema in backend/src/schemas/vacancies.ts).
 const MAX_VACANCY_OCCUPATION_NAMES = 20;
+const MAX_WILDCARD_VACANCY_OCCUPATION_NAMES = 5;
 
 function buildVacancyFetchKey(params: {
 	occupationNames: string[];
+	wildcardOccupationNames: string[];
 	postcode: string;
 	distance: number;
 	preferredJobs: string[];
 }): string {
-	return `${params.postcode}:${params.distance}:${params.occupationNames.join("|")}:${params.preferredJobs.join("|")}`;
+	return `${params.postcode}:${params.distance}:${params.occupationNames.join("|")}:${params.wildcardOccupationNames.join("|")}:${params.preferredJobs.join("|")}`;
 }
 
 function buildSharedVacancyFetchKey(params: SharedVacancyParams): string {
@@ -72,12 +76,18 @@ export function useFetchVacancies(
 			if (!occupations?.length) {
 				return () => {};
 			}
-			// Normal matches take priority; wildcard names only fill remaining slots.
-			const occupationNames = [...occupations, ...(wildcardOccupations ?? [])]
+			// Wildcard names are sent as their own field so the backend can
+			// give them a reserved budget instead of letting regular/preferred
+			// names crowd them out of a shared limit.
+			const occupationNames = occupations
 				.map((occupation) => occupation.rawName)
 				.slice(0, MAX_VACANCY_OCCUPATION_NAMES);
+			const wildcardOccupationNames = (wildcardOccupations ?? [])
+				.map((occupation) => occupation.rawName)
+				.slice(0, MAX_WILDCARD_VACANCY_OCCUPATION_NAMES);
 			fetchKey = buildVacancyFetchKey({
 				occupationNames,
+				wildcardOccupationNames,
 				postcode: location.postcode,
 				distance: location.distance,
 				preferredJobs,
@@ -85,6 +95,7 @@ export function useFetchVacancies(
 			fetchPromise = fetchVacancies(location.postcode, occupationNames, {
 				distance: location.distance,
 				preferredJobs,
+				wildcardOccupations: wildcardOccupationNames,
 				signal: controller.signal,
 			});
 		}

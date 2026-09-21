@@ -8,6 +8,7 @@ import {
 import { formatOccupationDisplayName } from "@azuki/shared";
 import { content } from "../../../content";
 import { useVacancyDetail } from "./useVacancyDetail";
+import { EmptyState } from "../EmptyState";
 import { VacancyDetailHero } from "./VacancyDetailHero";
 import { VacancyDetailHeaderCollapsed } from "./VacancyDetailHeaderCollapsed";
 import { VacancyDetailBody } from "./VacancyDetailBody";
@@ -26,7 +27,7 @@ export function VacanciesDetailPage() {
 	const navigate = useNavigate();
 	const [searchParams] = useSearchParams();
 	const referenznummer = decodeURIComponent(useParams().refnr ?? "");
-	const { detail, preview, loading, error, isFavorite, toggleFavorite } =
+	const { detail, preview, error, isFavorite, toggleFavorite } =
 		useVacancyDetail(referenznummer);
 	const navState = useLocation().state as VacancyDetailNavState | null;
 
@@ -52,9 +53,6 @@ export function VacanciesDetailPage() {
 			document.title = previousTitle;
 		};
 	}, [displayName]);
-
-	const statusMessage =
-		error ?? (loading && !detail ? content["vacancies.detail.loading"] : null);
 
 	const goBackToVacancies = () => {
 		navigate(toWithShareSearch(ROUTE_PATHS.resultsVacancies, searchParams));
@@ -127,8 +125,8 @@ export function VacanciesDetailPage() {
 					employer={detail?.employer ?? preview?.employer}
 				/>
 				<div className="relative flex mt-8 flex-col gap-8 bg-sky-white rounded-t-[20px] pb-8 z-10">
-					{statusMessage ? (
-						<p className="px-[18px] text-lg text-sky-900">{statusMessage}</p>
+					{error ? (
+						<EmptyState message={error} />
 					) : (
 						detail && <VacancyDetailBody detail={detail} />
 					)}

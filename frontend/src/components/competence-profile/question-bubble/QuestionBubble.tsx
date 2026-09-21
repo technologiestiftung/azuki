@@ -34,7 +34,7 @@ export function QuestionBubble({ question, subtitle }: QuestionBubbleProps) {
 					</div>
 					<div className="relative flex items-center p-3 z-10">
 						<div className="flex flex-col gap-2">
-							<h2 className="text-3xl font-bold text-sky-1000">{question}</h2>
+							<h2 className="text-3xl font-bold text-sky-900">{question}</h2>
 							{subtitle && (
 								<p className="text-base font-medium text-sky-900">{subtitle}</p>
 							)}
