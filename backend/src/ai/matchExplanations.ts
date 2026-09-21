@@ -365,6 +365,7 @@ export async function generateMatchExplanations(
 			{ role: "user", content: buildUserPrompt(occupation, profile, signals) },
 		],
 		temperature: 0.4,
+		max_tokens: 1000,
 		response_format: { type: "json_object" },
 	});
 
