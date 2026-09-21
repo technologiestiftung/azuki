@@ -53,10 +53,9 @@ export const content = {
 	"footer.feedback": "Feedback geben",
 	"footer.feedback.link": "",
 	"footer.imprint": "Impressum",
-	"footer.imprint.link": "https://www.technologiestiftung-berlin.de/impressum",
+	"footer.imprint.link": "https://plan-a.jetzt/impressum/",
 	"footer.privacyPolicy": "Datenschutz",
-	"footer.privacyPolicy.link":
-		"https://www.technologiestiftung-berlin.de/datenschutz",
+	"footer.privacyPolicy.link": "https://plan-a.jetzt/datenschutz/",
 
 	// Common
 	"common.multiSelect.subline": "Wähle alle aus, die zutreffen.",
