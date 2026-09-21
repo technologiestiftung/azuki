@@ -516,7 +516,7 @@ export const content = {
 	"results.export.inDemandBanner":
 		"Bei diesen Berufen werden viele Azubis gesucht",
 	"results.export.footer.1": "Finde mehr Ausbildungsberufe auf",
-	"results.export.footer.2": "www.Azuki.de",
+	"results.export.footer.2": "www.azuki-app.de",
 	"results.export.page": "Seite {page} von {total}",
 	"results.export.ctaTitle": "Bewerben? Wie geht das eigentlich?",
 	"results.export.ctaBody.before": "Unser ",
