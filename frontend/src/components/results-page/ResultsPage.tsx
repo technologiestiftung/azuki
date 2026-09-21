@@ -17,6 +17,7 @@ import {
 	type OccupationTagsFilterState,
 } from "../filter-bottom-sheet/OccupationTagsFilterBottomSheet";
 import { useFilterSheet } from "../filter-bottom-sheet/useFilterSheet";
+import { EmptyState } from "./EmptyState";
 import { ResultCard } from "./ResultCard";
 import { BottomCard } from "./BottomCard";
 import { WildcardCarousel } from "./WildcardCarousel";
@@ -111,6 +112,9 @@ export function ResultsPage() {
 	const hasVisibleContent =
 		visibleOccupations.length > 0 ||
 		(showFavoritesOnly && favoritedWildcardOccupations.length > 0);
+
+	const hasActiveTagFilter =
+		tagFilter.appliedValue.selectedOccupationTypeTagIds.length > 0;
 
 	const occupationTypeTagChips = useMemo(
 		() => buildResultTagChips(occupations),
@@ -262,17 +266,17 @@ export function ResultsPage() {
 							{visibleOccupations.map((occupation: MatchedOccupation) => (
 								<ResultCard key={occupation.id} occupation={occupation} />
 							))}
-							{showFavoritesOnly ? (
-								favoritedWildcardOccupations.map((occupation) => (
-									<ResultCard
-										key={occupation.id}
-										occupation={occupation}
-										isWildcard
-									/>
-								))
-							) : (
-								<WildcardCarousel occupations={wildcardOccupations} />
-							)}
+							{showFavoritesOnly
+								? favoritedWildcardOccupations.map((occupation) => (
+										<ResultCard
+											key={occupation.id}
+											occupation={occupation}
+											isWildcard
+										/>
+									))
+								: !hasActiveTagFilter && (
+										<WildcardCarousel occupations={wildcardOccupations} />
+									)}
 							<BottomCard handleDownload={handleDownload} />
 							<div className="mt-7">
 								<ContactCard
@@ -285,21 +289,7 @@ export function ResultsPage() {
 						</>
 					)}
 					{!isLoadingShared && !hasVisibleContent && (
-						<div className="flex px-4 pb-4 items-center h-full">
-							<div className="flex flex-col items-center justify-center gap-5 px-5">
-								<div className="flex items-center justify-center object-contain p-2">
-									<img
-										src="/illustrations/no-results-star.svg"
-										alt=""
-										className="w-[200px]"
-									/>
-								</div>
-
-								<p className="text-lg font-medium text-sky-900 text-center">
-									{content["results.noResults"]}
-								</p>
-							</div>
-						</div>
+						<EmptyState message={content["results.noResults"]} />
 					)}
 				</div>
 			</div>

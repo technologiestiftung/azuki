@@ -36,6 +36,9 @@ import {
 	resolveDetailTaskItems,
 	resolveHeroImageUrls,
 } from "./occupationDetailPageHelpers";
+import { WildcardPoolBadge } from "../WildcardPoolBadge";
+import { EmptyState } from "../EmptyState";
+import { isInWildcardPool } from "@azuki/shared";
 
 export function OccupationDetailPage() {
 	const navigate = useNavigate();
@@ -261,14 +264,16 @@ export function OccupationDetailPage() {
 					/>
 				</div>
 				<div className="relative -mt-4 flex flex-col gap-8 bg-sky-white rounded-t-[20px] pb-8 z-10">
-					<h1
-						ref={titleRef}
-						className="text-3xl font-semibold text-sky-900 px-[18px] pt-4 "
-					>
-						{detail.displayName}
-					</h1>
+					<div className="flex flex-col gap-2 px-[18px] pt-4">
+						{(isWildcard || isInWildcardPool(occupationId)) && (
+							<WildcardPoolBadge />
+						)}
+						<h1 ref={titleRef} className="text-3xl font-semibold text-sky-900">
+							{detail.displayName}
+						</h1>
+					</div>
 					{statusMessage ? (
-						<p className="px-[18px] text-lg text-sky-900">{statusMessage}</p>
+						<EmptyState message={statusMessage} />
 					) : (
 						<OccupationDetailBody
 							occupation={detail.occupation}
