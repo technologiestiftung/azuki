@@ -15,7 +15,7 @@ export function Toast() {
 		<div
 			key={shakeKey}
 			role="alert"
-			className={`absolute bottom-[98px] inset-x-4 flex gap-0.5 justify-between items-center py-3 pl-4 pr-2 bg-sky-200 rounded-xl text-sky-900 ${shakeKey > 0 ? "animate-shake" : "animate-slideInBottom"}`}
+			className={`absolute bottom-[98px] inset-x-4 z-40 flex gap-0.5 justify-between items-center py-3 pl-4 pr-2 bg-sky-200 rounded-xl text-sky-900 ${shakeKey > 0 ? "animate-shake" : "animate-slideInBottom"}`}
 		>
 			<p className="text-base font-medium">{content[descriptionKey]}</p>
 			<button

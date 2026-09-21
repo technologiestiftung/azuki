@@ -152,18 +152,24 @@ export function WorkPreferencesStep() {
 						/>
 					))}
 				</div>
-				<div className="flex shrink-0 gap-3 pb-4" key={current.id}>
+				<div
+					className="flex shrink-0 gap-3 pb-4"
+					key={current.id}
+					role="radiogroup"
+				>
 					<SelectableCardButton
 						label={current.a}
 						selected={workPreferences[current.id] === "a"}
 						onClick={() => handleChoice("a")}
 						className="items-center text-center"
+						showIndicator={false}
 					/>
 					<SelectableCardButton
 						label={current.b}
 						selected={workPreferences[current.id] === "b"}
 						onClick={() => handleChoice("b")}
 						className="items-center text-center"
+						showIndicator={false}
 					/>
 				</div>
 			</div>
