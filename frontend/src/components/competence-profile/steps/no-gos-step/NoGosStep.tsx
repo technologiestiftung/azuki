@@ -64,7 +64,7 @@ export function NoGosStep() {
 		(state) => state.setNoGo as (id: string, answer: NoGoAnswer | null) => void,
 	);
 	const addCustomNoGo = useAppStore((state) => state.addCustomNoGo);
-	const toggleCustomNoGo = useAppStore((state) => state.toggleCustomNoGo);
+	const removeCustomNoGo = useAppStore((state) => state.removeCustomNoGo);
 
 	const noGosValues = profile.noGos;
 
@@ -250,7 +250,7 @@ export function NoGosStep() {
 						stackGhostLayerScale={STACK_GHOST_LAYER_SCALE}
 						items={profile.customNoGos}
 						isSelected={(item) => profile.noGos[item] === "rejected"}
-						onToggle={toggleCustomNoGo}
+						onRemove={removeCustomNoGo}
 						onAddClick={() => setInputSheetOpen(true)}
 						illustrationSrc="/illustrations/custom-strength.svg"
 						labels={{

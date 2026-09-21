@@ -12,7 +12,7 @@ export const PreferredJobsStep = () => {
 	const { goNext } = useFlowNavigation();
 	const [inputSheetOpen, setInputSheetOpen] = useState(false);
 	const addPreferredJobs = useAppStore((state) => state.addPreferredJobs);
-	const togglePreferredJob = useAppStore((state) => state.togglePreferredJob);
+	const removePreferredJob = useAppStore((state) => state.removePreferredJob);
 	const profile = useAppStore((state) => state.profile);
 
 	const handleAddPreferredJobs = (value: string) => {
@@ -58,8 +58,9 @@ export const PreferredJobsStep = () => {
 								key={preferredJob}
 								label={preferredJob}
 								selected={profile.preferredJobs.includes(preferredJob)}
-								onClick={() => togglePreferredJob(preferredJob)}
+								onClick={() => removePreferredJob(preferredJob)}
 								ariaLabel={`${preferredJob} ${content["preferredJob.skipButton.pill.label.postfix"]}`}
+								removeButton
 							/>
 						))}
 						<AddPreferredJobButton />

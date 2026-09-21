@@ -13,8 +13,8 @@ export function PracticalExperienceStep() {
 	const addPracticalExperience = useAppStore(
 		(state) => state.addPracticalExperience,
 	);
-	const togglePracticalExperience = useAppStore(
-		(state) => state.togglePracticalExperience,
+	const removePracticalExperience = useAppStore(
+		(state) => state.removePracticalExperience,
 	);
 	const { goNext } = useFlowNavigation();
 	const [inputSheetOpen, setInputSheetOpen] = useState(false);
@@ -145,10 +145,11 @@ export function PracticalExperienceStep() {
 												entry.id,
 											)}
 											onClick={() => {
-												togglePracticalExperience(entry.id);
+												removePracticalExperience(entry.id);
 											}}
 											ariaLabel={entry.description}
 											className="text-left"
+											removeButton
 										>
 											<div className="flex gap-1.5 items-center justify-center w-full">
 												<span className="truncate">{entry.description}</span>

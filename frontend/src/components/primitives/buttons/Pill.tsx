@@ -7,6 +7,7 @@ interface PillProps {
 	ariaLabel?: string;
 	className?: string;
 	children?: React.ReactNode;
+	removeButton?: boolean;
 }
 
 export function Pill({
@@ -17,6 +18,7 @@ export function Pill({
 	ariaLabel,
 	className,
 	children,
+	removeButton = false,
 }: PillProps) {
 	return (
 		<button
@@ -32,6 +34,11 @@ export function Pill({
 			{icon && <span className="shrink-0">{icon}</span>}
 			{label && <span className="w-full truncate">{label}</span>}
 			{children}
+			{removeButton && (
+				<span className="shrink-0">
+					<img src="/icons/close-gray.svg" alt="" className="w-6 h-6" />
+				</span>
+			)}
 		</button>
 	);
 }
