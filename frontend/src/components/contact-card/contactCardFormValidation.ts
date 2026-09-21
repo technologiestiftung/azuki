@@ -6,6 +6,7 @@ export type FormErrors = {
 	postalcode?: boolean;
 	under16?: boolean;
 	birthdate?: boolean;
+	birthdateMismatch?: boolean;
 	contactType?: boolean;
 	phonenumber?: boolean;
 	email?: boolean;
@@ -19,6 +20,7 @@ export const FORM_FIELD_FOCUS_ORDER: {
 	{ key: "postalcode", focusId: "postalcode" },
 	{ key: "under16", focusId: "under16-yes" },
 	{ key: "birthdate", focusId: "birthdate" },
+	{ key: "birthdateMismatch", focusId: "birthdate" },
 	{ key: "contactType", focusId: "contact-call" },
 	{ key: "phonenumber", focusId: "phonenumber" },
 	{ key: "email", focusId: "email" },
@@ -34,6 +36,23 @@ export function isValidEmail(value: string): boolean {
 export function isValidPhone(value: string): boolean {
 	const normalized = value.replace(/[\s\-()/]/g, "");
 	return PHONE_PATTERN.test(normalized);
+}
+
+export function isUnder16(birthdateIso: string): boolean {
+	const birthdate = new Date(birthdateIso);
+	if (Number.isNaN(birthdate.getTime())) {
+		return true;
+	}
+	const today = new Date();
+	let age = today.getFullYear() - birthdate.getFullYear();
+	const hasHadBirthdayThisYear =
+		today.getMonth() > birthdate.getMonth() ||
+		(today.getMonth() === birthdate.getMonth() &&
+			today.getDate() >= birthdate.getDate());
+	if (!hasHadBirthdayThisYear) {
+		age -= 1;
+	}
+	return age < 16;
 }
 
 export function validateTextFields(data: FormData): FormErrors {
@@ -62,6 +81,8 @@ export function validateRadioFields(
 		const birthdate = (data.get("birthdate") as string | null)?.trim() ?? "";
 		if (!birthdate) {
 			errs.birthdate = true;
+		} else if (!isUnder16(birthdate)) {
+			errs.birthdateMismatch = true;
 		}
 	}
 	if (!contactType) {

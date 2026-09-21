@@ -34,7 +34,7 @@ export function ProfileResetCard() {
 				download={downloadProfile}
 				title={content["profile.resetDialog.title"]}
 				description={content["profile.resetDialog.description"]}
-				downloadLabel={content["profile.resetDialog.description"]}
+				downloadLabel={content["profile.resetDialog.downloadCta"]}
 			/>
 		</>
 	);

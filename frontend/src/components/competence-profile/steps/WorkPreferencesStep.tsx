@@ -52,6 +52,16 @@ const OVERLAY_ILLUSTRATIONS: Partial<
 	},
 } as const;
 
+const ALL_ILLUSTRATION_SRCS = Array.from(
+	new Set([
+		"/illustrations/work-preferences/star.svg",
+		"/illustrations/work-preferences/clock.svg",
+		...Object.values(OVERLAY_ILLUSTRATIONS).flatMap((choices) =>
+			[...(choices?.a ?? []), ...(choices?.b ?? [])].map(({ src }) => src),
+		),
+	]),
+);
+
 export function WorkPreferencesStep() {
 	const { pathname, hash } = useLocation();
 	const navigate = useNavigate();
@@ -82,6 +92,13 @@ export function WorkPreferencesStep() {
 			navigate({ pathname: "/preferences", hash: "#0" }, { replace: true });
 		}
 	}, [pathname, hash, navigate]);
+
+	useEffect(() => {
+		ALL_ILLUSTRATION_SRCS.forEach((src) => {
+			const image = new Image();
+			image.src = src;
+		});
+	}, []);
 
 	function handleChoice(choice: WorkPreferenceChoice) {
 		setWorkPreference(current.id, choice);

@@ -78,7 +78,7 @@ export function VacancyCard({
 				<div className="flex flex-col gap-5 p-3">
 					<div className="flex justify-between items-start gap-5">
 						<div className="flex flex-col gap-1">
-							<h3 className="text-xl font-semibold text-sky-1000">
+							<h3 className="text-xl font-semibold text-sky-900">
 								{displayName}
 							</h3>
 							<p className="text-sky-shade-120">{preview.employer}</p>
@@ -88,7 +88,7 @@ export function VacancyCard({
 
 					<div className="flex flex-col gap-[3px]">
 						{startDate && (
-							<div className="flex items-center gap-[5px] text-sky-1000">
+							<div className="flex items-center gap-[5px] text-sky-900">
 								<img
 									src="/icons/calendar.svg"
 									alt=""
@@ -99,7 +99,7 @@ export function VacancyCard({
 								</span>
 							</div>
 						)}
-						<div className="flex items-center gap-[5px] text-gray-900">
+						<div className="flex items-center gap-[5px] text-sky-900">
 							<img
 								src="/icons/location.svg"
 								alt=""

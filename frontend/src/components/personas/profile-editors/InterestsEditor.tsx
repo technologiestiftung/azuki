@@ -35,7 +35,7 @@ export function InterestsEditor({
 
 	return (
 		<div className="flex flex-col gap-2">
-			<span className="text-sm text-gray-600">Interessen</span>
+			<span className="text-sm text-sky-shade-160">Interessen</span>
 			<div className="flex flex-wrap gap-1">
 				{INTERESTS.map((opt) => {
 					const selected = interests.includes(opt.id);
@@ -47,7 +47,7 @@ export function InterestsEditor({
 							className={`text-xs px-2 py-1 rounded border ${
 								selected
 									? "bg-blue-100 border-blue-400 text-blue-800"
-									: "bg-gray-50 border-gray-300 text-gray-600"
+									: "bg-sky-shade-10 border-sky-shade-30 text-sky-shade-160"
 							}`}
 						>
 							{opt.dataLabel}
@@ -57,7 +57,7 @@ export function InterestsEditor({
 			</div>
 
 			<div className="flex flex-col gap-1 mt-1">
-				<span className="text-xs text-gray-500">Eigene Interessen</span>
+				<span className="text-xs text-sky-shade-110">Eigene Interessen</span>
 				{customInterests.length > 0 && (
 					<div className="flex flex-wrap gap-1">
 						{customInterests.map((value) => (
@@ -90,13 +90,13 @@ export function InterestsEditor({
 							}
 						}}
 						placeholder="z. B. Imkerei"
-						className="flex-1 border border-gray-300 rounded px-2 py-1 text-xs"
+						className="flex-1 border border-sky-shade-30 rounded px-2 py-1 text-xs"
 					/>
 					<button
 						type="button"
 						onClick={addCustom}
 						disabled={!draft.trim()}
-						className="text-xs border border-gray-400 rounded px-2 py-1 disabled:opacity-50"
+						className="text-xs border border-sky-shade-80 rounded px-2 py-1 disabled:opacity-50"
 					>
 						Hinzufügen
 					</button>

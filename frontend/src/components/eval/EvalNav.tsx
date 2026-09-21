@@ -12,7 +12,7 @@ export function EvalNav() {
 				className={
 					isEval
 						? "font-semibold underline"
-						: "text-gray-600 hover:text-gray-900"
+						: "text-sky-shade-160 hover:text-sky-900"
 				}
 			>
 				Eval
@@ -22,7 +22,7 @@ export function EvalNav() {
 				className={
 					isPersonas
 						? "font-semibold underline"
-						: "text-gray-600 hover:text-gray-900"
+						: "text-sky-shade-160 hover:text-sky-900"
 				}
 			>
 				Personas

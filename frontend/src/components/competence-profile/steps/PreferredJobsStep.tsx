@@ -12,7 +12,7 @@ export const PreferredJobsStep = () => {
 	const { goNext } = useFlowNavigation();
 	const [inputSheetOpen, setInputSheetOpen] = useState(false);
 	const addPreferredJobs = useAppStore((state) => state.addPreferredJobs);
-	const togglePreferredJob = useAppStore((state) => state.togglePreferredJob);
+	const removePreferredJob = useAppStore((state) => state.removePreferredJob);
 	const profile = useAppStore((state) => state.profile);
 
 	const handleAddPreferredJobs = (value: string) => {
@@ -49,7 +49,7 @@ export const PreferredJobsStep = () => {
 		>
 			{profile.preferredJobs.length > 0 ? (
 				<div className="scroll-mt-4">
-					<h3 className="text-lg font-semibold text-gray-500 mb-2 px-3.5">
+					<h3 className="text-lg font-semibold text-sky-shade-110 mb-2 px-3.5">
 						{content["preferredJob.addedByYouLabel"]}
 					</h3>
 					<div className="flex min-w-0 flex-wrap gap-x-2 gap-y-2.5 rounded-2xl bg-card-fill p-3">
@@ -58,15 +58,16 @@ export const PreferredJobsStep = () => {
 								key={preferredJob}
 								label={preferredJob}
 								selected={profile.preferredJobs.includes(preferredJob)}
-								onClick={() => togglePreferredJob(preferredJob)}
+								onClick={() => removePreferredJob(preferredJob)}
 								ariaLabel={`${preferredJob} ${content["preferredJob.skipButton.pill.label.postfix"]}`}
+								removeButton
 							/>
 						))}
 						<AddPreferredJobButton />
 					</div>
 				</div>
 			) : (
-				<div className="flex flex-col gap-2 px-6 pt-5 pb-6 bg-gray-200 rounded-3xl">
+				<div className="flex flex-col gap-2 px-6 pt-5 pb-6 bg-sky-shade-20 rounded-3xl">
 					<div className="w-full flex justify-center pb-2">
 						<img
 							src="/illustrations/preferred-job.svg"

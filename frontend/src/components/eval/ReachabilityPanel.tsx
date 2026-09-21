@@ -60,20 +60,22 @@ export function ReachabilityPanel({ reachability }: Props) {
 			{open && (
 				<div className="mt-1 ml-4 space-y-2">
 					<div>
-						<div className="text-gray-600 mb-0.5">Tier S in pre-filter:</div>
+						<div className="text-sky-shade-160 mb-0.5">
+							Tier S in pre-filter:
+						</div>
 						<ul className="space-y-0.5">
 							{tierSReached.map((e) => (
 								<li key={`s-r-${e.id}`} className="flex gap-2">
 									<span className="text-emerald-700">✓</span>
 									<span className="flex-1">{e.name}</span>
-									<span className="text-gray-500">rank {e.rank}</span>
+									<span className="text-sky-shade-110">rank {e.rank}</span>
 								</li>
 							))}
 							{tierSMissed.map((e) => (
 								<li key={`s-m-${e.id}`} className="flex gap-2">
 									<span className="text-red-700">✗</span>
-									<span className="flex-1 text-gray-500">{e.name}</span>
-									<span className="text-gray-500">
+									<span className="flex-1 text-sky-shade-110">{e.name}</span>
+									<span className="text-sky-shade-110">
 										not in top {prefilterSize}
 									</span>
 								</li>
@@ -83,13 +85,15 @@ export function ReachabilityPanel({ reachability }: Props) {
 
 					{tierCInPrefilter.length > 0 && (
 						<div>
-							<div className="text-gray-600 mb-0.5">Tier C in pre-filter:</div>
+							<div className="text-sky-shade-160 mb-0.5">
+								Tier C in pre-filter:
+							</div>
 							<ul className="space-y-0.5">
 								{tierCInPrefilter.map((e) => (
 									<li key={`c-${e.id}`} className="flex gap-2">
 										<span className="text-red-700">⚠</span>
 										<span className="flex-1">{e.name}</span>
-										<span className="text-gray-500">rank {e.rank}</span>
+										<span className="text-sky-shade-110">rank {e.rank}</span>
 									</li>
 								))}
 							</ul>

@@ -27,8 +27,8 @@ export function StrengthsStep() {
 	const strengthValues = profile.strengths;
 	const setStrength = useAppStore((state) => state.setStrength);
 	const addCustomStrength = useAppStore((state) => state.addCustomStrength);
-	const toggleCustomStrength = useAppStore(
-		(state) => state.toggleCustomStrength,
+	const removeCustomStrength = useAppStore(
+		(state) => state.removeCustomStrength,
 	);
 	const [inputSheetOpen, setInputSheetOpen] = useState(false);
 	const [sliderExiting, setSliderExiting] = useState(false);
@@ -219,7 +219,7 @@ export function StrengthsStep() {
 						isSelected={(item) =>
 							profile.selectedCustomStrengths.includes(item)
 						}
-						onToggle={toggleCustomStrength}
+						onRemove={removeCustomStrength}
 						onAddClick={() => setInputSheetOpen(true)}
 						illustrationSrc="/illustrations/custom-strength.svg"
 						labels={{

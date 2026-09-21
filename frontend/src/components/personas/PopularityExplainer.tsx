@@ -32,20 +32,20 @@ export function PopularityExplainer({
 	}
 
 	return (
-		<div className="border border-gray-200 rounded mb-2 text-sm">
+		<div className="border border-sky-shade-20 rounded mb-2 text-sm">
 			<button
 				type="button"
 				onClick={toggle}
-				className="w-full flex items-center justify-between p-2 text-left text-gray-800"
+				className="w-full flex items-center justify-between p-2 text-left text-sky-900"
 				aria-expanded={open}
 			>
 				<span className="font-medium">Was bedeuten die Häufigkeiten?</span>
 				<span className="text-xs">{open ? "▾" : "▸"}</span>
 			</button>
 			{open && (
-				<div className="px-3 pb-3 pt-1 text-xs text-gray-700 space-y-3">
+				<div className="px-3 pb-3 pt-1 text-xs text-sky-shade-170 space-y-3">
 					<div>
-						<p className="mb-1 font-medium text-gray-800">
+						<p className="mb-1 font-medium text-sky-900">
 							Woher die Daten kommen
 						</p>
 						<p>
@@ -64,14 +64,14 @@ export function PopularityExplainer({
 								Bundesamt, 306 Berufe).
 							</li>
 						</ul>
-						<p className="mt-1 text-gray-500">
+						<p className="mt-1 text-sky-shade-110">
 							Insgesamt 511 von 668 Berufen haben eine echte Zahl. Der Rest sind
 							Sonderfälle (siehe unten).
 						</p>
 					</div>
 
 					<div>
-						<p className="mb-1 font-medium text-gray-800">Die Klassen</p>
+						<p className="mb-1 font-medium text-sky-900">Die Klassen</p>
 						<ul className="ml-2 space-y-0.5">
 							<li>
 								<span className="inline-block w-32 font-medium text-emerald-800">
@@ -110,7 +110,7 @@ export function PopularityExplainer({
 					</div>
 
 					<div>
-						<p className="mb-1 font-medium text-gray-800">Sonderfälle</p>
+						<p className="mb-1 font-medium text-sky-900">Sonderfälle</p>
 						<ul className="ml-2 space-y-1">
 							<li>
 								<span className="inline-block w-32 font-medium text-blue-700 align-top">
@@ -122,7 +122,7 @@ export function PopularityExplainer({
 								</span>
 							</li>
 							<li>
-								<span className="inline-block w-32 font-medium text-gray-600 align-top">
+								<span className="inline-block w-32 font-medium text-sky-shade-160 align-top">
 									ohne Zahlen
 								</span>
 								<span>
@@ -134,7 +134,7 @@ export function PopularityExplainer({
 					</div>
 
 					<div>
-						<p className="mb-1 font-medium text-gray-800">Wofür?</p>
+						<p className="mb-1 font-medium text-sky-900">Wofür?</p>
 						<p>
 							Die Häufigkeit zeigt dir auf einen Blick, ob ein Beruf ein
 							verlässlicher Anker oder ein Spezialfall ist. Beim Befüllen von

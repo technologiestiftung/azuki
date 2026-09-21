@@ -18,8 +18,8 @@ export const ThemedIconButton: React.FC<ThemedIconButtonProps> = ({
 			className={`inline-flex h-10 w-10 items-center justify-center p-2 text-base font-medium rounded-2xl
 				focus-visible:outline focus-visible:outline-2 focus-visible:outline-sky-500 ${
 					disabled
-						? "bg-gray-200 text-gray-400 pointer-events-none"
-						: "bg-sky-300 text-sky-1000 md:hover:bg-sky-200 md:hover:text-sky-900 active:bg-sky-200 active:text-sky-900"
+						? "bg-sky-shade-20 text-sky-shade-70 pointer-events-none"
+						: "bg-sky-300 text-sky-900 md:hover:bg-sky-200 md:hover:text-sky-800 active:bg-sky-200 active:text-sky-800"
 				} ${className}`}
 			disabled={disabled}
 			onClick={onClick}
