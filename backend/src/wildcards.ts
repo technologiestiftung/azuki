@@ -42,6 +42,8 @@ export function toWildcardMatchedOccupation(
 		reasoning: "",
 		salaryKnown: occupation.salaryKnown,
 		salaryMonthlyMedian: occupation.salaryMonthlyMedian,
+		salaryEntryKnown: occupation.salaryEntryKnown,
+		salaryMonthlyEntry: occupation.salaryMonthlyEntry,
 		...occupationMatchMeta(occupation),
 	};
 }

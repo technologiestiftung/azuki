@@ -8,6 +8,8 @@ function makeOccupation(overrides: Partial<Occupation> = {}): Occupation {
 		name: "Anlagenmechaniker/in",
 		salaryKnown: true,
 		salaryMonthlyMedian: 2800,
+		salaryEntryKnown: true,
+		salaryMonthlyEntry: 2543,
 		...overrides,
 	} as Occupation;
 }
@@ -15,13 +17,13 @@ function makeOccupation(overrides: Partial<Occupation> = {}): Occupation {
 describe("buildOccupationShareText", () => {
 	test("formats duration and salary", () => {
 		expect(buildOccupationShareText(makeOccupation(), "2-4 Jahre")).toBe(
-			"Dauer: 2-4 Jahre · Einstiegsgehalt: 2.800 €",
+			"Dauer: 2-4 Jahre · Einstiegsgehalt: 2.543 €",
 		);
 	});
 
 	test("omits duration when empty", () => {
 		expect(buildOccupationShareText(makeOccupation(), "")).toBe(
-			"Einstiegsgehalt: 2.800 €",
+			"Einstiegsgehalt: 2.543 €",
 		);
 	});
 
@@ -29,8 +31,8 @@ describe("buildOccupationShareText", () => {
 		expect(
 			buildOccupationShareText(
 				makeOccupation({
-					salaryKnown: false,
-					salaryMonthlyMedian: null,
+					salaryEntryKnown: false,
+					salaryMonthlyEntry: null,
 				}),
 				"3 Jahre",
 			),

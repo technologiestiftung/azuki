@@ -32,8 +32,8 @@ export function WildcardCard({ occupation }: WildcardCardProps) {
 					images={occupation.images}
 					occupationDuration={occupation.occupationDuration}
 					occupationId={occupation.id}
-					salaryKnown={occupation.salaryKnown}
-					salaryMonthlyMedian={occupation.salaryMonthlyMedian}
+					salaryEntryKnown={occupation.salaryEntryKnown}
+					salaryMonthlyEntry={occupation.salaryMonthlyEntry}
 					shortDescription={occupation.shortDescription}
 					toggleFavorite={() => toggleFavorite(occupation.id)}
 					isFavorite={isFavorite}

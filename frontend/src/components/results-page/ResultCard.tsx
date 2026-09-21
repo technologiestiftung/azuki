@@ -43,8 +43,8 @@ export function ResultCard({
 					occupationDuration={occupation.occupationDuration}
 					occupationId={occupation.id}
 					matchPercent={displayFitPercent(occupation)}
-					salaryKnown={occupation.salaryKnown}
-					salaryMonthlyMedian={occupation.salaryMonthlyMedian}
+					salaryEntryKnown={occupation.salaryEntryKnown}
+					salaryMonthlyEntry={occupation.salaryMonthlyEntry}
 					shortDescription={occupation.shortDescription}
 					isFavorite={isFavorite}
 					toggleFavorite={() => toggleFavorite(occupation.id)}

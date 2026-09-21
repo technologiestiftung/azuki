@@ -1054,6 +1054,8 @@ function toOccupationResult(
 		reasoning,
 		salaryKnown: item.occupation.salaryKnown,
 		salaryMonthlyMedian: item.occupation.salaryMonthlyMedian,
+		salaryEntryKnown: item.occupation.salaryEntryKnown,
+		salaryMonthlyEntry: item.occupation.salaryMonthlyEntry,
 		...meta,
 	};
 }

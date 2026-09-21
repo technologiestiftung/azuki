@@ -317,8 +317,8 @@ function formatTopMeta(occupation: MatchedOccupation): string {
 	if (occupation.occupationDuration) {
 		parts.push(occupation.occupationDuration);
 	}
-	if (occupation.salaryKnown && occupation.salaryMonthlyMedian !== null) {
-		parts.push(formatOccupationSalary(occupation.salaryMonthlyMedian));
+	if (occupation.salaryEntryKnown && occupation.salaryMonthlyEntry !== null) {
+		parts.push(formatOccupationSalary(occupation.salaryMonthlyEntry));
 	}
 	return parts.join(" · ");
 }

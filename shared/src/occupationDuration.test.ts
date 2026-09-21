@@ -59,6 +59,8 @@ function makeOccupation(
 		skillTags: [],
 		salaryMonthlyMedian: null,
 		salaryKnown: false,
+		salaryMonthlyEntry: null,
+		salaryEntryKnown: false,
 		digitalizationSignal: false,
 		workLocations: "",
 		competenciesText: "",

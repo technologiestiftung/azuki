@@ -484,23 +484,32 @@ function extractSkillTags(infofelder: Infofeld[]): string[] {
   );
 }
 
-export function extractSalarySignal(infofelder: Infofeld[]): {
-  salaryMonthlyMedian: number | null;
-  salaryKnown: boolean;
-} {
+interface SalaryMatch {
+  monthlyValue: number;
+  // False for per-engagement Gage rates and tariff steps above Stufe 1 —
+  // neither is a starting salary.
+  entryEligible: boolean;
+}
+
+function isEntryEligible(context: string): boolean {
+  if (/wochengage|tagesgage|pro\s+auftritt/i.test(context)) return false;
+  const stufeMatch = context.match(/stufe\s*(\d+)/i);
+  if (stufeMatch && Number(stufeMatch[1]) > 1) return false;
+  return true;
+}
+
+function extractSalaryMatches(infofelder: Infofeld[]): SalaryMatch[] {
   const field = infofelder.find(
     (f) => f.id === INFOFELD_IDS.verdienstEinkommen,
   );
-  if (!field?.content) {
-    return { salaryMonthlyMedian: null, salaryKnown: false };
-  }
+  if (!field?.content) return [];
 
   const decoded = decodeHtmlEntities(field.content);
   const plain = stripHtml(decoded);
   const euros = [
     ...plain.matchAll(/(\d{1,3}(?:\.\d{3})*(?:,\d+)?)\s*(?:€|euro)/gi),
   ];
-  const monthlyValues: number[] = [];
+  const matches: SalaryMatch[] = [];
 
   for (const match of euros) {
     const raw = match[1];
@@ -512,8 +521,22 @@ export function extractSalarySignal(infofelder: Infofeld[]): {
     const end = Math.min(plain.length, idx + 50);
     const context = plain.slice(start, end);
     const unit = inferSalaryUnit(num, detectSalaryUnit(context));
-    monthlyValues.push(normalizeToMonthly(num, unit));
+    matches.push({
+      monthlyValue: normalizeToMonthly(num, unit),
+      entryEligible: isEntryEligible(context),
+    });
   }
+
+  return matches;
+}
+
+export function extractSalarySignal(infofelder: Infofeld[]): {
+  salaryMonthlyMedian: number | null;
+  salaryKnown: boolean;
+} {
+  const monthlyValues = extractSalaryMatches(infofelder).map(
+    (salaryMatch) => salaryMatch.monthlyValue,
+  );
 
   if (monthlyValues.length === 0) {
     return { salaryMonthlyMedian: null, salaryKnown: false };
@@ -522,6 +545,26 @@ export function extractSalarySignal(infofelder: Infofeld[]): {
   return {
     salaryMonthlyMedian: Math.round(median(monthlyValues)),
     salaryKnown: true,
+  };
+}
+
+// Low end of the band, not the median — extractSalarySignal above stays
+// median-based for good_salary scoring.
+export function extractEntrySalarySignal(infofelder: Infofeld[]): {
+  salaryMonthlyEntry: number | null;
+  salaryEntryKnown: boolean;
+} {
+  const eligibleValues = extractSalaryMatches(infofelder)
+    .filter((salaryMatch) => salaryMatch.entryEligible)
+    .map((salaryMatch) => salaryMatch.monthlyValue);
+
+  if (eligibleValues.length === 0) {
+    return { salaryMonthlyEntry: null, salaryEntryKnown: false };
+  }
+
+  return {
+    salaryMonthlyEntry: Math.round(Math.min(...eligibleValues)),
+    salaryEntryKnown: true,
   };
 }
 
@@ -659,6 +702,7 @@ function processOccupationDetail(data: ApiBerufItem[]): Occupation | null {
     ? stripHtml(ausbildung.steckbrief.lang)
     : null;
   const salarySignal = extractSalarySignal(mergedInfofelder);
+  const entrySalarySignal = extractEntrySalarySignal(mergedInfofelder);
   const interestData = extractInterestData(taetigkeitInfofelder);
 
   return {
@@ -680,6 +724,8 @@ function processOccupationDetail(data: ApiBerufItem[]): Occupation | null {
     conditions: extractConditions(taetigkeitInfofelder),
     salaryMonthlyMedian: salarySignal.salaryMonthlyMedian,
     salaryKnown: salarySignal.salaryKnown,
+    salaryMonthlyEntry: entrySalarySignal.salaryMonthlyEntry,
+    salaryEntryKnown: entrySalarySignal.salaryEntryKnown,
     digitalizationSignal: extractDigitalizationSignal(mergedInfofelder),
     workLocations: findInfofeld(taetigkeitInfofelder, INFOFELD_IDS.arbeitsorte),
     competenciesText: findInfofeld(
