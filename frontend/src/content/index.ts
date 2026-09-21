@@ -731,6 +731,8 @@ export const content = {
 	"vacancies.detail.employmentType.partTime": "Teilzeit",
 	"vacancies.detail.educationLevel.fachgebundeneHochschulreife":
 		"Fachgebundene Hochschulreife",
+	"vacancies.detail.schoolDegreeInfo.description":
+		"Du hast gute Chancen mit diesem Abschluss. Hast du einen anderen Abschluss? Bewirb dich trotzdem. Betriebe schreiben oft nur ihren Wunsch auf, manchmal reichen auch andere Abschlüsse.",
 	"vacancies.detail.locationTitle": "Arbeitsort",
 	"vacancies.detail.location.showMore": "+{count} weitere Arbeitsorte",
 	"vacancies.detail.location.showMore.one": "1 weiterer Arbeitsort",

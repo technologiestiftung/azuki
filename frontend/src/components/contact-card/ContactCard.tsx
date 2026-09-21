@@ -30,7 +30,7 @@ export function ContactCard({
 				<div className="flex flex-col gap-1.5">
 					<h3 className="text-2xl font-semibold text-sky-900">{title}</h3>
 					<p
-						className="text-lg font-normal text-sky-900 leading-[140%]"
+						className="text-lg font-normal text-sky-900 leading-[140%] [&_strong]:font-semibold"
 						dangerouslySetInnerHTML={{ __html: description }}
 					/>
 				</div>
