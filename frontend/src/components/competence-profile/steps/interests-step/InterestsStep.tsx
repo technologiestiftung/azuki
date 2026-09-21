@@ -13,6 +13,9 @@ export function InterestsStep() {
 	const profile = useAppStore((state) => state.profile);
 	const toggleInterest = useAppStore((state) => state.toggleInterest);
 	const addCustomInterest = useAppStore((state) => state.addCustomInterest);
+	const removeCustomInterest = useAppStore(
+		(state) => state.removeCustomInterest,
+	);
 	const { goNext } = useFlowNavigation();
 	const [inputSheetOpen, setInputSheetOpen] = useState(false);
 	const customInterestsSectionRef = useRef<HTMLDivElement>(null);
@@ -63,8 +66,9 @@ export function InterestsStep() {
 									key={interest}
 									label={interest}
 									selected={profile.interests.includes(interest)}
-									onClick={() => toggleInterest(interest)}
+									onClick={() => removeCustomInterest(interest)}
 									ariaLabel={`${interest} ${content["interests.skipButton.pill.label.postfix"]}`}
+									removeButton
 								/>
 							))}
 							<PrimaryThemedButton
