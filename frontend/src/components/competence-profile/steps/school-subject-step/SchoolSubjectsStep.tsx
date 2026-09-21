@@ -7,7 +7,6 @@ import { categories } from "./school-subjects";
 import { Pill } from "../../../primitives/buttons/Pill";
 import { PrimaryThemedButton } from "../../../primitives/buttons/PrimaryThemedButton";
 import { InputBottomSheet } from "../../../input-bottom-sheet/InputBottomSheet";
-import { SecondaryButton } from "../../../primitives/buttons/SecondaryButton";
 
 export function SchoolSubjectsStep() {
 	const profile = useAppStore((state) => state.profile);
@@ -43,7 +42,7 @@ export function SchoolSubjectsStep() {
 		>
 			<div className="flex flex-col gap-8">
 				{profile.customSubjects && profile.customSubjects.length === 0 && (
-					<SecondaryButton
+					<PrimaryThemedButton
 						className="text-lg"
 						ariaLabel={
 							content["schoolSubjects.addCustomSubjectButton.ariaLabel"]
@@ -54,7 +53,7 @@ export function SchoolSubjectsStep() {
 							<img src="/icons/plus-black.svg" alt="" className="w-6 h-6" />
 							{content["schoolSubjects.addCustomSubjectButton.label"]}
 						</div>
-					</SecondaryButton>
+					</PrimaryThemedButton>
 				)}
 				{profile.customSubjects && profile.customSubjects.length > 0 && (
 					<div ref={customSubjectsSectionRef} className="scroll-mt-4">
