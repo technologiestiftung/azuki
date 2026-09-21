@@ -72,7 +72,7 @@ export function WorkExpectationsStep() {
 				{profile.customWorkExpectations &&
 					profile.customWorkExpectations.length > 0 && (
 						<div ref={customWorkExpectationsSectionRef} className="scroll-mt-4">
-							<h3 className="text-lg font-semibold text-gray-500 mb-2 px-3.5">
+							<h3 className="text-lg font-semibold text-sky-shade-110 mb-2 px-3.5">
 								{content["workExpectations.customWorkExpectation.label"]}
 							</h3>
 							<div className="flex flex-col gap-y-2 rounded-2xl">

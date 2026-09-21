@@ -16,7 +16,7 @@ export function ProgressBar({ progress }: ProgressBarProps) {
 	}, [progress]);
 
 	return (
-		<div className="h-2 w-full rounded-full bg-gray-200 overflow-hidden">
+		<div className="h-2 w-full rounded-full bg-sky-shade-20 overflow-hidden">
 			<div
 				className="h-full bg-sky-300 rounded-full transition-all duration-500 ease-out"
 				style={{

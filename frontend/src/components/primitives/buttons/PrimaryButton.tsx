@@ -15,10 +15,10 @@ export const PrimaryButton: React.FC<PrimaryButtonProps> = ({
 	return (
 		<button
 			className={`h-12 w-full py-2 px-5 rounded-2xl text-base font-medium transition-colors
-				focus-visible:outline focus-visible:outline-2 focus-visible:outline-sky-500 active:bg-gray-700 active:text-gray-50 ${
+				focus-visible:outline focus-visible:outline-2 focus-visible:outline-sky-500 active:bg-sky-shade-160 active:text-sky-shade-10 ${
 					disabled
-						? "bg-gray-200 text-gray-400"
-						: "bg-gray-900 text-white md:hover:bg-gray-700 md:hover:text-gray-50"
+						? "bg-sky-shade-20 text-sky-shade-70"
+						: "bg-sky-900 text-white md:hover:bg-sky-shade-160 md:hover:text-sky-shade-10"
 				} ${className}`}
 			disabled={disabled}
 			onClick={onClick}

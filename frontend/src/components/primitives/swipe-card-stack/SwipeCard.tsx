@@ -155,10 +155,10 @@ export const SwipeCard = memo(function SwipeCard({
 					/>
 				</div>
 				<div className="shrink-0 text-center">
-					<h3 className="text-xl font-semibold leading-6 text-gray-700">
+					<h3 className="text-xl font-semibold leading-6 text-sky-shade-170">
 						{card.title}
 					</h3>
-					<p className="text-center text-base text-gray-700 max-w-60">
+					<p className="text-center text-base text-sky-shade-170 max-w-60">
 						{card.description}
 					</p>
 				</div>

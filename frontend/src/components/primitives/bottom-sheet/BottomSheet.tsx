@@ -381,7 +381,7 @@ export function BottomSheet({
 		<>
 			<button
 				type="button"
-				className={`z-50 fixed inset-0 bg-sky-1000/80 bg-blur-[2px] ${
+				className={`z-50 fixed inset-0 bg-sky-900/80 bg-blur-[2px] ${
 					isClosing ? "pointer-events-none animate-fadeOut" : "animate-fadeIn"
 				}`}
 				aria-label={overlayDismissLabel}
@@ -413,7 +413,7 @@ export function BottomSheet({
 						onLostPointerCapture={handleGrabLostPointerCapture}
 					>
 						<div
-							className="pointer-events-none h-[5px] w-9 shrink-0 rounded-full bg-gray-300 mix-blend-plus-darker"
+							className="pointer-events-none h-[5px] w-9 shrink-0 rounded-full bg-sky-shade-30 mix-blend-plus-darker"
 							aria-hidden
 						/>
 					</div>
@@ -425,7 +425,7 @@ export function BottomSheet({
 						{children}
 					</div>
 					{footer ? (
-						<div className="shrink-0 border-t-2 border-gray-200 p-4">
+						<div className="shrink-0 border-t-2 border-sky-shade-20 p-4">
 							{footer}
 						</div>
 					) : null}

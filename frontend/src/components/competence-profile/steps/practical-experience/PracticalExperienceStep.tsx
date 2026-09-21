@@ -132,7 +132,7 @@ export function PracticalExperienceStep() {
 			<div className="overflow-y-auto">
 				{profile.practicalExperiences.length > 0 && (
 					<div className="flex flex-col gap-2">
-						<h3 className="text-lg font-semibold text-gray-500 px-3.5 shrink-0">
+						<h3 className="text-lg font-semibold text-sky-shade-110 px-3.5 shrink-0">
 							{content["practicalExperience.suggestion.addedByYouLabel"]}
 						</h3>
 						<div className="flex h-full min-h-0 w-full flex-1 flex-col rounded-3xl bg-card-fill p-3 mb-3">
@@ -169,7 +169,7 @@ export function PracticalExperienceStep() {
 						</div>
 					</div>
 				)}
-				<h3 className="text-lg font-semibold text-gray-500 px-3.5 mb-2 shrink-0">
+				<h3 className="text-lg font-semibold text-sky-shade-110 px-3.5 mb-2 shrink-0">
 					{content["practicalExperience.suggestion.label"]}
 				</h3>
 				<div className="flex w-full flex-1 flex-col rounded-3xl bg-card-fill p-3 mb-3">

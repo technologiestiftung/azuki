@@ -38,7 +38,7 @@ export function SubjectsEditor({
 
 	return (
 		<div className="flex flex-col gap-2">
-			<span className="text-sm text-gray-600">Lieblingsfächer</span>
+			<span className="text-sm text-sky-shade-160">Lieblingsfächer</span>
 			<div className="flex flex-wrap gap-1">
 				{SUBJECTS.map((opt) => {
 					const selected = favoriteSubjects.includes(opt.id);
@@ -50,7 +50,7 @@ export function SubjectsEditor({
 							className={`text-xs px-2 py-1 rounded border ${
 								selected
 									? "bg-blue-100 border-blue-400 text-blue-800"
-									: "bg-gray-50 border-gray-300 text-gray-600"
+									: "bg-sky-shade-10 border-sky-shade-30 text-sky-shade-160"
 							}`}
 						>
 							{opt.dataLabel}
@@ -60,7 +60,7 @@ export function SubjectsEditor({
 			</div>
 
 			<div className="flex flex-col gap-1 mt-1">
-				<span className="text-xs text-gray-500">Eigene Fächer</span>
+				<span className="text-xs text-sky-shade-110">Eigene Fächer</span>
 				{customSubjects.length > 0 && (
 					<div className="flex flex-wrap gap-1">
 						{customSubjects.map((value) => (
@@ -93,13 +93,13 @@ export function SubjectsEditor({
 							}
 						}}
 						placeholder="z. B. Astronomie"
-						className="flex-1 border border-gray-300 rounded px-2 py-1 text-xs"
+						className="flex-1 border border-sky-shade-30 rounded px-2 py-1 text-xs"
 					/>
 					<button
 						type="button"
 						onClick={addCustom}
 						disabled={!draft.trim()}
-						className="text-xs border border-gray-400 rounded px-2 py-1 disabled:opacity-50"
+						className="text-xs border border-sky-shade-80 rounded px-2 py-1 disabled:opacity-50"
 					>
 						Hinzufügen
 					</button>

@@ -531,7 +531,7 @@ export const SwipeCardStack = forwardRef<
 				{hasNext && (
 					<div
 						aria-hidden="true"
-						className="absolute inset-0 -bottom-[37px] w-full bg-gray-300 rounded-3xl pointer-events-none"
+						className="absolute inset-0 -bottom-[37px] w-full bg-sky-shade-30 rounded-3xl pointer-events-none"
 						style={{
 							zIndex: 0,
 							transform: `scale(${ghostScale})`,

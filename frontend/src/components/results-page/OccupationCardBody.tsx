@@ -50,7 +50,7 @@ export function OccupationCardBody({
 			</div>
 
 			<div className="flex flex-1 flex-col gap-3">
-				<div className="flex justify-between items-center w-full">
+				<div className="flex justify-between items-center w-full gap-2">
 					{matchPercent !== undefined && (
 						<div className="w-fit flex items-center justify-center bg-sky-900 text-sky-white text-sm leading-5 font-normal px-2 h-[22px] rounded-lg whitespace-nowrap">
 							{matchPercent} {"%"}

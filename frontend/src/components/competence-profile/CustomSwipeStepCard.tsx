@@ -43,10 +43,10 @@ export function CustomSwipeStepCard({
 				} as CSSProperties
 			}
 		>
-			<div className="flex h-full min-h-0 w-full flex-1 flex-col rounded-3xl bg-gray-200 py-5 px-6 mb-3">
+			<div className="flex h-full min-h-0 w-full flex-1 flex-col rounded-3xl bg-sky-shade-20 py-5 px-6 mb-3">
 				{items.length > 0 ? (
 					<>
-						<h3 className="text-lg font-semibold text-gray-500 mb-2 shrink-0">
+						<h3 className="text-lg font-semibold text-sky-shade-110 mb-2 shrink-0">
 							{labels.listLabel}
 						</h3>
 						<div className="min-h-0 flex-1 overflow-y-auto">
@@ -82,10 +82,10 @@ export function CustomSwipeStepCard({
 							/>
 						</div>
 						<div className="flex flex-col gap-0.5 items-center justify-center text-center mb-2 shrink-0">
-							<h3 className="text-2xl font-semibold text-gray-700">
+							<h3 className="text-2xl font-semibold text-sky-shade-170">
 								{labels.customTitle}
 							</h3>
-							<p className="text-base text-gray-700">
+							<p className="text-base text-sky-shade-170">
 								{labels.customDescription}
 							</p>
 						</div>

@@ -44,11 +44,11 @@ function PersonaHeader({ persona }: { persona: Persona }) {
 		profile.selectedPracticalExperienceIds,
 	);
 	return (
-		<div className="border-b border-gray-200 pb-2 mb-2">
+		<div className="border-b border-sky-shade-20 pb-2 mb-2">
 			<div className="font-semibold">{persona.name}</div>
-			<div className="text-xs text-gray-600">{summary}</div>
+			<div className="text-xs text-sky-shade-160">{summary}</div>
 			<div
-				className="text-xs text-gray-500 mt-1 truncate"
+				className="text-xs text-sky-shade-110 mt-1 truncate"
 				title={practicalSummary}
 			>
 				{practicalSummary.slice(0, 60)}
@@ -69,11 +69,13 @@ export function PersonaColumn({
 	const isSuccess = current && !("error" in current);
 
 	return (
-		<div className="flex-1 min-w-0 border border-gray-200 rounded p-3">
+		<div className="flex-1 min-w-0 border border-sky-shade-20 rounded p-3">
 			<ScoreBanner report={report} />
 			<PersonaHeader persona={persona} />
 
-			{!current && <div className="text-sm text-gray-500">No run yet.</div>}
+			{!current && (
+				<div className="text-sm text-sky-shade-110">No run yet.</div>
+			)}
 
 			{current && "error" in current && (
 				<div className="text-sm">
@@ -81,7 +83,7 @@ export function PersonaColumn({
 					<button
 						type="button"
 						onClick={onRetry}
-						className="border border-gray-400 px-3 py-1 rounded text-xs"
+						className="border border-sky-shade-80 px-3 py-1 rounded text-xs"
 					>
 						Retry
 					</button>
@@ -119,15 +121,15 @@ export function PersonaColumn({
 								const tier = getRubricTier(entry.id, persona);
 								const borderClass = tier
 									? PREFILTER_TIER_BORDER[tier]
-									: "border-gray-200";
+									: "border-sky-shade-20";
 								return (
 									<div
 										key={entry.id}
 										className={`flex gap-2 border-l-2 pl-2 ${borderClass}`}
 									>
-										<span className="text-gray-500 w-6">{i + 1}.</span>
+										<span className="text-sky-shade-110 w-6">{i + 1}.</span>
 										<span className="flex-1 truncate">{entry.name}</span>
-										<span className="text-gray-500">
+										<span className="text-sky-shade-110">
 											{entry.score.toFixed(2)}
 										</span>
 										{tier && (

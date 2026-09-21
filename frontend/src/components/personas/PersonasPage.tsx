@@ -79,7 +79,7 @@ function PersonasPageInner() {
 				</button>
 			</div>
 
-			<p className="text-sm text-gray-600 mb-4 max-w-2xl">
+			<p className="text-sm text-sky-shade-160 mb-4 max-w-2xl">
 				Personas testen, ob deine Pipeline gute Ergebnisse für unterschiedliche
 				Profile liefert. Jede Persona hat eine Liste idealer Berufe (Tier S),
 				akzeptabler Alternativen (Tier A) und Berufe, die nicht erscheinen
@@ -92,31 +92,35 @@ function PersonasPageInner() {
 				</div>
 			)}
 
-			{personas === null && <div className="text-sm text-gray-500">Lädt…</div>}
+			{personas === null && (
+				<div className="text-sm text-sky-shade-110">Lädt…</div>
+			)}
 
 			{personas && personas.length === 0 && (
-				<div className="text-sm text-gray-500">
+				<div className="text-sm text-sky-shade-110">
 					Noch keine Personas. Klicke "+ Neue Persona", um zu starten.
 				</div>
 			)}
 
 			{personas && personas.length > 0 && (
-				<ul className="divide-y divide-gray-200 border border-gray-200 rounded">
+				<ul className="divide-y divide-sky-shade-20 border border-sky-shade-20 rounded">
 					{personas.map((p) => (
 						<li key={p.id} className="flex gap-3 items-start p-3">
 							<Link
 								to={`/personas/${p.id}`}
-								className="flex-1 hover:bg-gray-50 -m-1 p-1 rounded"
+								className="flex-1 hover:bg-sky-shade-10 -m-1 p-1 rounded"
 							>
 								<div className="font-medium">{p.name}</div>
 								{p.description && (
-									<div className="text-xs text-gray-600">{p.description}</div>
+									<div className="text-xs text-sky-shade-160">
+										{p.description}
+									</div>
 								)}
-								<div className="text-xs text-gray-500 mt-1">
+								<div className="text-xs text-sky-shade-110 mt-1">
 									Tier S: {p.tierS.length} · A: {p.tierA.length} · C:{" "}
 									{p.tierC.length}
 								</div>
-								<div className="text-xs text-gray-400 mt-0.5">
+								<div className="text-xs text-sky-shade-80 mt-0.5">
 									Aktualisiert{" "}
 									{new Date(p.updatedAt).toLocaleDateString("de-DE")}
 								</div>

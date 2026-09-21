@@ -57,7 +57,7 @@ export function SchoolSubjectsStep() {
 				)}
 				{profile.customSubjects && profile.customSubjects.length > 0 && (
 					<div ref={customSubjectsSectionRef} className="scroll-mt-4">
-						<h3 className="text-lg font-semibold text-gray-500 mb-2 px-3.5">
+						<h3 className="text-lg font-semibold text-sky-shade-110 mb-2 px-3.5">
 							{content["schoolSubjects.customSubject.label"]}
 						</h3>
 						<div className="flex min-w-0 flex-wrap gap-x-2 gap-y-2.5 rounded-2xl bg-card-fill p-3">
@@ -87,7 +87,7 @@ export function SchoolSubjectsStep() {
 					<div key={category.name}>
 						<div className="flex flex-col gap-2">
 							<div key={category.name}>
-								<h3 className="text-lg font-semibold text-gray-500 mb-2 px-3.5">
+								<h3 className="text-lg font-semibold text-sky-shade-110 mb-2 px-3.5">
 									{category.name}
 								</h3>
 								<div className="flex min-w-0 flex-wrap gap-x-2 gap-y-2.5 rounded-2xl bg-card-fill p-3">

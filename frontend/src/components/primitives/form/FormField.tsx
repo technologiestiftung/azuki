@@ -7,7 +7,7 @@ import {
 	type ReactNode,
 } from "react";
 
-const labelClassName = "text-lg font-medium leading-[140%] text-gray-700";
+const labelClassName = "text-lg font-medium leading-[140%] text-sky-shade-170";
 const errorClassName = "text-sm font-normal leading-[140%] text-red-600";
 
 export type FieldErrorProps = {

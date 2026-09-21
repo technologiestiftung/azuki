@@ -36,7 +36,7 @@ export function ScoreBanner({ report }: Props) {
 
 	if (!report) {
 		return (
-			<div className="border rounded p-2 mb-2 text-xs text-gray-500 bg-gray-50 border-gray-200">
+			<div className="border rounded p-2 mb-2 text-xs text-sky-shade-110 bg-sky-shade-10 border-sky-shade-20">
 				Score unavailable
 			</div>
 		);

@@ -47,7 +47,7 @@ export function CustomNoGosEditor({ customNoGos, noGos, onChange }: Props) {
 
 	return (
 		<div className="flex flex-col gap-1">
-			<span className="text-xs text-gray-500">Eigene No-Gos</span>
+			<span className="text-xs text-sky-shade-110">Eigene No-Gos</span>
 			{customNoGos.length > 0 && (
 				<div className="flex flex-wrap gap-1">
 					{customNoGos.map((value) => (
@@ -56,7 +56,7 @@ export function CustomNoGosEditor({ customNoGos, noGos, onChange }: Props) {
 							className={`inline-flex items-center gap-1 text-xs px-2 py-1 rounded border ${
 								noGos[value] === "rejected"
 									? "bg-orange-50 border-orange-200 text-orange-800"
-									: "bg-gray-50 border-gray-200 text-gray-600"
+									: "bg-sky-shade-10 border-sky-shade-20 text-sky-shade-160"
 							}`}
 						>
 							<button
@@ -90,13 +90,13 @@ export function CustomNoGosEditor({ customNoGos, noGos, onChange }: Props) {
 						}
 					}}
 					placeholder="z. B. lange Pendeln"
-					className="flex-1 border border-gray-300 rounded px-2 py-1 text-xs"
+					className="flex-1 border border-sky-shade-30 rounded px-2 py-1 text-xs"
 				/>
 				<button
 					type="button"
 					onClick={addCustom}
 					disabled={!draft.trim()}
-					className="text-xs border border-gray-400 rounded px-2 py-1 disabled:opacity-50"
+					className="text-xs border border-sky-shade-80 rounded px-2 py-1 disabled:opacity-50"
 				>
 					Hinzufügen
 				</button>
