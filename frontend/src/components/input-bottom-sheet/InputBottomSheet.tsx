@@ -76,10 +76,10 @@ export function InputBottomSheet({
 			<div className="flex flex-col items-center gap-3 pt-1 pb-4 px-4 w-full">
 				<div className="flex flex-col gap-2.5 w-full pl-1">
 					{title && (
-						<h2 className="text-2xl font-semibold text-gray-900">{title}</h2>
+						<h2 className="text-2xl font-semibold text-sky-900">{title}</h2>
 					)}
 					{description && (
-						<div className="text-gray-500 text-base">{description}</div>
+						<div className="text-sky-900/50 text-base">{description}</div>
 					)}
 				</div>
 				<div className="flex flex-col gap-2 w-full pt-4">

@@ -290,7 +290,7 @@ export function StartScreen() {
 										className={`absolute inset-0 flex flex-col gap-3 px-5 ${animationClass}`}
 										style={{ zIndex: index === currentSlide ? 10 : 0 }}
 									>
-										<h1 className="text-4xl font-extrabold text-center">
+										<h1 className="text-4xl font-extrabold text-center text-sky-900">
 											{slide.title}
 										</h1>
 										{slide.description ? (
@@ -311,7 +311,7 @@ export function StartScreen() {
 										className={`h-full rounded-full transition-all duration-500 ease-spring ${
 											index === currentSlide
 												? "w-6 bg-sky-300"
-												: "w-3 bg-gray-200"
+												: "w-3 bg-sky-shade-20"
 										}`}
 									/>
 								))}

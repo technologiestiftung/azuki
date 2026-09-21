@@ -7,7 +7,6 @@ import { useFlowNavigation } from "../../../routing/useFlowNavigation";
 import { workExpectationOptions } from "./work-expectation-options";
 import { PrimaryThemedButton } from "../../primitives/buttons/PrimaryThemedButton";
 import { InputBottomSheet } from "../../input-bottom-sheet/InputBottomSheet";
-import { SecondaryButton } from "../../primitives/buttons/SecondaryButton";
 
 export function WorkExpectationsStep() {
 	const { goNext } = useFlowNavigation();
@@ -51,7 +50,7 @@ export function WorkExpectationsStep() {
 			<div className="flex flex-col gap-3 pb-8">
 				{profile.customWorkExpectations &&
 					profile.customWorkExpectations.length === 0 && (
-						<SecondaryButton
+						<PrimaryThemedButton
 							className="text-lg mb-3"
 							ariaLabel={
 								content[
@@ -68,12 +67,12 @@ export function WorkExpectationsStep() {
 									]
 								}
 							</div>
-						</SecondaryButton>
+						</PrimaryThemedButton>
 					)}
 				{profile.customWorkExpectations &&
 					profile.customWorkExpectations.length > 0 && (
 						<div ref={customWorkExpectationsSectionRef} className="scroll-mt-4">
-							<h3 className="text-lg font-semibold text-gray-500 mb-2 px-3.5">
+							<h3 className="text-lg font-semibold text-sky-shade-110 mb-2 px-3.5">
 								{content["workExpectations.customWorkExpectation.label"]}
 							</h3>
 							<div className="flex flex-col gap-y-2 rounded-2xl">

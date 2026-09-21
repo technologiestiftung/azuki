@@ -18,7 +18,7 @@ export function WorkExpectationsEditor({
 
 	return (
 		<div className="flex flex-col gap-2">
-			<span className="text-sm text-gray-600">Rahmenbedingungen</span>
+			<span className="text-sm text-sky-shade-160">Rahmenbedingungen</span>
 			<div className="flex flex-wrap gap-1">
 				{workExpectationOptions.map((opt) => {
 					const isSelected = selected.includes(opt.value);
@@ -30,7 +30,7 @@ export function WorkExpectationsEditor({
 							className={`text-xs px-2 py-1 rounded border ${
 								isSelected
 									? "bg-blue-100 border-blue-400 text-blue-800"
-									: "bg-gray-50 border-gray-300 text-gray-600"
+									: "bg-sky-shade-10 border-sky-shade-30 text-sky-shade-160"
 							}`}
 						>
 							{opt.label}

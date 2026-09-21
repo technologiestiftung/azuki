@@ -20,14 +20,16 @@ const TIER_BADGE: Record<RubricTier, string> = {
 };
 
 export function JobCard({ entry, rank, tier }: Props) {
-	const borderClass = tier ? TIER_BORDER[tier] : "border-gray-200";
+	const borderClass = tier ? TIER_BORDER[tier] : "border-sky-shade-20";
 
 	return (
 		<div className={`p-2 border-l-2 ${borderClass}`}>
 			<div className="flex items-baseline gap-2">
-				<span className="text-xs text-gray-500 w-5">{rank}.</span>
+				<span className="text-xs text-sky-shade-110 w-5">{rank}.</span>
 				<span className="font-medium text-sm flex-1">{entry.name}</span>
-				<span className="text-xs text-gray-500">{entry.score.toFixed(2)}</span>
+				<span className="text-xs text-sky-shade-110">
+					{entry.score.toFixed(2)}
+				</span>
 				{tier && (
 					<span
 						className={`text-[10px] font-semibold px-1.5 rounded ${TIER_BADGE[tier]}`}
@@ -37,7 +39,7 @@ export function JobCard({ entry, rank, tier }: Props) {
 				)}
 			</div>
 			{entry.reasoning && (
-				<div className="text-xs text-gray-700 mt-1 whitespace-pre-wrap">
+				<div className="text-xs text-sky-shade-170 mt-1 whitespace-pre-wrap">
 					{entry.reasoning}
 				</div>
 			)}

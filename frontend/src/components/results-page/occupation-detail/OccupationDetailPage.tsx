@@ -63,8 +63,13 @@ export function OccupationDetailPage() {
 		navigate(toWithShareSearch(ROUTE_PATHS.resultsList, searchParams));
 	}, [matchResults, navigate, searchParams]);
 
-	const { onScroll, collapseProgress, overlayOpacity, heroImageParallaxY } =
-		useOccupationDetailScroll();
+	const {
+		onScroll,
+		collapseProgress,
+		overlayOpacity,
+		heroControlsOpacity,
+		heroImageParallaxY,
+	} = useOccupationDetailScroll();
 
 	const { titleRef, titleRevealProgress, updateTitleReveal } =
 		useCollapsedTitleReveal();
@@ -221,25 +226,40 @@ export function OccupationDetailPage() {
 	return (
 		<div className="flex flex-col h-full relative overflow-x-hidden">
 			<div
-				className="relative flex-1 overflow-y-auto overflow-x-hidden"
-				onScroll={handleScroll}
+				className="absolute top-0 inset-x-0 z-30 bg-white transition-opacity duration-150"
+				style={{
+					opacity: collapseProgress,
+					pointerEvents: collapseProgress < 0.5 ? "none" : "auto",
+				}}
+				aria-hidden={collapseProgress < 0.5}
 			>
 				<OccupationDetailHeaderCollapsed
 					title={detail.displayName}
-					collapseProgress={collapseProgress}
-					titleRevealProgress={titleRevealProgress}
-					onDownload={handleDownload}
-					onShare={handleShare}
-					onToggleFavorite={detail.toggleFavorite}
-					onBack={handleBack}
 					isFavorite={detail.isFavorite}
+					onToggleFavorite={detail.toggleFavorite}
+					onShare={handleShare}
+					onBack={handleBack}
+					onDownload={handleDownload}
 					downloadDisabled={downloadDisabled}
+					titleOpacity={titleRevealProgress}
 				/>
+			</div>
+			<div
+				className="relative flex-1 overflow-y-auto overflow-x-hidden"
+				onScroll={handleScroll}
+			>
 				<div className="sticky top-0 z-0">
 					<OccupationDetailHero
 						displayName={detail.displayName}
 						heroImage={detail.heroImage}
+						isFavorite={detail.isFavorite}
+						onToggleFavorite={detail.toggleFavorite}
+						onShare={handleShare}
+						onBack={handleBack}
+						onDownload={handleDownload}
+						downloadDisabled={downloadDisabled}
 						overlayOpacity={overlayOpacity}
+						controlsOpacity={heroControlsOpacity}
 						imageParallaxY={heroImageParallaxY}
 					/>
 				</div>

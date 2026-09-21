@@ -1,16 +1,15 @@
-import { afterEach, describe, expect, it, vi } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import type { ContactRequest } from "../../src/schemas/contact.js";
 import {
 	buildHubSpotFields,
 	buildHubSpotLegalConsentOptions,
 	buildHubSpotSubmitBody,
 	contactTypeToKontaktweg,
-	isoDateToGermanDate,
+	isoDateToDDMMYYYY,
 	submitContactToHubSpot,
 } from "../../src/hubspot/client.js";
 
-const HUBSPOT_URL =
-	"https://api.hsforms.com/submissions/v3/integration/submit/8886739/c020e6fc-b891-44e3-ab7d-0ccede49b070";
+const HUBSPOT_URL = "https://api.hsforms.com/test-submit-url";
 
 const callRequest: ContactRequest = {
 	firstname: "Anna",
@@ -30,9 +29,9 @@ const mailRequest: ContactRequest = {
 	marketingConsent: false,
 };
 
-describe("isoDateToGermanDate", () => {
-	it("converts YYYY-MM-DD to DD.MM.YYYY", () => {
-		expect(isoDateToGermanDate("2010-01-01")).toBe("01.01.2010");
+describe("isoDateToDDMMYYYY", () => {
+	it("converts YYYY-MM-DD to DD/MM/YYYY", () => {
+		expect(isoDateToDDMMYYYY("2010-01-01")).toBe("01/01/2010");
 	});
 });
 
@@ -61,7 +60,7 @@ describe("buildHubSpotFields", () => {
 				value: "tester123@joblinge.de",
 			},
 			{ objectTypeId: "0-1", name: "phone", value: "015711223344" },
-			{ objectTypeId: "0-1", name: "geburtsdatum", value: "01.01.2010" },
+			{ objectTypeId: "0-1", name: "geburtsdatum", value: "01/01/2010" },
 			{
 				objectTypeId: "0-1",
 				name: "bevorzugter_kontaktweg",
@@ -140,6 +139,10 @@ describe("buildHubSpotSubmitBody", () => {
 });
 
 describe("submitContactToHubSpot", () => {
+	beforeEach(() => {
+		vi.stubEnv("HUBSPOT_FORMS_SUBMIT_URL", HUBSPOT_URL);
+	});
+
 	afterEach(() => {
 		vi.unstubAllGlobals();
 		vi.unstubAllEnvs();
@@ -191,6 +194,17 @@ describe("submitContactToHubSpot", () => {
 		);
 
 		await expect(submitContactToHubSpot(callRequest)).rejects.toThrow();
+	});
+
+	it("throws when HUBSPOT_FORMS_SUBMIT_URL is not set", async () => {
+		vi.stubEnv("HUBSPOT_FORMS_SUBMIT_URL", "");
+		const fetchMock = vi.fn();
+		vi.stubGlobal("fetch", fetchMock);
+
+		await expect(submitContactToHubSpot(callRequest)).rejects.toThrow(
+			"HUBSPOT_FORMS_SUBMIT_URL must be set",
+		);
+		expect(fetchMock).not.toHaveBeenCalled();
 	});
 
 	it("skips the real request when HUBSPOT_MOCK_SUBMIT is true", async () => {

@@ -74,6 +74,7 @@ export const useMatchResultsStore = create<
 					occupationTypeTagFilterIds: [],
 					vacanciesCount: undefined,
 					cachedVacancies: null,
+					resultsListScrollTop: 0,
 				}),
 
 			syncVacanciesCount: (vacancies) =>

@@ -17,17 +17,19 @@ export function SelectableRowButton({
 			aria-label={ariaLabel || label}
 			aria-pressed={selected}
 			className={`min-h-[52px] w-full flex gap-2 items-center justify-between p-3 rounded-xl border-2 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-sky-500 ${
-				selected ? "border-sky-300 bg-sky-50" : "border-gray-200 bg-transparent"
+				selected
+					? "border-sky-300 bg-sky-50"
+					: "border-sky-shade-20 bg-transparent"
 			}`}
 		>
-			<span className="text-left text-lg font-medium text-gray-700">
+			<span className="text-left text-lg font-medium text-sky-shade-170">
 				{label}
 			</span>
 			<div
 				className={`w-6 h-6 rounded-[5px] border-2 flex items-center justify-center transition-colors ${
 					selected
 						? "border-sky-300 bg-sky-300"
-						: "border-gray-300 bg-transparent"
+						: "border-sky-shade-20 bg-transparent"
 				}`}
 			>
 				{selected && (
