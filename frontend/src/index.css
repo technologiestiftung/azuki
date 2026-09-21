@@ -3,6 +3,46 @@
 @tailwind utilities;
 
 @layer base {
+	@font-face {
+		font-family: "Asap";
+		font-style: normal;
+		font-weight: 400;
+		font-display: swap;
+		src: url("/fonts/asap/Asap-Regular.woff2") format("woff2");
+	}
+
+	@font-face {
+		font-family: "Asap";
+		font-style: normal;
+		font-weight: 500;
+		font-display: swap;
+		src: url("/fonts/asap/Asap-Medium.woff2") format("woff2");
+	}
+
+	@font-face {
+		font-family: "Asap";
+		font-style: normal;
+		font-weight: 600;
+		font-display: swap;
+		src: url("/fonts/asap/Asap-SemiBold.woff2") format("woff2");
+	}
+
+	@font-face {
+		font-family: "Asap";
+		font-style: normal;
+		font-weight: 700;
+		font-display: swap;
+		src: url("/fonts/asap/Asap-Bold.woff2") format("woff2");
+	}
+
+	@font-face {
+		font-family: "Asap";
+		font-style: normal;
+		font-weight: 800;
+		font-display: swap;
+		src: url("/fonts/asap/Asap-ExtraBold.woff2") format("woff2");
+	}
+
 	:root {
 		/* custom spring easing */
 		/* spring({ stiffness: 400, damping: 40, mass: 1, velocity: 0 }) */
