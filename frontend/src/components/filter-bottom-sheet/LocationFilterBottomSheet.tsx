@@ -141,13 +141,7 @@ export function LocationFilterBottomSheet({
 			onApply={handleApply}
 		>
 			<div className="flex flex-col min-w-0 gap-2 px-4 pt-4 pb-8">
-				<div
-					className={`flex flex-col justify-center items-center gap-2 min-h-[52px] p-3 w-full rounded-xl text-lg ${
-						regionSelected
-							? "border-2 border-sky-300 bg-sky-50 text-sky-700"
-							: "text-sky-shade-160"
-					}`}
-				>
+				<div className="flex flex-col justify-center items-center gap-2 min-h-[52px] p-3 w-full rounded-xl text-lg text-sky-shade-160">
 					{selectedLocationDisplay}
 				</div>
 				<PrimaryThemedButton
