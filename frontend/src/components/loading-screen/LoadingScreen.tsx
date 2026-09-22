@@ -13,7 +13,7 @@ const SUCCESS_FREEZE_MS = 2000;
 const MIN_SUCCESS_MS = 3000;
 // Cap, in case the animation never loads or never reports completion.
 const MAX_SUCCESS_MS = 6000;
-const MIN_WAITING_MS = 5000;
+const MIN_WAITING_MS = 10_000;
 const WHITE_FADE_MS = 400;
 const PROGRESS_BAR_DURATION_MS = 30_000;
 
