@@ -85,13 +85,6 @@ export function LoadingScreen() {
 				}
 				overlayTarget.current = null;
 				setOverlayOpacity(0);
-
-				const message = err instanceof Error ? err.message : "";
-				if (message.includes("401") || message.includes("403")) {
-					navigate(ROUTE_PATHS.login, { replace: true });
-					return;
-				}
-
 				setContentPhase("error");
 			}
 		};

@@ -167,10 +167,6 @@ app.post("/api/unlock", (c) => {
 });
 
 app.post("/api/match", async (c) => {
-	if (!isAuthorized(c)) {
-		return c.json({ error: "Unauthorized" }, 401);
-	}
-
 	let body: unknown;
 	try {
 		body = await c.req.json();
@@ -236,10 +232,6 @@ app.post("/api/match", async (c) => {
 });
 
 app.post("/api/vacancies", async (c) => {
-	if (!isAuthorized(c)) {
-		return c.json({ error: "Unauthorized" }, 401);
-	}
-
 	let body: unknown;
 	try {
 		body = await c.req.json();
@@ -381,10 +373,6 @@ app.get("/api/vacancies/:refnr", async (c) => {
 });
 
 app.post("/api/reverse-geocode", async (c) => {
-	if (!isAuthorized(c)) {
-		return c.json({ error: "Unauthorized" }, 401);
-	}
-
 	let body: unknown;
 	try {
 		body = await c.req.json();
@@ -409,10 +397,6 @@ app.post("/api/reverse-geocode", async (c) => {
 });
 
 app.post("/api/contact", async (c) => {
-	if (!isAuthorized(c)) {
-		return c.json({ error: "Unauthorized" }, 401);
-	}
-
 	let body: unknown;
 	try {
 		body = await c.req.json();
@@ -453,10 +437,6 @@ const MatchExplanationsRequestSchema = z.object({
 });
 
 app.post("/api/occupations/:id/match-explanations", async (c) => {
-	if (!isAuthorized(c)) {
-		return c.json({ error: "Unauthorized" }, 401);
-	}
-
 	const id = parseInt(c.req.param("id"), 10);
 	const occupation = occupations.find((o) => o.id === id);
 	if (!occupation) {
@@ -496,10 +476,6 @@ app.post("/api/occupations/:id/match-explanations", async (c) => {
 });
 
 app.post("/api/profile/short-description", async (c) => {
-	if (!isAuthorized(c)) {
-		return c.json({ error: "Unauthorized" }, 401);
-	}
-
 	let body: unknown;
 	try {
 		body = await c.req.json();

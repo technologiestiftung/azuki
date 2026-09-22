@@ -2,7 +2,6 @@ import { lazy, Suspense, useEffect } from "react";
 import { Routes, Route, Navigate, useLocation } from "react-router-dom";
 import { useToastStore } from "./store/useToastStore";
 import { useMatchResultsStore } from "./store/useMatchResultsStore";
-import { LoginScreen } from "./components/login-screen/LoginScreen";
 import { StartScreen } from "./components/competence-profile/start/StartScreen";
 import { InSchoolStep } from "./components/competence-profile/steps/InSchoolStep";
 import { SchoolDegreeStep } from "./components/competence-profile/steps/school-degree/SchoolDegreeStep";
@@ -57,7 +56,10 @@ function App() {
 		>
 			<div key={location.pathname} className="animate-fadeIn h-full">
 				<Routes>
-					<Route path={ROUTE_PATHS.login} element={<LoginScreen />} />
+					<Route
+						path={ROUTE_PATHS.root}
+						element={<Navigate to={ROUTE_PATHS.start} replace />}
+					/>
 					<Route path={ROUTE_PATHS.start} element={<StartScreen />} />
 					<Route
 						path={ROUTE_PATHS.educationInSchool}
