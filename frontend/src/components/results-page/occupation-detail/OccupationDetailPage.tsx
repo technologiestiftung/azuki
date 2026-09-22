@@ -90,6 +90,7 @@ export function OccupationDetailPage() {
 	);
 	const salaryLabel = resolveDetailSalaryLabel(detail.occupation);
 	const schoolDegreeLabel = resolveDetailSchoolDegreeLabel(detail.occupation);
+	const isShared = Boolean(shareState);
 	const downloadDisabled =
 		detail.loading || !detail.occupation || Boolean(detail.error);
 	const statusMessage = resolveDetailStatusMessage(detail);
@@ -241,6 +242,7 @@ export function OccupationDetailPage() {
 					onBack={handleBack}
 					onDownload={handleDownload}
 					downloadDisabled={downloadDisabled}
+					showDownload={!isShared}
 					titleOpacity={titleRevealProgress}
 				/>
 			</div>
@@ -258,6 +260,7 @@ export function OccupationDetailPage() {
 						onBack={handleBack}
 						onDownload={handleDownload}
 						downloadDisabled={downloadDisabled}
+						showDownload={!isShared}
 						overlayOpacity={overlayOpacity}
 						controlsOpacity={heroControlsOpacity}
 						imageParallaxY={heroImageParallaxY}
@@ -284,7 +287,7 @@ export function OccupationDetailPage() {
 							occupationVacanciesCount={occupationVacanciesCount}
 							nextOccupationCards={nextOccupationCards}
 							isWildcard={isWildcard}
-							isShared={Boolean(shareState)}
+							isShared={isShared}
 						/>
 					)}
 				</div>

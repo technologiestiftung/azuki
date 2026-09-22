@@ -11,6 +11,7 @@ interface OccupationDetailHeroProps {
 	onBack: () => void;
 	onDownload: () => void;
 	downloadDisabled: boolean;
+	showDownload?: boolean;
 	overlayOpacity: number;
 	controlsOpacity: number;
 	imageParallaxY: number;
@@ -25,6 +26,7 @@ export function OccupationDetailHero({
 	onBack,
 	onDownload,
 	downloadDisabled,
+	showDownload = true,
 	overlayOpacity,
 	controlsOpacity,
 	imageParallaxY,
@@ -65,6 +67,7 @@ export function OccupationDetailHero({
 					onToggleFavorite={onToggleFavorite}
 					isFavorite={isFavorite}
 					downloadDisabled={downloadDisabled}
+					showDownload={showDownload}
 					buttonClassName="bg-sky-shade-10/50 rounded-xl backdrop-blur-[4.5px]"
 				/>
 			</div>
