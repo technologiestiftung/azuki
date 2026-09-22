@@ -632,6 +632,8 @@ export const content = {
 		"Standortzugriff wurde verweigert. Bitte erlaube den Zugriff in den Einstellungen.",
 	"results.filter.location.error.geocodeFailed":
 		"Dein Standort konnte nicht ermittelt werden. Bitte versuche es erneut.",
+	"results.filter.location.error.rateLimited":
+		"Zu viele Standortanfragen. Bitte versuche es in ein paar Minuten erneut.",
 	"results.badge.suffix": "Stellen",
 	"results.badge.empty": "Keine offenen Stellen",
 	"results.previewHeading": "Beispiele in deiner Nähe",

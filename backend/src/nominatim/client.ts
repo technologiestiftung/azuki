@@ -2,6 +2,7 @@ const NOMINATIM_REVERSE_URL = "https://nominatim.openstreetmap.org/reverse";
 const POSTCODE_LENGTH = 5;
 const REQUEST_TIMEOUT_MS = 5000;
 const COORDINATE_PRECISION = 3;
+const CACHE_TTL_MS = 60 * 60 * 1000;
 
 // Rough bounding box for Germany
 const GERMANY_BOUNDS = {
@@ -10,6 +11,17 @@ const GERMANY_BOUNDS = {
 	minLon: 5.8,
 	maxLon: 15.1,
 };
+
+interface CacheEntry {
+	value: ResolvedLocation | null;
+	expiresAt: number;
+}
+
+const cache = new Map<string, CacheEntry>();
+
+function cacheKey(lat: number, lon: number): string {
+	return `${lat},${lon}`;
+}
 
 interface NominatimAddress {
 	postcode?: string;
@@ -78,6 +90,12 @@ export async function resolveLocationFromCoordinates(
 		return null;
 	}
 
+	const key = cacheKey(lat, lon);
+	const cached = cache.get(key);
+	if (cached && cached.expiresAt > Date.now()) {
+		return cached.value;
+	}
+
 	const params = new URLSearchParams({
 		lat: String(lat),
 		lon: String(lon),
@@ -102,7 +120,9 @@ export async function resolveLocationFromCoordinates(
 		}
 
 		const data = (await res.json()) as NominatimReverseResponse;
-		return parseNominatimReverseResponse(data);
+		const result = parseNominatimReverseResponse(data);
+		cache.set(key, { value: result, expiresAt: Date.now() + CACHE_TTL_MS });
+		return result;
 	} catch (err) {
 		const reason = err instanceof Error ? err.message : String(err);
 		console.error(`Nominatim API error: ${reason}`);

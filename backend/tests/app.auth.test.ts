@@ -48,6 +48,23 @@ describe("public app routes are usable without x-app-password", () => {
 		expect(res.status).not.toBe(401);
 	});
 
+	it("POST /api/contact with a valid payload reaches HubSpot submission and succeeds", async () => {
+		vi.stubEnv("HUBSPOT_MOCK_SUBMIT", "true");
+		const app = await loadApp("secret");
+		const res = await app.request("/api/contact", {
+			method: "POST",
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify({
+				firstname: "Anna",
+				postalcode: "12345",
+				contactType: "mail",
+				email: "anna@example.com",
+				marketingConsent: true,
+			}),
+		});
+		expect(res.status).toBe(200);
+	});
+
 	it("POST /api/occupations/:id/match-explanations", async () => {
 		const app = await loadApp("secret");
 		const res = await app.request(
