@@ -19,6 +19,7 @@ interface OccupationDetailBodyProps {
 	occupationVacanciesCount: number | undefined;
 	nextOccupationCards: SharedNextOccupationCard[];
 	isWildcard?: boolean;
+	isShared?: boolean;
 }
 
 export function OccupationDetailBody({
@@ -30,6 +31,7 @@ export function OccupationDetailBody({
 	occupationVacanciesCount,
 	nextOccupationCards,
 	isWildcard = false,
+	isShared = false,
 }: OccupationDetailBodyProps) {
 	const [searchParams] = useSearchParams();
 	const inlineApplyRef = useRef<HTMLAnchorElement>(null);
@@ -75,7 +77,7 @@ export function OccupationDetailBody({
 					))}
 				</ul>
 			</div>
-			{!isWildcard && (
+			{!isWildcard && !isShared && (
 				<OccupationDetailMatchSection
 					matchPercent={matchPercent}
 					occupation={occupation}
@@ -90,33 +92,35 @@ export function OccupationDetailBody({
 					<OccupationImageCarousel images={occupation.images} />
 				</div>
 			)}
-			<div className="px-4">
-				<div className="flex flex-col gap-5 px-3 py-5 rounded-2xl bg-sky-50">
-					<div className="flex flex-col gap-[7px] text-center">
-						<h3 className="text-sky-900 text-2xl font-semibold">
-							{occupationVacanciesCount !== undefined &&
-							occupationVacanciesCount > 0
-								? content["results.detail.apply.title"]
-								: content["results.detail.apply.empty.title"]}
-						</h3>
-						<p className="text-lg font-normal text-sky-900">
-							{occupationVacanciesCount !== undefined &&
-							occupationVacanciesCount > 0
-								? content["results.detail.apply.description"]
-								: content["results.detail.apply.empty.description"]}
-						</p>
+			{!isShared && (
+				<div className="px-4">
+					<div className="flex flex-col gap-5 px-3 py-5 rounded-2xl bg-sky-50 border border-sky-100">
+						<div className="flex flex-col gap-[7px] text-center">
+							<h3 className="text-sky-1000 text-2xl font-semibold">
+								{occupationVacanciesCount !== undefined &&
+								occupationVacanciesCount > 0
+									? content["results.detail.apply.title"]
+									: content["results.detail.apply.empty.title"]}
+							</h3>
+							<p className="text-lg font-normal text-sky-1000">
+								{occupationVacanciesCount !== undefined &&
+								occupationVacanciesCount > 0
+									? content["results.detail.apply.description"]
+									: content["results.detail.apply.empty.description"]}
+							</p>
+						</div>
+						<OccupationDetailApplyLink
+							ref={inlineApplyRef}
+							hidden={
+								!isInlineApplyVisible &&
+								occupationVacanciesCount !== undefined &&
+								occupationVacanciesCount > 0
+							}
+							occupationVacanciesCount={occupationVacanciesCount}
+						/>
 					</div>
-					<OccupationDetailApplyLink
-						ref={inlineApplyRef}
-						hidden={
-							!isInlineApplyVisible &&
-							occupationVacanciesCount !== undefined &&
-							occupationVacanciesCount > 0
-						}
-						occupationVacanciesCount={occupationVacanciesCount}
-					/>
 				</div>
-			</div>
+			)}
 			{nextOccupationCards.length > 0 && (
 				<div className="flex flex-col gap-2 pt-[25px] pb-4 bg-sky-50">
 					<h3 className="text-sky-900 text-2xl font-semibold text-left px-[19px]">
@@ -147,7 +151,8 @@ export function OccupationDetailBody({
 					</div>
 				</div>
 			)}
-			{!isInlineApplyVisible &&
+			{!isShared &&
+				!isInlineApplyVisible &&
 				occupationVacanciesCount !== undefined &&
 				occupationVacanciesCount > 0 && (
 					<div className="fixed bottom-0 left-0 right-0 p-4 z-40">

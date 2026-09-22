@@ -10,6 +10,7 @@ interface OccupationDetailHeaderCollapsedProps {
 	onBack: () => void;
 	onDownload: () => void;
 	downloadDisabled: boolean;
+	showDownload?: boolean;
 	titleOpacity?: number;
 }
 
@@ -21,6 +22,7 @@ export function OccupationDetailHeaderCollapsed({
 	onBack,
 	onDownload,
 	downloadDisabled,
+	showDownload = true,
 	titleOpacity = 1,
 }: OccupationDetailHeaderCollapsedProps) {
 	return (
@@ -45,6 +47,7 @@ export function OccupationDetailHeaderCollapsed({
 				onToggleFavorite={onToggleFavorite}
 				isFavorite={isFavorite}
 				downloadDisabled={downloadDisabled}
+				showDownload={showDownload}
 			/>
 		</div>
 	);

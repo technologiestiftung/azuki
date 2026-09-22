@@ -7,6 +7,7 @@ interface OccupationDetailActionButtonsProps {
 	onToggleFavorite: () => void;
 	isFavorite: boolean;
 	downloadDisabled?: boolean;
+	showDownload?: boolean;
 	buttonClassName?: string;
 	tabIndex?: number;
 }
@@ -17,21 +18,24 @@ export function OccupationDetailActionButtons({
 	onToggleFavorite,
 	isFavorite,
 	downloadDisabled = false,
+	showDownload = true,
 	buttonClassName,
 	tabIndex,
 }: OccupationDetailActionButtonsProps) {
 	return (
 		<div className="flex items-center gap-1.5">
-			<GhostIconButton
-				iconSrc="/icons/download.svg"
-				onClick={onDownload}
-				disabled={downloadDisabled}
-				ariaLabel={content["results.detail.download.ariaLabel"]}
-				title={content["results.download"]}
-				iconSize="w-5 h-5"
-				className={buttonClassName}
-				tabIndex={tabIndex}
-			/>
+			{showDownload && (
+				<GhostIconButton
+					iconSrc="/icons/download.svg"
+					onClick={onDownload}
+					disabled={downloadDisabled}
+					ariaLabel={content["results.detail.download.ariaLabel"]}
+					title={content["results.download"]}
+					iconSize="w-5 h-5"
+					className={buttonClassName}
+					tabIndex={tabIndex}
+				/>
+			)}
 			<GhostIconButton
 				iconSrc="/icons/share.svg"
 				onClick={onShare}
