@@ -3,18 +3,17 @@ import type { MatchedOccupation } from "@azuki/shared";
 import { content } from "../../../content";
 import {
 	LOGO_LOCKUP_SRC,
-	LOGO_RASTER_EDGE,
 	LOGO_WORDMARK_SRC,
 	ensureBufferPolyfill,
 	getSolidPdfPlaceholderSrc,
 	loadPdfIconSrc,
+	loadPdfLogoSrc,
 	loadPdfPlaceholderSrc,
 	loadPdfTopCardImages,
 	revokePdfBlobUrls,
 	triggerDownload,
 	warmPdfRuntime,
 } from "../../pdf/loadPdfAssets";
-import { COLOR } from "../../pdf/pdfTheme";
 import {
 	OccupationsPdfDocument,
 	type OccupationsPdfAssets,
@@ -48,8 +47,8 @@ export async function exportOccupationsPdf(
 			loadPdfIconSrc(MASCOT_SRC, CTA_SURFACE_BG),
 			loadPdfIconSrc(QR_SRC, CTA_SURFACE_BG),
 			loadPdfTopCardImages(topOccupations, resolvePlaceholder),
-			loadPdfIconSrc(LOGO_WORDMARK_SRC, COLOR.white, LOGO_RASTER_EDGE),
-			loadPdfIconSrc(LOGO_LOCKUP_SRC, COLOR.white, LOGO_RASTER_EDGE),
+			loadPdfLogoSrc(LOGO_WORDMARK_SRC),
+			loadPdfLogoSrc(LOGO_LOCKUP_SRC),
 		]);
 
 	const placeholderSrc = placeholderPromise

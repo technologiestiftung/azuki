@@ -41,7 +41,7 @@ const WARM_CTA_SURFACE_BG = "#DDF4FF";
  */
 export const LOGO_WORDMARK_SRC = "/illustrations/azuki-wordmark.svg";
 export const LOGO_LOCKUP_SRC = "/illustrations/azuki-lockup.svg";
-export const LOGO_RASTER_EDGE = MAX_RASTER_EDGE;
+const LOGO_RASTER_EDGE = 512;
 
 export type PdfRasterOptions = {
 	coverAspect?: number;
@@ -417,7 +417,8 @@ function rasterizeToDataUrl(
 			: canvas.toDataURL("image/png");
 	}
 
-	const scale = Math.min(1, MAX_RASTER_EDGE / Math.max(naturalW, naturalH));
+	const maxEdge = options.outHeight ?? MAX_RASTER_EDGE;
+	const scale = Math.min(1, maxEdge / Math.max(naturalW, naturalH));
 	const width = Math.max(1, Math.round(naturalW * scale));
 	const height = Math.max(1, Math.round(naturalH * scale));
 	const canvas = document.createElement("canvas");
@@ -496,19 +497,29 @@ const iconCache = new Map<string, Promise<string | null>>();
 export async function loadPdfIconSrc(
 	src: string,
 	backgroundColor: string,
-	outHeight?: number,
+	{
+		outHeight,
+		format = "jpeg",
+	}: { outHeight?: number; format?: "jpeg" | "png" } = {},
 ): Promise<string | null> {
-	const cacheKey = `${src}|${backgroundColor}|${outHeight ?? ""}`;
+	const cacheKey = `${src}|${backgroundColor}|${outHeight ?? ""}|${format}`;
 	let pending = iconCache.get(cacheKey);
 	if (!pending) {
 		pending = loadPdfImageSrc(src, {
-			format: "jpeg",
+			format,
 			backgroundColor,
 			outHeight,
 		});
 		iconCache.set(cacheKey, pending);
 	}
 	return pending;
+}
+
+export async function loadPdfLogoSrc(src: string): Promise<string | null> {
+	return loadPdfIconSrc(src, WHITE, {
+		outHeight: LOGO_RASTER_EDGE,
+		format: "png",
+	});
 }
 
 function createSolidPlaceholderDataUrl(): string {
@@ -653,8 +664,8 @@ export function warmPdfRuntime(): Promise<void> {
 				),
 				loadPdfIconSrc(WARM_MASCOT_SRC, WARM_CTA_SURFACE_BG),
 				loadPdfIconSrc(WARM_QR_SRC, WARM_CTA_SURFACE_BG),
-				loadPdfIconSrc(LOGO_WORDMARK_SRC, WHITE, LOGO_RASTER_EDGE),
-				loadPdfIconSrc(LOGO_LOCKUP_SRC, WHITE, LOGO_RASTER_EDGE),
+				loadPdfLogoSrc(LOGO_WORDMARK_SRC),
+				loadPdfLogoSrc(LOGO_LOCKUP_SRC),
 			]);
 		})().catch(() => {
 			pdfWarmPromise = null;
