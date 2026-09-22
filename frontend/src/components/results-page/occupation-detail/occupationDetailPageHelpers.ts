@@ -27,8 +27,8 @@ export function resolveDetailTaskItems(
 }
 
 export function resolveDetailSalaryLabel(occupation: DetailOccupation): string {
-	if (occupation?.salaryKnown && occupation.salaryMonthlyMedian !== null) {
-		return formatOccupationSalary(occupation.salaryMonthlyMedian);
+	if (occupation?.salaryEntryKnown && occupation.salaryMonthlyEntry !== null) {
+		return formatOccupationSalary(occupation.salaryMonthlyEntry);
 	}
 	return content["results.detail.salary.unknown"];
 }

@@ -153,7 +153,9 @@
       "Defekte Reißverschlüsse austauschen und Säume nähen",
       "Kunden beraten, was an der Kleidung geändert werden kann",
       "Kleidungsstücke bügeln und zur Abholung bereitstellen"
-    ]
+    ],
+    "salaryMonthlyEntry": 2543,
+    "salaryEntryKnown": true
   },
   {
     "id": 15647,
@@ -321,7 +323,9 @@
       "Musik auswählen und das Training damit begleiten",
       "Teilnehmende korrigieren, wenn Bewegungen falsch sind",
       "Aufwärmen und Entspannung am Ende der Stunde anleiten"
-    ]
+    ],
+    "salaryMonthlyEntry": null,
+    "salaryEntryKnown": false
   },
   {
     "id": 6327,
@@ -492,7 +496,9 @@
       "Saatgut auswählen, säen und Pflanzen pflegen",
       "Lebensmittel auf ihre Inhaltsstoffe prüfen",
       "Schädlingsbefall an Pflanzen erkennen und dokumentieren"
-    ]
+    ],
+    "salaryMonthlyEntry": 3418,
+    "salaryEntryKnown": true
   },
   {
     "id": 9063,
@@ -662,7 +668,9 @@
       "Beim Essen unterstützen und Mahlzeiten reichen",
       "Senioren zu Arztbesuchen oder Behörden begleiten",
       "Pflegedokumentation ausfüllen und Abläufe notieren"
-    ]
+    ],
+    "salaryMonthlyEntry": 3187,
+    "salaryEntryKnown": true
   },
   {
     "id": 51027,
@@ -849,7 +857,9 @@
       "Atmung und Kreislauf während eines Eingriffs überwachen",
       "Patienten vor und nach der Operation betreuen",
       "Medikamente und Infusionen kontrollieren und bereitstellen"
-    ]
+    ],
+    "salaryMonthlyEntry": 3568,
+    "salaryEntryKnown": true
   },
   {
     "id": 29047,
@@ -1023,7 +1033,9 @@
       "Bleche schneiden und in Form bringen",
       "Anlagen für Industrie- und Versorgungsbetriebe montieren",
       "Fertige Anlagen prüfen und in Betrieb nehmen"
-    ]
+    ],
+    "salaryMonthlyEntry": 3497,
+    "salaryEntryKnown": true
   },
   {
     "id": 15164,
@@ -1200,7 +1212,9 @@
       "Heizkessel und Heizungssysteme einbauen und in Betrieb nehmen",
       "Badezimmer und Sanitäranlagen montieren",
       "Defekte Leitungen oder Heizungen reparieren"
-    ]
+    ],
+    "salaryMonthlyEntry": 2866,
+    "salaryEntryKnown": true
   },
   {
     "id": 34754,
@@ -1380,7 +1394,9 @@
       "Kunststücke wie Jonglieren oder Seiltanzen vor Publikum zeigen",
       "Täglich Kraft, Ausdauer und Beweglichkeit trainieren",
       "Neue Nummern und Abläufe einstudieren und proben"
-    ]
+    ],
+    "salaryMonthlyEntry": null,
+    "salaryEntryKnown": false
   },
   {
     "id": 4303,
@@ -1532,7 +1548,9 @@
       "Asphaltgemische für Straßen oder Böden vorbereiten",
       "Asphalt auf Untergründe aufbringen und glätten",
       "Entwässerungsarbeiten auf Baustellen durchführen"
-    ]
+    ],
+    "salaryMonthlyEntry": 4298,
+    "salaryEntryKnown": true
   },
   {
     "id": 10186,
@@ -1683,7 +1701,9 @@
       "Lebensmittel einkaufen und Vorräte verwalten",
       "Wohn- und Sanitärräume reinigen und sauber halten",
       "Wäsche waschen, bügeln und ausbessern"
-    ]
+    ],
+    "salaryMonthlyEntry": 2870,
+    "salaryEntryKnown": true
   },
   {
     "id": 27411,
@@ -1855,7 +1875,9 @@
       "Kunden zu Gesundheits- und Urlaubsangeboten beraten",
       "Werbematerial erstellen und Angebote bewerben",
       "Verträge abschließen und Buchungen abrechnen"
-    ]
+    ],
+    "salaryMonthlyEntry": 2381,
+    "salaryEntryKnown": true
   },
   {
     "id": 9996,
@@ -2059,7 +2081,9 @@
       "Veranstaltungen und Banketts im Hotel organisieren",
       "Gäste empfangen und bei Fragen weiterhelfen",
       "Wareneinkauf und Lagerung im Betrieb koordinieren"
-    ]
+    ],
+    "salaryMonthlyEntry": 3316,
+    "salaryEntryKnown": true
   },
   {
     "id": 67663,
@@ -2228,7 +2252,9 @@
       "Datenbanken einrichten und aktuell halten",
       "IT-Systeme betreuen und bei Problemen helfen",
       "Internetlösungen und Anwendungen entwickeln"
-    ]
+    ],
+    "salaryMonthlyEntry": 3583,
+    "salaryEntryKnown": true
   },
   {
     "id": 7850,
@@ -2391,7 +2417,9 @@
       "Bilder, Ton und Animationen in Anwendungen einbinden",
       "Medienprodukte wie Videos oder interaktive Inhalte erstellen",
       "Grafiken und visuelle Elemente für Software aufbereiten"
-    ]
+    ],
+    "salaryMonthlyEntry": 2950,
+    "salaryEntryKnown": true
   },
   {
     "id": 7848,
@@ -2553,7 +2581,9 @@
       "Datenbanken entwickeln und in bestehende Systeme einbauen",
       "Software auf Rechnern und in Netzwerken installieren und pflegen",
       "IT-Systeme analysieren und passende Lösungen planen"
-    ]
+    ],
+    "salaryMonthlyEntry": 3583,
+    "salaryEntryKnown": true
   },
   {
     "id": 8564,
@@ -2720,7 +2750,9 @@
       "Grundrisse und Raumkonzepte mit CAD-Programmen zeichnen",
       "Materialien und Farben für Räume auswählen und zusammenstellen",
       "Modelle und Visualisierungen von Räumen erstellen"
-    ]
+    ],
+    "salaryMonthlyEntry": 2573,
+    "salaryEntryKnown": true
   },
   {
     "id": 7020,
@@ -2894,7 +2926,9 @@
       "Bild-, Ton- und Videomaterial bearbeiten und aufbereiten",
       "Layout und Design von Medienprodukten umsetzen",
       "Medienprodukte für verschiedene Kanäle wie Web oder Print anpassen"
-    ]
+    ],
+    "salaryMonthlyEntry": 2395,
+    "salaryEntryKnown": true
   },
   {
     "id": 15424,
@@ -3053,7 +3087,9 @@
       "Gestaltungsideen mit Kunden besprechen und weiterentwickeln",
       "Modelle und Prototypen von Produkten erstellen",
       "Materialien und Farben für das Design eines Produkts festlegen"
-    ]
+    ],
+    "salaryMonthlyEntry": 3409,
+    "salaryEntryKnown": true
   },
   {
     "id": 14497,
@@ -3224,7 +3260,9 @@
       "Informationen sammeln und in verständliche Texte umwandeln",
       "Fotos auswählen und technische Grafiken erstellen",
       "Dokumente archivieren und verwalten"
-    ]
+    ],
+    "salaryMonthlyEntry": 3497,
+    "salaryEntryKnown": true
   },
   {
     "id": 13620,
@@ -3407,7 +3445,9 @@
       "Flüge, Hotels und Mietwagen buchen und reservieren",
       "Reiseprogramme zusammenstellen und organisieren",
       "Reiseunterlagen wie Tickets und Voucher vorbereiten"
-    ]
+    ],
+    "salaryMonthlyEntry": 2381,
+    "salaryEntryKnown": true
   },
   {
     "id": 8526,
@@ -3584,7 +3624,9 @@
       "Klang und Lautstärke am Mischpult einstellen und regeln",
       "Tonaufnahmen in der Nachbearbeitung bearbeiten und verfeinern",
       "Akustik des Aufnahmeraums prüfen und optimieren"
-    ]
+    ],
+    "salaryMonthlyEntry": 3134,
+    "salaryEntryKnown": true
   },
   {
     "id": 27427,
@@ -3760,7 +3802,9 @@
       "Braunkohle in Trocknungsanlagen zu Produkten verarbeiten",
       "Proben nehmen und die Qualität der Kohle prüfen",
       "Anlagen überwachen und Störungen melden oder beheben"
-    ]
+    ],
+    "salaryMonthlyEntry": 3934,
+    "salaryEntryKnown": true
   },
   {
     "id": 820,
@@ -3934,7 +3978,9 @@
       "Rohstoffe zerkleinern, trocknen und mahlen",
       "Maschinen und Anlagen überwachen und steuern",
       "Proben nehmen und Qualität prüfen"
-    ]
+    ],
+    "salaryMonthlyEntry": 3985,
+    "salaryEntryKnown": true
   },
   {
     "id": 821,
@@ -4112,7 +4158,9 @@
       "Steine im Steinbruch bohren und sprengen",
       "Maschinen überwachen, die Steine zerkleinern und sortieren",
       "Proben nehmen und Qualität der Baustoffe prüfen"
-    ]
+    ],
+    "salaryMonthlyEntry": 3998,
+    "salaryEntryKnown": true
   },
   {
     "id": 822,
@@ -4288,7 +4336,9 @@
       "Sand und Kies in Gruben oder Seen abbauen",
       "Maschinen überwachen, die Sand und Kies sieben und waschen",
       "Material nach Korngröße sortieren lassen und kontrollieren"
-    ]
+    ],
+    "salaryMonthlyEntry": 4066,
+    "salaryEntryKnown": true
   },
   {
     "id": 819,
@@ -4481,7 +4531,9 @@
       "Maschinen steuern, die Kohle sieben und reinigen",
       "Steinkohle zu Koks oder anderen Produkten veredeln",
       "Proben nehmen und Ergebnisse aufschreiben"
-    ]
+    ],
+    "salaryMonthlyEntry": 2736,
+    "salaryEntryKnown": true
   },
   {
     "id": 2634,
@@ -4674,7 +4726,9 @@
       "Kunden bei der Brillenwahl beraten",
       "Gläser schleifen und in Fassungen einbauen",
       "Brillen anpassen und Sitz kontrollieren"
-    ]
+    ],
+    "salaryMonthlyEntry": 2410,
+    "salaryEntryKnown": true
   },
   {
     "id": 132718,
@@ -4818,7 +4872,9 @@
       "Untergrund prüfen und Dämmmaterial einbauen",
       "Estrichmörtel herstellen und aufbringen",
       "Estrich glätten und für Bodenbeläge vorbereiten"
-    ]
+    ],
+    "salaryMonthlyEntry": 3955,
+    "salaryEntryKnown": true
   },
   {
     "id": 132717,
@@ -4963,7 +5019,9 @@
       "Fliesen und Platten zuschneiden und verlegen",
       "Wände und Böden in Bädern oder Küchen verkleiden",
       "Fugen zwischen Fliesen ausfüllen und glätten"
-    ]
+    ],
+    "salaryMonthlyEntry": 3955,
+    "salaryEntryKnown": true
   },
   {
     "id": 132719,
@@ -5109,7 +5167,9 @@
       "Wände und Fassaden verputzen und glätten",
       "Putz für verschiedene Oberflächen herstellen und auftragen",
       "Stuckelemente formen und anbringen"
-    ]
+    ],
+    "salaryMonthlyEntry": 3955,
+    "salaryEntryKnown": true
   },
   {
     "id": 132721,
@@ -5255,7 +5315,9 @@
       "Metallprofile als Unterkonstruktion befestigen",
       "Gipskartonplatten an Wände und Decken montieren",
       "Dämmmaterial einbauen und Fugen verspachteln"
-    ]
+    ],
+    "salaryMonthlyEntry": 3955,
+    "salaryEntryKnown": true
   },
   {
     "id": 132723,
@@ -5404,7 +5466,9 @@
       "Dämmstoffe zuschneiden und an Fassaden befestigen",
       "Rohre und Behälter mit Isoliermaterial ummanteln",
       "Dämmschichten mit Blechen oder Folien abdecken"
-    ]
+    ],
+    "salaryMonthlyEntry": 3955,
+    "salaryEntryKnown": true
   },
   {
     "id": 132724,
@@ -5552,7 +5616,9 @@
       "Holzbalken sägen, hobeln und bearbeiten",
       "Dachstühle und Holzkonstruktionen auf der Baustelle montieren",
       "Türen, Treppen und Wandverkleidungen aus Holz einbauen"
-    ]
+    ],
+    "salaryMonthlyEntry": 3955,
+    "salaryEntryKnown": true
   },
   {
     "id": 126840,
@@ -5742,7 +5808,9 @@
       "Kunden zu Sanierungen und Ausbauarbeiten beraten",
       "Angebote kalkulieren und Verträge abschließen",
       "Bauarbeiten planen, koordinieren und kontrollieren"
-    ]
+    ],
+    "salaryMonthlyEntry": 5878,
+    "salaryEntryKnown": true
   },
   {
     "id": 126837,
@@ -5901,7 +5969,9 @@
       "Automaten aufstellen und in Betrieb nehmen",
       "Automaten befüllen und Bestände kontrollieren",
       "Kunden betreuen und Einstellungen anpassen"
-    ]
+    ],
+    "salaryMonthlyEntry": null,
+    "salaryEntryKnown": false
   },
   {
     "id": 126835,
@@ -6063,7 +6133,9 @@
       "Automaten montieren und Leitungen anschließen",
       "Software installieren und Geräte konfigurieren",
       "Defekte Teile austauschen und Automaten reparieren"
-    ]
+    ],
+    "salaryMonthlyEntry": null,
+    "salaryEntryKnown": false
   },
   {
     "id": 6622,
@@ -6253,7 +6325,9 @@
       "Angebote und Verträge für Neuwagen und Gebrauchtwagen erstellen",
       "Preise kalkulieren und Rechnungen schreiben",
       "Marktentwicklungen beobachten und Aktionen planen"
-    ]
+    ],
+    "salaryMonthlyEntry": 2845,
+    "salaryEntryKnown": true
   },
   {
     "id": 3626,
@@ -6410,7 +6484,9 @@
       "Zutaten abwiegen und Teig nach Rezept mischen",
       "Brot, Brötchen und Kuchen im Ofen backen",
       "Torten und Gebäck verzieren und garnieren"
-    ]
+    ],
+    "salaryMonthlyEntry": 3251,
+    "salaryEntryKnown": true
   },
   {
     "id": 6755,
@@ -6591,7 +6667,9 @@
       "Kunden zu Konten, Krediten und Geldanlagen beraten",
       "Überweisungen und Zahlungen für Kunden abwickeln",
       "Verträge für Kredite oder Versicherungen vorbereiten und abschließen"
-    ]
+    ],
+    "salaryMonthlyEntry": 3032,
+    "salaryEntryKnown": true
   },
   {
     "id": 4823,
@@ -6759,7 +6837,9 @@
       "Bagger, Kräne und Planierraupen auf der Baustelle bedienen",
       "Erde bewegen und Bauteile transportieren",
       "Baumaschinen warten und kleinere Reparaturen durchführen"
-    ]
+    ],
+    "salaryMonthlyEntry": 3955,
+    "salaryEntryKnown": true
   },
   {
     "id": 13727,
@@ -6940,7 +7020,9 @@
       "Proben von Beton, Asphalt oder Boden entnehmen",
       "Baustoffe im Labor testen und auf Qualität prüfen",
       "Ergebnisse dokumentieren und mit Normen vergleichen"
-    ]
+    ],
+    "salaryMonthlyEntry": 4069,
+    "salaryEntryKnown": true
   },
   {
     "id": 142962,
@@ -7064,7 +7146,9 @@
       "Grundrisse und Detailpläne für Gebäude am Computer zeichnen",
       "Wände, Decken und Innenausbau nach Architekten-Vorgaben planen",
       "Maßstabsgerechte Modelle und Pläne erstellen"
-    ]
+    ],
+    "salaryMonthlyEntry": 2573,
+    "salaryEntryKnown": true
   },
   {
     "id": 142964,
@@ -7187,7 +7271,9 @@
       "Technische Zeichnungen für Brücken und Betonbauten am Computer erstellen",
       "Tragwerke und Stützen nach statischen Berechnungen konstruieren",
       "Detailpläne für Stahl- und Stahlbetonbauten anfertigen"
-    ]
+    ],
+    "salaryMonthlyEntry": 2573,
+    "salaryEntryKnown": true
   },
   {
     "id": 142963,
@@ -7311,7 +7397,9 @@
       "Pläne für Straßen, Radwege und Kanäle am Computer zeichnen",
       "Übersichts- und Detailpläne für Rohrleitungen erstellen",
       "Grünanlagen und Landschaftspläne nach Vorgaben anfertigen"
-    ]
+    ],
+    "salaryMonthlyEntry": 2573,
+    "salaryEntryKnown": true
   },
   {
     "id": 4304,
@@ -7479,7 +7567,9 @@
       "Dächer, Wände und Böden gegen Feuchtigkeit abdichten",
       "Untergründe prüfen und vorbereiten",
       "Schutzschichten und Beläge mit Spezialwerkzeug aufbringen"
-    ]
+    ],
+    "salaryMonthlyEntry": 4298,
+    "salaryEntryKnown": true
   },
   {
     "id": 27304,
@@ -7646,7 +7736,9 @@
       "Baustelle absperren und Sicherheitsnetze aufhängen",
       "Gebäude mit Maschinen abreißen und Bauteile entfernen",
       "Beton mit Spezialgeräten trennen und schneiden"
-    ]
+    ],
+    "salaryMonthlyEntry": 4298,
+    "salaryEntryKnown": true
   },
   {
     "id": 2153,
@@ -7822,7 +7914,9 @@
       "Metallteile zuschneiden, formen und zusammenschweißen",
       "Tanks, Kessel und Behälter nach Zeichnung herstellen",
       "Fertige Behälter auf Dichtheit und Qualität prüfen"
-    ]
+    ],
+    "salaryMonthlyEntry": 2866,
+    "salaryEntryKnown": true
   },
   {
     "id": 5924,
@@ -7981,7 +8075,9 @@
       "Entwurfsskizzen für Kleidungsstücke zeichnen",
       "Schnittmuster erstellen und Maße berechnen",
       "Schnitte anpassen und Modellbeschreibungen dokumentieren"
-    ]
+    ],
+    "salaryMonthlyEntry": 2458,
+    "salaryEntryKnown": true
   },
   {
     "id": 756,
@@ -8127,7 +8223,9 @@
       "Förderbänder und Bahnanlagen im Bergwerk auf- und abbauen",
       "Transporteinrichtungen bedienen und auf Funktion prüfen",
       "Rohrleitungen verlegen und Pumpen warten"
-    ]
+    ],
+    "salaryMonthlyEntry": 3191,
+    "salaryEntryKnown": true
   },
   {
     "id": 757,
@@ -8277,7 +8375,9 @@
       "Vortriebsmaschinen im Bergwerk bedienen und steuern",
       "Rohstoffe abbauen und abtransportieren",
       "Strecken im Bergwerk anlegen und instand halten"
-    ]
+    ],
+    "salaryMonthlyEntry": 3191,
+    "salaryEntryKnown": true
   },
   {
     "id": 76437,
@@ -8456,7 +8556,9 @@
       "Maschinen warten und bei Problemen reparieren",
       "Belüftung und Klima im Tunnel überwachen",
       "Arbeiter sicher in den Schacht befördern"
-    ]
+    ],
+    "salaryMonthlyEntry": 3191,
+    "salaryEntryKnown": true
   },
   {
     "id": 76429,
@@ -8630,7 +8732,9 @@
       "Je nach Gestein das passende Bohrverfahren auswählen",
       "Fertige Schächte mit Zement sichern und abdichten",
       "Überflüssiges Material aus dem Schacht entfernen"
-    ]
+    ],
+    "salaryMonthlyEntry": 3191,
+    "salaryEntryKnown": true
   },
   {
     "id": 13794,
@@ -8810,7 +8914,9 @@
       "Fahrzeug vor der Abfahrt auf Sicherheit prüfen",
       "Ladung sichern und Lieferpapiere ausfüllen",
       "Fahrtzeiten und Routen einhalten und dokumentieren"
-    ]
+    ],
+    "salaryMonthlyEntry": 2963,
+    "salaryEntryKnown": true
   },
   {
     "id": 137338,
@@ -8987,7 +9093,9 @@
       "Materialien einkaufen und Preise verhandeln",
       "Qualität von Produkten prüfen und dokumentieren",
       "Zwischen Technik-Team und Büro vermitteln"
-    ]
+    ],
+    "salaryMonthlyEntry": 4004,
+    "salaryEntryKnown": true
   },
   {
     "id": 15577,
@@ -9161,7 +9269,9 @@
       "Verstorbene hygienisch und kosmetisch versorgen",
       "Sarg oder Urne herrichten und Grab anlegen",
       "Trauerfeier organisieren und begleiten"
-    ]
+    ],
+    "salaryMonthlyEntry": 3449,
+    "salaryEntryKnown": true
   },
   {
     "id": 3980,
@@ -9315,7 +9425,9 @@
       "Stahlstäbe biegen und als Gerüst in die Form einlegen",
       "Beton einbringen und glatt abziehen",
       "Fertige Betonteile prüfen und nachbearbeiten"
-    ]
+    ],
+    "salaryMonthlyEntry": 4298,
+    "salaryEntryKnown": true
   },
   {
     "id": 13747,
@@ -9468,7 +9580,9 @@
       "Beton mischen und in die Formen füllen",
       "Betonteile aushärten lassen und aus der Form lösen",
       "Fertige Teile auf Qualität prüfen"
-    ]
+    ],
+    "salaryMonthlyEntry": 4069,
+    "salaryEntryKnown": true
   },
   {
     "id": 9066,
@@ -9645,7 +9759,9 @@
       "Gemeinsam spielen, basteln oder spazieren gehen",
       "Beim Essen, Anziehen oder Einkaufen helfen",
       "Gespräche führen und für Gesellschaft sorgen"
-    ]
+    ],
+    "salaryMonthlyEntry": null,
+    "salaryEntryKnown": false
   },
   {
     "id": 9731,
@@ -9828,7 +9944,9 @@
       "Abläufe im Unternehmen verbessern und planen",
       "Einkauf von Waren und Rohstoffen organisieren",
       "Mitarbeiter einstellen und Gehälter abrechnen"
-    ]
+    ],
+    "salaryMonthlyEntry": 3643,
+    "salaryEntryKnown": true
   },
   {
     "id": 27401,
@@ -10024,7 +10142,9 @@
       "Internationale Märkte beobachten und vergleichen",
       "Verkauf im Ausland planen und Strategien entwickeln",
       "Finanzierungspläne für Auslandsgeschäfte erstellen"
-    ]
+    ],
+    "salaryMonthlyEntry": 3643,
+    "salaryEntryKnown": true
   },
   {
     "id": 27261,
@@ -10214,7 +10334,9 @@
       "Preise und Lieferbedingungen mit Partnern verhandeln",
       "Kunden beraten und Verkaufsgespräche führen",
       "Produktion überwachen und Qualität kontrollieren"
-    ]
+    ],
+    "salaryMonthlyEntry": 3643,
+    "salaryEntryKnown": true
   },
   {
     "id": 8428,
@@ -10336,7 +10458,9 @@
       "Skizzen und Modelle für neue Kunstwerke entwerfen",
       "Oberflächen schleifen, polieren oder bemalen",
       "Aufträge von Kunden besprechen und umsetzen"
-    ]
+    ],
+    "salaryMonthlyEntry": 3920,
+    "salaryEntryKnown": true
   },
   {
     "id": 7285,
@@ -10507,7 +10631,9 @@
       "Ladung be- und entladen und sicher verstauen",
       "Schiffsmotoren und Technik überwachen",
       "Schiff reinigen und in Ordnung halten"
-    ]
+    ],
+    "salaryMonthlyEntry": 2395,
+    "salaryEntryKnown": true
   },
   {
     "id": 136115,
@@ -10684,7 +10810,9 @@
       "Route planen und Karten sowie Radar nutzen",
       "Crew und Ladung im Blick behalten",
       "Schäden an Maschinen erkennen und melden"
-    ]
+    ],
+    "salaryMonthlyEntry": 3555,
+    "salaryEntryKnown": true
   },
   {
     "id": 6322,
@@ -10852,7 +10980,9 @@
       "Proben vorbereiten und auf Nährböden züchten",
       "Versuche im Labor durchführen und beobachten",
       "Ergebnisse aufschreiben und auswerten"
-    ]
+    ],
+    "salaryMonthlyEntry": 3653,
+    "salaryEntryKnown": true
   },
   {
     "id": 2710,
@@ -11024,7 +11154,9 @@
       "Formen aus Gips oder Holz vorbereiten und befüllen",
       "Modelle bemalen und realistisch gestalten",
       "Fertige Modelle prüfen und verpacken"
-    ]
+    ],
+    "salaryMonthlyEntry": 3017,
+    "salaryEntryKnown": true
   },
   {
     "id": 6315,
@@ -11192,7 +11324,9 @@
       "Messgeräte bedienen und Werte ablesen",
       "Experimente im Labor durchführen und beobachten",
       "Ergebnisse dokumentieren und auswerten"
-    ]
+    ],
+    "salaryMonthlyEntry": 3653,
+    "salaryEntryKnown": true
   },
   {
     "id": 15144,
@@ -11342,7 +11476,9 @@
       "Untergrund prüfen, glätten und vorbereiten",
       "Teppich, Laminat oder PVC zuschneiden und verlegen",
       "Beläge kleben, befestigen und sauber abschließen"
-    ]
+    ],
+    "salaryMonthlyEntry": 2945,
+    "salaryEntryKnown": true
   },
   {
     "id": 4539,
@@ -11488,7 +11624,9 @@
       "Fässer abdichten und innen beschichten",
       "Fertige Fässer prüfen und reparieren",
       "Maschinen zur Holzbearbeitung pflegen und warten"
-    ]
+    ],
+    "salaryMonthlyEntry": 3409,
+    "salaryEntryKnown": true
   },
   {
     "id": 90474,
@@ -11636,7 +11774,9 @@
       "Einzelteile zusammenfügen und abdichten",
       "Innenausbau und Aufbauten einbauen",
       "Fertige Boote prüfen und nachbessern"
-    ]
+    ],
+    "salaryMonthlyEntry": 3409,
+    "salaryEntryKnown": true
   },
   {
     "id": 90469,
@@ -11805,7 +11945,9 @@
       "Elektrik und Elektronik an Bord anschließen",
       "Technische Anlagen testen und kontrollieren",
       "Defekte reparieren und Teile austauschen"
-    ]
+    ],
+    "salaryMonthlyEntry": 3409,
+    "salaryEntryKnown": true
   },
   {
     "id": 4201,
@@ -11970,7 +12112,9 @@
       "Rohre verlegen und Pumpen einbauen",
       "Wasserqualität und Grundwasser prüfen",
       "Alte Brunnen sanieren und instand setzen"
-    ]
+    ],
+    "salaryMonthlyEntry": 4298,
+    "salaryEntryKnown": true
   },
   {
     "id": 90590,
@@ -12150,7 +12294,9 @@
       "Einbände gestalten und mit Leder oder Stoff beziehen",
       "Alte Bücher reparieren und restaurieren",
       "Vergoldungen und besondere Verzierungen anbringen"
-    ]
+    ],
+    "salaryMonthlyEntry": 3198,
+    "salaryEntryKnown": true
   },
   {
     "id": 13749,
@@ -12331,7 +12477,9 @@
       "Bücher bestellen und den Lagerbestand pflegen",
       "Bücher im Laden oder Onlineshop ansprechend präsentieren",
       "Neuerscheinungen beobachten und interessante Titel auswählen"
-    ]
+    ],
+    "salaryMonthlyEntry": 2785,
+    "salaryEntryKnown": true
   },
   {
     "id": 2443,
@@ -12494,7 +12642,9 @@
       "Schusswaffen aus Metall und Holz herstellen",
       "Defekte Waffen reparieren und Ersatzteile einbauen",
       "Zielfernrohre und andere Teile montieren und einstellen"
-    ]
+    ],
+    "salaryMonthlyEntry": 3353,
+    "salaryEntryKnown": true
   },
   {
     "id": 8409,
@@ -12647,7 +12797,9 @@
       "Jeden Morgen trainieren und Tanztechnik üben",
       "Neue Choreografien einstudieren und Schrittfolgen lernen",
       "Tanzstücke und Shownummern auf der Bühne aufführen"
-    ]
+    ],
+    "salaryMonthlyEntry": 3397,
+    "salaryEntryKnown": true
   },
   {
     "id": 130315,
@@ -12787,7 +12939,9 @@
       "Borsten und Haare auf die richtige Länge zuschneiden",
       "Produktionsmaschinen einrichten und Abläufe überwachen",
       "Borsten manuell oder maschinell in Holz oder Kunststoff einsetzen"
-    ]
+    ],
+    "salaryMonthlyEntry": null,
+    "salaryEntryKnown": false
   },
   {
     "id": 13809,
@@ -12954,7 +13108,9 @@
       "Chemische Stoffe und Proben im Labor untersuchen",
       "Versuche vorbereiten und Messgeräte bedienen",
       "Ergebnisse dokumentieren und auswerten"
-    ]
+    ],
+    "salaryMonthlyEntry": 3302,
+    "salaryEntryKnown": true
   },
   {
     "id": 1143,
@@ -13127,7 +13283,9 @@
       "Computergesteuerte Produktionsanlagen steuern und überwachen",
       "Rohstoffe abmessen und in Behälter einfüllen",
       "Fertige Produkte wie Farben oder Reinigungsmittel abfüllen"
-    ]
+    ],
+    "salaryMonthlyEntry": 3521,
+    "salaryEntryKnown": true
   },
   {
     "id": 5793,
@@ -13287,7 +13445,9 @@
       "Proben aus Produktion oder Umwelt entnehmen und analysieren",
       "Chemikalien und Geräte für Versuche auswählen und vorbereiten",
       "Versuchsabläufe beobachten und Ergebnisse dokumentieren"
-    ]
+    ],
+    "salaryMonthlyEntry": 3653,
+    "salaryEntryKnown": true
   },
   {
     "id": 2436,
@@ -13457,7 +13617,9 @@
       "Medizinische Instrumente wie Skalpelle oder Endoskope herstellen",
       "Defekte OP-Instrumente reparieren und prüfen",
       "Metallteile präzise bearbeiten und zu Instrumenten zusammenbauen"
-    ]
+    ],
+    "salaryMonthlyEntry": 3353,
+    "salaryEntryKnown": true
   },
   {
     "id": 129406,
@@ -13610,7 +13772,9 @@
       "Dachziegel und Dachplatten auf Gebäuden verlegen",
       "Dächer und Balkone gegen Wasser abdichten",
       "Dachrinnen, Fassaden und Schneefangsysteme montieren"
-    ]
+    ],
+    "salaryMonthlyEntry": 4085,
+    "salaryEntryKnown": true
   },
   {
     "id": 14557,
@@ -13771,7 +13935,9 @@
       "Gold und Silber schmieden und in Form bringen",
       "Edelsteine einsetzen und Oberflächen polieren",
       "Musterkollektionen für die Serienproduktion anfertigen"
-    ]
+    ],
+    "salaryMonthlyEntry": 3704,
+    "salaryEntryKnown": true
   },
   {
     "id": 14326,
@@ -13945,7 +14111,9 @@
       "Requisiten besorgen und Hintergründe gestalten",
       "Fotos am Computer bearbeiten und retuschieren",
       "Konzepte für Werbe- oder Modefotografie entwickeln"
-    ]
+    ],
+    "salaryMonthlyEntry": 2950,
+    "salaryEntryKnown": true
   },
   {
     "id": 14217,
@@ -14119,7 +14287,9 @@
       "Entwürfe skizzieren und mit Kunden abstimmen",
       "Schriften, Farben und Bilder passend zusammenstellen",
       "Druckvorlagen fertigstellen und prüfen"
-    ]
+    ],
+    "salaryMonthlyEntry": 2950,
+    "salaryEntryKnown": true
   },
   {
     "id": 8459,
@@ -14297,7 +14467,9 @@
       "Storyboards zeichnen und Bildabläufe planen",
       "Animationen und Grafiken am Computer erstellen",
       "Kunden beraten und Gestaltungsideen vorstellen"
-    ]
+    ],
+    "salaryMonthlyEntry": 2950,
+    "salaryEntryKnown": true
   },
   {
     "id": 14319,
@@ -14456,7 +14628,9 @@
       "Stoffe und Accessoires auswählen und kombinieren",
       "Schnittmuster erstellen und Modelle anfertigen lassen",
       "Herstellung von Kleidungsstücken begleiten und prüfen"
-    ]
+    ],
+    "salaryMonthlyEntry": 2458,
+    "salaryEntryKnown": true
   },
   {
     "id": 3814,
@@ -14613,7 +14787,9 @@
       "Alkohol, Aromen und Zucker nach Rezept mischen",
       "Alkoholgehalt und Qualität der Produkte prüfen",
       "Produktionsanlagen bedienen und überwachen"
-    ]
+    ],
+    "salaryMonthlyEntry": 2815,
+    "salaryEntryKnown": true
   },
   {
     "id": 8899,
@@ -14780,7 +14956,9 @@
       "Diätpläne erstellen und mit Patienten besprechen",
       "Patienten zu gesunder Ernährung beraten",
       "Diätmahlzeiten planen und deren Zubereitung begleiten"
-    ]
+    ],
+    "salaryMonthlyEntry": 3538,
+    "salaryEntryKnown": true
   },
   {
     "id": 8303,
@@ -14950,7 +15128,9 @@
       "Bei Konferenzen oder Verhandlungen dolmetschen",
       "Notizen während des Gesprächs schnell festhalten",
       "Fachbegriffe in verschiedenen Sprachen nachschlagen"
-    ]
+    ],
+    "salaryMonthlyEntry": 4525,
+    "salaryEntryKnown": true
   },
   {
     "id": 6712,
@@ -15118,7 +15298,9 @@
       "Fragen zu Medikamenten und ihrer Anwendung erklären",
       "Waren einräumen und Regale auffüllen",
       "An der Kasse abrechnen und Kunden bedienen"
-    ]
+    ],
+    "salaryMonthlyEntry": 2845,
+    "salaryEntryKnown": true
   },
   {
     "id": 2610,
@@ -15270,7 +15452,9 @@
       "Fassungen mit Handwerkzeug herstellen oder anpassen",
       "Steine auf Schmuckstücken ausrichten und prüfen",
       "Entwurfszeichnungen für Schmuckfassungen anfertigen"
-    ]
+    ],
+    "salaryMonthlyEntry": 3704,
+    "salaryEntryKnown": true
   },
   {
     "id": 131163,
@@ -15428,7 +15612,9 @@
       "Passende Steine für ein Motiv auswählen",
       "Steine sägen und auf die richtige Größe bringen",
       "Entwurfszeichnungen für Gravuren erstellen"
-    ]
+    ],
+    "salaryMonthlyEntry": 3704,
+    "salaryEntryKnown": true
   },
   {
     "id": 131165,
@@ -15588,7 +15774,9 @@
       "Schmucksteine oder Deko-Artikel wie Teelichthalter fertigen",
       "Steine polieren, bis sie glänzen",
       "Rohsteine nach Auftrag auswählen und vorbereiten"
-    ]
+    ],
+    "salaryMonthlyEntry": 3704,
+    "salaryEntryKnown": true
   },
   {
     "id": 131166,
@@ -15726,7 +15914,9 @@
       "Rohdiamanten auf ihre Eignung prüfen und auswählen",
       "Diamanten sägen, spalten oder per Laser trennen",
       "Steine für technische Zwecke schleifen und formen"
-    ]
+    ],
+    "salaryMonthlyEntry": 3704,
+    "salaryEntryKnown": true
   },
   {
     "id": 131167,
@@ -15879,7 +16069,9 @@
       "Diamanten schleifen, bis sie funkeln",
       "Steine in Halterungen einspannen und ausrichten",
       "Schliff und Qualität der fertigen Steine prüfen"
-    ]
+    ],
+    "salaryMonthlyEntry": 3704,
+    "salaryEntryKnown": true
   },
   {
     "id": 136201,
@@ -16044,7 +16236,9 @@
       "Vor der Fahrt Bremsen und Technik des Zuges prüfen",
       "Bei Störungen reagieren und Leitstelle informieren",
       "Reisende sicher ans Ziel bringen"
-    ]
+    ],
+    "salaryMonthlyEntry": 3547,
+    "salaryEntryKnown": true
   },
   {
     "id": 136199,
@@ -16211,7 +16405,9 @@
       "Bahnübergänge sichern und überwachen",
       "Bei Störungen Gleise sperren oder Nothalte anordnen",
       "Mit Lokführern und Leitstelle ständig in Kontakt bleiben"
-    ]
+    ],
+    "salaryMonthlyEntry": 3609,
+    "salaryEntryKnown": true
   },
   {
     "id": 2774,
@@ -16390,7 +16586,9 @@
       "Elektrische Anlagen prüfen und in Betrieb nehmen",
       "Bauteile vorbereiten und Werkzeug bereitstellen",
       "Fehler in Anlagen suchen und beheben"
-    ]
+    ],
+    "salaryMonthlyEntry": 3583,
+    "salaryEntryKnown": true
   },
   {
     "id": 134713,
@@ -16564,7 +16762,9 @@
       "Automatisierungsanlagen einrichten und in Betrieb nehmen",
       "Sensoren und Steuerungen prüfen und einstellen",
       "Fehler in automatischen Systemen suchen und beheben"
-    ]
+    ],
+    "salaryMonthlyEntry": 3583,
+    "salaryEntryKnown": true
   },
   {
     "id": 15630,
@@ -16740,7 +16940,9 @@
       "Steuerungsprogramme schreiben und testen",
       "Anlagen warten und Fehler beheben",
       "Abläufe in automatisierten Systemen prüfen"
-    ]
+    ],
+    "salaryMonthlyEntry": 3583,
+    "salaryEntryKnown": true
   },
   {
     "id": 15623,
@@ -16923,7 +17125,9 @@
       "Maschinen und Antriebe einrichten und prüfen",
       "Defekte an Anlagen suchen und reparieren",
       "Sicherheitseinrichtungen testen und kontrollieren"
-    ]
+    ],
+    "salaryMonthlyEntry": 3583,
+    "salaryEntryKnown": true
   },
   {
     "id": 15636,
@@ -17100,7 +17304,9 @@
       "Heizung, Klima und Lüftung anschließen und einstellen",
       "Antennen und Datennetzwerke installieren",
       "Gebäudetechnik prüfen und Fehler beheben"
-    ]
+    ],
+    "salaryMonthlyEntry": 3715,
+    "salaryEntryKnown": true
   },
   {
     "id": 15621,
@@ -17285,7 +17491,9 @@
       "Gebäudetechnik programmieren und einstellen",
       "Anlagen überwachen und bei Störungen eingreifen",
       "Nutzer in die Bedienung der Systeme einweisen"
-    ]
+    ],
+    "salaryMonthlyEntry": 3681,
+    "salaryEntryKnown": true
   },
   {
     "id": 134715,
@@ -17465,7 +17673,9 @@
       "Smarte Technik wie Licht- oder Heizungssteuerung einbauen",
       "Geräte und Systeme miteinander vernetzen und testen",
       "Software für Gebäudetechnik einrichten und einstellen"
-    ]
+    ],
+    "salaryMonthlyEntry": 3681,
+    "salaryEntryKnown": true
   },
   {
     "id": 15632,
@@ -17654,7 +17864,9 @@
       "Programme und Betriebssysteme auf Geräten einrichten",
       "Fertige Geräte prüfen und auf Fehler testen",
       "Bauteile bestellen und Lagerbestand im Blick behalten"
-    ]
+    ],
+    "salaryMonthlyEntry": 3583,
+    "salaryEntryKnown": true
   },
   {
     "id": 122382,
@@ -17788,7 +18000,9 @@
       "Elektronische Bauteile einbauen und verkabeln",
       "Systeme nach der Installation testen und einstellen",
       "Fehler in Anlagen suchen und beheben"
-    ]
+    ],
+    "salaryMonthlyEntry": 3583,
+    "salaryEntryKnown": true
   },
   {
     "id": 134719,
@@ -17969,7 +18183,9 @@
       "Metallteile wie Wellen und Gehäuse an Maschinen fertigen",
       "Elektrische Bauteile in Maschinen einbauen und verbinden",
       "Fertige Maschinen auf Funktion und Sicherheit prüfen"
-    ]
+    ],
+    "salaryMonthlyEntry": 3583,
+    "salaryEntryKnown": true
   },
   {
     "id": 134718,
@@ -18151,7 +18367,9 @@
       "Defekte Motoren oder Generatoren reparieren",
       "Fehler in Antrieben suchen und beheben",
       "Fertige Antriebe testen und in Betrieb nehmen"
-    ]
+    ],
+    "salaryMonthlyEntry": 3715,
+    "salaryEntryKnown": true
   },
   {
     "id": 5502,
@@ -18316,7 +18534,9 @@
       "Prototypen für neue Geräte bauen und ausprobieren",
       "Messungen durchführen und Ergebnisse auswerten",
       "Technische Unterlagen und Dokumentationen erstellen"
-    ]
+    ],
+    "salaryMonthlyEntry": 3583,
+    "salaryEntryKnown": true
   },
   {
     "id": 8369,
@@ -18476,7 +18696,9 @@
       "Proben mit Chor, Band oder Ensemble leiten",
       "Musikstücke auswählen und für die Gruppe vorbereiten",
       "Einzelne Mitglieder beim Spielen oder Singen anleiten"
-    ]
+    ],
+    "salaryMonthlyEntry": null,
+    "salaryEntryKnown": false
   },
   {
     "id": 8779,
@@ -18652,7 +18874,9 @@
       "Kinder beim Spielen beobachten und gezielt fördern",
       "Hilfsmittel für den Alltag ausprobieren und anpassen",
       "Behandlungsfortschritte dokumentieren und besprechen"
-    ]
+    ],
+    "salaryMonthlyEntry": 3538,
+    "salaryEntryKnown": true
   },
   {
     "id": 9162,
@@ -18847,7 +19071,9 @@
       "Entwicklung der Kinder beobachten und aufschreiben",
       "Ausflüge und Freizeitaktivitäten planen und durchführen",
       "Eltern über den Alltag und Fortschritte der Kinder informieren"
-    ]
+    ],
+    "salaryMonthlyEntry": 3639,
+    "salaryEntryKnown": true
   },
   {
     "id": 9106,
@@ -19035,7 +19261,9 @@
       "Bei Hausaufgaben helfen und schulische Entwicklung fördern",
       "Freizeitangebote organisieren und gemeinsam umsetzen",
       "Als Ansprechperson für Sorgen und Probleme da sein"
-    ]
+    ],
+    "salaryMonthlyEntry": 3709,
+    "salaryEntryKnown": true
   },
   {
     "id": 4390,
@@ -19190,7 +19418,9 @@
       "Untergrund vorbereiten und Estrichmasse anmischen",
       "Estrich gleichmäßig auftragen und glätten",
       "Fertigplatten als Trockenestrich verlegen und zuschneiden"
-    ]
+    ],
+    "salaryMonthlyEntry": 4298,
+    "salaryEntryKnown": true
   },
   {
     "id": 9598,
@@ -19367,7 +19597,9 @@
       "Eurythmie-Übungen mit Kindern oder Erwachsenen durchführen",
       "Bewegungsabläufe zu Musik oder Sprache einstudieren",
       "Auftritte und Vorführungen mit der Gruppe vorbereiten"
-    ]
+    ],
+    "salaryMonthlyEntry": null,
+    "salaryEntryKnown": false
   },
   {
     "id": 35201,
@@ -19533,7 +19765,9 @@
       "Abläufe, Budget und Personal für Events planen",
       "Vor Ort den Aufbau und die Durchführung koordinieren",
       "Nach dem Event abrechnen und Berichte erstellen"
-    ]
+    ],
+    "salaryMonthlyEntry": null,
+    "salaryEntryKnown": false
   },
   {
     "id": 100809,
@@ -19716,7 +19950,9 @@
       "Beim Ausfüllen von Anträgen auf Arbeitslosengeld helfen",
       "Anträge prüfen und nach gesetzlichen Vorgaben bearbeiten",
       "Kundendaten pflegen und Unterlagen verwalten"
-    ]
+    ],
+    "salaryMonthlyEntry": 3531,
+    "salaryEntryKnown": true
   },
   {
     "id": 9496,
@@ -19907,7 +20143,9 @@
       "Schwimmkurse leiten und Übungen zeigen",
       "Wasserqualität messen und Chemikalien dosieren",
       "Umkleiden und Duschen sauber halten"
-    ]
+    ],
+    "salaryMonthlyEntry": 3190,
+    "salaryEntryKnown": true
   },
   {
     "id": 35268,
@@ -20083,7 +20321,9 @@
       "Antworten aus Befragungen in Daten umwandeln",
       "Ergebnisse auswerten und in Tabellen eintragen",
       "Berichte und Zusammenfassungen erstellen"
-    ]
+    ],
+    "salaryMonthlyEntry": 3302,
+    "salaryEntryKnown": true
   },
   {
     "id": 8348,
@@ -20245,7 +20485,9 @@
       "Alte Dokumente, Fotos und Videos übernehmen und sortieren",
       "Archivmaterial in Datenbanken erfassen und beschreiben",
       "Bestände lagern und vor Schäden schützen"
-    ]
+    ],
+    "salaryMonthlyEntry": 3134,
+    "salaryEntryKnown": true
   },
   {
     "id": 8329,
@@ -20421,7 +20663,9 @@
       "Bücher und Medien ausleihen und zurückbuchen",
       "Besucher bei der Suche nach Büchern beraten",
       "Neue Medien erfassen und ins System eintragen"
-    ]
+    ],
+    "salaryMonthlyEntry": 3449,
+    "salaryEntryKnown": true
   },
   {
     "id": 8349,
@@ -20588,7 +20832,9 @@
       "Bilder in Datenbanken einpflegen und beschriften",
       "Fotos am Computer bearbeiten und freistellen",
       "Kunden bei der Bildauswahl beraten und Bilder verkaufen"
-    ]
+    ],
+    "salaryMonthlyEntry": 2461,
+    "salaryEntryKnown": true
   },
   {
     "id": 8347,
@@ -20763,7 +21009,9 @@
       "Informationen in Datenbanken recherchieren und sammeln",
       "Daten ordnen und in Systemen speichern",
       "Kunden passende Infos zusammenstellen und weitergeben"
-    ]
+    ],
+    "salaryMonthlyEntry": 3134,
+    "salaryEntryKnown": true
   },
   {
     "id": 14388,
@@ -20927,7 +21175,9 @@
       "Krankenakten und Befunde erfassen und einpflegen",
       "Diagnosen und Behandlungen nach Codes verschlüsseln",
       "Daten anonymisieren bevor sie weitergegeben werden"
-    ]
+    ],
+    "salaryMonthlyEntry": 3449,
+    "salaryEntryKnown": true
   },
   {
     "id": 35019,
@@ -21090,7 +21340,9 @@
       "Apps und Webseiten für Kunden entwickeln",
       "Software beim Kunden einrichten und erklären",
       "Updates durchführen und Fehler beheben"
-    ]
+    ],
+    "salaryMonthlyEntry": 3583,
+    "salaryEntryKnown": true
   },
   {
     "id": 7856,
@@ -21258,7 +21510,9 @@
       "Programme und Apps schreiben und testen",
       "Software installieren und Nutzer einweisen",
       "Bestehende Programme anpassen und verbessern"
-    ]
+    ],
+    "salaryMonthlyEntry": 3583,
+    "salaryEntryKnown": true
   },
   {
     "id": 133556,
@@ -21436,7 +21690,9 @@
       "Abläufe im Betrieb analysieren und Schwachstellen finden",
       "Daten auswerten und digitale Lösungen entwickeln",
       "Prozesse automatisieren und effizienter gestalten"
-    ]
+    ],
+    "salaryMonthlyEntry": 3583,
+    "salaryEntryKnown": true
   },
   {
     "id": 133560,
@@ -21620,7 +21876,9 @@
       "Maschinen und Geräte mit IT-Systemen verbinden",
       "Netzwerke planen und einrichten",
       "Vernetzte Systeme testen und auf Fehler prüfen"
-    ]
+    ],
+    "salaryMonthlyEntry": 3583,
+    "salaryEntryKnown": true
   },
   {
     "id": 7847,
@@ -21789,7 +22047,9 @@
       "Computer, Server und Netzwerke aufbauen und einrichten",
       "Nutzer bei technischen Problemen unterstützen",
       "Systeme regelmäßig warten und aktualisieren"
-    ]
+    ],
+    "salaryMonthlyEntry": 3583,
+    "salaryEntryKnown": true
   },
   {
     "id": 35009,
@@ -21935,7 +22195,9 @@
       "Felder pflügen und Saatgut mit Maschinen aussäen",
       "Pflanzen düngen und mit Pflanzenschutzmitteln behandeln",
       "Getreide und Kartoffeln mit Erntemaschinen einfahren"
-    ]
+    ],
+    "salaryMonthlyEntry": 2815,
+    "salaryEntryKnown": true
   },
   {
     "id": 50978,
@@ -22104,7 +22366,9 @@
       "Massagen und Körperbehandlungen durchführen",
       "Kunden zu Ernährung und Entspannung beraten",
       "Make-up auftragen und Typberatungen anbieten"
-    ]
+    ],
+    "salaryMonthlyEntry": 2576,
+    "salaryEntryKnown": true
   },
   {
     "id": 15085,
@@ -22282,7 +22546,9 @@
       "Fahrkarten verkaufen und Fahrgäste zu Verbindungen beraten",
       "Fahrzeug vor der Fahrt auf Sicherheit und Sauberkeit prüfen",
       "Bei Störungen Fahrgäste informieren und Leitstelle benachrichtigen"
-    ]
+    ],
+    "salaryMonthlyEntry": 3497,
+    "salaryEntryKnown": true
   },
   {
     "id": 3820,
@@ -22449,7 +22715,9 @@
       "Maschinen für die Saftherstellung bedienen und überwachen",
       "Zutaten wie Zucker oder Aromen zum Saft hinzumischen",
       "Fertige Säfte auf Qualität und Geschmack prüfen"
-    ]
+    ],
+    "salaryMonthlyEntry": 3641,
+    "salaryEntryKnown": true
   },
   {
     "id": 136126,
@@ -22622,7 +22890,9 @@
       "Bestellungen aufnehmen und Speisen sowie Getränke servieren",
       "Einfache Gerichte und Frühstück in der Küche vorbereiten",
       "Tische dekorieren und Büfetts aufbauen"
-    ]
+    ],
+    "salaryMonthlyEntry": 3016,
+    "salaryEntryKnown": true
   },
   {
     "id": 34996,
@@ -22798,7 +23068,9 @@
       "Waren im Hafen umladen und den Transport organisieren",
       "Gewichte und Maße von Gütern messen und Ladepläne erstellen",
       "Ankommende und abgehende Sendungen kontrollieren und dokumentieren"
-    ]
+    ],
+    "salaryMonthlyEntry": 3230,
+    "salaryEntryKnown": true
   },
   {
     "id": 57895,
@@ -22958,7 +23230,9 @@
       "Holz und Gebäudeteile auf Schäden und Schädlinge untersuchen",
       "Insekten- oder Pilzbefall dokumentieren und bekämpfen",
       "Schutzmittel auftragen, um Holz vor Feuchtigkeit zu schützen"
-    ]
+    ],
+    "salaryMonthlyEntry": 4085,
+    "salaryEntryKnown": true
   },
   {
     "id": 35021,
@@ -23133,7 +23407,9 @@
       "Krankenhäuser, Bäder und öffentliche Einrichtungen vor Ort kontrollieren",
       "Wasserproben nehmen und auf Hygiene prüfen",
       "Verstöße gegen Hygienevorschriften dokumentieren und melden"
-    ]
+    ],
+    "salaryMonthlyEntry": 3449,
+    "salaryEntryKnown": true
   },
   {
     "id": 136119,
@@ -23291,7 +23567,9 @@
       "Salate, Suppen und einfache Gerichte zubereiten",
       "Zutaten vorbereiten, schneiden und abwiegen",
       "Speisen anrichten und für den Service bereitstellen"
-    ]
+    ],
+    "salaryMonthlyEntry": 3016,
+    "salaryEntryKnown": true
   },
   {
     "id": 33362,
@@ -23452,7 +23730,9 @@
       "Briefe und Pakete sortieren und auf Zustelltouren verteilen",
       "Sendungen an Empfänger zustellen und Unterschriften einholen",
       "Kunden beraten und Pakete entgegennehmen"
-    ]
+    ],
+    "salaryMonthlyEntry": 2879,
+    "salaryEntryKnown": true
   },
   {
     "id": 27448,
@@ -23613,7 +23893,9 @@
       "Angelieferte Waren annehmen und auf Menge und Zustand prüfen",
       "Güter sortieren und an den richtigen Lagerplatz einräumen",
       "Bestellungen zusammenstellen und für den Versand verpacken"
-    ]
+    ],
+    "salaryMonthlyEntry": 3230,
+    "salaryEntryKnown": true
   },
   {
     "id": 3898,
@@ -23775,7 +24057,9 @@
       "Rohstoffe annehmen, prüfen und an die Produktion weitergeben",
       "Maschinen zur Lebensmittelherstellung bedienen und überwachen",
       "Fertige Produkte verpacken und auf Qualität kontrollieren"
-    ]
+    ],
+    "salaryMonthlyEntry": 3539,
+    "salaryEntryKnown": true
   },
   {
     "id": 126792,
@@ -23912,7 +24196,9 @@
       "Tierhäute von Haaren und Fleischresten befreien und reinigen",
       "Häute mit Maschinen gerben, färben und trocknen",
       "Leder durch Schleifen, Bügeln oder Prägen veredeln"
-    ]
+    ],
+    "salaryMonthlyEntry": 2400,
+    "salaryEntryKnown": true
   },
   {
     "id": 90009,
@@ -24046,7 +24332,9 @@
       "Lederteile nach Vorlage zuschneiden und vorbereiten",
       "Einzelteile durch Nähen, Kleben oder Schweißen zusammenfügen",
       "Nähte, Verzierungen und Zubehör an Lederwaren anbringen"
-    ]
+    ],
+    "salaryMonthlyEntry": 2440,
+    "salaryEntryKnown": true
   },
   {
     "id": 129419,
@@ -24197,7 +24485,9 @@
       "Medizinische Instrumente und Geräte reinigen und desinfizieren",
       "Instrumente auf Beschädigungen kontrollieren",
       "Saubere Geräte steril verpacken und für den Einsatz bereitstellen"
-    ]
+    ],
+    "salaryMonthlyEntry": null,
+    "salaryEntryKnown": false
   },
   {
     "id": 122290,
@@ -24342,7 +24632,9 @@
       "Bleche und Rohre nach Maß zuschneiden und biegen",
       "Bohrungen anbringen und Metallteile bearbeiten",
       "Einzelteile zu fertigen Metallkonstruktionen zusammenbauen"
-    ]
+    ],
+    "salaryMonthlyEntry": 3412,
+    "salaryEntryKnown": true
   },
   {
     "id": 122292,
@@ -24489,7 +24781,9 @@
       "Montagepläne lesen und Arbeitsschritte planen",
       "Metallteile herstellen und bearbeiten",
       "Bauteile nach Plan zu Baugruppen oder Maschinen zusammenbauen"
-    ]
+    ],
+    "salaryMonthlyEntry": 3412,
+    "salaryEntryKnown": true
   },
   {
     "id": 122286,
@@ -24645,7 +24939,9 @@
       "Metallstäbe und Rohmaterial in Maschinen einlegen",
       "Laufende Produktion beobachten und Fehler beheben",
       "Fertige Drähte und Metallteile prüfen und kontrollieren"
-    ]
+    ],
+    "salaryMonthlyEntry": 3412,
+    "salaryEntryKnown": true
   },
   {
     "id": 122288,
@@ -24811,7 +25107,9 @@
       "Fräs- und Drehmaschinen für Metallteile einrichten",
       "Metallstücke auf die richtige Größe und Form bringen",
       "Fertige Bauteile messen und auf Fehler prüfen"
-    ]
+    ],
+    "salaryMonthlyEntry": 3412,
+    "salaryEntryKnown": true
   },
   {
     "id": 34980,
@@ -24957,7 +25255,9 @@
     "salaryKnown": true,
     "digitalizationSignal": true,
     "workLocations": "Fachkräfte für Möbel-, Küchen- und Umzugsservice arbeiten meist in Lagerräumen in Werkstätten in Transportfahrzeugen bei Kunden/Kundinnen Sie arbeiten ggf. auch in Büroräumen",
-    "competenciesText": "Kernkompetenzen: Beladen, Entladen Bohren Kundenberatung, -betreuung Möbelauslieferung Montage (Möbel, Küchen) Neueinbau Sägen Transport Umzüge Weitere Kompetenzen: Arbeitsvorbereitung Elektroinstallation Exoskelette Hobeln (Holz) Justieren Kleben Qualitätsprüfung, Qualitätssicherung Reklamationsbearbeitung Speditions-, Lieferverkehr Tourenplanung Wartung, Reparatur, Instandhaltung Weitere Fertigkeiten und Kenntnisse: Kompetenzgruppe \" Möbel \""
+    "competenciesText": "Kernkompetenzen: Beladen, Entladen Bohren Kundenberatung, -betreuung Möbelauslieferung Montage (Möbel, Küchen) Neueinbau Sägen Transport Umzüge Weitere Kompetenzen: Arbeitsvorbereitung Elektroinstallation Exoskelette Hobeln (Holz) Justieren Kleben Qualitätsprüfung, Qualitätssicherung Reklamationsbearbeitung Speditions-, Lieferverkehr Tourenplanung Wartung, Reparatur, Instandhaltung Weitere Fertigkeiten und Kenntnisse: Kompetenzgruppe \" Möbel \"",
+    "salaryMonthlyEntry": 3549,
+    "salaryEntryKnown": true
   },
   {
     "id": 14463,
@@ -25137,7 +25437,9 @@
       "Gebäude und Gelände auf Sicherheitsrisiken prüfen",
       "Sicherheitstechnik wie Kameras und Alarmanlagen kontrollieren",
       "Personen und Veranstaltungen bewachen und schützen"
-    ]
+    ],
+    "salaryMonthlyEntry": 3475,
+    "salaryEntryKnown": true
   },
   {
     "id": 14374,
@@ -25321,7 +25623,9 @@
       "Baupläne für Straßen und Brücken am Computer zeichnen",
       "Baukosten und Materialbedarf berechnen",
       "Höhen und Abstände auf Baustellen ausmessen"
-    ]
+    ],
+    "salaryMonthlyEntry": 2573,
+    "salaryEntryKnown": true
   },
   {
     "id": 129457,
@@ -25522,7 +25826,9 @@
       "Bühnen und Messestände aufbauen und abbauen",
       "Licht- und Tonanlagen für Veranstaltungen einrichten",
       "Technik während der Veranstaltung bedienen und überwachen"
-    ]
+    ],
+    "salaryMonthlyEntry": 2395,
+    "salaryEntryKnown": true
   },
   {
     "id": 14376,
@@ -25712,7 +26018,9 @@
       "Wassermengen und Wasserqualität messen und auswerten",
       "Pläne für Wasserleitungen und Kläranlagen vorbereiten",
       "Baustellen für Wasserprojekte begleiten und überwachen"
-    ]
+    ],
+    "salaryMonthlyEntry": 2573,
+    "salaryEntryKnown": true
   },
   {
     "id": 27539,
@@ -25874,7 +26182,9 @@
       "Gelieferte Waren annehmen und auf Schäden prüfen",
       "Pakete auspacken, sortieren und ins Regal einräumen",
       "Lagerbestände zählen und im System erfassen"
-    ]
+    ],
+    "salaryMonthlyEntry": 2886,
+    "salaryEntryKnown": true
   },
   {
     "id": 9387,
@@ -26053,7 +26363,9 @@
       "Schüler in Fächern wie Sport, Musik oder Technik unterrichten",
       "Unterrichtsstunden vorbereiten und Materialien zusammenstellen",
       "Hausaufgaben und Arbeiten korrigieren und bewerten"
-    ]
+    ],
+    "salaryMonthlyEntry": null,
+    "salaryEntryKnown": false
   },
   {
     "id": 136125,
@@ -26230,7 +26542,9 @@
       "Tische eindecken und für Gäste dekorieren",
       "Speisen und Getränke servieren und Bestellungen aufnehmen",
       "Rechnungen erstellen und Zahlungen entgegennehmen"
-    ]
+    ],
+    "salaryMonthlyEntry": 3316,
+    "salaryEntryKnown": true
   },
   {
     "id": 9997,
@@ -26411,7 +26725,9 @@
       "Personal einteilen und Mitarbeiter anleiten",
       "Qualität der Speisen und Produkte kontrollieren",
       "Gäste betreuen und auf Wünsche eingehen"
-    ]
+    ],
+    "salaryMonthlyEntry": 3316,
+    "salaryEntryKnown": true
   },
   {
     "id": 50920,
@@ -26571,7 +26887,9 @@
       "Brötchen belegen und Snacks zubereiten",
       "Kunden über Zutaten und Produkte beraten",
       "Theke dekorieren und Verkaufsraum sauber halten"
-    ]
+    ],
+    "salaryMonthlyEntry": 2850,
+    "salaryEntryKnown": true
   },
   {
     "id": 50924,
@@ -26731,7 +27049,9 @@
       "Feinkostsalate und Snacks zubereiten",
       "Kunden über Produkte und Verwendung beraten",
       "Theke dekorieren und Verkaufsraum sauber halten"
-    ]
+    ],
+    "salaryMonthlyEntry": 2850,
+    "salaryEntryKnown": true
   },
   {
     "id": 50922,
@@ -26891,7 +27211,9 @@
       "Gäste im Café bedienen und Heißgetränke servieren",
       "Auslagen und Verkaufsraum dekorieren",
       "Kunden über Inhaltsstoffe und Produkte beraten"
-    ]
+    ],
+    "salaryMonthlyEntry": 2833,
+    "salaryEntryKnown": true
   },
   {
     "id": 136320,
@@ -27060,7 +27382,9 @@
       "Verkaufsstrategien für den Webhandel entwickeln",
       "Marketingkampagnen für Online-Kunden planen",
       "Daten zum Kaufverhalten auswerten und nutzen"
-    ]
+    ],
+    "salaryMonthlyEntry": 3643,
+    "salaryEntryKnown": true
   },
   {
     "id": 6532,
@@ -27241,7 +27565,9 @@
       "Werbemaßnahmen planen und deren Erfolg prüfen",
       "Dienstpläne erstellen und Personal einteilen",
       "Warentransport und Lagerung organisieren"
-    ]
+    ],
+    "salaryMonthlyEntry": 3643,
+    "salaryEntryKnown": true
   },
   {
     "id": 125588,
@@ -27421,7 +27747,9 @@
       "Marktentwicklungen beobachten und auswerten",
       "Sortiment pflegen und Bestände steuern",
       "Mitarbeiter führen und Beschwerden bearbeiten"
-    ]
+    ],
+    "salaryMonthlyEntry": 3501,
+    "salaryEntryKnown": true
   },
   {
     "id": 27394,
@@ -27588,7 +27916,9 @@
       "Defekte Teile reparieren oder austauschen",
       "Fahrräder nach Kundenwunsch umrüsten und anpassen",
       "Bremsen, Schaltung und Beleuchtung prüfen"
-    ]
+    ],
+    "salaryMonthlyEntry": 3412,
+    "salaryEntryKnown": true
   },
   {
     "id": 134333,
@@ -27745,7 +28075,9 @@
       "Stoffe, Leder und Kunststoffe zuschneiden und befestigen",
       "Fußbodenbeläge verlegen und Türen abdichten",
       "Maße prüfen und Schablonen für Formteile erstellen"
-    ]
+    ],
+    "salaryMonthlyEntry": 4107,
+    "salaryEntryKnown": true
   },
   {
     "id": 15540,
@@ -27894,7 +28226,9 @@
       "Fahrzeuge grundieren und mit Spritzpistole lackieren",
       "Schriftzüge und Motive mit Schablonen aufbringen",
       "Lack versiegeln und fertige Arbeit kontrollieren"
-    ]
+    ],
+    "salaryMonthlyEntry": 3514,
+    "salaryEntryKnown": true
   },
   {
     "id": 3951,
@@ -28035,7 +28369,9 @@
       "Maße aus Plänen auf das Gebäude übertragen",
       "Fassadenelemente aus Metall, Glas oder Stein befestigen",
       "Unterkonstruktionen und Verankerungen einbauen"
-    ]
+    ],
+    "salaryMonthlyEntry": 4298,
+    "salaryEntryKnown": true
   },
   {
     "id": 1123,
@@ -28195,7 +28531,9 @@
       "Oberflächen von optischen Bauteilen polieren",
       "Maße und Qualität der fertigen Teile prüfen",
       "Einzelteile zu optischen Geräten zusammenbauen"
-    ]
+    ],
+    "salaryMonthlyEntry": 3353,
+    "salaryEntryKnown": true
   },
   {
     "id": 1946,
@@ -28337,7 +28675,9 @@
       "Schmuck und Besteck mit Maschinen auf Hochglanz polieren",
       "Metalloberflächen schleifen und Kratzer entfernen",
       "Teile galvanisch beschichten, z. B. vergolden"
-    ]
+    ],
+    "salaryMonthlyEntry": 3704,
+    "salaryEntryKnown": true
   },
   {
     "id": 15145,
@@ -28502,7 +28842,9 @@
       "Einzelteile zu fertigen Geräten zusammenbauen",
       "Maße und Passgenauigkeit der Teile kontrollieren",
       "Computergesteuerte Werkzeugmaschinen einrichten und bedienen"
-    ]
+    ],
+    "salaryMonthlyEntry": 3353,
+    "salaryEntryKnown": true
   },
   {
     "id": 2488,
@@ -28669,7 +29011,9 @@
       "Einzelteile nach Bauplan zusammenschrauben und montieren",
       "Baugruppen löten, kleben oder verschweißen",
       "Fertige Produkte auf Funktion und Qualität prüfen"
-    ]
+    ],
+    "salaryMonthlyEntry": 3497,
+    "salaryEntryKnown": true
   },
   {
     "id": 3961,
@@ -28812,7 +29156,9 @@
       "Feuerungsanlagen aus Spezialsteinen aufbauen",
       "Alte Schornsteine sanieren und Schäden ausbessern",
       "Fertigteile montieren und Abgasleitungen einbauen"
-    ]
+    ],
+    "salaryMonthlyEntry": 4536,
+    "salaryEntryKnown": true
   },
   {
     "id": 129348,
@@ -28971,7 +29317,9 @@
       "Tiere füttern und auf Krankheiten kontrollieren",
       "Wasserqualität messen und Anlagen sauber halten",
       "Fische fangen, sortieren und für den Verkauf vorbereiten"
-    ]
+    ],
+    "salaryMonthlyEntry": 2815,
+    "salaryEntryKnown": true
   },
   {
     "id": 129350,
@@ -29071,7 +29419,9 @@
       "Fanggeräte bedienen und Fische an Bord holen",
       "Körbe und Reusen für Krabben und Krebse auslegen",
       "Fang sortieren und für den Verkauf herrichten"
-    ]
+    ],
+    "salaryMonthlyEntry": 3500,
+    "salaryEntryKnown": true
   },
   {
     "id": 15658,
@@ -29236,7 +29586,9 @@
       "Kunden an Fitnessgeräten einweisen und korrigieren",
       "Trainingspläne für einzelne Personen erstellen",
       "Fitnesstests durchführen und Fortschritte dokumentieren"
-    ]
+    ],
+    "salaryMonthlyEntry": null,
+    "salaryEntryKnown": false
   },
   {
     "id": 131053,
@@ -29392,7 +29744,9 @@
       "Glaskanten schleifen und polieren",
       "Automatische Schneid- und Produktionsanlagen steuern",
       "Glasprodukte für Fenster, Autos oder Solaranlagen fertigen"
-    ]
+    ],
+    "salaryMonthlyEntry": 2584,
+    "salaryEntryKnown": true
   },
   {
     "id": 13804,
@@ -29548,7 +29902,9 @@
       "Wurst und Fleischprodukte nach Rezept herstellen",
       "Fleisch räuchern, kochen oder würzen",
       "Produkte verpacken und die Theke bestücken"
-    ]
+    ],
+    "salaryMonthlyEntry": 3126,
+    "salaryEntryKnown": true
   },
   {
     "id": 4325,
@@ -29712,7 +30068,9 @@
       "Untergrund vorbereiten und Kleber auftragen",
       "Fliesen zuschneiden und Fugen sauber ausfüllen",
       "Mosaike und Terrazzoböden gestalten"
-    ]
+    ],
+    "salaryMonthlyEntry": 4429,
+    "salaryEntryKnown": true
   },
   {
     "id": 680,
@@ -29880,7 +30238,9 @@
       "Kunden beraten und Pflegetipps für Pflanzen geben",
       "Schaufenster und Verkaufsraum dekorieren",
       "Pflanzen im Laden gießen und pflegen"
-    ]
+    ],
+    "salaryMonthlyEntry": 2596,
+    "salaryEntryKnown": true
   },
   {
     "id": 123282,
@@ -30066,7 +30426,9 @@
       "Elektrische Geräte und Kabel in Flugzeuge einbauen",
       "Navigationssysteme und Funkanlagen prüfen und warten",
       "Defekte Bauteile reparieren oder austauschen"
-    ]
+    ],
+    "salaryMonthlyEntry": 3583,
+    "salaryEntryKnown": true
   },
   {
     "id": 2187,
@@ -30261,7 +30623,9 @@
       "Flugzeugteile wie Rümpfe und Tragflächen zusammenbauen",
       "Metallteile nieten, schrauben oder schweißen",
       "Triebwerke und Fahrwerke am Flugzeug befestigen"
-    ]
+    ],
+    "salaryMonthlyEntry": 3497,
+    "salaryEntryKnown": true
   },
   {
     "id": 2398,
@@ -30453,7 +30817,9 @@
       "Flugzeuge vor dem Start auf Schäden kontrollieren",
       "Rumpf, Tragflächen und Triebwerk genau untersuchen",
       "Defekte Teile reparieren oder ersetzen"
-    ]
+    ],
+    "salaryMonthlyEntry": 3497,
+    "salaryEntryKnown": true
   },
   {
     "id": 2403,
@@ -30632,7 +30998,9 @@
       "Triebwerke auseinanderbauen und alle Teile prüfen",
       "Bauteile reinigen und beschädigte Teile austauschen",
       "Triebwerk nach der Wartung wieder zusammenbauen"
-    ]
+    ],
+    "salaryMonthlyEntry": 3497,
+    "salaryEntryKnown": true
   },
   {
     "id": 7355,
@@ -30825,7 +31193,9 @@
       "Flugzeuge am Radar beobachten und verfolgen",
       "Per Funk Anweisungen für Start und Landung geben",
       "Abstände zwischen Flugzeugen im Luftraum regeln"
-    ]
+    ],
+    "salaryMonthlyEntry": 9929,
+    "salaryEntryKnown": true
   },
   {
     "id": 6461,
@@ -30982,7 +31352,9 @@
       "Foto- und Videoanlagen bedienen und warten",
       "Bilder und Videos am Computer bearbeiten",
       "Kunden beraten und ihre Fotoaufträge umsetzen"
-    ]
+    ],
+    "salaryMonthlyEntry": 2931,
+    "salaryEntryKnown": true
   },
   {
     "id": 58383,
@@ -31160,7 +31532,9 @@
       "Kunden zu Kameras und Fotozubehör beraten",
       "Eigene Fotos schießen und am Computer bearbeiten",
       "Kundenfotos ausdrucken oder digital aufbereiten"
-    ]
+    ],
+    "salaryMonthlyEntry": 2845,
+    "salaryEntryKnown": true
   },
   {
     "id": 7989,
@@ -31321,7 +31695,9 @@
       "Texte und Dokumente ins Deutsche übersetzen",
       "Telefonate auf Englisch oder anderen Sprachen führen",
       "Rechnungen und Lieferscheine auf Fremdsprachen prüfen"
-    ]
+    ],
+    "salaryMonthlyEntry": 3412,
+    "salaryEntryKnown": true
   },
   {
     "id": 9910,
@@ -31496,7 +31872,9 @@
       "Haare färben oder mit Wellen behandeln",
       "Bärte rasieren und in Form bringen",
       "Kunden beraten, welche Frisur zu ihnen passt"
-    ]
+    ],
+    "salaryMonthlyEntry": 2358,
+    "salaryEntryKnown": true
   },
   {
     "id": 594,
@@ -31663,7 +32041,9 @@
       "Bäume und Sträucher gießen, düngen und schneiden",
       "Schädlinge erkennen und bekämpfen",
       "Pflanzen für den Verkauf vorbereiten und ausgeben"
-    ]
+    ],
+    "salaryMonthlyEntry": 2723,
+    "salaryEntryKnown": true
   },
   {
     "id": 620,
@@ -31811,7 +32191,9 @@
       "Kränze und Trauergebinde binden und gestalten",
       "Pflanzen im Gewächshaus anziehen und kultivieren",
       "Friedhofsanlage sauber halten und pflegen"
-    ]
+    ],
+    "salaryMonthlyEntry": 2810,
+    "salaryEntryKnown": true
   },
   {
     "id": 588,
@@ -31973,7 +32355,9 @@
       "Wege und Plätze pflastern und Treppen bauen",
       "Grünanlagen regelmäßig pflegen und mähen",
       "Zäune, Mauern und Lärmschutzwände errichten"
-    ]
+    ],
+    "salaryMonthlyEntry": 3625,
+    "salaryEntryKnown": true
   },
   {
     "id": 614,
@@ -32128,7 +32512,9 @@
       "Gemüse und Kräuter aussäen und heranziehen",
       "Pflanzen gießen, düngen und vor Schädlingen schützen",
       "Reifes Gemüse ernten und für den Verkauf vorbereiten"
-    ]
+    ],
+    "salaryMonthlyEntry": 2810,
+    "salaryEntryKnown": true
   },
   {
     "id": 615,
@@ -32279,7 +32665,9 @@
       "Obstbäume und Beerenpflanzen anbauen und pflegen",
       "Bäume fachgerecht schneiden und formen",
       "Reifes Obst ernten und für den Verkauf sortieren"
-    ]
+    ],
+    "salaryMonthlyEntry": 2810,
+    "salaryEntryKnown": true
   },
   {
     "id": 604,
@@ -32432,7 +32820,9 @@
       "Stauden, Gräser und Wasserpflanzen vermehren und pflegen",
       "Boden bearbeiten, Unkraut jäten und Pflanzen düngen",
       "Pflanzen für Gärten und Parks verkaufsfertig machen"
-    ]
+    ],
+    "salaryMonthlyEntry": 2810,
+    "salaryEntryKnown": true
   },
   {
     "id": 605,
@@ -32593,7 +32983,9 @@
       "Pflanzen gießen, düngen und beschneiden",
       "Computergesteuerte Bewässerungs- und Beleuchtungsanlagen bedienen",
       "Pflanzen für den Verkauf vorbereiten und ausgeben"
-    ]
+    ],
+    "salaryMonthlyEntry": 2810,
+    "salaryEntryKnown": true
   },
   {
     "id": 14869,
@@ -32761,7 +33153,9 @@
       "Spielfiguren, Orte und Handlungen entwerfen",
       "Spiele testen und den Spielablauf verbessern",
       "Texte und Beschreibungen für das Spiel schreiben"
-    ]
+    ],
+    "salaryMonthlyEntry": null,
+    "salaryEntryKnown": false
   },
   {
     "id": 9999,
@@ -32936,7 +33330,9 @@
       "Lebensmittel und Waren einkaufen und einlagern",
       "Menüs und Büfetts planen und zusammenstellen",
       "Preise kalkulieren und Angebote erstellen"
-    ]
+    ],
+    "salaryMonthlyEntry": 3016,
+    "salaryEntryKnown": true
   },
   {
     "id": 10236,
@@ -33084,7 +33480,9 @@
       "Fassaden, Glasflächen und Fenster putzen",
       "Produktionshallen und Maschinen säubern",
       "Hygiene in Krankenhäusern oder Schwimmbädern sicherstellen"
-    ]
+    ],
+    "salaryMonthlyEntry": 3199,
+    "salaryEntryKnown": true
   },
   {
     "id": 9898,
@@ -33266,7 +33664,9 @@
       "Kinder und Jugendliche in der Gemeinde betreuen",
       "Gottesdienste und Gemeindegruppen mitgestalten",
       "Ältere oder kranke Menschen besuchen und begleiten"
-    ]
+    ],
+    "salaryMonthlyEntry": 3884,
+    "salaryEntryKnown": true
   },
   {
     "id": 77494,
@@ -33430,7 +33830,9 @@
       "3D-Modelle von Geländen und Gebäuden erstellen",
       "Kunden beraten, welche Geodaten sie brauchen",
       "Karten und Grafiken für Pläne und Präsentationen gestalten"
-    ]
+    ],
+    "salaryMonthlyEntry": 3302,
+    "salaryEntryKnown": true
   },
   {
     "id": 4066,
@@ -33578,7 +33980,9 @@
       "Gerüste nach der Arbeit wieder abbauen und verladen",
       "Untergrund vor dem Aufbau vorbereiten und sichern",
       "Spezielle Konstruktionen für besondere Bauprojekte errichten"
-    ]
+    ],
+    "salaryMonthlyEntry": 3176,
+    "salaryEntryKnown": true
   },
   {
     "id": 137579,
@@ -33758,7 +34162,9 @@
       "3D-Objekte und Animationen für immersive Anwendungen erstellen",
       "Anwendungen testen und Fehler beheben",
       "Mit Kunden Ideen und Konzepte für neue Projekte entwickeln"
-    ]
+    ],
+    "salaryMonthlyEntry": 2950,
+    "salaryEntryKnown": true
   },
   {
     "id": 27542,
@@ -33933,7 +34339,9 @@
       "Verkaufsräume nach aktuellen Trends gestalten",
       "Werbeaktionen und Events planen und umsetzen",
       "Dekorationsmaterial auswählen und Konzepte skizzieren"
-    ]
+    ],
+    "salaryMonthlyEntry": 2845,
+    "salaryEntryKnown": true
   },
   {
     "id": 6515,
@@ -34096,7 +34504,9 @@
       "Bilder, Texte und Grafiken für Webseiten aufbereiten",
       "Druckvorlagen erstellen und für den Druck vorbereiten",
       "Social-Media-Beiträge grafisch gestalten"
-    ]
+    ],
+    "salaryMonthlyEntry": 2950,
+    "salaryEntryKnown": true
   },
   {
     "id": 126847,
@@ -34248,7 +34658,9 @@
       "Gussformen und Kerne für Werkstücke herstellen",
       "Fertige Gussteile kontrollieren und nachbearbeiten",
       "Maschinen und Anlagen im Betrieb überwachen"
-    ]
+    ],
+    "salaryMonthlyEntry": 3497,
+    "salaryEntryKnown": true
   },
   {
     "id": 1077,
@@ -34393,7 +34805,9 @@
       "Glasteile nach technischen Zeichnungen biegen und verbinden",
       "Fertige Apparate prüfen und reparieren",
       "Spezialanfertigungen nach Kundenwunsch herstellen"
-    ]
+    ],
+    "salaryMonthlyEntry": 2987,
+    "salaryEntryKnown": true
   },
   {
     "id": 4365,
@@ -34539,7 +34953,9 @@
       "Wintergärten und Glasfassaden aufbauen",
       "Rahmen aus Holz, Aluminium oder Kunststoff herstellen",
       "Beschädigte Scheiben reparieren oder austauschen"
-    ]
+    ],
+    "salaryMonthlyEntry": 2833,
+    "salaryEntryKnown": true
   },
   {
     "id": 4364,
@@ -34688,7 +35104,9 @@
       "Kirchenfenster und Kunstverglasungen restaurieren",
       "Glas zuschneiden, schleifen und polieren",
       "Spiegel anfertigen und Bilder einrahmen"
-    ]
+    ],
+    "salaryMonthlyEntry": 2833,
+    "salaryEntryKnown": true
   },
   {
     "id": 27446,
@@ -34845,7 +35263,9 @@
       "Glas mit Farben bemalen und im Ofen einbrennen",
       "Glasstücke mit Bleiruten zusammensetzen und verlöten",
       "Muster und Ornamente am Computer oder von Hand zeichnen"
-    ]
+    ],
+    "salaryMonthlyEntry": 2833,
+    "salaryEntryKnown": true
   },
   {
     "id": 28998,
@@ -34994,7 +35414,9 @@
       "Muster auf Spiegel oder Glastüren aufbringen",
       "Glaskanten schleifen und polieren",
       "Entwürfe für Glasverzierungen am Computer erstellen"
-    ]
+    ],
+    "salaryMonthlyEntry": 2584,
+    "salaryEntryKnown": true
   },
   {
     "id": 29000,
@@ -35149,7 +35571,9 @@
       "Figuren und Schriften in Glas gravieren",
       "Entwürfe für Verzierungen skizzieren oder am Computer erstellen",
       "Glasoberflächen polieren und nachbearbeiten"
-    ]
+    ],
+    "salaryMonthlyEntry": 2584,
+    "salaryEntryKnown": true
   },
   {
     "id": 4144,
@@ -35301,7 +35725,9 @@
       "Gleise kontrollieren und auf Schäden prüfen",
       "Kaputte Schienen oder Schwellen austauschen",
       "Baumaschinen auf der Baustelle bedienen"
-    ]
+    ],
+    "salaryMonthlyEntry": 4298,
+    "salaryEntryKnown": true
   },
   {
     "id": 142202,
@@ -35413,7 +35839,9 @@
       "Edelsteine in Ringe oder Anhänger einsetzen",
       "Oberflächen schleifen, polieren und verzieren",
       "Schmuck nach Kundenwunsch entwerfen und anfertigen"
-    ]
+    ],
+    "salaryMonthlyEntry": 3704,
+    "salaryEntryKnown": true
   },
   {
     "id": 142203,
@@ -35525,7 +35953,9 @@
       "Oberflächen gravieren, polieren und versilbern",
       "Leuchter, Schalen oder Schmuck nach Entwurf herstellen",
       "Einzelteile zusammenlöten und nachbearbeiten"
-    ]
+    ],
+    "salaryMonthlyEntry": 3704,
+    "salaryEntryKnown": true
   },
   {
     "id": 129455,
@@ -35687,7 +36117,9 @@
       "Trauringe, Schilder oder Plaketten gravieren",
       "Computergesteuerte Gravurmaschinen bedienen",
       "Vorlagen und Designs am Computer erstellen"
-    ]
+    ],
+    "salaryMonthlyEntry": 2947,
+    "salaryEntryKnown": true
   },
   {
     "id": 9524,
@@ -35862,7 +36294,9 @@
       "Übungen zeigen und Teilnehmer dabei anleiten",
       "Programme auf verschiedene Altersgruppen anpassen",
       "Auf richtige Körperhaltung und sichere Ausführung achten"
-    ]
+    ],
+    "salaryMonthlyEntry": 3449,
+    "salaryEntryKnown": true
   },
   {
     "id": 7288,
@@ -36027,7 +36461,9 @@
       "Schiffe mit dem Boot schleppen oder schieben",
       "Leinen befestigen und Schiffe am Kai festmachen",
       "Motor und Ausrüstung des Bootes kontrollieren"
-    ]
+    ],
+    "salaryMonthlyEntry": 3497,
+    "salaryEntryKnown": true
   },
   {
     "id": 137478,
@@ -36147,7 +36583,9 @@
       "Waren bestellen, lagern und präsentieren",
       "Werbemaßnahmen planen und umsetzen",
       "Mitarbeiter einteilen und den Tagesablauf organisieren"
-    ]
+    ],
+    "salaryMonthlyEntry": 2997,
+    "salaryEntryKnown": true
   },
   {
     "id": 9077,
@@ -36317,7 +36755,9 @@
       "Mahlzeiten für die Familie kochen und zubereiten",
       "Kinder betreuen und bei Hausaufgaben helfen",
       "Kranke oder ältere Familienmitglieder im Alltag unterstützen"
-    ]
+    ],
+    "salaryMonthlyEntry": 3223,
+    "salaryEntryKnown": true
   },
   {
     "id": 133617,
@@ -36498,7 +36938,9 @@
       "Räume reinigen und Wäsche pflegen",
       "Lebensmittel einkaufen und Vorräte verwalten",
       "Menschen im Alltag unterstützen und begleiten"
-    ]
+    ],
+    "salaryMonthlyEntry": 3046,
+    "salaryEntryKnown": true
   },
   {
     "id": 13778,
@@ -36675,7 +37117,9 @@
       "Beim Essen und Trinken unterstützen und anleiten",
       "Personen zu Terminen oder zur Arbeit begleiten",
       "Freizeitaktivitäten und Alltagsaufgaben gemeinsam durchführen"
-    ]
+    ],
+    "salaryMonthlyEntry": 3421,
+    "salaryEntryKnown": true
   },
   {
     "id": 9127,
@@ -36852,7 +37296,9 @@
       "Gemeinsam einkaufen gehen oder Mahlzeiten zubereiten",
       "Freizeitaktivitäten wie Malen oder Sport begleiten und anleiten",
       "Fortschritte beobachten und in Berichten festhalten"
-    ]
+    ],
+    "salaryMonthlyEntry": 3709,
+    "salaryEntryKnown": true
   },
   {
     "id": 8722,
@@ -37024,7 +37470,9 @@
       "Patienten befragen und Beschwerden genau aufnehmen",
       "Mit Naturheilmethoden wie Akupunktur oder Kräutern behandeln",
       "Behandlungsfortschritte beobachten und dokumentieren"
-    ]
+    ],
+    "salaryMonthlyEntry": null,
+    "salaryEntryKnown": false
   },
   {
     "id": 139241,
@@ -37151,7 +37599,9 @@
       "Gespräche führen und psychische Probleme der Patienten verstehen",
       "Therapiemethoden wie Gesprächs- oder Verhaltenstherapie anwenden",
       "Behandlungsverläufe aufschreiben und auswerten"
-    ]
+    ],
+    "salaryMonthlyEntry": null,
+    "salaryEntryKnown": false
   },
   {
     "id": 139139,
@@ -37252,7 +37702,9 @@
       "Baustellen absperren und Schilder aufstellen",
       "Wände und Decken mit Abbruchhämmern einreißen",
       "Holzteile demontieren und Dämmmaterial entfernen"
-    ]
+    ],
+    "salaryMonthlyEntry": 3955,
+    "salaryEntryKnown": true
   },
   {
     "id": 132714,
@@ -37395,7 +37847,9 @@
       "Schalungen bauen und Stahlmatten einlegen",
       "Beton anmischen und in Formen gießen",
       "Fundamente, Wände und Decken aus Beton herstellen"
-    ]
+    ],
+    "salaryMonthlyEntry": 3955,
+    "salaryEntryKnown": true
   },
   {
     "id": 132716,
@@ -37489,7 +37943,9 @@
       "Schornsteine und Abzugskanäle aus Mauerwerk aufbauen",
       "Betonteile herstellen und Schalungen einbauen",
       "Feuerungsanlagen aus Stahlbetonteilen zusammensetzen"
-    ]
+    ],
+    "salaryMonthlyEntry": 4158,
+    "salaryEntryKnown": true
   },
   {
     "id": 132715,
@@ -37583,7 +38039,9 @@
       "Mörtel anmischen und Mauersteine aufeinanderlegen",
       "Wände und Decken betonieren",
       "Treppen und Fensterstürze einbauen"
-    ]
+    ],
+    "salaryMonthlyEntry": 3955,
+    "salaryEntryKnown": true
   },
   {
     "id": 129408,
@@ -37787,7 +38245,9 @@
       "Hörtests durchführen und Ergebnisse auswerten",
       "Hörgeräte individuell anpassen und einstellen",
       "Kunden zu Hörsystemen und Gehörschutz beraten"
-    ]
+    ],
+    "salaryMonthlyEntry": 2845,
+    "salaryEntryKnown": true
   },
   {
     "id": 58341,
@@ -37945,7 +38405,9 @@
       "Feuchtigkeitsschäden an Gebäuden untersuchen und einschätzen",
       "Durchfeuchtete Wände trocknen und Putz erneuern",
       "Schutzmaßnahmen gegen neue Schäden anbringen"
-    ]
+    ],
+    "salaryMonthlyEntry": 4085,
+    "salaryEntryKnown": true
   },
   {
     "id": 57887,
@@ -38101,7 +38563,9 @@
       "Holzbauteile auf Insekten- und Pilzbefall untersuchen",
       "Schädlinge bekämpfen und befallenes Holz behandeln",
       "Arbeitsbereich sichern und Schutzmaßnahmen einleiten"
-    ]
+    ],
+    "salaryMonthlyEntry": 4085,
+    "salaryEntryKnown": true
   },
   {
     "id": 1534,
@@ -38254,7 +38718,9 @@
       "Figuren und Ornamente mit Schnitzeisen aus Holz herausarbeiten",
       "Entwürfe zeichnen und Holzart auswählen",
       "Oberflächen schleifen und nachbearbeiten"
-    ]
+    ],
+    "salaryMonthlyEntry": 3409,
+    "salaryEntryKnown": true
   },
   {
     "id": 2687,
@@ -38410,7 +38876,9 @@
       "Holz und Metall für Flöten oder Klarinetten zuschneiden und formen",
       "Klappenmechaniken herstellen und einbauen",
       "Fertige Instrumente auf Klang und Funktion prüfen"
-    ]
+    ],
+    "salaryMonthlyEntry": 3409,
+    "salaryEntryKnown": true
   },
   {
     "id": 126805,
@@ -38556,7 +39024,9 @@
       "Holz zuschneiden und für die Weiterverarbeitung vorbereiten",
       "Fenster, Türen und Treppen mit Maschinen herstellen",
       "Holzverpackungen und Rahmen zusammenbauen"
-    ]
+    ],
+    "salaryMonthlyEntry": 3409,
+    "salaryEntryKnown": true
   },
   {
     "id": 126807,
@@ -38706,7 +39176,9 @@
       "Einzelteile zu Möbeln zusammenleimen und verschrauben",
       "Oberflächen schleifen und mit Furnier verkleiden",
       "Fertige Möbel auf Qualität und Maße prüfen"
-    ]
+    ],
+    "salaryMonthlyEntry": 3409,
+    "salaryEntryKnown": true
   },
   {
     "id": 126803,
@@ -38856,7 +39328,9 @@
       "Einbaumöbel und Regale zusammenbauen und montieren",
       "Einzelteile schrauben, nageln oder kleben",
       "Elektrische Geräte anschließen und in Betrieb nehmen"
-    ]
+    ],
+    "salaryMonthlyEntry": 3409,
+    "salaryEntryKnown": true
   },
   {
     "id": 1566,
@@ -39016,7 +39490,9 @@
       "Spielzeugfiguren und Dekoobjekte von Hand bemalen",
       "Entwürfe für neue Spielzeuge zeichnen und planen",
       "Holzarten auswählen und sicher lagern"
-    ]
+    ],
+    "salaryMonthlyEntry": 3287,
+    "salaryEntryKnown": true
   },
   {
     "id": 10009,
@@ -39189,7 +39665,9 @@
       "Zimmer herrichten und auf Sauberkeit kontrollieren",
       "Im Restaurant servieren und Bestellungen aufnehmen",
       "Rechnungen erstellen und Veranstaltungen organisieren"
-    ]
+    ],
+    "salaryMonthlyEntry": 3316,
+    "salaryEntryKnown": true
   },
   {
     "id": 9042,
@@ -39356,7 +39834,9 @@
       "Wasserproben und andere Proben nehmen und prüfen",
       "Mängel dokumentieren und Verbesserungen einfordern",
       "Schulen und Spielplätze auf Sicherheit überprüfen"
-    ]
+    ],
+    "salaryMonthlyEntry": 3697,
+    "salaryEntryKnown": true
   },
   {
     "id": 35275,
@@ -39549,7 +40029,9 @@
       "Schadensmeldungen bearbeiten und Reparaturen beauftragen",
       "Wohnungsübergaben durchführen und dokumentieren",
       "Mieter und Eigentümer beraten und betreuen"
-    ]
+    ],
+    "salaryMonthlyEntry": 3072,
+    "salaryEntryKnown": true
   },
   {
     "id": 4279,
@@ -39703,7 +40185,9 @@
       "Dämmplatten zuschneiden und befestigen",
       "Maschinen und Leitungen gegen Lärm und Wärme schützen",
       "Fertige Dämmung auf Dichtheit und Qualität prüfen"
-    ]
+    ],
+    "salaryMonthlyEntry": 3117,
+    "salaryEntryKnown": true
   },
   {
     "id": 76430,
@@ -39885,7 +40369,9 @@
       "Kabel verlegen und Geräte anschließen",
       "Anlagen warten und auf Fehler prüfen",
       "Störungen suchen und beheben"
-    ]
+    ],
+    "salaryMonthlyEntry": 3412,
+    "salaryEntryKnown": true
   },
   {
     "id": 76438,
@@ -40063,7 +40549,9 @@
       "Geräte einrichten und in Betrieb nehmen",
       "Fertige Systeme testen und auf Fehler prüfen",
       "IT-Systeme konfigurieren und anpassen"
-    ]
+    ],
+    "salaryMonthlyEntry": 3412,
+    "salaryEntryKnown": true
   },
   {
     "id": 7965,
@@ -40265,7 +40753,9 @@
       "Waren bestellen, einbuchen und versandfertig machen",
       "Angebote und Rechnungen erstellen",
       "Produktionsabläufe planen und koordinieren"
-    ]
+    ],
+    "salaryMonthlyEntry": 3497,
+    "salaryEntryKnown": true
   },
   {
     "id": 34941,
@@ -40432,7 +40922,9 @@
       "Rohstoffe zuführen und Materialfluss überwachen",
       "Brennöfen vorbereiten und kontrollieren",
       "Fehler an Maschinen erkennen und beheben"
-    ]
+    ],
+    "salaryMonthlyEntry": 2827,
+    "salaryEntryKnown": true
   },
   {
     "id": 34948,
@@ -40584,7 +41076,9 @@
       "Gold und Edelmetalle mit dem Pinsel auftragen",
       "Schriften und Monogramme auf Keramik aufbringen",
       "Dekorierte Stücke auf Qualität und Gleichmäßigkeit prüfen"
-    ]
+    ],
+    "salaryMonthlyEntry": 2827,
+    "salaryEntryKnown": true
   },
   {
     "id": 34943,
@@ -40746,7 +41240,9 @@
       "Keramikteile mit Maschinen oder von Hand formen",
       "Glasuren herstellen und auf Rohlinge auftragen",
       "Keramikprodukte im Ofen brennen und prüfen"
-    ]
+    ],
+    "salaryMonthlyEntry": 2827,
+    "salaryEntryKnown": true
   },
   {
     "id": 29055,
@@ -40907,7 +41403,9 @@
       "Defekte an Maschinen suchen und reparieren",
       "Maschinen regelmäßig warten und einstellen",
       "Fertigungsabläufe überwachen und kontrollieren"
-    ]
+    ],
+    "salaryMonthlyEntry": 3497,
+    "salaryEntryKnown": true
   },
   {
     "id": 134721,
@@ -41086,7 +41584,9 @@
       "Telefon- und Sicherheitsanlagen installieren",
       "Kunden erklären, wie neue Geräte funktionieren",
       "Technische Probleme vor Ort lösen und beheben"
-    ]
+    ],
+    "salaryMonthlyEntry": 3583,
+    "salaryEntryKnown": true
   },
   {
     "id": 15518,
@@ -41264,7 +41764,9 @@
       "Kundendepots verwalten und Aufträge abwickeln",
       "Preise und Steuern für Fonds berechnen",
       "Fondsmanager mit Daten und Analysen unterstützen"
-    ]
+    ],
+    "salaryMonthlyEntry": 3032,
+    "salaryEntryKnown": true
   },
   {
     "id": 4280,
@@ -41417,7 +41919,9 @@
       "Geeignete Materialien für die Dämmung auswählen",
       "Baustelle einrichten und Arbeitsschritte planen",
       "Dämmung auf Dichtheit und Qualität prüfen"
-    ]
+    ],
+    "salaryMonthlyEntry": 3412,
+    "salaryEntryKnown": true
   },
   {
     "id": 2927,
@@ -41595,7 +42099,9 @@
       "Hard- und Software installieren und anpassen",
       "IT-Geräte warten und bei Störungen reparieren",
       "Nutzer bei technischen Problemen unterstützen"
-    ]
+    ],
+    "salaryMonthlyEntry": 3915,
+    "salaryEntryKnown": true
   },
   {
     "id": 7924,
@@ -41763,7 +42269,9 @@
       "Fristen berechnen und im Blick behalten",
       "Briefe und Schreiben für Gericht oder Staatsanwaltschaft erledigen",
       "Eintragungen in Register und Dateien vornehmen"
-    ]
+    ],
+    "salaryMonthlyEntry": 3418,
+    "salaryEntryKnown": true
   },
   {
     "id": 139142,
@@ -41862,7 +42370,9 @@
       "Rohre aus verschiedenen Materialien verlegen",
       "Kanäle und Abwasserleitungen im Boden bauen",
       "Arbeitsstrecke vermessen und Baustelle einrichten"
-    ]
+    ],
+    "salaryMonthlyEntry": 4298,
+    "salaryEntryKnown": true
   },
   {
     "id": 137639,
@@ -42026,7 +42536,9 @@
       "Wände, Möbel und Dächer in Fahrzeuge einbauen",
       "Strom-, Wasser- und Gastechnik im Fahrzeug installieren",
       "Schäden an Caravans reparieren und instand setzen"
-    ]
+    ],
+    "salaryMonthlyEntry": 3514,
+    "salaryEntryKnown": true
   },
   {
     "id": 124530,
@@ -42185,7 +42697,9 @@
       "Elektrische und technische Bauteile einbauen",
       "Kunden zu Sonderausstattungen beraten",
       "Karosserien und Fahrzeugbaugruppen instand halten"
-    ]
+    ],
+    "salaryMonthlyEntry": 3011,
+    "salaryEntryKnown": true
   },
   {
     "id": 15166,
@@ -42347,7 +42861,9 @@
       "Fehler in Fahrzeugsystemen suchen und beheben",
       "Fahrwerk und Fahrgestell prüfen und instand setzen",
       "Fahrzeugtechnik bei Kundendiensten kontrollieren"
-    ]
+    ],
+    "salaryMonthlyEntry": 3514,
+    "salaryEntryKnown": true
   },
   {
     "id": 7018,
@@ -42524,7 +43040,9 @@
       "Budgets kalkulieren und Kosten im Blick behalten",
       "Rechte und Lizenzen für Musik oder Inhalte einkaufen",
       "Produktionen vermarkten und Vertrieb organisieren"
-    ]
+    ],
+    "salaryMonthlyEntry": 2395,
+    "salaryEntryKnown": true
   },
   {
     "id": 123266,
@@ -42707,7 +43225,9 @@
       "Termine planen und Meetings vorbereiten",
       "Rechnungen schreiben und Zahlungen kontrollieren",
       "Besucher empfangen und Dienstreisen organisieren"
-    ]
+    ],
+    "salaryMonthlyEntry": 3497,
+    "salaryEntryKnown": true
   },
   {
     "id": 35311,
@@ -42887,7 +43407,9 @@
       "Neue Mitarbeitende auswählen und einweisen",
       "Kundenanfragen und Reklamationen bearbeiten",
       "Abläufe im Contactcenter überwachen und verbessern"
-    ]
+    ],
+    "salaryMonthlyEntry": 3032,
+    "salaryEntryKnown": true
   },
   {
     "id": 133555,
@@ -43064,7 +43586,9 @@
       "Neue Software und Hardware beschaffen und einführen",
       "IT-Lösungen für den Betrieb entwickeln und umsetzen",
       "Mitarbeitende bei digitalen Veränderungen begleiten"
-    ]
+    ],
+    "salaryMonthlyEntry": 3497,
+    "salaryEntryKnown": true
   },
   {
     "id": 130926,
@@ -43239,7 +43763,9 @@
       "Kundenanfragen und Reklamationen per Chat oder E-Mail lösen",
       "Bestellungen bearbeiten und Lieferungen koordinieren",
       "Onlinewerbung schalten und Verkaufszahlen auswerten"
-    ]
+    ],
+    "salaryMonthlyEntry": 2845,
+    "salaryEntryKnown": true
   },
   {
     "id": 6580,
@@ -43405,7 +43931,9 @@
       "Waren auspacken, auszeichnen und ins Regal räumen",
       "Reklamationen entgegennehmen und bearbeiten",
       "Waren bestellen und Lieferungen kontrollieren"
-    ]
+    ],
+    "salaryMonthlyEntry": 2845,
+    "salaryEntryKnown": true
   },
   {
     "id": 7889,
@@ -43588,7 +44116,9 @@
       "Leistungen mit Krankenkassen abrechnen",
       "Abläufe in Praxen oder Kliniken organisieren",
       "Materialien und Medizinprodukte bestellen und verwalten"
-    ]
+    ],
+    "salaryMonthlyEntry": 3449,
+    "salaryEntryKnown": true
   },
   {
     "id": 133596,
@@ -43773,7 +44303,9 @@
       "Preise und Angebote mit ausländischen Partnern verhandeln",
       "Zolldokumente und Versandpapiere vorbereiten",
       "Kunden über Lieferzeiten und Kosten informieren"
-    ]
+    ],
+    "salaryMonthlyEntry": 3299,
+    "salaryEntryKnown": true
   },
   {
     "id": 133597,
@@ -43954,7 +44486,9 @@
       "Preise vergleichen und Angebote für Kunden erstellen",
       "Lagerbestände prüfen und Nachbestellungen auslösen",
       "Firmenkunden beraten und Bestellungen aufnehmen"
-    ]
+    ],
+    "salaryMonthlyEntry": 3299,
+    "salaryEntryKnown": true
   },
   {
     "id": 136121,
@@ -44137,7 +44671,9 @@
       "Abläufe zwischen Küche, Empfang und Reinigung koordinieren",
       "Rechnungen erstellen und Zahlungen abrechnen",
       "Personalplanung und Dienstpläne für das Team erstellen"
-    ]
+    ],
+    "salaryMonthlyEntry": 3316,
+    "salaryEntryKnown": true
   },
   {
     "id": 133558,
@@ -44318,7 +44854,9 @@
       "Angebote und Kostenvergleiche für IT-Produkte erstellen",
       "Verträge mit Kunden verhandeln und abschließen",
       "Bestellungen aufgeben und Lieferungen koordinieren"
-    ]
+    ],
+    "salaryMonthlyEntry": 3497,
+    "salaryEntryKnown": true
   },
   {
     "id": 33364,
@@ -44485,7 +45023,9 @@
       "Fahrtrouten für Zusteller planen und optimieren",
       "Aufträge annehmen und in Systeme eingeben",
       "Sendungen verfolgen und bei Problemen reagieren"
-    ]
+    ],
+    "salaryMonthlyEntry": 3152,
+    "salaryEntryKnown": true
   },
   {
     "id": 35279,
@@ -44663,7 +45203,9 @@
       "Zielgruppen analysieren und Inhalte für Social Media erstellen",
       "Kunden beraten, wie sie ihr Produkt bekannt machen",
       "Werbeerfolge auswerten und Berichte erstellen"
-    ]
+    ],
+    "salaryMonthlyEntry": 3497,
+    "salaryEntryKnown": true
   },
   {
     "id": 29441,
@@ -44831,7 +45373,9 @@
       "Kunden beraten, wie ihre Güter am besten verschickt werden",
       "Frachpapiere und Zolldokumente vorbereiten",
       "Lieferungen verfolgen und bei Verzögerungen reagieren"
-    ]
+    ],
+    "salaryMonthlyEntry": 3230,
+    "salaryEntryKnown": true
   },
   {
     "id": 33235,
@@ -45013,7 +45557,9 @@
       "Kunden zu Reisezielen und Freizeitangeboten beraten",
       "Veranstaltungen organisieren und mit Partnern abstimmen",
       "Buchungen verwalten und Reiseunterlagen zusammenstellen"
-    ]
+    ],
+    "salaryMonthlyEntry": 2477,
+    "salaryEntryKnown": true
   },
   {
     "id": 136117,
@@ -45196,7 +45742,9 @@
       "Den Finanzbedarf von Kunden ermitteln und erklären",
       "Verträge abschließen und Unterlagen zusammenstellen",
       "Bei Schäden oder Fragen von Kunden weiterhelfen"
-    ]
+    ],
+    "salaryMonthlyEntry": 3373,
+    "salaryEntryKnown": true
   },
   {
     "id": 76608,
@@ -45351,7 +45899,9 @@
       "Keramikstücke glasieren und im Ofen brennen",
       "Fliesen, Tassen oder Vasen nach Entwurf herstellen",
       "Oberflächen bemalen und verzieren"
-    ]
+    ],
+    "salaryMonthlyEntry": 2827,
+    "salaryEntryKnown": true
   },
   {
     "id": 126857,
@@ -45508,7 +46058,9 @@
       "Kerzen und Figuren mit Farben und Düften gestalten",
       "Maschinen für die Kerzenherstellung bedienen",
       "Wachsbilder und Ornamente von Hand formen"
-    ]
+    ],
+    "salaryMonthlyEntry": 3521,
+    "salaryEntryKnown": true
   },
   {
     "id": 2647,
@@ -45681,7 +46233,9 @@
       "Saiten spannen und das Instrument stimmen",
       "Technische Zeichnungen lesen und Maße übertragen",
       "Oberflächen schleifen, lackieren und verzieren"
-    ]
+    ],
+    "salaryMonthlyEntry": 3409,
+    "salaryEntryKnown": true
   },
   {
     "id": 2648,
@@ -45857,7 +46411,9 @@
       "Einzelteile zusammenbauen und verleimen",
       "Fertige Klaviere stimmen und auf Klang prüfen",
       "Beschädigte Klaviere reparieren und wieder spielbar machen"
-    ]
+    ],
+    "salaryMonthlyEntry": 3409,
+    "salaryEntryKnown": true
   },
   {
     "id": 2168,
@@ -46005,7 +46561,9 @@
       "Bleche zuschneiden, biegen und in Form bringen",
       "Dachrinnen und Fensterbänke am Gebäude montieren",
       "Blechteile durch Löten oder Schweißen verbinden"
-    ]
+    ],
+    "salaryMonthlyEntry": 2866,
+    "salaryEntryKnown": true
   },
   {
     "id": 3726,
@@ -46186,7 +46744,9 @@
       "Gerichte kochen, braten oder backen",
       "Speisen anrichten und für den Service fertigmachen",
       "Lebensmittel einkaufen und richtig lagern"
-    ]
+    ],
+    "salaryMonthlyEntry": 3016,
+    "salaryEntryKnown": true
   },
   {
     "id": 3654,
@@ -46361,7 +46921,9 @@
       "Torten und Gebäck backen und verzieren",
       "Pralinen und Süßspeisen von Hand fertigen",
       "Produkte im Laden verkaufen und Kunden beraten"
-    ]
+    ],
+    "salaryMonthlyEntry": 3251,
+    "salaryEntryKnown": true
   },
   {
     "id": 29049,
@@ -46528,7 +47090,9 @@
       "Metallteile zusammenschweißen und verbinden",
       "Konstruktionen wie Hallen oder Brücken montieren",
       "Maße prüfen und auf genaue Passform achten"
-    ]
+    ],
+    "salaryMonthlyEntry": 3497,
+    "salaryEntryKnown": true
   },
   {
     "id": 14624,
@@ -46703,7 +47267,9 @@
       "Make-up auftragen und Augenbrauen formen",
       "Nägel schneiden, formen und lackieren",
       "Kunden zu Hautpflege und Produkten beraten"
-    ]
+    ],
+    "salaryMonthlyEntry": 2358,
+    "salaryEntryKnown": true
   },
   {
     "id": 9929,
@@ -46873,7 +47439,9 @@
       "Make-up auftragen und Augenbrauen formen",
       "Nägel schneiden, formen und lackieren",
       "Kunden zu Hautpflege und Produkten beraten"
-    ]
+    ],
+    "salaryMonthlyEntry": 2358,
+    "salaryEntryKnown": true
   },
   {
     "id": 122564,
@@ -47038,7 +47606,9 @@
       "Dellen und verbogene Teile richten und glätten",
       "Beschädigte Karosserieteile austauschen und einbauen",
       "Reparierte Stellen vorbereiten und für die Lackierung fertigmachen"
-    ]
+    ],
+    "salaryMonthlyEntry": 3514,
+    "salaryEntryKnown": true
   },
   {
     "id": 27300,
@@ -47216,7 +47786,9 @@
       "Fehler mit Diagnosegeräten suchen und beheben",
       "Defekte Teile reparieren oder austauschen",
       "Bremsen, Beleuchtung und Fahrwerk kontrollieren"
-    ]
+    ],
+    "salaryMonthlyEntry": 3514,
+    "salaryEntryKnown": true
   },
   {
     "id": 27298,
@@ -47393,7 +47965,9 @@
       "Bremsen und Fahrwerk mit Diagnosegeräten testen",
       "Defekte Teile reparieren oder ersetzen",
       "Anbauteile wie Greifarme oder Leitern kontrollieren"
-    ]
+    ],
+    "salaryMonthlyEntry": 3514,
+    "salaryEntryKnown": true
   },
   {
     "id": 14799,
@@ -47567,7 +48141,9 @@
       "Fehler mit Diagnosegeräten am Computer suchen",
       "Defekte Teile wie Bremsen oder Motor reparieren",
       "Fahrzeuge nach der Reparatur testen und prüfen"
-    ]
+    ],
+    "salaryMonthlyEntry": 3514,
+    "salaryEntryKnown": true
   },
   {
     "id": 122563,
@@ -47711,7 +48287,9 @@
       "Hochvoltsysteme sicher kontrollieren und testen",
       "Fehler in Elektronik und Technik aufspüren und beheben",
       "Defekte Bauteile austauschen und Systeme neu einstellen"
-    ]
+    ],
+    "salaryMonthlyEntry": 3514,
+    "salaryEntryKnown": true
   },
   {
     "id": 3611,
@@ -47876,7 +48454,9 @@
       "Fellteile zusammennähen und zu Kleidung verarbeiten",
       "Jacken oder Mäntel nach Kundenwunsch anfertigen",
       "Beschädigte Pelzkleidung reparieren und aufarbeiten"
-    ]
+    ],
+    "salaryMonthlyEntry": 2793,
+    "salaryEntryKnown": true
   },
   {
     "id": 13991,
@@ -48035,7 +48615,9 @@
       "Zeichnungen, Comics oder Cartoons von Hand erstellen",
       "Figuren und Landschaften am Computer entwerfen",
       "Kundenwünsche besprechen und Ideen umsetzen"
-    ]
+    ],
+    "salaryMonthlyEntry": null,
+    "salaryEntryKnown": false
   },
   {
     "id": 137752,
@@ -48159,7 +48741,9 @@
       "Maschinen für die Kunststoffherstellung einrichten und starten",
       "Rohre und Bauteile aus Kunststoff herstellen",
       "Fertige Teile prüfen und auf Fehler kontrollieren"
-    ]
+    ],
+    "salaryMonthlyEntry": 3017,
+    "salaryEntryKnown": true
   },
   {
     "id": 137753,
@@ -48330,7 +48914,9 @@
       "Kunststoffe nach Rezept mischen und herstellen",
       "Maschinen einstellen und den Ablauf überwachen",
       "Fertige Mischungen auf Qualität und Eigenschaften prüfen"
-    ]
+    ],
+    "salaryMonthlyEntry": 3017,
+    "salaryEntryKnown": true
   },
   {
     "id": 137751,
@@ -48450,7 +49036,9 @@
       "Fasern zuschneiden und mit Kunststoff zu Bauteilen verarbeiten",
       "Maschinen einstellen und den Herstellungsprozess überwachen",
       "Fertige Bauteile auf Stabilität und Qualität prüfen"
-    ]
+    ],
+    "salaryMonthlyEntry": 3017,
+    "salaryEntryKnown": true
   },
   {
     "id": 137747,
@@ -48625,7 +49213,9 @@
       "Kunststoff- und Gummiteile mit Maschinen formen und pressen",
       "Maschinen einrichten und den Ablauf kontrollieren",
       "Fertige Teile messen und auf Fehler prüfen"
-    ]
+    ],
+    "salaryMonthlyEntry": 3017,
+    "salaryEntryKnown": true
   },
   {
     "id": 137746,
@@ -48800,7 +49390,9 @@
       "Kunststoffplatten, -folien und -profile mit Maschinen herstellen",
       "Maschinen einstellen und den Produktionsprozess überwachen",
       "Fertige Halbzeuge prüfen und vermessen"
-    ]
+    ],
+    "salaryMonthlyEntry": 3017,
+    "salaryEntryKnown": true
   },
   {
     "id": 137750,
@@ -48920,7 +49512,9 @@
       "Kunststoffprofile zuschneiden und zu Fensterrahmen schweißen",
       "Beschläge und Dichtungen einbauen und montieren",
       "Fertige Fenster und Türen auf Maß und Qualität prüfen"
-    ]
+    ],
+    "salaryMonthlyEntry": 3017,
+    "salaryEntryKnown": true
   },
   {
     "id": 137748,
@@ -49046,7 +49640,9 @@
       "Kautschuk nach Rezept mischen und vorbereiten",
       "Gummiteile wie Reifen oder Dichtungen herstellen",
       "Fertige Teile auf Dichtheit und Belastbarkeit prüfen"
-    ]
+    ],
+    "salaryMonthlyEntry": 3017,
+    "salaryEntryKnown": true
   },
   {
     "id": 6415,
@@ -49213,7 +49809,9 @@
       "Farben und Lacke im Labor testen und mischen",
       "Versuche planen, durchführen und Ergebnisse aufschreiben",
       "Produkte auf Qualität und Haltbarkeit prüfen"
-    ]
+    ],
+    "salaryMonthlyEntry": 3653,
+    "salaryEntryKnown": true
   },
   {
     "id": 124412,
@@ -49400,7 +49998,9 @@
       "Traktoren, Bagger und Baumaschinen reparieren",
       "Fehler mit Diagnosegeräten suchen und beheben",
       "Maschinen warten und auf Sicherheit prüfen"
-    ]
+    ],
+    "salaryMonthlyEntry": 2915,
+    "salaryEntryKnown": true
   },
   {
     "id": 272,
@@ -49559,7 +50159,9 @@
       "Felder bestellen, säen, düngen und Ernte einfahren",
       "Tiere füttern, pflegen und ihren Gesundheitszustand beobachten",
       "Landmaschinen bedienen, warten und pflegen"
-    ]
+    ],
+    "salaryMonthlyEntry": 2815,
+    "salaryEntryKnown": true
   },
   {
     "id": 5879,
@@ -49747,7 +50349,9 @@
       "Lebensmittelproben nehmen und im Labor untersuchen",
       "Rohstoffe auf Qualität und Reinheit prüfen",
       "Ergebnisse dokumentieren und auswerten"
-    ]
+    ],
+    "salaryMonthlyEntry": 4097,
+    "salaryEntryKnown": true
   },
   {
     "id": 15104,
@@ -49904,7 +50508,9 @@
       "Menschen zeigen, wie sie sich besser bewegen und sitzen",
       "Kurse planen und Übungen zur Körperhaltung anleiten",
       "Verspannungen und Fehlhaltungen mit Berührung korrigieren"
-    ]
+    ],
+    "salaryMonthlyEntry": null,
+    "salaryEntryKnown": false
   },
   {
     "id": 4559,
@@ -50083,7 +50689,9 @@
       "Bauteile nach Schablonen zuschneiden und formen",
       "Einzelteile zu Flügeln, Rümpfen oder Leitwerken zusammenbauen",
       "Fertige Flugzeuge prüfen und kontrollieren"
-    ]
+    ],
+    "salaryMonthlyEntry": 3409,
+    "salaryEntryKnown": true
   },
   {
     "id": 8764,
@@ -50247,7 +50855,9 @@
       "Kinder beim richtigen Aussprechen von Lauten üben",
       "Schluck- und Atemübungen mit Betroffenen trainieren",
       "Fortschritte beobachten und Übungen anpassen"
-    ]
+    ],
+    "salaryMonthlyEntry": 3538,
+    "salaryEntryKnown": true
   },
   {
     "id": 6928,
@@ -50422,7 +51032,9 @@
       "Fracht annehmen, wiegen und Papiere ausfüllen",
       "Flugpläne und Personaleinsatz am Terminal organisieren",
       "Treibstoff und Ersatzteile einkaufen und bestellen"
-    ]
+    ],
+    "salaryMonthlyEntry": 3265,
+    "salaryEntryKnown": true
   },
   {
     "id": 134955,
@@ -50577,7 +51189,9 @@
       "Dämmplatten und Deckenelemente montieren",
       "Wände und Decken streichen oder tapezieren",
       "Schimmel beseitigen und Unebenheiten ausgleichen"
-    ]
+    ],
+    "salaryMonthlyEntry": 3300,
+    "salaryEntryKnown": true
   },
   {
     "id": 15532,
@@ -50722,7 +51336,9 @@
       "Schutzfarben und Rostschutzmittel auftragen",
       "Oberflächen strahlen und reinigen",
       "Beschichtungen auf Schäden und Haltbarkeit prüfen"
-    ]
+    ],
+    "salaryMonthlyEntry": 3300,
+    "salaryEntryKnown": true
   },
   {
     "id": 134954,
@@ -50863,7 +51479,9 @@
       "Wände und Fassaden streichen und gestalten",
       "Untergründe prüfen, trocknen und vorbereiten",
       "Schimmel bekämpfen und Unebenheiten ausgleichen"
-    ]
+    ],
+    "salaryMonthlyEntry": 3300,
+    "salaryEntryKnown": true
   },
   {
     "id": 15530,
@@ -51023,7 +51641,9 @@
       "Fassaden außen reinigen und neu beschichten",
       "Putzschäden ausbessern und Untergründe vorbereiten",
       "Räume mit Maltechniken oder Dekorputz gestalten"
-    ]
+    ],
+    "salaryMonthlyEntry": 3300,
+    "salaryEntryKnown": true
   },
   {
     "id": 15534,
@@ -51202,7 +51822,9 @@
       "Stuck und Verzierungen erneuern oder vergolden",
       "Oberflächen auf Schäden untersuchen und dokumentieren",
       "Historische Maltechniken anwenden und nachahmen"
-    ]
+    ],
+    "salaryMonthlyEntry": 3300,
+    "salaryEntryKnown": true
   },
   {
     "id": 77908,
@@ -51378,7 +52000,9 @@
       "Verträge und Angebote prüfen und zusammenfassen",
       "Statistiken erstellen und auswerten",
       "Besprechungen vorbereiten und Protokolle schreiben"
-    ]
+    ],
+    "salaryMonthlyEntry": 3299,
+    "salaryEntryKnown": true
   },
   {
     "id": 58991,
@@ -51554,7 +52178,9 @@
       "Verträge und Angebote prüfen und zusammenfassen",
       "Statistiken erstellen und auswerten",
       "Besprechungen vorbereiten und Protokolle schreiben"
-    ]
+    ],
+    "salaryMonthlyEntry": 3299,
+    "salaryEntryKnown": true
   },
   {
     "id": 4664,
@@ -51708,7 +52334,9 @@
       "Muster und Motive freihändig auf Teller oder Vasen malen",
       "Bemaltes Porzellan zum Einbrennen in den Ofen geben",
       "Feine Details mit Pinsel oder Zeichenfeder aufbringen"
-    ]
+    ],
+    "salaryMonthlyEntry": 2827,
+    "salaryEntryKnown": true
   },
   {
     "id": 132652,
@@ -51870,7 +52498,9 @@
       "Papier und Karton in Maschinen einlegen und zuführen",
       "Laufende Produktion beobachten und kontrollieren",
       "Kleine Störungen an Maschinen beheben"
-    ]
+    ],
+    "salaryMonthlyEntry": 2801,
+    "salaryEntryKnown": true
   },
   {
     "id": 132657,
@@ -52031,7 +52661,9 @@
       "Koch-, Misch- und Abfüllanlagen einrichten und starten",
       "Laufende Maschinen überwachen und kontrollieren",
       "Lebensmittel auf Qualität und Gewicht prüfen"
-    ]
+    ],
+    "salaryMonthlyEntry": 3539,
+    "salaryEntryKnown": true
   },
   {
     "id": 132653,
@@ -52189,7 +52821,9 @@
       "Materialien wie Metallteile oder Kunststoffgranulat bereitstellen",
       "Laufende Produktion beobachten und auf Fehler prüfen",
       "Fertige Teile kontrollieren und Mängel melden"
-    ]
+    ],
+    "salaryMonthlyEntry": 3497,
+    "salaryEntryKnown": true
   },
   {
     "id": 132655,
@@ -52348,7 +52982,9 @@
       "Garne und Fasern einlegen und Maschinen bestücken",
       "Laufende Produktion überwachen und Fehler beheben",
       "Fertige Stoffe und Textilien auf Qualität prüfen"
-    ]
+    ],
+    "salaryMonthlyEntry": 2731,
+    "salaryEntryKnown": true
   },
   {
     "id": 132656,
@@ -52508,7 +53144,9 @@
       "Farben und Chemikalien für die Veredelung vorbereiten",
       "Stoffe auf gleichmäßige Färbung und Muster kontrollieren",
       "Maschinen reinigen und für den nächsten Auftrag vorbereiten"
-    ]
+    ],
+    "salaryMonthlyEntry": 2731,
+    "salaryEntryKnown": true
   },
   {
     "id": 15200,
@@ -52670,7 +53308,9 @@
       "Perücken, Bärte und Haarteile anfertigen oder anpassen",
       "Spezialeffekte wie Wunden oder Narben aufkleben",
       "Schminke und Maske während Drehpausen auffrischen"
-    ]
+    ],
+    "salaryMonthlyEntry": 3310,
+    "salaryEntryKnown": true
   },
   {
     "id": 8734,
@@ -52831,7 +53471,9 @@
       "Wärme-, Kälte- oder Wasseranwendungen durchführen",
       "Bewegungsübungen mit Patienten gemeinsam machen",
       "Behandlungsfortschritt beobachten und dokumentieren"
-    ]
+    ],
+    "salaryMonthlyEntry": 3318,
+    "salaryEntryKnown": true
   },
   {
     "id": 27398,
@@ -53000,7 +53642,9 @@
       "Schnittmuster erstellen und Stoffe zuschneiden",
       "Kleidungsstücke nähen und von Hand fertigstellen",
       "Kleidung anprobieren und passgenau anpassen"
-    ]
+    ],
+    "salaryMonthlyEntry": 2853,
+    "salaryEntryKnown": true
   },
   {
     "id": 131156,
@@ -53156,7 +53800,9 @@
       "Schnittmuster zeichnen und Leder zuschneiden",
       "Schuhteile von Hand nähen und zusammenfügen",
       "Fertige Schuhe anprobieren und anpassen"
-    ]
+    ],
+    "salaryMonthlyEntry": null,
+    "salaryEntryKnown": false
   },
   {
     "id": 131157,
@@ -53310,7 +53956,9 @@
       "Leder und Materialien nach Maß zuschneiden",
       "Schuhschäfte nähen und dekorativ gestalten",
       "Kundenwünsche besprechen und Entwürfe skizzieren"
-    ]
+    ],
+    "salaryMonthlyEntry": null,
+    "salaryEntryKnown": false
   },
   {
     "id": 14087,
@@ -53465,7 +54113,9 @@
       "Computer und Netzwerke einrichten und testen",
       "Fehler in bestehenden Programmen suchen und beheben",
       "Kunden erklären, wie neue Software funktioniert"
-    ]
+    ],
+    "salaryMonthlyEntry": 3497,
+    "salaryEntryKnown": true
   },
   {
     "id": 51029,
@@ -53638,7 +54288,9 @@
       "Kundenwünsche analysieren und in Code umsetzen",
       "Programme testen und Fehler beheben",
       "Entwicklungsschritte dokumentieren und erklären"
-    ]
+    ],
+    "salaryMonthlyEntry": 3583,
+    "salaryEntryKnown": true
   },
   {
     "id": 3938,
@@ -53785,7 +54437,9 @@
       "Wände aus Ziegeln oder Betonsteinen mauern",
       "Schalungen bauen und Beton einfüllen",
       "Decken und Treppen einbauen oder montieren"
-    ]
+    ],
+    "salaryMonthlyEntry": 4298,
+    "salaryEntryKnown": true
   },
   {
     "id": 27442,
@@ -53938,7 +54592,9 @@
       "Bremsen und Fahrwerk prüfen und reparieren",
       "Defekte Teile austauschen und Räder wuchten",
       "Kunden über nötige Reparaturen informieren"
-    ]
+    ],
+    "salaryMonthlyEntry": 3514,
+    "salaryEntryKnown": true
   },
   {
     "id": 27444,
@@ -54102,7 +54758,9 @@
       "Beschädigte Reifen reparieren oder austauschen",
       "Räder wuchten und Reifendruck einstellen",
       "Kunden bei der Reifenwahl beraten"
-    ]
+    ],
+    "salaryMonthlyEntry": 3514,
+    "salaryEntryKnown": true
   },
   {
     "id": 2868,
@@ -54285,7 +54943,9 @@
       "Fertige Maschinen programmieren und in Betrieb nehmen",
       "Anlagen auf Fehler prüfen und reparieren",
       "Nach Schaltplänen und Zeichnungen arbeiten"
-    ]
+    ],
+    "salaryMonthlyEntry": 3583,
+    "salaryEntryKnown": true
   },
   {
     "id": 35283,
@@ -54454,7 +55114,9 @@
       "Rohre verlegen und elektrische Anschlüsse installieren",
       "Steuerungen programmieren und Anlage in Betrieb nehmen",
       "Anlagen regelmäßig warten und Störungen beheben"
-    ]
+    ],
+    "salaryMonthlyEntry": 2858,
+    "salaryEntryKnown": true
   },
   {
     "id": 8533,
@@ -54634,7 +55296,9 @@
       "Filmmaterial am Computer schneiden und bearbeiten",
       "Ton und Musik zu fertigen Videos hinzufügen",
       "Produktionsabläufe planen und Aufwand berechnen"
-    ]
+    ],
+    "salaryMonthlyEntry": 3134,
+    "salaryEntryKnown": true
   },
   {
     "id": 137684,
@@ -54773,7 +55437,9 @@
       "Plakate, Anzeigen und Werbebanner am Computer gestalten",
       "Designideen entwickeln und dem Kunden vorstellen",
       "Farben, Schriften und Bilder passend zusammenstellen"
-    ]
+    ],
+    "salaryMonthlyEntry": 2950,
+    "salaryEntryKnown": true
   },
   {
     "id": 137682,
@@ -54907,7 +55573,9 @@
       "Websites und Apps nach Kundenwunsch gestalten",
       "Layouts mit Code umsetzen und testen",
       "Menüs und Bedienung benutzerfreundlich aufbauen"
-    ]
+    ],
+    "salaryMonthlyEntry": 2950,
+    "salaryEntryKnown": true
   },
   {
     "id": 137683,
@@ -55093,7 +55761,9 @@
       "Prospekte, Kataloge und Plakate am Computer gestalten",
       "Bilder und Texte für den Druck aufbereiten",
       "Druckvorlagen prüfen und druckfertig machen"
-    ]
+    ],
+    "salaryMonthlyEntry": 2950,
+    "salaryEntryKnown": true
   },
   {
     "id": 137685,
@@ -55268,7 +55938,9 @@
       "Medienprojekte von Anfang bis Ende planen",
       "Aufgaben im Team verteilen und Termine überwachen",
       "Kosten kalkulieren und den Projektfortschritt kontrollieren"
-    ]
+    ],
+    "salaryMonthlyEntry": 2950,
+    "salaryEntryKnown": true
   },
   {
     "id": 35281,
@@ -55448,7 +56120,9 @@
       "Kunden zu Büchern, Apps oder anderen Medienprodukten beraten",
       "Medienprodukte und Lizenzen verkaufen oder einkaufen",
       "Markttrends beobachten und bei der Programmplanung mitwirken"
-    ]
+    ],
+    "salaryMonthlyEntry": 2950,
+    "salaryEntryKnown": true
   },
   {
     "id": 90572,
@@ -55614,7 +56288,9 @@
       "Druckmaschinen einrichten und bedienen",
       "Druckaufträge prüfen und Arbeitsabläufe planen",
       "Druckergebnisse kontrollieren und Fehler beheben"
-    ]
+    ],
+    "salaryMonthlyEntry": 3826,
+    "salaryEntryKnown": true
   },
   {
     "id": 90574,
@@ -55771,7 +56447,9 @@
       "Gedruckte Seiten zu Büchern oder Heften zusammenfügen",
       "Verarbeitungsmaschinen einrichten und überwachen",
       "Fertige Produkte auf Qualität prüfen"
-    ]
+    ],
+    "salaryMonthlyEntry": 2801,
+    "salaryEntryKnown": true
   },
   {
     "id": 90578,
@@ -55931,7 +56609,9 @@
       "Stoffe, Glas oder Metall mit Siebdruckmaschinen bedrucken",
       "Siebdruckformen herstellen und Vorlagen am Computer aufbereiten",
       "Druckdaten prüfen und Kunden beraten"
-    ]
+    ],
+    "salaryMonthlyEntry": 3826,
+    "salaryEntryKnown": true
   },
   {
     "id": 8343,
@@ -56093,7 +56773,9 @@
       "Patientendaten erfassen und Krankenakten anlegen",
       "Medizinische Unterlagen sortieren und archivieren",
       "Diagnose- und Behandlungsdaten in Systeme eingeben"
-    ]
+    ],
+    "salaryMonthlyEntry": 3449,
+    "salaryEntryKnown": true
   },
   {
     "id": 33212,
@@ -56271,7 +56953,9 @@
       "Patienten empfangen und Termine vergeben",
       "Blut abnehmen und Verbände anlegen",
       "Laborproben vorbereiten und Instrumente pflegen"
-    ]
+    ],
+    "salaryMonthlyEntry": 2940,
+    "salaryEntryKnown": true
   },
   {
     "id": 9013,
@@ -56432,7 +57116,9 @@
       "Ärzte bei Leichenöffnungen assistieren und vorbereiten",
       "Gewebeproben entnehmen und für Labor aufbereiten",
       "Anatomische Präparate für Lehre und Forschung herstellen"
-    ]
+    ],
+    "salaryMonthlyEntry": 3418,
+    "salaryEntryKnown": true
   },
   {
     "id": 135579,
@@ -56607,7 +57293,9 @@
       "Herz, Gehirn oder Lunge von Patienten messen",
       "Messgeräte vorbereiten und Patienten durch Untersuchung begleiten",
       "Messergebnisse auswerten und für Ärzte dokumentieren"
-    ]
+    ],
+    "salaryMonthlyEntry": 3551,
+    "salaryEntryKnown": true
   },
   {
     "id": 135577,
@@ -56785,7 +57473,9 @@
       "Blut- und Gewebeproben im Labor untersuchen",
       "Laborgeräte bedienen und Proben vorbereiten",
       "Ergebnisse auswerten und für Ärzte dokumentieren"
-    ]
+    ],
+    "salaryMonthlyEntry": 3551,
+    "salaryEntryKnown": true
   },
   {
     "id": 135581,
@@ -56967,7 +57657,9 @@
       "Röntgenbilder und CT-Aufnahmen von Patienten erstellen",
       "Patienten auf Untersuchungen vorbereiten und begleiten",
       "Aufnahmen auswerten und für Ärzte bereitstellen"
-    ]
+    ],
+    "salaryMonthlyEntry": 3551,
+    "salaryEntryKnown": true
   },
   {
     "id": 135583,
@@ -57145,7 +57837,9 @@
       "Ergebnisse auswerten und an Tierärzte weitergeben",
       "Laborgeräte bedienen und sauber halten",
       "Proben vorbereiten und richtig lagern"
-    ]
+    ],
+    "salaryMonthlyEntry": 3302,
+    "salaryEntryKnown": true
   },
   {
     "id": 2277,
@@ -57327,7 +58021,9 @@
       "Tore, Gitter und Fassadenteile zusammenschweißen",
       "Fertige Konstruktionen auf Baustellen montieren",
       "Maße prüfen und Qualität kontrollieren"
-    ]
+    ],
+    "salaryMonthlyEntry": 3353,
+    "salaryEntryKnown": true
   },
   {
     "id": 2267,
@@ -57499,7 +58195,9 @@
       "Metall schmieden und in Form bringen",
       "Geländer, Gitter und Verzierungen nach Entwurf herstellen",
       "Fertige Teile an Gebäuden montieren"
-    ]
+    ],
+    "salaryMonthlyEntry": 3353,
+    "salaryEntryKnown": true
   },
   {
     "id": 2266,
@@ -57667,7 +58365,9 @@
       "Fahrzeugrahmen und Karosserien zusammenschweißen",
       "Aufbauten für Lastwagen und Maschinen montieren",
       "Maße und Schweißnähte prüfen"
-    ]
+    ],
+    "salaryMonthlyEntry": 3011,
+    "salaryEntryKnown": true
   },
   {
     "id": 129467,
@@ -57820,7 +58520,9 @@
       "Schmuck und Dekorteile aus Buntmetall formen",
       "Entwürfe am Computer zeichnen und planen",
       "Bleche stanzen, biegen und zusammensetzen"
-    ]
+    ],
+    "salaryMonthlyEntry": 2947,
+    "salaryEntryKnown": true
   },
   {
     "id": 129468,
@@ -57973,7 +58675,9 @@
       "Metallbleche in runde Hohlformen drücken",
       "Formen aus Stahl oder Kunststoff herstellen",
       "Fertige Teile prüfen und nachbearbeiten"
-    ]
+    ],
+    "salaryMonthlyEntry": 2947,
+    "salaryEntryKnown": true
   },
   {
     "id": 1964,
@@ -58131,7 +58835,9 @@
       "Ornamente und Muster in Metalloberflächen einarbeiten",
       "Reliefs und Skulpturen aus Metall gestalten",
       "Oberflächen schleifen und polieren"
-    ]
+    ],
+    "salaryMonthlyEntry": 2947,
+    "salaryEntryKnown": true
   },
   {
     "id": 2665,
@@ -58296,7 +59002,9 @@
       "Metallbleche zu Röhren und Schallstücken formen",
       "Einzelteile wie Ventile und Klappen einbauen",
       "Fertige Instrumente stimmen und auf Klang prüfen"
-    ]
+    ],
+    "salaryMonthlyEntry": 3497,
+    "salaryEntryKnown": true
   },
   {
     "id": 2757,
@@ -58464,7 +59172,9 @@
       "Computerchips und Sensoren herstellen",
       "Reinraumbedingungen kontrollieren und sicherstellen",
       "Fertige Bauteile prüfen und messen"
-    ]
+    ],
+    "salaryMonthlyEntry": 3583,
+    "salaryEntryKnown": true
   },
   {
     "id": 3353,
@@ -58625,7 +59335,9 @@
       "Stoffe und Stroh zuschneiden und in Form bringen",
       "Hüte mit Bändern, Blumen oder Federn verzieren",
       "Kunden beim Kauf beraten und Hüte anpassen"
-    ]
+    ],
+    "salaryMonthlyEntry": 2762,
+    "salaryEntryKnown": true
   },
   {
     "id": 8377,
@@ -58775,7 +59487,9 @@
       "Kirchenchor oder Posaunenchor leiten und proben",
       "Musikstücke für den Gottesdienst auswählen",
       "Musikunterricht geben oder Singnachmittage organisieren"
-    ]
+    ],
+    "salaryMonthlyEntry": null,
+    "salaryEntryKnown": false
   },
   {
     "id": 8379,
@@ -58937,7 +59651,9 @@
       "Mit der Band proben und Auftritte vorbereiten",
       "Eigene Songs schreiben oder arrangieren",
       "Bei Konzerten live auf der Bühne spielen"
-    ]
+    ],
+    "salaryMonthlyEntry": null,
+    "salaryEntryKnown": false
   },
   {
     "id": 73829,
@@ -59119,7 +59835,9 @@
       "Kunden zu Instrumenten beraten und diese vorspielen",
       "Waren einräumen, bestellen und den Laden pflegen",
       "Reklamationen annehmen und Umtausch abwickeln"
-    ]
+    ],
+    "salaryMonthlyEntry": 2845,
+    "salaryEntryKnown": true
   },
   {
     "id": 846,
@@ -59272,7 +59990,9 @@
       "Steinblöcke mit Maschinen in Platten oder Fliesen schneiden",
       "Maschinen einrichten und Programme eingeben",
       "Fertige Steinteile prüfen und für den Versand vorbereiten"
-    ]
+    ],
+    "salaryMonthlyEntry": 4178,
+    "salaryEntryKnown": true
   },
   {
     "id": 847,
@@ -59419,7 +60139,9 @@
       "Steinplatten aus Granit oder Marmor maschinell schleifen",
       "Oberflächen polieren bis sie glänzen",
       "Fertige Platten kontrollieren und versandfertig machen"
-    ]
+    ],
+    "salaryMonthlyEntry": 4178,
+    "salaryEntryKnown": true
   },
   {
     "id": 15435,
@@ -59576,7 +60298,9 @@
       "Grabmäler, Säulen oder Denkmäler herstellen",
       "Steinoberflächen schleifen, polieren und imprägnieren",
       "Natursteinfassaden oder Bodenplatten vor Ort einbauen"
-    ]
+    ],
+    "salaryMonthlyEntry": 4178,
+    "salaryEntryKnown": true
   },
   {
     "id": 67629,
@@ -59633,7 +60357,9 @@
       "Auf der Schiffsbrücke bei der Navigation mithelfen",
       "Technische Geräte und Instrumente überwachen",
       "Wache halten und die Umgebung des Schiffs beobachten"
-    ]
+    ],
+    "salaryMonthlyEntry": null,
+    "salaryEntryKnown": false
   },
   {
     "id": 7955,
@@ -59810,7 +60536,9 @@
       "Kontakt zu Gerichten und Behörden halten",
       "Beurkundungstermine organisieren und Akten führen",
       "Schriftstücke wie Erbscheinsanträge selbstständig erstellen"
-    ]
+    ],
+    "salaryMonthlyEntry": null,
+    "salaryEntryKnown": false
   },
   {
     "id": 122462,
@@ -60009,7 +60737,9 @@
       "Bei Notfällen schnell einschätzen, wie krank jemand ist",
       "Erste Hilfe leisten und lebensrettende Maßnahmen durchführen",
       "Patienten im Rettungswagen betreuen und ins Krankenhaus bringen"
-    ]
+    ],
+    "salaryMonthlyEntry": 3701,
+    "salaryEntryKnown": true
   },
   {
     "id": 34975,
@@ -60152,7 +60882,9 @@
       "Metalloberflächen reinigen und für die Beschichtung vorbereiten",
       "Schutzschichten durch Galvanisieren oder Verzinken auftragen",
       "Beschichtete Teile prüfen und auf Qualität kontrollieren"
-    ]
+    ],
+    "salaryMonthlyEntry": 2947,
+    "salaryEntryKnown": true
   },
   {
     "id": 35285,
@@ -60326,7 +61058,9 @@
       "Kunden beraten und Kamine oder Öfen planen",
       "Ofenteile in der Werkstatt fertigen und vorbereiten",
       "Kachelöfen oder Heizanlagen beim Kunden einbauen"
-    ]
+    ],
+    "salaryMonthlyEntry": 3383,
+    "salaryEntryKnown": true
   },
   {
     "id": 8830,
@@ -60525,7 +61259,9 @@
       "Ärzten im OP Instrumente und Material anreichen",
       "Atmung und Kreislauf der Patienten überwachen",
       "OP-Besteck reinigen, sterilisieren und bereitstellen"
-    ]
+    ],
+    "salaryMonthlyEntry": 3568,
+    "salaryEntryKnown": true
   },
   {
     "id": 132536,
@@ -60702,7 +61438,9 @@
       "Orgelpfeifen und Bauteile in der Werkstatt herstellen",
       "Orgeln in Kirchen aufbauen und einpassen",
       "Instrumente nach dem Aufbau stimmen und einstellen"
-    ]
+    ],
+    "salaryMonthlyEntry": 3409,
+    "salaryEntryKnown": true
   },
   {
     "id": 132537,
@@ -60871,7 +61609,9 @@
       "Pfeifen nach Klangvorgaben einstellen und anpassen",
       "Maschinen wie Kreissägen bedienen und einrichten",
       "Materialien je nach Aufstellungsort auswählen"
-    ]
+    ],
+    "salaryMonthlyEntry": 3409,
+    "salaryEntryKnown": true
   },
   {
     "id": 3497,
@@ -61050,7 +61790,9 @@
       "Einlagen und Stützschienen für Patienten herstellen",
       "Konfektionsschuhe umbauen und individuell anpassen",
       "Fertige Schuhe anprobieren und korrigieren"
-    ]
+    ],
+    "salaryMonthlyEntry": null,
+    "salaryEntryKnown": false
   },
   {
     "id": 122351,
@@ -61249,7 +61991,9 @@
       "Stützapparate für Rücken oder Gelenke bauen",
       "Patienten beim Anpassen von Hilfsmitteln begleiten",
       "Materialien zuschneiden, formen und zusammenbauen"
-    ]
+    ],
+    "salaryMonthlyEntry": null,
+    "salaryEntryKnown": false
   },
   {
     "id": 8769,
@@ -61415,7 +62159,9 @@
       "Schielbehandlungen durchführen und begleiten",
       "Patienten über ihre Augenerkrankung aufklären",
       "Therapieerfolge beobachten und dokumentieren"
-    ]
+    ],
+    "salaryMonthlyEntry": 3538,
+    "salaryEntryKnown": true
   },
   {
     "id": 90568,
@@ -61617,7 +62363,9 @@
       "Muster herstellen und auf Stabilität prüfen",
       "Stanzformen für Verpackungen erstellen",
       "Entwürfe mit Kunden abstimmen und anpassen"
-    ]
+    ],
+    "salaryMonthlyEntry": 2801,
+    "salaryEntryKnown": true
   },
   {
     "id": 78502,
@@ -61791,7 +62539,9 @@
       "Chemikalien dosieren und Produktionsprozesse überwachen",
       "Papierqualität prüfen und Fehler beheben",
       "Maschinen warten und reinigen"
-    ]
+    ],
+    "salaryMonthlyEntry": 3198,
+    "salaryEntryKnown": true
   },
   {
     "id": 4415,
@@ -61957,7 +62707,9 @@
       "Untergrund vorbereiten und glätten",
       "Parkettteile zusägen und nach Muster verlegen",
       "Boden schleifen, versiegeln und fertigstellen"
-    ]
+    ],
+    "salaryMonthlyEntry": 2945,
+    "salaryEntryKnown": true
   },
   {
     "id": 7957,
@@ -62152,7 +62904,9 @@
       "Termine mit Mandanten vereinbaren und verwalten",
       "Anrufe entgegennehmen und weiterleiten",
       "Fristen und Schutzrechte im Blick behalten"
-    ]
+    ],
+    "salaryMonthlyEntry": null,
+    "salaryEntryKnown": false
   },
   {
     "id": 58385,
@@ -62344,7 +63098,9 @@
       "Bewerbungen sichten und Kandidaten auswählen",
       "Gespräche mit Bewerbern und Firmen führen",
       "Arbeitsverträge vorbereiten und Einsätze planen"
-    ]
+    ],
+    "salaryMonthlyEntry": null,
+    "salaryEntryKnown": false
   },
   {
     "id": 77696,
@@ -62501,7 +63257,9 @@
       "Reitkunden unterrichten und trainieren",
       "Pferde füttern, pflegen und Gesundheit kontrollieren",
       "Stall und Ausrüstung sauber halten"
-    ]
+    ],
+    "salaryMonthlyEntry": 2624,
+    "salaryEntryKnown": true
   },
   {
     "id": 77695,
@@ -62652,7 +63410,9 @@
       "Pferde satteln und mit Zaumzeug ausrüsten",
       "Kunden zu Ernährung und Gesundheit der Pferde beraten",
       "Gesundheitszustand der Tiere beobachten und einschätzen"
-    ]
+    ],
+    "salaryMonthlyEntry": 2624,
+    "salaryEntryKnown": true
   },
   {
     "id": 122322,
@@ -62823,7 +63583,9 @@
       "Substrat vorbereiten und Wachstumsbedingungen kontrollieren",
       "Versuche durchführen und Ergebnisse aufschreiben",
       "Pflanzen gießen, düngen und auf Krankheiten prüfen"
-    ]
+    ],
+    "salaryMonthlyEntry": 3418,
+    "salaryEntryKnown": true
   },
   {
     "id": 135349,
@@ -62991,7 +63753,9 @@
       "Menschen beim Waschen, Anziehen und Essen helfen",
       "Blutdruck und Puls messen und aufschreiben",
       "Bewohner bei Freizeitaktivitäten begleiten und betreuen"
-    ]
+    ],
+    "salaryMonthlyEntry": 3187,
+    "salaryEntryKnown": true
   },
   {
     "id": 143399,
@@ -63103,7 +63867,9 @@
     "salaryKnown": true,
     "digitalizationSignal": true,
     "workLocations": "Pflegefachassistenten und -assistentinnen bzw. Pflegefachassistenzpersonen arbeiten meist in Patientenzimmern in Untersuchungs- und Behandlungsräumen in Büroräumen und Stationszimmern in Gemeinschaftsräumen von Heimen und Wohngemeinschaften Sie arbeiten ggf. auch in Privatwohnungen pflegebedürftiger Personen",
-    "competenciesText": "Kernkompetenzen: Ambulante/mobile Pflege Behandlungspflege Grundpflege Krankenpflege Monitoring von Vitalparametern Patientenbetreuung Pflegehilfe (Alten-, Kranken-, Behindertenpflege) Weitere Kompetenzen: Allgemeinmedizin (Pflege, Assistenz) Altenarbeit, Seniorenarbeit Altenpflege Ambulante Wohnbetreuung Blutdruckmessung Desinfektion Exoskelette Geriatrie, Gerontologie (Pflege, Assistenz) Gesundheitsvorsorge (Prävention) Hygiene Innere Medizin (Pflege, Assistenz) Intensivmedizin (Pflege, Assistenz) Kinderheilkunde (Pflege, Assistenz) Krankenhaus-, Praxishygiene Pflegedokumentation Qualifizierung medizinische Behandlungspflege nach &sect; 132a SGB V Rehabilitation Rettungsmaßnahmen, Erste Hilfe Sterbebegleitung Therapie- und Pflegeroboter Weitere Fertigkeiten und Kenntnisse: Kompetenzgruppe \" Personengruppen \""
+    "competenciesText": "Kernkompetenzen: Ambulante/mobile Pflege Behandlungspflege Grundpflege Krankenpflege Monitoring von Vitalparametern Patientenbetreuung Pflegehilfe (Alten-, Kranken-, Behindertenpflege) Weitere Kompetenzen: Allgemeinmedizin (Pflege, Assistenz) Altenarbeit, Seniorenarbeit Altenpflege Ambulante Wohnbetreuung Blutdruckmessung Desinfektion Exoskelette Geriatrie, Gerontologie (Pflege, Assistenz) Gesundheitsvorsorge (Prävention) Hygiene Innere Medizin (Pflege, Assistenz) Intensivmedizin (Pflege, Assistenz) Kinderheilkunde (Pflege, Assistenz) Krankenhaus-, Praxishygiene Pflegedokumentation Qualifizierung medizinische Behandlungspflege nach &sect; 132a SGB V Rehabilitation Rettungsmaßnahmen, Erste Hilfe Sterbebegleitung Therapie- und Pflegeroboter Weitere Fertigkeiten und Kenntnisse: Kompetenzgruppe \" Personengruppen \"",
+    "salaryMonthlyEntry": 3187,
+    "salaryEntryKnown": true
   },
   {
     "id": 132173,
@@ -63285,7 +64051,9 @@
       "Pflegebedarf einschätzen und Pflege planen",
       "Bei Untersuchungen assistieren und Arzt unterstützen",
       "Patienten und Angehörige beraten und informieren"
-    ]
+    ],
+    "salaryMonthlyEntry": 3568,
+    "salaryEntryKnown": true
   },
   {
     "id": 1151,
@@ -63456,7 +64224,9 @@
       "Wirkstoffe und Hilfsstoffe genau abwiegen und mischen",
       "Verpackungsanlagen steuern und Abfüllung überwachen",
       "Maschinen warten und Qualität der Produkte prüfen"
-    ]
+    ],
+    "salaryMonthlyEntry": 3521,
+    "salaryEntryKnown": true
   },
   {
     "id": 6717,
@@ -63627,7 +64397,9 @@
       "Medikamente bestellen und Lieferungen kontrollieren",
       "Waren einräumen und Lagervorschriften einhalten",
       "Rechnungen schreiben und Belege erfassen"
-    ]
+    ],
+    "salaryMonthlyEntry": 2405,
+    "salaryEntryKnown": true
   },
   {
     "id": 8910,
@@ -63818,7 +64590,9 @@
       "Medikamente nach Rezept ausgeben und erklären",
       "Kunden zu Wirkung und Nebenwirkungen beraten",
       "Arzneimittel in der Apotheke herstellen und prüfen"
-    ]
+    ],
+    "salaryMonthlyEntry": 2717,
+    "salaryEntryKnown": true
   },
   {
     "id": 5826,
@@ -63979,7 +64753,9 @@
       "Versuchsanlagen aufbauen und auf Funktion prüfen",
       "Bei Experimenten assistieren und Messungen durchführen",
       "Ergebnisse dokumentieren und auswerten"
-    ]
+    ],
+    "salaryMonthlyEntry": 3440,
+    "salaryEntryKnown": true
   },
   {
     "id": 6351,
@@ -64148,7 +64924,9 @@
       "Eigenschaften von Werkstoffen messen und dokumentieren",
       "Ergebnisse auswerten und für Fachleute aufbereiten",
       "Laborgeräte warten und instand halten"
-    ]
+    ],
+    "salaryMonthlyEntry": 3302,
+    "salaryEntryKnown": true
   },
   {
     "id": 8750,
@@ -64327,7 +65105,9 @@
       "Übungen mit Patienten durchführen, um Bewegung zu verbessern",
       "Therapieplan nach ärztlicher Diagnose erstellen",
       "Muskeln und Gelenke mit Massagen oder Wärme behandeln"
-    ]
+    ],
+    "salaryMonthlyEntry": 3538,
+    "salaryEntryKnown": true
   },
   {
     "id": 137340,
@@ -64498,7 +65278,9 @@
       "Pilatesübungen zeigen und Teilnehmer dabei korrigieren",
       "Auf richtige Atmung und Körperhaltung achten",
       "Kurse planen und Stunden vorbereiten"
-    ]
+    ],
+    "salaryMonthlyEntry": null,
+    "salaryEntryKnown": false
   },
   {
     "id": 4442,
@@ -64657,7 +65439,9 @@
       "Stoffe für Vorhänge und Sofabezüge zuschneiden",
       "Stoffteile per Hand oder an der Nähmaschine zusammennähen",
       "Knöpfe, Fransen oder Reißverschlüsse anbringen und bügeln"
-    ]
+    ],
+    "salaryMonthlyEntry": 3239,
+    "salaryEntryKnown": true
   },
   {
     "id": 4432,
@@ -64810,7 +65594,9 @@
       "Polster aus Federn und Füllstoffen aufbauen",
       "Bezugsstoffe zuschneiden, nähen und über Möbel ziehen",
       "Füße und Verzierungen am fertigen Möbel befestigen"
-    ]
+    ],
+    "salaryMonthlyEntry": 3409,
+    "salaryEntryKnown": true
   },
   {
     "id": 131057,
@@ -64971,7 +65757,9 @@
       "Metallteile zuschneiden, feilen und auf Maß bringen",
       "Werkzeuge auf Schärfe und Genauigkeit prüfen",
       "Technische Zeichnungen lesen und umsetzen"
-    ]
+    ],
+    "salaryMonthlyEntry": 3353,
+    "salaryEntryKnown": true
   },
   {
     "id": 131058,
@@ -65137,7 +65925,9 @@
       "Maschinen programmieren und einstellen",
       "Verschlissene Werkzeuge prüfen und reparieren",
       "Maße und Qualität der fertigen Werkzeuge kontrollieren"
-    ]
+    ],
+    "salaryMonthlyEntry": 3353,
+    "salaryEntryKnown": true
   },
   {
     "id": 8477,
@@ -65301,7 +66091,9 @@
       "Muster und Designs für Stoffe oder Teppiche entwerfen",
       "Entwürfe am Computer oder von Hand zeichnen",
       "Muster nach Kundenwunsch anpassen und weiterentwickeln"
-    ]
+    ],
+    "salaryMonthlyEntry": 3069,
+    "salaryEntryKnown": true
   },
   {
     "id": 34950,
@@ -65474,7 +66266,9 @@
       "Produktionsanlagen einschalten, einstellen und beobachten",
       "Proben entnehmen und im Labor prüfen",
       "Fertige Produkte verpacken und einlagern"
-    ]
+    ],
+    "salaryMonthlyEntry": 3363,
+    "salaryEntryKnown": true
   },
   {
     "id": 33210,
@@ -65637,7 +66431,9 @@
       "Maschinenteile ein- und ausbauen",
       "Störungen erkennen und beheben",
       "Laufende Produktion beobachten und kontrollieren"
-    ]
+    ],
+    "salaryMonthlyEntry": 2731,
+    "salaryEntryKnown": true
   },
   {
     "id": 67789,
@@ -65801,7 +66597,9 @@
       "Produktionsanlagen einrichten und in Betrieb nehmen",
       "Testreihen durchführen und Ergebnisse auswerten",
       "Fehler in der Produktion suchen und beheben"
-    ]
+    ],
+    "salaryMonthlyEntry": 3497,
+    "salaryEntryKnown": true
   },
   {
     "id": 34937,
@@ -65965,7 +66763,9 @@
       "Muster und Farben auf Stoffe drucken",
       "Textilien wasserabweisend oder schmutzabweisend behandeln",
       "Maschinen für die Veredelung einstellen und bedienen"
-    ]
+    ],
+    "salaryMonthlyEntry": 2731,
+    "salaryEntryKnown": true
   },
   {
     "id": 4405,
@@ -66130,7 +66930,9 @@
       "Vorhänge, Jalousien und Sonnenschutz montieren",
       "Kunden zu Materialien und Gestaltung beraten",
       "Räume nach Kundenwunsch dekorieren und einrichten"
-    ]
+    ],
+    "salaryMonthlyEntry": 2665,
+    "salaryEntryKnown": true
   },
   {
     "id": 7959,
@@ -66321,7 +67123,9 @@
       "Akten anlegen, pflegen und Fristen im Blick behalten",
       "Schriftstücke und Verträge nach Vorgabe verfassen",
       "Rechnungen erstellen und Zahlungen verbuchen"
-    ]
+    ],
+    "salaryMonthlyEntry": null,
+    "salaryEntryKnown": false
   },
   {
     "id": 7958,
@@ -66507,7 +67311,9 @@
       "Schriftsätze für Gerichtsverfahren vorbereiten",
       "Gebühren berechnen und Rechnungen stellen",
       "Mahnverfahren vorbereiten und Zahlungseingänge überwachen"
-    ]
+    ],
+    "salaryMonthlyEntry": null,
+    "salaryEntryKnown": false
   },
   {
     "id": 713,
@@ -66662,7 +67468,9 @@
       "Futterstellen im Winter anlegen und befüllen",
       "Tiere schießen, um den Wildbestand zu regulieren",
       "Lebensräume für Wild pflegen und schützen"
-    ]
+    ],
+    "salaryMonthlyEntry": 2815,
+    "salaryEntryKnown": true
   },
   {
     "id": 27530,
@@ -66832,7 +67640,9 @@
       "Rollläden, Sonnenschutz und Tore beim Kunden einbauen",
       "Motoren und Steuerungen in Anlagen einbauen",
       "Defekte Anlagen beim Kunden reparieren"
-    ]
+    ],
+    "salaryMonthlyEntry": 3353,
+    "salaryEntryKnown": true
   },
   {
     "id": 35029,
@@ -66983,7 +67793,9 @@
       "Leder und Stoff für Fahrzeugsitze zuschneiden",
       "Polster und Verdecke nähen oder kleben",
       "Sitze und Innenverkleidungen in Fahrzeuge einbauen"
-    ]
+    ],
+    "salaryMonthlyEntry": 2544,
+    "salaryEntryKnown": true
   },
   {
     "id": 35025,
@@ -67134,7 +67946,9 @@
       "Leder und Materialien für Taschen oder Koffer zuschneiden",
       "Einzelteile nähen, kleben oder nieten",
       "Taschen und Geldbörsen nach Kundenwunsch anfertigen"
-    ]
+    ],
+    "salaryMonthlyEntry": 2544,
+    "salaryEntryKnown": true
   },
   {
     "id": 35027,
@@ -67291,7 +68105,9 @@
       "Sättel und Zaumzeug aus Leder herstellen",
       "Lederteile zuschneiden, nähen und zusammensetzen",
       "Sättel anpassen und auf Passform prüfen"
-    ]
+    ],
+    "salaryMonthlyEntry": 2544,
+    "salaryEntryKnown": true
   },
   {
     "id": 27396,
@@ -67446,7 +68262,9 @@
       "Bekämpfungsmittel auswählen und gezielt einsetzen",
       "Kunden über Schutzmaßnahmen beraten",
       "Maßnahmen und verwendete Mittel dokumentieren"
-    ]
+    ],
+    "salaryMonthlyEntry": 3199,
+    "salaryEntryKnown": true
   },
   {
     "id": 8412,
@@ -67602,7 +68420,9 @@
       "Rollen lesen und Texte auswendig lernen",
       "Gestik, Mimik und Bewegung in Proben erarbeiten",
       "Charaktere auf der Bühne oder vor der Kamera spielen"
-    ]
+    ],
+    "salaryMonthlyEntry": 3310,
+    "salaryEntryKnown": true
   },
   {
     "id": 6920,
@@ -67783,7 +68603,9 @@
       "Kunden zu Frachtkosten und Transportwegen beraten",
       "Frachtaufträge bearbeiten und Dokumente erstellen",
       "Zoll- und Versicherungsfragen klären"
-    ]
+    ],
+    "salaryMonthlyEntry": 3158,
+    "salaryEntryKnown": true
   },
   {
     "id": 6921,
@@ -67964,7 +68786,9 @@
       "Häfen und Routen für Schiffstouren planen und koordinieren",
       "Kontakt mit Kunden, Häfen und Reedereien halten",
       "Dokumente für Ladung und Transport vorbereiten"
-    ]
+    ],
+    "salaryMonthlyEntry": 3158,
+    "salaryEntryKnown": true
   },
   {
     "id": 14506,
@@ -68021,7 +68845,9 @@
       "Bei der Navigation auf dem Schiff mithelfen und Wache halten",
       "Maschinen und Technik an Bord überwachen",
       "Auf See mitfahren und die Crew unterstützen"
-    ]
+    ],
+    "salaryMonthlyEntry": null,
+    "salaryEntryKnown": false
   },
   {
     "id": 7273,
@@ -68190,7 +69016,9 @@
       "Wachdienste auf der Brücke und im Maschinenraum übernehmen",
       "Ladung sicher verstauen und Ladeeinrichtungen bedienen",
       "Rettungsgeräte und Sicherheitsausrüstung kontrollieren"
-    ]
+    ],
+    "salaryMonthlyEntry": 4494,
+    "salaryEntryKnown": true
   },
   {
     "id": 8491,
@@ -68356,7 +69184,9 @@
       "Schilder und Leuchtreklamen am Computer entwerfen",
       "Materialien wie Plexiglas und Metall zuschneiden und bearbeiten",
       "Schaufenster bekleben und Beschriftungen anbringen"
-    ]
+    ],
+    "salaryMonthlyEntry": 2907,
+    "salaryEntryKnown": true
   },
   {
     "id": 8213,
@@ -68528,7 +69358,9 @@
       "Schornsteine und Heizungsanlagen reinigen",
       "Heizungen und Abgasanlagen auf Sicherheit prüfen",
       "Ablagerungen aus Lüftungsanlagen entfernen"
-    ]
+    ],
+    "salaryMonthlyEntry": 3828,
+    "salaryEntryKnown": true
   },
   {
     "id": 35205,
@@ -68686,7 +69518,9 @@
       "Gesprochene Worte live in Text umwandeln",
       "Untertitel für TV oder Livestreams in Echtzeit erstellen",
       "Hörgeschädigte bei Konferenzen und Sitzungen unterstützen"
-    ]
+    ],
+    "salaryMonthlyEntry": 3134,
+    "salaryEntryKnown": true
   },
   {
     "id": 3513,
@@ -68827,7 +69661,9 @@
       "Leder und Kunststoffe nach Vorlage zuschneiden",
       "Schuhteile in mehreren Schritten zusammennähen und verarbeiten",
       "Schuhe in Serie am Fließband herstellen"
-    ]
+    ],
+    "salaryMonthlyEntry": 2478,
+    "salaryEntryKnown": true
   },
   {
     "id": 15545,
@@ -68969,7 +69805,9 @@
       "Metallteile ausrichten und mit Schweißpunkten heften",
       "Verschiedene Schweißverfahren anwenden und Teile verbinden",
       "Schweißgeräte und Zusatzwerkstoffe auswählen und einsetzen"
-    ]
+    ],
+    "salaryMonthlyEntry": 3497,
+    "salaryEntryKnown": true
   },
   {
     "id": 3379,
@@ -69112,7 +69950,9 @@
       "Maß nehmen und Schnittmuster für Segel erstellen",
       "Segeltuch zuschneiden und mit Spezialmaschinen nähen",
       "Material und Größe mit Kunden absprechen und auswählen"
-    ]
+    ],
+    "salaryMonthlyEntry": 2731,
+    "salaryEntryKnown": true
   },
   {
     "id": 3045,
@@ -69253,7 +70093,9 @@
       "Fasern und Drähte an Maschinen zu Seilen drehen",
       "Verschiedene Materialien wie Hanf oder Stahldraht verarbeiten",
       "Netze und Taue nach Vorgabe herstellen"
-    ]
+    ],
+    "salaryMonthlyEntry": 2731,
+    "salaryEntryKnown": true
   },
   {
     "id": 35309,
@@ -69431,7 +70273,9 @@
       "Kunden am Telefon oder per Chat beraten und betreuen",
       "Produkte und Dienstleistungen aktiv verkaufen",
       "Anfragen und Beschwerden von Kunden bearbeiten"
-    ]
+    ],
+    "salaryMonthlyEntry": 2959,
+    "salaryEntryKnown": true
   },
   {
     "id": 33360,
@@ -69610,7 +70454,9 @@
       "Waren beladen, ausliefern und an Kunden übergeben",
       "Route planen und Lieferscheine auf Vollständigkeit prüfen",
       "Kunden vor Ort beraten und in Geräte einweisen"
-    ]
+    ],
+    "salaryMonthlyEntry": 2933,
+    "salaryEntryKnown": true
   },
   {
     "id": 6972,
@@ -69803,7 +70649,9 @@
       "Flugtickets verkaufen und Sitzplätze reservieren",
       "Fluggäste bei Fragen und Problemen beraten",
       "Hotelzimmer oder Mietwagen für Reisende buchen"
-    ]
+    ],
+    "salaryMonthlyEntry": 3265,
+    "salaryEntryKnown": true
   },
   {
     "id": 70148,
@@ -69984,7 +70832,9 @@
       "Rundgänge durch Gebäude und Gelände machen",
       "Sicherheitstechnik wie Alarmanlagen überprüfen",
       "Verstöße oder Mängel melden und dokumentieren"
-    ]
+    ],
+    "salaryMonthlyEntry": 3475,
+    "salaryEntryKnown": true
   },
   {
     "id": 9031,
@@ -70157,7 +71007,9 @@
       "Menschen im Alltag begleiten und beim Haushalt helfen",
       "Kinder, ältere oder behinderte Menschen betreuen",
       "Bei Mahlzeiten, Körperpflege und Freizeitaktivitäten unterstützen"
-    ]
+    ],
+    "salaryMonthlyEntry": 3187,
+    "salaryEntryKnown": true
   },
   {
     "id": 9170,
@@ -70323,7 +71175,9 @@
       "Kleinkinder beim Spielen, Basteln und Turnen begleiten",
       "Für altersgerechtes Spielmaterial sorgen",
       "Kinder beim Essen, Schlafen und der Körperpflege unterstützen"
-    ]
+    ],
+    "salaryMonthlyEntry": 3421,
+    "salaryEntryKnown": true
   },
   {
     "id": 7930,
@@ -70499,7 +71353,9 @@
       "Versicherte zu Krankenkassenleistungen beraten",
       "Anträge auf Leistungen prüfen und bearbeiten",
       "Neue Mitglieder gewinnen und Verträge abschließen"
-    ]
+    ],
+    "salaryMonthlyEntry": 3755,
+    "salaryEntryKnown": true
   },
   {
     "id": 7936,
@@ -70686,7 +71542,9 @@
       "Versicherte zu ihren Ansprüchen beraten",
       "Beiträge berechnen und Zahlungen überwachen",
       "Anträge auf Rente oder Krankenleistungen bearbeiten"
-    ]
+    ],
+    "salaryMonthlyEntry": 3318,
+    "salaryEntryKnown": true
   },
   {
     "id": 7946,
@@ -70868,7 +71726,9 @@
       "Landwirte zu ihrer Versicherung beraten",
       "Beiträge berechnen und Leistungsansprüche prüfen",
       "Anträge auf Unfall- oder Rentenleistungen bearbeiten"
-    ]
+    ],
+    "salaryMonthlyEntry": 3440,
+    "salaryEntryKnown": true
   },
   {
     "id": 7931,
@@ -71047,7 +71907,9 @@
       "Rentenanträge prüfen und bearbeiten",
       "Versicherte zu Rentenansprüchen beraten",
       "Beiträge berechnen und Zahlungseingänge überwachen"
-    ]
+    ],
+    "salaryMonthlyEntry": 3318,
+    "salaryEntryKnown": true
   },
   {
     "id": 7932,
@@ -71239,7 +72101,9 @@
       "Unfallmeldungen prüfen und Leistungsansprüche feststellen",
       "Mitgliedsbeiträge berechnen und Zahlungen überwachen",
       "Versicherte und Unternehmen zu Unfallversicherung beraten"
-    ]
+    ],
+    "salaryMonthlyEntry": 3918,
+    "salaryEntryKnown": true
   },
   {
     "id": 4188,
@@ -71434,7 +72298,9 @@
       "Tiefe Löcher bohren und Verankerungen einbauen",
       "Fundamente für Brücken oder Hochhäuser errichten",
       "Grundwasser beim Bauen abpumpen und sichern"
-    ]
+    ],
+    "salaryMonthlyEntry": 4298,
+    "salaryEntryKnown": true
   },
   {
     "id": 2704,
@@ -71582,7 +72448,9 @@
       "Spielzeugteile aus Kunststoff, Holz oder Metall herstellen",
       "Einzelteile schleifen, polieren und entgraten",
       "Fertige Teile zu Spielzeug zusammenbauen"
-    ]
+    ],
+    "salaryMonthlyEntry": 3497,
+    "salaryEntryKnown": true
   },
   {
     "id": 14449,
@@ -71785,7 +72653,9 @@
       "Kunden zu Sportangeboten und Mitgliedschaften beraten",
       "Kurse und Sportveranstaltungen planen und organisieren",
       "Marketingaktionen entwickeln und umsetzen"
-    ]
+    ],
+    "salaryMonthlyEntry": 2850,
+    "salaryEntryKnown": true
   },
   {
     "id": 58343,
@@ -71963,7 +72833,9 @@
       "Trainingspläne und Konzepte für den Verein erstellen",
       "Wettkämpfe und Sportveranstaltungen organisieren",
       "Statistiken führen und Kosten berechnen"
-    ]
+    ],
+    "salaryMonthlyEntry": 3449,
+    "salaryEntryKnown": true
   },
   {
     "id": 122285,
@@ -72135,7 +73007,9 @@
       "Metallteile aus Blechen mit Maschinen stanzen und formen",
       "Maschinen einrichten und auf den Auftrag vorbereiten",
       "Fertige Bauteile prüfen und auf Fehler kontrollieren"
-    ]
+    ],
+    "salaryMonthlyEntry": 3497,
+    "salaryEntryKnown": true
   },
   {
     "id": 863,
@@ -72302,7 +73176,9 @@
       "Entwürfe und Modelle für Steinarbeiten anfertigen",
       "Rohblöcke zersägen und Maße auf Werkstücke übertragen",
       "Kunden zu Gestaltung und Materialwahl beraten"
-    ]
+    ],
+    "salaryMonthlyEntry": 3920,
+    "salaryEntryKnown": true
   },
   {
     "id": 862,
@@ -72475,7 +73351,9 @@
       "Treppen, Fassaden und Grabsteine aus Stein herstellen",
       "Konstruktionszeichnungen am Computer erstellen",
       "Kunden zu Materialien und Gestaltung beraten"
-    ]
+    ],
+    "salaryMonthlyEntry": 3529,
+    "salaryEntryKnown": true
   },
   {
     "id": 7573,
@@ -72603,7 +73481,9 @@
       "Steuererklärungen für Mandanten vorbereiten",
       "Steuerbescheide prüfen und Fristen überwachen",
       "Kontakt mit Finanzämtern und Mandanten halten"
-    ]
+    ],
+    "salaryMonthlyEntry": null,
+    "salaryEntryKnown": false
   },
   {
     "id": 4105,
@@ -72755,7 +73635,9 @@
       "Asphalt und Pflastersteine verlegen",
       "Bagger, Raupen und Walzen bedienen",
       "Gehwege, Straßen und Autobahnen bauen"
-    ]
+    ],
+    "salaryMonthlyEntry": 4298,
+    "salaryEntryKnown": true
   },
   {
     "id": 7194,
@@ -72925,7 +73807,9 @@
       "Schlaglöcher und beschädigte Stellen reparieren",
       "Verkehrsschilder und Fahrbahnen reinigen",
       "Im Winterdienst Straßen räumen und streuen"
-    ]
+    ],
+    "salaryMonthlyEntry": 3318,
+    "salaryEntryKnown": true
   },
   {
     "id": 4248,
@@ -73092,7 +73976,9 @@
       "Trennwände und Decken aus Gipskarton einbauen",
       "Dämmplatten zur Wärme- und Schalldämmung anbringen",
       "Decken und Wände mit Stuck verzieren"
-    ]
+    ],
+    "salaryMonthlyEntry": 4429,
+    "salaryEntryKnown": true
   },
   {
     "id": 124029,
@@ -73253,7 +74139,9 @@
       "Zutaten wie Zucker oder Kakao abwiegen und vorbereiten",
       "Produktionsabläufe kontrollieren und Fehler beheben",
       "Fertige Süßwaren auf Qualität prüfen"
-    ]
+    ],
+    "salaryMonthlyEntry": 3539,
+    "salaryEntryKnown": true
   },
   {
     "id": 33346,
@@ -73413,7 +74301,9 @@
       "Tai-Chi- und Qigong-Übungen Schritt für Schritt zeigen",
       "Bewegungsabläufe korrigieren und Hilfestellung geben",
       "Hintergründe und Philosophie der Übungen erklären"
-    ]
+    ],
+    "salaryMonthlyEntry": null,
+    "salaryEntryKnown": false
   },
   {
     "id": 9511,
@@ -73579,7 +74469,9 @@
       "Musikanlage bedienen und passende Musik auswählen",
       "Bewegungen der Schüler beobachten und korrigieren",
       "Trainingsprogramme für Tanzpaare zusammenstellen"
-    ]
+    ],
+    "salaryMonthlyEntry": null,
+    "salaryEntryKnown": false
   },
   {
     "id": 15664,
@@ -73759,7 +74651,9 @@
       "Verschiedene Tanzstile wie Hip-Hop oder Jazztanz unterrichten",
       "Übungen für Kinder, Erwachsene und Senioren anleiten",
       "Unterrichtsstunden vorbereiten und Kurse organisieren"
-    ]
+    ],
+    "salaryMonthlyEntry": 3310,
+    "salaryEntryKnown": true
   },
   {
     "id": 5620,
@@ -73918,7 +74812,9 @@
       "Mengen an Baumaterial berechnen und einkaufen",
       "Baustellen organisieren und Abläufe überwachen",
       "Baustoffe auf ihre Qualität prüfen"
-    ]
+    ],
+    "salaryMonthlyEntry": 2573,
+    "salaryEntryKnown": true
   },
   {
     "id": 33197,
@@ -74091,7 +74987,9 @@
       "Messdaten zu Energieverbrauch erfassen und auswerten",
       "Ingenieure bei der Entwicklung von Energielösungen unterstützen",
       "Technische Unterlagen und Berichte erstellen"
-    ]
+    ],
+    "salaryMonthlyEntry": 3583,
+    "salaryEntryKnown": true
   },
   {
     "id": 2874,
@@ -74250,7 +75148,9 @@
       "Sicherheitschecks an Geräten wie Röntgenapparaten durchführen",
       "Krankenhauspersonal im Umgang mit Geräten einweisen",
       "Defekte Geräte prüfen und wieder in Betrieb nehmen"
-    ]
+    ],
+    "salaryMonthlyEntry": 3583,
+    "salaryEntryKnown": true
   },
   {
     "id": 6379,
@@ -74400,7 +75300,9 @@
       "Metalle und Kunststoffe unter dem Mikroskop untersuchen",
       "Materialproben vorbereiten und Tests durchführen",
       "Ergebnisse der Werkstoffprüfungen auswerten und dokumentieren"
-    ]
+    ],
+    "salaryMonthlyEntry": 3418,
+    "salaryEntryKnown": true
   },
   {
     "id": 9734,
@@ -74586,7 +75488,9 @@
       "Kosten berechnen und Angebote für Kunden erstellen",
       "Materialien einkaufen und die Lagerung organisieren",
       "Abläufe im Betrieb planen und koordinieren"
-    ]
+    ],
+    "salaryMonthlyEntry": 6452,
+    "salaryEntryKnown": true
   },
   {
     "id": 3388,
@@ -74735,7 +75639,9 @@
       "Planen, Markisen und Abdeckungen herstellen",
       "Beschläge, Ösen und Seile an Produkte anbringen",
       "Fertige Produkte beim Kunden montieren"
-    ]
+    ],
+    "salaryMonthlyEntry": 2864,
+    "salaryEntryKnown": true
   },
   {
     "id": 143519,
@@ -74782,7 +75688,9 @@
     "salaryKnown": false,
     "digitalizationSignal": false,
     "workLocations": "",
-    "competenciesText": ""
+    "competenciesText": "",
+    "salaryMonthlyEntry": 3497,
+    "salaryEntryKnown": true
   },
   {
     "id": 76568,
@@ -74945,7 +75853,9 @@
       "Maßstabsgetreue Modelle von Gebäuden und Fahrzeugen bauen",
       "Modelle am Computer in 2D und 3D entwerfen",
       "Holz, Kunststoff und Metall für Modelle bearbeiten"
-    ]
+    ],
+    "salaryMonthlyEntry": 3497,
+    "salaryEntryKnown": true
   },
   {
     "id": 76569,
@@ -75108,7 +76018,9 @@
       "Konstruktionszeichnungen lesen und umsetzen",
       "Werkstoffe drehen, bohren und fräsen",
       "Fertigungspläne erstellen und Verfahren festlegen"
-    ]
+    ],
+    "salaryMonthlyEntry": 3497,
+    "salaryEntryKnown": true
   },
   {
     "id": 76573,
@@ -75278,7 +76190,9 @@
       "Modelle für Autoteile und Werkzeuge herstellen",
       "Werkstoffe wie Holz, Kunststoff und Metall bearbeiten",
       "Designmodelle und Originalmodelle maßgenau anfertigen"
-    ]
+    ],
+    "salaryMonthlyEntry": 3497,
+    "salaryEntryKnown": true
   },
   {
     "id": 67654,
@@ -75336,7 +76250,9 @@
       "Motoren und technische Anlagen an Bord überwachen",
       "Kühl- und Schmiersysteme regelmäßig prüfen",
       "Fehler an Maschinen erkennen und beheben"
-    ]
+    ],
+    "salaryMonthlyEntry": null,
+    "salaryEntryKnown": false
   },
   {
     "id": 90571,
@@ -75497,7 +76413,9 @@
       "Maschinenteile und Anlagen am Computer konstruieren",
       "Technische Zeichnungen und 3D-Modelle am CAD erstellen",
       "Maße und Materialeigenschaften in Plänen festhalten"
-    ]
+    ],
+    "salaryMonthlyEntry": 3497,
+    "salaryEntryKnown": true
   },
   {
     "id": 90588,
@@ -75663,7 +76581,9 @@
       "Bestehende Modelle verbessern und anpassen",
       "Technische Zeichnungen und Datenmodelle erstellen",
       "Kundenwünsche in konkrete Konstruktionen umsetzen"
-    ]
+    ],
+    "salaryMonthlyEntry": 3497,
+    "salaryEntryKnown": true
   },
   {
     "id": 90585,
@@ -75833,7 +76753,9 @@
       "Technische Zeichnungen für Elektroinstallationen am Computer erstellen",
       "Schaltpläne und Stromlaufpläne anfertigen",
       "Unterlagen für Gebäudetechnik und Anlagen zusammenstellen"
-    ]
+    ],
+    "salaryMonthlyEntry": 2573,
+    "salaryEntryKnown": true
   },
   {
     "id": 90575,
@@ -75997,7 +76919,9 @@
       "Pläne für Brücken, Hallen oder Treppen in 2D und 3D zeichnen",
       "Maße und Materialmengen berechnen und prüfen",
       "Technische Unterlagen für die Werkstatt vorbereiten"
-    ]
+    ],
+    "salaryMonthlyEntry": 3497,
+    "salaryEntryKnown": true
   },
   {
     "id": 90591,
@@ -76177,7 +77101,9 @@
       "Rohrleitungen und Kanäle in 2D oder 3D darstellen",
       "Materialmengen berechnen und in Pläne eintragen",
       "Technische Unterlagen für Handwerker vorbereiten"
-    ]
+    ],
+    "salaryMonthlyEntry": 2573,
+    "salaryEntryKnown": true
   },
   {
     "id": 126794,
@@ -76331,7 +77257,9 @@
       "Stoffe zuschneiden und mit der Nähmaschine zusammennähen",
       "Einzelne Kleidungsteile oder Taschen fertig nähen",
       "Materialien auswählen und Produktionsschritte planen"
-    ]
+    ],
+    "salaryMonthlyEntry": 2793,
+    "salaryEntryKnown": true
   },
   {
     "id": 126796,
@@ -76485,7 +77413,9 @@
       "Schnittmuster entwickeln und anpassen",
       "Prototypen für neue Kleidungsstücke herstellen",
       "Unterlagen für die Serienfertigung vorbereiten"
-    ]
+    ],
+    "salaryMonthlyEntry": 2793,
+    "salaryEntryKnown": true
   },
   {
     "id": 90014,
@@ -76642,7 +77572,9 @@
       "Wolle und Fasern zu Filz verarbeiten",
       "Hüte, Teppiche oder Dichtungen aus Filz herstellen",
       "Entwürfe nach Kundenwünschen entwickeln und umsetzen"
-    ]
+    ],
+    "salaryMonthlyEntry": null,
+    "salaryEntryKnown": false
   },
   {
     "id": 90019,
@@ -76805,7 +77737,9 @@
       "Fäden mit Klöppeln zu Spitzen verknüpfen und verweben",
       "Muster und Vorlagen für Spitzenarbeiten entwerfen",
       "Materialien auswählen und Schmuckelemente fertigen"
-    ]
+    ],
+    "salaryMonthlyEntry": null,
+    "salaryEntryKnown": false
   },
   {
     "id": 90008,
@@ -76980,7 +77914,9 @@
       "Garne und Metalldrähte zu Fransen und Quasten verarbeiten",
       "Zierschnüre und Kordeln von Hand oder mit Maschinen fertigen",
       "Muster und Entwürfe nach Kundenwunsch umsetzen"
-    ]
+    ],
+    "salaryMonthlyEntry": null,
+    "salaryEntryKnown": false
   },
   {
     "id": 90017,
@@ -77136,7 +78072,9 @@
       "Muster und Motive für Stickereien entwerfen",
       "Kleidung oder Fahnen von Hand oder per Maschine besticken",
       "Farben und Materialien passend auswählen"
-    ]
+    ],
+    "salaryMonthlyEntry": null,
+    "salaryEntryKnown": false
   },
   {
     "id": 90013,
@@ -77299,7 +78237,9 @@
       "Muster und Schnitte für Kleidung entwerfen",
       "Mit Strickmaschinen Pullover, Ärmel oder andere Teile herstellen",
       "Gestrickte Teile zuschneiden und weiterverarbeiten"
-    ]
+    ],
+    "salaryMonthlyEntry": null,
+    "salaryEntryKnown": false
   },
   {
     "id": 90011,
@@ -77458,7 +78398,9 @@
       "Garne auf Webmaschinen zu Stoffen oder Teppichen verarbeiten",
       "Muster und Entwürfe am Computer oder von Hand gestalten",
       "Materialien auswählen und Materialbedarf berechnen"
-    ]
+    ],
+    "salaryMonthlyEntry": null,
+    "salaryEntryKnown": false
   },
   {
     "id": 10211,
@@ -77602,7 +78544,9 @@
       "Kleidung und Wäsche nass oder chemisch reinigen",
       "Textilien bügeln und für die Rückgabe aufbereiten",
       "Flecken erkennen und gezielt behandeln"
-    ]
+    ],
+    "salaryMonthlyEntry": 3196,
+    "salaryEntryKnown": true
   },
   {
     "id": 59042,
@@ -77779,7 +78723,9 @@
       "Konzepte für Bühnenraum und Inszenierung entwickeln",
       "Schauspieler bei Proben anleiten und Szenen erarbeiten",
       "Kostüme, Licht und Ton mit dem Team abstimmen"
-    ]
+    ],
+    "salaryMonthlyEntry": null,
+    "salaryEntryKnown": false
   },
   {
     "id": 132661,
@@ -77923,7 +78869,9 @@
       "Löcher in den Boden bohren und Brunnen einbauen",
       "Rohre einsetzen und Bohrlöcher abdichten",
       "Wasserpumpen und Druckkessel installieren"
-    ]
+    ],
+    "salaryMonthlyEntry": 3955,
+    "salaryEntryKnown": true
   },
   {
     "id": 132660,
@@ -78068,7 +79016,9 @@
       "Schwellen legen und Schienen auf dem Gleis befestigen",
       "Gleise mit Schotter einbauen und ausrichten",
       "Gräben ausheben und Entwässerung an Bahnanlagen anlegen"
-    ]
+    ],
+    "salaryMonthlyEntry": 3955,
+    "salaryEntryKnown": true
   },
   {
     "id": 139143,
@@ -78159,7 +79109,9 @@
       "Baustelle einrichten und Absperrungen aufstellen",
       "Gräben ausheben und mit Verbau absichern",
       "Abwasserrohre verlegen und Schächte einbauen"
-    ]
+    ],
+    "salaryMonthlyEntry": 3955,
+    "salaryEntryKnown": true
   },
   {
     "id": 139147,
@@ -78251,7 +79203,9 @@
       "Gräben ausheben und Leitungsrohre verlegen",
       "Rohre verschrauben, stecken oder schweißen",
       "Rohrleitungen auf Dichtigkeit prüfen"
-    ]
+    ],
+    "salaryMonthlyEntry": 3955,
+    "salaryEntryKnown": true
   },
   {
     "id": 132659,
@@ -78398,7 +79352,9 @@
       "Boden ausheben, planieren und verdichten",
       "Asphalt oder Pflastersteine für Straßen verlegen",
       "Entwässerung anlegen und Randsteine setzen"
-    ]
+    ],
+    "salaryMonthlyEntry": 3955,
+    "salaryEntryKnown": true
   },
   {
     "id": 33214,
@@ -78589,7 +79545,9 @@
       "Röntgenaufnahmen machen und Laborproben bearbeiten",
       "Tierhalter zu Haltung und Vorsorge beraten",
       "Praxisverwaltung erledigen und Termine organisieren"
-    ]
+    ],
+    "salaryMonthlyEntry": 2791,
+    "salaryEntryKnown": true
   },
   {
     "id": 531,
@@ -78750,7 +79708,9 @@
       "Tiere füttern und Käfige sauber halten",
       "Bei Operationen und Behandlungen assistieren",
       "Medikamente nach Anweisung verabreichen und Tiere beobachten"
-    ]
+    ],
+    "salaryMonthlyEntry": 3302,
+    "salaryEntryKnown": true
   },
   {
     "id": 533,
@@ -78912,7 +79872,9 @@
       "Tiere füttern und artgerechte Unterkünfte einrichten",
       "Verhalten traumatisierter Tiere beobachten und dokumentieren",
       "Tiere pflegen und auf neue Besitzer vorbereiten"
-    ]
+    ],
+    "salaryMonthlyEntry": null,
+    "salaryEntryKnown": false
   },
   {
     "id": 532,
@@ -79063,7 +80025,9 @@
       "Zootiere füttern und Gehege reinigen",
       "Tierverhalten beobachten und Auffälligkeiten melden",
       "Tiere beschäftigen und ihre Unterkünfte gestalten"
-    ]
+    ],
+    "salaryMonthlyEntry": 3318,
+    "salaryEntryKnown": true
   },
   {
     "id": 330,
@@ -79211,7 +80175,9 @@
       "Eier einsammeln und auf Qualität prüfen",
       "Tiere auf Krankheiten kontrollieren und impfen",
       "Ställe reinigen und Hygiene sicherstellen"
-    ]
+    ],
+    "salaryMonthlyEntry": 2815,
+    "salaryEntryKnown": true
   },
   {
     "id": 367,
@@ -79361,7 +80327,9 @@
       "Bienen füttern und auf Krankheiten untersuchen",
       "Honig ernten, schleudern und abfüllen",
       "Bienenvölker im Frühling und Herbst vorbereiten"
-    ]
+    ],
+    "salaryMonthlyEntry": 2815,
+    "salaryEntryKnown": true
   },
   {
     "id": 313,
@@ -79514,7 +80482,9 @@
       "Rinder füttern und Ställe sauber halten",
       "Kälber aufziehen und Geburten begleiten",
       "Gesundheit der Tiere täglich beobachten"
-    ]
+    ],
+    "salaryMonthlyEntry": 2815,
+    "salaryEntryKnown": true
   },
   {
     "id": 319,
@@ -79663,7 +80633,9 @@
       "Lämmer bei der Geburt versorgen und aufziehen",
       "Schafe scheren und Wolle aufbereiten",
       "Kranke Tiere pflegen und behandeln"
-    ]
+    ],
+    "salaryMonthlyEntry": 2815,
+    "salaryEntryKnown": true
   },
   {
     "id": 361,
@@ -79816,7 +80788,9 @@
       "Ferkel bei der Geburt versorgen und aufziehen",
       "Ställe reinigen und desinfizieren",
       "Fütterungs- und Lüftungsanlagen bedienen"
-    ]
+    ],
+    "salaryMonthlyEntry": 2815,
+    "salaryEntryKnown": true
   },
   {
     "id": 4460,
@@ -79985,7 +80959,9 @@
       "Möbel, Türen und Fenster zusammenbauen",
       "Einbauten beim Kunden vor Ort montieren",
       "Kunden zu Einrichtungslösungen beraten"
-    ]
+    ],
+    "salaryMonthlyEntry": 3287,
+    "salaryEntryKnown": true
   },
   {
     "id": 93277,
@@ -80177,7 +81153,9 @@
       "Flüge, Hotels und Reisen suchen und buchen",
       "Reiseangebote vergleichen und weiterempfehlen",
       "Buchungsunterlagen vorbereiten und verschicken"
-    ]
+    ],
+    "salaryMonthlyEntry": 2381,
+    "salaryEntryKnown": true
   },
   {
     "id": 4289,
@@ -80326,7 +81304,9 @@
       "Gipsplatten zuschneiden und an Wände schrauben",
       "Neue Zwischenwände einziehen",
       "Dämmmaterial in Wände und Decken einbauen"
-    ]
+    ],
+    "salaryMonthlyEntry": 4298,
+    "salaryEntryKnown": true
   },
   {
     "id": 136559,
@@ -80502,7 +81482,9 @@
       "Texte aus einer Sprache in eine andere übertragen",
       "Verträge, Anleitungen oder Urkunden übersetzen",
       "Fachbegriffe recherchieren und richtig verwenden"
-    ]
+    ],
+    "salaryMonthlyEntry": 3843,
+    "salaryEntryKnown": true
   },
   {
     "id": 2502,
@@ -80663,7 +81645,9 @@
       "Defekte Teile reparieren oder ersetzen",
       "Uhren wieder zusammenbauen und einstellen",
       "Mechanische und elektronische Uhren warten"
-    ]
+    ],
+    "salaryMonthlyEntry": 3353,
+    "salaryEntryKnown": true
   },
   {
     "id": 6045,
@@ -80826,7 +81810,9 @@
       "Proben im Labor auf Schadstoffe untersuchen",
       "Messgeräte bedienen und pflegen",
       "Ergebnisse aufschreiben und auswerten"
-    ]
+    ],
+    "salaryMonthlyEntry": 3266,
+    "salaryEntryKnown": true
   },
   {
     "id": 138722,
@@ -80995,7 +81981,9 @@
       "Abwasserproben nehmen und untersuchen",
       "Rohrleitungen und Kanäle kontrollieren",
       "Bei Störungen eingreifen und Abläufe anpassen"
-    ]
+    ],
+    "salaryMonthlyEntry": 3318,
+    "salaryEntryKnown": true
   },
   {
     "id": 138725,
@@ -81106,7 +82094,9 @@
       "Recyclinganlagen steuern und überwachen",
       "Müllabfuhr-Touren planen und koordinieren",
       "Container aufstellen und regelmäßig leeren lassen"
-    ]
+    ],
+    "salaryMonthlyEntry": 3318,
+    "salaryEntryKnown": true
   },
   {
     "id": 138723,
@@ -81232,7 +82222,9 @@
       "Verstopfungen und Blockaden im Kanal entfernen",
       "Tanks und Anlagen reinigen und warten",
       "Rückstände und Abwasser fachgerecht entsorgen"
-    ]
+    ],
+    "salaryMonthlyEntry": 3318,
+    "salaryEntryKnown": true
   },
   {
     "id": 138721,
@@ -81361,7 +82353,9 @@
       "Wasserproben nehmen und Qualität prüfen",
       "Leitungen verlegen oder reparieren",
       "Messwerte kontrollieren und dokumentieren"
-    ]
+    ],
+    "salaryMonthlyEntry": 3266,
+    "salaryEntryKnown": true
   },
   {
     "id": 14448,
@@ -81539,7 +82533,9 @@
       "Kosten kalkulieren und Angebote für Kunden erstellen",
       "Dienstleister buchen und Abläufe vor Ort koordinieren",
       "Rechnungen stellen und Veranstaltungen abrechnen"
-    ]
+    ],
+    "salaryMonthlyEntry": 3134,
+    "salaryEntryKnown": true
   },
   {
     "id": 4613,
@@ -81698,7 +82694,9 @@
       "Oberflächen vorbereiten und reinigen vor dem Beschichten",
       "Maschinen für die Beschichtung bedienen und einstellen",
       "Ergebnisse prüfen und Fehler in der Oberfläche erkennen"
-    ]
+    ],
+    "salaryMonthlyEntry": 3497,
+    "salaryEntryKnown": true
   },
   {
     "id": 14318,
@@ -81858,7 +82856,9 @@
       "Glas in Formen pressen, blasen oder walzen",
       "Produktionsanlagen steuern und überwachen",
       "Glasoberflächen polieren oder veredeln"
-    ]
+    ],
+    "salaryMonthlyEntry": 2584,
+    "salaryEntryKnown": true
   },
   {
     "id": 130922,
@@ -82035,7 +83035,9 @@
       "Aluminium- oder Kupferbarren zu Blechen und Rohren umformen",
       "Walzstraßen und Pressen bedienen und einstellen",
       "Fertige Metallteile auf Maße und Qualität prüfen"
-    ]
+    ],
+    "salaryMonthlyEntry": 3497,
+    "salaryEntryKnown": true
   },
   {
     "id": 6628,
@@ -82198,7 +83200,9 @@
       "Waren auspacken, einräumen und Preise auszeichnen",
       "An der Kasse abrechnen und Geld wechseln",
       "Lagerbestand prüfen und Waren nachbestellen"
-    ]
+    ],
+    "salaryMonthlyEntry": 2850,
+    "salaryEntryKnown": true
   },
   {
     "id": 77495,
@@ -82355,7 +83359,9 @@
       "Draußen Gelände und Grundstücksgrenzen vermessen",
       "Drohnen für Luftaufnahmen und Vermessungen einsetzen",
       "Messergebnisse in Karten und Pläne eintragen"
-    ]
+    ],
+    "salaryMonthlyEntry": 2573,
+    "salaryEntryKnown": true
   },
   {
     "id": 7934,
@@ -82534,7 +83540,9 @@
       "Bürger und Organisationen zu Verwaltungsthemen beraten",
       "Personalakten führen und Gehälter berechnen",
       "Verwaltungsentscheidungen vorbereiten und Bescheide schreiben"
-    ]
+    ],
+    "salaryMonthlyEntry": 3440,
+    "salaryEntryKnown": true
   },
   {
     "id": 7933,
@@ -82713,7 +83721,9 @@
       "Firmen und Handwerksbetriebe zu Gewerberecht beraten",
       "Anträge auf Eintragung ins Handelsregister bearbeiten",
       "Voraussetzungen für Gewerbebetriebe prüfen"
-    ]
+    ],
+    "salaryMonthlyEntry": 3302,
+    "salaryEntryKnown": true
   },
   {
     "id": 7929,
@@ -82889,7 +83899,9 @@
       "Sitzungen kirchlicher Gremien vorbereiten und nachbereiten",
       "Aufgaben in Finanzen und Buchhaltung erledigen",
       "Personalakten führen und Gehälter berechnen"
-    ]
+    ],
+    "salaryMonthlyEntry": 3302,
+    "salaryEntryKnown": true
   },
   {
     "id": 7944,
@@ -83069,7 +84081,9 @@
       "Gemeinderatssitzungen vorbereiten und Beschlüsse umsetzen",
       "Bürger zu Verwaltungsthemen beraten und Anträge bearbeiten",
       "Aufgaben in Kultur- und Wirtschaftsförderung erledigen"
-    ]
+    ],
+    "salaryMonthlyEntry": 3449,
+    "salaryEntryKnown": true
   },
   {
     "id": 7925,
@@ -83252,7 +84266,9 @@
       "Anträge auf Fördergelder prüfen und Auszahlungen veranlassen",
       "Einhaltung von Auflagen und Gesetzen kontrollieren",
       "Bürger und Unternehmen zu Verwaltungsthemen beraten"
-    ]
+    ],
+    "salaryMonthlyEntry": 3302,
+    "salaryEntryKnown": true
   },
   {
     "id": 4278,
@@ -83400,7 +84416,9 @@
       "Dämmstoffe an Wände, Decken und Fassaden anbringen",
       "Rohre und Leitungen gegen Wärme oder Kälte isolieren",
       "Leichtbauwände montieren und abdichten"
-    ]
+    ],
+    "salaryMonthlyEntry": 4298,
+    "salaryEntryKnown": true
   },
   {
     "id": 4171,
@@ -83570,7 +84588,9 @@
       "Dämme, Ufer und Schleusen regelmäßig kontrollieren",
       "Kleine Schäden an Wasserbauwerken reparieren",
       "Wehre und Stauanlagen warten und pflegen"
-    ]
+    ],
+    "salaryMonthlyEntry": 3318,
+    "salaryEntryKnown": true
   },
   {
     "id": 122362,
@@ -83738,7 +84758,9 @@
       "Trauben zerkleinern und zu Maische verarbeiten",
       "Gärung überwachen und Wein abfüllen",
       "Wein verkosten und auf Geschmack prüfen"
-    ]
+    ],
+    "salaryMonthlyEntry": 2815,
+    "salaryEntryKnown": true
   },
   {
     "id": 76769,
@@ -83926,7 +84948,9 @@
       "Brände löschen und Menschen in Sicherheit bringen",
       "Feuerwehrfahrzeuge und Geräte regelmäßig kontrollieren",
       "Betrieb auf Brandgefahren prüfen und Schutzmaßnahmen planen"
-    ]
+    ],
+    "salaryMonthlyEntry": 3521,
+    "salaryEntryKnown": true
   },
   {
     "id": 8010,
@@ -84081,7 +85105,9 @@
       "Materialien für Schmuck und Uhren bestellen",
       "Arbeitsaufträge an die Fertigung weitergeben",
       "Fertige Schmuckstücke und Uhren auf Qualität prüfen"
-    ]
+    ],
+    "salaryMonthlyEntry": 3704,
+    "salaryEntryKnown": true
   },
   {
     "id": 122368,
@@ -84253,7 +85279,9 @@
       "Kunststoffteile auf Risse und Fehler untersuchen",
       "Tests und Versuchsreihen planen und durchführen",
       "Nach Schäden die Ursache herausfinden"
-    ]
+    ],
+    "salaryMonthlyEntry": 3521,
+    "salaryEntryKnown": true
   },
   {
     "id": 6376,
@@ -84431,7 +85459,9 @@
       "Metallproben entnehmen und für Tests vorbereiten",
       "Prüfverfahren auswählen und Messungen durchführen",
       "Ergebnisse auswerten und Fehler im Material aufspüren"
-    ]
+    ],
+    "salaryMonthlyEntry": 3497,
+    "salaryEntryKnown": true
   },
   {
     "id": 122367,
@@ -84602,7 +85632,9 @@
       "Bauteile in Maschinen und Anlagen prüfen",
       "Prüfaufträge planen und mit Kollegen abstimmen",
       "Nach Schäden die Ursache untersuchen und dokumentieren"
-    ]
+    ],
+    "salaryMonthlyEntry": 3497,
+    "salaryEntryKnown": true
   },
   {
     "id": 6375,
@@ -84778,7 +85810,9 @@
       "Metallteile gezielt erhitzen und härten",
       "Wärmebehandlungsverfahren für jeden Auftrag auswählen",
       "Behandelte Teile auf Härte und Festigkeit testen"
-    ]
+    ],
+    "salaryMonthlyEntry": 3497,
+    "salaryEntryKnown": true
   },
   {
     "id": 29051,
@@ -84951,7 +85985,9 @@
       "Werkzeuge und Formen für die Industrie herstellen",
       "CNC-Maschinen einrichten und bedienen",
       "Fertige Teile auf Maßgenauigkeit prüfen"
-    ]
+    ],
+    "salaryMonthlyEntry": 3497,
+    "salaryEntryKnown": true
   },
   {
     "id": 294,
@@ -85126,7 +86162,9 @@
       "Weinstöcke schneiden und Schädlinge bekämpfen",
       "Trauben von Hand oder mit Maschinen ernten",
       "Trauben keltern und Wein im Keller betreuen"
-    ]
+    ],
+    "salaryMonthlyEntry": 2815,
+    "salaryEntryKnown": true
   },
   {
     "id": 8317,
@@ -85294,7 +86332,9 @@
       "Verträge und Geschäftsbriefe in andere Sprachen übersetzen",
       "Texte gründlich analysieren und Hintergrundrecherchen machen",
       "Übersetzungen mit Wörterbüchern und Software bearbeiten"
-    ]
+    ],
+    "salaryMonthlyEntry": 3497,
+    "salaryEntryKnown": true
   },
   {
     "id": 9603,
@@ -85448,7 +86488,9 @@
       "Yoga-Übungen und Körperhaltungen in Kursen zeigen",
       "Teilnehmende beim richtigen Atmen und Entspannen anleiten",
       "Kurse vorbereiten und Übungsfolgen zusammenstellen"
-    ]
+    ],
+    "salaryMonthlyEntry": null,
+    "salaryEntryKnown": false
   },
   {
     "id": 14704,
@@ -85634,7 +86676,9 @@
       "Termine vergeben und den Praxisablauf organisieren",
       "Instrumente reinigen und für die Behandlung vorbereiten",
       "Abrechnungen erstellen und mit Krankenkassen kommunizieren"
-    ]
+    ],
+    "salaryMonthlyEntry": 2675,
+    "salaryEntryKnown": true
   },
   {
     "id": 2622,
@@ -85805,7 +86849,9 @@
       "Zahnkronen, Brücken und Prothesen in Handarbeit anfertigen",
       "Gipsmodelle nach Abdrücken vom Zahnarzt herstellen",
       "Zahnersatz anpassen, schleifen und polieren"
-    ]
+    ],
+    "salaryMonthlyEntry": null,
+    "salaryEntryKnown": false
   },
   {
     "id": 29053,
@@ -85964,7 +87010,9 @@
       "CNC-Maschinen einrichten und Programme eingeben",
       "Metallteile fräsen, drehen und bohren",
       "Fertige Bauteile auf genaue Maße kontrollieren"
-    ]
+    ],
+    "salaryMonthlyEntry": 3497,
+    "salaryEntryKnown": true
   },
   {
     "id": 4010,
@@ -86112,7 +87160,9 @@
       "Treppen und Trennwände aus Holz einbauen",
       "Fenster und Türen montieren",
       "Alte Holzkonstruktionen reparieren und erneuern"
-    ]
+    ],
+    "salaryMonthlyEntry": 4298,
+    "salaryEntryKnown": true
   },
   {
     "id": 124509,
@@ -86269,7 +87319,9 @@
       "Einzelteile zusammenleimen und den Korpus formen",
       "Saiten und Mechaniken einbauen und einstellen",
       "Oberflächen lackieren und polieren"
-    ]
+    ],
+    "salaryMonthlyEntry": 3409,
+    "salaryEntryKnown": true
   },
   {
     "id": 124510,
@@ -86425,7 +87477,9 @@
       "Einzelteile zusammenbauen und verleimen",
       "Saiten spannen und die Mechanik einbauen",
       "Oberflächen bearbeiten und lackieren"
-    ]
+    ],
+    "salaryMonthlyEntry": 3409,
+    "salaryEntryKnown": true
   },
   {
     "id": 124409,
@@ -86599,7 +87653,9 @@
       "Bremsen, Schaltung und Reifen einstellen",
       "E-Bike-Antriebe prüfen und warten",
       "Fahrräder nach Kundenwunsch umbauen"
-    ]
+    ],
+    "salaryMonthlyEntry": 3497,
+    "salaryEntryKnown": true
   },
   {
     "id": 124410,
@@ -86773,6 +87829,8 @@
       "Elektronik und Sensoren prüfen und austauschen",
       "Regelmäßige Wartungen durchführen und Öl wechseln",
       "Elektro- und Hybridantriebe kontrollieren"
-    ]
+    ],
+    "salaryMonthlyEntry": 3514,
+    "salaryEntryKnown": true
   }
 ]

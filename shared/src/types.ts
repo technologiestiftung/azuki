@@ -90,8 +90,12 @@ export interface Occupation {
 	strengthTags: string[];
 	skillTags: string[];
 	conditions: WorkConditions;
+	/** Median of all tariff figures cited for this occupation; used for `good_salary` scoring, not for display. */
 	salaryMonthlyMedian: number | null;
 	salaryKnown: boolean;
+	/** Low end of the entry-eligible tariff figures — the user-facing "Einstiegsgehalt". */
+	salaryMonthlyEntry: number | null;
+	salaryEntryKnown: boolean;
 	digitalizationSignal: boolean;
 	workLocations: string;
 	competenciesText: string;
@@ -159,6 +163,8 @@ export interface MatchedOccupation {
 	occupationEarnings: string;
 	salaryKnown: boolean;
 	salaryMonthlyMedian: number | null;
+	salaryEntryKnown: boolean;
+	salaryMonthlyEntry: number | null;
 	/** Set when the user named this Beruf themselves in the Jobwunsch step. */
 	preferredJobMatch?: boolean;
 	/** Set once the list order is final; see fitPercentages. */

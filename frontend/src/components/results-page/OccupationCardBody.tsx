@@ -10,8 +10,8 @@ interface OccupationCardBodyProps {
 	occupationDuration: string;
 	occupationId: number;
 	matchPercent?: number;
-	salaryKnown: boolean;
-	salaryMonthlyMedian: number | null;
+	salaryEntryKnown: boolean;
+	salaryMonthlyEntry: number | null;
 	shortDescription: string;
 	toggleFavorite: (id: number) => void;
 	isFavorite: boolean;
@@ -24,8 +24,8 @@ export function OccupationCardBody({
 	occupationDuration,
 	occupationId,
 	matchPercent,
-	salaryKnown,
-	salaryMonthlyMedian,
+	salaryEntryKnown,
+	salaryMonthlyEntry,
 	shortDescription,
 	toggleFavorite,
 	isFavorite,
@@ -76,7 +76,7 @@ export function OccupationCardBody({
 						</p>
 					)}
 				</div>
-				{(occupationDuration || salaryKnown) && (
+				{(occupationDuration || salaryEntryKnown) && (
 					<div className="flex min-w-0 flex-wrap items-center gap-1 mt-auto">
 						{occupationDuration && (
 							<div className="text-sm font-medium text-sky-shade-170">
@@ -84,11 +84,11 @@ export function OccupationCardBody({
 							</div>
 						)}
 
-						{salaryKnown && salaryMonthlyMedian !== null && (
+						{salaryEntryKnown && salaryMonthlyEntry !== null && (
 							<>
 								<div className="text-sm text-sky-shade-170 text-center">•</div>
 								<div className="text-sm font-medium text-sky-shade-170">
-									{formatOccupationSalary(salaryMonthlyMedian)}{" "}
+									{formatOccupationSalary(salaryMonthlyEntry)}{" "}
 									{content["results.card.salary.monthly.label"]}
 								</div>
 							</>

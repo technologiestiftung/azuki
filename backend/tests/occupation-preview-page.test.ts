@@ -30,6 +30,8 @@ describe("occupationPreviewPage", () => {
 				"Ausbildungsdauer 3 Jahre Lernorte Betrieb und Berufsschule",
 			salaryKnown: true,
 			salaryMonthlyMedian: 2800,
+			salaryEntryKnown: true,
+			salaryMonthlyEntry: 2800,
 			images: [
 				{ url: "https://example.com/hero.jpg", caption: "", imageGroup: "" },
 			],
@@ -53,6 +55,8 @@ describe("occupationPreviewPage", () => {
 				"Ausbildungsdauer 3 Jahre Lernorte Betrieb und Berufsschule",
 			salaryKnown: true,
 			salaryMonthlyMedian: 2800,
+			salaryEntryKnown: true,
+			salaryMonthlyEntry: 2800,
 		});
 
 		const meta = buildOccupationPageMeta(

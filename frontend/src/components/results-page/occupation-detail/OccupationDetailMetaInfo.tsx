@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { content } from "../../../content";
 import { formatOccupationSchoolDegree } from "../utils/formatOccupationSchoolDegree";
-import { formatOccupationSalary } from "../utils/formatOccupationSalary";
 import { InfoBottomSheet } from "./InfoBottomSheet";
+import { resolveDetailSalaryLabel } from "./occupationDetailPageHelpers";
 import type { Occupation } from "@azuki/shared";
 
 type MetaInfoSheet = "salary" | "schoolDegree";
@@ -16,10 +16,7 @@ export function OccupationDetailMetaInfo({
 	occupation,
 	occupationDuration,
 }: OccupationDetailMetaInfoProps) {
-	const salaryLabel =
-		occupation?.salaryKnown && occupation.salaryMonthlyMedian !== null
-			? formatOccupationSalary(occupation.salaryMonthlyMedian)
-			: content["results.detail.salary.unknown"];
+	const salaryLabel = resolveDetailSalaryLabel(occupation);
 	const [activeInfoSheet, setActiveInfoSheet] = useState<MetaInfoSheet | null>(
 		null,
 	);

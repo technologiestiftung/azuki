@@ -220,6 +220,8 @@ app.post("/api/match", async (c) => {
 				reasoning: "Dieser Beruf passt zu deinem Profil.",
 				salaryKnown: scored.occupation.salaryKnown,
 				salaryMonthlyMedian: scored.occupation.salaryMonthlyMedian,
+				salaryEntryKnown: scored.occupation.salaryEntryKnown,
+				salaryMonthlyEntry: scored.occupation.salaryMonthlyEntry,
 				...occupationMatchMeta(scored.occupation),
 			}));
 		const fallback: MatchResult = {
@@ -303,6 +305,8 @@ app.get("/api/shared-match", (c) => {
 				reasoning: "",
 				salaryKnown: occupation.salaryKnown,
 				salaryMonthlyMedian: occupation.salaryMonthlyMedian,
+				salaryEntryKnown: occupation.salaryEntryKnown,
+				salaryMonthlyEntry: occupation.salaryMonthlyEntry,
 				...occupationMatchMeta(occupation),
 			},
 		];

@@ -19,8 +19,8 @@ export function buildOccupationShareText(
 	}
 
 	const salaryLabel =
-		occupation?.salaryKnown && occupation.salaryMonthlyMedian !== null
-			? formatOccupationSalary(occupation.salaryMonthlyMedian)
+		occupation?.salaryEntryKnown && occupation.salaryMonthlyEntry !== null
+			? formatOccupationSalary(occupation.salaryMonthlyEntry)
 			: UNKNOWN_SALARY_LABEL;
 
 	parts.push(`${SALARY_LABEL}: ${salaryLabel}`);
