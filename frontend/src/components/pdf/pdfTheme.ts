@@ -28,7 +28,6 @@ export const PAGE_PAD_X = 24;
 export const PAGE_PAD_TOP = 28;
 export const PAGE_PAD_BOTTOM = 48;
 export const PAGE_HEADER_HEIGHT = 72;
-export const PAGE_HEADER_HEIGHT_COMPACT = 42;
 export const PAGE_HEADER_GAP = 16;
 export const PAGE_WIDTH = 595.28;
 export const HEADER_TITLE_GAP = 12;
@@ -61,18 +60,12 @@ export const styles = StyleSheet.create({
 		fontSize: 10,
 		color: COLOR.sky900,
 	},
-	pageCompactHeader: {
-		paddingTop: PAGE_PAD_TOP + PAGE_HEADER_HEIGHT_COMPACT + PAGE_HEADER_GAP,
-	},
 	fixedPageHeader: {
 		position: "absolute",
 		top: PAGE_PAD_TOP,
 		left: PAGE_PAD_X,
 		right: PAGE_PAD_X,
 		height: PAGE_HEADER_HEIGHT,
-	},
-	fixedPageHeaderCompact: {
-		height: PAGE_HEADER_HEIGHT_COMPACT,
 	},
 	header: {
 		flexDirection: "row",

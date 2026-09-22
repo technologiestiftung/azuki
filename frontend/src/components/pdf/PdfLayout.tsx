@@ -7,7 +7,6 @@ import {
 	HEADER_TITLE_LINE_HEIGHT,
 	HEADER_TITLE_MIN_FONT_SIZE,
 	PAGE_HEADER_HEIGHT,
-	PAGE_HEADER_HEIGHT_COMPACT,
 	PAGE_PAD_X,
 	PAGE_WIDTH,
 	px,
@@ -18,17 +17,14 @@ const HEADER_PAD_LEFT = 8;
 const TITLE_AVG_CHAR_EM = 0.58;
 const TITLE_WRAP_FILL = 0.92;
 const TITLE_HEIGHT_SLACK = 0.94;
+const TITLE_MAX_LINES = 2;
 
 /**
  * Text cannot be measured from here, so a long title's size is estimated from
  * its character count and the room left beside the logo — without this it
  * overflows the header row and runs underneath the brand mark.
  */
-function fitHeaderTitle(
-	title: string,
-	logoWidth: number,
-	headerHeight: number,
-) {
+function fitHeaderTitle(title: string, logoWidth: number) {
 	const availableWidth =
 		PAGE_WIDTH -
 		2 * PAGE_PAD_X -
@@ -39,19 +35,20 @@ function fitHeaderTitle(
 	const widthAt = (fontSize: number) => chars * fontSize * TITLE_AVG_CHAR_EM;
 
 	if (widthAt(HEADER_TITLE_FONT_SIZE) <= availableWidth) {
-		return { fontSize: HEADER_TITLE_FONT_SIZE, maxLines: 1, availableWidth };
+		return { fontSize: HEADER_TITLE_FONT_SIZE, availableWidth };
 	}
 
-	const maxLines = 2;
 	const byWidth =
-		(availableWidth * maxLines * TITLE_WRAP_FILL) / (chars * TITLE_AVG_CHAR_EM);
+		(availableWidth * TITLE_MAX_LINES * TITLE_WRAP_FILL) /
+		(chars * TITLE_AVG_CHAR_EM);
 	const byHeight =
-		(headerHeight * TITLE_HEIGHT_SLACK) / (maxLines * HEADER_TITLE_LINE_HEIGHT);
+		(PAGE_HEADER_HEIGHT * TITLE_HEIGHT_SLACK) /
+		(TITLE_MAX_LINES * HEADER_TITLE_LINE_HEIGHT);
 	const fontSize = Math.max(
 		HEADER_TITLE_MIN_FONT_SIZE,
 		Math.min(HEADER_TITLE_FONT_SIZE, byWidth, byHeight),
 	);
-	return { fontSize, maxLines, availableWidth };
+	return { fontSize, availableWidth };
 }
 
 /**
@@ -80,11 +77,7 @@ export function PdfHeader({
 	const logoWidth = compact ? px(105) * 0.7361 : px(150);
 	const logoHeight = compact ? px(31) * 0.7361 : px(70);
 	const logoSrc = compact ? wordmarkSrc : lockupSrc;
-	const { fontSize, maxLines, availableWidth } = fitHeaderTitle(
-		title,
-		logoWidth,
-		compact ? PAGE_HEADER_HEIGHT_COMPACT : PAGE_HEADER_HEIGHT,
-	);
+	const { fontSize, availableWidth } = fitHeaderTitle(title, logoWidth);
 	return (
 		<View style={styles.header}>
 			<Text
@@ -92,7 +85,7 @@ export function PdfHeader({
 					styles.headerTitle,
 					{
 						fontSize,
-						maxLines,
+						maxLines: TITLE_MAX_LINES,
 						maxWidth: availableWidth,
 						textOverflow: "ellipsis",
 					},
