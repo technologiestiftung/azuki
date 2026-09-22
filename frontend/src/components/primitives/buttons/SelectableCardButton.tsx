@@ -29,9 +29,9 @@ export function SelectableCardButton({
 			} ${className}`}
 			onClick={onClick}
 		>
-			<span className="flex items-center justify-between w-full gap-2">
-				{label}
-				{showIndicator && (
+			{showIndicator ? (
+				<span className="flex items-center justify-between w-full gap-2">
+					{label}
 					<span
 						className={`flex items-center justify-center shrink-0 w-[22px] h-[22px] rounded-full ${
 							selected
@@ -43,8 +43,10 @@ export function SelectableCardButton({
 							<span className="w-2.5 h-2.5 rounded-full bg-sky-white" />
 						)}
 					</span>
-				)}
-			</span>
+				</span>
+			) : (
+				label
+			)}
 			{children}
 		</button>
 	);
