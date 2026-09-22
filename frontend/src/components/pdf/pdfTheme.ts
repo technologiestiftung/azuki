@@ -28,8 +28,9 @@ export const PAGE_PAD_X = 24;
 export const PAGE_PAD_TOP = 28;
 export const PAGE_PAD_BOTTOM = 48;
 export const PAGE_HEADER_HEIGHT = 72;
-export const PAGE_HEADER_HEIGHT_COMPACT = 42;
 export const PAGE_HEADER_GAP = 16;
+export const PAGE_WIDTH = 595.28;
+export const HEADER_TITLE_GAP = 12;
 
 /** Same-origin TTFs — @react-pdf cannot use the browser Google Fonts CSS. */
 Font.register({
@@ -45,6 +46,10 @@ Font.register({
 
 Font.registerHyphenationCallback((word) => [word]);
 
+export const HEADER_TITLE_FONT_SIZE = 26.5;
+export const HEADER_TITLE_MIN_FONT_SIZE = 15;
+export const HEADER_TITLE_LINE_HEIGHT = 1.2;
+
 export const styles = StyleSheet.create({
 	page: {
 		paddingTop: PAGE_PAD_TOP + PAGE_HEADER_HEIGHT + PAGE_HEADER_GAP,
@@ -55,18 +60,12 @@ export const styles = StyleSheet.create({
 		fontSize: 10,
 		color: COLOR.sky900,
 	},
-	pageCompactHeader: {
-		paddingTop: PAGE_PAD_TOP + PAGE_HEADER_HEIGHT_COMPACT + PAGE_HEADER_GAP,
-	},
 	fixedPageHeader: {
 		position: "absolute",
 		top: PAGE_PAD_TOP,
 		left: PAGE_PAD_X,
 		right: PAGE_PAD_X,
 		height: PAGE_HEADER_HEIGHT,
-	},
-	fixedPageHeaderCompact: {
-		height: PAGE_HEADER_HEIGHT_COMPACT,
 	},
 	header: {
 		flexDirection: "row",
@@ -77,15 +76,19 @@ export const styles = StyleSheet.create({
 	headerLogo: {
 		marginTop: "auto",
 		marginBottom: "auto",
+		marginLeft: HEADER_TITLE_GAP,
+		flexShrink: 0,
 	},
 	headerTitle: {
 		marginTop: "auto",
 		marginBottom: "auto",
+		flexShrink: 1,
+		minWidth: 0,
 		fontFamily: "Asap",
 		fontWeight: 600,
-		lineHeight: 1.2,
+		lineHeight: HEADER_TITLE_LINE_HEIGHT,
 		color: COLOR.sky900,
-		fontSize: 26.5,
+		fontSize: HEADER_TITLE_FONT_SIZE,
 	},
 	sectionTitle: {
 		fontFamily: "Asap",

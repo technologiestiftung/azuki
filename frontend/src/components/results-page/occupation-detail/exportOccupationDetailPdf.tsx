@@ -8,18 +8,17 @@ import {
 import { content } from "../../../content";
 import {
 	LOGO_LOCKUP_SRC,
-	LOGO_RASTER_EDGE,
 	LOGO_WORDMARK_SRC,
 	ensureBufferPolyfill,
 	getSolidPdfPlaceholderSrc,
 	loadPdfHeroImageSrc,
 	loadPdfIconSrc,
+	loadPdfLogoSrc,
 	loadPdfPlaceholderSrc,
 	revokePdfBlobUrls,
 	triggerDownload,
 	warmPdfRuntime,
 } from "../../pdf/loadPdfAssets";
-import { COLOR } from "../../pdf/pdfTheme";
 import {
 	OccupationDetailPdfDocument,
 	type OccupationDetailPdfAssets,
@@ -96,8 +95,8 @@ export async function exportOccupationDetailPdf({
 		loadPdfIconSrc(QR_SRC, CTA_SURFACE_BG),
 		loadPdfHeroImageSrc(heroImageUrls, resolvePlaceholder),
 		loadMatchExplanations(occupationId, profile),
-		loadPdfIconSrc(LOGO_WORDMARK_SRC, COLOR.white, LOGO_RASTER_EDGE),
-		loadPdfIconSrc(LOGO_LOCKUP_SRC, COLOR.white, LOGO_RASTER_EDGE),
+		loadPdfLogoSrc(LOGO_WORDMARK_SRC),
+		loadPdfLogoSrc(LOGO_LOCKUP_SRC),
 	]);
 
 	const placeholderSrc = placeholderPromise
