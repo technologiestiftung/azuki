@@ -130,7 +130,7 @@ export function renderOccupationPreviewPage(
 	c: Context,
 	occupations: Occupation[],
 ): Response {
-	const occupationId = Number.parseInt(c.req.param("id"), 10);
+	const occupationId = Number.parseInt(c.req.param("id") ?? "", 10);
 	const occupation = Number.isFinite(occupationId)
 		? occupations.find((entry) => entry.id === occupationId)
 		: undefined;

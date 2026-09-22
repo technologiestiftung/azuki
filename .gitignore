@@ -32,6 +32,7 @@ frontend/dist/
 .env
 backend/node_modules/
 backend/dist/
+frontend/.vite/
 materialien/
 # Yearly xlsx snapshots — see data/popularity-source/README.md
 data/popularity-source/*.xlsx
