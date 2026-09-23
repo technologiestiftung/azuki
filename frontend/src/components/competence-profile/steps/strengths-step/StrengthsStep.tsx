@@ -121,21 +121,12 @@ export function StrengthsStep() {
 	);
 
 	const handleSkip = useCallback(() => {
-		if (isCustomStrengthCard) {
-			goNext();
-			return;
-		}
 		if (isOnLastPredefinedCard) {
 			leaveLastPredefinedCard();
 			return;
 		}
 		stackRef.current?.goNext();
-	}, [
-		isCustomStrengthCard,
-		isOnLastPredefinedCard,
-		leaveLastPredefinedCard,
-		goNext,
-	]);
+	}, [isOnLastPredefinedCard, leaveLastPredefinedCard]);
 
 	const handleNext = useCallback(() => {
 		if (isCustomStrengthCard) {
@@ -171,7 +162,7 @@ export function StrengthsStep() {
 			onNext={handleNext}
 			onSkip={handleSkip}
 			onBack={handleBack}
-			hasSkipButton={true}
+			hasSkipButton={!isCustomStrengthCard}
 			skipLabel={content["strengths.skipButton.label"]}
 		>
 			<div

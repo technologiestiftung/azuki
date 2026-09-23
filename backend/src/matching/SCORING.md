@@ -144,9 +144,10 @@ Primäre und sekundäre Quelle sind ODER-verknüpft, nicht kumulativ. Das „geh
 | Sicherheit und Stabilität           | geregelte Abläufe UND keine Unfallgefahr UND keine unregelmäßigen Arbeitszeiten → **+2**                                                                     |
 | Moderne Technologien                | Maschinenarbeit oder Digitalisierungssignal (b40-02) → **+2**                                                                                                |
 | Kurzer Arbeitsweg                   | häufige Abwesenheit oder wechselnde Arbeitsorte → **-2**, sonst **+2**                                                                                       |
-| Remote möglich                      | Arbeitsorte (b12-02) enthalten „Homeoffice" → **+2**                                                                                                         |
+| Von zu Hause arbeiten               | Arbeitsorte (b12-02) enthalten „Homeoffice" → **+2**                                                                                                         |
 | Flexible Arbeitszeiten              | kein BERUFENET-Signal → **+0**, ans LLM delegiert                                                                                                            |
 | Karriere                            | arbeitgeberabhängig, nicht ableitbar → **+0**, ans LLM delegiert                                                                                             |
+| Freundlicher Umgang                 | kein BERUFENET-Signal → **+0**, ans LLM delegiert                                                                                                            |
 
 ### Marktpräsenz
 

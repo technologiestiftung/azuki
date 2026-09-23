@@ -80,7 +80,8 @@ export const WORK_EXPECTATION_LABELS: Record<string, string> = {
 	modern_technology: "Arbeiten mit modernen Technologien",
 	short_distance: "Kurzer Arbeitsweg",
 	career: "Karriere",
-	remote: "Remote möglich",
+	remote: "Von zu Hause arbeiten",
+	friendly_environment: "Freundlicher Umgang",
 };
 
 export const INTEREST_LABELS: Record<string, string> = Object.fromEntries(

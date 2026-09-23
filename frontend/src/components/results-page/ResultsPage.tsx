@@ -279,12 +279,7 @@ export function ResultsPage() {
 									)}
 							<BottomCard handleDownload={handleDownload} />
 							<div className="mt-7">
-								<ContactCard
-									title={content["vacancies.detail.contactCard.title"]}
-									description={
-										content["vacancies.detail.contactCard.description"]
-									}
-								/>
+								<ContactCard />
 							</div>
 						</>
 					)}
