@@ -11,4 +11,8 @@ describe("getPreviousPath", () => {
 			ROUTE_PATHS.start,
 		);
 	});
+
+	test("path not in the step list falls back to start", () => {
+		expect(getPreviousPath("/not-a-step", "")).toBe(ROUTE_PATHS.start);
+	});
 });

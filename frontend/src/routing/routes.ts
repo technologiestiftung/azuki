@@ -172,7 +172,10 @@ export function getPreviousPath(pathname: string, hash: string): To {
 	}
 
 	const index = orderedStepIndexByPath.get(pathname);
-	if (index === undefined || index === 0) {
+	if (index === undefined) {
+		return ROUTE_PATHS.start;
+	}
+	if (index === 0) {
 		return pathname;
 	}
 

@@ -4,17 +4,27 @@ interface RateLimiterOptions {
 	windowMs: number;
 	max: number;
 	now?: () => number;
+	store?: Map<string, number[]>;
 }
 
 export function createRateLimiter({
 	windowMs,
 	max,
 	now = Date.now,
+	store: hits = new Map(),
 }: RateLimiterOptions): (key: string) => boolean {
-	const hits = new Map<string, number[]>();
+	let lastSweep = now();
 
 	return function isAllowed(key: string): boolean {
 		const timestamp = now();
+		if (timestamp - lastSweep >= windowMs) {
+			for (const [storedKey, storedHits] of hits) {
+				if (timestamp - storedHits[storedHits.length - 1] >= windowMs) {
+					hits.delete(storedKey);
+				}
+			}
+			lastSweep = timestamp;
+		}
 		const recent = (hits.get(key) ?? []).filter(
 			(hit) => timestamp - hit < windowMs,
 		);

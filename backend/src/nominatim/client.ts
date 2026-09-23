@@ -3,6 +3,7 @@ const POSTCODE_LENGTH = 5;
 const REQUEST_TIMEOUT_MS = 5000;
 const COORDINATE_PRECISION = 3;
 const CACHE_TTL_MS = 60 * 60 * 1000;
+export const CACHE_MAX_ENTRIES = 10_000;
 
 // Rough bounding box for Germany
 const GERMANY_BOUNDS = {
@@ -121,6 +122,11 @@ export async function resolveLocationFromCoordinates(
 
 		const data = (await res.json()) as NominatimReverseResponse;
 		const result = parseNominatimReverseResponse(data);
+		cache.delete(key);
+		const oldestKey = cache.keys().next().value;
+		if (cache.size >= CACHE_MAX_ENTRIES && oldestKey !== undefined) {
+			cache.delete(oldestKey);
+		}
 		cache.set(key, { value: result, expiresAt: Date.now() + CACHE_TTL_MS });
 		return result;
 	} catch (err) {

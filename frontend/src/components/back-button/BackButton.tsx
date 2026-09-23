@@ -9,7 +9,7 @@ export const BackButton: React.FC<{
 	return (
 		<GhostIconButton
 			onClick={onClick}
-			aria-label={content["navigation.back"]}
+			ariaLabel={content["navigation.back"]}
 			disabled={disabled}
 		>
 			<img src="/icons/arrow-back-black.svg" alt="" className="w-6 h-6" />

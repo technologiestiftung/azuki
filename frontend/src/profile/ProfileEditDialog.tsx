@@ -37,7 +37,7 @@ export function ProfileEditDialog({
 					<GhostIconButton
 						onClick={onClose}
 						iconSrc="/icons/close-black.svg"
-						aria-label={content["profile.edit.close.ariaLabel"]}
+						ariaLabel={content["profile.edit.close.ariaLabel"]}
 						className="w-12 h-12"
 					/>
 					<h2 className="text-2xl font-semibold leading-8 text-sky-900">

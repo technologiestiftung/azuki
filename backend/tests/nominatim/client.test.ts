@@ -1,5 +1,6 @@
 import { describe, expect, it, vi } from "vitest";
 import {
+	CACHE_MAX_ENTRIES,
 	isWithinGermany,
 	parseNominatimReverseResponse,
 	resolveLocationFromCoordinates,
@@ -95,6 +96,32 @@ describe("resolveLocationFromCoordinates caching", () => {
 		expect(first).toBeNull();
 		expect(second).toEqual({ postcode: "01067", locality: "Altstadt" });
 		expect(fetchMock).toHaveBeenCalledTimes(2);
+
+		vi.unstubAllGlobals();
+	});
+
+	it("evicts the oldest entry once the cache is full", async () => {
+		const fetchMock = vi.fn().mockResolvedValue({
+			ok: true,
+			json: async () => ({ address: { postcode: "10115", suburb: "Mitte" } }),
+		});
+		vi.stubGlobal("fetch", fetchMock);
+
+		const coordinate = (i: number): [number, number] => [
+			48 + (i % 1000) / 1000,
+			7 + Math.floor(i / 1000) / 1000,
+		];
+		for (let i = 0; i <= CACHE_MAX_ENTRIES; i++) {
+			await resolveLocationFromCoordinates(...coordinate(i));
+		}
+		expect(fetchMock).toHaveBeenCalledTimes(CACHE_MAX_ENTRIES + 1);
+		fetchMock.mockClear();
+
+		await resolveLocationFromCoordinates(...coordinate(CACHE_MAX_ENTRIES));
+		expect(fetchMock).not.toHaveBeenCalled();
+
+		await resolveLocationFromCoordinates(...coordinate(0));
+		expect(fetchMock).toHaveBeenCalledTimes(1);
 
 		vi.unstubAllGlobals();
 	});
