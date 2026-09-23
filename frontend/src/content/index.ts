@@ -577,7 +577,7 @@ export const content = {
 	"results.contactCard.bottomSheet.marketing.label":
 		"Ich stimme zu, von PLAN A über Angebote und andere Inhalte benachrichtigt zu werden.",
 	"results.contactCard.bottomSheet.privacy.notice":
-		"Weitere Informationen zu unseren Datenschutzverfahren und dazu, wie wir deine Privatsphäre schützen und respektieren, findest du in unserer <a href='https://joblinge.de/datenschutz/' target='_blank' rel='noopener noreferrer'>Datenschutzrichtlinie</a>.",
+		"Weitere Informationen zu unseren Datenschutzverfahren und dazu, wie wir deine Privatsphäre schützen und respektieren, findest du in unserer <a href='https://plan-a.jetzt/datenschutz/' target='_blank' rel='noopener noreferrer'>Datenschutzrichtlinie</a>.",
 	"results.contactCard.bottomSheet.submit": "Kontaktdaten senden",
 	"results.contactCard.bottomSheet.lock.alt": "Schloss",
 	"results.contactCard.bottomSheet.dataProtection":
