@@ -686,7 +686,7 @@ export const content = {
 		"Der Beruf scheint gut zu dir zu passen. Nichts spricht dagegen.",
 	"results.detail.matchExplanations.loading": "Wird geladen…",
 	"results.detail.matchExplanations.unavailable":
-		"Die Erklärung konnte gerade nicht geladen werden.",
+		"Das konnten wir gerade nicht laden. Aktualisiere die Seite.",
 	// Apply
 	"results.detail.apply.title": "Du möchtest dich auf diesen Beruf bewerben?",
 	"results.detail.apply.description": "Entdecke jetzt freie Stellen.",
