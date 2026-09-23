@@ -91,11 +91,6 @@ export function LoadingScreen() {
 			console.error("Match API error:", err);
 			setOverlayOpacity(0);
 			setContentPhase("error");
-
-			const message = err instanceof Error ? err.message : "";
-			if (message.includes("401") || message.includes("403")) {
-				navigate(ROUTE_PATHS.login, { replace: true });
-			}
 		};
 
 		const run = async () => {

@@ -1,10 +1,6 @@
 import { workPreferencePairs } from "./work-preference-pairs";
 
 export const content = {
-	// login screen
-	"login.input.label": "Bitte gib das Passwort ein",
-	"login.cta.label": "Starten",
-	"login.error.message": "Falsches Passwort",
 	// Profile
 	"profile.title": "Das bist du",
 	"profile.topOccupationsTitle": "Deine Top-Berufe",
@@ -636,6 +632,8 @@ export const content = {
 		"Standortzugriff wurde verweigert. Bitte erlaube den Zugriff in den Einstellungen.",
 	"results.filter.location.error.geocodeFailed":
 		"Dein Standort konnte nicht ermittelt werden. Bitte versuche es erneut.",
+	"results.filter.location.error.rateLimited":
+		"Zu viele Standortanfragen. Bitte versuche es in ein paar Minuten erneut.",
 	"results.badge.suffix": "Stellen",
 	"results.badge.empty": "Keine offenen Stellen",
 	"results.previewHeading": "Beispiele in deiner Nähe",

@@ -33,6 +33,7 @@ import {
 	resolvePreferredJobVacancyNames,
 } from "./matching/resolvePreferredJobs.js";
 import { resolveLocationFromCoordinates } from "./nominatim/client.js";
+import { createRateLimiter, getClientIp } from "./rateLimit.js";
 import { runEval } from "../eval/run.js";
 import { z } from "zod";
 import { getSupabase } from "./supabase.js";
@@ -45,6 +46,20 @@ import { rowToPersona, type PersonaInsertRow } from "./personas/mappers.js";
 import { renderOccupationPreviewPage } from "./occupationPreviewPage.js";
 
 const occupations: Occupation[] = occupationsData as Occupation[];
+
+const CONTACT_RATE_LIMIT_WINDOW_MS = 10 * 60 * 1000;
+const CONTACT_RATE_LIMIT_MAX = 200;
+const isContactRequestAllowed = createRateLimiter({
+	windowMs: CONTACT_RATE_LIMIT_WINDOW_MS,
+	max: CONTACT_RATE_LIMIT_MAX,
+});
+
+const REVERSE_GEOCODE_RATE_LIMIT_WINDOW_MS = 10 * 60 * 1000;
+const REVERSE_GEOCODE_RATE_LIMIT_MAX = 200;
+const isReverseGeocodeRequestAllowed = createRateLimiter({
+	windowMs: REVERSE_GEOCODE_RATE_LIMIT_WINDOW_MS,
+	max: REVERSE_GEOCODE_RATE_LIMIT_MAX,
+});
 
 // Real defense for the admin surface is APP_PASSWORD, not CORS:
 // auth is via the `x-app-password` request header (never auto-sent by
@@ -134,6 +149,14 @@ app.get("/api/image-proxy", async (c) => {
 	}
 });
 
+// isAuthorized only guards the internal /api/eval* and /api/personas* admin
+// routes. The public matching flow is intentionally unauthenticated: AI-cost
+// routes (/api/match and friends) are bounded by an OpenRouter-side spend
+// cap set outside this repo, not by app code. /api/contact (writes to
+// HubSpot) and /api/reverse-geocode (proxies OpenStreetMap Nominatim, which
+// bans abusive callers) aren't covered by that cap, so they get their own
+// per-IP rate limits below — best-effort only, since in-memory state doesn't
+// survive across serverless instances.
 function isAuthorized(c: Context): boolean {
 	if (!APP_PASSWORD) {
 		// Reachable only in non-production (prod startup throws above).
@@ -167,10 +190,6 @@ app.post("/api/unlock", (c) => {
 });
 
 app.post("/api/match", async (c) => {
-	if (!isAuthorized(c)) {
-		return c.json({ error: "Unauthorized" }, 401);
-	}
-
 	let body: unknown;
 	try {
 		body = await c.req.json();
@@ -236,10 +255,6 @@ app.post("/api/match", async (c) => {
 });
 
 app.post("/api/vacancies", async (c) => {
-	if (!isAuthorized(c)) {
-		return c.json({ error: "Unauthorized" }, 401);
-	}
-
 	let body: unknown;
 	try {
 		body = await c.req.json();
@@ -381,8 +396,12 @@ app.get("/api/vacancies/:refnr", async (c) => {
 });
 
 app.post("/api/reverse-geocode", async (c) => {
-	if (!isAuthorized(c)) {
-		return c.json({ error: "Unauthorized" }, 401);
+	const reverseGeocodeClientIp = getClientIp(c);
+	if (
+		reverseGeocodeClientIp !== "unknown" &&
+		!isReverseGeocodeRequestAllowed(reverseGeocodeClientIp)
+	) {
+		return c.json({ error: "Too many requests" }, 429);
 	}
 
 	let body: unknown;
@@ -409,8 +428,12 @@ app.post("/api/reverse-geocode", async (c) => {
 });
 
 app.post("/api/contact", async (c) => {
-	if (!isAuthorized(c)) {
-		return c.json({ error: "Unauthorized" }, 401);
+	const contactClientIp = getClientIp(c);
+	if (
+		contactClientIp !== "unknown" &&
+		!isContactRequestAllowed(contactClientIp)
+	) {
+		return c.json({ error: "Too many requests" }, 429);
 	}
 
 	let body: unknown;
@@ -453,10 +476,6 @@ const MatchExplanationsRequestSchema = z.object({
 });
 
 app.post("/api/occupations/:id/match-explanations", async (c) => {
-	if (!isAuthorized(c)) {
-		return c.json({ error: "Unauthorized" }, 401);
-	}
-
 	const id = parseInt(c.req.param("id"), 10);
 	const occupation = occupations.find((o) => o.id === id);
 	if (!occupation) {
@@ -496,10 +515,6 @@ app.post("/api/occupations/:id/match-explanations", async (c) => {
 });
 
 app.post("/api/profile/short-description", async (c) => {
-	if (!isAuthorized(c)) {
-		return c.json({ error: "Unauthorized" }, 401);
-	}
-
 	let body: unknown;
 	try {
 		body = await c.req.json();

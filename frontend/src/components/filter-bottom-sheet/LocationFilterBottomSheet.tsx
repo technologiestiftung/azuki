@@ -100,6 +100,13 @@ export function LocationFilterBottomSheet({
 							content["results.filter.location.error.geocodeFailed"],
 						);
 					}
+				} catch (err) {
+					const message = err instanceof Error ? err.message : "";
+					setLocationError(
+						message.includes("429")
+							? content["results.filter.location.error.rateLimited"]
+							: content["results.filter.location.error.geocodeFailed"],
+					);
 				} finally {
 					setLocating(false);
 				}
