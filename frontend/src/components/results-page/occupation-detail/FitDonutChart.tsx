@@ -7,8 +7,7 @@ interface FitDonutChartProps {
 	className?: string;
 	trackClassName?: string;
 	roundedCaps?: boolean;
-	capBorderClassName?: string;
-	capBorderWidth?: number;
+	capGapWidth?: number;
 }
 
 const PROGRESS_DURATION_MS = 1500;
@@ -21,12 +20,14 @@ export function FitDonutChart({
 	className = "",
 	trackClassName = "stroke-sky-50",
 	roundedCaps = true,
-	capBorderClassName,
-	capBorderWidth = 2,
+	capGapWidth = 2,
 }: FitDonutChartProps) {
-	const [started, setStarted] = useState(false);
-	const hasAnimatedRef = useRef(false);
+	const [phase, setPhase] = useState<"idle" | "intro" | "static">("idle");
 	const svgRef = useRef<SVGSVGElement>(null);
+
+	useEffect(() => {
+		setPhase((current) => (current === "idle" ? current : "static"));
+	}, [percent]);
 
 	useEffect(() => {
 		const element = svgRef.current;
@@ -34,17 +35,25 @@ export function FitDonutChart({
 			return undefined;
 		}
 
+		const reveal = () => {
+			requestAnimationFrame(() => {
+				setPhase((current) => (current === "idle" ? "intro" : current));
+			});
+		};
+
+		if (typeof IntersectionObserver === "undefined") {
+			reveal();
+			return undefined;
+		}
+
 		const observer = new IntersectionObserver(
 			([entry]) => {
-				if (!entry.isIntersecting || hasAnimatedRef.current) {
+				if (!entry.isIntersecting) {
 					return;
 				}
 
-				hasAnimatedRef.current = true;
 				observer.disconnect();
-				requestAnimationFrame(() => {
-					setStarted(true);
-				});
+				reveal();
 			},
 			{ threshold: 0.25 },
 		);
@@ -61,10 +70,11 @@ export function FitDonutChart({
 	const capOffset = roundedCaps ? strokeWidth / 2 : 0;
 	const center = size / 2;
 	const progressAngle = (clampedPercent / 100) * 360;
-	const showCapBorder =
-		Boolean(capBorderClassName) && clampedPercent > 0 && clampedPercent < 100;
+	const started = phase !== "idle";
+	const animating = phase === "intro";
 
-	const gap = showCapBorder ? capBorderWidth : 0;
+	const gap =
+		clampedPercent > 0 && clampedPercent < 100 ? Math.max(0, capGapWidth) : 0;
 	const halfGapAngle = (gap / 2 / circumference) * 360;
 	const arcLength = (sharePercent: number) =>
 		sharePercent <= 0
@@ -73,9 +83,6 @@ export function FitDonutChart({
 
 	const progressLength = started ? arcLength(clampedPercent) : 0;
 	const trackLength = started ? arcLength(100 - clampedPercent) : 0;
-	const cutOuter = center - radius - strokeWidth / 2 - 0.5;
-	const cutInner = center - radius + strokeWidth / 2 + 0.5;
-	const boundaryAngles = [0, progressAngle];
 
 	return (
 		<svg
@@ -91,11 +98,15 @@ export function FitDonutChart({
 				cy={center}
 				r={radius}
 				fill="none"
-				className={`${trackClassName} transition-[stroke-dashoffset] ease-out`}
-				style={{
-					transitionDuration: `${TRACK_DURATION_MS}ms`,
-					transitionDelay: `${PROGRESS_DURATION_MS}ms`,
-				}}
+				className={`${trackClassName} ${animating ? "transition-[stroke-dashoffset] ease-out" : ""}`}
+				style={
+					animating
+						? {
+								transitionDuration: `${TRACK_DURATION_MS}ms`,
+								transitionDelay: `${PROGRESS_DURATION_MS}ms`,
+							}
+						: undefined
+				}
 				strokeWidth={strokeWidth}
 				strokeLinecap={roundedCaps ? "round" : "butt"}
 				strokeDasharray={circumference}
@@ -107,27 +118,18 @@ export function FitDonutChart({
 				cy={center}
 				r={radius}
 				fill="none"
-				className="stroke-sky-300 transition-[stroke-dashoffset] ease-out"
-				style={{ transitionDuration: `${PROGRESS_DURATION_MS}ms` }}
+				className={`stroke-sky-300 ${animating ? "transition-[stroke-dashoffset] ease-out" : ""}`}
+				style={
+					animating
+						? { transitionDuration: `${PROGRESS_DURATION_MS}ms` }
+						: undefined
+				}
 				strokeWidth={strokeWidth}
 				strokeLinecap={roundedCaps ? "round" : "butt"}
 				strokeDasharray={circumference}
 				strokeDashoffset={circumference - progressLength}
 				transform={`rotate(${halfGapAngle - 90} ${center} ${center})`}
 			/>
-			{showCapBorder &&
-				boundaryAngles.map((angle, index) => (
-					<line
-						key={index === 0 ? "start" : "end"}
-						x1={center}
-						y1={cutOuter}
-						x2={center}
-						y2={cutInner}
-						className={capBorderClassName}
-						strokeWidth={capBorderWidth}
-						transform={`rotate(${angle} ${center} ${center})`}
-					/>
-				))}
 		</svg>
 	);
 }

@@ -7,6 +7,7 @@ export interface OccupationMatchExplanation {
 
 interface MatchExplanationCardsProps {
 	explanations: OccupationMatchExplanation[];
+	labelledBy: string;
 	emptyMessage?: string;
 	loading?: boolean;
 	unavailable?: boolean;
@@ -16,6 +17,7 @@ interface MatchExplanationCardsProps {
 
 export function MatchExplanationCards({
 	explanations,
+	labelledBy,
 	emptyMessage,
 	loading = false,
 	unavailable = false,
@@ -47,7 +49,11 @@ export function MatchExplanationCards({
 	}
 
 	return (
-		<ul className="flex items-stretch gap-2 -mx-4 px-4 overflow-x-scroll [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+		<ul
+			aria-labelledby={labelledBy}
+			tabIndex={0}
+			className="flex items-stretch gap-2 -mx-4 px-4 overflow-x-scroll [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+		>
 			{explanations.map((explanation) => (
 				<li
 					key={explanation.id}

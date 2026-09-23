@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useId, useState } from "react";
 import type { Occupation, UserProfile } from "@azuki/shared";
 import {
 	fetchMatchExplanations,
@@ -55,6 +55,8 @@ export function OccupationDetailMatchSection({
 	profile,
 }: OccupationDetailMatchSectionProps) {
 	const [isMatchInfoOpen, setIsMatchInfoOpen] = useState(false);
+	const matchingHeadingId = useId();
+	const notMatchingHeadingId = useId();
 	const [explanations, setExplanations] = useState<AiExplanationGroups>({
 		matching: [],
 		notMatching: [],
@@ -151,17 +153,20 @@ export function OccupationDetailMatchSection({
 								<FitDonutChart
 									percent={matchPercent}
 									trackClassName="stroke-orange-400"
-									capBorderClassName="transparent"
 									roundedCaps={false}
 								/>
 							</div>
 						)}
 					</div>
 					<div className="flex flex-col gap-3.5 px-4 pt-3 pb-4 bg-sky-50">
-						<h3 className="pl-1.5 text-sky-900 text-base font-semibold">
+						<h3
+							id={matchingHeadingId}
+							className="pl-1.5 text-sky-900 text-base font-semibold"
+						>
 							{content["results.detail.whyItMatches.title"]}
 						</h3>
 						<MatchExplanationCards
+							labelledBy={matchingHeadingId}
 							explanations={matching}
 							emptyMessage={content["results.detail.whyItMatches.empty"]}
 							loading={loading}
@@ -175,10 +180,14 @@ export function OccupationDetailMatchSection({
 						/>
 					</div>
 					<div className="flex flex-col gap-3.5 px-4 pt-3 pb-4 bg-orange-100">
-						<h3 className="pl-1.5 text-sky-900 text-base font-semibold">
+						<h3
+							id={notMatchingHeadingId}
+							className="pl-1.5 text-sky-900 text-base font-semibold"
+						>
 							{content["results.detail.whyItMatches.notMatchTitle"]}
 						</h3>
 						<MatchExplanationCards
+							labelledBy={notMatchingHeadingId}
 							explanations={notMatching}
 							emptyMessage={
 								content["results.detail.whyItMatches.notMatchEmpty"]
