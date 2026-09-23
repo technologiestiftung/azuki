@@ -34,7 +34,7 @@ export const SUBJECT_LABELS: Record<string, string> = {
 	history: "Geschichte",
 	politics: "Politik",
 	geography: "Geographie",
-	ethics_religion: "Ethik & Religion",
+	ethics_religion: "Ethik und Religion",
 	performing_arts: "Darstellendes Spiel",
 	other_languages: "Andere Fremdsprachen",
 };

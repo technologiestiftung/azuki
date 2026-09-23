@@ -89,9 +89,29 @@ export const INTERESTS: InterestDefinition[] = [
 	},
 	{
 		id: "fashion",
-		dataLabel: "Mode & styling",
+		dataLabel: "Mode",
 		berufenetTags: ["kreativ-gestaltend"],
-		matchKeywords: ["mode", "styling", "kleidung", "design", "beratung"],
+		matchKeywords: [
+			"kleidungsstücken",
+			"kleidungsstücke",
+			"nähen",
+			"zusammennähen",
+			"textilien",
+			"design",
+		],
+	},
+	{
+		id: "styling",
+		dataLabel: "Styling",
+		berufenetTags: ["kreativ-gestaltend"],
+		matchKeywords: [
+			"schminken",
+			"frisieren",
+			"haare",
+			"kosmetika",
+			"kosmetikprodukten",
+			"stylen",
+		],
 	},
 	{
 		id: "building",
@@ -106,9 +126,22 @@ export const INTERESTS: InterestDefinition[] = [
 		matchKeywords: [
 			"montieren",
 			"einbauen",
+			"verschrauben",
+			"schrauben",
+			"werkzeugen",
+		],
+	},
+	{
+		id: "repairing",
+		dataLabel: "Reparieren",
+		berufenetTags: ["praktisch-konkret"],
+		matchKeywords: [
 			"reparieren",
-			"werkzeug",
+			"reparaturen",
+			"instandsetzen",
+			"instandhalten",
 			"warten",
+			"defekten",
 		],
 	},
 	{
@@ -148,28 +181,10 @@ export const INTERESTS: InterestDefinition[] = [
 		matchKeywords: ["tiere", "tier", "füttern", "pflege", "betreuen"],
 	},
 	{
-		id: "hiking",
-		dataLabel: "Wandern",
-		berufenetTags: ["praktisch-konkret"],
-		matchKeywords: ["draußen", "natur", "bewegung", "gelände", "weg"],
-	},
-	{
-		id: "camping",
-		dataLabel: "Camping",
-		berufenetTags: ["praktisch-konkret"],
-		matchKeywords: ["draußen", "natur", "ausrüstung", "aufbauen", "reise"],
-	},
-	{
 		id: "outdoors",
 		dataLabel: "Draußen sein",
 		berufenetTags: ["praktisch-konkret"],
 		matchKeywords: ["draußen", "natur", "außenbereich", "einsatz", "bewegung"],
-	},
-	{
-		id: "fishing",
-		dataLabel: "Angeln",
-		berufenetTags: ["praktisch-konkret"],
-		matchKeywords: ["fisch", "wasser", "tier", "versorgung", "natur"],
 	},
 	{
 		id: "gym",
@@ -245,25 +260,13 @@ export const INTERESTS: InterestDefinition[] = [
 	},
 	{
 		id: "babysitting",
-		dataLabel: "Babysitten",
+		dataLabel: "Mit Kindern sein",
 		berufenetTags: ["sozial-beratend"],
 		matchKeywords: ["kinder", "betreuen", "erziehen", "fördern", "einfühlsam"],
 	},
 	{
-		id: "petCare",
-		dataLabel: "Haustiere pflegen",
-		berufenetTags: ["sozial-beratend", "praktisch-konkret"],
-		matchKeywords: [
-			"pflege",
-			"organisieren",
-			"struktur",
-			"versorgung",
-			"tiere",
-		],
-	},
-	{
 		id: "planning",
-		dataLabel: "Party planen",
+		dataLabel: "Events planen",
 		berufenetTags: ["organisatorisch-pruefend", "kaufmännisch-organisatorisch"],
 		matchKeywords: [
 			"planen",

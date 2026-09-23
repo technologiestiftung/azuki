@@ -26,7 +26,7 @@ export const SUBJECTS: SubjectDefinition[] = [
 	{ id: "music", dataLabel: "Musik" },
 	{ id: "ethics", dataLabel: "Ethik" },
 	{ id: "religion", dataLabel: "Religion" },
-	{ id: "ethics_religion", dataLabel: "Ethik & Religion" },
+	{ id: "ethics_religion", dataLabel: "Ethik und Religion" },
 	{ id: "performing_arts", dataLabel: "Darstellendes Spiel" },
 	{ id: "other_languages", dataLabel: "Andere Fremdsprachen" },
 ];

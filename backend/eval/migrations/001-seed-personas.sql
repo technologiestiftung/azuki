@@ -56,7 +56,7 @@ insert into personas (
     "educationLevel": "secondary",
     "favoriteSubjects": ["sports"],
     "customSubjects": [],
-    "interests": ["videos", "screwing", "gym"],
+    "interests": ["videos", "screwing", "gym", "repairing"],
     "customInterests": [],
     "workExpectations": ["good_salary", "stability"],
     "strengths": {
@@ -600,13 +600,13 @@ insert into personas (
 ) values (
   'mia',
   'Mia W.',
-  '16, Realschule, still in school. Almost no free-text input — just a Praktikum at her aunt''s hair salon. Indoor, hands-on, people-contact, fashion/helping/planning interests. The canonical low-signal user at the upper edge of the Joblinge audience.',
+  '16, Realschule, still in school. Almost no free-text input — just a Praktikum at her aunt''s hair salon. Indoor, hands-on, people-contact, styling/helping/planning interests. The canonical low-signal user at the upper edge of the Joblinge audience.',
   '{
     "inSchool": true,
     "educationLevel": "intermediate",
     "favoriteSubjects": ["german", "art"],
     "customSubjects": [],
-    "interests": ["fashion", "helping", "planning"],
+    "interests": ["styling", "helping", "planning"],
     "customInterests": [],
     "workExpectations": ["people_work", "teamwork_value"],
     "strengths": {

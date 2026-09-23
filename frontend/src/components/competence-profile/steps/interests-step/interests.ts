@@ -57,6 +57,11 @@ export const interests: {
 				icon: content["interests.creativity.fashion.icon"],
 				value: "fashion",
 			},
+			{
+				label: content["interests.creativity.styling.label"],
+				icon: content["interests.creativity.styling.icon"],
+				value: "styling",
+			},
 		],
 	},
 	{
@@ -73,6 +78,11 @@ export const interests: {
 				value: "screwing",
 			},
 			{
+				label: content["interests.practical.repairing.label"],
+				icon: content["interests.practical.repairing.icon"],
+				value: "repairing",
+			},
+			{
 				label: content["interests.practical.backing.label"],
 				icon: content["interests.practical.baking.icon"],
 				value: "baking",
@@ -82,40 +92,25 @@ export const interests: {
 				icon: content["interests.practical.cooking.icon"],
 				value: "cooking",
 			},
-			{
-				label: content["interests.practical.gardening.label"],
-				icon: content["interests.practical.gardening.icon"],
-				value: "gardening",
-			},
 		],
 	},
 	{
 		name: content["interests.nature.label"],
 		interests: [
 			{
+				label: content["interests.practical.gardening.label"],
+				icon: content["interests.practical.gardening.icon"],
+				value: "gardening",
+			},
+			{
 				label: content["interests.nature.animals.label"],
 				icon: content["interests.nature.animals.icon"],
 				value: "animals",
 			},
 			{
-				label: content["interests.nature.hiking.label"],
-				icon: content["interests.nature.hiking.icon"],
-				value: "hiking",
-			},
-			{
-				label: content["interests.nature.camping.label"],
-				icon: content["interests.nature.camping.icon"],
-				value: "camping",
-			},
-			{
 				label: content["interests.nature.outdoors.label"],
 				icon: content["interests.nature.outdoors.icon"],
 				value: "outdoors",
-			},
-			{
-				label: content["interests.nature.fishing.label"],
-				icon: content["interests.nature.fishing.icon"],
-				value: "fishing",
 			},
 		],
 	},
@@ -163,19 +158,14 @@ export const interests: {
 				value: "helping",
 			},
 			{
-				label: content["interests.people.read.label"],
-				icon: content["interests.people.read.icon"],
-				value: "reading",
-			},
-			{
 				label: content["interests.people.babysitting.label"],
 				icon: content["interests.people.babysitting.icon"],
 				value: "babysitting",
 			},
 			{
-				label: content["interests.people.petCare.label"],
-				icon: content["interests.people.petCare.icon"],
-				value: "petCare",
+				label: content["interests.people.read.label"],
+				icon: content["interests.people.read.icon"],
+				value: "reading",
 			},
 			{
 				label: content["interests.people.planning.label"],
