@@ -1,11 +1,16 @@
 import { content } from "../../content";
 import { PrimaryThemedButton } from "../primitives/buttons/PrimaryThemedButton";
+import { SecondaryButton } from "../primitives/buttons/SecondaryButton";
 
 interface ContactCardSuccessViewProps {
 	email: string;
+	onContinue?: () => void;
 }
 
-export function ContactCardSuccessView({ email }: ContactCardSuccessViewProps) {
+export function ContactCardSuccessView({
+	email,
+	onContinue,
+}: ContactCardSuccessViewProps) {
 	const descriptionHtml = content[
 		"results.contactCard.bottomSheet.success.description"
 	].replace("{email}", email);
@@ -27,7 +32,7 @@ export function ContactCardSuccessView({ email }: ContactCardSuccessViewProps) {
 					dangerouslySetInnerHTML={{ __html: descriptionHtml }}
 				/>
 			</div>
-			<div className="animate-successCtaEnter">
+			<div className="flex flex-col gap-3 animate-successCtaEnter">
 				<PrimaryThemedButton
 					ariaLabel={content["results.contactCard.bottomSheet.success.button"]}
 					title={content["results.contactCard.bottomSheet.success.button"]}
@@ -35,6 +40,15 @@ export function ContactCardSuccessView({ email }: ContactCardSuccessViewProps) {
 				>
 					{content["results.contactCard.bottomSheet.success.button"]}
 				</PrimaryThemedButton>
+				{onContinue && (
+					<SecondaryButton
+						ariaLabel={content["contactPage.success.continue"]}
+						title={content["contactPage.success.continue"]}
+						onClick={onContinue}
+					>
+						{content["contactPage.success.continue"]}
+					</SecondaryButton>
+				)}
 			</div>
 		</div>
 	);

@@ -607,6 +607,8 @@ export const content = {
 	"results.contactCard.bottomSheet.success.button": "E-Mail Postfach öffnen",
 	"results.contactCard.bottomSheet.success.illustrationAlt":
 		"Briefumschlag mit Sternen",
+	"contactPage.close.ariaLabel": "Formular schließen",
+	"contactPage.success.continue": "AzuKi entdecken",
 	"results.resetDialog.title":
 		"Willst du wirklich alle Fragen nochmal beantworten?",
 	"results.resetDialog.description":

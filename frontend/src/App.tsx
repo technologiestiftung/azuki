@@ -24,6 +24,7 @@ import { RequireSession } from "./routing/RequireSession";
 import { isVacanciesSectionPath, ROUTE_PATHS } from "./routing/routes";
 import { Profile } from "./profile/Profile";
 import { AboutPage } from "./components/about-page/about";
+import { ContactPage } from "./components/contact-card/ContactPage";
 import { PreferredJobsStep } from "./components/competence-profile/steps/PreferredJobsStep";
 
 const LoadingScreen = lazy(() =>
@@ -141,6 +142,7 @@ function App() {
 						}
 					/>
 					<Route path={ROUTE_PATHS.about} element={<AboutPage />} />
+					<Route path={ROUTE_PATHS.contact} element={<ContactPage />} />
 					<Route
 						path="*"
 						element={<Navigate to={ROUTE_PATHS.start} replace />}
