@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useId, useRef, useState } from "react";
 
 interface FitDonutChartProps {
 	percent: number;
@@ -24,6 +24,7 @@ export function FitDonutChart({
 }: FitDonutChartProps) {
 	const [phase, setPhase] = useState<"idle" | "intro" | "static">("idle");
 	const svgRef = useRef<SVGSVGElement>(null);
+	const maskId = `fit-donut-gap-${useId().replace(/[^a-zA-Z0-9]/g, "")}`;
 
 	useEffect(() => {
 		setPhase((current) => (current === "idle" ? current : "static"));
@@ -73,13 +74,15 @@ export function FitDonutChart({
 	const started = phase !== "idle";
 	const animating = phase === "intro";
 
+	// The gap is cut out afterwards as a straight slot rather than trimmed off
+	// the arcs: trimming works along the centre line, so the wedge it leaves
+	// would be narrower at the inner edge of the ring and wider at the outer.
 	const gap =
 		clampedPercent > 0 && clampedPercent < 100 ? Math.max(0, capGapWidth) : 0;
-	const halfGapAngle = (gap / 2 / circumference) * 360;
 	const arcLength = (sharePercent: number) =>
 		sharePercent <= 0
 			? 0
-			: Math.max(0, (sharePercent / 100) * circumference - capOffset - gap);
+			: Math.max(0, (sharePercent / 100) * circumference - capOffset);
 
 	const progressLength = started ? arcLength(clampedPercent) : 0;
 	const trackLength = started ? arcLength(100 - clampedPercent) : 0;
@@ -93,43 +96,68 @@ export function FitDonutChart({
 			className={className}
 			aria-hidden
 		>
-			<circle
-				cx={center}
-				cy={center}
-				r={radius}
-				fill="none"
-				className={`${trackClassName} ${animating ? "transition-[stroke-dashoffset] ease-out" : ""}`}
-				style={
-					animating
-						? {
-								transitionDuration: `${TRACK_DURATION_MS}ms`,
-								transitionDelay: `${PROGRESS_DURATION_MS}ms`,
-							}
-						: undefined
-				}
-				strokeWidth={strokeWidth}
-				strokeLinecap={roundedCaps ? "round" : "butt"}
-				strokeDasharray={circumference}
-				strokeDashoffset={circumference - trackLength}
-				transform={`rotate(${progressAngle + halfGapAngle - 90} ${center} ${center})`}
-			/>
-			<circle
-				cx={center}
-				cy={center}
-				r={radius}
-				fill="none"
-				className={`stroke-sky-300 ${animating ? "transition-[stroke-dashoffset] ease-out" : ""}`}
-				style={
-					animating
-						? { transitionDuration: `${PROGRESS_DURATION_MS}ms` }
-						: undefined
-				}
-				strokeWidth={strokeWidth}
-				strokeLinecap={roundedCaps ? "round" : "butt"}
-				strokeDasharray={circumference}
-				strokeDashoffset={circumference - progressLength}
-				transform={`rotate(${halfGapAngle - 90} ${center} ${center})`}
-			/>
+			{gap > 0 && (
+				<mask id={maskId} maskUnits="userSpaceOnUse">
+					<circle
+						cx={center}
+						cy={center}
+						r={radius}
+						fill="none"
+						stroke="white"
+						strokeWidth={strokeWidth}
+					/>
+					{[0, progressAngle].map((angle) => (
+						<rect
+							key={angle}
+							x={center}
+							y={center - gap / 2}
+							width={size}
+							height={gap}
+							fill="black"
+							transform={`rotate(${angle - 90} ${center} ${center})`}
+						/>
+					))}
+				</mask>
+			)}
+			<g mask={gap > 0 ? `url(#${maskId})` : undefined}>
+				<circle
+					cx={center}
+					cy={center}
+					r={radius}
+					fill="none"
+					className={`${trackClassName} ${animating ? "transition-[stroke-dashoffset] ease-out" : ""}`}
+					style={
+						animating
+							? {
+									transitionDuration: `${TRACK_DURATION_MS}ms`,
+									transitionDelay: `${PROGRESS_DURATION_MS}ms`,
+								}
+							: undefined
+					}
+					strokeWidth={strokeWidth}
+					strokeLinecap={roundedCaps ? "round" : "butt"}
+					strokeDasharray={circumference}
+					strokeDashoffset={circumference - trackLength}
+					transform={`rotate(${progressAngle - 90} ${center} ${center})`}
+				/>
+				<circle
+					cx={center}
+					cy={center}
+					r={radius}
+					fill="none"
+					className={`stroke-sky-300 ${animating ? "transition-[stroke-dashoffset] ease-out" : ""}`}
+					style={
+						animating
+							? { transitionDuration: `${PROGRESS_DURATION_MS}ms` }
+							: undefined
+					}
+					strokeWidth={strokeWidth}
+					strokeLinecap={roundedCaps ? "round" : "butt"}
+					strokeDasharray={circumference}
+					strokeDashoffset={circumference - progressLength}
+					transform={`rotate(-90 ${center} ${center})`}
+				/>
+			</g>
 		</svg>
 	);
 }
