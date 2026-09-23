@@ -156,6 +156,18 @@ describe("formatProfileSections — custom work expectation dedup", () => {
 		);
 	});
 
+	test("labels remote and friendly_environment with the wording shown in the UI", () => {
+		const profile = makeProfile({
+			workExpectations: ["remote", "friendly_environment"],
+		});
+
+		const output = formatProfileSections(profile);
+
+		expect(output).toContain(
+			"Rahmenbedingungen: Von zu Hause arbeiten, Freundlicher Umgang",
+		);
+	});
+
 	test("lists predefined and custom work expectations on separate lines, each only once", () => {
 		const profile = makeProfile({
 			workExpectations: ["remote", "flexible hours"],

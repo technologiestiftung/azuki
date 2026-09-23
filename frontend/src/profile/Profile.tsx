@@ -117,7 +117,10 @@ export function Profile() {
 				)}
 				<ProfileAboutSection profile={profile} />
 				<div className="flex flex-col gap-[28px] px-4 bg-white pb-[28px]">
-					<ContactCard />
+					<ContactCard
+						title={content["profile.contactCard.title"]}
+						description={content["profile.contactCard.description"]}
+					/>
 					{!isSharedView && <ProfileResetCard />}
 				</div>
 				<Footer />
