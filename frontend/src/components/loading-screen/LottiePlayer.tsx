@@ -3,6 +3,7 @@ import {
 	memo,
 	useCallback,
 	useEffect,
+	useRef,
 	useState,
 	type ComponentType,
 } from "react";
@@ -52,8 +53,25 @@ export const LottiePlayer = memo(function LottiePlayer({
 		};
 	}, []);
 
+	const onCompleteRef = useRef(onComplete);
+	const onReadyRef = useRef(onReady);
+	useEffect(() => {
+		onCompleteRef.current = onComplete;
+		onReadyRef.current = onReady;
+	});
+
+	const instance = useRef<DotLottie | null>(null);
+	const removeListeners = useRef<(() => void) | null>(null);
+
 	const dotLottieRefCallback = useCallback(
 		(dotLottie: DotLottie | null) => {
+			if (instance.current === dotLottie) {
+				return;
+			}
+			removeListeners.current?.();
+			removeListeners.current = null;
+			instance.current = dotLottie;
+
 			if (!dotLottie) {
 				return;
 			}
@@ -63,20 +81,31 @@ export const LottiePlayer = memo(function LottiePlayer({
 					const end = Math.ceil(dotLottie.totalFrames) - 1;
 					dotLottie.setSegment(0, end);
 				}
-				onReady?.();
+				onReadyRef.current?.();
 			};
+			const handleComplete = () => onCompleteRef.current?.();
 
 			dotLottie.addEventListener("load", onLoad);
+			dotLottie.addEventListener("complete", handleComplete);
+			removeListeners.current = () => {
+				dotLottie.removeEventListener("load", onLoad);
+				dotLottie.removeEventListener("complete", handleComplete);
+			};
+
 			if (dotLottie.isLoaded) {
 				onLoad();
 			}
-
-			if (onComplete) {
-				dotLottie.addEventListener("complete", onComplete);
-			}
 		},
-		[loop, onComplete, onReady],
+		[loop],
 	);
+
+	useEffect(() => {
+		return () => {
+			removeListeners.current?.();
+			removeListeners.current = null;
+			instance.current = null;
+		};
+	}, []);
 
 	if (!DotLottieReact) {
 		return <div className="h-[250px] w-full" aria-hidden />;
