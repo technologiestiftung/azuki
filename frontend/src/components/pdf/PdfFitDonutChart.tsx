@@ -1,4 +1,4 @@
-import { Svg, Circle, Path } from "@react-pdf/renderer";
+import { Svg, Circle, Line, Path } from "@react-pdf/renderer";
 import { COLOR } from "./pdfTheme";
 
 interface PdfFitDonutChartProps {
@@ -6,6 +6,8 @@ interface PdfFitDonutChartProps {
 	size?: number;
 	strokeWidth?: number;
 }
+
+const CAP_BORDER_RATIO = 2 / 24;
 
 function polarToCartesian(
 	center: number,
@@ -57,18 +59,9 @@ export function PdfFitDonutChart({
 	const center = size / 2;
 	const radius = (size - strokeWidth) / 2;
 	const clampedPercent = Math.min(100, Math.max(0, percent));
-	/**
-	 * Match FitDonutChart: round caps extend the arc by ~half the stroke at the
-	 * leading edge, so shorten the sweep or 98% reads as a full ring.
-	 */
-	const capAngleDegrees =
-		clampedPercent > 0 && clampedPercent < 100
-			? (strokeWidth / 2 / radius) * (180 / Math.PI)
-			: 0;
-	const sweepDegrees = Math.max(
-		0,
-		(clampedPercent / 100) * 360 - capAngleDegrees,
-	);
+
+	const sweepDegrees = (clampedPercent / 100) * 360;
+
 	let progressPath = "";
 	if (clampedPercent >= 100) {
 		progressPath = describeArc({
@@ -85,13 +78,25 @@ export function PdfFitDonutChart({
 			endAngle: sweepDegrees,
 		});
 	}
+
+	const showCapBorder = clampedPercent > 0 && clampedPercent < 100;
+	const cutOuterRadius = radius + strokeWidth / 2 + 0.5;
+	const cutInnerRadius = radius - strokeWidth / 2 - 0.5;
+	const cuts = showCapBorder
+		? [0, sweepDegrees].map((angle) => ({
+				angle,
+				outer: polarToCartesian(center, cutOuterRadius, angle),
+				inner: polarToCartesian(center, cutInnerRadius, angle),
+			}))
+		: [];
+
 	return (
 		<Svg width={size} height={size} viewBox={`0 0 ${size} ${size}`}>
 			<Circle
 				cx={center}
 				cy={center}
 				r={radius}
-				stroke={COLOR.sky100}
+				stroke={COLOR.orange400}
 				strokeWidth={strokeWidth}
 				fill="none"
 			/>
@@ -101,9 +106,20 @@ export function PdfFitDonutChart({
 					stroke={COLOR.sky300}
 					strokeWidth={strokeWidth}
 					fill="none"
-					strokeLinecap="round"
+					strokeLinecap="butt"
 				/>
 			) : null}
+			{cuts.map((cut) => (
+				<Line
+					key={cut.angle}
+					x1={cut.outer.x}
+					y1={cut.outer.y}
+					x2={cut.inner.x}
+					y2={cut.inner.y}
+					stroke={COLOR.sky50}
+					strokeWidth={strokeWidth * CAP_BORDER_RATIO}
+				/>
+			))}
 		</Svg>
 	);
 }
