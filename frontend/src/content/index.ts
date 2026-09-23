@@ -454,7 +454,7 @@ export const content = {
 	"noGos.customNoGo.pill.label.postfix": "als No-Go markieren",
 	//noise
 	"noGos.noise.title": "Lärm",
-	"noGos.noise.description": "z.B. Baustelle, Maschinen oder laute Werkstatt",
+	"noGos.noise.description": "z.B. Baustelle, Werkstatt, Kinder",
 	//dirt
 	"noGos.dirt.title": "Schmutz",
 	"noGos.dirt.description": "z.B. Müll, Öl, Staub, starke Gerüche",
