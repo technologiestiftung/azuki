@@ -26,12 +26,21 @@ export interface BottomSheetProps {
 
 type DragSample = { t: number; y: number };
 
+const VIEWPORT_SYNC_TOLERANCE_PX = 80;
+
 function readVisualViewportLayout() {
-	const vv = window.visualViewport;
-	return {
-		offsetTop: vv?.offsetTop ?? 0,
-		height: vv?.height ?? window.innerHeight,
-	};
+	const visualViewport = window.visualViewport;
+	if (!visualViewport) {
+		return { offsetTop: 0, height: window.innerHeight };
+	}
+
+	if (
+		Math.abs(window.innerHeight - visualViewport.height) <
+		VIEWPORT_SYNC_TOLERANCE_PX
+	) {
+		return { offsetTop: 0, height: window.innerHeight };
+	}
+	return { offsetTop: visualViewport.offsetTop, height: visualViewport.height };
 }
 
 function applyVisualViewportLayout(el: HTMLElement | null) {
@@ -95,8 +104,18 @@ export function BottomSheet({
 			return () => {};
 		}
 
+		let frame = 0;
 		const update = () => {
+			frame = 0;
 			applyVisualViewportLayout(dialogRef.current);
+		};
+		// Android fires a burst of resize/scroll events while the keyboard
+		// animates; coalescing them into one write per frame keeps the sheet from
+		// stepping through the intermediate values.
+		const scheduleUpdate = () => {
+			if (frame === 0) {
+				frame = window.requestAnimationFrame(update);
+			}
 		};
 
 		update();
@@ -105,11 +124,14 @@ export function BottomSheet({
 			return () => {};
 		}
 
-		visualViewport.addEventListener("resize", update);
-		visualViewport.addEventListener("scroll", update);
+		visualViewport.addEventListener("resize", scheduleUpdate);
+		visualViewport.addEventListener("scroll", scheduleUpdate);
 		return () => {
-			visualViewport.removeEventListener("resize", update);
-			visualViewport.removeEventListener("scroll", update);
+			if (frame !== 0) {
+				window.cancelAnimationFrame(frame);
+			}
+			visualViewport.removeEventListener("resize", scheduleUpdate);
+			visualViewport.removeEventListener("scroll", scheduleUpdate);
 		};
 	}, [visible]);
 
