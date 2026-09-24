@@ -108,11 +108,7 @@ export function ProfileHero({
 
 	return (
 		<>
-			<div
-				className={`flex flex-col gap-3 px-[45px] items-center mb-9 ${
-					isSharedView ? "pt-6" : "pt-14"
-				}`}
-			>
+			<div className="flex flex-col gap-3 px-[45px] items-center mb-9 pt-14">
 				<div className="relative w-[102px] h-[102px] z-10">
 					<div className="flex items-center justify-center rounded-full overflow-hidden bg-sky-0 border-4 border-sky-50 w-full h-full p-4">
 						<img
@@ -121,13 +117,15 @@ export function ProfileHero({
 							className="w-[70px] h-[70px] object-contain aspect-square"
 						/>
 					</div>
-					<button
-						className="absolute bottom-0 right-0 w-8 h-8 bg-sky-900 rounded-full flex items-center justify-center hover:bg-sky-shade-160 focus-visible:outline focus-visible:outline-2 focus-visible:outline-sky-500"
-						onClick={openEditProfile}
-						aria-label={content["profile.edit.open.ariaLabel"]}
-					>
-						<img src="/icons/edit.svg" alt="" />
-					</button>
+					{!isSharedView && (
+						<button
+							className="absolute bottom-0 right-0 w-8 h-8 bg-sky-900 rounded-full flex items-center justify-center hover:bg-sky-shade-160 focus-visible:outline focus-visible:outline-2 focus-visible:outline-sky-500"
+							onClick={openEditProfile}
+							aria-label={content["profile.edit.open.ariaLabel"]}
+						>
+							<img src="/icons/edit.svg" alt="" />
+						</button>
+					)}
 				</div>
 
 				<div className="flex flex-col items-center w-full min-w-0">

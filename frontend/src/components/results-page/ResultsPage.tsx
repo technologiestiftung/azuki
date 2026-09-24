@@ -234,7 +234,7 @@ export function ResultsPage() {
 					title={content["results.title"]}
 					shareAriaLabel={content["results.share.ariaLabel"]}
 					downloadAriaLabel={content["results.download.ariaLabel"]}
-					onDownload={handleDownload}
+					onDownload={hasSharedParam ? undefined : handleDownload}
 					onShare={handleShare}
 					downloadDisabled={!hasVisibleContent}
 					shareDisabled={visibleOccupations.length === 0}
