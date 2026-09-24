@@ -65,7 +65,7 @@ Kein Beruf wird ausgeschlossen — nur abgewertet.
 
 Geprüft gegen die Arbeitsbedingungen (b16-3): Lärm, Schmutz, schweres Heben, Bildschirmarbeit, Schichtarbeit, Umgang mit Tieren, Unfallgefahr.
 
-**Ausnahme Pflege/Pädagogik:** Bei „Lärm" und „Schwere körperliche Arbeit" wird die Strafe auf **-1** reduziert, wenn der Beruf primär sozial-beratend ist und keine Maschinen im Spiel sind. Jugendliche meinen mit diesen No-Gos typischerweise Werkstatt und Baustelle — sonst würden Erzieher, Pflegehelfer & Co. systematisch aus den Ergebnissen fallen.
+**Ausnahme Pflege/Pädagogik:** Bei „Lärm" und „Schwere körperliche Arbeit" wird die Strafe auf **-1** reduziert, wenn der Beruf primär sozial-beratend ist und keine Maschinen im Spiel sind. So bleiben diese Berufe im Kandidatenpool. Ob Kita-Berufe bei Lärm-No-Go zurückgestellt werden, entscheidet die KI (siehe Regel 6 unten).
 
 ### Arbeitsvorlieben (+2 je Treffer)
 
@@ -198,7 +198,7 @@ Dieselbe Auflösung steuert die Stellensuche: die ersten 5 aufgelösten Wunschbe
 3. Bei dünnen Freitexten näher an der Pre-Filter-Reihenfolge bleiben.
 4. Vielfalt: mehrere Richtungen statt fünf Varianten desselben Berufs, aber nie auf Kosten der Passung.
 5. Marktpräsenz ist kein eigenes Auswahlkriterium, sondern Tiebreaker zwischen gleich gut passenden Berufen.
-6. Lärm/schweres Heben als No-Go schließt Kleinkindpädagogik nicht aus.
+6. Lärm als No-Go stellt Kleinkindpädagogik zurück (Jugendarbeit bleibt möglich); schweres Heben als No-Go schließt sie nicht aus.
 7. Nur IDs aus der gelieferten Liste, jede Begründung in 2–4 einfachen Sätzen nach dem Muster Signal → Berufsaspekt → Passung.
 
 Antworten, die sich nicht parsen lassen, ungültige oder doppelte IDs enthalten, werden gefiltert; bleiben weniger als 5 Berufe übrig, wird mit der Pre-Filter-Reihenfolge aufgefüllt.
