@@ -17,7 +17,7 @@ export function ContactPage() {
 	// The app entry point, not /start: a QR visitor has no session, and going
 	// straight to the questionnaire would skip whatever gate sits on the root.
 	const goToApp = () => {
-		navigate(ROUTE_PATHS.login);
+		navigate(ROUTE_PATHS.root);
 	};
 
 	const handleScroll = (event: UIEvent<HTMLDivElement>) => {
