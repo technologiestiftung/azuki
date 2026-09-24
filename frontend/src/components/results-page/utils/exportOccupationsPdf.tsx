@@ -7,6 +7,7 @@ import {
 	ensureBufferPolyfill,
 	getSolidPdfPlaceholderSrc,
 	loadPdfIconSrc,
+	loadPdfQrSrc,
 	loadPdfLogoSrc,
 	loadPdfPlaceholderSrc,
 	loadPdfTopCardImages,
@@ -45,7 +46,7 @@ export async function exportOccupationsPdf(
 	const [mascotSrc, qrSrc, topImageSrcs, wordmarkSrc, lockupSrc] =
 		await Promise.all([
 			loadPdfIconSrc(MASCOT_SRC, CTA_SURFACE_BG),
-			loadPdfIconSrc(QR_SRC, CTA_SURFACE_BG),
+			loadPdfQrSrc(QR_SRC, CTA_SURFACE_BG),
 			loadPdfTopCardImages(topOccupations, resolvePlaceholder),
 			loadPdfLogoSrc(LOGO_WORDMARK_SRC),
 			loadPdfLogoSrc(LOGO_LOCKUP_SRC),

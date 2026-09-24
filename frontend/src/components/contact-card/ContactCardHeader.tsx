@@ -6,6 +6,7 @@ interface ContactCardHeaderProps {
 	collapsed: boolean;
 	titleRevealProgress: number;
 	titleAlign?: "center" | "left";
+	title?: string;
 	onDismiss?: () => void;
 	dismissIconSrc?: string;
 	dismissAriaLabel?: string;
@@ -16,6 +17,7 @@ export function ContactCardHeader({
 	collapsed,
 	titleRevealProgress,
 	titleAlign = "center",
+	title = content["results.contactCard.bottomSheet.title"],
 	onDismiss,
 	dismissIconSrc,
 	dismissAriaLabel,
@@ -60,7 +62,7 @@ export function ContactCardHeader({
 					}}
 					aria-hidden
 				>
-					{content["results.contactCard.bottomSheet.title"]}
+					{title}
 				</div>
 			)}
 		</div>

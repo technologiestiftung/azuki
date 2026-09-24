@@ -8,6 +8,12 @@ import { ContactCardHeader } from "./ContactCardHeader";
 import { ContactCardSuccessView } from "./ContactCardSuccessView";
 import { useContactForm } from "./useContactForm";
 
+const CONTACT_PAGE_ITEMS = [
+	content["results.contactCard.item.1"],
+	content["results.contactCard.item.2"],
+	content["results.contactCard.item.3"],
+] as const;
+
 export function ContactPage() {
 	const navigate = useNavigate();
 	const form = useContactForm();
@@ -28,7 +34,7 @@ export function ContactPage() {
 
 	return (
 		<main
-			className="flex h-full flex-col bg-white"
+			className="flex h-full flex-col bg-sky-white"
 			aria-label={content["results.contactCard.bottomSheet.ariaLabel"]}
 		>
 			{!form.submitted && (
@@ -37,6 +43,7 @@ export function ContactPage() {
 					collapsed={titleRevealProgress > 0.5}
 					titleRevealProgress={titleRevealProgress}
 					titleAlign="left"
+					title={content["contactPage.title"]}
 				/>
 			)}
 			<div
@@ -53,6 +60,9 @@ export function ContactPage() {
 					<ContactCardFormContent
 						titleRef={titleRef}
 						showWordmark
+						title={content["contactPage.title"]}
+						description={content["contactPage.description"]}
+						items={CONTACT_PAGE_ITEMS}
 						under16={form.under16}
 						setUnder16={form.setUnder16}
 						contactType={form.contactType}

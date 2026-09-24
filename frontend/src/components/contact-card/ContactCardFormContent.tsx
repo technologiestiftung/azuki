@@ -18,9 +18,67 @@ import type { FormEvent, RefObject } from "react";
 
 const FORM_ERROR_ID = "contact-form-error";
 
+interface ContactCardFormIntroProps {
+	titleRef: RefObject<HTMLHeadingElement>;
+	showWordmark: boolean;
+	title?: string;
+	description?: string;
+	items?: readonly string[];
+}
+
+function ContactCardFormIntro({
+	titleRef,
+	showWordmark,
+	title = content["results.contactCard.bottomSheet.title"],
+	description = content["results.contactCard.bottomSheet.description"],
+	items,
+}: ContactCardFormIntroProps) {
+	return (
+		<>
+			{showWordmark && (
+				<img
+					src="/illustrations/azuki-wordmark.svg"
+					alt=""
+					className="mx-auto mb-4 w-[130px] object-contain"
+				/>
+			)}
+			<h2
+				ref={titleRef}
+				className="text-2xl font-semibold leading-[130%] text-sky-900"
+			>
+				{title}
+			</h2>
+			<p
+				className="text-base font-normal text-sky-900 leading-[140%] [&_strong]:font-semibold"
+				dangerouslySetInnerHTML={{ __html: description }}
+			/>
+			{items && (
+				<ul className="mt-2 flex flex-col gap-[5px]">
+					{items.map((item) => (
+						<li key={item} className="flex gap-[5px]">
+							<img
+								src="/icons/check-sky-500.svg"
+								alt=""
+								className="h-5 w-5 shrink-0"
+							/>
+							<p className="text-sm font-normal text-sky-500 leading-[140%]">
+								{item}
+							</p>
+						</li>
+					))}
+				</ul>
+			)}
+		</>
+	);
+}
+
 interface ContactCardFormContentProps {
 	titleRef: RefObject<HTMLHeadingElement>;
 	showWordmark?: boolean;
+	/** The standalone page carries the pitch the in-app contact card would show above the sheet. */
+	title?: string;
+	description?: string;
+	items?: readonly string[];
 	under16: Under16 | null;
 	setUnder16: (v: Under16) => void;
 	contactType: ContactType | null;
@@ -35,6 +93,9 @@ interface ContactCardFormContentProps {
 export function ContactCardFormContent({
 	titleRef,
 	showWordmark = false,
+	title,
+	description,
+	items,
 	under16,
 	setUnder16,
 	contactType,
@@ -56,24 +117,12 @@ export function ContactCardFormContent({
 
 	return (
 		<div className="flex flex-col gap-2 px-4 pb-5">
-			{showWordmark && (
-				<img
-					src="/illustrations/azuki-wordmark.svg"
-					alt=""
-					className="mx-auto mb-4 w-[130px] object-contain"
-				/>
-			)}
-			<h2
-				ref={titleRef}
-				className="text-2xl font-semibold leading-[130%] text-sky-900"
-			>
-				{content["results.contactCard.bottomSheet.title"]}
-			</h2>
-			<p
-				className="text-base font-normal text-sky-900 leading-[140%]"
-				dangerouslySetInnerHTML={{
-					__html: content["results.contactCard.bottomSheet.description"],
-				}}
+			<ContactCardFormIntro
+				titleRef={titleRef}
+				showWordmark={showWordmark}
+				title={title}
+				description={description}
+				items={items}
 			/>
 			<form
 				onSubmit={onSubmit}
