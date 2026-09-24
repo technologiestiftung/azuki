@@ -42,6 +42,7 @@ const WARM_CTA_SURFACE_BG = "#DDF4FF";
 export const LOGO_WORDMARK_SRC = "/illustrations/azuki-wordmark.svg";
 export const LOGO_LOCKUP_SRC = "/illustrations/azuki-lockup.svg";
 const LOGO_RASTER_EDGE = 512;
+const QR_RASTER_EDGE = 512;
 
 export type PdfRasterOptions = {
 	coverAspect?: number;
@@ -522,6 +523,21 @@ export async function loadPdfLogoSrc(src: string): Promise<string | null> {
 	});
 }
 
+/**
+ * QR codes rasterize large and lossless. The icon default encodes JPEG at 0.65
+ * from the SVG's natural size, which smears the module edges a scanner has to
+ * resolve once the code is printed at 52pt.
+ */
+export async function loadPdfQrSrc(
+	src: string,
+	backgroundColor: string,
+): Promise<string | null> {
+	return loadPdfIconSrc(src, backgroundColor, {
+		outHeight: QR_RASTER_EDGE,
+		format: "png",
+	});
+}
+
 function createSolidPlaceholderDataUrl(): string {
 	const outHeight = CARD_IMAGE_OUT_HEIGHT;
 	const outWidth = Math.max(1, Math.round(outHeight * CARD_IMAGE_ASPECT));
@@ -663,7 +679,7 @@ export function warmPdfRuntime(): Promise<void> {
 						.catch(() => null),
 				),
 				loadPdfIconSrc(WARM_MASCOT_SRC, WARM_CTA_SURFACE_BG),
-				loadPdfIconSrc(WARM_QR_SRC, WARM_CTA_SURFACE_BG),
+				loadPdfQrSrc(WARM_QR_SRC, WARM_CTA_SURFACE_BG),
 				loadPdfLogoSrc(LOGO_WORDMARK_SRC),
 				loadPdfLogoSrc(LOGO_LOCKUP_SRC),
 			]);

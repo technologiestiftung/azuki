@@ -607,6 +607,10 @@ export const content = {
 	"results.contactCard.bottomSheet.success.button": "E-Mail Postfach öffnen",
 	"results.contactCard.bottomSheet.success.illustrationAlt":
 		"Briefumschlag mit Sternen",
+	"contactPage.title": "Kostenlose Beratung anfragen",
+	"contactPage.description":
+		"PLAN A berät dich zu deinen <strong>Stärken</strong>, <strong>passenden Berufen</strong> und <strong>Bewerbungen</strong>. Schick uns deine Anfrage und wir melden uns bei dir.",
+	"contactPage.success.continue": "AzuKi entdecken",
 	"results.resetDialog.title":
 		"Willst du wirklich alle Fragen nochmal beantworten?",
 	"results.resetDialog.description":

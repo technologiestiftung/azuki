@@ -13,6 +13,7 @@ import {
 	getSolidPdfPlaceholderSrc,
 	loadPdfHeroImageSrc,
 	loadPdfIconSrc,
+	loadPdfQrSrc,
 	loadPdfLogoSrc,
 	loadPdfPlaceholderSrc,
 	revokePdfBlobUrls,
@@ -92,7 +93,7 @@ export async function exportOccupationDetailPdf({
 		lockupSrc,
 	] = await Promise.all([
 		loadPdfIconSrc(MASCOT_SRC, CTA_SURFACE_BG),
-		loadPdfIconSrc(QR_SRC, CTA_SURFACE_BG),
+		loadPdfQrSrc(QR_SRC, CTA_SURFACE_BG),
 		loadPdfHeroImageSrc(heroImageUrls, resolvePlaceholder),
 		loadMatchExplanations(occupationId, profile),
 		loadPdfLogoSrc(LOGO_WORDMARK_SRC),

@@ -11,6 +11,7 @@ import {
 	ensureBufferPolyfill,
 	getSolidPdfPlaceholderSrc,
 	loadPdfIconSrc,
+	loadPdfQrSrc,
 	loadPdfImageSrc,
 	loadPdfLogoSrc,
 	loadPdfPlaceholderSrc,
@@ -78,7 +79,7 @@ export async function exportProfilePdf({
 		lockupSrc,
 	] = await Promise.all([
 		loadPdfIconSrc(MASCOT_SRC, CTA_SURFACE_BG),
-		loadPdfIconSrc(QR_SRC, CTA_SURFACE_BG),
+		loadPdfQrSrc(QR_SRC, CTA_SURFACE_BG),
 		loadPdfImageSrc(avatarPath, {
 			format: "png",
 			backgroundColor: COLOR.sky0,
