@@ -1,14 +1,13 @@
 import { workPreferencePairs } from "./work-preference-pairs";
 
 export const content = {
-	// login screen
-	"login.input.label": "Bitte gib das Passwort ein",
-	"login.cta.label": "Starten",
-	"login.error.message": "Falsches Passwort",
 	// Profile
 	"profile.title": "Das bist du",
 	"profile.topOccupationsTitle": "Deine Top-Berufe",
 	"profile.aboutYou": "Über dich",
+	"profile.contactCard.title": "Stell uns deine Fragen zur Ausbildungssuche.",
+	"profile.contactCard.description":
+		"Stell unserem PLAN A Team alle Fragen zu <strong>passenden Berufen</strong>, <strong>Bewerbungen</strong> und <strong>Vorstellungsgesprächen</strong>.",
 	"profile.schoolDegreeLabel.planned": "Dein geplanter Schulabschluss",
 	"profile.schoolDegreeLabel.inSchool": "Dein Schulabschluss",
 	"profile.favoriteSubjects": "Deine Lieblingsfächer",
@@ -399,7 +398,7 @@ export const content = {
 	"practicalExperience.bottomSheet.example.job.li2": "Minijob",
 
 	//Work Expectations
-	"workExpectations.question": "Was ist dir in deinem Beruf wichtig?",
+	"workExpectations.question": "Was ist dir im Beruf wichtig?",
 	"workExpectations.skipButton.label": "Ich weiß es nicht",
 	"workExpectations.option.goodSalary": "Gutes Gehalt",
 	"workExpectations.option.peopleWork": "Mit Menschen arbeiten",
@@ -412,18 +411,19 @@ export const content = {
 		"Arbeiten mit modernen Technologien",
 	"workExpectations.option.shortDistance": "Kurzer Arbeitsweg",
 	"workExpectations.option.career": "Karriere",
-	"workExpectations.option.remote": "Remote möglich",
+	"workExpectations.option.remote": "Von zu Hause arbeiten",
+	"workExpectations.option.friendlyEnvironment": "Freundlicher Umgang",
 	"workExpectations.customWorkExpectation.label": "Von dir hinzugefügt",
 	"workExpectations.addCustomWorkExpectationButton.addMore":
 		"Weiteres hinzufügen",
 	"workExpectations.addCustomWorkExpectationButton.label":
-		"Etwas eigenes hinzufügen",
+		"Etwas Eigenes hinzufügen",
 	"workExpectations.addCustomWorkExpectationButton.ariaLabel":
-		"Etwas eigenes hinzufügen",
+		"Etwas Eigenes hinzufügen",
 	"workExpectations.bottomSheet.sheetAriaLabel":
 		"Bitte gib ein, was dir im Beruf wichtig ist.",
 	"workExpectations.bottomSheet.input.addPlaceholder":
-		"Etwas eigenes hinzufügen",
+		"Etwas Eigenes hinzufügen",
 	"workExpectations.bottomSheet.submitButtonLabel": "Hinzufügen",
 	"workExpectations.bottomSheet.submitButtonAriaLabel": "Hinzufügen",
 	"workExpectations.bottomSheet.cancelButtonLabel": "Abbrechen",
@@ -539,18 +539,18 @@ export const content = {
 	"results.card.salary.monthly.label": "/ Monat",
 	"results.noResults":
 		"Wir haben leider keine Ausbildungsberufe zu deiner Auswahl gefunden.",
-	"results.contactCard.title": "Du weißt nicht, wo du anfangen sollst?",
+	"results.contactCard.title": "Welcher Beruf passt zu dir?",
 	"results.contactCard.description":
-		"PLAN A berät dich zu deinen <strong>Stärken</strong>, <strong>passenden Berufen</strong> und <strong>Bewerbungen</strong>. Gemeinsam finden wir deinen nächsten Schritt!",
+		"Wir von PLAN A sprechen mit dir über deine <strong>Stärken</strong>, <strong>passende Berufe</strong> und <strong>Bewerbungen</strong>. Gemeinsam finden wir eine Ausbildung, die zu dir passt!",
 	"results.contactCard.item.1": "100% kostenlos und persönlich",
-	"results.contactCard.item.2": "Rückmeldung in 48h",
+	"results.contactCard.item.2": "Wir antworten dir innerhalb von 2 Tagen",
 	"results.contactCard.item.3":
 		"Du entscheidest was du brauchst – alle Fragen sind erlaubt",
-	"results.contactCard.consultationCta": "Beratung anfragen",
+	"results.contactCard.consultationCta": "Zur Anmeldung",
 	"results.contactCard.bottomSheet.ariaLabel": "Kontaktformular Beratung",
-	"results.contactCard.bottomSheet.title": "Kostenlose Beratung anfragen",
+	"results.contactCard.bottomSheet.title": "Wir melden uns bei dir.",
 	"results.contactCard.bottomSheet.description":
-		"PLAN A berät dich persönlich zu deinen <strong>Stärken</strong>, <strong>passenden Berufen</strong> und <strong>Bewerbungen</strong>. Schick uns deine Anfrage und wir melden uns bei dir.",
+		"Sag uns, wie wir dich erreichen. In 2 Tagen meldet sich jemand von PLAN A bei dir.",
 	"results.contactCard.bottomSheet.firstname.label": "Vorname",
 	"results.contactCard.bottomSheet.firstname.placeholder": "Angelina",
 	"results.contactCard.bottomSheet.postalcode.label": "Postleitzahl",
@@ -571,9 +571,9 @@ export const content = {
 	"results.contactCard.bottomSheet.email.placeholder":
 		"angelina@beispielmail.com",
 	"results.contactCard.bottomSheet.marketing.label":
-		"Ich stimme zu von PLAN A über Angebote und andere Inhalte benachrichtigt zu werden.",
+		"Ich stimme zu, von PLAN A über Angebote und andere Inhalte benachrichtigt zu werden.",
 	"results.contactCard.bottomSheet.privacy.notice":
-		"Weitere Informationen zu unseren Datenschutzverfahren und dazu, wie wir deine Privatsphäre schützen und respektieren, findest du in unserer <a href='https://www.lehrstellenportal.de/datenschutz' target='_blank' rel='noopener noreferrer'>Datenschutzrichtlinie</a>.",
+		"Weitere Informationen zu unseren Datenschutzverfahren und dazu, wie wir deine Privatsphäre schützen und respektieren, findest du in unserer <a href='https://plan-a.jetzt/datenschutz/' target='_blank' rel='noopener noreferrer'>Datenschutzrichtlinie</a>.",
 	"results.contactCard.bottomSheet.submit": "Kontaktdaten senden",
 	"results.contactCard.bottomSheet.lock.alt": "Schloss",
 	"results.contactCard.bottomSheet.dataProtection":
@@ -595,7 +595,7 @@ export const content = {
 	"results.contactCard.bottomSheet.email.error":
 		"Bitte gib eine gültige E-Mail Adresse ein.",
 	"results.contactCard.bottomSheet.marketing.error":
-		"Bitte stimme zu, von JOBLINGE benachrichtigt zu werden, um fortzufahren.",
+		"Bitte stimme zu, von PLAN A benachrichtigt zu werden, um fortzufahren.",
 	"results.contactCard.bottomSheet.form.error":
 		"Bitte fülle alle erforderlichen Felder aus, um fortzufahren.",
 	"results.contactCard.bottomSheet.submit.loading": "Wird gesendet …",
@@ -637,6 +637,8 @@ export const content = {
 		"Standortzugriff wurde verweigert. Bitte erlaube den Zugriff in den Einstellungen.",
 	"results.filter.location.error.geocodeFailed":
 		"Dein Standort konnte nicht ermittelt werden. Bitte versuche es erneut.",
+	"results.filter.location.error.rateLimited":
+		"Zu viele Standortanfragen. Bitte versuche es in ein paar Minuten erneut.",
 	"results.badge.suffix": "Stellen",
 	"results.badge.empty": "Keine offenen Stellen",
 	"results.previewHeading": "Beispiele in deiner Nähe",
@@ -748,7 +750,7 @@ export const content = {
 	"vacancies.detail.applyCard.cta.ariaLabel": "Zum Stellenangebot",
 	"vacancies.detail.contactCard.title": "Bewerben – wie geht das?",
 	"vacancies.detail.contactCard.description":
-		"Wir von PLAN A beraten dich zu <strong>Lebenslauf, Bewerbung</strong> und <strong>Vorstellungsgespräch</strong>. So wird Ausbildungssuche ganz einfach.",
+		"Wir von PLAN A sprechen mit dir über deinen <strong>Lebenslauf</strong>, <strong>Bewerbungen</strong> und <strong>Vorstellungsgespräche</strong>.",
 	"results.showAllLink": "Alle Stellen auf arbeitsagentur.de ansehen",
 	"results.fetchError": "Die Stellen konnten gerade nicht geladen werden.",
 	"standort.label": "Standort:",
@@ -761,12 +763,9 @@ export const content = {
 	"vacancies.noResultsFound":
 		"Wir haben leider keine freien Stellen zu deiner Auswahl gefunden.",
 
-	"vacancies.bottomCard.title": "Du brauchst Hilfe bei deiner Bewerbung?",
-	"vacancies.bottomCard.description":
-		"Kein Problem, das Joblinge Team ist an deiner Seite. Das kostenlose Beratungsprogramm hilft dir.",
-	"vacancies.bottomCard.consultationLink": "https://joblinge.de",
-	"vacancies.bottomCard.consultationCta": "Zum Beratungsprogramm",
-	"vacancies.bottomCard.consultationCta.ariaLabel": "Zum Beratungsprogramm",
+	"vacancies.contactCard.title": "Bewerben – wie geht das?",
+	"vacancies.contactCard.description":
+		"Wir von PLAN A sprechen mit dir über deinen <strong>Lebenslauf</strong>, <strong>passende Berufe</strong> und <strong>Bewerbungen</strong>. Gemeinsam finden wir eine Ausbildung, die zu dir passt!",
 	// Skip toast
 	"toast.inSchool.description": "Wähle Ja oder Nein, um weiter zu machen.",
 	"toast.schoolDegree.description":

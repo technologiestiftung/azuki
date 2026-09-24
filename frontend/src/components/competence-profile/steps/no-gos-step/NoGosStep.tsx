@@ -137,22 +137,12 @@ export function NoGosStep() {
 	}, []);
 
 	const handleSkip = useCallback(() => {
-		if (isCustomNoGoCard) {
-			goNext();
-			return;
-		}
 		if (cardIndex === customNoGoCardIndex - 1) {
 			leaveLastPredefinedCard();
 			return;
 		}
 		stackRef.current?.swipeUp();
-	}, [
-		isCustomNoGoCard,
-		cardIndex,
-		customNoGoCardIndex,
-		leaveLastPredefinedCard,
-		goNext,
-	]);
+	}, [cardIndex, customNoGoCardIndex, leaveLastPredefinedCard]);
 
 	const handleNext = useCallback(() => {
 		if (isCustomNoGoCard) {
@@ -189,7 +179,7 @@ export function NoGosStep() {
 			onNext={handleNext}
 			onSkip={handleSkip}
 			onBack={handleBack}
-			hasSkipButton={true}
+			hasSkipButton={!isCustomNoGoCard}
 			hasNextButton={isCustomNoGoCard}
 			skipLabel={content["noGos.skipButton.label"]}
 			bottomContent={

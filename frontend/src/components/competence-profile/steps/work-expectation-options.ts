@@ -32,4 +32,8 @@ export const workExpectationOptions: { value: string; label: string }[] = [
 	},
 	{ value: "career", label: content["workExpectations.option.career"] },
 	{ value: "remote", label: content["workExpectations.option.remote"] },
+	{
+		value: "friendly_environment",
+		label: content["workExpectations.option.friendlyEnvironment"],
+	},
 ];

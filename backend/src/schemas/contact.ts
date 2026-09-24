@@ -5,7 +5,10 @@ export const ContactRequestSchema = z.object({
 	postalcode: z.string().regex(/^\d{5}$/),
 	contactType: z.enum(["call", "whatsapp", "mail"]),
 	phonenumber: z.string().trim().min(1).optional(),
-	email: z.string().trim(),
+	email: z
+		.string()
+		.trim()
+		.regex(/^[^\s@]+@[^\s@]+\.[^\s@]+$/, "Invalid email"),
 	birthdate: z
 		.string()
 		.regex(/^\d{4}-\d{2}-\d{2}$/)

@@ -34,7 +34,6 @@ export interface WorkPreference {
 }
 
 export enum Step {
-	Login = 0,
 	Start = 1,
 	InSchool = 2,
 	SchoolDegreeStep = 3,

@@ -5,7 +5,7 @@ import { NO_GO_STEP_CARD_COUNT } from "../components/competence-profile/steps/no
 import { STRENGTH_STEP_CARD_COUNT } from "../components/competence-profile/steps/strengths-step/strengths";
 
 export const ROUTE_PATHS = {
-	login: "/",
+	root: "/",
 	start: "/start",
 	educationInSchool: "/education/inschool",
 	educationDegree: "/education/degree",
@@ -71,7 +71,6 @@ interface FlowNode {
  * Multi-card steps declare `cardCount` — the hash (#0, #1, …) tracks progress within them.
  */
 const ORDERED_NAVIGATION_STEPS: FlowNode[] = [
-	{ path: ROUTE_PATHS.login, step: Step.Login },
 	{ path: ROUTE_PATHS.start, step: Step.Start },
 	{ path: ROUTE_PATHS.educationInSchool, step: Step.InSchool },
 	{ path: ROUTE_PATHS.educationDegree, step: Step.SchoolDegreeStep },
@@ -174,8 +173,11 @@ export function getPreviousPath(pathname: string, hash: string): To {
 	}
 
 	const index = orderedStepIndexByPath.get(pathname);
-	if (index === undefined || index === 0) {
-		return ROUTE_PATHS.login;
+	if (index === undefined) {
+		return ROUTE_PATHS.start;
+	}
+	if (index === 0) {
+		return pathname;
 	}
 
 	const current = ORDERED_NAVIGATION_STEPS[index];
