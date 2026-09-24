@@ -20,6 +20,7 @@ const FORM_ERROR_ID = "contact-form-error";
 
 interface ContactCardFormContentProps {
 	titleRef: RefObject<HTMLHeadingElement>;
+	showWordmark?: boolean;
 	under16: Under16 | null;
 	setUnder16: (v: Under16) => void;
 	contactType: ContactType | null;
@@ -33,6 +34,7 @@ interface ContactCardFormContentProps {
 
 export function ContactCardFormContent({
 	titleRef,
+	showWordmark = false,
 	under16,
 	setUnder16,
 	contactType,
@@ -54,6 +56,13 @@ export function ContactCardFormContent({
 
 	return (
 		<div className="flex flex-col gap-2 px-4 pb-5">
+			{showWordmark && (
+				<img
+					src="/illustrations/azuki-wordmark.svg"
+					alt=""
+					className="mx-auto mb-4 w-[130px] object-contain"
+				/>
+			)}
 			<h2
 				ref={titleRef}
 				className="text-2xl font-semibold leading-[130%] text-sky-900"

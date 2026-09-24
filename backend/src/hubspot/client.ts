@@ -12,7 +12,7 @@ const REQUEST_TIMEOUT_MS = 8000;
 const CONSENT_TO_PROCESS_TEXT =
 	"Weitere Informationen zu unseren Datenschutzverfahren und dazu, wie wir deine Privatsphäre schützen und respektieren, findest du in unserer Datenschutzrichtlinie.";
 const MARKETING_CONSENT_TEXT =
-	"Ich stimme zu, von JOBLINGE über Angebote und andere Inhalte benachrichtigt zu werden.";
+	"Ich stimme zu von PLAN A über Angebote und andere Inhalte benachrichtigt zu werden.";
 
 interface HubSpotField {
 	objectTypeId: string;

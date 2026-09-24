@@ -541,7 +541,7 @@ export const content = {
 		"Wir haben leider keine Ausbildungsberufe zu deiner Auswahl gefunden.",
 	"results.contactCard.title": "Du weißt nicht, wo du anfangen sollst?",
 	"results.contactCard.description":
-		"Wir beraten dich zu deinen <strong>Stärken</strong>, <strong>passenden Berufen</strong> und <strong>Bewerbungen</strong>. Gemeinsam finden wir deinen nächsten Schritt!",
+		"PLAN A berät dich zu deinen <strong>Stärken</strong>, <strong>passenden Berufen</strong> und <strong>Bewerbungen</strong>. Gemeinsam finden wir deinen nächsten Schritt!",
 	"results.contactCard.item.1": "100% kostenlos und persönlich",
 	"results.contactCard.item.2": "Rückmeldung in 48h",
 	"results.contactCard.item.3":
@@ -550,7 +550,7 @@ export const content = {
 	"results.contactCard.bottomSheet.ariaLabel": "Kontaktformular Beratung",
 	"results.contactCard.bottomSheet.title": "Kostenlose Beratung anfragen",
 	"results.contactCard.bottomSheet.description":
-		"Wir beraten dich persönlich zu deinen <strong>Stärken</strong>, <strong>passenden Berufen</strong> und <strong>Bewerbungen</strong>. Schick uns deine Anfrage und wir melden uns bei dir.",
+		"PLAN A berät dich persönlich zu deinen <strong>Stärken</strong>, <strong>passenden Berufen</strong> und <strong>Bewerbungen</strong>. Schick uns deine Anfrage und wir melden uns bei dir.",
 	"results.contactCard.bottomSheet.firstname.label": "Vorname",
 	"results.contactCard.bottomSheet.firstname.placeholder": "Angelina",
 	"results.contactCard.bottomSheet.postalcode.label": "Postleitzahl",
@@ -571,10 +571,10 @@ export const content = {
 	"results.contactCard.bottomSheet.email.placeholder":
 		"angelina@beispielmail.com",
 	"results.contactCard.bottomSheet.marketing.label":
-		"Ich stimme zu, von JOBLINGE über Angebote und andere Inhalte benachrichtigt zu werden.",
+		"Ich stimme zu von PLAN A über Angebote und andere Inhalte benachrichtigt zu werden.",
 	"results.contactCard.bottomSheet.privacy.notice":
 		"Weitere Informationen zu unseren Datenschutzverfahren und dazu, wie wir deine Privatsphäre schützen und respektieren, findest du in unserer <a href='https://www.lehrstellenportal.de/datenschutz' target='_blank' rel='noopener noreferrer'>Datenschutzrichtlinie</a>.",
-	"results.contactCard.bottomSheet.submit": "Kostenlose Beratung anfragen",
+	"results.contactCard.bottomSheet.submit": "Kontaktdaten senden",
 	"results.contactCard.bottomSheet.lock.alt": "Schloss",
 	"results.contactCard.bottomSheet.dataProtection":
 		"Deine Daten werden nicht an Dritte weitergegeben.",
@@ -607,7 +607,6 @@ export const content = {
 	"results.contactCard.bottomSheet.success.button": "E-Mail Postfach öffnen",
 	"results.contactCard.bottomSheet.success.illustrationAlt":
 		"Briefumschlag mit Sternen",
-	"contactPage.close.ariaLabel": "Formular schließen",
 	"contactPage.success.continue": "AzuKi entdecken",
 	"results.resetDialog.title":
 		"Willst du wirklich alle Fragen nochmal beantworten?",

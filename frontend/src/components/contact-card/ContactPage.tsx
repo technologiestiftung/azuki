@@ -31,18 +31,14 @@ export function ContactPage() {
 			className="flex h-full flex-col bg-white"
 			aria-label={content["results.contactCard.bottomSheet.ariaLabel"]}
 		>
-			<ContactCardHeader
-				submitted={form.submitted}
-				collapsed={titleRevealProgress > 0.5}
-				titleRevealProgress={titleRevealProgress}
-				onDismiss={goToApp}
-				dismissIconSrc="/icons/close-black.svg"
-				dismissAriaLabel={
-					form.submitted
-						? content["common.bottomSheet.overlayDismissLabel"]
-						: content["contactPage.close.ariaLabel"]
-				}
-			/>
+			{!form.submitted && (
+				<ContactCardHeader
+					submitted={false}
+					collapsed={titleRevealProgress > 0.5}
+					titleRevealProgress={titleRevealProgress}
+					titleAlign="left"
+				/>
+			)}
 			<div
 				className="relative flex-1 overflow-y-auto overflow-x-hidden pb-[env(safe-area-inset-bottom,0px)]"
 				onScroll={handleScroll}
@@ -51,10 +47,12 @@ export function ContactPage() {
 					<ContactCardSuccessView
 						email={form.submittedEmail}
 						onContinue={goToApp}
+						fillHeight
 					/>
 				) : (
 					<ContactCardFormContent
 						titleRef={titleRef}
+						showWordmark
 						under16={form.under16}
 						setUnder16={form.setUnder16}
 						contactType={form.contactType}
