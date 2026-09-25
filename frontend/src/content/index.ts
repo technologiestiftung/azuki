@@ -610,6 +610,7 @@ export const content = {
 	"contactPage.title": "Kostenlose Beratung anfragen",
 	"contactPage.description":
 		"PLAN A berät dich zu deinen <strong>Stärken</strong>, <strong>passenden Berufen</strong> und <strong>Bewerbungen</strong>. Schick uns deine Anfrage und wir melden uns bei dir.",
+	"contactPage.back": "Zu AzuKi",
 	"contactPage.success.continue": "AzuKi entdecken",
 	"results.resetDialog.title":
 		"Willst du wirklich alle Fragen nochmal beantworten?",
