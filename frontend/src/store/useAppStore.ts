@@ -19,9 +19,14 @@ export interface Location {
 	postcode: string;
 	distance: number;
 	locality?: string | null;
+	isUserSelected?: boolean;
 }
 
-export const DEFAULT_LOCATION: Location = { postcode: "10115", distance: 25 };
+export const DEFAULT_LOCATION: Location = {
+	postcode: "10115",
+	distance: 25,
+	isUserSelected: false,
+};
 
 /** Normalizes the profile by merging the initial profile with the provided profile. */
 function normalizeProfile(

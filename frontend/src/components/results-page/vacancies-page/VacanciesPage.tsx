@@ -106,6 +106,7 @@ export function VacanciesPage() {
 		postcode: location.postcode,
 		distance: location.distance,
 		locality: location.locality ?? null,
+		isUserSelected: location.isUserSelected,
 	});
 	const [showFavoritesOnly, setShowFavoritesOnly] = useState(false);
 	const loading =
@@ -157,6 +158,7 @@ export function VacanciesPage() {
 				postcode: filters.postcode,
 				distance: filters.distance,
 				locality: filters.locality ?? null,
+				isUserSelected: filters.isUserSelected ?? false,
 			});
 		},
 		[locationFilter.apply, setLocation],
@@ -168,6 +170,7 @@ export function VacanciesPage() {
 			postcode: DEFAULT_LOCATION_FILTER.postcode,
 			distance: DEFAULT_LOCATION_FILTER.distance,
 			locality: null,
+			isUserSelected: false,
 		});
 	}, [locationFilter.reset, setLocation]);
 
@@ -189,11 +192,13 @@ export function VacanciesPage() {
 			postcode: location.postcode,
 			distance: location.distance,
 			locality: location.locality ?? null,
+			isUserSelected: location.isUserSelected,
 		});
 	}, [
 		location.postcode,
 		location.distance,
 		location.locality,
+		location.isUserSelected,
 		locationFilter.apply,
 	]);
 
