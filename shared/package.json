@@ -13,10 +13,10 @@
   "license": "MIT",
   "description": "",
   "devDependencies": {
-    "@technologiestiftung/eslint-config": "0.3.1",
-    "eslint": "9.11.1",
-    "globals": "15.10.0",
-    "prettier": "3.3.3",
+    "@technologiestiftung/eslint-config": "0.4.1",
+    "eslint": "9.39.5",
+    "globals": "15.15.0",
+    "prettier": "3.9.6",
     "vitest": "2.1.9"
   }
 }

@@ -23,12 +23,12 @@
 		"zod": "4.3.6"
 	},
 	"devDependencies": {
-		"@technologiestiftung/eslint-config": "0.3.1",
-		"@types/node": "22.19.11",
-		"eslint": "9.11.1",
-		"globals": "15.10.0",
-		"prettier": "3.3.3",
-		"tsx": "4.21.0",
+		"@technologiestiftung/eslint-config": "0.4.1",
+		"@types/node": "22.20.2",
+		"eslint": "9.39.5",
+		"globals": "15.15.0",
+		"prettier": "3.9.6",
+		"tsx": "4.23.13",
 		"typescript": "5.9.3",
 		"vitest": "2.1.9"
 	}
