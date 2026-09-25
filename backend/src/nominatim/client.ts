@@ -5,13 +5,31 @@ const COORDINATE_PRECISION = 3;
 const CACHE_TTL_MS = 60 * 60 * 1000;
 export const CACHE_MAX_ENTRIES = 10_000;
 
-// Rough bounding box for Germany
+// Coarse bounding box for Germany. Only a cheap guard against pointless
+// upstream calls — whether a location is actually inside the served region is
+// decided by the federal state below.
 const GERMANY_BOUNDS = {
 	minLat: 47.2,
 	maxLat: 55.1,
 	minLon: 5.8,
 	maxLon: 15.1,
 };
+
+const SERVICE_AREA_STATES = new Set(["Berlin", "Brandenburg"]);
+
+// Postcode ranges covering Berlin and Brandenburg, used only when Nominatim
+// omits the state. Deliberately generous: a few ranges spill into neighbouring
+// states, which is the harmless direction — wrongly telling someone in
+// Brandenburg that they are outside the region is not.
+const SERVICE_AREA_POSTCODE_RANGES: ReadonlyArray<readonly [number, number]> = [
+	[1900, 1999], // Oberlausitz border
+	[3000, 3299], // Cottbus, Spree-Neiße
+	[4890, 4949], // Elbe-Elster border
+	[10000, 14199], // Berlin
+	[14400, 16999], // Brandenburg (Potsdam, Havelland, Uckermark, …)
+	[17250, 17399], // Templin, Uckermark border
+	[19300, 19399], // Prignitz
+];
 
 interface CacheEntry {
 	value: ResolvedLocation | null;
@@ -26,10 +44,15 @@ function cacheKey(lat: number, lon: number): string {
 
 interface NominatimAddress {
 	postcode?: string;
+	city?: string;
+	town?: string;
+	village?: string;
+	municipality?: string;
 	suburb?: string;
 	neighbourhood?: string;
 	quarter?: string;
 	city_district?: string;
+	state?: string;
 }
 
 interface NominatimReverseResponse {
@@ -39,10 +62,17 @@ interface NominatimReverseResponse {
 export interface ResolvedLocation {
 	postcode: string;
 	locality: string | null;
+	/** False for places outside Berlin and Brandenburg, which the app does not serve. */
+	withinServiceArea: boolean;
 }
 
 function extractLocality(address: NominatimAddress): string | null {
+	// Prefer the city/town over the district, so the sheet shows "12347 Berlin"
 	const candidate =
+		address.city ??
+		address.town ??
+		address.village ??
+		address.municipality ??
 		address.suburb ??
 		address.neighbourhood ??
 		address.quarter ??
@@ -65,6 +95,21 @@ export function isWithinGermany(latitude: number, longitude: number): boolean {
 	);
 }
 
+export function isServiceAreaState(state: string | undefined): boolean {
+	return SERVICE_AREA_STATES.has(state?.trim() ?? "");
+}
+
+export function isServiceAreaPostcode(postcode: string): boolean {
+	const value = Number.parseInt(postcode, 10);
+	if (Number.isNaN(value)) {
+		return false;
+	}
+
+	return SERVICE_AREA_POSTCODE_RANGES.some(
+		([min, max]) => value >= min && value <= max,
+	);
+}
+
 export function parseNominatimReverseResponse(
 	data: NominatimReverseResponse,
 ): ResolvedLocation | null {
@@ -76,6 +121,11 @@ export function parseNominatimReverseResponse(
 	return {
 		postcode,
 		locality: extractLocality(data.address ?? {}),
+		// Nominatim does not always return a state; fall back to the postcode
+		// so a real Berlin location is never reported as out of area.
+		withinServiceArea: data.address?.state
+			? isServiceAreaState(data.address.state)
+			: isServiceAreaPostcode(postcode),
 	};
 }
 

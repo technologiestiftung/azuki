@@ -44,6 +44,7 @@ export function useSharedMatchResults() {
 					? distance
 					: DEFAULT_LOCATION.distance,
 				locality: null,
+				isUserSelected: true,
 			});
 		}
 

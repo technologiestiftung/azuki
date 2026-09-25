@@ -1,11 +1,18 @@
 import { useCallback, useEffect, useState } from "react";
 import { content } from "../../content";
 import { DEFAULT_LOCATION } from "../../store/useAppStore";
-import { resolveLocationFromCoordinates } from "../../api/resolvePlzFromCoordinates";
+import {
+	OutsideServiceAreaError,
+	resolveLocationFromCoordinates,
+} from "../../api/resolvePlzFromCoordinates";
 import { FilterBottomSheetShell } from "./FilterBottomSheetShell";
 import { PrimaryThemedButton } from "../primitives/buttons/PrimaryThemedButton";
 import { Pill } from "../primitives/buttons/Pill";
-import { getSelectedLocationDisplay } from "./plzLocality";
+import {
+	formatPlzWithLocality,
+	getSelectedLocationDisplay,
+	hasSpecificLocation,
+} from "./plzLocality";
 
 export const RADIUS_OPTIONS = [2, 5, 10, 20, 25, 30, 50, 100] as const;
 
@@ -13,11 +20,13 @@ export interface LocationFilterState {
 	postcode: string;
 	distance: number;
 	locality?: string | null;
+	isUserSelected?: boolean;
 }
 
 export const DEFAULT_LOCATION_FILTER: LocationFilterState = {
 	postcode: DEFAULT_LOCATION.postcode,
 	distance: DEFAULT_LOCATION.distance,
+	isUserSelected: false,
 };
 
 export interface LocationFilterBottomSheetProps {
@@ -44,11 +53,20 @@ export function LocationFilterBottomSheet({
 	const [draftLocality, setDraftLocality] = useState<string | null>(
 		initialFilters?.locality ?? null,
 	);
-	const [regionSelected, setRegionSelected] = useState(
-		Boolean(initialFilters?.locality),
+	const [regionSelected, setRegionSelected] = useState(() =>
+		hasSpecificLocation({
+			postcode: initialFilters?.postcode ?? DEFAULT_LOCATION_FILTER.postcode,
+			locality: initialFilters?.locality,
+			isUserSelected: initialFilters?.isUserSelected,
+		}),
 	);
 	const [locating, setLocating] = useState(false);
 	const [locationError, setLocationError] = useState<string | null>(null);
+	// The resolved place when it lies outside Berlin and Brandenburg. Shown in
+	// red next to the error, so it is clear which place was rejected.
+	const [outOfAreaLocation, setOutOfAreaLocation] = useState<string | null>(
+		null,
+	);
 
 	useEffect(() => {
 		setDraftPlz(initialFilters?.postcode ?? DEFAULT_LOCATION_FILTER.postcode);
@@ -56,12 +74,26 @@ export function LocationFilterBottomSheet({
 			initialFilters?.distance ?? DEFAULT_LOCATION_FILTER.distance,
 		);
 		setDraftLocality(initialFilters?.locality ?? null);
-		setRegionSelected(Boolean(initialFilters?.locality));
+		setRegionSelected(
+			hasSpecificLocation({
+				postcode: initialFilters?.postcode ?? DEFAULT_LOCATION_FILTER.postcode,
+				locality: initialFilters?.locality,
+				isUserSelected: initialFilters?.isUserSelected,
+			}),
+		);
 	}, [
 		initialFilters?.postcode,
 		initialFilters?.distance,
 		initialFilters?.locality,
+		initialFilters?.isUserSelected,
 	]);
+
+	useEffect(() => {
+		if (!open) {
+			setOutOfAreaLocation(null);
+			setLocationError(null);
+		}
+	}, [open]);
 
 	const handleReset = () => {
 		setDraftPlz(DEFAULT_LOCATION_FILTER.postcode);
@@ -70,6 +102,7 @@ export function LocationFilterBottomSheet({
 		setRegionSelected(false);
 		setLocating(false);
 		setLocationError(null);
+		setOutOfAreaLocation(null);
 		onReset?.();
 	};
 
@@ -83,6 +116,7 @@ export function LocationFilterBottomSheet({
 		}
 
 		setLocationError(null);
+		setOutOfAreaLocation(null);
 		setLocating(true);
 		navigator.geolocation.getCurrentPosition(
 			async (position) => {
@@ -101,6 +135,15 @@ export function LocationFilterBottomSheet({
 						);
 					}
 				} catch (err) {
+					if (err instanceof OutsideServiceAreaError) {
+						setOutOfAreaLocation(
+							formatPlzWithLocality(err.location.plz, err.location.locality),
+						);
+						setLocationError(
+							content["results.filter.location.error.outsideServiceArea"],
+						);
+						return;
+					}
 					const message = err instanceof Error ? err.message : "";
 					setLocationError(
 						message.includes("429")
@@ -126,7 +169,14 @@ export function LocationFilterBottomSheet({
 			? draftPlz
 			: DEFAULT_LOCATION_FILTER.postcode;
 
-		onApply?.({ postcode, distance: draftDistance, locality: draftLocality });
+		setOutOfAreaLocation(null);
+		setLocationError(null);
+		onApply?.({
+			postcode,
+			distance: draftDistance,
+			locality: regionSelected ? draftLocality : null,
+			isUserSelected: regionSelected,
+		});
 		onClose();
 	};
 
@@ -148,8 +198,12 @@ export function LocationFilterBottomSheet({
 			onApply={handleApply}
 		>
 			<div className="flex flex-col min-w-0 gap-2 px-4 pt-4 pb-8">
-				<div className="flex flex-col justify-center items-center gap-2 min-h-[52px] p-3 w-full rounded-xl text-lg text-sky-shade-160">
-					{selectedLocationDisplay}
+				<div
+					className={`flex flex-col justify-center items-center gap-2 min-h-[52px] p-3 w-full rounded-xl text-lg ${
+						outOfAreaLocation ? "text-red-500" : "text-sky-shade-160"
+					}`}
+				>
+					{outOfAreaLocation ?? selectedLocationDisplay}
 				</div>
 				<PrimaryThemedButton
 					ariaLabel={

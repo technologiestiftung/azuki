@@ -531,6 +531,7 @@ export async function fetchVacancies(
 export interface ReverseGeocodeResult {
 	postcode: string;
 	locality: string | null;
+	withinServiceArea: boolean;
 }
 
 export async function reverseGeocode(
