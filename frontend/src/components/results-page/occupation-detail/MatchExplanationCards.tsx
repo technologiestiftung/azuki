@@ -26,7 +26,7 @@ export function MatchExplanationCards({
 }: MatchExplanationCardsProps) {
 	if (loading) {
 		return loadingMessage ? (
-			<p className="text-center text-base text-sky-shade-110 px-[21px]">
+			<p className="text-center text-base text-sky-shade-150 px-[21px]">
 				{loadingMessage}
 			</p>
 		) : null;
@@ -34,7 +34,7 @@ export function MatchExplanationCards({
 
 	if (unavailable && explanations.length === 0) {
 		return unavailableMessage ? (
-			<p className="text-center text-base text-sky-shade-110 px-[21px]">
+			<p className="text-center text-base text-sky-shade-150 px-[21px]">
 				{unavailableMessage}
 			</p>
 		) : null;
@@ -42,7 +42,7 @@ export function MatchExplanationCards({
 
 	if (explanations.length === 0) {
 		return emptyMessage ? (
-			<p className="text-center text-base text-sky-shade-110 px-[21px]">
+			<p className="text-center text-base text-sky-shade-150 px-[21px]">
 				{emptyMessage}
 			</p>
 		) : null;
