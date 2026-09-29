@@ -14,13 +14,15 @@ import type {
 	FormErrors,
 	Under16,
 } from "./contactCardFormValidation";
+import { Fragment } from "react";
 import type { FormEvent, RefObject } from "react";
 
 const FORM_ERROR_ID = "contact-form-error";
 
 interface ContactCardFormIntroProps {
-	titleRef: RefObject<HTMLHeadingElement>;
+	titleRef?: RefObject<HTMLHeadingElement>;
 	showWordmark: boolean;
+	boxed?: boolean;
 	title?: string;
 	description?: string;
 	items?: readonly string[];
@@ -29,12 +31,18 @@ interface ContactCardFormIntroProps {
 function ContactCardFormIntro({
 	titleRef,
 	showWordmark,
+	boxed = false,
 	title = content["results.contactCard.bottomSheet.title"],
 	description = content["results.contactCard.bottomSheet.description"],
 	items,
 }: ContactCardFormIntroProps) {
+	const Wrapper = boxed ? "div" : Fragment;
+	const wrapperProps = boxed
+		? { className: "flex flex-col gap-2 rounded-2xl bg-sky-50 p-4" }
+		: {};
+
 	return (
-		<>
+		<Wrapper {...wrapperProps}>
 			{showWordmark && (
 				<img
 					src="/illustrations/azuki-wordmark.svg"
@@ -68,13 +76,15 @@ function ContactCardFormIntro({
 					))}
 				</ul>
 			)}
-		</>
+		</Wrapper>
 	);
 }
 
 interface ContactCardFormContentProps {
-	titleRef: RefObject<HTMLHeadingElement>;
+	titleRef?: RefObject<HTMLHeadingElement>;
 	showWordmark?: boolean;
+	/** The standalone page groups wordmark, title and pitch inside a blue card. */
+	boxedIntro?: boolean;
 	/** The standalone page carries the pitch the in-app contact card would show above the sheet. */
 	title?: string;
 	description?: string;
@@ -93,6 +103,7 @@ interface ContactCardFormContentProps {
 export function ContactCardFormContent({
 	titleRef,
 	showWordmark = false,
+	boxedIntro = false,
 	title,
 	description,
 	items,
@@ -120,6 +131,7 @@ export function ContactCardFormContent({
 			<ContactCardFormIntro
 				titleRef={titleRef}
 				showWordmark={showWordmark}
+				boxed={boxedIntro}
 				title={title}
 				description={description}
 				items={items}
