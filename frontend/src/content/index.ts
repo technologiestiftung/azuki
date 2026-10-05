@@ -676,6 +676,16 @@ export const content = {
 	"results.share": "Teilen",
 	"results.download": "Download",
 	"results.detail.tasksTitle": "Typische Aufgaben",
+	"results.detail.source.heroImage": "Foto: BERUFENET",
+	"results.detail.source.tasks":
+		"Quelle: BERUFENET, KI-generierte Zusammenfassung",
+	"results.detail.source.images": "Foto und Beschreibung: BERUFENET",
+	"results.detail.sourceFooter.title": "Alle gekennzeichneten Infos und Fotos:",
+	"results.detail.sourceFooter.provider":
+		"BERUFENET der Bundesagentur für Arbeit",
+	"results.detail.sourceFooter.website": "www.berufenet.arbeitsagentur.de",
+	"results.detail.sourceFooter.date": "Stand 09/26",
+	"results.detail.sourceFooter.link": "Mehr über diesen Beruf erfahren",
 	"results.detail.tasks.matchTitle": "So gut passt der Beruf zu dir",
 	"results.detail.tasks.matchInfo.title": "Wie wird das berechnet?",
 	"results.detail.tasks.matchInfo.ariaLabel":

@@ -42,6 +42,15 @@ export function OccupationDetailHero({
 				}}
 			/>
 			<div
+				className="absolute inset-0 bg-gradient-to-b from-transparent from-[76%] to-gray-900 to-[99%] pointer-events-none"
+				aria-hidden
+			/>
+			{heroImage && (
+				<p className="absolute right-4 bottom-6 text-xs leading-5 text-white">
+					{content["results.detail.source.heroImage"]}
+				</p>
+			)}
+			<div
 				className="absolute inset-0 bg-white pointer-events-none transition-opacity duration-150"
 				style={{ opacity: overlayOpacity }}
 				aria-hidden
