@@ -68,6 +68,7 @@ export const content = {
 	"common.bottomSheet.overlayDismissLabel": "Schließen",
 	"common.bottomSheet.ariaLabel": "Dialog",
 	"common.bottomSheet.backButtonAriaLabel": "Zurück gehen",
+	"common.infoSheet.sourceTitle": "Quelle:",
 
 	// Start
 	"start.step1.title": "Finde eine Ausbildung, die zu dir passt",
@@ -670,6 +671,9 @@ export const content = {
 	"results.detail.schoolDegreeInfo.title": "Empfohlener Schulabschluss",
 	"results.detail.schoolDegreeInfo.description":
 		"Mit diesem Abschluss hast du gute Chancen auf einen Ausbildungsplatz. Hast du einen anderen Abschluss, kannst du es trotzdem schaffen – vielleicht musst du dann mehr Bewerbungen schreiben und es dauert länger bis du einen Platz findest.",
+	"results.detail.schoolDegreeInfo.sourceLabel": "DAZUBI",
+	"results.detail.schoolDegreeInfo.sourceHref":
+		"https://www.bibb.de/de/12129.php",
 	"results.detail.notFound": "Dieser Beruf wurde nicht gefunden.",
 	"results.detail.loadError":
 		"Die Infos für diesen Beruf konnten gerade nicht geladen werden. Prüfe deine Internetverbindung und versuche es noch einmal.",
@@ -737,6 +741,7 @@ export const content = {
 		"Fachgebundene Hochschulreife",
 	"vacancies.detail.schoolDegreeInfo.description":
 		"Du hast gute Chancen mit diesem Abschluss. Hast du einen anderen Abschluss? Bewirb dich trotzdem. Betriebe schreiben oft nur ihren Wunsch auf, manchmal reichen auch andere Abschlüsse.",
+	"vacancies.detail.schoolDegreeInfo.sourceLabel": "Bundesagentur für Arbeit",
 	"vacancies.detail.locationTitle": "Arbeitsort",
 	"vacancies.detail.location.showMore": "+{count} weitere Arbeitsorte",
 	"vacancies.detail.location.showMore.one": "1 weiterer Arbeitsort",

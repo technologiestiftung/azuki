@@ -39,6 +39,10 @@ export function OccupationDetailMetaInfo({
 			return {
 				title: content["results.detail.schoolDegreeInfo.title"],
 				description: content["results.detail.schoolDegreeInfo.description"],
+				source: {
+					label: content["results.detail.schoolDegreeInfo.sourceLabel"],
+					href: content["results.detail.schoolDegreeInfo.sourceHref"],
+				},
 			};
 		}
 		return null;
@@ -102,6 +106,7 @@ export function OccupationDetailMetaInfo({
 				onClose={() => setActiveInfoSheet(null)}
 				title={infoSheetContent?.title ?? ""}
 				description={infoSheetContent?.description ?? ""}
+				source={infoSheetContent?.source}
 			/>
 		</>
 	);

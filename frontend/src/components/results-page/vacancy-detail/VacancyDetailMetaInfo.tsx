@@ -3,6 +3,7 @@ import type { VacancyDetail } from "@azuki/shared";
 import { content } from "../../../content";
 import { formatVacancyEducationLevel } from "../utils/formatVacancyEducationLevel";
 import { formatVacancyStartDate } from "../utils/formatVacancyStartDate";
+import { buildJobsucheApplyUrl } from "../utils/buildJobsucheApplyUrl";
 import { InfoBottomSheet } from "../occupation-detail/InfoBottomSheet";
 import { VacancyAddressList } from "./VacancyAddressList";
 
@@ -74,6 +75,10 @@ export function VacancyDetailMetaInfo({ detail }: VacancyDetailMetaInfoProps) {
 				onClose={() => setSchoolDegreeInfoOpen(false)}
 				title={content["results.detail.schoolDegreeInfo.title"]}
 				description={content["vacancies.detail.schoolDegreeInfo.description"]}
+				source={{
+					label: content["vacancies.detail.schoolDegreeInfo.sourceLabel"],
+					href: buildJobsucheApplyUrl(detail.referenznummer),
+				}}
 			/>
 		</>
 	);
