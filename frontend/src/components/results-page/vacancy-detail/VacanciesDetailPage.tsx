@@ -12,6 +12,7 @@ import { EmptyState } from "../EmptyState";
 import { VacancyDetailHero } from "./VacancyDetailHero";
 import { VacancyDetailHeaderCollapsed } from "./VacancyDetailHeaderCollapsed";
 import { VacancyDetailBody } from "./VacancyDetailBody";
+import { VacancyDetailSourceFooter } from "./VacancyDetailSourceFooter";
 import {
 	useOccupationDetailScroll,
 	COLLAPSE_END,
@@ -124,11 +125,18 @@ export function VacanciesDetailPage() {
 					displayName={displayName}
 					employer={detail?.employer ?? preview?.employer}
 				/>
-				<div className="relative flex mt-8 flex-col gap-8 bg-sky-white rounded-t-[20px] pb-8 z-10">
+				<div
+					className={`relative flex mt-8 flex-col gap-8 bg-sky-white rounded-t-[20px] z-10 ${detail && !error ? "" : "pb-8"}`}
+				>
 					{error ? (
 						<EmptyState message={error} />
 					) : (
-						detail && <VacancyDetailBody detail={detail} />
+						detail && (
+							<>
+								<VacancyDetailBody detail={detail} />
+								<VacancyDetailSourceFooter />
+							</>
+						)
 					)}
 				</div>
 			</div>

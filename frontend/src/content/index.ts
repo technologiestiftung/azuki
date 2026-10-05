@@ -758,8 +758,12 @@ export const content = {
 		"Schau dir das vollständige Stellenangebot an",
 	"vacancies.detail.applyCard.description":
 		"Dort findest du auch alle Infos zur Bewerbung.",
-	"vacancies.detail.applyCard.cta": "Zum Stellenangebot",
-	"vacancies.detail.applyCard.cta.ariaLabel": "Zum Stellenangebot",
+	"vacancies.detail.applyCard.cta": "Zum Stellenangebot (BERUFENET)",
+	"vacancies.detail.applyCard.cta.ariaLabel": "Zum Stellenangebot (BERUFENET)",
+	"vacancies.detail.sourceFooter.title": "Quelle",
+	"vacancies.detail.sourceFooter.provider":
+		"Jobsuche der Bundesagentur für Arbeit",
+	"vacancies.detail.sourceFooter.date": "Stand {date}",
 	"vacancies.detail.contactCard.title": "Bewerben – wie geht das?",
 	"vacancies.detail.contactCard.description":
 		"Wir von PLAN A sprechen mit dir über deinen <strong>Lebenslauf</strong>, <strong>Bewerbungen</strong> und <strong>Vorstellungsgespräche</strong>.",
