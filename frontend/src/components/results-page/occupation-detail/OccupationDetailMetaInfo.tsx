@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { content } from "../../../content";
 import { formatOccupationSchoolDegree } from "../utils/formatOccupationSchoolDegree";
+import { buildBerufenetUrl } from "../utils/buildBerufenetUrl";
 import { InfoBottomSheet } from "./InfoBottomSheet";
 import { resolveDetailSalaryLabel } from "./occupationDetailPageHelpers";
 import type { Occupation } from "@azuki/shared";
@@ -33,6 +34,12 @@ export function OccupationDetailMetaInfo({
 			return {
 				title: content["results.detail.salaryInfo.title"],
 				description: content["results.detail.salaryInfo.description"],
+				source: occupation
+					? {
+							label: content["results.detail.salaryInfo.sourceLabel"],
+							href: buildBerufenetUrl(occupation.id),
+						}
+					: undefined,
 			};
 		}
 		if (activeInfoSheet === "schoolDegree") {

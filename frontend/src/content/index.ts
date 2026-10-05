@@ -651,7 +651,8 @@ export const content = {
 	"results.detail.salary.unknown": "Unbekannt",
 	"results.detail.salaryInfo.title": "Einstiegsgehalt",
 	"results.detail.salaryInfo.description":
-		"Das Einstiegsgehalt ist das Geld, das du verdienst, wenn du nach der Ausbildung deinen ersten Job anfängst.",
+		"Das Einstiegsgehalt ist das Geld, das du verdienst, wenn du nach der Ausbildung deinen ersten Job anfängst. Es ist ein Bruttowert, je nach Betrieb und Region kann dein Gehalt anders sein.",
+	"results.detail.salaryInfo.sourceLabel": "BERUFENET",
 	"results.detail.durationTitle": "Dauer",
 	"results.detail.durationSuffix": "Jahre",
 	"results.detail.schoolDegreeTitle": "Empfohlener Schulabschluss",
