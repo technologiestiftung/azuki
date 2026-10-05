@@ -7,6 +7,7 @@
 		"dev": "npm run dev:backend & npm run dev:frontend",
 		"dev:backend": "cd backend && npm run dev",
 		"dev:frontend": "cd frontend && npm run dev",
+		"postinstall": "npm run data:build-dazubi",
 		"build": "npm run build --workspace=backend && npm run build --workspace=frontend",
 		"lint": "npm run lint --workspaces --if-present",
 		"prettier": "npm run prettier --workspaces --if-present",
@@ -18,8 +19,8 @@
 		"data:fetch-berufe": "npx tsx scripts/fetch-berufe.ts",
 		"data:generate-short-descriptions": "npx tsx --env-file-if-exists=.env scripts/generate-short-descriptions.ts",
 		"data:generate-task-bullets": "npx tsx --env-file-if-exists=.env scripts/generate-task-bullets.ts",
-		"data:build-trainee-fixtures": "npx tsx scripts/build-trainee-fixtures.ts",
-		"data:build-availability": "npx tsx scripts/build-availability.ts",
+		"data:build-destatis-fixture": "npx tsx scripts/build-destatis-fixture.ts",
+		"data:build-dazubi": "npx tsx scripts/build-dazubi-data.ts",
 		"eval:audit-personas": "npx tsx scripts/audit-personas.ts",
 		"eval:rescore": "npx tsx scripts/rescore-snapshot.ts"
 	},

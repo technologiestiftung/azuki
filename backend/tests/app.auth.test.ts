@@ -119,4 +119,24 @@ describe("admin routes still require x-app-password", () => {
 		const res = await app.request("/api/personas");
 		expect(res.status).toBe(401);
 	});
+
+	it("GET /api/eval/popularity-index without x-app-password → 401", async () => {
+		const app = await loadApp("secret");
+		const res = await app.request("/api/eval/popularity-index");
+		expect(res.status).toBe(401);
+	});
+
+	it("GET /api/eval/popularity-index with x-app-password → records", async () => {
+		const app = await loadApp("secret");
+		const res = await app.request("/api/eval/popularity-index", {
+			headers: { "x-app-password": "secret" },
+		});
+		expect(res.status).toBe(200);
+		const body = (await res.json()) as Array<{
+			id: number;
+			popularityTier: string;
+		}>;
+		expect(body.length).toBeGreaterThan(500);
+		expect(body.find((r) => r.id === 6628)?.popularityTier).toBe("A_anchor");
+	});
 });

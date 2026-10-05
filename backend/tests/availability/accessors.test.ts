@@ -1,10 +1,10 @@
 import { describe, expect, test } from "vitest";
+import { BUNDESLAENDER } from "@azuki/shared";
 import {
 	hasAvailabilityData,
 	traineeCountInState,
 	traineeCountAcrossStates,
-	BUNDESLAENDER,
-} from "@azuki/shared";
+} from "@azuki/shared/server-data";
 import availability from "../../../shared/data/availability-by-state.json";
 
 describe("availability accessors — missing data", () => {

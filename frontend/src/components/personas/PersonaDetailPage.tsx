@@ -1,7 +1,6 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import {
-	POPULARITY_INDEX,
 	formatPracticalExperiencesForApi,
 	type EducationLevel,
 	type Persona,
@@ -10,6 +9,7 @@ import { deletePersona, getPersona, updatePersona } from "../../api/client";
 import { useEvalStore } from "../../store/useEvalStore";
 import { EvalAuthGate } from "../eval/EvalAuthGate";
 import { EvalNav } from "../eval/EvalNav";
+import { usePopularityIndex } from "../eval/usePopularityIndex";
 import { OccupationPicker } from "./OccupationPicker";
 import { ScoringExplainer } from "./ScoringExplainer";
 import { InterestsEditor } from "./profile-editors/InterestsEditor";
@@ -414,7 +414,11 @@ function TierEditorSection({
 	draft: Persona;
 	patch: (p: Partial<Persona>) => void;
 }) {
-	const nameById = new Map(POPULARITY_INDEX.map((r) => [r.id, r.name]));
+	const popularityIndex = usePopularityIndex();
+	const nameById = useMemo(
+		() => new Map((popularityIndex ?? []).map((r) => [r.id, r.name])),
+		[popularityIndex],
+	);
 	const allTierIds = new Set([...draft.tierS, ...draft.tierA, ...draft.tierC]);
 
 	function addTo(tier: "S" | "A" | "C", id: number) {

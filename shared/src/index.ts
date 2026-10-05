@@ -36,14 +36,11 @@ export type {
 	EvalSnapshot,
 } from "./eval-types";
 
-export {
-	POPULARITY_INDEX,
-	getPopularityTier,
-	getPopularityRecord,
-	type PopularityTier,
-	type OccupationCategory,
-	type DazubiMatchType,
-	type PopularityRecord,
+export type {
+	PopularityTier,
+	OccupationCategory,
+	DazubiMatchType,
+	PopularityRecord,
 } from "./popularity";
 
 export { WILDCARD_POOL_OCCUPATION_IDS, isInWildcardPool } from "./wildcardPool";
@@ -175,14 +172,7 @@ export {
 	type MatchSignalKind,
 } from "./matching/signals";
 
-export {
-	type Bundesland,
-	BUNDESLAENDER,
-	isBundesland,
-	traineeCountInState,
-	traineeCountAcrossStates,
-	hasAvailabilityData,
-} from "./availability";
+export { type Bundesland, BUNDESLAENDER, isBundesland } from "./availability";
 
 export { normName } from "./normName";
 

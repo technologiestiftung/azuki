@@ -1,6 +1,9 @@
 import { execSync } from "node:child_process";
 import { cpSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 
+// 0. Generate DAZUBI-derived data; it is bundled into the function, never into static files
+execSync("npm run data:build-dazubi", { stdio: "inherit" });
+
 // 1. Build frontend
 execSync("npm run build --workspace=frontend", { stdio: "inherit" });
 

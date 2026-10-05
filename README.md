@@ -77,6 +77,8 @@ cd azuki
 npm run install:all
 ```
 
+`npm install` generates `shared/data/popularity-index.json` and `availability-by-state.json` from the BIBB xlsx (needs devDependencies).
+
 ## Environment variables
 
 The backend reads its configuration from `.env` in the repository root — copy
@@ -159,6 +161,8 @@ This project follows the [all-contributors](https://github.com/all-contributors/
 ## Content Licensing
 
 Texts and content available as [CC BY](https://creativecommons.org/licenses/by/3.0/de/).
+
+Third-party data is excluded; see [NOTICE](NOTICE).
 
 ## Credits
 

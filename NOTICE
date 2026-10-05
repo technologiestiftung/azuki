@@ -1,0 +1,47 @@
+Azuki
+Copyright (c) Technologiestiftung Berlin
+
+The MIT License in LICENSE applies to the source code of this repository only.
+
+The following files contain or are derived from third-party data and are NOT
+covered by the MIT License:
+
+- backend/src/data/berufe.json
+  Source: BERUFENET der Bundesagentur für Arbeit, www.berufenet.arbeitsagentur.de.
+  Used under the BERUFENET terms of use:
+  https://www.arbeitsagentur.de/berufenet-info/nutzungsbedingungen
+  Includes LLM-generated simplified summaries of BERUFENET content.
+
+- Occupation images referenced in berufe.json
+  BERUFENET, Bundesagentur für Arbeit. Not stored in this repository.
+  Use only with a direct link to the BERUFENET content.
+
+- data/popularity-source/dazubi-all-berufe-2024.xlsx (unmodified copy)
+  Stephan Kroll, Robyn Schmidt, Alexandra Uhly: Datensystem Auszubildende
+  (DAZUBI), Zusatztabellen, Alle dualen Ausbildungsberufe mit ausgewählten
+  Indikatoren zur dualen Berufsausbildung, Deutschland 2024.
+  © Bundesinstitut für Berufsbildung (BIBB), 1. Auflage Oktober 2025.
+  Source: https://www.bibb.de/dokumente/xls/dazubi_zusatztabellen_alle-dualen-berufe_indikatoren_aktuelles-bj.xlsx
+  Licence: CC BY-NC-ND 4.0, https://creativecommons.org/licenses/by-nc-nd/4.0/legalcode.de
+  (see www.bibb.de/cc-lizenz). Non-commercial use only; modified versions
+  must not be shared.
+  Quelle: „Datenbank Auszubildende“ des Bundesinstituts für Berufsbildung auf
+  Basis der Daten der Berufsbildungsstatistik der statistischen Ämter des Bundes
+  und der Länder (Erhebung zum 31.12.). Absolutwerte aus Datenschutzgründen
+  jeweils auf ein Vielfaches von 3 gerundet; der Insgesamtwert kann deshalb von
+  der Summe der Einzelwerte abweichen. Berechnungen des Bundesinstituts für
+  Berufsbildung.
+  Data derived from this file (shared/data/popularity-index.json,
+  shared/data/availability-by-state.json) is generated at build time and is
+  not part of this repository.
+
+- shared/data/destatis-trainee-starts.json
+  Derived from Statistisches Bundesamt (Destatis), Statistischer Bericht
+  „Berufliche Schulen und Schulen des Gesundheitswesens – Berufsbezeichnungen",
+  Schuljahr 2024/2025. Eigene Berechnung; not an official Destatis publication.
+  Terms: https://www.destatis.de/DE/Service/Impressum/copyright-allgemein.html
+
+- Location lookups
+  © OpenStreetMap contributors, ODbL.
+
+See "Content Licensing" in README.md.

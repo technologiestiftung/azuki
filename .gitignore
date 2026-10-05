@@ -34,9 +34,13 @@ backend/node_modules/
 backend/dist/
 frontend/.vite/
 materialien/
-# Yearly xlsx snapshots — see data/popularity-source/README.md
-data/popularity-source/*.xlsx
+# Only needed to rebuild the committed Destatis fixture — see data/popularity-source/README.md
+data/popularity-source/destatis-*.xlsx
 .worktrees/
 api/[...route].js
 .vercel/output
 data-refresh-summary.json
+# Generated from the BIBB DAZUBI xlsx on install/build (CC BY-NC-ND 4.0) — never commit
+shared/data/dazubi-trainee-starts.json
+shared/data/popularity-index.json
+shared/data/availability-by-state.json

@@ -150,3 +150,46 @@ describe("buildAvailability — KldB join normalizes both sides", () => {
 		expect(stats.destatisUnmatched).toBe(0);
 	});
 });
+
+describe("buildAvailability — DAZUBI row with a direct record and parent-matched Fachrichtungen", () => {
+	const berufe: Beruf[] = [
+		{ id: 1, name: "Technische/r Modellbauer/in", germanOccupationCode: null },
+		{
+			id: 2,
+			name: "Technische/r Modellbauer/in - Gießerei",
+			germanOccupationCode: null,
+		},
+	];
+	const pop: PopRecord[] = [
+		{
+			id: 1,
+			name: "Technische/r Modellbauer/in",
+			dazubiContracts: 99,
+			dazubiMatchType: "direct",
+		},
+		{
+			id: 2,
+			name: "Technische/r Modellbauer/in - Gießerei",
+			dazubiContracts: 99,
+			dazubiMatchType: "parent",
+		},
+	];
+	const dazubi: DazubiRow[] = [
+		{
+			bundesland: "Berlin",
+			name: "Technische/-r Modellbauer/-in (IH)",
+			anfaenger: 6,
+		},
+	];
+
+	const { availability, stats } = buildAvailability(berufe, pop, dazubi, []);
+
+	test("feeds both records", () => {
+		expect(availability[1]).toEqual({ Berlin: 6 });
+		expect(availability[2]).toEqual({ Berlin: 6 });
+	});
+
+	test("does not count the row as a rollup-only match", () => {
+		expect(stats.dazubiRollupMatched).toBe(0);
+	});
+});

@@ -54,19 +54,53 @@ export function PopularityExplainer({
 						</p>
 						<ul className="ml-4 mt-1 list-disc space-y-0.5">
 							<li>
-								<strong>BIBB DAZUBI 2024</strong> — neue Ausbildungsverträge im
-								dualen System (Bundesinstitut für Berufsbildung, 329 Berufe).
+								<strong>BIBB DAZUBI, Berichtsjahr 2024</strong> — neue
+								Ausbildungsverträge im dualen System. Quelle: „Datenbank
+								Auszubildende" des Bundesinstituts für Berufsbildung auf Basis
+								der Daten der Berufsbildungsstatistik der statistischen Ämter
+								des Bundes und der Länder (Erhebung zum 31.12.). Absolutwerte
+								aus Datenschutzgründen jeweils auf ein Vielfaches von 3
+								gerundet; Berechnungen des Bundesinstituts für Berufsbildung,{" "}
+								<a
+									href="https://www.bibb.de/dazubi"
+									target="_blank"
+									rel="noopener noreferrer"
+									className="underline"
+								>
+									bibb.de/dazubi
+								</a>
+								, Lizenz{" "}
+								<a
+									href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.de"
+									target="_blank"
+									rel="noopener noreferrer"
+									className="underline"
+								>
+									CC BY-NC-ND 4.0
+								</a>
+								. Stufen: eigene Berechnung.
 							</li>
 							<li>
-								<strong>Destatis Berufliche Schulen 2023/24</strong> —
+								<strong>Destatis Berufliche Schulen 2024/25</strong> —
 								Schüler/-innen im 1. Schuljahrgang an Berufsfachschulen,
-								Fachschulen und Schulen des Gesundheitswesens (Statistisches
-								Bundesamt, 306 Berufe).
+								Fachschulen und Schulen des Gesundheitswesens. Quelle:
+								Statistisches Bundesamt (Destatis), Statistischer Bericht
+								Berufliche Schulen und Schulen des Gesundheitswesens –
+								Berufsbezeichnungen, Schuljahr 2024/2025 (Tabellen 21121-10 bis
+								21121-13),{" "}
+								<a
+									href="https://www.destatis.de/DE/Service/Impressum/copyright-allgemein.html"
+									target="_blank"
+									rel="noopener noreferrer"
+									className="underline"
+								>
+									© Destatis
+								</a>
+								. Daten geändert: eigene Berechnung (Zuordnung zu Berufen).
 							</li>
 						</ul>
 						<p className="mt-1 text-sky-shade-110">
-							Insgesamt 511 von 668 Berufen haben eine echte Zahl. Der Rest sind
-							Sonderfälle (siehe unten).
+							Berufe ohne Zahl sind Sonderfälle (siehe unten).
 						</p>
 					</div>
 
