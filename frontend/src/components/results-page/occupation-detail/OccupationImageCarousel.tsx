@@ -354,9 +354,14 @@ export function OccupationImageCarousel({
 				)}
 			</div>
 
-			<p className="m-0 px-[18px] text-base font-normal text-sky-900 break-words">
-				{images[safeCurrent].caption}
-			</p>
+			<div className="flex flex-col px-[18px]">
+				<p className="m-0 text-base leading-[1.4] font-normal text-sky-900 break-words">
+					{images[safeCurrent].caption}
+				</p>
+				<p className="m-0 text-xs leading-5 text-sky-shade-130">
+					{content["results.detail.source.images"]}
+				</p>
+			</div>
 		</div>
 	);
 }

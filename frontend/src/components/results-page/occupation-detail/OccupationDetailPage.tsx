@@ -266,7 +266,9 @@ export function OccupationDetailPage() {
 						imageParallaxY={heroImageParallaxY}
 					/>
 				</div>
-				<div className="relative -mt-4 flex flex-col gap-8 bg-sky-white rounded-t-[20px] pb-8 z-10">
+				<div
+					className={`relative -mt-4 flex flex-col gap-8 bg-sky-white rounded-t-[20px] z-10 ${statusMessage ? "pb-8" : ""}`}
+				>
 					<div className="flex flex-col gap-2 px-[18px] pt-4">
 						{(isWildcard || isInWildcardPool(occupationId)) && (
 							<WildcardPoolBadge />

@@ -70,3 +70,4 @@ jobs:
           add-paths: |
             backend/src/data/berufe.json
             shared/data/availability-by-state.json
+            shared/data/berufenet-meta.json
