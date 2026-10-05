@@ -793,6 +793,15 @@ export const content = {
 		"AzuKi ist ein KI-basierter Ausbildungsassistent, der jungen Menschen hilft einen passenden Ausbildungsberuf zu finden. Nach einigen Fragen zu Schulbildung, Interessen, Stärken, Arbeitserfahrung und Erwartungen an den zukünftigen Beruf wird ein Profil erstellt. Basierend auf diesem Profil schlägt die KI passende Ausbildungsberufe vor und zeigt freie Stellen in der Nähe.",
 	"about.description.p2":
 		"Das Projekt ist eine Kollaboration mit <a href='https://joblinge.de' target='_blank'>Joblinge Berlin</a>, gefördert von der <a href='https://www.civic-innovation.de/' target='_blank'>Civic Innovation Platform</a> des <a href='https://www.bmas.de/' target='_blank'>Bundesministerium für Arbeit und Soziales</a>.",
+	"about.dataSources.title": "Woher kommen die Infos?",
+	"about.dataSources.p1":
+		"AzuKi nutzt Daten des Informationsportals <a href='https://web.arbeitsagentur.de/berufenet/' target='_blank' rel='noopener noreferrer'>BERUFENET</a> sowie der <a href='https://www.arbeitsagentur.de/jobsuche/' target='_blank' rel='noopener noreferrer'>Jobsuche</a> der Bundesagentur für Arbeit. So findest du Infos zu Ausbildungsberufen und freien Stellen an einem Ort. Auch die Fotos zu den Berufen stammen aus BERUFENET. Die typischen Aufgaben hat eine KI in einfacher Sprache zusammengefasst. Den Originaltext findest du bei jedem Beruf über den Link zu BERUFENET. Welche Berufe zu dir passen, schlägt ein KI-Modell vor. Dafür bekommt es deine Antworten aus den Fragen und eine Vorauswahl passender Ausbildungsberufe.",
+	"about.dataSources.p2":
+		"Weitere Quellen: Infos zum empfohlenen Schulabschluss kommen vom Datensystem Auszubildende (<a href='https://www.bibb.de/dazubi' target='_blank' rel='noopener noreferrer'>DAZUBI</a>) des Bundesinstituts für Berufsbildung, Ortsdaten von <a href='https://www.openstreetmap.org/' target='_blank' rel='noopener noreferrer'>OpenStreetMap</a>.",
+	"about.dataSources.p3":
+		"AzuKi ist kein Angebot der Bundesagentur für Arbeit. Die Infos können veraltet oder unvollständig sein. Wichtige Angaben wie Gehalt oder Voraussetzungen prüfst du am besten bei BERUFENET oder direkt beim Ausbildungsbetrieb.",
+	"about.dataSources.p4":
+		"AzuKi wurde vom CityLAB Berlin als Open-Source Projekt entwickelt. Mehr Infos unter: <a href='https://citylab-berlin.org/projekte/azuki' target='_blank' rel='noopener noreferrer'>https://citylab-berlin.org/projekte/azuki</a>",
 	"about.logobanner.projectOf": "Ein Projekt der",
 	"about.logobanner.technologieStiftungBerlin.logoLink":
 		"https://logos.citylab-berlin.org/logo-technologiestiftung-berlin-de.svg",
