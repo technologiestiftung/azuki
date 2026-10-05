@@ -69,3 +69,4 @@ jobs:
           commit-message: "chore(data): refresh BERUFENET catalog"
           add-paths: |
             backend/src/data/berufe.json
+            shared/data/berufenet-meta.json

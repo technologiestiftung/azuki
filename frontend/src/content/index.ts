@@ -676,6 +676,16 @@ export const content = {
 	"results.share": "Teilen",
 	"results.download": "Download",
 	"results.detail.tasksTitle": "Typische Aufgaben",
+	"results.detail.source.heroImage": "Foto: BERUFENET",
+	"results.detail.source.tasks":
+		"Quelle: BERUFENET, KI-generierte Zusammenfassung",
+	"results.detail.source.images": "Foto und Beschreibung: BERUFENET",
+	"results.detail.sourceFooter.title": "Alle gekennzeichneten Infos und Fotos:",
+	"results.detail.sourceFooter.provider":
+		"BERUFENET der Bundesagentur für Arbeit",
+	"results.detail.sourceFooter.website": "www.berufenet.arbeitsagentur.de",
+	"results.detail.sourceFooter.date": "Stand {date}",
+	"results.detail.sourceFooter.link": "Mehr über diesen Beruf erfahren",
 	"results.detail.tasks.matchTitle": "So gut passt der Beruf zu dir",
 	"results.detail.tasks.matchInfo.title": "Wie wird das berechnet?",
 	"results.detail.tasks.matchInfo.ariaLabel":
@@ -748,8 +758,12 @@ export const content = {
 		"Schau dir das vollständige Stellenangebot an",
 	"vacancies.detail.applyCard.description":
 		"Dort findest du auch alle Infos zur Bewerbung.",
-	"vacancies.detail.applyCard.cta": "Zum Stellenangebot",
-	"vacancies.detail.applyCard.cta.ariaLabel": "Zum Stellenangebot",
+	"vacancies.detail.applyCard.cta": "Zum Stellenangebot (BERUFENET)",
+	"vacancies.detail.applyCard.cta.ariaLabel": "Zum Stellenangebot (BERUFENET)",
+	"vacancies.detail.sourceFooter.title": "Quelle",
+	"vacancies.detail.sourceFooter.provider":
+		"Jobsuche der Bundesagentur für Arbeit",
+	"vacancies.detail.sourceFooter.date": "Stand {date}",
 	"vacancies.detail.contactCard.title": "Bewerben – wie geht das?",
 	"vacancies.detail.contactCard.description":
 		"Wir von PLAN A sprechen mit dir über deinen <strong>Lebenslauf</strong>, <strong>Bewerbungen</strong> und <strong>Vorstellungsgespräche</strong>.",

@@ -886,6 +886,16 @@ async function main() {
   writeFileSync(outPath, JSON.stringify(occupations, null, 2), "utf-8");
   console.log(`Step 3: Saved to ${outPath}`);
 
+  // For "Stand MM/YY" source note on the occupation detail page.
+  const metaPath = resolve(__dirname, "../shared/data/berufenet-meta.json");
+  writeFileSync(
+    metaPath,
+    JSON.stringify({ fetchedAt: new Date().toISOString().slice(0, 10) }, null, 2) +
+      "\n",
+    "utf-8",
+  );
+  console.log(`Step 3b: Wrote fetch date to ${metaPath}`);
+
   // Stale ids the report cannot recompute: they need the pre-exclusion id list.
   const summaryPath = resolve(__dirname, "../data-refresh-summary.json");
   writeFileSync(

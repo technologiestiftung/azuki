@@ -61,6 +61,7 @@ export type { Persona } from "./persona";
 export { formatOccupationDisplayName } from "./occupationDisplayName";
 
 export { getDurationOverride } from "./durationOverride";
+export { BERUFENET_FETCHED_AT } from "./berufenetMeta";
 
 export {
 	fitPercent,
