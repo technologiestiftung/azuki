@@ -672,9 +672,10 @@ export const content = {
 	"results.detail.schoolDegreeInfo.title": "Empfohlener Schulabschluss",
 	"results.detail.schoolDegreeInfo.description":
 		"Mit diesem Abschluss hast du gute Chancen auf einen Ausbildungsplatz. Hast du einen anderen Abschluss, kannst du es trotzdem schaffen – vielleicht musst du dann mehr Bewerbungen schreiben und es dauert länger bis du einen Platz findest.",
-	"results.detail.schoolDegreeInfo.sourceLabel": "DAZUBI",
-	"results.detail.schoolDegreeInfo.sourceHref":
+	"results.detail.schoolDegreeInfo.dazubiSourceLabel": "DAZUBI",
+	"results.detail.schoolDegreeInfo.dazubiSourceHref":
 		"https://www.bibb.de/de/12129.php",
+	"results.detail.schoolDegreeInfo.berufenetSourceLabel": "BERUFENET",
 	"results.detail.notFound": "Dieser Beruf wurde nicht gefunden.",
 	"results.detail.loadError":
 		"Die Infos für diesen Beruf konnten gerade nicht geladen werden. Prüfe deine Internetverbindung und versuche es noch einmal.",

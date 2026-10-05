@@ -29,6 +29,22 @@ export function OccupationDetailMetaInfo({
 		setActiveInfoSheet("schoolDegree");
 	};
 
+	const getSchoolDegreeSource = () => {
+		if (occupation?.degreeStats) {
+			return {
+				label: content["results.detail.schoolDegreeInfo.dazubiSourceLabel"],
+				href: content["results.detail.schoolDegreeInfo.dazubiSourceHref"],
+			};
+		}
+		return occupation
+			? {
+					label:
+						content["results.detail.schoolDegreeInfo.berufenetSourceLabel"],
+					href: buildBerufenetUrl(occupation.id),
+				}
+			: undefined;
+	};
+
 	const getInfoSheetContent = () => {
 		if (activeInfoSheet === "salary") {
 			return {
@@ -46,10 +62,7 @@ export function OccupationDetailMetaInfo({
 			return {
 				title: content["results.detail.schoolDegreeInfo.title"],
 				description: content["results.detail.schoolDegreeInfo.description"],
-				source: {
-					label: content["results.detail.schoolDegreeInfo.sourceLabel"],
-					href: content["results.detail.schoolDegreeInfo.sourceHref"],
-				},
+				source: getSchoolDegreeSource(),
 			};
 		}
 		return null;
