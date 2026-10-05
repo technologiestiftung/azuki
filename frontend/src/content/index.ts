@@ -684,7 +684,7 @@ export const content = {
 	"results.detail.sourceFooter.provider":
 		"BERUFENET der Bundesagentur für Arbeit",
 	"results.detail.sourceFooter.website": "www.berufenet.arbeitsagentur.de",
-	"results.detail.sourceFooter.date": "Stand 09/26",
+	"results.detail.sourceFooter.date": "Stand {date}",
 	"results.detail.sourceFooter.link": "Mehr über diesen Beruf erfahren",
 	"results.detail.tasks.matchTitle": "So gut passt der Beruf zu dir",
 	"results.detail.tasks.matchInfo.title": "Wie wird das berechnet?",

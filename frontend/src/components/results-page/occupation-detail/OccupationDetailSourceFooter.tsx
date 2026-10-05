@@ -1,5 +1,6 @@
 import { content } from "../../../content";
 import { buildBerufenetUrl } from "../utils/buildBerufenetUrl";
+import { formatBerufenetDate } from "../utils/formatBerufenetDate";
 
 interface OccupationDetailSourceFooterProps {
 	occupationId: number;
@@ -24,7 +25,10 @@ export function OccupationDetailSourceFooter({
 				<p className="leading-[1.3] text-sky-0">
 					{content["results.detail.sourceFooter.website"]}{" "}
 					<span className="text-sky-shade-70">
-						{content["results.detail.sourceFooter.date"]}
+						{content["results.detail.sourceFooter.date"].replace(
+							"{date}",
+							formatBerufenetDate(),
+						)}
 					</span>
 				</p>
 			</div>
