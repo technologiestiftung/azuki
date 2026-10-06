@@ -10,13 +10,10 @@ import {
 	LOGO_LOCKUP_SRC,
 	LOGO_WORDMARK_SRC,
 	ensureBufferPolyfill,
-	getSolidPdfPlaceholderSrc,
-	loadPdfHeroImageSrc,
+	loadPdfHeroPlaceholderSrc,
 	loadPdfIconSrc,
 	loadPdfQrSrc,
 	loadPdfLogoSrc,
-	loadPdfPlaceholderSrc,
-	revokePdfBlobUrls,
 	triggerDownload,
 	warmPdfRuntime,
 } from "../../pdf/loadPdfAssets";
@@ -61,7 +58,6 @@ export async function exportOccupationDetailPdf({
 	schoolDegreeLabel,
 	taskItems,
 	matchPercent,
-	heroImageUrls,
 	occupationId,
 	profile,
 }: {
@@ -71,18 +67,11 @@ export async function exportOccupationDetailPdf({
 	schoolDegreeLabel: string;
 	taskItems: string[];
 	matchPercent?: number;
-	heroImageUrls: string[];
 	occupationId: Occupation["id"];
 	profile: UserProfile;
 }): Promise<void> {
 	ensureBufferPolyfill();
 	await warmPdfRuntime();
-
-	let placeholderPromise: Promise<string> | null = null;
-	const resolvePlaceholder = () => {
-		placeholderPromise ??= loadPdfPlaceholderSrc();
-		return placeholderPromise;
-	};
 
 	const [
 		mascotSrc,
@@ -94,40 +83,32 @@ export async function exportOccupationDetailPdf({
 	] = await Promise.all([
 		loadPdfIconSrc(MASCOT_SRC, CTA_SURFACE_BG),
 		loadPdfQrSrc(QR_SRC, CTA_SURFACE_BG),
-		loadPdfHeroImageSrc(heroImageUrls, resolvePlaceholder),
+		loadPdfHeroPlaceholderSrc(),
 		loadMatchExplanations(occupationId, profile),
 		loadPdfLogoSrc(LOGO_WORDMARK_SRC),
 		loadPdfLogoSrc(LOGO_LOCKUP_SRC),
 	]);
 
-	const placeholderSrc = placeholderPromise
-		? await placeholderPromise
-		: getSolidPdfPlaceholderSrc();
-
 	const assets: OccupationDetailPdfAssets = {
 		mascotSrc,
 		qrSrc,
-		heroImageSrc: heroImageSrc || placeholderSrc,
+		heroImageSrc,
 		wordmarkSrc,
 		lockupSrc,
 	};
 
-	try {
-		const blob = await pdf(
-			<OccupationDetailPdfDocument
-				displayName={displayName}
-				occupationDuration={occupationDuration}
-				salaryLabel={salaryLabel}
-				schoolDegreeLabel={schoolDegreeLabel}
-				taskItems={taskItems}
-				matchPercent={matchPercent}
-				matchExplanations={matchExplanations}
-				assets={assets}
-			/>,
-		).toBlob();
+	const blob = await pdf(
+		<OccupationDetailPdfDocument
+			displayName={displayName}
+			occupationDuration={occupationDuration}
+			salaryLabel={salaryLabel}
+			schoolDegreeLabel={schoolDegreeLabel}
+			taskItems={taskItems}
+			matchPercent={matchPercent}
+			matchExplanations={matchExplanations}
+			assets={assets}
+		/>,
+	).toBlob();
 
-		triggerDownload(blob, buildExportFilename(displayName));
-	} finally {
-		revokePdfBlobUrls([heroImageSrc]);
-	}
+	triggerDownload(blob, buildExportFilename(displayName));
 }

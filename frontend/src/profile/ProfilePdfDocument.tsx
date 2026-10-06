@@ -24,6 +24,10 @@ import { CtaCard, PageFooter, PdfHeader } from "../components/pdf/PdfLayout";
 import { COLOR, px, styles } from "../components/pdf/pdfTheme";
 import { formatOccupationSalary } from "@azuki/shared";
 
+/** Markers referencing the footnotes line under the top 3 cards. */
+const DESCRIPTION_FOOTNOTE_MARK = "*";
+const SALARY_FOOTNOTE_MARK = "**";
+
 const profileStyles = StyleSheet.create({
 	hero: {
 		flexDirection: "row",
@@ -75,8 +79,15 @@ const profileStyles = StyleSheet.create({
 	cardsRow: {
 		flexDirection: "row",
 		gap: px(9),
-		marginBottom: px(55.68),
+		marginBottom: px(16),
 		alignItems: "stretch",
+	},
+	footnotes: {
+		fontFamily: "Asap",
+		fontWeight: 400,
+		fontSize: 8,
+		color: COLOR.skyShade120,
+		marginBottom: px(55.68),
 	},
 	card: {
 		flex: 1,
@@ -257,7 +268,6 @@ export interface ProfilePdfAssets {
 	qrSrc: string | null;
 	avatarSrc: string | null;
 	placeholderSrc: string;
-	topImageSrcs: string[];
 	wordmarkSrc: string | null;
 	lockupSrc: string | null;
 }
@@ -318,7 +328,9 @@ function formatTopMeta(occupation: MatchedOccupation): string {
 		parts.push(occupation.occupationDuration);
 	}
 	if (occupation.salaryEntryKnown && occupation.salaryMonthlyEntry !== null) {
-		parts.push(formatOccupationSalary(occupation.salaryMonthlyEntry));
+		parts.push(
+			`${formatOccupationSalary(occupation.salaryMonthlyEntry)} ${content["results.card.salary.monthly.label"]}${SALARY_FOOTNOTE_MARK}`,
+		);
 	}
 	return parts.join(" · ");
 }
@@ -403,7 +415,10 @@ function TopCard({
 				{formatOccupationDisplayName(occupation.name)}
 			</Text>
 			{description ? (
-				<Text style={profileStyles.cardDescription}>{description}</Text>
+				<Text style={profileStyles.cardDescription}>
+					{description}
+					{DESCRIPTION_FOOTNOTE_MARK}
+				</Text>
 			) : null}
 			{meta ? <Text style={profileStyles.cardMeta}>{meta}</Text> : null}
 		</View>
@@ -705,14 +720,17 @@ export function ProfilePdfDocument({
 							{content["results.export.topTitle"]}
 						</Text>
 						<View style={profileStyles.cardsRow} wrap={false}>
-							{topOccupations.map((occupation, index) => (
+							{topOccupations.map((occupation) => (
 								<TopCard
 									key={occupation.id}
 									occupation={occupation}
-									imageSrc={assets.topImageSrcs[index] || assets.placeholderSrc}
+									imageSrc={assets.placeholderSrc}
 								/>
 							))}
 						</View>
+						<Text style={profileStyles.footnotes}>
+							{content["profile.export.footnotes"]}
+						</Text>
 					</View>
 				) : null}
 

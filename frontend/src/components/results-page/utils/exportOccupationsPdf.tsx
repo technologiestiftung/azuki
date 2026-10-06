@@ -5,13 +5,10 @@ import {
 	LOGO_LOCKUP_SRC,
 	LOGO_WORDMARK_SRC,
 	ensureBufferPolyfill,
-	getSolidPdfPlaceholderSrc,
 	loadPdfIconSrc,
 	loadPdfQrSrc,
 	loadPdfLogoSrc,
 	loadPdfPlaceholderSrc,
-	loadPdfTopCardImages,
-	revokePdfBlobUrls,
 	triggerDownload,
 	warmPdfRuntime,
 } from "../../pdf/loadPdfAssets";
@@ -36,46 +33,30 @@ export async function exportOccupationsPdf(
 	ensureBufferPolyfill();
 	await warmPdfRuntime();
 
-	const topOccupations = occupations.slice(0, 3);
-	let placeholderPromise: Promise<string> | null = null;
-	const resolvePlaceholder = () => {
-		placeholderPromise ??= loadPdfPlaceholderSrc();
-		return placeholderPromise;
-	};
-
-	const [mascotSrc, qrSrc, topImageSrcs, wordmarkSrc, lockupSrc] =
+	const [mascotSrc, qrSrc, placeholderSrc, wordmarkSrc, lockupSrc] =
 		await Promise.all([
 			loadPdfIconSrc(MASCOT_SRC, CTA_SURFACE_BG),
 			loadPdfQrSrc(QR_SRC, CTA_SURFACE_BG),
-			loadPdfTopCardImages(topOccupations, resolvePlaceholder),
+			loadPdfPlaceholderSrc(),
 			loadPdfLogoSrc(LOGO_WORDMARK_SRC),
 			loadPdfLogoSrc(LOGO_LOCKUP_SRC),
 		]);
-
-	const placeholderSrc = placeholderPromise
-		? await placeholderPromise
-		: getSolidPdfPlaceholderSrc();
 
 	const assets: OccupationsPdfAssets = {
 		mascotSrc,
 		qrSrc,
 		placeholderSrc,
-		topImageSrcs,
 		wordmarkSrc,
 		lockupSrc,
 	};
 
-	try {
-		const blob = await pdf(
-			<OccupationsPdfDocument
-				occupations={occupations}
-				wildcardOccupations={wildcardOccupations}
-				assets={assets}
-			/>,
-		).toBlob();
+	const blob = await pdf(
+		<OccupationsPdfDocument
+			occupations={occupations}
+			wildcardOccupations={wildcardOccupations}
+			assets={assets}
+		/>,
+	).toBlob();
 
-		triggerDownload(blob, content["results.export.filename"]);
-	} finally {
-		revokePdfBlobUrls(topImageSrcs);
-	}
+	triggerDownload(blob, content["results.export.filename"]);
 }
