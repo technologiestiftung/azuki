@@ -4,8 +4,8 @@
  *
  *   { [occupationId]: { [bundesland]: traineeCount } }
  *
- * - DAZUBI rows match by normalized name (popularity-index.json carries
- *   the BERUFENET id ↔ DAZUBI name mapping).
+ * - DAZUBI rows match by `matchKey`, the same key the popularity index uses
+ *   (popularity-index.json carries the BERUFENET id ↔ DAZUBI name mapping).
  * - Destatis rows match by KldB 2010. Both sides of the join are run
  *   through normalizeKldb so the equality match shares one contract,
  *   regardless of how each source wrote its code.
@@ -13,8 +13,9 @@
  * Called by scripts/build-dazubi-data.ts.
  */
 
-import { isBundesland, normName, type Bundesland } from "@azuki/shared";
+import { isBundesland, type Bundesland } from "@azuki/shared";
 import { normalizeKldb } from "./normalizeKldb.js";
+import { matchKey } from "./lib/popularityIndex.js";
 
 export interface PopRecord {
 	id: number;
@@ -72,12 +73,12 @@ export function buildAvailability(
 	const popByNormFull = new Map<string, number[]>();
 	const popByNormRollup = new Map<string, number[]>();
 	for (const r of pop) {
-		const k = normName(r.name);
+		const k = matchKey(r.name);
 		if (!popByNormFull.has(k)) popByNormFull.set(k, []);
 		popByNormFull.get(k)!.push(r.id);
 		if (r.dazubiMatchType === "parent") {
 			const base = r.name.split(" - ")[0];
-			const bk = normName(base);
+			const bk = matchKey(base);
 			if (bk !== k) {
 				if (!popByNormRollup.has(bk)) popByNormRollup.set(bk, []);
 				popByNormRollup.get(bk)!.push(r.id);
@@ -101,13 +102,13 @@ export function buildAvailability(
 	const dazubiUnmatchedNames = new Set<string>();
 	for (const row of dazubi) {
 		if (!isBundesland(row.bundesland)) continue;
-		const norm = normName(row.name);
+		const norm = matchKey(row.name);
 		const directIds = popByNormFull.get(norm) ?? [];
 		const rollupIds = popByNormRollup.get(norm) ?? [];
 		let ids: number[] | undefined = [...directIds, ...rollupIds];
 		let viaRollup = directIds.length === 0 && rollupIds.length > 0;
 		if (!ids?.length) {
-			const baseNorm = normName(row.name.split(" - ")[0]);
+			const baseNorm = matchKey(row.name.split(" - ")[0]);
 			ids = popByNormFull.get(baseNorm) ?? popByNormRollup.get(baseNorm);
 			if (ids?.length) viaRollup = true;
 		}
