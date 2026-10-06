@@ -752,7 +752,7 @@ export const content = {
 	"vacancies.detail.educationLevel.fachgebundeneHochschulreife":
 		"Fachgebundene Hochschulreife",
 	"vacancies.detail.schoolDegreeInfo.description":
-		"Du hast gute Chancen mit diesem Abschluss. Hast du einen anderen Abschluss? Bewirb dich trotzdem. Betriebe schreiben oft nur ihren Wunsch auf, manchmal reichen auch andere Abschlüsse.",
+		"Der Betrieb wünscht sich diesen Abschluss. Damit hast du hier gute Chancen. Du hast einen anderen Abschluss? Bewirb dich trotzdem. Vielleicht brauchst du mehr Bewerbungen und mehr Zeit.",
 	"vacancies.detail.schoolDegreeInfo.sourceLabel": "Bundesagentur für Arbeit",
 	"vacancies.detail.locationTitle": "Arbeitsort",
 	"vacancies.detail.location.showMore": "+{count} weitere Arbeitsorte",

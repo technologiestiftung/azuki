@@ -49,20 +49,36 @@ export function VacancyDetailMetaInfo({ detail }: VacancyDetailMetaInfoProps) {
 						</span>
 					</div>
 				</div>
-				<button
-					type="button"
-					onClick={() => setSchoolDegreeInfoOpen(true)}
-					aria-label={`${content["results.detail.schoolDegreeTitle"]}: ${schoolDegreeLabel ?? unknown}, ${content["results.moreInfo"]}`}
-					className="flex flex-col gap-1.5 flex-1 px-4 py-3 bg-sky-50 text-start focus-visible:outline focus-visible:outline-2 focus-visible:outline-sky-500"
-				>
-					<span className="flex justify-between items-center text-sky-shade-140 text-base font-normal">
-						{content["results.detail.schoolDegreeTitle"]}
-						<img src="/icons/info.svg" alt="" className="w-5 h-5" aria-hidden />
-					</span>
-					<span className="text-sky-900 text-xl font-semibold text-start">
-						{schoolDegreeLabel ?? unknown}
-					</span>
-				</button>
+				{schoolDegreeLabel ? (
+					<button
+						type="button"
+						onClick={() => setSchoolDegreeInfoOpen(true)}
+						aria-label={`${content["results.detail.schoolDegreeTitle"]}: ${schoolDegreeLabel}, ${content["results.moreInfo"]}`}
+						className="flex flex-col gap-1.5 flex-1 px-4 py-3 bg-sky-50 text-start focus-visible:outline focus-visible:outline-2 focus-visible:outline-sky-500"
+					>
+						<span className="flex justify-between items-center text-sky-shade-140 text-base font-normal">
+							{content["results.detail.schoolDegreeTitle"]}
+							<img
+								src="/icons/info.svg"
+								alt=""
+								className="w-5 h-5"
+								aria-hidden
+							/>
+						</span>
+						<span className="text-sky-900 text-xl font-semibold text-start">
+							{schoolDegreeLabel}
+						</span>
+					</button>
+				) : (
+					<div className="flex flex-col gap-1.5 flex-1 px-4 py-3 bg-sky-50">
+						<span className="text-sky-shade-140 text-base font-normal">
+							{content["results.detail.schoolDegreeTitle"]}
+						</span>
+						<span className="text-sky-900 text-xl font-semibold text-start">
+							{unknown}
+						</span>
+					</div>
+				)}
 				<div className="flex flex-col gap-1.5 flex-1 px-4 py-3 bg-sky-50 rounded-b-xl">
 					<span className="text-sky-shade-140 text-base font-normal">
 						{content["vacancies.detail.locationTitle"]}
