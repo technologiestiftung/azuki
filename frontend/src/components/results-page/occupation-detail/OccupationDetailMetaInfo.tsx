@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { content } from "../../../content";
 import { formatOccupationSchoolDegree } from "../utils/formatOccupationSchoolDegree";
+import { buildBerufenetUrl } from "../utils/buildBerufenetUrl";
 import { InfoBottomSheet } from "./InfoBottomSheet";
 import { resolveDetailSalaryLabel } from "./occupationDetailPageHelpers";
 import type { Occupation } from "@azuki/shared";
@@ -28,17 +29,40 @@ export function OccupationDetailMetaInfo({
 		setActiveInfoSheet("schoolDegree");
 	};
 
+	const getSchoolDegreeSource = () => {
+		if (occupation?.degreeStats) {
+			return {
+				label: content["results.detail.schoolDegreeInfo.dazubiSourceLabel"],
+				href: content["results.detail.schoolDegreeInfo.dazubiSourceHref"],
+			};
+		}
+		return occupation
+			? {
+					label:
+						content["results.detail.schoolDegreeInfo.berufenetSourceLabel"],
+					href: buildBerufenetUrl(occupation.id),
+				}
+			: undefined;
+	};
+
 	const getInfoSheetContent = () => {
 		if (activeInfoSheet === "salary") {
 			return {
 				title: content["results.detail.salaryInfo.title"],
 				description: content["results.detail.salaryInfo.description"],
+				source: occupation
+					? {
+							label: content["results.detail.salaryInfo.sourceLabel"],
+							href: buildBerufenetUrl(occupation.id),
+						}
+					: undefined,
 			};
 		}
 		if (activeInfoSheet === "schoolDegree") {
 			return {
 				title: content["results.detail.schoolDegreeInfo.title"],
 				description: content["results.detail.schoolDegreeInfo.description"],
+				source: getSchoolDegreeSource(),
 			};
 		}
 		return null;
@@ -102,6 +126,7 @@ export function OccupationDetailMetaInfo({
 				onClose={() => setActiveInfoSheet(null)}
 				title={infoSheetContent?.title ?? ""}
 				description={infoSheetContent?.description ?? ""}
+				source={infoSheetContent?.source}
 			/>
 		</>
 	);
