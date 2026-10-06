@@ -7,7 +7,6 @@ import type {
 } from "@azuki/shared";
 import {
 	INTERESTS,
-	getPopularityTier,
 	strengthScorePoints,
 	getActivePracticalExperiences,
 	getPracticalExperienceCategoryWeight,
@@ -16,6 +15,7 @@ import {
 	PREFERRED_JOB_SCORE_CAP,
 	occupationMatchesStrength,
 } from "@azuki/shared";
+import { getPopularityTier } from "@azuki/shared/server-data";
 import { getBestPreferredJobTierForOccupation } from "../resolvePreferredJobs.js";
 import type { SalaryBands } from "./salaryScoreBands.js";
 import {

@@ -1,5 +1,8 @@
 import type { Bundesland, Occupation, UserProfile } from "@azuki/shared";
-import { hasAvailabilityData, traineeCountAcrossStates } from "@azuki/shared";
+import {
+	hasAvailabilityData,
+	traineeCountAcrossStates,
+} from "@azuki/shared/server-data";
 import { buildSalaryBands, scoreOccupation } from "./score/index.js";
 import { resolvePreferredJobs } from "./resolvePreferredJobs.js";
 

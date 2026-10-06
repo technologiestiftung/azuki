@@ -1,5 +1,7 @@
 import { useState, useMemo } from "react";
-import { POPULARITY_INDEX, type PopularityTier } from "@azuki/shared";
+import type { PopularityTier } from "@azuki/shared";
+import { usePopularityIndex } from "../eval/usePopularityIndex";
+import { useEvalStore } from "../../store/useEvalStore";
 import { searchOccupations } from "./occupation-search";
 import { PopularityExplainer } from "./PopularityExplainer";
 
@@ -62,18 +64,20 @@ export function OccupationPicker({
 	excludeIds,
 	initialFilter,
 }: Props) {
+	const popularityIndex = usePopularityIndex();
+	const popularityIndexError = useEvalStore((s) => s.popularityIndexError);
 	const [query, setQuery] = useState("");
 	const [tierFilter, setTierFilter] = useState<PopularityTier | "">(
 		initialFilter ?? "",
 	);
 
 	const { results, total } = useMemo(() => {
-		return searchOccupations(POPULARITY_INDEX, {
+		return searchOccupations(popularityIndex ?? [], {
 			query,
 			tier: tierFilter || undefined,
 			limit: 50,
 		});
-	}, [query, tierFilter]);
+	}, [popularityIndex, query, tierFilter]);
 	const isFiltered = query.trim().length > 0 || tierFilter !== "";
 
 	return (
@@ -119,6 +123,13 @@ export function OccupationPicker({
 			</div>
 
 			<ul className="max-h-96 overflow-y-auto divide-y divide-sky-shade-10">
+				{popularityIndex === null && (
+					<li className="py-2 text-sky-shade-110">
+						{popularityIndexError
+							? "Berufe konnten nicht geladen werden."
+							: "Berufe werden geladen…"}
+					</li>
+				)}
 				{results.map((r) => {
 					const excluded = excludeIds?.has(r.id);
 					return (

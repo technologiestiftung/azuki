@@ -31,8 +31,8 @@ describe("scorePopularity", () => {
 		expect(scorePopularity(occ)).toBe(-6);
 	});
 
-	test("penalizes G_unknown Berufe (-2) — e.g. Agrarwirtschaftlich-technische/r Assistent/in", () => {
-		const occ = makeOccupation({ id: 6327 });
+	test("penalizes G_unknown Berufe (-2) — e.g. Aerobic-Trainer/in", () => {
+		const occ = makeOccupation({ id: 15647 });
 		expect(scorePopularity(occ)).toBe(-2);
 	});
 

@@ -8,12 +8,12 @@ import {
 	type GenerationInfo,
 	formatOccupationDisplayName,
 	formatPracticalExperiencesForApi,
-	getPopularityRecord,
 	resolveOccupationShortDescription,
 	AI_MODEL_IDS,
 	DEFAULT_MODEL_ID,
 	fitPercentages,
 } from "@azuki/shared";
+import { getPopularityRecord } from "@azuki/shared/server-data";
 import { occupationMatchMeta } from "../occupationMeta";
 import type { ScoredOccupation } from "../matching/index.js";
 import {

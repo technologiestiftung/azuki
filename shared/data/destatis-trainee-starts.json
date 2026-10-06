@@ -1,6066 +1,7279 @@
 [
   {
     "germanOccupationCode": "23212",
+    "name": "Berufe in der Digital- und Printmediengestaltung - fachlich ausgerichtete Tätigkeiten",
     "bundesland": "Baden-Württemberg",
     "students": 59
   },
   {
     "germanOccupationCode": "23222",
+    "name": "Berufe im Grafik-, Kommunikations- und Fotodesign - fachlich ausgerichtete Tätigkeiten",
     "bundesland": "Baden-Württemberg",
     "students": 49
   },
   {
     "germanOccupationCode": "23222",
+    "name": "Designer/in (Ausbildung) - Grafik",
     "bundesland": "Baden-Württemberg",
     "students": 729
   },
   {
     "germanOccupationCode": "23222",
+    "name": "Designer/in (Ausbildung) - Medien",
     "bundesland": "Baden-Württemberg",
     "students": 14
   },
   {
     "germanOccupationCode": "23223",
+    "name": "Gamedesigner/in (Ausbildung)",
     "bundesland": "Baden-Württemberg",
     "students": 12
   },
   {
     "germanOccupationCode": "23312",
+    "name": "Foto- und medientechnische/r Assistent/in",
     "bundesland": "Baden-Württemberg",
     "students": 169
   },
   {
     "germanOccupationCode": "23322",
+    "name": "Designer/in (Ausbildung) - Foto",
     "bundesland": "Baden-Württemberg",
     "students": 8
   },
   {
     "germanOccupationCode": "26302",
+    "name": "Elektrotechnische/r Assistent/in",
     "bundesland": "Baden-Württemberg",
     "students": 65
   },
   {
     "germanOccupationCode": "27212",
+    "name": "Technische Zeichner/innen - fachlich ausgerichtete Tätigkeiten",
     "bundesland": "Baden-Württemberg",
     "students": 4
   },
   {
     "germanOccupationCode": "28212",
+    "name": "Designer/in (Ausbildung) - Mode",
     "bundesland": "Baden-Württemberg",
     "students": 365
   },
   {
     "germanOccupationCode": "41212",
+    "name": "Biologisch-technische/r Assistent/in",
     "bundesland": "Baden-Württemberg",
     "students": 241
   },
   {
     "germanOccupationCode": "41322",
+    "name": "Chemisch-technische/r Assistent/in",
     "bundesland": "Baden-Württemberg",
     "students": 243
   },
   {
     "germanOccupationCode": "41412",
+    "name": "Physikalisch-technische/r Assistent/in",
     "bundesland": "Baden-Württemberg",
     "students": 19
   },
   {
     "germanOccupationCode": "43102",
+    "name": "Berufe in der Informatik (ohne Spezialisierung) - fachlich ausgerichtete Tätigkeiten",
     "bundesland": "Baden-Württemberg",
     "students": 37
   },
   {
     "germanOccupationCode": "43152",
+    "name": "Assistent/in - Informatik (Medieninformatik)",
     "bundesland": "Baden-Württemberg",
     "students": 31
   },
   {
     "germanOccupationCode": "63122",
+    "name": "Sportassistent/in",
     "bundesland": "Baden-Württemberg",
     "students": 92
   },
   {
     "germanOccupationCode": "71413",
+    "name": "Fremdsprachenkorrespondent/in",
     "bundesland": "Baden-Württemberg",
     "students": 10
   },
   {
     "germanOccupationCode": "73332",
+    "name": "Assistent/in - Technische Kommunikation",
     "bundesland": "Baden-Württemberg",
     "students": 671
   },
   {
     "germanOccupationCode": "73342",
+    "name": "Medizinische/r Dokumentationsassistent/in",
     "bundesland": "Baden-Württemberg",
     "students": 8
   },
   {
     "germanOccupationCode": "81301",
+    "name": "Pflegeassistent/in",
     "bundesland": "Baden-Württemberg",
     "students": 30
   },
   {
     "germanOccupationCode": "81302",
+    "name": "Pflegefachmann/-frau (Ausbildung)",
     "bundesland": "Baden-Württemberg",
     "students": 3764
   },
   {
     "germanOccupationCode": "81822",
+    "name": "Pharmazeutisch-technische/r Assistent/in",
     "bundesland": "Baden-Württemberg",
     "students": 718
   },
   {
     "germanOccupationCode": "82101",
+    "name": "Altenpflegehelfer/in",
     "bundesland": "Baden-Württemberg",
     "students": 3004
   },
   {
     "germanOccupationCode": "83112",
+    "name": "Sozialpädagogische/r Assistent/in / Kinderpfleger/in",
     "bundesland": "Baden-Württemberg",
     "students": 2528
   },
   {
     "germanOccupationCode": "83113",
+    "name": "Erzieher/in",
     "bundesland": "Baden-Württemberg",
     "students": 4789
   },
   {
     "germanOccupationCode": "83141",
+    "name": "Betreuungskraft / Alltagsbegleiter/in",
     "bundesland": "Baden-Württemberg",
     "students": 149
   },
   {
     "germanOccupationCode": "83322",
+    "name": "Berufe in der Gemeindearbeit - fachlich ausgerichtete Tätigkeiten",
     "bundesland": "Baden-Württemberg",
     "students": 18
   },
   {
     "germanOccupationCode": "84412",
+    "name": "Berufe in der Musikpädagogik - fachlich ausgerichtete Tätigkeiten",
     "bundesland": "Baden-Württemberg",
     "students": 12
   },
   {
     "germanOccupationCode": "84533",
+    "name": "Tanzpädagoge/-pädagogin",
     "bundesland": "Baden-Württemberg",
     "students": 15
   },
   {
     "germanOccupationCode": "84553",
+    "name": "Gymnastiklehrer/in",
     "bundesland": "Baden-Württemberg",
     "students": 229
   },
   {
     "germanOccupationCode": "84553",
+    "name": "Trainer/innen - Fitness und Gymnastik - komplexe Spezialistentätigkeiten",
     "bundesland": "Baden-Württemberg",
     "students": 13
   },
   {
     "germanOccupationCode": "93102",
+    "name": "Assistent/in - Produktdesign",
     "bundesland": "Baden-Württemberg",
     "students": 253
   },
   {
     "germanOccupationCode": "93312",
+    "name": "Berufe in der Bildhauerei - fachlich ausgerichtete Tätigkeiten",
     "bundesland": "Baden-Württemberg",
     "students": 11
   },
   {
     "germanOccupationCode": "93522",
+    "name": "Designer/in (Ausbildung) - angew.Formg.,Schmuck/Gerät",
     "bundesland": "Baden-Württemberg",
     "students": 43
   },
   {
     "germanOccupationCode": "94214",
+    "name": "Schauspieler/in (Ausbildung)",
     "bundesland": "Baden-Württemberg",
     "students": 38
   },
   {
     "germanOccupationCode": "94224",
+    "name": "Bühnentänzer/in (Ausbildung)",
     "bundesland": "Baden-Württemberg",
     "students": 18
   },
   {
     "germanOccupationCode": "94283",
+    "name": "Artist/in",
     "bundesland": "Baden-Württemberg",
     "students": 6
   },
   {
     "germanOccupationCode": "94532",
+    "name": "Berufe in der Bild- und Tontechnik - fachlich ausgerichtete Tätigkeiten",
     "bundesland": "Baden-Württemberg",
     "students": 10
   },
   {
     "germanOccupationCode": "99999",
+    "name": "Keine Zuordnung möglich",
     "bundesland": "Baden-Württemberg",
     "students": 23
   },
   {
     "germanOccupationCode": "23222",
+    "name": "Designer/in (Ausbildung) - Kommunikationsdesign",
     "bundesland": "Bayern",
     "students": 76
   },
   {
     "germanOccupationCode": "23223",
+    "name": "Gamedesigner/in (Ausbildung)",
     "bundesland": "Bayern",
     "students": 23
   },
   {
     "germanOccupationCode": "28212",
+    "name": "Designer/in (Ausbildung) - Mode",
     "bundesland": "Bayern",
     "students": 26
   },
   {
     "germanOccupationCode": "28222",
+    "name": "Bekleidungstechnische/r Assistent/in",
     "bundesland": "Bayern",
     "students": 7
   },
   {
     "germanOccupationCode": "41212",
+    "name": "Biologisch-technische/r Assistent/in",
     "bundesland": "Bayern",
     "students": 68
   },
   {
     "germanOccupationCode": "41322",
+    "name": "Chemisch-technische/r Assistent/in",
     "bundesland": "Bayern",
     "students": 42
   },
   {
     "germanOccupationCode": "43102",
+    "name": "Assistent/in - Informatik (allgemeine Informatik)",
     "bundesland": "Bayern",
     "students": 21
   },
   {
     "germanOccupationCode": "43112",
+    "name": "Kfm. Ass./Wirtschaftsassistent/in - E-Business Management",
     "bundesland": "Bayern",
     "students": 117
   },
   {
     "germanOccupationCode": "43122",
+    "name": "Assistent/in - Informatik (technische Informatik)",
     "bundesland": "Bayern",
     "students": 212
   },
   {
     "germanOccupationCode": "63212",
+    "name": "Assistent/in - Hotelmanagement",
     "bundesland": "Bayern",
     "students": 136
   },
   {
     "germanOccupationCode": "71403",
+    "name": "Managementassistent/in (schulische Ausbildung)",
     "bundesland": "Bayern",
     "students": 5
   },
   {
     "germanOccupationCode": "71413",
+    "name": "Fremdsprachenkorrespondent/in",
     "bundesland": "Bayern",
     "students": 486
   },
   {
     "germanOccupationCode": "81752",
+    "name": "Heilpraktiker/in",
     "bundesland": "Bayern",
     "students": 11
   },
   {
     "germanOccupationCode": "82222",
+    "name": "Fachkraft - Beauty und Wellness",
     "bundesland": "Bayern",
     "students": 80
   },
   {
     "germanOccupationCode": "82322",
+    "name": "Kosmetiker/in (schulische Ausbildung)",
     "bundesland": "Bayern",
     "students": 213
   },
   {
     "germanOccupationCode": "83112",
+    "name": "Sozialpädagogische/r Assistent/in / Kinderpfleger/in",
     "bundesland": "Bayern",
     "students": 3722
   },
   {
     "germanOccupationCode": "83142",
+    "name": "Sozialassistent/in",
     "bundesland": "Bayern",
     "students": 836
   },
   {
     "germanOccupationCode": "83212",
+    "name": "Assistent/in - Ernährung und Versorgung",
     "bundesland": "Bayern",
     "students": 905
   },
   {
     "germanOccupationCode": "84483",
+    "name": "Eurythmielehrer/in",
     "bundesland": "Bayern",
     "students": 2
   },
   {
     "germanOccupationCode": "84553",
+    "name": "Gymnastiklehrer/in",
     "bundesland": "Bayern",
     "students": 51
   },
   {
     "germanOccupationCode": "93102",
+    "name": "Assistent/in - Produktdesign",
     "bundesland": "Bayern",
     "students": 45
   },
   {
     "germanOccupationCode": "93212",
+    "name": "Assistent/in - Innenarchitektur",
     "bundesland": "Bayern",
     "students": 6
   },
   {
     "germanOccupationCode": "93323",
+    "name": "Kunstmaler/in",
     "bundesland": "Bayern",
     "students": 9
   },
   {
     "germanOccupationCode": "94114",
+    "name": "Musiker/in - Kirchenmusik (Ausbildung)",
     "bundesland": "Bayern",
     "students": 3
   },
   {
     "germanOccupationCode": "94134",
+    "name": "Ensembleleiter/in",
     "bundesland": "Bayern",
     "students": 253
   },
   {
     "germanOccupationCode": "94214",
+    "name": "Schauspieler/in (Ausbildung)",
     "bundesland": "Bayern",
     "students": 90
   },
   {
     "germanOccupationCode": "94224",
+    "name": "Bühnentänzer/in (Ausbildung)",
     "bundesland": "Bayern",
     "students": 12
   },
   {
     "germanOccupationCode": "99999",
+    "name": "Keine Zuordnung möglich",
     "bundesland": "Bayern",
     "students": 11
   },
   {
     "germanOccupationCode": "23212",
+    "name": "Gestaltungstechnische/r Assistent/in",
     "bundesland": "Berlin",
     "students": 137
   },
   {
     "germanOccupationCode": "23222",
+    "name": "Designer/in (Ausbildung) - Grafik",
     "bundesland": "Berlin",
     "students": 116
   },
   {
     "germanOccupationCode": "23312",
+    "name": "Foto- und medientechnische/r Assistent/in",
     "bundesland": "Berlin",
     "students": 187
   },
   {
     "germanOccupationCode": "23322",
+    "name": "Designer/in (Ausbildung) - Foto",
     "bundesland": "Berlin",
     "students": 25
   },
   {
     "germanOccupationCode": "26302",
+    "name": "Elektrotechnische/r Assistent/in",
     "bundesland": "Berlin",
     "students": 38
   },
   {
     "germanOccupationCode": "26312",
+    "name": "Techn. Assistent/in - Elektronik und Datentechnik",
     "bundesland": "Berlin",
     "students": 37
   },
   {
     "germanOccupationCode": "28212",
+    "name": "Designer/in (Ausbildung) - Mode",
     "bundesland": "Berlin",
     "students": 73
   },
   {
     "germanOccupationCode": "28222",
+    "name": "Bekleidungstechnische/r Assistent/in",
     "bundesland": "Berlin",
     "students": 30
   },
   {
     "germanOccupationCode": "29202",
+    "name": "Lebensmitteltechnische/r Assistent/in",
     "bundesland": "Berlin",
     "students": 8
   },
   {
     "germanOccupationCode": "31152",
+    "name": "Denkmaltechnische/r Assistent/in",
     "bundesland": "Berlin",
     "students": 13
   },
   {
     "germanOccupationCode": "41212",
+    "name": "Biologisch-technische/r Assistent/in",
     "bundesland": "Berlin",
     "students": 90
   },
   {
     "germanOccupationCode": "41322",
+    "name": "Chemisch-technische/r Assistent/in",
     "bundesland": "Berlin",
     "students": 64
   },
   {
     "germanOccupationCode": "41412",
+    "name": "Physikalisch-technische/r Assistent/in",
     "bundesland": "Berlin",
     "students": 26
   },
   {
     "germanOccupationCode": "41422",
+    "name": "Techn. Assistent/in - Metallografie/Werkstoffkunde",
     "bundesland": "Berlin",
     "students": 4
   },
   {
     "germanOccupationCode": "42202",
+    "name": "Umweltschutztechnische/r Assistent/in",
     "bundesland": "Berlin",
     "students": 8
   },
   {
     "germanOccupationCode": "43102",
+    "name": "Assistent/in - Informatik (allgemeine Informatik)",
     "bundesland": "Berlin",
     "students": 106
   },
   {
     "germanOccupationCode": "43102",
+    "name": "Fachberater/in - Integrierte Systeme",
     "bundesland": "Berlin",
     "students": 27
   },
   {
     "germanOccupationCode": "43112",
+    "name": "Kfm. Ass./Wirtschaftsassistent/in - Informationsverarbeitung",
     "bundesland": "Berlin",
     "students": 10
   },
   {
     "germanOccupationCode": "43122",
+    "name": "Assistent/in - Informatik (technische Informatik)",
     "bundesland": "Berlin",
     "students": 67
   },
   {
     "germanOccupationCode": "71302",
+    "name": "Kfm. Ass./Wirtschaftsassistent/in - Betriebswirtschaft",
     "bundesland": "Berlin",
     "students": 102
   },
   {
     "germanOccupationCode": "71402",
+    "name": "Kfm. Ass./Wirtschaftsassistent/in - Büro/Sekretariat",
     "bundesland": "Berlin",
     "students": 8
   },
   {
     "germanOccupationCode": "71412",
+    "name": "Kfm. Ass./Wirtschaftsassistent/in - Fremdsprachen",
     "bundesland": "Berlin",
     "students": 102
   },
   {
     "germanOccupationCode": "82322",
+    "name": "Kosmetiker/in (schulische Ausbildung)",
     "bundesland": "Berlin",
     "students": 123
   },
   {
     "germanOccupationCode": "82502",
+    "name": "Techn. Assistent/in - medizinische Gerätetechnik",
     "bundesland": "Berlin",
     "students": 32
   },
   {
     "germanOccupationCode": "83142",
+    "name": "Sozialassistent/in",
     "bundesland": "Berlin",
     "students": 2418
   },
   {
     "germanOccupationCode": "83212",
+    "name": "Assistent/in - Ernährung und Versorgung",
     "bundesland": "Berlin",
     "students": 19
   },
   {
     "germanOccupationCode": "92302",
+    "name": "Kfm. Ass./Wirtschaftsassistent/in - Medien",
     "bundesland": "Berlin",
     "students": 10
   },
   {
     "germanOccupationCode": "94224",
+    "name": "Bühnentänzer/in (Ausbildung)",
     "bundesland": "Berlin",
     "students": 10
   },
   {
     "germanOccupationCode": "94283",
+    "name": "Artist/in",
     "bundesland": "Berlin",
     "students": 2
   },
   {
     "germanOccupationCode": "99999",
+    "name": "Keine Zuordnung möglich",
     "bundesland": "Berlin",
     "students": 48
   },
   {
     "germanOccupationCode": "23212",
+    "name": "Gestaltungstechnische/r Assistent/in",
     "bundesland": "Brandenburg",
     "students": 146
   },
   {
     "germanOccupationCode": "41212",
+    "name": "Biologisch-technische/r Assistent/in",
     "bundesland": "Brandenburg",
     "students": 17
   },
   {
     "germanOccupationCode": "63122",
+    "name": "Sportassistent/in",
     "bundesland": "Brandenburg",
     "students": 93
   },
   {
     "germanOccupationCode": "71402",
+    "name": "Kfm. Ass./Wirtschaftsassistent/in - Büro/Sekretariat",
     "bundesland": "Brandenburg",
     "students": 9
   },
   {
     "germanOccupationCode": "83142",
+    "name": "Sozialassistent/in",
     "bundesland": "Brandenburg",
     "students": 1227
   },
   {
     "germanOccupationCode": "23212",
+    "name": "Gestaltungstechnische/r Assistent/in",
     "bundesland": "Bremen",
     "students": 43
   },
   {
     "germanOccupationCode": "23222",
+    "name": "Designer/in (Ausbildung) - Grafik",
     "bundesland": "Bremen",
     "students": 47
   },
   {
     "germanOccupationCode": "41212",
+    "name": "Biologisch-technische/r Assistent/in",
     "bundesland": "Bremen",
     "students": 17
   },
   {
     "germanOccupationCode": "41322",
+    "name": "Chemisch-technische/r Assistent/in",
     "bundesland": "Bremen",
     "students": 15
   },
   {
     "germanOccupationCode": "43112",
+    "name": "Kfm. Ass./Wirtschaftsassistent/in - Informationsverarbeitung",
     "bundesland": "Bremen",
     "students": 75
   },
   {
     "germanOccupationCode": "43122",
+    "name": "Assistent/in - Informatik (technische Informatik)",
     "bundesland": "Bremen",
     "students": 44
   },
   {
     "germanOccupationCode": "43412",
+    "name": "Mathematisch-technische/r Assistent/in",
     "bundesland": "Bremen",
     "students": 27
   },
   {
     "germanOccupationCode": "71412",
+    "name": "Kfm. Ass./Wirtschaftsassistent/in - Fremdsprachen",
     "bundesland": "Bremen",
     "students": 37
   },
   {
     "germanOccupationCode": "81301",
+    "name": "Pflegeassistent/in",
     "bundesland": "Bremen",
     "students": 27
   },
   {
     "germanOccupationCode": "81822",
+    "name": "Pharmazeutisch-technische/r Assistent/in",
     "bundesland": "Bremen",
     "students": 30
   },
   {
     "germanOccupationCode": "83112",
+    "name": "Sozialpädagogische/r Assistent/in / Kinderpfleger/in",
     "bundesland": "Bremen",
     "students": 414
   },
   {
     "germanOccupationCode": "83131",
+    "name": "Heilerziehungspflegeassistent/in",
     "bundesland": "Bremen",
     "students": 10
   },
   {
     "germanOccupationCode": "83142",
+    "name": "Sozialassistent/in",
     "bundesland": "Bremen",
     "students": 29
   },
   {
     "germanOccupationCode": "83143",
+    "name": "Haus- und Familienpfleger/in (Ausbildung)",
     "bundesland": "Bremen",
     "students": 35
   },
   {
     "germanOccupationCode": "23212",
+    "name": "Gestaltungstechnische/r Assistent/in",
     "bundesland": "Hamburg",
     "students": 110
   },
   {
     "germanOccupationCode": "41212",
+    "name": "Biologisch-technische/r Assistent/in",
     "bundesland": "Hamburg",
     "students": 62
   },
   {
     "germanOccupationCode": "41322",
+    "name": "Chemisch-technische/r Assistent/in",
     "bundesland": "Hamburg",
     "students": 46
   },
   {
     "germanOccupationCode": "63112",
+    "name": "Touristikassistent/in",
     "bundesland": "Hamburg",
     "students": 23
   },
   {
     "germanOccupationCode": "71412",
+    "name": "Kfm. Ass./Wirtschaftsassistent/in - Fremdsprachen",
     "bundesland": "Hamburg",
     "students": 62
   },
   {
     "germanOccupationCode": "81822",
+    "name": "Pharmazeutisch-technische/r Assistent/in",
     "bundesland": "Hamburg",
     "students": 203
   },
   {
     "germanOccupationCode": "83112",
+    "name": "Sozialpädagogische/r Assistent/in / Kinderpfleger/in",
     "bundesland": "Hamburg",
     "students": 930
   },
   {
     "germanOccupationCode": "84553",
+    "name": "Gymnastiklehrer/in",
     "bundesland": "Hamburg",
     "students": 42
   },
   {
     "germanOccupationCode": "92302",
+    "name": "Kfm. Ass./Wirtschaftsassistent/in - Medien",
     "bundesland": "Hamburg",
     "students": 52
   },
   {
     "germanOccupationCode": "41212",
+    "name": "Biologisch-technische/r Assistent/in",
     "bundesland": "Hessen",
     "students": 91
   },
   {
     "germanOccupationCode": "41322",
+    "name": "Chemisch-technische/r Assistent/in",
     "bundesland": "Hessen",
     "students": 73
   },
   {
     "germanOccupationCode": "42202",
+    "name": "Umweltschutztechnische/r Assistent/in",
     "bundesland": "Hessen",
     "students": 21
   },
   {
     "germanOccupationCode": "43112",
+    "name": "Assistent/in - Informatik (Wirtschaftsinformatik)",
     "bundesland": "Hessen",
     "students": 242
   },
   {
     "germanOccupationCode": "43112",
+    "name": "Kfm. Ass./Wirtschaftsassistent/in - Informationsverarbeitung",
     "bundesland": "Hessen",
     "students": 602
   },
   {
     "germanOccupationCode": "43122",
+    "name": "Assistent/in - Informatik (technische Informatik)",
     "bundesland": "Hessen",
     "students": 215
   },
   {
     "germanOccupationCode": "71412",
+    "name": "Kfm. Ass./Wirtschaftsassistent/in - Fremdsprachen",
     "bundesland": "Hessen",
     "students": 229
   },
   {
     "germanOccupationCode": "83142",
+    "name": "Sozialassistent/in",
     "bundesland": "Hessen",
     "students": 1915
   },
   {
     "germanOccupationCode": "92302",
+    "name": "Kfm. Ass./Wirtschaftsassistent/in - Medien",
     "bundesland": "Hessen",
     "students": 184
   },
   {
     "germanOccupationCode": "23212",
+    "name": "Gestaltungstechnische/r Assistent/in",
     "bundesland": "Mecklenburg-Vorpommern",
     "students": 162
   },
   {
     "germanOccupationCode": "28212",
+    "name": "Designer/in (Ausbildung) - Mode",
     "bundesland": "Mecklenburg-Vorpommern",
     "students": 43
   },
   {
     "germanOccupationCode": "43122",
+    "name": "Assistent/in - Informatik (technische Informatik)",
     "bundesland": "Mecklenburg-Vorpommern",
     "students": 8
   },
   {
     "germanOccupationCode": "73342",
+    "name": "Medizinische/r Dokumentationsassistent/in",
     "bundesland": "Mecklenburg-Vorpommern",
     "students": 7
   },
   {
     "germanOccupationCode": "81132",
+    "name": "Orthoptist/in",
     "bundesland": "Mecklenburg-Vorpommern",
     "students": 11
   },
   {
     "germanOccupationCode": "81212",
+    "name": "Medizinische/r Technologe/Technologin - Laboratoriumsanaly.",
     "bundesland": "Mecklenburg-Vorpommern",
     "students": 40
   },
   {
     "germanOccupationCode": "81232",
+    "name": "Medizinische/r Technologe/Technologin - Radiologie",
     "bundesland": "Mecklenburg-Vorpommern",
     "students": 52
   },
   {
     "germanOccupationCode": "81302",
+    "name": "Pflegefachmann/-frau (Ausbildung)",
     "bundesland": "Mecklenburg-Vorpommern",
     "students": 1214
   },
   {
     "germanOccupationCode": "81332",
+    "name": "Anästhesietechnische/r Assistent/in",
     "bundesland": "Mecklenburg-Vorpommern",
     "students": 40
   },
   {
     "germanOccupationCode": "81332",
+    "name": "Operationstechnische/r Assistent/in",
     "bundesland": "Mecklenburg-Vorpommern",
     "students": 77
   },
   {
     "germanOccupationCode": "81342",
+    "name": "Notfallsanitäter/in",
     "bundesland": "Mecklenburg-Vorpommern",
     "students": 106
   },
   {
     "germanOccupationCode": "81712",
+    "name": "Masseur/in und medizinische/r Bademeister/in",
     "bundesland": "Mecklenburg-Vorpommern",
     "students": 13
   },
   {
     "germanOccupationCode": "81713",
+    "name": "Physiotherapeut/in (Ausbildung)",
     "bundesland": "Mecklenburg-Vorpommern",
     "students": 232
   },
   {
     "germanOccupationCode": "81723",
+    "name": "Ergotherapeut/in (Ausbildung)",
     "bundesland": "Mecklenburg-Vorpommern",
     "students": 148
   },
   {
     "germanOccupationCode": "81733",
+    "name": "Logopäde/Logopädin (Ausbildung)",
     "bundesland": "Mecklenburg-Vorpommern",
     "students": 29
   },
   {
     "germanOccupationCode": "81762",
+    "name": "Diätassistent/in",
     "bundesland": "Mecklenburg-Vorpommern",
     "students": 19
   },
   {
     "germanOccupationCode": "81772",
+    "name": "Podologe/Podologin",
     "bundesland": "Mecklenburg-Vorpommern",
     "students": 16
   },
   {
     "germanOccupationCode": "81822",
+    "name": "Pharmazeutisch-technische/r Assistent/in",
     "bundesland": "Mecklenburg-Vorpommern",
     "students": 45
   },
   {
     "germanOccupationCode": "82101",
+    "name": "Altenpflegehelfer/in",
     "bundesland": "Mecklenburg-Vorpommern",
     "students": 407
   },
   {
     "germanOccupationCode": "83112",
+    "name": "Sozialpädagogische/r Assistent/in / Kinderpfleger/in",
     "bundesland": "Mecklenburg-Vorpommern",
     "students": 108
   },
   {
     "germanOccupationCode": "83113",
+    "name": "Erzieher/in",
     "bundesland": "Mecklenburg-Vorpommern",
     "students": 441
   },
   {
     "germanOccupationCode": "83142",
+    "name": "Sozialassistent/in",
     "bundesland": "Mecklenburg-Vorpommern",
     "students": 584
   },
   {
     "germanOccupationCode": "11132",
+    "name": "Agrarwirtschaftlich-technische/r Assistent/in",
     "bundesland": "Niedersachsen",
     "students": 16
   },
   {
     "germanOccupationCode": "23212",
+    "name": "Gestaltungstechnische/r Assistent/in",
     "bundesland": "Niedersachsen",
     "students": 210
   },
   {
     "germanOccupationCode": "26302",
+    "name": "Elektrotechnische/r Assistent/in",
     "bundesland": "Niedersachsen",
     "students": 7
   },
   {
     "germanOccupationCode": "28212",
+    "name": "Designer/in (Ausbildung) - Mode",
     "bundesland": "Niedersachsen",
     "students": 25
   },
   {
     "germanOccupationCode": "41212",
+    "name": "Biologisch-technische/r Assistent/in",
     "bundesland": "Niedersachsen",
     "students": 154
   },
   {
     "germanOccupationCode": "41322",
+    "name": "Chemisch-technische/r Assistent/in",
     "bundesland": "Niedersachsen",
     "students": 89
   },
   {
     "germanOccupationCode": "42202",
+    "name": "Umweltschutztechnische/r Assistent/in",
     "bundesland": "Niedersachsen",
     "students": 17
   },
   {
     "germanOccupationCode": "43102",
+    "name": "Assistent/in - Informatik (allgemeine Informatik)",
     "bundesland": "Niedersachsen",
     "students": 345
   },
   {
     "germanOccupationCode": "43112",
+    "name": "Kfm. Ass./Wirtschaftsassistent/in - Informationsverarbeitung",
     "bundesland": "Niedersachsen",
     "students": 141
   },
   {
     "germanOccupationCode": "51132",
+    "name": "Schiffsbetriebstechnische/r Assistent/in",
     "bundesland": "Niedersachsen",
     "students": 4
   },
   {
     "germanOccupationCode": "71412",
+    "name": "Kfm. Ass./Wirtschaftsassistent/in - Fremdsprachen",
     "bundesland": "Niedersachsen",
     "students": 152
   },
   {
     "germanOccupationCode": "81301",
+    "name": "Pflegeassistent/in",
     "bundesland": "Niedersachsen",
     "students": 1691
   },
   {
     "germanOccupationCode": "81302",
+    "name": "Pflegefachmann/-frau (Ausbildung)",
     "bundesland": "Niedersachsen",
     "students": 964
   },
   {
     "germanOccupationCode": "81713",
+    "name": "Physiotherapeut/in (Ausbildung)",
     "bundesland": "Niedersachsen",
     "students": 71
   },
   {
     "germanOccupationCode": "81723",
+    "name": "Ergotherapeut/in (Ausbildung)",
     "bundesland": "Niedersachsen",
     "students": 722
   },
   {
     "germanOccupationCode": "81723",
+    "name": "Motopäde/Motopädin",
     "bundesland": "Niedersachsen",
     "students": 11
   },
   {
     "germanOccupationCode": "81733",
+    "name": "Atem-, Sprech- und Stimmlehrer/in",
     "bundesland": "Niedersachsen",
     "students": 43
   },
   {
     "germanOccupationCode": "81822",
+    "name": "Pharmazeutisch-technische/r Assistent/in",
     "bundesland": "Niedersachsen",
     "students": 641
   },
   {
     "germanOccupationCode": "82322",
+    "name": "Kosmetiker/in (schulische Ausbildung)",
     "bundesland": "Niedersachsen",
     "students": 526
   },
   {
     "germanOccupationCode": "83112",
+    "name": "Sozialpädagogische/r Assistent/in / Kinderpfleger/in",
     "bundesland": "Niedersachsen",
     "students": 3579
   },
   {
     "germanOccupationCode": "83142",
+    "name": "Sozialassistent/in",
     "bundesland": "Niedersachsen",
     "students": 21
   },
   {
     "germanOccupationCode": "23212",
+    "name": "Gestaltungstechnische/r Assistent/in",
     "bundesland": "Nordrhein-Westfalen",
     "students": 1545
   },
   {
     "germanOccupationCode": "25103",
+    "name": "Assistent/in - Maschinenbautechnik",
     "bundesland": "Nordrhein-Westfalen",
     "students": 200
   },
   {
     "germanOccupationCode": "26242",
+    "name": "Techn. Assistent/in - regenerative Energietechnik/Energiem.",
     "bundesland": "Nordrhein-Westfalen",
     "students": 25
   },
   {
     "germanOccupationCode": "26302",
+    "name": "Elektrotechnische/r Assistent/in",
     "bundesland": "Nordrhein-Westfalen",
     "students": 190
   },
   {
     "germanOccupationCode": "28222",
+    "name": "Bekleidungstechnische/r Assistent/in",
     "bundesland": "Nordrhein-Westfalen",
     "students": 195
   },
   {
     "germanOccupationCode": "29202",
+    "name": "Lebensmitteltechnische/r Assistent/in",
     "bundesland": "Nordrhein-Westfalen",
     "students": 35
   },
   {
     "germanOccupationCode": "31102",
+    "name": "Techn. Assistent/in - Bautechnik",
     "bundesland": "Nordrhein-Westfalen",
     "students": 205
   },
   {
     "germanOccupationCode": "41212",
+    "name": "Biologisch-technische/r Assistent/in",
     "bundesland": "Nordrhein-Westfalen",
     "students": 205
   },
   {
     "germanOccupationCode": "41222",
+    "name": "Präparationstechnische/r Assistent/in",
     "bundesland": "Nordrhein-Westfalen",
     "students": 25
   },
   {
     "germanOccupationCode": "41322",
+    "name": "Chemisch-technische/r Assistent/in",
     "bundesland": "Nordrhein-Westfalen",
     "students": 330
   },
   {
     "germanOccupationCode": "41412",
+    "name": "Physikalisch-technische/r Assistent/in",
     "bundesland": "Nordrhein-Westfalen",
     "students": 25
   },
   {
     "germanOccupationCode": "41422",
+    "name": "Techn. Assistent/in - Metallografie/Werkstoffkunde",
     "bundesland": "Nordrhein-Westfalen",
     "students": 20
   },
   {
     "germanOccupationCode": "42202",
+    "name": "Umweltschutztechnische/r Assistent/in",
     "bundesland": "Nordrhein-Westfalen",
     "students": 30
   },
   {
     "germanOccupationCode": "43102",
+    "name": "Assistent/in - Informatik (allgemeine Informatik)",
     "bundesland": "Nordrhein-Westfalen",
     "students": 1685
   },
   {
     "germanOccupationCode": "43112",
+    "name": "Assistent/in - Informatik (Wirtschaftsinformatik)",
     "bundesland": "Nordrhein-Westfalen",
     "students": 5
   },
   {
     "germanOccupationCode": "43112",
+    "name": "Kfm. Ass./Wirtschaftsassistent/in - Betriebsinformatik",
     "bundesland": "Nordrhein-Westfalen",
     "students": 50
   },
   {
     "germanOccupationCode": "43112",
+    "name": "Kfm. Ass./Wirtschaftsassistent/in - Informationsverarbeitung",
     "bundesland": "Nordrhein-Westfalen",
     "students": 325
   },
   {
     "germanOccupationCode": "43152",
+    "name": "Assistent/in - Informatik (Medieninformatik)",
     "bundesland": "Nordrhein-Westfalen",
     "students": 85
   },
   {
     "germanOccupationCode": "43412",
+    "name": "Assistent/in - Informatik (Softwaretechnik)",
     "bundesland": "Nordrhein-Westfalen",
     "students": 75
   },
   {
     "germanOccupationCode": "71302",
+    "name": "Kfm. Ass./Wirtschaftsassistent/in - Betriebswirtschaft",
     "bundesland": "Nordrhein-Westfalen",
     "students": 505
   },
   {
     "germanOccupationCode": "71412",
+    "name": "Kfm. Ass./Wirtschaftsassistent/in - Fremdsprachen",
     "bundesland": "Nordrhein-Westfalen",
     "students": 240
   },
   {
     "germanOccupationCode": "82322",
+    "name": "Kosmetiker/in (schulische Ausbildung)",
     "bundesland": "Nordrhein-Westfalen",
     "students": 420
   },
   {
     "germanOccupationCode": "83112",
+    "name": "Sozialpädagogische/r Assistent/in / Kinderpfleger/in",
     "bundesland": "Nordrhein-Westfalen",
     "students": 5620
   },
   {
     "germanOccupationCode": "83131",
+    "name": "Heilerziehungspflegeassistent/in",
     "bundesland": "Nordrhein-Westfalen",
     "students": 440
   },
   {
     "germanOccupationCode": "83142",
+    "name": "Sozialassistent/in",
     "bundesland": "Nordrhein-Westfalen",
     "students": 2585
   },
   {
     "germanOccupationCode": "83212",
+    "name": "Assistent/in - Ernährung und Versorgung",
     "bundesland": "Nordrhein-Westfalen",
     "students": 305
   },
   {
     "germanOccupationCode": "84553",
+    "name": "Gymnastiklehrer/in",
     "bundesland": "Nordrhein-Westfalen",
     "students": 300
   },
   {
     "germanOccupationCode": "99999",
+    "name": "Keine Zuordnung möglich",
     "bundesland": "Nordrhein-Westfalen",
     "students": 690
   },
   {
     "germanOccupationCode": "23212",
+    "name": "Gestaltungstechnische/r Assistent/in",
     "bundesland": "Rheinland-Pfalz",
     "students": 267
   },
   {
     "germanOccupationCode": "26112",
+    "name": "Mechatroniker/in",
     "bundesland": "Rheinland-Pfalz",
     "students": 135
   },
   {
     "germanOccupationCode": "28222",
+    "name": "Bekleidungstechnische/r Assistent/in",
     "bundesland": "Rheinland-Pfalz",
     "students": 11
   },
   {
     "germanOccupationCode": "41212",
+    "name": "Biologisch-technische/r Assistent/in",
     "bundesland": "Rheinland-Pfalz",
     "students": 109
   },
   {
     "germanOccupationCode": "43102",
+    "name": "Assistent/in - Informatik (allgemeine Informatik)",
     "bundesland": "Rheinland-Pfalz",
     "students": 468
   },
   {
     "germanOccupationCode": "53212",
+    "name": "Polizeivollzugsbeamt(er/in) (mittl. Dienst)",
     "bundesland": "Rheinland-Pfalz",
     "students": 61
   },
   {
     "germanOccupationCode": "63312",
+    "name": "Gastronomische/r Assistent/in",
     "bundesland": "Rheinland-Pfalz",
     "students": 55
   },
   {
     "germanOccupationCode": "71302",
+    "name": "Kfm. Ass./Wirtschaftsassistent/in - Betriebswirtschaft",
     "bundesland": "Rheinland-Pfalz",
     "students": 1813
   },
   {
     "germanOccupationCode": "81302",
+    "name": "Pflegefachmann/-frau (Ausbildung)",
     "bundesland": "Rheinland-Pfalz",
     "students": 1574
   },
   {
     "germanOccupationCode": "83142",
+    "name": "Sozialassistent/in",
     "bundesland": "Rheinland-Pfalz",
     "students": 1692
   },
   {
     "germanOccupationCode": "83212",
+    "name": "Assistent/in - Ernährung und Versorgung",
     "bundesland": "Rheinland-Pfalz",
     "students": 58
   },
   {
     "germanOccupationCode": "83112",
+    "name": "Sozialpädagogische/r Assistent/in / Kinderpfleger/in",
     "bundesland": "Saarland",
     "students": 269
   },
   {
     "germanOccupationCode": "83131",
+    "name": "Heilerziehungspflegeassistent/in",
     "bundesland": "Saarland",
     "students": 40
   },
   {
     "germanOccupationCode": "83143",
+    "name": "Haus- und Familienpfleger/in (Ausbildung)",
     "bundesland": "Saarland",
     "students": 55
   },
   {
     "germanOccupationCode": "23222",
+    "name": "Designer/in (Ausbildung) - Grafik",
     "bundesland": "Sachsen",
     "students": 54
   },
   {
     "germanOccupationCode": "23222",
+    "name": "Designer/in (Ausbildung) - Kommunikationsdesign",
     "bundesland": "Sachsen",
     "students": 10
   },
   {
     "germanOccupationCode": "23223",
+    "name": "Gamedesigner/in (Ausbildung)",
     "bundesland": "Sachsen",
     "students": 17
   },
   {
     "germanOccupationCode": "28212",
+    "name": "Designer/in (Ausbildung) - Mode",
     "bundesland": "Sachsen",
     "students": 25
   },
   {
     "germanOccupationCode": "81212",
+    "name": "Medizinische/r Technologe/Technologin - Laboratoriumsanaly.",
     "bundesland": "Sachsen",
     "students": 64
   },
   {
     "germanOccupationCode": "81222",
+    "name": "Medizinische/r Technologe/Technologin - Funktionsdiagnostik",
     "bundesland": "Sachsen",
     "students": 13
   },
   {
     "germanOccupationCode": "81232",
+    "name": "Medizinische/r Technologe/Technologin - Radiologie",
     "bundesland": "Sachsen",
     "students": 76
   },
   {
     "germanOccupationCode": "81301",
+    "name": "Gesundheits- und Krankenpflegehelfer/in",
     "bundesland": "Sachsen",
     "students": 1392
   },
   {
     "germanOccupationCode": "81302",
+    "name": "Pflegefachmann/-frau (Ausbildung)",
     "bundesland": "Sachsen",
     "students": 3433
   },
   {
     "germanOccupationCode": "81332",
+    "name": "Anästhesietechnische/r Assistent/in",
     "bundesland": "Sachsen",
     "students": 73
   },
   {
     "germanOccupationCode": "81332",
+    "name": "Operationstechnische/r Assistent/in",
     "bundesland": "Sachsen",
     "students": 143
   },
   {
     "germanOccupationCode": "81342",
+    "name": "Notfallsanitäter/in",
     "bundesland": "Sachsen",
     "students": 298
   },
   {
     "germanOccupationCode": "81712",
+    "name": "Masseur/in und medizinische/r Bademeister/in",
     "bundesland": "Sachsen",
     "students": 70
   },
   {
     "germanOccupationCode": "81713",
+    "name": "Physiotherapeut/in (Ausbildung)",
     "bundesland": "Sachsen",
     "students": 900
   },
   {
     "germanOccupationCode": "81723",
+    "name": "Ergotherapeut/in (Ausbildung)",
     "bundesland": "Sachsen",
     "students": 743
   },
   {
     "germanOccupationCode": "81733",
+    "name": "Logopäde/Logopädin (Ausbildung)",
     "bundesland": "Sachsen",
     "students": 199
   },
   {
     "germanOccupationCode": "81762",
+    "name": "Diätassistent/in",
     "bundesland": "Sachsen",
     "students": 33
   },
   {
     "germanOccupationCode": "81772",
+    "name": "Podologe/Podologin",
     "bundesland": "Sachsen",
     "students": 66
   },
   {
     "germanOccupationCode": "81822",
+    "name": "Pharmazeutisch-technische/r Assistent/in",
     "bundesland": "Sachsen",
     "students": 266
   },
   {
     "germanOccupationCode": "83142",
+    "name": "Sozialassistent/in",
     "bundesland": "Sachsen",
     "students": 1977
   },
   {
     "germanOccupationCode": "94214",
+    "name": "Schauspieler/in (Ausbildung)",
     "bundesland": "Sachsen",
     "students": 7
   },
   {
     "germanOccupationCode": "94224",
+    "name": "Bühnentänzer/in (Ausbildung)",
     "bundesland": "Sachsen",
     "students": 5
   },
   {
     "germanOccupationCode": "23212",
+    "name": "Gestaltungstechnische/r Assistent/in",
     "bundesland": "Sachsen-Anhalt",
     "students": 111
   },
   {
     "germanOccupationCode": "41212",
+    "name": "Biologisch-technische/r Assistent/in",
     "bundesland": "Sachsen-Anhalt",
     "students": 24
   },
   {
     "germanOccupationCode": "43102",
+    "name": "Assistent/in - Informatik (allgemeine Informatik)",
     "bundesland": "Sachsen-Anhalt",
     "students": 30
   },
   {
     "germanOccupationCode": "43112",
+    "name": "Kfm. Ass./Wirtschaftsassistent/in - Informationsverarbeitung",
     "bundesland": "Sachsen-Anhalt",
     "students": 45
   },
   {
     "germanOccupationCode": "81212",
+    "name": "Medizinische/r Technologe/Technologin - Laboratoriumsanaly.",
     "bundesland": "Sachsen-Anhalt",
     "students": 9
   },
   {
     "germanOccupationCode": "81301",
+    "name": "Pflegeassistent/in",
     "bundesland": "Sachsen-Anhalt",
     "students": 840
   },
   {
     "germanOccupationCode": "81712",
+    "name": "Masseur/in und medizinische/r Bademeister/in",
     "bundesland": "Sachsen-Anhalt",
     "students": 15
   },
   {
     "germanOccupationCode": "81713",
+    "name": "Physiotherapeut/in (Ausbildung)",
     "bundesland": "Sachsen-Anhalt",
     "students": 204
   },
   {
     "germanOccupationCode": "81723",
+    "name": "Ergotherapeut/in (Ausbildung)",
     "bundesland": "Sachsen-Anhalt",
     "students": 174
   },
   {
     "germanOccupationCode": "81733",
+    "name": "Logopäde/Logopädin (Ausbildung)",
     "bundesland": "Sachsen-Anhalt",
     "students": 24
   },
   {
     "germanOccupationCode": "81762",
+    "name": "Diätassistent/in",
     "bundesland": "Sachsen-Anhalt",
     "students": 15
   },
   {
     "germanOccupationCode": "81822",
+    "name": "Pharmazeutisch-technische/r Assistent/in",
     "bundesland": "Sachsen-Anhalt",
     "students": 102
   },
   {
     "germanOccupationCode": "83112",
+    "name": "Sozialpädagogische/r Assistent/in / Kinderpfleger/in",
     "bundesland": "Sachsen-Anhalt",
     "students": 729
   },
   {
     "germanOccupationCode": "83142",
+    "name": "Sozialassistent/in",
     "bundesland": "Sachsen-Anhalt",
     "students": 831
   },
   {
     "germanOccupationCode": "83143",
+    "name": "Haus- und Familienpfleger/in (Ausbildung)",
     "bundesland": "Sachsen-Anhalt",
     "students": 54
   },
   {
     "germanOccupationCode": "99999",
+    "name": "Keine Zuordnung möglich",
     "bundesland": "Schleswig-Holstein",
     "students": 4364
   },
   {
     "germanOccupationCode": "23212",
+    "name": "Gestaltungstechnische/r Assistent/in",
     "bundesland": "Thüringen",
     "students": 63
   },
   {
     "germanOccupationCode": "41212",
+    "name": "Biologisch-technische/r Assistent/in",
     "bundesland": "Thüringen",
     "students": 15
   },
   {
     "germanOccupationCode": "41322",
+    "name": "Chemisch-technische/r Assistent/in",
     "bundesland": "Thüringen",
     "students": 11
   },
   {
     "germanOccupationCode": "43122",
+    "name": "Assistent/in - Informatik (technische Informatik)",
     "bundesland": "Thüringen",
     "students": 56
   },
   {
     "germanOccupationCode": "53322",
+    "name": "Fachkraft - Hygieneüberwachung",
     "bundesland": "Thüringen",
     "students": 12
   },
   {
     "germanOccupationCode": "71302",
+    "name": "Kfm. Ass./Wirtschaftsassistent/in - Betriebswirtschaft",
     "bundesland": "Thüringen",
     "students": 16
   },
   {
     "germanOccupationCode": "81132",
+    "name": "Orthoptist/in",
     "bundesland": "Thüringen",
     "students": 8
   },
   {
     "germanOccupationCode": "81212",
+    "name": "Medizinische/r Technologe/Technologin - Laboratoriumsanaly.",
     "bundesland": "Thüringen",
     "students": 37
   },
   {
     "germanOccupationCode": "81222",
+    "name": "Medizinische/r Technologe/Technologin - Funktionsdiagnostik",
     "bundesland": "Thüringen",
     "students": 13
   },
   {
     "germanOccupationCode": "81232",
+    "name": "Medizinische/r Technologe/Technologin - Radiologie",
     "bundesland": "Thüringen",
     "students": 73
   },
   {
     "germanOccupationCode": "81301",
+    "name": "Gesundheits- und Krankenpflegehelfer/in",
     "bundesland": "Thüringen",
     "students": 241
   },
   {
     "germanOccupationCode": "81302",
+    "name": "Pflegefachmann/-frau (Ausbildung)",
     "bundesland": "Thüringen",
     "students": 1576
   },
   {
     "germanOccupationCode": "81332",
+    "name": "Anästhesietechnische/r Assistent/in",
     "bundesland": "Thüringen",
     "students": 15
   },
   {
     "germanOccupationCode": "81332",
+    "name": "Operationstechnische/r Assistent/in",
     "bundesland": "Thüringen",
     "students": 95
   },
   {
     "germanOccupationCode": "81342",
+    "name": "Notfallsanitäter/in",
     "bundesland": "Thüringen",
     "students": 107
   },
   {
     "germanOccupationCode": "81712",
+    "name": "Masseur/in und medizinische/r Bademeister/in",
     "bundesland": "Thüringen",
     "students": 19
   },
   {
     "germanOccupationCode": "81713",
+    "name": "Physiotherapeut/in (Ausbildung)",
     "bundesland": "Thüringen",
     "students": 252
   },
   {
     "germanOccupationCode": "81723",
+    "name": "Ergotherapeut/in (Ausbildung)",
     "bundesland": "Thüringen",
     "students": 183
   },
   {
     "germanOccupationCode": "81733",
+    "name": "Logopäde/Logopädin (Ausbildung)",
     "bundesland": "Thüringen",
     "students": 35
   },
   {
     "germanOccupationCode": "81772",
+    "name": "Podologe/Podologin",
     "bundesland": "Thüringen",
     "students": 32
   },
   {
     "germanOccupationCode": "81822",
+    "name": "Pharmazeutisch-technische/r Assistent/in",
     "bundesland": "Thüringen",
     "students": 95
   },
   {
     "germanOccupationCode": "82101",
+    "name": "Altenpflegehelfer/in",
     "bundesland": "Thüringen",
     "students": 575
   },
   {
     "germanOccupationCode": "83112",
+    "name": "Sozialpädagogische/r Assistent/in / Kinderpfleger/in",
     "bundesland": "Thüringen",
     "students": 806
   },
   {
     "germanOccupationCode": "83142",
+    "name": "Sozialassistent/in",
     "bundesland": "Thüringen",
     "students": 774
   },
   {
     "germanOccupationCode": "11132",
+    "name": "Agrarwirtschaftlich-technische/r Assistent/in",
     "bundesland": "Deutschland",
     "students": 16
   },
   {
     "germanOccupationCode": "23212",
+    "name": "Berufe in der Digital- und Printmediengestaltung - fachlich ausgerichtete Tätigkeiten",
     "bundesland": "Deutschland",
     "students": 59
   },
   {
     "germanOccupationCode": "23212",
+    "name": "Gestaltungstechnische/r Assistent/in",
     "bundesland": "Deutschland",
     "students": 2794
   },
   {
     "germanOccupationCode": "23222",
+    "name": "Berufe im Grafik-, Kommunikations- und Fotodesign - fachlich ausgerichtete Tätigkeiten",
     "bundesland": "Deutschland",
     "students": 49
   },
   {
     "germanOccupationCode": "23222",
+    "name": "Designer/in (Ausbildung) - Grafik",
     "bundesland": "Deutschland",
     "students": 946
   },
   {
     "germanOccupationCode": "23222",
+    "name": "Designer/in (Ausbildung) - Kommunikationsdesign",
     "bundesland": "Deutschland",
     "students": 86
   },
   {
     "germanOccupationCode": "23222",
+    "name": "Designer/in (Ausbildung) - Medien",
     "bundesland": "Deutschland",
     "students": 14
   },
   {
     "germanOccupationCode": "23223",
+    "name": "Gamedesigner/in (Ausbildung)",
     "bundesland": "Deutschland",
     "students": 52
   },
   {
     "germanOccupationCode": "23312",
+    "name": "Foto- und medientechnische/r Assistent/in",
     "bundesland": "Deutschland",
     "students": 356
   },
   {
     "germanOccupationCode": "23322",
+    "name": "Designer/in (Ausbildung) - Foto",
     "bundesland": "Deutschland",
     "students": 33
   },
   {
     "germanOccupationCode": "25103",
+    "name": "Assistent/in - Maschinenbautechnik",
     "bundesland": "Deutschland",
     "students": 200
   },
   {
     "germanOccupationCode": "26112",
+    "name": "Mechatroniker/in",
     "bundesland": "Deutschland",
     "students": 135
   },
   {
     "germanOccupationCode": "26242",
+    "name": "Techn. Assistent/in - regenerative Energietechnik/Energiem.",
     "bundesland": "Deutschland",
     "students": 25
   },
   {
     "germanOccupationCode": "26302",
+    "name": "Elektrotechnische/r Assistent/in",
     "bundesland": "Deutschland",
     "students": 300
   },
   {
     "germanOccupationCode": "26312",
+    "name": "Techn. Assistent/in - Elektronik und Datentechnik",
     "bundesland": "Deutschland",
     "students": 37
   },
   {
     "germanOccupationCode": "27212",
+    "name": "Technische Zeichner/innen - fachlich ausgerichtete Tätigkeiten",
     "bundesland": "Deutschland",
     "students": 4
   },
   {
     "germanOccupationCode": "28212",
+    "name": "Designer/in (Ausbildung) - Mode",
     "bundesland": "Deutschland",
     "students": 557
   },
   {
     "germanOccupationCode": "28222",
+    "name": "Bekleidungstechnische/r Assistent/in",
     "bundesland": "Deutschland",
     "students": 243
   },
   {
     "germanOccupationCode": "29202",
+    "name": "Lebensmitteltechnische/r Assistent/in",
     "bundesland": "Deutschland",
     "students": 43
   },
   {
     "germanOccupationCode": "31102",
+    "name": "Techn. Assistent/in - Bautechnik",
     "bundesland": "Deutschland",
     "students": 205
   },
   {
     "germanOccupationCode": "31152",
+    "name": "Denkmaltechnische/r Assistent/in",
     "bundesland": "Deutschland",
     "students": 13
   },
   {
     "germanOccupationCode": "41212",
+    "name": "Biologisch-technische/r Assistent/in",
     "bundesland": "Deutschland",
     "students": 1093
   },
   {
     "germanOccupationCode": "41222",
+    "name": "Präparationstechnische/r Assistent/in",
     "bundesland": "Deutschland",
     "students": 25
   },
   {
     "germanOccupationCode": "41322",
+    "name": "Chemisch-technische/r Assistent/in",
     "bundesland": "Deutschland",
     "students": 913
   },
   {
     "germanOccupationCode": "41412",
+    "name": "Physikalisch-technische/r Assistent/in",
     "bundesland": "Deutschland",
     "students": 70
   },
   {
     "germanOccupationCode": "41422",
+    "name": "Techn. Assistent/in - Metallografie/Werkstoffkunde",
     "bundesland": "Deutschland",
     "students": 24
   },
   {
     "germanOccupationCode": "42202",
+    "name": "Umweltschutztechnische/r Assistent/in",
     "bundesland": "Deutschland",
     "students": 76
   },
   {
     "germanOccupationCode": "43102",
+    "name": "Assistent/in - Informatik (allgemeine Informatik)",
     "bundesland": "Deutschland",
     "students": 2655
   },
   {
     "germanOccupationCode": "43102",
+    "name": "Berufe in der Informatik (ohne Spezialisierung) - fachlich ausgerichtete Tätigkeiten",
     "bundesland": "Deutschland",
     "students": 37
   },
   {
     "germanOccupationCode": "43102",
+    "name": "Fachberater/in - Integrierte Systeme",
     "bundesland": "Deutschland",
     "students": 27
   },
   {
     "germanOccupationCode": "43112",
+    "name": "Assistent/in - Informatik (Wirtschaftsinformatik)",
     "bundesland": "Deutschland",
     "students": 247
   },
   {
     "germanOccupationCode": "43112",
+    "name": "Kfm. Ass./Wirtschaftsassistent/in - Betriebsinformatik",
     "bundesland": "Deutschland",
     "students": 50
   },
   {
     "germanOccupationCode": "43112",
+    "name": "Kfm. Ass./Wirtschaftsassistent/in - E-Business Management",
     "bundesland": "Deutschland",
     "students": 117
   },
   {
     "germanOccupationCode": "43112",
+    "name": "Kfm. Ass./Wirtschaftsassistent/in - Informationsverarbeitung",
     "bundesland": "Deutschland",
     "students": 1198
   },
   {
     "germanOccupationCode": "43122",
+    "name": "Assistent/in - Informatik (technische Informatik)",
     "bundesland": "Deutschland",
     "students": 602
   },
   {
     "germanOccupationCode": "43152",
+    "name": "Assistent/in - Informatik (Medieninformatik)",
     "bundesland": "Deutschland",
     "students": 116
   },
   {
     "germanOccupationCode": "43412",
+    "name": "Assistent/in - Informatik (Softwaretechnik)",
     "bundesland": "Deutschland",
     "students": 75
   },
   {
     "germanOccupationCode": "43412",
+    "name": "Mathematisch-technische/r Assistent/in",
     "bundesland": "Deutschland",
     "students": 27
   },
   {
     "germanOccupationCode": "51132",
+    "name": "Schiffsbetriebstechnische/r Assistent/in",
     "bundesland": "Deutschland",
     "students": 4
   },
   {
     "germanOccupationCode": "53212",
+    "name": "Polizeivollzugsbeamt(er/in) (mittl. Dienst)",
     "bundesland": "Deutschland",
     "students": 61
   },
   {
     "germanOccupationCode": "53322",
+    "name": "Fachkraft - Hygieneüberwachung",
     "bundesland": "Deutschland",
     "students": 12
   },
   {
     "germanOccupationCode": "63112",
+    "name": "Touristikassistent/in",
     "bundesland": "Deutschland",
     "students": 23
   },
   {
     "germanOccupationCode": "63122",
+    "name": "Sportassistent/in",
     "bundesland": "Deutschland",
     "students": 185
   },
   {
     "germanOccupationCode": "63212",
+    "name": "Assistent/in - Hotelmanagement",
     "bundesland": "Deutschland",
     "students": 136
   },
   {
     "germanOccupationCode": "63312",
+    "name": "Gastronomische/r Assistent/in",
     "bundesland": "Deutschland",
     "students": 55
   },
   {
     "germanOccupationCode": "71302",
+    "name": "Kfm. Ass./Wirtschaftsassistent/in - Betriebswirtschaft",
     "bundesland": "Deutschland",
     "students": 2436
   },
   {
     "germanOccupationCode": "71402",
+    "name": "Kfm. Ass./Wirtschaftsassistent/in - Büro/Sekretariat",
     "bundesland": "Deutschland",
     "students": 17
   },
   {
     "germanOccupationCode": "71403",
+    "name": "Managementassistent/in (schulische Ausbildung)",
     "bundesland": "Deutschland",
     "students": 5
   },
   {
     "germanOccupationCode": "71412",
+    "name": "Kfm. Ass./Wirtschaftsassistent/in - Fremdsprachen",
     "bundesland": "Deutschland",
     "students": 822
   },
   {
     "germanOccupationCode": "71413",
+    "name": "Fremdsprachenkorrespondent/in",
     "bundesland": "Deutschland",
     "students": 496
   },
   {
     "germanOccupationCode": "73332",
+    "name": "Assistent/in - Technische Kommunikation",
     "bundesland": "Deutschland",
     "students": 671
   },
   {
     "germanOccupationCode": "73342",
+    "name": "Medizinische/r Dokumentationsassistent/in",
     "bundesland": "Deutschland",
     "students": 15
   },
   {
     "germanOccupationCode": "81132",
+    "name": "Orthoptist/in",
     "bundesland": "Deutschland",
     "students": 19
   },
   {
     "germanOccupationCode": "81212",
+    "name": "Medizinische/r Technologe/Technologin - Laboratoriumsanaly.",
     "bundesland": "Deutschland",
     "students": 150
   },
   {
     "germanOccupationCode": "81222",
+    "name": "Medizinische/r Technologe/Technologin - Funktionsdiagnostik",
     "bundesland": "Deutschland",
     "students": 26
   },
   {
     "germanOccupationCode": "81232",
+    "name": "Medizinische/r Technologe/Technologin - Radiologie",
     "bundesland": "Deutschland",
     "students": 201
   },
   {
     "germanOccupationCode": "81301",
+    "name": "Gesundheits- und Krankenpflegehelfer/in",
     "bundesland": "Deutschland",
     "students": 1633
   },
   {
     "germanOccupationCode": "81301",
+    "name": "Pflegeassistent/in",
     "bundesland": "Deutschland",
     "students": 2588
   },
   {
     "germanOccupationCode": "81302",
+    "name": "Pflegefachmann/-frau (Ausbildung)",
     "bundesland": "Deutschland",
     "students": 12525
   },
   {
     "germanOccupationCode": "81332",
+    "name": "Anästhesietechnische/r Assistent/in",
     "bundesland": "Deutschland",
     "students": 128
   },
   {
     "germanOccupationCode": "81332",
+    "name": "Operationstechnische/r Assistent/in",
     "bundesland": "Deutschland",
     "students": 315
   },
   {
     "germanOccupationCode": "81342",
+    "name": "Notfallsanitäter/in",
     "bundesland": "Deutschland",
     "students": 511
   },
   {
     "germanOccupationCode": "81712",
+    "name": "Masseur/in und medizinische/r Bademeister/in",
     "bundesland": "Deutschland",
     "students": 117
   },
   {
     "germanOccupationCode": "81713",
+    "name": "Physiotherapeut/in (Ausbildung)",
     "bundesland": "Deutschland",
     "students": 1659
   },
   {
     "germanOccupationCode": "81723",
+    "name": "Ergotherapeut/in (Ausbildung)",
     "bundesland": "Deutschland",
     "students": 1970
   },
   {
     "germanOccupationCode": "81723",
+    "name": "Motopäde/Motopädin",
     "bundesland": "Deutschland",
     "students": 11
   },
   {
     "germanOccupationCode": "81733",
+    "name": "Atem-, Sprech- und Stimmlehrer/in",
     "bundesland": "Deutschland",
     "students": 43
   },
   {
     "germanOccupationCode": "81733",
+    "name": "Logopäde/Logopädin (Ausbildung)",
     "bundesland": "Deutschland",
     "students": 287
   },
   {
     "germanOccupationCode": "81752",
+    "name": "Heilpraktiker/in",
     "bundesland": "Deutschland",
     "students": 11
   },
   {
     "germanOccupationCode": "81762",
+    "name": "Diätassistent/in",
     "bundesland": "Deutschland",
     "students": 67
   },
   {
     "germanOccupationCode": "81772",
+    "name": "Podologe/Podologin",
     "bundesland": "Deutschland",
     "students": 114
   },
   {
     "germanOccupationCode": "81822",
+    "name": "Pharmazeutisch-technische/r Assistent/in",
     "bundesland": "Deutschland",
     "students": 2100
   },
   {
     "germanOccupationCode": "82101",
+    "name": "Altenpflegehelfer/in",
     "bundesland": "Deutschland",
     "students": 3986
   },
   {
     "germanOccupationCode": "82222",
+    "name": "Fachkraft - Beauty und Wellness",
     "bundesland": "Deutschland",
     "students": 80
   },
   {
     "germanOccupationCode": "82322",
+    "name": "Kosmetiker/in (schulische Ausbildung)",
     "bundesland": "Deutschland",
     "students": 1282
   },
   {
     "germanOccupationCode": "82502",
+    "name": "Techn. Assistent/in - medizinische Gerätetechnik",
     "bundesland": "Deutschland",
     "students": 32
   },
   {
     "germanOccupationCode": "83112",
+    "name": "Sozialpädagogische/r Assistent/in / Kinderpfleger/in",
     "bundesland": "Deutschland",
     "students": 18705
   },
   {
     "germanOccupationCode": "83113",
+    "name": "Erzieher/in",
     "bundesland": "Deutschland",
     "students": 5230
   },
   {
     "germanOccupationCode": "83131",
+    "name": "Heilerziehungspflegeassistent/in",
     "bundesland": "Deutschland",
     "students": 490
   },
   {
     "germanOccupationCode": "83141",
+    "name": "Betreuungskraft / Alltagsbegleiter/in",
     "bundesland": "Deutschland",
     "students": 149
   },
   {
     "germanOccupationCode": "83142",
+    "name": "Sozialassistent/in",
     "bundesland": "Deutschland",
     "students": 14889
   },
   {
     "germanOccupationCode": "83143",
+    "name": "Haus- und Familienpfleger/in (Ausbildung)",
     "bundesland": "Deutschland",
     "students": 144
   },
   {
     "germanOccupationCode": "83212",
+    "name": "Assistent/in - Ernährung und Versorgung",
     "bundesland": "Deutschland",
     "students": 1287
   },
   {
     "germanOccupationCode": "83322",
+    "name": "Berufe in der Gemeindearbeit - fachlich ausgerichtete Tätigkeiten",
     "bundesland": "Deutschland",
     "students": 18
   },
   {
     "germanOccupationCode": "84412",
+    "name": "Berufe in der Musikpädagogik - fachlich ausgerichtete Tätigkeiten",
     "bundesland": "Deutschland",
     "students": 12
   },
   {
     "germanOccupationCode": "84483",
+    "name": "Eurythmielehrer/in",
     "bundesland": "Deutschland",
     "students": 2
   },
   {
     "germanOccupationCode": "84533",
+    "name": "Tanzpädagoge/-pädagogin",
     "bundesland": "Deutschland",
     "students": 15
   },
   {
     "germanOccupationCode": "84553",
+    "name": "Gymnastiklehrer/in",
     "bundesland": "Deutschland",
     "students": 622
   },
   {
     "germanOccupationCode": "84553",
+    "name": "Trainer/innen - Fitness und Gymnastik - komplexe Spezialistentätigkeiten",
     "bundesland": "Deutschland",
     "students": 13
   },
   {
     "germanOccupationCode": "92302",
+    "name": "Kfm. Ass./Wirtschaftsassistent/in - Medien",
     "bundesland": "Deutschland",
     "students": 246
   },
   {
     "germanOccupationCode": "93102",
+    "name": "Assistent/in - Produktdesign",
     "bundesland": "Deutschland",
     "students": 298
   },
   {
     "germanOccupationCode": "93212",
+    "name": "Assistent/in - Innenarchitektur",
     "bundesland": "Deutschland",
     "students": 6
   },
   {
     "germanOccupationCode": "93312",
+    "name": "Berufe in der Bildhauerei - fachlich ausgerichtete Tätigkeiten",
     "bundesland": "Deutschland",
     "students": 11
   },
   {
     "germanOccupationCode": "93323",
+    "name": "Kunstmaler/in",
     "bundesland": "Deutschland",
     "students": 9
   },
   {
     "germanOccupationCode": "93522",
+    "name": "Designer/in (Ausbildung) - angew.Formg.,Schmuck/Gerät",
     "bundesland": "Deutschland",
     "students": 43
   },
   {
     "germanOccupationCode": "94114",
+    "name": "Musiker/in - Kirchenmusik (Ausbildung)",
     "bundesland": "Deutschland",
     "students": 3
   },
   {
     "germanOccupationCode": "94134",
+    "name": "Ensembleleiter/in",
     "bundesland": "Deutschland",
     "students": 253
   },
   {
     "germanOccupationCode": "94214",
+    "name": "Schauspieler/in (Ausbildung)",
     "bundesland": "Deutschland",
     "students": 135
   },
   {
     "germanOccupationCode": "94224",
+    "name": "Bühnentänzer/in (Ausbildung)",
     "bundesland": "Deutschland",
     "students": 45
   },
   {
     "germanOccupationCode": "94283",
+    "name": "Artist/in",
     "bundesland": "Deutschland",
     "students": 8
   },
   {
     "germanOccupationCode": "94532",
+    "name": "Berufe in der Bild- und Tontechnik - fachlich ausgerichtete Tätigkeiten",
     "bundesland": "Deutschland",
     "students": 10
   },
   {
     "germanOccupationCode": "99999",
+    "name": "Keine Zuordnung möglich",
     "bundesland": "Deutschland",
     "students": 5136
   },
   {
     "germanOccupationCode": "11113",
+    "name": "Techniker/in - Agrartechnik/B. Prof. Technik",
     "bundesland": "Baden-Württemberg",
     "students": 17
   },
   {
     "germanOccupationCode": "11193",
+    "name": "Wirtschafter/in - Landwirtschaft/B. Prof. Agrarwirtsch.",
     "bundesland": "Baden-Württemberg",
     "students": 229
   },
   {
     "germanOccupationCode": "11603",
+    "name": "Techniker/in - Weinbau und Kellerwirtschaft/B. Prof. Technik",
     "bundesland": "Baden-Württemberg",
     "students": 17
   },
   {
     "germanOccupationCode": "11693",
+    "name": "Wirtschafter/in - Weinbau/B. Prof. Agrarwirtsch.",
     "bundesland": "Baden-Württemberg",
     "students": 32
   },
   {
     "germanOccupationCode": "12143",
+    "name": "Techniker/in - Gartenbau (GaLaBau)/B. Prof. Technik",
     "bundesland": "Baden-Württemberg",
     "students": 23
   },
   {
     "germanOccupationCode": "12193",
+    "name": "Gärtnermeister/in",
     "bundesland": "Baden-Württemberg",
     "students": 182
   },
   {
     "germanOccupationCode": "21293",
+    "name": "Steinmetz-/Steinbildhauermeister/in/B. Prof. Steinbildh.Hw.",
     "bundesland": "Baden-Württemberg",
     "students": 5
   },
   {
     "germanOccupationCode": "21293",
+    "name": "Werkstein-/Terrazzoherstellermeister/in/B. Prof.Werk/Ter.Hw.",
     "bundesland": "Baden-Württemberg",
     "students": 5
   },
   {
     "germanOccupationCode": "22193",
+    "name": "Industriemeister/in - Kunststoff und Kautschuk",
     "bundesland": "Baden-Württemberg",
     "students": 8
   },
   {
     "germanOccupationCode": "22203",
+    "name": "Techniker/in - Farb- u. Lackt. (ind.Besch.)/B. Prof. Technik",
     "bundesland": "Baden-Württemberg",
     "students": 16
   },
   {
     "germanOccupationCode": "22203",
+    "name": "Techniker/in - Farb- u. Lackt./B. Prof. Technik",
     "bundesland": "Baden-Württemberg",
     "students": 11
   },
   {
     "germanOccupationCode": "22293",
+    "name": "Betriebsmanager/in - Farbtechnik",
     "bundesland": "Baden-Württemberg",
     "students": 16
   },
   {
     "germanOccupationCode": "22303",
+    "name": "Techniker/in - Holztechnik/B. Prof. Technik",
     "bundesland": "Baden-Württemberg",
     "students": 40
   },
   {
     "germanOccupationCode": "22393",
+    "name": "Betriebsmanager/in - Bau- und Holztechnik",
     "bundesland": "Baden-Württemberg",
     "students": 27
   },
   {
     "germanOccupationCode": "22393",
+    "name": "Tischlermeister/in/B. Prof. Tischler-Handwerk",
     "bundesland": "Baden-Württemberg",
     "students": 166
   },
   {
     "germanOccupationCode": "23193",
+    "name": "Industriemeister/in - Papier- und Kunststoffverarbeitung",
     "bundesland": "Baden-Württemberg",
     "students": 12
   },
   {
     "germanOccupationCode": "23193",
+    "name": "Industriemeister/in - Papiererzeugung",
     "bundesland": "Baden-Württemberg",
     "students": 43
   },
   {
     "germanOccupationCode": "23213",
+    "name": "Gestalter/in - Werbe- u. Mediengestalt./B. Prof. Gestaltung",
     "bundesland": "Baden-Württemberg",
     "students": 16
   },
   {
     "germanOccupationCode": "23293",
+    "name": "Industriemeister/in - Printmedien/B. Prof. Print",
     "bundesland": "Baden-Württemberg",
     "students": 36
   },
   {
     "germanOccupationCode": "23413",
+    "name": "Techniker/in - Druck- und Medientechnik/B. Prof. Technik",
     "bundesland": "Baden-Württemberg",
     "students": 11
   },
   {
     "germanOccupationCode": "24193",
+    "name": "Industriemeister/in - Gießerei",
     "bundesland": "Baden-Württemberg",
     "students": 21
   },
   {
     "germanOccupationCode": "24233",
+    "name": "Techniker/in - Zerspanungstechnik/B. Prof. Technik",
     "bundesland": "Baden-Württemberg",
     "students": 19
   },
   {
     "germanOccupationCode": "24293",
+    "name": "Industriemeister/in - Metall",
     "bundesland": "Baden-Württemberg",
     "students": 81
   },
   {
     "germanOccupationCode": "24303",
+    "name": "Techniker/in - Galvanotechnik/B. Prof. Technik",
     "bundesland": "Baden-Württemberg",
     "students": 9
   },
   {
     "germanOccupationCode": "24413",
+    "name": "Techniker/in - Metallbautechnik/B. Prof. Technik",
     "bundesland": "Baden-Württemberg",
     "students": 7
   },
   {
     "germanOccupationCode": "24493",
+    "name": "Metallbauermeister/in/B. Prof. Metallbauer-Handwerk",
     "bundesland": "Baden-Württemberg",
     "students": 51
   },
   {
     "germanOccupationCode": "24513",
+    "name": "Techniker/in - Feinwerktechnik/B. Prof. Technik",
     "bundesland": "Baden-Württemberg",
     "students": 44
   },
   {
     "germanOccupationCode": "24593",
+    "name": "Büchsenmachermeister/in/B. Prof. Büchsenmacher-Handwerk",
     "bundesland": "Baden-Württemberg",
     "students": 18
   },
   {
     "germanOccupationCode": "24593",
+    "name": "Feinwerkmechanikermeister/in/B. Prof. Feinmechanik-Handwerk",
     "bundesland": "Baden-Württemberg",
     "students": 93
   },
   {
     "germanOccupationCode": "25103",
+    "name": "Techniker/in - Maschinentechnik/B. Prof. Technik",
     "bundesland": "Baden-Württemberg",
     "students": 1072
   },
   {
     "germanOccupationCode": "25213",
+    "name": "Techniker/in - Kraftfahrzeugtechnik/B. Prof. Technik",
     "bundesland": "Baden-Württemberg",
     "students": 53
   },
   {
     "germanOccupationCode": "25293",
+    "name": "Kraftfahrzeugtechnikermeister/in/B. Prof. Kfz.techniker-Hw.",
     "bundesland": "Baden-Württemberg",
     "students": 350
   },
   {
     "germanOccupationCode": "25293",
+    "name": "Land-/Baumasch.mechatronikermeister/in/B. Prof. Land/Bau.Hw.",
     "bundesland": "Baden-Württemberg",
     "students": 58
   },
   {
     "germanOccupationCode": "25293",
+    "name": "Zweiradmechanikermeister/in/B. Prof. Zweiradmechaniker-Hw.",
     "bundesland": "Baden-Württemberg",
     "students": 30
   },
   {
     "germanOccupationCode": "26113",
+    "name": "Techniker/in - Mechatronik/B. Prof. Technik",
     "bundesland": "Baden-Württemberg",
     "students": 392
   },
   {
     "germanOccupationCode": "26303",
+    "name": "Techniker/in - Elektrotechnik/B. Prof. Technik",
     "bundesland": "Baden-Württemberg",
     "students": 398
   },
   {
     "germanOccupationCode": "26313",
+    "name": "Techniker/in - Elektrotechnik (Info./Komm.)/B. Prof. Technik",
     "bundesland": "Baden-Württemberg",
     "students": 40
   },
   {
     "germanOccupationCode": "26393",
+    "name": "Elektrotechnikermeister/in/B. Prof. Elektrotechn.-Handwerk",
     "bundesland": "Baden-Württemberg",
     "students": 128
   },
   {
     "germanOccupationCode": "28103",
+    "name": "Techniker/in - Textiltechnik/B. Prof. Technik",
     "bundesland": "Baden-Württemberg",
     "students": 10
   },
   {
     "germanOccupationCode": "28213",
+    "name": "Produktentwickler/in (Mode)",
     "bundesland": "Baden-Württemberg",
     "students": 12
   },
   {
     "germanOccupationCode": "28293",
+    "name": "Maßschneidermeister/in/B. Prof. Maßschneider-Handwerk",
     "bundesland": "Baden-Württemberg",
     "students": 33
   },
   {
     "germanOccupationCode": "29193",
+    "name": "Brauer- und Mälzermeister/in/B. Prof. Brauer- und MälzerHw.",
     "bundesland": "Baden-Württemberg",
     "students": 12
   },
   {
     "germanOccupationCode": "29193",
+    "name": "Landwirtschaftliche/r Brennmeister/in",
     "bundesland": "Baden-Württemberg",
     "students": 24
   },
   {
     "germanOccupationCode": "29293",
+    "name": "Bäckermeister/in/B. Prof. Bäcker-Handwerk",
     "bundesland": "Baden-Württemberg",
     "students": 65
   },
   {
     "germanOccupationCode": "29293",
+    "name": "Konditormeister/in/B. Prof. Konditor-Handwerk",
     "bundesland": "Baden-Württemberg",
     "students": 40
   },
   {
     "germanOccupationCode": "29293",
+    "name": "Müllermeister/in/B. Prof. Müller-Handwerk",
     "bundesland": "Baden-Württemberg",
     "students": 18
   },
   {
     "germanOccupationCode": "31103",
+    "name": "Techniker/in - Bautechnik/B. Prof. Technik",
     "bundesland": "Baden-Württemberg",
     "students": 214
   },
   {
     "germanOccupationCode": "32193",
+    "name": "Maurer- und Betonbauermeister/in/B. Prof. Maurer-/Betonb.Hw.",
     "bundesland": "Baden-Württemberg",
     "students": 72
   },
   {
     "germanOccupationCode": "33193",
+    "name": "Fliesen-, Platten-, Mosaiklegermeister/in/B. Prof. LegerHw.",
     "bundesland": "Baden-Württemberg",
     "students": 15
   },
   {
     "germanOccupationCode": "33293",
+    "name": "Maler- und Lackierermeister/in/B. Prof. Maler-/Lackierer-Hw.",
     "bundesland": "Baden-Württemberg",
     "students": 105
   },
   {
     "germanOccupationCode": "33293",
+    "name": "Stuckateurmeister/in/B. Prof. Stuckateur-Handwerk",
     "bundesland": "Baden-Württemberg",
     "students": 25
   },
   {
     "germanOccupationCode": "33393",
+    "name": "Glasermeister/in/B. Prof. Glaser-Handwerk",
     "bundesland": "Baden-Württemberg",
     "students": 14
   },
   {
     "germanOccupationCode": "33393",
+    "name": "Rollladen-/Sonnenschutzt.meister/in/B. Prof. Roll/Sonnen.Hw.",
     "bundesland": "Baden-Württemberg",
     "students": 16
   },
   {
     "germanOccupationCode": "33393",
+    "name": "Zimmerermeister/in/B. Prof. Zimmerer-Handwerk",
     "bundesland": "Baden-Württemberg",
     "students": 119
   },
   {
     "germanOccupationCode": "34103",
+    "name": "Techniker/in - Gebäudesystemtechnik/B. Prof. Technik",
     "bundesland": "Baden-Württemberg",
     "students": 21
   },
   {
     "germanOccupationCode": "34213",
+    "name": "Techniker/in - Heiz.-, Lüft.-, Klimatechnik/B. Prof. Technik",
     "bundesland": "Baden-Württemberg",
     "students": 31
   },
   {
     "germanOccupationCode": "34213",
+    "name": "Techniker/in - Sanitärtechnik/B. Prof. Technik",
     "bundesland": "Baden-Württemberg",
     "students": 6
   },
   {
     "germanOccupationCode": "34293",
+    "name": "Installateur-/Heizungsbauermeister/in/B. Prof. Inst/Heiz.Hw.",
     "bundesland": "Baden-Württemberg",
     "students": 131
   },
   {
     "germanOccupationCode": "34293",
+    "name": "Klempnermeister/in/B. Prof. Klempner-Handwerk",
     "bundesland": "Baden-Württemberg",
     "students": 10
   },
   {
     "germanOccupationCode": "34393",
+    "name": "Abwassermeister/in",
     "bundesland": "Baden-Württemberg",
     "students": 25
   },
   {
     "germanOccupationCode": "41293",
+    "name": "Milchwirtschaftliche/r Labormeister/in/B. Prof. milchw. Lab.",
     "bundesland": "Baden-Württemberg",
     "students": 14
   },
   {
     "germanOccupationCode": "41313",
+    "name": "Techniker/in - Chemietechnik/B. Prof. Technik",
     "bundesland": "Baden-Württemberg",
     "students": 45
   },
   {
     "germanOccupationCode": "42293",
+    "name": "Schornsteinfegermeister/in/B. Prof. Schornsteinf.-Handwerk",
     "bundesland": "Baden-Württemberg",
     "students": 32
   },
   {
     "germanOccupationCode": "42313",
+    "name": "Techniker/in - Umweltschutzt./regen. Energ./B. Prof. Technik",
     "bundesland": "Baden-Württemberg",
     "students": 12
   },
   {
     "germanOccupationCode": "43113",
+    "name": "Wirtschaftsinformatiker/in (Fachschule)/B. Prof. Wirtsch.",
     "bundesland": "Baden-Württemberg",
     "students": 12
   },
   {
     "germanOccupationCode": "53193",
+    "name": "Meister/in - Bäderbetriebe",
     "bundesland": "Baden-Württemberg",
     "students": 17
   },
   {
     "germanOccupationCode": "54193",
+    "name": "Gebäudereinigermeister/in/B. Prof. Gebäudereiniger-Handwerk",
     "bundesland": "Baden-Württemberg",
     "students": 15
   },
   {
     "germanOccupationCode": "63213",
+    "name": "Betriebswirt/in (Fachschule) - Hotel/Gast./B. Prof. Wirtsch.",
     "bundesland": "Baden-Württemberg",
     "students": 54
   },
   {
     "germanOccupationCode": "63394",
+    "name": "Gastronom/in/B. Prof. Wirtsch.",
     "bundesland": "Baden-Württemberg",
     "students": 10
   },
   {
     "germanOccupationCode": "71303",
+    "name": "Betriebswirt/in (Fachschule) - allg. BWL/B. Prof. Wirtsch.",
     "bundesland": "Baden-Württemberg",
     "students": 112
   },
   {
     "germanOccupationCode": "73223",
+    "name": "Fachwirt/in - Organisation u. Führung (Sozial)",
     "bundesland": "Baden-Württemberg",
     "students": 500
   },
   {
     "germanOccupationCode": "81394",
+    "name": "Pflegedienstleiter/in",
     "bundesland": "Baden-Württemberg",
     "students": 195
   },
   {
     "germanOccupationCode": "81723",
+    "name": "Altentherapeut/in",
     "bundesland": "Baden-Württemberg",
     "students": 49
   },
   {
     "germanOccupationCode": "82393",
+    "name": "Friseurmeister/in/B. Prof. Friseur-Handwerk",
     "bundesland": "Baden-Württemberg",
     "students": 30
   },
   {
     "germanOccupationCode": "82503",
+    "name": "Techniker/in - Medizintechnik/B. Prof. Technik",
     "bundesland": "Baden-Württemberg",
     "students": 15
   },
   {
     "germanOccupationCode": "82593",
+    "name": "Augenoptikermeister/in/B. Prof. Augenoptiker-Handwerk",
     "bundesland": "Baden-Württemberg",
     "students": 93
   },
   {
     "germanOccupationCode": "82593",
+    "name": "Orthopädietechnikermeister/in/B. Prof. Orthopädietechn.Hw",
     "bundesland": "Baden-Württemberg",
     "students": 24
   },
   {
     "germanOccupationCode": "82593",
+    "name": "Zahntechnikermeister/in/B. Prof. Zahntechniker-Handwerk",
     "bundesland": "Baden-Württemberg",
     "students": 42
   },
   {
     "germanOccupationCode": "83113",
+    "name": "Erzieher/in - Jugend- und Heimerziehung",
     "bundesland": "Baden-Württemberg",
     "students": 794
   },
   {
     "germanOccupationCode": "83131",
+    "name": "Heilerziehungspflegeassistent/in",
     "bundesland": "Baden-Württemberg",
     "students": 264
   },
   {
     "germanOccupationCode": "83133",
+    "name": "Arbeitserzieher/in",
     "bundesland": "Baden-Württemberg",
     "students": 209
   },
   {
     "germanOccupationCode": "83133",
+    "name": "Heilerziehungspfleger/in",
     "bundesland": "Baden-Württemberg",
     "students": 912
   },
   {
     "germanOccupationCode": "83134",
+    "name": "Heilpädagoge/-pädagogin/B. Prof. Sozialw.",
     "bundesland": "Baden-Württemberg",
     "students": 94
   },
   {
     "germanOccupationCode": "83143",
+    "name": "Haus- und Familienpfleger/in (Ausbildung)",
     "bundesland": "Baden-Württemberg",
     "students": 15
   },
   {
     "germanOccupationCode": "83213",
+    "name": "Fachkraft - landwirtschaftlicher Haushalt",
     "bundesland": "Baden-Württemberg",
     "students": 10
   },
   {
     "germanOccupationCode": "83293",
+    "name": "Hauswirtschaftliche/r Betriebsleiter/in/B. Prof. Wirtsch.",
     "bundesland": "Baden-Württemberg",
     "students": 8
   },
   {
     "germanOccupationCode": "83293",
+    "name": "Meister/in - Hauswirtschaft",
     "bundesland": "Baden-Württemberg",
     "students": 10
   },
   {
     "germanOccupationCode": "83384",
+    "name": "Missionar/in",
     "bundesland": "Baden-Württemberg",
     "students": 6
   },
   {
     "germanOccupationCode": "84533",
+    "name": "Tanzpädagoge/-pädagogin",
     "bundesland": "Baden-Württemberg",
     "students": 11
   },
   {
     "germanOccupationCode": "93213",
+    "name": "Gestalter/in - Farbtechnik/Raumgestalt./B. Prof. Gestaltung",
     "bundesland": "Baden-Württemberg",
     "students": 7
   },
   {
     "germanOccupationCode": "93213",
+    "name": "Gestalter/in - Holz/Möbel/Raumgestaltung/B. Prof. Gestaltung",
     "bundesland": "Baden-Württemberg",
     "students": 16
   },
   {
     "germanOccupationCode": "93293",
+    "name": "Raumausstattermeister/in/B. Prof. Raumausstatter-Handwerk",
     "bundesland": "Baden-Württemberg",
     "students": 40
   },
   {
     "germanOccupationCode": "93593",
+    "name": "Gold- und Silberschmiedemeister/in/B. Prof. Gold- /SilberHw.",
     "bundesland": "Baden-Württemberg",
     "students": 18
   },
   {
     "germanOccupationCode": "93593",
+    "name": "Schilder-/Lichtreklameherst.meister/in/B. Prof. Schild/L.Hw.",
     "bundesland": "Baden-Württemberg",
     "students": 9
   },
   {
     "germanOccupationCode": "93693",
+    "name": "Holzblasinstrumentenmachermeister/in/B. Prof. Holzblas.Hw.",
     "bundesland": "Baden-Württemberg",
     "students": 10
   },
   {
     "germanOccupationCode": "93693",
+    "name": "Orgel-/Harmoniumbauermeister/in/B. Prof. Orgel/Harmonium.Hw.",
     "bundesland": "Baden-Württemberg",
     "students": 19
   },
   {
     "germanOccupationCode": "99999",
+    "name": "Keine Zuordnung möglich",
     "bundesland": "Baden-Württemberg",
     "students": 13
   },
   {
     "germanOccupationCode": "11113",
+    "name": "Techniker/in - Agrartechnik/B. Prof. Technik",
     "bundesland": "Bayern",
     "students": 121
   },
   {
     "germanOccupationCode": "11193",
+    "name": "Betriebswirt/in (Fachschule) - Agrarb/B. Prof. Agrarwirtsch.",
     "bundesland": "Bayern",
     "students": 56
   },
   {
     "germanOccupationCode": "11193",
+    "name": "Wirtschafter/in - Landwirtschaft/B. Prof. Agrarwirtsch.",
     "bundesland": "Bayern",
     "students": 397
   },
   {
     "germanOccupationCode": "11603",
+    "name": "Techniker/in - Weinbau und Kellerwirtschaft/B. Prof. Technik",
     "bundesland": "Bayern",
     "students": 9
   },
   {
     "germanOccupationCode": "11713",
+    "name": "Techniker/in - Forsttechnik/B. Prof. Technik",
     "bundesland": "Bayern",
     "students": 28
   },
   {
     "germanOccupationCode": "12103",
+    "name": "Techniker/in - Gartenbau/B. Prof. Technik",
     "bundesland": "Bayern",
     "students": 12
   },
   {
     "germanOccupationCode": "12143",
+    "name": "Techniker/in - Gartenbau (GaLaBau)/B. Prof. Technik",
     "bundesland": "Bayern",
     "students": 27
   },
   {
     "germanOccupationCode": "12193",
+    "name": "Wirtschafter/in - Gartenbau/B. Prof. Agrarwirtsch.",
     "bundesland": "Bayern",
     "students": 91
   },
   {
     "germanOccupationCode": "12203",
+    "name": "Gestalter/in - Blumenkunst/B. Prof. Gestaltung",
     "bundesland": "Bayern",
     "students": 22
   },
   {
     "germanOccupationCode": "21233",
+    "name": "Techniker/in - Steintechnik/B. Prof. Technik",
     "bundesland": "Bayern",
     "students": 16
   },
   {
     "germanOccupationCode": "21293",
+    "name": "Steinmetz-/Steinbildhauermeister/in/B. Prof. Steinbildh.Hw.",
     "bundesland": "Bayern",
     "students": 12
   },
   {
     "germanOccupationCode": "21313",
+    "name": "Techniker/in - Glastechnik/B. Prof. Technik",
     "bundesland": "Bayern",
     "students": 5
   },
   {
     "germanOccupationCode": "22103",
+    "name": "Techniker/in - Kunststoff- u. Kautschukt./B. Prof. Technik",
     "bundesland": "Bayern",
     "students": 54
   },
   {
     "germanOccupationCode": "22203",
+    "name": "Techniker/in - Farb- u. Lackt./B. Prof. Technik",
     "bundesland": "Bayern",
     "students": 18
   },
   {
     "germanOccupationCode": "22303",
+    "name": "Techniker/in - Holztechnik/B. Prof. Technik",
     "bundesland": "Bayern",
     "students": 65
   },
   {
     "germanOccupationCode": "22393",
+    "name": "Tischlermeister/in/B. Prof. Tischler-Handwerk",
     "bundesland": "Bayern",
     "students": 155
   },
   {
     "germanOccupationCode": "23113",
+    "name": "Techniker/in - Papiertechnik/B. Prof. Technik",
     "bundesland": "Bayern",
     "students": 9
   },
   {
     "germanOccupationCode": "23393",
+    "name": "Fotografenmeister/in/B. Prof. Fotografen-Handwerk",
     "bundesland": "Bayern",
     "students": 15
   },
   {
     "germanOccupationCode": "23413",
+    "name": "Techniker/in - Druck- und Medientechnik/B. Prof. Technik",
     "bundesland": "Bayern",
     "students": 10
   },
   {
     "germanOccupationCode": "23493",
+    "name": "Buchbindermeister/in/B. Prof. Buchbinder-Handwerk",
     "bundesland": "Bayern",
     "students": 7
   },
   {
     "germanOccupationCode": "24413",
+    "name": "Techniker/in - Metallbautechnik/B. Prof. Technik",
     "bundesland": "Bayern",
     "students": 19
   },
   {
     "germanOccupationCode": "24493",
+    "name": "Metallbauermeister/in/B. Prof. Metallbauer-Handwerk",
     "bundesland": "Bayern",
     "students": 24
   },
   {
     "germanOccupationCode": "24593",
+    "name": "Feinwerkmechanikermeister/in/B. Prof. Feinmechanik-Handwerk",
     "bundesland": "Bayern",
     "students": 23
   },
   {
     "germanOccupationCode": "25103",
+    "name": "Techniker/in - Maschinentechnik/B. Prof. Technik",
     "bundesland": "Bayern",
     "students": 1002
   },
   {
     "germanOccupationCode": "25293",
+    "name": "Land-/Baumasch.mechatronikermeister/in/B. Prof. Land/Bau.Hw.",
     "bundesland": "Bayern",
     "students": 16
   },
   {
     "germanOccupationCode": "26113",
+    "name": "Techniker/in - Mechatronik/B. Prof. Technik",
     "bundesland": "Bayern",
     "students": 219
   },
   {
     "germanOccupationCode": "26303",
+    "name": "Techniker/in - Elektrotechnik/B. Prof. Technik",
     "bundesland": "Bayern",
     "students": 585
   },
   {
     "germanOccupationCode": "26333",
+    "name": "Techniker/in - Elektromobilität/B. Prof. Technik",
     "bundesland": "Bayern",
     "students": 160
   },
   {
     "germanOccupationCode": "26393",
+    "name": "Elektrotechnikermeister/in/B. Prof. Elektrotechn.-Handwerk",
     "bundesland": "Bayern",
     "students": 130
   },
   {
     "germanOccupationCode": "26393",
+    "name": "Informationstechnikermeister/in/B. Prof. Informationst.Hw.",
     "bundesland": "Bayern",
     "students": 20
   },
   {
     "germanOccupationCode": "28103",
+    "name": "Techniker/in - Textiltechnik/B. Prof. Technik",
     "bundesland": "Bayern",
     "students": 11
   },
   {
     "germanOccupationCode": "28213",
+    "name": "Schnitt-, Entwurfs- und Fertigungsmodelleur/-direktrice",
     "bundesland": "Bayern",
     "students": 16
   },
   {
     "germanOccupationCode": "28223",
+    "name": "Techniker/in - Bekleidungstechnik/B. Prof. Technik",
     "bundesland": "Bayern",
     "students": 6
   },
   {
     "germanOccupationCode": "28293",
+    "name": "Maßschneidermeister/in/B. Prof. Maßschneider-Handwerk",
     "bundesland": "Bayern",
     "students": 27
   },
   {
     "germanOccupationCode": "29193",
+    "name": "Brauer- und Mälzermeister/in/B. Prof. Brauer- und MälzerHw.",
     "bundesland": "Bayern",
     "students": 44
   },
   {
     "germanOccupationCode": "29203",
+    "name": "Techniker/in - Lebensmittelt. (Verarb.t.)/B. Prof. Technik",
     "bundesland": "Bayern",
     "students": 29
   },
   {
     "germanOccupationCode": "29233",
+    "name": "Techniker/in - Lebensmittelt. (Fleischert.)/B. Prof. Technik",
     "bundesland": "Bayern",
     "students": 5
   },
   {
     "germanOccupationCode": "29253",
+    "name": "Techniker/in - Milchwirtschaft, Molkereiw./B. Prof. Technik",
     "bundesland": "Bayern",
     "students": 26
   },
   {
     "germanOccupationCode": "29253",
+    "name": "Wirtschafter/in - Milch-/Molkereiw./B. Prof. Agrarwirtsch.",
     "bundesland": "Bayern",
     "students": 36
   },
   {
     "germanOccupationCode": "29293",
+    "name": "Konditormeister/in/B. Prof. Konditor-Handwerk",
     "bundesland": "Bayern",
     "students": 24
   },
   {
     "germanOccupationCode": "31103",
+    "name": "Techniker/in - Bautechnik/B. Prof. Technik",
     "bundesland": "Bayern",
     "students": 425
   },
   {
     "germanOccupationCode": "32193",
+    "name": "Maurer- und Betonbauermeister/in/B. Prof. Maurer-/Betonb.Hw.",
     "bundesland": "Bayern",
     "students": 53
   },
   {
     "germanOccupationCode": "32293",
+    "name": "Straßenbauermeister/in/B. Prof. Straßenbauer-Handwerk",
     "bundesland": "Bayern",
     "students": 27
   },
   {
     "germanOccupationCode": "33293",
+    "name": "Maler- und Lackierermeister/in/B. Prof. Maler-/Lackierer-Hw.",
     "bundesland": "Bayern",
     "students": 81
   },
   {
     "germanOccupationCode": "33393",
+    "name": "Zimmerermeister/in/B. Prof. Zimmerer-Handwerk",
     "bundesland": "Bayern",
     "students": 56
   },
   {
     "germanOccupationCode": "34213",
+    "name": "Techniker/in - Heiz.-, Lüft.-, Klimatechnik/B. Prof. Technik",
     "bundesland": "Bayern",
     "students": 77
   },
   {
     "germanOccupationCode": "34293",
+    "name": "Installateur-/Heizungsbauermeister/in/B. Prof. Inst/Heiz.Hw.",
     "bundesland": "Bayern",
     "students": 127
   },
   {
     "germanOccupationCode": "41213",
+    "name": "Techniker/in - Biotechnik/B. Prof. Technik",
     "bundesland": "Bayern",
     "students": 23
   },
   {
     "germanOccupationCode": "41313",
+    "name": "Techniker/in - Chemietechnik/B. Prof. Technik",
     "bundesland": "Bayern",
     "students": 37
   },
   {
     "germanOccupationCode": "41423",
+    "name": "Techniker/in - Werkstofftechnik/B. Prof. Technik",
     "bundesland": "Bayern",
     "students": 9
   },
   {
     "germanOccupationCode": "42313",
+    "name": "Techniker/in - Umweltschutzt./regen. Energ./B. Prof. Technik",
     "bundesland": "Bayern",
     "students": 67
   },
   {
     "germanOccupationCode": "43103",
+    "name": "Techniker/in - Informatik/B. Prof. Technik",
     "bundesland": "Bayern",
     "students": 102
   },
   {
     "germanOccupationCode": "43113",
+    "name": "Wirtschaftsinformatiker/in (Fachschule)/B. Prof. Wirtsch.",
     "bundesland": "Bayern",
     "students": 73
   },
   {
     "germanOccupationCode": "63213",
+    "name": "Betriebswirt/in (Fachschule) - Hotel/Gast./B. Prof. Wirtsch.",
     "bundesland": "Bayern",
     "students": 31
   },
   {
     "germanOccupationCode": "82393",
+    "name": "Friseurmeister/in/B. Prof. Friseur-Handwerk",
     "bundesland": "Bayern",
     "students": 44
   },
   {
     "germanOccupationCode": "82593",
+    "name": "Orthopädietechnikermeister/in/B. Prof. Orthopädietechn.Hw",
     "bundesland": "Bayern",
     "students": 14
   },
   {
     "germanOccupationCode": "82593",
+    "name": "Zahntechnikermeister/in/B. Prof. Zahntechniker-Handwerk",
     "bundesland": "Bayern",
     "students": 23
   },
   {
     "germanOccupationCode": "83113",
+    "name": "Erzieher/in",
     "bundesland": "Bayern",
     "students": 93
   },
   {
     "germanOccupationCode": "83131",
+    "name": "Heilerziehungspflegeassistent/in",
     "bundesland": "Bayern",
     "students": 539
   },
   {
     "germanOccupationCode": "83133",
+    "name": "Heilerziehungspfleger/in",
     "bundesland": "Bayern",
     "students": 1144
   },
   {
     "germanOccupationCode": "83143",
+    "name": "Dorfhelfer/in",
     "bundesland": "Bayern",
     "students": 29
   },
   {
     "germanOccupationCode": "83213",
+    "name": "Fachkraft - landwirtschaftlicher Haushalt",
     "bundesland": "Bayern",
     "students": 469
   },
   {
     "germanOccupationCode": "83213",
+    "name": "Wirtschafter/in - Hauswirtschaft/B. Prof. Agrarwirtsch.",
     "bundesland": "Bayern",
     "students": 22
   },
   {
     "germanOccupationCode": "84214",
+    "name": "Fachlehrer/in - berufliche/allgemeinbildende Schulen",
     "bundesland": "Bayern",
     "students": 10
   },
   {
     "germanOccupationCode": "93103",
+    "name": "Gestalter/in - Produktdesign/B. Prof. Gestaltung",
     "bundesland": "Bayern",
     "students": 36
   },
   {
     "germanOccupationCode": "93393",
+    "name": "Vergoldermeister/in/B. Prof. Vergolder-Handwerk",
     "bundesland": "Bayern",
     "students": 14
   },
   {
     "germanOccupationCode": "93493",
+    "name": "Keramikermeister/in/B. Prof. Keramiker-Handwerk",
     "bundesland": "Bayern",
     "students": 11
   },
   {
     "germanOccupationCode": "93593",
+    "name": "Gold- und Silberschmiedemeister/in/B. Prof. Gold- /SilberHw.",
     "bundesland": "Bayern",
     "students": 16
   },
   {
     "germanOccupationCode": "99999",
+    "name": "Keine Zuordnung möglich",
     "bundesland": "Bayern",
     "students": 68
   },
   {
     "germanOccupationCode": "12143",
+    "name": "Techniker/in - Gartenbau (GaLaBau)/B. Prof. Technik",
     "bundesland": "Berlin",
     "students": 5
   },
   {
     "germanOccupationCode": "12193",
+    "name": "Wirtschafter/in - Gartenbau/B. Prof. Agrarwirtsch.",
     "bundesland": "Berlin",
     "students": 35
   },
   {
     "germanOccupationCode": "22203",
+    "name": "Techniker/in - Farb- u. Lackt./B. Prof. Technik",
     "bundesland": "Berlin",
     "students": 20
   },
   {
     "germanOccupationCode": "23413",
+    "name": "Techniker/in - Druck- und Medientechnik/B. Prof. Technik",
     "bundesland": "Berlin",
     "students": 20
   },
   {
     "germanOccupationCode": "25103",
+    "name": "Techniker/in - Maschinentechnik/B. Prof. Technik",
     "bundesland": "Berlin",
     "students": 57
   },
   {
     "germanOccupationCode": "26303",
+    "name": "Techniker/in - Elektrotechnik/B. Prof. Technik",
     "bundesland": "Berlin",
     "students": 56
   },
   {
     "germanOccupationCode": "29203",
+    "name": "Techniker/in - Lebensmittelt./B. Prof. Technik",
     "bundesland": "Berlin",
     "students": 5
   },
   {
     "germanOccupationCode": "29223",
+    "name": "Techniker/in - Lebensmittelt. (Bäckereit.)/B. Prof. Technik",
     "bundesland": "Berlin",
     "students": 8
   },
   {
     "germanOccupationCode": "32103",
+    "name": "Techniker/in - Bautechnik (Hochbau)/B. Prof. Technik",
     "bundesland": "Berlin",
     "students": 14
   },
   {
     "germanOccupationCode": "41213",
+    "name": "Techniker/in - Biotechnik/B. Prof. Technik",
     "bundesland": "Berlin",
     "students": 2
   },
   {
     "germanOccupationCode": "41323",
+    "name": "Techniker/in - Chemietechnik (Lab.technik)/B. Prof. Technik",
     "bundesland": "Berlin",
     "students": 6
   },
   {
     "germanOccupationCode": "63213",
+    "name": "Betriebswirt/in (Fachschule) - Hotel/Gast./B. Prof. Wirtsch.",
     "bundesland": "Berlin",
     "students": 22
   },
   {
     "germanOccupationCode": "71413",
+    "name": "Fremdsprachenkorrespondent/in (Weiterbildung)",
     "bundesland": "Berlin",
     "students": 87
   },
   {
     "germanOccupationCode": "72113",
+    "name": "Betriebswirt/in (Fachschule) - Bank",
     "bundesland": "Berlin",
     "students": 31
   },
   {
     "germanOccupationCode": "82503",
+    "name": "Techniker/in - Medizintechnik/B. Prof. Technik",
     "bundesland": "Berlin",
     "students": 17
   },
   {
     "germanOccupationCode": "83113",
+    "name": "Erzieher/in",
     "bundesland": "Berlin",
     "students": 2955
   },
   {
     "germanOccupationCode": "83133",
+    "name": "Heilerziehungspfleger/in",
     "bundesland": "Berlin",
     "students": 91
   },
   {
     "germanOccupationCode": "83134",
+    "name": "Heilpädagoge/-pädagogin/B. Prof. Sozialw.",
     "bundesland": "Berlin",
     "students": 12
   },
   {
     "germanOccupationCode": "83213",
+    "name": "Betriebswirt/in (Fachschule) - Hauswirtschaft",
     "bundesland": "Berlin",
     "students": 2
   },
   {
     "germanOccupationCode": "11113",
+    "name": "Techniker/in - Agrartechnik/B. Prof. Technik",
     "bundesland": "Brandenburg",
     "students": 14
   },
   {
     "germanOccupationCode": "25103",
+    "name": "Techniker/in - Maschinentechnik (o. Schwp.)/B. Prof. Technik",
     "bundesland": "Brandenburg",
     "students": 3
   },
   {
     "germanOccupationCode": "26303",
+    "name": "Techniker/in - Elektrotechnik (o. Schwerp.)/B. Prof. Technik",
     "bundesland": "Brandenburg",
     "students": 4
   },
   {
     "germanOccupationCode": "31103",
+    "name": "Techniker/in - Bautechnik/B. Prof. Technik",
     "bundesland": "Brandenburg",
     "students": 9
   },
   {
     "germanOccupationCode": "83113",
+    "name": "Erzieher/in",
     "bundesland": "Brandenburg",
     "students": 1414
   },
   {
     "germanOccupationCode": "83133",
+    "name": "Heilerziehungspfleger/in",
     "bundesland": "Brandenburg",
     "students": 209
   },
   {
     "germanOccupationCode": "83134",
+    "name": "Heilpädagoge/-pädagogin/B. Prof. Sozialw.",
     "bundesland": "Brandenburg",
     "students": 34
   },
   {
     "germanOccupationCode": "25103",
+    "name": "Techniker/in - Maschinentechnik/B. Prof. Technik",
     "bundesland": "Bremen",
     "students": 9
   },
   {
     "germanOccupationCode": "26303",
+    "name": "Techniker/in - Elektrotechnik/B. Prof. Technik",
     "bundesland": "Bremen",
     "students": 11
   },
   {
     "germanOccupationCode": "29203",
+    "name": "Techniker/in - Lebensmittelt./B. Prof. Technik",
     "bundesland": "Bremen",
     "students": 16
   },
   {
     "germanOccupationCode": "41313",
+    "name": "Techniker/in - Chemietechnik/B. Prof. Technik",
     "bundesland": "Bremen",
     "students": 6
   },
   {
     "germanOccupationCode": "71303",
+    "name": "Betriebswirt/in (Fachschule)/B. Prof. Wirtsch.",
     "bundesland": "Bremen",
     "students": 46
   },
   {
     "germanOccupationCode": "83113",
+    "name": "Erzieher/in",
     "bundesland": "Bremen",
     "students": 463
   },
   {
     "germanOccupationCode": "83133",
+    "name": "Heilerziehungspfleger/in",
     "bundesland": "Bremen",
     "students": 71
   },
   {
     "germanOccupationCode": "22203",
+    "name": "Techniker/in - Farb- u. Lackt. (o.Schwerp.)/B. Prof. Technik",
     "bundesland": "Hamburg",
     "students": 33
   },
   {
     "germanOccupationCode": "22303",
+    "name": "Techniker/in - Holztechnik (o. Schwerpunkt)/B. Prof. Technik",
     "bundesland": "Hamburg",
     "students": 28
   },
   {
     "germanOccupationCode": "25103",
+    "name": "Techniker/in - Maschinentechnik (o. Schwp.)/B. Prof. Technik",
     "bundesland": "Hamburg",
     "students": 43
   },
   {
     "germanOccupationCode": "25213",
+    "name": "Techniker/in - Karosserie- u. Fahrzeugbaut./B. Prof. Technik",
     "bundesland": "Hamburg",
     "students": 14
   },
   {
     "germanOccupationCode": "26113",
+    "name": "Techniker/in - Mechatronik/B. Prof. Technik",
     "bundesland": "Hamburg",
     "students": 53
   },
   {
     "germanOccupationCode": "26233",
+    "name": "Techniker/in - Elektrotechnik (Energiet.)/B. Prof. Technik",
     "bundesland": "Hamburg",
     "students": 22
   },
   {
     "germanOccupationCode": "26303",
+    "name": "Techniker/in - Elektrotechnik (o. Schwerp.)/B. Prof. Technik",
     "bundesland": "Hamburg",
     "students": 36
   },
   {
     "germanOccupationCode": "31103",
+    "name": "Techniker/in - Bautechnik (o. Schwerpunkt)/B. Prof. Technik",
     "bundesland": "Hamburg",
     "students": 68
   },
   {
     "germanOccupationCode": "41313",
+    "name": "Techniker/in - Chemietechnik (o. Schwerp.)/B. Prof. Technik",
     "bundesland": "Hamburg",
     "students": 23
   },
   {
     "germanOccupationCode": "42203",
+    "name": "Techniker/in - Umweltschutzt. (o. Schwerp.)/B. Prof. Technik",
     "bundesland": "Hamburg",
     "students": 14
   },
   {
     "germanOccupationCode": "63213",
+    "name": "Betriebswirt/in (Fachschule) - Hotel/Gast./B. Prof. Wirtsch.",
     "bundesland": "Hamburg",
     "students": 30
   },
   {
     "germanOccupationCode": "83113",
+    "name": "Erzieher/in",
     "bundesland": "Hamburg",
     "students": 778
   },
   {
     "germanOccupationCode": "83133",
+    "name": "Heilerziehungspfleger/in",
     "bundesland": "Hamburg",
     "students": 104
   },
   {
     "germanOccupationCode": "94613",
+    "name": "Gewandmeister/in/B. Prof. Gestaltung",
     "bundesland": "Hamburg",
     "students": 23
   },
   {
     "germanOccupationCode": "11113",
+    "name": "Techniker/in - Agrartechnik/B. Prof. Technik",
     "bundesland": "Hessen",
     "students": 22
   },
   {
     "germanOccupationCode": "11193",
+    "name": "Wirtschafter/in - Landwirtschaft/B. Prof. Agrarwirtsch.",
     "bundesland": "Hessen",
     "students": 54
   },
   {
     "germanOccupationCode": "21313",
+    "name": "Techniker/in - Glastechnik/B. Prof. Technik",
     "bundesland": "Hessen",
     "students": 3
   },
   {
     "germanOccupationCode": "22103",
+    "name": "Techniker/in - Kunststoff- u. Kautschukt./B. Prof. Technik",
     "bundesland": "Hessen",
     "students": 7
   },
   {
     "germanOccupationCode": "22203",
+    "name": "Techniker/in - Farb- u. Lackt. (Gestaltung)/B. Prof. Technik",
     "bundesland": "Hessen",
     "students": 11
   },
   {
     "germanOccupationCode": "25103",
+    "name": "Techniker/in - Maschinentechnik/B. Prof. Technik",
     "bundesland": "Hessen",
     "students": 407
   },
   {
     "germanOccupationCode": "26123",
+    "name": "Techniker/in - Elektrotechnik (Autom.tech.)/B. Prof. Technik",
     "bundesland": "Hessen",
     "students": 119
   },
   {
     "germanOccupationCode": "26303",
+    "name": "Techniker/in - Elektrotechnik/B. Prof. Technik",
     "bundesland": "Hessen",
     "students": 160
   },
   {
     "germanOccupationCode": "28223",
+    "name": "Techniker/in - Bekleidungstechnik/B. Prof. Technik",
     "bundesland": "Hessen",
     "students": 24
   },
   {
     "germanOccupationCode": "29203",
+    "name": "Techniker/in - Lebensmittelt./B. Prof. Technik",
     "bundesland": "Hessen",
     "students": 6
   },
   {
     "germanOccupationCode": "31103",
+    "name": "Techniker/in - Bautechnik/B. Prof. Technik",
     "bundesland": "Hessen",
     "students": 80
   },
   {
     "germanOccupationCode": "34213",
+    "name": "Techniker/in - Heiz.-, Lüft.-, Klimatechnik/B. Prof. Technik",
     "bundesland": "Hessen",
     "students": 15
   },
   {
     "germanOccupationCode": "41213",
+    "name": "Techniker/in - Biotechnik/B. Prof. Technik",
     "bundesland": "Hessen",
     "students": 15
   },
   {
     "germanOccupationCode": "41313",
+    "name": "Techniker/in - Chemietechnik/B. Prof. Technik",
     "bundesland": "Hessen",
     "students": 34
   },
   {
     "germanOccupationCode": "43103",
+    "name": "Techniker/in - Informatik/B. Prof. Technik",
     "bundesland": "Hessen",
     "students": 16
   },
   {
     "germanOccupationCode": "61203",
+    "name": "Betriebswirt/in (Fachschule) - Handel",
     "bundesland": "Hessen",
     "students": 263
   },
   {
     "germanOccupationCode": "63213",
+    "name": "Betriebswirt/in (Fachschule) - Hotel/Gast./B. Prof. Wirtsch.",
     "bundesland": "Hessen",
     "students": 29
   },
   {
     "germanOccupationCode": "71303",
+    "name": "Technische/r Betriebswirt/in (Weiterbildung)",
     "bundesland": "Hessen",
     "students": 44
   },
   {
     "germanOccupationCode": "83113",
+    "name": "Erzieher/in",
     "bundesland": "Hessen",
     "students": 2345
   },
   {
     "germanOccupationCode": "83133",
+    "name": "Heilerziehungspfleger/in",
     "bundesland": "Hessen",
     "students": 245
   },
   {
     "germanOccupationCode": "83134",
+    "name": "Heilpädagoge/-pädagogin/B. Prof. Sozialw.",
     "bundesland": "Hessen",
     "students": 34
   },
   {
     "germanOccupationCode": "93103",
+    "name": "Gestalter/in - Produktdesign/B. Prof. Gestaltung",
     "bundesland": "Hessen",
     "students": 6
   },
   {
     "germanOccupationCode": "11193",
+    "name": "Betriebswirt/in (Fachschule) - Agrarb/B. Prof. Agrarwirtsch.",
     "bundesland": "Mecklenburg-Vorpommern",
     "students": 18
   },
   {
     "germanOccupationCode": "11193",
+    "name": "Wirtschafter/in - Landwirtschaft/B. Prof. Agrarwirtsch.",
     "bundesland": "Mecklenburg-Vorpommern",
     "students": 14
   },
   {
     "germanOccupationCode": "25103",
+    "name": "Techniker/in - Maschinentechnik (Konstruk.)/B. Prof. Technik",
     "bundesland": "Mecklenburg-Vorpommern",
     "students": 7
   },
   {
     "germanOccupationCode": "26123",
+    "name": "Techniker/in - Elektrotechnik (Autom.tech.)/B. Prof. Technik",
     "bundesland": "Mecklenburg-Vorpommern",
     "students": 9
   },
   {
     "germanOccupationCode": "51133",
+    "name": "Schiffsbetriebstechniker/in/B. Prof. Technik",
     "bundesland": "Mecklenburg-Vorpommern",
     "students": 3
   },
   {
     "germanOccupationCode": "51133",
+    "name": "Schiffsmaschinist/in",
     "bundesland": "Mecklenburg-Vorpommern",
     "students": 3
   },
   {
     "germanOccupationCode": "52413",
+    "name": "Nautiker/in (BRZ 500) - nat. Fahrt",
     "bundesland": "Mecklenburg-Vorpommern",
     "students": 9
   },
   {
     "germanOccupationCode": "52413",
+    "name": "Nautiker/in (Fachschule)/B. Prof. Technik",
     "bundesland": "Mecklenburg-Vorpommern",
     "students": 2
   },
   {
     "germanOccupationCode": "72123",
+    "name": "Betriebswirt/in (Fachschule) - Finanz./Inv/B. Prof. Wirtsch.",
     "bundesland": "Mecklenburg-Vorpommern",
     "students": 18
   },
   {
     "germanOccupationCode": "83113",
+    "name": "Erzieher/in",
     "bundesland": "Mecklenburg-Vorpommern",
     "students": 435
   },
   {
     "germanOccupationCode": "83133",
+    "name": "Heilerziehungspfleger/in",
     "bundesland": "Mecklenburg-Vorpommern",
     "students": 124
   },
   {
     "germanOccupationCode": "11193",
+    "name": "Landwirtschaftsmeister/in",
     "bundesland": "Niedersachsen",
     "students": 521
   },
   {
     "germanOccupationCode": "21233",
+    "name": "Techniker/in - Steintechnik/B. Prof. Technik",
     "bundesland": "Niedersachsen",
     "students": 7
   },
   {
     "germanOccupationCode": "22303",
+    "name": "Techniker/in - Holztechnik/B. Prof. Technik",
     "bundesland": "Niedersachsen",
     "students": 53
   },
   {
     "germanOccupationCode": "24413",
+    "name": "Techniker/in - Metallbautechnik/B. Prof. Technik",
     "bundesland": "Niedersachsen",
     "students": 22
   },
   {
     "germanOccupationCode": "25103",
+    "name": "Techniker/in - Maschinentechnik/B. Prof. Technik",
     "bundesland": "Niedersachsen",
     "students": 390
   },
   {
     "germanOccupationCode": "25183",
+    "name": "Techniker/in - Mühlenbau, Getr.- u. Futterm.",
     "bundesland": "Niedersachsen",
     "students": 11
   },
   {
     "germanOccupationCode": "25213",
+    "name": "Techniker/in - Karosserie- u. Fahrzeugbaut./B. Prof. Technik",
     "bundesland": "Niedersachsen",
     "students": 29
   },
   {
     "germanOccupationCode": "26113",
+    "name": "Techniker/in - Mechatronik/B. Prof. Technik",
     "bundesland": "Niedersachsen",
     "students": 49
   },
   {
     "germanOccupationCode": "26303",
+    "name": "Techniker/in - Elektrotechnik/B. Prof. Technik",
     "bundesland": "Niedersachsen",
     "students": 330
   },
   {
     "germanOccupationCode": "31103",
+    "name": "Techniker/in - Bautechnik/B. Prof. Technik",
     "bundesland": "Niedersachsen",
     "students": 83
   },
   {
     "germanOccupationCode": "34213",
+    "name": "Techniker/in - Heiz.-, Lüft.-, Klimatechnik/B. Prof. Technik",
     "bundesland": "Niedersachsen",
     "students": 11
   },
   {
     "germanOccupationCode": "42203",
+    "name": "Techniker/in - Umweltschutzt./B. Prof. Technik",
     "bundesland": "Niedersachsen",
     "students": 8
   },
   {
     "germanOccupationCode": "51133",
+    "name": "Schiffsbetriebstechniker/in/B. Prof. Technik",
     "bundesland": "Niedersachsen",
     "students": 2
   },
   {
     "germanOccupationCode": "51133",
+    "name": "Schiffsmaschinist/in",
     "bundesland": "Niedersachsen",
     "students": 11
   },
   {
     "germanOccupationCode": "52413",
+    "name": "Kapitän/in - Küstenfischerei",
     "bundesland": "Niedersachsen",
     "students": 5
   },
   {
     "germanOccupationCode": "52413",
+    "name": "Nautiker/in (BRZ 500) - nat. Fahrt",
     "bundesland": "Niedersachsen",
     "students": 10
   },
   {
     "germanOccupationCode": "52413",
+    "name": "Nautiker/in (Fachschule)/B. Prof. Technik",
     "bundesland": "Niedersachsen",
     "students": 25
   },
   {
     "germanOccupationCode": "63213",
+    "name": "Betriebswirt/in (Fachschule) - Hotel/Gast./B. Prof. Wirtsch.",
     "bundesland": "Niedersachsen",
     "students": 17
   },
   {
     "germanOccupationCode": "71303",
+    "name": "Betriebswirt/in (Fachschule) - allg. BWL/B. Prof. Wirtsch.",
     "bundesland": "Niedersachsen",
     "students": 155
   },
   {
     "germanOccupationCode": "83113",
+    "name": "Erzieher/in",
     "bundesland": "Niedersachsen",
     "students": 3012
   },
   {
     "germanOccupationCode": "83133",
+    "name": "Heilerziehungspfleger/in",
     "bundesland": "Niedersachsen",
     "students": 744
   },
   {
     "germanOccupationCode": "83134",
+    "name": "Heilpädagoge/-pädagogin/B. Prof. Sozialw.",
     "bundesland": "Niedersachsen",
     "students": 99
   },
   {
     "germanOccupationCode": "83213",
+    "name": "Wirtschafter/in - Hauswirtschaft/B. Prof. Agrarwirtsch.",
     "bundesland": "Niedersachsen",
     "students": 29
   },
   {
     "germanOccupationCode": "93393",
+    "name": "Holzbildhauermeister/in/B. Prof. Holzbildhauer-Handwerk",
     "bundesland": "Niedersachsen",
     "students": 7
   },
   {
     "germanOccupationCode": "11193",
+    "name": "Betriebswirt/in (Fachschule) - Agrarb/B. Prof. Agrarwirtsch.",
     "bundesland": "Nordrhein-Westfalen",
     "students": 235
   },
   {
     "germanOccupationCode": "12193",
+    "name": "Wirtschafter/in - Gartenbau/B. Prof. Agrarwirtsch.",
     "bundesland": "Nordrhein-Westfalen",
     "students": 185
   },
   {
     "germanOccupationCode": "21323",
+    "name": "Techniker/in - Glastechnik (Optik)/B. Prof. Technik",
     "bundesland": "Nordrhein-Westfalen",
     "students": 55
   },
   {
     "germanOccupationCode": "22103",
+    "name": "Techniker/in - Kunststoff- u. Kautschukt./B. Prof. Technik",
     "bundesland": "Nordrhein-Westfalen",
     "students": 15
   },
   {
     "germanOccupationCode": "22303",
+    "name": "Techniker/in - Holztechnik/B. Prof. Technik",
     "bundesland": "Nordrhein-Westfalen",
     "students": 90
   },
   {
     "germanOccupationCode": "23213",
+    "name": "Gestalter/in - Werbe- u. Mediengestalt./B. Prof. Gestaltung",
     "bundesland": "Nordrhein-Westfalen",
     "students": 35
   },
   {
     "germanOccupationCode": "23413",
+    "name": "Techniker/in - Druck- und Medientechnik/B. Prof. Technik",
     "bundesland": "Nordrhein-Westfalen",
     "students": 10
   },
   {
     "germanOccupationCode": "24303",
+    "name": "Techniker/in - Korrosionsschutz/B. Prof. Technik",
     "bundesland": "Nordrhein-Westfalen",
     "students": 25
   },
   {
     "germanOccupationCode": "24413",
+    "name": "Techniker/in - Metallbautechnik/B. Prof. Technik",
     "bundesland": "Nordrhein-Westfalen",
     "students": 15
   },
   {
     "germanOccupationCode": "25103",
+    "name": "Techniker/in - Maschinentechnik/B. Prof. Technik",
     "bundesland": "Nordrhein-Westfalen",
     "students": 1550
   },
   {
     "germanOccupationCode": "25213",
+    "name": "Techniker/in - Karosserie- u. Fahrzeugbaut./B. Prof. Technik",
     "bundesland": "Nordrhein-Westfalen",
     "students": 10
   },
   {
     "germanOccupationCode": "25213",
+    "name": "Techniker/in - Kraftfahrzeugtechnik/B. Prof. Technik",
     "bundesland": "Nordrhein-Westfalen",
     "students": 30
   },
   {
     "germanOccupationCode": "26113",
+    "name": "Techniker/in - Mechatronik/B. Prof. Technik",
     "bundesland": "Nordrhein-Westfalen",
     "students": 60
   },
   {
     "germanOccupationCode": "26123",
+    "name": "Techniker/in - Elektrotechnik (Autom.tech.)/B. Prof. Technik",
     "bundesland": "Nordrhein-Westfalen",
     "students": 45
   },
   {
     "germanOccupationCode": "26303",
+    "name": "Techniker/in - Elektrotechnik/B. Prof. Technik",
     "bundesland": "Nordrhein-Westfalen",
     "students": 850
   },
   {
     "germanOccupationCode": "29203",
+    "name": "Techniker/in - Lebensmittelt./B. Prof. Technik",
     "bundesland": "Nordrhein-Westfalen",
     "students": 30
   },
   {
     "germanOccupationCode": "31213",
+    "name": "Techniker/in - Vermessungstechnik/B. Prof. Technik",
     "bundesland": "Nordrhein-Westfalen",
     "students": 25
   },
   {
     "germanOccupationCode": "32103",
+    "name": "Techniker/in - Bautechnik (Hochbau)/B. Prof. Technik",
     "bundesland": "Nordrhein-Westfalen",
     "students": 185
   },
   {
     "germanOccupationCode": "32203",
+    "name": "Techniker/in - Bautechnik (Tiefbau)/B. Prof. Technik",
     "bundesland": "Nordrhein-Westfalen",
     "students": 70
   },
   {
     "germanOccupationCode": "33303",
+    "name": "Techniker/in - Bautechnik (Ausbau)/B. Prof. Technik",
     "bundesland": "Nordrhein-Westfalen",
     "students": 20
   },
   {
     "germanOccupationCode": "34103",
+    "name": "Techniker/in - Gebäudesystemtechnik/B. Prof. Technik",
     "bundesland": "Nordrhein-Westfalen",
     "students": 20
   },
   {
     "germanOccupationCode": "34213",
+    "name": "Techniker/in - Heiz.-, Lüft.-, Klimatechnik/B. Prof. Technik",
     "bundesland": "Nordrhein-Westfalen",
     "students": 165
   },
   {
     "germanOccupationCode": "34233",
+    "name": "Techniker/in - Kältetechnik/B. Prof. Technik",
     "bundesland": "Nordrhein-Westfalen",
     "students": 15
   },
   {
     "germanOccupationCode": "41313",
+    "name": "Techniker/in - Chemietechnik (Betriebst.)/B. Prof. Technik",
     "bundesland": "Nordrhein-Westfalen",
     "students": 70
   },
   {
     "germanOccupationCode": "41323",
+    "name": "Techniker/in - Chemietechnik (Lab.technik)/B. Prof. Technik",
     "bundesland": "Nordrhein-Westfalen",
     "students": 155
   },
   {
     "germanOccupationCode": "41423",
+    "name": "Techniker/in - Werkstofftechnik/B. Prof. Technik",
     "bundesland": "Nordrhein-Westfalen",
     "students": 25
   },
   {
     "germanOccupationCode": "42313",
+    "name": "Techniker/in - Umweltschutzt./regen. Energ./B. Prof. Technik",
     "bundesland": "Nordrhein-Westfalen",
     "students": 55
   },
   {
     "germanOccupationCode": "43123",
+    "name": "Techniker/in - Informatik (tech.Informatik)/B. Prof. Technik",
     "bundesland": "Nordrhein-Westfalen",
     "students": 50
   },
   {
     "germanOccupationCode": "51623",
+    "name": "Betriebswirt/in (Fachschule) - Logistik/B. Prof. Wirtsch.",
     "bundesland": "Nordrhein-Westfalen",
     "students": 220
   },
   {
     "germanOccupationCode": "61203",
+    "name": "Betriebswirt/in (Fachschule) - Handel",
     "bundesland": "Nordrhein-Westfalen",
     "students": 75
   },
   {
     "germanOccupationCode": "61213",
+    "name": "Betriebswirt/in (Fachschule) - Außenwirt./B. Prof. Wirtsch.",
     "bundesland": "Nordrhein-Westfalen",
     "students": 280
   },
   {
     "germanOccupationCode": "61283",
+    "name": "Betriebswirt/in (Fachschule) - Möbelhandel/B. Prof. Wirtsch.",
     "bundesland": "Nordrhein-Westfalen",
     "students": 70
   },
   {
     "germanOccupationCode": "61313",
+    "name": "Betriebswirt/in (Fachschule) - Immobilien/B. Prof. Wirtsch.",
     "bundesland": "Nordrhein-Westfalen",
     "students": 45
   },
   {
     "germanOccupationCode": "63113",
+    "name": "Betriebswirt/in (Fachschule) - Tour./Reise/B. Prof. Wirtsch.",
     "bundesland": "Nordrhein-Westfalen",
     "students": 30
   },
   {
     "germanOccupationCode": "63294",
+    "name": "Betriebsleiter/in - Hotel/Gaststätten/B. Prof. Hauswirtsch.",
     "bundesland": "Nordrhein-Westfalen",
     "students": 35
   },
   {
     "germanOccupationCode": "71303",
+    "name": "Betriebswirt/in (Fachschule) - allg. BWL/B. Prof. Wirtsch.",
     "bundesland": "Nordrhein-Westfalen",
     "students": 155
   },
   {
     "germanOccupationCode": "71303",
+    "name": "Technische/r Betriebswirt/in (Weiterbildung)",
     "bundesland": "Nordrhein-Westfalen",
     "students": 20
   },
   {
     "germanOccupationCode": "71383",
+    "name": "Betriebswirt/in (Fachschule) - Recht/B. Prof. Wirtsch.",
     "bundesland": "Nordrhein-Westfalen",
     "students": 50
   },
   {
     "germanOccupationCode": "71513",
+    "name": "Betriebswirt/in (Fachschule) - Personalw./B. Prof. Wirtsch.",
     "bundesland": "Nordrhein-Westfalen",
     "students": 350
   },
   {
     "germanOccupationCode": "72123",
+    "name": "Betriebswirt/in (Fachschule) - Finanz./Inv/B. Prof. Wirtsch.",
     "bundesland": "Nordrhein-Westfalen",
     "students": 110
   },
   {
     "germanOccupationCode": "72213",
+    "name": "Betriebswirt/in (Fachschule) - Rechnungsw./B. Prof. Wirtsch.",
     "bundesland": "Nordrhein-Westfalen",
     "students": 295
   },
   {
     "germanOccupationCode": "72303",
+    "name": "Betriebswirt/in (Fachschule) - Steuern/B. Prof. Wirtsch.",
     "bundesland": "Nordrhein-Westfalen",
     "students": 45
   },
   {
     "germanOccupationCode": "73223",
+    "name": "Betriebswirt/in (Fachschule) - Manag. Ges./B. Prof. Wirtsch.",
     "bundesland": "Nordrhein-Westfalen",
     "students": 50
   },
   {
     "germanOccupationCode": "81723",
+    "name": "Motopäde/Motopädin",
     "bundesland": "Nordrhein-Westfalen",
     "students": 70
   },
   {
     "germanOccupationCode": "81723",
+    "name": "Reittherapeut/in",
     "bundesland": "Nordrhein-Westfalen",
     "students": 15
   },
   {
     "germanOccupationCode": "82503",
+    "name": "Techniker/in - Medizintechnik/B. Prof. Technik",
     "bundesland": "Nordrhein-Westfalen",
     "students": 15
   },
   {
     "germanOccupationCode": "83113",
+    "name": "Erzieher/in",
     "bundesland": "Nordrhein-Westfalen",
     "students": 7000
   },
   {
     "germanOccupationCode": "83133",
+    "name": "Heilerziehungspfleger/in",
     "bundesland": "Nordrhein-Westfalen",
     "students": 1230
   },
   {
     "germanOccupationCode": "83133",
+    "name": "Sonderpädagoge/-pädagogin (Fachschule)",
     "bundesland": "Nordrhein-Westfalen",
     "students": 135
   },
   {
     "germanOccupationCode": "83134",
+    "name": "Heilpädagoge/-pädagogin/B. Prof. Sozialw.",
     "bundesland": "Nordrhein-Westfalen",
     "students": 195
   },
   {
     "germanOccupationCode": "83193",
+    "name": "Fachwirt/in - Erziehungswesen",
     "bundesland": "Nordrhein-Westfalen",
     "students": 115
   },
   {
     "germanOccupationCode": "83293",
+    "name": "Hauswirtschaftliche/r Betriebsleiter/in/B. Prof. Wirtsch.",
     "bundesland": "Nordrhein-Westfalen",
     "students": 10
   },
   {
     "germanOccupationCode": "83293",
+    "name": "Meister/in - Hauswirtschaft",
     "bundesland": "Nordrhein-Westfalen",
     "students": 30
   },
   {
     "germanOccupationCode": "92113",
+    "name": "Betriebswirt/in (Fachschule) - Abs./Mark./B. Prof. Wirtsch.",
     "bundesland": "Nordrhein-Westfalen",
     "students": 680
   },
   {
     "germanOccupationCode": "11193",
+    "name": "Wirtschafter/in - Landwirtschaft/B. Prof. Agrarwirtsch.",
     "bundesland": "Rheinland-Pfalz",
     "students": 73
   },
   {
     "germanOccupationCode": "11693",
+    "name": "Wirtschafter/in - Weinbau/B. Prof. Agrarwirtsch.",
     "bundesland": "Rheinland-Pfalz",
     "students": 48
   },
   {
     "germanOccupationCode": "12193",
+    "name": "Wirtschafter/in - Gartenbau/B. Prof. Agrarwirtsch.",
     "bundesland": "Rheinland-Pfalz",
     "students": 18
   },
   {
     "germanOccupationCode": "21293",
+    "name": "Steinmetz-/Steinbildhauermeister/in/B. Prof. Steinbildh.Hw.",
     "bundesland": "Rheinland-Pfalz",
     "students": 9
   },
   {
     "germanOccupationCode": "21413",
+    "name": "Techniker/in - Keramiktechnik/B. Prof. Technik",
     "bundesland": "Rheinland-Pfalz",
     "students": 7
   },
   {
     "germanOccupationCode": "22343",
+    "name": "Techniker/in - Holztechnik (Möbelb/Raumges)/B. Prof. Technik",
     "bundesland": "Rheinland-Pfalz",
     "students": 23
   },
   {
     "germanOccupationCode": "22393",
+    "name": "Tischlermeister/in/B. Prof. Tischler-Handwerk",
     "bundesland": "Rheinland-Pfalz",
     "students": 16
   },
   {
     "germanOccupationCode": "24493",
+    "name": "Metallbauermeister/in/B. Prof. Metallbauer-Handwerk",
     "bundesland": "Rheinland-Pfalz",
     "students": 13
   },
   {
     "germanOccupationCode": "24593",
+    "name": "Feinwerkmechanikermeister/in/B. Prof. Feinmechanik-Handwerk",
     "bundesland": "Rheinland-Pfalz",
     "students": 9
   },
   {
     "germanOccupationCode": "25103",
+    "name": "Techniker/in - Maschinentechnik (Autom.t.)/B. Prof. Technik",
     "bundesland": "Rheinland-Pfalz",
     "students": 114
   },
   {
     "germanOccupationCode": "25103",
+    "name": "Techniker/in - Maschinentechnik (Verfahr.)/B. Prof. Technik",
     "bundesland": "Rheinland-Pfalz",
     "students": 17
   },
   {
     "germanOccupationCode": "25103",
+    "name": "Techniker/in - Maschinentechnik/B. Prof. Technik",
     "bundesland": "Rheinland-Pfalz",
     "students": 256
   },
   {
     "germanOccupationCode": "25213",
+    "name": "Techniker/in - Karosserie- u. Fahrzeugbaut./B. Prof. Technik",
     "bundesland": "Rheinland-Pfalz",
     "students": 11
   },
   {
     "germanOccupationCode": "25213",
+    "name": "Techniker/in - Kraftfahrzeugtechnik/B. Prof. Technik",
     "bundesland": "Rheinland-Pfalz",
     "students": 15
   },
   {
     "germanOccupationCode": "25293",
+    "name": "Karosserie-/Fahrzeugbauermeister/in/B. Prof. Kaross/Fahr.Hw.",
     "bundesland": "Rheinland-Pfalz",
     "students": 12
   },
   {
     "germanOccupationCode": "25293",
+    "name": "Kraftfahrzeugtechnikermeister/in/B. Prof. Kfz.techniker-Hw.",
     "bundesland": "Rheinland-Pfalz",
     "students": 28
   },
   {
     "germanOccupationCode": "26113",
+    "name": "Techniker/in - Mechatronik/B. Prof. Technik",
     "bundesland": "Rheinland-Pfalz",
     "students": 3
   },
   {
     "germanOccupationCode": "26233",
+    "name": "Techniker/in - Elektrotechnik (Energiet.)/B. Prof. Technik",
     "bundesland": "Rheinland-Pfalz",
     "students": 73
   },
   {
     "germanOccupationCode": "26313",
+    "name": "Techniker/in - Elektrotechnik (Info./Komm.)/B. Prof. Technik",
     "bundesland": "Rheinland-Pfalz",
     "students": 29
   },
   {
     "germanOccupationCode": "26393",
+    "name": "Elektrotechnikermeister/in/B. Prof. Elektrotechn.-Handwerk",
     "bundesland": "Rheinland-Pfalz",
     "students": 48
   },
   {
     "germanOccupationCode": "32103",
+    "name": "Techniker/in - Bautechnik (Hochbau)/B. Prof. Technik",
     "bundesland": "Rheinland-Pfalz",
     "students": 63
   },
   {
     "germanOccupationCode": "32193",
+    "name": "Maurer- und Betonbauermeister/in/B. Prof. Maurer-/Betonb.Hw.",
     "bundesland": "Rheinland-Pfalz",
     "students": 24
   },
   {
     "germanOccupationCode": "32203",
+    "name": "Techniker/in - Bautechnik (Tiefbau)/B. Prof. Technik",
     "bundesland": "Rheinland-Pfalz",
     "students": 19
   },
   {
     "germanOccupationCode": "33293",
+    "name": "Maler- und Lackierermeister/in/B. Prof. Maler-/Lackierer-Hw.",
     "bundesland": "Rheinland-Pfalz",
     "students": 17
   },
   {
     "germanOccupationCode": "33393",
+    "name": "Zimmerermeister/in/B. Prof. Zimmerer-Handwerk",
     "bundesland": "Rheinland-Pfalz",
     "students": 23
   },
   {
     "germanOccupationCode": "34213",
+    "name": "Techniker/in - Heiz.-, Lüft.-, Klimatechnik/B. Prof. Technik",
     "bundesland": "Rheinland-Pfalz",
     "students": 34
   },
   {
     "germanOccupationCode": "41323",
+    "name": "Techniker/in - Chemietechnik (Lab.technik)/B. Prof. Technik",
     "bundesland": "Rheinland-Pfalz",
     "students": 28
   },
   {
     "germanOccupationCode": "43113",
+    "name": "Techniker/in - Informatik (Betriebsinf.)/B. Prof. Technik",
     "bundesland": "Rheinland-Pfalz",
     "students": 8
   },
   {
     "germanOccupationCode": "51623",
+    "name": "Betriebswirt/in (Fachschule) - Logistik/B. Prof. Wirtsch.",
     "bundesland": "Rheinland-Pfalz",
     "students": 13
   },
   {
     "germanOccupationCode": "63113",
+    "name": "Betriebswirt/in (Fachschule) - Tour./Reise/B. Prof. Wirtsch.",
     "bundesland": "Rheinland-Pfalz",
     "students": 15
   },
   {
     "germanOccupationCode": "63213",
+    "name": "Betriebswirt/in (Fachschule) - Hotel/Gast./B. Prof. Wirtsch.",
     "bundesland": "Rheinland-Pfalz",
     "students": 4
   },
   {
     "germanOccupationCode": "63403",
+    "name": "Betriebswirt/in (Fachschule) - Event-Manag/B. Prof. Wirtsch.",
     "bundesland": "Rheinland-Pfalz",
     "students": 21
   },
   {
     "germanOccupationCode": "71303",
+    "name": "Technische/r Betriebswirt/in (Weiterbildung)",
     "bundesland": "Rheinland-Pfalz",
     "students": 11
   },
   {
     "germanOccupationCode": "71403",
+    "name": "Betriebswirt/in (Fachschule) - Komm/ Büro./B. Prof. Wirtsch.",
     "bundesland": "Rheinland-Pfalz",
     "students": 87
   },
   {
     "germanOccupationCode": "72303",
+    "name": "Betriebswirt/in (Fachschule) - Steuern/B. Prof. Wirtsch.",
     "bundesland": "Rheinland-Pfalz",
     "students": 22
   },
   {
     "germanOccupationCode": "73223",
+    "name": "Fachwirt/in - Organisation u. Führung (Sozial)",
     "bundesland": "Rheinland-Pfalz",
     "students": 74
   },
   {
     "germanOccupationCode": "82101",
+    "name": "Altenpflegehelfer/in",
     "bundesland": "Rheinland-Pfalz",
     "students": 1124
   },
   {
     "germanOccupationCode": "82393",
+    "name": "Friseurmeister/in/B. Prof. Friseur-Handwerk",
     "bundesland": "Rheinland-Pfalz",
     "students": 16
   },
   {
     "germanOccupationCode": "83113",
+    "name": "Erzieher/in",
     "bundesland": "Rheinland-Pfalz",
     "students": 1977
   },
   {
     "germanOccupationCode": "83133",
+    "name": "Heilerziehungspfleger/in",
     "bundesland": "Rheinland-Pfalz",
     "students": 218
   },
   {
     "germanOccupationCode": "83293",
+    "name": "Meister/in - Hauswirtschaft",
     "bundesland": "Rheinland-Pfalz",
     "students": 3
   },
   {
     "germanOccupationCode": "93413",
+    "name": "Gestalter/in - Keramik/B. Prof. Gestaltung",
     "bundesland": "Rheinland-Pfalz",
     "students": 4
   },
   {
     "germanOccupationCode": "99999",
+    "name": "Keine Zuordnung möglich",
     "bundesland": "Rheinland-Pfalz",
     "students": 20
   },
   {
     "germanOccupationCode": "22393",
+    "name": "Tischlermeister/in/B. Prof. Tischler-Handwerk",
     "bundesland": "Saarland",
     "students": 10
   },
   {
     "germanOccupationCode": "24593",
+    "name": "Feinwerkmechanikermeister/in/B. Prof. Feinmechanik-Handwerk",
     "bundesland": "Saarland",
     "students": 5
   },
   {
     "germanOccupationCode": "25103",
+    "name": "Techniker/in - Maschinentechnik/B. Prof. Technik",
     "bundesland": "Saarland",
     "students": 104
   },
   {
     "germanOccupationCode": "25293",
+    "name": "Kraftfahrzeugtechnikermeister/in/B. Prof. Kfz.techniker-Hw.",
     "bundesland": "Saarland",
     "students": 32
   },
   {
     "germanOccupationCode": "26113",
+    "name": "Techniker/in - Mechatronik/B. Prof. Technik",
     "bundesland": "Saarland",
     "students": 37
   },
   {
     "germanOccupationCode": "26303",
+    "name": "Techniker/in - Elektrotechnik/B. Prof. Technik",
     "bundesland": "Saarland",
     "students": 71
   },
   {
     "germanOccupationCode": "26393",
+    "name": "Elektrotechnikermeister/in/B. Prof. Elektrotechn.-Handwerk",
     "bundesland": "Saarland",
     "students": 24
   },
   {
     "germanOccupationCode": "31103",
+    "name": "Techniker/in - Bautechnik/B. Prof. Technik",
     "bundesland": "Saarland",
     "students": 8
   },
   {
     "germanOccupationCode": "33293",
+    "name": "Maler- und Lackierermeister/in/B. Prof. Maler-/Lackierer-Hw.",
     "bundesland": "Saarland",
     "students": 8
   },
   {
     "germanOccupationCode": "34293",
+    "name": "Installateur-/Heizungsbauermeister/in/B. Prof. Inst/Heiz.Hw.",
     "bundesland": "Saarland",
     "students": 23
   },
   {
     "germanOccupationCode": "41423",
+    "name": "Techniker/in - Werkstofftechnik/B. Prof. Technik",
     "bundesland": "Saarland",
     "students": 11
   },
   {
     "germanOccupationCode": "63394",
+    "name": "Gastronom/in/B. Prof. Wirtsch.",
     "bundesland": "Saarland",
     "students": 10
   },
   {
     "germanOccupationCode": "71303",
+    "name": "Betriebswirt/in (Fachschule) - Unternehm./B. Prof. Wirtsch.",
     "bundesland": "Saarland",
     "students": 15
   },
   {
     "germanOccupationCode": "82393",
+    "name": "Friseurmeister/in/B. Prof. Friseur-Handwerk",
     "bundesland": "Saarland",
     "students": 28
   },
   {
     "germanOccupationCode": "83113",
+    "name": "Erzieher/in",
     "bundesland": "Saarland",
     "students": 346
   },
   {
     "germanOccupationCode": "83293",
+    "name": "Meister/in - Hauswirtschaft",
     "bundesland": "Saarland",
     "students": 5
   },
   {
     "germanOccupationCode": "11113",
+    "name": "Techniker/in - Agrartechnik/B. Prof. Technik",
     "bundesland": "Sachsen",
     "students": 22
   },
   {
     "germanOccupationCode": "11193",
+    "name": "Wirtschafter/in - Landwirtschaft/B. Prof. Agrarwirtsch.",
     "bundesland": "Sachsen",
     "students": 17
   },
   {
     "germanOccupationCode": "12193",
+    "name": "Wirtschafter/in - Gartenbau/B. Prof. Agrarwirtsch.",
     "bundesland": "Sachsen",
     "students": 36
   },
   {
     "germanOccupationCode": "21113",
+    "name": "Techniker/in - Bergbautechnik/B. Prof. Technik",
     "bundesland": "Sachsen",
     "students": 4
   },
   {
     "germanOccupationCode": "21113",
+    "name": "Techniker/in - Bohrtechnik/B. Prof. Technik",
     "bundesland": "Sachsen",
     "students": 3
   },
   {
     "germanOccupationCode": "25103",
+    "name": "Techniker/in - Maschinentechnik/B. Prof. Technik",
     "bundesland": "Sachsen",
     "students": 155
   },
   {
     "germanOccupationCode": "25213",
+    "name": "Techniker/in - Karosserie- u. Fahrzeugbaut./B. Prof. Technik",
     "bundesland": "Sachsen",
     "students": 15
   },
   {
     "germanOccupationCode": "26113",
+    "name": "Techniker/in - Mechatronik/B. Prof. Technik",
     "bundesland": "Sachsen",
     "students": 19
   },
   {
     "germanOccupationCode": "26233",
+    "name": "Techniker/in - Elektrotechnik (Energiet.)/B. Prof. Technik",
     "bundesland": "Sachsen",
     "students": 158
   },
   {
     "germanOccupationCode": "31153",
+    "name": "Techniker/in - Bautechnik (Bauern./Bausan.)/B. Prof. Technik",
     "bundesland": "Sachsen",
     "students": 2
   },
   {
     "germanOccupationCode": "32103",
+    "name": "Techniker/in - Bautechnik (Hochbau)/B. Prof. Technik",
     "bundesland": "Sachsen",
     "students": 17
   },
   {
     "germanOccupationCode": "32203",
+    "name": "Techniker/in - Bautechnik (Tiefbau)/B. Prof. Technik",
     "bundesland": "Sachsen",
     "students": 2
   },
   {
     "germanOccupationCode": "42113",
+    "name": "Techniker/in - Geologietechnik/B. Prof. Technik",
     "bundesland": "Sachsen",
     "students": 3
   },
   {
     "germanOccupationCode": "43313",
+    "name": "Techniker/in - Informatik (Netzwerktechn.)/B. Prof. Technik",
     "bundesland": "Sachsen",
     "students": 6
   },
   {
     "germanOccupationCode": "63213",
+    "name": "Betriebswirt/in (Fachschule) - Hotel/Gast./B. Prof. Wirtsch.",
     "bundesland": "Sachsen",
     "students": 5
   },
   {
     "germanOccupationCode": "83113",
+    "name": "Erzieher/in",
     "bundesland": "Sachsen",
     "students": 2381
   },
   {
     "germanOccupationCode": "83133",
+    "name": "Heilerziehungspfleger/in",
     "bundesland": "Sachsen",
     "students": 338
   },
   {
     "germanOccupationCode": "83293",
+    "name": "Hauswirtschaftliche/r Betriebsleiter/in/B. Prof. Wirtsch.",
     "bundesland": "Sachsen",
     "students": 15
   },
   {
     "germanOccupationCode": "11193",
+    "name": "Betriebswirt/in (Fachschule) - Agrarb/B. Prof. Agrarwirtsch.",
     "bundesland": "Sachsen-Anhalt",
     "students": 45
   },
   {
     "germanOccupationCode": "25103",
+    "name": "Techniker/in - Maschinentechnik (Fertig.t.)/B. Prof. Technik",
     "bundesland": "Sachsen-Anhalt",
     "students": 12
   },
   {
     "germanOccupationCode": "26233",
+    "name": "Techniker/in - Elektrotechnik (Energiet.)/B. Prof. Technik",
     "bundesland": "Sachsen-Anhalt",
     "students": 9
   },
   {
     "germanOccupationCode": "31103",
+    "name": "Techniker/in - Bautechnik/B. Prof. Technik",
     "bundesland": "Sachsen-Anhalt",
     "students": 21
   },
   {
     "germanOccupationCode": "41313",
+    "name": "Techniker/in - Chemietechnik/B. Prof. Technik",
     "bundesland": "Sachsen-Anhalt",
     "students": 6
   },
   {
     "germanOccupationCode": "71303",
+    "name": "Betriebswirt/in (Fachschule) - allg. BWL/B. Prof. Wirtsch.",
     "bundesland": "Sachsen-Anhalt",
     "students": 21
   },
   {
     "germanOccupationCode": "83113",
+    "name": "Erzieher/in",
     "bundesland": "Sachsen-Anhalt",
     "students": 1164
   },
   {
     "germanOccupationCode": "83133",
+    "name": "Heilerziehungspfleger/in",
     "bundesland": "Sachsen-Anhalt",
     "students": 120
   },
   {
     "germanOccupationCode": "83134",
+    "name": "Heilpädagoge/-pädagogin/B. Prof. Sozialw.",
     "bundesland": "Sachsen-Anhalt",
     "students": 60
   },
   {
     "germanOccupationCode": "99999",
+    "name": "Keine Zuordnung möglich",
     "bundesland": "Schleswig-Holstein",
     "students": 2047
   },
   {
     "germanOccupationCode": "22103",
+    "name": "Techniker/in - Maschinentechnik (Kun./Kau.)/B. Prof. Technik",
     "bundesland": "Thüringen",
     "students": 2
   },
   {
     "germanOccupationCode": "23113",
+    "name": "Techniker/in - Papiertechnik/B. Prof. Technik",
     "bundesland": "Thüringen",
     "students": 11
   },
   {
     "germanOccupationCode": "25103",
+    "name": "Techniker/in - Maschinentechnik (Konstruk.)/B. Prof. Technik",
     "bundesland": "Thüringen",
     "students": 45
   },
   {
     "germanOccupationCode": "25103",
+    "name": "Techniker/in - Maschinentechnik/B. Prof. Technik",
     "bundesland": "Thüringen",
     "students": 24
   },
   {
     "germanOccupationCode": "26113",
+    "name": "Techniker/in - Mechatronik/B. Prof. Technik",
     "bundesland": "Thüringen",
     "students": 17
   },
   {
     "germanOccupationCode": "26123",
+    "name": "Techniker/in - Elektrotechnik (Autom.tech.)/B. Prof. Technik",
     "bundesland": "Thüringen",
     "students": 19
   },
   {
     "germanOccupationCode": "31153",
+    "name": "Techniker/in - Bautechnik (Bauern./Bausan.)/B. Prof. Technik",
     "bundesland": "Thüringen",
     "students": 11
   },
   {
     "germanOccupationCode": "32203",
+    "name": "Techniker/in - Bautechnik (Tiefbau)/B. Prof. Technik",
     "bundesland": "Thüringen",
     "students": 8
   },
   {
     "germanOccupationCode": "51503",
+    "name": "Techniker/in - Verkehrstechnik (Verkehrsm.)/B. Prof. Technik",
     "bundesland": "Thüringen",
     "students": 52
   },
   {
     "germanOccupationCode": "51523",
+    "name": "Techniker/in - Verkehrstechnik (Eisenbahn.)/B. Prof. Technik",
     "bundesland": "Thüringen",
     "students": 15
   },
   {
     "germanOccupationCode": "71303",
+    "name": "Technische/r Betriebswirt/in (Weiterbildung)",
     "bundesland": "Thüringen",
     "students": 15
   },
   {
     "germanOccupationCode": "83113",
+    "name": "Erzieher/in",
     "bundesland": "Thüringen",
     "students": 844
   },
   {
     "germanOccupationCode": "83133",
+    "name": "Heilerziehungspfleger/in",
     "bundesland": "Thüringen",
     "students": 175
   },
   {
     "germanOccupationCode": "83134",
+    "name": "Heilpädagoge/-pädagogin/B. Prof. Sozialw.",
     "bundesland": "Thüringen",
     "students": 37
   },
   {
     "germanOccupationCode": "92113",
+    "name": "Betriebswirt/in (Fachschule) - Abs./Mark./B. Prof. Wirtsch.",
     "bundesland": "Thüringen",
     "students": 13
   },
   {
     "germanOccupationCode": "99999",
+    "name": "Keine Zuordnung möglich",
     "bundesland": "Thüringen",
     "students": 25
   },
   {
     "germanOccupationCode": "11113",
+    "name": "Techniker/in - Agrartechnik/B. Prof. Technik",
     "bundesland": "Deutschland",
     "students": 196
   },
   {
     "germanOccupationCode": "11193",
+    "name": "Betriebswirt/in (Fachschule) - Agrarb/B. Prof. Agrarwirtsch.",
     "bundesland": "Deutschland",
     "students": 354
   },
   {
     "germanOccupationCode": "11193",
+    "name": "Landwirtschaftsmeister/in",
     "bundesland": "Deutschland",
     "students": 521
   },
   {
     "germanOccupationCode": "11193",
+    "name": "Wirtschafter/in - Landwirtschaft/B. Prof. Agrarwirtsch.",
     "bundesland": "Deutschland",
     "students": 784
   },
   {
     "germanOccupationCode": "11603",
+    "name": "Techniker/in - Weinbau und Kellerwirtschaft/B. Prof. Technik",
     "bundesland": "Deutschland",
     "students": 26
   },
   {
     "germanOccupationCode": "11693",
+    "name": "Wirtschafter/in - Weinbau/B. Prof. Agrarwirtsch.",
     "bundesland": "Deutschland",
     "students": 80
   },
   {
     "germanOccupationCode": "11713",
+    "name": "Techniker/in - Forsttechnik/B. Prof. Technik",
     "bundesland": "Deutschland",
     "students": 28
   },
   {
     "germanOccupationCode": "12103",
+    "name": "Techniker/in - Gartenbau/B. Prof. Technik",
     "bundesland": "Deutschland",
     "students": 12
   },
   {
     "germanOccupationCode": "12143",
+    "name": "Techniker/in - Gartenbau (GaLaBau)/B. Prof. Technik",
     "bundesland": "Deutschland",
     "students": 55
   },
   {
     "germanOccupationCode": "12193",
+    "name": "Gärtnermeister/in",
     "bundesland": "Deutschland",
     "students": 182
   },
   {
     "germanOccupationCode": "12193",
+    "name": "Wirtschafter/in - Gartenbau/B. Prof. Agrarwirtsch.",
     "bundesland": "Deutschland",
     "students": 365
   },
   {
     "germanOccupationCode": "12203",
+    "name": "Gestalter/in - Blumenkunst/B. Prof. Gestaltung",
     "bundesland": "Deutschland",
     "students": 22
   },
   {
     "germanOccupationCode": "21113",
+    "name": "Techniker/in - Bergbautechnik/B. Prof. Technik",
     "bundesland": "Deutschland",
     "students": 4
   },
   {
     "germanOccupationCode": "21113",
+    "name": "Techniker/in - Bohrtechnik/B. Prof. Technik",
     "bundesland": "Deutschland",
     "students": 3
   },
   {
     "germanOccupationCode": "21233",
+    "name": "Techniker/in - Steintechnik/B. Prof. Technik",
     "bundesland": "Deutschland",
     "students": 23
   },
   {
     "germanOccupationCode": "21293",
+    "name": "Steinmetz-/Steinbildhauermeister/in/B. Prof. Steinbildh.Hw.",
     "bundesland": "Deutschland",
     "students": 26
   },
   {
     "germanOccupationCode": "21293",
+    "name": "Werkstein-/Terrazzoherstellermeister/in/B. Prof.Werk/Ter.Hw.",
     "bundesland": "Deutschland",
     "students": 5
   },
   {
     "germanOccupationCode": "21313",
+    "name": "Techniker/in - Glastechnik/B. Prof. Technik",
     "bundesland": "Deutschland",
     "students": 8
   },
   {
     "germanOccupationCode": "21323",
+    "name": "Techniker/in - Glastechnik (Optik)/B. Prof. Technik",
     "bundesland": "Deutschland",
     "students": 55
   },
   {
     "germanOccupationCode": "21413",
+    "name": "Techniker/in - Keramiktechnik/B. Prof. Technik",
     "bundesland": "Deutschland",
     "students": 7
   },
   {
     "germanOccupationCode": "22103",
+    "name": "Techniker/in - Kunststoff- u. Kautschukt./B. Prof. Technik",
     "bundesland": "Deutschland",
     "students": 76
   },
   {
     "germanOccupationCode": "22103",
+    "name": "Techniker/in - Maschinentechnik (Kun./Kau.)/B. Prof. Technik",
     "bundesland": "Deutschland",
     "students": 2
   },
   {
     "germanOccupationCode": "22193",
+    "name": "Industriemeister/in - Kunststoff und Kautschuk",
     "bundesland": "Deutschland",
     "students": 8
   },
   {
     "germanOccupationCode": "22203",
+    "name": "Techniker/in - Farb- u. Lackt. (Gestaltung)/B. Prof. Technik",
     "bundesland": "Deutschland",
     "students": 11
   },
   {
     "germanOccupationCode": "22203",
+    "name": "Techniker/in - Farb- u. Lackt. (ind.Besch.)/B. Prof. Technik",
     "bundesland": "Deutschland",
     "students": 16
   },
   {
     "germanOccupationCode": "22203",
+    "name": "Techniker/in - Farb- u. Lackt. (o.Schwerp.)/B. Prof. Technik",
     "bundesland": "Deutschland",
     "students": 33
   },
   {
     "germanOccupationCode": "22203",
+    "name": "Techniker/in - Farb- u. Lackt./B. Prof. Technik",
     "bundesland": "Deutschland",
     "students": 49
   },
   {
     "germanOccupationCode": "22293",
+    "name": "Betriebsmanager/in - Farbtechnik",
     "bundesland": "Deutschland",
     "students": 16
   },
   {
     "germanOccupationCode": "22303",
+    "name": "Techniker/in - Holztechnik (o. Schwerpunkt)/B. Prof. Technik",
     "bundesland": "Deutschland",
     "students": 28
   },
   {
     "germanOccupationCode": "22303",
+    "name": "Techniker/in - Holztechnik/B. Prof. Technik",
     "bundesland": "Deutschland",
     "students": 248
   },
   {
     "germanOccupationCode": "22343",
+    "name": "Techniker/in - Holztechnik (Möbelb/Raumges)/B. Prof. Technik",
     "bundesland": "Deutschland",
     "students": 23
   },
   {
     "germanOccupationCode": "22393",
+    "name": "Betriebsmanager/in - Bau- und Holztechnik",
     "bundesland": "Deutschland",
     "students": 27
   },
   {
     "germanOccupationCode": "22393",
+    "name": "Tischlermeister/in/B. Prof. Tischler-Handwerk",
     "bundesland": "Deutschland",
     "students": 347
   },
   {
     "germanOccupationCode": "23113",
+    "name": "Techniker/in - Papiertechnik/B. Prof. Technik",
     "bundesland": "Deutschland",
     "students": 20
   },
   {
     "germanOccupationCode": "23193",
+    "name": "Industriemeister/in - Papier- und Kunststoffverarbeitung",
     "bundesland": "Deutschland",
     "students": 12
   },
   {
     "germanOccupationCode": "23193",
+    "name": "Industriemeister/in - Papiererzeugung",
     "bundesland": "Deutschland",
     "students": 43
   },
   {
     "germanOccupationCode": "23213",
+    "name": "Gestalter/in - Werbe- u. Mediengestalt./B. Prof. Gestaltung",
     "bundesland": "Deutschland",
     "students": 51
   },
   {
     "germanOccupationCode": "23293",
+    "name": "Industriemeister/in - Printmedien/B. Prof. Print",
     "bundesland": "Deutschland",
     "students": 36
   },
   {
     "germanOccupationCode": "23393",
+    "name": "Fotografenmeister/in/B. Prof. Fotografen-Handwerk",
     "bundesland": "Deutschland",
     "students": 15
   },
   {
     "germanOccupationCode": "23413",
+    "name": "Techniker/in - Druck- und Medientechnik/B. Prof. Technik",
     "bundesland": "Deutschland",
     "students": 51
   },
   {
     "germanOccupationCode": "23493",
+    "name": "Buchbindermeister/in/B. Prof. Buchbinder-Handwerk",
     "bundesland": "Deutschland",
     "students": 7
   },
   {
     "germanOccupationCode": "24193",
+    "name": "Industriemeister/in - Gießerei",
     "bundesland": "Deutschland",
     "students": 21
   },
   {
     "germanOccupationCode": "24233",
+    "name": "Techniker/in - Zerspanungstechnik/B. Prof. Technik",
     "bundesland": "Deutschland",
     "students": 19
   },
   {
     "germanOccupationCode": "24293",
+    "name": "Industriemeister/in - Metall",
     "bundesland": "Deutschland",
     "students": 81
   },
   {
     "germanOccupationCode": "24303",
+    "name": "Techniker/in - Galvanotechnik/B. Prof. Technik",
     "bundesland": "Deutschland",
     "students": 9
   },
   {
     "germanOccupationCode": "24303",
+    "name": "Techniker/in - Korrosionsschutz/B. Prof. Technik",
     "bundesland": "Deutschland",
     "students": 25
   },
   {
     "germanOccupationCode": "24413",
+    "name": "Techniker/in - Metallbautechnik/B. Prof. Technik",
     "bundesland": "Deutschland",
     "students": 63
   },
   {
     "germanOccupationCode": "24493",
+    "name": "Metallbauermeister/in/B. Prof. Metallbauer-Handwerk",
     "bundesland": "Deutschland",
     "students": 88
   },
   {
     "germanOccupationCode": "24513",
+    "name": "Techniker/in - Feinwerktechnik/B. Prof. Technik",
     "bundesland": "Deutschland",
     "students": 44
   },
   {
     "germanOccupationCode": "24593",
+    "name": "Büchsenmachermeister/in/B. Prof. Büchsenmacher-Handwerk",
     "bundesland": "Deutschland",
     "students": 18
   },
   {
     "germanOccupationCode": "24593",
+    "name": "Feinwerkmechanikermeister/in/B. Prof. Feinmechanik-Handwerk",
     "bundesland": "Deutschland",
     "students": 130
   },
   {
     "germanOccupationCode": "25103",
+    "name": "Techniker/in - Maschinentechnik (Autom.t.)/B. Prof. Technik",
     "bundesland": "Deutschland",
     "students": 114
   },
   {
     "germanOccupationCode": "25103",
+    "name": "Techniker/in - Maschinentechnik (Fertig.t.)/B. Prof. Technik",
     "bundesland": "Deutschland",
     "students": 12
   },
   {
     "germanOccupationCode": "25103",
+    "name": "Techniker/in - Maschinentechnik (Konstruk.)/B. Prof. Technik",
     "bundesland": "Deutschland",
     "students": 52
   },
   {
     "germanOccupationCode": "25103",
+    "name": "Techniker/in - Maschinentechnik (Verfahr.)/B. Prof. Technik",
     "bundesland": "Deutschland",
     "students": 17
   },
   {
     "germanOccupationCode": "25103",
+    "name": "Techniker/in - Maschinentechnik (o. Schwp.)/B. Prof. Technik",
     "bundesland": "Deutschland",
     "students": 46
   },
   {
     "germanOccupationCode": "25103",
+    "name": "Techniker/in - Maschinentechnik/B. Prof. Technik",
     "bundesland": "Deutschland",
     "students": 5026
   },
   {
     "germanOccupationCode": "25183",
+    "name": "Techniker/in - Mühlenbau, Getr.- u. Futterm.",
     "bundesland": "Deutschland",
     "students": 11
   },
   {
     "germanOccupationCode": "25213",
+    "name": "Techniker/in - Karosserie- u. Fahrzeugbaut./B. Prof. Technik",
     "bundesland": "Deutschland",
     "students": 79
   },
   {
     "germanOccupationCode": "25213",
+    "name": "Techniker/in - Kraftfahrzeugtechnik/B. Prof. Technik",
     "bundesland": "Deutschland",
     "students": 98
   },
   {
     "germanOccupationCode": "25293",
+    "name": "Karosserie-/Fahrzeugbauermeister/in/B. Prof. Kaross/Fahr.Hw.",
     "bundesland": "Deutschland",
     "students": 12
   },
   {
     "germanOccupationCode": "25293",
+    "name": "Kraftfahrzeugtechnikermeister/in/B. Prof. Kfz.techniker-Hw.",
     "bundesland": "Deutschland",
     "students": 410
   },
   {
     "germanOccupationCode": "25293",
+    "name": "Land-/Baumasch.mechatronikermeister/in/B. Prof. Land/Bau.Hw.",
     "bundesland": "Deutschland",
     "students": 74
   },
   {
     "germanOccupationCode": "25293",
+    "name": "Zweiradmechanikermeister/in/B. Prof. Zweiradmechaniker-Hw.",
     "bundesland": "Deutschland",
     "students": 30
   },
   {
     "germanOccupationCode": "26113",
+    "name": "Techniker/in - Mechatronik/B. Prof. Technik",
     "bundesland": "Deutschland",
     "students": 849
   },
   {
     "germanOccupationCode": "26123",
+    "name": "Techniker/in - Elektrotechnik (Autom.tech.)/B. Prof. Technik",
     "bundesland": "Deutschland",
     "students": 192
   },
   {
     "germanOccupationCode": "26233",
+    "name": "Techniker/in - Elektrotechnik (Energiet.)/B. Prof. Technik",
     "bundesland": "Deutschland",
     "students": 262
   },
   {
     "germanOccupationCode": "26303",
+    "name": "Techniker/in - Elektrotechnik (o. Schwerp.)/B. Prof. Technik",
     "bundesland": "Deutschland",
     "students": 40
   },
   {
     "germanOccupationCode": "26303",
+    "name": "Techniker/in - Elektrotechnik/B. Prof. Technik",
     "bundesland": "Deutschland",
     "students": 2461
   },
   {
     "germanOccupationCode": "26313",
+    "name": "Techniker/in - Elektrotechnik (Info./Komm.)/B. Prof. Technik",
     "bundesland": "Deutschland",
     "students": 69
   },
   {
     "germanOccupationCode": "26333",
+    "name": "Techniker/in - Elektromobilität/B. Prof. Technik",
     "bundesland": "Deutschland",
     "students": 160
   },
   {
     "germanOccupationCode": "26393",
+    "name": "Elektrotechnikermeister/in/B. Prof. Elektrotechn.-Handwerk",
     "bundesland": "Deutschland",
     "students": 330
   },
   {
     "germanOccupationCode": "26393",
+    "name": "Informationstechnikermeister/in/B. Prof. Informationst.Hw.",
     "bundesland": "Deutschland",
     "students": 20
   },
   {
     "germanOccupationCode": "28103",
+    "name": "Techniker/in - Textiltechnik/B. Prof. Technik",
     "bundesland": "Deutschland",
     "students": 21
   },
   {
     "germanOccupationCode": "28213",
+    "name": "Produktentwickler/in (Mode)",
     "bundesland": "Deutschland",
     "students": 12
   },
   {
     "germanOccupationCode": "28213",
+    "name": "Schnitt-, Entwurfs- und Fertigungsmodelleur/-direktrice",
     "bundesland": "Deutschland",
     "students": 16
   },
   {
     "germanOccupationCode": "28223",
+    "name": "Techniker/in - Bekleidungstechnik/B. Prof. Technik",
     "bundesland": "Deutschland",
     "students": 30
   },
   {
     "germanOccupationCode": "28293",
+    "name": "Maßschneidermeister/in/B. Prof. Maßschneider-Handwerk",
     "bundesland": "Deutschland",
     "students": 60
   },
   {
     "germanOccupationCode": "29193",
+    "name": "Brauer- und Mälzermeister/in/B. Prof. Brauer- und MälzerHw.",
     "bundesland": "Deutschland",
     "students": 56
   },
   {
     "germanOccupationCode": "29193",
+    "name": "Landwirtschaftliche/r Brennmeister/in",
     "bundesland": "Deutschland",
     "students": 24
   },
   {
     "germanOccupationCode": "29203",
+    "name": "Techniker/in - Lebensmittelt. (Verarb.t.)/B. Prof. Technik",
     "bundesland": "Deutschland",
     "students": 29
   },
   {
     "germanOccupationCode": "29203",
+    "name": "Techniker/in - Lebensmittelt./B. Prof. Technik",
     "bundesland": "Deutschland",
     "students": 57
   },
   {
     "germanOccupationCode": "29223",
+    "name": "Techniker/in - Lebensmittelt. (Bäckereit.)/B. Prof. Technik",
     "bundesland": "Deutschland",
     "students": 8
   },
   {
     "germanOccupationCode": "29233",
+    "name": "Techniker/in - Lebensmittelt. (Fleischert.)/B. Prof. Technik",
     "bundesland": "Deutschland",
     "students": 5
   },
   {
     "germanOccupationCode": "29253",
+    "name": "Techniker/in - Milchwirtschaft, Molkereiw./B. Prof. Technik",
     "bundesland": "Deutschland",
     "students": 26
   },
   {
     "germanOccupationCode": "29253",
+    "name": "Wirtschafter/in - Milch-/Molkereiw./B. Prof. Agrarwirtsch.",
     "bundesland": "Deutschland",
     "students": 36
   },
   {
     "germanOccupationCode": "29293",
+    "name": "Bäckermeister/in/B. Prof. Bäcker-Handwerk",
     "bundesland": "Deutschland",
     "students": 65
   },
   {
     "germanOccupationCode": "29293",
+    "name": "Konditormeister/in/B. Prof. Konditor-Handwerk",
     "bundesland": "Deutschland",
     "students": 64
   },
   {
     "germanOccupationCode": "29293",
+    "name": "Müllermeister/in/B. Prof. Müller-Handwerk",
     "bundesland": "Deutschland",
     "students": 18
   },
   {
     "germanOccupationCode": "31103",
+    "name": "Techniker/in - Bautechnik (o. Schwerpunkt)/B. Prof. Technik",
     "bundesland": "Deutschland",
     "students": 68
   },
   {
     "germanOccupationCode": "31103",
+    "name": "Techniker/in - Bautechnik/B. Prof. Technik",
     "bundesland": "Deutschland",
     "students": 840
   },
   {
     "germanOccupationCode": "31153",
+    "name": "Techniker/in - Bautechnik (Bauern./Bausan.)/B. Prof. Technik",
     "bundesland": "Deutschland",
     "students": 13
   },
   {
     "germanOccupationCode": "31213",
+    "name": "Techniker/in - Vermessungstechnik/B. Prof. Technik",
     "bundesland": "Deutschland",
     "students": 25
   },
   {
     "germanOccupationCode": "32103",
+    "name": "Techniker/in - Bautechnik (Hochbau)/B. Prof. Technik",
     "bundesland": "Deutschland",
     "students": 279
   },
   {
     "germanOccupationCode": "32193",
+    "name": "Maurer- und Betonbauermeister/in/B. Prof. Maurer-/Betonb.Hw.",
     "bundesland": "Deutschland",
     "students": 149
   },
   {
     "germanOccupationCode": "32203",
+    "name": "Techniker/in - Bautechnik (Tiefbau)/B. Prof. Technik",
     "bundesland": "Deutschland",
     "students": 99
   },
   {
     "germanOccupationCode": "32293",
+    "name": "Straßenbauermeister/in/B. Prof. Straßenbauer-Handwerk",
     "bundesland": "Deutschland",
     "students": 27
   },
   {
     "germanOccupationCode": "33193",
+    "name": "Fliesen-, Platten-, Mosaiklegermeister/in/B. Prof. LegerHw.",
     "bundesland": "Deutschland",
     "students": 15
   },
   {
     "germanOccupationCode": "33293",
+    "name": "Maler- und Lackierermeister/in/B. Prof. Maler-/Lackierer-Hw.",
     "bundesland": "Deutschland",
     "students": 211
   },
   {
     "germanOccupationCode": "33293",
+    "name": "Stuckateurmeister/in/B. Prof. Stuckateur-Handwerk",
     "bundesland": "Deutschland",
     "students": 25
   },
   {
     "germanOccupationCode": "33303",
+    "name": "Techniker/in - Bautechnik (Ausbau)/B. Prof. Technik",
     "bundesland": "Deutschland",
     "students": 20
   },
   {
     "germanOccupationCode": "33393",
+    "name": "Glasermeister/in/B. Prof. Glaser-Handwerk",
     "bundesland": "Deutschland",
     "students": 14
   },
   {
     "germanOccupationCode": "33393",
+    "name": "Rollladen-/Sonnenschutzt.meister/in/B. Prof. Roll/Sonnen.Hw.",
     "bundesland": "Deutschland",
     "students": 16
   },
   {
     "germanOccupationCode": "33393",
+    "name": "Zimmerermeister/in/B. Prof. Zimmerer-Handwerk",
     "bundesland": "Deutschland",
     "students": 198
   },
   {
     "germanOccupationCode": "34103",
+    "name": "Techniker/in - Gebäudesystemtechnik/B. Prof. Technik",
     "bundesland": "Deutschland",
     "students": 41
   },
   {
     "germanOccupationCode": "34213",
+    "name": "Techniker/in - Heiz.-, Lüft.-, Klimatechnik/B. Prof. Technik",
     "bundesland": "Deutschland",
     "students": 333
   },
   {
     "germanOccupationCode": "34213",
+    "name": "Techniker/in - Sanitärtechnik/B. Prof. Technik",
     "bundesland": "Deutschland",
     "students": 6
   },
   {
     "germanOccupationCode": "34233",
+    "name": "Techniker/in - Kältetechnik/B. Prof. Technik",
     "bundesland": "Deutschland",
     "students": 15
   },
   {
     "germanOccupationCode": "34293",
+    "name": "Installateur-/Heizungsbauermeister/in/B. Prof. Inst/Heiz.Hw.",
     "bundesland": "Deutschland",
     "students": 281
   },
   {
     "germanOccupationCode": "34293",
+    "name": "Klempnermeister/in/B. Prof. Klempner-Handwerk",
     "bundesland": "Deutschland",
     "students": 10
   },
   {
     "germanOccupationCode": "34393",
+    "name": "Abwassermeister/in",
     "bundesland": "Deutschland",
     "students": 25
   },
   {
     "germanOccupationCode": "41213",
+    "name": "Techniker/in - Biotechnik/B. Prof. Technik",
     "bundesland": "Deutschland",
     "students": 40
   },
   {
     "germanOccupationCode": "41293",
+    "name": "Milchwirtschaftliche/r Labormeister/in/B. Prof. milchw. Lab.",
     "bundesland": "Deutschland",
     "students": 14
   },
   {
     "germanOccupationCode": "41313",
+    "name": "Techniker/in - Chemietechnik (Betriebst.)/B. Prof. Technik",
     "bundesland": "Deutschland",
     "students": 70
   },
   {
     "germanOccupationCode": "41313",
+    "name": "Techniker/in - Chemietechnik (o. Schwerp.)/B. Prof. Technik",
     "bundesland": "Deutschland",
     "students": 23
   },
   {
     "germanOccupationCode": "41313",
+    "name": "Techniker/in - Chemietechnik/B. Prof. Technik",
     "bundesland": "Deutschland",
     "students": 128
   },
   {
     "germanOccupationCode": "41323",
+    "name": "Techniker/in - Chemietechnik (Lab.technik)/B. Prof. Technik",
     "bundesland": "Deutschland",
     "students": 189
   },
   {
     "germanOccupationCode": "41423",
+    "name": "Techniker/in - Werkstofftechnik/B. Prof. Technik",
     "bundesland": "Deutschland",
     "students": 45
   },
   {
     "germanOccupationCode": "42113",
+    "name": "Techniker/in - Geologietechnik/B. Prof. Technik",
     "bundesland": "Deutschland",
     "students": 3
   },
   {
     "germanOccupationCode": "42203",
+    "name": "Techniker/in - Umweltschutzt. (o. Schwerp.)/B. Prof. Technik",
     "bundesland": "Deutschland",
     "students": 14
   },
   {
     "germanOccupationCode": "42203",
+    "name": "Techniker/in - Umweltschutzt./B. Prof. Technik",
     "bundesland": "Deutschland",
     "students": 8
   },
   {
     "germanOccupationCode": "42293",
+    "name": "Schornsteinfegermeister/in/B. Prof. Schornsteinf.-Handwerk",
     "bundesland": "Deutschland",
     "students": 32
   },
   {
     "germanOccupationCode": "42313",
+    "name": "Techniker/in - Umweltschutzt./regen. Energ./B. Prof. Technik",
     "bundesland": "Deutschland",
     "students": 134
   },
   {
     "germanOccupationCode": "43103",
+    "name": "Techniker/in - Informatik/B. Prof. Technik",
     "bundesland": "Deutschland",
     "students": 118
   },
   {
     "germanOccupationCode": "43113",
+    "name": "Techniker/in - Informatik (Betriebsinf.)/B. Prof. Technik",
     "bundesland": "Deutschland",
     "students": 8
   },
   {
     "germanOccupationCode": "43113",
+    "name": "Wirtschaftsinformatiker/in (Fachschule)/B. Prof. Wirtsch.",
     "bundesland": "Deutschland",
     "students": 85
   },
   {
     "germanOccupationCode": "43123",
+    "name": "Techniker/in - Informatik (tech.Informatik)/B. Prof. Technik",
     "bundesland": "Deutschland",
     "students": 50
   },
   {
     "germanOccupationCode": "43313",
+    "name": "Techniker/in - Informatik (Netzwerktechn.)/B. Prof. Technik",
     "bundesland": "Deutschland",
     "students": 6
   },
   {
     "germanOccupationCode": "51133",
+    "name": "Schiffsbetriebstechniker/in/B. Prof. Technik",
     "bundesland": "Deutschland",
     "students": 5
   },
   {
     "germanOccupationCode": "51133",
+    "name": "Schiffsmaschinist/in",
     "bundesland": "Deutschland",
     "students": 14
   },
   {
     "germanOccupationCode": "51503",
+    "name": "Techniker/in - Verkehrstechnik (Verkehrsm.)/B. Prof. Technik",
     "bundesland": "Deutschland",
     "students": 52
   },
   {
     "germanOccupationCode": "51523",
+    "name": "Techniker/in - Verkehrstechnik (Eisenbahn.)/B. Prof. Technik",
     "bundesland": "Deutschland",
     "students": 15
   },
   {
     "germanOccupationCode": "51623",
+    "name": "Betriebswirt/in (Fachschule) - Logistik/B. Prof. Wirtsch.",
     "bundesland": "Deutschland",
     "students": 233
   },
   {
     "germanOccupationCode": "52413",
+    "name": "Kapitän/in - Küstenfischerei",
     "bundesland": "Deutschland",
     "students": 5
   },
   {
     "germanOccupationCode": "52413",
+    "name": "Nautiker/in (BRZ 500) - nat. Fahrt",
     "bundesland": "Deutschland",
     "students": 19
   },
   {
     "germanOccupationCode": "52413",
+    "name": "Nautiker/in (Fachschule)/B. Prof. Technik",
     "bundesland": "Deutschland",
     "students": 27
   },
   {
     "germanOccupationCode": "53193",
+    "name": "Meister/in - Bäderbetriebe",
     "bundesland": "Deutschland",
     "students": 17
   },
   {
     "germanOccupationCode": "54193",
+    "name": "Gebäudereinigermeister/in/B. Prof. Gebäudereiniger-Handwerk",
     "bundesland": "Deutschland",
     "students": 15
   },
   {
     "germanOccupationCode": "61203",
+    "name": "Betriebswirt/in (Fachschule) - Handel",
     "bundesland": "Deutschland",
     "students": 338
   },
   {
     "germanOccupationCode": "61213",
+    "name": "Betriebswirt/in (Fachschule) - Außenwirt./B. Prof. Wirtsch.",
     "bundesland": "Deutschland",
     "students": 280
   },
   {
     "germanOccupationCode": "61283",
+    "name": "Betriebswirt/in (Fachschule) - Möbelhandel/B. Prof. Wirtsch.",
     "bundesland": "Deutschland",
     "students": 70
   },
   {
     "germanOccupationCode": "61313",
+    "name": "Betriebswirt/in (Fachschule) - Immobilien/B. Prof. Wirtsch.",
     "bundesland": "Deutschland",
     "students": 45
   },
   {
     "germanOccupationCode": "63113",
+    "name": "Betriebswirt/in (Fachschule) - Tour./Reise/B. Prof. Wirtsch.",
     "bundesland": "Deutschland",
     "students": 45
   },
   {
     "germanOccupationCode": "63213",
+    "name": "Betriebswirt/in (Fachschule) - Hotel/Gast./B. Prof. Wirtsch.",
     "bundesland": "Deutschland",
     "students": 192
   },
   {
     "germanOccupationCode": "63294",
+    "name": "Betriebsleiter/in - Hotel/Gaststätten/B. Prof. Hauswirtsch.",
     "bundesland": "Deutschland",
     "students": 35
   },
   {
     "germanOccupationCode": "63394",
+    "name": "Gastronom/in/B. Prof. Wirtsch.",
     "bundesland": "Deutschland",
     "students": 20
   },
   {
     "germanOccupationCode": "63403",
+    "name": "Betriebswirt/in (Fachschule) - Event-Manag/B. Prof. Wirtsch.",
     "bundesland": "Deutschland",
     "students": 21
   },
   {
     "germanOccupationCode": "71303",
+    "name": "Betriebswirt/in (Fachschule) - Unternehm./B. Prof. Wirtsch.",
     "bundesland": "Deutschland",
     "students": 15
   },
   {
     "germanOccupationCode": "71303",
+    "name": "Betriebswirt/in (Fachschule) - allg. BWL/B. Prof. Wirtsch.",
     "bundesland": "Deutschland",
     "students": 443
   },
   {
     "germanOccupationCode": "71303",
+    "name": "Betriebswirt/in (Fachschule)/B. Prof. Wirtsch.",
     "bundesland": "Deutschland",
     "students": 46
   },
   {
     "germanOccupationCode": "71303",
+    "name": "Technische/r Betriebswirt/in (Weiterbildung)",
     "bundesland": "Deutschland",
     "students": 90
   },
   {
     "germanOccupationCode": "71383",
+    "name": "Betriebswirt/in (Fachschule) - Recht/B. Prof. Wirtsch.",
     "bundesland": "Deutschland",
     "students": 50
   },
   {
     "germanOccupationCode": "71403",
+    "name": "Betriebswirt/in (Fachschule) - Komm/ Büro./B. Prof. Wirtsch.",
     "bundesland": "Deutschland",
     "students": 87
   },
   {
     "germanOccupationCode": "71413",
+    "name": "Fremdsprachenkorrespondent/in (Weiterbildung)",
     "bundesland": "Deutschland",
     "students": 87
   },
   {
     "germanOccupationCode": "71513",
+    "name": "Betriebswirt/in (Fachschule) - Personalw./B. Prof. Wirtsch.",
     "bundesland": "Deutschland",
     "students": 350
   },
   {
     "germanOccupationCode": "72113",
+    "name": "Betriebswirt/in (Fachschule) - Bank",
     "bundesland": "Deutschland",
     "students": 31
   },
   {
     "germanOccupationCode": "72123",
+    "name": "Betriebswirt/in (Fachschule) - Finanz./Inv/B. Prof. Wirtsch.",
     "bundesland": "Deutschland",
     "students": 128
   },
   {
     "germanOccupationCode": "72213",
+    "name": "Betriebswirt/in (Fachschule) - Rechnungsw./B. Prof. Wirtsch.",
     "bundesland": "Deutschland",
     "students": 295
   },
   {
     "germanOccupationCode": "72303",
+    "name": "Betriebswirt/in (Fachschule) - Steuern/B. Prof. Wirtsch.",
     "bundesland": "Deutschland",
     "students": 67
   },
   {
     "germanOccupationCode": "73223",
+    "name": "Betriebswirt/in (Fachschule) - Manag. Ges./B. Prof. Wirtsch.",
     "bundesland": "Deutschland",
     "students": 50
   },
   {
     "germanOccupationCode": "73223",
+    "name": "Fachwirt/in - Organisation u. Führung (Sozial)",
     "bundesland": "Deutschland",
     "students": 574
   },
   {
     "germanOccupationCode": "81394",
+    "name": "Pflegedienstleiter/in",
     "bundesland": "Deutschland",
     "students": 195
   },
   {
     "germanOccupationCode": "81723",
+    "name": "Altentherapeut/in",
     "bundesland": "Deutschland",
     "students": 49
   },
   {
     "germanOccupationCode": "81723",
+    "name": "Motopäde/Motopädin",
     "bundesland": "Deutschland",
     "students": 70
   },
   {
     "germanOccupationCode": "81723",
+    "name": "Reittherapeut/in",
     "bundesland": "Deutschland",
     "students": 15
   },
   {
     "germanOccupationCode": "82101",
+    "name": "Altenpflegehelfer/in",
     "bundesland": "Deutschland",
     "students": 1124
   },
   {
     "germanOccupationCode": "82393",
+    "name": "Friseurmeister/in/B. Prof. Friseur-Handwerk",
     "bundesland": "Deutschland",
     "students": 118
   },
   {
     "germanOccupationCode": "82503",
+    "name": "Techniker/in - Medizintechnik/B. Prof. Technik",
     "bundesland": "Deutschland",
     "students": 47
   },
   {
     "germanOccupationCode": "82593",
+    "name": "Augenoptikermeister/in/B. Prof. Augenoptiker-Handwerk",
     "bundesland": "Deutschland",
     "students": 93
   },
   {
     "germanOccupationCode": "82593",
+    "name": "Orthopädietechnikermeister/in/B. Prof. Orthopädietechn.Hw",
     "bundesland": "Deutschland",
     "students": 38
   },
   {
     "germanOccupationCode": "82593",
+    "name": "Zahntechnikermeister/in/B. Prof. Zahntechniker-Handwerk",
     "bundesland": "Deutschland",
     "students": 65
   },
   {
     "germanOccupationCode": "83113",
+    "name": "Erzieher/in",
     "bundesland": "Deutschland",
     "students": 25207
   },
   {
     "germanOccupationCode": "83113",
+    "name": "Erzieher/in - Jugend- und Heimerziehung",
     "bundesland": "Deutschland",
     "students": 794
   },
   {
     "germanOccupationCode": "83131",
+    "name": "Heilerziehungspflegeassistent/in",
     "bundesland": "Deutschland",
     "students": 803
   },
   {
     "germanOccupationCode": "83133",
+    "name": "Arbeitserzieher/in",
     "bundesland": "Deutschland",
     "students": 209
   },
   {
     "germanOccupationCode": "83133",
+    "name": "Heilerziehungspfleger/in",
     "bundesland": "Deutschland",
     "students": 5725
   },
   {
     "germanOccupationCode": "83133",
+    "name": "Sonderpädagoge/-pädagogin (Fachschule)",
     "bundesland": "Deutschland",
     "students": 135
   },
   {
     "germanOccupationCode": "83134",
+    "name": "Heilpädagoge/-pädagogin/B. Prof. Sozialw.",
     "bundesland": "Deutschland",
     "students": 565
   },
   {
     "germanOccupationCode": "83143",
+    "name": "Dorfhelfer/in",
     "bundesland": "Deutschland",
     "students": 29
   },
   {
     "germanOccupationCode": "83143",
+    "name": "Haus- und Familienpfleger/in (Ausbildung)",
     "bundesland": "Deutschland",
     "students": 15
   },
   {
     "germanOccupationCode": "83193",
+    "name": "Fachwirt/in - Erziehungswesen",
     "bundesland": "Deutschland",
     "students": 115
   },
   {
     "germanOccupationCode": "83213",
+    "name": "Betriebswirt/in (Fachschule) - Hauswirtschaft",
     "bundesland": "Deutschland",
     "students": 2
   },
   {
     "germanOccupationCode": "83213",
+    "name": "Fachkraft - landwirtschaftlicher Haushalt",
     "bundesland": "Deutschland",
     "students": 479
   },
   {
     "germanOccupationCode": "83213",
+    "name": "Wirtschafter/in - Hauswirtschaft/B. Prof. Agrarwirtsch.",
     "bundesland": "Deutschland",
     "students": 51
   },
   {
     "germanOccupationCode": "83293",
+    "name": "Hauswirtschaftliche/r Betriebsleiter/in/B. Prof. Wirtsch.",
     "bundesland": "Deutschland",
     "students": 33
   },
   {
     "germanOccupationCode": "83293",
+    "name": "Meister/in - Hauswirtschaft",
     "bundesland": "Deutschland",
     "students": 48
   },
   {
     "germanOccupationCode": "83384",
+    "name": "Missionar/in",
     "bundesland": "Deutschland",
     "students": 6
   },
   {
     "germanOccupationCode": "84214",
+    "name": "Fachlehrer/in - berufliche/allgemeinbildende Schulen",
     "bundesland": "Deutschland",
     "students": 10
   },
   {
     "germanOccupationCode": "84533",
+    "name": "Tanzpädagoge/-pädagogin",
     "bundesland": "Deutschland",
     "students": 11
   },
   {
     "germanOccupationCode": "92113",
+    "name": "Betriebswirt/in (Fachschule) - Abs./Mark./B. Prof. Wirtsch.",
     "bundesland": "Deutschland",
     "students": 693
   },
   {
     "germanOccupationCode": "93103",
+    "name": "Gestalter/in - Produktdesign/B. Prof. Gestaltung",
     "bundesland": "Deutschland",
     "students": 42
   },
   {
     "germanOccupationCode": "93213",
+    "name": "Gestalter/in - Farbtechnik/Raumgestalt./B. Prof. Gestaltung",
     "bundesland": "Deutschland",
     "students": 7
   },
   {
     "germanOccupationCode": "93213",
+    "name": "Gestalter/in - Holz/Möbel/Raumgestaltung/B. Prof. Gestaltung",
     "bundesland": "Deutschland",
     "students": 16
   },
   {
     "germanOccupationCode": "93293",
+    "name": "Raumausstattermeister/in/B. Prof. Raumausstatter-Handwerk",
     "bundesland": "Deutschland",
     "students": 40
   },
   {
     "germanOccupationCode": "93393",
+    "name": "Holzbildhauermeister/in/B. Prof. Holzbildhauer-Handwerk",
     "bundesland": "Deutschland",
     "students": 7
   },
   {
     "germanOccupationCode": "93393",
+    "name": "Vergoldermeister/in/B. Prof. Vergolder-Handwerk",
     "bundesland": "Deutschland",
     "students": 14
   },
   {
     "germanOccupationCode": "93413",
+    "name": "Gestalter/in - Keramik/B. Prof. Gestaltung",
     "bundesland": "Deutschland",
     "students": 4
   },
   {
     "germanOccupationCode": "93493",
+    "name": "Keramikermeister/in/B. Prof. Keramiker-Handwerk",
     "bundesland": "Deutschland",
     "students": 11
   },
   {
     "germanOccupationCode": "93593",
+    "name": "Gold- und Silberschmiedemeister/in/B. Prof. Gold- /SilberHw.",
     "bundesland": "Deutschland",
     "students": 34
   },
   {
     "germanOccupationCode": "93593",
+    "name": "Schilder-/Lichtreklameherst.meister/in/B. Prof. Schild/L.Hw.",
     "bundesland": "Deutschland",
     "students": 9
   },
   {
     "germanOccupationCode": "93693",
+    "name": "Holzblasinstrumentenmachermeister/in/B. Prof. Holzblas.Hw.",
     "bundesland": "Deutschland",
     "students": 10
   },
   {
     "germanOccupationCode": "93693",
+    "name": "Orgel-/Harmoniumbauermeister/in/B. Prof. Orgel/Harmonium.Hw.",
     "bundesland": "Deutschland",
     "students": 19
   },
   {
     "germanOccupationCode": "94613",
+    "name": "Gewandmeister/in/B. Prof. Gestaltung",
     "bundesland": "Deutschland",
     "students": 23
   },
   {
     "germanOccupationCode": "99999",
+    "name": "Keine Zuordnung möglich",
     "bundesland": "Deutschland",
     "students": 2173
   },
   {
     "germanOccupationCode": "22343",
+    "name": "Restaurator/in - Möbel und Holzobjekte/B. Prof. Technik",
     "bundesland": "Bayern",
     "students": 14
   },
   {
     "germanOccupationCode": "29103",
+    "name": "Brau- und Getränketechnologe/-technologin/B. Prof. Technik",
     "bundesland": "Bayern",
     "students": 24
   },
   {
     "germanOccupationCode": "71303",
+    "name": "Betriebswirt/in (Fachschule)/B. Prof. Wirtsch.",
     "bundesland": "Bayern",
     "students": 76
   },
   {
     "germanOccupationCode": "71423",
+    "name": "Übersetzer/in (Ausbildung)",
     "bundesland": "Bayern",
     "students": 96
   },
   {
     "germanOccupationCode": "71424",
+    "name": "Dolmetscher/in (Ausbildung)",
     "bundesland": "Bayern",
     "students": 93
   },
   {
     "germanOccupationCode": "82503",
+    "name": "Techniker/in - Medizintechnik/B. Prof. Technik",
     "bundesland": "Bayern",
     "students": 21
   },
   {
     "germanOccupationCode": "83113",
+    "name": "Erzieher/in",
     "bundesland": "Bayern",
     "students": 4570
   },
   {
     "germanOccupationCode": "83134",
+    "name": "Heilpädagoge/-pädagogin/B. Prof. Sozialw.",
     "bundesland": "Bayern",
     "students": 191
   },
   {
     "germanOccupationCode": "83293",
+    "name": "Hauswirtschaftliche/r Betriebsleiter/in/B. Prof. Wirtsch.",
     "bundesland": "Bayern",
     "students": 142
   },
   {
     "germanOccupationCode": "84434",
+    "name": "Theaterpädagoge/-pädagogin (Weiterbildung)",
     "bundesland": "Bayern",
     "students": 2
   },
   {
     "germanOccupationCode": "93213",
+    "name": "Gestalter/in - Holz/Möbel/Raumgestaltung/B. Prof. Gestaltung",
     "bundesland": "Bayern",
     "students": 14
   },
   {
     "germanOccupationCode": "94214",
+    "name": "Schauspieler/in (Ausbildung)",
     "bundesland": "Bayern",
     "students": 40
   },
   {
     "germanOccupationCode": "94414",
+    "name": "Theater-Regisseur/in/Spielleiter/in (Ausbildung)",
     "bundesland": "Bayern",
     "students": 4
   },
   {
     "germanOccupationCode": "81132",
+    "name": "Orthoptist/in",
     "bundesland": "Baden-Württemberg",
     "students": 8
   },
   {
     "germanOccupationCode": "81212",
+    "name": "Zytologieassistent/in",
     "bundesland": "Baden-Württemberg",
     "students": 197
   },
   {
     "germanOccupationCode": "81301",
+    "name": "Gesundheits- und Krankenpflegehelfer/in",
     "bundesland": "Baden-Württemberg",
     "students": 848
   },
   {
     "germanOccupationCode": "81301",
+    "name": "Pflegeassistent/in",
     "bundesland": "Baden-Württemberg",
     "students": 18
   },
   {
     "germanOccupationCode": "81302",
+    "name": "Pflegefachmann/-frau (Ausbildung)",
     "bundesland": "Baden-Württemberg",
     "students": 3171
   },
   {
     "germanOccupationCode": "81332",
+    "name": "Anästhesietechnische/r Assistent/in",
     "bundesland": "Baden-Württemberg",
     "students": 233
   },
   {
     "germanOccupationCode": "81332",
+    "name": "Operationstechnische/r Assistent/in",
     "bundesland": "Baden-Württemberg",
     "students": 474
   },
   {
     "germanOccupationCode": "81342",
+    "name": "Notfallsanitäter/in",
     "bundesland": "Baden-Württemberg",
     "students": 735
   },
   {
     "germanOccupationCode": "81712",
+    "name": "Masseur/in und medizinische/r Bademeister/in",
     "bundesland": "Baden-Württemberg",
     "students": 51
   },
   {
     "germanOccupationCode": "81713",
+    "name": "Physiotherapeut/in (Ausbildung)",
     "bundesland": "Baden-Württemberg",
     "students": 1766
   },
   {
     "germanOccupationCode": "81723",
+    "name": "Ergotherapeut/in (Ausbildung)",
     "bundesland": "Baden-Württemberg",
     "students": 422
   },
   {
     "germanOccupationCode": "81733",
+    "name": "Logopäde/Logopädin (Ausbildung)",
     "bundesland": "Baden-Württemberg",
     "students": 275
   },
   {
     "germanOccupationCode": "81762",
+    "name": "Diätassistent/in",
     "bundesland": "Baden-Württemberg",
     "students": 71
   },
   {
     "germanOccupationCode": "81772",
+    "name": "Podologe/Podologin",
     "bundesland": "Baden-Württemberg",
     "students": 55
   },
   {
     "germanOccupationCode": "99999",
+    "name": "Keine Zuordnung möglich",
     "bundesland": "Baden-Württemberg",
     "students": 222
   },
   {
     "germanOccupationCode": "81132",
+    "name": "Orthoptist/in",
     "bundesland": "Bayern",
     "students": 7
   },
   {
     "germanOccupationCode": "81212",
+    "name": "Medizinische/r Technologe/Technologin - Laboratoriumsanaly.",
     "bundesland": "Bayern",
     "students": 197
   },
   {
     "germanOccupationCode": "81232",
+    "name": "Medizinische/r Technologe/Technologin - Radiologie",
     "bundesland": "Bayern",
     "students": 175
   },
   {
     "germanOccupationCode": "81301",
+    "name": "Gesundheits- und Krankenpflegehelfer/in",
     "bundesland": "Bayern",
     "students": 1511
   },
   {
     "germanOccupationCode": "81302",
+    "name": "Pflegefachmann/-frau (Ausbildung)",
     "bundesland": "Bayern",
     "students": 6809
   },
   {
     "germanOccupationCode": "81332",
+    "name": "Anästhesietechnische/r Assistent/in",
     "bundesland": "Bayern",
     "students": 233
   },
   {
     "germanOccupationCode": "81332",
+    "name": "Operationstechnische/r Assistent/in",
     "bundesland": "Bayern",
     "students": 515
   },
   {
     "germanOccupationCode": "81342",
+    "name": "Notfallsanitäter/in",
     "bundesland": "Bayern",
     "students": 643
   },
   {
     "germanOccupationCode": "81712",
+    "name": "Masseur/in und medizinische/r Bademeister/in",
     "bundesland": "Bayern",
     "students": 219
   },
   {
     "germanOccupationCode": "81713",
+    "name": "Physiotherapeut/in (Ausbildung)",
     "bundesland": "Bayern",
     "students": 1667
   },
   {
     "germanOccupationCode": "81723",
+    "name": "Ergotherapeut/in (Ausbildung)",
     "bundesland": "Bayern",
     "students": 763
   },
   {
     "germanOccupationCode": "81733",
+    "name": "Logopäde/Logopädin (Ausbildung)",
     "bundesland": "Bayern",
     "students": 212
   },
   {
     "germanOccupationCode": "81762",
+    "name": "Diätassistent/in",
     "bundesland": "Bayern",
     "students": 96
   },
   {
     "germanOccupationCode": "81772",
+    "name": "Podologe/Podologin",
     "bundesland": "Bayern",
     "students": 61
   },
   {
     "germanOccupationCode": "81822",
+    "name": "Pharmazeutisch-technische/r Assistent/in",
     "bundesland": "Bayern",
     "students": 516
   },
   {
     "germanOccupationCode": "82101",
+    "name": "Altenpflegehelfer/in",
     "bundesland": "Bayern",
     "students": 2720
   },
   {
     "germanOccupationCode": "41222",
+    "name": "Medizinische/r Sektions- und Präparationsassistent/in",
     "bundesland": "Berlin",
     "students": 20
   },
   {
     "germanOccupationCode": "81212",
+    "name": "Medizinische/r Technologe/Technologin - Laboratoriumsanaly.",
     "bundesland": "Berlin",
     "students": 35
   },
   {
     "germanOccupationCode": "81222",
+    "name": "Medizinische/r Technologe/Technologin - Funktionsdiagnostik",
     "bundesland": "Berlin",
     "students": 21
   },
   {
     "germanOccupationCode": "81223",
+    "name": "Techniker/in - Kardiotechnik",
     "bundesland": "Berlin",
     "students": 23
   },
   {
     "germanOccupationCode": "81232",
+    "name": "Medizinische/r Technologe/Technologin - Radiologie",
     "bundesland": "Berlin",
     "students": 85
   },
   {
     "germanOccupationCode": "81301",
+    "name": "Pflegeassistent/in",
     "bundesland": "Berlin",
     "students": 585
   },
   {
     "germanOccupationCode": "81302",
+    "name": "Pflegefachmann/-frau (Ausbildung)",
     "bundesland": "Berlin",
     "students": 2490
   },
   {
     "germanOccupationCode": "81332",
+    "name": "Anästhesietechnische/r Assistent/in",
     "bundesland": "Berlin",
     "students": 46
   },
   {
     "germanOccupationCode": "81332",
+    "name": "Operationstechnische/r Assistent/in",
     "bundesland": "Berlin",
     "students": 198
   },
   {
     "germanOccupationCode": "81342",
+    "name": "Notfallsanitäter/in",
     "bundesland": "Berlin",
     "students": 164
   },
   {
     "germanOccupationCode": "81713",
+    "name": "Physiotherapeut/in (Ausbildung)",
     "bundesland": "Berlin",
     "students": 377
   },
   {
     "germanOccupationCode": "81723",
+    "name": "Ergotherapeut/in (Ausbildung)",
     "bundesland": "Berlin",
     "students": 166
   },
   {
     "germanOccupationCode": "81733",
+    "name": "Logopäde/Logopädin (Ausbildung)",
     "bundesland": "Berlin",
     "students": 64
   },
   {
     "germanOccupationCode": "81762",
+    "name": "Diätassistent/in",
     "bundesland": "Berlin",
     "students": 20
   },
   {
     "germanOccupationCode": "81772",
+    "name": "Podologe/Podologin",
     "bundesland": "Berlin",
     "students": 44
   },
   {
     "germanOccupationCode": "81822",
+    "name": "Pharmazeutisch-technische/r Assistent/in",
     "bundesland": "Berlin",
     "students": 144
   },
   {
     "germanOccupationCode": "81212",
+    "name": "Medizinische/r Technologe/Technologin - Laboratoriumsanaly.",
     "bundesland": "Brandenburg",
     "students": 72
   },
   {
     "germanOccupationCode": "81232",
+    "name": "Medizinische/r Technologe/Technologin - Radiologie",
     "bundesland": "Brandenburg",
     "students": 53
   },
   {
     "germanOccupationCode": "81301",
+    "name": "Gesundheits- und Krankenpflegehelfer/in",
     "bundesland": "Brandenburg",
     "students": 303
   },
   {
     "germanOccupationCode": "81302",
+    "name": "Pflegefachmann/-frau (Ausbildung)",
     "bundesland": "Brandenburg",
     "students": 1621
   },
   {
     "germanOccupationCode": "81332",
+    "name": "Anästhesietechnische/r Assistent/in",
     "bundesland": "Brandenburg",
     "students": 20
   },
   {
     "germanOccupationCode": "81332",
+    "name": "Operationstechnische/r Assistent/in",
     "bundesland": "Brandenburg",
     "students": 49
   },
   {
     "germanOccupationCode": "81342",
+    "name": "Notfallsanitäter/in",
     "bundesland": "Brandenburg",
     "students": 95
   },
   {
     "germanOccupationCode": "81713",
+    "name": "Physiotherapeut/in (Ausbildung)",
     "bundesland": "Brandenburg",
     "students": 186
   },
   {
     "germanOccupationCode": "81723",
+    "name": "Ergotherapeut/in (Ausbildung)",
     "bundesland": "Brandenburg",
     "students": 72
   },
   {
     "germanOccupationCode": "81733",
+    "name": "Logopäde/Logopädin (Ausbildung)",
     "bundesland": "Brandenburg",
     "students": 32
   },
   {
     "germanOccupationCode": "81822",
+    "name": "Pharmazeutisch-technische/r Assistent/in",
     "bundesland": "Brandenburg",
     "students": 23
   },
   {
     "germanOccupationCode": "82101",
+    "name": "Altenpflegehelfer/in",
     "bundesland": "Brandenburg",
     "students": 209
   },
   {
     "germanOccupationCode": "81212",
+    "name": "Medizinische/r Technologe/Technologin - Laboratoriumsanaly.",
     "bundesland": "Bremen",
     "students": 19
   },
   {
     "germanOccupationCode": "81232",
+    "name": "Medizinische/r Technologe/Technologin - Radiologie",
     "bundesland": "Bremen",
     "students": 21
   },
   {
     "germanOccupationCode": "81301",
+    "name": "Gesundheits- und Krankenpflegehelfer/in",
     "bundesland": "Bremen",
     "students": 33
   },
   {
     "germanOccupationCode": "81301",
+    "name": "Pflegeassistent/in",
     "bundesland": "Bremen",
     "students": 87
   },
   {
     "germanOccupationCode": "81302",
+    "name": "Pflegefachmann/-frau (Ausbildung)",
     "bundesland": "Bremen",
     "students": 484
   },
   {
     "germanOccupationCode": "81332",
+    "name": "Anästhesietechnische/r Assistent/in",
     "bundesland": "Bremen",
     "students": 15
   },
   {
     "germanOccupationCode": "81332",
+    "name": "Operationstechnische/r Assistent/in",
     "bundesland": "Bremen",
     "students": 19
   },
   {
     "germanOccupationCode": "81342",
+    "name": "Notfallsanitäter/in",
     "bundesland": "Bremen",
     "students": 64
   },
   {
     "germanOccupationCode": "81713",
+    "name": "Physiotherapeut/in (Ausbildung)",
     "bundesland": "Bremen",
     "students": 55
   },
   {
     "germanOccupationCode": "81723",
+    "name": "Ergotherapeut/in (Ausbildung)",
     "bundesland": "Bremen",
     "students": 20
   },
   {
     "germanOccupationCode": "81733",
+    "name": "Logopäde/Logopädin (Ausbildung)",
     "bundesland": "Bremen",
     "students": 20
   },
   {
     "germanOccupationCode": "81132",
+    "name": "Orthoptist/in",
     "bundesland": "Hamburg",
     "students": 7
   },
   {
     "germanOccupationCode": "81212",
+    "name": "Medizinische/r Technologe/Technologin - Laboratoriumsanaly.",
     "bundesland": "Hamburg",
     "students": 38
   },
   {
     "germanOccupationCode": "81232",
+    "name": "Medizinische/r Technologe/Technologin - Radiologie",
     "bundesland": "Hamburg",
     "students": 32
   },
   {
     "germanOccupationCode": "81302",
+    "name": "Pflegefachmann/-frau (Ausbildung)",
     "bundesland": "Hamburg",
     "students": 1318
   },
   {
     "germanOccupationCode": "81332",
+    "name": "Anästhesietechnische/r Assistent/in",
     "bundesland": "Hamburg",
     "students": 76
   },
   {
     "germanOccupationCode": "81332",
+    "name": "Operationstechnische/r Assistent/in",
     "bundesland": "Hamburg",
     "students": 135
   },
   {
     "germanOccupationCode": "81342",
+    "name": "Notfallsanitäter/in",
     "bundesland": "Hamburg",
     "students": 136
   },
   {
     "germanOccupationCode": "81712",
+    "name": "Masseur/in und medizinische/r Bademeister/in",
     "bundesland": "Hamburg",
     "students": 31
   },
   {
     "germanOccupationCode": "81713",
+    "name": "Physiotherapeut/in (Ausbildung)",
     "bundesland": "Hamburg",
     "students": 307
   },
   {
     "germanOccupationCode": "81723",
+    "name": "Ergotherapeut/in (Ausbildung)",
     "bundesland": "Hamburg",
     "students": 173
   },
   {
     "germanOccupationCode": "81733",
+    "name": "Logopäde/Logopädin (Ausbildung)",
     "bundesland": "Hamburg",
     "students": 59
   },
   {
     "germanOccupationCode": "81762",
+    "name": "Diätassistent/in",
     "bundesland": "Hamburg",
     "students": 1
   },
   {
     "germanOccupationCode": "73342",
+    "name": "Medizinische/r Dokumentar/in",
     "bundesland": "Hessen",
     "students": 8
   },
   {
     "germanOccupationCode": "81132",
+    "name": "Orthoptist/in",
     "bundesland": "Hessen",
     "students": 4
   },
   {
     "germanOccupationCode": "81212",
+    "name": "Medizinische/r Technologe/Technologin - Laboratoriumsanaly.",
     "bundesland": "Hessen",
     "students": 52
   },
   {
     "germanOccupationCode": "81232",
+    "name": "Medizinische/r Technologe/Technologin - Radiologie",
     "bundesland": "Hessen",
     "students": 97
   },
   {
     "germanOccupationCode": "81301",
+    "name": "Gesundheits- und Krankenpflegehelfer/in",
     "bundesland": "Hessen",
     "students": 546
   },
   {
     "germanOccupationCode": "81302",
+    "name": "Pflegefachmann/-frau (Ausbildung)",
     "bundesland": "Hessen",
     "students": 8939
   },
   {
     "germanOccupationCode": "81332",
+    "name": "Anästhesietechnische/r Assistent/in",
     "bundesland": "Hessen",
     "students": 65
   },
   {
     "germanOccupationCode": "81332",
+    "name": "Operationstechnische/r Assistent/in",
     "bundesland": "Hessen",
     "students": 159
   },
   {
     "germanOccupationCode": "81342",
+    "name": "Notfallsanitäter/in",
     "bundesland": "Hessen",
     "students": 624
   },
   {
     "germanOccupationCode": "81342",
+    "name": "Rettungssanitäter/in",
     "bundesland": "Hessen",
     "students": 129
   },
   {
     "germanOccupationCode": "81713",
+    "name": "Physiotherapeut/in (Ausbildung)",
     "bundesland": "Hessen",
     "students": 515
   },
   {
     "germanOccupationCode": "81723",
+    "name": "Ergotherapeut/in (Ausbildung)",
     "bundesland": "Hessen",
     "students": 248
   },
   {
     "germanOccupationCode": "81733",
+    "name": "Logopäde/Logopädin (Ausbildung)",
     "bundesland": "Hessen",
     "students": 26
   },
   {
     "germanOccupationCode": "81762",
+    "name": "Diätassistent/in",
     "bundesland": "Hessen",
     "students": 21
   },
   {
     "germanOccupationCode": "81772",
+    "name": "Podologe/Podologin",
     "bundesland": "Hessen",
     "students": 55
   },
   {
     "germanOccupationCode": "81822",
+    "name": "Pharmazeutisch-technische/r Assistent/in",
     "bundesland": "Hessen",
     "students": 121
   },
   {
     "germanOccupationCode": "82101",
+    "name": "Altenpflegehelfer/in",
     "bundesland": "Hessen",
     "students": 1368
   },
   {
     "germanOccupationCode": "81132",
+    "name": "Orthoptist/in",
     "bundesland": "Niedersachsen",
     "students": 9
   },
   {
     "germanOccupationCode": "81212",
+    "name": "Medizinische/r Technologe/Technologin - Laboratoriumsanaly.",
     "bundesland": "Niedersachsen",
     "students": 123
   },
   {
     "germanOccupationCode": "81222",
+    "name": "Medizinische/r Technologe/Technologin - Funktionsdiagnostik",
     "bundesland": "Niedersachsen",
     "students": 15
   },
   {
     "germanOccupationCode": "81232",
+    "name": "Medizinische/r Technologe/Technologin - Radiologie",
     "bundesland": "Niedersachsen",
     "students": 135
   },
   {
     "germanOccupationCode": "81302",
+    "name": "Pflegefachmann/-frau (Ausbildung)",
     "bundesland": "Niedersachsen",
     "students": 4174
   },
   {
     "germanOccupationCode": "81332",
+    "name": "Anästhesietechnische/r Assistent/in",
     "bundesland": "Niedersachsen",
     "students": 136
   },
   {
     "germanOccupationCode": "81332",
+    "name": "Operationstechnische/r Assistent/in",
     "bundesland": "Niedersachsen",
     "students": 251
   },
   {
     "germanOccupationCode": "81342",
+    "name": "Notfallsanitäter/in",
     "bundesland": "Niedersachsen",
     "students": 425
   },
   {
     "germanOccupationCode": "81713",
+    "name": "Physiotherapeut/in (Ausbildung)",
     "bundesland": "Niedersachsen",
     "students": 1085
   },
   {
     "germanOccupationCode": "81733",
+    "name": "Logopäde/Logopädin (Ausbildung)",
     "bundesland": "Niedersachsen",
     "students": 123
   },
   {
     "germanOccupationCode": "81762",
+    "name": "Diätassistent/in",
     "bundesland": "Niedersachsen",
     "students": 47
   },
   {
     "germanOccupationCode": "81772",
+    "name": "Podologe/Podologin",
     "bundesland": "Niedersachsen",
     "students": 65
   },
   {
     "germanOccupationCode": "81212",
+    "name": "Medizinische/r Technologe/Technologin - Laboratoriumsanaly.",
     "bundesland": "Nordrhein-Westfalen",
     "students": 265
   },
   {
     "germanOccupationCode": "81232",
+    "name": "Medizinische/r Technologe/Technologin - Radiologie",
     "bundesland": "Nordrhein-Westfalen",
     "students": 260
   },
   {
     "germanOccupationCode": "81301",
+    "name": "Pflegeassistent/in",
     "bundesland": "Nordrhein-Westfalen",
     "students": 3560
   },
   {
     "germanOccupationCode": "81332",
+    "name": "Anästhesietechnische/r Assistent/in",
     "bundesland": "Nordrhein-Westfalen",
     "students": 205
   },
   {
     "germanOccupationCode": "81332",
+    "name": "Operationstechnische/r Assistent/in",
     "bundesland": "Nordrhein-Westfalen",
     "students": 470
   },
   {
     "germanOccupationCode": "81342",
+    "name": "Notfallsanitäter/in",
     "bundesland": "Nordrhein-Westfalen",
     "students": 635
   },
   {
     "germanOccupationCode": "81712",
+    "name": "Masseur/in und medizinische/r Bademeister/in",
     "bundesland": "Nordrhein-Westfalen",
     "students": 75
   },
   {
     "germanOccupationCode": "81713",
+    "name": "Physiotherapeut/in (Ausbildung)",
     "bundesland": "Nordrhein-Westfalen",
     "students": 1850
   },
   {
     "germanOccupationCode": "81723",
+    "name": "Ergotherapeut/in (Ausbildung)",
     "bundesland": "Nordrhein-Westfalen",
     "students": 815
   },
   {
     "germanOccupationCode": "81733",
+    "name": "Logopäde/Logopädin (Ausbildung)",
     "bundesland": "Nordrhein-Westfalen",
     "students": 290
   },
   {
     "germanOccupationCode": "81762",
+    "name": "Diätassistent/in",
     "bundesland": "Nordrhein-Westfalen",
     "students": 40
   },
   {
     "germanOccupationCode": "81772",
+    "name": "Podologe/Podologin",
     "bundesland": "Nordrhein-Westfalen",
     "students": 70
   },
   {
     "germanOccupationCode": "81822",
+    "name": "Pharmazeutisch-technische/r Assistent/in",
     "bundesland": "Nordrhein-Westfalen",
     "students": 805
   },
   {
     "germanOccupationCode": "83143",
+    "name": "Dorfhelfer/in",
     "bundesland": "Nordrhein-Westfalen",
     "students": 70
   },
   {
     "germanOccupationCode": "81212",
+    "name": "Medizinische/r Technologe/Technologin - Laboratoriumsanaly.",
     "bundesland": "Rheinland-Pfalz",
     "students": 52
   },
   {
     "germanOccupationCode": "81232",
+    "name": "Medizinische/r Technologe/Technologin - Radiologie",
     "bundesland": "Rheinland-Pfalz",
     "students": 50
   },
   {
     "germanOccupationCode": "81301",
+    "name": "Gesundheits- und Krankenpflegehelfer/in",
     "bundesland": "Rheinland-Pfalz",
     "students": 447
   },
   {
     "germanOccupationCode": "81302",
+    "name": "Pflegefachmann/-frau (Ausbildung)",
     "bundesland": "Rheinland-Pfalz",
     "students": 867
   },
   {
     "germanOccupationCode": "81332",
+    "name": "Anästhesietechnische/r Assistent/in",
     "bundesland": "Rheinland-Pfalz",
     "students": 69
   },
   {
     "germanOccupationCode": "81332",
+    "name": "Operationstechnische/r Assistent/in",
     "bundesland": "Rheinland-Pfalz",
     "students": 138
   },
   {
     "germanOccupationCode": "81342",
+    "name": "Notfallsanitäter/in",
     "bundesland": "Rheinland-Pfalz",
     "students": 179
   },
   {
     "germanOccupationCode": "81712",
+    "name": "Masseur/in und medizinische/r Bademeister/in",
     "bundesland": "Rheinland-Pfalz",
     "students": 16
   },
   {
     "germanOccupationCode": "81713",
+    "name": "Physiotherapeut/in (Ausbildung)",
     "bundesland": "Rheinland-Pfalz",
     "students": 798
   },
   {
     "germanOccupationCode": "81723",
+    "name": "Ergotherapeut/in (Ausbildung)",
     "bundesland": "Rheinland-Pfalz",
     "students": 320
   },
   {
     "germanOccupationCode": "81733",
+    "name": "Logopäde/Logopädin (Ausbildung)",
     "bundesland": "Rheinland-Pfalz",
     "students": 56
   },
   {
     "germanOccupationCode": "81762",
+    "name": "Diätassistent/in",
     "bundesland": "Rheinland-Pfalz",
     "students": 18
   },
   {
     "germanOccupationCode": "81772",
+    "name": "Podologe/Podologin",
     "bundesland": "Rheinland-Pfalz",
     "students": 11
   },
   {
     "germanOccupationCode": "81822",
+    "name": "Pharmazeutisch-technische/r Assistent/in",
     "bundesland": "Rheinland-Pfalz",
     "students": 138
   },
   {
     "germanOccupationCode": "81212",
+    "name": "Medizinische/r Technologe/Technologin - Laboratoriumsanaly.",
     "bundesland": "Sachsen-Anhalt",
     "students": 39
   },
   {
     "germanOccupationCode": "81232",
+    "name": "Medizinische/r Technologe/Technologin - Radiologie",
     "bundesland": "Sachsen-Anhalt",
     "students": 57
   },
   {
     "germanOccupationCode": "81301",
+    "name": "Gesundheits- und Krankenpflegehelfer/in",
     "bundesland": "Sachsen-Anhalt",
     "students": 120
   },
   {
     "germanOccupationCode": "81332",
+    "name": "Anästhesietechnische/r Assistent/in",
     "bundesland": "Sachsen-Anhalt",
     "students": 36
   },
   {
     "germanOccupationCode": "81332",
+    "name": "Operationstechnische/r Assistent/in",
     "bundesland": "Sachsen-Anhalt",
     "students": 102
   },
   {
     "germanOccupationCode": "81342",
+    "name": "Notfallsanitäter/in",
     "bundesland": "Sachsen-Anhalt",
     "students": 141
   },
   {
     "germanOccupationCode": "81342",
+    "name": "Rettungssanitäter/in",
     "bundesland": "Sachsen-Anhalt",
     "students": 117
   },
   {
     "germanOccupationCode": "81713",
+    "name": "Physiotherapeut/in (Ausbildung)",
     "bundesland": "Sachsen-Anhalt",
     "students": 21
   },
   {
     "germanOccupationCode": "81772",
+    "name": "Podologe/Podologin",
     "bundesland": "Sachsen-Anhalt",
     "students": 27
   },
   {
     "germanOccupationCode": "81232",
+    "name": "Medizinische/r Technologe/Technologin - Radiologie",
     "bundesland": "Schleswig-Holstein",
     "students": 58
   },
   {
     "germanOccupationCode": "81301",
+    "name": "Gesundheits- und Krankenpflegehelfer/in",
     "bundesland": "Schleswig-Holstein",
     "students": 332
   },
   {
     "germanOccupationCode": "81302",
+    "name": "Pflegefachmann/-frau (Ausbildung)",
     "bundesland": "Schleswig-Holstein",
     "students": 1472
   },
   {
     "germanOccupationCode": "81332",
+    "name": "Anästhesietechnische/r Assistent/in",
     "bundesland": "Schleswig-Holstein",
     "students": 53
   },
   {
     "germanOccupationCode": "81332",
+    "name": "Operationstechnische/r Assistent/in",
     "bundesland": "Schleswig-Holstein",
     "students": 93
   },
   {
     "germanOccupationCode": "81342",
+    "name": "Notfallsanitäter/in",
     "bundesland": "Schleswig-Holstein",
     "students": 251
   },
   {
     "germanOccupationCode": "81342",
+    "name": "Rettungssanitäter/in",
     "bundesland": "Schleswig-Holstein",
     "students": 327
   },
   {
     "germanOccupationCode": "81713",
+    "name": "Physiotherapeut/in (Ausbildung)",
     "bundesland": "Schleswig-Holstein",
     "students": 296
   },
   {
     "germanOccupationCode": "81723",
+    "name": "Ergotherapeut/in (Ausbildung)",
     "bundesland": "Schleswig-Holstein",
     "students": 192
   },
   {
     "germanOccupationCode": "81733",
+    "name": "Logopäde/Logopädin (Ausbildung)",
     "bundesland": "Schleswig-Holstein",
     "students": 40
   },
   {
     "germanOccupationCode": "81762",
+    "name": "Diätassistent/in",
     "bundesland": "Schleswig-Holstein",
     "students": 19
   },
   {
     "germanOccupationCode": "81772",
+    "name": "Podologe/Podologin",
     "bundesland": "Schleswig-Holstein",
     "students": 24
   },
   {
     "germanOccupationCode": "82101",
+    "name": "Altenpflegehelfer/in",
     "bundesland": "Schleswig-Holstein",
     "students": 474
   },
   {
     "germanOccupationCode": "41222",
+    "name": "Medizinische/r Sektions- und Präparationsassistent/in",
     "bundesland": "Deutschland",
     "students": 20
   },
   {
     "germanOccupationCode": "73342",
+    "name": "Medizinische/r Dokumentar/in",
     "bundesland": "Deutschland",
     "students": 8
   },
   {
     "germanOccupationCode": "81132",
+    "name": "Orthoptist/in",
     "bundesland": "Deutschland",
     "students": 35
   },
   {
     "germanOccupationCode": "81212",
+    "name": "Medizinische/r Technologe/Technologin - Laboratoriumsanaly.",
     "bundesland": "Deutschland",
     "students": 892
   },
   {
     "germanOccupationCode": "81212",
+    "name": "Zytologieassistent/in",
     "bundesland": "Deutschland",
     "students": 197
   },
   {
     "germanOccupationCode": "81222",
+    "name": "Medizinische/r Technologe/Technologin - Funktionsdiagnostik",
     "bundesland": "Deutschland",
     "students": 36
   },
   {
     "germanOccupationCode": "81223",
+    "name": "Techniker/in - Kardiotechnik",
     "bundesland": "Deutschland",
     "students": 23
   },
   {
     "germanOccupationCode": "81232",
+    "name": "Medizinische/r Technologe/Technologin - Radiologie",
     "bundesland": "Deutschland",
     "students": 1023
   },
   {
     "germanOccupationCode": "81301",
+    "name": "Gesundheits- und Krankenpflegehelfer/in",
     "bundesland": "Deutschland",
     "students": 4140
   },
   {
     "germanOccupationCode": "81301",
+    "name": "Pflegeassistent/in",
     "bundesland": "Deutschland",
     "students": 4250
   },
   {
     "germanOccupationCode": "81302",
+    "name": "Pflegefachmann/-frau (Ausbildung)",
     "bundesland": "Deutschland",
     "students": 31345
   },
   {
     "germanOccupationCode": "81332",
+    "name": "Anästhesietechnische/r Assistent/in",
     "bundesland": "Deutschland",
     "students": 1187
   },
   {
     "germanOccupationCode": "81332",
+    "name": "Operationstechnische/r Assistent/in",
     "bundesland": "Deutschland",
     "students": 2603
   },
   {
     "germanOccupationCode": "81342",
+    "name": "Notfallsanitäter/in",
     "bundesland": "Deutschland",
     "students": 4092
   },
   {
     "germanOccupationCode": "81342",
+    "name": "Rettungssanitäter/in",
     "bundesland": "Deutschland",
     "students": 573
   },
   {
     "germanOccupationCode": "81712",
+    "name": "Masseur/in und medizinische/r Bademeister/in",
     "bundesland": "Deutschland",
     "students": 392
   },
   {
     "germanOccupationCode": "81713",
+    "name": "Physiotherapeut/in (Ausbildung)",
     "bundesland": "Deutschland",
     "students": 8923
   },
   {
     "germanOccupationCode": "81723",
+    "name": "Ergotherapeut/in (Ausbildung)",
     "bundesland": "Deutschland",
     "students": 3191
   },
   {
     "germanOccupationCode": "81733",
+    "name": "Logopäde/Logopädin (Ausbildung)",
     "bundesland": "Deutschland",
     "students": 1197
   },
   {
     "germanOccupationCode": "81762",
+    "name": "Diätassistent/in",
     "bundesland": "Deutschland",
     "students": 333
   },
   {
     "germanOccupationCode": "81772",
+    "name": "Podologe/Podologin",
     "bundesland": "Deutschland",
     "students": 412
   },
   {
     "germanOccupationCode": "81822",
+    "name": "Pharmazeutisch-technische/r Assistent/in",
     "bundesland": "Deutschland",
     "students": 1747
   },
   {
     "germanOccupationCode": "82101",
+    "name": "Altenpflegehelfer/in",
     "bundesland": "Deutschland",
     "students": 4771
   },
   {
     "germanOccupationCode": "83143",
+    "name": "Dorfhelfer/in",
     "bundesland": "Deutschland",
     "students": 70
   },
   {
     "germanOccupationCode": "99999",
+    "name": "Keine Zuordnung möglich",
     "bundesland": "Deutschland",
     "students": 222
   }

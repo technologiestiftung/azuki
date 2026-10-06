@@ -14,7 +14,7 @@ import type { Occupation } from "@azuki/shared";
 export const MAX_CATALOG_REMOVAL_RATE = 0.1;
 
 export interface RefreshContext {
-	popularityIds: Set<number>;
+	popularityTiers: Map<number, string>;
 	availabilityIds: Set<number>;
 	unmatchedExclusionIds: number[];
 	staleConditionOverrideIds: number[];
@@ -61,7 +61,7 @@ export function buildRefreshReport(
 	}
 
 	const missingPopularity = after.filter(
-		(o) => !context.popularityIds.has(o.id),
+		(o) => (context.popularityTiers.get(o.id) ?? "G_unknown") === "G_unknown",
 	);
 	const missingAvailability = after.filter(
 		(o) => !context.availabilityIds.has(o.id),
@@ -85,7 +85,7 @@ export function buildRefreshReport(
 		``,
 		`Catalog: **${before.length} → ${after.length}** (+${added.length} / −${removed.length})`,
 		``,
-		`### Added — needs a suitability decision and a popularity tier`,
+		`### Added — needs a suitability decision`,
 		list(
 			added.map(
 				(o) =>
@@ -109,7 +109,7 @@ export function buildRefreshReport(
 		``,
 		`### Coverage gaps`,
 		``,
-		`No popularity tier (scored as \`G_unknown\`, −2): ${missingPopularity.length}`,
+		`No market-size data (\`G_unknown\`, −2): ${missingPopularity.length}`,
 		list(missingPopularity.map((o) => `\`${o.id}\` ${o.name}`)),
 		``,
 		`No availability record (\`traineeCountInState\` returns 0): ${missingAvailability.length}`,
@@ -143,7 +143,7 @@ function main() {
 		}),
 	);
 	const after: Occupation[] = read("backend/src/data/berufe.json");
-	const popularity: Array<{ id: number }> = read(
+	const popularity: Array<{ id: number; popularityTier: string }> = read(
 		"shared/data/popularity-index.json",
 	);
 	const availability: Record<string, unknown> = read(
@@ -152,7 +152,7 @@ function main() {
 	const summary = read("data-refresh-summary.json");
 
 	const report = buildRefreshReport(before, after, {
-		popularityIds: new Set(popularity.map((r) => r.id)),
+		popularityTiers: new Map(popularity.map((r) => [r.id, r.popularityTier])),
 		availabilityIds: new Set(Object.keys(availability).map(Number)),
 		unmatchedExclusionIds: summary.unmatchedExclusionIds ?? [],
 		staleConditionOverrideIds: summary.staleConditionOverrideIds ?? [],

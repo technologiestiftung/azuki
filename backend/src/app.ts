@@ -13,6 +13,7 @@ import {
 	scoreFromFitPercent,
 	resolveOccupationShortDescription,
 } from "@azuki/shared";
+import { POPULARITY_INDEX } from "@azuki/shared/server-data";
 import { occupationMatchMeta } from "./occupationMeta";
 import {
 	pickWildcardOccupations,
@@ -546,6 +547,13 @@ app.get("/api/eval/default-prompt", (c) => {
 		return c.json({ error: "Unauthorized" }, 401);
 	}
 	return c.json({ prompt: buildSystemPromptV5() });
+});
+
+app.get("/api/eval/popularity-index", (c) => {
+	if (!isAuthorized(c)) {
+		return c.json({ error: "Unauthorized" }, 401);
+	}
+	return c.json(POPULARITY_INDEX);
 });
 
 app.post("/api/eval/run", async (c) => {

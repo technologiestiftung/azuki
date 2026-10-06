@@ -2,6 +2,10 @@
   "name": "@azuki/shared",
   "version": "0.1.0",
   "main": "src/index.ts",
+  "exports": {
+    ".": "./src/index.ts",
+    "./server-data": "./src/serverData.ts"
+  },
   "type": "module",
   "scripts": {
     "test:unit": "vitest run",

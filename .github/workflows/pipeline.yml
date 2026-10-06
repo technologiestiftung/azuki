@@ -34,8 +34,15 @@ jobs:
         if: steps.cache-npm-deps.outputs.cache-hit != 'true'
         run: npm ci
 
+      - name: Generate DAZUBI-derived data 🔗
+        run: npm run data:build-dazubi
+
       - name: Check Build 🏗️
         run: npm run build
+
+      - name: Check bundle for DAZUBI data 🔒
+        run: |
+          ! grep -rqE '(dazubiContracts|schulischeStudents)"?:[[:space:]]*[0-9]' frontend/dist
 
       - name: Check Prettier 🧹
         run: npm run prettier:ci

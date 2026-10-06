@@ -1,5 +1,5 @@
 import { beforeEach, describe, expect, test, vi } from "vitest";
-import type { Persona } from "@azuki/shared";
+import type { Persona, PopularityRecord } from "@azuki/shared";
 
 const baseProfile = {
 	inSchool: false,
@@ -201,5 +201,58 @@ describe("useEvalStore — removePersona", () => {
 		const useEvalStore = await loadFreshStore([]);
 		useEvalStore.getState().removePersona("a");
 		expect(useEvalStore.getState().personas).toBeNull();
+	});
+});
+
+describe("useEvalStore — loadPopularityIndex", () => {
+	beforeEach(() => {
+		installFakeLocalStorage();
+	});
+
+	test("fetches the index once and caches it", async () => {
+		const records = [
+			{
+				id: 1,
+				name: "A",
+				category: "dual",
+				dazubiContracts: 10,
+				dazubiMatchType: "direct",
+				salaryKnown: true,
+				hasDegreeStats: true,
+				popularityTier: "E_vanishing",
+			},
+		] satisfies PopularityRecord[];
+		const fetchPopularityIndex = vi.fn(async () => records);
+		vi.resetModules();
+		vi.doMock("../../src/api/client", () => ({
+			listPersonas: vi.fn(async () => []),
+			fetchPopularityIndex,
+		}));
+		const { useEvalStore } = await import("../../src/store/useEvalStore");
+
+		await useEvalStore.getState().loadPopularityIndex();
+		await useEvalStore.getState().loadPopularityIndex();
+
+		expect(useEvalStore.getState().popularityIndex).toEqual(records);
+		expect(fetchPopularityIndex).toHaveBeenCalledTimes(1);
+	});
+
+	test("a failed fetch sets popularityIndexError and leaves the index null", async () => {
+		const fetchPopularityIndex = vi.fn(async () => {
+			throw new Error("401");
+		});
+		vi.resetModules();
+		vi.doMock("../../src/api/client", () => ({
+			listPersonas: vi.fn(async () => []),
+			fetchPopularityIndex,
+		}));
+		const { useEvalStore } = await import("../../src/store/useEvalStore");
+
+		await expect(useEvalStore.getState().loadPopularityIndex()).rejects.toThrow(
+			"401",
+		);
+
+		expect(useEvalStore.getState().popularityIndexError).toBe(true);
+		expect(useEvalStore.getState().popularityIndex).toBeNull();
 	});
 });

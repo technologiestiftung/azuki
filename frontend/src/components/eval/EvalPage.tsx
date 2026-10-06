@@ -9,6 +9,7 @@ import { RunScoreBanner } from "./RunScoreBanner";
 import { ScoringExplainer } from "../personas/ScoringExplainer";
 import { scoreSnapshot } from "./scoring";
 import { aggregateRunScore } from "./run-score";
+import { usePopularityIndex } from "./usePopularityIndex";
 import { rubricReachability, type RubricReachability } from "./reachability";
 
 export function EvalPage() {
@@ -34,6 +35,12 @@ function EvalPageInner() {
 			});
 		}
 	}, [personas, fetchPersonas]);
+
+	const popularityIndex = usePopularityIndex();
+	const nameById = useMemo(
+		() => new Map((popularityIndex ?? []).map((r) => [r.id, r.name])),
+		[popularityIndex],
+	);
 
 	const selectedPersonas = useMemo(() => {
 		if (!personas) {
@@ -67,10 +74,10 @@ function EvalPageInner() {
 				out[persona.id] = undefined;
 				continue;
 			}
-			out[persona.id] = rubricReachability(result.prefilter, persona);
+			out[persona.id] = rubricReachability(result.prefilter, persona, nameById);
 		}
 		return out;
-	}, [currentRun, selectedPersonas]);
+	}, [currentRun, selectedPersonas, nameById]);
 
 	function retry() {
 		document.getElementById("eval-run-btn")?.click();

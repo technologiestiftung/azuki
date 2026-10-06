@@ -155,13 +155,15 @@ Additiver Auf-/Abschlag nach Größe der Ausbildung (DAZUBI-Verträge bzw. Desta
 
 | Stufe                                  | Punkte | im Katalog |
 | -------------------------------------- | ------ | ---------- |
-| A — sehr beliebt (≥ 5.000 Starts/Jahr) | **+5** | 52         |
-| B — etabliert                          | **+2** | 108        |
+| A — sehr beliebt (≥ 5.000 Starts/Jahr) | **+5** | 54         |
+| B — etabliert                          | **+2** | 103        |
 | C — klein, aber real                   | **0**  | 116        |
-| D — Nische                             | **-3** | 86         |
-| E — auslaufend                         | **-6** | 109        |
-| Doppelqualifizierend                   | **0**  | 8          |
-| Unbekannte Marktgröße                  | **-2** | 59         |
+| D — Nische                             | **-3** | 80         |
+| E — auslaufend                         | **-6** | 112        |
+| Doppelqualifizierend                   | **0**  | 11         |
+| Unbekannte Marktgröße                  | **-2** | 53         |
+
+Stand: BIBB-Berichtsjahr 2024, Destatis 2024/25.
 
 Die Spanne A→E (11 Punkte) reicht aus, um den typischen Abstand zwischen einem Nischenberuf mit gutem Profil-Match und einem populären mit dünnem Match zu kippen, ohne die Profilsignale zu überstimmen.
 

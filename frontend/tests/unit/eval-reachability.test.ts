@@ -38,30 +38,33 @@ function makePersona(overrides: Partial<Persona> = {}): Persona {
 	};
 }
 
+const NAMES: ReadonlyMap<number, string> = new Map([
+	[33209, "Änderungsschneider/in"],
+]);
+
 describe("rubricReachability", () => {
 	test("all Tier S present in prefilter → all reached, none missed", () => {
 		const persona = makePersona({ tierS: [1, 2, 3] });
 		const prefilter = [pf(1, "A"), pf(2, "B"), pf(3, "C"), pf(99, "Other")];
-		const result = rubricReachability(prefilter, persona);
+		const result = rubricReachability(prefilter, persona, NAMES);
 		expect(result.tierSReached.map((e) => e.id)).toEqual([1, 2, 3]);
 		expect(result.tierSMissed).toEqual([]);
 	});
 
 	test("Tier S missing from prefilter → present in tierSMissed with name resolved", () => {
-		// id 33209 is Änderungsschneider/in in POPULARITY_INDEX (first entry)
 		const persona = makePersona({ tierS: [33209] });
 		const prefilter = [pf(99, "Other")];
-		const result = rubricReachability(prefilter, persona);
+		const result = rubricReachability(prefilter, persona, NAMES);
 		expect(result.tierSReached).toEqual([]);
 		expect(result.tierSMissed.length).toBe(1);
 		expect(result.tierSMissed[0].id).toBe(33209);
 		expect(result.tierSMissed[0].name).toBe("Änderungsschneider/in");
 	});
 
-	test("Tier S missing from prefilter AND from POPULARITY_INDEX → name falls back to placeholder", () => {
+	test("Tier S missing from prefilter AND from the name lookup → name falls back to placeholder", () => {
 		const persona = makePersona({ tierS: [999999999] }); // not a real ID
 		const prefilter: PrefilterEntry[] = [];
-		const result = rubricReachability(prefilter, persona);
+		const result = rubricReachability(prefilter, persona, NAMES);
 		expect(result.tierSMissed.length).toBe(1);
 		expect(result.tierSMissed[0].id).toBe(999999999);
 		// Don't crash; provide a placeholder.
@@ -71,7 +74,7 @@ describe("rubricReachability", () => {
 	test("Tier C present in prefilter → tierCInPrefilter populated with rank", () => {
 		const persona = makePersona({ tierC: [10, 20] });
 		const prefilter = [pf(99, "Other"), pf(10, "BadBeruf"), pf(20, "AlsoBad")];
-		const result = rubricReachability(prefilter, persona);
+		const result = rubricReachability(prefilter, persona, NAMES);
 		expect(result.tierCInPrefilter.length).toBe(2);
 		expect(result.tierCInPrefilter[0]).toEqual({
 			id: 10,
@@ -88,7 +91,7 @@ describe("rubricReachability", () => {
 	test("rank is 1-indexed from prefilter order", () => {
 		const persona = makePersona({ tierS: [42] });
 		const prefilter = [pf(1), pf(2), pf(42, "Hit"), pf(4)];
-		const result = rubricReachability(prefilter, persona);
+		const result = rubricReachability(prefilter, persona, NAMES);
 		expect(result.tierSReached[0].rank).toBe(3);
 	});
 
@@ -98,7 +101,7 @@ describe("rubricReachability", () => {
 			tierC: [10, 11],
 		});
 		const prefilter = [pf(1), pf(2), pf(10)];
-		const result = rubricReachability(prefilter, persona);
+		const result = rubricReachability(prefilter, persona, NAMES);
 		expect(result.tierSTotal).toBe(5);
 		expect(result.tierSReached.length).toBe(2);
 		expect(result.tierSMissed.length).toBe(3);
@@ -109,13 +112,15 @@ describe("rubricReachability", () => {
 		// The panel used to say "top 40" while PREFILTER_TOP_K was 60.
 		const persona = makePersona({ tierS: [1] });
 		const prefilter = Array.from({ length: 60 }, (_, i) => pf(i + 1));
-		expect(rubricReachability(prefilter, persona).prefilterSize).toBe(60);
+		expect(rubricReachability(prefilter, persona, NAMES).prefilterSize).toBe(
+			60,
+		);
 	});
 
 	test("empty persona → empty results, no crash", () => {
 		const persona = makePersona();
 		const prefilter = [pf(1), pf(2)];
-		const result = rubricReachability(prefilter, persona);
+		const result = rubricReachability(prefilter, persona, NAMES);
 		expect(result.tierSReached).toEqual([]);
 		expect(result.tierSMissed).toEqual([]);
 		expect(result.tierCInPrefilter).toEqual([]);

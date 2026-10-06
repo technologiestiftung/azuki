@@ -1,12 +1,15 @@
 import { create } from "zustand";
-import type { EvalSnapshot, Persona } from "@azuki/shared";
+import type { EvalSnapshot, Persona, PopularityRecord } from "@azuki/shared";
 import { DEFAULT_MODEL_ID } from "@azuki/shared";
-import { listPersonas } from "../api/client";
+import { fetchPopularityIndex, listPersonas } from "../api/client";
 
 const PROMPT_DRAFT_KEY = "eval.promptDraft";
 const SELECTED_PERSONA_IDS_KEY = "eval.selectedPersonaIds";
 
 interface EvalState {
+	popularityIndex: PopularityRecord[] | null;
+	popularityIndexError: boolean;
+	loadPopularityIndex: () => Promise<void>;
 	prompt: string;
 	model: string;
 	currentRun: EvalSnapshot | null;
@@ -59,6 +62,20 @@ function persistSelected(ids: Set<string>): void {
 }
 
 export const useEvalStore = create<EvalState>((set, get) => ({
+	popularityIndex: null,
+	popularityIndexError: false,
+	loadPopularityIndex: async () => {
+		if (get().popularityIndex !== null) {
+			return;
+		}
+		set({ popularityIndexError: false });
+		try {
+			set({ popularityIndex: await fetchPopularityIndex() });
+		} catch (err) {
+			set({ popularityIndexError: true });
+			throw err;
+		}
+	},
 	prompt: initialPrompt,
 	model: DEFAULT_MODEL_ID,
 	currentRun: null,

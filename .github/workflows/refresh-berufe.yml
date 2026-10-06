@@ -50,8 +50,8 @@ jobs:
         env:
           OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
 
-      - name: Rebuild availability join 🔗
-        run: npm run data:build-availability
+      - name: Regenerate DAZUBI-derived data for the report 🔗
+        run: npm run data:build-dazubi
 
       - name: Build refresh report 📋
         run: npx tsx scripts/report-data-refresh.ts > refresh-report.md
@@ -69,5 +69,4 @@ jobs:
           commit-message: "chore(data): refresh BERUFENET catalog"
           add-paths: |
             backend/src/data/berufe.json
-            shared/data/availability-by-state.json
             shared/data/berufenet-meta.json

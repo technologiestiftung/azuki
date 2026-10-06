@@ -1,34 +1,21 @@
 /**
- * Joins the per-state DAZUBI + Destatis fixtures against the BERUFENET
- * catalog to produce shared/data/availability-by-state.json:
+ * Joins the per-state DAZUBI rows and the Destatis fixture against the
+ * BERUFENET catalog to produce shared/data/availability-by-state.json:
  *
  *   { [occupationId]: { [bundesland]: traineeCount } }
  *
- * - DAZUBI rows match by normalized name (popularity-index.json carries
- *   the BERUFENET id ↔ DAZUBI name mapping).
+ * - DAZUBI rows match by `matchKey`, the same key the popularity index uses
+ *   (popularity-index.json carries the BERUFENET id ↔ DAZUBI name mapping).
  * - Destatis rows match by KldB 2010. Both sides of the join are run
  *   through normalizeKldb so the equality match shares one contract,
  *   regardless of how each source wrote its code.
  *
- * Run: npx tsx scripts/build-availability.ts
+ * Called by scripts/build-dazubi-data.ts.
  */
 
-import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
-import { resolve, dirname } from "node:path";
-import { fileURLToPath } from "node:url";
-import { isBundesland, normName, type Bundesland } from "@azuki/shared";
+import { isBundesland, type Bundesland } from "@azuki/shared";
 import { normalizeKldb } from "./normalizeKldb.js";
-
-const __dirname = dirname(fileURLToPath(import.meta.url));
-const ROOT = resolve(__dirname, "..");
-const POP_INDEX = resolve(ROOT, "shared/data/popularity-index.json");
-const BERUFE = resolve(ROOT, "backend/src/data/berufe.json");
-const DAZUBI_FIXTURE = resolve(ROOT, "shared/data/dazubi-trainee-starts.json");
-const DESTATIS_FIXTURE = resolve(
-	ROOT,
-	"shared/data/destatis-trainee-starts.json",
-);
-const OUT = resolve(ROOT, "shared/data/availability-by-state.json");
+import { matchKey } from "./lib/popularityIndex.js";
 
 export interface PopRecord {
 	id: number;
@@ -86,12 +73,12 @@ export function buildAvailability(
 	const popByNormFull = new Map<string, number[]>();
 	const popByNormRollup = new Map<string, number[]>();
 	for (const r of pop) {
-		const k = normName(r.name);
+		const k = matchKey(r.name);
 		if (!popByNormFull.has(k)) popByNormFull.set(k, []);
 		popByNormFull.get(k)!.push(r.id);
 		if (r.dazubiMatchType === "parent") {
 			const base = r.name.split(" - ")[0];
-			const bk = normName(base);
+			const bk = matchKey(base);
 			if (bk !== k) {
 				if (!popByNormRollup.has(bk)) popByNormRollup.set(bk, []);
 				popByNormRollup.get(bk)!.push(r.id);
@@ -115,15 +102,13 @@ export function buildAvailability(
 	const dazubiUnmatchedNames = new Set<string>();
 	for (const row of dazubi) {
 		if (!isBundesland(row.bundesland)) continue;
-		const norm = normName(row.name);
-		let ids = popByNormFull.get(norm);
-		let viaRollup = false;
+		const norm = matchKey(row.name);
+		const directIds = popByNormFull.get(norm) ?? [];
+		const rollupIds = popByNormRollup.get(norm) ?? [];
+		let ids: number[] | undefined = [...directIds, ...rollupIds];
+		let viaRollup = directIds.length === 0 && rollupIds.length > 0;
 		if (!ids?.length) {
-			ids = popByNormRollup.get(norm);
-			if (ids?.length) viaRollup = true;
-		}
-		if (!ids?.length) {
-			const baseNorm = normName(row.name.split(" - ")[0]);
+			const baseNorm = matchKey(row.name.split(" - ")[0]);
 			ids = popByNormFull.get(baseNorm) ?? popByNormRollup.get(baseNorm);
 			if (ids?.length) viaRollup = true;
 		}
@@ -170,59 +155,4 @@ export function buildAvailability(
 			destatisUnmatched,
 		},
 	};
-}
-
-function main() {
-	const pop = JSON.parse(readFileSync(POP_INDEX, "utf8")) as PopRecord[];
-	const berufe = JSON.parse(readFileSync(BERUFE, "utf8")) as Beruf[];
-	const dazubi = JSON.parse(
-		readFileSync(DAZUBI_FIXTURE, "utf8"),
-	) as DazubiRow[];
-	const destatis = JSON.parse(
-		readFileSync(DESTATIS_FIXTURE, "utf8"),
-	) as DestatisRow[];
-
-	console.log(
-		`  ${dazubi.length} DAZUBI rows, ${destatis.length} Destatis rows`,
-	);
-
-	const { availability, stats } = buildAvailability(
-		berufe,
-		pop,
-		dazubi,
-		destatis,
-	);
-
-	console.log(
-		`  DAZUBI matched: ${stats.dazubiMatched} (${stats.dazubiRollupMatched} via parent-rollup), unmatched: ${stats.dazubiUnmatched}`,
-	);
-	if (stats.dazubiUnmatched > 0) {
-		console.log("    examples:", stats.dazubiUnmatchedNames.slice(0, 5));
-	}
-	console.log(
-		`  Destatis matched (row-level): ${stats.destatisMatched}, unmatched: ${stats.destatisUnmatched}`,
-	);
-
-	const idsWithAny = Object.keys(availability).length;
-	const idsWithBeBb = Object.values(availability).filter(
-		(s) => (s.Berlin ?? 0) + (s.Brandenburg ?? 0) > 0,
-	).length;
-	const catalogSize = berufe.length;
-	const withoutData = catalogSize - idsWithAny;
-	const pct = (n: number) => ((100 * n) / catalogSize).toFixed(1);
-	console.log(`\nCatalog: ${catalogSize} berufe`);
-	console.log(`  with availability data: ${idsWithAny} (${pct(idsWithAny)}%)`);
-	console.log(
-		`  without data (will pass the regional filter unverified): ${withoutData} (${pct(withoutData)}%)`,
-	);
-	console.log(`  with ≥1 trainee in Berlin or Brandenburg: ${idsWithBeBb}`);
-
-	mkdirSync(dirname(OUT), { recursive: true });
-	writeFileSync(OUT, JSON.stringify(availability, null, 2) + "\n");
-	console.log(`\nWrote ${OUT}`);
-}
-
-// Run main() only when invoked as a CLI, not when imported from a test.
-if (process.argv[1] === fileURLToPath(import.meta.url)) {
-	main();
 }

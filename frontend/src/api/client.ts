@@ -6,6 +6,7 @@ import type {
 	EvalSnapshot,
 	Persona,
 	Occupation,
+	PopularityRecord,
 } from "@azuki/shared";
 import {
 	MOCK_MATCH_RESULT,
@@ -564,6 +565,16 @@ export async function getDefaultPrompt(): Promise<string> {
 	}
 	const data = (await res.json()) as { prompt: string };
 	return data.prompt;
+}
+
+export async function fetchPopularityIndex(): Promise<PopularityRecord[]> {
+	const res = await fetch(`${API_BASE}/eval/popularity-index`, {
+		headers: headers(),
+	});
+	if (!res.ok) {
+		throw new Error(`fetchPopularityIndex failed: ${res.status}`);
+	}
+	return res.json();
 }
 
 export async function runEvalRequest(

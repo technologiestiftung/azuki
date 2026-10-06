@@ -13,7 +13,8 @@ Every file in this folder, what it does, and a concrete before → after example
 - [`generate-short-descriptions.ts`](#generate-short-descriptionsts) — LLM batch
 
 **Availability data (per-Bundesland trainee counts)**
-- [`build-trainee-fixtures.ts`](#build-trainee-fixturests) — fixture builder
+- [`build-destatis-fixture.ts`](#build-destatis-fixturets) — fixture builder
+- [`build-dazubi-data.ts`](#build-dazubi-datats) — build-time generator
 - [`build-availability.ts`](#build-availabilityts) — join
 
 **Utilities (imported, no CLI)**
@@ -41,10 +42,15 @@ berufe.json
   → generate-short-descriptions.ts   (via OpenRouter LLM)
   → berufe.json (shortDescription field filled in)
 
-DAZUBI + Destatis xlsx snapshots
-  → build-trainee-fixtures.ts
-  → build-availability.ts            (joins by name + KldB)
-  → shared/data/availability-by-state.json
+Destatis xlsx (gitignored, manual)
+  → build-destatis-fixture.ts
+  → shared/data/destatis-trainee-starts.json        (committed)
+
+BIBB DAZUBI xlsx (committed, sha256-pinned) + destatis fixture + berufe.json
+  → build-dazubi-data.ts             (npm install / Vercel build)
+      → lib/popularityIndex.ts       (name match → tier)
+      → build-availability.ts        (joins by name + KldB)
+  → shared/data/popularity-index.json, availability-by-state.json   (gitignored)
 ```
 
 ---
@@ -283,67 +289,66 @@ After:
 
 ## Availability data (per-Bundesland trainee counts)
 
-### `build-trainee-fixtures.ts`
+### `build-destatis-fixture.ts`
 
-*Fixture builder.* Reads the two yearly xlsx snapshots (BIBB DAZUBI "Alle Berufe nach Ländern" + Destatis Berufliche Schulen 21121-10..13) with `exceljs` and writes slim JSON fixtures consumed by `build-availability.ts`. Run rarely — only when refreshing the underlying xlsx.
-
-The xlsx are ~17 MB and therefore gitignored: download them once into `data/popularity-source/` ([how](../data/popularity-source/README.md)), or point `POPULARITY_DATA_DIR` at them. The script fails with the download instructions if they are absent. Its committed output means a normal checkout never needs them.
+*Fixture builder.* Reads the gitignored Destatis xlsx (sheets 21121-10..13, [download](../data/popularity-source/README.md)) and writes the committed fixture. Only needed when refreshing Destatis.
 
 | | |
 |---|---|
-| **Runs** | `npm run data:build-trainee-fixtures` |
-| **Reads** | `data/popularity-source/dazubi-all-berufe-2024.xlsx`, `data/popularity-source/destatis-2024-25.xlsx` (override dir via `POPULARITY_DATA_DIR`) |
-| **Writes** | `shared/data/dazubi-trainee-starts.json`, `shared/data/destatis-trainee-starts.json` |
+| **Runs** | `npm run data:build-destatis-fixture` |
+| **Reads** | `data/popularity-source/destatis-2024-25.xlsx` (override dir via `POPULARITY_DATA_DIR`) |
+| **Writes** | `shared/data/destatis-trainee-starts.json` |
 
-**Example — output row shapes**
+**Example — output row shape**
 
-`dazubi-trainee-starts.json`:
 ```json
-[
-  { "bundesland": "Bayern", "name": "Kaufmann/-frau - Einzelhandel", "anfaenger": 4820 },
-  { "bundesland": "Berlin", "name": "Fachinformatiker/-in",          "anfaenger": 612 }
-]
+{ "germanOccupationCode": "83113", "name": "Erzieher/in", "bundesland": "Deutschland", "students": 5230 }
 ```
 
-`destatis-trainee-starts.json`:
-```json
-[
-  { "germanOccupationCode": "81302", "bundesland": "Nordrhein-Westfalen", "students": 1104 }
-]
-```
+---
+
+### `build-dazubi-data.ts`
+
+*Build-time generator.* Turns the BIBB xlsx into popularity tiers and per-Bundesland availability. The outputs are gitignored (BIBB licence forbids sharing derived data).
+
+| | |
+|---|---|
+| **Runs** | `postinstall`, `scripts/vercel-build.mjs`, or `npm run data:build-dazubi` |
+| **Reads** | `data/popularity-source/dazubi-all-berufe-2024.xlsx`, `data/popularity-source/dazubi-source.json`, `shared/data/destatis-trainee-starts.json`, `backend/src/data/berufe.json` |
+| **Writes** | `shared/data/popularity-index.json`, `shared/data/availability-by-state.json` (both gitignored) |
+| **Fails when** | the xlsx sha256 does not match `dazubi-source.json` |
 
 ---
 
 ### `build-availability.ts`
 
-*Join.* Joins `berufe.json` (the BERUFENET catalog) against both trainee-count fixtures to produce `availability-by-state.json` — an `{ occupationId → { bundesland → count } }` map used by the frontend to show whether an occupation is offered in the user's state. DAZUBI joins by normalized name (`normName`); Destatis joins by KldB code (`normalizeKldb`).
+*Join.* Builds `availability-by-state.json` (`{ occupationId → { bundesland → count } }`) for the backend regional filter. DAZUBI rows join by `normName`, Destatis rows by KldB code (`normalizeKldb`).
 
 | | |
 |---|---|
-| **Runs** | `npm run data:build-availability` |
-| **Reads** | `berufe.json`, `popularity-index.json`, both trainee-starts fixtures |
+| **Runs** | called by `build-dazubi-data.ts` |
+| **Reads** | `berufe.json`, popularity index, DAZUBI state rows, Destatis fixture (passed in) |
 | **Writes** | `shared/data/availability-by-state.json` |
 
-**Example — three inputs → one merged record**
+**Example — catalog entry + Destatis rows → one record**
 
 Inputs:
 ```jsonc
 // berufe.json entry
-{ "id": 9162, "name": "Erzieher/in", "germanOccupationCode": "83112" }
+{ "id": 9162, "name": "Erzieher/in", "germanOccupationCode": "83113" }
 
-// dazubi row (name match via normName)
-{ "bundesland": "Bayern", "name": "Erzieher/-in", "anfaenger": 2410 }
-
-// destatis row (KldB match)
-{ "germanOccupationCode": "83112", "bundesland": "Berlin", "students": 1030 }
+// destatis rows (KldB match)
+{ "germanOccupationCode": "83113", "name": "Erzieher/in", "bundesland": "Berlin", "students": 2955 }
+{ "germanOccupationCode": "83113", "name": "Erzieher/in", "bundesland": "Hamburg", "students": 778 }
 ```
 
 Output — `availability-by-state.json`:
-```json
+```jsonc
 {
   "9162": {
-    "Bayern": 2410,
-    "Berlin": 1030
+    "Berlin": 2955,
+    "Hamburg": 778
+    // … other Länder
   }
 }
 ```
@@ -356,7 +361,7 @@ Output — `availability-by-state.json`:
 
 Cleans up KldB 2010 codes returned by BERUFENET so the same shape lines up with Destatis. Strips the agency-internal `"B "` prefix and any whitespace; warns on non-numeric residues (upstream shape drift).
 
-Used by `fetch-berufe.ts`, `build-trainee-fixtures.ts`, `build-availability.ts`. No CLI.
+Used by `fetch-berufe.ts`, `build-destatis-fixture.ts`, `build-availability.ts`. No CLI.
 
 **Example inputs → outputs**
 ```
@@ -425,7 +430,7 @@ normName("")                                          →  ""
 
 Catalog: **538 → 534** (+2 / −6)
 
-### Added — needs a suitability decision and a popularity tier
+### Added — needs a suitability decision
 - `143399` Pflegefachassistent/in — accessLevel `hauptschule`, KldB `81301`
 
 ### Removed — check whether a successor exists under a new id

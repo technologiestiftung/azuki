@@ -3,7 +3,7 @@ import { buildRefreshReport } from "../../../scripts/report-data-refresh.js";
 import { makeOccupation } from "../scoring/helpers.js";
 
 const emptyContext = {
-	popularityIds: new Set<number>(),
+	popularityTiers: new Map<number, string>(),
 	availabilityIds: new Set<number>(),
 	unmatchedExclusionIds: [],
 	staleConditionOverrideIds: [],
@@ -34,7 +34,7 @@ describe("buildRefreshReport", () => {
 		];
 		const { markdown } = buildRefreshReport(before, after, {
 			...emptyContext,
-			popularityIds: new Set([2]),
+			popularityTiers: new Map([[2, "A_anchor"]]),
 			availabilityIds: new Set([2]),
 		});
 		expect(markdown).toContain("Pflegefachassistent/in");
@@ -46,9 +46,29 @@ describe("buildRefreshReport", () => {
 	test("flags a new occupation with no popularity tier and no availability", () => {
 		const after = [makeOccupation({ id: 3, name: "Pflegefachassistent/in" })];
 		const { markdown } = buildRefreshReport([], after, emptyContext);
-		expect(markdown).toMatch(/popularity/i);
+		expect(markdown).toMatch(/market-size/i);
 		expect(markdown).toMatch(/availability/i);
 		expect(markdown).toContain("3");
+	});
+
+	test("lists occupations without market-size data", () => {
+		const after = [
+			makeOccupation({ id: 1, name: "Unbekannt" }),
+			makeOccupation({ id: 2, name: "Bekannt" }),
+			makeOccupation({ id: 3, name: "Fehlt" }),
+		];
+		const { markdown } = buildRefreshReport([], after, {
+			...emptyContext,
+			popularityTiers: new Map([
+				[1, "G_unknown"],
+				[2, "A_anchor"],
+			]),
+			availabilityIds: new Set([1, 2, 3]),
+		});
+		expect(markdown).toMatch(/No market-size data[^\n]*: 2$/m);
+		expect(markdown).toContain("Unbekannt");
+		expect(markdown).toContain("Fehlt");
+		expect(markdown).not.toMatch(/Added[^\n]*popularity tier/);
 	});
 
 	test("lists missing enrichment", () => {
@@ -63,7 +83,10 @@ describe("buildRefreshReport", () => {
 		];
 		const { markdown } = buildRefreshReport([], after, {
 			...emptyContext,
-			popularityIds: new Set([1, 2]),
+			popularityTiers: new Map([
+				[1, "A_anchor"],
+				[2, "A_anchor"],
+			]),
 			availabilityIds: new Set([1, 2]),
 		});
 		expect(markdown).toMatch(/Missing enrichment[^\n]*: 1$/m);
@@ -73,7 +96,7 @@ describe("buildRefreshReport", () => {
 	test("surfaces stale override and exclusion ids", () => {
 		const { markdown } = buildRefreshReport(catalog(1), catalog(1), {
 			...emptyContext,
-			popularityIds: new Set([1]),
+			popularityTiers: new Map([[1, "A_anchor"]]),
 			availabilityIds: new Set([1]),
 			staleConditionOverrideIds: [4708, 14616],
 			staleAccessOverrideIds: [13968],
