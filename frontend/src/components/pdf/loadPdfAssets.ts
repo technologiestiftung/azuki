@@ -21,6 +21,9 @@ const HERO_PLACEHOLDER_EDGE = 512;
 /** PDFs always show this illustration instead of occupation photos. */
 const OCCUPATION_PLACEHOLDER_SRC =
 	"/illustrations/pdf-occupation-placeholder.svg";
+/** Occupation detail PDF hero uses its own illustration (same sky-blue fill). */
+const OCCUPATION_DETAIL_PLACEHOLDER_SRC =
+	"/illustrations/pdf-occupation-detail-placeholder.svg";
 const PDF_FONT_URLS = [
 	"/fonts/asap/Asap-Regular.ttf",
 	"/fonts/asap/Asap-Medium.ttf",
@@ -450,7 +453,7 @@ export async function loadPdfPlaceholderSrc(): Promise<string> {
  */
 export async function loadPdfHeroPlaceholderSrc(): Promise<string> {
 	const loaded = await loadPdfImageSrc(
-		OCCUPATION_PLACEHOLDER_SRC,
+		OCCUPATION_DETAIL_PLACEHOLDER_SRC,
 		{
 			format: "png",
 			backgroundColor: PLACEHOLDER_BG,
