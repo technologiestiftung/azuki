@@ -771,8 +771,9 @@ export const content = {
 		"Schau dir das vollständige Stellenangebot an",
 	"vacancies.detail.applyCard.description":
 		"Dort findest du auch alle Infos zur Bewerbung.",
-	"vacancies.detail.applyCard.cta": "Zum Stellenangebot (BERUFENET)",
-	"vacancies.detail.applyCard.cta.ariaLabel": "Zum Stellenangebot (BERUFENET)",
+	"vacancies.detail.applyCard.cta": "Zum Stellenangebot (BA Jobsuche)",
+	"vacancies.detail.applyCard.cta.ariaLabel":
+		"Zum Stellenangebot (BA Jobsuche)",
 	"vacancies.detail.sourceFooter.title": "Quelle",
 	"vacancies.detail.sourceFooter.provider":
 		"Jobsuche der Bundesagentur für Arbeit",
