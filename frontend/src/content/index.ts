@@ -724,7 +724,7 @@ export const content = {
 	"results.detail.export.tagline": "Finde deine Ausbildung.",
 	"results.detail.export.filename": "AzuKi-{name}.pdf",
 	"results.detail.export.footnotes":
-		"*KI-generiert Quelle BERUFENET; **Berechnung basierend auf Infos von BERUFENET; ***Quelle: DAZUBI",
+		"*KI-generiert Quelle BERUFENET; **Berechnung basierend auf Infos von BERUFENET; ***Quelle: DAZUBI, BERUFENET",
 	"results.detail.export.filenameFallback": "AzuKi-Beruf.pdf",
 	// Vacancies
 	"vacancies.title": "Freie Stellen für dich",
