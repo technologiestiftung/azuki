@@ -19,11 +19,19 @@ import {
 	styles,
 } from "../../pdf/pdfTheme";
 
-const HERO_HEIGHT = 172;
+/**
+ * Close to the placeholder's height at 40% column width (~127pt) while still
+ * fitting the meta panel's three label/value/description blocks.
+ */
+const HERO_HEIGHT = 152;
 /** Extra room above the footer so match sections break earlier. */
 const DETAIL_PAGE_PAD_BOTTOM = PAGE_PAD_BOTTOM + 24;
 /** Extra space under the fixed header (helps continued grey boxes on page 2+). */
 const DETAIL_HEADER_EXTRA = 10;
+/** Markers referencing the footnotes line at the end of the document. */
+const TASKS_FOOTNOTE_MARK = "*";
+const SALARY_FOOTNOTE_MARK = "**";
+const SCHOOL_DEGREE_FOOTNOTE_MARK = "***";
 
 const detailStyles = StyleSheet.create({
 	page: {
@@ -48,14 +56,15 @@ const detailStyles = StyleSheet.create({
 	heroImage: {
 		width: "100%",
 		height: HERO_HEIGHT,
-		objectFit: "cover",
+		/** Column fill matches the placeholder background, so letterboxing blends in. */
+		objectFit: "contain",
 	},
 	metaPanel: {
 		flex: 1,
 		height: HERO_HEIGHT,
 		paddingHorizontal: 12,
-		paddingTop: 12,
-		paddingBottom: 10,
+		paddingTop: 10,
+		paddingBottom: 8,
 		justifyContent: "flex-start",
 		gap: 8,
 	},
@@ -224,6 +233,13 @@ const detailStyles = StyleSheet.create({
 		flexGrow: 1,
 		minHeight: 12,
 	},
+	footnotes: {
+		fontFamily: "Asap",
+		fontWeight: 400,
+		fontSize: 8,
+		color: COLOR.skyShade120,
+		marginTop: 8,
+	},
 });
 
 export interface OccupationDetailPdfAssets {
@@ -353,13 +369,13 @@ export function OccupationDetailPdfDocument({
 								value={occupationDuration}
 							/>
 							<MetaCell
-								label={content["results.detail.salaryTitle"]}
+								label={`${content["results.detail.salaryTitle"]}${SALARY_FOOTNOTE_MARK}`}
 								value={salaryLabel}
 								description={content["results.detail.salaryInfo.description"]}
 							/>
 						</View>
 						<MetaCell
-							label={content["results.detail.schoolDegreeTitle"]}
+							label={`${content["results.detail.schoolDegreeTitle"]}${SCHOOL_DEGREE_FOOTNOTE_MARK}`}
 							value={schoolDegreeLabel}
 							description={
 								content["results.detail.schoolDegreeInfo.description"]
@@ -373,6 +389,7 @@ export function OccupationDetailPdfDocument({
 					<View>
 						<Text style={styles.sectionTitle}>
 							{content["results.detail.tasksTitle"]}
+							{TASKS_FOOTNOTE_MARK}
 						</Text>
 						<View style={detailStyles.taskList}>
 							{taskItems.map((task) => (
@@ -435,6 +452,9 @@ export function OccupationDetailPdfDocument({
 					</>
 				) : null}
 
+				<Text style={detailStyles.footnotes} wrap={false}>
+					{content["results.detail.export.footnotes"]}
+				</Text>
 				<View style={detailStyles.ctaSpacer} />
 				<CtaCard mascotSrc={assets.mascotSrc} qrSrc={assets.qrSrc} />
 				<PageFooter />

@@ -12,17 +12,18 @@ const CARD_IMAGE_OUT_HEIGHT = 138;
 /** ~5px radius on ~92pt-tall frame ≈ 0.05 of min edge. */
 const CARD_IMAGE_CORNER_RATIO = 5 / 92;
 const CARD_IMAGE_BG = "#F2F4F5";
-/** Detail hero ~40% of content width × 172pt — ~2× for retina sharpness. */
-const HERO_IMAGE_ASPECT = 1.27;
-const HERO_IMAGE_OUT_HEIGHT = 344;
-const HERO_JPEG_QUALITY = 0.78;
-/** Matches occupation-placeholder.svg fill. */
+/** Matches pdf-occupation-placeholder.svg fill. */
 const PLACEHOLDER_BG = "#BAE6FD";
 const JPEG_QUALITY = 0.65;
 const PLACEHOLDER_LOAD_TIMEOUT_MS = 12000;
-const OCCUPATION_PLACEHOLDER_SRC = "/illustrations/occupation-placeholder.svg";
-/** Primary gallery URL is almost always enough. */
-const MAX_CARD_IMAGE_URL_CANDIDATES = 1;
+/** Longest edge for the detail hero placeholder — ~2× its ~220pt display width. */
+const HERO_PLACEHOLDER_EDGE = 512;
+/** PDFs always show this illustration instead of occupation photos. */
+const OCCUPATION_PLACEHOLDER_SRC =
+	"/illustrations/pdf-occupation-placeholder.svg";
+/** Occupation detail PDF hero uses its own illustration (same sky-blue fill). */
+const OCCUPATION_DETAIL_PLACEHOLDER_SRC =
+	"/illustrations/pdf-occupation-detail-placeholder.svg";
 const PDF_FONT_URLS = [
 	"/fonts/asap/Asap-Regular.ttf",
 	"/fonts/asap/Asap-Medium.ttf",
@@ -75,17 +76,6 @@ export function triggerDownload(blob: Blob, filename: string): void {
 	anchor.download = filename;
 	anchor.click();
 	URL.revokeObjectURL(url);
-}
-
-/** Drop temporary blob: URLs created for card images after the PDF is built. */
-export function revokePdfBlobUrls(
-	urls: Array<string | null | undefined>,
-): void {
-	for (const url of urls) {
-		if (url?.startsWith("blob:")) {
-			URL.revokeObjectURL(url);
-		}
-	}
 }
 
 function resolveFetchableImageUrl(src: string): string {
@@ -234,131 +224,6 @@ async function fetchAsObjectUrl(src: string): Promise<string | null> {
 		return null;
 	}
 	return URL.createObjectURL(blob);
-}
-
-/**
- * Cover-crop and export as a JPEG blob URL.
- * Re-encoding strips broken BA JPEG metadata; blob URLs avoid base64 bloat.
- * A cheap variance check rejects near-blank truncated Arbeitsagentur decodes.
- */
-async function coverRasterizeToJpeg(
-	source: ImageBitmap | HTMLImageElement,
-	options: {
-		outHeight?: number;
-		aspect?: number;
-		quality?: number;
-		backgroundColor?: string;
-	} = {},
-): Promise<string | null> {
-	const width = Math.max(
-		1,
-		"naturalWidth" in source ? source.naturalWidth : source.width,
-	);
-	const height = Math.max(
-		1,
-		"naturalHeight" in source ? source.naturalHeight : source.height,
-	);
-	const outHeight = options.outHeight ?? CARD_IMAGE_OUT_HEIGHT;
-	const aspect = options.aspect ?? CARD_IMAGE_ASPECT;
-	const outWidth = Math.max(1, Math.round(outHeight * aspect));
-	const canvas = document.createElement("canvas");
-	canvas.width = outWidth;
-	canvas.height = outHeight;
-	const ctx = canvas.getContext("2d", { willReadFrequently: true });
-	if (!ctx) {
-		return null;
-	}
-
-	ctx.fillStyle = options.backgroundColor ?? CARD_IMAGE_BG;
-	ctx.fillRect(0, 0, outWidth, outHeight);
-
-	const scale = Math.max(outWidth / width, outHeight / height);
-	const drawWidth = width * scale;
-	const drawHeight = height * scale;
-	try {
-		ctx.drawImage(
-			source,
-			(outWidth - drawWidth) / 2,
-			(outHeight - drawHeight) / 2,
-			drawWidth,
-			drawHeight,
-		);
-	} catch {
-		return null;
-	}
-
-	if (isNearBlankRaster(ctx, outWidth, outHeight)) {
-		return null;
-	}
-
-	const quality = options.quality ?? JPEG_QUALITY;
-	const blob = await new Promise<Blob | null>((resolve) => {
-		canvas.toBlob(resolve, "image/jpeg", quality);
-	});
-	if (!blob || blob.size < 32) {
-		return null;
-	}
-	return URL.createObjectURL(blob);
-}
-
-/** One getImageData + stride sampling (cheaper than many 1×1 reads). */
-function isNearBlankRaster(
-	ctx: CanvasRenderingContext2D,
-	width: number,
-	height: number,
-): boolean {
-	const { data } = ctx.getImageData(0, 0, width, height);
-	let sum = 0;
-	let sumSq = 0;
-	let samples = 0;
-	for (let i = 0; i < data.length; i += 4 * 96) {
-		const y = 0.3 * data[i] + 0.59 * data[i + 1] + 0.11 * data[i + 2];
-		sum += y;
-		sumSq += y * y;
-		samples += 1;
-	}
-	const mean = sum / Math.max(1, samples);
-	return sumSq / Math.max(1, samples) - mean * mean < 40;
-}
-
-/** Load a remote photo via blob → HTMLImage (handles truncated BA JPEGs) → JPEG. */
-async function loadRemoteCardImageDataUrl(src: string): Promise<string | null> {
-	const blob = await fetchImageBlob(src);
-	if (!blob) {
-		return null;
-	}
-
-	const objectUrl = URL.createObjectURL(blob);
-	try {
-		const image = await loadHtmlImage(objectUrl);
-		return await coverRasterizeToJpeg(image);
-	} catch {
-		return null;
-	} finally {
-		URL.revokeObjectURL(objectUrl);
-	}
-}
-
-async function loadRemoteHeroImageDataUrl(src: string): Promise<string | null> {
-	const blob = await fetchImageBlob(src);
-	if (!blob) {
-		return null;
-	}
-
-	const objectUrl = URL.createObjectURL(blob);
-	try {
-		const image = await loadHtmlImage(objectUrl);
-		return await coverRasterizeToJpeg(image, {
-			outHeight: HERO_IMAGE_OUT_HEIGHT,
-			aspect: HERO_IMAGE_ASPECT,
-			quality: HERO_JPEG_QUALITY,
-			backgroundColor: PLACEHOLDER_BG,
-		});
-	} catch {
-		return null;
-	} finally {
-		URL.revokeObjectURL(objectUrl);
-	}
 }
 
 function rasterizeToDataUrl(
@@ -582,82 +447,21 @@ export async function loadPdfPlaceholderSrc(): Promise<string> {
 	return placeholderCache;
 }
 
-type PlaceholderSource =
-	| string
-	| Promise<string>
-	| (() => string | Promise<string>);
-
-async function resolvePlaceholderSource(
-	placeholderSrc: PlaceholderSource,
-): Promise<string> {
-	const value =
-		typeof placeholderSrc === "function" ? placeholderSrc() : placeholderSrc;
-	return (await value) || getSolidPdfPlaceholderSrc();
-}
-
-/** Try gallery URLs in order until one rasterizes. */
-export async function loadPdfCardImageSrc(
-	imageUrls: string[],
-	placeholderSrc: PlaceholderSource,
-): Promise<string> {
-	const urls = imageUrls
-		.map((url) => url.trim())
-		.filter(Boolean)
-		.slice(0, MAX_CARD_IMAGE_URL_CANDIDATES);
-
-	for (const imageUrl of urls) {
-		const loaded = await loadRemoteCardImageDataUrl(imageUrl);
-		if (loaded) {
-			return loaded;
-		}
-	}
-	return resolvePlaceholderSource(placeholderSrc);
-}
-
-/** Higher-res cover for the occupation detail PDF hero (~2× display size). */
-export async function loadPdfHeroImageSrc(
-	imageUrls: string[],
-	placeholderSrc: PlaceholderSource,
-): Promise<string> {
-	const urls = imageUrls
-		.map((url) => url.trim())
-		.filter(Boolean)
-		.slice(0, MAX_CARD_IMAGE_URL_CANDIDATES);
-
-	for (const imageUrl of urls) {
-		const loaded = await loadRemoteHeroImageDataUrl(imageUrl);
-		if (loaded) {
-			return loaded;
-		}
-	}
-
-	const placeholder = await resolvePlaceholderSource(placeholderSrc);
-	const heroPlaceholder = await loadPdfImageSrc(
-		OCCUPATION_PLACEHOLDER_SRC,
+/**
+ * Uncropped PDF placeholder for the occupation detail hero, kept at its
+ * natural aspect so the PDF can `contain`-fit it instead of cover-cropping.
+ */
+export async function loadPdfHeroPlaceholderSrc(): Promise<string> {
+	const loaded = await loadPdfImageSrc(
+		OCCUPATION_DETAIL_PLACEHOLDER_SRC,
 		{
-			coverAspect: HERO_IMAGE_ASPECT,
-			format: "jpeg",
+			format: "png",
 			backgroundColor: PLACEHOLDER_BG,
-			outHeight: HERO_IMAGE_OUT_HEIGHT,
+			outHeight: HERO_PLACEHOLDER_EDGE,
 		},
 		PLACEHOLDER_LOAD_TIMEOUT_MS,
 	);
-	return heroPlaceholder || placeholder;
-}
-
-/** Load Top card covers in parallel; placeholder may resolve lazily on miss. */
-export async function loadPdfTopCardImages(
-	occupations: Array<{ images: Array<{ url: string }> }>,
-	placeholderSrc: PlaceholderSource,
-): Promise<string[]> {
-	return Promise.all(
-		occupations.map((occupation) => {
-			const urls = occupation.images
-				.map((image) => image.url?.trim())
-				.filter((url): url is string => Boolean(url));
-			return loadPdfCardImageSrc(urls, placeholderSrc);
-		}),
-	);
+	return loaded || getSolidPdfPlaceholderSrc();
 }
 
 let pdfWarmPromise: Promise<void> | null = null;

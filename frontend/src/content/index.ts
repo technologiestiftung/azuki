@@ -36,6 +36,8 @@ export const content = {
 	"profile.share.text":
 		"Schau dir dieses Profil und passende Ausbildungsberufe an.",
 	"profile.export.filename": "AzuKi-Profil.pdf",
+	"profile.export.footnotes":
+		"*KI-generiert Quelle BERUFENET; **Berechnung basierend auf Infos von BERUFENET",
 	"profile.export.category": "Bereich",
 	"profile.export.details": "Angaben",
 	"profile.edit.title": "Profil bearbeiten",
@@ -509,6 +511,8 @@ export const content = {
 	"results.export.duration": "Dauer Ausbildung",
 	"results.export.earnings": "Einstiegsgehalt",
 	"results.export.description": "Beschreibung",
+	"results.export.footnotes":
+		"*KI-generiert Quelle BERUFENET; **Berechnung basierend auf Infos von BERUFENET",
 	"results.export.inDemandBanner":
 		"Bei diesen Berufen werden viele Azubis gesucht",
 	"results.export.footer.1": "Finde mehr Ausbildungsberufe auf",
@@ -725,6 +729,8 @@ export const content = {
 	"results.detail.download.ariaLabel": "Beruf herunterladen",
 	"results.detail.export.tagline": "Finde deine Ausbildung.",
 	"results.detail.export.filename": "AzuKi-{name}.pdf",
+	"results.detail.export.footnotes":
+		"*KI-generiert Quelle BERUFENET; **Berechnung basierend auf Infos von BERUFENET; ***Quelle: DAZUBI, BERUFENET",
 	"results.detail.export.filenameFallback": "AzuKi-Beruf.pdf",
 	// Vacancies
 	"vacancies.title": "Freie Stellen für dich",

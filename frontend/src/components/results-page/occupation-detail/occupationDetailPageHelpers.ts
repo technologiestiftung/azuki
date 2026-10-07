@@ -53,12 +53,3 @@ export function resolveDetailStatusMessage(detail: {
 
 	return null;
 }
-
-export function resolveHeroImageUrls(occupation: DetailOccupation): string[] {
-	if (!occupation) {
-		return [];
-	}
-	return occupation.images
-		.map((image) => image.url?.trim())
-		.filter((url): url is string => Boolean(url));
-}

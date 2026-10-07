@@ -24,6 +24,9 @@ import {
 } from "../../pdf/pdfTheme";
 
 const TABLE_HEADER_BLOCK = 44;
+/** Markers referencing the footnotes line above the CTA card. */
+const DESCRIPTION_FOOTNOTE_MARK = "*";
+const SALARY_FOOTNOTE_MARK = "**";
 
 const resultsListStyles = StyleSheet.create({
 	pageWithTable: {
@@ -201,13 +204,19 @@ const resultsListStyles = StyleSheet.create({
 		fontSize: 11.5,
 		color: COLOR.sky900,
 	},
+	footnotes: {
+		fontFamily: "Asap",
+		fontWeight: 400,
+		fontSize: 8,
+		color: COLOR.skyShade120,
+		marginTop: 4,
+	},
 });
 
 export interface OccupationsPdfAssets {
 	mascotSrc: string | null;
 	qrSrc: string | null;
 	placeholderSrc: string;
-	topImageSrcs: string[];
 	wordmarkSrc: string | null;
 	lockupSrc: string | null;
 }
@@ -235,7 +244,9 @@ function formatTopMeta(occupation: MatchedOccupation): string {
 		parts.push(occupation.occupationDuration);
 	}
 	if (occupation.salaryEntryKnown && occupation.salaryMonthlyEntry !== null) {
-		parts.push(formatOccupationSalary(occupation.salaryMonthlyEntry));
+		parts.push(
+			`${formatOccupationSalary(occupation.salaryMonthlyEntry)} ${content["results.card.salary.monthly.label"]}${SALARY_FOOTNOTE_MARK}`,
+		);
 	}
 	return parts.join(" · ");
 }
@@ -275,7 +286,10 @@ function TopCard({
 				{formatOccupationDisplayName(occupation.name)}
 			</Text>
 			{description ? (
-				<Text style={resultsListStyles.cardDescription}>{description}</Text>
+				<Text style={resultsListStyles.cardDescription}>
+					{description}
+					{DESCRIPTION_FOOTNOTE_MARK}
+				</Text>
 			) : null}
 			{meta ? <Text style={resultsListStyles.cardMeta}>{meta}</Text> : null}
 		</View>
@@ -292,6 +306,7 @@ function TableHeader() {
 				]}
 			>
 				{content["results.export.occupation"]}
+				{DESCRIPTION_FOOTNOTE_MARK}
 			</Text>
 			<View style={resultsListStyles.tableHeaderDivider} />
 			<Text
@@ -316,6 +331,7 @@ function TableHeader() {
 				]}
 			>
 				{content["results.export.earnings"]}
+				{SALARY_FOOTNOTE_MARK}
 			</Text>
 		</View>
 	);
@@ -444,11 +460,11 @@ export function OccupationsPdfDocument({
 							{content["results.export.topTitle"]}
 						</Text>
 						<View style={resultsListStyles.cardsRow} wrap={false}>
-							{topOccupations.map((occupation, index) => (
+							{topOccupations.map((occupation) => (
 								<TopCard
 									key={occupation.id}
 									occupation={occupation}
-									imageSrc={assets.topImageSrcs[index] || assets.placeholderSrc}
+									imageSrc={assets.placeholderSrc}
 								/>
 							))}
 						</View>
@@ -495,6 +511,9 @@ export function OccupationsPdfDocument({
 					</>
 				) : null}
 
+				<Text style={resultsListStyles.footnotes} wrap={false}>
+					{content["results.export.footnotes"]}
+				</Text>
 				<CtaCard mascotSrc={assets.mascotSrc} qrSrc={assets.qrSrc} />
 				<PageFooter />
 			</Page>

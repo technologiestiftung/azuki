@@ -34,7 +34,6 @@ import {
 	resolveDetailSchoolDegreeLabel,
 	resolveDetailStatusMessage,
 	resolveDetailTaskItems,
-	resolveHeroImageUrls,
 } from "./occupationDetailPageHelpers";
 import { WildcardPoolBadge } from "../WildcardPoolBadge";
 import { EmptyState } from "../EmptyState";
@@ -193,7 +192,6 @@ export function OccupationDetailPage() {
 				schoolDegreeLabel,
 				taskItems,
 				matchPercent: isWildcard ? undefined : matchPercent,
-				heroImageUrls: resolveHeroImageUrls(detail.occupation),
 				occupationId: detail.occupation.id,
 				profile,
 			});

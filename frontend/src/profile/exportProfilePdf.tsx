@@ -9,14 +9,11 @@ import {
 	LOGO_LOCKUP_SRC,
 	LOGO_WORDMARK_SRC,
 	ensureBufferPolyfill,
-	getSolidPdfPlaceholderSrc,
 	loadPdfIconSrc,
 	loadPdfQrSrc,
 	loadPdfImageSrc,
 	loadPdfLogoSrc,
 	loadPdfPlaceholderSrc,
-	loadPdfTopCardImages,
-	revokePdfBlobUrls,
 	triggerDownload,
 	warmPdfRuntime,
 } from "../components/pdf/loadPdfAssets";
@@ -63,18 +60,12 @@ export async function exportProfilePdf({
 		PROFILE_AVATARS.find((avatar) => avatar.id === profileAvatarId)?.url ??
 		FALLBACK_AVATAR_SRC;
 
-	let placeholderPromise: Promise<string> | null = null;
-	const resolvePlaceholder = () => {
-		placeholderPromise ??= loadPdfPlaceholderSrc();
-		return placeholderPromise;
-	};
-
 	const [
 		mascotSrc,
 		qrSrc,
 		avatarSrc,
 		shortDescription,
-		topImageSrcs,
+		placeholderSrc,
 		wordmarkSrc,
 		lockupSrc,
 	] = await Promise.all([
@@ -86,38 +77,29 @@ export async function exportProfilePdf({
 			outHeight: 192,
 		}),
 		loadShortDescription(profile),
-		loadPdfTopCardImages(topOccupations, resolvePlaceholder),
+		loadPdfPlaceholderSrc(),
 		loadPdfLogoSrc(LOGO_WORDMARK_SRC),
 		loadPdfLogoSrc(LOGO_LOCKUP_SRC),
 	]);
-
-	const placeholderSrc = placeholderPromise
-		? await placeholderPromise
-		: getSolidPdfPlaceholderSrc();
 
 	const assets: ProfilePdfAssets = {
 		mascotSrc,
 		qrSrc,
 		avatarSrc,
 		placeholderSrc,
-		topImageSrcs,
 		wordmarkSrc,
 		lockupSrc,
 	};
 
-	try {
-		const blob = await pdf(
-			<ProfilePdfDocument
-				profile={profile}
-				topOccupations={topOccupations}
-				shortDescription={shortDescription}
-				profileName={profileName}
-				assets={assets}
-			/>,
-		).toBlob();
+	const blob = await pdf(
+		<ProfilePdfDocument
+			profile={profile}
+			topOccupations={topOccupations}
+			shortDescription={shortDescription}
+			profileName={profileName}
+			assets={assets}
+		/>,
+	).toBlob();
 
-		triggerDownload(blob, content["profile.export.filename"]);
-	} finally {
-		revokePdfBlobUrls(topImageSrcs);
-	}
+	triggerDownload(blob, content["profile.export.filename"]);
 }
