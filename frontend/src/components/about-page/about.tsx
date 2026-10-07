@@ -87,7 +87,9 @@ export const AboutPage = () => {
 					<h2 className="text-2xl font-semibold">
 						{content["about.dataSources.title"]}
 					</h2>
-					<div className={`flex flex-col gap-6 text-lg ${LINK_STYLES}`}>
+					<div
+						className={`flex flex-col gap-6 text-lg [&_u]:underline-offset-2 ${LINK_STYLES}`}
+					>
 						{DATA_SOURCE_PARAGRAPH_KEYS.map((key) => (
 							<p
 								key={key}
