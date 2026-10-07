@@ -13,6 +13,14 @@ import { SecondaryIconButton } from "../primitives/buttons/SecondaryIconButton";
 import { useCollapsedTitleReveal } from "../collapsing-header/useCollapsedTitleReveal";
 
 const SCROLL_OUT_THRESHOLD_PX = 8;
+const LINK_STYLES =
+	"[&_a]:underline [&_a]:underline-offset-2 [&_a]:decoration-sky-200";
+const DATA_SOURCE_PARAGRAPH_KEYS = [
+	"about.dataSources.p1",
+	"about.dataSources.p2",
+	"about.dataSources.p3",
+	"about.dataSources.p4",
+] as const;
 
 export const AboutPage = () => {
 	const navigate = useNavigate();
@@ -70,11 +78,27 @@ export const AboutPage = () => {
 					{content["about.description.p1"]}
 				</p>
 				<p
-					className="text-lg px-[18px] py-2 [&_a]:underline [&_a]:underline-offset-2 [&_a]:decoration-sky-200"
+					className={`text-lg px-[18px] py-2 ${LINK_STYLES}`}
 					dangerouslySetInnerHTML={{
 						__html: content["about.description.p2"],
 					}}
 				/>
+				<section className="flex flex-col gap-2 px-[18px] py-2">
+					<h2 className="text-2xl font-semibold">
+						{content["about.dataSources.title"]}
+					</h2>
+					<div
+						className={`flex flex-col gap-6 text-lg [&_u]:underline-offset-2 ${LINK_STYLES}`}
+					>
+						{DATA_SOURCE_PARAGRAPH_KEYS.map((key) => (
+							<p
+								key={key}
+								className="break-words"
+								dangerouslySetInnerHTML={{ __html: content[key] }}
+							/>
+						))}
+					</div>
+				</section>
 				<div className="flex flex-col gap-8 px-[18px] pt-8 pb-16">
 					<div className="flex flex-col gap-4 items-start">
 						<span className="text-sm font-medium text-sky-shade-170">
