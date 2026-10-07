@@ -6,39 +6,49 @@
 
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
-# Azuki
+# What is AzuKi?
 
-Azuki helps young people in Germany find a vocational training (_Ausbildung_) that
-fits them. Users answer a short questionnaire about their school background,
-interests, strengths and expectations, and in a few minutes get a personal
-strengths profile and a ranked list of matching _Ausbildungsberufe_.
+Azuki is an AI-powered app that helps young people in Berlin find a suitable apprenticeship. After answering a few questions about their education, interests, strengths, previous work experience and expectations of their future jobs, a profile is created. Based on this profile, AzuKi suggests suitable apprenticeships and shows available vacancies nearby.
 
-## About Azuki
+Azuki was built by [CityLAB Berlin](https://citylab-berlin.org/), a project of [Technologiestiftung Berlin](https://www.technologiestiftung-berlin.de/) in collaboration with [JOBLINGE](https://joblinge.de) Berlin. The project was funded by the [Civic Innovation Platform](https://www.civic-innovation.de) of the [Federal Ministry of Labour and Social Affairs](https://www.bmas.de/EN/Home/home.html). 
 
-Azuki was built by [CityLAB Berlin](https://citylab-berlin.org/), a project of the
-[Technologiestiftung Berlin](https://www.technologiestiftung-berlin.de/), supported
-by the Senate Chancellery of Berlin.
+## How does it work?
 
-Choosing an apprenticeship is hard: there are hundreds of recognised occupations, and
+Choosing a future career is hard: there are hundreds of possible apprenticeships, and
 official databases are written for adults who already know what they are looking for.
-Azuki turns that decision into a short, friendly conversation. It asks about who you
-are rather than which job title you want, and matches your answers against the full
-catalogue of German vocational occupations.
+AzuKi turns that decision into a short and friendly conversation. It asks users about who they
+are and what their strengths are rather than which job title they want, and matches these answers against the
+catalogue of recognised apprenticeships available in the wider region of Berlin.
 
-- **A guided questionnaire.** Ten steps cover school situation, degree, subjects,
-  interests, strengths, work expectations, practical experience, work preferences and
-  no-gos — no prior knowledge of any occupation required.
-- **A personal strengths profile.** Answers are turned into a profile that is used for
+- **A guided questionnaire.** Ten steps cover school education, preferred subjects,
+  interests, strengths, work expectations, previous work experience, as well as work preferences and
+  no-gos - no prior knowledge of any apprenticeship needed.
+- **A personal strengths profile.** Answers are turned into an individual profile that is used for
   matching and shown back to the user.
-- **Ranked occupation matches.** Every recognised occupation is scored against the
+- **Ranked matches.** Every apprenticeship is scored against the
   profile, and the best matches are presented with a plain-language explanation of why
   they fit.
-- **Real training vacancies.** Matches can be connected to open apprenticeship
-  positions nearby via the German Federal Employment Agency's job search.
+- **Up-to-date vacancies.** Together with the matches AzuKi shows available job vacancies nearby.
+
+## Data sources
+
+AzuKi uses data from the [BERUFENET](https://web.arbeitsagentur.de/berufenet) information portal and the Federal Employment Agency’s [job search service](https://www.arbeitsagentur.de/jobsuche). This way information on apprenticeships and job vacancies can be found all in one place. The photos accompanying the job descriptions also come from BERUFENET. The typical tasks are AI summaries in simple language. The original text of each apprenticeship can be found via the link to BERUFENET.
+
+Further sources: The data on the recommended school-leaving qualification is based on the Trainee Data System ([DAZUBI](https://www.bibb.de/dazubi)) of the Federal Institute for Vocational Education and Training. If this information is missing there, we use the data on BERUFENET. Using figures from the Federal Statistical Office ([Destatis](https://www.destatis.de/DE/Themen/Gesellschaft-Umwelt/Bildung-Forschung-Kultur/Schulen/Publikationen/_publikationen-innen-statistischer-bericht.html)), we calculate how many people are undertaking school-based apprenticeships in Berlin/Brandenburg. The location data comes from [OpenStreetMap](https://www.openstreetmap.org/copyright).
+
+AzuKi is not a service provided by the Federal Employment Agency. The information may be out of date or incomplete. It is best to check important details such as salary or entry requirements on BERUFENET or directly with the employer.
+
+AzuKi was developed by CityLAB Berlin as an open-source project. More information at: https://citylab-berlin.org/projekte/azuki
+
+## Content Licensing
+
+Texts and content available as [CC BY](https://creativecommons.org/licenses/by/3.0/de/).
+
+Third-party data is excluded; see [NOTICE](NOTICE).
 
 ## Architecture
 
-Azuki is a single monorepo with three [npm workspaces](https://docs.npmjs.com/cli/using-npm/workspaces):
+AzuKi is a single monorepo with three [npm workspaces](https://docs.npmjs.com/cli/using-npm/workspaces):
 
 - **`frontend/`** — Vite + React single-page app (Zustand for state). The questionnaire
   UI and results view. In development it proxies `/api` to the backend.
@@ -47,8 +57,7 @@ Azuki is a single monorepo with three [npm workspaces](https://docs.npmjs.com/cl
 - **`shared/`** — TypeScript types and constants shared by frontend and backend,
   imported as `@azuki/shared`.
 
-The occupation catalogue (~528 occupations, sourced from the Federal Employment
-Agency's BerufeNet data) lives in `backend/src/data/`.
+The catalogue (~528 apprenticeships) lives in `backend/src/data/`.
 
 ### Matching pipeline
 
@@ -115,7 +124,7 @@ npm run prettier   # format
 
 ## Deployment
 
-Azuki ships to [Vercel](https://vercel.com/) as a single app: the frontend is served as
+AzuKi ships to [Vercel](https://vercel.com/) as a single app: the frontend is served as
 static assets and the backend runs as a serverless function
 (`api/_handler.ts`). The build is driven by [`vercel.json`](./vercel.json).
 
@@ -157,12 +166,6 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
-
-## Content Licensing
-
-Texts and content available as [CC BY](https://creativecommons.org/licenses/by/3.0/de/).
-
-Third-party data is excluded; see [NOTICE](NOTICE).
 
 ## Credits
 
