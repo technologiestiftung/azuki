@@ -18,9 +18,9 @@
 		"@azuki/shared": "*",
 		"@hono/node-server": "1.19.17",
 		"@supabase/supabase-js": "^2.105.1",
-		"hono": "4.13.8",
-		"openai": "6.33.0",
-		"zod": "4.3.6"
+		"hono": "4.13.9",
+		"openai": "6.49.0",
+		"zod": "4.6.5"
 	},
 	"devDependencies": {
 		"@technologiestiftung/eslint-config": "0.3.1",
