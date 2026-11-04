@@ -1,12 +1,12 @@
 name: Build, Prettier, Lint, Test
 permissions:
-  contents: write
-  packages: write
+  contents: read
 on:
   push:
     branches: [main, staging]
   pull_request:
     branches: [main, staging]
+  workflow_dispatch:
 jobs:
   pipeline:
     runs-on: ubuntu-latest
@@ -81,8 +81,3 @@ jobs:
 #        with:
 #          name: playwright-a11y-test-results
 #          path: tests/a11y/test-results
-#
-#      - name: Create a release 🚢
-#        run: npx semantic-release --ci
-#        env:
-#          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}

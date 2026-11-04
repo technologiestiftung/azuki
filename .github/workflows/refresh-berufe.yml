@@ -8,20 +8,22 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write
-  pull-requests: write
+  contents: read
 
 concurrency:
   group: data-refresh
   cancel-in-progress: false
 
 jobs:
+  # Runs npm install scripts, so it gets no write token.
   refresh:
     runs-on: ubuntu-latest
     timeout-minutes: 60
     steps:
       - name: Checkout code ⬇️
         uses: actions/checkout@v4
+        with:
+          persist-credentials: false
 
       - name: Setup Node.js using .nvmrc ⚙️
         uses: actions/setup-node@v4
@@ -56,12 +58,39 @@ jobs:
       - name: Build refresh report 📋
         run: npx tsx scripts/report-data-refresh.ts > refresh-report.md
 
-      # GH_TOKEN, not GITHUB_TOKEN: a PR opened by GITHUB_TOKEN would not trigger
-      # pipeline.yml, skipping build/lint/test.
+      - name: Upload refreshed data ⬆️
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: data-refresh
+          if-no-files-found: error
+          retention-days: 7
+          path: |
+            backend/src/data/berufe.json
+            shared/data/berufenet-meta.json
+            refresh-report.md
+
+  # Holds the write token, so it must never install or run project code.
+  open-pr:
+    needs: refresh
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: write
+      pull-requests: write
+      actions: write
+    steps:
+      - name: Checkout code ⬇️
+        uses: actions/checkout@v4
+
+      - name: Download refreshed data ⬇️
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
+        with:
+          name: data-refresh
+
       - name: Open pull request 🚢
+        id: cpr
         uses: peter-evans/create-pull-request@22a9089034f40e5a961c8808d113e2c98fb63676 # v7
         with:
-          token: ${{ secrets.GH_TOKEN }}
           branch: chore/data-refresh
           base: main
           title: "chore(data): refresh BERUFENET catalog"
@@ -70,3 +99,10 @@ jobs:
           add-paths: |
             backend/src/data/berufe.json
             shared/data/berufenet-meta.json
+
+      # Pushes and PRs made with GITHUB_TOKEN don't trigger workflows; a dispatch does.
+      - name: Run CI on the pull request 🧪
+        if: steps.cpr.outputs.pull-request-operation == 'created' || steps.cpr.outputs.pull-request-operation == 'updated'
+        run: gh workflow run pipeline.yml --ref chore/data-refresh --repo "$GITHUB_REPOSITORY"
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
